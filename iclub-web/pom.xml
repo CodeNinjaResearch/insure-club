@@ -41,8 +41,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.pss.innoms</groupId>
-			<artifactId>innoms-model</artifactId>
+			<groupId>za.co.iclub.pss</groupId>
+			<artifactId>iclub-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>

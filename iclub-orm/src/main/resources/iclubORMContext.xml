@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="url" value="jdbc:mysql://localhost:3306/iclubdb">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="Pa%5W0Rd"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubOccupiedStatus
+				</value>
+				<value>za.co.iclub.pss.orm.bean.IclubEventType</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubInsuranceItemType
+				</value>
+				<value>za.co.iclub.pss.orm.bean.IclubMessageType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubAccessType</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubNotificationType
+				</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubSupplierType
+				</value>
+				<value>za.co.iclub.pss.orm.bean.IclubWallType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubRoofType</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubBuildingState
+				</value>
+				<value>za.co.iclub.pss.orm.bean.IclubQuoteStatus</value>
+				<value>za.co.iclub.pss.orm.bean.IclubIdType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubRateType</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubBoundaryType
+				</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubPolicyStatus
+				</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubPaymentStatus
+				</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubPclaimStatus
+				</value>
+				<value>za.co.iclub.pss.orm.bean.IclubThatchType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubAlarmType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubCoverType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubBarType</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubMaritialStatus
+				</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="IclubOccupiedStatusDAO" class="za.co.iclub.pss.orm.dao.IclubOccupiedStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubEventTypeDAO" class="za.co.iclub.pss.orm.dao.IclubEventTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubInsuranceItemTypeDAO" class="za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubMessageTypeDAO" class="za.co.iclub.pss.orm.dao.IclubMessageTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubAccessTypeDAO" class="za.co.iclub.pss.orm.dao.IclubAccessTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubNotificationTypeDAO" class="za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubSupplierTypeDAO" class="za.co.iclub.pss.orm.dao.IclubSupplierTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubWallTypeDAO" class="za.co.iclub.pss.orm.dao.IclubWallTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubRoofTypeDAO" class="za.co.iclub.pss.orm.dao.IclubRoofTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubBuildingStateDAO" class="za.co.iclub.pss.orm.dao.IclubBuildingStateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubQuoteStatusDAO" class="za.co.iclub.pss.orm.dao.IclubQuoteStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubIdTypeDAO" class="za.co.iclub.pss.orm.dao.IclubIdTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubRateTypeDAO" class="za.co.iclub.pss.orm.dao.IclubRateTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubBoundaryTypeDAO" class="za.co.iclub.pss.orm.dao.IclubBoundaryTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPolicyStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPolicyStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPaymentStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPaymentStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPclaimStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPclaimStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubThatchTypeDAO" class="za.co.iclub.pss.orm.dao.IclubThatchTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubAlarmTypeDAO" class="za.co.iclub.pss.orm.dao.IclubAlarmTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCoverTypeDAO" class="za.co.iclub.pss.orm.dao.IclubCoverTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubBarTypeDAO" class="za.co.iclub.pss.orm.dao.IclubBarTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubMaritialStatusDAO" class="za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+</beans>
