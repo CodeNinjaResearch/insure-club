@@ -178,4 +178,18 @@ public class IclubBuildingStateDAO {
 			ApplicationContext ctx) {
 		return (IclubBuildingStateDAO) ctx.getBean("IclubBuildingStateDAO");
 	}
+	
+	public List getBuildingStateBySD(String sd, Long id) {
+		log.debug("Fetching all Building State by Query :: getBuildingStateBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getBuildingStateBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("appl Type", re);
+			throw re;
+		}
+	}
 }
