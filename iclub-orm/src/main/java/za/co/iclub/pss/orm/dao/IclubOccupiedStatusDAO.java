@@ -173,6 +173,20 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
+	
+	public List getOccupiedStatusBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getOccupiedStatusBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getOccupiedStatusBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubOccupiedStatusDAO getFromApplicationContext(
 			ApplicationContext ctx) {

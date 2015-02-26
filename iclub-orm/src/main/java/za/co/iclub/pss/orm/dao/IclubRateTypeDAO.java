@@ -172,6 +172,19 @@ public class IclubRateTypeDAO {
 		}
 	}
 
+	public List getRateTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getRateTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getRateTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 	public static IclubRateTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {
 		return (IclubRateTypeDAO) ctx.getBean("IclubRateTypeDAO");

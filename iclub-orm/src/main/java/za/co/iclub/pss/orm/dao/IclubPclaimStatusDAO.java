@@ -173,6 +173,20 @@ public class IclubPclaimStatusDAO {
 			throw re;
 		}
 	}
+	
+	public List getPclaimStatusBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getPclaimStatusBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getPclaimStatusBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubPclaimStatusDAO getFromApplicationContext(
 			ApplicationContext ctx) {

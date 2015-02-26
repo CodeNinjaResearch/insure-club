@@ -173,6 +173,20 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
+	
+	public List getPolicyStatusBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getPolicyStatusBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getPolicyStatusBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubPolicyStatusDAO getFromApplicationContext(
 			ApplicationContext ctx) {
