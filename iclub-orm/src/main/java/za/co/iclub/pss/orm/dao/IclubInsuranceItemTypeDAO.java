@@ -174,6 +174,20 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getInsuranceItemTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getInsuranceItemTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getInsuranceItemTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubInsuranceItemTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {

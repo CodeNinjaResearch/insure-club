@@ -172,6 +172,20 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getEventTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getEventTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getEventTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubEventTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {

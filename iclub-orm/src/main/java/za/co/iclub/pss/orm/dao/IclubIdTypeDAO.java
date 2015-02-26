@@ -172,6 +172,20 @@ public class IclubIdTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getIdType BySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getIdType BySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getIdType BySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubIdTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {

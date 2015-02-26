@@ -173,6 +173,20 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
+	
+	public List getMaritialStatusBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getMaritialStatusBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getMaritialStatusBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubMaritialStatusDAO getFromApplicationContext(
 			ApplicationContext ctx) {

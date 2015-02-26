@@ -172,6 +172,20 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getCoverTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Batch by Query :: getCoverTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getCoverTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Entity Cat", re);
+			throw re;
+		}
+	}
 
 	public static IclubCoverTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {
