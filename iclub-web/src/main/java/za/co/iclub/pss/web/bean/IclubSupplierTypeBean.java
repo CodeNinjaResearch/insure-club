@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 public class IclubSupplierTypeBean {
 	
