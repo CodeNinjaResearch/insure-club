@@ -177,4 +177,18 @@ public class IclubAccessTypeDAO {
 			ApplicationContext ctx) {
 		return (IclubAccessTypeDAO) ctx.getBean("IclubAccessTypeDAO");
 	}
+	
+	public List getAccessTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Access Type by Query :: getAccessTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getAccessTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("appl Type", re);
+			throw re;
+		}
+	}
 }

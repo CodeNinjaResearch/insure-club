@@ -177,4 +177,18 @@ public class IclubBarTypeDAO {
 			ApplicationContext ctx) {
 		return (IclubBarTypeDAO) ctx.getBean("IclubBarTypeDAO");
 	}
+	
+	public List getBarTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Bar Type by Query :: getBarTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getBarTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("appl Type", re);
+			throw re;
+		}
+	}
 }

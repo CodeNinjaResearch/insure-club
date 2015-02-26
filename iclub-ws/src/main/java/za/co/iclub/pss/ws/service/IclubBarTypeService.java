@@ -12,38 +12,37 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
-import za.co.iclub.pss.orm.bean.IclubAccessType;
-import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
+import za.co.iclub.pss.orm.bean.IclubBarType;
+import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
-import za.co.iclub.pss.ws.model.IclubAccessTypeModel;
+import za.co.iclub.pss.ws.model.IclubBarTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@Path(value = "/IclubAccessTypeService")
+@Path(value = "/IclubBarTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class IclubAccessTypeService {
-	
-	private static final Logger LOGGER = Logger.getLogger(IclubAccessTypeService.class);
-	private IclubAccessTypeDAO iclubAccessTypeDAO;
+public class IclubBarTypeService {
+
+	private static final Logger LOGGER = Logger.getLogger(IclubBarTypeService.class);
+	private IclubBarTypeDAO iclubBarTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
-	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Transactional
-	public ResponseModel add(IclubAccessTypeModel model) {
+	public ResponseModel add(IclubBarTypeModel model) {
 		try {
 
-			IclubAccessType acctype = new IclubAccessType();
+			IclubBarType barType = new IclubBarType();
 			
-			acctype.setAtId(iclubCommonDAO.getNextId(IclubAccessType.class));
-			acctype.setAtLongDesc(model.getAtLongDesc());
-			acctype.setAtShortDesc(model.getAtShortDesc());
-			acctype.setAtStatus(model.getAtStatus());
+			barType.setBtId(iclubCommonDAO.getNextId(IclubBarType.class));
+			barType.setBtLongDesc(model.getBtLongDesc());
+			barType.setBtShortDesc(model.getBtShortDesc());
+			barType.setBtStatus(model.getBtStatus());
 
-			iclubAccessTypeDAO.save(acctype);
+			iclubBarTypeDAO.save(barType);
 
-			LOGGER.info("Save Success with ID :: " + acctype.getAtId().longValue());
+			LOGGER.info("Save Success with ID :: " + barType.getBtId().longValue());
 
 			ResponseModel message = new ResponseModel();
 
@@ -66,18 +65,18 @@ public class IclubAccessTypeService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Transactional
-	public ResponseModel mod(IclubAccessTypeModel model) {
+	public ResponseModel mod(IclubBarTypeModel model) {
 		try {
-			IclubAccessType acctype = new IclubAccessType();
+			IclubBarType barType = new IclubBarType();
 			
-			acctype.setAtId(model.getAtId());
-			acctype.setAtLongDesc(model.getAtLongDesc());
-			acctype.setAtShortDesc(model.getAtShortDesc());
-			acctype.setAtStatus(model.getAtStatus());
+			barType.setBtId(iclubCommonDAO.getNextId(IclubBarType.class));
+			barType.setBtLongDesc(model.getBtLongDesc());
+			barType.setBtShortDesc(model.getBtShortDesc());
+			barType.setBtStatus(model.getBtStatus());
 
-			iclubAccessTypeDAO.merge(acctype);
+			iclubBarTypeDAO.merge(barType);
 
-			LOGGER.info("Save Success with ID :: " + model.getAtId().longValue());
+			LOGGER.info("Save Success with ID :: " + model.getBtId().longValue());
 
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
@@ -100,7 +99,7 @@ public class IclubAccessTypeService {
 	@Transactional
 	public Response del(@PathParam("id") Long id) {
 		try {
-			iclubAccessTypeDAO.delete(iclubAccessTypeDAO.findById(id));
+			iclubBarTypeDAO.delete(iclubBarTypeDAO.findById(id));
 			return Response.ok().build();
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -115,7 +114,7 @@ public class IclubAccessTypeService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubAccessTypeDAO.getAccessTypeBySD(val,id);
+			List data = iclubBarTypeDAO.getBarTypeBySD(val,id);
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
 				message.setStatusCode(1);
@@ -139,20 +138,20 @@ public class IclubAccessTypeService {
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
-	public <T extends IclubAccessTypeModel> List<T> list() {
+	public <T extends IclubBarTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubAccessTypeDAO.findAll();
+			List batmod = iclubBarTypeDAO.findAll();
 
 			for (Object object : batmod) {
-				IclubAccessType iclubAtype = (IclubAccessType) object;
-				IclubAccessTypeModel iCB = new IclubAccessTypeModel();
+				IclubBarType iclubBtype = (IclubBarType) object;
+				IclubBarTypeModel iCB = new IclubBarTypeModel();
 				
-				iCB.setAtId(iclubAtype.getAtId().longValue());
-				iCB.setAtLongDesc(iclubAtype.getAtLongDesc());
-				iCB.setAtShortDesc(iclubAtype.getAtShortDesc());
-				iCB.setAtStatus(iclubAtype.getAtStatus());
+				iCB.setBtId(iclubBtype.getBtId().longValue());
+				iCB.setBtLongDesc(iclubBtype.getBtLongDesc());
+				iCB.setBtShortDesc(iclubBtype.getBtShortDesc());
+				iCB.setBtStatus(iclubBtype.getBtStatus());
 				
 				ret.add((T) iCB);
 			}
@@ -167,15 +166,15 @@ public class IclubAccessTypeService {
 	@Path("/get/{id}")
 	@Produces("application/json")
 	@Transactional
-	public IclubAccessTypeModel getById(@PathParam("id") Long id) {
-		IclubAccessTypeModel model = new IclubAccessTypeModel();
+	public IclubBarTypeModel getById(@PathParam("id") Long id) {
+		IclubBarTypeModel model = new IclubBarTypeModel();
 		try {
-			IclubAccessType bean = iclubAccessTypeDAO.findById(id);
+			IclubBarType bean = iclubBarTypeDAO.findById(id);
 			
-			model.setAtId(bean.getAtId().longValue());
-			model.setAtLongDesc(bean.getAtLongDesc());
-			model.setAtShortDesc(bean.getAtShortDesc());
-			model.setAtStatus(bean.getAtStatus());
+			model.setBtId(bean.getBtId().longValue());
+			model.setBtLongDesc(bean.getBtLongDesc());
+			model.setBtShortDesc(bean.getBtShortDesc());
+			model.setBtStatus(bean.getBtStatus());
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e );
@@ -184,3 +183,4 @@ public class IclubAccessTypeService {
 	}
 	
 }
+
