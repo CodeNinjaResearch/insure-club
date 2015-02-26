@@ -1,7 +1,10 @@
-package za.co.iclub.pss.web.bean;
+package za.co.iclub.pss.ws.model;
 
-public class IclubAccessTypeBean {
-	
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "IclubAlarmTypeModel")
+public class IclubAlarmTypeModel {
+
 	private Long atId;
 	private String atShortDesc;
 	private String atLongDesc;
@@ -31,4 +34,5 @@ public class IclubAccessTypeBean {
 	public void setAtStatus(String atStatus) {
 		this.atStatus = atStatus;
 	}
+
 }

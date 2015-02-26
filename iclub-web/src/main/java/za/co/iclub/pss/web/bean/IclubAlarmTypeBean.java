@@ -1,7 +1,7 @@
 package za.co.iclub.pss.web.bean;
 
-public class IclubAccessTypeBean {
-	
+public class IclubAlarmTypeBean {
+
 	private Long atId;
 	private String atShortDesc;
 	private String atLongDesc;
@@ -31,4 +31,5 @@ public class IclubAccessTypeBean {
 	public void setAtStatus(String atStatus) {
 		this.atStatus = atStatus;
 	}
+	
 }
