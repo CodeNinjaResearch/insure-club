@@ -184,4 +184,9 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="IclubCommonDAO" class="za.co.iclub.pss.orm.dao.IclubCommonDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 </beans>
