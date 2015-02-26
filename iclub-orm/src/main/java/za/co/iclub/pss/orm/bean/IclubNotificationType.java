@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * IclubNotificationType entity. @author MyEclipse Persistence Tools
+ * IclubNotificationType entity. @author Venu Madhav Pattamatta
  */
 @Entity
 @Table(name = "iclub_notification_type", catalog = "iclubdb")

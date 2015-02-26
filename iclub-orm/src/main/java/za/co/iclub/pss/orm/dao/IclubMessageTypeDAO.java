@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubMessageType;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubMessageType
- * @author MyEclipse Persistence Tools
+ * @author Venu Madhav Pattamatta
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })

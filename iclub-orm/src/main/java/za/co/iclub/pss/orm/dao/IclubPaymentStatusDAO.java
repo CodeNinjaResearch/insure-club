@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubPaymentStatus;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubPaymentStatus
- * @author MyEclipse Persistence Tools
+ * @author Venu Madhav Pattamatta
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })

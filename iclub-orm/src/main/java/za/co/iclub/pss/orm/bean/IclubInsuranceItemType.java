@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * IclubInsuranceItemType entity. @author MyEclipse Persistence Tools
+ * IclubInsuranceItemType entity. @author Venu Madhav Pattamatta
  */
 @Entity
 @Table(name = "iclub_insurance_item_type", catalog = "iclubdb")

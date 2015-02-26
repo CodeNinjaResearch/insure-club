@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * IclubBuildingState entity. @author MyEclipse Persistence Tools
+ * IclubBuildingState entity. @author Venu Madhav Pattamatta
  */
 @Entity
 @Table(name = "iclub_building_state", catalog = "iclubdb")

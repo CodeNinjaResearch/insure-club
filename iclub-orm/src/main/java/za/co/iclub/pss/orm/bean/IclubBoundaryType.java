@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * IclubBoundaryType entity. @author MyEclipse Persistence Tools
+ * IclubBoundaryType entity. @author Venu Madhav Pattamatta
  */
 @Entity
 @Table(name = "iclub_boundary_type", catalog = "iclubdb")
