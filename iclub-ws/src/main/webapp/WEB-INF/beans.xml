@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:http-conf="http://cxf.apache.org/transports/http/configuration" xmlns:util="http://www.springframework.org/schema/util" xmlns:cxf="http://cxf.apache.org/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 	http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
@@ -9,48 +13,34 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-	<import resource="classpath:innomsWSContext.xml" />
-	<bean id="jacksonMapper" class="com.pss.innoms.ws.util.CustomObjectMapper" />
+	<import resource="classpath:iclubWSContext.xml" />
+	<bean id="jacksonMapper" class="za.co.iclub.pss.ws.util.CustomObjectMapper" />
 	<http-conf:conduit name="*.http-conduit">
 		<http-conf:client Connection="close" AllowChunking="false" />
 	</http-conf:conduit>
-	<jaxrs:server id="innomsService" address="/innoms">
+	<jaxrs:server id="iclubService" address="/iclub">
 		<jaxrs:serviceBeans>
-			<ref bean="InnomsEntityCatService" />
-			<ref bean="InnomsEntityStatusService" />
-			<ref bean="InnomsEntityTypeService" />
-			<ref bean="InnomsFunctionService" />
-			<ref bean="InnomsIdTypeService" />
-			<ref bean="InnomsLoginService" />
-			<ref bean="InnomsRoleService" />
-			<ref bean="InnomsSecQuesService" />
-			<ref bean="InnomsTagTypeService" />
-			<ref bean="InnomsUserService" />
-			<ref bean="InnomsGroupService" />
-			<ref bean="InnomsSolutionService" />
-			<ref bean="InnomsNewsService" />
-			<ref bean="InnomsClaimService" />
-			<ref bean="InnomsIdeaService" />
-			<ref bean="InnomsChallengeService" />
-			<ref bean="InnomsRewardService" />
-			<ref bean="InnomsAllocationService" />
-			<ref bean="InnomsEntityRevService" />
-			<ref bean="InnomsFieldAccessService" />
-			<ref bean="InnomsGroupRevService" />
-			<ref bean="InnomsNotificationService" />
-			<ref bean="InnomsPointsService" />
-			<ref bean="InnomsTagService" />
-			<ref bean="InnomsPageService" />
-			<ref bean="InnomsPageAccessService" />
-			<ref bean="InnomsFieldService" />
-			<ref bean="InnomsEntityStatusMapService" />
-			<ref bean="InnomsDocumentService" />
-			<ref bean="InnomsCommonService" />
-			<ref bean="InnomsEventService" />
-			<ref bean="InnomsEventTypeService" />
-			<ref bean="InnomsEntityGroupService"/>
-			<ref bean="InnomsGroupUserService"/>
-			<ref bean="InnomsEntityStateService"/>
+			<ref bean="IclubAlarmTypeService" />
+			<ref bean="IclubBoundaryTypeService" />
+			<ref bean="IclubBarTypeService" />
+			<ref bean="IclubThatchTypeService" />
+			<ref bean="IclubMaritialStatusService" />
+			<ref bean="IclubCoverTypeService" />
+			<ref bean="IclubInsuranceItemTypeService" />
+			<ref bean="IclubQuoteStatusService" />
+			<ref bean="IclubNotificationTypeService" />
+			<ref bean="IclubOccupiedStatusService" />
+			<ref bean="IclubWallTypeService" />
+			<ref bean="IclubPaymentStatusService" />
+			<ref bean="IclubPclaimStatusService" />
+			<ref bean="IclubIdTypeService" />
+			<ref bean="IclubEventTypeService" />
+			<ref bean="IclubMessageTypeService" />
+			<ref bean="IclubAccessTypeService" />
+			<ref bean="IclubBuildingStateService" />
+			<ref bean="IclubRoofTypeService" />
+			<ref bean="IclubRateTypeService" />
+			<ref bean="IclubSupplierTypeService" />
 
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
