@@ -174,9 +174,9 @@ public class IclubIdTypeDAO {
 	}
 	
 	public List getIdTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getIdType BySD");
+		log.debug("Fetching all Batch by Query :: getIdTypeBySD");
 		try {
-			Query query = getCurrentSession().getNamedQuery("getIdType BySD");
+			Query query = getCurrentSession().getNamedQuery("getIdTypeBySD");
 			query.setString("sd", sd);
 			query.setLong("id", id);
 			List ret = query.list();
