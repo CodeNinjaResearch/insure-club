@@ -5,39 +5,48 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
-import za.co.iclub.pss.web.bean.IclubAccessTypeBean;
+
+import za.co.iclub.pss.web.bean.IclubMessageTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubAccessTypeModel;
+import za.co.iclub.pss.ws.model.IclubMessageTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
+
+
+@ManagedBean(name = "iclubMessageTypeController")
+@SessionScoped
 public class IclubMessageTypeController implements Serializable {
 
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubMessageTypeController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubAccessTypeService/";
-	private List<IclubAccessTypeBean> beans;
-	private IclubAccessTypeBean bean;
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubMessageTypeService/";
+	private List<IclubMessageTypeBean> beans;
+	private IclubMessageTypeBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
 
-	public void addIclubAccessType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubAccessType");
+	public void addIclubMessageType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubMessageType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubAccessTypeModel model = new IclubAccessTypeModel();
+				IclubMessageTypeModel model = new IclubMessageTypeModel();
 
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
+				model.setMtLongDesc(bean.getMtLongDesc());
+				model.setMtShortDesc(bean.getMtShortDesc());
+				model.setMtStatus(bean.getMtStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -54,16 +63,16 @@ public class IclubMessageTypeController implements Serializable {
 		}
 	}
 
-	public void modIclubAccessType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubAccessType");
+	public void modIclubMessageType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubMessageType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubAccessTypeModel model = new IclubAccessTypeModel();
-				model.setAtId(bean.getAtId());
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
+				IclubMessageTypeModel model = new IclubMessageTypeModel();
+				model.setMtId(bean.getMtId());
+				model.setMtLongDesc(bean.getMtLongDesc());
+				model.setMtShortDesc(bean.getMtShortDesc());
+				model.setMtStatus(bean.getMtStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -80,10 +89,10 @@ public class IclubMessageTypeController implements Serializable {
 		}
 	}
 
-	public void delIclubAccessType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubAccessType");
+	public void delIclubMessageType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubMessageType");
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getAtId());
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getMtId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
 				IclubWebHelper.addMessage(getLabelBundle().getString("appltype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
@@ -100,13 +109,13 @@ public class IclubMessageTypeController implements Serializable {
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
-		bean = new IclubAccessTypeBean();
+		bean = new IclubMessageTypeBean();
 	}
 
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
-		bean = new IclubAccessTypeBean();
+		bean = new IclubMessageTypeBean();
 	}
 
 	public void showModPanel() {
@@ -117,8 +126,8 @@ public class IclubMessageTypeController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 
-		if (bean.getAtShortDesc() != null && !bean.getAtShortDesc().trim().equalsIgnoreCase("")) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getAtShortDesc().trim() + "/" + ((bean.getAtId() == null) ? -999l : bean.getAtId()));
+		if (bean.getMtShortDesc() != null && !bean.getMtShortDesc().trim().equalsIgnoreCase("")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getMtShortDesc().trim() + "/" + ((bean.getMtId() == null) ? -999l : bean.getMtId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
 			if (message.getStatusCode() != 0) {
@@ -127,7 +136,7 @@ public class IclubMessageTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getAtStatus().equalsIgnoreCase("-1")) {
+		if (bean.getMtStatus().equalsIgnoreCase("-1")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -135,33 +144,33 @@ public class IclubMessageTypeController implements Serializable {
 		return ret;
 	}
 
-	public List<IclubAccessTypeBean> getBeans() {
+	public List<IclubMessageTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
-		Collection<? extends IclubAccessTypeModel> models = new ArrayList<IclubAccessTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccessTypeModel.class));
+		Collection<? extends IclubMessageTypeModel> models = new ArrayList<IclubMessageTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMessageTypeModel.class));
 		client.close();
-		beans = new ArrayList<IclubAccessTypeBean>();
-		for (IclubAccessTypeModel model : models) {
-			IclubAccessTypeBean bean = new IclubAccessTypeBean();
-			bean.setAtId(model.getAtId());
-			bean.setAtLongDesc(model.getAtLongDesc());
-			bean.setAtShortDesc(model.getAtShortDesc());
-			bean.setAtStatus(model.getAtStatus());
+		beans = new ArrayList<IclubMessageTypeBean>();
+		for (IclubMessageTypeModel model : models) {
+			IclubMessageTypeBean bean = new IclubMessageTypeBean();
+			bean.setMtId(model.getMtId());
+			bean.setMtLongDesc(model.getMtLongDesc());
+			bean.setMtShortDesc(model.getMtShortDesc());
+			bean.setMtStatus(model.getMtStatus());
 			beans.add(bean);
 		}
 		return beans;
 	}
 
-	public void setBeans(List<IclubAccessTypeBean> beans) {
+	public void setBeans(List<IclubMessageTypeBean> beans) {
 		this.beans = beans;
 	}
 
-	public IclubAccessTypeBean getBean() {
+	public IclubMessageTypeBean getBean() {
 		if (bean == null)
-			bean = new IclubAccessTypeBean();
+			bean = new IclubMessageTypeBean();
 		return bean;
 	}
 
-	public void setBean(IclubAccessTypeBean bean) {
+	public void setBean(IclubMessageTypeBean bean) {
 		this.bean = bean;
 	}
 

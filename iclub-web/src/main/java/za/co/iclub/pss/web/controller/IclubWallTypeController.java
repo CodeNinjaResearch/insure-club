@@ -5,17 +5,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+
 import za.co.iclub.pss.web.bean.IclubWallTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubWallTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
+@ManagedBean(name = "iclubWallTypeController")
+@SessionScoped
 public class IclubWallTypeController implements Serializable {
 
 	private static final long serialVersionUID = 6271776777151313314L;
