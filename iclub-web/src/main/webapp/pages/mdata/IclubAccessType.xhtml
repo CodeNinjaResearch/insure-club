@@ -1,0 +1,111 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<f:loadBundle basename="labels" var="labels"/>
+	<ui:define name="title">Maintain AccessType</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlEntityCatCont">
+			<p:dataTable id="dtEntityCatCont" widgetVar="dtEntityCatCont" value="#{innomsEntityCatController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['entitycat.view.table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnEntityCatShowAdd" value="#{labels['add']}" actionListener="#{innomsEntityCatController.showAddPanel}" update=":innomsFrm:grlMsg, :innomsFrm:pnlEntityCatCont" />
+				</f:facet>
+				<p:column headerText="#{labels['entitycat.view.id']}">
+					<p:outputLabel value="#{bean.entityCatId}" />
+				</p:column>
+				<p:column headerText="#{labels['entitycat.view.shortdesc']}">
+					<p:outputLabel value="#{bean.entityCatShortDec}" />
+				</p:column>
+				<p:column headerText="#{labels['entitycat.view.longdesc']}">
+					<p:outputLabel value="#{bean.entityCatLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['entitycat.view.status']}">
+					<p:selectOneMenu value="#{bean.entityCatStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnEntityCatEdit" icon="ui-icon-pencil" actionListener="#{innomsEntityCatController.showModPanel}" update=":innomsFrm:grlMsg, :innomsFrm:pnlEntityCatCont">
+						<f:setPropertyActionListener target="#{innomsEntityCatController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:panel id="pnlAdd" rendered="#{innomsEntityCatController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['entitycat.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{innomsEntityCatController.bean.entityCatShortDec}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['entitycat.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{innomsEntityCatController.bean.entityCatLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['entitycat.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{innomsEntityCatController.bean.entityCatStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnEntityCatAddSave" value="#{labels['entitycat.create.save']}" actionListener="#{innomsEntityCatController.addInnomsEntityCat}" update=":innomsFrm:grlMsg, :innomsFrm:pnlEntityCatCont" />
+								<p:commandButton id="btnEntityCatAddClose" value="#{labels['entitycat.create.close']}" actionListener="#{innomsEntityCatController.clearForm}" update=":innomsFrm:grlMsg, :innomsFrm:pnlEntityCatCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{innomsEntityCatController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['entitycat.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{innomsEntityCatController.bean.entityCatId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['entitycat.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{innomsEntityCatController.bean.entityCatStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['entitycat.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{innomsEntityCatController.bean.entityCatShortDec}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['entitycat.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{innomsEntityCatController.bean.entityCatLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnEntityCatModSave" value="#{labels['entitycat.edit.save']}" actionListener="#{innomsEntityCatController.modInnomsEntityCat}" update=":innomsFrm:grlMsg, :innomsFrm:pnlEntityCatCont" />
+								<p:commandButton id="btnEntityCatModDelete" value="#{labels['entitycat.edit.delete']}" actionListener="#{innomsEntityCatController.delInnomsEntityCat}" update=":innomsFrm:grlMsg, :innomsFrm:pnlEntityCatCont" />
+								<p:commandButton id="btnEntityCatModClose" value="#{labels['entitycat.edit.close']}" actionListener="#{innomsEntityCatController.clearForm}" update=":innomsFrm:grlMsg, :innomsFrm:pnlEntityCatCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>
