@@ -1,11 +1,11 @@
-<ui:composition templiite="/templiites/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="title">Maintain InsuranceItemType</ui:define>
 	<ui:define name="body">
 		<p:panel id="pnlInsuranceItemTypeCont">
-			<p:diitaTable id="dtInsuranceItemTypeCont" widgetVar="dtInsuranceItemTypeCont" value="#{iclubInsuranceItemTypeController.beans}" var="bean" rows="10" paginiitor="true" paginiitorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+			<p:dataTable id="dtInsuranceItemTypeCont" widgetVar="dtInsuranceItemTypeCont" value="#{iclubInsuranceItemTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 				<f:facet name="footer">
-					<p:commandButton id="btnInsuranceItemTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubInsuranceItemTypeController.showAddPanel}" updiite=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
+					<p:commandButton id="btnInsuranceItemTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubInsuranceItemTypeController.showAddPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
 				</f:facet>
 				<p:column headerText="#{labels['insuranceitemtype.view.id']}">
 					<p:outputLabel value="#{bean.iitId}" />
@@ -24,7 +24,7 @@
 					</p:selectOneMenu>
 				</p:column>
 				<p:column>
-					<p:commandButton id="btnInsuranceItemTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubInsuranceItemTypeController.showModPanel}" updiite=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont">
+					<p:commandButton id="btnInsuranceItemTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubInsuranceItemTypeController.showModPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont">
 						<f:setPropertyActionListener target="#{iclubInsuranceItemTypeController.bean}" value="#{bean}" />
 					</p:commandButton>
 				</p:column>
@@ -56,8 +56,8 @@
 						</p:column>
 						<f:facet name="footer">
 							<div align="center">
-								<p:commandButton id="btnInsuranceItemTypeAddSave" value="#{labels['save']}" actionListener="#{iclubInsuranceItemTypeController.addIclubInsuranceItemType}" updiite=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
-								<p:commandButton id="btnInsuranceItemTypeAddClose" value="#{labels['close']}" actionListener="#{iclubInsuranceItemTypeController.clearForm}" updiite=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeAddSave" value="#{labels['save']}" actionListener="#{iclubInsuranceItemTypeController.addIclubInsuranceItemType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeAddClose" value="#{labels['close']}" actionListener="#{iclubInsuranceItemTypeController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
 							</div>
 						</f:facet>
 					</p:panelGrid>
@@ -97,9 +97,9 @@
 						</p:column>
 						<f:facet name="footer">
 							<div align="center">
-								<p:commandButton id="btnInsuranceItemTypeModSave" value="#{labels['save']}" actionListener="#{iclubInsuranceItemTypeController.modIclubInsuranceItemType}" updiite=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
-								<p:commandButton id="btnInsuranceItemTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubInsuranceItemTypeController.delIclubInsuranceItemType}" updiite=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
-								<p:commandButton id="btnInsuranceItemTypeModClose" value="#{labels['close']}" actionListener="#{iclubInsuranceItemTypeController.clearForm}" updiite=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeModSave" value="#{labels['save']}" actionListener="#{iclubInsuranceItemTypeController.modIclubInsuranceItemType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubInsuranceItemTypeController.delIclubInsuranceItemType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeModClose" value="#{labels['close']}" actionListener="#{iclubInsuranceItemTypeController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlInsuranceItemTypeCont" />
 							</div>
 						</f:facet>
 					</p:panelGrid>
