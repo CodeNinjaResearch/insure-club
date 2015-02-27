@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({  "rawtypes" })
 public class IclubCommonDAO {
 
 	private static final Logger log = Logger.getLogger(IclubCommonDAO.class);
