@@ -1,0 +1,110 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain BuildingState</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlBuildingStateCont">
+			<p:dataTable id="dtBuildingStateCont" widgetVar="dtBuildingStateCont" value="#{iclubBuildingStateController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnBuildingStateShowAdd" value="#{labels['add']}" actionListener="#{iclubBuildingStateController.showAddPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlBuildingStateCont" />
+				</f:facet>
+				<p:column headerText="#{labels['buildingstate.view.id']}">
+					<p:outputLabel value="#{bean.bsId}" />
+				</p:column>
+				<p:column headerText="#{labels['buildingstate.view.shortdesc']}">
+					<p:outputLabel value="#{bean.bsShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['buildingstate.view.longdesc']}">
+					<p:outputLabel value="#{bean.bsLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['buildingstate.view.status']}">
+					<p:selectOneMenu value="#{bean.bsStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnBuildingStateEdit" icon="ui-icon-pencil" actionListener="#{iclubBuildingStateController.showModPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlBuildingStateCont">
+						<f:setPropertyActionListener target="#{iclubBuildingStateController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:panel id="pnlAdd" rendered="#{iclubBuildingStateController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['buildingstate.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubBuildingStateController.bean.bsShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['buildingstate.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubBuildingStateController.bean.bsLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['buildingstate.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubBuildingStateController.bean.bsStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnBuildingStateAddSave" value="#{labels['save']}" actionListener="#{iclubBuildingStateController.addIclubBuildingState}" update=":iclubFrm:grlMsg, :iclubFrm:pnlBuildingStateCont" />
+								<p:commandButton id="btnBuildingStateAddClose" value="#{labels['close']}" actionListener="#{iclubBuildingStateController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlBuildingStateCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubBuildingStateController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['buildingstate.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubBuildingStateController.bean.bsId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['buildingstate.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubBuildingStateController.bean.bsStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['buildingstate.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubBuildingStateController.bean.bsShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['buildingstate.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubBuildingStateController.bean.bsLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnBuildingStateModSave" value="#{labels['save']}" actionListener="#{iclubBuildingStateController.modIclubBuildingState}" update=":iclubFrm:grlMsg, :iclubFrm:pnlBuildingStateCont" />
+								<p:commandButton id="btnBuildingStateModDelete" value="#{labels['delete']}" actionListener="#{iclubBuildingStateController.delIclubBuildingState}" update=":iclubFrm:grlMsg, :iclubFrm:pnlBuildingStateCont" />
+								<p:commandButton id="btnBuildingStateModClose" value="#{labels['close']}" actionListener="#{iclubBuildingStateController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlBuildingStateCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

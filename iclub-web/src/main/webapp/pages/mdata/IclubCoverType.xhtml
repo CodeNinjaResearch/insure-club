@@ -1,0 +1,110 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain CoverType</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlCoverTypeCont">
+			<p:dataTable id="dtCoverTypeCont" widgetVar="dtCoverTypeCont" value="#{iclubCoverTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnCoverTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubCoverTypeController.showAddPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" />
+				</f:facet>
+				<p:column headerText="#{labels['covertype.view.id']}">
+					<p:outputLabel value="#{bean.ctId}" />
+				</p:column>
+				<p:column headerText="#{labels['covertype.view.shortdesc']}">
+					<p:outputLabel value="#{bean.ctShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['covertype.view.longdesc']}">
+					<p:outputLabel value="#{bean.ctLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['covertype.view.status']}">
+					<p:selectOneMenu value="#{bean.ctStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnCoverTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubCoverTypeController.showModPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont">
+						<f:setPropertyActionListener target="#{iclubCoverTypeController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:panel id="pnlAdd" rendered="#{iclubCoverTypeController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['covertype.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubCoverTypeController.bean.ctShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['covertype.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubCoverTypeController.bean.ctLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['covertype.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubCoverTypeController.bean.ctStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnCoverTypeAddSave" value="#{labels['save']}" actionListener="#{iclubCoverTypeController.addIclubCoverType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" />
+								<p:commandButton id="btnCoverTypeAddClose" value="#{labels['close']}" actionListener="#{iclubCoverTypeController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubCoverTypeController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['covertype.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubCoverTypeController.bean.ctId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['covertype.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubCoverTypeController.bean.ctStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['covertype.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubCoverTypeController.bean.ctShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['covertype.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubCoverTypeController.bean.ctLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnCoverTypeModSave" value="#{labels['save']}" actionListener="#{iclubCoverTypeController.modIclubCoverType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" />
+								<p:commandButton id="btnCoverTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubCoverTypeController.delIclubCoverType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" />
+								<p:commandButton id="btnCoverTypeModClose" value="#{labels['close']}" actionListener="#{iclubCoverTypeController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>
