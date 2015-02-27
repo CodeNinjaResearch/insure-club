@@ -173,7 +173,7 @@ public class IclubIdTypeDAO {
 		}
 	}
 	
-	public List getIdType BySD(String sd, Long id) {
+	public List getIdTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Batch by Query :: getIdType BySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getIdType BySD");
