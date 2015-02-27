@@ -1,0 +1,110 @@
+<ui:composition templose="/temploses/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain OccupiedStatus</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlOccupiedStatusCont">
+			<p:dosaTable id="dtOccupiedStatusCont" widgetVar="dtOccupiedStatusCont" value="#{iclubOccupiedStatusController.beans}" var="bean" rows="10" paginosor="true" paginosorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnOccupiedStatusShowAdd" value="#{labels['add']}" actionListener="#{iclubOccupiedStatusController.showAddPanel}" updose=":iclubFrm:grlMsg, :iclubFrm:pnlOccupiedStatusCont" />
+				</f:facet>
+				<p:column headerText="#{labels['occupiedstatus.view.id']}">
+					<p:outputLabel value="#{bean.osId}" />
+				</p:column>
+				<p:column headerText="#{labels['occupiedstatus.view.shortdesc']}">
+					<p:outputLabel value="#{bean.osShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['occupiedstatus.view.longdesc']}">
+					<p:outputLabel value="#{bean.osLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['occupiedstatus.view.status']}">
+					<p:selectOneMenu value="#{bean.osStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnOccupiedStatusEdit" icon="ui-icon-pencil" actionListener="#{iclubOccupiedStatusController.showModPanel}" updose=":iclubFrm:grlMsg, :iclubFrm:pnlOccupiedStatusCont">
+						<f:setPropertyActionListener target="#{iclubOccupiedStatusController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dosaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubOccupiedStatusController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['occupiedstatus.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubOccupiedStatusController.bean.osShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['occupiedstatus.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubOccupiedStatusController.bean.osLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['occupiedstatus.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubOccupiedStatusController.bean.osStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnOccupiedStatusAddSave" value="#{labels['save']}" actionListener="#{iclubOccupiedStatusController.addIclubOccupiedStatus}" updose=":iclubFrm:grlMsg, :iclubFrm:pnlOccupiedStatusCont" />
+								<p:commandButton id="btnOccupiedStatusAddClose" value="#{labels['close']}" actionListener="#{iclubOccupiedStatusController.clearForm}" updose=":iclubFrm:grlMsg, :iclubFrm:pnlOccupiedStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubOccupiedStatusController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['occupiedstatus.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubOccupiedStatusController.bean.osId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['occupiedstatus.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubOccupiedStatusController.bean.osStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['occupiedstatus.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubOccupiedStatusController.bean.osShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['occupiedstatus.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubOccupiedStatusController.bean.osLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnOccupiedStatusModSave" value="#{labels['save']}" actionListener="#{iclubOccupiedStatusController.modIclubOccupiedStatus}" updose=":iclubFrm:grlMsg, :iclubFrm:pnlOccupiedStatusCont" />
+								<p:commandButton id="btnOccupiedStatusModDelete" value="#{labels['delete']}" actionListener="#{iclubOccupiedStatusController.delIclubOccupiedStatus}" updose=":iclubFrm:grlMsg, :iclubFrm:pnlOccupiedStatusCont" />
+								<p:commandButton id="btnOccupiedStatusModClose" value="#{labels['close']}" actionListener="#{iclubOccupiedStatusController.clearForm}" updose=":iclubFrm:grlMsg, :iclubFrm:pnlOccupiedStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

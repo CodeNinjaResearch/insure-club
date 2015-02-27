@@ -1,0 +1,110 @@
+<ui:composition templmte="/templmtes/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain MessageType</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlMessageTypeCont">
+			<p:dmtaTable id="dtMessageTypeCont" widgetVar="dtMessageTypeCont" value="#{iclubMessageTypeController.beans}" var="bean" rows="10" paginmtor="true" paginmtorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnMessageTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubMessageTypeController.showAddPanel}" updmte=":iclubFrm:grlMsg, :iclubFrm:pnlMessageTypeCont" />
+				</f:facet>
+				<p:column headerText="#{labels['messagetype.view.id']}">
+					<p:outputLabel value="#{bean.mtId}" />
+				</p:column>
+				<p:column headerText="#{labels['messagetype.view.shortdesc']}">
+					<p:outputLabel value="#{bean.mtShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['messagetype.view.longdesc']}">
+					<p:outputLabel value="#{bean.mtLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['messagetype.view.status']}">
+					<p:selectOneMenu value="#{bean.mtStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnMessageTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubMessageTypeController.showModPanel}" updmte=":iclubFrm:grlMsg, :iclubFrm:pnlMessageTypeCont">
+						<f:setPropertyActionListener target="#{iclubMessageTypeController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dmtaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubMessageTypeController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['messagetype.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubMessageTypeController.bean.mtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['messagetype.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubMessageTypeController.bean.mtLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['messagetype.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubMessageTypeController.bean.mtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnMessageTypeAddSave" value="#{labels['save']}" actionListener="#{iclubMessageTypeController.addIclubMessageType}" updmte=":iclubFrm:grlMsg, :iclubFrm:pnlMessageTypeCont" />
+								<p:commandButton id="btnMessageTypeAddClose" value="#{labels['close']}" actionListener="#{iclubMessageTypeController.clearForm}" updmte=":iclubFrm:grlMsg, :iclubFrm:pnlMessageTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubMessageTypeController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['messagetype.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubMessageTypeController.bean.mtId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['messagetype.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubMessageTypeController.bean.mtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['messagetype.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubMessageTypeController.bean.mtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['messagetype.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubMessageTypeController.bean.mtLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnMessageTypeModSave" value="#{labels['save']}" actionListener="#{iclubMessageTypeController.modIclubMessageType}" updmte=":iclubFrm:grlMsg, :iclubFrm:pnlMessageTypeCont" />
+								<p:commandButton id="btnMessageTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubMessageTypeController.delIclubMessageType}" updmte=":iclubFrm:grlMsg, :iclubFrm:pnlMessageTypeCont" />
+								<p:commandButton id="btnMessageTypeModClose" value="#{labels['close']}" actionListener="#{iclubMessageTypeController.clearForm}" updmte=":iclubFrm:grlMsg, :iclubFrm:pnlMessageTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

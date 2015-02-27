@@ -1,0 +1,110 @@
+<ui:composition templrte="/templrtes/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain RateType</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlRateTypeCont">
+			<p:drtaTable id="dtRateTypeCont" widgetVar="dtRateTypeCont" value="#{iclubRateTypeController.beans}" var="bean" rows="10" paginrtor="true" paginrtorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnRateTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubRateTypeController.showAddPanel}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" />
+				</f:facet>
+				<p:column headerText="#{labels['ratetype.view.id']}">
+					<p:outputLabel value="#{bean.rtId}" />
+				</p:column>
+				<p:column headerText="#{labels['ratetype.view.shortdesc']}">
+					<p:outputLabel value="#{bean.rtShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['ratetype.view.longdesc']}">
+					<p:outputLabel value="#{bean.rtLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['ratetype.view.status']}">
+					<p:selectOneMenu value="#{bean.rtStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnRateTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubRateTypeController.showModPanel}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont">
+						<f:setPropertyActionListener target="#{iclubRateTypeController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:drtaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubRateTypeController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['ratetype.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRateTypeController.bean.rtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['ratetype.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRateTypeController.bean.rtLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['ratetype.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubRateTypeController.bean.rtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnRateTypeAddSave" value="#{labels['save']}" actionListener="#{iclubRateTypeController.addIclubRateType}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" />
+								<p:commandButton id="btnRateTypeAddClose" value="#{labels['close']}" actionListener="#{iclubRateTypeController.clearForm}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubRateTypeController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['ratetype.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubRateTypeController.bean.rtId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['ratetype.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubRateTypeController.bean.rtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['ratetype.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRateTypeController.bean.rtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['ratetype.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRateTypeController.bean.rtLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnRateTypeModSave" value="#{labels['save']}" actionListener="#{iclubRateTypeController.modIclubRateType}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" />
+								<p:commandButton id="btnRateTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubRateTypeController.delIclubRateType}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" />
+								<p:commandButton id="btnRateTypeModClose" value="#{labels['close']}" actionListener="#{iclubRateTypeController.clearForm}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

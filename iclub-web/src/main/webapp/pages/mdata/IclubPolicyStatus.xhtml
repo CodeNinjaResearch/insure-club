@@ -1,0 +1,110 @@
+<ui:composition templpse="/templpses/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain PolicyStatus</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlPolicyStatusCont">
+			<p:dpsaTable id="dtPolicyStatusCont" widgetVar="dtPolicyStatusCont" value="#{iclubPolicyStatusController.beans}" var="bean" rows="10" paginpsor="true" paginpsorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnPolicyStatusShowAdd" value="#{labels['add']}" actionListener="#{iclubPolicyStatusController.showAddPanel}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPolicyStatusCont" />
+				</f:facet>
+				<p:column headerText="#{labels['policystatus.view.id']}">
+					<p:outputLabel value="#{bean.psId}" />
+				</p:column>
+				<p:column headerText="#{labels['policystatus.view.shortdesc']}">
+					<p:outputLabel value="#{bean.psShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['policystatus.view.longdesc']}">
+					<p:outputLabel value="#{bean.psLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['policystatus.view.status']}">
+					<p:selectOneMenu value="#{bean.psStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnPolicyStatusEdit" icon="ui-icon-pencil" actionListener="#{iclubPolicyStatusController.showModPanel}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPolicyStatusCont">
+						<f:setPropertyActionListener target="#{iclubPolicyStatusController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dpsaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubPolicyStatusController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['policystatus.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPolicyStatusController.bean.psShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['policystatus.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPolicyStatusController.bean.psLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['policystatus.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubPolicyStatusController.bean.psStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPolicyStatusAddSave" value="#{labels['save']}" actionListener="#{iclubPolicyStatusController.addIclubPolicyStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPolicyStatusCont" />
+								<p:commandButton id="btnPolicyStatusAddClose" value="#{labels['close']}" actionListener="#{iclubPolicyStatusController.clearForm}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPolicyStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubPolicyStatusController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['policystatus.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubPolicyStatusController.bean.psId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['policystatus.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubPolicyStatusController.bean.psStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['policystatus.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPolicyStatusController.bean.psShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['policystatus.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPolicyStatusController.bean.psLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPolicyStatusModSave" value="#{labels['save']}" actionListener="#{iclubPolicyStatusController.modIclubPolicyStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPolicyStatusCont" />
+								<p:commandButton id="btnPolicyStatusModDelete" value="#{labels['delete']}" actionListener="#{iclubPolicyStatusController.delIclubPolicyStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPolicyStatusCont" />
+								<p:commandButton id="btnPolicyStatusModClose" value="#{labels['close']}" actionListener="#{iclubPolicyStatusController.clearForm}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPolicyStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

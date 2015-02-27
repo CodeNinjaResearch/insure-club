@@ -1,0 +1,110 @@
+<ui:composition templpse="/templpses/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain PclaimStatus</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlPclaimStatusCont">
+			<p:dpsaTable id="dtPclaimStatusCont" widgetVar="dtPclaimStatusCont" value="#{iclubPclaimStatusController.beans}" var="bean" rows="10" paginpsor="true" paginpsorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnPclaimStatusShowAdd" value="#{labels['add']}" actionListener="#{iclubPclaimStatusController.showAddPanel}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPclaimStatusCont" />
+				</f:facet>
+				<p:column headerText="#{labels['pclaimstatus.view.id']}">
+					<p:outputLabel value="#{bean.psId}" />
+				</p:column>
+				<p:column headerText="#{labels['pclaimstatus.view.shortdesc']}">
+					<p:outputLabel value="#{bean.psShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['pclaimstatus.view.longdesc']}">
+					<p:outputLabel value="#{bean.psLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['pclaimstatus.view.status']}">
+					<p:selectOneMenu value="#{bean.psStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnPclaimStatusEdit" icon="ui-icon-pencil" actionListener="#{iclubPclaimStatusController.showModPanel}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPclaimStatusCont">
+						<f:setPropertyActionListener target="#{iclubPclaimStatusController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dpsaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubPclaimStatusController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['pclaimstatus.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPclaimStatusController.bean.psShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['pclaimstatus.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPclaimStatusController.bean.psLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['pclaimstatus.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubPclaimStatusController.bean.psStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPclaimStatusAddSave" value="#{labels['save']}" actionListener="#{iclubPclaimStatusController.addIclubPclaimStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPclaimStatusCont" />
+								<p:commandButton id="btnPclaimStatusAddClose" value="#{labels['close']}" actionListener="#{iclubPclaimStatusController.clearForm}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPclaimStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubPclaimStatusController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['pclaimstatus.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubPclaimStatusController.bean.psId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['pclaimstatus.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubPclaimStatusController.bean.psStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['pclaimstatus.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPclaimStatusController.bean.psShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['pclaimstatus.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPclaimStatusController.bean.psLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPclaimStatusModSave" value="#{labels['save']}" actionListener="#{iclubPclaimStatusController.modIclubPclaimStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPclaimStatusCont" />
+								<p:commandButton id="btnPclaimStatusModDelete" value="#{labels['delete']}" actionListener="#{iclubPclaimStatusController.delIclubPclaimStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPclaimStatusCont" />
+								<p:commandButton id="btnPclaimStatusModClose" value="#{labels['close']}" actionListener="#{iclubPclaimStatusController.clearForm}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPclaimStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

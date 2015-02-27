@@ -1,0 +1,110 @@
+<ui:composition templpse="/templpses/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain PaymentStatus</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlPaymentStatusCont">
+			<p:dpsaTable id="dtPaymentStatusCont" widgetVar="dtPaymentStatusCont" value="#{iclubPaymentStatusController.beans}" var="bean" rows="10" paginpsor="true" paginpsorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnPaymentStatusShowAdd" value="#{labels['add']}" actionListener="#{iclubPaymentStatusController.showAddPanel}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPaymentStatusCont" />
+				</f:facet>
+				<p:column headerText="#{labels['paymentstatus.view.id']}">
+					<p:outputLabel value="#{bean.psId}" />
+				</p:column>
+				<p:column headerText="#{labels['paymentstatus.view.shortdesc']}">
+					<p:outputLabel value="#{bean.psShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['paymentstatus.view.longdesc']}">
+					<p:outputLabel value="#{bean.psLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['paymentstatus.view.status']}">
+					<p:selectOneMenu value="#{bean.psStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnPaymentStatusEdit" icon="ui-icon-pencil" actionListener="#{iclubPaymentStatusController.showModPanel}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPaymentStatusCont">
+						<f:setPropertyActionListener target="#{iclubPaymentStatusController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dpsaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubPaymentStatusController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['paymentstatus.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPaymentStatusController.bean.psShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['paymentstatus.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPaymentStatusController.bean.psLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['paymentstatus.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubPaymentStatusController.bean.psStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPaymentStatusAddSave" value="#{labels['save']}" actionListener="#{iclubPaymentStatusController.addIclubPaymentStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPaymentStatusCont" />
+								<p:commandButton id="btnPaymentStatusAddClose" value="#{labels['close']}" actionListener="#{iclubPaymentStatusController.clearForm}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPaymentStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubPaymentStatusController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['paymentstatus.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubPaymentStatusController.bean.psId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['paymentstatus.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubPaymentStatusController.bean.psStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['paymentstatus.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPaymentStatusController.bean.psShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['paymentstatus.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPaymentStatusController.bean.psLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPaymentStatusModSave" value="#{labels['save']}" actionListener="#{iclubPaymentStatusController.modIclubPaymentStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPaymentStatusCont" />
+								<p:commandButton id="btnPaymentStatusModDelete" value="#{labels['delete']}" actionListener="#{iclubPaymentStatusController.delIclubPaymentStatus}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPaymentStatusCont" />
+								<p:commandButton id="btnPaymentStatusModClose" value="#{labels['close']}" actionListener="#{iclubPaymentStatusController.clearForm}" updpse=":iclubFrm:grlMsg, :iclubFrm:pnlPaymentStatusCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

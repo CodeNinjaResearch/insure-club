@@ -1,0 +1,110 @@
+<ui:composition templwte="/templwtes/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain WallType</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlWallTypeCont">
+			<p:dwtaTable id="dtWallTypeCont" widgetVar="dtWallTypeCont" value="#{iclubWallTypeController.beans}" var="bean" rows="10" paginwtor="true" paginwtorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnWallTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubWallTypeController.showAddPanel}" updwte=":iclubFrm:grlMsg, :iclubFrm:pnlWallTypeCont" />
+				</f:facet>
+				<p:column headerText="#{labels['walltype.view.id']}">
+					<p:outputLabel value="#{bean.wtId}" />
+				</p:column>
+				<p:column headerText="#{labels['walltype.view.shortdesc']}">
+					<p:outputLabel value="#{bean.wtShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['walltype.view.longdesc']}">
+					<p:outputLabel value="#{bean.wtLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['walltype.view.status']}">
+					<p:selectOneMenu value="#{bean.wtStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnWallTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubWallTypeController.showModPanel}" updwte=":iclubFrm:grlMsg, :iclubFrm:pnlWallTypeCont">
+						<f:setPropertyActionListener target="#{iclubWallTypeController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dwtaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubWallTypeController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['walltype.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubWallTypeController.bean.wtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['walltype.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubWallTypeController.bean.wtLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['walltype.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubWallTypeController.bean.wtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnWallTypeAddSave" value="#{labels['save']}" actionListener="#{iclubWallTypeController.addIclubWallType}" updwte=":iclubFrm:grlMsg, :iclubFrm:pnlWallTypeCont" />
+								<p:commandButton id="btnWallTypeAddClose" value="#{labels['close']}" actionListener="#{iclubWallTypeController.clearForm}" updwte=":iclubFrm:grlMsg, :iclubFrm:pnlWallTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubWallTypeController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['walltype.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubWallTypeController.bean.wtId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['walltype.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubWallTypeController.bean.wtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['walltype.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubWallTypeController.bean.wtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['walltype.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubWallTypeController.bean.wtLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnWallTypeModSave" value="#{labels['save']}" actionListener="#{iclubWallTypeController.modIclubWallType}" updwte=":iclubFrm:grlMsg, :iclubFrm:pnlWallTypeCont" />
+								<p:commandButton id="btnWallTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubWallTypeController.delIclubWallType}" updwte=":iclubFrm:grlMsg, :iclubFrm:pnlWallTypeCont" />
+								<p:commandButton id="btnWallTypeModClose" value="#{labels['close']}" actionListener="#{iclubWallTypeController.clearForm}" updwte=":iclubFrm:grlMsg, :iclubFrm:pnlWallTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

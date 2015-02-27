@@ -1,0 +1,110 @@
+<ui:composition templrte="/templrtes/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain RoofType</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlRoofTypeCont">
+			<p:drtaTable id="dtRoofTypeCont" widgetVar="dtRoofTypeCont" value="#{iclubRoofTypeController.beans}" var="bean" rows="10" paginrtor="true" paginrtorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnRoofTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubRoofTypeController.showAddPanel}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRoofTypeCont" />
+				</f:facet>
+				<p:column headerText="#{labels['rooftype.view.id']}">
+					<p:outputLabel value="#{bean.rtId}" />
+				</p:column>
+				<p:column headerText="#{labels['rooftype.view.shortdesc']}">
+					<p:outputLabel value="#{bean.rtShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['rooftype.view.longdesc']}">
+					<p:outputLabel value="#{bean.rtLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['rooftype.view.status']}">
+					<p:selectOneMenu value="#{bean.rtStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnRoofTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubRoofTypeController.showModPanel}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRoofTypeCont">
+						<f:setPropertyActionListener target="#{iclubRoofTypeController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:drtaTable>
+			<p:panel id="pnlAdd" rendered="#{iclubRoofTypeController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['rooftype.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRoofTypeController.bean.rtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['rooftype.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRoofTypeController.bean.rtLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['rooftype.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubRoofTypeController.bean.rtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnRoofTypeAddSave" value="#{labels['save']}" actionListener="#{iclubRoofTypeController.addIclubRoofType}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRoofTypeCont" />
+								<p:commandButton id="btnRoofTypeAddClose" value="#{labels['close']}" actionListener="#{iclubRoofTypeController.clearForm}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRoofTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubRoofTypeController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['rooftype.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubRoofTypeController.bean.rtId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['rooftype.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubRoofTypeController.bean.rtStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['rooftype.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRoofTypeController.bean.rtShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['rooftype.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubRoofTypeController.bean.rtLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnRoofTypeModSave" value="#{labels['save']}" actionListener="#{iclubRoofTypeController.modIclubRoofType}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRoofTypeCont" />
+								<p:commandButton id="btnRoofTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubRoofTypeController.delIclubRoofType}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRoofTypeCont" />
+								<p:commandButton id="btnRoofTypeModClose" value="#{labels['close']}" actionListener="#{iclubRoofTypeController.clearForm}" updrte=":iclubFrm:grlMsg, :iclubFrm:pnlRoofTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>
