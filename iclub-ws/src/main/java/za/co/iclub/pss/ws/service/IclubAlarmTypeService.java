@@ -181,5 +181,21 @@ public class IclubAlarmTypeService {
 		}
 		return model;
 	}
+
+	public IclubAlarmTypeDAO getIclubAlarmTypeDAO() {
+		return iclubAlarmTypeDAO;
+	}
+
+	public void setIclubAlarmTypeDAO(IclubAlarmTypeDAO iclubAlarmTypeDAO) {
+		this.iclubAlarmTypeDAO = iclubAlarmTypeDAO;
+	}
+
+	public IclubCommonDAO getIclubCommonDAO() {
+		return iclubCommonDAO;
+	}
+
+	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
+		this.iclubCommonDAO = iclubCommonDAO;
+	}
 	
 }

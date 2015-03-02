@@ -181,6 +181,22 @@ public class IclubBarTypeService {
 		}
 		return model;
 	}
+
+	public IclubBarTypeDAO getIclubBarTypeDAO() {
+		return iclubBarTypeDAO;
+	}
+
+	public void setIclubBarTypeDAO(IclubBarTypeDAO iclubBarTypeDAO) {
+		this.iclubBarTypeDAO = iclubBarTypeDAO;
+	}
+
+	public IclubCommonDAO getIclubCommonDAO() {
+		return iclubCommonDAO;
+	}
+
+	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
+		this.iclubCommonDAO = iclubCommonDAO;
+	}
 	
 }
 

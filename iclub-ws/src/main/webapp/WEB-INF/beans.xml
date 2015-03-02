@@ -43,7 +43,6 @@
 			<ref bean="IclubSupplierTypeService" />
 			<ref bean="IclubAccountTypeService"/>
 			<ref bean="IclubDocumentTypeService"/>
-			<ref bean="IclubPaymentTypeService"/>
 			<ref bean="IclubOwnerTypeService"/>
 			<ref bean="IclubPolicyStatusService"/>
 			<ref bean="IclubProductTypeService"/>

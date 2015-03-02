@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 	<import resource="classpath:iclubORMContext.xml" />
-	<bean id="IclubAlarmTypeService" class="za.co.iclub.pss.ws.service.IclubAlarmTypeService" >
+	<bean id="IclubAlarmTypeService" class="za.co.iclub.pss.ws.service.IclubAlarmTypeService">
 		<property name="iclubAlarmTypeDAO" ref="IclubAlarmTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
@@ -89,43 +89,39 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubAccountTypeService" class="za.co.iclub.pss.ws.service.IclubAccountTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubAccountTypeDAO" ref="IclubSupplierTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubDocumentTypeService" class="za.co.iclub.pss.ws.service.IclubDocumentTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
-		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
-	</bean>
-	<bean id="IclubPaymentTypeService" class="za.co.iclub.pss.ws.service.IclubPaymentTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubDocumentTypeDAO" ref="IclubSupplierTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubOwnerTypeService" class="za.co.iclub.pss.ws.service.IclubOwnerTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubOwnerTypeDAO" ref="IclubOwnerTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubPolicyStatusService" class="za.co.iclub.pss.ws.service.IclubPolicyStatusService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubPolicyStatusDAO" ref="IclubPolicyStatusDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubProductTypeService" class="za.co.iclub.pss.ws.service.IclubProductTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubProductTypeDAO" ref="IclubProductTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubPropertyTypeService" class="za.co.iclub.pss.ws.service.IclubPropertyTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubPropertyTypeDAO" ref="IclubPropertyTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubPurposeTypeService" class="za.co.iclub.pss.ws.service.IclubPurposeTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubPurposeTypeDAO" ref="IclubPurposeTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubRoleTypeService" class="za.co.iclub.pss.ws.service.IclubRoleTypeService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubRoleTypeDAO" ref="IclubRoleTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubSecurityQuestionService" class="za.co.iclub.pss.ws.service.IclubSecurityQuestionService">
-		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubSecurityQuestionDAO" ref="IclubSecurityQuestionDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 

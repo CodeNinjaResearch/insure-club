@@ -182,5 +182,21 @@ public class IclubAccessTypeService {
 		}
 		return model;
 	}
+
+	public IclubAccessTypeDAO getIclubAccessTypeDAO() {
+		return iclubAccessTypeDAO;
+	}
+
+	public void setIclubAccessTypeDAO(IclubAccessTypeDAO iclubAccessTypeDAO) {
+		this.iclubAccessTypeDAO = iclubAccessTypeDAO;
+	}
+
+	public IclubCommonDAO getIclubCommonDAO() {
+		return iclubCommonDAO;
+	}
+
+	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
+		this.iclubCommonDAO = iclubCommonDAO;
+	}
 	
 }

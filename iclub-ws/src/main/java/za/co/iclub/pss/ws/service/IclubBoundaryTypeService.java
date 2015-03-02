@@ -181,6 +181,22 @@ public class IclubBoundaryTypeService {
 		}
 		return model;
 	}
+
+	public IclubBoundaryTypeDAO getIclubBoundaryTypeDAO() {
+		return iclubBoundaryTypeDAO;
+	}
+
+	public void setIclubBoundaryTypeDAO(IclubBoundaryTypeDAO iclubBoundaryTypeDAO) {
+		this.iclubBoundaryTypeDAO = iclubBoundaryTypeDAO;
+	}
+
+	public IclubCommonDAO getIclubCommonDAO() {
+		return iclubCommonDAO;
+	}
+
+	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
+		this.iclubCommonDAO = iclubCommonDAO;
+	}
 	
 }
 

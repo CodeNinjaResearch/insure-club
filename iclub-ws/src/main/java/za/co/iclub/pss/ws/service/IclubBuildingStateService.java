@@ -181,6 +181,22 @@ public class IclubBuildingStateService {
 		}
 		return model;
 	}
+
+	public IclubBuildingStateDAO getIclubBuildingStateDAO() {
+		return iclubBuildingStateDAO;
+	}
+
+	public void setIclubBuildingStateDAO(IclubBuildingStateDAO iclubBuildingStateDAO) {
+		this.iclubBuildingStateDAO = iclubBuildingStateDAO;
+	}
+
+	public IclubCommonDAO getIclubCommonDAO() {
+		return iclubCommonDAO;
+	}
+
+	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
+		this.iclubCommonDAO = iclubCommonDAO;
+	}
 	
 }
 
