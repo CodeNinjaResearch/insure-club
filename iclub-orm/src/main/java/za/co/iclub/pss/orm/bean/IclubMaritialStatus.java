@@ -1,12 +1,18 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * IclubMaritialStatus entity. @author Venu Madhav Pattamatta
+ * IclubMaritialStatus entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "iclub_maritial_status", catalog = "iclubdb")
@@ -17,11 +23,12 @@ public class IclubMaritialStatus implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1611703298795919365L;
+	private static final long serialVersionUID = -3253493791358844912L;
 	private Long msId;
 	private String msShortDesc;
 	private String msLongDesc;
 	private String msStatus;
+	private Set<IclubPerson> iclubPersons = new HashSet<IclubPerson>(0);
 
 	// Constructors
 
@@ -36,11 +43,12 @@ public class IclubMaritialStatus implements java.io.Serializable {
 
 	/** full constructor */
 	public IclubMaritialStatus(Long msId, String msShortDesc,
-			String msLongDesc, String msStatus) {
+			String msLongDesc, String msStatus, Set<IclubPerson> iclubPersons) {
 		this.msId = msId;
 		this.msShortDesc = msShortDesc;
 		this.msLongDesc = msLongDesc;
 		this.msStatus = msStatus;
+		this.iclubPersons = iclubPersons;
 	}
 
 	// Property accessors
@@ -79,6 +87,15 @@ public class IclubMaritialStatus implements java.io.Serializable {
 
 	public void setMsStatus(String msStatus) {
 		this.msStatus = msStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubMaritialStatus")
+	public Set<IclubPerson> getIclubPersons() {
+		return this.iclubPersons;
+	}
+
+	public void setIclubPersons(Set<IclubPerson> iclubPersons) {
+		this.iclubPersons = iclubPersons;
 	}
 
 }

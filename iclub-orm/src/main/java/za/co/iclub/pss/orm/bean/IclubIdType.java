@@ -1,12 +1,18 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * IclubIdType entity. @author Venu Madhav Pattamatta
+ * IclubIdType entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "iclub_id_type", catalog = "iclubdb")
@@ -17,11 +23,12 @@ public class IclubIdType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4906075924247682385L;
+	private static final long serialVersionUID = -282618468900973425L;
 	private Long itId;
 	private String itShortDesc;
 	private String itLongDesc;
 	private String itStatus;
+	private Set<IclubPerson> iclubPersons = new HashSet<IclubPerson>(0);
 
 	// Constructors
 
@@ -36,11 +43,12 @@ public class IclubIdType implements java.io.Serializable {
 
 	/** full constructor */
 	public IclubIdType(Long itId, String itShortDesc, String itLongDesc,
-			String itStatus) {
+			String itStatus, Set<IclubPerson> iclubPersons) {
 		this.itId = itId;
 		this.itShortDesc = itShortDesc;
 		this.itLongDesc = itLongDesc;
 		this.itStatus = itStatus;
+		this.iclubPersons = iclubPersons;
 	}
 
 	// Property accessors
@@ -79,6 +87,15 @@ public class IclubIdType implements java.io.Serializable {
 
 	public void setItStatus(String itStatus) {
 		this.itStatus = itStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubIdType")
+	public Set<IclubPerson> getIclubPersons() {
+		return this.iclubPersons;
+	}
+
+	public void setIclubPersons(Set<IclubPerson> iclubPersons) {
+		this.iclubPersons = iclubPersons;
 	}
 
 }

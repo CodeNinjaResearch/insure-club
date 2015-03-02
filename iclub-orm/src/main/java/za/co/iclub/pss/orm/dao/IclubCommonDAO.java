@@ -10,13 +10,12 @@ import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
-@SuppressWarnings({  "rawtypes" })
+@SuppressWarnings({ "rawtypes" })
 public class IclubCommonDAO {
 
 	private static final Logger log = Logger.getLogger(IclubCommonDAO.class);
-	
+
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -34,8 +33,11 @@ public class IclubCommonDAO {
 	public Long getNextId(Class clazz) {
 		Long ret = -1l;
 		try {
-			AbstractEntityPersister persister = (AbstractEntityPersister) sessionFactory.getClassMetadata(clazz);
-			String sql = "select ifnull(max(" + persister.getIdentifierColumnNames()[0] + "),0)+1 from " + persister.getTableName();
+			AbstractEntityPersister persister = (AbstractEntityPersister) sessionFactory
+					.getClassMetadata(clazz);
+			String sql = "select ifnull(max("
+					+ persister.getIdentifierColumnNames()[0] + "),0)+1 from "
+					+ persister.getTableName();
 			SQLQuery query = getCurrentSession().createSQLQuery(sql);
 			List res = query.list();
 			if (res != null && res.size() > 0)
@@ -50,8 +52,11 @@ public class IclubCommonDAO {
 	public Long[] getNextIds(Class clazz, int num) {
 		Long[] ret = new Long[num];
 		try {
-			AbstractEntityPersister persister = (AbstractEntityPersister) sessionFactory.getClassMetadata(clazz);
-			String sql = "select ifnull(max(" + persister.getIdentifierColumnNames()[0] + "),0)+1 from " + persister.getTableName();
+			AbstractEntityPersister persister = (AbstractEntityPersister) sessionFactory
+					.getClassMetadata(clazz);
+			String sql = "select ifnull(max("
+					+ persister.getIdentifierColumnNames()[0] + "),0)+1 from "
+					+ persister.getTableName();
 			SQLQuery query = getCurrentSession().createSQLQuery(sql);
 			List res = query.list();
 			if (res != null && res.size() > 0)
@@ -65,7 +70,8 @@ public class IclubCommonDAO {
 		return ret;
 	}
 
-	public static IclubCommonDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubCommonDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubCommonDAO) ctx.getBean("IclubCommonDAO");
 	}
 

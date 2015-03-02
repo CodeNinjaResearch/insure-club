@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * IclubThatchType entity. @author Venu Madhav Pattamatta
+ * IclubThatchType entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "iclub_thatch_type", catalog = "iclubdb")

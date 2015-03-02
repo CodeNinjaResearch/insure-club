@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * IclubWallType entity. @author Venu Madhav Pattamatta
+ * IclubWallType entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "iclub_wall_type", catalog = "iclubdb")

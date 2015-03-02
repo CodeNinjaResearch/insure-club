@@ -1,12 +1,18 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * IclubSupplierType entity. @author Venu Madhav Pattamatta
+ * IclubSupplierType entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "iclub_supplier_type", catalog = "iclubdb")
@@ -17,11 +23,13 @@ public class IclubSupplierType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5650824419552056263L;
+	private static final long serialVersionUID = -1613754131810757273L;
 	private Long stId;
 	private String stShortDesc;
 	private String stLongDesc;
 	private String stStatus;
+	private Set<IclubSupplMaster> iclubSupplMasters = new HashSet<IclubSupplMaster>(
+			0);
 
 	// Constructors
 
@@ -36,11 +44,12 @@ public class IclubSupplierType implements java.io.Serializable {
 
 	/** full constructor */
 	public IclubSupplierType(Long stId, String stShortDesc, String stLongDesc,
-			String stStatus) {
+			String stStatus, Set<IclubSupplMaster> iclubSupplMasters) {
 		this.stId = stId;
 		this.stShortDesc = stShortDesc;
 		this.stLongDesc = stLongDesc;
 		this.stStatus = stStatus;
+		this.iclubSupplMasters = iclubSupplMasters;
 	}
 
 	// Property accessors
@@ -79,6 +88,15 @@ public class IclubSupplierType implements java.io.Serializable {
 
 	public void setStStatus(String stStatus) {
 		this.stStatus = stStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubSupplierType")
+	public Set<IclubSupplMaster> getIclubSupplMasters() {
+		return this.iclubSupplMasters;
+	}
+
+	public void setIclubSupplMasters(Set<IclubSupplMaster> iclubSupplMasters) {
+		this.iclubSupplMasters = iclubSupplMasters;
 	}
 
 }

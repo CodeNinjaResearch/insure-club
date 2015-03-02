@@ -1,12 +1,18 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * IclubNotificationType entity. @author Venu Madhav Pattamatta
+ * IclubNotificationType entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "iclub_notification_type", catalog = "iclubdb")
@@ -17,11 +23,12 @@ public class IclubNotificationType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 424241877222722469L;
+	private static final long serialVersionUID = -4410660226310612623L;
 	private Long ntId;
 	private String ntShortDesc;
 	private String ntLongDesc;
 	private String ntStatus;
+	private Set<IclubNotif> iclubNotifs = new HashSet<IclubNotif>(0);
 
 	// Constructors
 
@@ -36,11 +43,12 @@ public class IclubNotificationType implements java.io.Serializable {
 
 	/** full constructor */
 	public IclubNotificationType(Long ntId, String ntShortDesc,
-			String ntLongDesc, String ntStatus) {
+			String ntLongDesc, String ntStatus, Set<IclubNotif> iclubNotifs) {
 		this.ntId = ntId;
 		this.ntShortDesc = ntShortDesc;
 		this.ntLongDesc = ntLongDesc;
 		this.ntStatus = ntStatus;
+		this.iclubNotifs = iclubNotifs;
 	}
 
 	// Property accessors
@@ -79,6 +87,15 @@ public class IclubNotificationType implements java.io.Serializable {
 
 	public void setNtStatus(String ntStatus) {
 		this.ntStatus = ntStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubNotificationType")
+	public Set<IclubNotif> getIclubNotifs() {
+		return this.iclubNotifs;
+	}
+
+	public void setIclubNotifs(Set<IclubNotif> iclubNotifs) {
+		this.iclubNotifs = iclubNotifs;
 	}
 
 }

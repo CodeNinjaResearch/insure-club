@@ -189,4 +189,135 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-</beans>
+	<bean id="IclubNotifDAO"
+		class="za.co.iclub.pss.orm.dao.IclubNotifDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPersonDAO"
+		class="za.co.iclub.pss.orm.dao.IclubPersonDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubProductTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubProductTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubVehicleMasterDAO"
+		class="za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubGeoLocDAO"
+		class="za.co.iclub.pss.orm.dao.IclubGeoLocDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubOwnerTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubOwnerTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubAccountTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubAccountTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPaymentTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubPaymentTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPropertyTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubPropertyTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubDocumentTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubDocumentTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubAccountDAO"
+		class="za.co.iclub.pss.orm.dao.IclubAccountDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubInsurerMasterDAO"
+		class="za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubSecurityQuestionDAO"
+		class="za.co.iclub.pss.orm.dao.IclubSecurityQuestionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubTrackerMasterDAO"
+		class="za.co.iclub.pss.orm.dao.IclubTrackerMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubBankMasterDAO"
+		class="za.co.iclub.pss.orm.dao.IclubBankMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubSecurityMasterDAO"
+		class="za.co.iclub.pss.orm.dao.IclubSecurityMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubRoleTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubRoleTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPurposeTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubPurposeTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubLoginDAO"
+		class="za.co.iclub.pss.orm.dao.IclubLoginDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubSupplMasterDAO"
+		class="za.co.iclub.pss.orm.dao.IclubSupplMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubConfigDAO"
+		class="za.co.iclub.pss.orm.dao.IclubConfigDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCountryCodeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubCountryCodeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>
