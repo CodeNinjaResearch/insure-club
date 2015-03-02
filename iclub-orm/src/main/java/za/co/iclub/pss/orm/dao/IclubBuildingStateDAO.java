@@ -188,7 +188,7 @@ public class IclubBuildingStateDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("appl Type", re);
+			log.error("Building State", re);
 			throw re;
 		}
 	}

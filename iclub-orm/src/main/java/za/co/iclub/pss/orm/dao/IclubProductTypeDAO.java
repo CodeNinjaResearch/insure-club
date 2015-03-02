@@ -172,6 +172,20 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getProductTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Product Type by Query :: getProductTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getProductTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Product Type", re);
+			throw re;
+		}
+	}
 
 	public static IclubProductTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {

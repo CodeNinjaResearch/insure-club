@@ -175,7 +175,7 @@ public class IclubPaymentStatusDAO {
 	}
 	
 	public List getPaymentStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getPaymentStatusBySD");
+		log.debug("Fetching all Payment Status by Query :: getPaymentStatusBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getPaymentStatusBySD");
 			query.setString("sd", sd);
@@ -183,7 +183,7 @@ public class IclubPaymentStatusDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Payment Status", re);
 			throw re;
 		}
 	}

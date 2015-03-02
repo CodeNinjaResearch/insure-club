@@ -173,7 +173,7 @@ public class IclubRateTypeDAO {
 	}
 
 	public List getRateTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getRateTypeBySD");
+		log.debug("Fetching all Rate Type by Query :: getRateTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getRateTypeBySD");
 			query.setString("sd", sd);
@@ -181,7 +181,7 @@ public class IclubRateTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Rate Type", re);
 			throw re;
 		}
 	}

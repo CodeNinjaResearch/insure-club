@@ -174,7 +174,7 @@ public class IclubEventTypeDAO {
 	}
 	
 	public List getEventTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getEventTypeBySD");
+		log.debug("Fetching all Event Type by Query :: getEventTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getEventTypeBySD");
 			query.setString("sd", sd);
@@ -182,7 +182,7 @@ public class IclubEventTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Event Type", re);
 			throw re;
 		}
 	}

@@ -173,7 +173,7 @@ public class IclubRoofTypeDAO {
 	}
 	
 	public List getRoofTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getRoofTypeBySD");
+		log.debug("Fetching all Roof Type by Query :: getRoofTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getRoofTypeBySD");
 			query.setString("sd", sd);
@@ -181,7 +181,7 @@ public class IclubRoofTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Roof Type", re);
 			throw re;
 		}
 	}

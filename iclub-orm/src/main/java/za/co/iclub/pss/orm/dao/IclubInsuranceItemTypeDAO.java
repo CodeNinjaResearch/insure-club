@@ -176,7 +176,7 @@ public class IclubInsuranceItemTypeDAO {
 	}
 	
 	public List getInsuranceItemTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getInsuranceItemTypeBySD");
+		log.debug("Fetching all Insurance Item Type by Query :: getInsuranceItemTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getInsuranceItemTypeBySD");
 			query.setString("sd", sd);
@@ -184,7 +184,7 @@ public class IclubInsuranceItemTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Insurance Item Type", re);
 			throw re;
 		}
 	}

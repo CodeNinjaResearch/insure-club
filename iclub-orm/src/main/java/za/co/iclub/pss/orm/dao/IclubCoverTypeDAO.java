@@ -174,7 +174,7 @@ public class IclubCoverTypeDAO {
 	}
 	
 	public List getCoverTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getCoverTypeBySD");
+		log.debug("Fetching all Cover Type Query :: getCoverTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getCoverTypeBySD");
 			query.setString("sd", sd);
@@ -182,7 +182,7 @@ public class IclubCoverTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Cover Type", re);
 			throw re;
 		}
 	}

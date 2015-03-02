@@ -172,6 +172,20 @@ public class IclubPurposeTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getPurposeTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Purpose Type by Query :: getPurposeTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getPurposeTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Purpose Type", re);
+			throw re;
+		}
+	}
 
 	public static IclubPurposeTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {

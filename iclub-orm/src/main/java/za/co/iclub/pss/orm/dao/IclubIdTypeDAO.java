@@ -174,7 +174,7 @@ public class IclubIdTypeDAO {
 	}
 	
 	public List getIdTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getIdTypeBySD");
+		log.debug("Fetching all Id Type by Query :: getIdTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getIdTypeBySD");
 			query.setString("sd", sd);
@@ -182,7 +182,7 @@ public class IclubIdTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Id Type", re);
 			throw re;
 		}
 	}

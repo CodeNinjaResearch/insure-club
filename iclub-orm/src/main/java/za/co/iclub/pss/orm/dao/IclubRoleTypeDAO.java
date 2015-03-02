@@ -172,6 +172,20 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getRoleTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Role Type by Query :: getRoleTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getRoleTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Role Type", re);
+			throw re;
+		}
+	}
 
 	public static IclubRoleTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {

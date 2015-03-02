@@ -175,7 +175,7 @@ public class IclubSupplierTypeDAO {
 	}
 	
 	public List getSupplierTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getSupplierTypeBySD");
+		log.debug("Fetching all Supplier Type by Query :: getSupplierTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getSupplierTypeBySD");
 			query.setString("sd", sd);
@@ -183,7 +183,7 @@ public class IclubSupplierTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Supplier Type", re);
 			throw re;
 		}
 	}

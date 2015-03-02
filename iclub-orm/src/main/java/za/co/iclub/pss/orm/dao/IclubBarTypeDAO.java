@@ -187,7 +187,7 @@ public class IclubBarTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("appl Type", re);
+			log.error("Bar Type", re);
 			throw re;
 		}
 	}

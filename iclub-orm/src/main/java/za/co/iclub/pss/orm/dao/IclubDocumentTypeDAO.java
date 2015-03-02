@@ -173,6 +173,20 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getAccountTypeBySD(String sd, Long id) {
+		log.debug("Fetching all Account Type by Query :: getAccountTypeySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getAccountTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Account Type", re);
+			throw re;
+		}
+	}
 
 	public static IclubDocumentTypeDAO getFromApplicationContext(
 			ApplicationContext ctx) {

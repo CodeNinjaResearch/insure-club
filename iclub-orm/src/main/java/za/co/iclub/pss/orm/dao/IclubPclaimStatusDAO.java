@@ -175,7 +175,7 @@ public class IclubPclaimStatusDAO {
 	}
 	
 	public List getPclaimStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getPclaimStatusBySD");
+		log.debug("Fetching all Pclaim Status by Query :: getPclaimStatusBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getPclaimStatusBySD");
 			query.setString("sd", sd);
@@ -183,7 +183,7 @@ public class IclubPclaimStatusDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Pclaim Status", re);
 			throw re;
 		}
 	}

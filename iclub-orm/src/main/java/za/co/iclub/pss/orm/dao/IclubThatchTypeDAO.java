@@ -174,7 +174,7 @@ public class IclubThatchTypeDAO {
 	}
 	
 	public List getThatchTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getThatchTypeBySD");
+		log.debug("Fetching all Thatch Type by Query :: getThatchTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getThatchTypeBySD");
 			query.setString("sd", sd);
@@ -182,7 +182,7 @@ public class IclubThatchTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Thatch Type", re);
 			throw re;
 		}
 	}

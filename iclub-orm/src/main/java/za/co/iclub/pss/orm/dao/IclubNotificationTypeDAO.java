@@ -176,7 +176,7 @@ public class IclubNotificationTypeDAO {
 	}
 	
 	public List getNotificationTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getNotificationTypeBySD");
+		log.debug("Fetching all Notification Type by Query :: getNotificationTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getNotificationTypeBySD");
 			query.setString("sd", sd);
@@ -184,7 +184,7 @@ public class IclubNotificationTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Notification Type", re);
 			throw re;
 		}
 	}

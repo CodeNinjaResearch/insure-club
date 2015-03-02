@@ -174,7 +174,7 @@ public class IclubQuoteStatusDAO {
 	}
 	
 	public List getQuoteStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getQuoteStatusBySD");
+		log.debug("Fetching all Quote Status by Query :: getQuoteStatusBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getQuoteStatusBySD");
 			query.setString("sd", sd);
@@ -182,7 +182,7 @@ public class IclubQuoteStatusDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Quote Status", re);
 			throw re;
 		}
 	}

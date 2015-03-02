@@ -188,7 +188,7 @@ public class IclubBoundaryTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("appl Type", re);
+			log.error("Boundary Type", re);
 			throw re;
 		}
 	}

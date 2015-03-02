@@ -173,7 +173,7 @@ public class IclubWallTypeDAO {
 	}
 	
 	public List getWallTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getWallTypeBySD");
+		log.debug("Fetching all Wall Type by Query :: getWallTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getWallTypeBySD");
 			query.setString("sd", sd);
@@ -181,7 +181,7 @@ public class IclubWallTypeDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Wall Type", re);
 			throw re;
 		}
 	}

@@ -174,7 +174,7 @@ public class IclubMessageTypeDAO {
 	}
 	
 	public List getMessageTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getMessageTypeBySD");
+		log.debug("Fetching all Message Type by Query :: getMessageTypeBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getMessageTypeBySD");
 			query.setString("sd", sd);

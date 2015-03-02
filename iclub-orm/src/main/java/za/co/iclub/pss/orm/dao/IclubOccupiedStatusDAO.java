@@ -175,7 +175,7 @@ public class IclubOccupiedStatusDAO {
 	}
 	
 	public List getOccupiedStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Batch by Query :: getOccupiedStatusBySD");
+		log.debug("Fetching all Occupied Status by Query :: getOccupiedStatusBySD");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getOccupiedStatusBySD");
 			query.setString("sd", sd);
@@ -183,7 +183,7 @@ public class IclubOccupiedStatusDAO {
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Entity Cat", re);
+			log.error("Occupied Status", re);
 			throw re;
 		}
 	}
