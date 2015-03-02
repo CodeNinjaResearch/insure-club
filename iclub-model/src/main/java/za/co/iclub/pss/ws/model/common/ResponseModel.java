@@ -1,7 +1,5 @@
 package za.co.iclub.pss.ws.model.common;
 
-import java.io.File;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "ResponseModel")

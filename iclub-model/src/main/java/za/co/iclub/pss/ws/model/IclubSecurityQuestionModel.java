@@ -1,0 +1,53 @@
+package za.co.iclub.pss.ws.model;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "IclubSecurityQuestionModel")
+public class IclubSecurityQuestionModel {
+
+	private Long sqId;
+	private String sqShortDesc;
+	private String sqLongDesc;
+	private String sqStatus;
+	private String[] iclubLogins;
+
+	public Long getSqId() {
+		return sqId;
+	}
+
+	public void setSqId(Long sqId) {
+		this.sqId = sqId;
+	}
+
+	public String getSqShortDesc() {
+		return sqShortDesc;
+	}
+
+	public void setSqShortDesc(String sqShortDesc) {
+		this.sqShortDesc = sqShortDesc;
+	}
+
+	public String getSqLongDesc() {
+		return sqLongDesc;
+	}
+
+	public void setSqLongDesc(String sqLongDesc) {
+		this.sqLongDesc = sqLongDesc;
+	}
+
+	public String getSqStatus() {
+		return sqStatus;
+	}
+
+	public void setSqStatus(String sqStatus) {
+		this.sqStatus = sqStatus;
+	}
+
+	public String[] getIclubLogins() {
+		return iclubLogins;
+	}
+
+	public void setIclubLogins(String[] iclubLogins) {
+		this.iclubLogins = iclubLogins;
+	}
+}
