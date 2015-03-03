@@ -3,13 +3,16 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
  * IclubWallType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_wall_type", catalog = "iclubdb")
+@Table(name = "iclub_wall_type")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getWallTypeBySD", query = "select * from iclub_wall_type where lower(wt_short_desc) = lower(:sd) and wt_id <> :id", resultClass = IclubWallType.class) })
 public class IclubWallType implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +38,7 @@ public class IclubWallType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubWallType(Long wtId, String wtShortDesc, String wtLongDesc,
-			String wtStatus) {
+	public IclubWallType(Long wtId, String wtShortDesc, String wtLongDesc, String wtStatus) {
 		this.wtId = wtId;
 		this.wtShortDesc = wtShortDesc;
 		this.wtLongDesc = wtLongDesc;

@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,7 +17,8 @@ import javax.persistence.Table;
  * IclubSecurityQuestion entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_security_question", catalog = "iclubdb")
+@Table(name = "iclub_security_question")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getSecurityQuestionBySD", query = "select * from iclub_security_question where lower(sq_short_desc) = lower(:sd) and sq_id <> :id", resultClass = IclubSecurityQuestion.class) })
 public class IclubSecurityQuestion implements java.io.Serializable {
 
 	// Fields
@@ -42,8 +45,7 @@ public class IclubSecurityQuestion implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSecurityQuestion(Long sqId, String sqShortDesc,
-			String sqLongDesc, String sqStatus, Set<IclubLogin> iclubLogins) {
+	public IclubSecurityQuestion(Long sqId, String sqShortDesc, String sqLongDesc, String sqStatus, Set<IclubLogin> iclubLogins) {
 		this.sqId = sqId;
 		this.sqShortDesc = sqShortDesc;
 		this.sqLongDesc = sqLongDesc;

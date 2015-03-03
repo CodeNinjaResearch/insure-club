@@ -3,13 +3,16 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
  * IclubRateType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_rate_type", catalog = "iclubdb")
+@Table(name = "iclub_rate_type")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getRateTypeBySD", query = "select * from iclub_rate_type where lower(rt_short_desc) = lower(:sd) and rt_id <> :id", resultClass = IclubRateType.class) })
 public class IclubRateType implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +38,7 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateType(Long rtId, String rtShortDesc, String rtLongDesc,
-			String rtStatus) {
+	public IclubRateType(Long rtId, String rtShortDesc, String rtLongDesc, String rtStatus) {
 		this.rtId = rtId;
 		this.rtShortDesc = rtShortDesc;
 		this.rtLongDesc = rtLongDesc;

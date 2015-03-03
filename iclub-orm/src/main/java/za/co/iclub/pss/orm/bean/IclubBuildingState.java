@@ -3,13 +3,16 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
  * IclubBuildingState entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_building_state", catalog = "iclubdb")
+@Table(name = "iclub_building_state")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getBuildingStateBySD", query = "select * from iclub_building_state where lower(bs_short_desc) = lower(:sd) and bs_id <> :id", resultClass = IclubBuildingState.class) })
 public class IclubBuildingState implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +38,7 @@ public class IclubBuildingState implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubBuildingState(Long bsId, String bsShortDesc, String bsLongDesc,
-			String bsStatus) {
+	public IclubBuildingState(Long bsId, String bsShortDesc, String bsLongDesc, String bsStatus) {
 		this.bsId = bsId;
 		this.bsShortDesc = bsShortDesc;
 		this.bsLongDesc = bsLongDesc;

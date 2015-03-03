@@ -3,13 +3,16 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
  * IclubThatchType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_thatch_type", catalog = "iclubdb")
+@Table(name = "iclub_thatch_type")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getThatchTypeBySD", query = "select * from iclub_thatch_type where lower(tt_short_desc) = lower(:sd) and tt_id <> :id", resultClass = IclubThatchType.class) })
 public class IclubThatchType implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +38,7 @@ public class IclubThatchType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubThatchType(Long ttId, String ttShortDesc, String ttLongDesc,
-			String ttStatus) {
+	public IclubThatchType(Long ttId, String ttShortDesc, String ttLongDesc, String ttStatus) {
 		this.ttId = ttId;
 		this.ttShortDesc = ttShortDesc;
 		this.ttLongDesc = ttLongDesc;

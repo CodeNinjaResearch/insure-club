@@ -3,6 +3,8 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
@@ -10,6 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_event_type", catalog = "iclubdb")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getEventTypeBySD", query = "select * from iclub_event_type where lower(et_short_desc) = lower(:sd) and et_id <> :id", resultClass = IclubEventType.class) })
 public class IclubEventType implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +38,7 @@ public class IclubEventType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubEventType(Long etId, String etShortDesc, String etLongDesc,
-			String etStatus) {
+	public IclubEventType(Long etId, String etShortDesc, String etLongDesc, String etStatus) {
 		this.etId = etId;
 		this.etShortDesc = etShortDesc;
 		this.etLongDesc = etLongDesc;

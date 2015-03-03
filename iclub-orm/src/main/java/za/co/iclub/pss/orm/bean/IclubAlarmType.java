@@ -3,6 +3,8 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
@@ -10,6 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_alarm_type", catalog = "iclubdb")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getAlarmTypeBySD", query = "select * from iclub_alarm_type where lower(at_short_desc) = lower(:sd) and at_id <> :id", resultClass = IclubAlarmType.class) })
 public class IclubAlarmType implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +38,7 @@ public class IclubAlarmType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAlarmType(Long atId, String atShortDesc, String atLongDesc,
-			String atStatus) {
+	public IclubAlarmType(Long atId, String atShortDesc, String atLongDesc, String atStatus) {
 		this.atId = atId;
 		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;

@@ -3,13 +3,16 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
  * IclubMessageType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_message_type", catalog = "iclubdb")
+@Table(name = "iclub_message_type")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getMessageTypeBySD", query = "select * from iclub_message_type where lower(mt_short_desc) = lower(:sd) and mt_id <> :id", resultClass = IclubMessageType.class) })
 public class IclubMessageType implements java.io.Serializable {
 
 	// Fields
@@ -35,8 +38,7 @@ public class IclubMessageType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMessageType(Long mtId, String mtShortDesc, String mtLongDesc,
-			String mtStatus) {
+	public IclubMessageType(Long mtId, String mtShortDesc, String mtLongDesc, String mtStatus) {
 		this.mtId = mtId;
 		this.mtShortDesc = mtShortDesc;
 		this.mtLongDesc = mtLongDesc;

@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,7 +17,8 @@ import javax.persistence.Table;
  * IclubRoleType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_role_type", catalog = "iclubdb")
+@Table(name = "iclub_role_type")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getRoleTypeBySD", query = "select * from iclub_role_type where lower(rt_short_desc) = lower(:sd) and rt_id <> :id", resultClass = IclubRoleType.class) })
 public class IclubRoleType implements java.io.Serializable {
 
 	// Fields
@@ -42,8 +45,7 @@ public class IclubRoleType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRoleType(Long rtId, String rtShortDesc, String rtLongDesc,
-			String rtStatus, Set<IclubLogin> iclubLogins) {
+	public IclubRoleType(Long rtId, String rtShortDesc, String rtLongDesc, String rtStatus, Set<IclubLogin> iclubLogins) {
 		this.rtId = rtId;
 		this.rtShortDesc = rtShortDesc;
 		this.rtLongDesc = rtLongDesc;

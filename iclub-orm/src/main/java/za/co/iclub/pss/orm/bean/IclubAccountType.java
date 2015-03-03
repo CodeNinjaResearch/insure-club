@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,6 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_account_type", catalog = "iclubdb")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getAccountTypeBySD", query = "select * from iclub_account_type where lower(at_short_desc) = lower(:sd) and at_id <> :id", resultClass = IclubAccountType.class) })
 public class IclubAccountType implements java.io.Serializable {
 
 	// Fields
@@ -42,8 +45,7 @@ public class IclubAccountType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAccountType(Long atId, String atShortDesc, String atLongDesc,
-			String atStatus, Set<IclubAccount> iclubAccounts) {
+	public IclubAccountType(Long atId, String atShortDesc, String atLongDesc, String atStatus, Set<IclubAccount> iclubAccounts) {
 		this.atId = atId;
 		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;
