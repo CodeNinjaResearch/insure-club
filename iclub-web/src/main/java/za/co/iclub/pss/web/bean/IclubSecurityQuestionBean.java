@@ -1,13 +1,12 @@
 package za.co.iclub.pss.web.bean;
 
-
 public class IclubSecurityQuestionBean {
 
 	private Long sqId;
 	private String sqShortDesc;
 	private String sqLongDesc;
 	private String sqStatus;
-	private Long[] iclubLogins;
+	private String[] iclubLogins;
 
 	public Long getSqId() {
 		return sqId;
@@ -41,11 +40,11 @@ public class IclubSecurityQuestionBean {
 		this.sqStatus = sqStatus;
 	}
 
-	public Long[] getIclubLogins() {
+	public String[] getIclubLogins() {
 		return iclubLogins;
 	}
 
-	public void setIclubLogins(Long[] iclubLogins) {
+	public void setIclubLogins(String[] iclubLogins) {
 		this.iclubLogins = iclubLogins;
 	}
 }

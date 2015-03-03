@@ -6,7 +6,7 @@ public class IclubAccountTypeBean {
 	private String atShortDesc;
 	private String atLongDesc;
 	private String atStatus;
-	private Long[] iclubAccounts;
+	private Integer[] iclubAccounts;
 
 	public Long getAtId() {
 		return atId;
@@ -40,11 +40,11 @@ public class IclubAccountTypeBean {
 		this.atStatus = atStatus;
 	}
 
-	public Long[] getIclubAccounts() {
+	public Integer[] getIclubAccounts() {
 		return iclubAccounts;
 	}
 
-	public void setIclubAccounts(Long[] iclubAccounts) {
+	public void setIclubAccounts(Integer[] iclubAccounts) {
 		this.iclubAccounts = iclubAccounts;
 	}
 }
