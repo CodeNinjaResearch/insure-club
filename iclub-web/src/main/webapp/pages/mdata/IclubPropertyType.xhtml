@@ -1,0 +1,110 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain PropertyType</ui:define>
+	<ui:define name="body">
+		<p:panel id="pnlPropertyTypeCont">
+			<p:dataTable id="dtPropertyTypeCont" widgetVar="dtPropertyTypeCont" value="#{iclubPropertyTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					<p:commandButton id="btnPropertyTypeShowAdd" value="#{labels['add']}" actionListener="#{iclubPropertyTypeController.showAddPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlPropertyTypeCont" />
+				</f:facet>
+				<p:column headerText="#{labels['propertytype.view.id']}">
+					<p:outputLabel value="#{bean.ptId}" />
+				</p:column>
+				<p:column headerText="#{labels['propertytype.view.shortdesc']}">
+					<p:outputLabel value="#{bean.ptShortDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['propertytype.view.longdesc']}">
+					<p:outputLabel value="#{bean.ptLongDesc}" />
+				</p:column>
+				<p:column headerText="#{labels['propertytype.view.status']}">
+					<p:selectOneMenu value="#{bean.ptStatus}" disabled="true">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+						<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnPropertyTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubPropertyTypeController.showModPanel}" update=":iclubFrm:grlMsg, :iclubFrm:pnlPropertyTypeCont">
+						<f:setPropertyActionListener target="#{iclubPropertyTypeController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:panel id="pnlAdd" rendered="#{iclubPropertyTypeController.showAddPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value=" #{labels['propertytype.create.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPropertyTypeController.bean.ptShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['propertytype.create.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPropertyTypeController.bean.ptLongDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['propertytype.create.status']} :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubPropertyTypeController.bean.ptStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPropertyTypeAddSave" value="#{labels['save']}" actionListener="#{iclubPropertyTypeController.addIclubPropertyType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlPropertyTypeCont" />
+								<p:commandButton id="btnPropertyTypeAddClose" value="#{labels['close']}" actionListener="#{iclubPropertyTypeController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlPropertyTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+			<p:panel id="pnlMod" rendered="#{iclubPropertyTypeController.showModPanel}">
+				<div align="center">
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['propertytype.edit.id']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{iclubPropertyTypeController.bean.ptId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['propertytype.create.status']} :" />
+						</p:column>
+						
+						<p:column>
+							<p:selectOneMenu value="#{iclubPropertyTypeController.bean.ptStatus}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+								<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['propertytype.edit.shortdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPropertyTypeController.bean.ptShortDesc}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value=" #{labels['propertytype.edit.longdesc']} :" />
+						</p:column>
+						<p:column>
+							<p:inputText value="#{iclubPropertyTypeController.bean.ptLongDesc}" />
+						</p:column>
+						<f:facet name="footer">
+							<div align="center">
+								<p:commandButton id="btnPropertyTypeModSave" value="#{labels['save']}" actionListener="#{iclubPropertyTypeController.modIclubPropertyType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlPropertyTypeCont" />
+								<p:commandButton id="btnPropertyTypeModDelete" value="#{labels['delete']}" actionListener="#{iclubPropertyTypeController.delIclubPropertyType}" update=":iclubFrm:grlMsg, :iclubFrm:pnlPropertyTypeCont" />
+								<p:commandButton id="btnPropertyTypeModClose" value="#{labels['close']}" actionListener="#{iclubPropertyTypeController.clearForm}" update=":iclubFrm:grlMsg, :iclubFrm:pnlPropertyTypeCont" />
+							</div>
+						</f:facet>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>
