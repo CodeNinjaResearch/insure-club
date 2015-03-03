@@ -10,4 +10,11 @@
 		<f:selectItem itemLabel="English" itemValue="en" />
 		<f:selectItem itemLabel="German" itemValue="de" />
 	</p:selectOneMenu>
+	<p:selectOneMenu value="#{themeSwitcherController.theme}" onchange="submit()" valueChangeListener="#{themeSwitcherController.themeValueChangeListener}">
+	
+		<f:selectItems value="#{themeSwitcherController.themes}" />
+	</p:selectOneMenu>
+	
+   
+	 
 </ui:composition>
