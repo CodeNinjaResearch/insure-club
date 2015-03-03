@@ -50,6 +50,7 @@
 			<ref bean="IclubPurposeTypeService"/>
 			<ref bean="IclubRoleTypeService"/>
 			<ref bean="IclubSecurityQuestionService"/>
+			<ref bean="IclubPaymentTypeService"/>
 	
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>

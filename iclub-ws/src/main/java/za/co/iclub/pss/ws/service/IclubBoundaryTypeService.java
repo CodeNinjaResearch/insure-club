@@ -69,7 +69,7 @@ public class IclubBoundaryTypeService {
 		try {
 			IclubBoundaryType bouType = new IclubBoundaryType();
 			
-			bouType.setBtId(iclubCommonDAO.getNextId(IclubBoundaryType.class));
+			bouType.setBtId(model.getBtId());
 			bouType.setBtLongDesc(model.getBtLongDesc());
 			bouType.setBtShortDesc(model.getBtShortDesc());
 			bouType.setBtStatus(model.getBtStatus());

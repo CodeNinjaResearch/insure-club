@@ -89,11 +89,11 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubAccountTypeService" class="za.co.iclub.pss.ws.service.IclubAccountTypeService">
-		<property name="iclubAccountTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubAccountTypeDAO" ref="IclubAccountTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubDocumentTypeService" class="za.co.iclub.pss.ws.service.IclubDocumentTypeService">
-		<property name="iclubDocumentTypeDAO" ref="IclubSupplierTypeDAO" />
+		<property name="iclubDocumentTypeDAO" ref="IclubDocumentTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubOwnerTypeService" class="za.co.iclub.pss.ws.service.IclubOwnerTypeService">
@@ -122,6 +122,10 @@
 	</bean>
 	<bean id="IclubSecurityQuestionService" class="za.co.iclub.pss.ws.service.IclubSecurityQuestionService">
 		<property name="iclubSecurityQuestionDAO" ref="IclubSecurityQuestionDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+	<bean id="IclubPaymentTypeService" class="za.co.iclub.pss.ws.service.IclubPaymentTypeService">
+		<property name="iclubPaymentTypeDAO" ref="IclubPaymentTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 

@@ -69,7 +69,7 @@ public class IclubAlarmTypeService {
 		try {
 			IclubAlarmType alamType = new IclubAlarmType();
 			
-			alamType.setAtId(iclubCommonDAO.getNextId(IclubAlarmType.class));
+			alamType.setAtId(model.getAtId());
 			alamType.setAtLongDesc(model.getAtLongDesc());
 			alamType.setAtShortDesc(model.getAtShortDesc());
 			alamType.setAtStatus(model.getAtStatus());

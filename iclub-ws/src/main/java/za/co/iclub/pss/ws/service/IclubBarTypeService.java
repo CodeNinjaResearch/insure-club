@@ -69,7 +69,7 @@ public class IclubBarTypeService {
 		try {
 			IclubBarType barType = new IclubBarType();
 			
-			barType.setBtId(iclubCommonDAO.getNextId(IclubBarType.class));
+			barType.setBtId(model.getBtId());
 			barType.setBtLongDesc(model.getBtLongDesc());
 			barType.setBtShortDesc(model.getBtShortDesc());
 			barType.setBtStatus(model.getBtStatus());

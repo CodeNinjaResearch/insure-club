@@ -25,9 +25,9 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubPaymentTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class IclubPaymentTypeModelService {
+public class IclubPaymentTypeService {
 
-	protected static final Logger LOGGER = Logger.getLogger(IclubPaymentTypeModelService.class);
+	protected static final Logger LOGGER = Logger.getLogger(IclubPaymentTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPaymentTypeDAO iclubPaymentTypeDAO; 
 
