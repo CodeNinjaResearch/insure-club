@@ -6,7 +6,7 @@ import java.util.Date;
 public class IclubVehicleMasterBean {
 
 	private Long vmId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String vmMake;
 	private String vmModel;
 	private Long vmOrigRate;
@@ -23,11 +23,11 @@ public class IclubVehicleMasterBean {
 		this.vmId = vmId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

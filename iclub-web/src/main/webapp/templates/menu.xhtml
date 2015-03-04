@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<p:menubar>
 		<p:submenu label="User">
-			<p:menuitem actionListener="#{iclubLoginController.doEdumsLogout}" value="Logout" />
+			<p:menuitem actionListener="#{iclubLoginController.doIclubLogout}" value="Logout" />
+			<p:menuitem outcome="home" value="Home" />
 		</p:submenu>
 
 	</p:menubar>

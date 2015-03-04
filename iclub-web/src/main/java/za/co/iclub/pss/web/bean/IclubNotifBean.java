@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class IclubNotifBean {
 
 	private String NId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private Long iclubNotificationType;
 	private String NTitle;
 	private String NBody;
@@ -22,11 +22,11 @@ public class IclubNotifBean {
 		NId = nId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

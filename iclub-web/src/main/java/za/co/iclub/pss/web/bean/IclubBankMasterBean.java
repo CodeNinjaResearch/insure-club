@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class IclubBankMasterBean {
 
 	private Long bmId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String bmBankName;
 	private Integer bmBankCode;
 	private String bmBranchName;
@@ -25,11 +25,11 @@ public class IclubBankMasterBean {
 		this.bmId = bmId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

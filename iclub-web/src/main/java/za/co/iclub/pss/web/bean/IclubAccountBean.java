@@ -8,7 +8,7 @@ public class IclubAccountBean {
 	private Long iclubAccountType;
 	private Long iclubBankMaster;
 	private Long iclubOwnerType;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String AAccNum;
 	private String AOwnerId;
 	private String AStatus;
@@ -46,11 +46,11 @@ public class IclubAccountBean {
 		this.iclubOwnerType = iclubOwnerType;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

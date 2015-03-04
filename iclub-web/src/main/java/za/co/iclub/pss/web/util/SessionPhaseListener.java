@@ -22,7 +22,7 @@ public class SessionPhaseListener implements PhaseListener {
 		ResourceBundle bundle = ResourceBundle.getBundle("iclub-web");
 		boolean bypassAuth = Boolean.valueOf(bundle.getString("bypass.auth"));
 
-		Long userSessionId = (Long) IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		String userSessionId = (String) IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (!bypassAuth) {
 			if (!context.getViewRoot().getViewId().toLowerCase().contains("login")) {
 				if (userSessionId == null) {

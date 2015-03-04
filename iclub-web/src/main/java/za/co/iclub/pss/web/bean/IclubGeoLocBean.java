@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class IclubGeoLocBean {
 
 	private Long glId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String glAddress;
 	private Long glLat;
 	private Long glLong;
@@ -20,11 +20,11 @@ public class IclubGeoLocBean {
 		this.glId = glId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

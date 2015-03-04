@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class IclubTrackerMasterBean {
 
 	private Long tmId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String tmName;
 	private String tmTradeName;
 	private String tmLocation;
@@ -22,11 +22,11 @@ public class IclubTrackerMasterBean {
 		this.tmId = tmId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 
