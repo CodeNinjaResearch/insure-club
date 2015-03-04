@@ -52,16 +52,19 @@ public class IclubLoginController implements Serializable {
 						WebClient personClient = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + model.getIclubPersonByLPersonId());
 						IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
 						personClient.close();
-						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() +(personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
+						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
 
-						/*ResponseModel eResponse = IclubWebHelper.createEvent("Person Logged in :: " + bean.getLName(), 12l, personModel.getPId());
-						if (eResponse.getStatusCode() == 0) {
-							return "home";
-						} else {
-							IclubWebHelper.addMessage("Login event generation failed :: " + eResponse.getStatusDesc(), FacesMessage.SEVERITY_INFO);
-							return "home";
-						}*/
+						/*
+						 * ResponseModel eResponse =
+						 * IclubWebHelper.createEvent("Person Logged in :: " +
+						 * bean.getLName(), 12l, personModel.getPId()); if
+						 * (eResponse.getStatusCode() == 0) { return "home"; }
+						 * else { IclubWebHelper.addMessage(
+						 * "Login event generation failed :: " +
+						 * eResponse.getStatusDesc(),
+						 * FacesMessage.SEVERITY_INFO); return "home"; }
+						 */
 						return "home";
 
 					} else {
