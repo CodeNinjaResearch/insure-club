@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubSecurityMasterDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubSecurityMasterDAO.class);
+	private static final Logger log = Logger.getLogger(IclubSecurityMasterDAO.class);
 	// property constants
 	public static final String SM_DESC = "smDesc";
 	public static final String SM_STATUS = "smStatus";
@@ -73,8 +72,7 @@ public class IclubSecurityMasterDAO {
 	public IclubSecurityMaster findById(java.lang.String id) {
 		log.debug("getting IclubSecurityMaster instance with id: " + id);
 		try {
-			IclubSecurityMaster instance = (IclubSecurityMaster) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubSecurityMaster", id);
+			IclubSecurityMaster instance = (IclubSecurityMaster) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSecurityMaster", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -85,12 +83,8 @@ public class IclubSecurityMasterDAO {
 	public List<IclubSecurityMaster> findByExample(IclubSecurityMaster instance) {
 		log.debug("finding IclubSecurityMaster instance by example");
 		try {
-			List<IclubSecurityMaster> results = (List<IclubSecurityMaster>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubSecurityMaster")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubSecurityMaster> results = (List<IclubSecurityMaster>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSecurityMaster").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +93,9 @@ public class IclubSecurityMasterDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSecurityMaster instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubSecurityMaster instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSecurityMaster as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubSecurityMaster as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -136,8 +128,7 @@ public class IclubSecurityMasterDAO {
 	public IclubSecurityMaster merge(IclubSecurityMaster detachedInstance) {
 		log.debug("merging IclubSecurityMaster instance");
 		try {
-			IclubSecurityMaster result = (IclubSecurityMaster) getCurrentSession()
-					.merge(detachedInstance);
+			IclubSecurityMaster result = (IclubSecurityMaster) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -160,8 +151,7 @@ public class IclubSecurityMasterDAO {
 	public void attachClean(IclubSecurityMaster instance) {
 		log.debug("attaching clean IclubSecurityMaster instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -169,8 +159,7 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public static IclubSecurityMasterDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubSecurityMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSecurityMasterDAO) ctx.getBean("IclubSecurityMasterDAO");
 	}
 }

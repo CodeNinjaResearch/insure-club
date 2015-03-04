@@ -73,8 +73,7 @@ public class IclubRateTypeDAO {
 	public IclubRateType findById(java.lang.Long id) {
 		log.debug("getting IclubRateType instance with id: " + id);
 		try {
-			IclubRateType instance = (IclubRateType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubRateType", id);
+			IclubRateType instance = (IclubRateType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubRateType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -85,11 +84,8 @@ public class IclubRateTypeDAO {
 	public List<IclubRateType> findByExample(IclubRateType instance) {
 		log.debug("finding IclubRateType instance by example");
 		try {
-			List<IclubRateType> results = (List<IclubRateType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubRateType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubRateType> results = (List<IclubRateType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubRateType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -98,11 +94,9 @@ public class IclubRateTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubRateType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubRateType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubRateType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubRateType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -139,8 +133,7 @@ public class IclubRateTypeDAO {
 	public IclubRateType merge(IclubRateType detachedInstance) {
 		log.debug("merging IclubRateType instance");
 		try {
-			IclubRateType result = (IclubRateType) getCurrentSession().merge(
-					detachedInstance);
+			IclubRateType result = (IclubRateType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -163,8 +156,7 @@ public class IclubRateTypeDAO {
 	public void attachClean(IclubRateType instance) {
 		log.debug("attaching clean IclubRateType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -185,8 +177,8 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	public static IclubRateTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+
+	public static IclubRateTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRateTypeDAO) ctx.getBean("IclubRateTypeDAO");
 	}
 }

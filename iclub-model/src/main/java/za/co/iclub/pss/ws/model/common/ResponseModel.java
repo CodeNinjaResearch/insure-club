@@ -22,6 +22,5 @@ public class ResponseModel {
 	public void setStatusDesc(String statusDesc) {
 		this.statusDesc = statusDesc;
 	}
-	
 
 }

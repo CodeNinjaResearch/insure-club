@@ -29,7 +29,7 @@ public class IclubPaymentTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubPaymentTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubPaymentTypeDAO iclubPaymentTypeDAO; 
+	private IclubPaymentTypeDAO iclubPaymentTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubPaymentTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubPaymentTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubPaymentTypeDAO getIclubPaymentTypeDAO() {
 		return iclubPaymentTypeDAO;

@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubNotificationType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubNotificationTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubNotificationTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubNotificationTypeDAO.class);
 	// property constants
 	public static final String NT_SHORT_DESC = "ntShortDesc";
 	public static final String NT_LONG_DESC = "ntLongDesc";
@@ -74,8 +73,7 @@ public class IclubNotificationTypeDAO {
 	public IclubNotificationType findById(java.lang.Long id) {
 		log.debug("getting IclubNotificationType instance with id: " + id);
 		try {
-			IclubNotificationType instance = (IclubNotificationType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubNotificationType", id);
+			IclubNotificationType instance = (IclubNotificationType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubNotificationType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -83,16 +81,11 @@ public class IclubNotificationTypeDAO {
 		}
 	}
 
-	public List<IclubNotificationType> findByExample(
-			IclubNotificationType instance) {
+	public List<IclubNotificationType> findByExample(IclubNotificationType instance) {
 		log.debug("finding IclubNotificationType instance by example");
 		try {
-			List<IclubNotificationType> results = (List<IclubNotificationType>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubNotificationType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubNotificationType> results = (List<IclubNotificationType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubNotificationType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -101,11 +94,9 @@ public class IclubNotificationTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubNotificationType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubNotificationType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubNotificationType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubNotificationType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -142,8 +133,7 @@ public class IclubNotificationTypeDAO {
 	public IclubNotificationType merge(IclubNotificationType detachedInstance) {
 		log.debug("merging IclubNotificationType instance");
 		try {
-			IclubNotificationType result = (IclubNotificationType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubNotificationType result = (IclubNotificationType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -166,15 +156,14 @@ public class IclubNotificationTypeDAO {
 	public void attachClean(IclubNotificationType instance) {
 		log.debug("attaching clean IclubNotificationType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List getNotificationTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Notification Type by Query :: getNotificationTypeBySD");
 		try {
@@ -189,9 +178,7 @@ public class IclubNotificationTypeDAO {
 		}
 	}
 
-	public static IclubNotificationTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
-		return (IclubNotificationTypeDAO) ctx
-				.getBean("IclubNotificationTypeDAO");
+	public static IclubNotificationTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (IclubNotificationTypeDAO) ctx.getBean("IclubNotificationTypeDAO");
 	}
 }

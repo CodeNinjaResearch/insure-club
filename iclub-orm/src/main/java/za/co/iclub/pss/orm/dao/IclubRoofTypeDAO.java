@@ -73,8 +73,7 @@ public class IclubRoofTypeDAO {
 	public IclubRoofType findById(java.lang.Long id) {
 		log.debug("getting IclubRoofType instance with id: " + id);
 		try {
-			IclubRoofType instance = (IclubRoofType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubRoofType", id);
+			IclubRoofType instance = (IclubRoofType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubRoofType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -85,11 +84,8 @@ public class IclubRoofTypeDAO {
 	public List<IclubRoofType> findByExample(IclubRoofType instance) {
 		log.debug("finding IclubRoofType instance by example");
 		try {
-			List<IclubRoofType> results = (List<IclubRoofType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubRoofType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubRoofType> results = (List<IclubRoofType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubRoofType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -98,11 +94,9 @@ public class IclubRoofTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubRoofType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubRoofType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubRoofType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubRoofType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -139,8 +133,7 @@ public class IclubRoofTypeDAO {
 	public IclubRoofType merge(IclubRoofType detachedInstance) {
 		log.debug("merging IclubRoofType instance");
 		try {
-			IclubRoofType result = (IclubRoofType) getCurrentSession().merge(
-					detachedInstance);
+			IclubRoofType result = (IclubRoofType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -163,15 +156,14 @@ public class IclubRoofTypeDAO {
 	public void attachClean(IclubRoofType instance) {
 		log.debug("attaching clean IclubRoofType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List getRoofTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Roof Type by Query :: getRoofTypeBySD");
 		try {
@@ -186,8 +178,7 @@ public class IclubRoofTypeDAO {
 		}
 	}
 
-	public static IclubRoofTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubRoofTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRoofTypeDAO) ctx.getBean("IclubRoofTypeDAO");
 	}
 }

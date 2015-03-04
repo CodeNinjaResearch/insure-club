@@ -29,7 +29,7 @@ public class IclubEventTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubEventTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubEventTypeDAO iclubEventTypeDAO; 
+	private IclubEventTypeDAO iclubEventTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubEventTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubEventTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubEventTypeDAO getIclubEventTypeDAO() {
 		return iclubEventTypeDAO;

@@ -29,7 +29,7 @@ public class IclubInsuranceItemTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubInsuranceItemTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO; 
+	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubInsuranceItemTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubInsuranceItemTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;

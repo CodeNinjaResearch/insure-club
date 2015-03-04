@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubAccountType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubAccountTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubAccountTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubAccountTypeDAO.class);
 	// property constants
 	public static final String AT_SHORT_DESC = "atShortDesc";
 	public static final String AT_LONG_DESC = "atLongDesc";
@@ -74,8 +73,7 @@ public class IclubAccountTypeDAO {
 	public IclubAccountType findById(java.lang.Long id) {
 		log.debug("getting IclubAccountType instance with id: " + id);
 		try {
-			IclubAccountType instance = (IclubAccountType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubAccountType", id);
+			IclubAccountType instance = (IclubAccountType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubAccountType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubAccountTypeDAO {
 	public List<IclubAccountType> findByExample(IclubAccountType instance) {
 		log.debug("finding IclubAccountType instance by example");
 		try {
-			List<IclubAccountType> results = (List<IclubAccountType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubAccountType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubAccountType> results = (List<IclubAccountType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubAccountType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubAccountTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubAccountType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubAccountType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubAccountType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubAccountType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubAccountTypeDAO {
 	public IclubAccountType merge(IclubAccountType detachedInstance) {
 		log.debug("merging IclubAccountType instance");
 		try {
-			IclubAccountType result = (IclubAccountType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubAccountType result = (IclubAccountType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,15 +156,14 @@ public class IclubAccountTypeDAO {
 	public void attachClean(IclubAccountType instance) {
 		log.debug("attaching clean IclubAccountType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List getAccountTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Account Type by Query :: getAccountTypeySD");
 		try {
@@ -187,8 +178,7 @@ public class IclubAccountTypeDAO {
 		}
 	}
 
-	public static IclubAccountTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubAccountTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAccountTypeDAO) ctx.getBean("IclubAccountTypeDAO");
 	}
 }

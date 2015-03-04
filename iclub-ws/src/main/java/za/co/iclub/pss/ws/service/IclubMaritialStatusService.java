@@ -29,7 +29,7 @@ public class IclubMaritialStatusService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubMaritialStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubMaritialStatusDAO iclubMaritialStatusDAO; 
+	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubMaritialStatusService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubMaritialStatusService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
 		return iclubMaritialStatusDAO;

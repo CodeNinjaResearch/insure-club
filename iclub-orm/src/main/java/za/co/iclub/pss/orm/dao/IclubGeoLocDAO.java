@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubGeoLocDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubGeoLocDAO.class);
+	private static final Logger log = Logger.getLogger(IclubGeoLocDAO.class);
 	// property constants
 	public static final String GL_ADDRESS = "glAddress";
 	public static final String GL_LAT = "glLat";
@@ -75,8 +74,7 @@ public class IclubGeoLocDAO {
 	public IclubGeoLoc findById(java.lang.Long id) {
 		log.debug("getting IclubGeoLoc instance with id: " + id);
 		try {
-			IclubGeoLoc instance = (IclubGeoLoc) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubGeoLoc", id);
+			IclubGeoLoc instance = (IclubGeoLoc) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubGeoLoc", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -87,11 +85,8 @@ public class IclubGeoLocDAO {
 	public List<IclubGeoLoc> findByExample(IclubGeoLoc instance) {
 		log.debug("finding IclubGeoLoc instance by example");
 		try {
-			List<IclubGeoLoc> results = (List<IclubGeoLoc>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubGeoLoc")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubGeoLoc> results = (List<IclubGeoLoc>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubGeoLoc").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -100,11 +95,9 @@ public class IclubGeoLocDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubGeoLoc instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding IclubGeoLoc instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubGeoLoc as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubGeoLoc as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -145,8 +138,7 @@ public class IclubGeoLocDAO {
 	public IclubGeoLoc merge(IclubGeoLoc detachedInstance) {
 		log.debug("merging IclubGeoLoc instance");
 		try {
-			IclubGeoLoc result = (IclubGeoLoc) getCurrentSession().merge(
-					detachedInstance);
+			IclubGeoLoc result = (IclubGeoLoc) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -169,8 +161,7 @@ public class IclubGeoLocDAO {
 	public void attachClean(IclubGeoLoc instance) {
 		log.debug("attaching clean IclubGeoLoc instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -178,8 +169,7 @@ public class IclubGeoLocDAO {
 		}
 	}
 
-	public static IclubGeoLocDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubGeoLocDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubGeoLocDAO) ctx.getBean("IclubGeoLocDAO");
 	}
 }

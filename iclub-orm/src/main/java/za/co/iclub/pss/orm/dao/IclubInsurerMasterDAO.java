@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubInsurerMaster;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubInsurerMasterDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubInsurerMasterDAO.class);
+	private static final Logger log = Logger.getLogger(IclubInsurerMasterDAO.class);
 	// property constants
 	public static final String IM_NAME = "imName";
 	public static final String IM_TRADE_NAME = "imTradeName";
@@ -77,8 +76,7 @@ public class IclubInsurerMasterDAO {
 	public IclubInsurerMaster findById(java.lang.Long id) {
 		log.debug("getting IclubInsurerMaster instance with id: " + id);
 		try {
-			IclubInsurerMaster instance = (IclubInsurerMaster) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubInsurerMaster", id);
+			IclubInsurerMaster instance = (IclubInsurerMaster) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubInsurerMaster", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -89,12 +87,8 @@ public class IclubInsurerMasterDAO {
 	public List<IclubInsurerMaster> findByExample(IclubInsurerMaster instance) {
 		log.debug("finding IclubInsurerMaster instance by example");
 		try {
-			List<IclubInsurerMaster> results = (List<IclubInsurerMaster>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubInsurerMaster")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubInsurerMaster> results = (List<IclubInsurerMaster>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubInsurerMaster").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -103,11 +97,9 @@ public class IclubInsurerMasterDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubInsurerMaster instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubInsurerMaster instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubInsurerMaster as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubInsurerMaster as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -156,8 +148,7 @@ public class IclubInsurerMasterDAO {
 	public IclubInsurerMaster merge(IclubInsurerMaster detachedInstance) {
 		log.debug("merging IclubInsurerMaster instance");
 		try {
-			IclubInsurerMaster result = (IclubInsurerMaster) getCurrentSession()
-					.merge(detachedInstance);
+			IclubInsurerMaster result = (IclubInsurerMaster) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -180,8 +171,7 @@ public class IclubInsurerMasterDAO {
 	public void attachClean(IclubInsurerMaster instance) {
 		log.debug("attaching clean IclubInsurerMaster instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -189,8 +179,7 @@ public class IclubInsurerMasterDAO {
 		}
 	}
 
-	public static IclubInsurerMasterDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubInsurerMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubInsurerMasterDAO) ctx.getBean("IclubInsurerMasterDAO");
 	}
 }

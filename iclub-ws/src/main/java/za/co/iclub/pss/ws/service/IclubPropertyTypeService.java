@@ -29,7 +29,7 @@ public class IclubPropertyTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropertyTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubPropertyTypeDAO iclubPropertyTypeDAO; 
+	private IclubPropertyTypeDAO iclubPropertyTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubPropertyTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubPropertyTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubPropertyTypeDAO getIclubPropertyTypeDAO() {
 		return iclubPropertyTypeDAO;

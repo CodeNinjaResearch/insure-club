@@ -29,7 +29,7 @@ public class IclubNotificationTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubNotificationTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubNotificationTypeDAO iclubNotificationTypeDAO; 
+	private IclubNotificationTypeDAO iclubNotificationTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubNotificationTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubNotificationTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubNotificationTypeDAO getIclubNotificationTypeDAO() {
 		return iclubNotificationTypeDAO;

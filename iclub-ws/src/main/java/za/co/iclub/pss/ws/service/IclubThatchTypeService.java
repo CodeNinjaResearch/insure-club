@@ -29,7 +29,7 @@ public class IclubThatchTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubThatchTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubThatchTypeDAO iclubThatchTypeDAO; 
+	private IclubThatchTypeDAO iclubThatchTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubThatchTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubThatchTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubThatchTypeDAO getIclubThatchTypeDAO() {
 		return iclubThatchTypeDAO;

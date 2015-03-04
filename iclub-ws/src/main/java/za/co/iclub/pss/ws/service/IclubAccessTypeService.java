@@ -1,4 +1,5 @@
 package za.co.iclub.pss.ws.service;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -21,11 +22,11 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubAccessTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubAccessTypeService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubAccessTypeService.class);
 	private IclubAccessTypeDAO iclubAccessTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -35,7 +36,7 @@ public class IclubAccessTypeService {
 		try {
 
 			IclubAccessType acctype = new IclubAccessType();
-			
+
 			acctype.setAtId(iclubCommonDAO.getNextId(IclubAccessType.class));
 			acctype.setAtLongDesc(model.getAtLongDesc());
 			acctype.setAtShortDesc(model.getAtShortDesc());
@@ -69,7 +70,7 @@ public class IclubAccessTypeService {
 	public ResponseModel mod(IclubAccessTypeModel model) {
 		try {
 			IclubAccessType acctype = new IclubAccessType();
-			
+
 			acctype.setAtId(model.getAtId());
 			acctype.setAtLongDesc(model.getAtLongDesc());
 			acctype.setAtShortDesc(model.getAtShortDesc());
@@ -115,7 +116,7 @@ public class IclubAccessTypeService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubAccessTypeDAO.getAccessTypeBySD(val,id);
+			List data = iclubAccessTypeDAO.getAccessTypeBySD(val, id);
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
 				message.setStatusCode(1);
@@ -148,12 +149,12 @@ public class IclubAccessTypeService {
 			for (Object object : batmod) {
 				IclubAccessType iclubAtype = (IclubAccessType) object;
 				IclubAccessTypeModel iCB = new IclubAccessTypeModel();
-				
+
 				iCB.setAtId(iclubAtype.getAtId().longValue());
 				iCB.setAtLongDesc(iclubAtype.getAtLongDesc());
 				iCB.setAtShortDesc(iclubAtype.getAtShortDesc());
 				iCB.setAtStatus(iclubAtype.getAtStatus());
-				
+
 				ret.add((T) iCB);
 			}
 		} catch (Exception e) {
@@ -171,14 +172,14 @@ public class IclubAccessTypeService {
 		IclubAccessTypeModel model = new IclubAccessTypeModel();
 		try {
 			IclubAccessType bean = iclubAccessTypeDAO.findById(id);
-			
+
 			model.setAtId(bean.getAtId().longValue());
 			model.setAtLongDesc(bean.getAtLongDesc());
 			model.setAtShortDesc(bean.getAtShortDesc());
 			model.setAtStatus(bean.getAtStatus());
-			
+
 		} catch (Exception e) {
-			LOGGER.error(e, e );
+			LOGGER.error(e, e);
 		}
 		return model;
 	}
@@ -198,5 +199,5 @@ public class IclubAccessTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 }

@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubSupplierType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubSupplierTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubSupplierTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubSupplierTypeDAO.class);
 	// property constants
 	public static final String ST_SHORT_DESC = "stShortDesc";
 	public static final String ST_LONG_DESC = "stLongDesc";
@@ -74,8 +73,7 @@ public class IclubSupplierTypeDAO {
 	public IclubSupplierType findById(java.lang.Long id) {
 		log.debug("getting IclubSupplierType instance with id: " + id);
 		try {
-			IclubSupplierType instance = (IclubSupplierType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubSupplierType", id);
+			IclubSupplierType instance = (IclubSupplierType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSupplierType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,12 +84,8 @@ public class IclubSupplierTypeDAO {
 	public List<IclubSupplierType> findByExample(IclubSupplierType instance) {
 		log.debug("finding IclubSupplierType instance by example");
 		try {
-			List<IclubSupplierType> results = (List<IclubSupplierType>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubSupplierType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubSupplierType> results = (List<IclubSupplierType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSupplierType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -100,11 +94,9 @@ public class IclubSupplierTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSupplierType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubSupplierType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSupplierType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubSupplierType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -141,8 +133,7 @@ public class IclubSupplierTypeDAO {
 	public IclubSupplierType merge(IclubSupplierType detachedInstance) {
 		log.debug("merging IclubSupplierType instance");
 		try {
-			IclubSupplierType result = (IclubSupplierType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubSupplierType result = (IclubSupplierType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -165,15 +156,14 @@ public class IclubSupplierTypeDAO {
 	public void attachClean(IclubSupplierType instance) {
 		log.debug("attaching clean IclubSupplierType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List getSupplierTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Supplier Type by Query :: getSupplierTypeBySD");
 		try {
@@ -188,8 +178,7 @@ public class IclubSupplierTypeDAO {
 		}
 	}
 
-	public static IclubSupplierTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubSupplierTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSupplierTypeDAO) ctx.getBean("IclubSupplierTypeDAO");
 	}
 }

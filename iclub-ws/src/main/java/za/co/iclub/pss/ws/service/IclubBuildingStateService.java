@@ -1,4 +1,5 @@
 package za.co.iclub.pss.ws.service;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -25,6 +26,7 @@ public class IclubBuildingStateService {
 	private static final Logger LOGGER = Logger.getLogger(IclubBuildingStateService.class);
 	private IclubBuildingStateDAO iclubBuildingStateDAO;
 	private IclubCommonDAO iclubCommonDAO;
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -34,7 +36,7 @@ public class IclubBuildingStateService {
 		try {
 
 			IclubBuildingState buildType = new IclubBuildingState();
-			
+
 			buildType.setBsId(iclubCommonDAO.getNextId(IclubBuildingState.class));
 			buildType.setBsLongDesc(model.getBsLongDesc());
 			buildType.setBsShortDesc(model.getBsShortDesc());
@@ -68,7 +70,7 @@ public class IclubBuildingStateService {
 	public ResponseModel mod(IclubBuildingStateModel model) {
 		try {
 			IclubBuildingState buildType = new IclubBuildingState();
-			
+
 			buildType.setBsId(model.getBsId());
 			buildType.setBsLongDesc(model.getBsLongDesc());
 			buildType.setBsShortDesc(model.getBsShortDesc());
@@ -114,7 +116,7 @@ public class IclubBuildingStateService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubBuildingStateDAO.getBuildingStateBySD(val,id);
+			List data = iclubBuildingStateDAO.getBuildingStateBySD(val, id);
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
 				message.setStatusCode(1);
@@ -147,12 +149,12 @@ public class IclubBuildingStateService {
 			for (Object object : batmod) {
 				IclubBuildingState iclubBsype = (IclubBuildingState) object;
 				IclubBuildingStateModel iCB = new IclubBuildingStateModel();
-				
+
 				iCB.setBsId(iclubBsype.getBsId().longValue());
 				iCB.setBsLongDesc(iclubBsype.getBsLongDesc());
 				iCB.setBsShortDesc(iclubBsype.getBsShortDesc());
 				iCB.setBsStatus(iclubBsype.getBsStatus());
-				
+
 				ret.add((T) iCB);
 			}
 		} catch (Exception e) {
@@ -170,14 +172,14 @@ public class IclubBuildingStateService {
 		IclubBuildingStateModel model = new IclubBuildingStateModel();
 		try {
 			IclubBuildingState bean = iclubBuildingStateDAO.findById(id);
-			
+
 			model.setBsId(bean.getBsId().longValue());
 			model.setBsLongDesc(bean.getBsLongDesc());
 			model.setBsShortDesc(bean.getBsShortDesc());
 			model.setBsStatus(bean.getBsStatus());
-			
+
 		} catch (Exception e) {
-			LOGGER.error(e, e );
+			LOGGER.error(e, e);
 		}
 		return model;
 	}
@@ -197,6 +199,5 @@ public class IclubBuildingStateService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
-}
 
+}

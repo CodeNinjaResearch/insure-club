@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubConfig;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubConfigDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubConfigDAO.class);
+	private static final Logger log = Logger.getLogger(IclubConfigDAO.class);
 	// property constants
 	public static final String _CKEY = "CKey";
 	public static final String _CVALUE = "CValue";
@@ -74,8 +73,7 @@ public class IclubConfigDAO {
 	public IclubConfig findById(java.lang.Long id) {
 		log.debug("getting IclubConfig instance with id: " + id);
 		try {
-			IclubConfig instance = (IclubConfig) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubConfig", id);
+			IclubConfig instance = (IclubConfig) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubConfig", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubConfigDAO {
 	public List<IclubConfig> findByExample(IclubConfig instance) {
 		log.debug("finding IclubConfig instance by example");
 		try {
-			List<IclubConfig> results = (List<IclubConfig>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubConfig")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubConfig> results = (List<IclubConfig>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubConfig").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubConfigDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubConfig instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding IclubConfig instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubConfig as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubConfig as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubConfigDAO {
 	public IclubConfig merge(IclubConfig detachedInstance) {
 		log.debug("merging IclubConfig instance");
 		try {
-			IclubConfig result = (IclubConfig) getCurrentSession().merge(
-					detachedInstance);
+			IclubConfig result = (IclubConfig) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,8 +156,7 @@ public class IclubConfigDAO {
 	public void attachClean(IclubConfig instance) {
 		log.debug("attaching clean IclubConfig instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -173,8 +164,7 @@ public class IclubConfigDAO {
 		}
 	}
 
-	public static IclubConfigDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubConfigDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubConfigDAO) ctx.getBean("IclubConfigDAO");
 	}
 }

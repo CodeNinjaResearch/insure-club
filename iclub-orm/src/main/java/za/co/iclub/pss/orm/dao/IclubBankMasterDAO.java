@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubBankMaster;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubBankMasterDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubBankMasterDAO.class);
+	private static final Logger log = Logger.getLogger(IclubBankMasterDAO.class);
 	// property constants
 	public static final String BM_BANK_NAME = "bmBankName";
 	public static final String BM_BANK_CODE = "bmBankCode";
@@ -79,8 +78,7 @@ public class IclubBankMasterDAO {
 	public IclubBankMaster findById(java.lang.Long id) {
 		log.debug("getting IclubBankMaster instance with id: " + id);
 		try {
-			IclubBankMaster instance = (IclubBankMaster) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubBankMaster", id);
+			IclubBankMaster instance = (IclubBankMaster) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubBankMaster", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -91,11 +89,8 @@ public class IclubBankMasterDAO {
 	public List<IclubBankMaster> findByExample(IclubBankMaster instance) {
 		log.debug("finding IclubBankMaster instance by example");
 		try {
-			List<IclubBankMaster> results = (List<IclubBankMaster>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubBankMaster")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubBankMaster> results = (List<IclubBankMaster>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubBankMaster").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -104,11 +99,9 @@ public class IclubBankMasterDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubBankMaster instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubBankMaster instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubBankMaster as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubBankMaster as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -165,8 +158,7 @@ public class IclubBankMasterDAO {
 	public IclubBankMaster merge(IclubBankMaster detachedInstance) {
 		log.debug("merging IclubBankMaster instance");
 		try {
-			IclubBankMaster result = (IclubBankMaster) getCurrentSession()
-					.merge(detachedInstance);
+			IclubBankMaster result = (IclubBankMaster) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -189,8 +181,7 @@ public class IclubBankMasterDAO {
 	public void attachClean(IclubBankMaster instance) {
 		log.debug("attaching clean IclubBankMaster instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -198,8 +189,7 @@ public class IclubBankMasterDAO {
 		}
 	}
 
-	public static IclubBankMasterDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubBankMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBankMasterDAO) ctx.getBean("IclubBankMasterDAO");
 	}
 }

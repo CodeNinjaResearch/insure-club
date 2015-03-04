@@ -31,7 +31,7 @@ public class IclubRoleTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubRoleTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubRoleTypeDAO iclubRoleTypeDAO; 
+	private IclubRoleTypeDAO iclubRoleTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -131,7 +131,7 @@ public class IclubRoleTypeService {
 				model.setRtLongDesc(iRt.getRtLongDesc());
 				model.setRtShortDesc(iRt.getRtShortDesc());
 				model.setRtStatus(iRt.getRtStatus());
-				
+
 				if (iRt.getIclubLogins() != null && iRt.getIclubLogins().size() > 0) {
 					Set<IclubLogin> iLog = iRt.getIclubLogins();
 					String[] iclubLogins = new String[iLog.size()];
@@ -172,7 +172,7 @@ public class IclubRoleTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -198,9 +198,6 @@ public class IclubRoleTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubRoleTypeDAO getIclubRoleTypeDAO() {
 		return iclubRoleTypeDAO;

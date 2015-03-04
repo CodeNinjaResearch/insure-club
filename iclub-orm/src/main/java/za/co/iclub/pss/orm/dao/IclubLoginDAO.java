@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubLogin;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubLoginDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubLoginDAO.class);
+	private static final Logger log = Logger.getLogger(IclubLoginDAO.class);
 	// property constants
 	public static final String _LNAME = "LName";
 	public static final String _LPASSWD = "LPasswd";
@@ -74,8 +73,7 @@ public class IclubLoginDAO {
 	public IclubLogin findById(java.lang.String id) {
 		log.debug("getting IclubLogin instance with id: " + id);
 		try {
-			IclubLogin instance = (IclubLogin) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubLogin", id);
+			IclubLogin instance = (IclubLogin) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubLogin", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubLoginDAO {
 	public List<IclubLogin> findByExample(IclubLogin instance) {
 		log.debug("finding IclubLogin instance by example");
 		try {
-			List<IclubLogin> results = (List<IclubLogin>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubLogin")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubLogin> results = (List<IclubLogin>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubLogin").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubLoginDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubLogin instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding IclubLogin instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubLogin as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubLogin as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubLoginDAO {
 	public IclubLogin merge(IclubLogin detachedInstance) {
 		log.debug("merging IclubLogin instance");
 		try {
-			IclubLogin result = (IclubLogin) getCurrentSession().merge(
-					detachedInstance);
+			IclubLogin result = (IclubLogin) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,8 +156,7 @@ public class IclubLoginDAO {
 	public void attachClean(IclubLogin instance) {
 		log.debug("attaching clean IclubLogin instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);

@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubBuildingState;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubBuildingStateDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubBuildingStateDAO.class);
+	private static final Logger log = Logger.getLogger(IclubBuildingStateDAO.class);
 	// property constants
 	public static final String BS_SHORT_DESC = "bsShortDesc";
 	public static final String BS_LONG_DESC = "bsLongDesc";
@@ -74,8 +73,7 @@ public class IclubBuildingStateDAO {
 	public IclubBuildingState findById(java.lang.Long id) {
 		log.debug("getting IclubBuildingState instance with id: " + id);
 		try {
-			IclubBuildingState instance = (IclubBuildingState) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubBuildingState", id);
+			IclubBuildingState instance = (IclubBuildingState) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubBuildingState", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,12 +84,8 @@ public class IclubBuildingStateDAO {
 	public List<IclubBuildingState> findByExample(IclubBuildingState instance) {
 		log.debug("finding IclubBuildingState instance by example");
 		try {
-			List<IclubBuildingState> results = (List<IclubBuildingState>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubBuildingState")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubBuildingState> results = (List<IclubBuildingState>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubBuildingState").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -100,11 +94,9 @@ public class IclubBuildingStateDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubBuildingState instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubBuildingState instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubBuildingState as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubBuildingState as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -141,8 +133,7 @@ public class IclubBuildingStateDAO {
 	public IclubBuildingState merge(IclubBuildingState detachedInstance) {
 		log.debug("merging IclubBuildingState instance");
 		try {
-			IclubBuildingState result = (IclubBuildingState) getCurrentSession()
-					.merge(detachedInstance);
+			IclubBuildingState result = (IclubBuildingState) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -165,8 +156,7 @@ public class IclubBuildingStateDAO {
 	public void attachClean(IclubBuildingState instance) {
 		log.debug("attaching clean IclubBuildingState instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -174,11 +164,10 @@ public class IclubBuildingStateDAO {
 		}
 	}
 
-	public static IclubBuildingStateDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubBuildingStateDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBuildingStateDAO) ctx.getBean("IclubBuildingStateDAO");
 	}
-	
+
 	public List getBuildingStateBySD(String sd, Long id) {
 		log.debug("Fetching all Building State by Query :: getBuildingStateBySD");
 		try {

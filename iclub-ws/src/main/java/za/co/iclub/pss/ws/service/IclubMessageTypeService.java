@@ -29,7 +29,7 @@ public class IclubMessageTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubMessageTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubMessageTypeDAO iclubMessageTypeDAO; 
+	private IclubMessageTypeDAO iclubMessageTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubMessageTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubMessageTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubMessageTypeDAO getIclubMessageTypeDAO() {
 		return iclubMessageTypeDAO;

@@ -29,7 +29,7 @@ public class IclubOccupiedStatusService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubOccupiedStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubOccupiedStatusDAO iclubOccupiedStatusDAO; 
+	private IclubOccupiedStatusDAO iclubOccupiedStatusDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubOccupiedStatusService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubOccupiedStatusService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubOccupiedStatusDAO getIclubOccupiedStatusDAO() {
 		return iclubOccupiedStatusDAO;

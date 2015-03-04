@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubProductType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubProductTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubProductTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubProductTypeDAO.class);
 	// property constants
 	public static final String PT_SHORT_DESC = "ptShortDesc";
 	public static final String PT_LONG_DESC = "ptLongDesc";
@@ -74,8 +73,7 @@ public class IclubProductTypeDAO {
 	public IclubProductType findById(java.lang.Long id) {
 		log.debug("getting IclubProductType instance with id: " + id);
 		try {
-			IclubProductType instance = (IclubProductType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubProductType", id);
+			IclubProductType instance = (IclubProductType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubProductType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubProductTypeDAO {
 	public List<IclubProductType> findByExample(IclubProductType instance) {
 		log.debug("finding IclubProductType instance by example");
 		try {
-			List<IclubProductType> results = (List<IclubProductType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubProductType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubProductType> results = (List<IclubProductType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubProductType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubProductTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubProductType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubProductType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubProductType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubProductType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubProductTypeDAO {
 	public IclubProductType merge(IclubProductType detachedInstance) {
 		log.debug("merging IclubProductType instance");
 		try {
-			IclubProductType result = (IclubProductType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubProductType result = (IclubProductType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,15 +156,14 @@ public class IclubProductTypeDAO {
 	public void attachClean(IclubProductType instance) {
 		log.debug("attaching clean IclubProductType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List getProductTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Product Type by Query :: getProductTypeBySD");
 		try {
@@ -187,8 +178,7 @@ public class IclubProductTypeDAO {
 		}
 	}
 
-	public static IclubProductTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubProductTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubProductTypeDAO) ctx.getBean("IclubProductTypeDAO");
 	}
 }

@@ -1,4 +1,5 @@
 package za.co.iclub.pss.ws.service;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -25,6 +26,7 @@ public class IclubBoundaryTypeService {
 	private static final Logger LOGGER = Logger.getLogger(IclubBoundaryTypeService.class);
 	private IclubBoundaryTypeDAO iclubBoundaryTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -34,7 +36,7 @@ public class IclubBoundaryTypeService {
 		try {
 
 			IclubBoundaryType bouType = new IclubBoundaryType();
-			
+
 			bouType.setBtId(iclubCommonDAO.getNextId(IclubBoundaryType.class));
 			bouType.setBtLongDesc(model.getBtLongDesc());
 			bouType.setBtShortDesc(model.getBtShortDesc());
@@ -68,7 +70,7 @@ public class IclubBoundaryTypeService {
 	public ResponseModel mod(IclubBoundaryTypeModel model) {
 		try {
 			IclubBoundaryType bouType = new IclubBoundaryType();
-			
+
 			bouType.setBtId(model.getBtId());
 			bouType.setBtLongDesc(model.getBtLongDesc());
 			bouType.setBtShortDesc(model.getBtShortDesc());
@@ -114,7 +116,7 @@ public class IclubBoundaryTypeService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubBoundaryTypeDAO.getBoundaryTypeBySD(val,id);
+			List data = iclubBoundaryTypeDAO.getBoundaryTypeBySD(val, id);
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
 				message.setStatusCode(1);
@@ -147,12 +149,12 @@ public class IclubBoundaryTypeService {
 			for (Object object : batmod) {
 				IclubBoundaryType iclubBoutype = (IclubBoundaryType) object;
 				IclubBoundaryTypeModel iCB = new IclubBoundaryTypeModel();
-				
+
 				iCB.setBtId(iclubBoutype.getBtId().longValue());
 				iCB.setBtLongDesc(iclubBoutype.getBtLongDesc());
 				iCB.setBtShortDesc(iclubBoutype.getBtShortDesc());
 				iCB.setBtStatus(iclubBoutype.getBtStatus());
-				
+
 				ret.add((T) iCB);
 			}
 		} catch (Exception e) {
@@ -170,14 +172,14 @@ public class IclubBoundaryTypeService {
 		IclubBoundaryTypeModel model = new IclubBoundaryTypeModel();
 		try {
 			IclubBoundaryType bean = iclubBoundaryTypeDAO.findById(id);
-			
+
 			model.setBtId(bean.getBtId().longValue());
 			model.setBtLongDesc(bean.getBtLongDesc());
 			model.setBtShortDesc(bean.getBtShortDesc());
 			model.setBtStatus(bean.getBtStatus());
-			
+
 		} catch (Exception e) {
-			LOGGER.error(e, e );
+			LOGGER.error(e, e);
 		}
 		return model;
 	}
@@ -197,6 +199,5 @@ public class IclubBoundaryTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
-}
 
+}

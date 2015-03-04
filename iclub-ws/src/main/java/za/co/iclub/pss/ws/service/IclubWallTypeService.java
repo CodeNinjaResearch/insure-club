@@ -29,7 +29,7 @@ public class IclubWallTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubWallTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubWallTypeDAO iclubWallTypeDAO; 
+	private IclubWallTypeDAO iclubWallTypeDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubWallTypeService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubWallTypeService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubWallTypeDAO getIclubWallTypeDAO() {
 		return iclubWallTypeDAO;

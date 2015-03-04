@@ -41,17 +41,17 @@
 			<ref bean="IclubRoofTypeService" />
 			<ref bean="IclubRateTypeService" />
 			<ref bean="IclubSupplierTypeService" />
-			<ref bean="IclubAccountTypeService"/>
-			<ref bean="IclubDocumentTypeService"/>
-			<ref bean="IclubOwnerTypeService"/>
-			<ref bean="IclubPolicyStatusService"/>
-			<ref bean="IclubProductTypeService"/>
-			<ref bean="IclubPropertyTypeService"/>
-			<ref bean="IclubPurposeTypeService"/>
-			<ref bean="IclubRoleTypeService"/>
-			<ref bean="IclubSecurityQuestionService"/>
-			<ref bean="IclubPaymentTypeService"/>
-	
+			<ref bean="IclubAccountTypeService" />
+			<ref bean="IclubDocumentTypeService" />
+			<ref bean="IclubOwnerTypeService" />
+			<ref bean="IclubPolicyStatusService" />
+			<ref bean="IclubProductTypeService" />
+			<ref bean="IclubPropertyTypeService" />
+			<ref bean="IclubPurposeTypeService" />
+			<ref bean="IclubRoleTypeService" />
+			<ref bean="IclubSecurityQuestionService" />
+			<ref bean="IclubPaymentTypeService" />
+
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">

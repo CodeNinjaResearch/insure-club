@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubAlarmType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubAlarmTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubAlarmTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubAlarmTypeDAO.class);
 	// property constants
 	public static final String AT_SHORT_DESC = "atShortDesc";
 	public static final String AT_LONG_DESC = "atLongDesc";
@@ -74,8 +73,7 @@ public class IclubAlarmTypeDAO {
 	public IclubAlarmType findById(java.lang.Long id) {
 		log.debug("getting IclubAlarmType instance with id: " + id);
 		try {
-			IclubAlarmType instance = (IclubAlarmType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubAlarmType", id);
+			IclubAlarmType instance = (IclubAlarmType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubAlarmType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubAlarmTypeDAO {
 	public List<IclubAlarmType> findByExample(IclubAlarmType instance) {
 		log.debug("finding IclubAlarmType instance by example");
 		try {
-			List<IclubAlarmType> results = (List<IclubAlarmType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubAlarmType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubAlarmType> results = (List<IclubAlarmType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubAlarmType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubAlarmTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubAlarmType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubAlarmType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubAlarmType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubAlarmType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubAlarmTypeDAO {
 	public IclubAlarmType merge(IclubAlarmType detachedInstance) {
 		log.debug("merging IclubAlarmType instance");
 		try {
-			IclubAlarmType result = (IclubAlarmType) getCurrentSession().merge(
-					detachedInstance);
+			IclubAlarmType result = (IclubAlarmType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,8 +156,7 @@ public class IclubAlarmTypeDAO {
 	public void attachClean(IclubAlarmType instance) {
 		log.debug("attaching clean IclubAlarmType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -173,11 +164,10 @@ public class IclubAlarmTypeDAO {
 		}
 	}
 
-	public static IclubAlarmTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubAlarmTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAlarmTypeDAO) ctx.getBean("IclubAlarmTypeDAO");
 	}
-	
+
 	public List getAlarmTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Alarm Type by Query :: getAlarmTypeBySD");
 		try {

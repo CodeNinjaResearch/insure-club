@@ -1,4 +1,5 @@
 package za.co.iclub.pss.ws.service;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -25,6 +26,7 @@ public class IclubBarTypeService {
 	private static final Logger LOGGER = Logger.getLogger(IclubBarTypeService.class);
 	private IclubBarTypeDAO iclubBarTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -34,7 +36,7 @@ public class IclubBarTypeService {
 		try {
 
 			IclubBarType barType = new IclubBarType();
-			
+
 			barType.setBtId(iclubCommonDAO.getNextId(IclubBarType.class));
 			barType.setBtLongDesc(model.getBtLongDesc());
 			barType.setBtShortDesc(model.getBtShortDesc());
@@ -68,7 +70,7 @@ public class IclubBarTypeService {
 	public ResponseModel mod(IclubBarTypeModel model) {
 		try {
 			IclubBarType barType = new IclubBarType();
-			
+
 			barType.setBtId(model.getBtId());
 			barType.setBtLongDesc(model.getBtLongDesc());
 			barType.setBtShortDesc(model.getBtShortDesc());
@@ -114,7 +116,7 @@ public class IclubBarTypeService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubBarTypeDAO.getBarTypeBySD(val,id);
+			List data = iclubBarTypeDAO.getBarTypeBySD(val, id);
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
 				message.setStatusCode(1);
@@ -147,12 +149,12 @@ public class IclubBarTypeService {
 			for (Object object : batmod) {
 				IclubBarType iclubBtype = (IclubBarType) object;
 				IclubBarTypeModel iCB = new IclubBarTypeModel();
-				
+
 				iCB.setBtId(iclubBtype.getBtId().longValue());
 				iCB.setBtLongDesc(iclubBtype.getBtLongDesc());
 				iCB.setBtShortDesc(iclubBtype.getBtShortDesc());
 				iCB.setBtStatus(iclubBtype.getBtStatus());
-				
+
 				ret.add((T) iCB);
 			}
 		} catch (Exception e) {
@@ -170,14 +172,14 @@ public class IclubBarTypeService {
 		IclubBarTypeModel model = new IclubBarTypeModel();
 		try {
 			IclubBarType bean = iclubBarTypeDAO.findById(id);
-			
+
 			model.setBtId(bean.getBtId().longValue());
 			model.setBtLongDesc(bean.getBtLongDesc());
 			model.setBtShortDesc(bean.getBtShortDesc());
 			model.setBtStatus(bean.getBtStatus());
-			
+
 		} catch (Exception e) {
-			LOGGER.error(e, e );
+			LOGGER.error(e, e);
 		}
 		return model;
 	}
@@ -197,6 +199,5 @@ public class IclubBarTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
-}
 
+}

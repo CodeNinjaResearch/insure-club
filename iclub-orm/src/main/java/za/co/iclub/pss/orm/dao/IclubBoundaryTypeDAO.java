@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubBoundaryType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubBoundaryTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubBoundaryTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubBoundaryTypeDAO.class);
 	// property constants
 	public static final String BT_SHORT_DESC = "btShortDesc";
 	public static final String BT_LONG_DESC = "btLongDesc";
@@ -74,8 +73,7 @@ public class IclubBoundaryTypeDAO {
 	public IclubBoundaryType findById(java.lang.Long id) {
 		log.debug("getting IclubBoundaryType instance with id: " + id);
 		try {
-			IclubBoundaryType instance = (IclubBoundaryType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubBoundaryType", id);
+			IclubBoundaryType instance = (IclubBoundaryType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubBoundaryType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,12 +84,8 @@ public class IclubBoundaryTypeDAO {
 	public List<IclubBoundaryType> findByExample(IclubBoundaryType instance) {
 		log.debug("finding IclubBoundaryType instance by example");
 		try {
-			List<IclubBoundaryType> results = (List<IclubBoundaryType>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubBoundaryType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubBoundaryType> results = (List<IclubBoundaryType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubBoundaryType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -100,11 +94,9 @@ public class IclubBoundaryTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubBoundaryType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubBoundaryType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubBoundaryType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubBoundaryType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -141,8 +133,7 @@ public class IclubBoundaryTypeDAO {
 	public IclubBoundaryType merge(IclubBoundaryType detachedInstance) {
 		log.debug("merging IclubBoundaryType instance");
 		try {
-			IclubBoundaryType result = (IclubBoundaryType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubBoundaryType result = (IclubBoundaryType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -165,8 +156,7 @@ public class IclubBoundaryTypeDAO {
 	public void attachClean(IclubBoundaryType instance) {
 		log.debug("attaching clean IclubBoundaryType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -174,11 +164,10 @@ public class IclubBoundaryTypeDAO {
 		}
 	}
 
-	public static IclubBoundaryTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubBoundaryTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBoundaryTypeDAO) ctx.getBean("IclubBoundaryTypeDAO");
 	}
-	
+
 	public List getBoundaryTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Boundary Type by Query :: getBoundaryTypeBySD");
 		try {

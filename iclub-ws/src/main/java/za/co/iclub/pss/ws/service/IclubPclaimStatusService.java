@@ -29,7 +29,7 @@ public class IclubPclaimStatusService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubPclaimStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubPclaimStatusDAO iclubPclaimStatusDAO; 
+	private IclubPclaimStatusDAO iclubPclaimStatusDAO;
 
 	@POST
 	@Path("/add")
@@ -158,7 +158,7 @@ public class IclubPclaimStatusService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,9 +184,6 @@ public class IclubPclaimStatusService {
 			return message;
 		}
 	}
-
-
-	 
 
 	public IclubPclaimStatusDAO getIclubPclaimStatusDAO() {
 		return iclubPclaimStatusDAO;

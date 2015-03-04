@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubOwnerType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubOwnerTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubOwnerTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubOwnerTypeDAO.class);
 	// property constants
 	public static final String OT_SHORT_DESC = "otShortDesc";
 	public static final String OT_LONG_DESC = "otLongDesc";
@@ -74,8 +73,7 @@ public class IclubOwnerTypeDAO {
 	public IclubOwnerType findById(java.lang.Long id) {
 		log.debug("getting IclubOwnerType instance with id: " + id);
 		try {
-			IclubOwnerType instance = (IclubOwnerType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubOwnerType", id);
+			IclubOwnerType instance = (IclubOwnerType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubOwnerType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubOwnerTypeDAO {
 	public List<IclubOwnerType> findByExample(IclubOwnerType instance) {
 		log.debug("finding IclubOwnerType instance by example");
 		try {
-			List<IclubOwnerType> results = (List<IclubOwnerType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubOwnerType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubOwnerType> results = (List<IclubOwnerType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubOwnerType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubOwnerTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubOwnerType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubOwnerType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubOwnerType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubOwnerType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubOwnerTypeDAO {
 	public IclubOwnerType merge(IclubOwnerType detachedInstance) {
 		log.debug("merging IclubOwnerType instance");
 		try {
-			IclubOwnerType result = (IclubOwnerType) getCurrentSession().merge(
-					detachedInstance);
+			IclubOwnerType result = (IclubOwnerType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,15 +156,14 @@ public class IclubOwnerTypeDAO {
 	public void attachClean(IclubOwnerType instance) {
 		log.debug("attaching clean IclubOwnerType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List getOwnerTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Owner Type by Query :: getOwnerTypeBySD");
 		try {
@@ -187,8 +178,7 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public static IclubOwnerTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubOwnerTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubOwnerTypeDAO) ctx.getBean("IclubOwnerTypeDAO");
 	}
 }

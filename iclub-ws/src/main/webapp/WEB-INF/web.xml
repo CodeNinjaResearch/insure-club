@@ -3,7 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<display-name>innoms-ws</display-name>
+	<display-name>iclub-ws</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>WEB-INF/beans.xml</param-value>

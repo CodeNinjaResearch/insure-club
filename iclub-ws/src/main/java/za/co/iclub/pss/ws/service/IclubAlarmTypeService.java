@@ -1,4 +1,5 @@
 package za.co.iclub.pss.ws.service;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -24,7 +25,7 @@ public class IclubAlarmTypeService {
 	private static final Logger LOGGER = Logger.getLogger(IclubAlarmTypeService.class);
 	private IclubAlarmTypeDAO iclubAlarmTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -34,7 +35,7 @@ public class IclubAlarmTypeService {
 		try {
 
 			IclubAlarmType alamType = new IclubAlarmType();
-			
+
 			alamType.setAtId(iclubCommonDAO.getNextId(IclubAlarmType.class));
 			alamType.setAtLongDesc(model.getAtLongDesc());
 			alamType.setAtShortDesc(model.getAtShortDesc());
@@ -68,7 +69,7 @@ public class IclubAlarmTypeService {
 	public ResponseModel mod(IclubAlarmTypeModel model) {
 		try {
 			IclubAlarmType alamType = new IclubAlarmType();
-			
+
 			alamType.setAtId(model.getAtId());
 			alamType.setAtLongDesc(model.getAtLongDesc());
 			alamType.setAtShortDesc(model.getAtShortDesc());
@@ -114,7 +115,7 @@ public class IclubAlarmTypeService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubAlarmTypeDAO.getAlarmTypeBySD(val,id);
+			List data = iclubAlarmTypeDAO.getAlarmTypeBySD(val, id);
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
 				message.setStatusCode(1);
@@ -147,12 +148,12 @@ public class IclubAlarmTypeService {
 			for (Object object : batmod) {
 				IclubAlarmType iclubAlamtype = (IclubAlarmType) object;
 				IclubAlarmTypeModel iCB = new IclubAlarmTypeModel();
-				
+
 				iCB.setAtId(iclubAlamtype.getAtId().longValue());
 				iCB.setAtLongDesc(iclubAlamtype.getAtLongDesc());
 				iCB.setAtShortDesc(iclubAlamtype.getAtShortDesc());
 				iCB.setAtStatus(iclubAlamtype.getAtStatus());
-				
+
 				ret.add((T) iCB);
 			}
 		} catch (Exception e) {
@@ -170,14 +171,14 @@ public class IclubAlarmTypeService {
 		IclubAlarmTypeModel model = new IclubAlarmTypeModel();
 		try {
 			IclubAlarmType bean = iclubAlarmTypeDAO.findById(id);
-			
+
 			model.setAtId(bean.getAtId().longValue());
 			model.setAtLongDesc(bean.getAtLongDesc());
 			model.setAtShortDesc(bean.getAtShortDesc());
 			model.setAtStatus(bean.getAtStatus());
-			
+
 		} catch (Exception e) {
-			LOGGER.error(e, e );
+			LOGGER.error(e, e);
 		}
 		return model;
 	}
@@ -197,5 +198,5 @@ public class IclubAlarmTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 }

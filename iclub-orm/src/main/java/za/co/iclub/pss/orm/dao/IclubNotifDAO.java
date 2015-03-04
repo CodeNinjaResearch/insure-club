@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubNotif;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubNotifDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubNotifDAO.class);
+	private static final Logger log = Logger.getLogger(IclubNotifDAO.class);
 	// property constants
 	public static final String _NTITLE = "NTitle";
 	public static final String _NBODY = "NBody";
@@ -76,8 +75,7 @@ public class IclubNotifDAO {
 	public IclubNotif findById(java.lang.String id) {
 		log.debug("getting IclubNotif instance with id: " + id);
 		try {
-			IclubNotif instance = (IclubNotif) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubNotif", id);
+			IclubNotif instance = (IclubNotif) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubNotif", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -88,11 +86,8 @@ public class IclubNotifDAO {
 	public List<IclubNotif> findByExample(IclubNotif instance) {
 		log.debug("finding IclubNotif instance by example");
 		try {
-			List<IclubNotif> results = (List<IclubNotif>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubNotif")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubNotif> results = (List<IclubNotif>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubNotif").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -101,11 +96,9 @@ public class IclubNotifDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubNotif instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding IclubNotif instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubNotif as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubNotif as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -150,8 +143,7 @@ public class IclubNotifDAO {
 	public IclubNotif merge(IclubNotif detachedInstance) {
 		log.debug("merging IclubNotif instance");
 		try {
-			IclubNotif result = (IclubNotif) getCurrentSession().merge(
-					detachedInstance);
+			IclubNotif result = (IclubNotif) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -174,8 +166,7 @@ public class IclubNotifDAO {
 	public void attachClean(IclubNotif instance) {
 		log.debug("attaching clean IclubNotif instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
