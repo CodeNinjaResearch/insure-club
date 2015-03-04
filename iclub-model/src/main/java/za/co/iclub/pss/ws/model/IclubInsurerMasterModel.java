@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IclubInsurerMasterModel {
 
 	private Long imId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String imName;
 	private String imTradeName;
 	private String imLocation;
@@ -25,11 +25,11 @@ public class IclubInsurerMasterModel {
 		this.imId = imId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

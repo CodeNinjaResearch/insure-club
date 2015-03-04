@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IclubSupplMasterModel {
 
 	private String smId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private Long iclubSupplierType;
 	private String smName;
 	private String smTradeName;
@@ -30,11 +30,11 @@ public class IclubSupplMasterModel {
 		this.smId = smId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

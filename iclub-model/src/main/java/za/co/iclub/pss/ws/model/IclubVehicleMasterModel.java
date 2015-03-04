@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IclubVehicleMasterModel {
 
 	private Long vmId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String vmMake;
 	private String vmModel;
 	private Long vmOrigRate;
@@ -26,11 +26,11 @@ public class IclubVehicleMasterModel {
 		this.vmId = vmId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

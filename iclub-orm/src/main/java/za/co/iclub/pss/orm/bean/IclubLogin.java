@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -15,7 +17,8 @@ import javax.persistence.UniqueConstraint;
  * IclubLogin entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_login", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "l_name"))
+@Table(name = "iclub_login", uniqueConstraints = @UniqueConstraint(columnNames = "l_name"))
+@NamedNativeQueries({ @NamedNativeQuery(name = "verifyLogin", query = "select * from iclub_login where l_name=:name and l_passwd=:pwd", resultClass = IclubLogin.class) })
 public class IclubLogin implements java.io.Serializable {
 
 	// Fields
@@ -47,11 +50,7 @@ public class IclubLogin implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubLogin(String LId, IclubSecurityQuestion iclubSecurityQuestion,
-			IclubPerson iclubPersonByLCrtdBy,
-			IclubPerson iclubPersonByLPersonId, IclubRoleType iclubRoleType,
-			String LName, String LPasswd, Timestamp LLastDate, String LSecAns,
-			Timestamp LCrtdDt) {
+	public IclubLogin(String LId, IclubSecurityQuestion iclubSecurityQuestion, IclubPerson iclubPersonByLCrtdBy, IclubPerson iclubPersonByLPersonId, IclubRoleType iclubRoleType, String LName, String LPasswd, Timestamp LLastDate, String LSecAns, Timestamp LCrtdDt) {
 		this.LId = LId;
 		this.iclubSecurityQuestion = iclubSecurityQuestion;
 		this.iclubPersonByLCrtdBy = iclubPersonByLCrtdBy;
@@ -81,8 +80,7 @@ public class IclubLogin implements java.io.Serializable {
 		return this.iclubSecurityQuestion;
 	}
 
-	public void setIclubSecurityQuestion(
-			IclubSecurityQuestion iclubSecurityQuestion) {
+	public void setIclubSecurityQuestion(IclubSecurityQuestion iclubSecurityQuestion) {
 		this.iclubSecurityQuestion = iclubSecurityQuestion;
 	}
 

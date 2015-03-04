@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IclubGeoLocModel {
 
 	private Long glId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String glAddress;
 	private Long glLat;
 	private Long glLong;
@@ -23,11 +23,11 @@ public class IclubGeoLocModel {
 		this.glId = glId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

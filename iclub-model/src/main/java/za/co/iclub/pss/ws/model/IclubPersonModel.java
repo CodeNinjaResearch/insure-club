@@ -9,7 +9,7 @@ public class IclubPersonModel {
 
 	private String PId;
 	private Long iclubMaritialStatus;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private Long iclubIdType;
 	private String PTitle;
 	private String PInitials;
@@ -31,20 +31,20 @@ public class IclubPersonModel {
 	private Long PLong;
 	private Integer PZipCd;
 	private Date PCrtdDt;
-	private Long[] iclubPersons;
+	private String[] iclubPersons;
 	private Long[] iclubSecurityMasters;
 	private Long[] iclubGeoLocs;
 	private Long[] iclubInsurerMasters;
-	private Long[] iclubAccounts;
+	private Integer[] iclubAccounts;
 	private Long[] iclubTrackerMasters;
 	private Long[] iclubConfigs;
-	private Long[] iclubSupplMasters;
+	private String[] iclubSupplMasters;
 	private Long[] iclubBankMaster;
 	private Long[] iclubCountryCodes;
-	private Long[] iclubNotifs;
+	private String[] iclubNotifs;
 	private Long[] iclubVehicleMasters;
-	private Long[] iclubLoginsForLPersonId;
-	private Long[] iclubLoginsForLCrtdBy;
+	private String[] iclubLoginsForLPersonId;
+	private String[] iclubLoginsForLCrtdBy;
 
 	public String getPId() {
 		return PId;
@@ -62,11 +62,11 @@ public class IclubPersonModel {
 		this.iclubMaritialStatus = iclubMaritialStatus;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 
@@ -238,11 +238,11 @@ public class IclubPersonModel {
 		PCrtdDt = pCrtdDt;
 	}
 
-	public Long[] getIclubPersons() {
+	public String[] getIclubPersons() {
 		return iclubPersons;
 	}
 
-	public void setIclubPersons(Long[] iclubPersons) {
+	public void setIclubPersons(String[] iclubPersons) {
 		this.iclubPersons = iclubPersons;
 	}
 
@@ -270,11 +270,11 @@ public class IclubPersonModel {
 		this.iclubInsurerMasters = iclubInsurerMasters;
 	}
 
-	public Long[] getIclubAccounts() {
+	public Integer[] getIclubAccounts() {
 		return iclubAccounts;
 	}
 
-	public void setIclubAccounts(Long[] iclubAccounts) {
+	public void setIclubAccounts(Integer[] iclubAccounts) {
 		this.iclubAccounts = iclubAccounts;
 	}
 
@@ -294,11 +294,11 @@ public class IclubPersonModel {
 		this.iclubConfigs = iclubConfigs;
 	}
 
-	public Long[] getIclubSupplMasters() {
+	public String[] getIclubSupplMasters() {
 		return iclubSupplMasters;
 	}
 
-	public void setIclubSupplMasters(Long[] iclubSupplMasters) {
+	public void setIclubSupplMasters(String[] iclubSupplMasters) {
 		this.iclubSupplMasters = iclubSupplMasters;
 	}
 
@@ -318,11 +318,11 @@ public class IclubPersonModel {
 		this.iclubCountryCodes = iclubCountryCodes;
 	}
 
-	public Long[] getIclubNotifs() {
+	public String[] getIclubNotifs() {
 		return iclubNotifs;
 	}
 
-	public void setIclubNotifs(Long[] iclubNotifs) {
+	public void setIclubNotifs(String[] iclubNotifs) {
 		this.iclubNotifs = iclubNotifs;
 	}
 
@@ -334,19 +334,19 @@ public class IclubPersonModel {
 		this.iclubVehicleMasters = iclubVehicleMasters;
 	}
 
-	public Long[] getIclubLoginsForLPersonId() {
+	public String[] getIclubLoginsForLPersonId() {
 		return iclubLoginsForLPersonId;
 	}
 
-	public void setIclubLoginsForLPersonId(Long[] iclubLoginsForLPersonId) {
+	public void setIclubLoginsForLPersonId(String[] iclubLoginsForLPersonId) {
 		this.iclubLoginsForLPersonId = iclubLoginsForLPersonId;
 	}
 
-	public Long[] getIclubLoginsForLCrtdBy() {
+	public String[] getIclubLoginsForLCrtdBy() {
 		return iclubLoginsForLCrtdBy;
 	}
 
-	public void setIclubLoginsForLCrtdBy(Long[] iclubLoginsForLCrtdBy) {
+	public void setIclubLoginsForLCrtdBy(String[] iclubLoginsForLCrtdBy) {
 		this.iclubLoginsForLCrtdBy = iclubLoginsForLCrtdBy;
 	}
 

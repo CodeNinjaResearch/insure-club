@@ -9,8 +9,8 @@ public class IclubLoginModel {
 
 	private String LId;
 	private Long iclubSecurityQuestion;
-	private Long iclubPersonByLCrtdBy;
-	private Long iclubPersonByLPersonId;
+	private String iclubPersonByLCrtdBy;
+	private String iclubPersonByLPersonId;
 	private Long iclubRoleType;
 	private String LName;
 	private String LPasswd;
@@ -34,19 +34,19 @@ public class IclubLoginModel {
 		this.iclubSecurityQuestion = iclubSecurityQuestion;
 	}
 
-	public Long getIclubPersonByLCrtdBy() {
+	public String getIclubPersonByLCrtdBy() {
 		return iclubPersonByLCrtdBy;
 	}
 
-	public void setIclubPersonByLCrtdBy(Long iclubPersonByLCrtdBy) {
+	public void setIclubPersonByLCrtdBy(String iclubPersonByLCrtdBy) {
 		this.iclubPersonByLCrtdBy = iclubPersonByLCrtdBy;
 	}
 
-	public Long getIclubPersonByLPersonId() {
+	public String getIclubPersonByLPersonId() {
 		return iclubPersonByLPersonId;
 	}
 
-	public void setIclubPersonByLPersonId(Long iclubPersonByLPersonId) {
+	public void setIclubPersonByLPersonId(String iclubPersonByLPersonId) {
 		this.iclubPersonByLPersonId = iclubPersonByLPersonId;
 	}
 

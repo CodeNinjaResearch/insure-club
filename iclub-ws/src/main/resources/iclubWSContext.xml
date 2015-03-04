@@ -128,6 +128,16 @@
 		<property name="iclubPaymentTypeDAO" ref="IclubPaymentTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
+	<bean id="IclubLoginService" class="za.co.iclub.pss.ws.service.IclubLoginService">
+		<property name="iclubLoginDAO" ref="IclubLoginDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubSecurityQuestionDAO" ref="IclubSecurityQuestionDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
 
+	<bean id="IclubPersonService" class="za.co.iclub.pss.ws.service.IclubPersonService">
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
 
 </beans>

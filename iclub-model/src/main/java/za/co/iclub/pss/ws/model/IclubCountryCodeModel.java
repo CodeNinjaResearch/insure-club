@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IclubCountryCodeModel {
 
 	private Integer ccId;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String ccShortId;
 	private String ccIsoId;
 	private String ccName;
@@ -22,11 +22,11 @@ public class IclubCountryCodeModel {
 		this.ccId = ccId;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 

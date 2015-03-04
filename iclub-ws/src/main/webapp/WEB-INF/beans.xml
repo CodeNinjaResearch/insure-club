@@ -51,6 +51,8 @@
 			<ref bean="IclubRoleTypeService" />
 			<ref bean="IclubSecurityQuestionService" />
 			<ref bean="IclubPaymentTypeService" />
+			<ref bean="IclubLoginService" />
+			<ref bean="IclubPersonService" />
 
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>

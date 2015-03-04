@@ -163,6 +163,20 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
+	
+	public List verifyLogin(String name, String pwd) {
+		log.debug("Fetching Login Query :: verify Login");
+		try {
+			Query query = getCurrentSession().getNamedQuery("verifyLogin");
+			query.setString("name", name);
+			query.setString("pwd", pwd);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Login failed", re);
+			throw re;
+		}
+	}
 
 	public static IclubLoginDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubLoginDAO) ctx.getBean("IclubLoginDAO");

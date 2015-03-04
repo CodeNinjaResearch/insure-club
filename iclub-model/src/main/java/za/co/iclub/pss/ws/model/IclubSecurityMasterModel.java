@@ -9,7 +9,7 @@ public class IclubSecurityMasterModel {
 
 	private String smId;
 	private Long iclubInsuranceItemType;
-	private Long iclubPerson;
+	private String iclubPerson;
 	private String smDesc;
 	private String smStatus;
 	private Timestamp smCrtdDt;
@@ -30,11 +30,11 @@ public class IclubSecurityMasterModel {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 
-	public Long getIclubPerson() {
+	public String getIclubPerson() {
 		return iclubPerson;
 	}
 
-	public void setIclubPerson(Long iclubPerson) {
+	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
 
