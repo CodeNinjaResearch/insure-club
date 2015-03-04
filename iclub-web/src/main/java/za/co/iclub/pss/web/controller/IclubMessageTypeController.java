@@ -21,8 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubMessageTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
-
 @ManagedBean(name = "iclubMessageTypeController")
 @SessionScoped
 public class IclubMessageTypeController implements Serializable {

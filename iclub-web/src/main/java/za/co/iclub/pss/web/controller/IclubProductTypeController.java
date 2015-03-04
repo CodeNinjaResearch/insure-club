@@ -21,14 +21,10 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubProductTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubProductTypeController")
 @SessionScoped
 public class IclubProductTypeController implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1939823976633251535L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubProductTypeController.class);

@@ -23,7 +23,6 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubPaymentStatusController")
 @SessionScoped
-
 public class IclubPaymentStatusController implements Serializable {
 
 	private static final long serialVersionUID = 6271776777151313314L;

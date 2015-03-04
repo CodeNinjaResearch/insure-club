@@ -21,7 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubPropertyTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubPropertyTypeController")
 @SessionScoped
 public class IclubPropertyTypeController implements Serializable {
@@ -154,7 +153,7 @@ public class IclubPropertyTypeController implements Serializable {
 			bean.setPtLongDesc(model.getPtLongDesc());
 			bean.setPtShortDesc(model.getPtShortDesc());
 			bean.setPtStatus(model.getPtStatus());
-			
+
 			beans.add(bean);
 		}
 		return beans;

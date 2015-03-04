@@ -21,7 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubRoleTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubRoleTypeController")
 @SessionScoped
 public class IclubRoleTypeController implements Serializable {
@@ -154,10 +153,10 @@ public class IclubRoleTypeController implements Serializable {
 			bean.setRtLongDesc(model.getRtLongDesc());
 			bean.setRtShortDesc(model.getRtShortDesc());
 			bean.setRtStatus(model.getRtStatus());
-			
+
 			// need to verify is required or not
 			if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
-				 
+
 				bean.setIclubLogins(model.getIclubLogins());
 			}
 

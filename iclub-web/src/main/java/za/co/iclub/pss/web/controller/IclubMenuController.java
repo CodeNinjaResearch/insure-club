@@ -13,33 +13,27 @@ import org.apache.log4j.Logger;
 
 @ManagedBean(name = "iclubMenuController")
 @SessionScoped
-public class IclubMenuController implements Serializable{
-	
-	
+public class IclubMenuController implements Serializable {
+
 	private static final long serialVersionUID = -5155234741934732730L;
 	private static final Logger LOGGER = Logger.getLogger(IclubMenuController.class);
 	private String language;
 
-	
-	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent)
-	{
+	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: languageValueChangeListener");
-		if(valueChangeEvent!=null && valueChangeEvent.getNewValue()!=null && !valueChangeEvent.getNewValue().toString().trim().equalsIgnoreCase(""))
-		{
+		if (valueChangeEvent != null && valueChangeEvent.getNewValue() != null && !valueChangeEvent.getNewValue().toString().trim().equalsIgnoreCase("")) {
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-			session.setAttribute("languageforlocale",valueChangeEvent.getNewValue().toString());
+			session.setAttribute("languageforlocale", valueChangeEvent.getNewValue().toString());
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(valueChangeEvent.getNewValue().toString()));
 		}
 	}
-
 
 	public String getLanguage() {
 		return language;
 	}
 
-
 	public void setLanguage(String language) {
 		this.language = language;
-	} 
+	}
 
 }

@@ -21,7 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubPaymentTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubPaymentTypeController")
 @SessionScoped
 public class IclubPaymentTypeController implements Serializable {
@@ -154,7 +153,7 @@ public class IclubPaymentTypeController implements Serializable {
 			bean.setPtLongDesc(model.getPtLongDesc());
 			bean.setPtShortDesc(model.getPtShortDesc());
 			bean.setPtStatus(model.getPtStatus());
-			
+
 			beans.add(bean);
 		}
 		return beans;

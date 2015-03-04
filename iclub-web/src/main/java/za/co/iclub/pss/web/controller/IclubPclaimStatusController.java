@@ -21,7 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubPclaimStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubPclaimStatusController")
 @SessionScoped
 public class IclubPclaimStatusController implements Serializable {

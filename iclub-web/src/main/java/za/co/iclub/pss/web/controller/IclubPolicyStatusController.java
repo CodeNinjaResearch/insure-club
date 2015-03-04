@@ -21,7 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubPolicyStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubPolicyStatusController")
 @SessionScoped
 public class IclubPolicyStatusController implements Serializable {

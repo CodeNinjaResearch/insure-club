@@ -3,18 +3,18 @@
 		<p:submenu label="User">
 			<p:menuitem actionListener="#{iclubLoginController.doEdumsLogout}" value="Logout" />
 		</p:submenu>
-		 
+
 	</p:menubar>
 	<p:selectOneMenu value="#{iclubMenuController.language}" onchange="submit()" valueChangeListener="#{iclubMenuController.languageValueChangeListener}">
-	
+
 		<f:selectItem itemLabel="English" itemValue="en" />
 		<f:selectItem itemLabel="German" itemValue="de" />
 	</p:selectOneMenu>
 	<p:selectOneMenu value="#{themeSwitcherController.theme}" onchange="submit()" valueChangeListener="#{themeSwitcherController.themeValueChangeListener}">
-	
+
 		<f:selectItems value="#{themeSwitcherController.themes}" />
 	</p:selectOneMenu>
-	
-   
-	 
+
+
+
 </ui:composition>

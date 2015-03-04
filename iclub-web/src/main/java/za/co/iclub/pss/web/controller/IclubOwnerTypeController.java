@@ -21,7 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubOwnerTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubOwnerTypeController")
 @SessionScoped
 public class IclubOwnerTypeController implements Serializable {
@@ -154,9 +153,9 @@ public class IclubOwnerTypeController implements Serializable {
 			bean.setOtLongDesc(model.getOtLongDesc());
 			bean.setOtShortDesc(model.getOtShortDesc());
 			bean.setOtStatus(model.getOtStatus());
-			
+
 			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
-				 
+
 				bean.setIclubAccounts(model.getIclubAccounts());
 			}
 

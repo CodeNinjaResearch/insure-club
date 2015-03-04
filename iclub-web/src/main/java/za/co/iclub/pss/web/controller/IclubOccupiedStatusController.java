@@ -21,10 +21,8 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubOccupiedStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubOccupiedStatusController")
 @SessionScoped
-
 public class IclubOccupiedStatusController implements Serializable {
 
 	private static final long serialVersionUID = 6271776777151313314L;

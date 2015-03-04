@@ -21,7 +21,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubSecurityQuestionModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-
 @ManagedBean(name = "iclubSecurityQuestionController")
 @SessionScoped
 public class IclubSecurityQuestionController implements Serializable {
@@ -154,9 +153,9 @@ public class IclubSecurityQuestionController implements Serializable {
 			bean.setSqLongDesc(model.getSqLongDesc());
 			bean.setSqShortDesc(model.getSqShortDesc());
 			bean.setSqStatus(model.getSqStatus());
-			
+
 			if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
-				 
+
 				bean.setIclubLogins(model.getIclubLogins());
 			}
 
