@@ -70,7 +70,7 @@ public class IclubAccountDAO {
 		}
 	}
 
-	public IclubAccount findById(java.lang.Integer id) {
+	public IclubAccount findById(java.lang.String id) {
 		log.debug("getting IclubAccount instance with id: " + id);
 		try {
 			IclubAccount instance = (IclubAccount) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubAccount", id);

@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubPaymentStatus implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4647101336116737900L;
+	private static final long serialVersionUID = -3334770448452915634L;
 	private Long psId;
 	private String psShortDesc;
 	private String psLongDesc;
 	private String psStatus;
+	private Set<IclubPayment> iclubPayments = new HashSet<IclubPayment>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubPaymentStatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPaymentStatus(Long psId, String psShortDesc, String psLongDesc, String psStatus) {
+	public IclubPaymentStatus(Long psId, String psShortDesc, String psLongDesc, String psStatus, Set<IclubPayment> iclubPayments) {
 		this.psId = psId;
 		this.psShortDesc = psShortDesc;
 		this.psLongDesc = psLongDesc;
 		this.psStatus = psStatus;
+		this.iclubPayments = iclubPayments;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubPaymentStatus implements java.io.Serializable {
 
 	public void setPsStatus(String psStatus) {
 		this.psStatus = psStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPaymentStatus")
+	public Set<IclubPayment> getIclubPayments() {
+		return this.iclubPayments;
+	}
+
+	public void setIclubPayments(Set<IclubPayment> iclubPayments) {
+		this.iclubPayments = iclubPayments;
 	}
 
 }

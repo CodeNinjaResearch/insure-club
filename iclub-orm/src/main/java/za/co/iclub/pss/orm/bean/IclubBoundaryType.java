@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * IclubBoundaryType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_boundary_type", catalog = "iclubdb")
+@Table(name = "iclub_boundary_type")
 @NamedNativeQueries({ @NamedNativeQuery(name = "getBoundaryTypeBySD", query = "select * from iclub_boundary_type where lower(bt_short_desc) = lower(:sd) and bt_id <> :id", resultClass = IclubBoundaryType.class) })
 public class IclubBoundaryType implements java.io.Serializable {
 

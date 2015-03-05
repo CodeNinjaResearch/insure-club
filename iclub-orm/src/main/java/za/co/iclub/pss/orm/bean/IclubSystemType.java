@@ -2,6 +2,7 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  * IclubSystemType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_system_type", catalog = "iclubdb")
+@Table(name = "iclub_system_type")
 public class IclubSystemType implements java.io.Serializable {
 
 	// Fields
@@ -27,10 +28,8 @@ public class IclubSystemType implements java.io.Serializable {
 	private String stShortDesc;
 	private String stLongDesc;
 	private String stStatus;
-	private Set<IclubMessage> iclubMessagesForMFromSysId = new HashSet<IclubMessage>(
-			0);
-	private Set<IclubMessage> iclubMessagesForMToSysId = new HashSet<IclubMessage>(
-			0);
+	private Set<IclubMessage> iclubMessagesForMFromSysId = new HashSet<IclubMessage>(0);
+	private Set<IclubMessage> iclubMessagesForMToSysId = new HashSet<IclubMessage>(0);
 
 	// Constructors
 
@@ -44,9 +43,7 @@ public class IclubSystemType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSystemType(Long stId, String stShortDesc, String stLongDesc,
-			String stStatus, Set<IclubMessage> iclubMessagesForMFromSysId,
-			Set<IclubMessage> iclubMessagesForMToSysId) {
+	public IclubSystemType(Long stId, String stShortDesc, String stLongDesc, String stStatus, Set<IclubMessage> iclubMessagesForMFromSysId, Set<IclubMessage> iclubMessagesForMToSysId) {
 		this.stId = stId;
 		this.stShortDesc = stShortDesc;
 		this.stLongDesc = stLongDesc;
@@ -98,8 +95,7 @@ public class IclubSystemType implements java.io.Serializable {
 		return this.iclubMessagesForMFromSysId;
 	}
 
-	public void setIclubMessagesForMFromSysId(
-			Set<IclubMessage> iclubMessagesForMFromSysId) {
+	public void setIclubMessagesForMFromSysId(Set<IclubMessage> iclubMessagesForMFromSysId) {
 		this.iclubMessagesForMFromSysId = iclubMessagesForMFromSysId;
 	}
 
@@ -108,8 +104,7 @@ public class IclubSystemType implements java.io.Serializable {
 		return this.iclubMessagesForMToSysId;
 	}
 
-	public void setIclubMessagesForMToSysId(
-			Set<IclubMessage> iclubMessagesForMToSysId) {
+	public void setIclubMessagesForMToSysId(Set<IclubMessage> iclubMessagesForMToSysId) {
 		this.iclubMessagesForMToSysId = iclubMessagesForMToSysId;
 	}
 

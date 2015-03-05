@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * IclubAlarmType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_alarm_type", catalog = "iclubdb")
+@Table(name = "iclub_alarm_type")
 @NamedNativeQueries({ @NamedNativeQuery(name = "getAlarmTypeBySD", query = "select * from iclub_alarm_type where lower(at_short_desc) = lower(:sd) and at_id <> :id", resultClass = IclubAlarmType.class) })
 public class IclubAlarmType implements java.io.Serializable {
 

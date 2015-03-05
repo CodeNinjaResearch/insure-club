@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * IclubIdType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_id_type", catalog = "iclubdb")
+@Table(name = "iclub_id_type")
 @NamedNativeQueries({ @NamedNativeQuery(name = "getIdTypeBySD", query = "select * from iclub_id_type where lower(it_short_desc) = lower(:sd) and it_id <> :id", resultClass = IclubIdType.class) })
 public class IclubIdType implements java.io.Serializable {
 

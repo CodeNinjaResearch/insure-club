@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubBarType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8751460818975927664L;
+	private static final long serialVersionUID = -7312881882880072968L;
 	private Long btId;
 	private String btShortDesc;
 	private String btLongDesc;
 	private String btStatus;
+	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubBarType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubBarType(Long btId, String btShortDesc, String btLongDesc, String btStatus) {
+	public IclubBarType(Long btId, String btShortDesc, String btLongDesc, String btStatus, Set<IclubProperty> iclubProperties) {
 		this.btId = btId;
 		this.btShortDesc = btShortDesc;
 		this.btLongDesc = btLongDesc;
 		this.btStatus = btStatus;
+		this.iclubProperties = iclubProperties;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubBarType implements java.io.Serializable {
 
 	public void setBtStatus(String btStatus) {
 		this.btStatus = btStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubBarType")
+	public Set<IclubProperty> getIclubProperties() {
+		return this.iclubProperties;
+	}
+
+	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }

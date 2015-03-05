@@ -1,19 +1,24 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * IclubPurposeType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_purpose_type", catalog = "iclubdb")
+@Table(name = "iclub_purpose_type")
 public class IclubPurposeType implements java.io.Serializable {
 
 	// Fields
@@ -21,7 +26,7 @@ public class IclubPurposeType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 174942980029437864L;
+	private static final long serialVersionUID = -8543478655259701168L;
 	private Long ptId;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;
@@ -29,6 +34,8 @@ public class IclubPurposeType implements java.io.Serializable {
 	private String ptLongDesc;
 	private String ptStatus;
 	private Timestamp ptCrtdDt;
+	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
+	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
 
@@ -42,10 +49,7 @@ public class IclubPurposeType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPurposeType(Long ptId,
-			IclubInsuranceItemType iclubInsuranceItemType,
-			IclubPerson iclubPerson, String ptShortDesc, String ptLongDesc,
-			String ptStatus, Timestamp ptCrtdDt) {
+	public IclubPurposeType(Long ptId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String ptShortDesc, String ptLongDesc, String ptStatus, Timestamp ptCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubVehicle> iclubVehicles) {
 		this.ptId = ptId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
@@ -53,6 +57,8 @@ public class IclubPurposeType implements java.io.Serializable {
 		this.ptLongDesc = ptLongDesc;
 		this.ptStatus = ptStatus;
 		this.ptCrtdDt = ptCrtdDt;
+		this.iclubProperties = iclubProperties;
+		this.iclubVehicles = iclubVehicles;
 	}
 
 	// Property accessors
@@ -72,8 +78,7 @@ public class IclubPurposeType implements java.io.Serializable {
 		return this.iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(
-			IclubInsuranceItemType iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 
@@ -121,6 +126,24 @@ public class IclubPurposeType implements java.io.Serializable {
 
 	public void setPtCrtdDt(Timestamp ptCrtdDt) {
 		this.ptCrtdDt = ptCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPurposeType")
+	public Set<IclubProperty> getIclubProperties() {
+		return this.iclubProperties;
+	}
+
+	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
+		this.iclubProperties = iclubProperties;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPurposeType")
+	public Set<IclubVehicle> getIclubVehicles() {
+		return this.iclubVehicles;
+	}
+
+	public void setIclubVehicles(Set<IclubVehicle> iclubVehicles) {
+		this.iclubVehicles = iclubVehicles;
 	}
 
 }

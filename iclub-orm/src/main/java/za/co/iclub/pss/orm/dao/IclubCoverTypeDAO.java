@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubCoverType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubCoverTypeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubCoverTypeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubCoverTypeDAO.class);
 	// property constants
 	public static final String CT_SHORT_DESC = "ctShortDesc";
 	public static final String CT_LONG_DESC = "ctLongDesc";
@@ -74,8 +73,7 @@ public class IclubCoverTypeDAO {
 	public IclubCoverType findById(java.lang.Long id) {
 		log.debug("getting IclubCoverType instance with id: " + id);
 		try {
-			IclubCoverType instance = (IclubCoverType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubCoverType", id);
+			IclubCoverType instance = (IclubCoverType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubCoverType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubCoverTypeDAO {
 	public List<IclubCoverType> findByExample(IclubCoverType instance) {
 		log.debug("finding IclubCoverType instance by example");
 		try {
-			List<IclubCoverType> results = (List<IclubCoverType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubCoverType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubCoverType> results = (List<IclubCoverType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubCoverType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubCoverTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubCoverType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubCoverType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubCoverType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubCoverType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubCoverTypeDAO {
 	public IclubCoverType merge(IclubCoverType detachedInstance) {
 		log.debug("merging IclubCoverType instance");
 		try {
-			IclubCoverType result = (IclubCoverType) getCurrentSession().merge(
-					detachedInstance);
+			IclubCoverType result = (IclubCoverType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,8 +156,7 @@ public class IclubCoverTypeDAO {
 	public void attachClean(IclubCoverType instance) {
 		log.debug("attaching clean IclubCoverType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -173,8 +164,7 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public static IclubCoverTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubCoverTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCoverTypeDAO) ctx.getBean("IclubCoverTypeDAO");
 	}
 }

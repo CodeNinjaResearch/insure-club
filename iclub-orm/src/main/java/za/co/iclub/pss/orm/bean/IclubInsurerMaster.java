@@ -1,13 +1,17 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -15,7 +19,7 @@ import javax.persistence.UniqueConstraint;
  * IclubInsurerMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_insurer_master", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "im_name"))
+@Table(name = "iclub_insurer_master", uniqueConstraints = @UniqueConstraint(columnNames = "im_name"))
 public class IclubInsurerMaster implements java.io.Serializable {
 
 	// Fields
@@ -23,7 +27,7 @@ public class IclubInsurerMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2765591419941938228L;
+	private static final long serialVersionUID = 3767283760849227701L;
 	private Long imId;
 	private IclubPerson iclubPerson;
 	private String imName;
@@ -33,6 +37,7 @@ public class IclubInsurerMaster implements java.io.Serializable {
 	private Long imLong;
 	private String imRegNum;
 	private Timestamp imCrtdDt;
+	private Set<IclubQuote> iclubQuotes = new HashSet<IclubQuote>(0);
 
 	// Constructors
 
@@ -46,9 +51,7 @@ public class IclubInsurerMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubInsurerMaster(Long imId, IclubPerson iclubPerson,
-			String imName, String imTradeName, String imLocation, Long imLat,
-			Long imLong, String imRegNum, Timestamp imCrtdDt) {
+	public IclubInsurerMaster(Long imId, IclubPerson iclubPerson, String imName, String imTradeName, String imLocation, Long imLat, Long imLong, String imRegNum, Timestamp imCrtdDt, Set<IclubQuote> iclubQuotes) {
 		this.imId = imId;
 		this.iclubPerson = iclubPerson;
 		this.imName = imName;
@@ -58,6 +61,7 @@ public class IclubInsurerMaster implements java.io.Serializable {
 		this.imLong = imLong;
 		this.imRegNum = imRegNum;
 		this.imCrtdDt = imCrtdDt;
+		this.iclubQuotes = iclubQuotes;
 	}
 
 	// Property accessors
@@ -142,6 +146,15 @@ public class IclubInsurerMaster implements java.io.Serializable {
 
 	public void setImCrtdDt(Timestamp imCrtdDt) {
 		this.imCrtdDt = imCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsurerMaster")
+	public Set<IclubQuote> getIclubQuotes() {
+		return this.iclubQuotes;
+	}
+
+	public void setIclubQuotes(Set<IclubQuote> iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

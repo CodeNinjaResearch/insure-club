@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubOccupiedStatus implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8103033165228040040L;
+	private static final long serialVersionUID = 1494952670198297922L;
 	private Long osId;
 	private String osShortDesc;
 	private String osLongDesc;
 	private String osStatus;
+	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubOccupiedStatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubOccupiedStatus(Long osId, String osShortDesc, String osLongDesc, String osStatus) {
+	public IclubOccupiedStatus(Long osId, String osShortDesc, String osLongDesc, String osStatus, Set<IclubProperty> iclubProperties) {
 		this.osId = osId;
 		this.osShortDesc = osShortDesc;
 		this.osLongDesc = osLongDesc;
 		this.osStatus = osStatus;
+		this.iclubProperties = iclubProperties;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubOccupiedStatus implements java.io.Serializable {
 
 	public void setOsStatus(String osStatus) {
 		this.osStatus = osStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubOccupiedStatus")
+	public Set<IclubProperty> getIclubProperties() {
+		return this.iclubProperties;
+	}
+
+	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }

@@ -2,6 +2,7 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  * IclubEntityType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_entity_type", catalog = "iclubdb")
+@Table(name = "iclub_entity_type")
 public class IclubEntityType implements java.io.Serializable {
 
 	// Fields
@@ -41,8 +42,7 @@ public class IclubEntityType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubEntityType(Long etId, String etShortDesc, String etLongDesc,
-			String etStatus, Set<IclubDocument> iclubDocuments) {
+	public IclubEntityType(Long etId, String etShortDesc, String etLongDesc, String etStatus, Set<IclubDocument> iclubDocuments) {
 		this.etId = etId;
 		this.etShortDesc = etShortDesc;
 		this.etLongDesc = etLongDesc;

@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubProductType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -634449648350767645L;
+	private static final long serialVersionUID = 1696659249106486941L;
 	private Long ptId;
 	private String ptShortDesc;
 	private String ptLongDesc;
 	private String ptStatus;
+	private Set<IclubQuote> iclubQuotes = new HashSet<IclubQuote>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubProductType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubProductType(Long ptId, String ptShortDesc, String ptLongDesc, String ptStatus) {
+	public IclubProductType(Long ptId, String ptShortDesc, String ptLongDesc, String ptStatus, Set<IclubQuote> iclubQuotes) {
 		this.ptId = ptId;
 		this.ptShortDesc = ptShortDesc;
 		this.ptLongDesc = ptLongDesc;
 		this.ptStatus = ptStatus;
+		this.iclubQuotes = iclubQuotes;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubProductType implements java.io.Serializable {
 
 	public void setPtStatus(String ptStatus) {
 		this.ptStatus = ptStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubProductType")
+	public Set<IclubQuote> getIclubQuotes() {
+		return this.iclubQuotes;
+	}
+
+	public void setIclubQuotes(Set<IclubQuote> iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

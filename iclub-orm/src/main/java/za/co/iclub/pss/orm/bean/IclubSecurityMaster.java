@@ -1,20 +1,24 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * IclubSecurityMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_security_master", catalog = "iclubdb")
+@Table(name = "iclub_security_master")
 public class IclubSecurityMaster implements java.io.Serializable {
 
 	// Fields
@@ -22,13 +26,14 @@ public class IclubSecurityMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6304141126750022549L;
+	private static final long serialVersionUID = 8683722133865886245L;
 	private String smId;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;
 	private String smDesc;
 	private String smStatus;
 	private Timestamp smCrtdDt;
+	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
 
@@ -42,16 +47,14 @@ public class IclubSecurityMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSecurityMaster(String smId,
-			IclubInsuranceItemType iclubInsuranceItemType,
-			IclubPerson iclubPerson, String smDesc, String smStatus,
-			Timestamp smCrtdDt) {
+	public IclubSecurityMaster(String smId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String smDesc, String smStatus, Timestamp smCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.smId = smId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
 		this.smDesc = smDesc;
 		this.smStatus = smStatus;
 		this.smCrtdDt = smCrtdDt;
+		this.iclubVehicles = iclubVehicles;
 	}
 
 	// Property accessors
@@ -71,8 +74,7 @@ public class IclubSecurityMaster implements java.io.Serializable {
 		return this.iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(
-			IclubInsuranceItemType iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 
@@ -111,6 +113,15 @@ public class IclubSecurityMaster implements java.io.Serializable {
 
 	public void setSmCrtdDt(Timestamp smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubSecurityMaster")
+	public Set<IclubVehicle> getIclubVehicles() {
+		return this.iclubVehicles;
+	}
+
+	public void setIclubVehicles(Set<IclubVehicle> iclubVehicles) {
+		this.iclubVehicles = iclubVehicles;
 	}
 
 }

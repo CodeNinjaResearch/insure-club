@@ -1,20 +1,24 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * IclubAccount entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_account", catalog = "iclubdb")
+@Table(name = "iclub_account")
 public class IclubAccount implements java.io.Serializable {
 
 	// Fields
@@ -22,8 +26,8 @@ public class IclubAccount implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5082887782355260582L;
-	private Integer AId;
+	private static final long serialVersionUID = 511675744089147971L;
+	private String AId;
 	private IclubAccountType iclubAccountType;
 	private IclubBankMaster iclubBankMaster;
 	private IclubOwnerType iclubOwnerType;
@@ -32,6 +36,8 @@ public class IclubAccount implements java.io.Serializable {
 	private String AOwnerId;
 	private String AStatus;
 	private Timestamp ACrtdDt;
+	private Set<IclubPolicy> iclubPolicies = new HashSet<IclubPolicy>(0);
+	private Set<IclubPayment> iclubPayments = new HashSet<IclubPayment>(0);
 
 	// Constructors
 
@@ -40,15 +46,12 @@ public class IclubAccount implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public IclubAccount(Integer AId) {
+	public IclubAccount(String AId) {
 		this.AId = AId;
 	}
 
 	/** full constructor */
-	public IclubAccount(Integer AId, IclubAccountType iclubAccountType,
-			IclubBankMaster iclubBankMaster, IclubOwnerType iclubOwnerType,
-			IclubPerson iclubPerson, String AAccNum, String AOwnerId,
-			String AStatus, Timestamp ACrtdDt) {
+	public IclubAccount(String AId, IclubAccountType iclubAccountType, IclubBankMaster iclubBankMaster, IclubOwnerType iclubOwnerType, IclubPerson iclubPerson, String AAccNum, String AOwnerId, String AStatus, Timestamp ACrtdDt, Set<IclubPolicy> iclubPolicies, Set<IclubPayment> iclubPayments) {
 		this.AId = AId;
 		this.iclubAccountType = iclubAccountType;
 		this.iclubBankMaster = iclubBankMaster;
@@ -58,16 +61,18 @@ public class IclubAccount implements java.io.Serializable {
 		this.AOwnerId = AOwnerId;
 		this.AStatus = AStatus;
 		this.ACrtdDt = ACrtdDt;
+		this.iclubPolicies = iclubPolicies;
+		this.iclubPayments = iclubPayments;
 	}
 
 	// Property accessors
 	@Id
-	@Column(name = "a_id", unique = true, nullable = false)
-	public Integer getAId() {
+	@Column(name = "a_id", unique = true, nullable = false, length = 36)
+	public String getAId() {
 		return this.AId;
 	}
 
-	public void setAId(Integer AId) {
+	public void setAId(String AId) {
 		this.AId = AId;
 	}
 
@@ -145,6 +150,24 @@ public class IclubAccount implements java.io.Serializable {
 
 	public void setACrtdDt(Timestamp ACrtdDt) {
 		this.ACrtdDt = ACrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccount")
+	public Set<IclubPolicy> getIclubPolicies() {
+		return this.iclubPolicies;
+	}
+
+	public void setIclubPolicies(Set<IclubPolicy> iclubPolicies) {
+		this.iclubPolicies = iclubPolicies;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccount")
+	public Set<IclubPayment> getIclubPayments() {
+		return this.iclubPayments;
+	}
+
+	public void setIclubPayments(Set<IclubPayment> iclubPayments) {
+		this.iclubPayments = iclubPayments;
 	}
 
 }

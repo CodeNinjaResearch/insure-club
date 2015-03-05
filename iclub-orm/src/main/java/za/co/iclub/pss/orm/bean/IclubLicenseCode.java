@@ -1,12 +1,17 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -14,7 +19,7 @@ import javax.persistence.UniqueConstraint;
  * IclubLicenseCode entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_license_code", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "lc_category"))
+@Table(name = "iclub_license_code", uniqueConstraints = @UniqueConstraint(columnNames = "lc_category"))
 public class IclubLicenseCode implements java.io.Serializable {
 
 	// Fields
@@ -22,13 +27,14 @@ public class IclubLicenseCode implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8561186801228927462L;
+	private static final long serialVersionUID = 1090498428479785573L;
 	private Long lcId;
 	private IclubPerson iclubPerson;
 	private String lcCategory;
 	private String lcDesc;
 	private String lcStatus;
 	private Timestamp lcCrtdDt;
+	private Set<IclubDriver> iclubDrivers = new HashSet<IclubDriver>(0);
 
 	// Constructors
 
@@ -42,15 +48,14 @@ public class IclubLicenseCode implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson,
-			String lcCategory, String lcDesc, String lcStatus,
-			Timestamp lcCrtdDt) {
+	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson, String lcCategory, String lcDesc, String lcStatus, Timestamp lcCrtdDt, Set<IclubDriver> iclubDrivers) {
 		this.lcId = lcId;
 		this.iclubPerson = iclubPerson;
 		this.lcCategory = lcCategory;
 		this.lcDesc = lcDesc;
 		this.lcStatus = lcStatus;
 		this.lcCrtdDt = lcCrtdDt;
+		this.iclubDrivers = iclubDrivers;
 	}
 
 	// Property accessors
@@ -108,6 +113,15 @@ public class IclubLicenseCode implements java.io.Serializable {
 
 	public void setLcCrtdDt(Timestamp lcCrtdDt) {
 		this.lcCrtdDt = lcCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubLicenseCode")
+	public Set<IclubDriver> getIclubDrivers() {
+		return this.iclubDrivers;
+	}
+
+	public void setIclubDrivers(Set<IclubDriver> iclubDrivers) {
+		this.iclubDrivers = iclubDrivers;
 	}
 
 }

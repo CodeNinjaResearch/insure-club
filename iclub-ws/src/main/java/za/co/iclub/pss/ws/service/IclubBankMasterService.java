@@ -156,7 +156,7 @@ public class IclubBankMasterService {
 				iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
 				if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
 
-					Integer[] accounts = new Integer[iclubBMaster.getIclubAccounts().size()];
+					String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
 
 					int i = 0;
 					for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
@@ -200,7 +200,7 @@ public class IclubBankMasterService {
 				iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
 				if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
 
-					Integer[] accounts = new Integer[iclubBMaster.getIclubAccounts().size()];
+					String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
 
 					int i = 0;
 					for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
@@ -238,7 +238,7 @@ public class IclubBankMasterService {
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 			if (bean.getIclubAccounts() != null && bean.getIclubAccounts().size() > 0) {
 
-				Integer[] accounts = new Integer[bean.getIclubAccounts().size()];
+				String[] accounts = new String[bean.getIclubAccounts().size()];
 
 				int i = 0;
 				for (IclubAccount account : bean.getIclubAccounts()) {

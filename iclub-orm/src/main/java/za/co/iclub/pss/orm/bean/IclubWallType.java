@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubWallType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7087677394103289393L;
+	private static final long serialVersionUID = -8606196015877472290L;
 	private Long wtId;
 	private String wtShortDesc;
 	private String wtLongDesc;
 	private String wtStatus;
+	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubWallType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubWallType(Long wtId, String wtShortDesc, String wtLongDesc, String wtStatus) {
+	public IclubWallType(Long wtId, String wtShortDesc, String wtLongDesc, String wtStatus, Set<IclubProperty> iclubProperties) {
 		this.wtId = wtId;
 		this.wtShortDesc = wtShortDesc;
 		this.wtLongDesc = wtLongDesc;
 		this.wtStatus = wtStatus;
+		this.iclubProperties = iclubProperties;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubWallType implements java.io.Serializable {
 
 	public void setWtStatus(String wtStatus) {
 		this.wtStatus = wtStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubWallType")
+	public Set<IclubProperty> getIclubProperties() {
+		return this.iclubProperties;
+	}
+
+	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }

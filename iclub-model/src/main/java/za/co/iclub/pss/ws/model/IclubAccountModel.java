@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "IclubAccountModel")
 public class IclubAccountModel {
 
-	private Integer AId;
+	private String AId;
 	private Long iclubAccountType;
 	private Long iclubBankMaster;
 	private Long iclubOwnerType;
@@ -17,11 +17,11 @@ public class IclubAccountModel {
 	private String AStatus;
 	private Timestamp ACrtdDt;
 
-	public Integer getAId() {
+	public String getAId() {
 		return AId;
 	}
 
-	public void setAId(Integer aId) {
+	public void setAId(String aId) {
 		AId = aId;
 	}
 

@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -21,7 +22,6 @@ import za.co.iclub.pss.orm.bean.IclubAccount;
 import za.co.iclub.pss.orm.dao.IclubAccountDAO;
 import za.co.iclub.pss.orm.dao.IclubAccountTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBankMasterDAO;
-import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubOwnerTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubAccountModel;
@@ -33,7 +33,6 @@ public class IclubAccountService {
 
 	private static final Logger LOGGER = Logger.getLogger(IclubAccountService.class);
 	private IclubAccountDAO iclubAccountDAO;
-	private IclubCommonDAO iclubCommonDAO;
 	private IclubOwnerTypeDAO iclubOwnerTypeDAO;
 	private IclubBankMasterDAO iclubBankMasterDAO;
 	private IclubAccountTypeDAO iclubAccountTypeDAO;
@@ -49,7 +48,7 @@ public class IclubAccountService {
 
 			IclubAccount iCA = new IclubAccount();
 
-			iCA.setAId(iclubCommonDAO.getNextId(IclubAccount.class).intValue());
+			iCA.setAId(UUID.randomUUID().toString());
 			iCA.setAAccNum(model.getAAccNum());
 			iCA.setACrtdDt(model.getACrtdDt());
 			iCA.setAOwnerId(model.getAOwnerId());
@@ -61,7 +60,7 @@ public class IclubAccountService {
 
 			iclubAccountDAO.save(iCA);
 
-			LOGGER.info("Save Success with ID :: " + iCA.getAId().longValue());
+			LOGGER.info("Save Success with ID :: " + iCA.getAId());
 
 			ResponseModel message = new ResponseModel();
 
@@ -100,7 +99,7 @@ public class IclubAccountService {
 
 			iclubAccountDAO.merge(iCA);
 
-			LOGGER.info("Save Success with ID :: " + model.getAId().longValue());
+			LOGGER.info("Save Success with ID :: " + model.getAId());
 
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
@@ -121,7 +120,7 @@ public class IclubAccountService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Transactional
-	public Response del(@PathParam("id") Integer id) {
+	public Response del(@PathParam("id") String id) {
 		try {
 			iclubAccountDAO.delete(iclubAccountDAO.findById(id));
 			return Response.ok().build();
@@ -200,7 +199,7 @@ public class IclubAccountService {
 	@Path("/get/{id}")
 	@Produces("application/json")
 	@Transactional
-	public IclubAccountModel getById(@PathParam("id") Integer id) {
+	public IclubAccountModel getById(@PathParam("id") String id) {
 		IclubAccountModel model = new IclubAccountModel();
 		try {
 			IclubAccount bean = iclubAccountDAO.findById(id);
@@ -228,14 +227,6 @@ public class IclubAccountService {
 
 	public void setIclubAccountDAO(IclubAccountDAO iclubAccountDAO) {
 		this.iclubAccountDAO = iclubAccountDAO;
-	}
-
-	public IclubCommonDAO getIclubCommonDAO() {
-		return iclubCommonDAO;
-	}
-
-	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
-		this.iclubCommonDAO = iclubCommonDAO;
 	}
 
 	public IclubOwnerTypeDAO getIclubOwnerTypeDAO() {

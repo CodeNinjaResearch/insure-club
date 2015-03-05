@@ -1,19 +1,24 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * IclubCoverType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_cover_type", catalog = "iclubdb")
+@Table(name = "iclub_cover_type")
 public class IclubCoverType implements java.io.Serializable {
 
 	// Fields
@@ -21,7 +26,7 @@ public class IclubCoverType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 769071861769996731L;
+	private static final long serialVersionUID = 596072198822224792L;
 	private Long ctId;
 	private IclubPerson iclubPerson;
 	private IclubInsuranceItemType iclubInsuranceItemType;
@@ -29,6 +34,8 @@ public class IclubCoverType implements java.io.Serializable {
 	private String ctLongDesc;
 	private String ctStatus;
 	private Timestamp ctCrtdDt;
+	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
+	private Set<IclubQuote> iclubQuotes = new HashSet<IclubQuote>(0);
 
 	// Constructors
 
@@ -42,9 +49,7 @@ public class IclubCoverType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubCoverType(Long ctId, IclubPerson iclubPerson,
-			IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc,
-			String ctLongDesc, String ctStatus, Timestamp ctCrtdDt) {
+	public IclubCoverType(Long ctId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc, String ctLongDesc, String ctStatus, Timestamp ctCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubQuote> iclubQuotes) {
 		this.ctId = ctId;
 		this.iclubPerson = iclubPerson;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
@@ -52,6 +57,8 @@ public class IclubCoverType implements java.io.Serializable {
 		this.ctLongDesc = ctLongDesc;
 		this.ctStatus = ctStatus;
 		this.ctCrtdDt = ctCrtdDt;
+		this.iclubProperties = iclubProperties;
+		this.iclubQuotes = iclubQuotes;
 	}
 
 	// Property accessors
@@ -81,8 +88,7 @@ public class IclubCoverType implements java.io.Serializable {
 		return this.iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(
-			IclubInsuranceItemType iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 
@@ -120,6 +126,24 @@ public class IclubCoverType implements java.io.Serializable {
 
 	public void setCtCrtdDt(Timestamp ctCrtdDt) {
 		this.ctCrtdDt = ctCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubCoverType")
+	public Set<IclubProperty> getIclubProperties() {
+		return this.iclubProperties;
+	}
+
+	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
+		this.iclubProperties = iclubProperties;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubCoverType")
+	public Set<IclubQuote> getIclubQuotes() {
+		return this.iclubQuotes;
+	}
+
+	public void setIclubQuotes(Set<IclubQuote> iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

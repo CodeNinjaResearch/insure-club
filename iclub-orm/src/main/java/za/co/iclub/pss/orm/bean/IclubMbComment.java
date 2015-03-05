@@ -1,6 +1,7 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
  * IclubMbComment entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_mb_comment", catalog = "iclubdb")
+@Table(name = "iclub_mb_comment")
 public class IclubMbComment implements java.io.Serializable {
 
 	// Fields
@@ -40,9 +41,7 @@ public class IclubMbComment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMbComment(String mbcId, IclubPerson iclubPerson,
-			IclubMessageBoard iclubMessageBoard, String mbcDesc,
-			Timestamp mbcCrtdDt) {
+	public IclubMbComment(String mbcId, IclubPerson iclubPerson, IclubMessageBoard iclubMessageBoard, String mbcDesc, Timestamp mbcCrtdDt) {
 		this.mbcId = mbcId;
 		this.iclubPerson = iclubPerson;
 		this.iclubMessageBoard = iclubMessageBoard;

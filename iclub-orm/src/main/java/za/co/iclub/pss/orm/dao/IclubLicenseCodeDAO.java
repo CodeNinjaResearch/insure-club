@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubLicenseCode;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubLicenseCodeDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubLicenseCodeDAO.class);
+	private static final Logger log = Logger.getLogger(IclubLicenseCodeDAO.class);
 	// property constants
 	public static final String LC_CATEGORY = "lcCategory";
 	public static final String LC_DESC = "lcDesc";
@@ -74,8 +73,7 @@ public class IclubLicenseCodeDAO {
 	public IclubLicenseCode findById(java.lang.Long id) {
 		log.debug("getting IclubLicenseCode instance with id: " + id);
 		try {
-			IclubLicenseCode instance = (IclubLicenseCode) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubLicenseCode", id);
+			IclubLicenseCode instance = (IclubLicenseCode) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubLicenseCode", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,11 +84,8 @@ public class IclubLicenseCodeDAO {
 	public List<IclubLicenseCode> findByExample(IclubLicenseCode instance) {
 		log.debug("finding IclubLicenseCode instance by example");
 		try {
-			List<IclubLicenseCode> results = (List<IclubLicenseCode>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubLicenseCode")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubLicenseCode> results = (List<IclubLicenseCode>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubLicenseCode").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -99,11 +94,9 @@ public class IclubLicenseCodeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubLicenseCode instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubLicenseCode instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubLicenseCode as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubLicenseCode as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -140,8 +133,7 @@ public class IclubLicenseCodeDAO {
 	public IclubLicenseCode merge(IclubLicenseCode detachedInstance) {
 		log.debug("merging IclubLicenseCode instance");
 		try {
-			IclubLicenseCode result = (IclubLicenseCode) getCurrentSession()
-					.merge(detachedInstance);
+			IclubLicenseCode result = (IclubLicenseCode) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -164,8 +156,7 @@ public class IclubLicenseCodeDAO {
 	public void attachClean(IclubLicenseCode instance) {
 		log.debug("attaching clean IclubLicenseCode instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -173,8 +164,7 @@ public class IclubLicenseCodeDAO {
 		}
 	}
 
-	public static IclubLicenseCodeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubLicenseCodeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubLicenseCodeDAO) ctx.getBean("IclubLicenseCodeDAO");
 	}
 }

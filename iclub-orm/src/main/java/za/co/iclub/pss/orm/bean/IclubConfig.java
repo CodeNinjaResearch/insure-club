@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
  * IclubConfig entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_config", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "c_key"))
+@Table(name = "iclub_config", uniqueConstraints = @UniqueConstraint(columnNames = "c_key"))
 public class IclubConfig implements java.io.Serializable {
 
 	// Fields
@@ -43,8 +43,7 @@ public class IclubConfig implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubConfig(Long CId, IclubPerson iclubPerson, String CKey,
-			String CValue, String CStatus, Timestamp CCrtdDt) {
+	public IclubConfig(Long CId, IclubPerson iclubPerson, String CKey, String CValue, String CStatus, Timestamp CCrtdDt) {
 		this.CId = CId;
 		this.iclubPerson = iclubPerson;
 		this.CKey = CKey;

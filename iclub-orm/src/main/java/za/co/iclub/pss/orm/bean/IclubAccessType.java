@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,15 @@ public class IclubAccessType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6377036690644586328L;
+	private static final long serialVersionUID = 7466825663122589652L;
 	private Long atId;
 	private String atShortDesc;
 	private String atLongDesc;
 	private String atStatus;
+	private Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId = new HashSet<IclubVehicle>(0);
+	private Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId = new HashSet<IclubVehicle>(0);
+	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
+	private Set<IclubDriver> iclubDrivers = new HashSet<IclubDriver>(0);
 
 	// Constructors
 
@@ -38,11 +48,15 @@ public class IclubAccessType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAccessType(Long atId, String atShortDesc, String atLongDesc, String atStatus) {
+	public IclubAccessType(Long atId, String atShortDesc, String atLongDesc, String atStatus, Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId, Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId, Set<IclubProperty> iclubProperties, Set<IclubDriver> iclubDrivers) {
 		this.atId = atId;
 		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;
 		this.atStatus = atStatus;
+		this.iclubVehiclesForVOnAccessTypeId = iclubVehiclesForVOnAccessTypeId;
+		this.iclubVehiclesForVDdAccessTypeId = iclubVehiclesForVDdAccessTypeId;
+		this.iclubProperties = iclubProperties;
+		this.iclubDrivers = iclubDrivers;
 	}
 
 	// Property accessors
@@ -81,6 +95,42 @@ public class IclubAccessType implements java.io.Serializable {
 
 	public void setAtStatus(String atStatus) {
 		this.atStatus = atStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccessTypeByVOnAccessTypeId")
+	public Set<IclubVehicle> getIclubVehiclesForVOnAccessTypeId() {
+		return this.iclubVehiclesForVOnAccessTypeId;
+	}
+
+	public void setIclubVehiclesForVOnAccessTypeId(Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId) {
+		this.iclubVehiclesForVOnAccessTypeId = iclubVehiclesForVOnAccessTypeId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccessTypeByVDdAccessTypeId")
+	public Set<IclubVehicle> getIclubVehiclesForVDdAccessTypeId() {
+		return this.iclubVehiclesForVDdAccessTypeId;
+	}
+
+	public void setIclubVehiclesForVDdAccessTypeId(Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId) {
+		this.iclubVehiclesForVDdAccessTypeId = iclubVehiclesForVDdAccessTypeId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccessType")
+	public Set<IclubProperty> getIclubProperties() {
+		return this.iclubProperties;
+	}
+
+	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
+		this.iclubProperties = iclubProperties;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccessType")
+	public Set<IclubDriver> getIclubDrivers() {
+		return this.iclubDrivers;
+	}
+
+	public void setIclubDrivers(Set<IclubDriver> iclubDrivers) {
+		this.iclubDrivers = iclubDrivers;
 	}
 
 }

@@ -2,13 +2,17 @@ package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +22,7 @@ import javax.persistence.UniqueConstraint;
  * IclubVehicleMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_vehicle_master", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "vm_make"))
+@Table(name = "iclub_vehicle_master", uniqueConstraints = @UniqueConstraint(columnNames = "vm_make"))
 public class IclubVehicleMaster implements java.io.Serializable {
 
 	// Fields
@@ -26,7 +30,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3237387535578793827L;
+	private static final long serialVersionUID = -991980648399076007L;
 	private Long vmId;
 	private IclubPerson iclubPerson;
 	private String vmMake;
@@ -36,6 +40,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	private Long vmRetRate;
 	private Date vmProdDt;
 	private Timestamp vmCrtdDt;
+	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
 
@@ -49,9 +54,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson,
-			String vmMake, String vmModel, Long vmOrigRate, Long vmMrktRate,
-			Long vmRetRate, Date vmProdDt, Timestamp vmCrtdDt) {
+	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson, String vmMake, String vmModel, Long vmOrigRate, Long vmMrktRate, Long vmRetRate, Date vmProdDt, Timestamp vmCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.vmId = vmId;
 		this.iclubPerson = iclubPerson;
 		this.vmMake = vmMake;
@@ -61,6 +64,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 		this.vmRetRate = vmRetRate;
 		this.vmProdDt = vmProdDt;
 		this.vmCrtdDt = vmCrtdDt;
+		this.iclubVehicles = iclubVehicles;
 	}
 
 	// Property accessors
@@ -146,6 +150,15 @@ public class IclubVehicleMaster implements java.io.Serializable {
 
 	public void setVmCrtdDt(Timestamp vmCrtdDt) {
 		this.vmCrtdDt = vmCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubVehicleMaster")
+	public Set<IclubVehicle> getIclubVehicles() {
+		return this.iclubVehicles;
+	}
+
+	public void setIclubVehicles(Set<IclubVehicle> iclubVehicles) {
+		this.iclubVehicles = iclubVehicles;
 	}
 
 }

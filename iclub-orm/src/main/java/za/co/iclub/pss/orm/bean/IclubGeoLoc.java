@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * IclubGeoLoc entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_geo_loc", catalog = "iclubdb")
+@Table(name = "iclub_geo_loc")
 public class IclubGeoLoc implements java.io.Serializable {
 
 	// Fields
@@ -43,8 +43,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glAddress,
-			Long glLat, Long glLong, Long glRate, Timestamp glCrtdDt) {
+	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glAddress, Long glLat, Long glLong, Long glRate, Timestamp glCrtdDt) {
 		this.glId = glId;
 		this.iclubPerson = iclubPerson;
 		this.glAddress = glAddress;

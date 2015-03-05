@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubPolicyStatus implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6317387541135459290L;
+	private static final long serialVersionUID = 7359840649862662567L;
 	private Long psId;
 	private String psShortDesc;
 	private String psLongDesc;
 	private String psStatus;
+	private Set<IclubPolicy> iclubPolicies = new HashSet<IclubPolicy>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubPolicyStatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPolicyStatus(Long psId, String psShortDesc, String psLongDesc, String psStatus) {
+	public IclubPolicyStatus(Long psId, String psShortDesc, String psLongDesc, String psStatus, Set<IclubPolicy> iclubPolicies) {
 		this.psId = psId;
 		this.psShortDesc = psShortDesc;
 		this.psLongDesc = psLongDesc;
 		this.psStatus = psStatus;
+		this.iclubPolicies = iclubPolicies;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubPolicyStatus implements java.io.Serializable {
 
 	public void setPsStatus(String psStatus) {
 		this.psStatus = psStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPolicyStatus")
+	public Set<IclubPolicy> getIclubPolicies() {
+		return this.iclubPolicies;
+	}
+
+	public void setIclubPolicies(Set<IclubPolicy> iclubPolicies) {
+		this.iclubPolicies = iclubPolicies;
 	}
 
 }

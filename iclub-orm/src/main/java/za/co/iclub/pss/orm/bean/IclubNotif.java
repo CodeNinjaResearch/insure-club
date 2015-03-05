@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * IclubNotif entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_notif", catalog = "iclubdb")
+@Table(name = "iclub_notif")
 public class IclubNotif implements java.io.Serializable {
 
 	// Fields
@@ -45,10 +45,7 @@ public class IclubNotif implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubNotif(String NId, IclubPerson iclubPerson,
-			IclubNotificationType iclubNotificationType, String NTitle,
-			String NBody, String NFromAddr, String NToList, String NStatus,
-			Timestamp NCrtdDt) {
+	public IclubNotif(String NId, IclubPerson iclubPerson, IclubNotificationType iclubNotificationType, String NTitle, String NBody, String NFromAddr, String NToList, String NStatus, Timestamp NCrtdDt) {
 		this.NId = NId;
 		this.iclubPerson = iclubPerson;
 		this.iclubNotificationType = iclubNotificationType;
@@ -87,8 +84,7 @@ public class IclubNotif implements java.io.Serializable {
 		return this.iclubNotificationType;
 	}
 
-	public void setIclubNotificationType(
-			IclubNotificationType iclubNotificationType) {
+	public void setIclubNotificationType(IclubNotificationType iclubNotificationType) {
 		this.iclubNotificationType = iclubNotificationType;
 	}
 

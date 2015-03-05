@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubThatchType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5101746394011736278L;
+	private static final long serialVersionUID = -4594352503825157164L;
 	private Long ttId;
 	private String ttShortDesc;
 	private String ttLongDesc;
 	private String ttStatus;
+	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubThatchType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubThatchType(Long ttId, String ttShortDesc, String ttLongDesc, String ttStatus) {
+	public IclubThatchType(Long ttId, String ttShortDesc, String ttLongDesc, String ttStatus, Set<IclubProperty> iclubProperties) {
 		this.ttId = ttId;
 		this.ttShortDesc = ttShortDesc;
 		this.ttLongDesc = ttLongDesc;
 		this.ttStatus = ttStatus;
+		this.iclubProperties = iclubProperties;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubThatchType implements java.io.Serializable {
 
 	public void setTtStatus(String ttStatus) {
 		this.ttStatus = ttStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubThatchType")
+	public Set<IclubProperty> getIclubProperties() {
+		return this.iclubProperties;
+	}
+
+	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }

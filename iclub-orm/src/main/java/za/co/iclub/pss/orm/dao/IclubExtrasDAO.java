@@ -28,8 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubExtras;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubExtrasDAO {
-	private static final Logger log = Logger
-			.getLogger(IclubExtrasDAO.class);
+	private static final Logger log = Logger.getLogger(IclubExtrasDAO.class);
 	// property constants
 	public static final String _EDESC = "EDesc";
 	public static final String _ESTATUS = "EStatus";
@@ -73,8 +72,7 @@ public class IclubExtrasDAO {
 	public IclubExtras findById(java.lang.Long id) {
 		log.debug("getting IclubExtras instance with id: " + id);
 		try {
-			IclubExtras instance = (IclubExtras) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubExtras", id);
+			IclubExtras instance = (IclubExtras) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubExtras", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -85,11 +83,8 @@ public class IclubExtrasDAO {
 	public List<IclubExtras> findByExample(IclubExtras instance) {
 		log.debug("finding IclubExtras instance by example");
 		try {
-			List<IclubExtras> results = (List<IclubExtras>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubExtras")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubExtras> results = (List<IclubExtras>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubExtras").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -98,11 +93,9 @@ public class IclubExtrasDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubExtras instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding IclubExtras instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubExtras as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubExtras as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -135,8 +128,7 @@ public class IclubExtrasDAO {
 	public IclubExtras merge(IclubExtras detachedInstance) {
 		log.debug("merging IclubExtras instance");
 		try {
-			IclubExtras result = (IclubExtras) getCurrentSession().merge(
-					detachedInstance);
+			IclubExtras result = (IclubExtras) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -159,8 +151,7 @@ public class IclubExtrasDAO {
 	public void attachClean(IclubExtras instance) {
 		log.debug("attaching clean IclubExtras instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -168,8 +159,7 @@ public class IclubExtrasDAO {
 		}
 	}
 
-	public static IclubExtrasDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	public static IclubExtrasDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubExtrasDAO) ctx.getBean("IclubExtrasDAO");
 	}
 }

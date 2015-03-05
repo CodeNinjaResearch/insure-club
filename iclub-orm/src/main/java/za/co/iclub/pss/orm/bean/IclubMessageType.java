@@ -45,8 +45,7 @@ public class IclubMessageType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMessageType(Long mtId, String mtShortDesc, String mtLongDesc,
-			String mtStatus, Set<IclubMessage> iclubMessages) {
+	public IclubMessageType(Long mtId, String mtShortDesc, String mtLongDesc, String mtStatus, Set<IclubMessage> iclubMessages) {
 		this.mtId = mtId;
 		this.mtShortDesc = mtShortDesc;
 		this.mtLongDesc = mtLongDesc;

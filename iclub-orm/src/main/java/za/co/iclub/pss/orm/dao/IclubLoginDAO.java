@@ -163,7 +163,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public List verifyLogin(String name, String pwd) {
 		log.debug("Fetching Login Query :: verify Login");
 		try {

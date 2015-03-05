@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubRateType;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubRateType
- * @author Venu Madhav Pattamatta
+ * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -32,6 +32,7 @@ public class IclubRateTypeDAO {
 	// property constants
 	public static final String RT_SHORT_DESC = "rtShortDesc";
 	public static final String RT_LONG_DESC = "rtLongDesc";
+	public static final String RT_FIELD_NM = "rtFieldNm";
 	public static final String RT_STATUS = "rtStatus";
 
 	private SessionFactory sessionFactory;
@@ -112,6 +113,10 @@ public class IclubRateTypeDAO {
 
 	public List<IclubRateType> findByRtLongDesc(Object rtLongDesc) {
 		return findByProperty(RT_LONG_DESC, rtLongDesc);
+	}
+
+	public List<IclubRateType> findByRtFieldNm(Object rtFieldNm) {
+		return findByProperty(RT_FIELD_NM, rtFieldNm);
 	}
 
 	public List<IclubRateType> findByRtStatus(Object rtStatus) {

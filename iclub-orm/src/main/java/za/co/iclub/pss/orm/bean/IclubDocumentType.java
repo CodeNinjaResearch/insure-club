@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * IclubDocumentType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_document_type", catalog = "iclubdb")
+@Table(name = "iclub_document_type")
 @NamedNativeQueries({ @NamedNativeQuery(name = "getDocumentTypeBySD", query = "select * from iclub_document_type where lower(dt_short_desc) = lower(:sd) and dt_id <> :id", resultClass = IclubDocumentType.class) })
 public class IclubDocumentType implements java.io.Serializable {
 
@@ -45,8 +45,7 @@ public class IclubDocumentType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDocumentType(Long dtId, String dtShortDesc, String dtLongDesc,
-			String dtStatus, Set<IclubDocument> iclubDocuments) {
+	public IclubDocumentType(Long dtId, String dtShortDesc, String dtLongDesc, String dtStatus, Set<IclubDocument> iclubDocuments) {
 		this.dtId = dtId;
 		this.dtShortDesc = dtShortDesc;
 		this.dtLongDesc = dtLongDesc;

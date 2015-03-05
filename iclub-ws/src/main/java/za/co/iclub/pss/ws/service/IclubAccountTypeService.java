@@ -134,7 +134,7 @@ public class IclubAccountTypeService {
 
 				if (iAt.getIclubAccounts() != null && iAt.getIclubAccounts().size() > 0) {
 					Set<IclubAccount> iAcc = iAt.getIclubAccounts();
-					Integer[] iclubAccounts = new Integer[iAcc.size()];
+					String[] iclubAccounts = new String[iAcc.size()];
 
 					int i = 0;
 					for (IclubAccount iA : iAcc) {
@@ -169,7 +169,7 @@ public class IclubAccountTypeService {
 
 			if (bean.getIclubAccounts() != null && bean.getIclubAccounts().size() > 0) {
 				Set<IclubAccount> iAcc = bean.getIclubAccounts();
-				Integer[] iclubAccounts = new Integer[iAcc.size()];
+				String[] iclubAccounts = new String[iAcc.size()];
 
 				int i = 0;
 				for (IclubAccount iA : iAcc) {

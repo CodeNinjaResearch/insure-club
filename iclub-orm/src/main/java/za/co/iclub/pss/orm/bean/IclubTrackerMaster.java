@@ -1,13 +1,17 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -15,7 +19,7 @@ import javax.persistence.UniqueConstraint;
  * IclubTrackerMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_tracker_master", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "tm_name"))
+@Table(name = "iclub_tracker_master", uniqueConstraints = @UniqueConstraint(columnNames = "tm_name"))
 public class IclubTrackerMaster implements java.io.Serializable {
 
 	// Fields
@@ -23,7 +27,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3932954844072561271L;
+	private static final long serialVersionUID = 5669057725433825466L;
 	private Long tmId;
 	private IclubPerson iclubPerson;
 	private String tmName;
@@ -33,6 +37,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	private Long tmLong;
 	private String tmRegNum;
 	private Timestamp tmCrtdDt;
+	private Set<IclubSecurityDevice> iclubSecurityDevices = new HashSet<IclubSecurityDevice>(0);
 
 	// Constructors
 
@@ -46,9 +51,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubTrackerMaster(Long tmId, IclubPerson iclubPerson,
-			String tmName, String tmTradeName, String tmLocation, Long tmLat,
-			Long tmLong, String tmRegNum, Timestamp tmCrtdDt) {
+	public IclubTrackerMaster(Long tmId, IclubPerson iclubPerson, String tmName, String tmTradeName, String tmLocation, Long tmLat, Long tmLong, String tmRegNum, Timestamp tmCrtdDt, Set<IclubSecurityDevice> iclubSecurityDevices) {
 		this.tmId = tmId;
 		this.iclubPerson = iclubPerson;
 		this.tmName = tmName;
@@ -58,6 +61,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 		this.tmLong = tmLong;
 		this.tmRegNum = tmRegNum;
 		this.tmCrtdDt = tmCrtdDt;
+		this.iclubSecurityDevices = iclubSecurityDevices;
 	}
 
 	// Property accessors
@@ -142,6 +146,15 @@ public class IclubTrackerMaster implements java.io.Serializable {
 
 	public void setTmCrtdDt(Timestamp tmCrtdDt) {
 		this.tmCrtdDt = tmCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubTrackerMaster")
+	public Set<IclubSecurityDevice> getIclubSecurityDevices() {
+		return this.iclubSecurityDevices;
+	}
+
+	public void setIclubSecurityDevices(Set<IclubSecurityDevice> iclubSecurityDevices) {
+		this.iclubSecurityDevices = iclubSecurityDevices;
 	}
 
 }

@@ -6,7 +6,7 @@ public class IclubOwnerTypeBean {
 	private String otShortDesc;
 	private String otLongDesc;
 	private String otStatus;
-	private Integer[] iclubAccounts;
+	private String[] iclubAccounts;
 
 	public Long getOtId() {
 		return otId;
@@ -40,11 +40,11 @@ public class IclubOwnerTypeBean {
 		this.otStatus = otStatus;
 	}
 
-	public Integer[] getIclubAccounts() {
+	public String[] getIclubAccounts() {
 		return iclubAccounts;
 	}
 
-	public void setIclubAccounts(Integer[] iclubAccounts) {
+	public void setIclubAccounts(String[] iclubAccounts) {
 		this.iclubAccounts = iclubAccounts;
 	}
 

@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubQuoteStatus implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3041167003838834380L;
+	private static final long serialVersionUID = -3569290894614510188L;
 	private Long qsId;
 	private String qsShortDesc;
 	private String qsLongDesc;
 	private String qsStatus;
+	private Set<IclubQuote> iclubQuotes = new HashSet<IclubQuote>(0);
 
 	// Constructors
 
@@ -38,11 +45,12 @@ public class IclubQuoteStatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubQuoteStatus(Long qsId, String qsShortDesc, String qsLongDesc, String qsStatus) {
+	public IclubQuoteStatus(Long qsId, String qsShortDesc, String qsLongDesc, String qsStatus, Set<IclubQuote> iclubQuotes) {
 		this.qsId = qsId;
 		this.qsShortDesc = qsShortDesc;
 		this.qsLongDesc = qsLongDesc;
 		this.qsStatus = qsStatus;
+		this.iclubQuotes = iclubQuotes;
 	}
 
 	// Property accessors
@@ -81,6 +89,15 @@ public class IclubQuoteStatus implements java.io.Serializable {
 
 	public void setQsStatus(String qsStatus) {
 		this.qsStatus = qsStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubQuoteStatus")
+	public Set<IclubQuote> getIclubQuotes() {
+		return this.iclubQuotes;
+	}
+
+	public void setIclubQuotes(Set<IclubQuote> iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

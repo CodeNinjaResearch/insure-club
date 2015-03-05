@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * IclubBankMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_bank_master", catalog = "iclubdb")
+@Table(name = "iclub_bank_master")
 public class IclubBankMaster implements java.io.Serializable {
 
 	// Fields
@@ -52,11 +52,7 @@ public class IclubBankMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubBankMaster(Long bmId, IclubPerson iclubPerson,
-			String bmBankName, Integer bmBankCode, String bmBranchName,
-			Integer bmBranchCode, String bmBranchAddress, Long bmBranchLat,
-			Long bmBranchLong, Integer bmBranchZip, Timestamp bmCrtdDt,
-			Set<IclubAccount> iclubAccounts) {
+	public IclubBankMaster(Long bmId, IclubPerson iclubPerson, String bmBankName, Integer bmBankCode, String bmBranchName, Integer bmBranchCode, String bmBranchAddress, Long bmBranchLat, Long bmBranchLong, Integer bmBranchZip, Timestamp bmCrtdDt, Set<IclubAccount> iclubAccounts) {
 		this.bmId = bmId;
 		this.iclubPerson = iclubPerson;
 		this.bmBankName = bmBankName;

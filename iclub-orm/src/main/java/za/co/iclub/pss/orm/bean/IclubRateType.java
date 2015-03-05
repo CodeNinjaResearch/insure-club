@@ -1,10 +1,19 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +29,17 @@ public class IclubRateType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2636062017875435455L;
+	private static final long serialVersionUID = 1222778689466584778L;
 	private Long rtId;
+	private IclubInsuranceItemType iclubInsuranceItemType;
+	private IclubPerson iclubPerson;
+	private IclubEntityType iclubEntityType;
 	private String rtShortDesc;
 	private String rtLongDesc;
+	private String rtFieldNm;
 	private String rtStatus;
+	private Timestamp rtCrtdDt;
+	private Set<IclubRateEngine> iclubRateEngines = new HashSet<IclubRateEngine>(0);
 
 	// Constructors
 
@@ -38,11 +53,17 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateType(Long rtId, String rtShortDesc, String rtLongDesc, String rtStatus) {
+	public IclubRateType(Long rtId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtFieldNm, String rtStatus, Timestamp rtCrtdDt, Set<IclubRateEngine> iclubRateEngines) {
 		this.rtId = rtId;
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
+		this.iclubPerson = iclubPerson;
+		this.iclubEntityType = iclubEntityType;
 		this.rtShortDesc = rtShortDesc;
 		this.rtLongDesc = rtLongDesc;
+		this.rtFieldNm = rtFieldNm;
 		this.rtStatus = rtStatus;
+		this.rtCrtdDt = rtCrtdDt;
+		this.iclubRateEngines = iclubRateEngines;
 	}
 
 	// Property accessors
@@ -54,6 +75,36 @@ public class IclubRateType implements java.io.Serializable {
 
 	public void setRtId(Long rtId) {
 		this.rtId = rtId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rt_item_type_id")
+	public IclubInsuranceItemType getIclubInsuranceItemType() {
+		return this.iclubInsuranceItemType;
+	}
+
+	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rt_crtd_by")
+	public IclubPerson getIclubPerson() {
+		return this.iclubPerson;
+	}
+
+	public void setIclubPerson(IclubPerson iclubPerson) {
+		this.iclubPerson = iclubPerson;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rt_entity_type_id")
+	public IclubEntityType getIclubEntityType() {
+		return this.iclubEntityType;
+	}
+
+	public void setIclubEntityType(IclubEntityType iclubEntityType) {
+		this.iclubEntityType = iclubEntityType;
 	}
 
 	@Column(name = "rt_short_desc", length = 4)
@@ -74,6 +125,15 @@ public class IclubRateType implements java.io.Serializable {
 		this.rtLongDesc = rtLongDesc;
 	}
 
+	@Column(name = "rt_field_nm", length = 450)
+	public String getRtFieldNm() {
+		return this.rtFieldNm;
+	}
+
+	public void setRtFieldNm(String rtFieldNm) {
+		this.rtFieldNm = rtFieldNm;
+	}
+
 	@Column(name = "rt_status", length = 1)
 	public String getRtStatus() {
 		return this.rtStatus;
@@ -81,6 +141,24 @@ public class IclubRateType implements java.io.Serializable {
 
 	public void setRtStatus(String rtStatus) {
 		this.rtStatus = rtStatus;
+	}
+
+	@Column(name = "rt_crtd_dt", length = 19)
+	public Timestamp getRtCrtdDt() {
+		return this.rtCrtdDt;
+	}
+
+	public void setRtCrtdDt(Timestamp rtCrtdDt) {
+		this.rtCrtdDt = rtCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubRateType")
+	public Set<IclubRateEngine> getIclubRateEngines() {
+		return this.iclubRateEngines;
+	}
+
+	public void setIclubRateEngines(Set<IclubRateEngine> iclubRateEngines) {
+		this.iclubRateEngines = iclubRateEngines;
 	}
 
 }
