@@ -23,10 +23,6 @@
 		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
-	<bean id="IclubCoverTypeService" class="za.co.iclub.pss.ws.service.IclubCoverTypeService">
-		<property name="iclubCoverTypeDAO" ref="IclubCoverTypeDAO" />
-		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
-	</bean>
 	<bean id="IclubInsuranceItemTypeService"
 		class="za.co.iclub.pss.ws.service.IclubInsuranceItemTypeService">
 		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
@@ -110,10 +106,6 @@
 	</bean>
 	<bean id="IclubPropertyTypeService" class="za.co.iclub.pss.ws.service.IclubPropertyTypeService">
 		<property name="iclubPropertyTypeDAO" ref="IclubPropertyTypeDAO" />
-		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
-	</bean>
-	<bean id="IclubPurposeTypeService" class="za.co.iclub.pss.ws.service.IclubPurposeTypeService">
-		<property name="iclubPurposeTypeDAO" ref="IclubPurposeTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	<bean id="IclubRoleTypeService" class="za.co.iclub.pss.ws.service.IclubRoleTypeService">

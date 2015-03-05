@@ -34,7 +34,6 @@
 				<value>za.co.iclub.pss.orm.bean.IclubBuildingState</value>
 				<value>za.co.iclub.pss.orm.bean.IclubConfig</value>
 				<value>za.co.iclub.pss.orm.bean.IclubCountryCode</value>
-				<value>za.co.iclub.pss.orm.bean.IclubCoverType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubDocumentType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubEventType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubGeoLoc</value>
@@ -55,7 +54,6 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPolicyStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubProductType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPropertyType</value>
-				<value>za.co.iclub.pss.orm.bean.IclubPurposeType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubQuoteStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubRateType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubRoleType</value>
@@ -171,11 +169,6 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="IclubCoverTypeDAO" class="za.co.iclub.pss.orm.dao.IclubCoverTypeDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
 	<bean id="IclubBarTypeDAO" class="za.co.iclub.pss.orm.dao.IclubBarTypeDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -272,11 +265,6 @@
 		</property>
 	</bean>
 	<bean id="IclubRoleTypeDAO" class="za.co.iclub.pss.orm.dao.IclubRoleTypeDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="IclubPurposeTypeDAO" class="za.co.iclub.pss.orm.dao.IclubPurposeTypeDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

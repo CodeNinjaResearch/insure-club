@@ -25,7 +25,6 @@
 			<ref bean="IclubBarTypeService" />
 			<ref bean="IclubThatchTypeService" />
 			<ref bean="IclubMaritialStatusService" />
-			<ref bean="IclubCoverTypeService" />
 			<ref bean="IclubInsuranceItemTypeService" />
 			<ref bean="IclubQuoteStatusService" />
 			<ref bean="IclubNotificationTypeService" />
@@ -47,7 +46,6 @@
 			<ref bean="IclubPolicyStatusService" />
 			<ref bean="IclubProductTypeService" />
 			<ref bean="IclubPropertyTypeService" />
-			<ref bean="IclubPurposeTypeService" />
 			<ref bean="IclubRoleTypeService" />
 			<ref bean="IclubSecurityQuestionService" />
 			<ref bean="IclubPaymentTypeService" />
