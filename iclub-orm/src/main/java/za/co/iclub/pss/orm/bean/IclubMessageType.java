@@ -1,10 +1,16 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +26,12 @@ public class IclubMessageType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -516763458059760752L;
+	private static final long serialVersionUID = 8755866992996462950L;
 	private Long mtId;
 	private String mtShortDesc;
 	private String mtLongDesc;
 	private String mtStatus;
+	private Set<IclubMessage> iclubMessages = new HashSet<IclubMessage>(0);
 
 	// Constructors
 
@@ -38,11 +45,13 @@ public class IclubMessageType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMessageType(Long mtId, String mtShortDesc, String mtLongDesc, String mtStatus) {
+	public IclubMessageType(Long mtId, String mtShortDesc, String mtLongDesc,
+			String mtStatus, Set<IclubMessage> iclubMessages) {
 		this.mtId = mtId;
 		this.mtShortDesc = mtShortDesc;
 		this.mtLongDesc = mtLongDesc;
 		this.mtStatus = mtStatus;
+		this.iclubMessages = iclubMessages;
 	}
 
 	// Property accessors
@@ -81,6 +90,15 @@ public class IclubMessageType implements java.io.Serializable {
 
 	public void setMtStatus(String mtStatus) {
 		this.mtStatus = mtStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubMessageType")
+	public Set<IclubMessage> getIclubMessages() {
+		return this.iclubMessages;
+	}
+
+	public void setIclubMessages(Set<IclubMessage> iclubMessages) {
+		this.iclubMessages = iclubMessages;
 	}
 
 }

@@ -34,17 +34,27 @@
 				<value>za.co.iclub.pss.orm.bean.IclubBuildingState</value>
 				<value>za.co.iclub.pss.orm.bean.IclubConfig</value>
 				<value>za.co.iclub.pss.orm.bean.IclubCountryCode</value>
+				<value>za.co.iclub.pss.orm.bean.IclubCoverType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubDocument</value>
 				<value>za.co.iclub.pss.orm.bean.IclubDocumentType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubEntityType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubEvent</value>
 				<value>za.co.iclub.pss.orm.bean.IclubEventType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubExtras</value>
 				<value>za.co.iclub.pss.orm.bean.IclubGeoLoc</value>
 				<value>za.co.iclub.pss.orm.bean.IclubIdType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubInsuranceItemType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubInsurerMaster</value>
+				<value>za.co.iclub.pss.orm.bean.IclubLicenseCode</value>
 				<value>za.co.iclub.pss.orm.bean.IclubLogin</value>
 				<value>za.co.iclub.pss.orm.bean.IclubMaritialStatus</value>
+				<value>za.co.iclub.pss.orm.bean.IclubMbComment</value>
+				<value>za.co.iclub.pss.orm.bean.IclubMessage</value>
+				<value>za.co.iclub.pss.orm.bean.IclubMessageBoard</value>
 				<value>za.co.iclub.pss.orm.bean.IclubMessageType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubNotif</value>
 				<value>za.co.iclub.pss.orm.bean.IclubNotificationType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubOccupation</value>
 				<value>za.co.iclub.pss.orm.bean.IclubOccupiedStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubOwnerType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPaymentStatus</value>
@@ -54,6 +64,7 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPolicyStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubProductType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPropertyType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubPurposeType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubQuoteStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubRateType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubRoleType</value>
@@ -62,6 +73,7 @@
 				<value>za.co.iclub.pss.orm.bean.IclubSecurityQuestion</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSupplierType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSupplMaster</value>
+				<value>za.co.iclub.pss.orm.bean.IclubSystemType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubThatchType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubTrackerMaster</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehicleMaster</value>
@@ -285,6 +297,66 @@
 		</property>
 	</bean>
 	<bean id="IclubCountryCodeDAO" class="za.co.iclub.pss.orm.dao.IclubCountryCodeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubMbCommentDAO" class="za.co.iclub.pss.orm.dao.IclubMbCommentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubOccupationDAO" class="za.co.iclub.pss.orm.dao.IclubOccupationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubExtrasDAO" class="za.co.iclub.pss.orm.dao.IclubExtrasDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubMessageDAO" class="za.co.iclub.pss.orm.dao.IclubMessageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubSystemTypeDAO" class="za.co.iclub.pss.orm.dao.IclubSystemTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubEntityTypeDAO" class="za.co.iclub.pss.orm.dao.IclubEntityTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubDocumentDAO" class="za.co.iclub.pss.orm.dao.IclubDocumentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubLicenseCodeDAO" class="za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPurposeTypeDAO" class="za.co.iclub.pss.orm.dao.IclubPurposeTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubEventDAO" class="za.co.iclub.pss.orm.dao.IclubEventDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCoverTypeDAO" class="za.co.iclub.pss.orm.dao.IclubCoverTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubMessageBoardDAO" class="za.co.iclub.pss.orm.dao.IclubMessageBoardDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

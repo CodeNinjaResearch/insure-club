@@ -28,7 +28,8 @@ import za.co.iclub.pss.orm.bean.IclubEventType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubEventTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubEventTypeDAO.class);
+	private static final Logger log = Logger
+			.getLogger(IclubEventTypeDAO.class);
 	// property constants
 	public static final String ET_SHORT_DESC = "etShortDesc";
 	public static final String ET_LONG_DESC = "etLongDesc";
@@ -73,7 +74,8 @@ public class IclubEventTypeDAO {
 	public IclubEventType findById(java.lang.Long id) {
 		log.debug("getting IclubEventType instance with id: " + id);
 		try {
-			IclubEventType instance = (IclubEventType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubEventType", id);
+			IclubEventType instance = (IclubEventType) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubEventType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +86,11 @@ public class IclubEventTypeDAO {
 	public List<IclubEventType> findByExample(IclubEventType instance) {
 		log.debug("finding IclubEventType instance by example");
 		try {
-			List<IclubEventType> results = (List<IclubEventType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubEventType").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubEventType> results = (List<IclubEventType>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubEventType")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +99,11 @@ public class IclubEventTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubEventType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubEventType instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubEventType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubEventType as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +140,8 @@ public class IclubEventTypeDAO {
 	public IclubEventType merge(IclubEventType detachedInstance) {
 		log.debug("merging IclubEventType instance");
 		try {
-			IclubEventType result = (IclubEventType) getCurrentSession().merge(detachedInstance);
+			IclubEventType result = (IclubEventType) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +164,8 @@ public class IclubEventTypeDAO {
 	public void attachClean(IclubEventType instance) {
 		log.debug("attaching clean IclubEventType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);

@@ -2,56 +2,52 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * IclubEventType entity. @author MyEclipse Persistence Tools
+ * IclubEntityType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_event_type", catalog = "iclubdb")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getEventTypeBySD", query = "select * from iclub_event_type where lower(et_short_desc) = lower(:sd) and et_id <> :id", resultClass = IclubEventType.class) })
-public class IclubEventType implements java.io.Serializable {
+@Table(name = "iclub_entity_type", catalog = "iclubdb")
+public class IclubEntityType implements java.io.Serializable {
 
 	// Fields
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -658849497021815449L;
+	private static final long serialVersionUID = -6125126871302238063L;
 	private Long etId;
 	private String etShortDesc;
 	private String etLongDesc;
 	private String etStatus;
-	private Set<IclubEvent> iclubEvents = new HashSet<IclubEvent>(0);
+	private Set<IclubDocument> iclubDocuments = new HashSet<IclubDocument>(0);
 
 	// Constructors
 
 	/** default constructor */
-	public IclubEventType() {
+	public IclubEntityType() {
 	}
 
 	/** minimal constructor */
-	public IclubEventType(Long etId) {
+	public IclubEntityType(Long etId) {
 		this.etId = etId;
 	}
 
 	/** full constructor */
-	public IclubEventType(Long etId, String etShortDesc, String etLongDesc,
-			String etStatus, Set<IclubEvent> iclubEvents) {
+	public IclubEntityType(Long etId, String etShortDesc, String etLongDesc,
+			String etStatus, Set<IclubDocument> iclubDocuments) {
 		this.etId = etId;
 		this.etShortDesc = etShortDesc;
 		this.etLongDesc = etLongDesc;
 		this.etStatus = etStatus;
-		this.iclubEvents = iclubEvents;
+		this.iclubDocuments = iclubDocuments;
 	}
 
 	// Property accessors
@@ -92,13 +88,13 @@ public class IclubEventType implements java.io.Serializable {
 		this.etStatus = etStatus;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubEventType")
-	public Set<IclubEvent> getIclubEvents() {
-		return this.iclubEvents;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubEntityType")
+	public Set<IclubDocument> getIclubDocuments() {
+		return this.iclubDocuments;
 	}
 
-	public void setIclubEvents(Set<IclubEvent> iclubEvents) {
-		this.iclubEvents = iclubEvents;
+	public void setIclubDocuments(Set<IclubDocument> iclubDocuments) {
+		this.iclubDocuments = iclubDocuments;
 	}
 
 }

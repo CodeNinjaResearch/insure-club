@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +27,7 @@ public class IclubPerson implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7660113578360382290L;
+	private static final long serialVersionUID = -6504144757362429237L;
 	private String PId;
 	private IclubMaritialStatus iclubMaritialStatus;
 	private IclubPerson iclubPerson;
@@ -53,27 +52,41 @@ public class IclubPerson implements java.io.Serializable {
 	private Long PLong;
 	private Integer PZipCd;
 	private Date PCrtdDt;
+	private Set<IclubMessageBoard> iclubMessageBoards = new HashSet<IclubMessageBoard>(
+			0);
 	private Set<IclubPerson> iclubPersons = new HashSet<IclubPerson>(0);
+	private Set<IclubMbComment> iclubMbComments = new HashSet<IclubMbComment>(0);
+	private Set<IclubExtras> iclubExtrases = new HashSet<IclubExtras>(0);
 	private Set<IclubSecurityMaster> iclubSecurityMasters = new HashSet<IclubSecurityMaster>(
 			0);
+	private Set<IclubDocument> iclubDocuments = new HashSet<IclubDocument>(0);
 	private Set<IclubGeoLoc> iclubGeoLocs = new HashSet<IclubGeoLoc>(0);
 	private Set<IclubInsurerMaster> iclubInsurerMasters = new HashSet<IclubInsurerMaster>(
+			0);
+	private Set<IclubLicenseCode> iclubLicenseCodes = new HashSet<IclubLicenseCode>(
 			0);
 	private Set<IclubAccount> iclubAccounts = new HashSet<IclubAccount>(0);
 	private Set<IclubTrackerMaster> iclubTrackerMasters = new HashSet<IclubTrackerMaster>(
 			0);
-	private Set<IclubConfig> iclubConfigs = new HashSet<IclubConfig>(0);
+	private Set<IclubCoverType> iclubCoverTypes = new HashSet<IclubCoverType>(0);
 	private Set<IclubSupplMaster> iclubSupplMasters = new HashSet<IclubSupplMaster>(
 			0);
+	private Set<IclubConfig> iclubConfigs = new HashSet<IclubConfig>(0);
+	private Set<IclubNotif> iclubNotifs = new HashSet<IclubNotif>(0);
 	private Set<IclubBankMaster> iclubBankMasters = new HashSet<IclubBankMaster>(
 			0);
 	private Set<IclubCountryCode> iclubCountryCodes = new HashSet<IclubCountryCode>(
 			0);
-	private Set<IclubNotif> iclubNotifs = new HashSet<IclubNotif>(0);
+	private Set<IclubEvent> iclubEvents = new HashSet<IclubEvent>(0);
 	private Set<IclubVehicleMaster> iclubVehicleMasters = new HashSet<IclubVehicleMaster>(
+			0);
+	private Set<IclubPurposeType> iclubPurposeTypes = new HashSet<IclubPurposeType>(
+			0);
+	private Set<IclubOccupation> iclubOccupations = new HashSet<IclubOccupation>(
 			0);
 	private Set<IclubLogin> iclubLoginsForLPersonId = new HashSet<IclubLogin>(0);
 	private Set<IclubLogin> iclubLoginsForLCrtdBy = new HashSet<IclubLogin>(0);
+	private Set<IclubMessage> iclubMessages = new HashSet<IclubMessage>(0);
 
 	// Constructors
 
@@ -94,20 +107,27 @@ public class IclubPerson implements java.io.Serializable {
 			Long PIdIssueCntry, Date PIdIssueDt, Date PIdExpiryDt,
 			Long POccupation, Date PDob, String PIsPensioner, String PAddress,
 			Long PLat, Long PLong, Integer PZipCd, Date PCrtdDt,
-			Set<IclubPerson> iclubPersons,
+			Set<IclubMessageBoard> iclubMessageBoards,
+			Set<IclubPerson> iclubPersons, Set<IclubMbComment> iclubMbComments,
+			Set<IclubExtras> iclubExtrases,
 			Set<IclubSecurityMaster> iclubSecurityMasters,
-			Set<IclubGeoLoc> iclubGeoLocs,
+			Set<IclubDocument> iclubDocuments, Set<IclubGeoLoc> iclubGeoLocs,
 			Set<IclubInsurerMaster> iclubInsurerMasters,
+			Set<IclubLicenseCode> iclubLicenseCodes,
 			Set<IclubAccount> iclubAccounts,
 			Set<IclubTrackerMaster> iclubTrackerMasters,
-			Set<IclubConfig> iclubConfigs,
+			Set<IclubCoverType> iclubCoverTypes,
 			Set<IclubSupplMaster> iclubSupplMasters,
+			Set<IclubConfig> iclubConfigs, Set<IclubNotif> iclubNotifs,
 			Set<IclubBankMaster> iclubBankMasters,
 			Set<IclubCountryCode> iclubCountryCodes,
-			Set<IclubNotif> iclubNotifs,
+			Set<IclubEvent> iclubEvents,
 			Set<IclubVehicleMaster> iclubVehicleMasters,
+			Set<IclubPurposeType> iclubPurposeTypes,
+			Set<IclubOccupation> iclubOccupations,
 			Set<IclubLogin> iclubLoginsForLPersonId,
-			Set<IclubLogin> iclubLoginsForLCrtdBy) {
+			Set<IclubLogin> iclubLoginsForLCrtdBy,
+			Set<IclubMessage> iclubMessages) {
 		this.PId = PId;
 		this.iclubMaritialStatus = iclubMaritialStatus;
 		this.iclubPerson = iclubPerson;
@@ -132,20 +152,30 @@ public class IclubPerson implements java.io.Serializable {
 		this.PLong = PLong;
 		this.PZipCd = PZipCd;
 		this.PCrtdDt = PCrtdDt;
+		this.iclubMessageBoards = iclubMessageBoards;
 		this.iclubPersons = iclubPersons;
+		this.iclubMbComments = iclubMbComments;
+		this.iclubExtrases = iclubExtrases;
 		this.iclubSecurityMasters = iclubSecurityMasters;
+		this.iclubDocuments = iclubDocuments;
 		this.iclubGeoLocs = iclubGeoLocs;
 		this.iclubInsurerMasters = iclubInsurerMasters;
+		this.iclubLicenseCodes = iclubLicenseCodes;
 		this.iclubAccounts = iclubAccounts;
 		this.iclubTrackerMasters = iclubTrackerMasters;
-		this.iclubConfigs = iclubConfigs;
+		this.iclubCoverTypes = iclubCoverTypes;
 		this.iclubSupplMasters = iclubSupplMasters;
+		this.iclubConfigs = iclubConfigs;
+		this.iclubNotifs = iclubNotifs;
 		this.iclubBankMasters = iclubBankMasters;
 		this.iclubCountryCodes = iclubCountryCodes;
-		this.iclubNotifs = iclubNotifs;
+		this.iclubEvents = iclubEvents;
 		this.iclubVehicleMasters = iclubVehicleMasters;
+		this.iclubPurposeTypes = iclubPurposeTypes;
+		this.iclubOccupations = iclubOccupations;
 		this.iclubLoginsForLPersonId = iclubLoginsForLPersonId;
 		this.iclubLoginsForLCrtdBy = iclubLoginsForLCrtdBy;
+		this.iclubMessages = iclubMessages;
 	}
 
 	// Property accessors
@@ -374,12 +404,39 @@ public class IclubPerson implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubMessageBoard> getIclubMessageBoards() {
+		return this.iclubMessageBoards;
+	}
+
+	public void setIclubMessageBoards(Set<IclubMessageBoard> iclubMessageBoards) {
+		this.iclubMessageBoards = iclubMessageBoards;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
 	public Set<IclubPerson> getIclubPersons() {
 		return this.iclubPersons;
 	}
 
 	public void setIclubPersons(Set<IclubPerson> iclubPersons) {
 		this.iclubPersons = iclubPersons;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubMbComment> getIclubMbComments() {
+		return this.iclubMbComments;
+	}
+
+	public void setIclubMbComments(Set<IclubMbComment> iclubMbComments) {
+		this.iclubMbComments = iclubMbComments;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubExtras> getIclubExtrases() {
+		return this.iclubExtrases;
+	}
+
+	public void setIclubExtrases(Set<IclubExtras> iclubExtrases) {
+		this.iclubExtrases = iclubExtrases;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
@@ -390,6 +447,15 @@ public class IclubPerson implements java.io.Serializable {
 	public void setIclubSecurityMasters(
 			Set<IclubSecurityMaster> iclubSecurityMasters) {
 		this.iclubSecurityMasters = iclubSecurityMasters;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubDocument> getIclubDocuments() {
+		return this.iclubDocuments;
+	}
+
+	public void setIclubDocuments(Set<IclubDocument> iclubDocuments) {
+		this.iclubDocuments = iclubDocuments;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
@@ -412,6 +478,15 @@ public class IclubPerson implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubLicenseCode> getIclubLicenseCodes() {
+		return this.iclubLicenseCodes;
+	}
+
+	public void setIclubLicenseCodes(Set<IclubLicenseCode> iclubLicenseCodes) {
+		this.iclubLicenseCodes = iclubLicenseCodes;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
 	public Set<IclubAccount> getIclubAccounts() {
 		return this.iclubAccounts;
 	}
@@ -431,12 +506,12 @@ public class IclubPerson implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
-	public Set<IclubConfig> getIclubConfigs() {
-		return this.iclubConfigs;
+	public Set<IclubCoverType> getIclubCoverTypes() {
+		return this.iclubCoverTypes;
 	}
 
-	public void setIclubConfigs(Set<IclubConfig> iclubConfigs) {
-		this.iclubConfigs = iclubConfigs;
+	public void setIclubCoverTypes(Set<IclubCoverType> iclubCoverTypes) {
+		this.iclubCoverTypes = iclubCoverTypes;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
@@ -446,6 +521,24 @@ public class IclubPerson implements java.io.Serializable {
 
 	public void setIclubSupplMasters(Set<IclubSupplMaster> iclubSupplMasters) {
 		this.iclubSupplMasters = iclubSupplMasters;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubConfig> getIclubConfigs() {
+		return this.iclubConfigs;
+	}
+
+	public void setIclubConfigs(Set<IclubConfig> iclubConfigs) {
+		this.iclubConfigs = iclubConfigs;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubNotif> getIclubNotifs() {
+		return this.iclubNotifs;
+	}
+
+	public void setIclubNotifs(Set<IclubNotif> iclubNotifs) {
+		this.iclubNotifs = iclubNotifs;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
@@ -467,12 +560,12 @@ public class IclubPerson implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
-	public Set<IclubNotif> getIclubNotifs() {
-		return this.iclubNotifs;
+	public Set<IclubEvent> getIclubEvents() {
+		return this.iclubEvents;
 	}
 
-	public void setIclubNotifs(Set<IclubNotif> iclubNotifs) {
-		this.iclubNotifs = iclubNotifs;
+	public void setIclubEvents(Set<IclubEvent> iclubEvents) {
+		this.iclubEvents = iclubEvents;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
@@ -483,6 +576,24 @@ public class IclubPerson implements java.io.Serializable {
 	public void setIclubVehicleMasters(
 			Set<IclubVehicleMaster> iclubVehicleMasters) {
 		this.iclubVehicleMasters = iclubVehicleMasters;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubPurposeType> getIclubPurposeTypes() {
+		return this.iclubPurposeTypes;
+	}
+
+	public void setIclubPurposeTypes(Set<IclubPurposeType> iclubPurposeTypes) {
+		this.iclubPurposeTypes = iclubPurposeTypes;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubOccupation> getIclubOccupations() {
+		return this.iclubOccupations;
+	}
+
+	public void setIclubOccupations(Set<IclubOccupation> iclubOccupations) {
+		this.iclubOccupations = iclubOccupations;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPersonByLPersonId")
@@ -502,6 +613,15 @@ public class IclubPerson implements java.io.Serializable {
 
 	public void setIclubLoginsForLCrtdBy(Set<IclubLogin> iclubLoginsForLCrtdBy) {
 		this.iclubLoginsForLCrtdBy = iclubLoginsForLCrtdBy;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPerson")
+	public Set<IclubMessage> getIclubMessages() {
+		return this.iclubMessages;
+	}
+
+	public void setIclubMessages(Set<IclubMessage> iclubMessages) {
+		this.iclubMessages = iclubMessages;
 	}
 
 }

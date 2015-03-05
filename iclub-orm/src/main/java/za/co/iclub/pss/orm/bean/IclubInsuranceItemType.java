@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,12 +25,16 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8163657831207600977L;
+	private static final long serialVersionUID = 8538428444190363704L;
 	private Long iitId;
 	private String iitShortDesc;
 	private String iitLongDesc;
 	private String iitStatus;
-	private Set<IclubSecurityMaster> iclubSecurityMasters = new HashSet<IclubSecurityMaster>(0);
+	private Set<IclubSecurityMaster> iclubSecurityMasters = new HashSet<IclubSecurityMaster>(
+			0);
+	private Set<IclubPurposeType> iclubPurposeTypes = new HashSet<IclubPurposeType>(
+			0);
+	private Set<IclubCoverType> iclubCoverTypes = new HashSet<IclubCoverType>(0);
 
 	// Constructors
 
@@ -45,12 +48,18 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubInsuranceItemType(Long iitId, String iitShortDesc, String iitLongDesc, String iitStatus, Set<IclubSecurityMaster> iclubSecurityMasters) {
+	public IclubInsuranceItemType(Long iitId, String iitShortDesc,
+			String iitLongDesc, String iitStatus,
+			Set<IclubSecurityMaster> iclubSecurityMasters,
+			Set<IclubPurposeType> iclubPurposeTypes,
+			Set<IclubCoverType> iclubCoverTypes) {
 		this.iitId = iitId;
 		this.iitShortDesc = iitShortDesc;
 		this.iitLongDesc = iitLongDesc;
 		this.iitStatus = iitStatus;
 		this.iclubSecurityMasters = iclubSecurityMasters;
+		this.iclubPurposeTypes = iclubPurposeTypes;
+		this.iclubCoverTypes = iclubCoverTypes;
 	}
 
 	// Property accessors
@@ -96,8 +105,27 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 		return this.iclubSecurityMasters;
 	}
 
-	public void setIclubSecurityMasters(Set<IclubSecurityMaster> iclubSecurityMasters) {
+	public void setIclubSecurityMasters(
+			Set<IclubSecurityMaster> iclubSecurityMasters) {
 		this.iclubSecurityMasters = iclubSecurityMasters;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsuranceItemType")
+	public Set<IclubPurposeType> getIclubPurposeTypes() {
+		return this.iclubPurposeTypes;
+	}
+
+	public void setIclubPurposeTypes(Set<IclubPurposeType> iclubPurposeTypes) {
+		this.iclubPurposeTypes = iclubPurposeTypes;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsuranceItemType")
+	public Set<IclubCoverType> getIclubCoverTypes() {
+		return this.iclubCoverTypes;
+	}
+
+	public void setIclubCoverTypes(Set<IclubCoverType> iclubCoverTypes) {
+		this.iclubCoverTypes = iclubCoverTypes;
 	}
 
 }
