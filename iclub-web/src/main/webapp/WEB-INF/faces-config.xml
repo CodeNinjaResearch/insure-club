@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd" version="2.2">
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
 
 	<application>
 		<action-listener>org.primefaces.application.DialogActionListener</action-listener>
@@ -14,98 +17,33 @@
 			<var>labels</var>
 		</resource-bundle>
 	</application>
-	<lifecycle>
-		<phase-listener>za.co.iclub.pss.web.util.SessionPhaseListener</phase-listener>
-	</lifecycle>
+	<!-- <lifecycle> <phase-listener>za.co.iclub.pss.web.util.SessionPhaseListener</phase-listener> 
+		</lifecycle> -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>home</from-outcome>
-			<to-view-id>/pages/iclubHome.xhtml</to-view-id>
+			<from-outcome>IclubAccessType</from-outcome>
+			<to-view-id>/pages/mdata/IclubAccessType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/iclubLogin.xhtml</to-view-id>
+			<from-outcome>IclubAccountType</from-outcome>
+			<to-view-id>/pages/mdata/IclubAccountType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubThatchType</from-outcome>
-			<to-view-id>/pages/mdata/IclubThatchType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubPropertyType</from-outcome>
-			<to-view-id>/pages/mdata/IclubPropertyType.xhtml</to-view-id>
+			<from-outcome>IclubAlarmType</from-outcome>
+			<to-view-id>/pages/mdata/IclubAlarmType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>IclubBarType</from-outcome>
 			<to-view-id>/pages/mdata/IclubBarType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubOccupiedStatus</from-outcome>
-			<to-view-id>/pages/mdata/IclubOccupiedStatus.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubInsuranceItemType</from-outcome>
-			<to-view-id>/pages/mdata/IclubInsuranceItemType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>IclubBoundaryType</from-outcome>
 			<to-view-id>/pages/mdata/IclubBoundaryType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubRoofType</from-outcome>
-			<to-view-id>/pages/mdata/IclubRoofType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubPclaimStatus</from-outcome>
-			<to-view-id>/pages/mdata/IclubPclaimStatus.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubPolicyStatus</from-outcome>
-			<to-view-id>/pages/mdata/IclubPolicyStatus.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubAccessType</from-outcome>
-			<to-view-id>/pages/mdata/IclubAccessType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubRoleType</from-outcome>
-			<to-view-id>/pages/mdata/IclubRoleType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubMessageType</from-outcome>
-			<to-view-id>/pages/mdata/IclubMessageType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubNotificationType</from-outcome>
-			<to-view-id>/pages/mdata/IclubNotificationType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubSupplierType</from-outcome>
-			<to-view-id>/pages/mdata/IclubSupplierType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubMaritialStatus</from-outcome>
-			<to-view-id>/pages/mdata/IclubMaritialStatus.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubPaymentType</from-outcome>
-			<to-view-id>/pages/mdata/IclubPaymentType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubRateType</from-outcome>
-			<to-view-id>/pages/mdata/IclubRateType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubProductType</from-outcome>
-			<to-view-id>/pages/mdata/IclubProductType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubPurposeType</from-outcome>
-			<to-view-id>/pages/mdata/IclubPurposeType.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>IclubWallType</from-outcome>
-			<to-view-id>/pages/mdata/IclubWallType.xhtml</to-view-id>
+			<from-outcome>IclubBuildingState</from-outcome>
+			<to-view-id>/pages/mdata/IclubBuildingState.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>IclubCoverType</from-outcome>
@@ -116,12 +54,32 @@
 			<to-view-id>/pages/mdata/IclubDocumentType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>IclubEventType</from-outcome>
+			<to-view-id>/pages/mdata/IclubEventType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>IclubIdType</from-outcome>
 			<to-view-id>/pages/mdata/IclubIdType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubAlarmType</from-outcome>
-			<to-view-id>/pages/mdata/IclubAlarmType.xhtml</to-view-id>
+			<from-outcome>IclubInsuranceItemType</from-outcome>
+			<to-view-id>/pages/mdata/IclubInsuranceItemType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubMaritialStatus</from-outcome>
+			<to-view-id>/pages/mdata/IclubMaritialStatus.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubMessageType</from-outcome>
+			<to-view-id>/pages/mdata/IclubMessageType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubNotificationType</from-outcome>
+			<to-view-id>/pages/mdata/IclubNotificationType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubOccupiedStatus</from-outcome>
+			<to-view-id>/pages/mdata/IclubOccupiedStatus.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>IclubOwnerType</from-outcome>
@@ -132,26 +90,61 @@
 			<to-view-id>/pages/mdata/IclubPaymentStatus.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>IclubPaymentType</from-outcome>
+			<to-view-id>/pages/mdata/IclubPaymentType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubPclaimStatus</from-outcome>
+			<to-view-id>/pages/mdata/IclubPclaimStatus.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubPolicyStatus</from-outcome>
+			<to-view-id>/pages/mdata/IclubPolicyStatus.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubProductType</from-outcome>
+			<to-view-id>/pages/mdata/IclubProductType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubPropertyType</from-outcome>
+			<to-view-id>/pages/mdata/IclubPropertyType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubPurposeType</from-outcome>
+			<to-view-id>/pages/mdata/IclubPurposeType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>IclubQuoteStatus</from-outcome>
 			<to-view-id>/pages/mdata/IclubQuoteStatus.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubRateType</from-outcome>
+			<to-view-id>/pages/mdata/IclubRateType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubRoleType</from-outcome>
+			<to-view-id>/pages/mdata/IclubRoleType.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>IclubRoofType</from-outcome>
+			<to-view-id>/pages/mdata/IclubRoofType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>IclubSecurityQuestion</from-outcome>
 			<to-view-id>/pages/mdata/IclubSecurityQuestion.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubAccountType</from-outcome>
-			<to-view-id>/pages/mdata/IclubAccountType.xhtml</to-view-id>
+			<from-outcome>IclubSupplierType</from-outcome>
+			<to-view-id>/pages/mdata/IclubSupplierType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubBuildingState</from-outcome>
-			<to-view-id>/pages/mdata/IclubBuildingState.xhtml</to-view-id>
+			<from-outcome>IclubThatchType</from-outcome>
+			<to-view-id>/pages/mdata/IclubThatchType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubEventType</from-outcome>
-			<to-view-id>/pages/mdata/IclubEventType.xhtml</to-view-id>
+			<from-outcome>IclubWallType</from-outcome>
+			<to-view-id>/pages/mdata/IclubWallType.xhtml</to-view-id>
 		</navigation-case>
-
 	</navigation-rule>
 
 
