@@ -12,28 +12,27 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubCoverType;
+import za.co.iclub.pss.orm.bean.IclubExtras;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * IclubCoverType entities. Transaction control of the save(), update() and
+ * IclubExtras entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see za.co.iclub.pss.orm.bean.IclubCoverType
+ * @see za.co.iclub.pss.orm.bean.IclubExtras
  * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class IclubCoverTypeDAO {
+public class IclubExtrasDAO {
 	private static final Logger log = Logger
-			.getLogger(IclubCoverTypeDAO.class);
+			.getLogger(IclubExtrasDAO.class);
 	// property constants
-	public static final String CT_SHORT_DESC = "ctShortDesc";
-	public static final String CT_LONG_DESC = "ctLongDesc";
-	public static final String CT_STATUS = "ctStatus";
+	public static final String _EDESC = "EDesc";
+	public static final String _ESTATUS = "EStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -49,8 +48,8 @@ public class IclubCoverTypeDAO {
 		// do nothing
 	}
 
-	public void save(IclubCoverType transientInstance) {
-		log.debug("saving IclubCoverType instance");
+	public void save(IclubExtras transientInstance) {
+		log.debug("saving IclubExtras instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -60,8 +59,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public void delete(IclubCoverType persistentInstance) {
-		log.debug("deleting IclubCoverType instance");
+	public void delete(IclubExtras persistentInstance) {
+		log.debug("deleting IclubExtras instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -71,11 +70,11 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public IclubCoverType findById(java.lang.Long id) {
-		log.debug("getting IclubCoverType instance with id: " + id);
+	public IclubExtras findById(java.lang.Long id) {
+		log.debug("getting IclubExtras instance with id: " + id);
 		try {
-			IclubCoverType instance = (IclubCoverType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubCoverType", id);
+			IclubExtras instance = (IclubExtras) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubExtras", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -83,11 +82,11 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public List<IclubCoverType> findByExample(IclubCoverType instance) {
-		log.debug("finding IclubCoverType instance by example");
+	public List<IclubExtras> findByExample(IclubExtras instance) {
+		log.debug("finding IclubExtras instance by example");
 		try {
-			List<IclubCoverType> results = (List<IclubCoverType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubCoverType")
+			List<IclubExtras> results = (List<IclubExtras>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubExtras")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -99,10 +98,10 @@ public class IclubCoverTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubCoverType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubExtras instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from IclubCoverType as model where model."
+			String queryString = "from IclubExtras as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -113,22 +112,18 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public List<IclubCoverType> findByCtShortDesc(Object ctShortDesc) {
-		return findByProperty(CT_SHORT_DESC, ctShortDesc);
+	public List<IclubExtras> findByEDesc(Object EDesc) {
+		return findByProperty(_EDESC, EDesc);
 	}
 
-	public List<IclubCoverType> findByCtLongDesc(Object ctLongDesc) {
-		return findByProperty(CT_LONG_DESC, ctLongDesc);
-	}
-
-	public List<IclubCoverType> findByCtStatus(Object ctStatus) {
-		return findByProperty(CT_STATUS, ctStatus);
+	public List<IclubExtras> findByEStatus(Object EStatus) {
+		return findByProperty(_ESTATUS, EStatus);
 	}
 
 	public List findAll() {
-		log.debug("finding all IclubCoverType instances");
+		log.debug("finding all IclubExtras instances");
 		try {
-			String queryString = "from IclubCoverType";
+			String queryString = "from IclubExtras";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -137,10 +132,10 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public IclubCoverType merge(IclubCoverType detachedInstance) {
-		log.debug("merging IclubCoverType instance");
+	public IclubExtras merge(IclubExtras detachedInstance) {
+		log.debug("merging IclubExtras instance");
 		try {
-			IclubCoverType result = (IclubCoverType) getCurrentSession().merge(
+			IclubExtras result = (IclubExtras) getCurrentSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -150,8 +145,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public void attachDirty(IclubCoverType instance) {
-		log.debug("attaching dirty IclubCoverType instance");
+	public void attachDirty(IclubExtras instance) {
+		log.debug("attaching dirty IclubExtras instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -161,8 +156,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public void attachClean(IclubCoverType instance) {
-		log.debug("attaching clean IclubCoverType instance");
+	public void attachClean(IclubExtras instance) {
+		log.debug("attaching clean IclubExtras instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -173,8 +168,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public static IclubCoverTypeDAO getFromApplicationContext(
+	public static IclubExtrasDAO getFromApplicationContext(
 			ApplicationContext ctx) {
-		return (IclubCoverTypeDAO) ctx.getBean("IclubCoverTypeDAO");
+		return (IclubExtrasDAO) ctx.getBean("IclubExtrasDAO");
 	}
 }

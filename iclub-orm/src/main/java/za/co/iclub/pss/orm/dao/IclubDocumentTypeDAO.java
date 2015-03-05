@@ -28,7 +28,8 @@ import za.co.iclub.pss.orm.bean.IclubDocumentType;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubDocumentTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubDocumentTypeDAO.class);
+	private static final Logger log = Logger
+			.getLogger(IclubDocumentTypeDAO.class);
 	// property constants
 	public static final String DT_SHORT_DESC = "dtShortDesc";
 	public static final String DT_LONG_DESC = "dtLongDesc";
@@ -73,7 +74,8 @@ public class IclubDocumentTypeDAO {
 	public IclubDocumentType findById(java.lang.Long id) {
 		log.debug("getting IclubDocumentType instance with id: " + id);
 		try {
-			IclubDocumentType instance = (IclubDocumentType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubDocumentType", id);
+			IclubDocumentType instance = (IclubDocumentType) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubDocumentType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +86,12 @@ public class IclubDocumentTypeDAO {
 	public List<IclubDocumentType> findByExample(IclubDocumentType instance) {
 		log.debug("finding IclubDocumentType instance by example");
 		try {
-			List<IclubDocumentType> results = (List<IclubDocumentType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubDocumentType").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubDocumentType> results = (List<IclubDocumentType>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubDocumentType")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +100,11 @@ public class IclubDocumentTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubDocumentType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubDocumentType instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubDocumentType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubDocumentType as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +141,8 @@ public class IclubDocumentTypeDAO {
 	public IclubDocumentType merge(IclubDocumentType detachedInstance) {
 		log.debug("merging IclubDocumentType instance");
 		try {
-			IclubDocumentType result = (IclubDocumentType) getCurrentSession().merge(detachedInstance);
+			IclubDocumentType result = (IclubDocumentType) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +165,8 @@ public class IclubDocumentTypeDAO {
 	public void attachClean(IclubDocumentType instance) {
 		log.debug("attaching clean IclubDocumentType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);

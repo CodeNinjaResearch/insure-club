@@ -1,10 +1,12 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -12,7 +14,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_cover_type", catalog = "iclubdb")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getCoverTypeBySD", query = "select * from iclub_cover_type where lower(ct_short_desc) = lower(:sd) and ct_id <> :id", resultClass = IclubCoverType.class) })
 public class IclubCoverType implements java.io.Serializable {
 
 	// Fields
@@ -20,11 +21,14 @@ public class IclubCoverType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2744257241077599763L;
+	private static final long serialVersionUID = 769071861769996731L;
 	private Long ctId;
+	private IclubPerson iclubPerson;
+	private IclubInsuranceItemType iclubInsuranceItemType;
 	private String ctShortDesc;
 	private String ctLongDesc;
 	private String ctStatus;
+	private Timestamp ctCrtdDt;
 
 	// Constructors
 
@@ -38,11 +42,16 @@ public class IclubCoverType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubCoverType(Long ctId, String ctShortDesc, String ctLongDesc, String ctStatus) {
+	public IclubCoverType(Long ctId, IclubPerson iclubPerson,
+			IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc,
+			String ctLongDesc, String ctStatus, Timestamp ctCrtdDt) {
 		this.ctId = ctId;
+		this.iclubPerson = iclubPerson;
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.ctShortDesc = ctShortDesc;
 		this.ctLongDesc = ctLongDesc;
 		this.ctStatus = ctStatus;
+		this.ctCrtdDt = ctCrtdDt;
 	}
 
 	// Property accessors
@@ -56,6 +65,27 @@ public class IclubCoverType implements java.io.Serializable {
 		this.ctId = ctId;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ct_crtd_by")
+	public IclubPerson getIclubPerson() {
+		return this.iclubPerson;
+	}
+
+	public void setIclubPerson(IclubPerson iclubPerson) {
+		this.iclubPerson = iclubPerson;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ct_item_type_id")
+	public IclubInsuranceItemType getIclubInsuranceItemType() {
+		return this.iclubInsuranceItemType;
+	}
+
+	public void setIclubInsuranceItemType(
+			IclubInsuranceItemType iclubInsuranceItemType) {
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
+	}
+
 	@Column(name = "ct_short_desc", length = 4)
 	public String getCtShortDesc() {
 		return this.ctShortDesc;
@@ -65,7 +95,7 @@ public class IclubCoverType implements java.io.Serializable {
 		this.ctShortDesc = ctShortDesc;
 	}
 
-	@Column(name = "ct_long_desc", length = 500)
+	@Column(name = "ct_long_desc", length = 450)
 	public String getCtLongDesc() {
 		return this.ctLongDesc;
 	}
@@ -81,6 +111,15 @@ public class IclubCoverType implements java.io.Serializable {
 
 	public void setCtStatus(String ctStatus) {
 		this.ctStatus = ctStatus;
+	}
+
+	@Column(name = "ct_crtd_dt", length = 19)
+	public Timestamp getCtCrtdDt() {
+		return this.ctCrtdDt;
+	}
+
+	public void setCtCrtdDt(Timestamp ctCrtdDt) {
+		this.ctCrtdDt = ctCrtdDt;
 	}
 
 }

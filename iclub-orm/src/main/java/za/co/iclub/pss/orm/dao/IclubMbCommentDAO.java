@@ -12,28 +12,26 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubCoverType;
+import za.co.iclub.pss.orm.bean.IclubMbComment;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * IclubCoverType entities. Transaction control of the save(), update() and
+ * IclubMbComment entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see za.co.iclub.pss.orm.bean.IclubCoverType
+ * @see za.co.iclub.pss.orm.bean.IclubMbComment
  * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class IclubCoverTypeDAO {
+public class IclubMbCommentDAO {
 	private static final Logger log = Logger
-			.getLogger(IclubCoverTypeDAO.class);
+			.getLogger(IclubMbCommentDAO.class);
 	// property constants
-	public static final String CT_SHORT_DESC = "ctShortDesc";
-	public static final String CT_LONG_DESC = "ctLongDesc";
-	public static final String CT_STATUS = "ctStatus";
+	public static final String MBC_DESC = "mbcDesc";
 
 	private SessionFactory sessionFactory;
 
@@ -49,8 +47,8 @@ public class IclubCoverTypeDAO {
 		// do nothing
 	}
 
-	public void save(IclubCoverType transientInstance) {
-		log.debug("saving IclubCoverType instance");
+	public void save(IclubMbComment transientInstance) {
+		log.debug("saving IclubMbComment instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -60,8 +58,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public void delete(IclubCoverType persistentInstance) {
-		log.debug("deleting IclubCoverType instance");
+	public void delete(IclubMbComment persistentInstance) {
+		log.debug("deleting IclubMbComment instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -71,11 +69,11 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public IclubCoverType findById(java.lang.Long id) {
-		log.debug("getting IclubCoverType instance with id: " + id);
+	public IclubMbComment findById(java.lang.String id) {
+		log.debug("getting IclubMbComment instance with id: " + id);
 		try {
-			IclubCoverType instance = (IclubCoverType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubCoverType", id);
+			IclubMbComment instance = (IclubMbComment) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubMbComment", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -83,11 +81,11 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public List<IclubCoverType> findByExample(IclubCoverType instance) {
-		log.debug("finding IclubCoverType instance by example");
+	public List<IclubMbComment> findByExample(IclubMbComment instance) {
+		log.debug("finding IclubMbComment instance by example");
 		try {
-			List<IclubCoverType> results = (List<IclubCoverType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubCoverType")
+			List<IclubMbComment> results = (List<IclubMbComment>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubMbComment")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -99,10 +97,10 @@ public class IclubCoverTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubCoverType instance with property: "
+		log.debug("finding IclubMbComment instance with property: "
 				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubCoverType as model where model."
+			String queryString = "from IclubMbComment as model where model."
 					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -113,22 +111,14 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public List<IclubCoverType> findByCtShortDesc(Object ctShortDesc) {
-		return findByProperty(CT_SHORT_DESC, ctShortDesc);
-	}
-
-	public List<IclubCoverType> findByCtLongDesc(Object ctLongDesc) {
-		return findByProperty(CT_LONG_DESC, ctLongDesc);
-	}
-
-	public List<IclubCoverType> findByCtStatus(Object ctStatus) {
-		return findByProperty(CT_STATUS, ctStatus);
+	public List<IclubMbComment> findByMbcDesc(Object mbcDesc) {
+		return findByProperty(MBC_DESC, mbcDesc);
 	}
 
 	public List findAll() {
-		log.debug("finding all IclubCoverType instances");
+		log.debug("finding all IclubMbComment instances");
 		try {
-			String queryString = "from IclubCoverType";
+			String queryString = "from IclubMbComment";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -137,10 +127,10 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public IclubCoverType merge(IclubCoverType detachedInstance) {
-		log.debug("merging IclubCoverType instance");
+	public IclubMbComment merge(IclubMbComment detachedInstance) {
+		log.debug("merging IclubMbComment instance");
 		try {
-			IclubCoverType result = (IclubCoverType) getCurrentSession().merge(
+			IclubMbComment result = (IclubMbComment) getCurrentSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -150,8 +140,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public void attachDirty(IclubCoverType instance) {
-		log.debug("attaching dirty IclubCoverType instance");
+	public void attachDirty(IclubMbComment instance) {
+		log.debug("attaching dirty IclubMbComment instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -161,8 +151,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public void attachClean(IclubCoverType instance) {
-		log.debug("attaching clean IclubCoverType instance");
+	public void attachClean(IclubMbComment instance) {
+		log.debug("attaching clean IclubMbComment instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
 					instance);
@@ -173,8 +163,8 @@ public class IclubCoverTypeDAO {
 		}
 	}
 
-	public static IclubCoverTypeDAO getFromApplicationContext(
+	public static IclubMbCommentDAO getFromApplicationContext(
 			ApplicationContext ctx) {
-		return (IclubCoverTypeDAO) ctx.getBean("IclubCoverTypeDAO");
+		return (IclubMbCommentDAO) ctx.getBean("IclubMbCommentDAO");
 	}
 }

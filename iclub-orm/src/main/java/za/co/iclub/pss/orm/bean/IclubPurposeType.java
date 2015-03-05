@@ -1,18 +1,19 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  * IclubPurposeType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_purpose_type")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getPurposeTypeBySD", query = "select * from iclub_purpose_type where lower(pt_short_desc) = lower(:sd) and pt_id <> :id", resultClass = IclubPurposeType.class) })
+@Table(name = "iclub_purpose_type", catalog = "iclubdb")
 public class IclubPurposeType implements java.io.Serializable {
 
 	// Fields
@@ -20,11 +21,14 @@ public class IclubPurposeType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6510161278441158553L;
+	private static final long serialVersionUID = 174942980029437864L;
 	private Long ptId;
+	private IclubInsuranceItemType iclubInsuranceItemType;
+	private IclubPerson iclubPerson;
 	private String ptShortDesc;
 	private String ptLongDesc;
 	private String ptStatus;
+	private Timestamp ptCrtdDt;
 
 	// Constructors
 
@@ -38,11 +42,17 @@ public class IclubPurposeType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPurposeType(Long ptId, String ptShortDesc, String ptLongDesc, String ptStatus) {
+	public IclubPurposeType(Long ptId,
+			IclubInsuranceItemType iclubInsuranceItemType,
+			IclubPerson iclubPerson, String ptShortDesc, String ptLongDesc,
+			String ptStatus, Timestamp ptCrtdDt) {
 		this.ptId = ptId;
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
+		this.iclubPerson = iclubPerson;
 		this.ptShortDesc = ptShortDesc;
 		this.ptLongDesc = ptLongDesc;
 		this.ptStatus = ptStatus;
+		this.ptCrtdDt = ptCrtdDt;
 	}
 
 	// Property accessors
@@ -56,6 +66,27 @@ public class IclubPurposeType implements java.io.Serializable {
 		this.ptId = ptId;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pt_item_type_id")
+	public IclubInsuranceItemType getIclubInsuranceItemType() {
+		return this.iclubInsuranceItemType;
+	}
+
+	public void setIclubInsuranceItemType(
+			IclubInsuranceItemType iclubInsuranceItemType) {
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pt_crtd_by")
+	public IclubPerson getIclubPerson() {
+		return this.iclubPerson;
+	}
+
+	public void setIclubPerson(IclubPerson iclubPerson) {
+		this.iclubPerson = iclubPerson;
+	}
+
 	@Column(name = "pt_short_desc", length = 4)
 	public String getPtShortDesc() {
 		return this.ptShortDesc;
@@ -65,7 +96,7 @@ public class IclubPurposeType implements java.io.Serializable {
 		this.ptShortDesc = ptShortDesc;
 	}
 
-	@Column(name = "pt_long_desc", length = 500)
+	@Column(name = "pt_long_desc", length = 450)
 	public String getPtLongDesc() {
 		return this.ptLongDesc;
 	}
@@ -81,6 +112,15 @@ public class IclubPurposeType implements java.io.Serializable {
 
 	public void setPtStatus(String ptStatus) {
 		this.ptStatus = ptStatus;
+	}
+
+	@Column(name = "pt_crtd_dt", length = 19)
+	public Timestamp getPtCrtdDt() {
+		return this.ptCrtdDt;
+	}
+
+	public void setPtCrtdDt(Timestamp ptCrtdDt) {
+		this.ptCrtdDt = ptCrtdDt;
 	}
 
 }
