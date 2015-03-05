@@ -136,6 +136,8 @@
 	</bean>
 
 	<bean id="IclubPersonService" class="za.co.iclub.pss.ws.service.IclubPersonService">
+		<property name="iclubIdTypeDAO" ref="IclubIdTypeDAO" />
+		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
