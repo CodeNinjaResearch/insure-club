@@ -103,10 +103,6 @@
 			<to-view-id>/pages/mdata/IclubPaymentType.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>IclubPclaimStatus</from-outcome>
-			<to-view-id>/pages/mdata/IclubPclaimStatus.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>IclubPolicyStatus</from-outcome>
 			<to-view-id>/pages/mdata/IclubPolicyStatus.xhtml</to-view-id>
 		</navigation-case>

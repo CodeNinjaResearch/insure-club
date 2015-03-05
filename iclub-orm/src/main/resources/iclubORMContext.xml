@@ -62,7 +62,6 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPayment</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPaymentStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPaymentType</value>
-				<value>za.co.iclub.pss.orm.bean.IclubPclaimStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPerson</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPolicy</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPolicyStatus</value>
@@ -170,11 +169,6 @@
 		</property>
 	</bean>
 	<bean id="IclubPaymentStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPaymentStatusDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="IclubPclaimStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPclaimStatusDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

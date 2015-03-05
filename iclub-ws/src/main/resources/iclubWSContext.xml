@@ -48,10 +48,6 @@
 		<property name="iclubPaymentStatusDAO" ref="IclubPaymentStatusDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
-	<bean id="IclubPclaimStatusService" class="za.co.iclub.pss.ws.service.IclubPclaimStatusService">
-		<property name="iclubPclaimStatusDAO" ref="IclubPclaimStatusDAO" />
-		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
-	</bean>
 	<bean id="IclubIdTypeService" class="za.co.iclub.pss.ws.service.IclubIdTypeService">
 		<property name="iclubIdTypeDAO" ref="IclubIdTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />

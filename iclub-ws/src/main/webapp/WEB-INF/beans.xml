@@ -31,7 +31,6 @@
 			<ref bean="IclubOccupiedStatusService" />
 			<ref bean="IclubWallTypeService" />
 			<ref bean="IclubPaymentStatusService" />
-			<ref bean="IclubPclaimStatusService" />
 			<ref bean="IclubIdTypeService" />
 			<ref bean="IclubEventTypeService" />
 			<ref bean="IclubMessageTypeService" />
