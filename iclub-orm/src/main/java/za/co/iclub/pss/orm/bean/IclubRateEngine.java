@@ -127,7 +127,7 @@ public class IclubRateEngine implements java.io.Serializable {
 		this.reMaxValue = reMaxValue;
 	}
 
-	@Column(name = "re_rate", precision = 10, scale = 0)
+	@Column(name = "re_rate", precision = 15, scale = 5)
 	public Long getReRate() {
 		return this.reRate;
 	}

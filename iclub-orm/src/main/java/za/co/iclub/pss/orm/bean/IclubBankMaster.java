@@ -133,7 +133,7 @@ public class IclubBankMaster implements java.io.Serializable {
 		this.bmBranchAddress = bmBranchAddress;
 	}
 
-	@Column(name = "bm_branch_lat", precision = 10, scale = 0)
+	@Column(name = "bm_branch_lat", precision = 10, scale = 7)
 	public Long getBmBranchLat() {
 		return this.bmBranchLat;
 	}
@@ -142,7 +142,7 @@ public class IclubBankMaster implements java.io.Serializable {
 		this.bmBranchLat = bmBranchLat;
 	}
 
-	@Column(name = "bm_branch_long", precision = 10, scale = 0)
+	@Column(name = "bm_branch_long", precision = 10, scale = 7)
 	public Long getBmBranchLong() {
 		return this.bmBranchLong;
 	}

@@ -118,7 +118,7 @@ public class IclubClaimItem implements java.io.Serializable {
 		this.iclubClaimStatus = iclubClaimStatus;
 	}
 
-	@Column(name = "ci_value", precision = 10, scale = 0)
+	@Column(name = "ci_value", precision = 15, scale = 5)
 	public Long getCiValue() {
 		return this.ciValue;
 	}

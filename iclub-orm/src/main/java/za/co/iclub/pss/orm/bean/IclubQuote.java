@@ -179,7 +179,7 @@ public class IclubQuote implements java.io.Serializable {
 		this.QNumItems = QNumItems;
 	}
 
-	@Column(name = "q_gen_premium", precision = 10, scale = 0)
+	@Column(name = "q_gen_premium", precision = 15, scale = 5)
 	public Long getQGenPremium() {
 		return this.QGenPremium;
 	}
@@ -215,7 +215,7 @@ public class IclubQuote implements java.io.Serializable {
 		this.QValidUntil = QValidUntil;
 	}
 
-	@Column(name = "q_prev_premium", precision = 10, scale = 0)
+	@Column(name = "q_prev_premium", precision = 15, scale = 5)
 	public Long getQPrevPremium() {
 		return this.QPrevPremium;
 	}

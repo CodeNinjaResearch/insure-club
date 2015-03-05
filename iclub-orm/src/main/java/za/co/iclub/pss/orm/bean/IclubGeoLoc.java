@@ -83,7 +83,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 		this.glAddress = glAddress;
 	}
 
-	@Column(name = "gl_lat", precision = 10, scale = 0)
+	@Column(name = "gl_lat", precision = 10, scale = 7)
 	public Long getGlLat() {
 		return this.glLat;
 	}
@@ -92,7 +92,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 		this.glLat = glLat;
 	}
 
-	@Column(name = "gl_long", precision = 10, scale = 0)
+	@Column(name = "gl_long", precision = 10, scale = 7)
 	public Long getGlLong() {
 		return this.glLong;
 	}
@@ -101,7 +101,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 		this.glLong = glLong;
 	}
 
-	@Column(name = "gl_rate", precision = 10, scale = 0)
+	@Column(name = "gl_rate", precision = 15, scale = 5)
 	public Long getGlRate() {
 		return this.glRate;
 	}

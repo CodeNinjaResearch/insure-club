@@ -120,7 +120,7 @@ public class IclubPayment implements java.io.Serializable {
 		this.iclubPaymentStatus = iclubPaymentStatus;
 	}
 
-	@Column(name = "p_value", precision = 10, scale = 0)
+	@Column(name = "p_value", precision = 15, scale = 5)
 	public Long getPValue() {
 		return this.PValue;
 	}

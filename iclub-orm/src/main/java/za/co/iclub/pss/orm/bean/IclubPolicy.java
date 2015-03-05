@@ -128,7 +128,7 @@ public class IclubPolicy implements java.io.Serializable {
 		this.PNumber = PNumber;
 	}
 
-	@Column(name = "p_premium", precision = 10, scale = 0)
+	@Column(name = "p_premium", precision = 15, scale = 5)
 	public Long getPPremium() {
 		return this.PPremium;
 	}
@@ -137,7 +137,7 @@ public class IclubPolicy implements java.io.Serializable {
 		this.PPremium = PPremium;
 	}
 
-	@Column(name = "p_prorata_prm", precision = 10, scale = 0)
+	@Column(name = "p_prorata_prm", precision = 15, scale = 5)
 	public Long getPProrataPrm() {
 		return this.PProrataPrm;
 	}

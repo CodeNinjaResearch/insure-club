@@ -143,7 +143,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 		this.smAddress = smAddress;
 	}
 
-	@Column(name = "sm_lat", precision = 10, scale = 0)
+	@Column(name = "sm_lat", precision = 10, scale = 7)
 	public Long getSmLat() {
 		return this.smLat;
 	}
@@ -152,7 +152,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 		this.smLat = smLat;
 	}
 
-	@Column(name = "sm_long", precision = 10, scale = 0)
+	@Column(name = "sm_long", precision = 10, scale = 7)
 	public Long getSmLong() {
 		return this.smLong;
 	}
@@ -161,7 +161,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 		this.smLong = smLong;
 	}
 
-	@Column(name = "sm_cr_limit", precision = 10, scale = 0)
+	@Column(name = "sm_cr_limit", precision = 15, scale = 5)
 	public Long getSmCrLimit() {
 		return this.smCrLimit;
 	}

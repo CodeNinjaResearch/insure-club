@@ -204,7 +204,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VOnArea = VOnArea;
 	}
 
-	@Column(name = "v_on_lat", precision = 10, scale = 0)
+	@Column(name = "v_on_lat", precision = 10, scale = 7)
 	public Long getVOnLat() {
 		return this.VOnLat;
 	}
@@ -213,7 +213,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VOnLat = VOnLat;
 	}
 
-	@Column(name = "v_on_long", precision = 10, scale = 0)
+	@Column(name = "v_on_long", precision = 10, scale = 7)
 	public Long getVOnLong() {
 		return this.VOnLong;
 	}
@@ -231,7 +231,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VDdArea = VDdArea;
 	}
 
-	@Column(name = "v_dd_lat", precision = 10, scale = 0)
+	@Column(name = "v_dd_lat", precision = 10, scale = 7)
 	public Long getVDdLat() {
 		return this.VDdLat;
 	}
@@ -240,7 +240,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VDdLat = VDdLat;
 	}
 
-	@Column(name = "v_dd_long", precision = 10, scale = 0)
+	@Column(name = "v_dd_long", precision = 10, scale = 7)
 	public Long getVDdLong() {
 		return this.VDdLong;
 	}
@@ -258,7 +258,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VYear = VYear;
 	}
 
-	@Column(name = "v_insured_value", precision = 10, scale = 0)
+	@Column(name = "v_insured_value", precision = 15, scale = 5)
 	public Long getVInsuredValue() {
 		return this.VInsuredValue;
 	}
@@ -267,7 +267,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VInsuredValue = VInsuredValue;
 	}
 
-	@Column(name = "v_concess_prct", precision = 10, scale = 0)
+	@Column(name = "v_concess_prct", precision = 15, scale = 5)
 	public Long getVConcessPrct() {
 		return this.VConcessPrct;
 	}

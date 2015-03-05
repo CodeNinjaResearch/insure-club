@@ -112,7 +112,7 @@ public class IclubInsurerMaster implements java.io.Serializable {
 		this.imLocation = imLocation;
 	}
 
-	@Column(name = "im_lat", precision = 10, scale = 0)
+	@Column(name = "im_lat", precision = 10, scale = 7)
 	public Long getImLat() {
 		return this.imLat;
 	}
@@ -121,7 +121,7 @@ public class IclubInsurerMaster implements java.io.Serializable {
 		this.imLat = imLat;
 	}
 
-	@Column(name = "im_long", precision = 10, scale = 0)
+	@Column(name = "im_long", precision = 10, scale = 7)
 	public Long getImLong() {
 		return this.imLong;
 	}

@@ -214,7 +214,7 @@ public class IclubProperty implements java.io.Serializable {
 		this.PAddress = PAddress;
 	}
 
-	@Column(name = "p_lat", precision = 10, scale = 0)
+	@Column(name = "p_lat", precision = 10, scale = 7)
 	public Long getPLat() {
 		return this.PLat;
 	}
@@ -223,7 +223,7 @@ public class IclubProperty implements java.io.Serializable {
 		this.PLat = PLat;
 	}
 
-	@Column(name = "p_long", precision = 10, scale = 0)
+	@Column(name = "p_long", precision = 10, scale = 7)
 	public Long getPLong() {
 		return this.PLong;
 	}
@@ -286,7 +286,7 @@ public class IclubProperty implements java.io.Serializable {
 		this.PSecGatesYn = PSecGatesYn;
 	}
 
-	@Column(name = "p_est_value", precision = 10, scale = 0)
+	@Column(name = "p_est_value", precision = 15, scale = 5)
 	public Long getPEstValue() {
 		return this.PEstValue;
 	}

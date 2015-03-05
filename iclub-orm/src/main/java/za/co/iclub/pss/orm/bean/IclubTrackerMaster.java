@@ -112,7 +112,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 		this.tmLocation = tmLocation;
 	}
 
-	@Column(name = "tm_lat", precision = 10, scale = 0)
+	@Column(name = "tm_lat", precision = 10, scale = 7)
 	public Long getTmLat() {
 		return this.tmLat;
 	}
@@ -121,7 +121,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 		this.tmLat = tmLat;
 	}
 
-	@Column(name = "tm_long", precision = 10, scale = 0)
+	@Column(name = "tm_long", precision = 10, scale = 7)
 	public Long getTmLong() {
 		return this.tmLong;
 	}

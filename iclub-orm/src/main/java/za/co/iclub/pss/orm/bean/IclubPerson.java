@@ -357,7 +357,7 @@ public class IclubPerson implements java.io.Serializable {
 		this.PAddress = PAddress;
 	}
 
-	@Column(name = "p_lat", precision = 10, scale = 0)
+	@Column(name = "p_lat", precision = 10, scale = 7)
 	public Long getPLat() {
 		return this.PLat;
 	}
@@ -366,7 +366,7 @@ public class IclubPerson implements java.io.Serializable {
 		this.PLat = PLat;
 	}
 
-	@Column(name = "p_long", precision = 10, scale = 0)
+	@Column(name = "p_long", precision = 10, scale = 7)
 	public Long getPLong() {
 		return this.PLong;
 	}

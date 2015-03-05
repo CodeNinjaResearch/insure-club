@@ -122,7 +122,7 @@ public class IclubClaim implements java.io.Serializable {
 		this.CNumItems = CNumItems;
 	}
 
-	@Column(name = "c_value", precision = 10, scale = 0)
+	@Column(name = "c_value", precision = 15, scale = 5)
 	public Long getCValue() {
 		return this.CValue;
 	}

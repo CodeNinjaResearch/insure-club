@@ -106,7 +106,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 		this.vmModel = vmModel;
 	}
 
-	@Column(name = "vm_orig_rate", precision = 10, scale = 0)
+	@Column(name = "vm_orig_rate", precision = 15, scale = 5)
 	public Long getVmOrigRate() {
 		return this.vmOrigRate;
 	}
@@ -115,7 +115,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 		this.vmOrigRate = vmOrigRate;
 	}
 
-	@Column(name = "vm_mrkt_rate", precision = 10, scale = 0)
+	@Column(name = "vm_mrkt_rate", precision = 15, scale = 5)
 	public Long getVmMrktRate() {
 		return this.vmMrktRate;
 	}
@@ -124,7 +124,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 		this.vmMrktRate = vmMrktRate;
 	}
 
-	@Column(name = "vm_ret_rate", precision = 10, scale = 0)
+	@Column(name = "vm_ret_rate", precision = 15, scale = 5)
 	public Long getVmRetRate() {
 		return this.vmRetRate;
 	}
