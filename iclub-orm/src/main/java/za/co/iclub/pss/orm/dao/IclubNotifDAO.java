@@ -174,6 +174,18 @@ public class IclubNotifDAO {
 		}
 	}
 
+	public List findByUser(String userId) {
+		log.debug("finding all IclubNotif instances by user");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getByUser");
+			queryObject.setString("id", userId);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all by user failed", re);
+			throw re;
+		}
+	}
+
 	public static IclubNotifDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubNotifDAO) ctx.getBean("IclubNotifDAO");
 	}

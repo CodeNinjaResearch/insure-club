@@ -53,6 +53,15 @@
 			<ref bean="IclubPaymentTypeService" />
 			<ref bean="IclubLoginService" />
 			<ref bean="IclubPersonService" />
+			<ref bean="IclubBankMasterService"/>
+			<ref bean="IclubGeoLocService"/>
+			<ref bean="IclubInsurerMasterService"/>
+			<ref bean="IclubNotifService"/>
+			<ref bean="IclubSecurityMasterService"/>
+			<ref bean="IclubSupplierTypeService"/>
+			<ref bean="IclubTrackerMasterService"/>
+			<ref bean="IclubVehicleMasterService"/>
+			
 
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>

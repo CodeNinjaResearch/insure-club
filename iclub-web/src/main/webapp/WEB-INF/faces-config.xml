@@ -17,10 +17,19 @@
 			<var>labels</var>
 		</resource-bundle>
 	</application>
-	<!-- <lifecycle> <phase-listener>za.co.iclub.pss.web.util.SessionPhaseListener</phase-listener> 
-		</lifecycle> -->
+	<lifecycle>
+		<phase-listener>za.co.iclub.pss.web.util.SessionPhaseListener</phase-listener>
+	</lifecycle>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pages/iclubLogin.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/pages/iclubHome.xhtml</to-view-id>
+		</navigation-case>
 		<navigation-case>
 			<from-outcome>IclubAccessType</from-outcome>
 			<to-view-id>/pages/mdata/IclubAccessType.xhtml</to-view-id>

@@ -18,7 +18,7 @@ public class IclubBankMasterModel {
 	private Long bmBranchLong;
 	private Integer bmBranchZip;
 	private Timestamp bmCrtdDt;
-	private Long[] iclubAccounts;
+	private Integer[] iclubAccounts;
 
 	public Long getBmId() {
 		return bmId;
@@ -108,11 +108,11 @@ public class IclubBankMasterModel {
 		this.bmCrtdDt = bmCrtdDt;
 	}
 
-	public Long[] getIclubAccounts() {
+	public Integer[] getIclubAccounts() {
 		return iclubAccounts;
 	}
 
-	public void setIclubAccounts(Long[] iclubAccounts) {
+	public void setIclubAccounts(Integer[] iclubAccounts) {
 		this.iclubAccounts = iclubAccounts;
 	}
 }

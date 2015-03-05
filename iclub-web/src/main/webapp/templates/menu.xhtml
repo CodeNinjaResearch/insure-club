@@ -1,12 +1,8 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<p:menubar>
 		<p:submenu label="User">
-			<p:menuitem actionListener="#{iclubLoginController.doEdumsLogout}"
-				value="Logout" />
+			<p:menuitem actionListener="#{iclubLoginController.doIclubLogout}" value="Logout" />
+			<p:menuitem outcome="home" value="Home" />
 		</p:submenu>
 		<p:submenu label="Meta-Data">
 			<p:submenu label="Generic">
@@ -20,8 +16,7 @@
 				<p:menuitem outcome="IclubDocumentType" value="DocumentType" />
 				<p:menuitem outcome="IclubEventType" value="EventType" />
 				<p:menuitem outcome="IclubIdType" value="IdType" />
-				<p:menuitem outcome="IclubInsuranceItemType"
-					value="InsuranceItemType" />
+				<p:menuitem outcome="IclubInsuranceItemType" value="InsuranceItemType" />
 				<p:menuitem outcome="IclubMaritialStatus" value="MaritialStatus" />
 				<p:menuitem outcome="IclubMessageType" value="MessageType" />
 				<p:menuitem outcome="IclubNotificationType" value="NotificationType" />
@@ -49,16 +44,12 @@
 		<p:submenu label="Screens">
 		</p:submenu>
 	</p:menubar>
-	<p:selectOneMenu value="#{iclubMenuController.language}"
-		onchange="submit()"
-		valueChangeListener="#{iclubMenuController.languageValueChangeListener}">
+	<p:selectOneMenu value="#{iclubMenuController.language}" onchange="submit()" valueChangeListener="#{iclubMenuController.languageValueChangeListener}">
 
 		<f:selectItem itemLabel="English" itemValue="en" />
 		<f:selectItem itemLabel="German" itemValue="de" />
 	</p:selectOneMenu>
-	<p:selectOneMenu value="#{themeSwitcherController.theme}"
-		onchange="submit()"
-		valueChangeListener="#{themeSwitcherController.themeValueChangeListener}">
+	<p:selectOneMenu value="#{themeSwitcherController.theme}" onchange="submit()" valueChangeListener="#{themeSwitcherController.themeValueChangeListener}">
 
 		<f:selectItems value="#{themeSwitcherController.themes}" />
 	</p:selectOneMenu>
