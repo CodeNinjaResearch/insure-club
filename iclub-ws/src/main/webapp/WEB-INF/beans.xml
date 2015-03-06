@@ -69,6 +69,14 @@
 			<ref bean="IclubMessageBoardService"/>
 			<ref bean="IclubOccupationService"/>
 			<ref bean="IclubSystemTypeService"/>
+			<ref bean="IclubInsuranceItemService"/>
+			<ref bean="IclubSecurityDeviceService"/>
+			<ref bean="IclubDriverService"/>
+			<ref bean="IclubPolicyService"/>
+			<ref bean="IclubPropertyService"/>
+			<ref bean="IclubQuoteService"/>
+			<ref bean="IclubRateEngineService"/>
+			<ref bean="IclubVehicleService"/>
 			
 
 		</jaxrs:serviceBeans>

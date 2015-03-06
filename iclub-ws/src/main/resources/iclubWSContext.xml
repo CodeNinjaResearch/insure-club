@@ -236,5 +236,79 @@
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
+	<bean id="IclubDriverService" class="za.co.iclub.pss.ws.service.IclubDriverService">
+		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
+		<property name="iclubLicenseCodeDAO" ref="IclubLicenseCodeDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubAccessTypeDAO" ref="IclubAccessTypeDAO" />
+		<property name="iclubDriverDAO" ref="IclubDriverDAO" />
+
+	</bean>
+	<bean id="IclubSecurityDeviceService" class="za.co.iclub.pss.ws.service.IclubSecurityDeviceService">
+		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
+		<property name="iclubTrackerMasterDAO" ref="IclubTrackerMasterDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubSecurityDeviceDAO" ref="IclubSecurityDeviceDAO" />
+	</bean>
+	<bean id="IclubInsuranceItemService" class="za.co.iclub.pss.ws.service.IclubInsuranceItemService">
+		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
+		<property name="iclubInsuranceItemDAO" ref="IclubInsuranceItemDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+	<bean id="IclubPolicyService" class="za.co.iclub.pss.ws.service.IclubPolicyService">
+		<property name="iclubPolicyDAO" ref="IclubPolicyDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubAccountDAO" ref="IclubAccountDAO" />
+		<property name="iclubQuoteDAO" ref="IclubQuoteDAO" />
+		<property name="iclubPolicyStatusDAO" ref="IclubPolicyStatusDAO" />
+
+	</bean>
+	<bean id="IclubPropertyService" class="za.co.iclub.pss.ws.service.IclubPropertyService">
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubPropertyDAO" ref="IclubPropertyDAO" />
+		<property name="iclubCoverTypeDAO" ref="IclubCoverTypeDAO" />
+		<property name="iclubPurposeTypeDAO" ref="IclubPurposeTypeDAO" />
+		<property name="iclubOccupiedStatusDAO" ref="IclubOccupiedStatusDAO" />
+		<property name="iclubPropertyTypeDAO" ref="IclubPropertyTypeDAO" />
+		<property name="iclubWallTypeDAO" ref="IclubWallTypeDAO" />
+		<property name="iclubAccessTypeDAO" ref="IclubAccessTypeDAO" />
+		<property name="iclubBarTypeDAO" ref="IclubBarTypeDAO" />
+		<property name="iclubThatchTypeDAO" ref="IclubThatchTypeDAO" />
+		<property name="iclubRoofTypeDAO" ref="IclubRoofTypeDAO" />
+
+	</bean>
+	<bean id="IclubQuoteService" class="za.co.iclub.pss.ws.service.IclubQuoteService">
+		<property name="iclubQuoteDAO" ref="IclubQuoteDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubQuoteStatusDAO" ref="IclubQuoteStatusDAO" />
+		<property name="iclubCoverTypeDAO" ref="IclubCoverTypeDAO" />
+		<property name="iclubInsurerMasterDAO" ref="IclubInsurerMasterDAO" />
+		<property name="iclubProductTypeDAO" ref="IclubProductTypeDAO" />
+	</bean>
+	<bean id="IclubRateEngineService" class="za.co.iclub.pss.ws.service.IclubRateEngineService">
+		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
+		<property name="iclubRateEngineDAO" ref="IclubRateEngineDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubRateTypeDAO" ref="IclubRateTypeDAO" />
+	</bean>
+
+	<bean id="IclubVehicleService" class="za.co.iclub.pss.ws.service.IclubVehicleService">
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubVehicleDAO" ref="IclubVehicleDAO" />
+		<property name="iclubPurposeTypeDAO" ref="IclubPurposeTypeDAO" />
+		<property name="iclubSecurityMasterDAO" ref="IclubSecurityMasterDAO" />
+		<property name="iclubAccessTypeDAO" ref="IclubAccessTypeDAO" />
+		<property name="iclubSecurityDeviceDAO" ref="IclubSecurityDeviceDAO" />
+		<property name="iclubVehicleMasterDAO" ref="IclubVehicleMasterDAO" />
+		<property name="iclubDriverDAO" ref="IclubDriverDAO" />
+
+	</bean>
 
 </beans>
