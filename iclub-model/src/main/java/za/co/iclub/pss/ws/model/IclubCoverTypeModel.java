@@ -1,12 +1,15 @@
-package za.co.iclub.pss.web.bean;
+package za.co.iclub.pss.ws.model;
 
 import java.sql.Timestamp;
 
-public class IclubCoverTypeBean {
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "IclubCoverTypeModel")
+public class IclubCoverTypeModel {
 
 	private Long ctId;
 	private String iclubPerson;
-	private String iclubInsuranceItemType;
+	private Long iclubInsuranceItemType;
 	private String ctShortDesc;
 	private String ctLongDesc;
 	private String ctStatus;
@@ -28,11 +31,11 @@ public class IclubCoverTypeBean {
 		this.iclubPerson = iclubPerson;
 	}
 
-	public String getIclubInsuranceItemType() {
+	public Long getIclubInsuranceItemType() {
 		return iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(String iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(Long iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 
@@ -67,4 +70,5 @@ public class IclubCoverTypeBean {
 	public void setCtCrtdDt(Timestamp ctCrtdDt) {
 		this.ctCrtdDt = ctCrtdDt;
 	}
+
 }
