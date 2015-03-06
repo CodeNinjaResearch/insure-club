@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubDocument;
 import za.co.iclub.pss.orm.bean.IclubEntityType;
-import za.co.iclub.pss.orm.bean.IclubMessage;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
@@ -155,7 +154,7 @@ public class IclubEntityTypeService {
 		return ret;
 	}
 
-	@GET
+	/*@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -192,7 +191,7 @@ public class IclubEntityTypeService {
 		}
 
 		return ret;
-	}
+	}*/
 
 	@GET
 	@Path("/get/{id}")

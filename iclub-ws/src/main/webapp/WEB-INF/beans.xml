@@ -58,6 +58,17 @@
 			<ref bean="IclubSupplierTypeService"/>
 			<ref bean="IclubTrackerMasterService"/>
 			<ref bean="IclubVehicleMasterService"/>
+			<ref bean="IclubPurposeTypeService"/>
+			<ref bean="IclubCoverTypeService"/>
+			<ref bean="IclubEntityTypeService"/>
+			<ref bean="IclubEventService"/>
+			<ref bean="IclubExtrasService"/>
+			<ref bean="IclubLicenseCodeService"/>
+			<ref bean="IclubMbCommentService"/>
+			<ref bean="IclubMessageService"/>
+			<ref bean="IclubMessageBoardService"/>
+			<ref bean="IclubOccupationService"/>
+			<ref bean="IclubSystemTypeService"/>
 			
 
 		</jaxrs:serviceBeans>

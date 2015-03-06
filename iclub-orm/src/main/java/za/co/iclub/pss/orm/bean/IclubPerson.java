@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,6 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "iclub_person")
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_person where p_crtd_by=:id", name = "getPersonByUser", resultClass = IclubPerson.class) })
 public class IclubPerson implements java.io.Serializable {
 
 	// Fields

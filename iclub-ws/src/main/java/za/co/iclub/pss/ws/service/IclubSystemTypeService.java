@@ -169,7 +169,7 @@ public class IclubSystemTypeService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubSystemTypeDAO.findAll();
+			List batmod = iclubSystemTypeDAO.findByUser(user);
 
 			for (Object object : batmod) {
 				IclubSystemType iCSt = (IclubSystemType) object;

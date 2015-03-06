@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,6 +24,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "iclub_suppl_master")
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_suppl_master where sm_crtd_by=:id", name = "getSupplMasterByUser", resultClass = IclubSupplMaster.class) })
 public class IclubSupplMaster implements java.io.Serializable {
 
 	// Fields

@@ -158,6 +158,18 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
+	
+	public List findByUser(String userId) {
+		log.debug("finding all IclubMessage instances by user");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getMessageByUser");
+			queryObject.setString("id", userId);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all by user failed", re);
+			throw re;
+		}
+	}
 
 	public static IclubMessageDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubMessageDAO) ctx.getBean("IclubMessageDAO");

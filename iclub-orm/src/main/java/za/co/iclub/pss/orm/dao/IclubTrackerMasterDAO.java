@@ -182,7 +182,7 @@ public class IclubTrackerMasterDAO {
 	public List findByUser(String userId) {
 		log.debug("finding all IclubTrackerMaster instances by user");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getByUser");
+			Query queryObject = getCurrentSession().getNamedQuery("getTrackerMasterByUser");
 			queryObject.setString("id", userId);
 			return queryObject.list();
 		} catch (RuntimeException re) {

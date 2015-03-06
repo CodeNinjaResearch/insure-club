@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,6 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_system_type")
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_system_type where st_crtd_by=:id", name = "getSystemTypeByUser", resultClass = IclubSystemType.class) })
 public class IclubSystemType implements java.io.Serializable {
 
 	// Fields

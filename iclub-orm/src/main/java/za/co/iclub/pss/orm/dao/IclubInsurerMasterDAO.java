@@ -182,7 +182,7 @@ public class IclubInsurerMasterDAO {
 	public List findByUser(String userId) {
 		log.debug("finding all IclubInsurerMaster instances by user");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getByUser");
+			Query queryObject = getCurrentSession().getNamedQuery("getInsurerMasterByUser");
 			queryObject.setString("id", userId);
 			return queryObject.list();
 		} catch (RuntimeException re) {

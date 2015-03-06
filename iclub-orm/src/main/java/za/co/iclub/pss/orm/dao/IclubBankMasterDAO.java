@@ -192,7 +192,7 @@ public class IclubBankMasterDAO {
 	public List findByUser(String userId) {
 		log.debug("finding all IclubBankMaster instances by user");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getByUser");
+			Query queryObject = getCurrentSession().getNamedQuery("getBankMasterByUser");
 			queryObject.setString("id", userId);
 			return queryObject.list();
 		} catch (RuntimeException re) {

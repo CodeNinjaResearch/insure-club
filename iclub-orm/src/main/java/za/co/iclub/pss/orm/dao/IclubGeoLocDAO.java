@@ -172,7 +172,7 @@ public class IclubGeoLocDAO {
 	public List findByUser(String userId) {
 		log.debug("finding all IclubGeoLoc instances by user");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getByUser");
+			Query queryObject = getCurrentSession().getNamedQuery("getGeoLocByUser");
 			queryObject.setString("id", userId);
 			return queryObject.list();
 		} catch (RuntimeException re) {

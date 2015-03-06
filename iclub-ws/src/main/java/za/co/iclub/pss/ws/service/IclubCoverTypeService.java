@@ -157,7 +157,7 @@ public class IclubCoverTypeService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubCoverTypeDAO.findAll();
+			List batmod = iclubCoverTypeDAO.findByUser(user);
 
 			for (Object object : batmod) {
 				IclubCoverType iCt = (IclubCoverType) object;

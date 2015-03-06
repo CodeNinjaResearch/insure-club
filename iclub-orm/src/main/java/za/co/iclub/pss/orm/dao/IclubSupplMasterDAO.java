@@ -192,7 +192,7 @@ public class IclubSupplMasterDAO {
 	public List findByUser(String userId) {
 		log.debug("finding all IclubSupplMaster instances by user");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getByUser");
+			Query queryObject = getCurrentSession().getNamedQuery("getSupplMasterByUser");
 			queryObject.setString("id", userId);
 			return queryObject.list();
 		} catch (RuntimeException re) {
