@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubDriver;
+import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
@@ -86,8 +87,6 @@ public class IclubDriverService {
 	public ResponseModel mod(IclubDriverModel model) {
 		try {
 			IclubDriver iCt = new IclubDriver();
-
-			iCt.setDId(model.getDId());
 
 			iCt.setDId(model.getDId());
 			iCt.setDDob(model.getDDob());
@@ -161,6 +160,17 @@ public class IclubDriverService {
 				model.setIclubPersonByDPersonId(iCt.getIclubPersonByDPersonId() != null ? (iCt.getIclubPersonByDPersonId().getPId()) : null);
 				model.setIclubPersonByDCrtdBy(iCt.getIclubPersonByDCrtdBy() != null ? (iCt.getIclubPersonByDCrtdBy().getPId()) : null);
 
+				if (iCt.getIclubVehicles() != null && iCt.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iCt.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iCt.getIclubVehicles()) {
+
+						vehicles[i] = vehicle.getVId();
+						i++;
+					}
+					model.setIclubVehicles(vehicles);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -178,7 +188,7 @@ public class IclubDriverService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubDriverDAO.findAll();
+			List batmod = iclubDriverDAO.findByUser(user);
 
 			for (Object object : batmod) {
 				IclubDriver iCt = (IclubDriver) object;
@@ -196,6 +206,17 @@ public class IclubDriverService {
 				model.setIclubMaritialStatus(iCt.getIclubMaritialStatus() != null ? (iCt.getIclubMaritialStatus().getMsId()) : null);
 				model.setIclubPersonByDPersonId(iCt.getIclubPersonByDPersonId() != null ? (iCt.getIclubPersonByDPersonId().getPId()) : null);
 				model.setIclubPersonByDCrtdBy(iCt.getIclubPersonByDCrtdBy() != null ? (iCt.getIclubPersonByDCrtdBy().getPId()) : null);
+
+				if (iCt.getIclubVehicles() != null && iCt.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iCt.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iCt.getIclubVehicles()) {
+
+						vehicles[i] = vehicle.getVId();
+						i++;
+					}
+					model.setIclubVehicles(vehicles);
+				}
 
 				ret.add((T) model);
 			}
@@ -226,6 +247,17 @@ public class IclubDriverService {
 			model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
 			model.setIclubPersonByDPersonId(bean.getIclubPersonByDPersonId() != null ? (bean.getIclubPersonByDPersonId().getPId()) : null);
 			model.setIclubPersonByDCrtdBy(bean.getIclubPersonByDCrtdBy() != null ? (bean.getIclubPersonByDCrtdBy().getPId()) : null);
+
+			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
+				String[] vehicles = new String[bean.getIclubVehicles().size()];
+				int i = 0;
+				for (IclubVehicle vehicle : bean.getIclubVehicles()) {
+
+					vehicles[i] = vehicle.getVId();
+					i++;
+				}
+				model.setIclubVehicles(vehicles);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

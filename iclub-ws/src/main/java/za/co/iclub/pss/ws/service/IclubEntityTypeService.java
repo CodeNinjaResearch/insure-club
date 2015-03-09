@@ -154,44 +154,32 @@ public class IclubEntityTypeService {
 		return ret;
 	}
 
-	/*@GET
-	@Path("/get/user/{user}")
-	@Produces("application/json")
+	@GET
+	@Path("/validate/sd/{val}/{id}")
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
 	@Transactional(propagation = Propagation.REQUIRED)
-	public <T extends IclubEntityTypeModel> List<T> getByUser(@PathParam("user") String user) {
-		List<T> ret = new ArrayList<T>();
-
+	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List batmod = iclubEntityTypeDAO.findAll();
-
-			for (Object object : batmod) {
-				IclubEntityType iCEt = (IclubEntityType) object;
-
-				IclubEntityTypeModel model = new IclubEntityTypeModel();
-
-				model.setEtId(iCEt.getEtId());
-				model.setEtLongDesc(iCEt.getEtLongDesc());
-				model.setEtShortDesc(iCEt.getEtShortDesc());
-				model.setEtStatus(iCEt.getEtStatus());
-				
-				if (iCEt.getIclubDocuments() != null && iCEt.getIclubDocuments().size() > 0) {
-					String[] documents = new String[iCEt.getIclubDocuments().size()];
-					int i = 0;
-					for (IclubDocument iclubDocument : iCEt.getIclubDocuments()) {
-						documents[i] = iclubDocument.getDId();
-						i++;
-					}
-					model.setIclubDocuments(documents);
-				}
-
-				ret.add((T) model);
+			List data = iclubEntityTypeDAO.getEntityTypeBySD(val, id);
+			ResponseModel message = new ResponseModel();
+			if ((data != null) && (data.size() > 0)) {
+				message.setStatusCode(Integer.valueOf(1));
+				message.setStatusDesc("Duplicate Value");
+			} else {
+				message.setStatusCode(Integer.valueOf(0));
+				message.setStatusDesc("Success");
 			}
+			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
+			ResponseModel message = new ResponseModel();
+			message.setStatusCode(Integer.valueOf(2));
+			message.setStatusDesc(e.getMessage());
+			return message;
 		}
+	}
 
-		return ret;
-	}*/
 
 	@GET
 	@Path("/get/{id}")

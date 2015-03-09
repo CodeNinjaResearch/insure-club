@@ -172,7 +172,7 @@ public class IclubRateEngineService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubRateEngineDAO.findAll();
+			List batmod = iclubRateEngineDAO.findByUser(user);
 
 			for (Object object : batmod) {
 				IclubRateEngine iCt = (IclubRateEngine) object;

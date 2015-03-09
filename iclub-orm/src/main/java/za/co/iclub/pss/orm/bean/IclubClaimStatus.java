@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,6 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_claim_status")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getClaimStatusBySD", query = "select * from iclub_claim_status where lower(cs_short_desc) = lower(:sd) and cs_id <> :id", resultClass = IclubClaimStatus.class) })
 public class IclubClaimStatus implements java.io.Serializable {
 
 	// Fields

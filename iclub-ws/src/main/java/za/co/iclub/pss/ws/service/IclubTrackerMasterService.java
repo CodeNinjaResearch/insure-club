@@ -12,9 +12,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
 import za.co.iclub.pss.orm.bean.IclubTrackerMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -149,6 +152,16 @@ public class IclubTrackerMasterService {
 				iCTm.setTmCrtdDt(iclubTMaster.getTmCrtdDt());
 				iCTm.setIclubPerson(iclubTMaster.getIclubPerson() != null ? iclubTMaster.getIclubPerson().getPId() : null);
 
+
+				if (iclubTMaster.getIclubSecurityDevices() != null && iclubTMaster.getIclubSecurityDevices().size() > 0) {
+					String[] securityDevices = new String[iclubTMaster.getIclubSecurityDevices().size()];
+					int i = 0;
+					for (IclubSecurityDevice securityDevice : iclubTMaster.getIclubSecurityDevices()) {
+						securityDevices[i] = securityDevice.getSdId();
+						i++;
+					}
+				}
+
 				ret.add((T) iCTm);
 			}
 		} catch (Exception e) {
@@ -182,6 +195,15 @@ public class IclubTrackerMasterService {
 				iCTm.setTmCrtdDt(iclubTMaster.getTmCrtdDt());
 				iCTm.setIclubPerson(iclubTMaster.getIclubPerson() != null ? iclubTMaster.getIclubPerson().getPId() : null);
 
+				if (iclubTMaster.getIclubSecurityDevices() != null && iclubTMaster.getIclubSecurityDevices().size() > 0) {
+					String[] securityDevices = new String[iclubTMaster.getIclubSecurityDevices().size()];
+					int i = 0;
+					for (IclubSecurityDevice securityDevice : iclubTMaster.getIclubSecurityDevices()) {
+						securityDevices[i] = securityDevice.getSdId();
+						i++;
+					}
+				}
+				
 				ret.add((T) iCTm);
 			}
 		} catch (Exception e) {
@@ -210,6 +232,15 @@ public class IclubTrackerMasterService {
 			model.setTmCrtdDt(bean.getTmCrtdDt());
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 
+			if (bean.getIclubSecurityDevices() != null && bean.getIclubSecurityDevices().size() > 0) {
+				String[] securityDevices = new String[bean.getIclubSecurityDevices().size()];
+				int i = 0;
+				for (IclubSecurityDevice securityDevice : bean.getIclubSecurityDevices()) {
+					securityDevices[i] = securityDevice.getSdId();
+					i++;
+				}
+			}
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

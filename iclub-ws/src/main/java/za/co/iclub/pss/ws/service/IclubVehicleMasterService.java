@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.bean.IclubVehicleMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -149,6 +150,17 @@ public class IclubVehicleMasterService {
 				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
 				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
+				if(iclubVMaster.getIclubVehicles()!=null && iclubVMaster.getIclubVehicles().size()>0)
+				{
+					String[] vehicles=new String[iclubVMaster.getIclubVehicles().size()];
+					int i=0;
+					for(IclubVehicle vehicle:iclubVMaster.getIclubVehicles()){
+						vehicles[i]=vehicle.getVId();
+						i++;
+					}
+				}
+
+				
 				ret.add((T) iCVm);
 			}
 		} catch (Exception e) {
@@ -182,6 +194,17 @@ public class IclubVehicleMasterService {
 				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
 				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
+				
+				if(iclubVMaster.getIclubVehicles()!=null && iclubVMaster.getIclubVehicles().size()>0)
+				{
+					String[] vehicles=new String[iclubVMaster.getIclubVehicles().size()];
+					int i=0;
+					for(IclubVehicle vehicle:iclubVMaster.getIclubVehicles()){
+						vehicles[i]=vehicle.getVId();
+						i++;
+					}
+				}
+				
 				ret.add((T) iCVm);
 			}
 		} catch (Exception e) {
@@ -209,6 +232,16 @@ public class IclubVehicleMasterService {
 			model.setVmProdDt(bean.getVmProdDt());
 			model.setVmCrtdDt(bean.getVmCrtdDt());
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+			
+			if(bean.getIclubVehicles()!=null && bean.getIclubVehicles().size()>0)
+			{
+				String[] vehicles=new String[bean.getIclubVehicles().size()];
+				int i=0;
+				for(IclubVehicle vehicle:bean.getIclubVehicles()){
+					vehicles[i]=vehicle.getVId();
+					i++;
+				}
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

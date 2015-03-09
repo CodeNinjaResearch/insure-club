@@ -17,38 +17,37 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubProperty;
-import za.co.iclub.pss.orm.bean.IclubWallType;
+import za.co.iclub.pss.orm.bean.IclubClaimStatus;
+import za.co.iclub.pss.orm.dao.IclubClaimStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
-import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
-import za.co.iclub.pss.ws.model.IclubWallTypeModel;
+import za.co.iclub.pss.ws.model.IclubClaimStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@Path(value = "/IclubWallTypeService")
+@Path(value = "/IclubClaimStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class IclubWallTypeService {
+public class IclubClaimStatusService {
 
-	protected static final Logger LOGGER = Logger.getLogger(IclubWallTypeService.class);
+	protected static final Logger LOGGER = Logger.getLogger(IclubClaimStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubWallTypeDAO iclubWallTypeDAO;
+	private IclubClaimStatusDAO iclubClaimStatusDAO;
 
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public ResponseModel add(IclubWallTypeModel model) {
+	public ResponseModel add(IclubClaimStatusModel model) {
 		try {
-			IclubWallType iWt = new IclubWallType();
+			IclubClaimStatus iCS = new IclubClaimStatus();
 
-			iWt.setWtId(iclubCommonDAO.getNextId(IclubWallType.class));
-			iWt.setWtLongDesc(model.getWtLongDesc());
-			iWt.setWtShortDesc(model.getWtShortDesc());
-			iWt.setWtStatus(model.getWtStatus());
+			iCS.setCsId(iclubCommonDAO.getNextId(IclubClaimStatus.class));
+			iCS.setCsLongDesc(model.getCsLongDesc());
+			iCS.setCsShortDesc(model.getCsShortDesc());
+			iCS.setCsStatus(model.getCsStatus());
 
-			iclubWallTypeDAO.save(iWt);
+			iclubClaimStatusDAO.save(iCS);
 
-			LOGGER.info("Save Success with ID :: " + iWt.getWtId());
+			LOGGER.info("Save Success with ID :: " + iCS.getCsId());
 
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
@@ -69,18 +68,18 @@ public class IclubWallTypeService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public ResponseModel mod(IclubWallTypeModel model) {
+	public ResponseModel mod(IclubClaimStatusModel model) {
 		try {
-			IclubWallType iWt = new IclubWallType();
+			IclubClaimStatus iCS = new IclubClaimStatus();
 
-			iWt.setWtId(model.getWtId());
-			iWt.setWtLongDesc(model.getWtLongDesc());
-			iWt.setWtShortDesc(model.getWtShortDesc());
-			iWt.setWtStatus(model.getWtStatus());
+			iCS.setCsId(model.getCsId());
+			iCS.setCsLongDesc(model.getCsLongDesc());
+			iCS.setCsShortDesc(model.getCsShortDesc());
+			iCS.setCsStatus(model.getCsStatus());
 
-			iclubWallTypeDAO.merge(iWt);
+			iclubClaimStatusDAO.merge(iCS);
 
-			LOGGER.info("Merge Success with ID :: " + model.getWtId());
+			LOGGER.info("Merge Success with ID :: " + model.getCsId());
 
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
@@ -103,7 +102,7 @@ public class IclubWallTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Response del(@PathParam("id") Long id) {
 		try {
-			iclubWallTypeDAO.delete(iclubWallTypeDAO.findById(id));
+			iclubClaimStatusDAO.delete(iclubClaimStatusDAO.findById(id));
 			return Response.ok().build();
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -115,30 +114,21 @@ public class IclubWallTypeService {
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public <T extends IclubWallTypeModel> List<T> list() {
+	public <T extends IclubClaimStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubWallTypeDAO.findAll();
+			List batmod = iclubClaimStatusDAO.findAll();
 
 			for (Object object : batmod) {
-				IclubWallType iWt = (IclubWallType) object;
+				IclubClaimStatus iCS = (IclubClaimStatus) object;
 
-				IclubWallTypeModel model = new IclubWallTypeModel();
+				IclubClaimStatusModel model = new IclubClaimStatusModel();
 
-				model.setWtId(iWt.getWtId());
-				model.setWtLongDesc(iWt.getWtLongDesc());
-				model.setWtShortDesc(iWt.getWtShortDesc());
-				model.setWtStatus(iWt.getWtStatus());
-
-				if (iWt.getIclubProperties() != null && iWt.getIclubProperties().size() > 0) {
-					String[] properties = new String[iWt.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty property : iWt.getIclubProperties()) {
-						properties[i] = property.getPId();
-						i++;
-					}
-				}
+				model.setCsId(iCS.getCsId());
+				model.setCsLongDesc(iCS.getCsLongDesc());
+				model.setCsShortDesc(iCS.getCsShortDesc());
+				model.setCsStatus(iCS.getCsStatus());
 
 				ret.add((T) model);
 			}
@@ -153,24 +143,15 @@ public class IclubWallTypeService {
 	@Path("/get/{id}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public IclubWallTypeModel getById(@PathParam("id") Long id) {
-		IclubWallTypeModel model = new IclubWallTypeModel();
+	public IclubClaimStatusModel getById(@PathParam("id") Long id) {
+		IclubClaimStatusModel model = new IclubClaimStatusModel();
 		try {
-			IclubWallType bean = iclubWallTypeDAO.findById(id);
+			IclubClaimStatus bean = iclubClaimStatusDAO.findById(id);
 
-			model.setWtId(bean.getWtId());
-			model.setWtLongDesc(bean.getWtLongDesc());
-			model.setWtShortDesc(bean.getWtShortDesc());
-			model.setWtStatus(bean.getWtStatus());
-
-			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
-				String[] properties = new String[bean.getIclubProperties().size()];
-				int i = 0;
-				for (IclubProperty property : bean.getIclubProperties()) {
-					properties[i] = property.getPId();
-					i++;
-				}
-			}
+			model.setCsId(bean.getCsId());
+			model.setCsLongDesc(bean.getCsLongDesc());
+			model.setCsShortDesc(bean.getCsShortDesc());
+			model.setCsStatus(bean.getCsStatus());
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -185,7 +166,7 @@ public class IclubWallTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubWallTypeDAO.getWallTypeBySD(val, id);
+			List data = iclubClaimStatusDAO.getClaimStatusBySD(val, id);
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -204,12 +185,12 @@ public class IclubWallTypeService {
 		}
 	}
 
-	public IclubWallTypeDAO getIclubWallTypeDAO() {
-		return iclubWallTypeDAO;
+	public IclubClaimStatusDAO getIclubClaimStatusDAO() {
+		return iclubClaimStatusDAO;
 	}
 
-	public void setIclubWallTypeDAO(IclubWallTypeDAO iclubWallTypeDAO) {
-		this.iclubWallTypeDAO = iclubWallTypeDAO;
+	public void setIclubClaimStatusDAO(IclubClaimStatusDAO iclubClaimStatusDAO) {
+		this.iclubClaimStatusDAO = iclubClaimStatusDAO;
 	}
 
 	public IclubCommonDAO getIclubCommonDAO() {

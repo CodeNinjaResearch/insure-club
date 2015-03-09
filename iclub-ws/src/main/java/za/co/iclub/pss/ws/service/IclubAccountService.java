@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubAccount;
+import za.co.iclub.pss.orm.bean.IclubPayment;
+import za.co.iclub.pss.orm.bean.IclubPolicy;
+import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccountDAO;
 import za.co.iclub.pss.orm.dao.IclubAccountTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBankMasterDAO;
@@ -154,6 +157,28 @@ public class IclubAccountService {
 				iCA.setIclubPerson(iclubAtype.getIclubPerson() != null ? iclubAtype.getIclubPerson().getPId() : null);
 				iCA.setAStatus(iclubAtype.getAStatus());
 
+				if (iclubAtype.getIclubPolicies() != null && iclubAtype.getIclubPolicies().size() > 0) {
+					String[] policies = new String[iclubAtype.getIclubPolicies().size()];
+					int i = 0;
+					for (IclubPolicy policy : iclubAtype.getIclubPolicies()) {
+
+						policies[i] = policy.getPId();
+						i++;
+					}
+					iCA.setIclubPolicies(policies);
+				}
+
+				if (iclubAtype.getIclubPayments() != null && iclubAtype.getIclubPayments().size() > 0) {
+					String[] payments = new String[iclubAtype.getIclubPayments().size()];
+					int i = 0;
+					for (IclubPayment payment : iclubAtype.getIclubPayments()) {
+
+						payments[i] = payment.getPId();
+						i++;
+					}
+					iCA.setIclubPayments(payments);
+				}
+
 				ret.add((T) iCA);
 			}
 		} catch (Exception e) {
@@ -187,6 +212,28 @@ public class IclubAccountService {
 				iCA.setIclubPerson(iclubAtype.getIclubPerson() != null ? iclubAtype.getIclubPerson().getPId() : null);
 				iCA.setAStatus(iclubAtype.getAStatus());
 
+				if (iclubAtype.getIclubPolicies() != null && iclubAtype.getIclubPolicies().size() > 0) {
+					String[] policies = new String[iclubAtype.getIclubPolicies().size()];
+					int i = 0;
+					for (IclubPolicy policy : iclubAtype.getIclubPolicies()) {
+
+						policies[i] = policy.getPId();
+						i++;
+					}
+					iCA.setIclubPolicies(policies);
+				}
+
+				if (iclubAtype.getIclubPayments() != null && iclubAtype.getIclubPayments().size() > 0) {
+					String[] payments = new String[iclubAtype.getIclubPayments().size()];
+					int i = 0;
+					for (IclubPayment payment : iclubAtype.getIclubPayments()) {
+
+						payments[i] = payment.getPId();
+						i++;
+					}
+					iCA.setIclubPayments(payments);
+				}
+
 				ret.add((T) iCA);
 			}
 		} catch (Exception e) {
@@ -214,6 +261,29 @@ public class IclubAccountService {
 			model.setIclubOwnerType(bean.getIclubOwnerType() != null ? bean.getIclubOwnerType().getOtId() : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 			model.setAStatus(bean.getAStatus());
+			
+			if (bean.getIclubPolicies() != null && bean.getIclubPolicies().size() > 0) {
+				String[] policies = new String[bean.getIclubPolicies().size()];
+				int i = 0;
+				for (IclubPolicy policy : bean.getIclubPolicies()) {
+
+					policies[i] = policy.getPId();
+					i++;
+				}
+				model.setIclubPolicies(policies);
+			}
+			
+			
+			if (bean.getIclubPayments() != null && bean.getIclubPayments().size() > 0) {
+				String[] payments = new String[bean.getIclubPayments().size()];
+				int i = 0;
+				for (IclubPayment payment : bean.getIclubPayments()) {
+
+					payments[i] = payment.getPId();
+					i++;
+				}
+				model.setIclubPayments(payments);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

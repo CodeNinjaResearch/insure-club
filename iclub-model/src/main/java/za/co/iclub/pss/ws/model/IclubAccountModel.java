@@ -16,6 +16,8 @@ public class IclubAccountModel {
 	private String AOwnerId;
 	private String AStatus;
 	private Timestamp ACrtdDt;
+	private String[] iclubPolicies;
+	private String[] iclubPayments;
 
 	public String getAId() {
 		return AId;
@@ -87,6 +89,22 @@ public class IclubAccountModel {
 
 	public void setACrtdDt(Timestamp aCrtdDt) {
 		ACrtdDt = aCrtdDt;
+	}
+
+	public String[] getIclubPolicies() {
+		return iclubPolicies;
+	}
+
+	public void setIclubPolicies(String[] iclubPolicies) {
+		this.iclubPolicies = iclubPolicies;
+	}
+
+	public String[] getIclubPayments() {
+		return iclubPayments;
+	}
+
+	public void setIclubPayments(String[] iclubPayments) {
+		this.iclubPayments = iclubPayments;
 	}
 
 }

@@ -188,7 +188,7 @@ public class IclubPolicyService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubPolicyDAO.findAll();
+			List batmod = iclubPolicyDAO.findByUser();
 
 			for (Object object : batmod) {
 				IclubPolicy iCP = (IclubPolicy) object;

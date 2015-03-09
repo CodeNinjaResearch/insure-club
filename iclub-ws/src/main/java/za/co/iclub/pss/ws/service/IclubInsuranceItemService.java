@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemDAO;
@@ -138,7 +139,17 @@ public class IclubInsuranceItemService {
 				model.setIiCrtdDt(iCTt.getIiCrtdDt());
 				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
-				
+
+				if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
+					String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
+						claimItems[i] = claimItem.getCiId();
+						i++;
+					}
+					model.setIclubClaimItems(claimItems);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -156,7 +167,7 @@ public class IclubInsuranceItemService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubInsuranceItemDAO.findAll();
+			List batmod = iclubInsuranceItemDAO.findByUser(user);
 
 			for (Object object : batmod) {
 				IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
@@ -169,7 +180,17 @@ public class IclubInsuranceItemService {
 				model.setIiCrtdDt(iCTt.getIiCrtdDt());
 				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
-				
+
+				if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
+					String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
+						claimItems[i] = claimItem.getCiId();
+						i++;
+					}
+					model.setIclubClaimItems(claimItems);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -194,6 +215,16 @@ public class IclubInsuranceItemService {
 			model.setIiCrtdDt(bean.getIiCrtdDt());
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
+
+			if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
+				String[] claimItems = new String[bean.getIclubClaimItems().size()];
+				int i = 0;
+				for (IclubClaimItem claimItem : bean.getIclubClaimItems()) {
+					claimItems[i] = claimItem.getCiId();
+					i++;
+				}
+				model.setIclubClaimItems(claimItems);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

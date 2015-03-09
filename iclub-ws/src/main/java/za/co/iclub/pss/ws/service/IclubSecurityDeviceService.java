@@ -1,7 +1,9 @@
 package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
+import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -47,15 +50,13 @@ public class IclubSecurityDeviceService {
 			IclubSecurityDevice iCSd = new IclubSecurityDevice();
 
 			iCSd.setSdId(model.getSdId());
-			iCSd.setSdId(model.getSdId());
 			iCSd.setSdItemId(model.getSdItemId());
 			iCSd.setSdContractNum(model.getSdContractNum());
 			iCSd.setSdSerNum(model.getSdSerNum());
 			iCSd.setSdCrtdDt(model.getSdCrtdDt());
-			iCSd.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null   ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
-			iCSd.setIclubTrackerMaster(model.getIclubTrackerMaster() != null  ? iclubTrackerMasterDAO.findById(model.getIclubTrackerMaster()) : null);
+			iCSd.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
+			iCSd.setIclubTrackerMaster(model.getIclubTrackerMaster() != null ? iclubTrackerMasterDAO.findById(model.getIclubTrackerMaster()) : null);
 			iCSd.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-
 
 			iclubSecurityDeviceDAO.save(iCSd);
 
@@ -85,13 +86,12 @@ public class IclubSecurityDeviceService {
 			IclubSecurityDevice iCSd = new IclubSecurityDevice();
 
 			iCSd.setSdId(model.getSdId());
-			iCSd.setSdId(model.getSdId());
 			iCSd.setSdItemId(model.getSdItemId());
 			iCSd.setSdContractNum(model.getSdContractNum());
 			iCSd.setSdSerNum(model.getSdSerNum());
 			iCSd.setSdCrtdDt(model.getSdCrtdDt());
-			iCSd.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null   ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
-			iCSd.setIclubTrackerMaster(model.getIclubTrackerMaster() != null  ? iclubTrackerMasterDAO.findById(model.getIclubTrackerMaster()) : null);
+			iCSd.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
+			iCSd.setIclubTrackerMaster(model.getIclubTrackerMaster() != null ? iclubTrackerMasterDAO.findById(model.getIclubTrackerMaster()) : null);
 			iCSd.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 
 			iclubSecurityDeviceDAO.merge(iCSd);
@@ -149,6 +149,16 @@ public class IclubSecurityDeviceService {
 				model.setIclubInsuranceItemType(iCSd.getIclubInsuranceItemType() != null ? (iCSd.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubTrackerMaster(iCSd.getIclubTrackerMaster() != null ? (iCSd.getIclubTrackerMaster().getTmId()) : null);
 				model.setIclubPerson(iCSd.getIclubPerson() != null ? (iCSd.getIclubPerson().getPId()) : null);
+				if (iCSd.getIclubVehicles() != null && iCSd.getIclubVehicles().size() > 0) {
+					String[] vehicales = new String[iCSd.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iCSd.getIclubVehicles()) {
+						vehicales[i] = vehicle.getVId();
+
+						i++;
+					}
+					model.setIclubVehicles(vehicales);
+				}
 
 				ret.add((T) model);
 			}
@@ -167,7 +177,7 @@ public class IclubSecurityDeviceService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubSecurityDeviceDAO.findAll();
+			List batmod = iclubSecurityDeviceDAO.findByUser(user);
 
 			for (Object object : batmod) {
 				IclubSecurityDevice iCSd = (IclubSecurityDevice) object;
@@ -182,6 +192,18 @@ public class IclubSecurityDeviceService {
 				model.setIclubInsuranceItemType(iCSd.getIclubInsuranceItemType() != null ? (iCSd.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubTrackerMaster(iCSd.getIclubTrackerMaster() != null ? (iCSd.getIclubTrackerMaster().getTmId()) : null);
 				model.setIclubPerson(iCSd.getIclubPerson() != null ? (iCSd.getIclubPerson().getPId()) : null);
+				if(iCSd.getIclubVehicles()!=null && iCSd.getIclubVehicles().size()>0)
+				{
+					String[] vehicales=new String[iCSd.getIclubVehicles().size()];
+					int i=0;
+					for(IclubVehicle vehicle:iCSd.getIclubVehicles())
+					{
+						vehicales[i]=vehicle.getVId();
+						
+						i++;
+					}
+					model.setIclubVehicles(vehicales);
+				}
 
 				ret.add((T) model);
 			}
@@ -209,6 +231,18 @@ public class IclubSecurityDeviceService {
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
 			model.setIclubTrackerMaster(bean.getIclubTrackerMaster() != null ? (bean.getIclubTrackerMaster().getTmId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
+			if(bean.getIclubVehicles()!=null && bean.getIclubVehicles().size()>0)
+			{
+				String[] vehicales=new String[bean.getIclubVehicles().size()];
+				int i=0;
+				for(IclubVehicle vehicle:bean.getIclubVehicles())
+				{
+					vehicales[i]=vehicle.getVId();
+					
+					i++;
+				}
+				model.setIclubVehicles(vehicales);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

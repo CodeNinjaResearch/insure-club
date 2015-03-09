@@ -3,6 +3,7 @@ package za.co.iclub.pss.orm.bean;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,6 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_driver")
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_driver where d_crtd_by=:id", name = "getDriverByUser", resultClass = IclubDriver.class) })
 public class IclubDriver implements java.io.Serializable {
 
 	// Fields

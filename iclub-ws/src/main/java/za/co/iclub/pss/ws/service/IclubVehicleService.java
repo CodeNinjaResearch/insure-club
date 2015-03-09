@@ -17,7 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubAccessType;
+import za.co.iclub.pss.orm.bean.IclubDriver;
+import za.co.iclub.pss.orm.bean.IclubPerson;
+import za.co.iclub.pss.orm.bean.IclubPurposeType;
+import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
+import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
+import za.co.iclub.pss.orm.bean.IclubVehicleMaster;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
@@ -74,14 +81,15 @@ public class IclubVehicleService {
 			iCV.setVEngineNr(model.getVEngineNr());
 			iCV.setVVin(model.getVVin());
 			iCV.setVNoclaimYrs(model.getVNoclaimYrs());
-			
+
 			iCV.setIclubPurposeType(iclubPurposeTypeDAO.findById(model.getIclubPurposeType()));
-			iCV.setIclubSecurityMaster(iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster() ));
-			iCV.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson() ));
-			iCV.setIclubDriver(iclubDriverDAO.findById(model.getIclubDriver() ));
-			iCV.setIclubSecurityDevice(iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice() ));
-			iCV.setIclubAccessTypeByVDdAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId() ));
-			iCV.setIclubAccessTypeByVOnAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId() ));
+			iCV.setIclubSecurityMaster(iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster()));
+			iCV.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			iCV.setIclubDriver(iclubDriverDAO.findById(model.getIclubDriver()));
+			iCV.setIclubSecurityDevice(iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice()));
+			iCV.setIclubAccessTypeByVDdAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId()));
+			iCV.setIclubAccessTypeByVOnAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()));
+			iCV.setIclubVehicleMaster(iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()));
 
 			iclubVehicleDAO.save(iCV);
 
@@ -130,14 +138,15 @@ public class IclubVehicleService {
 			iCV.setVEngineNr(model.getVEngineNr());
 			iCV.setVVin(model.getVVin());
 			iCV.setVNoclaimYrs(model.getVNoclaimYrs());
-			
+
 			iCV.setIclubPurposeType(iclubPurposeTypeDAO.findById(model.getIclubPurposeType()));
-			iCV.setIclubSecurityMaster(iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster() ));
-			iCV.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson() ));
-			iCV.setIclubDriver(iclubDriverDAO.findById(model.getIclubDriver() ));
-			iCV.setIclubSecurityDevice(iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice() ));
-			iCV.setIclubAccessTypeByVDdAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId() ));
-			iCV.setIclubAccessTypeByVOnAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId() ));
+			iCV.setIclubSecurityMaster(iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster()));
+			iCV.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			iCV.setIclubDriver(iclubDriverDAO.findById(model.getIclubDriver()));
+			iCV.setIclubSecurityDevice(iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice()));
+			iCV.setIclubAccessTypeByVDdAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId()));
+			iCV.setIclubAccessTypeByVOnAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()));
+			iCV.setIclubVehicleMaster(iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()));
 
 			iclubVehicleDAO.merge(iCV);
 
@@ -207,7 +216,7 @@ public class IclubVehicleService {
 				model.setVEngineNr(iCV.getVEngineNr());
 				model.setVVin(iCV.getVVin());
 				model.setVNoclaimYrs(iCV.getVNoclaimYrs());
-				
+				model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
 				model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
 				model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
 				model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
@@ -233,7 +242,7 @@ public class IclubVehicleService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubVehicleDAO.findAll();
+			List batmod = iclubVehicleDAO.findByUser(user);
 
 			for (Object object : batmod) {
 				IclubVehicle iCV = (IclubVehicle) object;
@@ -260,10 +269,10 @@ public class IclubVehicleService {
 				model.setVEngineNr(iCV.getVEngineNr());
 				model.setVVin(iCV.getVVin());
 				model.setVNoclaimYrs(iCV.getVNoclaimYrs());
-				
 				model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
 				model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
 				model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
+				model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
 				model.setIclubDriver(iCV.getIclubDriver() != null ? (iCV.getIclubDriver().getDId()) : null);
 				model.setIclubSecurityDevice(iCV.getIclubSecurityDevice() != null ? (iCV.getIclubSecurityDevice().getSdId()) : null);
 				model.setIclubAccessTypeByVDdAccessTypeId(iCV.getIclubAccessTypeByVDdAccessTypeId() != null ? (iCV.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
@@ -307,7 +316,7 @@ public class IclubVehicleService {
 			model.setVEngineNr(bean.getVEngineNr());
 			model.setVVin(bean.getVVin());
 			model.setVNoclaimYrs(bean.getVNoclaimYrs());
-			
+			model.setIclubVehicleMaster(bean.getIclubVehicleMaster() != null ? (bean.getIclubVehicleMaster().getVmId()) : null);
 			model.setIclubPurposeType(bean.getIclubPurposeType() != null ? (bean.getIclubPurposeType().getPtId()) : null);
 			model.setIclubSecurityMaster(bean.getIclubSecurityMaster() != null ? (bean.getIclubSecurityMaster().getSmId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
