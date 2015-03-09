@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,9 +12,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import za.co.iclub.pss.orm.bean.IclubClaim;
+import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.dao.IclubAccountDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
@@ -152,6 +157,27 @@ public class IclubPolicyService {
 				model.setIclubPolicyStatus(iCP.getIclubPolicyStatus() != null ? (iCP.getIclubPolicyStatus().getPsId()) : null);
 				model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
 				model.setIclubPolicyStatus(iCP.getIclubPolicyStatus() != null ? (iCP.getIclubPolicyStatus().getPsId()) : null);
+				
+				if (iCP.getIclubClaims() != null && iCP.getIclubClaims().size() > 0) {
+					String[] claims = new String[iCP.getIclubClaims().size()];
+					int i = 0;
+					for (IclubClaim claim : iCP.getIclubClaims()) {
+						claims[i] = claim.getCId();
+						i++;
+					}
+					model.setIclubClaims(claims);
+				}
+				
+				if (iCP.getIclubPayments() != null && iCP.getIclubPayments().size() > 0) {
+					String[] payments = new String[iCP.getIclubPayments().size()];
+					int i = 0;
+					for (IclubPayment payment : iCP.getIclubPayments()) {
+						payments[i] = payment.getPId();
+						i++;
+					}
+					model.setIclubClaims(payments);
+				}
+
 
 				ret.add((T) model);
 			}
@@ -188,6 +214,26 @@ public class IclubPolicyService {
 				model.setIclubPolicyStatus(iCP.getIclubPolicyStatus() != null ? (iCP.getIclubPolicyStatus().getPsId()) : null);
 				model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
 				model.setIclubPolicyStatus(iCP.getIclubPolicyStatus() != null ? (iCP.getIclubPolicyStatus().getPsId()) : null);
+				
+				if (iCP.getIclubClaims() != null && iCP.getIclubClaims().size() > 0) {
+					String[] claims = new String[iCP.getIclubClaims().size()];
+					int i = 0;
+					for (IclubClaim claim : iCP.getIclubClaims()) {
+						claims[i] = claim.getCId();
+						i++;
+					}
+					model.setIclubClaims(claims);
+				}
+				
+				if (iCP.getIclubPayments() != null && iCP.getIclubPayments().size() > 0) {
+					String[] payments = new String[iCP.getIclubPayments().size()];
+					int i = 0;
+					for (IclubPayment payment : iCP.getIclubPayments()) {
+						payments[i] = payment.getPId();
+						i++;
+					}
+					model.setIclubClaims(payments);
+				}
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -217,6 +263,26 @@ public class IclubPolicyService {
 			model.setIclubPolicyStatus(bean.getIclubPolicyStatus() != null ? (bean.getIclubPolicyStatus().getPsId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 			model.setIclubPolicyStatus(bean.getIclubPolicyStatus() != null ? (bean.getIclubPolicyStatus().getPsId()) : null);
+			
+			if (bean.getIclubClaims() != null && bean.getIclubClaims().size() > 0) {
+				String[] claims = new String[bean.getIclubClaims().size()];
+				int i = 0;
+				for (IclubClaim claim : bean.getIclubClaims()) {
+					claims[i] = claim.getCId();
+					i++;
+				}
+				model.setIclubClaims(claims);
+			}
+			
+			if (bean.getIclubPayments() != null && bean.getIclubPayments().size() > 0) {
+				String[] payments = new String[bean.getIclubPayments().size()];
+				int i = 0;
+				for (IclubPayment payment : bean.getIclubPayments()) {
+					payments[i] = payment.getPId();
+					i++;
+				}
+				model.setIclubClaims(payments);
+			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

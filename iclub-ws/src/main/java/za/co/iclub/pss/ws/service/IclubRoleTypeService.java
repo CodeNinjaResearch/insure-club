@@ -166,6 +166,18 @@ public class IclubRoleTypeService {
 			model.setRtLongDesc(bean.getRtLongDesc());
 			model.setRtShortDesc(bean.getRtShortDesc());
 			model.setRtStatus(bean.getRtStatus());
+			
+			if (bean.getIclubLogins() != null && bean.getIclubLogins().size() > 0) {
+				Set<IclubLogin> iLog = bean.getIclubLogins();
+				String[] iclubLogins = new String[iLog.size()];
+
+				int i = 0;
+				for (IclubLogin iL : iLog) {
+					iclubLogins[i] = iL.getLId();
+					i++;
+				}
+				model.setIclubLogins(iclubLogins);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

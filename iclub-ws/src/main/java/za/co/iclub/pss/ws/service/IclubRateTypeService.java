@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubRateEngine;
 import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubRateTypeDAO;
@@ -129,6 +130,17 @@ public class IclubRateTypeService {
 				model.setRtLongDesc(iRt.getRtLongDesc());
 				model.setRtShortDesc(iRt.getRtShortDesc());
 				model.setRtStatus(iRt.getRtStatus());
+				
+				if (iRt.getIclubRateEngines() != null && iRt.getIclubRateEngines().size() > 0) {
+					String[] rateEngines = new String[iRt.getIclubRateEngines().size()];
+					int i = 0;
+					for (IclubRateEngine rateEngine : iRt.getIclubRateEngines()) {
+						rateEngines[i] = rateEngine.getReId();
+						i++;
+					}
+					
+					model.setIclubRateEngines(rateEngines);
+				}
 
 				ret.add((T) model);
 			}
@@ -152,6 +164,17 @@ public class IclubRateTypeService {
 			model.setRtLongDesc(bean.getRtLongDesc());
 			model.setRtShortDesc(bean.getRtShortDesc());
 			model.setRtStatus(bean.getRtStatus());
+			
+			if (bean.getIclubRateEngines() != null && bean.getIclubRateEngines().size() > 0) {
+				String[] rateEngines = new String[bean.getIclubRateEngines().size()];
+				int i = 0;
+				for (IclubRateEngine rateEngine : bean.getIclubRateEngines()) {
+					rateEngines[i] = rateEngine.getReId();
+					i++;
+				}
+				
+				model.setIclubRateEngines(rateEngines);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

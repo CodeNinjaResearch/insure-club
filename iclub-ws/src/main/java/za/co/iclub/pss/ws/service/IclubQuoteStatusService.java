@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubQuote;
 import za.co.iclub.pss.orm.bean.IclubQuoteStatus;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteStatusDAO;
@@ -130,6 +131,16 @@ public class IclubQuoteStatusService {
 				model.setQsShortDesc(iQs.getQsShortDesc());
 				model.setQsStatus(iQs.getQsStatus());
 
+				if (iQs.getIclubQuotes() != null && iQs.getIclubQuotes().size() > 0) {
+					String[] quotes = new String[iQs.getIclubQuotes().size()];
+					int i = 0;
+					for (IclubQuote quote : iQs.getIclubQuotes()) {
+						quotes[i] = quote.getQId();
+						i++;
+					}
+					model.setIclubQuotes(quotes);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -152,6 +163,16 @@ public class IclubQuoteStatusService {
 			model.setQsLongDesc(bean.getQsLongDesc());
 			model.setQsShortDesc(bean.getQsShortDesc());
 			model.setQsStatus(bean.getQsStatus());
+			
+			if (bean.getIclubQuotes() != null && bean.getIclubQuotes().size() > 0) {
+				String[] quotes = new String[bean.getIclubQuotes().size()];
+				int i = 0;
+				for (IclubQuote quote : bean.getIclubQuotes()) {
+					quotes[i] = quote.getQId();
+					i++;
+				}
+				model.setIclubQuotes(quotes);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

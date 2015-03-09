@@ -9,6 +9,7 @@ public class IclubRateTypeModel {
 	private String rtShortDesc;
 	private String rtLongDesc;
 	private String rtStatus;
+	private String[] iclubRateEngines;
 
 	public Long getRtId() {
 		return rtId;
@@ -40,6 +41,14 @@ public class IclubRateTypeModel {
 
 	public void setRtStatus(String rtStatus) {
 		this.rtStatus = rtStatus;
+	}
+
+	public String[] getIclubRateEngines() {
+		return iclubRateEngines;
+	}
+
+	public void setIclubRateEngines(String[] iclubRateEngines) {
+		this.iclubRateEngines = iclubRateEngines;
 	}
 
 }

@@ -2,7 +2,6 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -50,7 +49,7 @@ public class IclubAccountService {
 
 			IclubAccount iCA = new IclubAccount();
 
-			iCA.setAId(UUID.randomUUID().toString());
+			iCA.setAId(model.getAId());
 			iCA.setAAccNum(model.getAAccNum());
 			iCA.setACrtdDt(model.getACrtdDt());
 			iCA.setAOwnerId(model.getAOwnerId());

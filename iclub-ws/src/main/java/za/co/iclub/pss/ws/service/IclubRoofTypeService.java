@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubRoofType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubRoofTypeDAO;
@@ -129,6 +130,18 @@ public class IclubRoofTypeService {
 				model.setRtLongDesc(iRt.getRtLongDesc());
 				model.setRtShortDesc(iRt.getRtShortDesc());
 				model.setRtStatus(iRt.getRtStatus());
+				
+				if (iRt.getIclubProperties() != null && iRt.getIclubProperties().size() > 0) {
+					String[] properties = new String[iRt.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty property : iRt.getIclubProperties()) {
+						properties[i] = property.getPId();
+						i++;
+					}
+					
+					 model.setIclubProperties(properties);
+				}
+
 
 				ret.add((T) model);
 			}
@@ -152,6 +165,16 @@ public class IclubRoofTypeService {
 			model.setRtLongDesc(bean.getRtLongDesc());
 			model.setRtShortDesc(bean.getRtShortDesc());
 			model.setRtStatus(bean.getRtStatus());
+			
+			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
+				String[] properties = new String[bean.getIclubProperties().size()];
+				int i = 0;
+				for (IclubProperty property : bean.getIclubProperties()) {
+					properties[i] = property.getPId();
+					i++;
+				}
+				 model.setIclubProperties(properties);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);
