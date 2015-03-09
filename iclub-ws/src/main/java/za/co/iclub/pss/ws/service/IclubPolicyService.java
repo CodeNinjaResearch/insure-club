@@ -46,11 +46,6 @@ public class IclubPolicyService {
 			IclubPolicy iCP = new IclubPolicy();
 
 			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
 			iCP.setPProrataPrm(model.getPProrataPrm());
 			iCP.setPPremium(model.getPPremium());
 			iCP.setPNumber(model.getPNumber());
@@ -87,11 +82,6 @@ public class IclubPolicyService {
 		try {
 			IclubPolicy iCP = new IclubPolicy();
 
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
-			iCP.setPId(model.getPId());
 			iCP.setPId(model.getPId());
 			iCP.setPProrataPrm(model.getPProrataPrm());
 			iCP.setPPremium(model.getPPremium());
@@ -152,11 +142,6 @@ public class IclubPolicyService {
 				IclubPolicyModel model = new IclubPolicyModel();
 
 				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
 				model.setPProrataPrm(iCP.getPProrataPrm());
 				model.setPPremium(iCP.getPPremium());
 				model.setPNumber(iCP.getPNumber());
@@ -193,11 +178,6 @@ public class IclubPolicyService {
 				IclubPolicyModel model = new IclubPolicyModel();
 
 				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
-				model.setPId(iCP.getPId());
 				model.setPProrataPrm(iCP.getPProrataPrm());
 				model.setPPremium(iCP.getPPremium());
 				model.setPNumber(iCP.getPNumber());
@@ -226,11 +206,6 @@ public class IclubPolicyService {
 		try {
 			IclubPolicy bean = iclubPolicyDAO.findById(id);
 
-			model.setPId(bean.getPId());
-			model.setPId(bean.getPId());
-			model.setPId(bean.getPId());
-			model.setPId(bean.getPId());
-			model.setPId(bean.getPId());
 			model.setPId(bean.getPId());
 			model.setPProrataPrm(bean.getPProrataPrm());
 			model.setPPremium(bean.getPPremium());
