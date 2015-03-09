@@ -17,14 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubAccessType;
-import za.co.iclub.pss.orm.bean.IclubDriver;
-import za.co.iclub.pss.orm.bean.IclubPerson;
-import za.co.iclub.pss.orm.bean.IclubPurposeType;
-import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
-import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
-import za.co.iclub.pss.orm.bean.IclubVehicleMaster;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;

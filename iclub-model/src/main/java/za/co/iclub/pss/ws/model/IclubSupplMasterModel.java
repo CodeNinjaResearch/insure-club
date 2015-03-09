@@ -21,6 +21,8 @@ public class IclubSupplMasterModel {
 	private Date srActionDt;
 	private Integer smRating;
 	private Timestamp smCrtdDt;
+	private String[] iclubClaimItemsForCiAssesorId;
+	private String[] iclubClaimItemsForCiHandlerId;
 
 	public String getSmId() {
 		return smId;
@@ -124,6 +126,22 @@ public class IclubSupplMasterModel {
 
 	public void setSmCrtdDt(Timestamp smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
+	}
+
+	public String[] getIclubClaimItemsForCiAssesorId() {
+		return iclubClaimItemsForCiAssesorId;
+	}
+
+	public void setIclubClaimItemsForCiAssesorId(String[] iclubClaimItemsForCiAssesorId) {
+		this.iclubClaimItemsForCiAssesorId = iclubClaimItemsForCiAssesorId;
+	}
+
+	public String[] getIclubClaimItemsForCiHandlerId() {
+		return iclubClaimItemsForCiHandlerId;
+	}
+
+	public void setIclubClaimItemsForCiHandlerId(String[] iclubClaimItemsForCiHandlerId) {
+		this.iclubClaimItemsForCiHandlerId = iclubClaimItemsForCiHandlerId;
 	}
 
 }

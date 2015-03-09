@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.bean.IclubSupplMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -54,6 +55,8 @@ public class IclubSupplMasterService {
 			iCSm.setSmAddress(model.getSmAddress());
 			iCSm.setSmRegNum(model.getSmRegNum());
 			iCSm.setSmTradeName(model.getSmTradeName());
+			iCSm.setSmLat(model.getSmLat());
+			iCSm.setSmName(model.getSmName());
 			iCSm.setIclubSupplierType(iclubSupplierTypeDAO.findById(model.getIclubSupplierType()));
 			iCSm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 
@@ -95,6 +98,8 @@ public class IclubSupplMasterService {
 			iCSm.setSmAddress(model.getSmAddress());
 			iCSm.setSmRegNum(model.getSmRegNum());
 			iCSm.setSmTradeName(model.getSmTradeName());
+			iCSm.setSmLat(model.getSmLat());
+			iCSm.setSmName(model.getSmName());
 			iCSm.setIclubSupplierType(iclubSupplierTypeDAO.findById(model.getIclubSupplierType()));
 			iCSm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 
@@ -144,7 +149,8 @@ public class IclubSupplMasterService {
 			for (Object object : batmod) {
 				IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
 				IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
-
+			
+				iCSm.setSmId(iclubSMaster.getSmId());
 				iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
 				iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
 				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
@@ -155,6 +161,28 @@ public class IclubSupplMasterService {
 				iCSm.setSmAddress(iclubSMaster.getSmAddress());
 				iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
 				iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
+				iCSm.setSmLat(iclubSMaster.getSmLat());
+				iCSm.setSmName(iclubSMaster.getSmName());
+				
+				if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
+					String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
+						claimItemsForCiAssesorIds[i] = claimItem.getCiId();
+						i++;
+					}
+					iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
+				}
+
+				if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
+					String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
+						claimItemsForCiHandlerIds[i] = claimItem.getCiId();
+						i++;
+					}
+					iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
+				}
 
 				ret.add((T) iCSm);
 			}
@@ -179,6 +207,7 @@ public class IclubSupplMasterService {
 				IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
 				IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
 
+				iCSm.setSmId(iclubSMaster.getSmId());
 				iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
 				iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
 				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
@@ -189,6 +218,30 @@ public class IclubSupplMasterService {
 				iCSm.setSmAddress(iclubSMaster.getSmAddress());
 				iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
 				iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
+				
+				iCSm.setSmLat(iclubSMaster.getSmLat());
+				iCSm.setSmName(iclubSMaster.getSmName());
+				
+				if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
+					String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
+						claimItemsForCiAssesorIds[i] = claimItem.getCiId();
+						i++;
+					}
+					iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
+				}
+
+				if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
+					String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
+						claimItemsForCiHandlerIds[i] = claimItem.getCiId();
+						i++;
+					}
+					iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
+				}
+
 
 				ret.add((T) iCSm);
 			}
@@ -218,6 +271,29 @@ public class IclubSupplMasterService {
 			model.setSmAddress(bean.getSmAddress());
 			model.setSmRegNum(bean.getSmRegNum());
 			model.setSmTradeName(bean.getSmTradeName());
+			
+			model.setSmLat(bean.getSmLat());
+			model.setSmName(bean.getSmName());
+			
+			if (bean.getIclubClaimItemsForCiAssesorId() != null && bean.getIclubClaimItemsForCiAssesorId().size() > 0) {
+				String[] claimItemsForCiAssesorIds = new String[bean.getIclubClaimItemsForCiAssesorId().size()];
+				int i = 0;
+				for (IclubClaimItem claimItem : bean.getIclubClaimItemsForCiAssesorId()) {
+					claimItemsForCiAssesorIds[i] = claimItem.getCiId();
+					i++;
+				}
+				model.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
+			}
+
+			if (bean.getIclubClaimItemsForCiHandlerId() != null && bean.getIclubClaimItemsForCiHandlerId().size() > 0) {
+				String[] claimItemsForCiHandlerIds = new String[bean.getIclubClaimItemsForCiHandlerId().size()];
+				int i = 0;
+				for (IclubClaimItem claimItem : bean.getIclubClaimItemsForCiHandlerId()) {
+					claimItemsForCiHandlerIds[i] = claimItem.getCiId();
+					i++;
+				}
+				model.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -9,6 +9,7 @@ public class IclubThatchTypeModel {
 	private String ttShortDesc;
 	private String ttLongDesc;
 	private String ttStatus;
+	private String[] iclubProperties;
 
 	public Long getTtId() {
 		return ttId;
@@ -40,5 +41,13 @@ public class IclubThatchTypeModel {
 
 	public void setTtStatus(String ttStatus) {
 		this.ttStatus = ttStatus;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 }

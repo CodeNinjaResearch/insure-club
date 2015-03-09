@@ -222,7 +222,6 @@ public class IclubTrackerMasterService {
 			IclubTrackerMaster bean = iclubTrackerMasterDAO.findById(id);
 
 			model.setTmId(bean.getTmId());
-
 			model.setTmName(bean.getTmName());
 			model.setTmLat(bean.getTmLat());
 			model.setTmLocation(bean.getTmLocation());

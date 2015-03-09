@@ -13,6 +13,7 @@ public class IclubSecurityMasterModel {
 	private String smDesc;
 	private String smStatus;
 	private Timestamp smCrtdDt;
+	private String[] iclubVehicles ;
 
 	public String getSmId() {
 		return smId;
@@ -60,6 +61,14 @@ public class IclubSecurityMasterModel {
 
 	public void setSmCrtdDt(Timestamp smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
+	}
+
+	public String[] getIclubVehicles() {
+		return iclubVehicles;
+	}
+
+	public void setIclubVehicles(String[] iclubVehicles) {
+		this.iclubVehicles = iclubVehicles;
 	}
 
 }

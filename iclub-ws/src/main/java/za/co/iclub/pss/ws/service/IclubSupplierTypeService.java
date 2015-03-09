@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubSupplMaster;
 import za.co.iclub.pss.orm.bean.IclubSupplierType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplierTypeDAO;
@@ -130,6 +131,16 @@ public class IclubSupplierTypeService {
 				model.setStShortDesc(iSt.getStShortDesc());
 				model.setStStatus(iSt.getStStatus());
 
+				if (iSt.getIclubSupplMasters() != null && iSt.getIclubSupplMasters().size() > 0) {
+					String[] supplMasters = new String[iSt.getIclubSupplMasters().size()];
+					int i = 0;
+					for (IclubSupplMaster supplMaster : iSt.getIclubSupplMasters()) {
+						supplMasters[i] = supplMaster.getSmId();
+						i++;
+					}
+					model.setIclubSupplMasters(supplMasters);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -152,6 +163,16 @@ public class IclubSupplierTypeService {
 			model.setStLongDesc(bean.getStLongDesc());
 			model.setStShortDesc(bean.getStShortDesc());
 			model.setStStatus(bean.getStStatus());
+
+			if (bean.getIclubSupplMasters() != null && bean.getIclubSupplMasters().size() > 0) {
+				String[] supplMasters = new String[bean.getIclubSupplMasters().size()];
+				int i = 0;
+				for (IclubSupplMaster supplMaster : bean.getIclubSupplMasters()) {
+					supplMasters[i] = supplMaster.getSmId();
+					i++;
+				}
+				model.setIclubSupplMasters(supplMasters);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -1,9 +1,7 @@
 package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

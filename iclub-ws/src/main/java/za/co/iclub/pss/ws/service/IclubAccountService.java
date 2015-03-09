@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubAccount;
 import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
-import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccountDAO;
 import za.co.iclub.pss.orm.dao.IclubAccountTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBankMasterDAO;

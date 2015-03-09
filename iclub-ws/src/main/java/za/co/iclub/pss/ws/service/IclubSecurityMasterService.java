@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
+import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -143,6 +144,18 @@ public class IclubSecurityMasterService {
 				iCSm.setSmStatus(iclubSMaster.getSmStatus());
 				iCSm.setIclubInsuranceItemType(iclubSMaster.getIclubInsuranceItemType() != null ? iclubSMaster.getIclubInsuranceItemType().getIitId() : null);
 				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
+				
+				
+				if (iclubSMaster.getIclubVehicles() != null && iclubSMaster.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iclubSMaster.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iclubSMaster.getIclubVehicles()) {
+						vehicles[i] = vehicle.getVId();
+						i++;
+					}
+					iCSm.setIclubVehicles(vehicles);
+				}
+				
 
 				ret.add((T) iCSm);
 			}

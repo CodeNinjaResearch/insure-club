@@ -9,6 +9,7 @@ public class IclubSupplierTypeModel {
 	private String stShortDesc;
 	private String stLongDesc;
 	private String stStatus;
+	private String[] iclubSupplMasters;
 
 	public Long getStId() {
 		return stId;
@@ -40,6 +41,14 @@ public class IclubSupplierTypeModel {
 
 	public void setStStatus(String stStatus) {
 		this.stStatus = stStatus;
+	}
+
+	public String[] getIclubSupplMasters() {
+		return iclubSupplMasters;
+	}
+
+	public void setIclubSupplMasters(String[] iclubSupplMasters) {
+		this.iclubSupplMasters = iclubSupplMasters;
 	}
 
 }
