@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubOccupiedStatus;
+import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubOccupiedStatusDAO;
 import za.co.iclub.pss.ws.model.IclubOccupiedStatusModel;
@@ -129,6 +130,16 @@ public class IclubOccupiedStatusService {
 				model.setOsLongDesc(iOs.getOsLongDesc());
 				model.setOsShortDesc(iOs.getOsShortDesc());
 				model.setOsStatus(iOs.getOsStatus());
+				
+				if (iOs.getIclubProperties() != null && iOs.getIclubProperties().size() > 0) {
+					String[] iclubProperties = new String[iOs.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty iclubProperty : iOs.getIclubProperties()) {
+						iclubProperties[i] = iclubProperty.getPId();
+						i++;
+					}
+					model.setIclubProperties(iclubProperties);
+				}
 
 				ret.add((T) model);
 			}
@@ -152,6 +163,16 @@ public class IclubOccupiedStatusService {
 			model.setOsLongDesc(bean.getOsLongDesc());
 			model.setOsShortDesc(bean.getOsShortDesc());
 			model.setOsStatus(bean.getOsStatus());
+			
+			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
+				String[] iclubProperties = new String[bean.getIclubProperties().size()];
+				int i = 0;
+				for (IclubProperty iclubProperty : bean.getIclubProperties()) {
+					iclubProperties[i] = iclubProperty.getPId();
+					i++;
+				}
+				model.setIclubProperties(iclubProperties);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

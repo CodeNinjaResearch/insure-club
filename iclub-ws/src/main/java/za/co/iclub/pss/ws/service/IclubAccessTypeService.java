@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,9 +12,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubAccessType;
+import za.co.iclub.pss.orm.bean.IclubDriver;
+import za.co.iclub.pss.orm.bean.IclubProperty;
+import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.ws.model.IclubAccessTypeModel;
@@ -155,6 +161,46 @@ public class IclubAccessTypeService {
 				iCB.setAtShortDesc(iclubAtype.getAtShortDesc());
 				iCB.setAtStatus(iclubAtype.getAtStatus());
 
+				if (iclubAtype.getIclubVehiclesForVOnAccessTypeId() != null && iclubAtype.getIclubVehiclesForVOnAccessTypeId().size() > 0) {
+					String[] vehiclesForVOnAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVOnAccessTypeId().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVOnAccessTypeId()) {
+						vehiclesForVOnAccessTypeIds[i] = vehicle.getVId();
+						i++;
+					}
+					iCB.setIclubVehiclesForVOnAccessTypeId(vehiclesForVOnAccessTypeIds);
+				}
+
+				if (iclubAtype.getIclubVehiclesForVDdAccessTypeId() != null && iclubAtype.getIclubVehiclesForVDdAccessTypeId().size() > 0) {
+					String[] vehiclesForVDdAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVDdAccessTypeId().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVDdAccessTypeId()) {
+						vehiclesForVDdAccessTypeIds[i] = vehicle.getVId();
+						i++;
+					}
+					iCB.setIclubVehiclesForVDdAccessTypeId(vehiclesForVDdAccessTypeIds);
+				}
+
+				if (iclubAtype.getIclubDrivers() != null && iclubAtype.getIclubDrivers().size() > 0) {
+					String[] drivers = new String[iclubAtype.getIclubDrivers().size()];
+					int i = 0;
+					for (IclubDriver driver : iclubAtype.getIclubDrivers()) {
+						drivers[i] = driver.getDId();
+						i++;
+					}
+					iCB.setIclubDrivers(drivers);
+				}
+
+				if (iclubAtype.getIclubProperties() != null && iclubAtype.getIclubProperties().size() > 0) {
+					String[] properties = new String[iclubAtype.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty property : iclubAtype.getIclubProperties()) {
+						properties[i] = property.getPId();
+						i++;
+					}
+					iCB.setIclubProperties(properties);
+				}
+
 				ret.add((T) iCB);
 			}
 		} catch (Exception e) {
@@ -177,6 +223,46 @@ public class IclubAccessTypeService {
 			model.setAtLongDesc(bean.getAtLongDesc());
 			model.setAtShortDesc(bean.getAtShortDesc());
 			model.setAtStatus(bean.getAtStatus());
+
+			if (bean.getIclubVehiclesForVOnAccessTypeId() != null && bean.getIclubVehiclesForVOnAccessTypeId().size() > 0) {
+				String[] vehiclesForVOnAccessTypeIds = new String[bean.getIclubVehiclesForVOnAccessTypeId().size()];
+				int i = 0;
+				for (IclubVehicle vehicle : bean.getIclubVehiclesForVOnAccessTypeId()) {
+					vehiclesForVOnAccessTypeIds[i] = vehicle.getVId();
+					i++;
+				}
+				model.setIclubVehiclesForVOnAccessTypeId(vehiclesForVOnAccessTypeIds);
+			}
+
+			if (bean.getIclubVehiclesForVDdAccessTypeId() != null && bean.getIclubVehiclesForVDdAccessTypeId().size() > 0) {
+				String[] vehiclesForVDdAccessTypeIds = new String[bean.getIclubVehiclesForVDdAccessTypeId().size()];
+				int i = 0;
+				for (IclubVehicle vehicle : bean.getIclubVehiclesForVDdAccessTypeId()) {
+					vehiclesForVDdAccessTypeIds[i] = vehicle.getVId();
+					i++;
+				}
+				model.setIclubVehiclesForVDdAccessTypeId(vehiclesForVDdAccessTypeIds);
+			}
+
+			if (bean.getIclubDrivers() != null && bean.getIclubDrivers().size() > 0) {
+				String[] drivers = new String[bean.getIclubDrivers().size()];
+				int i = 0;
+				for (IclubDriver driver : bean.getIclubDrivers()) {
+					drivers[i] = driver.getDId();
+					i++;
+				}
+				model.setIclubDrivers(drivers);
+			}
+
+			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
+				String[] properties = new String[bean.getIclubProperties().size()];
+				int i = 0;
+				for (IclubProperty property : bean.getIclubProperties()) {
+					properties[i] = property.getPId();
+					i++;
+				}
+				model.setIclubProperties(properties);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

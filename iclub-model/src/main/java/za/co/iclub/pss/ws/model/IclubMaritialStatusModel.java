@@ -9,6 +9,7 @@ public class IclubMaritialStatusModel {
 	private String msShortDesc;
 	private String msLongDesc;
 	private String msStatus;
+	private String[] iclubPersons;
 
 	public Long getMsId() {
 		return msId;
@@ -40,6 +41,14 @@ public class IclubMaritialStatusModel {
 
 	public void setMsStatus(String msStatus) {
 		this.msStatus = msStatus;
+	}
+
+	public String[] getIclubPersons() {
+		return iclubPersons;
+	}
+
+	public void setIclubPersons(String[] iclubPersons) {
+		this.iclubPersons = iclubPersons;
 	}
 
 }

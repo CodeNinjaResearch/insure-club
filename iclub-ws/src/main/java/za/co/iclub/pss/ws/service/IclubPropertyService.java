@@ -73,7 +73,6 @@ public class IclubPropertyService {
 			model.setPLat(iCP.getPLat());
 			model.setPAddress(iCP.getPAddress());
 			model.setPRegNum(iCP.getPRegNum());
-
 			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
 			iCP.setIclubThatchType(model.getIclubThatchType() != null ? iclubThatchTypeDAO.findById(model.getIclubThatchType()) : null);
 			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
@@ -124,7 +123,6 @@ public class IclubPropertyService {
 			model.setPLat(iCP.getPLat());
 			model.setPAddress(iCP.getPAddress());
 			model.setPRegNum(iCP.getPRegNum());
-
 			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
 			iCP.setIclubThatchType(model.getIclubThatchType() != null ? iclubThatchTypeDAO.findById(model.getIclubThatchType()) : null);
 			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
@@ -197,7 +195,6 @@ public class IclubPropertyService {
 				model.setPLat(iCP.getPLat());
 				model.setPAddress(iCP.getPAddress());
 				model.setPRegNum(iCP.getPRegNum());
-
 				model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
 				model.setIclubPurposeType(iCP.getIclubPurposeType() != null ? (iCP.getIclubPurposeType().getPtId()) : null);
 				model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
@@ -246,7 +243,6 @@ public class IclubPropertyService {
 				model.setPLat(iCP.getPLat());
 				model.setPAddress(iCP.getPAddress());
 				model.setPRegNum(iCP.getPRegNum());
-
 				model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
 				model.setIclubPurposeType(iCP.getIclubPurposeType() != null ? (iCP.getIclubPurposeType().getPtId()) : null);
 				model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
@@ -289,7 +285,6 @@ public class IclubPropertyService {
 			model.setPLat(bean.getPLat());
 			model.setPAddress(bean.getPAddress());
 			model.setPRegNum(bean.getPRegNum());
-
 			model.setIclubCoverType(bean.getIclubCoverType() != null ? (bean.getIclubCoverType().getCtId()) : null);
 			model.setIclubPurposeType(bean.getIclubPurposeType() != null ? (bean.getIclubPurposeType().getPtId()) : null);
 			model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus() != null ? (bean.getIclubOccupiedStatus().getOsId()) : null);

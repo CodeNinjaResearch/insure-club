@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubPropertyType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyTypeDAO;
@@ -129,6 +130,17 @@ public class IclubPropertyTypeService {
 				model.setPtLongDesc(iPt.getPtLongDesc());
 				model.setPtShortDesc(iPt.getPtShortDesc());
 				model.setPtStatus(iPt.getPtStatus());
+				
+				if (iPt.getIclubProperties() != null && iPt.getIclubProperties().size() > 0) {
+					String[] properties = new String[iPt.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty iclubProperty : iPt.getIclubProperties()) {
+						properties[i] = iclubProperty.getPId();
+						i++;
+					}
+					model.setIclubProperties(properties);
+				}
+
 
 				ret.add((T) model);
 			}
@@ -152,6 +164,16 @@ public class IclubPropertyTypeService {
 			model.setPtLongDesc(bean.getPtLongDesc());
 			model.setPtShortDesc(bean.getPtShortDesc());
 			model.setPtStatus(bean.getPtStatus());
+
+			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
+				String[] properties = new String[bean.getIclubProperties().size()];
+				int i = 0;
+				for (IclubProperty iclubProperty : bean.getIclubProperties()) {
+					properties[i] = iclubProperty.getPId();
+					i++;
+				}
+				model.setIclubProperties(properties);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

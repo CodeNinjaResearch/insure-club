@@ -9,6 +9,7 @@ public class IclubNotificationTypeModel {
 	private String ntShortDesc;
 	private String ntLongDesc;
 	private String ntStatus;
+	private String[] iclubNotifs;
 
 	public Long getNtId() {
 		return ntId;
@@ -40,6 +41,14 @@ public class IclubNotificationTypeModel {
 
 	public void setNtStatus(String ntStatus) {
 		this.ntStatus = ntStatus;
+	}
+
+	public String[] getIclubNotifs() {
+		return iclubNotifs;
+	}
+
+	public void setIclubNotifs(String[] iclubNotifs) {
+		this.iclubNotifs = iclubNotifs;
 	}
 
 }

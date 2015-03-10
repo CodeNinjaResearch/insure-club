@@ -9,6 +9,10 @@ public class IclubAccessTypeModel {
 	private String atShortDesc;
 	private String atLongDesc;
 	private String atStatus;
+	private String[] iclubVehiclesForVOnAccessTypeId ;
+	private String[] iclubVehiclesForVDdAccessTypeId ;
+	private String[] iclubProperties ;
+	private String[] iclubDrivers ;
 
 	public Long getAtId() {
 		return atId;
@@ -40,6 +44,38 @@ public class IclubAccessTypeModel {
 
 	public void setAtStatus(String atStatus) {
 		this.atStatus = atStatus;
+	}
+
+	public String[] getIclubVehiclesForVOnAccessTypeId() {
+		return iclubVehiclesForVOnAccessTypeId;
+	}
+
+	public void setIclubVehiclesForVOnAccessTypeId(String[] iclubVehiclesForVOnAccessTypeId) {
+		this.iclubVehiclesForVOnAccessTypeId = iclubVehiclesForVOnAccessTypeId;
+	}
+
+	public String[] getIclubVehiclesForVDdAccessTypeId() {
+		return iclubVehiclesForVDdAccessTypeId;
+	}
+
+	public void setIclubVehiclesForVDdAccessTypeId(String[] iclubVehiclesForVDdAccessTypeId) {
+		this.iclubVehiclesForVDdAccessTypeId = iclubVehiclesForVDdAccessTypeId;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
+	}
+
+	public String[] getIclubDrivers() {
+		return iclubDrivers;
+	}
+
+	public void setIclubDrivers(String[] iclubDrivers) {
+		this.iclubDrivers = iclubDrivers;
 	}
 
 }

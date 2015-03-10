@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.bean.IclubPaymentStatus;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubPaymentStatusDAO;
@@ -130,6 +131,16 @@ public class IclubPaymentStatusService {
 				model.setPsShortDesc(iPs.getPsShortDesc());
 				model.setPsStatus(iPs.getPsStatus());
 
+				if (iPs.getIclubPayments() != null && iPs.getIclubPayments().size() > 0) {
+					String[] payments = new String[iPs.getIclubPayments().size()];
+					int i = 0;
+					for (IclubPayment iclubPayment : iPs.getIclubPayments()) {
+						payments[i] = iclubPayment.getPId();
+						i++;
+					}
+					model.setIclubPayments(payments);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -152,6 +163,16 @@ public class IclubPaymentStatusService {
 			model.setPsLongDesc(bean.getPsLongDesc());
 			model.setPsShortDesc(bean.getPsShortDesc());
 			model.setPsStatus(bean.getPsStatus());
+
+			if (bean.getIclubPayments() != null && bean.getIclubPayments().size() > 0) {
+				String[] payments = new String[bean.getIclubPayments().size()];
+				int i = 0;
+				for (IclubPayment iclubPayment : bean.getIclubPayments()) {
+					payments[i] = iclubPayment.getPId();
+					i++;
+				}
+				model.setIclubPayments(payments);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

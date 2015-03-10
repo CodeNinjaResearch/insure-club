@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubMaritialStatus;
+import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
 import za.co.iclub.pss.ws.model.IclubMaritialStatusModel;
@@ -130,6 +131,15 @@ public class IclubMaritialStatusService {
 				model.setMsShortDesc(iMs.getMsShortDesc());
 				model.setMsStatus(iMs.getMsStatus());
 
+				if (iMs.getIclubPersons() != null && iMs.getIclubPersons().size() > 0) {
+					String[] iclubPersons = new String[iMs.getIclubPersons().size()];
+					int i = 0;
+					for (IclubPerson iclubPerson : iMs.getIclubPersons()) {
+						iclubPersons[i] = iclubPerson.getPId();
+						i++;
+					}
+					model.setIclubPersons(iclubPersons);
+				}
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -152,6 +162,16 @@ public class IclubMaritialStatusService {
 			model.setMsLongDesc(bean.getMsLongDesc());
 			model.setMsShortDesc(bean.getMsShortDesc());
 			model.setMsStatus(bean.getMsStatus());
+			
+			if (bean.getIclubPersons() != null && bean.getIclubPersons().size() > 0) {
+				String[] iclubPersons = new String[bean.getIclubPersons().size()];
+				int i = 0;
+				for (IclubPerson iclubPerson : bean.getIclubPersons()) {
+					iclubPersons[i] = iclubPerson.getPId();
+					i++;
+				}
+				model.setIclubPersons(iclubPersons);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

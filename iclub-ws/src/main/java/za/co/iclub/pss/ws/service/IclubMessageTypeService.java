@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubMessage;
 import za.co.iclub.pss.orm.bean.IclubMessageType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubMessageTypeDAO;
@@ -130,6 +131,16 @@ public class IclubMessageTypeService {
 				model.setMtShortDesc(iMt.getMtShortDesc());
 				model.setMtStatus(iMt.getMtStatus());
 
+				if (iMt.getIclubMessages() != null && iMt.getIclubMessages().size() > 0) {
+					String[] iclubMessages = new String[iMt.getIclubMessages().size()];
+					int i = 0;
+					for (IclubMessage iclubMessage : iMt.getIclubMessages()) {
+						iclubMessages[i] = iclubMessage.getMId();
+						i++;
+					}
+					model.setIclubMessages(iclubMessages);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -152,6 +163,16 @@ public class IclubMessageTypeService {
 			model.setMtLongDesc(bean.getMtLongDesc());
 			model.setMtShortDesc(bean.getMtShortDesc());
 			model.setMtStatus(bean.getMtStatus());
+
+			if (bean.getIclubMessages() != null && bean.getIclubMessages().size() > 0) {
+				String[] iclubMessages = new String[bean.getIclubMessages().size()];
+				int i = 0;
+				for (IclubMessage iclubMessage : bean.getIclubMessages()) {
+					iclubMessages[i] = iclubMessage.getMId();
+					i++;
+				}
+				model.setIclubMessages(iclubMessages);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

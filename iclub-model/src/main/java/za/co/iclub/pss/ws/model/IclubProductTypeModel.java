@@ -9,6 +9,7 @@ public class IclubProductTypeModel {
 	private String ptShortDesc;
 	private String ptLongDesc;
 	private String ptStatus;
+	private String[] iclubQuotes;
 
 	public Long getPtId() {
 		return ptId;
@@ -40,6 +41,14 @@ public class IclubProductTypeModel {
 
 	public void setPtStatus(String ptStatus) {
 		this.ptStatus = ptStatus;
+	}
+
+	public String[] getIclubQuotes() {
+		return iclubQuotes;
+	}
+
+	public void setIclubQuotes(String[] iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubNotif;
 import za.co.iclub.pss.orm.bean.IclubNotificationType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
@@ -129,6 +130,17 @@ public class IclubNotificationTypeService {
 				model.setNtLongDesc(iNt.getNtLongDesc());
 				model.setNtShortDesc(iNt.getNtShortDesc());
 				model.setNtStatus(iNt.getNtStatus());
+				
+
+				if (iNt.getIclubNotifs() != null && iNt.getIclubNotifs().size() > 0) {
+					String[] iclubNotifs = new String[iNt.getIclubNotifs().size()];
+					int i = 0;
+					for (IclubNotif iclubNotif : iNt.getIclubNotifs()) {
+						iclubNotifs[i] = iclubNotif.getNId();
+						i++;
+					}
+					model.setIclubNotifs(iclubNotifs);
+				}
 
 				ret.add((T) model);
 			}
@@ -152,6 +164,16 @@ public class IclubNotificationTypeService {
 			model.setNtLongDesc(bean.getNtLongDesc());
 			model.setNtShortDesc(bean.getNtShortDesc());
 			model.setNtStatus(bean.getNtStatus());
+			
+			if (bean.getIclubNotifs() != null && bean.getIclubNotifs().size() > 0) {
+				String[] iclubNotifs = new String[bean.getIclubNotifs().size()];
+				int i = 0;
+				for (IclubNotif iclubNotif : bean.getIclubNotifs()) {
+					iclubNotifs[i] = iclubNotif.getNId();
+					i++;
+				}
+				model.setIclubNotifs(iclubNotifs);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

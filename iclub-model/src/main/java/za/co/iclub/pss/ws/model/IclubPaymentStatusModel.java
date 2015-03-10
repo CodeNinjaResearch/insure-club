@@ -9,6 +9,7 @@ public class IclubPaymentStatusModel {
 	private String psShortDesc;
 	private String psLongDesc;
 	private String psStatus;
+	private String[] iclubPayments;
 
 	public Long getPsId() {
 		return psId;
@@ -40,6 +41,14 @@ public class IclubPaymentStatusModel {
 
 	public void setPsStatus(String psStatus) {
 		this.psStatus = psStatus;
+	}
+
+	public String[] getIclubPayments() {
+		return iclubPayments;
+	}
+
+	public void setIclubPayments(String[] iclubPayments) {
+		this.iclubPayments = iclubPayments;
 	}
 
 }

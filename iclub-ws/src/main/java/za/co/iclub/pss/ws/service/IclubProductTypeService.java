@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubProductType;
+import za.co.iclub.pss.orm.bean.IclubQuote;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubProductTypeDAO;
 import za.co.iclub.pss.ws.model.IclubProductTypeModel;
@@ -152,6 +153,16 @@ public class IclubProductTypeService {
 			model.setPtLongDesc(bean.getPtLongDesc());
 			model.setPtShortDesc(bean.getPtShortDesc());
 			model.setPtStatus(bean.getPtStatus());
+
+			if (bean.getIclubQuotes() != null && bean.getIclubQuotes().size() > 0) {
+				String[] quotes = new String[bean.getIclubQuotes().size()];
+				int i = 0;
+				for (IclubQuote iclubQuote : bean.getIclubQuotes()) {
+					quotes[i] = iclubQuote.getQId();
+					i++;
+				}
+				model.setIclubQuotes(quotes);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);
