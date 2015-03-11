@@ -1,6 +1,5 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class IclubConfigBean {
