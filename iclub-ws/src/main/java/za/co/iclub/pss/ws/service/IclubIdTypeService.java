@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubIdType;
+import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
 import za.co.iclub.pss.ws.model.IclubIdTypeModel;
@@ -129,6 +130,16 @@ public class IclubIdTypeService {
 				model.setItLongDesc(iIt.getItLongDesc());
 				model.setItShortDesc(iIt.getItShortDesc());
 				model.setItStatus(iIt.getItStatus());
+				
+				if (iIt.getIclubPersons() != null && iIt.getIclubPersons().size() > 0) {
+					String[] iclubPersons = new String[iIt.getIclubPersons().size()];
+					int i = 0;
+					for (IclubPerson iclubPerson : iIt.getIclubPersons()) {
+						iclubPersons[i] = iclubPerson.getPId();
+						i++;
+					}
+					model.setIclubPersons(iclubPersons);
+				}
 
 				ret.add((T) model);
 			}
@@ -152,6 +163,16 @@ public class IclubIdTypeService {
 			model.setItLongDesc(bean.getItLongDesc());
 			model.setItShortDesc(bean.getItShortDesc());
 			model.setItStatus(bean.getItStatus());
+			
+			if (bean.getIclubPersons() != null && bean.getIclubPersons().size() > 0) {
+				String[] iclubPersons = new String[bean.getIclubPersons().size()];
+				int i = 0;
+				for (IclubPerson iclubPerson : bean.getIclubPersons()) {
+					iclubPersons[i] = iclubPerson.getPId();
+					i++;
+				}
+				model.setIclubPersons(iclubPersons);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

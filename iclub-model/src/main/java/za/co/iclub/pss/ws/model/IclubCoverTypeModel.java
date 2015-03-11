@@ -14,6 +14,8 @@ public class IclubCoverTypeModel {
 	private String ctLongDesc;
 	private String ctStatus;
 	private Timestamp ctCrtdDt;
+	private String[] iclubProperties;
+	private String[] iclubQuotes;
 
 	public Long getCtId() {
 		return ctId;
@@ -69,6 +71,22 @@ public class IclubCoverTypeModel {
 
 	public void setCtCrtdDt(Timestamp ctCrtdDt) {
 		this.ctCrtdDt = ctCrtdDt;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
+	}
+
+	public String[] getIclubQuotes() {
+		return iclubQuotes;
+	}
+
+	public void setIclubQuotes(String[] iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

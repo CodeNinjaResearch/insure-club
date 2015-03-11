@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubDocument;
 import za.co.iclub.pss.orm.bean.IclubDocumentType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDocumentTypeDAO;
@@ -129,6 +130,18 @@ public class IclubDocumentTypeService {
 				model.setDtLongDesc(iDt.getDtLongDesc());
 				model.setDtShortDesc(iDt.getDtShortDesc());
 				model.setDtStatus(iDt.getDtStatus());
+				
+				if (iDt.getIclubDocuments() != null && iDt.getIclubDocuments().size() > 0) {
+					String[] iclubDocuments = new String[iDt.getIclubDocuments().size()];
+					int i = 0;
+					for (IclubDocument iclubDocument : iDt.getIclubDocuments()) {
+						iclubDocuments[i] = iclubDocument.getDId();
+						i++;
+					}
+					model.setIclubDocuments(iclubDocuments);
+				}
+
+				
 
 				ret.add((T) model);
 			}
@@ -152,6 +165,16 @@ public class IclubDocumentTypeService {
 			model.setDtLongDesc(bean.getDtLongDesc());
 			model.setDtShortDesc(bean.getDtShortDesc());
 			model.setDtStatus(bean.getDtStatus());
+			
+			if (bean.getIclubDocuments() != null && bean.getIclubDocuments().size() > 0) {
+				String[] iclubDocuments = new String[bean.getIclubDocuments().size()];
+				int i = 0;
+				for (IclubDocument iclubDocument : bean.getIclubDocuments()) {
+					iclubDocuments[i] = iclubDocument.getDId();
+					i++;
+				}
+				model.setIclubDocuments(iclubDocuments);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

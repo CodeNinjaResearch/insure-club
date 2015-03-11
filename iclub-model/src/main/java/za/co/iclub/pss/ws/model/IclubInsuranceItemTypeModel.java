@@ -9,6 +9,14 @@ public class IclubInsuranceItemTypeModel {
 	private String iitShortDesc;
 	private String iitLongDesc;
 	private String iitStatus;
+	private Long[] iclubRateTypes;
+	private String[] iclubSecurityDevices;
+	private String[] iclubSecurityMasters;
+	private Long[] iclubPurposeTypes;
+	private String[] iclubRateEngines;
+	private String[] iclubInsuranceItems;
+	private String[] iclubInsuranceItems_1;
+	private Long[] iclubCoverTypes;
 
 	public Long getIitId() {
 		return iitId;
@@ -40,6 +48,70 @@ public class IclubInsuranceItemTypeModel {
 
 	public void setIitStatus(String iitStatus) {
 		this.iitStatus = iitStatus;
+	}
+
+	public Long[] getIclubRateTypes() {
+		return iclubRateTypes;
+	}
+
+	public void setIclubRateTypes(Long[] iclubRateTypes) {
+		this.iclubRateTypes = iclubRateTypes;
+	}
+
+	public String[] getIclubSecurityDevices() {
+		return iclubSecurityDevices;
+	}
+
+	public void setIclubSecurityDevices(String[] iclubSecurityDevices) {
+		this.iclubSecurityDevices = iclubSecurityDevices;
+	}
+
+	public String[] getIclubSecurityMasters() {
+		return iclubSecurityMasters;
+	}
+
+	public void setIclubSecurityMasters(String[] iclubSecurityMasters) {
+		this.iclubSecurityMasters = iclubSecurityMasters;
+	}
+
+	public Long[] getIclubPurposeTypes() {
+		return iclubPurposeTypes;
+	}
+
+	public void setIclubPurposeTypes(Long[] iclubPurposeTypes) {
+		this.iclubPurposeTypes = iclubPurposeTypes;
+	}
+
+	public String[] getIclubRateEngines() {
+		return iclubRateEngines;
+	}
+
+	public void setIclubRateEngines(String[] iclubRateEngines) {
+		this.iclubRateEngines = iclubRateEngines;
+	}
+
+	public String[] getIclubInsuranceItems() {
+		return iclubInsuranceItems;
+	}
+
+	public void setIclubInsuranceItems(String[] iclubInsuranceItems) {
+		this.iclubInsuranceItems = iclubInsuranceItems;
+	}
+
+	public String[] getIclubInsuranceItems_1() {
+		return iclubInsuranceItems_1;
+	}
+
+	public void setIclubInsuranceItems_1(String[] iclubInsuranceItems_1) {
+		this.iclubInsuranceItems_1 = iclubInsuranceItems_1;
+	}
+
+	public Long[] getIclubCoverTypes() {
+		return iclubCoverTypes;
+	}
+
+	public void setIclubCoverTypes(Long[] iclubCoverTypes) {
+		this.iclubCoverTypes = iclubCoverTypes;
 	}
 
 }

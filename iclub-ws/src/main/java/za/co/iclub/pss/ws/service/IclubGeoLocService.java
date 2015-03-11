@@ -49,7 +49,6 @@ public class IclubGeoLocService {
 			iCGl.setGlLong(model.getGlLong());
 			iCGl.setGlRate(model.getGlRate());
 			iCGl.setGlCrtdDt(model.getGlCrtdDt());
-			;
 			iCGl.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 
 			iclubGeoLocDAO.save(iCGl);

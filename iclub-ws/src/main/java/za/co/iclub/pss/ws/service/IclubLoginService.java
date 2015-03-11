@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubLogin;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubLoginDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
+import za.co.iclub.pss.orm.dao.IclubRoleTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityQuestionDAO;
 import za.co.iclub.pss.ws.model.IclubLoginModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -33,6 +34,7 @@ public class IclubLoginService {
 	private IclubLoginDAO iclubLoginDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubSecurityQuestionDAO iclubSecurityQuestionDAO;
+	private IclubRoleTypeDAO iclubRoleTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
 
 	@POST
@@ -50,7 +52,10 @@ public class IclubLoginService {
 			login.setLName(model.getLName());
 			login.setLPasswd(model.getLPasswd());
 			login.setLSecAns(model.getLSecAns());
-			login.setLSecAns(model.getLSecAns());
+			login.setIclubPersonByLCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()));
+			login.setIclubPersonByLPersonId(iclubPersonDAO.findById(model.getIclubPersonByLPersonId()));
+			login.setIclubRoleType(iclubRoleTypeDAO.findById(model.getIclubRoleType()));
+			login.setIclubSecurityQuestion(iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()));
 
 			iclubLoginDAO.save(login);
 
@@ -85,7 +90,10 @@ public class IclubLoginService {
 			login.setLName(model.getLName());
 			login.setLPasswd(model.getLPasswd());
 			login.setLSecAns(model.getLSecAns());
-			login.setLSecAns(model.getLSecAns());
+			login.setIclubPersonByLCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()));
+			login.setIclubPersonByLPersonId(iclubPersonDAO.findById(model.getIclubPersonByLPersonId()));
+			login.setIclubRoleType(iclubRoleTypeDAO.findById(model.getIclubRoleType()));
+			login.setIclubSecurityQuestion(iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()));
 
 			iclubLoginDAO.merge(login);
 
@@ -139,7 +147,10 @@ public class IclubLoginService {
 				ibm.setLName(iclubLogin.getLName());
 				ibm.setLPasswd(iclubLogin.getLPasswd());
 				ibm.setLSecAns(iclubLogin.getLSecAns());
-				ibm.setLSecAns(iclubLogin.getLSecAns());
+				ibm.setIclubPersonByLCrtdBy(iclubLogin.getIclubPersonByLCrtdBy() != null ? iclubLogin.getIclubPersonByLCrtdBy().getPId() : null);
+				ibm.setIclubPersonByLPersonId(iclubLogin.getIclubPersonByLPersonId() != null ? iclubLogin.getIclubPersonByLPersonId().getPId() : null);
+				ibm.setIclubRoleType(iclubLogin.getIclubRoleType() != null ? iclubLogin.getIclubRoleType().getRtId() : null);
+				ibm.setIclubSecurityQuestion(iclubLogin.getIclubSecurityQuestion() != null ? iclubLogin.getIclubSecurityQuestion().getSqId() : null);
 
 				ret.add((T) ibm);
 			}
@@ -198,7 +209,11 @@ public class IclubLoginService {
 				message.setLPasswd(login.getLPasswd());
 				message.setLSecAns(login.getLSecAns());
 				message.setLSecAns(login.getLSecAns());
-				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId().getPId());
+				message.setIclubPersonByLCrtdBy(login.getIclubPersonByLCrtdBy() != null ? login.getIclubPersonByLCrtdBy().getPId() : null);
+				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
+				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
+				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
+
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -236,6 +251,14 @@ public class IclubLoginService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubRoleTypeDAO getIclubRoleTypeDAO() {
+		return iclubRoleTypeDAO;
+	}
+
+	public void setIclubRoleTypeDAO(IclubRoleTypeDAO iclubRoleTypeDAO) {
+		this.iclubRoleTypeDAO = iclubRoleTypeDAO;
 	}
 
 }

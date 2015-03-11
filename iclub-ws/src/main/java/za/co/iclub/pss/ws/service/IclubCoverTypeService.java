@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubCoverType;
+import za.co.iclub.pss.orm.bean.IclubProperty;
+import za.co.iclub.pss.orm.bean.IclubQuote;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
@@ -139,6 +141,25 @@ public class IclubCoverTypeService {
 				model.setCtStatus(iCt.getCtStatus());
 				model.setIclubInsuranceItemType(iCt.getIclubInsuranceItemType() != null ? iCt.getIclubInsuranceItemType().getIitId() : null);
 				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
+				
+				if (iCt.getIclubProperties() != null && iCt.getIclubProperties().size() > 0) {
+					String[] iclubProperties = new String[iCt.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty iclubProperty : iCt.getIclubProperties()) {
+						iclubProperties[i] = iclubProperty.getPId();
+						i++;
+					}
+					model.setIclubProperties(iclubProperties);
+				}
+				if (iCt.getIclubQuotes() != null && iCt.getIclubQuotes().size() > 0) {
+					String[] iclubQuotes = new String[iCt.getIclubQuotes().size()];
+					int i = 0;
+					for (IclubQuote iclubQuote : iCt.getIclubQuotes()) {
+						iclubQuotes[i] = iclubQuote.getQId();
+						i++;
+					}
+					model.setIclubQuotes(iclubQuotes);
+				}
 
 				ret.add((T) model);
 			}
@@ -171,6 +192,25 @@ public class IclubCoverTypeService {
 				model.setIclubInsuranceItemType(iCt.getIclubInsuranceItemType() != null ? iCt.getIclubInsuranceItemType().getIitId() : null);
 				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
+				if (iCt.getIclubProperties() != null && iCt.getIclubProperties().size() > 0) {
+					String[] iclubProperties = new String[iCt.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty iclubProperty : iCt.getIclubProperties()) {
+						iclubProperties[i] = iclubProperty.getPId();
+						i++;
+					}
+					model.setIclubProperties(iclubProperties);
+				}
+				if (iCt.getIclubQuotes() != null && iCt.getIclubQuotes().size() > 0) {
+					String[] iclubQuotes = new String[iCt.getIclubQuotes().size()];
+					int i = 0;
+					for (IclubQuote iclubQuote : iCt.getIclubQuotes()) {
+						iclubQuotes[i] = iclubQuote.getQId();
+						i++;
+					}
+					model.setIclubQuotes(iclubQuotes);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -195,6 +235,25 @@ public class IclubCoverTypeService {
 			model.setCtStatus(bean.getCtStatus());
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
+			
+			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
+				String[] iclubProperties = new String[bean.getIclubProperties().size()];
+				int i = 0;
+				for (IclubProperty iclubProperty : bean.getIclubProperties()) {
+					iclubProperties[i] = iclubProperty.getPId();
+					i++;
+				}
+				model.setIclubProperties(iclubProperties);
+			}
+			if (bean.getIclubQuotes() != null && bean.getIclubQuotes().size() > 0) {
+				String[] iclubQuotes = new String[bean.getIclubQuotes().size()];
+				int i = 0;
+				for (IclubQuote iclubQuote : bean.getIclubQuotes()) {
+					iclubQuotes[i] = iclubQuote.getQId();
+					i++;
+				}
+				model.setIclubQuotes(iclubQuotes);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

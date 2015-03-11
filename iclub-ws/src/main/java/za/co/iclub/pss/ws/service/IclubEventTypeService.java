@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubEvent;
 import za.co.iclub.pss.orm.bean.IclubEventType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubEventTypeDAO;
@@ -129,6 +130,16 @@ public class IclubEventTypeService {
 				model.setEtLongDesc(iEt.getEtLongDesc());
 				model.setEtShortDesc(iEt.getEtShortDesc());
 				model.setEtStatus(iEt.getEtStatus());
+				
+				if (iEt.getIclubEvents() != null && iEt.getIclubEvents().size() > 0) {
+					String[] iclubEvents = new String[iEt.getIclubEvents().size()];
+					int i = 0;
+					for (IclubEvent iclubEvent : iEt.getIclubEvents()) {
+						iclubEvents[i] = iclubEvent.getEId();
+						i++;
+					}
+					model.setIclubEvents(iclubEvents);
+				}
 
 				ret.add((T) model);
 			}
@@ -152,6 +163,16 @@ public class IclubEventTypeService {
 			model.setEtLongDesc(bean.getEtLongDesc());
 			model.setEtShortDesc(bean.getEtShortDesc());
 			model.setEtStatus(bean.getEtStatus());
+			
+			if (bean.getIclubEvents() != null && bean.getIclubEvents().size() > 0) {
+				String[] iclubEvents = new String[bean.getIclubEvents().size()];
+				int i = 0;
+				for (IclubEvent iclubEvent : bean.getIclubEvents()) {
+					iclubEvents[i] = iclubEvent.getEId();
+					i++;
+				}
+				model.setIclubEvents(iclubEvents);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -17,7 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubCoverType;
+import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
+import za.co.iclub.pss.orm.bean.IclubPurposeType;
+import za.co.iclub.pss.orm.bean.IclubRateEngine;
+import za.co.iclub.pss.orm.bean.IclubRateType;
+import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
+import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemTypeModel;
@@ -129,6 +136,84 @@ public class IclubInsuranceItemTypeService {
 				model.setIitLongDesc(iIit.getIitLongDesc());
 				model.setIitShortDesc(iIit.getIitShortDesc());
 				model.setIitStatus(iIit.getIitStatus());
+				
+				if (iIit.getIclubSecurityMasters() != null && iIit.getIclubSecurityMasters().size() > 0) {
+					String[] iclubSecurityMasters = new String[iIit.getIclubSecurityMasters().size()];
+					int i = 0;
+					for (IclubSecurityMaster iclubSecurityMaster : iIit.getIclubSecurityMasters()) {
+						iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
+						i++;
+					}
+					model.setIclubSecurityMasters(iclubSecurityMasters);
+				}
+
+				if (iIit.getIclubRateTypes() != null && iIit.getIclubRateTypes().size() > 0) {
+					Long[] iclubRateTypes = new Long[iIit.getIclubRateTypes().size()];
+					int i = 0;
+					for (IclubRateType iclubRateType : iIit.getIclubRateTypes()) {
+						iclubRateTypes[i] = iclubRateType.getRtId();
+						i++;
+					}
+					model.setIclubRateTypes(iclubRateTypes);
+				}
+
+				if (iIit.getIclubSecurityDevices() != null && iIit.getIclubSecurityDevices().size() > 0) {
+					String[] iclubSecurityDevices = new String[iIit.getIclubSecurityDevices().size()];
+					int i = 0;
+					for (IclubSecurityDevice iclubSecurityDevice : iIit.getIclubSecurityDevices()) {
+						iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
+						i++;
+					}
+					model.setIclubSecurityDevices(iclubSecurityDevices);
+				}
+				if (iIit.getIclubRateEngines() != null && iIit.getIclubRateEngines().size() > 0) {
+					String[] iclubRateEngines = new String[iIit.getIclubRateEngines().size()];
+					int i = 0;
+					for (IclubRateEngine iclubRateEngine : iIit.getIclubRateEngines()) {
+						iclubRateEngines[i] = iclubRateEngine.getReId();
+						i++;
+					}
+					model.setIclubRateEngines(iclubRateEngines);
+				}
+
+				if (iIit.getIclubPurposeTypes() != null && iIit.getIclubPurposeTypes().size() > 0) {
+					Long[] purposeTypes = new Long[iIit.getIclubPurposeTypes().size()];
+					int i = 0;
+					for (IclubPurposeType iclubPurposeType : iIit.getIclubPurposeTypes()) {
+						purposeTypes[i] = iclubPurposeType.getPtId();
+						i++;
+					}
+					model.setIclubPurposeTypes(purposeTypes);
+				}
+
+				if (iIit.getIclubInsuranceItems() != null && iIit.getIclubInsuranceItems().size() > 0) {
+					String[] insuranceItems = new String[iIit.getIclubInsuranceItems().size()];
+					int i = 0;
+					for (IclubInsuranceItem iclubInsuranceItem : iIit.getIclubInsuranceItems()) {
+						insuranceItems[i] = iclubInsuranceItem.getIiId();
+						i++;
+					}
+					model.setIclubInsuranceItems(insuranceItems);
+				}
+				if (iIit.getIclubInsuranceItems_1() != null && iIit.getIclubInsuranceItems_1().size() > 0) {
+					String[] insuranceItems = new String[iIit.getIclubInsuranceItems_1().size()];
+					int i = 0;
+					for (IclubInsuranceItem iclubInsuranceItem : iIit.getIclubInsuranceItems_1()) {
+						insuranceItems[i] = iclubInsuranceItem.getIiId();
+						i++;
+					}
+					model.setIclubInsuranceItems_1(insuranceItems);
+				}
+
+				if (iIit.getIclubCoverTypes() != null && iIit.getIclubCoverTypes().size() > 0) {
+					Long[] iclubCoverTypes = new Long[iIit.getIclubCoverTypes().size()];
+					int i = 0;
+					for (IclubCoverType iclubCoverType : iIit.getIclubCoverTypes()) {
+						iclubCoverTypes[i] = iclubCoverType.getCtId();
+						i++;
+					}
+					model.setIclubCoverTypes(iclubCoverTypes);
+				}
 
 				ret.add((T) model);
 			}
@@ -152,6 +237,84 @@ public class IclubInsuranceItemTypeService {
 			model.setIitLongDesc(bean.getIitLongDesc());
 			model.setIitShortDesc(bean.getIitShortDesc());
 			model.setIitStatus(bean.getIitStatus());
+
+			if (bean.getIclubSecurityMasters() != null && bean.getIclubSecurityMasters().size() > 0) {
+				String[] iclubSecurityMasters = new String[bean.getIclubSecurityMasters().size()];
+				int i = 0;
+				for (IclubSecurityMaster iclubSecurityMaster : bean.getIclubSecurityMasters()) {
+					iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
+					i++;
+				}
+				model.setIclubSecurityMasters(iclubSecurityMasters);
+			}
+
+			if (bean.getIclubRateTypes() != null && bean.getIclubRateTypes().size() > 0) {
+				Long[] iclubRateTypes = new Long[bean.getIclubRateTypes().size()];
+				int i = 0;
+				for (IclubRateType iclubRateType : bean.getIclubRateTypes()) {
+					iclubRateTypes[i] = iclubRateType.getRtId();
+					i++;
+				}
+				model.setIclubRateTypes(iclubRateTypes);
+			}
+
+			if (bean.getIclubSecurityDevices() != null && bean.getIclubSecurityDevices().size() > 0) {
+				String[] iclubSecurityDevices = new String[bean.getIclubSecurityDevices().size()];
+				int i = 0;
+				for (IclubSecurityDevice iclubSecurityDevice : bean.getIclubSecurityDevices()) {
+					iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
+					i++;
+				}
+				model.setIclubSecurityDevices(iclubSecurityDevices);
+			}
+			if (bean.getIclubRateEngines() != null && bean.getIclubRateEngines().size() > 0) {
+				String[] iclubRateEngines = new String[bean.getIclubRateEngines().size()];
+				int i = 0;
+				for (IclubRateEngine iclubRateEngine : bean.getIclubRateEngines()) {
+					iclubRateEngines[i] = iclubRateEngine.getReId();
+					i++;
+				}
+				model.setIclubRateEngines(iclubRateEngines);
+			}
+
+			if (bean.getIclubPurposeTypes() != null && bean.getIclubPurposeTypes().size() > 0) {
+				Long[] purposeTypes = new Long[bean.getIclubPurposeTypes().size()];
+				int i = 0;
+				for (IclubPurposeType iclubPurposeType : bean.getIclubPurposeTypes()) {
+					purposeTypes[i] = iclubPurposeType.getPtId();
+					i++;
+				}
+				model.setIclubPurposeTypes(purposeTypes);
+			}
+
+			if (bean.getIclubInsuranceItems() != null && bean.getIclubInsuranceItems().size() > 0) {
+				String[] insuranceItems = new String[bean.getIclubInsuranceItems().size()];
+				int i = 0;
+				for (IclubInsuranceItem iclubInsuranceItem : bean.getIclubInsuranceItems()) {
+					insuranceItems[i] = iclubInsuranceItem.getIiId();
+					i++;
+				}
+				model.setIclubInsuranceItems(insuranceItems);
+			}
+			if (bean.getIclubInsuranceItems_1() != null && bean.getIclubInsuranceItems_1().size() > 0) {
+				String[] insuranceItems = new String[bean.getIclubInsuranceItems_1().size()];
+				int i = 0;
+				for (IclubInsuranceItem iclubInsuranceItem : bean.getIclubInsuranceItems_1()) {
+					insuranceItems[i] = iclubInsuranceItem.getIiId();
+					i++;
+				}
+				model.setIclubInsuranceItems_1(insuranceItems);
+			}
+
+			if (bean.getIclubCoverTypes() != null && bean.getIclubCoverTypes().size() > 0) {
+				Long[] iclubCoverTypes = new Long[bean.getIclubCoverTypes().size()];
+				int i = 0;
+				for (IclubCoverType iclubCoverType : bean.getIclubCoverTypes()) {
+					iclubCoverTypes[i] = iclubCoverType.getCtId();
+					i++;
+				}
+				model.setIclubCoverTypes(iclubCoverTypes);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

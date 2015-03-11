@@ -32,6 +32,7 @@ public class IclubPerson implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8225363817530349605L;
+	
 	private String PId;
 	private IclubMaritialStatus iclubMaritialStatus;
 	private IclubPerson iclubPerson;
@@ -56,6 +57,7 @@ public class IclubPerson implements java.io.Serializable {
 	private Long PLong;
 	private Integer PZipCd;
 	private Date PCrtdDt;
+	
 	private Set<IclubMessageBoard> iclubMessageBoards = new HashSet<IclubMessageBoard>(0);
 	private Set<IclubPerson> iclubPersons = new HashSet<IclubPerson>(0);
 	private Set<IclubExtras> iclubExtrases = new HashSet<IclubExtras>(0);

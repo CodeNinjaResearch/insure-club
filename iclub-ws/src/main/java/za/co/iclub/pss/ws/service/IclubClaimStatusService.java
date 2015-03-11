@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubClaim;
+import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.bean.IclubClaimStatus;
 import za.co.iclub.pss.orm.dao.IclubClaimStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
@@ -130,6 +132,25 @@ public class IclubClaimStatusService {
 				model.setCsShortDesc(iCS.getCsShortDesc());
 				model.setCsStatus(iCS.getCsStatus());
 
+				if (iCS.getIclubClaimItems() != null && iCS.getIclubClaimItems().size() > 0) {
+					String[] iclubClaimItems = new String[iCS.getIclubClaimItems().size()];
+					int i = 0;
+					for (IclubClaimItem iclubClaimItem : iCS.getIclubClaimItems()) {
+						iclubClaimItems[i] = iclubClaimItem.getCiId();
+						i++;
+					}
+					model.setIclubClaimItems(iclubClaimItems);
+				}
+				if (iCS.getIclubClaims() != null && iCS.getIclubClaims().size() > 0) {
+					String[] iclubClaims = new String[iCS.getIclubClaims().size()];
+					int i = 0;
+					for (IclubClaim iclubClaim : iCS.getIclubClaims()) {
+						iclubClaims[i] = iclubClaim.getCId();
+						i++;
+					}
+					model.setIclubClaims(iclubClaims);
+				}
+
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -152,6 +173,25 @@ public class IclubClaimStatusService {
 			model.setCsLongDesc(bean.getCsLongDesc());
 			model.setCsShortDesc(bean.getCsShortDesc());
 			model.setCsStatus(bean.getCsStatus());
+
+			if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
+				String[] iclubClaimItems = new String[bean.getIclubClaimItems().size()];
+				int i = 0;
+				for (IclubClaimItem iclubClaimItem : bean.getIclubClaimItems()) {
+					iclubClaimItems[i] = iclubClaimItem.getCiId();
+					i++;
+				}
+				model.setIclubClaimItems(iclubClaimItems);
+			}
+			if (bean.getIclubClaims() != null && bean.getIclubClaims().size() > 0) {
+				String[] iclubClaims = new String[bean.getIclubClaims().size()];
+				int i = 0;
+				for (IclubClaim iclubClaim : bean.getIclubClaims()) {
+					iclubClaims[i] = iclubClaim.getCId();
+					i++;
+				}
+				model.setIclubClaims(iclubClaims);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

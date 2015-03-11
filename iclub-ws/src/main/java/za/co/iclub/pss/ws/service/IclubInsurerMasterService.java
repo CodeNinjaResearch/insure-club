@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubInsurerMaster;
+import za.co.iclub.pss.orm.bean.IclubQuote;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -146,6 +147,16 @@ public class IclubInsurerMasterService {
 				iCIm.setImCrtdDt(iCIMaster.getImCrtdDt());
 				iCIm.setIclubPerson(iCIMaster.getIclubPerson() != null ? iCIMaster.getIclubPerson().getPId() : null);
 
+				if (iCIMaster.getIclubQuotes() != null && iCIMaster.getIclubQuotes().size() > 0) {
+					String[] iclubQuotes = new String[iCIMaster.getIclubQuotes().size()];
+					int i = 0;
+					for (IclubQuote iclubQuote : iCIMaster.getIclubQuotes()) {
+						iclubQuotes[i] = iclubQuote.getQId();
+						i++;
+					}
+					iCIm.setIclubQuotes(iclubQuotes);
+				}
+
 				ret.add((T) iCIm);
 			}
 		} catch (Exception e) {
@@ -177,7 +188,15 @@ public class IclubInsurerMasterService {
 				iCIm.setImLocation(iCIMaster.getImLocation());
 				iCIm.setImCrtdDt(iCIMaster.getImCrtdDt());
 				iCIm.setIclubPerson(iCIMaster.getIclubPerson() != null ? iCIMaster.getIclubPerson().getPId() : null);
-				;
+				if (iCIMaster.getIclubQuotes() != null && iCIMaster.getIclubQuotes().size() > 0) {
+					String[] iclubQuotes = new String[iCIMaster.getIclubQuotes().size()];
+					int i = 0;
+					for (IclubQuote iclubQuote : iCIMaster.getIclubQuotes()) {
+						iclubQuotes[i] = iclubQuote.getQId();
+						i++;
+					}
+					iCIm.setIclubQuotes(iclubQuotes);
+				}
 
 				ret.add((T) iCIm);
 			}
@@ -204,6 +223,16 @@ public class IclubInsurerMasterService {
 			model.setImLocation(bean.getImLocation());
 			model.setImCrtdDt(bean.getImCrtdDt());
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+			
+			if (bean.getIclubQuotes() != null && bean.getIclubQuotes().size() > 0) {
+				String[] iclubQuotes = new String[bean.getIclubQuotes().size()];
+				int i = 0;
+				for (IclubQuote iclubQuote : bean.getIclubQuotes()) {
+					iclubQuotes[i] = iclubQuote.getQId();
+					i++;
+				}
+				model.setIclubQuotes(iclubQuotes);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

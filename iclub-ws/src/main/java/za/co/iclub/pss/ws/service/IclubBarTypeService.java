@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,9 +12,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubBarType;
+import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.ws.model.IclubBarTypeModel;
@@ -154,6 +158,16 @@ public class IclubBarTypeService {
 				iCB.setBtLongDesc(iclubBtype.getBtLongDesc());
 				iCB.setBtShortDesc(iclubBtype.getBtShortDesc());
 				iCB.setBtStatus(iclubBtype.getBtStatus());
+				
+				if (iclubBtype.getIclubProperties() != null && iclubBtype.getIclubProperties().size() > 0) {
+					String[] iclubProperties = new String[iclubBtype.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty iclubProperty : iclubBtype.getIclubProperties()) {
+						iclubProperties[i] = iclubProperty.getPId();
+						i++;
+					}
+					iCB.setIclubProperties(iclubProperties);
+				}
 
 				ret.add((T) iCB);
 			}
@@ -177,6 +191,16 @@ public class IclubBarTypeService {
 			model.setBtLongDesc(bean.getBtLongDesc());
 			model.setBtShortDesc(bean.getBtShortDesc());
 			model.setBtStatus(bean.getBtStatus());
+			
+			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
+				String[] iclubProperties = new String[bean.getIclubProperties().size()];
+				int i = 0;
+				for (IclubProperty iclubProperty : bean.getIclubProperties()) {
+					iclubProperties[i] = iclubProperty.getPId();
+					i++;
+				}
+				model.setIclubProperties(iclubProperties);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -9,6 +9,7 @@ public class IclubEventTypeModel {
 	private String etShortDesc;
 	private String etLongDesc;
 	private String etStatus;
+	private String[] iclubEvents;
 
 	public Long getEtId() {
 		return etId;
@@ -40,6 +41,14 @@ public class IclubEventTypeModel {
 
 	public void setEtStatus(String etStatus) {
 		this.etStatus = etStatus;
+	}
+
+	public String[] getIclubEvents() {
+		return iclubEvents;
+	}
+
+	public void setIclubEvents(String[] iclubEvents) {
+		this.iclubEvents = iclubEvents;
 	}
 
 }
