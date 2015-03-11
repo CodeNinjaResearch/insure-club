@@ -2,22 +2,22 @@
 	<p:dataTable id="dtConfigCont" widgetVar="dtConfigCont" value="#{iclubConfigController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Configes Available">
 		
 		<p:column headerText="#{labels['config.view.cid']}">
-			<p:outputLabel escape="false" value="#{bean.CId}" />
+			<p:outputLabel value="#{bean.CId}" />
 		</p:column>
 		<p:column headerText="#{labels['config.view.ckey']}">
-			<p:outputLabel escape="false" value="#{bean.CKey}" />
+			<p:outputLabel value="#{bean.CKey}" />
 		</p:column>
 		<p:column headerText="#{labels['config.view.cvalue']}">
-			<p:outputLabel escape="false" value="#{bean.CValue}" />
+			<p:outputLabel value="#{bean.CValue}" />
 		</p:column>
 		<p:column headerText="#{labels['config.view.cstatus']}">
-			<p:outputLabel escape="false" value="#{bean.CStatus}" />
+			<p:outputLabel value="#{bean.CStatus}" />
 		</p:column>
 		<p:column headerText="#{labels['config.view.ccrtdDt']}">
-			<p:outputLabel escape="false" value="#{bean.CCrtdDt}" />
+			<p:outputLabel value="#{bean.CCrtdDt}" />
 		</p:column>
 		<p:column headerText="#{labels['config.view.userid']}">
-				<p:outputLabel escape="false" value="#{bean.iclubPerson}" />
+				<p:outputLabel value="#{bean.iclubPerson}" />
 			</p:column>
 		
 		<p:column>
