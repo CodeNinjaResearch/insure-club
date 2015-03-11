@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtConfigCont" widgetVar="dtConfigCont" value="#{iclubConfigController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Configes Available">
+		
+		<p:column headerText="#{labels['config.view.cid']}">
+			<p:outputLabel escape="false" value="#{bean.CId}" />
+		</p:column>
+		<p:column headerText="#{labels['config.view.ckey']}">
+			<p:outputLabel escape="false" value="#{bean.CKey}" />
+		</p:column>
+		<p:column headerText="#{labels['config.view.cvalue']}">
+			<p:outputLabel escape="false" value="#{bean.CValue}" />
+		</p:column>
+		<p:column headerText="#{labels['config.view.cstatus']}">
+			<p:outputLabel escape="false" value="#{bean.CStatus}" />
+		</p:column>
+		<p:column headerText="#{labels['config.view.ccrtdDt']}">
+			<p:outputLabel escape="false" value="#{bean.CCrtdDt}" />
+		</p:column>
+		<p:column headerText="#{labels['config.view.userid']}">
+				<p:outputLabel escape="false" value="#{bean.iclubPerson}" />
+			</p:column>
+		
+		<p:column>
+			<p:commandButton id="btnConfigEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubConfigController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubConfigController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubConfigController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

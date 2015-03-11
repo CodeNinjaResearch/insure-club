@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubConfigBean {
 
@@ -9,7 +10,7 @@ public class IclubConfigBean {
 	private String CKey;
 	private String CValue;
 	private String CStatus;
-	private Timestamp CCrtdDt;
+	private Date CCrtdDt;
 
 	public Long getCId() {
 		return CId;
@@ -51,11 +52,11 @@ public class IclubConfigBean {
 		CStatus = cStatus;
 	}
 
-	public Timestamp getCCrtdDt() {
+	public Date getCCrtdDt() {
 		return CCrtdDt;
 	}
 
-	public void setCCrtdDt(Timestamp cCrtdDt) {
+	public void setCCrtdDt(Date cCrtdDt) {
 		CCrtdDt = cCrtdDt;
 	}
 

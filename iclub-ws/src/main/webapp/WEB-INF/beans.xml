@@ -77,6 +77,7 @@
 			<ref bean="IclubQuoteService"/>
 			<ref bean="IclubRateEngineService"/>
 			<ref bean="IclubVehicleService"/>
+			<ref bean="IclubConfigService"/>
 			
 
 		</jaxrs:serviceBeans>

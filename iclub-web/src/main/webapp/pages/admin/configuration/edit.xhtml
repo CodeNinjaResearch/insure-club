@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+
+			<p:column>
+				<p:outputLabel value="#{labels['config.edit.cid']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:outputLabel value="#{iclubConfigController.bean.CId}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['config.edit.ckey']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText escape="false" value="#{iclubConfigController.bean.CKey}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['config.edit.cvalue']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText escape="false" value="#{iclubConfigController.bean.CValue}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['config.edit.userid']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:outputLabel escape="false" value="#{iclubConfigController.bean.iclubPerson}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['config.edit.cstatus']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+
+				<p:selectOneMenu value="#{iclubConfigController.bean.CStatus}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+					<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+
+				</p:selectOneMenu>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['config.edit.ccrtdDt']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:calendar escape="false" value="#{iclubConfigController.bean.CCrtdDt}" />
+			</p:column>
+
+			 
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnConfigEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="#{labels['update']}" actionListener="#{iclubConfigController.modIclubConfig}" />
+			<p:commandButton id="btnConfigDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="#{labels['delete']}" actionListener="#{iclubConfigController.delIclubConfig}" />
+			<p:commandButton id="btnConfigCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="#{labels['close']}" actionListener="#{iclubConfigController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>
