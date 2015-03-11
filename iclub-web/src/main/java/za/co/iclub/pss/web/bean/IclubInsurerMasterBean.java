@@ -13,6 +13,7 @@ public class IclubInsurerMasterBean {
 	private Long imLong;
 	private String imRegNum;
 	private Timestamp imCrtdDt;
+	private String[] iclubQuotes;
 
 	public Long getImId() {
 		return imId;
@@ -84,6 +85,14 @@ public class IclubInsurerMasterBean {
 
 	public void setImCrtdDt(Timestamp imCrtdDt) {
 		this.imCrtdDt = imCrtdDt;
+	}
+
+	public String[] getIclubQuotes() {
+		return iclubQuotes;
+	}
+
+	public void setIclubQuotes(String[] iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

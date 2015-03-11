@@ -6,6 +6,7 @@ public class IclubOccupiedStatusBean {
 	private String osShortDesc;
 	private String osLongDesc;
 	private String osStatus;
+	private String[] iclubProperties;
 
 	public Long getOsId() {
 		return osId;
@@ -37,6 +38,14 @@ public class IclubOccupiedStatusBean {
 
 	public void setOsStatus(String osStatus) {
 		this.osStatus = osStatus;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }

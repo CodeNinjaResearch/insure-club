@@ -6,11 +6,13 @@ public class IclubCoverTypeBean {
 
 	private Long ctId;
 	private String iclubPerson;
-	private String iclubInsuranceItemType;
+	private Long iclubInsuranceItemType;
 	private String ctShortDesc;
 	private String ctLongDesc;
 	private String ctStatus;
 	private Timestamp ctCrtdDt;
+	private String[] iclubProperties;
+	private String[] iclubQuotes;
 
 	public Long getCtId() {
 		return ctId;
@@ -28,11 +30,11 @@ public class IclubCoverTypeBean {
 		this.iclubPerson = iclubPerson;
 	}
 
-	public String getIclubInsuranceItemType() {
+	public Long getIclubInsuranceItemType() {
 		return iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(String iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(Long iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 
@@ -67,4 +69,21 @@ public class IclubCoverTypeBean {
 	public void setCtCrtdDt(Timestamp ctCrtdDt) {
 		this.ctCrtdDt = ctCrtdDt;
 	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
+	}
+
+	public String[] getIclubQuotes() {
+		return iclubQuotes;
+	}
+
+	public void setIclubQuotes(String[] iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
+	}
+
 }

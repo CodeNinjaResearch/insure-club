@@ -6,6 +6,7 @@ public class IclubBarTypeBean {
 	private String btShortDesc;
 	private String btLongDesc;
 	private String btStatus;
+	private String[] iclubProperties;
 
 	public Long getBtId() {
 		return btId;
@@ -37,6 +38,14 @@ public class IclubBarTypeBean {
 
 	public void setBtStatus(String btStatus) {
 		this.btStatus = btStatus;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class IclubEventBean {
 
 	private String EId;
-	private String iclubEventType;
+	private Long iclubEventType;
 	private String iclubPerson;
 	private String EDesc;
 	private Timestamp ECrtdDt;
@@ -18,11 +18,11 @@ public class IclubEventBean {
 		EId = eId;
 	}
 
-	public String getIclubEventType() {
+	public Long getIclubEventType() {
 		return iclubEventType;
 	}
 
-	public void setIclubEventType(String iclubEventType) {
+	public void setIclubEventType(Long iclubEventType) {
 		this.iclubEventType = iclubEventType;
 	}
 

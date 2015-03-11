@@ -6,6 +6,7 @@ public class IclubDocumentTypeBean {
 	private String dtShortDesc;
 	private String dtLongDesc;
 	private String dtStatus;
+	private String[] iclubDocuments;
 
 	public Long getDtId() {
 		return dtId;
@@ -37,6 +38,14 @@ public class IclubDocumentTypeBean {
 
 	public void setDtStatus(String dtStatus) {
 		this.dtStatus = dtStatus;
+	}
+
+	public String[] getIclubDocuments() {
+		return iclubDocuments;
+	}
+
+	public void setIclubDocuments(String[] iclubDocuments) {
+		this.iclubDocuments = iclubDocuments;
 	}
 
 }

@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "IclubOccupationModel")
 public class IclubOccupationModel {
-	
+
 	private Long OId;
 	private String iclubPerson;
 	private String ODesc;

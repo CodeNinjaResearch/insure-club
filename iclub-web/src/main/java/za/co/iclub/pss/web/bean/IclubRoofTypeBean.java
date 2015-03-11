@@ -6,6 +6,7 @@ public class IclubRoofTypeBean {
 	private String rtShortDesc;
 	private String rtLongDesc;
 	private String rtStatus;
+	private String[] iclubProperties;
 
 	public Long getRtId() {
 		return rtId;
@@ -37,6 +38,14 @@ public class IclubRoofTypeBean {
 
 	public void setRtStatus(String rtStatus) {
 		this.rtStatus = rtStatus;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }

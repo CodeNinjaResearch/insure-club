@@ -6,6 +6,7 @@ public class IclubMessageTypeBean {
 	private String mtShortDesc;
 	private String mtLongDesc;
 	private String mtStatus;
+	private String[] iclubMessages;
 
 	public Long getMtId() {
 		return mtId;
@@ -37,6 +38,14 @@ public class IclubMessageTypeBean {
 
 	public void setMtStatus(String mtStatus) {
 		this.mtStatus = mtStatus;
+	}
+
+	public String[] getIclubMessages() {
+		return iclubMessages;
+	}
+
+	public void setIclubMessages(String[] iclubMessages) {
+		this.iclubMessages = iclubMessages;
 	}
 
 }

@@ -6,6 +6,7 @@ public class IclubQuoteStatusBean {
 	private String qsShortDesc;
 	private String qsLongDesc;
 	private String qsStatus;
+	private String[] iclubQuotes;
 
 	public Long getQsId() {
 		return qsId;
@@ -37,6 +38,14 @@ public class IclubQuoteStatusBean {
 
 	public void setQsStatus(String qsStatus) {
 		this.qsStatus = qsStatus;
+	}
+
+	public String[] getIclubQuotes() {
+		return iclubQuotes;
+	}
+
+	public void setIclubQuotes(String[] iclubQuotes) {
+		this.iclubQuotes = iclubQuotes;
 	}
 
 }

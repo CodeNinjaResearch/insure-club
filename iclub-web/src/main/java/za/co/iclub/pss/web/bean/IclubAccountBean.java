@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class IclubAccountBean {
 
-	private Integer AId;
+	private String AId;
 	private Long iclubAccountType;
 	private Long iclubBankMaster;
 	private Long iclubOwnerType;
@@ -13,12 +13,14 @@ public class IclubAccountBean {
 	private String AOwnerId;
 	private String AStatus;
 	private Timestamp ACrtdDt;
+	private String[] iclubPolicies;
+	private String[] iclubPayments;
 
-	public Integer getAId() {
+	public String getAId() {
 		return AId;
 	}
 
-	public void setAId(Integer aId) {
+	public void setAId(String aId) {
 		AId = aId;
 	}
 
@@ -84,6 +86,22 @@ public class IclubAccountBean {
 
 	public void setACrtdDt(Timestamp aCrtdDt) {
 		ACrtdDt = aCrtdDt;
+	}
+
+	public String[] getIclubPolicies() {
+		return iclubPolicies;
+	}
+
+	public void setIclubPolicies(String[] iclubPolicies) {
+		this.iclubPolicies = iclubPolicies;
+	}
+
+	public String[] getIclubPayments() {
+		return iclubPayments;
+	}
+
+	public void setIclubPayments(String[] iclubPayments) {
+		this.iclubPayments = iclubPayments;
 	}
 
 }

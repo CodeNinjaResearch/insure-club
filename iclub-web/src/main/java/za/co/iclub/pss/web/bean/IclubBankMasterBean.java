@@ -15,7 +15,7 @@ public class IclubBankMasterBean {
 	private Long bmBranchLong;
 	private Integer bmBranchZip;
 	private Timestamp bmCrtdDt;
-	private Long[] iclubAccounts;
+	private String[] iclubAccounts;
 
 	public Long getBmId() {
 		return bmId;
@@ -105,11 +105,11 @@ public class IclubBankMasterBean {
 		this.bmCrtdDt = bmCrtdDt;
 	}
 
-	public Long[] getIclubAccounts() {
+	public String[] getIclubAccounts() {
 		return iclubAccounts;
 	}
 
-	public void setIclubAccounts(Long[] iclubAccounts) {
+	public void setIclubAccounts(String[] iclubAccounts) {
 		this.iclubAccounts = iclubAccounts;
 	}
 }

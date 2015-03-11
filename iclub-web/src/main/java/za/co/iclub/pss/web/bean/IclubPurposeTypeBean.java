@@ -3,6 +3,7 @@ package za.co.iclub.pss.web.bean;
 import java.sql.Timestamp;
 
 public class IclubPurposeTypeBean {
+
 	private Long ptId;
 	private Long iclubInsuranceItemType;
 	private String iclubPerson;
@@ -84,4 +85,5 @@ public class IclubPurposeTypeBean {
 	public void setIclubVehicles(String[] iclubVehicles) {
 		this.iclubVehicles = iclubVehicles;
 	}
+
 }

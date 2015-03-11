@@ -7,8 +7,8 @@ public class IclubMessageBean {
 	private String MId;
 	private String iclubPerson;
 	private Long iclubSystemTypeByMToSysId;
-	private String iclubMessageType;
-	private String iclubSystemTypeByMFromSysId;
+	private Long iclubMessageType;
+	private Long iclubSystemTypeByMFromSysId;
 	private Timestamp MSentDt;
 	private String MTranId;
 	private String MContent;
@@ -38,19 +38,19 @@ public class IclubMessageBean {
 		this.iclubSystemTypeByMToSysId = iclubSystemTypeByMToSysId;
 	}
 
-	public String getIclubMessageType() {
+	public Long getIclubMessageType() {
 		return iclubMessageType;
 	}
 
-	public void setIclubMessageType(String iclubMessageType) {
+	public void setIclubMessageType(Long iclubMessageType) {
 		this.iclubMessageType = iclubMessageType;
 	}
 
-	public String getIclubSystemTypeByMFromSysId() {
+	public Long getIclubSystemTypeByMFromSysId() {
 		return iclubSystemTypeByMFromSysId;
 	}
 
-	public void setIclubSystemTypeByMFromSysId(String iclubSystemTypeByMFromSysId) {
+	public void setIclubSystemTypeByMFromSysId(Long iclubSystemTypeByMFromSysId) {
 		this.iclubSystemTypeByMFromSysId = iclubSystemTypeByMFromSysId;
 	}
 

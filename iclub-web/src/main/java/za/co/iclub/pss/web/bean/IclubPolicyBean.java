@@ -1,7 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-
-public class IclubPolicyModel {
+public class IclubPolicyBean {
 
 	private String PId;
 	private Long iclubPolicyStatus;

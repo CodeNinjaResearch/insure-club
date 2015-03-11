@@ -6,6 +6,7 @@ public class IclubIdTypeBean {
 	private String itShortDesc;
 	private String itLongDesc;
 	private String itStatus;
+	private String[] iclubPersons;
 
 	public Long getItId() {
 		return itId;
@@ -37,6 +38,14 @@ public class IclubIdTypeBean {
 
 	public void setItStatus(String itStatus) {
 		this.itStatus = itStatus;
+	}
+
+	public String[] getIclubPersons() {
+		return iclubPersons;
+	}
+
+	public void setIclubPersons(String[] iclubPersons) {
+		this.iclubPersons = iclubPersons;
 	}
 
 }

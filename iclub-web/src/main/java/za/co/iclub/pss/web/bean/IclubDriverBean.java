@@ -2,7 +2,7 @@ package za.co.iclub.pss.web.bean;
 
 import java.sql.Timestamp;
 
-public class IclubDriverModel {
+public class IclubDriverBean {
 
 	private String DId;
 	private Long iclubAccessType;

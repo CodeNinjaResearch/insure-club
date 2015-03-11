@@ -1,51 +1,53 @@
 package za.co.iclub.pss.web.bean;
 
+import java.sql.Timestamp;
+
 public class IclubEntityTypeBean {
 
-	private Long etId;
-	private String etShortDesc;
-	private String etLongDesc;
-	private String etStatus;
-	private String[] iclubDocuments;
+	private String EId;
+	private Long iclubEventType;
+	private String iclubPerson;
+	private String EDesc;
+	private Timestamp ECrtdDt;
 
-	public Long getEtId() {
-		return etId;
+	public String getEId() {
+		return EId;
 	}
 
-	public void setEtId(Long etId) {
-		this.etId = etId;
+	public void setEId(String eId) {
+		EId = eId;
 	}
 
-	public String getEtShortDesc() {
-		return etShortDesc;
+	public Long getIclubEventType() {
+		return iclubEventType;
 	}
 
-	public void setEtShortDesc(String etShortDesc) {
-		this.etShortDesc = etShortDesc;
+	public void setIclubEventType(Long iclubEventType) {
+		this.iclubEventType = iclubEventType;
 	}
 
-	public String getEtLongDesc() {
-		return etLongDesc;
+	public String getIclubPerson() {
+		return iclubPerson;
 	}
 
-	public void setEtLongDesc(String etLongDesc) {
-		this.etLongDesc = etLongDesc;
+	public void setIclubPerson(String iclubPerson) {
+		this.iclubPerson = iclubPerson;
 	}
 
-	public String getEtStatus() {
-		return etStatus;
+	public String getEDesc() {
+		return EDesc;
 	}
 
-	public void setEtStatus(String etStatus) {
-		this.etStatus = etStatus;
+	public void setEDesc(String eDesc) {
+		EDesc = eDesc;
 	}
 
-	public String[] getIclubDocuments() {
-		return iclubDocuments;
+	public Timestamp getECrtdDt() {
+		return ECrtdDt;
 	}
 
-	public void setIclubDocuments(String[] iclubDocuments) {
-		this.iclubDocuments = iclubDocuments;
+	public void setECrtdDt(Timestamp eCrtdDt) {
+		ECrtdDt = eCrtdDt;
 	}
 
 }

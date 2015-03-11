@@ -6,6 +6,7 @@ public class IclubPropertyTypeBean {
 	private String ptShortDesc;
 	private String ptLongDesc;
 	private String ptStatus;
+	private String[] iclubProperties;
 
 	public Long getPtId() {
 		return ptId;
@@ -37,6 +38,14 @@ public class IclubPropertyTypeBean {
 
 	public void setPtStatus(String ptStatus) {
 		this.ptStatus = ptStatus;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 
 }
