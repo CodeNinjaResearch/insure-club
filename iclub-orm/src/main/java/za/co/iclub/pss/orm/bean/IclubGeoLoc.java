@@ -28,6 +28,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 	private static final long serialVersionUID = 509313853940529348L;
 	private Long glId;
 	private IclubPerson iclubPerson;
+	private String glKey;
 	private String glAddress;
 	private Long glLat;
 	private Long glLong;
@@ -46,9 +47,10 @@ public class IclubGeoLoc implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glAddress, Long glLat, Long glLong, Long glRate, Timestamp glCrtdDt) {
+	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glKey, String glAddress, Long glLat, Long glLong, Long glRate, Timestamp glCrtdDt) {
 		this.glId = glId;
 		this.iclubPerson = iclubPerson;
+		this.glKey = glKey;
 		this.glAddress = glAddress;
 		this.glLat = glLat;
 		this.glLong = glLong;
@@ -75,6 +77,15 @@ public class IclubGeoLoc implements java.io.Serializable {
 
 	public void setIclubPerson(IclubPerson iclubPerson) {
 		this.iclubPerson = iclubPerson;
+	}
+
+	@Column(name = "gl_key", length = 450)
+	public String getGlKey() {
+		return glKey;
+	}
+
+	public void setGlKey(String glKey) {
+		this.glKey = glKey;
 	}
 
 	@Column(name = "gl_address", length = 999)

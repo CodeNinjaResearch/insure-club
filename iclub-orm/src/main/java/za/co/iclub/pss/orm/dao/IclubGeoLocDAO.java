@@ -30,6 +30,7 @@ import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 public class IclubGeoLocDAO {
 	private static final Logger log = Logger.getLogger(IclubGeoLocDAO.class);
 	// property constants
+	public static final String GL_KEY = "glKey";
 	public static final String GL_ADDRESS = "glAddress";
 	public static final String GL_LAT = "glLat";
 	public static final String GL_LONG = "glLong";
@@ -105,6 +106,10 @@ public class IclubGeoLocDAO {
 			log.error("find by property name failed", re);
 			throw re;
 		}
+	}
+
+	public List<IclubGeoLoc> findByGlKey(Object glKey) {
+		return findByProperty(GL_KEY, glKey);
 	}
 
 	public List<IclubGeoLoc> findByGlAddress(Object glAddress) {
