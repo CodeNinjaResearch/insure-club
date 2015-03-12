@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+
+			<p:column>
+				<p:outputLabel value="#{labels['licensecode.create.lcid']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubLicenseCodeController.bean.lcId}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['licensecode.create.lccategory']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubLicenseCodeController.bean.lcCategory}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['licensecode.create.lcdesc']}"></p:outputLabel>
+			</p:column>
+			<p:column  >
+				<p:inputText value="#{iclubLicenseCodeController.bean.lcDesc}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['licensecode.create.lcstatus']}"></p:outputLabel>
+			</p:column>
+			<p:column  >
+
+				<p:selectOneMenu value="#{iclubLicenseCodeController.bean.lcStatus}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+					<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+
+				</p:selectOneMenu>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['licensecode.create.lccrtddt']}"></p:outputLabel>
+			</p:column>
+			<p:column  >
+				<p:calendar  value="#{iclubLicenseCodeController.bean.lcCrtdDt}" />
+			</p:column>
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnLicenseCodeCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubLicenseCodeController.addIclubLicenseCode}" />
+			<p:commandButton id="btnLicenseCodeCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="#{labels['close']}" actionListener="#{iclubLicenseCodeController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

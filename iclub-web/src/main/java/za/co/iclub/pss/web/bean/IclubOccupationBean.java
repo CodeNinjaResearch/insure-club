@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubOccupationBean {
 
@@ -8,7 +8,7 @@ public class IclubOccupationBean {
 	private String iclubPerson;
 	private String ODesc;
 	private String OStatus;
-	private Timestamp OCrtdDt;
+	private Date OCrtdDt;
 
 	public Long getOId() {
 		return OId;
@@ -42,11 +42,11 @@ public class IclubOccupationBean {
 		OStatus = oStatus;
 	}
 
-	public Timestamp getOCrtdDt() {
+	public Date getOCrtdDt() {
 		return OCrtdDt;
 	}
 
-	public void setOCrtdDt(Timestamp oCrtdDt) {
+	public void setOCrtdDt(Date oCrtdDt) {
 		OCrtdDt = oCrtdDt;
 	}
 

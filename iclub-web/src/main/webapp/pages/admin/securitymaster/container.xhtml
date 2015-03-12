@@ -1,0 +1,24 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Maintain SecurityMaster</ui:define>
+	<ui:define name="body">
+		<p:remoteCommand actionListener="#{iclubSecurityMasterController.initializePage}" name="onload" autoRun="true" update="pnlSecurityMasterContDet" />
+		<p:panel id="pnlSecurityMasterCont">
+			<p:panel id="pnlSecurityMasterContMenu">
+				<p:commandLink value="#{labels['viewsecuritymaster']}" actionListener="#{iclubSecurityMasterController.showView}" update="pnlSecurityMasterContDet" />
+				<p:graphicImage name="separator.png" library="images" />
+				<p:commandLink value="#{labels['createsecuritymaster']}"  actionListener="#{iclubSecurityMasterController.showCreate}" update="pnlSecurityMasterContDet" />
+			</p:panel>
+			<p:panel id="pnlSecurityMasterContDet">
+				<p:panel id="pnlSecurityMasterContView" rendered="#{iclubSecurityMasterController.showViewCont}">
+					<ui:include src="/pages/admin/securitymaster/view.xhtml" />
+				</p:panel>
+				<p:panel id="pnlSecurityMasterContCreate" rendered="#{iclubSecurityMasterController.showCreateCont}">
+					<ui:include src="/pages/admin/securitymaster/create.xhtml" />
+				</p:panel>
+				<p:panel id="pnlSecurityMasterContEdit" rendered="#{iclubSecurityMasterController.showEditCont}">
+					<ui:include src="/pages/admin/securitymaster/edit.xhtml" />
+				</p:panel>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

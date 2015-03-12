@@ -1,6 +1,5 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class IclubSupplMasterBean {
@@ -17,7 +16,7 @@ public class IclubSupplMasterBean {
 	private Long smCrLimit;
 	private Date srActionDt;
 	private Integer smRating;
-	private Timestamp smCrtdDt;
+	private Date smCrtdDt;
 	private String[] iclubClaimItemsForCiAssesorId;
 	private String[] iclubClaimItemsForCiHandlerId;
 
@@ -117,11 +116,11 @@ public class IclubSupplMasterBean {
 		this.smRating = smRating;
 	}
 
-	public Timestamp getSmCrtdDt() {
+	public Date getSmCrtdDt() {
 		return smCrtdDt;
 	}
 
-	public void setSmCrtdDt(Timestamp smCrtdDt) {
+	public void setSmCrtdDt(Date smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
 	}
 

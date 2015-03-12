@@ -160,6 +160,7 @@ public class IclubTrackerMasterService {
 						securityDevices[i] = securityDevice.getSdId();
 						i++;
 					}
+					iCTm.setIclubSecurityDevices(securityDevices);
 				}
 
 				ret.add((T) iCTm);
@@ -202,6 +203,7 @@ public class IclubTrackerMasterService {
 						securityDevices[i] = securityDevice.getSdId();
 						i++;
 					}
+					iCTm.setIclubSecurityDevices(securityDevices);
 				}
 				
 				ret.add((T) iCTm);
@@ -238,6 +240,7 @@ public class IclubTrackerMasterService {
 					securityDevices[i] = securityDevice.getSdId();
 					i++;
 				}
+				model.setIclubSecurityDevices(securityDevices);
 			}
 			
 		} catch (Exception e) {

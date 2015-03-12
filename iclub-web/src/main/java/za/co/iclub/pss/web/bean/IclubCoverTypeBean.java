@@ -1,6 +1,8 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
+
 
 public class IclubCoverTypeBean {
 
@@ -10,7 +12,7 @@ public class IclubCoverTypeBean {
 	private String ctShortDesc;
 	private String ctLongDesc;
 	private String ctStatus;
-	private Timestamp ctCrtdDt;
+	private Date ctCrtdDt;
 	private String[] iclubProperties;
 	private String[] iclubQuotes;
 
@@ -62,11 +64,11 @@ public class IclubCoverTypeBean {
 		this.ctStatus = ctStatus;
 	}
 
-	public Timestamp getCtCrtdDt() {
+	public Date getCtCrtdDt() {
 		return ctCrtdDt;
 	}
 
-	public void setCtCrtdDt(Timestamp ctCrtdDt) {
+	public void setCtCrtdDt(Date ctCrtdDt) {
 		this.ctCrtdDt = ctCrtdDt;
 	}
 

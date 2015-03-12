@@ -16,6 +16,7 @@ public class IclubTrackerMasterModel {
 	private Long tmLong;
 	private String tmRegNum;
 	private Timestamp tmCrtdDt;
+	private String[] iclubSecurityDevices;
 
 	public Long getTmId() {
 		return tmId;
@@ -87,6 +88,14 @@ public class IclubTrackerMasterModel {
 
 	public void setTmCrtdDt(Timestamp tmCrtdDt) {
 		this.tmCrtdDt = tmCrtdDt;
+	}
+
+	public String[] getIclubSecurityDevices() {
+		return iclubSecurityDevices;
+	}
+
+	public void setIclubSecurityDevices(String[] iclubSecurityDevices) {
+		this.iclubSecurityDevices = iclubSecurityDevices;
 	}
 
 }

@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+
+			<p:column>
+				<p:outputLabel value="#{labels['occupation.edit.oid']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:outputLabel value="#{iclubOccupationController.bean.OId}" />
+			</p:column>
+			 
+			<p:column>
+				<p:outputLabel value="#{labels['occupation.edit.odesc']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubOccupationController.bean.ODesc}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['occupation.edit.userid']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:outputLabel value="#{iclubOccupationController.bean.iclubPerson}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['occupation.edit.ostatus']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+
+				<p:selectOneMenu value="#{iclubOccupationController.bean.OStatus}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+					<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+
+				</p:selectOneMenu>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['occupation.edit.ocrtddt']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:calendar value="#{iclubOccupationController.bean.OCrtdDt}" />
+			</p:column>
+
+			 
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnOccupationEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="#{labels['update']}" actionListener="#{iclubOccupationController.modIclubOccupation}" />
+			<p:commandButton id="btnOccupationDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="#{labels['delete']}" actionListener="#{iclubOccupationController.delIclubOccupation}" />
+			<p:commandButton id="btnOccupationCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="#{labels['close']}" actionListener="#{iclubOccupationController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

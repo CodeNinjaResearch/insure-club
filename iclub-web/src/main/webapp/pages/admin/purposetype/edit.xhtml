@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.edit.ptid']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubPurposeTypeController.bean.ptId}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.edit.ptshortdesc']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubPurposeTypeController.bean.ptShortDesc}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.edit.ptlongdesc']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubPurposeTypeController.bean.ptLongDesc}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.edit.userid']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubPurposeTypeController.bean.iclubPerson}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.edit.iclubinsuranceitemtype']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubPurposeTypeController.bean.iclubInsuranceItemType}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.edit.ptstatus']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+
+				<p:selectOneMenu value="#{iclubPurposeTypeController.bean.ptStatus}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+					<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+
+				</p:selectOneMenu>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.edit.ptcrtddt']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:calendar value="#{iclubPurposeTypeController.bean.ptCrtdDt}" />
+			</p:column>
+
+
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnPurposeTypeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlPurposeTypeCont" value="#{labels['update']}" actionListener="#{iclubPurposeTypeController.modIclubPurposeType}" />
+			<p:commandButton id="btnPurposeTypeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlPurposeTypeCont" value="#{labels['delete']}" actionListener="#{iclubPurposeTypeController.delIclubPurposeType}" />
+			<p:commandButton id="btnPurposeTypeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlPurposeTypeCont" value="#{labels['close']}" actionListener="#{iclubPurposeTypeController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

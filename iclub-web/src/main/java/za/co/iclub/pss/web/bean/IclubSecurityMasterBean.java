@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubSecurityMasterBean {
 
@@ -9,7 +9,7 @@ public class IclubSecurityMasterBean {
 	private String iclubPerson;
 	private String smDesc;
 	private String smStatus;
-	private Timestamp smCrtdDt;
+	private Date smCrtdDt;
 	private String[] iclubVehicles;
 
 	public String getSmId() {
@@ -52,11 +52,11 @@ public class IclubSecurityMasterBean {
 		this.smStatus = smStatus;
 	}
 
-	public Timestamp getSmCrtdDt() {
+	public Date getSmCrtdDt() {
 		return smCrtdDt;
 	}
 
-	public void setSmCrtdDt(Timestamp smCrtdDt) {
+	public void setSmCrtdDt(Date smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
 	}
 

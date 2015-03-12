@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtCoverTypeCont" widgetVar="dtCoverTypeCont" value="#{iclubCoverTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No CoverTypees Available">
+
+		<p:column headerText="#{labels['covertype.view.ctid']}">
+			<p:outputLabel value="#{bean.ctId}" />
+		</p:column>
+
+		<p:column headerText="#{labels['covertype.view.ctshortdesc']}">
+			<p:outputLabel value="#{bean.ctShortDesc}" />
+		</p:column>
+
+
+		<p:column headerText="#{labels['covertype.view.ctlongdesc']}">
+			<p:outputLabel value="#{bean.ctLongDesc}" />
+		</p:column>
+
+
+		<p:column headerText="#{labels['covertype.view.ctstatus']}">
+
+			<p:outputLabel value="#{bean.ctStatus}" />
+
+		</p:column>
+		<p:column headerText="#{labels['covertype.view.ctcrtddt']}">
+			<p:outputLabel value="#{bean.ctCrtdDt}" />
+		</p:column>
+
+
+		<p:column>
+			<p:commandButton id="btnCoverTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubCoverTypeController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubCoverTypeController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubCoverTypeController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

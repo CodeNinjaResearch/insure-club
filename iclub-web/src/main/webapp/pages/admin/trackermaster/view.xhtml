@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtTrackerMasterCont" widgetVar="dtTrackerMasterCont" value="#{iclubTrackerMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No TrackerMasteres Available">
+		
+		<p:column headerText="#{labels['trackermaster.view.tmid']}">
+			<p:outputLabel value="#{bean.tmId}" />
+		</p:column>
+		<p:column headerText="#{labels['trackermaster.view.userid']}">
+			<p:outputLabel value="#{bean.iclubPerson}" />
+		</p:column>
+		<p:column headerText="#{labels['trackermaster.view.tmname']}">
+			<p:outputLabel value="#{bean.tmName}" />
+		</p:column>
+		<p:column headerText="#{labels['trackermaster.view.tmtradename']}">
+			<p:outputLabel value="#{bean.tmTradeName}" />
+		</p:column>
+		<p:column headerText="#{labels['trackermaster.view.tmlocation']}">
+			<p:outputLabel value="#{bean.tmLocation}" />
+		</p:column>
+		<p:column headerText="#{labels['trackermaster.view.tmlat']}">
+			<p:outputLabel value="#{bean.tmLat}" />
+		</p:column>
+		<p:column headerText="#{labels['trackermaster.view.tmregnum']}">
+			<p:outputLabel value="#{bean.tmRegNum}" />
+		</p:column>
+		<p:column headerText="#{labels['trackermaster.view.tmcrtddt']}">
+			<p:outputLabel value="#{bean.tmCrtdDt}" />
+		</p:column>
+		 
+		
+		 
+		<p:column>
+			<p:commandButton id="btnTrackerMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubTrackerMasterController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubTrackerMasterController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubTrackerMasterController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

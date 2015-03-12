@@ -1,0 +1,24 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Maintain RateType</ui:define>
+	<ui:define name="body">
+		<p:remoteCommand actionListener="#{iclubRateTypeController.initializePage}" name="onload" autoRun="true" update="pnlRateTypeContDet" />
+		<p:panel id="pnlRateTypeCont">
+			<p:panel id="pnlRateTypeContMenu">
+				<p:commandLink value="#{labels['viewratetype']}" actionListener="#{iclubRateTypeController.showView}" update="pnlRateTypeContDet" />
+				<p:graphicImage name="separator.png" library="images" />
+				<p:commandLink value="#{labels['createratetype']}"  actionListener="#{iclubRateTypeController.showCreate}" update="pnlRateTypeContDet" />
+			</p:panel>
+			<p:panel id="pnlRateTypeContDet">
+				<p:panel id="pnlRateTypeContView" rendered="#{iclubRateTypeController.showViewCont}">
+					<ui:include src="/pages/admin/ratetype/view.xhtml" />
+				</p:panel>
+				<p:panel id="pnlRateTypeContCreate" rendered="#{iclubRateTypeController.showCreateCont}">
+					<ui:include src="/pages/admin/ratetype/create.xhtml" />
+				</p:panel>
+				<p:panel id="pnlRateTypeContEdit" rendered="#{iclubRateTypeController.showEditCont}">
+					<ui:include src="/pages/admin/ratetype/edit.xhtml" />
+				</p:panel>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

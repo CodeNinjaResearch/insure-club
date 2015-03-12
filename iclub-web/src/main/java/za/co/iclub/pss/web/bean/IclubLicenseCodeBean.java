@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubLicenseCodeBean {
 
@@ -9,7 +9,7 @@ public class IclubLicenseCodeBean {
 	private String lcCategory;
 	private String lcDesc;
 	private String lcStatus;
-	private Timestamp lcCrtdDt;
+	private Date lcCrtdDt;
 	private String[] iclubDrivers;
 
 	public Long getLcId() {
@@ -52,11 +52,11 @@ public class IclubLicenseCodeBean {
 		this.lcStatus = lcStatus;
 	}
 
-	public Timestamp getLcCrtdDt() {
+	public Date getLcCrtdDt() {
 		return lcCrtdDt;
 	}
 
-	public void setLcCrtdDt(Timestamp lcCrtdDt) {
+	public void setLcCrtdDt(Date lcCrtdDt) {
 		this.lcCrtdDt = lcCrtdDt;
 	}
 

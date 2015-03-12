@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,22 +17,22 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubRateTypeBean;
+import za.co.iclub.pss.web.bean.IclubExtrasBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubRateTypeModel;
+import za.co.iclub.pss.ws.model.IclubExtrasModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@ManagedBean(name = "iclubRateTypeController")
+@ManagedBean(name = "iclubExtrasController")
 @SessionScoped
-public class IclubRateTypeController implements Serializable {
+public class IclubExtrasController implements Serializable {
 
-	private static final long serialVersionUID = 6271776777151313314L;
+	private static final long serialVersionUID = -8915296782572192096L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	protected static final Logger LOGGER = Logger.getLogger(IclubRateTypeController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRateTypeService/";
-	private List<IclubRateTypeBean> beans;
-	private List<IclubRateTypeBean> dashBoardBeans;
-	private IclubRateTypeBean bean;
+	protected static final Logger LOGGER = Logger.getLogger(IclubExtrasController.class);
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubExtrasService/";
+	private List<IclubExtrasBean> beans;
+	private List<IclubExtrasBean> dashBoardBeans;
+	private IclubExtrasBean bean;
 	private boolean showCreateCont;
 	private boolean showViewCont;
 	private boolean showEditCont;
@@ -59,7 +60,7 @@ public class IclubRateTypeController implements Serializable {
 
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
-		bean = new IclubRateTypeBean();
+		bean = new IclubExtrasBean();
 		showCreateCont = true;
 		showViewCont = false;
 		showEditCont = false;
@@ -74,106 +75,108 @@ public class IclubRateTypeController implements Serializable {
 		viewParam = 2l;
 	}
 
-	public List<IclubRateTypeBean> getDashBoardBeans() {
+	public List<IclubExtrasBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
-		Collection<? extends IclubRateTypeModel> models = new ArrayList<IclubRateTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateTypeModel.class));
+		Collection<? extends IclubExtrasModel> models = new ArrayList<IclubExtrasModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubExtrasModel.class));
 		client.close();
-		dashBoardBeans = new ArrayList<IclubRateTypeBean>();
-		for (IclubRateTypeModel model : models) {
+		dashBoardBeans = new ArrayList<IclubExtrasBean>();
+		for (IclubExtrasModel model : models) {
+			IclubExtrasBean bean = new IclubExtrasBean();
 
-			IclubRateTypeBean bean = new IclubRateTypeBean();
-
-			bean.setRtId(model.getRtId());
-			bean.setRtLongDesc(model.getRtLongDesc());
-			bean.setRtShortDesc(model.getRtShortDesc());
-			bean.setRtStatus(model.getRtStatus());
+			bean.setEId(model.getEId());
+			bean.setEDesc(model.getEDesc());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setEStatus(model.getEStatus());
+			bean.setECrtdDt(model.getECrtdDt());
 
 			dashBoardBeans.add(bean);
 		}
 		return dashBoardBeans;
 	}
 
-	public void setDashBoardBeans(List<IclubRateTypeBean> dashBoardBeans) {
+	public void setDashBoardBeans(List<IclubExtrasBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
 
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
-		bean = new IclubRateTypeBean();
+		bean = new IclubExtrasBean();
 	}
 
-	public void addIclubRateType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubRateType");
+	public void addIclubExtras() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubExtras");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubRateTypeModel model = new IclubRateTypeModel();
+				IclubExtrasModel model = new IclubExtrasModel();
+
+				model.setEDesc(bean.getEDesc());
+				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setEStatus(bean.getEStatus());
+				model.setECrtdDt(new Timestamp(System.currentTimeMillis()));
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
 
-					model.setRtLongDesc(bean.getRtLongDesc());
-					model.setRtShortDesc(bean.getRtShortDesc());
-					model.setRtStatus(bean.getRtStatus());
-					;
-					IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
-	public void modIclubRateType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubRateType");
+	public void modIclubExtras() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubExtras");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubRateTypeModel model = new IclubRateTypeModel();
+				IclubExtrasModel model = new IclubExtrasModel();
 
-				model.setRtId(bean.getRtId());
-				model.setRtLongDesc(bean.getRtLongDesc());
-				model.setRtShortDesc(bean.getRtShortDesc());
-				model.setRtStatus(bean.getRtStatus());
+				model.setEId(bean.getEId());
+				model.setEDesc(bean.getEDesc());
+				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setEStatus(bean.getEStatus());
+				model.setECrtdDt(new Timestamp(System.currentTimeMillis()));
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
-	public void delIclubRateType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubRateType");
+	public void delIclubExtras() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubExtras");
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getRtId());
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getEId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
-				IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
 				viewParam = 1l;
 				showView();
 			} else {
-				IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+				IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("extras") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
@@ -183,13 +186,13 @@ public class IclubRateTypeController implements Serializable {
 		return ret;
 	}
 
-	public IclubRateTypeBean getBean() {
+	public IclubExtrasBean getBean() {
 		if (bean == null)
-			bean = new IclubRateTypeBean();
+			bean = new IclubExtrasBean();
 		return bean;
 	}
 
-	public void setBean(IclubRateTypeBean bean) {
+	public void setBean(IclubExtrasBean bean) {
 		this.bean = bean;
 	}
 
@@ -254,37 +257,28 @@ public class IclubRateTypeController implements Serializable {
 		this.labelBundle = labelBundle;
 	}
 
-	public List<IclubRateTypeBean> getBeans() {
+	public List<IclubExtrasBean> getBeans() {
 
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
-		Collection<? extends IclubRateTypeModel> models = new ArrayList<IclubRateTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateTypeModel.class));
+		Collection<? extends IclubExtrasModel> models = new ArrayList<IclubExtrasModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubExtrasModel.class));
 		client.close();
-		beans = new ArrayList<IclubRateTypeBean>();
-		for (IclubRateTypeModel model : models) {
+		beans = new ArrayList<IclubExtrasBean>();
+		for (IclubExtrasModel model : models) {
 
-			IclubRateTypeBean bean = new IclubRateTypeBean();
+			IclubExtrasBean bean = new IclubExtrasBean();
 
-			bean.setRtId(model.getRtId());
-			bean.setRtLongDesc(model.getRtLongDesc());
-			bean.setRtShortDesc(model.getRtShortDesc());
-			bean.setRtStatus(model.getRtStatus());
-			if (model.getIclubRateEngines() != null && model.getIclubRateEngines().length > 0) {
-				String[] rateEngines = new String[model.getIclubRateEngines().length];
-				int i = 0;
-				for (String rateEngine : model.getIclubRateEngines()) {
-					rateEngines[i] = rateEngine;
-					i++;
-				}
-
-				model.setIclubRateEngines(rateEngines);
-			}
+			bean.setEId(model.getEId());
+			bean.setEDesc(model.getEDesc());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setEStatus(model.getEStatus());
+			bean.setECrtdDt(model.getECrtdDt());
 
 			beans.add(bean);
 		}
 		return beans;
 	}
 
-	public void setBeans(List<IclubRateTypeBean> beans) {
+	public void setBeans(List<IclubExtrasBean> beans) {
 		this.beans = beans;
 	}
 

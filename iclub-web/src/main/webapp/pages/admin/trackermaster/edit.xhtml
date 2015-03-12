@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+
+			 <p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmid']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubTrackerMasterController.bean.tmId}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmname']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubTrackerMasterController.bean.tmName}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmtradename']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubTrackerMasterController.bean.tmTradeName}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmlocation']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubTrackerMasterController.bean.tmLocation}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmlat']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubTrackerMasterController.bean.tmLat}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmlong']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubTrackerMasterController.bean.tmLong}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmregnum']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:inputText value="#{iclubTrackerMasterController.bean.tmRegNum}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.userid']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:outputLabel value="#{iclubTrackerMasterController.bean.iclubPerson}" />
+			</p:column>
+			 
+			<p:column>
+				<p:outputLabel value="#{labels['trackermaster.edit.tmcrtddt']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:calendar value="#{iclubTrackerMasterController.bean.tmCrtdDt}" />
+			</p:column>
+
+			 
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnTrackerMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="#{labels['update']}" actionListener="#{iclubTrackerMasterController.modIclubTrackerMaster}" />
+			<p:commandButton id="btnTrackerMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="#{labels['delete']}" actionListener="#{iclubTrackerMasterController.delIclubTrackerMaster}" />
+			<p:commandButton id="btnTrackerMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="#{labels['close']}" actionListener="#{iclubTrackerMasterController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

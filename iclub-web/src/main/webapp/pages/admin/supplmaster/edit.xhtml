@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smid']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubSupplMasterController.bean.smId}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smname']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubSupplMasterController.bean.smName}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smtradename']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubSupplMasterController.bean.smTradeName}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smregnum']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubSupplMasterController.bean.smRegNum}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smaddress']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubSupplMasterController.bean.smAddress}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smlat']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubSupplMasterController.bean.smLat}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smlong']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubSupplMasterController.bean.smLong}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smcrlimit']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:inputText value="#{iclubSupplMasterController.bean.smCrLimit}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.sractiondt']}"></p:outputLabel>
+			</p:column>
+			<p:column >
+				<p:calender value="#{iclubSupplMasterController.bean.srActionDt}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smrating']}"></p:outputLabel>
+			</p:column>
+			<p:column  >
+				<p:inputText value="#{iclubSupplMasterController.bean.smRating}" />
+			</p:column>
+			 
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.smcrtddt']}"></p:outputLabel>
+			</p:column>
+			<p:column  >
+				<p:calendar  value="#{iclubSupplMasterController.bean.smCrtdDt}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.iclubsuppliertype']}"></p:outputLabel>
+			</p:column>
+			<p:column  >
+				<p:calendar  value="#{iclubSupplMasterController.bean.iclubSupplierType}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['supplmaster.edit.userid']}"></p:outputLabel>
+			</p:column>
+			<p:column  >
+				<p:calendar  value="#{iclubSupplMasterController.bean.iclubPerson}" />
+			</p:column>
+
+			 
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnSupplMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="#{labels['update']}" actionListener="#{iclubSupplMasterController.modIclubSupplMaster}" />
+			<p:commandButton id="btnSupplMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="#{labels['delete']}" actionListener="#{iclubSupplMasterController.delIclubSupplMaster}" />
+			<p:commandButton id="btnSupplMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="#{labels['close']}" actionListener="#{iclubSupplMasterController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

@@ -1,0 +1,24 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Maintain PurposeType</ui:define>
+	<ui:define name="body">
+		<p:remoteCommand actionListener="#{iclubPurposeTypeController.initializePage}" name="onload" autoRun="true" update="pnlPurposeTypeContDet" />
+		<p:panel id="pnlPurposeTypeCont">
+			<p:panel id="pnlPurposeTypeContMenu">
+				<p:commandLink value="#{labels['viewpurposetype']}" actionListener="#{iclubPurposeTypeController.showView}" update="pnlPurposeTypeContDet" />
+				<p:graphicImage name="separator.png" library="images" />
+				<p:commandLink value="#{labels['createpurposetype']}"  actionListener="#{iclubPurposeTypeController.showCreate}" update="pnlPurposeTypeContDet" />
+			</p:panel>
+			<p:panel id="pnlPurposeTypeContDet">
+				<p:panel id="pnlPurposeTypeContView" rendered="#{iclubPurposeTypeController.showViewCont}">
+					<ui:include src="/pages/admin/purposetype/view.xhtml" />
+				</p:panel>
+				<p:panel id="pnlPurposeTypeContCreate" rendered="#{iclubPurposeTypeController.showCreateCont}">
+					<ui:include src="/pages/admin/purposetype/create.xhtml" />
+				</p:panel>
+				<p:panel id="pnlPurposeTypeContEdit" rendered="#{iclubPurposeTypeController.showEditCont}">
+					<ui:include src="/pages/admin/purposetype/edit.xhtml" />
+				</p:panel>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>
