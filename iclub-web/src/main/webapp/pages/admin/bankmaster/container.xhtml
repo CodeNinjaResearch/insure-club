@@ -1,0 +1,21 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Maintain BankMaster</ui:define>
+	<ui:define name="body">
+		<p:remoteCommand actionListener="#{iclubBankMasterController.initializePage}" name="onload" autoRun="true" update="pnlBankMasterContDet" />
+		<p:panel id="pnlBankMasterCont">
+			<p:panel id="pnlBankMasterContMenu">
+				<p:commandLink value="#{labels['viewbankmaster']}" actionListener="#{iclubBankMasterController.showView}" update="pnlBankMasterContDet" />
+			</p:panel>
+			<p:panel id="pnlBankMasterContDet">
+				<p:panel id="pnlBankMasterContView" rendered="#{iclubBankMasterController.showViewCont}">
+					<ui:include src="/pages/admin/bankmaster/view.xhtml" />
+				</p:panel>
+				
+				<p:panel id="pnlBankMasterContSummary" rendered="#{iclubBankMasterController.showSummaryCont}">
+					<ui:include src="/pages/bankmaster/summary.xhtml" />
+				</p:panel>
+				  
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

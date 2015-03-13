@@ -150,17 +150,15 @@ public class IclubVehicleMasterService {
 				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
 				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
-				if(iclubVMaster.getIclubVehicles()!=null && iclubVMaster.getIclubVehicles().size()>0)
-				{
-					String[] vehicles=new String[iclubVMaster.getIclubVehicles().size()];
-					int i=0;
-					for(IclubVehicle vehicle:iclubVMaster.getIclubVehicles()){
-						vehicles[i]=vehicle.getVId();
+				if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
+						vehicles[i] = vehicle.getVId();
 						i++;
 					}
 				}
 
-				
 				ret.add((T) iCVm);
 			}
 		} catch (Exception e) {
@@ -194,17 +192,16 @@ public class IclubVehicleMasterService {
 				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
 				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
-				
-				if(iclubVMaster.getIclubVehicles()!=null && iclubVMaster.getIclubVehicles().size()>0)
-				{
-					String[] vehicles=new String[iclubVMaster.getIclubVehicles().size()];
-					int i=0;
-					for(IclubVehicle vehicle:iclubVMaster.getIclubVehicles()){
-						vehicles[i]=vehicle.getVId();
+				if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
+						vehicles[i] = vehicle.getVId();
 						i++;
 					}
+					iCVm.setIclubVehicles(vehicles);
 				}
-				
+
 				ret.add((T) iCVm);
 			}
 		} catch (Exception e) {
@@ -232,15 +229,15 @@ public class IclubVehicleMasterService {
 			model.setVmProdDt(bean.getVmProdDt());
 			model.setVmCrtdDt(bean.getVmCrtdDt());
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			
-			if(bean.getIclubVehicles()!=null && bean.getIclubVehicles().size()>0)
-			{
-				String[] vehicles=new String[bean.getIclubVehicles().size()];
-				int i=0;
-				for(IclubVehicle vehicle:bean.getIclubVehicles()){
-					vehicles[i]=vehicle.getVId();
+
+			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
+				String[] vehicles = new String[bean.getIclubVehicles().size()];
+				int i = 0;
+				for (IclubVehicle vehicle : bean.getIclubVehicles()) {
+					vehicles[i] = vehicle.getVId();
 					i++;
 				}
+				model.setIclubVehicles(vehicles);
 			}
 
 		} catch (Exception e) {

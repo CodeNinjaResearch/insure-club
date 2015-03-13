@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtNotifCont" widgetVar="dtNotifCont" value="#{iclubNotifController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Notifes Available">
+
+		<p:column headerText="#{labels['notif.view.nid']}">
+			<p:outputLabel value="#{bean.NId}" />
+		</p:column>
+
+		<p:column headerText="#{labels['notif.view.userid']}">
+			<p:outputLabel value="#{bean.iclubPerson}" />
+		</p:column>
+		<p:column headerText="#{labels['notif.view.iclubnotificationtype']}">
+			<p:outputLabel value="#{bean.iclubNotificationType}" />
+		</p:column>
+		<p:column headerText="#{labels['notif.view.ntitle']}">
+			<p:outputLabel value="#{bean.NTitle}" />
+		</p:column>
+
+		<p:column headerText="#{labels['notif.view.nbody']}">
+			<p:outputLabel value="#{bean.NBody}" />
+		</p:column>
+
+		<p:column headerText="#{labels['notif.view.nfromaddr']}">
+			<p:outputLabel value="#{bean.NFromAddr}" />
+		</p:column>
+
+		<p:column headerText="#{labels['notif.view.ntolist']}">
+			<p:outputLabel value="#{bean.NToList}" />
+		</p:column>
+
+		<p:column headerText="#{labels['notif.view.nstatus']}">
+			<p:outputLabel value="#{bean.NStatus}" />
+		</p:column>
+
+
+
+
+		<p:column>
+			<p:commandButton id="btnNotifSummary" icon="ui-icon-summary" ajax="false" action="#{iclubNotifController.showSummary}" update=":notifFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubNotifController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubNotifController.viewParam}" value="3" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

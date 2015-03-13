@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+			<p:column>
+				<p:outputLabel value="#{labels['message.summary.mid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubMessageController.bean.MId}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['message.summary.userid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubMessageController.bean.iclubPerson}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['message.summary.systemfromid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubMessageController.bean.iclubSystemTypeByMFromSysId}" />
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="#{labels['message.summary.systemtoid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubMessageController.bean.iclubSystemTypeByMToSysId}" />
+			</p:column>
+			
+			
+			<p:column>
+				<p:outputLabel value="#{labels['message.summary.mtranid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubMessageController.bean.MTranId}" />
+			</p:column>
+			
+			
+			<p:column>
+				<p:outputLabel value="#{labels['message.summary.mcontent']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubMessageController.bean.MContent}" />
+			</p:column>
+			
+			
+			<p:column>
+				<p:outputLabel value="#{labels['message.summary.mcrtddt']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubMessageController.bean.MCrtdDt}" />
+			</p:column>
+
+
+			 
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnMessageCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlMessageCont" value="#{labels['close']}" actionListener="#{iclubMessageController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

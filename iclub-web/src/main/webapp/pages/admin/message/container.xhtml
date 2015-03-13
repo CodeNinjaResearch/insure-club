@@ -1,0 +1,21 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">Maintain Message</ui:define>
+	<ui:define name="body">
+		<p:remoteCommand actionListener="#{iclubMessageController.initializePage}" name="onload" autoRun="true" update="pnlMessageContDet" />
+		<p:panel id="pnlMessageCont">
+			<p:panel id="pnlMessageContMenu">
+				<p:commandLink value="#{labels['viewmessage']}" actionListener="#{iclubMessageController.showView}" update="pnlMessageContDet" />
+			</p:panel>
+			<p:panel id="pnlMessageContDet">
+				<p:panel id="pnlMessageContView" rendered="#{iclubMessageController.showViewCont}">
+					<ui:include src="/pages/admin/message/view.xhtml" />
+				</p:panel>
+				
+				<p:panel id="pnlMessageContSummary" rendered="#{iclubMessageController.showSummaryCont}">
+					<ui:include src="/pages/message/summary.xhtml" />
+				</p:panel>
+				  
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

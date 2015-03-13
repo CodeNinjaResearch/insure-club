@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubGeoLocBean {
 
@@ -10,7 +10,7 @@ public class IclubGeoLocBean {
 	private Long glLat;
 	private Long glLong;
 	private Long glRate;
-	private Timestamp glCrtdDt;
+	private Date glCrtdDt;
 
 	public Long getGlId() {
 		return glId;
@@ -60,11 +60,11 @@ public class IclubGeoLocBean {
 		this.glRate = glRate;
 	}
 
-	public Timestamp getGlCrtdDt() {
+	public Date getGlCrtdDt() {
 		return glCrtdDt;
 	}
 
-	public void setGlCrtdDt(Timestamp glCrtdDt) {
+	public void setGlCrtdDt(Date glCrtdDt) {
 		this.glCrtdDt = glCrtdDt;
 	}
 

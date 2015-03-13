@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmId}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.userid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.iclubPerson}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmbankname']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmBankName}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmbankcode']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmBankCode}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmbranchname']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmBranchName}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmbranchcode']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmBranchCode}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmbranchaddress']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmBranchAddress}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmbranchlat']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmBranchLat}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmbranchlong']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmBranchLong}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{labels['bankmaster.summary.bmcrtddt']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubBankMasterController.bean.bmCrtdDt}" />
+			</p:column>
+
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnBankMasterCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlBankMasterCont" value="#{labels['close']}" actionListener="#{iclubBankMasterController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

@@ -17,6 +17,7 @@ public class IclubVehicleMasterModel {
 	private Long vmRetRate;
 	private Date vmProdDt;
 	private Timestamp vmCrtdDt;
+	private String[] iclubVehicles;
 
 	public Long getVmId() {
 		return vmId;
@@ -88,6 +89,14 @@ public class IclubVehicleMasterModel {
 
 	public void setVmCrtdDt(Timestamp vmCrtdDt) {
 		this.vmCrtdDt = vmCrtdDt;
+	}
+
+	public String[] getIclubVehicles() {
+		return iclubVehicles;
+	}
+
+	public void setIclubVehicles(String[] iclubVehicles) {
+		this.iclubVehicles = iclubVehicles;
 	}
 
 }

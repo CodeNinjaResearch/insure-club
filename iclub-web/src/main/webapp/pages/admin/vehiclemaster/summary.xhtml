@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmId}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.userid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.iclubPerson}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmmake']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmMake}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmmodel']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmModel}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmorigrate']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmOrigRate}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmmrktrate']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmMrktRate}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmretrate']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmRetRate}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmproddt']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmProdDt}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['vehiclemaster.summary.vmcrtddt']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmCrtdDt}" />
+			</p:column>
+
+
+
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnVehicleMasterCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleMasterCont" value="#{labels['close']}" actionListener="#{iclubVehicleMasterController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>

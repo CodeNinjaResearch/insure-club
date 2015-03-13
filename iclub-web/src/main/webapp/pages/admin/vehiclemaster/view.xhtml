@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtVehicleMasterCont" widgetVar="dtVehicleMasterCont" value="#{iclubVehicleMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No VehicleMasteres Available">
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmid']}">
+			<p:outputLabel value="#{bean.vmId}" />
+		</p:column>
+
+		<p:column headerText="#{labels['vehiclemaster.view.userid']}">
+			<p:outputLabel value="#{bean.iclubPerson}" />
+		</p:column>
+
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmmake']}">
+			<p:outputLabel value="#{bean.vmMake}" />
+		</p:column>
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmmodel']}">
+			<p:outputLabel value="#{bean.vmModel}" />
+		</p:column>
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmorigrate']}">
+			<p:outputLabel value="#{bean.vmOrigRate}" />
+		</p:column>
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmmrktrate']}">
+			<p:outputLabel value="#{bean.vmMrktRate}" />
+		</p:column>
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmretrate']}">
+			<p:outputLabel value="#{bean.vmRetRate}" />
+		</p:column>
+
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmproddt']}">
+			<p:outputLabel value="#{bean.vmProdDt}" />
+		</p:column>
+
+		<p:column headerText="#{labels['vehiclemaster.view.vmcrtddt']}">
+			<p:outputLabel value="#{bean.vmCrtdDt}" />
+		</p:column>
+
+
+		<p:column>
+			<p:commandButton id="btnVehicleMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubVehicleMasterController.showSummary}" update=":vehiclemasterFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubVehicleMasterController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubVehicleMasterController.viewParam}" value="3" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

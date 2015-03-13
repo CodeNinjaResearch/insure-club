@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtBankMasterCont" widgetVar="dtBankMasterCont" value="#{iclubBankMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No BankMasteres Available">
+
+		<p:column headerText="#{labels['bankmaster.view.bmid']}">
+			<p:outputLabel value="#{bean.bmId}" />
+		</p:column>
+		
+		<p:column headerText="#{labels['bankmaster.view.userid']}">
+			<p:outputLabel value="#{bean.iclubPerson}" />
+		</p:column>
+		
+		<p:column headerText="#{labels['bankmaster.view.bmbankname']}">
+			<p:outputLabel value="#{bean.bmBankName}" />
+		</p:column>
+		
+		
+		<p:column headerText="#{labels['bankmaster.view.bmbranchname']}">
+			<p:outputLabel value="#{bean.bmBranchName}" />
+		</p:column>
+		
+		
+		<p:column headerText="#{labels['bankmaster.view.bmbranchaddress']}">
+			<p:outputLabel value="#{bean.bmBranchAddress}" />
+		</p:column>
+		
+		
+		<p:column headerText="#{labels['bankmaster.view.bmbranchlat']}">
+			<p:outputLabel value="#{bean.bmBranchLat}" />
+		</p:column>
+		
+		<p:column headerText="#{labels['bankmaster.view.bmbranchlong']}">
+			<p:outputLabel value="#{bean.bmBranchLong}" />
+		</p:column>
+		
+		
+		<p:column headerText="#{labels['bankmaster.view.bmbranchzip']}">
+			<p:outputLabel value="#{bean.bmBranchZip}" />
+		</p:column>
+		
+		<p:column headerText="#{labels['bankmaster.view.bmcrtddt']}">
+			<p:outputLabel value="#{bean.bmCrtdDt}" />
+		</p:column>
+		
+
+		<p:column>
+			<p:commandButton id="btnBankMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubBankMasterController.showSummary}" update=":bankmasterFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubBankMasterController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubBankMasterController.viewParam}" value="3" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

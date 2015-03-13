@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtMessageCont" widgetVar="dtMessageCont" value="#{iclubMessageController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Messagees Available">
+
+		<p:column headerText="#{labels['message.view.mid']}">
+			<p:outputLabel value="#{bean.MId}" />
+		</p:column>
+
+		<p:column headerText="#{labels['message.view.userid']}">
+			<p:outputLabel value="#{bean.iclubPerson}" />
+		</p:column>
+		 
+		 <p:column headerText="#{labels['message.view.systemtoid']}">
+			<p:outputLabel value="#{bean.iclubSystemTypeByMToSysId}" />
+		</p:column>
+
+		 
+		 <p:column headerText="#{labels['message.view.systemfromid']}">
+			<p:outputLabel value="#{bean.iclubSystemTypeByMFromSysId}" />
+		</p:column>
+
+		 
+		 <p:column headerText="#{labels['message.view.iclubmessagetype']}">
+			<p:outputLabel value="#{bean.iclubMessageType}" />
+		</p:column>
+
+		 
+		 <p:column headerText="#{labels['message.view.msentdt']}">
+			<p:outputLabel value="#{bean.MSentDt}" />
+		</p:column>
+
+		 
+		 <p:column headerText="#{labels['message.view.mtranid']}">
+			<p:outputLabel value="#{bean.MTranId}" />
+		</p:column>
+
+		 
+		 <p:column headerText="#{labels['message.view.mcontent']}">
+			<p:outputLabel value="#{bean.MContent}" />
+		</p:column>
+
+		 
+		 <p:column headerText="#{labels['message.view.mcrtddt']}">
+			<p:outputLabel value="#{bean.MCrtdDt}" />
+		</p:column>
+
+		 
+		 
+		 
+		 
+
+
+
+
+
+		<p:column>
+			<p:commandButton id="btnMessageSummary" icon="ui-icon-summary" ajax="false" action="#{iclubMessageController.showSummary}" update=":messageFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubMessageController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubMessageController.viewParam}" value="3" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

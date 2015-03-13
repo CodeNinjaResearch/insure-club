@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div style="align: center !important">
+		<p:panelGrid columns="4">
+			<p:column>
+				<p:outputLabel value="#{labels['geoloc.summary.glid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubGeoLocController.bean.glId}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['geoloc.summary.userid']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubGeoLocController.bean.iclubPerson}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['geoloc.summary.gladdress']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubGeoLocController.bean.glAddress}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{labels['geoloc.summary.gllat']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubGeoLocController.bean.glLat}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['geoloc.summary.gllong']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubGeoLocController.bean.glLong}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['geoloc.summary.glrate']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubGeoLocController.bean.glRate}" />
+			</p:column>
+
+
+			<p:column>
+				<p:outputLabel value="#{labels['geoloc.summary.glcrtddt']}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{iclubGeoLocController.bean.glCrtdDt}" />
+			</p:column>
+
+
+		</p:panelGrid>
+	</div>
+	<f:facet name="footer">
+		<div style="align: center !important">
+			<p:commandButton id="btnGeoLocCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlGeoLocCont" value="#{labels['close']}" actionListener="#{iclubGeoLocController.showView}" />
+		</div>
+	</f:facet>
+</ui:composition>
