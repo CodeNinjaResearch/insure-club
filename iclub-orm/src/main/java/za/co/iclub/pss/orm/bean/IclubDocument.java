@@ -36,6 +36,7 @@ public class IclubDocument implements java.io.Serializable {
 	private String DEntityId;
 	private String DContent;
 	private Timestamp DCrtdDt;
+	private byte[] DBlob;
 
 	// Constructors
 
@@ -155,6 +156,15 @@ public class IclubDocument implements java.io.Serializable {
 
 	public void setDCrtdDt(Timestamp DCrtdDt) {
 		this.DCrtdDt = DCrtdDt;
+	}
+
+	@Column(name = "d_blob")
+	public byte[] getDBlob() {
+		return DBlob;
+	}
+
+	public void setDBlob(byte[] dBlob) {
+		DBlob = dBlob;
 	}
 
 }

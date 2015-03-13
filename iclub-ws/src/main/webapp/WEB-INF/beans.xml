@@ -78,6 +78,7 @@
 			<ref bean="IclubRateEngineService"/>
 			<ref bean="IclubVehicleService"/>
 			<ref bean="IclubConfigService"/>
+			<ref bean="IclubDocumentService" />
 			
 
 		</jaxrs:serviceBeans>

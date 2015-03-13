@@ -1,8 +1,11 @@
 package za.co.iclub.pss.ws.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.activation.DataHandler;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,9 +13,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.cxf.jaxrs.ext.multipart.Attachment;
+import org.apache.cxf.jaxrs.ext.multipart.ContentDisposition;
+import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -222,6 +230,55 @@ public class IclubDocumentService {
 			LOGGER.error(e, e);
 		}
 		return model;
+	}
+	
+	@POST
+	@Path("/upload")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Response upload(MultipartBody body) {
+		try {
+
+			List<Attachment> attachments = body.getAllAttachments();
+			for (Attachment attachment : attachments) {
+				String docId = attachment.getContentId();
+				DataHandler handler = attachment.getDataHandler();
+				InputStream stream = handler.getInputStream();
+				byte[] bytes = IOUtils.toByteArray(stream);
+				IclubDocument iDocument = iclubDocumentDAO.findById(docId);
+				iDocument.setDBlob(bytes);
+				iclubDocumentDAO.merge(iDocument);
+				LOGGER.info("Save Success with ID :: " + iDocument.getDId());
+			}
+
+			Response response = Response.ok("SUCCESS").build();
+			return response;
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			Response response = Response.ok(e.getMessage()).build();
+			return response;
+		}
+
+	}
+
+	@GET
+	@Path("/download/{docId}")
+	@Produces(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Transactional(propagation = Propagation.REQUIRED)
+	public List<Attachment> downloadFile(@PathParam("docId") String docId) {
+		List<Attachment> attachments = new ArrayList<Attachment>();
+		try {
+			IclubDocument document = iclubDocumentDAO.findById(docId);
+			ContentDisposition cd = new ContentDisposition("attachment;filename=" + document.getDName() + ";filetype=" + document.getDMimeType());
+			InputStream in = new ByteArrayInputStream(document.getDBlob());
+			Attachment attachment = new Attachment("id", in, cd);
+			attachments.add(attachment);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return attachments;
 	}
 
 	public IclubCommonDAO getIclubCommonDAO() {
