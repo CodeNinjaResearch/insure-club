@@ -202,8 +202,9 @@ public class IclubVehicleMasterDAO {
 	public List findAllVmMakes() {
 		log.debug("finding all IclubVehicleMaster instances by vmMake");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getAllVmMakes");
-			
+			String queryString = "select  distinct model.vmMake from IclubVehicleMaster as model ";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+			 
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all by vmMake failed", re);

@@ -1,0 +1,128 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain AccessType</ui:define>
+	<ui:define name="body">
+	  <p:tabView>
+        <p:tab title="Person details">
+           <p:panel id="pnlPersonCont">
+			<p:panel id="pnlPersonCont1">
+				<div align="center">
+				<p:panelGrid columns="4">
+				<p:outputLabel value="Title :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PTitle}"></p:inputText>
+				<p:outputLabel value="Initials :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PInitials}"></p:inputText>
+				<p:outputLabel value="First Name :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PFName}"></p:inputText>
+				<p:outputLabel value="Last Name :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PLName}"></p:inputText>
+				<p:outputLabel value="Mobile Number :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PMobile}"></p:inputText>
+				<p:outputLabel value="Email :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PEmail}"></p:inputText>
+				<p:outputLabel value="Contact Ref :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PContactPref}"></p:inputText>
+				<p:outputLabel value="Gender :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PGender}"></p:inputText>
+				<p:outputLabel value="Id Num :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PIdNum}"></p:inputText>
+				<p:outputLabel value="Id Issuer Country :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PIdIssueCntry}"></p:inputText>
+				<p:outputLabel value="Id Issue Date :"></p:outputLabel>
+				<p:calendar value="#{iclubQuickQuoteController.personBean.PIdIssueDt}" />
+				<p:outputLabel value="Id Expiry Date :"></p:outputLabel>
+				<p:calendar value="#{iclubQuickQuoteController.personBean.PIdExpiryDt}" />
+				<p:outputLabel value="Occupation :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.POccupation}"></p:inputText>
+				<p:outputLabel value="Date Of Birth :"></p:outputLabel>
+				<p:calendar value="#{iclubQuickQuoteController.personBean.PDob}"></p:calendar> 
+				<p:outputLabel value="Is Pensioner :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PIsPensioner}"></p:inputText>
+				<p:outputLabel value="Address :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PAddress}"></p:inputText>
+				<p:outputLabel value="Lat :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PLat}"></p:inputText>
+				<p:outputLabel value="Long :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PLong}"></p:inputText>
+				<p:outputLabel value="Zip Code :"></p:outputLabel>
+				<p:inputText value="#{iclubQuickQuoteController.personBean.PZipCd}"></p:inputText>
+				
+				
+				</p:panelGrid>
+				</div>
+				</p:panel>
+				</p:panel>
+        </p:tab>
+        <p:tab title="Vechicle details">
+           
+					<p:panel id="pnlEntityCatCont">
+			<p:panel id="pnlEntityCatCont1">
+				<div align="center">
+					<p:panelGrid columns="4">
+						<p:column>
+							<p:outputLabel value="Location :" />
+						</p:column>
+						<p:column>
+							<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+						</p:column>
+
+						<p:column>
+							<p:outputLabel value="Vehicle Make :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubQuickQuoteController.vmMake}" onchange="submit()" valueChangeListener="#{iclubQuickQuoteController.vmMakeValueChangeListener}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
+
+							</p:selectOneMenu>
+						</p:column>
+
+						<p:column>
+							<p:outputLabel value="Vehicle Model :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubQuickQuoteController.vmModel}" onchange="submit()" valueChangeListener="#{iclubQuickQuoteController.vmModelValueChangeListener}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
+
+							</p:selectOneMenu>
+						</p:column>
+
+						<p:column>
+							<p:outputLabel value="year :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubQuickQuoteController.vmYear}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItems value="#{iclubQuickQuoteController.years}" />
+
+							</p:selectOneMenu>
+						</p:column>
+
+						<p:column>
+							<p:outputLabel value="Purpose Type :" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{iclubQuickQuoteController.purposeType}">
+								<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+								<f:selectItems value="#{iclubQuickQuoteController.pBeans}" var="p" itemLabel="#{p.ptLongDesc}" itemValue="#{p.ptId}" />
+
+							</p:selectOneMenu>
+						</p:column>
+
+						 
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</p:panel>
+				
+        </p:tab>
+        <p:tab title="Property details">
+            <h:panelGrid columns="2" cellpadding="10">
+               
+                <h:outputText value="Third Tab" />
+            </h:panelGrid>
+        </p:tab>
+    </p:tabView>
+	</ui:define>
+</ui:composition>

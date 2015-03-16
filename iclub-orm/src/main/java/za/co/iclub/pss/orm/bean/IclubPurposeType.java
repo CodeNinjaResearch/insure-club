@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_purpose_type")
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_purpose_type where pt_crtd_by=:id", name = "getPurposeTypeByUser", resultClass = IclubPurposeType.class) })
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_purpose_type where pt_crtd_by=:id", name = "getPurposeTypeByUser", resultClass = IclubPurposeType.class) ,@NamedNativeQuery(query = "select * from iclub_purpose_type where pt_item_type_id=:iIType", name = "getPurposeTypeByInsurnceItemType", resultClass = IclubPurposeType.class) })
 public class IclubPurposeType implements java.io.Serializable {
 
 	// Fields

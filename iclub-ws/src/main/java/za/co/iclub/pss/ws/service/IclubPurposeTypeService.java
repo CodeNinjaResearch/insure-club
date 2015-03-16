@@ -171,6 +171,60 @@ public class IclubPurposeTypeService {
 		return ret;
 	}
 
+	
+	@GET
+	@Path("/get/insurnceitemtype/{insurnceItemType}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubPurposeTypeModel> List<T> getByItemType(@PathParam("insurnceItemType") String insurnceItemType) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubPurposeTypeDAO.findByInsuranceItemType(insurnceItemType);
+
+			for (Object object : batmod) {
+				IclubPurposeType iCPt = (IclubPurposeType) object;
+
+				IclubPurposeTypeModel model = new IclubPurposeTypeModel();
+
+				model.setPtId(iCPt.getPtId());
+				model.setPtLongDesc(iCPt.getPtLongDesc());
+				model.setPtShortDesc(iCPt.getPtShortDesc());
+				model.setPtStatus(iCPt.getPtStatus());
+				model.setPtCrtdDt(iCPt.getPtCrtdDt());
+				model.setIclubPerson(iCPt.getIclubPerson() != null ? iCPt.getIclubPerson().getPId() : null);
+				model.setIclubInsuranceItemType(iCPt.getIclubInsuranceItemType() != null ? iCPt.getIclubInsuranceItemType().getIitId() : null);
+
+				if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
+					String[] properties = new String[iCPt.getIclubProperties().size()];
+					int i = 0;
+					for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
+						properties[i] = iclubProperty.getPId();
+						i++;
+					}
+					model.setIclubProperties(properties);
+				}
+
+				if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iCPt.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
+						vehicles[i] = iclubVehicle.getVId();
+						i++;
+					}
+					model.setIclubVehicles(vehicles);
+				}
+
+				ret.add((T) model);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+	
+	
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
