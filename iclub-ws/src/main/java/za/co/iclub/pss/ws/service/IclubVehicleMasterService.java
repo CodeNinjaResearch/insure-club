@@ -169,6 +169,71 @@ public class IclubVehicleMasterService {
 	}
 
 	@GET
+	@Path("/listAllMake")
+	@Produces("application/json")
+	@Transactional
+	public List<String> listAllMake() {
+		List<String> ret = new ArrayList<String>();
+
+		try {
+			List batmod = iclubVehicleMasterDAO.findAll();
+
+			for (Object object : batmod) {
+
+				String vmMake = (String) object;
+
+				ret.add(vmMake);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+	
+	@GET
+	@Path("/getByMake/{vmMake}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubVehicleMasterModel> List<T> getByMake(@PathParam("vmMake") String vmMake) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubVehicleMasterDAO.findByVmMake(vmMake);
+
+			for (Object object : batmod) {
+				IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
+				IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
+
+				iCVm.setVmId(iclubVMaster.getVmId());
+				iCVm.setVmMake(iclubVMaster.getVmMake());
+				iCVm.setVmModel(iclubVMaster.getVmModel());
+				iCVm.setVmMrktRate(iclubVMaster.getVmMrktRate());
+				iCVm.setVmOrigRate(iclubVMaster.getVmOrigRate());
+				iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
+				iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
+				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
+				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
+
+				if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
+						vehicles[i] = vehicle.getVId();
+						i++;
+					}
+					iCVm.setIclubVehicles(vehicles);
+				}
+
+				ret.add((T) iCVm);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
+	}
+
+	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)

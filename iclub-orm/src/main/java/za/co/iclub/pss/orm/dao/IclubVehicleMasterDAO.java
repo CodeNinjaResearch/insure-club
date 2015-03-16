@@ -185,6 +185,31 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
+	
+	
+	public List findAllByMake(String vmMake) {
+		log.debug("finding all IclubVehicleMaster instances by vmMake");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getVehicleMasterByMake");
+			queryObject.setString("vmMake", vmMake);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all by vmMake failed", re);
+			throw re;
+		}
+	}
+	
+	public List findAllVmMakes() {
+		log.debug("finding all IclubVehicleMaster instances by vmMake");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getAllVmMakes");
+			
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all by vmMake failed", re);
+			throw re;
+		}
+	}
 
 	public static IclubVehicleMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehicleMasterDAO) ctx.getBean("IclubVehicleMasterDAO");
