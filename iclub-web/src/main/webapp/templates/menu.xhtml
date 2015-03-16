@@ -12,7 +12,6 @@
 				<p:menuitem outcome="IclubBarType" value="BarType" />
 				<p:menuitem outcome="IclubBoundaryType" value="BoundaryType" />
 				<p:menuitem outcome="IclubBuildingState" value="BuildingState" />
-				<p:menuitem outcome="IclubCoverType" value="CoverType" />
 				<p:menuitem outcome="IclubDocumentType" value="DocumentType" />
 				<p:menuitem outcome="IclubEventType" value="EventType" />
 				<p:menuitem outcome="IclubIdType" value="IdType" />
@@ -27,7 +26,6 @@
 				<p:menuitem outcome="IclubPolicyStatus" value="PolicyStatus" />
 				<p:menuitem outcome="IclubProductType" value="ProductType" />
 				<p:menuitem outcome="IclubPropertyType" value="PropertyType" />
-				<p:menuitem outcome="IclubPurposeType" value="PurposeType" />
 				<p:menuitem outcome="IclubQuoteStatus" value="QuoteStatus" />
 				<p:menuitem outcome="IclubRateType" value="RateType" />
 				<p:menuitem outcome="IclubRoleType" value="RoleType" />
@@ -37,10 +35,26 @@
 				<p:menuitem outcome="IclubThatchType" value="ThatchType" />
 				<p:menuitem outcome="IclubWallType" value="WallType" />
 			</p:submenu>
-			<p:submenu label="Master">
-			</p:submenu>
 		</p:submenu>
 		<p:submenu label="Screens">
+			<p:menuitem outcome="bankmaster" value="BankMaster" />
+			<p:menuitem outcome="configuration" value="Configuration" />
+			<p:menuitem outcome="covertype" value="CoverType" />
+			<p:menuitem outcome="entitytype" value="EntityType" />
+			<p:menuitem outcome="event" value="Event" />
+			<p:menuitem outcome="extras" value="Extras" />
+			<p:menuitem outcome="geoloc" value="GeoLoc" />
+			<p:menuitem outcome="licensecode" value="LicenseCode" />
+			<p:menuitem outcome="message" value="Message" />
+			<p:menuitem outcome="notif" value="Notification" />
+			<p:menuitem outcome="occupation" value="Occupation" />
+			<p:menuitem outcome="purposetype" value="PurposeType" />
+			<p:menuitem outcome="ratetype" value="RateType" />
+			<p:menuitem outcome="rating" value="Rating" />
+			<p:menuitem outcome="securitymaster" value="SecurityMaster" />
+			<p:menuitem outcome="supplmaster" value="SupplMaster" />
+			<p:menuitem outcome="trackermaster" value="TrackerMaster" />
+			<p:menuitem outcome="vehiclemaster" value="VehicleMaster" />
 		</p:submenu>
 	</p:menubar>
 	<p:selectOneMenu value="#{iclubMenuController.language}" onchange="submit()" valueChangeListener="#{iclubMenuController.languageValueChangeListener}">

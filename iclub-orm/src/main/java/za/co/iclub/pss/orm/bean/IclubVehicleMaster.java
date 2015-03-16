@@ -91,7 +91,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 		this.iclubPerson = iclubPerson;
 	}
 
-	@Column(name = "vm_make", unique = true, length = 250)
+	@Column(name = "vm_make", length = 250)
 	public String getVmMake() {
 		return this.vmMake;
 	}
