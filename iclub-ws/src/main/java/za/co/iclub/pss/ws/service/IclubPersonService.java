@@ -1215,7 +1215,7 @@ public class IclubPersonService {
 				model.setIclubTrackerMasters(iclubTrackerMasters);
 			}
 			if (bean.getIclubCoverTypes() != null && bean.getIclubCoverTypes().size() > 0) {
-				Long[] iclubCoverTypes = new Long[bean.getIclubVehicles().size()];
+				Long[] iclubCoverTypes = new Long[bean.getIclubCoverTypes().size()];
 				int i = 0;
 				for (IclubCoverType iclubCoverType : bean.getIclubCoverTypes()) {
 					iclubCoverTypes[i] = iclubCoverType.getCtId();

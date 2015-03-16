@@ -101,18 +101,17 @@ public class IclubQuickQuoteController implements Serializable {
 	public void vmModelValueChangeListener(ValueChangeEvent valueChangeEvent) {
 		if (valueChangeEvent != null && valueChangeEvent.getNewValue() != null && !valueChangeEvent.getNewValue().toString().trim().equalsIgnoreCase("-1")) {
 
-			WebClient client = IclubWebHelper.createCustomClient(VEH_BASE_URL + "getByMake/" + valueChangeEvent.getNewValue().toString());
+			WebClient client = IclubWebHelper.createCustomClient(VEH_BASE_URL + "get/" + valueChangeEvent.getNewValue().toString());
 			IclubVehicleMasterModel model = (IclubVehicleMasterModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubVehicleMasterModel.class));
 			client.close();
+			years = new ArrayList<String>();
 			if (model != null && model.getVmProdDt() != null) {
 				Calendar now = Calendar.getInstance();
 				int currentYear = now.get(Calendar.YEAR);
 				now.setTimeInMillis(model.getVmProdDt().getTime());
 				int prodYear = now.get(Calendar.YEAR);
-				System.out.println("------" + prodYear + "-------");
-
 				for (int i = prodYear; i <= currentYear; i++) {
-					years.add(prodYear + "");
+					years.add(i + "");
 				}
 
 			}
@@ -237,6 +236,8 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 
 	public IclubPersonBean getPersonBean() {
+		if (personBean == null)
+			personBean = new IclubPersonBean();
 		return personBean;
 	}
 

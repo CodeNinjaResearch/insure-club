@@ -18,8 +18,10 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.web.bean.IclubBankMasterBean;
+import za.co.iclub.pss.web.bean.IclubPersonBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubBankMasterModel;
+import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubBankMasterController")
@@ -30,8 +32,10 @@ public class IclubBankMasterController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubBankMasterController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBankMasterService/";
+	private static final String P_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPersonService/";
 	private List<IclubBankMasterBean> beans;
 	private List<IclubBankMasterBean> dashBoardBeans;
+	private List<IclubPersonBean> personBeans;
 	private IclubBankMasterBean bean;
 	private boolean showCreateCont;
 	private boolean showViewCont;
@@ -58,6 +62,7 @@ public class IclubBankMasterController implements Serializable {
 		showCreateCont = false;
 		showViewCont = true;
 		showEditCont = false;
+		showSummaryCont = false;
 		viewParam = 1l;
 	}
 
@@ -67,6 +72,7 @@ public class IclubBankMasterController implements Serializable {
 		showCreateCont = true;
 		showViewCont = false;
 		showEditCont = false;
+		showSummaryCont = false;
 		viewParam = 1l;
 	}
 
@@ -75,9 +81,10 @@ public class IclubBankMasterController implements Serializable {
 		showCreateCont = false;
 		showViewCont = false;
 		showEditCont = true;
+		showSummaryCont = false;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -340,6 +347,26 @@ public class IclubBankMasterController implements Serializable {
 
 	public void setShowSummaryCont(boolean showSummaryCont) {
 		this.showSummaryCont = showSummaryCont;
+	}
+
+	public List<IclubPersonBean> getPersonBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "list");
+		Collection<? extends IclubPersonModel> models = new ArrayList<IclubPersonModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPersonModel.class));
+		client.close();
+		personBeans = new ArrayList<IclubPersonBean>();
+		for (IclubPersonModel model : models) {
+
+			IclubPersonBean bean = new IclubPersonBean();
+			bean.setPId(model.getPId());
+			bean.setPFName(model.getPFName());
+			bean.setPLName(model.getPLName());
+			personBeans.add(bean);
+		}
+		return personBeans;
+	}
+
+	public void setPersonBeans(List<IclubPersonBean> personBeans) {
+		this.personBeans = personBeans;
 	}
 
 }

@@ -52,7 +52,7 @@ public class IclubCoverTypeService {
 			iCt.setCtStatus(model.getCtStatus());
 			iCt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-
+			iCt.setCtCrtdDt(model.getCtCrtdDt());
 			iclubCoverTypeDAO.save(iCt);
 
 			LOGGER.info("Save Success with ID :: " + iCt.getCtId());
@@ -86,7 +86,7 @@ public class IclubCoverTypeService {
 			iCt.setCtStatus(model.getCtStatus());
 			iCt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-
+			iCt.setCtCrtdDt(model.getCtCrtdDt());
 			iclubCoverTypeDAO.merge(iCt);
 
 			LOGGER.info("Merge Success with ID :: " + model.getCtId());
@@ -141,7 +141,7 @@ public class IclubCoverTypeService {
 				model.setCtStatus(iCt.getCtStatus());
 				model.setIclubInsuranceItemType(iCt.getIclubInsuranceItemType() != null ? iCt.getIclubInsuranceItemType().getIitId() : null);
 				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-				
+				model.setCtCrtdDt(iCt.getCtCrtdDt());
 				if (iCt.getIclubProperties() != null && iCt.getIclubProperties().size() > 0) {
 					String[] iclubProperties = new String[iCt.getIclubProperties().size()];
 					int i = 0;
@@ -191,7 +191,7 @@ public class IclubCoverTypeService {
 				model.setCtStatus(iCt.getCtStatus());
 				model.setIclubInsuranceItemType(iCt.getIclubInsuranceItemType() != null ? iCt.getIclubInsuranceItemType().getIitId() : null);
 				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
+				model.setCtCrtdDt(iCt.getCtCrtdDt());
 				if (iCt.getIclubProperties() != null && iCt.getIclubProperties().size() > 0) {
 					String[] iclubProperties = new String[iCt.getIclubProperties().size()];
 					int i = 0;
@@ -235,7 +235,7 @@ public class IclubCoverTypeService {
 			model.setCtStatus(bean.getCtStatus());
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
-			
+			model.setCtCrtdDt(bean.getCtCrtdDt());
 			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
 				String[] iclubProperties = new String[bean.getIclubProperties().size()];
 				int i = 0;

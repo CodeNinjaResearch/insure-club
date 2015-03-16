@@ -5,7 +5,7 @@
 			<p:menuitem outcome="home" value="Home" />
 		</p:submenu>
 		<p:submenu label="Meta-Data">
-			<p:submenu label="Generic">
+			<p:submenu label="Screen Lists">
 				<p:menuitem outcome="IclubAccessType" value="AccessType" />
 				<p:menuitem outcome="IclubAccountType" value="AccountType" />
 				<p:menuitem outcome="IclubAlarmType" value="AlarmType" />
@@ -13,47 +13,57 @@
 				<p:menuitem outcome="IclubBoundaryType" value="BoundaryType" />
 				<p:menuitem outcome="IclubBuildingState" value="BuildingState" />
 				<p:menuitem outcome="IclubDocumentType" value="DocumentType" />
-				<p:menuitem outcome="IclubEventType" value="EventType" />
 				<p:menuitem outcome="IclubIdType" value="IdType" />
 				<p:menuitem outcome="IclubInsuranceItemType" value="InsuranceItemType" />
 				<p:menuitem outcome="IclubMaritialStatus" value="MaritialStatus" />
-				<p:menuitem outcome="IclubMessageType" value="MessageType" />
-				<p:menuitem outcome="IclubNotificationType" value="NotificationType" />
 				<p:menuitem outcome="IclubOccupiedStatus" value="OccupiedStatus" />
 				<p:menuitem outcome="IclubOwnerType" value="OwnerType" />
 				<p:menuitem outcome="IclubPaymentStatus" value="PaymentStatus" />
 				<p:menuitem outcome="IclubPaymentType" value="PaymentType" />
 				<p:menuitem outcome="IclubPolicyStatus" value="PolicyStatus" />
-				<p:menuitem outcome="IclubProductType" value="ProductType" />
 				<p:menuitem outcome="IclubPropertyType" value="PropertyType" />
 				<p:menuitem outcome="IclubQuoteStatus" value="QuoteStatus" />
-				<p:menuitem outcome="IclubRoleType" value="RoleType" />
 				<p:menuitem outcome="IclubRoofType" value="RoofType" />
 				<p:menuitem outcome="IclubSecurityQuestion" value="SecurityQuestion" />
 				<p:menuitem outcome="IclubSupplierType" value="SupplierType" />
 				<p:menuitem outcome="IclubThatchType" value="ThatchType" />
 				<p:menuitem outcome="IclubWallType" value="WallType" />
 			</p:submenu>
+			<p:submenu label="Internal Lists">
+				<p:menuitem outcome="IclubEventType" value="EventType" />
+				<p:menuitem outcome="IclubMessageType" value="MessageType" />
+				<p:menuitem outcome="IclubNotificationType" value="NotificationType" />
+				<p:menuitem outcome="IclubProductType" value="ProductType" />
+				<p:menuitem outcome="IclubRoleType" value="RoleType" />
+			</p:submenu>
 		</p:submenu>
 		<p:submenu label="Screens">
-			<p:menuitem outcome="bankmaster" value="BankMaster" />
-			<p:menuitem outcome="configuration" value="Configuration" />
-			<p:menuitem outcome="covertype" value="CoverType" />
-			<p:menuitem outcome="entitytype" value="EntityType" />
-			<p:menuitem outcome="event" value="Event" />
-			<p:menuitem outcome="extras" value="Extras" />
-			<p:menuitem outcome="geoloc" value="GeoLoc" />
-			<p:menuitem outcome="licensecode" value="LicenseCode" />
-			<p:menuitem outcome="message" value="Message" />
-			<p:menuitem outcome="notif" value="Notification" />
-			<p:menuitem outcome="occupation" value="Occupation" />
-			<p:menuitem outcome="purposetype" value="PurposeType" />
-			<p:menuitem outcome="ratetype" value="RateType" />
-			<p:menuitem outcome="ratetype" value="Rating" />
-			<p:menuitem outcome="securitymaster" value="SecurityMaster" />
-			<p:menuitem outcome="supplmaster" value="SupplMaster" />
-			<p:menuitem outcome="trackermaster" value="TrackerMaster" />
-			<p:menuitem outcome="vehiclemaster" value="VehicleMaster" />
+			<p:submenu label="External Lists">
+				<p:menuitem outcome="bankmaster" value="BankMaster" />
+				<p:menuitem outcome="geoloc" value="GeoLoc" />
+				<p:menuitem outcome="vehiclemaster" value="VehicleMaster" />
+			</p:submenu>
+			<p:submenu label="Screen Lists">
+				<p:menuitem outcome="covertype" value="CoverType" />
+				<p:menuitem outcome="extras" value="Extras" />
+				<p:menuitem outcome="licensecode" value="LicenseCode" />
+				<p:menuitem outcome="occupation" value="Occupation" />
+				<p:menuitem outcome="purposetype" value="PurposeType" />
+				<p:menuitem outcome="ratetype" value="RateType" />
+				<p:menuitem outcome="securitymaster" value="SecurityMaster" />
+				<p:menuitem outcome="supplmaster" value="SupplMaster" />
+				<p:menuitem outcome="trackermaster" value="TrackerMaster" />
+			</p:submenu>
+			<p:submenu label="Internal Lists">
+				<p:menuitem outcome="configuration" value="Configuration" />
+				<p:menuitem outcome="entitytype" value="EntityType" />
+				<p:menuitem outcome="event" value="Event" />
+				<p:menuitem outcome="message" value="Message" />
+				<p:menuitem outcome="notif" value="Notification" />
+			</p:submenu>
+		</p:submenu>
+		<p:submenu label="Quote">
+			<p:menuitem outcome="qq" value="Quick Quote" />
 		</p:submenu>
 	</p:menubar>
 	<p:selectOneMenu value="#{iclubMenuController.language}" onchange="submit()" valueChangeListener="#{iclubMenuController.languageValueChangeListener}">

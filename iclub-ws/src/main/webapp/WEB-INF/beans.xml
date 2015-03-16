@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:cxf="http://cxf.apache.org/core"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:http-conf="http://cxf.apache.org/transports/http/configuration" xmlns:util="http://www.springframework.org/schema/util" xmlns:cxf="http://cxf.apache.org/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 	http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
@@ -50,37 +46,36 @@
 			<ref bean="IclubPaymentTypeService" />
 			<ref bean="IclubLoginService" />
 			<ref bean="IclubPersonService" />
-			<ref bean="IclubBankMasterService"/>
-			<ref bean="IclubGeoLocService"/>
-			<ref bean="IclubInsurerMasterService"/>
-			<ref bean="IclubNotifService"/>
-			<ref bean="IclubSecurityMasterService"/>
-			<ref bean="IclubSupplierTypeService"/>
-			<ref bean="IclubTrackerMasterService"/>
-			<ref bean="IclubVehicleMasterService"/>
-			<ref bean="IclubPurposeTypeService"/>
-			<ref bean="IclubCoverTypeService"/>
-			<ref bean="IclubEntityTypeService"/>
-			<ref bean="IclubEventService"/>
-			<ref bean="IclubExtrasService"/>
-			<ref bean="IclubLicenseCodeService"/>
-			<ref bean="IclubMbCommentService"/>
-			<ref bean="IclubMessageService"/>
-			<ref bean="IclubMessageBoardService"/>
-			<ref bean="IclubOccupationService"/>
-			<ref bean="IclubSystemTypeService"/>
-			<ref bean="IclubInsuranceItemService"/>
-			<ref bean="IclubSecurityDeviceService"/>
-			<ref bean="IclubDriverService"/>
-			<ref bean="IclubPolicyService"/>
-			<ref bean="IclubPropertyService"/>
-			<ref bean="IclubQuoteService"/>
-			<ref bean="IclubRateEngineService"/>
-			<ref bean="IclubVehicleService"/>
-			<ref bean="IclubConfigService"/>
+			<ref bean="IclubBankMasterService" />
+			<ref bean="IclubGeoLocService" />
+			<ref bean="IclubInsurerMasterService" />
+			<ref bean="IclubNotifService" />
+			<ref bean="IclubSecurityMasterService" />
+			<ref bean="IclubSupplierTypeService" />
+			<ref bean="IclubTrackerMasterService" />
+			<ref bean="IclubVehicleMasterService" />
+			<ref bean="IclubPurposeTypeService" />
+			<ref bean="IclubCoverTypeService" />
+			<ref bean="IclubEntityTypeService" />
+			<ref bean="IclubEventService" />
+			<ref bean="IclubExtrasService" />
+			<ref bean="IclubLicenseCodeService" />
+			<ref bean="IclubMbCommentService" />
+			<ref bean="IclubMessageService" />
+			<ref bean="IclubMessageBoardService" />
+			<ref bean="IclubOccupationService" />
+			<ref bean="IclubSystemTypeService" />
+			<ref bean="IclubInsuranceItemService" />
+			<ref bean="IclubSecurityDeviceService" />
+			<ref bean="IclubDriverService" />
+			<ref bean="IclubPolicyService" />
+			<ref bean="IclubPropertyService" />
+			<ref bean="IclubQuoteService" />
+			<ref bean="IclubRateEngineService" />
+			<ref bean="IclubVehicleService" />
+			<ref bean="IclubConfigService" />
 			<ref bean="IclubDocumentService" />
-			
-
+			<ref bean="IclubDocumentService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
