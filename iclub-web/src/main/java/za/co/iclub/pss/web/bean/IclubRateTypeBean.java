@@ -1,11 +1,20 @@
 package za.co.iclub.pss.web.bean;
 
+import java.sql.Timestamp;
+
 public class IclubRateTypeBean {
 
 	private Long rtId;
+	private Long iclubInsuranceItemType;
+	private String iclubPerson;
+	private Long iclubEntityType;
 	private String rtShortDesc;
 	private String rtLongDesc;
+	private String rtFieldNm;
 	private String rtStatus;
+	private String rtType;
+	private String rtQuoteType;
+	private Timestamp rtCrtdDt;
 	private String[] iclubRateEngines;
 
 	public Long getRtId() {
@@ -14,6 +23,30 @@ public class IclubRateTypeBean {
 
 	public void setRtId(Long rtId) {
 		this.rtId = rtId;
+	}
+
+	public Long getIclubInsuranceItemType() {
+		return iclubInsuranceItemType;
+	}
+
+	public void setIclubInsuranceItemType(Long iclubInsuranceItemType) {
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
+	}
+
+	public String getIclubPerson() {
+		return iclubPerson;
+	}
+
+	public void setIclubPerson(String iclubPerson) {
+		this.iclubPerson = iclubPerson;
+	}
+
+	public Long getIclubEntityType() {
+		return iclubEntityType;
+	}
+
+	public void setIclubEntityType(Long iclubEntityType) {
+		this.iclubEntityType = iclubEntityType;
 	}
 
 	public String getRtShortDesc() {
@@ -32,12 +65,44 @@ public class IclubRateTypeBean {
 		this.rtLongDesc = rtLongDesc;
 	}
 
+	public String getRtFieldNm() {
+		return rtFieldNm;
+	}
+
+	public void setRtFieldNm(String rtFieldNm) {
+		this.rtFieldNm = rtFieldNm;
+	}
+
 	public String getRtStatus() {
 		return rtStatus;
 	}
 
 	public void setRtStatus(String rtStatus) {
 		this.rtStatus = rtStatus;
+	}
+
+	public String getRtType() {
+		return rtType;
+	}
+
+	public void setRtType(String rtType) {
+		this.rtType = rtType;
+	}
+
+	public String getRtQuoteType() {
+		return rtQuoteType;
+	}
+
+	public void setRtQuoteType(String rtQuoteType) {
+		this.rtQuoteType = rtQuoteType;
+	}
+
+	public Timestamp getRtCrtdDt() {
+		return rtCrtdDt;
+	}
+
+	public void setRtCrtdDt(Timestamp rtCrtdDt) {
+		this.rtCrtdDt = rtCrtdDt;
 	}
 
 	public String[] getIclubRateEngines() {
@@ -47,5 +112,4 @@ public class IclubRateTypeBean {
 	public void setIclubRateEngines(String[] iclubRateEngines) {
 		this.iclubRateEngines = iclubRateEngines;
 	}
-
 }

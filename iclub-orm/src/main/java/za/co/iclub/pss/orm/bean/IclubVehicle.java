@@ -47,6 +47,7 @@ public class IclubVehicle implements java.io.Serializable {
 	private String VGearLockYn;
 	private String VOwner;
 	private Integer VNoclaimYrs;
+	private Integer VCompYrs;
 	private String VVin;
 	private String VEngineNr;
 	private String VRegNum;
@@ -64,7 +65,7 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Long VOnLat, Long VOnLong, String VDdArea, Long VDdLat, Long VDdLong, Integer VYear, Long VInsuredValue, Long VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, String VVin, String VEngineNr, String VRegNum, Timestamp VCrtdDt) {
+	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Long VOnLat, Long VOnLong, String VDdArea, Long VDdLat, Long VDdLong, Integer VYear, Long VInsuredValue, Long VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Timestamp VCrtdDt) {
 		this.VId = VId;
 		this.iclubPurposeType = iclubPurposeType;
 		this.iclubSecurityMaster = iclubSecurityMaster;
@@ -89,6 +90,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VGearLockYn = VGearLockYn;
 		this.VOwner = VOwner;
 		this.VNoclaimYrs = VNoclaimYrs;
+		this.VCompYrs = VCompYrs;
 		this.VVin = VVin;
 		this.VEngineNr = VEngineNr;
 		this.VRegNum = VRegNum;
@@ -319,6 +321,15 @@ public class IclubVehicle implements java.io.Serializable {
 
 	public void setVNoclaimYrs(Integer VNoclaimYrs) {
 		this.VNoclaimYrs = VNoclaimYrs;
+	}
+
+	@Column(name = "v_noclaim_yrs")
+	public Integer getVCompYrs() {
+		return VCompYrs;
+	}
+
+	public void setVCompYrs(Integer vCompYrs) {
+		VCompYrs = vCompYrs;
 	}
 
 	@Column(name = "v_vin", length = 50)

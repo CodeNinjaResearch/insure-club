@@ -10,14 +10,17 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
+import za.co.iclub.pss.web.bean.IclubEntityTypeBean;
 import za.co.iclub.pss.web.bean.IclubRateTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
+import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
 import za.co.iclub.pss.ws.model.IclubRateTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -29,16 +32,27 @@ public class IclubRateTypeController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubRateTypeController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRateTypeService/";
+	private static final String E_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubEntityTypeService/";
 	private List<IclubRateTypeBean> beans;
 	private List<IclubRateTypeBean> dashBoardBeans;
+	private List<IclubEntityTypeBean> entityTypeBeans;
+	private List<String> fields;
 	private IclubRateTypeBean bean;
 	private boolean showCreateCont;
 	private boolean showViewCont;
 	private boolean showEditCont;
+	private boolean showMin;
+	private boolean showMax;
+	private boolean showLookup;
 	private Long viewParam;
 	private String sessionUserId;
 	private String userName;
 	private ResourceBundle labelBundle;
+	private List<String> quoteType;
+	private List<String> rateType;
+	private String selEntityType;
+	private String selQuoteType;
+	private String selRateType;
 
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -72,6 +86,18 @@ public class IclubRateTypeController implements Serializable {
 		showViewCont = false;
 		showEditCont = true;
 		viewParam = 2l;
+	}
+
+	public void changeQuoteType(ValueChangeEvent valueChangeEvent) {
+
+	}
+
+	public void changeEntityType(ValueChangeEvent valueChangeEvent) {
+
+	}
+
+	public void changeRateType(ValueChangeEvent valueChangeEvent) {
+
 	}
 
 	public List<IclubRateTypeBean> getDashBoardBeans() {
@@ -117,7 +143,6 @@ public class IclubRateTypeController implements Serializable {
 					model.setRtLongDesc(bean.getRtLongDesc());
 					model.setRtShortDesc(bean.getRtShortDesc());
 					model.setRtStatus(bean.getRtStatus());
-					;
 					IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -217,6 +242,30 @@ public class IclubRateTypeController implements Serializable {
 		this.showEditCont = showEditCont;
 	}
 
+	public boolean isShowMin() {
+		return showMin;
+	}
+
+	public void setShowMin(boolean showMin) {
+		this.showMin = showMin;
+	}
+
+	public boolean isShowMax() {
+		return showMax;
+	}
+
+	public void setShowMax(boolean showMax) {
+		this.showMax = showMax;
+	}
+
+	public boolean isShowLookup() {
+		return showLookup;
+	}
+
+	public void setShowLookup(boolean showLookup) {
+		this.showLookup = showLookup;
+	}
+
 	public Long getViewParam() {
 		return viewParam;
 	}
@@ -286,6 +335,107 @@ public class IclubRateTypeController implements Serializable {
 
 	public void setBeans(List<IclubRateTypeBean> beans) {
 		this.beans = beans;
+	}
+
+	public List<IclubEntityTypeBean> getEntityTypeBeans() {
+
+		WebClient client = IclubWebHelper.createCustomClient(E_BASE_URL + "list");
+		Collection<? extends IclubEntityTypeModel> models = new ArrayList<IclubEntityTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEntityTypeModel.class));
+		client.close();
+		entityTypeBeans = new ArrayList<IclubEntityTypeBean>();
+		for (IclubEntityTypeModel model : models) {
+			IclubEntityTypeBean bean = new IclubEntityTypeBean();
+			bean.setEtId(model.getEtId());
+			bean.setEtLongDesc(model.getEtLongDesc());
+			bean.setEtShortDesc(model.getEtShortDesc());
+			bean.setEtStatus(model.getEtStatus());
+			entityTypeBeans.add(bean);
+		}
+		return entityTypeBeans;
+	}
+
+	public void setEntityTypeBeans(List<IclubEntityTypeBean> entityTypeBeans) {
+		this.entityTypeBeans = entityTypeBeans;
+	}
+
+	public List<String> getFields() {
+		fields = new ArrayList<String>();
+		switch (bean.getIclubEntityType().intValue()) {
+		case 1:
+			fields.add("Purpose Type");
+			fields.add("No Claim Years");
+			if (bean.getRtQuoteType().equalsIgnoreCase("f")) {
+				fields.add("Safety Score");
+				fields.add("Security Features");
+				fields.add("Overnight Parking");
+				fields.add("Comprehensive Years");
+				fields.add("Cover Type");
+				fields.add("Vehicle Modifications");
+			}
+			break;
+		case 2:
+			fields.add("Age");
+			fields.add("Gender");
+			fields.add("Maritial Status");
+			fields.add("Years with License");
+			break;
+		case 3:
+			break;
+		default:
+			break;
+		}
+		return fields;
+	}
+
+	public void setFields(List<String> fields) {
+		this.fields = fields;
+	}
+
+	public List<String> getQuoteType() {
+		quoteType = new ArrayList<String>();
+		quoteType.add("F-Full");
+		quoteType.add("Q-Quick");
+		return quoteType;
+	}
+
+	public void setQuoteType(List<String> quoteType) {
+		this.quoteType = quoteType;
+	}
+
+	public List<String> getRateType() {
+		rateType = new ArrayList<String>();
+		rateType.add("L-Lookup");
+		rateType.add("R-Range");
+		rateType.add("F-Fixed");
+		return rateType;
+	}
+
+	public void setRateType(List<String> rateType) {
+		this.rateType = rateType;
+	}
+
+	public String getSelEntityType() {
+		return selEntityType;
+	}
+
+	public void setSelEntityType(String selEntityType) {
+		this.selEntityType = selEntityType;
+	}
+
+	public String getSelQuoteType() {
+		return selQuoteType;
+	}
+
+	public void setSelQuoteType(String selQuoteType) {
+		this.selQuoteType = selQuoteType;
+	}
+
+	public String getSelRateType() {
+		return selRateType;
+	}
+
+	public void setSelRateType(String selRateType) {
+		this.selRateType = selRateType;
 	}
 
 }

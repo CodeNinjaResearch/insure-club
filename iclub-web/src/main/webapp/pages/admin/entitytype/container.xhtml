@@ -4,9 +4,9 @@
 		<p:remoteCommand actionListener="#{iclubEntityTypeController.initializePage}" name="onload" autoRun="true" update="pnlEntityTypeContDet" />
 		<p:panel id="pnlEntityTypeCont">
 			<p:panel id="pnlEntityTypeContMenu">
-				<p:commandLink value="#{labels['viewconfig']}" actionListener="#{iclubEntityTypeController.showView}" update="pnlEntityTypeContDet" />
+				<p:commandLink value="#{labels['viewentitytype']}" actionListener="#{iclubEntityTypeController.showView}" update="pnlEntityTypeContDet" />
 				<p:graphicImage name="separator.png" library="images" />
-				<p:commandLink value="#{labels['createconfig']}"  actionListener="#{iclubEntityTypeController.showCreate}" update="pnlEntityTypeContDet" />
+				<p:commandLink value="#{labels['createentitytype']}"  actionListener="#{iclubEntityTypeController.showCreate}" update="pnlEntityTypeContDet" />
 			</p:panel>
 			<p:panel id="pnlEntityTypeContDet">
 				<p:panel id="pnlEntityTypeContView" rendered="#{iclubEntityTypeController.showViewCont}">

@@ -56,6 +56,7 @@ public class IclubPerson implements java.io.Serializable {
 	private Long PLat;
 	private Long PLong;
 	private Integer PZipCd;
+	private Integer PAge;
 	private Date PCrtdDt;
 	
 	private Set<IclubMessageBoard> iclubMessageBoards = new HashSet<IclubMessageBoard>(0);
@@ -108,7 +109,7 @@ public class IclubPerson implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPerson(String PId, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPerson, IclubIdType iclubIdType, String PTitle, String PInitials, String PFName, String PLName, String PMobile, String PEmail, String PContactPref, String PGender, String PIdNum, Long PIdIssueCntry, Date PIdIssueDt, Date PIdExpiryDt, Long POccupation, Date PDob, String PIsPensioner, String PAddress, Long PLat, Long PLong, Integer PZipCd, Date PCrtdDt, Set<IclubMessageBoard> iclubMessageBoards, Set<IclubPerson> iclubPersons, Set<IclubExtras> iclubExtrases, Set<IclubSecurityMaster> iclubSecurityMasters, Set<IclubProperty> iclubProperties, Set<IclubInsurerMaster> iclubInsurerMasters, Set<IclubLicenseCode> iclubLicenseCodes, Set<IclubAccount> iclubAccounts, Set<IclubVehicle> iclubVehicles,
+	public IclubPerson(String PId, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPerson, IclubIdType iclubIdType, String PTitle, String PInitials, String PFName, String PLName, String PMobile, String PEmail, String PContactPref, String PGender, String PIdNum, Long PIdIssueCntry, Date PIdIssueDt, Date PIdExpiryDt, Long POccupation, Date PDob, String PIsPensioner, String PAddress, Long PLat, Long PLong, Integer PZipCd, Integer PAge, Date PCrtdDt, Set<IclubMessageBoard> iclubMessageBoards, Set<IclubPerson> iclubPersons, Set<IclubExtras> iclubExtrases, Set<IclubSecurityMaster> iclubSecurityMasters, Set<IclubProperty> iclubProperties, Set<IclubInsurerMaster> iclubInsurerMasters, Set<IclubLicenseCode> iclubLicenseCodes, Set<IclubAccount> iclubAccounts, Set<IclubVehicle> iclubVehicles,
 			Set<IclubSupplMaster> iclubSupplMasters, Set<IclubConfig> iclubConfigs, Set<IclubClaim> iclubClaims, Set<IclubRateType> iclubRateTypes, Set<IclubEvent> iclubEvents, Set<IclubOccupation> iclubOccupations, Set<IclubPayment> iclubPayments, Set<IclubSecurityDevice> iclubSecurityDevices, Set<IclubPolicy> iclubPolicies, Set<IclubMbComment> iclubMbComments, Set<IclubQuote> iclubQuotesForQCrtdBy, Set<IclubDocument> iclubDocuments, Set<IclubRateEngine> iclubRateEngines, Set<IclubGeoLoc> iclubGeoLocs, Set<IclubQuote> iclubQuotesForQPersonId, Set<IclubTrackerMaster> iclubTrackerMasters, Set<IclubCoverType> iclubCoverTypes, Set<IclubCountryCode> iclubCountryCodes, Set<IclubBankMaster> iclubBankMasters, Set<IclubNotif> iclubNotifs, Set<IclubVehicleMaster> iclubVehicleMasters,
 			Set<IclubDriver> iclubDriversForDCrtdBy, Set<IclubPurposeType> iclubPurposeTypes, Set<IclubDriver> iclubDriversForDPersonId, Set<IclubInsuranceItem> iclubInsuranceItems, Set<IclubLogin> iclubLoginsForLPersonId, Set<IclubLogin> iclubLoginsForLCrtdBy, Set<IclubMessage> iclubMessages) {
 		this.PId = PId;
@@ -134,6 +135,7 @@ public class IclubPerson implements java.io.Serializable {
 		this.PLat = PLat;
 		this.PLong = PLong;
 		this.PZipCd = PZipCd;
+		this.PAge = PAge;
 		this.PCrtdDt = PCrtdDt;
 		this.iclubMessageBoards = iclubMessageBoards;
 		this.iclubPersons = iclubPersons;
@@ -387,6 +389,15 @@ public class IclubPerson implements java.io.Serializable {
 
 	public void setPZipCd(Integer PZipCd) {
 		this.PZipCd = PZipCd;
+	}
+
+	@Column(name = "p_f_name", length = 3)
+	public Integer getPAge() {
+		return PAge;
+	}
+
+	public void setPAge(Integer pAge) {
+		PAge = pAge;
 	}
 
 	@Temporal(TemporalType.DATE)

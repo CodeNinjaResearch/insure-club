@@ -1,29 +1,29 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<p:dataTable id="dtConfigCont" widgetVar="dtConfigCont" value="#{iclubConfigController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Configes Available">
-		
-			<p:column headerText="#{labels['entitytype.view.etid']}">
-				<p:outputLabel value="#{iclubEntityTypeController.bean.etId}" />
-			</p:column>
-			
-			<p:column headerText="#{labels['entitytype.view.etshortdesc']}" >
-				<p:inputText value="#{iclubEntityTypeController.bean.etShortDesc}" />
-			</p:column>
-			
-			 
-			<p:column headerText="#{labels['entitytype.view.etlongdesc']}" >
-				<p:inputText value="#{iclubEntityTypeController.bean.etLongDesc}" />
-			</p:column>
-			
-			 
-			<p:column headerText="#{labels['entitytype.view.etstatus']}" >
+	<p:dataTable id="dtEntityTypeCont" widgetVar="dtEntityTypeCont" value="#{iclubEntityTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Entity Types Available">
 
-				<p:outputLabel value="#{iclubEntityTypeController.bean.etStatus}" />
-			</p:column>
-		
+		<p:column headerText="#{labels['entitytype.view.etid']}">
+			<p:outputLabel value="#{iclubEntityTypeController.bean.etId}" />
+		</p:column>
+
+		<p:column headerText="#{labels['entitytype.view.etshortdesc']}">
+			<p:inputText value="#{iclubEntityTypeController.bean.etShortDesc}" />
+		</p:column>
+
+
+		<p:column headerText="#{labels['entitytype.view.etlongdesc']}">
+			<p:inputText value="#{iclubEntityTypeController.bean.etLongDesc}" />
+		</p:column>
+
+
+		<p:column headerText="#{labels['entitytype.view.etstatus']}">
+
+			<p:outputLabel value="#{iclubEntityTypeController.bean.etStatus}" />
+		</p:column>
+
 		<p:column>
-			<p:commandButton id="btnConfigEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubConfigController.showEdit}" update=":iclubFrm:grlMsg">
-				<f:setPropertyActionListener target="#{iclubConfigController.bean}" value="#{bean}" />
-				<f:setPropertyActionListener target="#{iclubConfigController.viewParam}" value="2" />
+			<p:commandButton id="btnEntityTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubEntityTypeController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubEntityTypeController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubEntityTypeController.viewParam}" value="2" />
 			</p:commandButton>
 		</p:column>
 	</p:dataTable>

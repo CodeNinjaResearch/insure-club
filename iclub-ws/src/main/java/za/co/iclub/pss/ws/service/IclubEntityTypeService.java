@@ -134,7 +134,7 @@ public class IclubEntityTypeService {
 				model.setEtLongDesc(iCEt.getEtLongDesc());
 				model.setEtShortDesc(iCEt.getEtShortDesc());
 				model.setEtStatus(iCEt.getEtStatus());
-				
+
 				if (iCEt.getIclubDocuments() != null && iCEt.getIclubDocuments().size() > 0) {
 					String[] documents = new String[iCEt.getIclubDocuments().size()];
 					int i = 0;
@@ -180,7 +180,6 @@ public class IclubEntityTypeService {
 		}
 	}
 
-
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -194,7 +193,7 @@ public class IclubEntityTypeService {
 			model.setEtLongDesc(bean.getEtLongDesc());
 			model.setEtShortDesc(bean.getEtShortDesc());
 			model.setEtStatus(bean.getEtStatus());
-			
+
 			if (bean.getIclubDocuments() != null && bean.getIclubDocuments().size() > 0) {
 				String[] documents = new String[bean.getIclubDocuments().size()];
 				int i = 0;

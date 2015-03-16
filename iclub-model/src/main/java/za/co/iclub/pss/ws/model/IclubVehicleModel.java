@@ -31,6 +31,7 @@ public class IclubVehicleModel {
 	private String VGearLockYn;
 	private String VOwner;
 	private Integer VNoclaimYrs;
+	private Integer VCompYrs;
 	private String VVin;
 	private String VEngineNr;
 	private String VRegNum;
@@ -226,6 +227,14 @@ public class IclubVehicleModel {
 
 	public void setVNoclaimYrs(Integer vNoclaimYrs) {
 		VNoclaimYrs = vNoclaimYrs;
+	}
+
+	public Integer getVCompYrs() {
+		return VCompYrs;
+	}
+
+	public void setVCompYrs(Integer vCompYrs) {
+		VCompYrs = vCompYrs;
 	}
 
 	public String getVVin() {

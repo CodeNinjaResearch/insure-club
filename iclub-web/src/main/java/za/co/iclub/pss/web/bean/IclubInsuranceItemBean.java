@@ -2,7 +2,7 @@ package za.co.iclub.pss.web.bean;
 
 import java.sql.Timestamp;
 
-public class IclubInsuranceItemModel {
+public class IclubInsuranceItemBean {
 
 	private String iiId;
 	private String iclubPerson;
