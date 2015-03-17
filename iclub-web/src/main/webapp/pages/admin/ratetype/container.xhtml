@@ -3,22 +3,26 @@
 	<ui:define name="body">
 		<p:remoteCommand actionListener="#{iclubRateTypeController.initializePage}" name="onload" autoRun="true" update="pnlRateTypeContDet" />
 		<p:panel id="pnlRateTypeCont">
-			<p:panel id="pnlRateTypeContMenu">
-				<p:commandLink value="#{labels['viewratetype']}" actionListener="#{iclubRateTypeController.showView}" update="pnlRateTypeContDet" />
-				<p:graphicImage name="separator.png" library="images" />
-				<p:commandLink value="#{labels['createratetype']}"  actionListener="#{iclubRateTypeController.showCreate}" update="pnlRateTypeContDet" />
-			</p:panel>
-			<p:panel id="pnlRateTypeContDet">
-				<p:panel id="pnlRateTypeContView" rendered="#{iclubRateTypeController.showViewCont}">
-					<ui:include src="/pages/admin/ratetype/view.xhtml" />
-				</p:panel>
-				<p:panel id="pnlRateTypeContCreate" rendered="#{iclubRateTypeController.showCreateCont}">
-					<ui:include src="/pages/admin/ratetype/create.xhtml" />
-				</p:panel>
-				<p:panel id="pnlRateTypeContEdit" rendered="#{iclubRateTypeController.showEditCont}">
-					<ui:include src="/pages/admin/ratetype/edit.xhtml" />
-				</p:panel>
-			</p:panel>
+			<p:panelGrid id="pnlSrchCriteria" columns="6">
+				<p:column>
+					<p:outputLabel value="Select Quote Type" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu value="#{iclubRateTypeController.selQuoteType}" valueChangeListener="#{iclubRateTypeController.changeQuoteType}" onchange="submit()">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItems value="#{iclubRateTypeController.quoteType}" var="p" itemLabel="#{p.split('-')[1]}" itemValue="#{p.split('-')[0]}" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Select Quote Type" />
+				</p:column>
+				<p:column>
+					<p:selectOneRadio value="#{iclubRateTypeController.selEntityType}" valueChangeListener="#{iclubRateTypeController.changeEntityType}" onchange="submit()">
+						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+						<f:selectItems value="#{iclubRateTypeController.entityTypeBeans}" var="p" itemLabel="#{p.etId}" itemValue="#{p.etLongDesc}" />
+					</p:selectOneRadio>
+				</p:column>
+			</p:panelGrid>
 		</p:panel>
 	</ui:define>
 </ui:composition>

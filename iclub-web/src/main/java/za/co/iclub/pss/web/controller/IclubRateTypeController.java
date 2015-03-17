@@ -55,6 +55,9 @@ public class IclubRateTypeController implements Serializable {
 	private String selRateType;
 
 	public void initializePage() {
+		selQuoteType = null;
+		selEntityType = null;
+		selRateType = null;
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
 		if (viewParam == null || viewParam.longValue() == 1)
 			showView();
@@ -89,11 +92,12 @@ public class IclubRateTypeController implements Serializable {
 	}
 
 	public void changeQuoteType(ValueChangeEvent valueChangeEvent) {
-
+		selEntityType = null;
+		selRateType = null;
 	}
 
 	public void changeEntityType(ValueChangeEvent valueChangeEvent) {
-
+		selRateType = null;
 	}
 
 	public void changeRateType(ValueChangeEvent valueChangeEvent) {
