@@ -1,6 +1,5 @@
 package za.co.iclub.pss.web.bean;
 
-import java.util.List;
 
 public class IclubWallTypeBean {
 
