@@ -391,7 +391,7 @@ public class IclubPerson implements java.io.Serializable {
 		this.PZipCd = PZipCd;
 	}
 
-	@Column(name = "p_f_name", length = 3)
+	@Column(name = "p_age", length = 3)
 	public Integer getPAge() {
 		return PAge;
 	}

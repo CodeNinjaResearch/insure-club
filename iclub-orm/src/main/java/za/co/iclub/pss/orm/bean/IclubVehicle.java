@@ -323,7 +323,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VNoclaimYrs = VNoclaimYrs;
 	}
 
-	@Column(name = "v_noclaim_yrs")
+	@Column(name = "v_comp_yrs")
 	public Integer getVCompYrs() {
 		return VCompYrs;
 	}
