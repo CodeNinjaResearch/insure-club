@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.bean.IclubPolicyStatus;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubPolicyStatusDAO;
@@ -129,6 +130,16 @@ public class IclubPolicyStatusService {
 				model.setPsLongDesc(iPs.getPsLongDesc());
 				model.setPsShortDesc(iPs.getPsShortDesc());
 				model.setPsStatus(iPs.getPsStatus());
+				
+				if (iPs.getIclubPolicies() != null && iPs.getIclubPolicies().size() > 0) {
+					String[] iclubPolicies = new String[iPs.getIclubPolicies().size()];
+					int i = 0;
+					for (IclubPolicy iclubPolicy : iPs.getIclubPolicies()) {
+						iclubPolicies[i] = iclubPolicy.getPId();
+						i++;
+					}
+					model.setIclubPolicies(iclubPolicies);
+				}
 
 				ret.add((T) model);
 			}
@@ -152,6 +163,16 @@ public class IclubPolicyStatusService {
 			model.setPsLongDesc(bean.getPsLongDesc());
 			model.setPsShortDesc(bean.getPsShortDesc());
 			model.setPsStatus(bean.getPsStatus());
+
+			if (bean.getIclubPolicies() != null && bean.getIclubPolicies().size() > 0) {
+				String[] iclubPolicies = new String[bean.getIclubPolicies().size()];
+				int i = 0;
+				for (IclubPolicy iclubPolicy : bean.getIclubPolicies()) {
+					iclubPolicies[i] = iclubPolicy.getPId();
+					i++;
+				}
+				model.setIclubPolicies(iclubPolicies);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

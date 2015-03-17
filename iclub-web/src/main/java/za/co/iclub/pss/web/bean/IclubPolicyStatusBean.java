@@ -6,6 +6,7 @@ public class IclubPolicyStatusBean {
 	private String psShortDesc;
 	private String psLongDesc;
 	private String psStatus;
+	private String[] iclubPolicies;
 
 	public Long getPsId() {
 		return psId;
@@ -37,6 +38,14 @@ public class IclubPolicyStatusBean {
 
 	public void setPsStatus(String psStatus) {
 		this.psStatus = psStatus;
+	}
+
+	public String[] getIclubPolicies() {
+		return iclubPolicies;
+	}
+
+	public void setIclubPolicies(String[] iclubPolicies) {
+		this.iclubPolicies = iclubPolicies;
 	}
 
 }

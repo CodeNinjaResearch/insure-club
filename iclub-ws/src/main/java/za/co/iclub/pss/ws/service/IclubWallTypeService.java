@@ -138,6 +138,8 @@ public class IclubWallTypeService {
 						properties[i] = property.getPId();
 						i++;
 					}
+					
+					model.setIclubProperties(properties);
 				}
 
 				ret.add((T) model);
@@ -170,6 +172,8 @@ public class IclubWallTypeService {
 					properties[i] = property.getPId();
 					i++;
 				}
+				
+				model.setIclubProperties(properties);
 			}
 
 		} catch (Exception e) {
