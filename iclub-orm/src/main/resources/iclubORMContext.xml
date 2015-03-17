@@ -423,4 +423,8 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-</beans>
+	<bean id="IclubVehicleTypeDAO" class="za.co.iclub.pss.orm.dao.IclubVehicleTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>
