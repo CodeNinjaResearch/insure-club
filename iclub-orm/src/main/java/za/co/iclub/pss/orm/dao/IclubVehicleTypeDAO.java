@@ -163,6 +163,20 @@ public class IclubVehicleTypeDAO {
 			throw re;
 		}
 	}
+	
+	public List getVehicleTypeBySD(String sd, Long id) {
+		log.debug("Fetching all VehicleType by Query :: getVehicleTypeBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getVehicleTypeBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("VehicleType", re);
+			throw re;
+		}
+	}
 
 	public static IclubVehicleTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehicleTypeDAO) ctx.getBean("IclubVehicleTypeDAO");

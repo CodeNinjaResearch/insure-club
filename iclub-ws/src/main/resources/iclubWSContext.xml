@@ -116,6 +116,11 @@
 		<property name="iclubPaymentTypeDAO" ref="IclubPaymentTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
+	<bean id="IclubVehicleTypeService" class="za.co.iclub.pss.ws.service.IclubVehicleTypeService">
+		<property name="iclubVehicleTypeDAO" ref="IclubVehicleTypeDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+	
 	<bean id="IclubLoginService" class="za.co.iclub.pss.ws.service.IclubLoginService">
 		<property name="iclubLoginDAO" ref="IclubLoginDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />

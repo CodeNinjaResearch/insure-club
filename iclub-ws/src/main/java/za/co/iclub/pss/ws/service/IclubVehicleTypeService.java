@@ -166,8 +166,7 @@ public class IclubVehicleTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			// List data = iclubVehicleTypeDAO.getVehicleTypeBySD(val, id);
-			List data = iclubVehicleTypeDAO.findAll();
+			List data = iclubVehicleTypeDAO.getVehicleTypeBySD(val, id);
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));

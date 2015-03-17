@@ -86,6 +86,8 @@
 				<value>za.co.iclub.pss.orm.bean.IclubVehicle</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehicleMaster</value>
 				<value>za.co.iclub.pss.orm.bean.IclubWallType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubVehicleType</value>
+				
 			</list>
 		</property>
 	</bean>

@@ -76,6 +76,7 @@
 			<ref bean="IclubConfigService" />
 			<ref bean="IclubDocumentService" />
 			<ref bean="IclubDocumentService" />
+			<ref bean="IclubVehicleTypeService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
