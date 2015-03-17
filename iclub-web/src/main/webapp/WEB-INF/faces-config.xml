@@ -139,6 +139,11 @@
 			<from-outcome>IclubEventType</from-outcome>
 			<to-view-id>/pages/mdata/IclubEventType.xhtml</to-view-id>
 		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>IclubVehicleType</from-outcome>
+			<to-view-id>/pages/mdata/IclubVehicleType.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
