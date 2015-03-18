@@ -16,7 +16,7 @@ public class IclubClaimModel {
 	private Long CValue;
 	private Timestamp CCrtdDt;
 	private String[] iclubPayments;
-	private String iclubClaimItems;
+	private String[] iclubClaimItems;
 
 	public String getCId() {
 		return CId;
@@ -90,11 +90,11 @@ public class IclubClaimModel {
 		this.iclubPayments = iclubPayments;
 	}
 
-	public String getIclubClaimItems() {
+	public String[] getIclubClaimItems() {
 		return iclubClaimItems;
 	}
 
-	public void setIclubClaimItems(String iclubClaimItems) {
+	public void setIclubClaimItems(String[] iclubClaimItems) {
 		this.iclubClaimItems = iclubClaimItems;
 	}
 

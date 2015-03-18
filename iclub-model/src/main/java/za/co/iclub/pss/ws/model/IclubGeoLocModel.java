@@ -14,6 +14,7 @@ public class IclubGeoLocModel {
 	private Long glLong;
 	private Long glRate;
 	private Timestamp glCrtdDt;
+	private String glKey; 
 
 	public Long getGlId() {
 		return glId;
@@ -69,6 +70,14 @@ public class IclubGeoLocModel {
 
 	public void setGlCrtdDt(Timestamp glCrtdDt) {
 		this.glCrtdDt = glCrtdDt;
+	}
+
+	public String getGlKey() {
+		return glKey;
+	}
+
+	public void setGlKey(String glKey) {
+		this.glKey = glKey;
 	}
 
 }

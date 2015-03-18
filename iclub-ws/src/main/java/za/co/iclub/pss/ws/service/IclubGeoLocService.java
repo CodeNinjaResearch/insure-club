@@ -45,6 +45,7 @@ public class IclubGeoLocService {
 
 			iCGl.setGlId(iclubCommonDAO.getNextId(IclubGeoLoc.class));
 			iCGl.setGlAddress(model.getGlAddress());
+			iCGl.setGlKey(model.getGlKey());
 			iCGl.setGlLat(model.getGlLat());
 			iCGl.setGlLong(model.getGlLong());
 			iCGl.setGlRate(model.getGlRate());
@@ -81,6 +82,7 @@ public class IclubGeoLocService {
 			IclubGeoLoc iCGl = new IclubGeoLoc();
 
 			iCGl.setGlId(model.getGlId());
+			iCGl.setGlKey(model.getGlKey());
 			iCGl.setGlAddress(model.getGlAddress());
 			iCGl.setGlLat(model.getGlLat());
 			iCGl.setGlLong(model.getGlLong());
@@ -138,6 +140,7 @@ public class IclubGeoLocService {
 
 				iCGl.setGlId(iclubGLoc.getGlId());
 				iCGl.setGlAddress(iclubGLoc.getGlAddress());
+				iCGl.setGlKey(iclubGLoc.getGlKey());
 				iCGl.setGlLat(iclubGLoc.getGlLat());
 				iCGl.setGlLong(iclubGLoc.getGlLong());
 				iCGl.setIclubPerson(iclubGLoc.getIclubPerson() != null ? iclubGLoc.getIclubPerson().getPId() : null);
@@ -168,6 +171,7 @@ public class IclubGeoLocService {
 				IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
 				IclubGeoLocModel iCGl = new IclubGeoLocModel();
 
+				iCGl.setGlKey(iclubGLoc.getGlKey());
 				iCGl.setGlId(iclubGLoc.getGlId());
 				iCGl.setGlAddress(iclubGLoc.getGlAddress());
 				iCGl.setGlLat(iclubGLoc.getGlLat());
@@ -194,6 +198,7 @@ public class IclubGeoLocService {
 		try {
 			IclubGeoLoc bean = iclubGeoLocDAO.findById(id);
 
+			model.setGlKey(bean.getGlKey());
 			model.setGlId(bean.getGlId());
 			model.setGlAddress(bean.getGlAddress());
 			model.setGlLat(bean.getGlLat());

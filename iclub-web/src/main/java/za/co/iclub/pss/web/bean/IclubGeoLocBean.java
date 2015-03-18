@@ -11,6 +11,7 @@ public class IclubGeoLocBean {
 	private Long glLong;
 	private Long glRate;
 	private Date glCrtdDt;
+	private String glKey; 
 
 	public Long getGlId() {
 		return glId;
@@ -66,6 +67,14 @@ public class IclubGeoLocBean {
 
 	public void setGlCrtdDt(Date glCrtdDt) {
 		this.glCrtdDt = glCrtdDt;
+	}
+
+	public String getGlKey() {
+		return glKey;
+	}
+
+	public void setGlKey(String glKey) {
+		this.glKey = glKey;
 	}
 
 }

@@ -160,6 +160,7 @@ public class IclubClaimService {
 						payments[i] = payment.getPId();
 						i++;
 					}
+					model.setIclubPayments(payments);
 				}
 
 				if (iCC.getIclubClaimItems() != null && iCC.getIclubClaimItems().size() > 0) {
@@ -169,6 +170,7 @@ public class IclubClaimService {
 						claimItems[i] = claimItem.getCiId();
 						i++;
 					}
+					model.setIclubClaimItems(claimItems);
 				}
 				ret.add((T) model);
 			}
@@ -210,6 +212,7 @@ public class IclubClaimService {
 						payments[i] = payment.getPId();
 						i++;
 					}
+					model.setIclubPayments(payments);
 				}
 
 				if (iCC.getIclubClaimItems() != null && iCC.getIclubClaimItems().size() > 0) {
@@ -219,6 +222,7 @@ public class IclubClaimService {
 						claimItems[i] = claimItem.getCiId();
 						i++;
 					}
+					model.setIclubClaimItems(claimItems);
 				}
 				ret.add((T) model);
 			}
@@ -254,6 +258,8 @@ public class IclubClaimService {
 					payments[i] = payment.getPId();
 					i++;
 				}
+				
+				model.setIclubPayments(payments);
 			}
 
 			if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
@@ -263,6 +269,7 @@ public class IclubClaimService {
 					claimItems[i] = claimItem.getCiId();
 					i++;
 				}
+				model.setIclubClaimItems(claimItems);
 			}
 
 		} catch (Exception e) {
