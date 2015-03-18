@@ -172,13 +172,13 @@ public class IclubVehicleMasterService {
 	@Path("/listAllMake")
 	@Produces("application/json")
 	@Transactional
-	public List<String> listAllMake() {
-		List<String> ret = new ArrayList<String>();
+	public <T extends String> List<T> listAllMake() {
+		List<T> ret = new ArrayList<T>();
 		try {
 			List batmod = iclubVehicleMasterDAO.findAllVmMakes();
 			for (Object object : batmod) {
 				String vmMake = (String) object;
-				ret.add(vmMake);
+				ret.add((T) vmMake);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
