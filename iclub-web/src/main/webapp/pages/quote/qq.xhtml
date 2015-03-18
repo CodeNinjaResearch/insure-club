@@ -87,12 +87,12 @@
 							<p:column>
 								<p:inputText value="#{iclubQuickQuoteController.personBean.PEmail}" />
 							</p:column>
-							<p:column>
-								<p:outputLabel value="Contact Ref :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubQuickQuoteController.personBean.PContactPref}" />
-							</p:column>
+<!-- 							<p:column> -->
+<!-- 								<p:outputLabel value="Contact Ref :" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column> -->
+<!-- 								<p:inputText value="#{iclubQuickQuoteController.personBean.PContactPref}" /> -->
+<!-- 							</p:column> -->
 							<p:column>
 								<p:outputLabel value="Gender :" />
 							</p:column>
@@ -257,7 +257,7 @@
 								<p:outputLabel value="Wall Type :" />
 							</p:column>
 							<p:column>
-								<p:selectOneMenu onchange="submit()" value="#{iclubQuickQuoteController.propertyBean.iclubWallType}" valueChangeListener="#{iclubQuickQuoteController.vmMakeValueChangeListener}">
+								<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubWallType}">
 									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
 									<f:selectItems value="#{iclubQuickQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
 
@@ -268,7 +268,7 @@
 								<p:outputLabel value="Roof Type :" />
 							</p:column>
 							<p:column>
-								<p:selectOneMenu onchange="submit()" value="#{iclubQuickQuoteController.propertyBean.iclubRoofType}" valueChangeListener="#{iclubQuickQuoteController.vmMakeValueChangeListener}">
+								<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubRoofType}">
 									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
 									<f:selectItems value="#{iclubQuickQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
 
