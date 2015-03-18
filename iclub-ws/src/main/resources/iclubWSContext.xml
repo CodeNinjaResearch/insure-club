@@ -121,6 +121,11 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
 	
+	<bean id="IclubClaimStatusService" class="za.co.iclub.pss.ws.service.IclubClaimStatusService">
+		<property name="iclubClaimStatusDAO" ref="IclubClaimStatusDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+	
 	<bean id="IclubLoginService" class="za.co.iclub.pss.ws.service.IclubLoginService">
 		<property name="iclubLoginDAO" ref="IclubLoginDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
