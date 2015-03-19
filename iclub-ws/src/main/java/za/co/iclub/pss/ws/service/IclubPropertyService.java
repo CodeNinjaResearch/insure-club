@@ -60,19 +60,19 @@ public class IclubPropertyService {
 		try {
 			IclubProperty iCP = new IclubProperty();
 
-			model.setPId(iCP.getPId());
-			model.setPCrtdDt(iCP.getPCrtdDt());
-			model.setPEstValue(iCP.getPEstValue());
-			model.setPSecGatesYn(iCP.getPSecGatesYn());
-			model.setPNorobberyYn(iCP.getPNorobberyYn());
-			model.setPCompYn(iCP.getPCompYn());
-			model.setPRentFurYn(iCP.getPRentFurYn());
-			model.setPNoclaimYrs(iCP.getPNoclaimYrs());
-			model.setPPostalCd(iCP.getPPostalCd());
-			model.setPLong(iCP.getPLong());
-			model.setPLat(iCP.getPLat());
-			model.setPAddress(iCP.getPAddress());
-			model.setPRegNum(iCP.getPRegNum());
+			iCP.setPId(model.getPId());
+			iCP.setPCrtdDt(model.getPCrtdDt());
+			iCP.setPEstValue(model.getPEstValue());
+			iCP.setPSecGatesYn(model.getPSecGatesYn());
+			iCP.setPNorobberyYn(model.getPNorobberyYn());
+			iCP.setPCompYn(model.getPCompYn());
+			iCP.setPRentFurYn(model.getPRentFurYn());
+			iCP.setPNoclaimYrs(model.getPNoclaimYrs());
+			iCP.setPPostalCd(model.getPPostalCd());
+			iCP.setPLong(model.getPLong());
+			iCP.setPLat(model.getPLat());
+			iCP.setPAddress(model.getPAddress());
+			iCP.setPRegNum(model.getPRegNum());
 			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
 			iCP.setIclubThatchType(model.getIclubThatchType() != null ? iclubThatchTypeDAO.findById(model.getIclubThatchType()) : null);
 			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
@@ -110,19 +110,19 @@ public class IclubPropertyService {
 		try {
 			IclubProperty iCP = new IclubProperty();
 
-			model.setPId(iCP.getPId());
-			model.setPCrtdDt(iCP.getPCrtdDt());
-			model.setPEstValue(iCP.getPEstValue());
-			model.setPSecGatesYn(iCP.getPSecGatesYn());
-			model.setPNorobberyYn(iCP.getPNorobberyYn());
-			model.setPCompYn(iCP.getPCompYn());
-			model.setPRentFurYn(iCP.getPRentFurYn());
-			model.setPNoclaimYrs(iCP.getPNoclaimYrs());
-			model.setPPostalCd(iCP.getPPostalCd());
-			model.setPLong(iCP.getPLong());
-			model.setPLat(iCP.getPLat());
-			model.setPAddress(iCP.getPAddress());
-			model.setPRegNum(iCP.getPRegNum());
+			iCP.setPId(model.getPId());
+			iCP.setPCrtdDt(model.getPCrtdDt());
+			iCP.setPEstValue(model.getPEstValue());
+			iCP.setPSecGatesYn(model.getPSecGatesYn());
+			iCP.setPNorobberyYn(model.getPNorobberyYn());
+			iCP.setPCompYn(model.getPCompYn());
+			iCP.setPRentFurYn(model.getPRentFurYn());
+			iCP.setPNoclaimYrs(model.getPNoclaimYrs());
+			iCP.setPPostalCd(model.getPPostalCd());
+			iCP.setPLong(model.getPLong());
+			iCP.setPLat(model.getPLat());
+			iCP.setPAddress(model.getPAddress());
+			iCP.setPRegNum(model.getPRegNum());
 			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
 			iCP.setIclubThatchType(model.getIclubThatchType() != null ? iclubThatchTypeDAO.findById(model.getIclubThatchType()) : null);
 			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);

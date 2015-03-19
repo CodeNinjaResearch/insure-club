@@ -714,6 +714,44 @@
 									<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
 								</p:selectOneMenu>
 							</p:column>
+							
+							<p:column>
+								<p:outputLabel value="Bank Master :" />
+							</p:column>
+							<p:column>
+								<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}">
+									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+									<f:selectItems var="c" itemLabel="#{c.bmBankCode}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
+								</p:selectOneMenu>
+							</p:column>
+							
+							<p:column>
+								<p:outputLabel value="Owner Type :" />
+							</p:column>
+							<p:column>
+								<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubOwnerType}">
+									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+									<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubFullQuoteController.ownerTypeBeans}" />
+								</p:selectOneMenu>
+							</p:column>
+							
+							<p:column>
+								<p:outputLabel value="Account Type :" />
+							</p:column>
+							<p:column>
+								<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubAccountType}">
+									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+									<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubFullQuoteController.accountTypeBeans}" />
+								</p:selectOneMenu>
+							</p:column>
+							<p:column>
+							
+								<p:outputLabel value="Debit Date :" />
+							</p:column>
+							<p:column>
+								<p:inputText value="#{iclubFullQuoteController.debitDate}"/>
+								<p:inputText value="#{iclubFullQuoteController.debitMonth}"/>
+							</p:column>
 						</p:panelGrid>
 					</div>
 				</p:tab>
