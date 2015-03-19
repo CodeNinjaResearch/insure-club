@@ -18,6 +18,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
@@ -148,6 +150,8 @@ public class IclubFullQuoteController implements Serializable {
 	private IclubVehicleMasterBean vehicleMasterBean;
 
 	private IclubPersonBean personBean;
+	
+	private IclubQuoteBean quoteBean;
 
 	private IclubPropertyBean propertyBean;
 
@@ -685,8 +689,82 @@ public class IclubFullQuoteController implements Serializable {
 
 	public IclubPersonBean getPersonBean() {
 		if (personBean == null)
-			personBean = new IclubPersonBean();
+			{
+				personBean = new IclubPersonBean();
+			}
+		if(IclubWebHelper.getObjectIntoSession("fullquote")!=null)
+		{
+			quoteBean=(IclubQuoteBean) IclubWebHelper.getObjectIntoSession("fullquote");
+			
+			if(quoteBean!=null &&quoteBean.getIclubPersonByQPersonId()!=null && !quoteBean.getIclubPersonByQPersonId().trim().equalsIgnoreCase(""))
+			{
+				WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "get/"+/*Base64.encodeBase64URLSafeString(DigestUtils.md5(*/quoteBean.getIclubPersonByQPersonId());
+				
+				IclubPersonModel model = (IclubPersonModel)(client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+				
+				personBean.setPId(model.getPId());
+				personBean.setPCrtdDt(model.getPCrtdDt());
+				personBean.setPDob(model.getPDob());
+				personBean.setPEmail(model.getPEmail());
+				personBean.setPFName(model.getPFName());
+				personBean.setPIdNum(model.getPIdNum());
+				personBean.setPLName(model.getPLName());
+				personBean.setPMobile(model.getPMobile());
+				personBean.setPAddress(model.getPAddress());
+				personBean.setPContactPref(model.getPContactPref());
+				personBean.setPGender(model.getPGender());
+				personBean.setPContactPref(model.getPContactPref());
+				personBean.setPIdExpiryDt(model.getPIdExpiryDt());
+				personBean.setPInitials(model.getPInitials());
+				personBean.setPIsPensioner(model.getPIsPensioner());
+				personBean.setPIdIssueCntry(model.getPIdIssueCntry());
+				personBean.setPLat(model.getPLat());
+				personBean.setPLong(model.getPLong());
+				personBean.setPOccupation(model.getPOccupation());
+				personBean.setPTitle(model.getPTitle());
+				personBean.setPZipCd(model.getPZipCd());
+				personBean.setIclubIdType(model.getIclubIdType());
+				personBean.setIclubPerson(model.getIclubPerson());
+				personBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+
+				client.close();
+			}
+			
+			IclubWebHelper.addObjectIntoSession("fullquote",null);
+		}
 		return personBean;
+	}
+	
+	public void setDriverDetails(String personId)
+	{
+		WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "get/"+personId);
+		
+		IclubDriverModel model = (IclubDriverModel)(client.accept(MediaType.APPLICATION_JSON).get(IclubDriverModel.class));
+		driverBean=new IclubDriverBean();
+		
+		driverBean.setDId(model.getDId());
+		driverBean.setDDob(model.getDDob());
+		driverBean.setDIssueDt(model.getDIssueDt());
+		driverBean.setDLicenseNum(model.getDLicenseNum());
+		driverBean.setDName(model.getDName());
+		driverBean.setDCrtdDt(model.getDCrtdDt());
+		driverBean.setIclubAccessType(model.getIclubAccessType());
+		driverBean.setIclubLicenseCode(model.getIclubLicenseCode());
+		driverBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+		driverBean.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId());
+		driverBean.setIclubPersonByDCrtdBy(model.getIclubPersonByDCrtdBy());
+
+		
+		
+		client.close();
+	}
+	
+	public void setVehicleDetails(String driverId)
+	{
+//		WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "get/"+driverId);
+//		
+//		IclubDriverModel model = (IclubDriverModel)(client.accept(MediaType.APPLICATION_JSON).get(IclubDriverModel.class));
+//		vehicleBean=new IclubVehicleBean();
 	}
 
 	public void setPersonBean(IclubPersonBean personBean) {
@@ -1246,6 +1324,14 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void setDebitMonth(String debitMonth) {
 		this.debitMonth = debitMonth;
+	}
+
+	public IclubQuoteBean getQuoteBean() {
+		return quoteBean;
+	}
+
+	public void setQuoteBean(IclubQuoteBean quoteBean) {
+		this.quoteBean = quoteBean;
 	}
 
 }
