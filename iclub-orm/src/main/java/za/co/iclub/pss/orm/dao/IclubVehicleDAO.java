@@ -250,6 +250,18 @@ public class IclubVehicleDAO {
 			throw re;
 		}
 	}
+	
+	public IclubVehicle findByDriverId(String driverId) {
+		log.debug("finding  IclubVehicle instance by getVehicleByDriverId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getVehicleByDriverId");
+			queryObject.setString("driverId", driverId);
+			return (IclubVehicle)queryObject.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("find IclubVehicle failed", re);
+			throw re;
+		}
+	}
 
 	public static IclubVehicleDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehicleDAO) ctx.getBean("IclubVehicleDAO");

@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
@@ -15,6 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_vehicle")
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_vehicle where v_driver_id=:driverId", name = "getVehicleByDriverId", resultClass = IclubVehicle.class), })
 public class IclubVehicle implements java.io.Serializable {
 
 	// Fields

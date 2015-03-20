@@ -277,6 +277,52 @@ public class IclubClaimService {
 		}
 		return model;
 	}
+	
+	@GET
+	@Path("/getByPolicyId/{policyId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public IclubClaimModel getByPolicyId(@PathParam("policyId") String policyId) {
+		IclubClaimModel model = new IclubClaimModel();
+		try {
+			IclubClaim bean = iclubClaimDAO.findByPolicyId(policyId);
+
+			model.setCId(bean.getCId());
+			model.setCCrtdDt(bean.getCCrtdDt());
+			model.setCValue(bean.getCValue());
+			model.setCNumItems(bean.getCNumItems());
+			model.setCNumber(bean.getCNumber());
+			model.setIclubPolicy(bean.getIclubPolicy() != null ? (bean.getIclubPolicy().getPId()) : null);
+			model.setIclubClaimStatus(bean.getIclubClaimStatus() != null ? (bean.getIclubClaimStatus().getCsId()) : null);
+			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
+
+			if (bean.getIclubPayments() != null && bean.getIclubPayments().size() > 0) {
+				String[] payments = new String[bean.getIclubPayments().size()];
+				int i = 0;
+				for (IclubPayment payment : bean.getIclubPayments()) {
+					payments[i] = payment.getPId();
+					i++;
+				}
+				
+				model.setIclubPayments(payments);
+			}
+
+			if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
+				String[] claimItems = new String[bean.getIclubClaimItems().size()];
+				int i = 0;
+				for (IclubClaimItem claimItem : bean.getIclubClaimItems()) {
+					claimItems[i] = claimItem.getCiId();
+					i++;
+				}
+				model.setIclubClaimItems(claimItems);
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return model;
+	}
+
 
 	public IclubClaimDAO getIclubClaimDAO() {
 		return iclubClaimDAO;

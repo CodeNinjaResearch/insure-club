@@ -175,6 +175,18 @@ public class IclubClaimDAO {
 			throw re;
 		}
 	}
+	
+	public IclubClaim findByPolicyId(String policyId) {
+		log.debug("finding all IclubClaim instances by user");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getClaimByPolicyId");
+			queryObject.setString("policyId", policyId);
+			return (IclubClaim)queryObject.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("find all by user failed", re);
+			throw re;
+		}
+	}
 
 	public static IclubClaimDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubClaimDAO) ctx.getBean("IclubClaimDAO");

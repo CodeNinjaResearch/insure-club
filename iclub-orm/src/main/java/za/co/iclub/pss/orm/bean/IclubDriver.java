@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_driver")
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_driver where d_crtd_by=:id", name = "getDriverByUser", resultClass = IclubDriver.class) })
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_driver where d_crtd_by=:id", name = "getDriverByUser", resultClass = IclubDriver.class),@NamedNativeQuery(query = "select * from iclub_driver where d_person_id=:id", name = "getDriverByPersonId", resultClass = IclubDriver.class) })
 public class IclubDriver implements java.io.Serializable {
 
 	// Fields

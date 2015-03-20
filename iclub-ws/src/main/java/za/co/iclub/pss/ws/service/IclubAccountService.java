@@ -259,7 +259,7 @@ public class IclubAccountService {
 			model.setIclubOwnerType(bean.getIclubOwnerType() != null ? bean.getIclubOwnerType().getOtId() : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 			model.setAStatus(bean.getAStatus());
-			
+
 			if (bean.getIclubPolicies() != null && bean.getIclubPolicies().size() > 0) {
 				String[] policies = new String[bean.getIclubPolicies().size()];
 				int i = 0;
@@ -270,8 +270,7 @@ public class IclubAccountService {
 				}
 				model.setIclubPolicies(policies);
 			}
-			
-			
+
 			if (bean.getIclubPayments() != null && bean.getIclubPayments().size() > 0) {
 				String[] payments = new String[bean.getIclubPayments().size()];
 				int i = 0;

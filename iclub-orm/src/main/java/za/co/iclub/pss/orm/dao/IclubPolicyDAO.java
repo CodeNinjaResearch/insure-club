@@ -186,6 +186,19 @@ public class IclubPolicyDAO {
 		}
 	}
 	
+	
+	public IclubPolicy findByQuoteId(String quoteId) {
+		log.debug("finding   IclubPolicy instances by user");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getPolicyByQuoteId");
+			queryObject.setString("quoteId", quoteId);
+			return (IclubPolicy)queryObject.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("find   by user failed", re);
+			throw re;
+		}
+	}
+	
 
 	public static IclubPolicyDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPolicyDAO) ctx.getBean("IclubPolicyDAO");

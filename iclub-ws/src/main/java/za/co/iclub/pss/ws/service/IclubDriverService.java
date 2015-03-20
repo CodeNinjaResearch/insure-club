@@ -264,6 +264,46 @@ public class IclubDriverService {
 		}
 		return model;
 	}
+	
+	
+	@GET
+	@Path("/getByPersonId/{id}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public IclubDriverModel getByPersonId(@PathParam("id") String id) {
+		IclubDriverModel model = new IclubDriverModel();
+		try {
+			IclubDriver bean = iclubDriverDAO.findByPersonId(id);
+
+			model.setDId(bean.getDId());
+			model.setDDob(bean.getDDob());
+			model.setDIssueDt(bean.getDIssueDt());
+			model.setDLicenseNum(bean.getDLicenseNum());
+			model.setDName(bean.getDName());
+			model.setDCrtdDt(bean.getDCrtdDt());
+			model.setIclubAccessType(bean.getIclubAccessType() != null ? (bean.getIclubAccessType().getAtId()) : null);
+			model.setIclubLicenseCode(bean.getIclubLicenseCode() != null ? (bean.getIclubLicenseCode().getLcId()) : null);
+			model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
+			model.setIclubPersonByDPersonId(bean.getIclubPersonByDPersonId() != null ? (bean.getIclubPersonByDPersonId().getPId()) : null);
+			model.setIclubPersonByDCrtdBy(bean.getIclubPersonByDCrtdBy() != null ? (bean.getIclubPersonByDCrtdBy().getPId()) : null);
+
+			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
+				String[] vehicles = new String[bean.getIclubVehicles().size()];
+				int i = 0;
+				for (IclubVehicle vehicle : bean.getIclubVehicles()) {
+
+					vehicles[i] = vehicle.getVId();
+					i++;
+				}
+				model.setIclubVehicles(vehicles);
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return model;
+	}
+
 
 	public IclubDriverDAO getIclubDriverDAO() {
 		return iclubDriverDAO;

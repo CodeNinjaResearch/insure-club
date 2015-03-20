@@ -20,8 +20,8 @@ import javax.persistence.UniqueConstraint;
  * IclubPolicy entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_policy", uniqueConstraints = @UniqueConstraint(columnNames = "p_number"))
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_policy where p_crtd_by=:id", name = "getPolicyByUser", resultClass = IclubPolicy.class) })
+@Table(name = "iclub_policy", uniqueConstraints = @UniqueConstraint(columnNames = "p_number")) 
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_policy where p_quote_id=:quoteId", name = "getPolicyByQuoteId", resultClass = IclubPolicy.class),@NamedNativeQuery(query = "select * from iclub_policy where p_crtd_by=:id", name = "getPolicyByUser", resultClass = IclubPolicy.class) })
 public class IclubPolicy implements java.io.Serializable {
 
 	// Fields
