@@ -76,6 +76,13 @@ public class IclubViewQuoteController implements Serializable {
 		
 		return "fq";
 	}
+	
+	public String policyActionListener(IclubQuoteBean bean)
+	{
+		IclubWebHelper.addObjectIntoSession("fullquote", bean);
+		
+		return "dashboard";
+	}
 
 	public void setBeans(List<IclubQuoteBean> beans) {
 		this.beans = beans;

@@ -183,6 +183,19 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
+	
+	
+	public List findByQuoteId(String quoteId) {
+		log.debug("finding all IclubInsuranceItem instances by user");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getInsuranceItemByQuoteId");
+			queryObject.setString("quoteId", quoteId);
+			return   queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all by user failed", re);
+			throw re;
+		}
+	}
 
 	public static IclubInsuranceItemDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubInsuranceItemDAO) ctx.getBean("IclubInsuranceItemDAO");

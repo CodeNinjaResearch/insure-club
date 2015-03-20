@@ -1,3 +1,485 @@
-<?xml version="1.0"?>
-<beans xmlns="http://java.sun.com/xml/ns/javaee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://jboss.org/schema/cdi/beans_1_0.xsd"/>
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Maintain ViewQuote</ui:define>
+	<ui:define name="body">
+
+<p:panel id="qqPanel">
+			 
+			 <p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					
+				</f:facet>
+				<p:column headerText="Policy Id">
+					<p:outputLabel value="#{bean.PId}" />
+				</p:column>
+				
+				<p:column headerText="Policy Number">
+					<p:outputLabel value="#{bean.PNumber}" />
+				</p:column>
+				
+				<p:column headerText="Premium">
+					<p:outputLabel value="#{bean.PPremium}" />
+				</p:column>
+				
+				<p:column headerText="Prorata Premium">
+					<p:outputLabel value="#{bean.PProrataPrm}" />
+				</p:column>
+				
+				 
+				<p:column headerText="Policy">
+					<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubPolicyController.policyListener(bean)}" >
+						 
+					</p:commandButton>
+				
+				</p:column>
+				
+				 
+				 
+			</p:dataTable>
+
+		
+
+		<p:panel id="iiPanel" rendered="#{iclubPolicyController.iItemFalg}">
+			 
+			 <p:dataTable id="dtIICont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+					
+				</f:facet>
+				<p:column headerText="Item Id">
+					<p:outputLabel value="#{bean.iiId}" />
+				</p:column>
+				
+				<p:column headerText="Quote Id">
+					<p:outputLabel value="#{bean.iiQuoteId}" />
+				</p:column>
+				
+				<p:column headerText="Gen Date">
+					<p:outputLabel value="#{bean.iiCrtdDt}" />
+				</p:column>
+				
+				<p:column headerText="Item Type">
+					<p:outputLabel value="#{bean.iclubInsuranceItemType}" />
+				</p:column>
+				
+				 
+				<p:column >
+					<p:commandButton  icon="ui-icon-pencil" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" action="#{iclubPolicyController.iItemListener(bean)}" >
+						 
+					</p:commandButton>
+				
+				</p:column>
+				
+				
+				
+				 
+				 
+			</p:dataTable>
+			</p:panel>
+			
+			<p:panel id="temp1" rendered="#{iclubPolicyController.propertyFlag}">
+		 
+
+
+					<div align="center">
+						<p:panelGrid columns="2">
+							<p:column>
+								<p:outputLabel value="Location :" />
+							</p:column>
+							<p:column>
+								<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Cover Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubCoverType}" />
+									 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Purpose Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubPurposeType}" />
+									 
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Ocupied Status :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubOccupiedStatus}" />
+									 
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Property Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubPropertyType}"/>
+									 
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Access Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubAccessType}" />
+									 
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Bar Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubBarType}" />
+									 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Thatch Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubThatchType}" />
+									 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Roof Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.iclubRoofType}">
+								</p:outputLabel>
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Reg Number" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PRegNum}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Address" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PAddress}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Lat" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PLat}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Long" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PLong}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Postal Cd" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PPostalCd}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="No Claim Years" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PNoclaimYrs}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Rent FurYn" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PRentFurYn}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Comp Yn" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PCompYn}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Norobbery Yn" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PNorobberyYn}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Sec Gates Yn" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PSecGatesYn}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Estimatted Value" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.propertyBean.PEstValue}" />
+							</p:column>
+
+
+
+
+						</p:panelGrid>
+					</div>
+
+
+				 
+		
+		</p:panel>
+		
+		<p:panel id="temp2" rendered="#{iclubPolicyController.vehhicleFlag}">
+		
+		 
+					<div align="center">
+						<p:panelGrid columns="2">
+
+							<p:column>
+								<p:outputLabel value="Security Master" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.iclubSecurityMaster}"/>
+									 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Access Type VOn" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.iclubAccessTypeByVOnAccessTypeId}" />
+								 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Access Type VD" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.iclubAccessTypeByVDdAccessTypeId}" />
+									 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Vo Do Meter" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VOdometer}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="On Area" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VOnArea}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="On Lat" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VOnLat}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="On Long" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VOnLong}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="VDd Area" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VDdArea}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="VDd Lat" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VDdLat}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="VDd Long" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VDdLong}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Insured Value" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VInsuredValue}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Concess Prct" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VConcessPrct}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Concess Reason" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VConcessReason}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="VImm Yn" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VImmYn}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Gear Lock Yn" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VGearLockYn}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Owner" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VOwner}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="No Claims Years" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VNoclaimYrs}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Comp Years" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VCompYrs}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="VVin" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VVin}" />
+							</p:column>
+
+
+							<p:column>
+								<p:outputLabel value="Engine Nr" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VEngineNr}" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Reg Number" />
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VRegNum}" />
+							</p:column>
+
+							 
+
+
+
+							<p:column>
+								<p:outputLabel value="Location" />
+							</p:column>
+							<p:column>
+								<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+							</p:column>
+
+							
+
+							<p:column>
+								<p:outputLabel value="Vehicle Model :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel id="vmm" value="#{iclubPolicyController.vehicleBean.iclubVehicleMaster}" />
+								 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="year :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.VYear}" />
+									 
+							</p:column>
+
+							<p:column>
+								<p:outputLabel value="Purpose Type :" />
+							</p:column>
+							<p:column>
+								<p:outputLabel value="#{iclubPolicyController.vehicleBean.iclubPurposeType}" />
+									 
+							</p:column>
+						</p:panelGrid>
+					</div>
+
+ 
+		</p:panel>
+
+		</p:panel>
+		
+
+
+	</ui:define>
+
+
+</ui:composition>

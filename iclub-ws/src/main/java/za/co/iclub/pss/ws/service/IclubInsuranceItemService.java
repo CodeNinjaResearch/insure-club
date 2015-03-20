@@ -199,6 +199,49 @@ public class IclubInsuranceItemService {
 
 		return ret;
 	}
+	
+	
+	@GET
+	@Path("/get/quoteId/{user}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubInsuranceItemModel> List<T> getByQuoteId(@PathParam("user") String user) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubInsuranceItemDAO.findByQuoteId(user);
+
+			for (Object object : batmod) {
+				IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
+
+				IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+
+				model.setIiId(iCTt.getIiId());
+				model.setIiItemId(iCTt.getIiItemId());
+				model.setIiQuoteId(iCTt.getIiQuoteId());
+				model.setIiCrtdDt(iCTt.getIiCrtdDt());
+				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
+				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
+
+				if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
+					String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
+						claimItems[i] = claimItem.getCiId();
+						i++;
+					}
+					model.setIclubClaimItems(claimItems);
+				}
+
+				ret.add((T) model);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+
 
 	@GET
 	@Path("/get/{id}")
