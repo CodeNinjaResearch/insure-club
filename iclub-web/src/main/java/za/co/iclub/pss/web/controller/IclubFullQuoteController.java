@@ -314,7 +314,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubPerson(getSessionUserId());
 		model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
 
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 		client.close();
 
 		if (response.getStatusCode() == 0) {
@@ -363,7 +363,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
 		model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId());
 
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 		client.close();
 
 		if (response.getStatusCode() == 0) {
@@ -400,7 +400,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubPersonByDPersonId(personModel.getPId());
 		model.setIclubPersonByDCrtdBy(getSessionUserId());
 
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 		client.close();
 
 		if (response.getStatusCode() == 0) {
@@ -445,7 +445,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubThatchType(bean.getIclubThatchType());
 		model.setIclubRoofType(bean.getIclubRoofType());
 
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 		client.close();
 
 		if (response.getStatusCode() == 0) {
@@ -508,6 +508,7 @@ public class IclubFullQuoteController implements Serializable {
 		WebClient client = null;
 		if (bean != null && bean.getCId() != null) {
 			client = IclubWebHelper.createCustomClient(CLM_BASE_URL + "mod");
+			model.setCId(bean.getCId());
 		} else {
 			client = IclubWebHelper.createCustomClient(CLM_BASE_URL + "add");
 			model.setCId(UUID.randomUUID().toString());
@@ -520,9 +521,14 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubPolicy(policyModel.getPId());
 		model.setIclubClaimStatus(bean.getIclubClaimStatus());
 		model.setIclubPerson(getSessionUserId());
-
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-		client.close();
+		ResponseModel response = null;
+		if (bean != null && bean.getCId() != null) {
+			response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+			client.close();
+		} else {
+			response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+			client.close();
+		}
 
 		if (response.getStatusCode() == 0) {
 
@@ -543,6 +549,7 @@ public class IclubFullQuoteController implements Serializable {
 		} else {
 			client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "add");
 			model.setPId(UUID.randomUUID().toString());
+			bean=new IclubPolicyBean();
 		}
 
 		model.setPProrataPrm(0l);
@@ -554,7 +561,12 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubQuote(quoteModel.getQId());
 		model.setIclubPolicyStatus(bean.getIclubPolicyStatus());
 		model.setIclubPerson(getSessionUserId());
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		ResponseModel response = null;
+		if (bean != null && bean.getPId() != null) {
+			response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+		} else {
+			response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		}
 		client.close();
 		if (response.getStatusCode() == 0) {
 			addClaim(claimBean, model);
@@ -585,7 +597,12 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubOwnerType(bean.getIclubOwnerType());
 		model.setIclubPerson(getSessionUserId());
 		model.setAStatus(bean.getAStatus());
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		ResponseModel response = null;
+		if (bean != null && bean.getAId() != null) {
+			  response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+		}else{
+			response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		}
 		client.close();
 		if (response.getStatusCode() == 0) {
 			addPolicy(policyBean, quoteModel, model);
@@ -619,7 +636,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubQuoteStatus(bean.getIclubQuoteStatus());
 		model.setIclubPersonByQPersonId(personModel.getPId());
 
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 		client.close();
 		if (response.getStatusCode() == 0) {
 
@@ -842,7 +859,7 @@ public class IclubFullQuoteController implements Serializable {
 				}
 				policyBean.setIclubClaims(payments);
 			}
-			
+
 			setClaimDetails();
 			setAccountDetails();
 		}
@@ -887,7 +904,7 @@ public class IclubFullQuoteController implements Serializable {
 				}
 				claimBean.setIclubClaimItems(claimItems);
 			}
-			
+
 		}
 	}
 

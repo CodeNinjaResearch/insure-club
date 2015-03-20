@@ -132,14 +132,14 @@ public class IclubVehicleService {
 			iCV.setVVin(model.getVVin());
 			iCV.setVNoclaimYrs(model.getVNoclaimYrs());
 
-			iCV.setIclubPurposeType(iclubPurposeTypeDAO.findById(model.getIclubPurposeType()));
-			iCV.setIclubSecurityMaster(iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster()));
-			iCV.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
-			iCV.setIclubDriver(iclubDriverDAO.findById(model.getIclubDriver()));
-			iCV.setIclubSecurityDevice(iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice()));
-			iCV.setIclubAccessTypeByVDdAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId()));
-			iCV.setIclubAccessTypeByVOnAccessTypeId(iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()));
-			iCV.setIclubVehicleMaster(iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()));
+			iCV.setIclubPurposeType(model.getIclubPurposeType()!=null ? iclubPurposeTypeDAO.findById(model.getIclubPurposeType()): null);
+			iCV.setIclubSecurityMaster(model.getIclubSecurityMaster()!=null ? iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster()):null);;
+			iCV.setIclubPerson(model.getIclubPerson()!=null ? iclubPersonDAO.findById(model.getIclubPerson()):null);
+			iCV.setIclubDriver(model.getIclubDriver()!=null ? iclubDriverDAO.findById(model.getIclubDriver()):null);
+			iCV.setIclubSecurityDevice(model.getIclubSecurityDevice()!=null ? iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice()):null);
+			iCV.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId()!=null ? iclubAccessTypeDAO.findById( model.getIclubAccessTypeByVDdAccessTypeId()):null);
+			iCV.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId()!=null ?iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()):null);
+			iCV.setIclubVehicleMaster(model.getIclubVehicleMaster()!=null ? iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()):null);
 
 			iclubVehicleDAO.merge(iCV);
 
