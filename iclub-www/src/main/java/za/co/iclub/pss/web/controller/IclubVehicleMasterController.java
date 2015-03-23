@@ -58,6 +58,7 @@ public class IclubVehicleMasterController implements Serializable {
 		showCreateCont = false;
 		showViewCont = true;
 		showEditCont = false;
+		showSummaryCont = false;
 		viewParam = 1l;
 	}
 
@@ -67,6 +68,7 @@ public class IclubVehicleMasterController implements Serializable {
 		showCreateCont = true;
 		showViewCont = false;
 		showEditCont = false;
+		showSummaryCont = false;
 		viewParam = 1l;
 	}
 
@@ -75,9 +77,10 @@ public class IclubVehicleMasterController implements Serializable {
 		showCreateCont = false;
 		showViewCont = false;
 		showEditCont = true;
+		showSummaryCont = false;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;

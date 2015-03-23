@@ -23,14 +23,16 @@
 </h:head>
 
 <h:body>
-	<!-- <ui:include src="top.xhtml" /> -->
+	<h:form id="frmIClub">
+		<ui:include src="top.xhtml" />
 
-	<ui:include src="menu.xhtml" />
+		<ui:include src="menu.xhtml" />
 
-	<div id="layout-portlets-cover" class="fontRegular">
-		<ui:insert name="content">
-		</ui:insert>
-	</div>
+		<div id="layout-portlets-cover" class="fontRegular">
+			<ui:insert name="content">
+			</ui:insert>
+		</div>
+	</h:form>
 
 	<h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
 	<h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />

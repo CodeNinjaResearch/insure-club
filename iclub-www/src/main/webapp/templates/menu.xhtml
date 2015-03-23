@@ -3,22 +3,20 @@
 		<div class="layout-menubarinner-box" id="buttonArea">
 			<a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize"><i class="icon-th-list-2"></i></a> <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
 		</div>
-		<h:form id="frmMenu">
-			<ps:menu id="sm_leftmenu">
-				<p:menuitem id="sm_home" value="Home" icon="icon-home-outline" containerStyleClass="layout-menubar-active" />
-				<p:menuitem id="sm_faq" value="FAQ" containerStyleClass="layout-menubar-active" />
-				<p:submenu id="sm_hitw" label="How It Works">
-					<p:menuitem id="sm_transparency" value="Transparency" containerStyleClass="layout-menubar-active" />
-					<p:menuitem id="sm_privacy" value="Privacy" containerStyleClass="layout-menubar-active" />
-				</p:submenu>
-				<p:submenu id="sm_aboutus" label="About Us">
-					<p:menuitem id="sm_leadership" value="Leadership" containerStyleClass="layout-menubar-active" />
-					<p:menuitem id="sm_board" value="Board" containerStyleClass="layout-menubar-active" />
-					<p:menuitem id="sm_execmem" value="Executive Management" containerStyleClass="layout-menubar-active" />
-					<p:menuitem id="sm_senmem" value="Senior Management" containerStyleClass="layout-menubar-active" />
-				</p:submenu>
-				<p:menuitem id="sm_qq" value="Quick Quote" containerStyleClass="layout-menubar-active" />
-			</ps:menu>
-		</h:form>
+		<ps:menu id="sm_leftmenu">
+			<p:menuitem id="sm_home" value="Home" icon="icon-home-outline" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="sm_faq" value="FAQ" containerStyleClass="layout-menubar-active" />
+			<p:submenu id="sm_hitw" label="How It Works">
+				<p:menuitem id="sm_transparency" value="Transparency" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_privacy" value="Privacy" containerStyleClass="layout-menubar-active" />
+			</p:submenu>
+			<p:submenu id="sm_aboutus" label="About Us">
+				<p:menuitem id="sm_leadership" value="Leadership" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_board" value="Board" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_execmem" value="Executive Management" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_senmem" value="Senior Management" containerStyleClass="layout-menubar-active" />
+			</p:submenu>
+			<p:menuitem id="sm_qq" value="Quick Quote" outcome="qq" containerStyleClass="layout-menubar-active" />
+		</ps:menu>
 	</div>
 </ui:composition>

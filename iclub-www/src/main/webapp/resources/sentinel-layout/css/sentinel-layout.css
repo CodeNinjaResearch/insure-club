@@ -98,8 +98,7 @@ body {
 
 #login-box {
 	min-height: 350px;
-	margin-bottom: 20px;
-	/* -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2); -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2); box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2); */
+	margin-bottom: 20px; /* -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2); -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2); box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2); */
 	border: solid 1px #D1D3D4;
 }
 
@@ -169,12 +168,12 @@ body {
 	border-bottom: solid 1px #0b4170;
 	border-top: solid 1px #0b4170;
 	background: #1578c9;
-	background: -moz-linear-gradient(top, #ffffff 0%, #0b66b1 100%);
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #0b66b1));
-	background: -webkit-linear-gradient(top, #ffffff 0%, #0b66b1 100%);
-	background: -o-linear-gradient(top, #ffffff 0%, #0b66b1 100%);
-	background: -ms-linear-gradient(top, #ffffff 0%, #0b66b1 100%);
-	background: linear-gradient(to bottom, #ffffff 0%, #0b66b1 100%);
+	background: -moz-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, #1578c9), color-stop(100%, #0b66b1));
+	background: -webkit-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+	background: -o-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+	background: -ms-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
+	background: linear-gradient(to bottom, #1578c9 0%, #0b66b1 100%);
 	-webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
 	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
@@ -186,7 +185,7 @@ body {
 	padding: 0px;
 	margin: 18px;
 	float: left;
-	line-height: 16px;
+	line-height: 25px;
 }
 
 #layout-logo img {
@@ -205,8 +204,7 @@ body {
 	background-color: #0f446c;
 	width: 34px;
 	height: 34px;
-	margin-left: 10px;
-	/*for background transition overflow problem of safari*/
+	margin-left: 10px; /*for background transition overflow problem of safari*/
 	-webkit-backface-visibility: hidden;
 }
 
@@ -271,7 +269,7 @@ body {
 /* MENU BAR */
 #layout-menubar {
 	float: left;
-	/* padding-top: 55px;*/
+	padding-top: 55px;
 	background-color: #3D3D3D;
 	position: relative;
 	z-index: 998;
@@ -471,7 +469,7 @@ body {
 #layout-portlets-cover {
 	background-color: #ffffff;
 	overflow-y: hidden;
-	/*	padding-top: 55px; */
+	padding-top: 55px;
 	color: #9FADB5;
 	overflow-x: hidden;
 }

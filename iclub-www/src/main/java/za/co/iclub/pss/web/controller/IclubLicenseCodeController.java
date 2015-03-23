@@ -121,15 +121,14 @@ public class IclubLicenseCodeController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 
+				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLcDesc(bean.getLcDesc());
+				model.setLcStatus(bean.getLcStatus());
+				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setLcCategory(bean.getLcCategory());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-
-					model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
-					model.setLcDesc(bean.getLcDesc());
-					model.setLcStatus(bean.getLcStatus());
-					model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-					model.setLcCategory(bean.getLcCategory());
 					IclubWebHelper.addMessage(getLabelBundle().getString("licensecode") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -149,7 +148,7 @@ public class IclubLicenseCodeController implements Serializable {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
-				
+
 				model.setLcId(bean.getLcId());
 				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setLcDesc(bean.getLcDesc());

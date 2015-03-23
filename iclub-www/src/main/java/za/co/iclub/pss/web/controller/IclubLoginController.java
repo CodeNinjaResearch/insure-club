@@ -2,13 +2,11 @@ package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.codec.binary.Base64;
@@ -36,10 +34,6 @@ public class IclubLoginController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 
-	public void setLang(String lang) {
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(lang));
-	}
-
 	public String doIclubLogin() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: doIclubLogin");
 		if (!validateLogin()) {
@@ -58,9 +52,19 @@ public class IclubLoginController implements Serializable {
 						WebClient personClient = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + model.getIclubPersonByLPersonId());
 						IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
 						personClient.close();
-						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + " " + (personModel.getPLName() == null ? "" : personModel.getPLName()));
-						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
-						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.last.login"), model.getLLastDate());
+						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
+						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
+
+						/*
+						 * ResponseModel eResponse =
+						 * IclubWebHelper.createEvent("Person Logged in :: " +
+						 * bean.getLName(), 12l, personModel.getPId()); if
+						 * (eResponse.getStatusCode() == 0) { return "home"; }
+						 * else { IclubWebHelper.addMessage(
+						 * "Login event generation failed :: " +
+						 * eResponse.getStatusDesc(),
+						 * FacesMessage.SEVERITY_INFO); return "home"; }
+						 */
 						return "home";
 
 					} else {

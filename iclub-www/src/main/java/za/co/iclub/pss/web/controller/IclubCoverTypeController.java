@@ -26,8 +26,6 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @SessionScoped
 public class IclubCoverTypeController implements Serializable {
 
-
-	
 	private static final long serialVersionUID = 2246191018654665794L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubCoverTypeController.class);
@@ -91,7 +89,7 @@ public class IclubCoverTypeController implements Serializable {
 			bean.setCtStatus(model.getCtStatus());
 			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 			bean.setIclubPerson(model.getIclubPerson());
-
+			bean.setCtCrtdDt(model.getCtCrtdDt());
 			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
 				String[] iclubProperties = new String[model.getIclubProperties().length];
 				int i = 0;
@@ -304,7 +302,7 @@ public class IclubCoverTypeController implements Serializable {
 			bean.setCtStatus(model.getCtStatus());
 			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 			bean.setIclubPerson(model.getIclubPerson());
-
+			bean.setCtCrtdDt(model.getCtCrtdDt());
 			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
 				String[] iclubProperties = new String[model.getIclubProperties().length];
 				int i = 0;

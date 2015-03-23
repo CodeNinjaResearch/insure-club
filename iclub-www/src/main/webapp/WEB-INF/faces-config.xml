@@ -21,6 +21,27 @@
 			<to-view-id>/templates/home.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>qq</from-outcome>
+			<to-view-id>/pages/quote/qq.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>fq</from-outcome>
+			<to-view-id>/pages/quote/fq.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>vq</from-outcome>
+			<to-view-id>/pages/quote/vq.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<lifecycle>
 		<phase-listener>za.co.iclub.pss.web.util.SessionPhaseListener</phase-listener>
 	</lifecycle>

@@ -1,11 +1,13 @@
 package za.co.iclub.pss.web.bean;
 
+
 public class IclubWallTypeBean {
 
 	private Long wtId;
 	private String wtShortDesc;
 	private String wtLongDesc;
 	private String wtStatus;
+	private String[] iclubProperties;
 
 	public Long getWtId() {
 		return wtId;
@@ -37,5 +39,13 @@ public class IclubWallTypeBean {
 
 	public void setWtStatus(String wtStatus) {
 		this.wtStatus = wtStatus;
+	}
+
+	public String[] getIclubProperties() {
+		return iclubProperties;
+	}
+
+	public void setIclubProperties(String[] iclubProperties) {
+		this.iclubProperties = iclubProperties;
 	}
 }
