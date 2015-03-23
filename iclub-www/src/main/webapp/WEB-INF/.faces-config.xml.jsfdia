@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubAccessType::#pages#mdata#IclubAccessType.xhtml"
+    NAME="output9" PATH="/pages/mdata/IclubAccessType.xhtml"
+    TARGET="rules:#pages#mdata#IclubAccessType.xhtml"
+    TITLE="IclubAccessType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubAccountType::#pages#mdata#IclubAccountType.xhtml"
+    NAME="output28" PATH="/pages/mdata/IclubAccountType.xhtml"
+    TARGET="rules:#pages#mdata#IclubAccountType.xhtml"
+    TITLE="IclubAccountType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubAlarmType::#pages#mdata#IclubAlarmType.xhtml"
+    NAME="output23" PATH="/pages/mdata/IclubAlarmType.xhtml"
+    TARGET="rules:#pages#mdata#IclubAlarmType.xhtml"
+    TITLE="IclubAlarmType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubBarType::#pages#mdata#IclubBarType.xhtml" NAME="output2"
+    PATH="/pages/mdata/IclubBarType.xhtml"
+    TARGET="rules:#pages#mdata#IclubBarType.xhtml" TITLE="IclubBarType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubBoundaryType::#pages#mdata#IclubBoundaryType.xhtml"
+    NAME="output5" PATH="/pages/mdata/IclubBoundaryType.xhtml"
+    TARGET="rules:#pages#mdata#IclubBoundaryType.xhtml"
+    TITLE="IclubBoundaryType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubBuildingState::#pages#mdata#IclubBuildingState.xhtml"
+    NAME="output29" PATH="/pages/mdata/IclubBuildingState.xhtml"
+    TARGET="rules:#pages#mdata#IclubBuildingState.xhtml"
+    TITLE="IclubBuildingState" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubCoverType::#pages#mdata#IclubCoverType.xhtml"
+    NAME="output20" PATH="/pages/mdata/IclubCoverType.xhtml"
+    TARGET="rules:#pages#mdata#IclubCoverType.xhtml"
+    TITLE="IclubCoverType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubDocumentType::#pages#mdata#IclubDocumentType.xhtml"
+    NAME="output21" PATH="/pages/mdata/IclubDocumentType.xhtml"
+    TARGET="rules:#pages#mdata#IclubDocumentType.xhtml"
+    TITLE="IclubDocumentType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubEventType::#pages#mdata#IclubEventType.xhtml"
+    NAME="output30" PATH="/pages/mdata/IclubEventType.xhtml"
+    TARGET="rules:#pages#mdata#IclubEventType.xhtml"
+    TITLE="IclubEventType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="IclubIdType::#pages#mdata#IclubIdType.xhtml"
+    NAME="output22" PATH="/pages/mdata/IclubIdType.xhtml"
+    TARGET="rules:#pages#mdata#IclubIdType.xhtml" TITLE="IclubIdType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubInsuranceItemType::#pages#mdata#IclubInsuranceItemType.xhtml"
+    NAME="output4" PATH="/pages/mdata/IclubInsuranceItemType.xhtml"
+    TARGET="rules:#pages#mdata#IclubInsuranceItemType.xhtml"
+    TITLE="IclubInsuranceItemType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubMaritialStatus::#pages#mdata#IclubMaritialStatus.xhtml"
+    NAME="output14" PATH="/pages/mdata/IclubMaritialStatus.xhtml"
+    TARGET="rules:#pages#mdata#IclubMaritialStatus.xhtml"
+    TITLE="IclubMaritialStatus" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubMessageType::#pages#mdata#IclubMessageType.xhtml"
+    NAME="output11" PATH="/pages/mdata/IclubMessageType.xhtml"
+    TARGET="rules:#pages#mdata#IclubMessageType.xhtml"
+    TITLE="IclubMessageType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubNotificationType::#pages#mdata#IclubNotificationType.xhtml"
+    NAME="output12" PATH="/pages/mdata/IclubNotificationType.xhtml"
+    TARGET="rules:#pages#mdata#IclubNotificationType.xhtml"
+    TITLE="IclubNotificationType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubOccupiedStatus::#pages#mdata#IclubOccupiedStatus.xhtml"
+    NAME="output3" PATH="/pages/mdata/IclubOccupiedStatus.xhtml"
+    TARGET="rules:#pages#mdata#IclubOccupiedStatus.xhtml"
+    TITLE="IclubOccupiedStatus" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubOwnerType::#pages#mdata#IclubOwnerType.xhtml"
+    NAME="output24" PATH="/pages/mdata/IclubOwnerType.xhtml"
+    TARGET="rules:#pages#mdata#IclubOwnerType.xhtml"
+    TITLE="IclubOwnerType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubPaymentStatus::#pages#mdata#IclubPaymentStatus.xhtml"
+    NAME="output25" PATH="/pages/mdata/IclubPaymentStatus.xhtml"
+    TARGET="rules:#pages#mdata#IclubPaymentStatus.xhtml"
+    TITLE="IclubPaymentStatus" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubPaymentType::#pages#mdata#IclubPaymentType.xhtml"
+    NAME="output15" PATH="/pages/mdata/IclubPaymentType.xhtml"
+    TARGET="rules:#pages#mdata#IclubPaymentType.xhtml"
+    TITLE="IclubPaymentType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubPclaimStatus::#pages#mdata#IclubPclaimStatus.xhtml"
+    NAME="output7" PATH="/pages/mdata/IclubPclaimStatus.xhtml"
+    TARGET="rules:#pages#mdata#IclubPclaimStatus.xhtml"
+    TITLE="IclubPclaimStatus" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubPolicyStatus::#pages#mdata#IclubPolicyStatus.xhtml"
+    NAME="output8" PATH="/pages/mdata/IclubPolicyStatus.xhtml"
+    TARGET="rules:#pages#mdata#IclubPolicyStatus.xhtml"
+    TITLE="IclubPolicyStatus" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubProductType::#pages#mdata#IclubProductType.xhtml"
+    NAME="output17" PATH="/pages/mdata/IclubProductType.xhtml"
+    TARGET="rules:#pages#mdata#IclubProductType.xhtml"
+    TITLE="IclubProductType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubPropertyType::#pages#mdata#IclubPropertyType.xhtml"
+    NAME="output1" PATH="/pages/mdata/IclubPropertyType.xhtml"
+    TARGET="rules:#pages#mdata#IclubPropertyType.xhtml"
+    TITLE="IclubPropertyType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubPurposeType::#pages#mdata#IclubPurposeType.xhtml"
+    NAME="output18" PATH="/pages/mdata/IclubPurposeType.xhtml"
+    TARGET="rules:#pages#mdata#IclubPurposeType.xhtml"
+    TITLE="IclubPurposeType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubQuoteStatus::#pages#mdata#IclubQuoteStatus.xhtml"
+    NAME="output26" PATH="/pages/mdata/IclubQuoteStatus.xhtml"
+    TARGET="rules:#pages#mdata#IclubQuoteStatus.xhtml"
+    TITLE="IclubQuoteStatus" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubRateType::#pages#mdata#IclubRateType.xhtml" NAME="output16"
+    PATH="/pages/mdata/IclubRateType.xhtml"
+    TARGET="rules:#pages#mdata#IclubRateType.xhtml"
+    TITLE="IclubRateType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubRoleType::#pages#mdata#IclubRoleType.xhtml" NAME="output10"
+    PATH="/pages/mdata/IclubRoleType.xhtml"
+    TARGET="rules:#pages#mdata#IclubRoleType.xhtml"
+    TITLE="IclubRoleType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubRoofType::#pages#mdata#IclubRoofType.xhtml" NAME="output6"
+    PATH="/pages/mdata/IclubRoofType.xhtml"
+    TARGET="rules:#pages#mdata#IclubRoofType.xhtml"
+    TITLE="IclubRoofType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubSecurityQuestion::#pages#mdata#IclubSecurityQuestion.xhtml"
+    NAME="output27" PATH="/pages/mdata/IclubSecurityQuestion.xhtml"
+    TARGET="rules:#pages#mdata#IclubSecurityQuestion.xhtml"
+    TITLE="IclubSecurityQuestion" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubSupplierType::#pages#mdata#IclubSupplierType.xhtml"
+    NAME="output13" PATH="/pages/mdata/IclubSupplierType.xhtml"
+    TARGET="rules:#pages#mdata#IclubSupplierType.xhtml"
+    TITLE="IclubSupplierType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubThatchType::#pages#mdata#IclubThatchType.xhtml"
+    NAME="output" PATH="/pages/mdata/IclubThatchType.xhtml"
+    TARGET="rules:#pages#mdata#IclubThatchType.xhtml"
+    TITLE="IclubThatchType" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="IclubWallType::#pages#mdata#IclubWallType.xhtml" NAME="output19"
+    PATH="/pages/mdata/IclubWallType.xhtml"
+    TARGET="rules:#pages#mdata#IclubWallType.xhtml"
+    TITLE="IclubWallType" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubPolicyStatus.xhtml"
+  PATH="/pages/mdata/IclubPolicyStatus.xhtml" SHAPE="304,1889,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubWallType.xhtml"
+  PATH="/pages/mdata/IclubWallType.xhtml" SHAPE="304,3121,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubPaymentType.xhtml"
+  PATH="/pages/mdata/IclubPaymentType.xhtml" SHAPE="304,2673,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubBuildingState.xhtml"
+  PATH="/pages/mdata/IclubBuildingState.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubRoofType.xhtml"
+  PATH="/pages/mdata/IclubRoofType.xhtml" SHAPE="304,1665,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubMessageType.xhtml"
+  PATH="/pages/mdata/IclubMessageType.xhtml" SHAPE="304,2225,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubProductType.xhtml"
+  PATH="/pages/mdata/IclubProductType.xhtml" SHAPE="304,2897,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubPaymentStatus.xhtml"
+  PATH="/pages/mdata/IclubPaymentStatus.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubMaritialStatus.xhtml"
+  PATH="/pages/mdata/IclubMaritialStatus.xhtml" SHAPE="304,2561,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubCoverType.xhtml"
+  PATH="/pages/mdata/IclubCoverType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubAlarmType.xhtml"
+  PATH="/pages/mdata/IclubAlarmType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubThatchType.xhtml"
+  PATH="/pages/mdata/IclubThatchType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubOccupiedStatus.xhtml"
+  PATH="/pages/mdata/IclubOccupiedStatus.xhtml" SHAPE="304,1329,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubQuoteStatus.xhtml"
+  PATH="/pages/mdata/IclubQuoteStatus.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubDocumentType.xhtml"
+  PATH="/pages/mdata/IclubDocumentType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubInsuranceItemType.xhtml"
+  PATH="/pages/mdata/IclubInsuranceItemType.xhtml" SHAPE="304,1441,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubPropertyType.xhtml"
+  PATH="/pages/mdata/IclubPropertyType.xhtml" SHAPE="304,1105,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubRoleType.xhtml"
+  PATH="/pages/mdata/IclubRoleType.xhtml" SHAPE="304,2113,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubSupplierType.xhtml"
+  PATH="/pages/mdata/IclubSupplierType.xhtml" SHAPE="304,2449,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubAccessType.xhtml"
+  PATH="/pages/mdata/IclubAccessType.xhtml" SHAPE="304,2001,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubBarType.xhtml"
+  PATH="/pages/mdata/IclubBarType.xhtml" SHAPE="304,1217,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubSecurityQuestion.xhtml"
+  PATH="/pages/mdata/IclubSecurityQuestion.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubBoundaryType.xhtml"
+  PATH="/pages/mdata/IclubBoundaryType.xhtml" SHAPE="304,1553,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubRateType.xhtml"
+  PATH="/pages/mdata/IclubRateType.xhtml" SHAPE="304,2785,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubEventType.xhtml"
+  PATH="/pages/mdata/IclubEventType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubPurposeType.xhtml"
+  PATH="/pages/mdata/IclubPurposeType.xhtml" SHAPE="304,3009,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubIdType.xhtml"
+  PATH="/pages/mdata/IclubIdType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubPclaimStatus.xhtml"
+  PATH="/pages/mdata/IclubPclaimStatus.xhtml" SHAPE="304,1777,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubAccountType.xhtml"
+  PATH="/pages/mdata/IclubAccountType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubOwnerType.xhtml"
+  PATH="/pages/mdata/IclubOwnerType.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#mdata#IclubNotificationType.xhtml"
+  PATH="/pages/mdata/IclubNotificationType.xhtml" SHAPE="304,2337,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
