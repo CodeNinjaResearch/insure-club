@@ -1,28 +1,24 @@
 <ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<ui:define name="title">Maintain RateType</ui:define>
+	<ui:define name="title">Maintain EntityType</ui:define>
 	<ui:define name="body">
-		<p:remoteCommand actionListener="#{iclubRateTypeController.initializePage}" name="onload" autoRun="true" update="pnlRateTypeContDet" />
-		<p:panel id="pnlRateTypeCont">
-			<p:panelGrid id="pnlSrchCriteria" columns="6">
-				<p:column>
-					<p:outputLabel value="Select Quote Type" />
-				</p:column>
-				<p:column>
-					<p:selectOneMenu value="#{iclubRateTypeController.selQuoteType}" valueChangeListener="#{iclubRateTypeController.changeQuoteType}" onchange="submit()">
-						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-						<f:selectItems value="#{iclubRateTypeController.quoteType}" var="p" itemLabel="#{p.split('-')[1]}" itemValue="#{p.split('-')[0]}" />
-					</p:selectOneMenu>
-				</p:column>
-				<p:column>
-					<p:outputLabel value="Select Quote Type" />
-				</p:column>
-				<p:column>
-					<p:selectOneRadio value="#{iclubRateTypeController.selEntityType}" valueChangeListener="#{iclubRateTypeController.changeEntityType}" onchange="submit()">
-						<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-						<f:selectItems value="#{iclubRateTypeController.entityTypeBeans}" var="p" itemLabel="#{p.etId}" itemValue="#{p.etLongDesc}" />
-					</p:selectOneRadio>
-				</p:column>
-			</p:panelGrid>
+		<p:remoteCommand actionListener="#{iclubEntityTypeController.initializePage}" name="onload" autoRun="true" update="pnlEntityTypeContDet" />
+		<p:panel id="pnlEntityTypeCont">
+			<p:panel id="pnlEntityTypeContMenu">
+				<p:commandLink value="#{labels['viewentitytype']}" actionListener="#{iclubEntityTypeController.showView}" update="pnlEntityTypeContDet" />
+				<p:graphicImage name="separator.png" library="images" />
+				<p:commandLink value="#{labels['createentitytype']}"  actionListener="#{iclubEntityTypeController.showCreate}" update="pnlEntityTypeContDet" />
+			</p:panel>
+			<p:panel id="pnlEntityTypeContDet">
+				<p:panel id="pnlEntityTypeContView" rendered="#{iclubEntityTypeController.showViewCont}">
+					<ui:include src="/pages/admin/entitytype/view.xhtml" />
+				</p:panel>
+				<p:panel id="pnlEntityTypeContCreate" rendered="#{iclubEntityTypeController.showCreateCont}">
+					<ui:include src="/pages/admin/entitytype/create.xhtml" />
+				</p:panel>
+				<p:panel id="pnlEntityTypeContEdit" rendered="#{iclubEntityTypeController.showEditCont}">
+					<ui:include src="/pages/admin/entitytype/edit.xhtml" />
+				</p:panel>
+			</p:panel>
 		</p:panel>
 	</ui:define>
 </ui:composition>

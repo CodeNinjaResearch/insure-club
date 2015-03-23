@@ -26,11 +26,14 @@ public class IclubEntityType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6125126871302238063L;
+	private static final long serialVersionUID = 4809949485408370000L;
 	private Long etId;
 	private String etShortDesc;
 	private String etLongDesc;
+	private String etTblNm;
 	private String etStatus;
+	private Set<IclubRateType> iclubRateTypes = new HashSet<IclubRateType>(0);
+	private Set<IclubField> iclubFields = new HashSet<IclubField>(0);
 	private Set<IclubDocument> iclubDocuments = new HashSet<IclubDocument>(0);
 
 	// Constructors
@@ -45,11 +48,14 @@ public class IclubEntityType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubEntityType(Long etId, String etShortDesc, String etLongDesc, String etStatus, Set<IclubDocument> iclubDocuments) {
+	public IclubEntityType(Long etId, String etShortDesc, String etLongDesc, String etTblNm, String etStatus, Set<IclubRateType> iclubRateTypes, Set<IclubField> iclubFields, Set<IclubDocument> iclubDocuments) {
 		this.etId = etId;
 		this.etShortDesc = etShortDesc;
 		this.etLongDesc = etLongDesc;
+		this.etTblNm = etTblNm;
 		this.etStatus = etStatus;
+		this.iclubRateTypes = iclubRateTypes;
+		this.iclubFields = iclubFields;
 		this.iclubDocuments = iclubDocuments;
 	}
 
@@ -82,6 +88,15 @@ public class IclubEntityType implements java.io.Serializable {
 		this.etLongDesc = etLongDesc;
 	}
 
+	@Column(name = "et_tbl_nm", length = 450)
+	public String getEtTblNm() {
+		return this.etTblNm;
+	}
+
+	public void setEtTblNm(String etTblNm) {
+		this.etTblNm = etTblNm;
+	}
+
 	@Column(name = "et_status", length = 1)
 	public String getEtStatus() {
 		return this.etStatus;
@@ -89,6 +104,24 @@ public class IclubEntityType implements java.io.Serializable {
 
 	public void setEtStatus(String etStatus) {
 		this.etStatus = etStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubEntityType")
+	public Set<IclubRateType> getIclubRateTypes() {
+		return this.iclubRateTypes;
+	}
+
+	public void setIclubRateTypes(Set<IclubRateType> iclubRateTypes) {
+		this.iclubRateTypes = iclubRateTypes;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubEntityType")
+	public Set<IclubField> getIclubFields() {
+		return this.iclubFields;
+	}
+
+	public void setIclubFields(Set<IclubField> iclubFields) {
+		this.iclubFields = iclubFields;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubEntityType")

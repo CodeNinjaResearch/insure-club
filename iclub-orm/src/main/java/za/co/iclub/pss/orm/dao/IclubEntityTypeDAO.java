@@ -32,6 +32,7 @@ public class IclubEntityTypeDAO {
 	// property constants
 	public static final String ET_SHORT_DESC = "etShortDesc";
 	public static final String ET_LONG_DESC = "etLongDesc";
+	public static final String ET_TBL_NM = "etTblNm";
 	public static final String ET_STATUS = "etStatus";
 
 	private SessionFactory sessionFactory;
@@ -112,6 +113,10 @@ public class IclubEntityTypeDAO {
 
 	public List<IclubEntityType> findByEtLongDesc(Object etLongDesc) {
 		return findByProperty(ET_LONG_DESC, etLongDesc);
+	}
+
+	public List<IclubEntityType> findByEtTblNm(Object etTblNm) {
+		return findByProperty(ET_TBL_NM, etTblNm);
 	}
 
 	public List<IclubEntityType> findByEtStatus(Object etStatus) {

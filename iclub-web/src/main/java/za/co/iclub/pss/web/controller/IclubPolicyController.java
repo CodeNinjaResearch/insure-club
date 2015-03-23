@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.naming.InsufficientResourcesException;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
@@ -42,13 +41,13 @@ public class IclubPolicyController implements Serializable {
 	private boolean iItemFalg;
 
 	private List<IclubInsuranceItemBean> iItemBeans;
-	
+
 	private IclubVehicleBean vehicleBean;
-	
-	private boolean vehhicleFlag; 
-	
+
+	private boolean vehhicleFlag;
+
 	private boolean propertyFlag;
-	
+
 	private IclubPropertyBean propertyBean;
 
 	private String sessionUserId;
@@ -114,7 +113,7 @@ public class IclubPolicyController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "get/quoteId/" + policyBean.getIclubQuote());
 
 		List<IclubInsuranceItemModel> models = (ArrayList<IclubInsuranceItemModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemModel.class));
-		iItemBeans=new ArrayList<IclubInsuranceItemBean>();
+		iItemBeans = new ArrayList<IclubInsuranceItemBean>();
 		for (IclubInsuranceItemModel model : models) {
 			IclubInsuranceItemBean bean = new IclubInsuranceItemBean();
 
@@ -142,10 +141,9 @@ public class IclubPolicyController implements Serializable {
 	}
 
 	public void iItemListener(IclubInsuranceItemBean bean) {
-		if(bean!=null && bean.getIclubInsuranceItemType().compareTo(1l)==0)
-		{
-			vehhicleFlag=true;
-			propertyFlag=false;
+		if (bean != null && bean.getIclubInsuranceItemType().compareTo(1l) == 0) {
+			vehhicleFlag = true;
+			propertyFlag = false;
 			WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "get/" + bean.getIiItemId());
 
 			IclubVehicleModel model = (IclubVehicleModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubVehicleModel.class));
@@ -182,10 +180,10 @@ public class IclubPolicyController implements Serializable {
 				vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
 				client.close();
 			}
-		}else if(bean!=null && bean.getIclubInsuranceItemType().compareTo(2l)==0) {
-			vehhicleFlag=false;
-			propertyFlag=true;
-			
+		} else if (bean != null && bean.getIclubInsuranceItemType().compareTo(2l) == 0) {
+			vehhicleFlag = false;
+			propertyFlag = true;
+
 			WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "get/" + bean.getIiItemId());
 			IclubPropertyModel model = (IclubPropertyModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPropertyModel.class));
 
@@ -216,10 +214,10 @@ public class IclubPolicyController implements Serializable {
 				propertyBean.setIclubRoofType(model.getIclubRoofType());
 			}
 			client.close();
-		}else{
-			vehhicleFlag=false;
-			propertyFlag=false;
-			
+		} else {
+			vehhicleFlag = false;
+			propertyFlag = false;
+
 		}
 	}
 
@@ -251,9 +249,8 @@ public class IclubPolicyController implements Serializable {
 	}
 
 	public IclubVehicleBean getVehicleBean() {
-		if(vehicleBean==null)
-		{
-			vehicleBean=new IclubVehicleBean();
+		if (vehicleBean == null) {
+			vehicleBean = new IclubVehicleBean();
 		}
 		return vehicleBean;
 	}
@@ -279,10 +276,9 @@ public class IclubPolicyController implements Serializable {
 	}
 
 	public IclubPropertyBean getPropertyBean() {
-		
-		if(propertyBean==null)
-		{
-			propertyBean=new IclubPropertyBean();
+
+		if (propertyBean == null) {
+			propertyBean = new IclubPropertyBean();
 		}
 		return propertyBean;
 	}

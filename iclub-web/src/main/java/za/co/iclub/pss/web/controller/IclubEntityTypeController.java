@@ -278,16 +278,6 @@ public class IclubEntityTypeController implements Serializable {
 			bean.setEtShortDesc(model.getEtShortDesc());
 			bean.setEtStatus(model.getEtStatus());
 
-			if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
-				String[] documents = new String[model.getIclubDocuments().length];
-				int i = 0;
-				for (String iclubDocument : model.getIclubDocuments()) {
-					documents[i] = iclubDocument;
-					i++;
-				}
-				bean.setIclubDocuments(documents);
-			}
-
 			beans.add(bean);
 		}
 		return beans;
