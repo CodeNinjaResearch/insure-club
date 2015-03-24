@@ -2,31 +2,35 @@
 	<div style="align: center !important">
 		<p:panelGrid columns="2">
 
+
 			<p:column>
-				<p:outputLabel value="#{labels['covertype.create.ctid']}"></p:outputLabel>
+				<p:outputLabel value="#{labels['covertype.create.iclubinsuranceitemtype']}"></p:outputLabel>
 			</p:column>
 			<p:column>
-				<p:inputText value="#{iclubCoverTypeController.bean.ctId}" />
+				<p:selectOneMenu value="#{iclubCoverTypeController.bean.iclubInsuranceItemType}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItems value="#{iclubCoverTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+
+				</p:selectOneMenu>
 			</p:column>
-			
 			<p:column>
 				<p:outputLabel value="#{labels['covertype.create.ctshortdesc']}"></p:outputLabel>
 			</p:column>
-			<p:column >
+			<p:column>
 				<p:inputText value="#{iclubCoverTypeController.bean.ctShortDesc}" />
 			</p:column>
-			
+
 			<p:column>
 				<p:outputLabel value="#{labels['covertype.create.ctlongdesc']}"></p:outputLabel>
 			</p:column>
-			<p:column >
+			<p:column>
 				<p:inputText value="#{iclubCoverTypeController.bean.ctLongDesc}" />
 			</p:column>
-			
+
 			<p:column>
 				<p:outputLabel value="#{labels['covertype.create.ctstatus']}"></p:outputLabel>
 			</p:column>
-			<p:column  >
+			<p:column>
 
 				<p:selectOneMenu value="#{iclubCoverTypeController.bean.ctStatus}">
 					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
@@ -38,8 +42,8 @@
 			<p:column>
 				<p:outputLabel value="#{labels['covertype.create.ctcrtddt']}"></p:outputLabel>
 			</p:column>
-			<p:column  >
-				<p:calendar  value="#{iclubCoverTypeController.bean.ctCrtdDt}" />
+			<p:column>
+				<p:calendar value="#{iclubCoverTypeController.bean.ctCrtdDt}" />
 			</p:column>
 
 		</p:panelGrid>

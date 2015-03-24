@@ -8,25 +8,29 @@
 			<p:column>
 				<p:inputText value="#{iclubSecurityMasterController.bean.smId}" />
 			</p:column>
-			
+
 			<p:column>
 				<p:outputLabel value="#{labels['securitymaster.create.iclubinsuranceitemtype']}"></p:outputLabel>
 			</p:column>
-			<p:column >
-				<p:inputText value="#{iclubSecurityMasterController.bean.iclubInsuranceItemType}" />
+			<p:column>
+				<p:selectOneMenu value="#{iclubSecurityMasterController.bean.iclubInsuranceItemType}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItems value="#{iclubSecurityMasterController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+
+				</p:selectOneMenu>
 			</p:column>
-			
+
 			<p:column>
 				<p:outputLabel value="#{labels['securitymaster.create.smdesc']}"></p:outputLabel>
 			</p:column>
-			<p:column  >
+			<p:column>
 				<p:inputText value="#{iclubSecurityMasterController.bean.smDesc}" />
 			</p:column>
-			
+
 			<p:column>
 				<p:outputLabel value="#{labels['securitymaster.create.smstatus']}"></p:outputLabel>
 			</p:column>
-			<p:column  >
+			<p:column>
 
 				<p:selectOneMenu value="#{iclubSecurityMasterController.bean.smStatus}">
 					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
@@ -38,8 +42,8 @@
 			<p:column>
 				<p:outputLabel value="#{labels['securitymaster.create.smcrtddt']}"></p:outputLabel>
 			</p:column>
-			<p:column  >
-				<p:calendar  value="#{iclubSecurityMasterController.bean.smCrtdDt}" />
+			<p:column>
+				<p:calendar value="#{iclubSecurityMasterController.bean.smCrtdDt}" />
 			</p:column>
 
 		</p:panelGrid>
