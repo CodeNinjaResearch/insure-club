@@ -2,6 +2,7 @@ package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -11,13 +12,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import za.co.iclub.pss.web.util.IclubWebHelper;
+
 @ManagedBean(name = "iclubMenuController")
 @SessionScoped
 public class IclubMenuController implements Serializable {
 
 	private static final long serialVersionUID = -5155234741934732730L;
+	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubMenuController.class);
 	private String language;
+	private boolean userMenu;
 
 	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: languageValueChangeListener");
@@ -34,6 +39,15 @@ public class IclubMenuController implements Serializable {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public boolean isUserMenu() {
+		userMenu = (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null);
+		return userMenu;
+	}
+
+	public void setUserMenu(boolean userMenu) {
+		this.userMenu = userMenu;
 	}
 
 }

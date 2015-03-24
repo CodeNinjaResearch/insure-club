@@ -192,6 +192,8 @@ public class IclubFullQuoteController implements Serializable {
 
 	private IclubPolicyBean policyBean;
 
+	private String claimYN;
+
 	public void initializePage() {
 
 	}
@@ -272,7 +274,7 @@ public class IclubFullQuoteController implements Serializable {
 		}
 	}
 
-	public void saveQuickQuoteDetails() {
+	public void saveFullQuoteDetails() {
 
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
@@ -1642,6 +1644,14 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void setPolicyBean(IclubPolicyBean policyBean) {
 		this.policyBean = policyBean;
+	}
+
+	public String getClaimYN() {
+		return claimYN;
+	}
+
+	public void setClaimYN(String claimYN) {
+		this.claimYN = claimYN;
 	}
 
 }
