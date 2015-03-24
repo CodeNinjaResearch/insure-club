@@ -285,6 +285,14 @@
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
+	<bean id="IclubCountryCodeService" class="za.co.iclub.pss.ws.service.IclubCountryCodeService">
+
+		<property name="iclubCountryCodeDAO" ref="IclubCountryCodeDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubOwnerTypeDAO" ref="IclubOwnerTypeDAO" />
+		<property name="iclubBankMasterDAO" ref="IclubBankMasterDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+	</bean>
 	<bean id="IclubPolicyService" class="za.co.iclub.pss.ws.service.IclubPolicyService">
 		<property name="iclubPolicyDAO" ref="IclubPolicyDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />

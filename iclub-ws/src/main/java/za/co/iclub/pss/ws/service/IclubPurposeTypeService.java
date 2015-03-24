@@ -173,7 +173,7 @@ public class IclubPurposeTypeService {
 
 	
 	@GET
-	@Path("/get/insurnceitemtype/{insurnceItemType}")
+	@Path("/list/status/{insurnceItemType}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPurposeTypeModel> List<T> getByItemType(@PathParam("insurnceItemType") String insurnceItemType) {

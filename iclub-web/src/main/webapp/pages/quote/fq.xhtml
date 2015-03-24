@@ -93,7 +93,10 @@
 								<p:outputLabel value="Id Issuer Country :" />
 							</p:column>
 							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PIdIssueCntry}" />
+								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.PIdIssueCntry}">
+									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+									<f:selectItems value="#{iclubFullQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
+								</p:selectOneMenu> 
 							</p:column>
 							<p:column>
 								<p:outputLabel value="Id Issue Date :" />
@@ -111,7 +114,10 @@
 								<p:outputLabel value="Occupation :" />
 							</p:column>
 							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.POccupation}" />
+								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.POccupation}">
+									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+									<f:selectItems value="#{iclubFullQuoteController.occupationBeans}" var="c" itemLabel="#{c.ODesc}" itemValue="#{c.OId}" />
+								</p:selectOneMenu>
 							</p:column>
 							<p:column>
 								<p:outputLabel value="Date Of Birth :" />
@@ -328,7 +334,7 @@
 								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VRegNum}" />
 							</p:column>
 
-							 
+
 
 
 
@@ -480,7 +486,7 @@
 							<p:column>
 								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPurposeType}">
 									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.purposeTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
+									<f:selectItems value="#{iclubFullQuoteController.pPurposeTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
 
 								</p:selectOneMenu>
 							</p:column>
@@ -691,8 +697,8 @@
 							<p:column>
 								<p:inputText value="#{iclubFullQuoteController.accountBean.AAccNum}" />
 							</p:column>
-						 
-						<p:column>
+
+							<p:column>
 								<p:outputLabel value="Account Status :" />
 							</p:column>
 							<p:column>
@@ -702,7 +708,7 @@
 									<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
 								</p:selectOneMenu>
 							</p:column>
-							
+
 							<p:column>
 								<p:outputLabel value="Bank Master :" />
 							</p:column>
@@ -712,7 +718,7 @@
 									<f:selectItems var="c" itemLabel="#{c.bmBankCode}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
 								</p:selectOneMenu>
 							</p:column>
-							
+
 							<p:column>
 								<p:outputLabel value="Owner Type :" />
 							</p:column>
@@ -722,7 +728,7 @@
 									<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubFullQuoteController.ownerTypeBeans}" />
 								</p:selectOneMenu>
 							</p:column>
-							
+
 							<p:column>
 								<p:outputLabel value="Account Type :" />
 							</p:column>
@@ -733,12 +739,12 @@
 								</p:selectOneMenu>
 							</p:column>
 							<p:column>
-							
+
 								<p:outputLabel value="Debit Date :" />
 							</p:column>
 							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.debitDate}"/>
-								<p:inputText value="#{iclubFullQuoteController.debitMonth}"/>
+								<p:inputText value="#{iclubFullQuoteController.debitDate}" />
+								<p:inputText value="#{iclubFullQuoteController.debitMonth}" />
 							</p:column>
 						</p:panelGrid>
 					</div>
