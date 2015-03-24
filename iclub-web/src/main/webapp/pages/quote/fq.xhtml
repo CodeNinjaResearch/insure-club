@@ -96,7 +96,7 @@
 								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.PIdIssueCntry}">
 									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
 									<f:selectItems value="#{iclubFullQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
-								</p:selectOneMenu> 
+								</p:selectOneMenu>
 							</p:column>
 							<p:column>
 								<p:outputLabel value="Id Issue Date :" />
@@ -136,10 +136,18 @@
 								</p:selectOneMenu>
 							</p:column>
 							<p:column>
-								<p:outputLabel value="Location" />
+								<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+									<p:outputLabel for="address" value="Address:" />
+									<p:inputText id="address" />
+									<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocode()" type="button" />
+								</h:panelGrid>
 							</p:column>
 							<p:column>
-								<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+								
+
+								<p:gmap id="geoGmap" widgetVar="geoMap" center="#{iclubFullQuoteController.centerGeoMap}" zoom="2" type="ROADMAP" model="#{iclubFullQuoteController.geoModel}" style="width:400px;height:400px">
+									<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocode}" update="@this" />
+								</p:gmap>
 							</p:column>
 						</p:panelGrid>
 					</div>
