@@ -459,7 +459,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public List<IclubPurposeTypeBean> getpBeans() {
 
-		WebClient client = IclubWebHelper.createCustomClient(PUR_BASE_URL + "/get/insurnceitemtype/" + "1");
+		WebClient client = IclubWebHelper.createCustomClient(PUR_BASE_URL + "/list/status/" + "1");
 		Collection<? extends IclubPurposeTypeModel> models = new ArrayList<IclubPurposeTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPurposeTypeModel.class));
 		client.close();
 		pBeans = new ArrayList<IclubPurposeTypeBean>();
