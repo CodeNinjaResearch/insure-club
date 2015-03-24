@@ -2,8 +2,17 @@
 	<div style="align: center !important">
 		<p:panelGrid columns="2">
 
-			 
 
+			<p:column>
+				<p:outputLabel value="#{labels['purposetype.create.iclubinsuranceitemtype']}"></p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:selectOneMenu value="#{iclubPurposeTypeController.bean.iclubInsuranceItemType}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+
+				</p:selectOneMenu>
+			</p:column>
 			<p:column>
 				<p:outputLabel value="#{labels['purposetype.create.ptshortdesc']}"></p:outputLabel>
 			</p:column>

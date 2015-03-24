@@ -18,8 +18,10 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.web.bean.IclubCoverTypeBean;
+import za.co.iclub.pss.web.bean.IclubInsuranceItemTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubCoverTypeModel;
+import za.co.iclub.pss.ws.model.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubCoverTypeController")
@@ -30,7 +32,9 @@ public class IclubCoverTypeController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubCoverTypeController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCoverTypeService/";
+	private static final String IIT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemTypeService/";
 	private List<IclubCoverTypeBean> beans;
+	private List<IclubInsuranceItemTypeBean> insuranceItemTypeBeans;
 	private List<IclubCoverTypeBean> dashBoardBeans;
 	private IclubCoverTypeBean bean;
 	private boolean showCreateCont;
@@ -306,7 +310,7 @@ public class IclubCoverTypeController implements Serializable {
 			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
 				String[] iclubProperties = new String[model.getIclubProperties().length];
 				int i = 0;
-				for (String iclubProperty : bean.getIclubProperties()) {
+				for (String iclubProperty : model.getIclubProperties()) {
 					iclubProperties[i] = iclubProperty;
 					i++;
 				}
@@ -328,6 +332,27 @@ public class IclubCoverTypeController implements Serializable {
 
 	public void setBeans(List<IclubCoverTypeBean> beans) {
 		this.beans = beans;
+	}
+
+	public List<IclubInsuranceItemTypeBean> getInsuranceItemTypeBeans() {
+
+		WebClient client = IclubWebHelper.createCustomClient(IIT_BASE_URL + "list");
+		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
+		client.close();
+		insuranceItemTypeBeans = new ArrayList<IclubInsuranceItemTypeBean>();
+		for (IclubInsuranceItemTypeModel model : models) {
+			IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
+			bean.setIitId(model.getIitId());
+			bean.setIitLongDesc(model.getIitLongDesc());
+			bean.setIitShortDesc(model.getIitShortDesc());
+			bean.setIitStatus(model.getIitStatus());
+			insuranceItemTypeBeans.add(bean);
+		}
+		return insuranceItemTypeBeans;
+	}
+
+	public void setInsuranceItemTypeBeans(List<IclubInsuranceItemTypeBean> insuranceItemTypeBeans) {
+		this.insuranceItemTypeBeans = insuranceItemTypeBeans;
 	}
 
 }

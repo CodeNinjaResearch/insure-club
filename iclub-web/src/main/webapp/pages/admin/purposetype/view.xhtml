@@ -4,6 +4,13 @@
 		<p:column headerText="#{labels['purposetype.view.ptid']}">
 			<p:outputLabel value="#{bean.ptId}" />
 		</p:column>
+		<p:column headerText="#{labels['purposetype.view.iclubinsuranceitemtype']}">
+				<p:selectOneMenu value="#{bean.iclubInsuranceItemType}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+
+				</p:selectOneMenu>
+			</p:column>
 		<p:column headerText="#{labels['purposetype.view.ptshortdesc']}">
 			<p:outputLabel value="#{bean.ptShortDesc}" />
 		</p:column>

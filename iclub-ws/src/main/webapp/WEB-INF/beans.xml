@@ -80,6 +80,7 @@
 			<ref bean="IclubClaimStatusService" />
 			<ref bean="IclubAccountService"/>
 			<ref bean="IclubClaimService" />
+			<ref bean="IclubSupplMasterService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
