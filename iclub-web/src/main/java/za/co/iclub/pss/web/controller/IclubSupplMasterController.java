@@ -19,8 +19,10 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.web.bean.IclubSupplMasterBean;
+import za.co.iclub.pss.web.bean.IclubSupplierTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubSupplMasterModel;
+import za.co.iclub.pss.ws.model.IclubSupplierTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubSupplMasterController")
@@ -31,7 +33,9 @@ public class IclubSupplMasterController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubSupplMasterController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplMasterService/";
+	private static final String ST_BASE_URL ="http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplierTypeService/";
 	private List<IclubSupplMasterBean> beans;
+	private List<IclubSupplierTypeBean> supplierTypeBeans;
 	private List<IclubSupplMasterBean> dashBoardBeans;
 	private IclubSupplMasterBean bean;
 	private boolean showCreateCont;
@@ -358,6 +362,27 @@ public class IclubSupplMasterController implements Serializable {
 
 	public void setBeans(List<IclubSupplMasterBean> beans) {
 		this.beans = beans;
+	}
+
+	public List<IclubSupplierTypeBean> getSupplierTypeBeans() {
+		
+		WebClient client = IclubWebHelper.createCustomClient(ST_BASE_URL + "list");
+		Collection<? extends IclubSupplierTypeModel> models = new ArrayList<IclubSupplierTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSupplierTypeModel.class));
+		client.close();
+		supplierTypeBeans = new ArrayList<IclubSupplierTypeBean>();
+		for (IclubSupplierTypeModel model : models) {
+			IclubSupplierTypeBean bean = new IclubSupplierTypeBean();
+			bean.setStId(model.getStId());
+			bean.setStLongDesc(model.getStLongDesc());
+			bean.setStShortDesc(model.getStShortDesc());
+			bean.setStStatus(model.getStStatus());
+			supplierTypeBeans.add(bean);
+		}
+		return supplierTypeBeans;
+	}
+
+	public void setSupplierTypeBeans(List<IclubSupplierTypeBean> supplierTypeBeans) {
+		this.supplierTypeBeans = supplierTypeBeans;
 	}
 
 }

@@ -16,6 +16,16 @@
 		<p:column headerText="#{labels['supplmaster.view.smregnum']}">
 			<p:outputLabel value="#{bean.smRegNum}" />
 		</p:column>
+
+			<p:column headerText="#{labels['suppliertype']}">
+
+				<p:selectOneMenu value="#{iclubSupplMasterController.bean.iclubSupplierType}">
+					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+					<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
+					 
+
+				</p:selectOneMenu>
+			</p:column>
 		<p:column headerText="#{labels['supplmaster.view.smaddress']}">
 			<p:outputLabel value="#{bean.smAddress}" />
 		</p:column>
