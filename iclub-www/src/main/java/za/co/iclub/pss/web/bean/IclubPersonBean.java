@@ -17,7 +17,7 @@ public class IclubPersonBean {
 	private String PContactPref;
 	private String PGender;
 	private String PIdNum;
-	private Long PIdIssueCntry;
+	private Integer PIdIssueCntry;
 	private Date PIdIssueDt;
 	private Date PIdExpiryDt;
 	private Long POccupation;
@@ -170,11 +170,11 @@ public class IclubPersonBean {
 		PIdNum = pIdNum;
 	}
 
-	public Long getPIdIssueCntry() {
+	public Integer getPIdIssueCntry() {
 		return PIdIssueCntry;
 	}
 
-	public void setPIdIssueCntry(Long pIdIssueCntry) {
+	public void setPIdIssueCntry(Integer pIdIssueCntry) {
 		PIdIssueCntry = pIdIssueCntry;
 	}
 
