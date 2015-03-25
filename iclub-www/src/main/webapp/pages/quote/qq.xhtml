@@ -16,7 +16,7 @@
 				<p:tab id="qqVehDet" title="Vehicle Details">
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vmMake}">
-							<p:ajax update="mnuVehModel" process="@this" event="change" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
+							<p:ajax update=":iclubFrm:qqTabView:mnuVehModel" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
 							<f:selectItem itemLabel="Vehicle Make" itemDisabled="true" />
 							<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
 						</p:selectOneMenu>
@@ -24,7 +24,7 @@
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuVehModel" id="mnuVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubVehicleMaster}">
-							<p:ajax update="mnuYear" process="@this" event="change" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
+							<p:ajax update=":iclubFrm:qqTabView:mnuYear" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
 							<f:selectItem itemLabel="Vehicle Model" itemDisabled="true" />
 							<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
 						</p:selectOneMenu>

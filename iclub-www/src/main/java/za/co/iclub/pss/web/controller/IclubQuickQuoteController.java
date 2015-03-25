@@ -132,6 +132,7 @@ public class IclubQuickQuoteController implements Serializable {
 				years.clear();
 			}
 		}
+		LOGGER.info("Completed");
 	}
 
 	public void vmModelValueChangeListener() {
