@@ -15,11 +15,11 @@ public class IclubVehicleBean {
 	private String iclubDriver;
 	private Long VOdometer;
 	private String VOnArea;
-	private Long VOnLat;
-	private Long VOnLong;
+	private Double VOnLat;
+	private Double VOnLong;
 	private String VDdArea;
-	private Long VDdLat;
-	private Long VDdLong;
+	private Double VDdLat;
+	private Double VDdLong;
 	private Integer VYear;
 	private Long VInsuredValue;
 	private Long VConcessPrct;
@@ -122,19 +122,19 @@ public class IclubVehicleBean {
 		VOnArea = vOnArea;
 	}
 
-	public Long getVOnLat() {
+	public Double getVOnLat() {
 		return VOnLat;
 	}
 
-	public void setVOnLat(Long vOnLat) {
+	public void setVOnLat(Double vOnLat) {
 		VOnLat = vOnLat;
 	}
 
-	public Long getVOnLong() {
+	public Double getVOnLong() {
 		return VOnLong;
 	}
 
-	public void setVOnLong(Long vOnLong) {
+	public void setVOnLong(Double vOnLong) {
 		VOnLong = vOnLong;
 	}
 
@@ -146,19 +146,19 @@ public class IclubVehicleBean {
 		VDdArea = vDdArea;
 	}
 
-	public Long getVDdLat() {
+	public Double getVDdLat() {
 		return VDdLat;
 	}
 
-	public void setVDdLat(Long vDdLat) {
+	public void setVDdLat(Double vDdLat) {
 		VDdLat = vDdLat;
 	}
 
-	public Long getVDdLong() {
+	public Double getVDdLong() {
 		return VDdLong;
 	}
 
-	public void setVDdLong(Long vDdLong) {
+	public void setVDdLong(Double vDdLong) {
 		VDdLong = vDdLong;
 	}
 

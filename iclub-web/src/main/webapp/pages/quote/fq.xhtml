@@ -2,8 +2,72 @@
 
 	<ui:define name="title">Maintain FullQuote</ui:define>
 	<ui:define name="body">
+		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="perAddress" value="Address:" />
+					<p:inputText id="perAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPre" showDetail="true" />
+
+				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubFullQuoteController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPer}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPer}" update="growlPre" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePer}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPer}" update="growlPre" />
+				</p:gmap>
 
 
+
+			</p:panel>
+		</p:dialog>
+
+		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="proAddress" value="Address:" />
+					<p:inputText id="proAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPro" showDetail="true" />
+
+				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubFullQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPro}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPro}" update="growlPro" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePro}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPro}" update="growlPro" />
+				</p:gmap>
+
+
+
+			</p:panel>
+		</p:dialog>
+
+
+		<p:dialog id="vehLocationDetailsDialog" widgetVar="vehLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehAddress" value="Address:" />
+					<p:inputText id="vehAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVeh" showDetail="true" />
+
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubFullQuoteController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelVeh}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragVeh}" update="growlVeh" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodeVeh}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectVeh}" update="growlVeh" />
+				</p:gmap>
+
+
+
+			</p:panel>
+		</p:dialog>
 
 		<p:panel id="qqPanel">
 			<p:tabView id="tabView">
@@ -136,19 +200,10 @@
 								</p:selectOneMenu>
 							</p:column>
 							<p:column>
-								<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
-									<p:outputLabel for="address" value="Address:" />
-									<p:inputText id="address" />
-									<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocode()" type="button" />
-								</h:panelGrid>
-							</p:column>
-							<p:column>
-								
 
-								<p:gmap id="geoGmap" widgetVar="geoMap" center="#{iclubFullQuoteController.centerGeoMap}" zoom="2" type="ROADMAP" model="#{iclubFullQuoteController.geoModel}" style="width:400px;height:400px">
-									<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocode}" update="@this" />
-								</p:gmap>
+								<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
 							</p:column>
+
 						</p:panelGrid>
 					</div>
 				</p:tab>
@@ -229,22 +284,7 @@
 							</p:column>
 
 
-							<p:column>
-								<p:outputLabel value="VDd Lat" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VDdLat}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="VDd Long" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VDdLong}" />
-							</p:column>
+							 
 
 							<p:column>
 								<p:outputLabel value="Insured Value" />
@@ -350,7 +390,8 @@
 								<p:outputLabel value="Location" />
 							</p:column>
 							<p:column>
-								<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+								<p:commandButton update=":iclubFrm:vehLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('vehLocationDetailsDialog').show();" />
+								<!-- <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
 							</p:column>
 
 							<p:column>
@@ -474,7 +515,9 @@
 								<p:outputLabel value="Location :" />
 							</p:column>
 							<p:column>
-								<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+
+								<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+								<!-- <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
 							</p:column>
 
 							<p:column>
@@ -583,19 +626,6 @@
 								<p:inputText value="#{iclubFullQuoteController.propertyBean.PAddress}" />
 							</p:column>
 
-							<p:column>
-								<p:outputLabel value="Lat" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PLat}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Long" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PLong}" />
-							</p:column>
 
 							<p:column>
 								<p:outputLabel value="Postal Cd" />

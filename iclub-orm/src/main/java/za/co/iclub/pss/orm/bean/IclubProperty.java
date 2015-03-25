@@ -39,8 +39,8 @@ public class IclubProperty implements java.io.Serializable {
 	private IclubRoofType iclubRoofType;
 	private String PRegNum;
 	private String PAddress;
-	private Long PLat;
-	private Long PLong;
+	private Double PLat;
+	private Double PLong;
 	private Integer PPostalCd;
 	private Integer PNoclaimYrs;
 	private String PRentFurYn;
@@ -62,7 +62,7 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubPurposeType iclubPurposeType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Long PLat, Long PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Long PEstValue, Timestamp PCrtdDt) {
+	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubPurposeType iclubPurposeType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Long PEstValue, Timestamp PCrtdDt) {
 		this.PId = PId;
 		this.iclubCoverType = iclubCoverType;
 		this.iclubPurposeType = iclubPurposeType;
@@ -218,20 +218,20 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	@Column(name = "p_lat", precision = 10, scale = 7)
-	public Long getPLat() {
+	public Double getPLat() {
 		return this.PLat;
 	}
 
-	public void setPLat(Long PLat) {
+	public void setPLat(Double PLat) {
 		this.PLat = PLat;
 	}
 
 	@Column(name = "p_long", precision = 10, scale = 7)
-	public Long getPLong() {
+	public Double getPLong() {
 		return this.PLong;
 	}
 
-	public void setPLong(Long PLong) {
+	public void setPLong(Double PLong) {
 		this.PLong = PLong;
 	}
 

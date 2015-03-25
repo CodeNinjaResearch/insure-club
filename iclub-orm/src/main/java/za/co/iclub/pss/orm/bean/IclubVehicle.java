@@ -37,11 +37,11 @@ public class IclubVehicle implements java.io.Serializable {
 	private IclubDriver iclubDriver;
 	private Long VOdometer;
 	private String VOnArea;
-	private Long VOnLat;
-	private Long VOnLong;
+	private Double VOnLat;
+	private Double VOnLong;
 	private String VDdArea;
-	private Long VDdLat;
-	private Long VDdLong;
+	private Double VDdLat;
+	private Double VDdLong;
 	private Integer VYear;
 	private Long VInsuredValue;
 	private Long VConcessPrct;
@@ -68,7 +68,7 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Long VOnLat, Long VOnLong, String VDdArea, Long VDdLat, Long VDdLong, Integer VYear, Long VInsuredValue, Long VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Timestamp VCrtdDt) {
+	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Long VInsuredValue, Long VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Timestamp VCrtdDt) {
 		this.VId = VId;
 		this.iclubPurposeType = iclubPurposeType;
 		this.iclubSecurityMaster = iclubSecurityMaster;
@@ -210,20 +210,20 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	@Column(name = "v_on_lat", precision = 10, scale = 7)
-	public Long getVOnLat() {
+	public Double getVOnLat() {
 		return this.VOnLat;
 	}
 
-	public void setVOnLat(Long VOnLat) {
+	public void setVOnLat(Double VOnLat) {
 		this.VOnLat = VOnLat;
 	}
 
 	@Column(name = "v_on_long", precision = 10, scale = 7)
-	public Long getVOnLong() {
+	public Double getVOnLong() {
 		return this.VOnLong;
 	}
 
-	public void setVOnLong(Long VOnLong) {
+	public void setVOnLong(Double VOnLong) {
 		this.VOnLong = VOnLong;
 	}
 
@@ -237,20 +237,20 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	@Column(name = "v_dd_lat", precision = 10, scale = 7)
-	public Long getVDdLat() {
+	public Double getVDdLat() {
 		return this.VDdLat;
 	}
 
-	public void setVDdLat(Long VDdLat) {
+	public void setVDdLat(Double VDdLat) {
 		this.VDdLat = VDdLat;
 	}
 
 	@Column(name = "v_dd_long", precision = 10, scale = 7)
-	public Long getVDdLong() {
+	public Double getVDdLong() {
 		return this.VDdLong;
 	}
 
-	public void setVDdLong(Long VDdLong) {
+	public void setVDdLong(Double VDdLong) {
 		this.VDdLong = VDdLong;
 	}
 
