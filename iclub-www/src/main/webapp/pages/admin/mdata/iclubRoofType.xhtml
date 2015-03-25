@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/mdata/container.xhtml">
+	<ui:define name="mdata">
+		<div class="ContainerIndent">
+			<p:panel id="pnlRoofTypeCont">
+				<p:dataTable id="dtRoofTypeCont" widgetVar="dtRoofTypeCont" value="#{iclubRoofTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+					<f:facet name="footer">
+						<p:commandButton id="btnRoofTypeShowAdd" value="Add" actionListener="#{iclubRoofTypeController.showAddPanel}" update=":iclubFrm:pnlRoofTypeCont" />
+					</f:facet>
+					<p:column headerText="Id">
+						<p:outputLabel value="#{bean.rtId}" />
+					</p:column>
+					<p:column headerText="Short Description">
+						<p:outputLabel value="#{bean.rtShortDesc}" />
+					</p:column>
+					<p:column headerText="Long Description">
+						<p:outputLabel value="#{bean.rtLongDesc}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:selectOneMenu value="#{bean.rtStatus}" disabled="true">
+							<f:selectItem itemLabel="Please Select" itemValue="-1" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnRoofTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubRoofTypeController.showModPanel}" update=":iclubFrm:pnlRoofTypeCont">
+							<f:setPropertyActionListener target="#{iclubRoofTypeController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="pnlAdd" rendered="#{iclubRoofTypeController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubRoofTypeController.bean.rtShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubRoofTypeController.bean.rtLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubRoofTypeController.bean.rtStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:commandButton id="btnRoofTypeAddSave" value="Save" actionListener="#{iclubRoofTypeController.addIclubRoofType}" update=":iclubFrm:pnlRoofTypeCont" />
+							</div>
+							<div class="Container50">
+								<p:commandButton id="btnRoofTypeAddClose" value="Close" actionListener="#{iclubRoofTypeController.clearForm}" update=":iclubFrm:pnlRoofTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlMod" rendered="#{iclubRoofTypeController.showModPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:outputLabel value="#{iclubRoofTypeController.bean.rtId}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubRoofTypeController.bean.rtShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubRoofTypeController.bean.rtLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubRoofTypeController.bean.rtStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container33">
+								<p:commandButton id="btnRoofTypeModSave" value="Save" actionListener="#{iclubRoofTypeController.modIclubRoofType}" update=":iclubFrm:pnlRoofTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnRoofTypeModDelete" value="Delete" actionListener="#{iclubRoofTypeController.delIclubRoofType}" update=":iclubFrm:pnlRoofTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnRoofTypeModClose" value="Close" actionListener="#{iclubRoofTypeController.clearForm}" update=":iclubFrm:pnlRoofTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

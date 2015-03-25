@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/mdata/container.xhtml">
+	<ui:define name="mdata">
+		<div class="ContainerIndent">
+			<p:panel id="pnlDocumentTypeCont">
+				<p:dataTable id="dtDocumentTypeCont" widgetVar="dtDocumentTypeCont" value="#{iclubDocumentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+					<f:facet name="footer">
+						<p:commandButton id="btnDocumentTypeShowAdd" value="Add" actionListener="#{iclubDocumentTypeController.showAddPanel}" update=":iclubFrm:pnlDocumentTypeCont" />
+					</f:facet>
+					<p:column headerText="Id">
+						<p:outputLabel value="#{bean.dtId}" />
+					</p:column>
+					<p:column headerText="Short Description">
+						<p:outputLabel value="#{bean.dtShortDesc}" />
+					</p:column>
+					<p:column headerText="Long Description">
+						<p:outputLabel value="#{bean.dtLongDesc}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:selectOneMenu value="#{bean.dtStatus}" disabled="true">
+							<f:selectItem itemLabel="Please Select" itemValue="-1" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnDocumentTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubDocumentTypeController.showModPanel}" update=":iclubFrm:pnlDocumentTypeCont">
+							<f:setPropertyActionListener target="#{iclubDocumentTypeController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="pnlAdd" rendered="#{iclubDocumentTypeController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubDocumentTypeController.bean.dtShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubDocumentTypeController.bean.dtLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubDocumentTypeController.bean.dtStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:commandButton id="btnDocumentTypeAddSave" value="Save" actionListener="#{iclubDocumentTypeController.addIclubDocumentType}" update=":iclubFrm:pnlDocumentTypeCont" />
+							</div>
+							<div class="Container50">
+								<p:commandButton id="btnDocumentTypeAddClose" value="Close" actionListener="#{iclubDocumentTypeController.clearForm}" update=":iclubFrm:pnlDocumentTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlMod" rendered="#{iclubDocumentTypeController.showModPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:outputLabel value="#{iclubDocumentTypeController.bean.dtId}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubDocumentTypeController.bean.dtShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubDocumentTypeController.bean.dtLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubDocumentTypeController.bean.dtStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="Container100">
+							<div class="Container33">
+								<p:commandButton id="btnDocumentTypeModSave" value="Save" actionListener="#{iclubDocumentTypeController.modIclubDocumentType}" update=":iclubFrm:pnlDocumentTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnDocumentTypeModDelete" value="Delete" actionListener="#{iclubDocumentTypeController.delIclubDocumentType}" update=":iclubFrm:pnlDocumentTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnDocumentTypeModClose" value="Close" actionListener="#{iclubDocumentTypeController.clearForm}" update=":iclubFrm:pnlDocumentTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>
