@@ -17,8 +17,8 @@ public class IclubPropertyBean {
 	private Long iclubRoofType;
 	private String PRegNum;
 	private String PAddress;
-	private Long PLat;
-	private Long PLong;
+	private Double PLat;
+	private Double PLong;
 	private Integer PPostalCd;
 	private Integer PNoclaimYrs;
 	private String PRentFurYn;
@@ -132,19 +132,19 @@ public class IclubPropertyBean {
 		PAddress = pAddress;
 	}
 
-	public Long getPLat() {
+	public Double getPLat() {
 		return PLat;
 	}
 
-	public void setPLat(Long pLat) {
+	public void setPLat(Double pLat) {
 		PLat = pLat;
 	}
 
-	public Long getPLong() {
+	public Double getPLong() {
 		return PLong;
 	}
 
-	public void setPLong(Long pLong) {
+	public void setPLong(Double pLong) {
 		PLong = pLong;
 	}
 

@@ -27,8 +27,8 @@ public class IclubPersonModel {
 	private Date PDob;
 	private String PIsPensioner;
 	private String PAddress;
-	private Long PLat;
-	private Long PLong;
+	private Double PLat;
+	private Double PLong;
 	private Integer PZipCd;
 	private Date PCrtdDt;
 	private String[] iclubMessageBoards;
@@ -229,19 +229,19 @@ public class IclubPersonModel {
 		PAddress = pAddress;
 	}
 
-	public Long getPLat() {
+	public Double getPLat() {
 		return PLat;
 	}
 
-	public void setPLat(Long pLat) {
+	public void setPLat(Double pLat) {
 		PLat = pLat;
 	}
 
-	public Long getPLong() {
+	public Double getPLong() {
 		return PLong;
 	}
 
-	public void setPLong(Long pLong) {
+	public void setPLong(Double pLong) {
 		PLong = pLong;
 	}
 

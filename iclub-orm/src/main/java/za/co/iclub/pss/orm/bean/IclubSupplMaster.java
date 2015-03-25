@@ -40,8 +40,8 @@ public class IclubSupplMaster implements java.io.Serializable {
 	private String smTradeName;
 	private String smRegNum;
 	private String smAddress;
-	private Long smLat;
-	private Long smLong;
+	private Double smLat;
+	private Double smLong;
 	private Long smCrLimit;
 	private Date srActionDt;
 	private Integer smRating;
@@ -61,7 +61,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Long smLat, Long smLong, Long smCrLimit, Date srActionDt, Integer smRating, Timestamp smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId) {
+	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Long smCrLimit, Date srActionDt, Integer smRating, Timestamp smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId) {
 		this.smId = smId;
 		this.iclubPerson = iclubPerson;
 		this.iclubSupplierType = iclubSupplierType;
@@ -146,21 +146,21 @@ public class IclubSupplMaster implements java.io.Serializable {
 		this.smAddress = smAddress;
 	}
 
-	@Column(name = "sm_lat", precision = 10, scale = 7)
-	public Long getSmLat() {
+	@Column(name = "sm_lat")
+	public Double getSmLat() {
 		return this.smLat;
 	}
 
-	public void setSmLat(Long smLat) {
+	public void setSmLat(Double smLat) {
 		this.smLat = smLat;
 	}
 
-	@Column(name = "sm_long", precision = 10, scale = 7)
-	public Long getSmLong() {
+	@Column(name = "sm_long")
+	public Double getSmLong() {
 		return this.smLong;
 	}
 
-	public void setSmLong(Long smLong) {
+	public void setSmLong(Double smLong) {
 		this.smLong = smLong;
 	}
 

@@ -16,13 +16,15 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 import org.primefaces.event.map.GeocodeEvent;
-import org.primefaces.event.map.ReverseGeocodeEvent;
+import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.GeocodeResult;
 import org.primefaces.model.map.LatLng;
@@ -157,57 +159,18 @@ public class IclubFullQuoteController implements Serializable {
 	private List<IclubOccupiedStatusBean> occupiedStatusBeans;
 
 	private List<IclubBarTypeBean> barTypeBeans;
-	
-	private MapModel geoModel;
-    private MapModel revGeoModel;
-    private String centerGeoMap = "41.850033, -87.6500523";
-    private String centerRevGeoMap = "41.850033, -87.6500523";
-     
-    @PostConstruct
-    public void init() {
-        geoModel = new DefaultMapModel();
-        revGeoModel = new DefaultMapModel();
-    }
-     
-    public void onGeocode(GeocodeEvent event) {
-        List<GeocodeResult> results = event.getResults();
-         
-        if (results != null && !results.isEmpty()) {
-            LatLng center = results.get(0).getLatLng();
-            centerGeoMap = center.getLat() + "," + center.getLng();
-             
-            for (int i = 0; i < results.size(); i++) {
-                GeocodeResult result = results.get(i);
-                geoModel.addOverlay(new Marker(result.getLatLng(), result.getAddress()));
-            }
-        }
-    }
-     
-    public void onReverseGeocode(ReverseGeocodeEvent event) {
-        List<String> addresses = event.getAddresses();
-        LatLng coord = event.getLatlng();
-         
-        if (addresses != null && !addresses.isEmpty()) {
-            centerRevGeoMap = coord.getLat() + "," + coord.getLng();
-            revGeoModel.addOverlay(new Marker(coord, addresses.get(0)));
-        }
-    }
- 
-    public MapModel getGeoModel() {
-        return geoModel;
-    }
- 
-    public MapModel getRevGeoModel() {
-        return revGeoModel;
-    }
- 
-    public String getCenterGeoMap() {
-        return centerGeoMap;
-    }
- 
-    public String getCenterRevGeoMap() {
-        return centerRevGeoMap;
-    }
+
+	private MapModel draggableModelPer;
+	private Marker markerPer;
+	private String centerGeoMapPer = "36.890257,30.707417";
+
+	private MapModel draggableModelPro;
+	private Marker markerPro;
+	private String centerGeoMapPro = "36.890257,30.707417";
+
+	private MapModel draggableModelVeh;
+	private Marker markerVeh;
+	private String centerGeoMapVeh = "36.890257,30.707417";
 
 	private List<IclubPropertyTypeBean> propertyTypeBeans;
 
@@ -230,7 +193,7 @@ public class IclubFullQuoteController implements Serializable {
 	private List<IclubVehicleMasterBean> vBeans;
 
 	private List<IclubPurposeTypeBean> purposeTypeBeans;
-	
+
 	private List<IclubPurposeTypeBean> pPurposeTypeBeans;
 
 	private List<IclubLicenseCodeBean> licenseCodeBeans;
@@ -263,8 +226,126 @@ public class IclubFullQuoteController implements Serializable {
 
 	private IclubPolicyBean policyBean;
 
-	public void initializePage() {
+	@PostConstruct
+	public void init() {
+		draggableModelPer = new DefaultMapModel();
+		draggableModelPro = new DefaultMapModel();
+		draggableModelVeh = new DefaultMapModel();
 
+	}
+
+	public MapModel getDraggableModelPer() {
+		return draggableModelPer;
+	}
+
+	public MapModel getDraggableModelVeh() {
+		return draggableModelVeh;
+	}
+
+	public MapModel getDraggableModelPro() {
+		return draggableModelPro;
+	}
+
+	public String getCenterGeoMapPro() {
+		return centerGeoMapPro;
+	}
+
+	public String getCenterGeoMapPer() {
+		return centerGeoMapPer;
+	}
+
+	public String getCenterGeoMapVeh() {
+		return centerGeoMapVeh;
+	}
+
+	public void onMarkerDragPer(MarkerDragEvent event) {
+		markerPer = event.getMarker();
+
+		personBean.setPLat(markerPer.getLatlng().getLat());
+		personBean.setPLong(markerPer.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng()));
+	}
+
+	public void onGeocodePer(GeocodeEvent event) {
+		List<GeocodeResult> results = event.getResults();
+
+		if (results != null && !results.isEmpty()) {
+			LatLng center = results.get(0).getLatLng();
+			centerGeoMapPer = center.getLat() + "," + center.getLng();
+
+			for (int i = 0; i < results.size(); i++) {
+				GeocodeResult result = results.get(i);
+				Marker marker = new Marker(result.getLatLng(), result.getAddress());
+				marker.setDraggable(true);
+				draggableModelPer.addOverlay(marker);
+			}
+		}
+	}
+
+	public void onMarkerSelectPer(OverlaySelectEvent event) {
+		markerPer = (Marker) event.getOverlay();
+		personBean.setPLat(markerPer.getLatlng().getLat());
+		personBean.setPLong(markerPer.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPer.getTitle()));
+	}
+
+	public void onMarkerDragPro(MarkerDragEvent event) {
+		markerPro = event.getMarker();
+		propertyBean.setPLat(markerPro.getLatlng().getLat());
+		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng()));
+	}
+
+	public void onGeocodePro(GeocodeEvent event) {
+		List<GeocodeResult> results = event.getResults();
+
+		if (results != null && !results.isEmpty()) {
+			LatLng center = results.get(0).getLatLng();
+			centerGeoMapPro = center.getLat() + "," + center.getLng();
+
+			for (int i = 0; i < results.size(); i++) {
+				GeocodeResult result = results.get(i);
+				Marker marker = new Marker(result.getLatLng(), result.getAddress());
+				marker.setDraggable(true);
+				draggableModelPro.addOverlay(marker);
+			}
+		}
+	}
+
+	public void onMarkerSelectPro(OverlaySelectEvent event) {
+		markerPro = (Marker) event.getOverlay();
+		propertyBean.setPLat(markerPro.getLatlng().getLat());
+		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPro.getTitle()));
+	}
+
+	public void onMarkerDragVeh(MarkerDragEvent event) {
+		markerVeh = event.getMarker();
+		vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
+		vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
+	}
+
+	public void onGeocodeVeh(GeocodeEvent event) {
+		List<GeocodeResult> results = event.getResults();
+
+		if (results != null && !results.isEmpty()) {
+			LatLng center = results.get(0).getLatLng();
+			centerGeoMapVeh = center.getLat() + "," + center.getLng();
+
+			for (int i = 0; i < results.size(); i++) {
+				GeocodeResult result = results.get(i);
+				Marker marker = new Marker(result.getLatLng(), result.getAddress());
+				marker.setDraggable(true);
+				draggableModelVeh.addOverlay(marker);
+			}
+		}
+	}
+
+	public void onMarkerSelectVeh(OverlaySelectEvent event) {
+		markerVeh = (Marker) event.getOverlay();
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerVeh.getTitle()));
 	}
 
 	public void vmMakeValueChangeListener(ValueChangeEvent valueChangeEvent) {
@@ -844,6 +925,14 @@ public class IclubFullQuoteController implements Serializable {
 				personBean.setIclubIdType(model.getIclubIdType());
 				personBean.setIclubPerson(model.getIclubPerson());
 				personBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+				if (personBean.getPLat() != null && personBean.getPLong() != null) {
+					centerGeoMapPer = personBean.getPLat() + "," + personBean.getPLong();
+					LatLng coord = new LatLng(personBean.getPLat(), personBean.getPLong());
+					Marker marker = new Marker(coord, "");
+					marker.setDraggable(true);
+					draggableModelPer.addOverlay(marker);
+
+				}
 
 				client.close();
 				setDriverDetails();
@@ -887,6 +976,15 @@ public class IclubFullQuoteController implements Serializable {
 			propertyBean.setIclubBarType(model.getIclubBarType());
 			propertyBean.setIclubThatchType(model.getIclubThatchType());
 			propertyBean.setIclubRoofType(model.getIclubRoofType());
+
+			if (propertyBean.getPLat() != null && propertyBean.getPLong() != null) {
+				centerGeoMapPro = propertyBean.getPLat() + "," + propertyBean.getPLong();
+				LatLng coord = new LatLng(propertyBean.getPLat(), propertyBean.getPLong());
+				Marker marker = new Marker(coord, "");
+				marker.setDraggable(true);
+				draggableModelPro.addOverlay(marker);
+
+			}
 		}
 		client.close();
 	}
@@ -1079,6 +1177,15 @@ public class IclubFullQuoteController implements Serializable {
 			vehicleBean.setIclubSecurityDevice(model.getIclubSecurityDevice());
 			vehicleBean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
 			vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
+
+			if (vehicleBean.getVDdLat() != null && vehicleBean.getVDdLong() != null) {
+				centerGeoMapVeh = vehicleBean.getVDdLat() + "," + vehicleBean.getVDdLong();
+				LatLng coord = new LatLng(vehicleBean.getVDdLat(), vehicleBean.getVDdLong());
+				Marker marker = new Marker(coord, "");
+				marker.setDraggable(true);
+				draggableModelVeh.addOverlay(marker);
+
+			}
 
 			vehicleIItemBean = setInsuranceItemDetails(quoteBean.getQId(), 1l);
 			setVmMakeAndMode();

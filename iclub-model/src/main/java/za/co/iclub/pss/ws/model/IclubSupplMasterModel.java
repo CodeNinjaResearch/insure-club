@@ -15,8 +15,8 @@ public class IclubSupplMasterModel {
 	private String smTradeName;
 	private String smRegNum;
 	private String smAddress;
-	private Long smLat;
-	private Long smLong;
+	private Double smLat;
+	private Double smLong;
 	private Long smCrLimit;
 	private Date srActionDt;
 	private Integer smRating;
@@ -80,19 +80,19 @@ public class IclubSupplMasterModel {
 		this.smAddress = smAddress;
 	}
 
-	public Long getSmLat() {
+	public Double getSmLat() {
 		return smLat;
 	}
 
-	public void setSmLat(Long smLat) {
+	public void setSmLat(Double smLat) {
 		this.smLat = smLat;
 	}
 
-	public Long getSmLong() {
+	public Double getSmLong() {
 		return smLong;
 	}
 
-	public void setSmLong(Long smLong) {
+	public void setSmLong(Double smLong) {
 		this.smLong = smLong;
 	}
 

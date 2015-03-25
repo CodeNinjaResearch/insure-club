@@ -284,6 +284,7 @@
 		<navigation-case>
 			<from-outcome>fq</from-outcome>
 			<to-view-id>/pages/quote/fq.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -291,6 +292,7 @@
 		<navigation-case>
 			<from-outcome>vq</from-outcome>
 			<to-view-id>/pages/quote/vq.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -299,6 +301,7 @@
 		<navigation-case>
 			<from-outcome>dashboard</from-outcome>
 			<to-view-id>/pages/policy/dashboard.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
