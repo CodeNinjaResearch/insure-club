@@ -50,14 +50,9 @@
 			<p:column>
 				<p:outputLabel value="#{labels['supplmaster.edit.smlat']}"></p:outputLabel>
 			</p:column>
+
 			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smLat}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smlong']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smLong}" />
+				<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
 			</p:column>
 
 			<p:column>
