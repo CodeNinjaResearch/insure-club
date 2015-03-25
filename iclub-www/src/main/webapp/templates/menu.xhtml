@@ -8,6 +8,12 @@
 			<p:menuitem id="sm_home" value="Home" icon="icon-home-outline" containerStyleClass="layout-menubar-active" />
 			<p:menuitem id="sm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
 			<p:menuitem id="sm_logout" value="Logout" ajax="false" action="#{iclubLoginController.doIclubLogout}" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
+			<p:submenu id="sm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
+				<p:menuitem id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
+				<p:submenu id="sm_admin" label="Admin Screens">
+					<p:menuitem id="sm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
+				</p:submenu>
+			</p:submenu>
 			<p:menuitem id="sm_faq" value="FAQ" containerStyleClass="layout-menubar-active" />
 			<p:submenu id="sm_hitw" label="How It Works">
 				<p:menuitem id="sm_transparency" value="Transparency" containerStyleClass="layout-menubar-active" />
@@ -20,12 +26,6 @@
 				<p:menuitem id="sm_senmem" value="Senior Management" containerStyleClass="layout-menubar-active" />
 			</p:submenu>
 			<p:menuitem id="sm_qq" value="Quick Quote" outcome="qq" containerStyleClass="layout-menubar-active" />
-			<p:submenu id="sm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
-				<p:menuitem id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
-				<p:submenu id="sm_admin" label="Admin Screens">
-					<p:menuitem id="sm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
-				</p:submenu>
-			</p:submenu>
 		</ps:menu>
 	</div>
 </ui:composition>
