@@ -49,6 +49,20 @@
 			<to-view-id>/pages/quote/vq.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>mdata</from-outcome>
+			<to-view-id>/pages/admin/mdata/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubAccessType</from-outcome>
+			<to-view-id>/pages/admin/mdata/iclubAccessType.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<lifecycle>
 		<phase-listener>za.co.iclub.pss.web.util.SessionPhaseListener</phase-listener>
 	</lifecycle>

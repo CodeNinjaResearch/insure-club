@@ -3,6 +3,7 @@
 		<div class="layout-menubarinner-box" id="buttonArea">
 			<a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize"><i class="icon-th-list-2"></i></a> <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
 		</div>
+		<div class="layout-menubarinner-box" id="searchArea"></div>
 		<ps:menu id="sm_leftmenu">
 			<p:menuitem id="sm_home" value="Home" icon="icon-home-outline" containerStyleClass="layout-menubar-active" />
 			<p:menuitem id="sm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
@@ -22,7 +23,7 @@
 			<p:submenu id="sm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
 				<p:menuitem id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
 				<p:submenu id="sm_admin" label="Admin Screens">
-					<p:menuitem id="sm_mdata" value="Metadata" containerStyleClass="layout-menubar-active" />
+					<p:menuitem id="sm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
 				</p:submenu>
 			</p:submenu>
 		</ps:menu>

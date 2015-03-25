@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -23,6 +24,7 @@ public class IclubMenuController implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(IclubMenuController.class);
 	private String language;
 	private boolean userMenu;
+	private String selPage;
 
 	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: languageValueChangeListener");
@@ -30,6 +32,15 @@ public class IclubMenuController implements Serializable {
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute("languageforlocale", valueChangeEvent.getNewValue().toString());
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(valueChangeEvent.getNewValue().toString()));
+		}
+	}
+
+	public void onPageChange() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: onPageChange");
+		if (selPage != null && !selPage.trim().equalsIgnoreCase("")) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
+			navigationHandler.handleNavigation(context, null, selPage + "?faces-redirect=true");
 		}
 	}
 
@@ -48,6 +59,14 @@ public class IclubMenuController implements Serializable {
 
 	public void setUserMenu(boolean userMenu) {
 		this.userMenu = userMenu;
+	}
+
+	public String getSelPage() {
+		return selPage;
+	}
+
+	public void setSelPage(String selPage) {
+		this.selPage = selPage;
 	}
 
 }

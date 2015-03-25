@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.codec.binary.Base64;
@@ -77,6 +79,9 @@ public class IclubLoginController implements Serializable {
 
 	public void doIclubLogout() {
 		IclubWebHelper.invalidateSession();
+		FacesContext context = FacesContext.getCurrentInstance();
+		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
+		navigationHandler.handleNavigation(context, null, "home?faces-redirect=true");
 	}
 
 	public boolean validateLogin() {

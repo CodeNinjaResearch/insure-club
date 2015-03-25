@@ -99,8 +99,6 @@ public class IclubQuickQuoteController implements Serializable {
 	private IclubVehicleBean vehicleBean;
 
 	private String vmMake;
-	
-	private String claimYN;
 
 	public void initializePage() {
 
@@ -693,14 +691,6 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public void setVehicleBean(IclubVehicleBean vehicleBean) {
 		this.vehicleBean = vehicleBean;
-	}
-
-	public String getClaimYN() {
-		return claimYN;
-	}
-
-	public void setClaimYN(String claimYN) {
-		this.claimYN = claimYN;
 	}
 
 }
