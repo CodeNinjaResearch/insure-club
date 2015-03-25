@@ -118,84 +118,47 @@ public class IclubFullQuoteController implements Serializable {
 	private static final String OWNT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOwnerTypeService/";
 	private static final String ACCT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubAccountTypeService/";
 	private static final String BNKM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBankMasterService/";
+
 	private List<IclubSecurityMasterBean> securityMasterBeans;
-
 	private List<IclubBankMasterBean> bankMasterBeans;
-
 	private List<IclubAccountTypeBean> accountTypeBeans;
-
 	private List<IclubOwnerTypeBean> ownerTypeBeans;
-
 	private List<IclubAccessTypeBean> accessTypeBeans;
-
 	private List<IclubSecurityDeviceBean> securityDeviceBeans;
-
 	private List<IclubCoverTypeBean> coverTypeBeans;
-
 	private List<IclubClaimStatusBean> claimStatusBeans;
-
 	private List<IclubThatchTypeBean> thatchTypeBeans;
-
 	private List<IclubOccupiedStatusBean> occupiedStatusBeans;
-
 	private List<IclubBarTypeBean> barTypeBeans;
-
 	private List<IclubPropertyTypeBean> propertyTypeBeans;
-
 	private IclubExtrasBean extrasBean;
-
 	private List<String> vmMakes;
-
 	private IclubVehicleMasterBean vehicleMasterBean;
-
 	private IclubPersonBean personBean;
-
 	private IclubQuoteBean quoteBean;
-
 	private IclubPropertyBean propertyBean;
-
 	private List<IclubMaritialStatusBean> maritialStatusBeans;
-
 	private List<IclubIdTypeBean> idTypeBeans;
-
 	private List<IclubVehicleMasterBean> vBeans;
-
 	private List<IclubPurposeTypeBean> purposeTypeBeans;
-
 	private List<IclubLicenseCodeBean> licenseCodeBeans;
-
 	private List<IclubWallTypeBean> wallTypeBeans;
-
 	private List<IclubRoofTypeBean> roofTypeBeans;
-
 	private IclubDriverBean driverBean;
-
 	private List<String> years;
-
 	private String sessionUserId;
-
 	private IclubVehicleBean vehicleBean;
-
 	private IclubClaimBean claimBean;
-
 	private IclubAccountBean accountBean;
-
 	private String vmMake;
-
 	private String debitDate;
-
 	private String debitMonth;
-
 	private IclubInsuranceItemBean vehicleIItemBean;
-
 	private IclubInsuranceItemBean propertyIItemBean;
-
 	private IclubPolicyBean policyBean;
-
 	private String claimYN;
 
 	public void initializePage() {
-
 	}
 
 	public void vmMakeValueChangeListener(ValueChangeEvent valueChangeEvent) {
@@ -551,7 +514,7 @@ public class IclubFullQuoteController implements Serializable {
 		} else {
 			client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "add");
 			model.setPId(UUID.randomUUID().toString());
-			bean=new IclubPolicyBean();
+			bean = new IclubPolicyBean();
 		}
 
 		model.setPProrataPrm(0l);
@@ -601,8 +564,8 @@ public class IclubFullQuoteController implements Serializable {
 		model.setAStatus(bean.getAStatus());
 		ResponseModel response = null;
 		if (bean != null && bean.getAId() != null) {
-			  response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
-		}else{
+			response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+		} else {
 			response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 		}
 		client.close();

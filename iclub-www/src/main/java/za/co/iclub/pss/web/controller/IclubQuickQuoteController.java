@@ -68,37 +68,24 @@ public class IclubQuickQuoteController implements Serializable {
 	private static final String QUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubQuoteService/";
 	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
 	private static final String II_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemService/";
+
 	private List<String> vmMakes;
-
 	private IclubVehicleMasterBean vehicleMasterBean;
-
 	private IclubPersonBean personBean;
-
 	private IclubPropertyBean propertyBean;
-
 	private List<IclubMaritialStatusBean> maritialStatusBeans;
-
 	private List<IclubIdTypeBean> idTypeBeans;
-
 	private List<IclubVehicleMasterBean> vBeans;
-
 	private List<IclubPurposeTypeBean> pBeans;
-
 	private List<IclubLicenseCodeBean> licenseCodeBeans;
-
 	private List<IclubWallTypeBean> wallTypeBeans;
-
 	private List<IclubRoofTypeBean> roofTypeBeans;
-
 	private IclubDriverBean driverBean;
-
 	private List<String> years;
-
 	private String sessionUserId;
-
 	private IclubVehicleBean vehicleBean;
-
 	private String vmMake;
+	private String claimYN;
 
 	public void initializePage() {
 
@@ -691,6 +678,14 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public void setVehicleBean(IclubVehicleBean vehicleBean) {
 		this.vehicleBean = vehicleBean;
+	}
+
+	public String getClaimYN() {
+		return claimYN;
+	}
+
+	public void setClaimYN(String claimYN) {
+		this.claimYN = claimYN;
 	}
 
 }
