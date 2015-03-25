@@ -11,6 +11,7 @@
 </style>
 	</ui:define>
 	<ui:define name="content">
+		<p:remoteCommand actionListener="#{iclubQuickQuoteController.initializePage}" name="onload" autoRun="true" />
 		<div class="ContainerIndent TexAlCenter">
 			<p:tabView id="qqTabView">
 				<p:tab id="qqVehDet" title="Vehicle Details">

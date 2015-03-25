@@ -88,7 +88,7 @@ public class IclubQuickQuoteController implements Serializable {
 	private String claimYN;
 
 	public void initializePage() {
-
+		IclubWebHelper.addObjectIntoSession("page_key", "/pages/quote/qq.xhtml");
 	}
 
 	public void vmMakeValueChangeListener() {

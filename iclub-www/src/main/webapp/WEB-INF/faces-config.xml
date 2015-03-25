@@ -63,7 +63,4 @@
 			<to-view-id>/pages/admin/mdata/iclubAccessType.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<lifecycle>
-		<phase-listener>za.co.iclub.pss.web.util.SessionPhaseListener</phase-listener>
-	</lifecycle>
 </faces-config>
