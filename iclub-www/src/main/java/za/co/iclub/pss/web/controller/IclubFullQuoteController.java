@@ -12,14 +12,24 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.event.map.GeocodeEvent;
+import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.event.map.OverlaySelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.GeocodeResult;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 import za.co.iclub.pss.web.bean.IclubAccessTypeBean;
 import za.co.iclub.pss.web.bean.IclubAccountBean;
@@ -28,6 +38,7 @@ import za.co.iclub.pss.web.bean.IclubBankMasterBean;
 import za.co.iclub.pss.web.bean.IclubBarTypeBean;
 import za.co.iclub.pss.web.bean.IclubClaimBean;
 import za.co.iclub.pss.web.bean.IclubClaimStatusBean;
+import za.co.iclub.pss.web.bean.IclubCountryCodeBean;
 import za.co.iclub.pss.web.bean.IclubCoverTypeBean;
 import za.co.iclub.pss.web.bean.IclubDriverBean;
 import za.co.iclub.pss.web.bean.IclubExtrasBean;
@@ -35,6 +46,7 @@ import za.co.iclub.pss.web.bean.IclubIdTypeBean;
 import za.co.iclub.pss.web.bean.IclubInsuranceItemBean;
 import za.co.iclub.pss.web.bean.IclubLicenseCodeBean;
 import za.co.iclub.pss.web.bean.IclubMaritialStatusBean;
+import za.co.iclub.pss.web.bean.IclubOccupationBean;
 import za.co.iclub.pss.web.bean.IclubOccupiedStatusBean;
 import za.co.iclub.pss.web.bean.IclubOwnerTypeBean;
 import za.co.iclub.pss.web.bean.IclubPersonBean;
@@ -58,6 +70,7 @@ import za.co.iclub.pss.ws.model.IclubBankMasterModel;
 import za.co.iclub.pss.ws.model.IclubBarTypeModel;
 import za.co.iclub.pss.ws.model.IclubClaimModel;
 import za.co.iclub.pss.ws.model.IclubClaimStatusModel;
+import za.co.iclub.pss.ws.model.IclubCountryCodeModel;
 import za.co.iclub.pss.ws.model.IclubCoverTypeModel;
 import za.co.iclub.pss.ws.model.IclubDriverModel;
 import za.co.iclub.pss.ws.model.IclubExtrasModel;
@@ -65,6 +78,7 @@ import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubLicenseCodeModel;
 import za.co.iclub.pss.ws.model.IclubMaritialStatusModel;
+import za.co.iclub.pss.ws.model.IclubOccupationModel;
 import za.co.iclub.pss.ws.model.IclubOccupiedStatusModel;
 import za.co.iclub.pss.ws.model.IclubOwnerTypeModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
@@ -118,47 +132,222 @@ public class IclubFullQuoteController implements Serializable {
 	private static final String OWNT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOwnerTypeService/";
 	private static final String ACCT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubAccountTypeService/";
 	private static final String BNKM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBankMasterService/";
-
+	private static final String OCN_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOccupationService/";
+	private static final String CCDE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCountryCodeService/";
 	private List<IclubSecurityMasterBean> securityMasterBeans;
+
+	private List<IclubOccupationBean> occupationBeans;
+
+	private List<IclubCountryCodeBean> countryCodeBeans;
+
 	private List<IclubBankMasterBean> bankMasterBeans;
+
 	private List<IclubAccountTypeBean> accountTypeBeans;
+
 	private List<IclubOwnerTypeBean> ownerTypeBeans;
+
 	private List<IclubAccessTypeBean> accessTypeBeans;
+
 	private List<IclubSecurityDeviceBean> securityDeviceBeans;
+
 	private List<IclubCoverTypeBean> coverTypeBeans;
+
 	private List<IclubClaimStatusBean> claimStatusBeans;
+
 	private List<IclubThatchTypeBean> thatchTypeBeans;
+
 	private List<IclubOccupiedStatusBean> occupiedStatusBeans;
+
 	private List<IclubBarTypeBean> barTypeBeans;
+
+	private MapModel draggableModelPer;
+	private Marker markerPer;
+	private String centerGeoMapPer = "36.890257,30.707417";
+
+	private MapModel draggableModelPro;
+	private Marker markerPro;
+	private String centerGeoMapPro = "36.890257,30.707417";
+
+	private MapModel draggableModelVeh;
+	private Marker markerVeh;
+	private String centerGeoMapVeh = "36.890257,30.707417";
+
 	private List<IclubPropertyTypeBean> propertyTypeBeans;
+
 	private IclubExtrasBean extrasBean;
+
 	private List<String> vmMakes;
+
 	private IclubVehicleMasterBean vehicleMasterBean;
+
 	private IclubPersonBean personBean;
+
 	private IclubQuoteBean quoteBean;
+
 	private IclubPropertyBean propertyBean;
+
 	private List<IclubMaritialStatusBean> maritialStatusBeans;
+
 	private List<IclubIdTypeBean> idTypeBeans;
+
 	private List<IclubVehicleMasterBean> vBeans;
+
 	private List<IclubPurposeTypeBean> purposeTypeBeans;
+
+	private List<IclubPurposeTypeBean> pPurposeTypeBeans;
+
 	private List<IclubLicenseCodeBean> licenseCodeBeans;
+
 	private List<IclubWallTypeBean> wallTypeBeans;
+
 	private List<IclubRoofTypeBean> roofTypeBeans;
+
 	private IclubDriverBean driverBean;
+
 	private List<String> years;
+
 	private String sessionUserId;
+
 	private IclubVehicleBean vehicleBean;
+
 	private IclubClaimBean claimBean;
+
 	private IclubAccountBean accountBean;
+
 	private String vmMake;
+
 	private String debitDate;
+
 	private String debitMonth;
+
 	private IclubInsuranceItemBean vehicleIItemBean;
+
 	private IclubInsuranceItemBean propertyIItemBean;
+
 	private IclubPolicyBean policyBean;
+	
 	private String claimYN;
 
-	public void initializePage() {
+	@PostConstruct
+	public void init() {
+		draggableModelPer = new DefaultMapModel();
+		draggableModelPro = new DefaultMapModel();
+		draggableModelVeh = new DefaultMapModel();
+
+	}
+
+	public MapModel getDraggableModelPer() {
+		return draggableModelPer;
+	}
+
+	public MapModel getDraggableModelVeh() {
+		return draggableModelVeh;
+	}
+
+	public MapModel getDraggableModelPro() {
+		return draggableModelPro;
+	}
+
+	public String getCenterGeoMapPro() {
+		return centerGeoMapPro;
+	}
+
+	public String getCenterGeoMapPer() {
+		return centerGeoMapPer;
+	}
+
+	public String getCenterGeoMapVeh() {
+		return centerGeoMapVeh;
+	}
+
+	public void onMarkerDragPer(MarkerDragEvent event) {
+		markerPer = event.getMarker();
+
+		personBean.setPLat(markerPer.getLatlng().getLat());
+		personBean.setPLong(markerPer.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng()));
+	}
+
+	public void onGeocodePer(GeocodeEvent event) {
+		List<GeocodeResult> results = event.getResults();
+
+		if (results != null && !results.isEmpty()) {
+			LatLng center = results.get(0).getLatLng();
+			centerGeoMapPer = center.getLat() + "," + center.getLng();
+
+			for (int i = 0; i < results.size(); i++) {
+				GeocodeResult result = results.get(i);
+				Marker marker = new Marker(result.getLatLng(), result.getAddress());
+				marker.setDraggable(true);
+				draggableModelPer.addOverlay(marker);
+			}
+		}
+	}
+
+	public void onMarkerSelectPer(OverlaySelectEvent event) {
+		markerPer = (Marker) event.getOverlay();
+		personBean.setPLat(markerPer.getLatlng().getLat());
+		personBean.setPLong(markerPer.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPer.getTitle()));
+	}
+
+	public void onMarkerDragPro(MarkerDragEvent event) {
+		markerPro = event.getMarker();
+		propertyBean.setPLat(markerPro.getLatlng().getLat());
+		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng()));
+	}
+
+	public void onGeocodePro(GeocodeEvent event) {
+		List<GeocodeResult> results = event.getResults();
+
+		if (results != null && !results.isEmpty()) {
+			LatLng center = results.get(0).getLatLng();
+			centerGeoMapPro = center.getLat() + "," + center.getLng();
+
+			for (int i = 0; i < results.size(); i++) {
+				GeocodeResult result = results.get(i);
+				Marker marker = new Marker(result.getLatLng(), result.getAddress());
+				marker.setDraggable(true);
+				draggableModelPro.addOverlay(marker);
+			}
+		}
+	}
+
+	public void onMarkerSelectPro(OverlaySelectEvent event) {
+		markerPro = (Marker) event.getOverlay();
+		propertyBean.setPLat(markerPro.getLatlng().getLat());
+		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPro.getTitle()));
+	}
+
+	public void onMarkerDragVeh(MarkerDragEvent event) {
+		markerVeh = event.getMarker();
+		vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
+		vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
+	}
+
+	public void onGeocodeVeh(GeocodeEvent event) {
+		List<GeocodeResult> results = event.getResults();
+
+		if (results != null && !results.isEmpty()) {
+			LatLng center = results.get(0).getLatLng();
+			centerGeoMapVeh = center.getLat() + "," + center.getLng();
+
+			for (int i = 0; i < results.size(); i++) {
+				GeocodeResult result = results.get(i);
+				Marker marker = new Marker(result.getLatLng(), result.getAddress());
+				marker.setDraggable(true);
+				draggableModelVeh.addOverlay(marker);
+			}
+		}
+	}
+
+	public void onMarkerSelectVeh(OverlaySelectEvent event) {
+		markerVeh = (Marker) event.getOverlay();
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerVeh.getTitle()));
 	}
 
 	public void vmMakeValueChangeListener(ValueChangeEvent valueChangeEvent) {
@@ -269,7 +458,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setPIdExpiryDt(personBean.getPIdExpiryDt());
 		model.setPInitials(personBean.getPInitials());
 		model.setPIsPensioner(personBean.getPIsPensioner());
-		model.setPIdIssueCntry(personBean.getPIdIssueCntry());
+		model.setPIdIssueCntry(personBean.getPIdIssueCntry().longValue());
 		model.setPLat(personBean.getPLat());
 		model.setPLong(personBean.getPLong());
 		model.setPOccupation(personBean.getPOccupation());
@@ -659,7 +848,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	public List<IclubPurposeTypeBean> getPurposeTypeBeans() {
 
-		WebClient client = IclubWebHelper.createCustomClient(PUR_BASE_URL + "/get/insurnceitemtype/" + "1");
+		WebClient client = IclubWebHelper.createCustomClient(PUR_BASE_URL + "/list/status/" + "1");
 		Collection<? extends IclubPurposeTypeModel> models = new ArrayList<IclubPurposeTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPurposeTypeModel.class));
 		client.close();
 		purposeTypeBeans = new ArrayList<IclubPurposeTypeBean>();
@@ -738,6 +927,14 @@ public class IclubFullQuoteController implements Serializable {
 				personBean.setIclubIdType(model.getIclubIdType());
 				personBean.setIclubPerson(model.getIclubPerson());
 				personBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+				if (personBean.getPLat() != null && personBean.getPLong() != null) {
+					centerGeoMapPer = personBean.getPLat() + "," + personBean.getPLong();
+					LatLng coord = new LatLng(personBean.getPLat(), personBean.getPLong());
+					Marker marker = new Marker(coord, "");
+					marker.setDraggable(true);
+					draggableModelPer.addOverlay(marker);
+
+				}
 
 				client.close();
 				setDriverDetails();
@@ -781,6 +978,15 @@ public class IclubFullQuoteController implements Serializable {
 			propertyBean.setIclubBarType(model.getIclubBarType());
 			propertyBean.setIclubThatchType(model.getIclubThatchType());
 			propertyBean.setIclubRoofType(model.getIclubRoofType());
+
+			if (propertyBean.getPLat() != null && propertyBean.getPLong() != null) {
+				centerGeoMapPro = propertyBean.getPLat() + "," + propertyBean.getPLong();
+				LatLng coord = new LatLng(propertyBean.getPLat(), propertyBean.getPLong());
+				Marker marker = new Marker(coord, "");
+				marker.setDraggable(true);
+				draggableModelPro.addOverlay(marker);
+
+			}
 		}
 		client.close();
 	}
@@ -973,6 +1179,15 @@ public class IclubFullQuoteController implements Serializable {
 			vehicleBean.setIclubSecurityDevice(model.getIclubSecurityDevice());
 			vehicleBean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
 			vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
+
+			if (vehicleBean.getVDdLat() != null && vehicleBean.getVDdLong() != null) {
+				centerGeoMapVeh = vehicleBean.getVDdLat() + "," + vehicleBean.getVDdLong();
+				LatLng coord = new LatLng(vehicleBean.getVDdLat(), vehicleBean.getVDdLong());
+				Marker marker = new Marker(coord, "");
+				marker.setDraggable(true);
+				draggableModelVeh.addOverlay(marker);
+
+			}
 
 			vehicleIItemBean = setInsuranceItemDetails(quoteBean.getQId(), 1l);
 			setVmMakeAndMode();
@@ -1607,6 +1822,96 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void setPolicyBean(IclubPolicyBean policyBean) {
 		this.policyBean = policyBean;
+	}
+
+	public List<IclubOccupationBean> getOccupationBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(OCN_BASE_URL + "list");
+		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
+		client.close();
+		occupationBeans = new ArrayList<IclubOccupationBean>();
+		for (IclubOccupationModel model : models) {
+
+			IclubOccupationBean bean = new IclubOccupationBean();
+
+			bean.setOId(model.getOId());
+			bean.setODesc(model.getODesc());
+			bean.setOCrtdDt(model.getOCrtdDt());
+			bean.setOStatus(model.getOStatus());
+			bean.setIclubPerson(model.getIclubPerson());
+
+			occupationBeans.add(bean);
+		}
+		return occupationBeans;
+	}
+
+	public void setOccupationBeans(List<IclubOccupationBean> occupationBeans) {
+		this.occupationBeans = occupationBeans;
+	}
+
+	public List<IclubCountryCodeBean> getCountryCodeBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(CCDE_BASE_URL + "list");
+		Collection<? extends IclubCountryCodeModel> models = new ArrayList<IclubCountryCodeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCountryCodeModel.class));
+		client.close();
+		countryCodeBeans = new ArrayList<IclubCountryCodeBean>();
+		for (IclubCountryCodeModel model : models) {
+			IclubCountryCodeBean bean = new IclubCountryCodeBean();
+			bean.setCcId(model.getCcId().intValue());
+			bean.setCcIsoId(model.getCcIsoId());
+			bean.setCcShortId(model.getCcShortId());
+			bean.setCcCrtdDt(model.getCcCrtdDt());
+			bean.setCcName(model.getCcName());
+			bean.setIclubPerson(model.getIclubPerson());
+			countryCodeBeans.add(bean);
+		}
+		return countryCodeBeans;
+	}
+
+	public void setCountryCodeBeans(List<IclubCountryCodeBean> countryCodeBeans) {
+		this.countryCodeBeans = countryCodeBeans;
+	}
+
+	public List<IclubPurposeTypeBean> getpPurposeTypeBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(PUR_BASE_URL + "/list/status/" + "2");
+		Collection<? extends IclubPurposeTypeModel> models = new ArrayList<IclubPurposeTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPurposeTypeModel.class));
+		client.close();
+		pPurposeTypeBeans = new ArrayList<IclubPurposeTypeBean>();
+		for (IclubPurposeTypeModel model : models) {
+			IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
+
+			bean.setPtId(model.getPtId());
+			bean.setPtLongDesc(model.getPtLongDesc());
+			bean.setPtShortDesc(model.getPtShortDesc());
+			bean.setPtStatus(model.getPtStatus());
+			bean.setPtCrtdDt(model.getPtCrtdDt());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+
+			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
+				String[] properties = new String[model.getIclubProperties().length];
+				int i = 0;
+				for (String iclubProperty : model.getIclubProperties()) {
+					properties[i] = iclubProperty;
+					i++;
+				}
+				bean.setIclubProperties(properties);
+			}
+
+			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+				String[] vehicles = new String[model.getIclubVehicles().length];
+				int i = 0;
+				for (String iclubVehicle : model.getIclubVehicles()) {
+					vehicles[i] = iclubVehicle;
+					i++;
+				}
+				bean.setIclubVehicles(vehicles);
+			}
+			pPurposeTypeBeans.add(bean);
+		}
+		return pPurposeTypeBeans;
+	}
+
+	public void setpPurposeTypeBeans(List<IclubPurposeTypeBean> pPurposeTypeBeans) {
+		this.pPurposeTypeBeans = pPurposeTypeBeans;
 	}
 
 	public String getClaimYN() {
