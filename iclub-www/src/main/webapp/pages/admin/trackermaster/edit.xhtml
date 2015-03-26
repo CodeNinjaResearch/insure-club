@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+
+
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.tmId}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Track Name" value="#{iclubTrackerMasterController.bean.tmName}" />
+
+	</div>
+
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Trade Name" value="#{iclubTrackerMasterController.bean.tmTradeName}" />
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Location" value="#{iclubTrackerMasterController.bean.tmLocation}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Lat" value="#{iclubTrackerMasterController.bean.tmLat}" />
+	</div>
+
+
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Long" value="#{iclubTrackerMasterController.bean.tmLong}" />
+
+	</div>
+
+
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Reg Number" value="#{iclubTrackerMasterController.bean.tmRegNum}" />
+
+	</div>
+
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.iclubPerson}" />
+
+	</div>
+
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubTrackerMasterController.bean.tmCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+
+
+
+
+	<div class="Container100">
+		<div class="Container33">
+			<p:commandButton id="btnTrackerMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="#{labels['update']}" actionListener="#{iclubTrackerMasterController.modIclubTrackerMaster}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnTrackerMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="#{labels['delete']}" actionListener="#{iclubTrackerMasterController.delIclubTrackerMaster}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnTrackerMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="#{labels['close']}" actionListener="#{iclubTrackerMasterController.showView}" />
+		</div>
+	</div>
+</ui:composition>
