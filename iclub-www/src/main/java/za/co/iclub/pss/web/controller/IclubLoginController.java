@@ -81,7 +81,7 @@ public class IclubLoginController implements Serializable {
 		IclubWebHelper.invalidateSession();
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
-		navigationHandler.handleNavigation(context, null, "home?faces-redirect=true");
+		navigationHandler.handleNavigation(context, null, "/templates/home.xhtml?faces-redirect=true");
 	}
 
 	public boolean validateLogin() {
