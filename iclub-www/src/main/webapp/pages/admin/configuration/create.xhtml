@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Key" value="#{iclubConfigController.bean.CKey}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Value" value="#{iclubConfigController.bean.CValue}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu value="#{iclubConfigController.bean.CStatus}">
+			<f:selectItem itemLabel="Config Status" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubConfigController.bean.CCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100">
+		<div class="Container50">
+			<p:commandButton id="btnConfigCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubConfigController.addIclubConfig}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnConfigCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="#{labels['close']}" actionListener="#{iclubConfigController.showView}" />
+		</div>
+	</div>
+</ui:composition>
