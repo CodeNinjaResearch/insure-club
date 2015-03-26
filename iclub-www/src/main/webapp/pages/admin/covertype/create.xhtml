@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCoverTypeController.bean.iclubInsuranceItemType}">
+			<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+			<f:selectItems value="#{iclubCoverTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubCoverTypeController.bean.ctShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubCoverTypeController.bean.ctLongDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCoverTypeController.bean.ctStatus}">
+			<f:selectItem itemLabel="CoverType Status" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubCoverTypeController.bean.ctCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100">
+		<div class="Container50">
+			<p:commandButton id="btnCoverTypeCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubCoverTypeController.addIclubCoverType}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnCoverTypeCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlCoverTypeCont" value="#{labels['close']}" actionListener="#{iclubCoverTypeController.showView}" />
+		</div>
+	</div>
+</ui:composition>
