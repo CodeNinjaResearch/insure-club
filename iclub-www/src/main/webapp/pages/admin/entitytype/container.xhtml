@@ -1,0 +1,25 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubEntityTypeController.initializePage}" name="onload" autoRun="true" update="pnlEntityTypeContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlEntityTypeCont">
+				<p:panel id="pnlEntityTypeContMenu">
+					<p:commandLink value="#{labels['viewentitytype']}" actionListener="#{iclubEntityTypeController.showView}" update="pnlEntityTypeContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="#{labels['createentitytype']}" actionListener="#{iclubEntityTypeController.showCreate}" update="pnlEntityTypeContDet" />
+				</p:panel>
+				<p:panel id="pnlEntityTypeContDet">
+					<p:panel id="pnlEntityTypeContView" styleClass="BordNone" rendered="#{iclubEntityTypeController.showViewCont}">
+						<ui:include src="/pages/admin/entitytype/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlEntityTypeContCreate" styleClass="BordNone" rendered="#{iclubEntityTypeController.showCreateCont}">
+						<ui:include src="/pages/admin/entitytype/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlEntityTypeContEdit" styleClass="BordNone" rendered="#{iclubEntityTypeController.showEditCont}">
+						<ui:include src="/pages/admin/entitytype/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

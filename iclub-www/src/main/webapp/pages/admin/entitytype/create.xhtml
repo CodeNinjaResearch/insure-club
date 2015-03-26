@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Shor desc" value="#{iclubEntityTypeController.bean.etShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubEntityTypeController.bean.etLongDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubEntityTypeController.bean.etStatus}">
+			<f:selectItem itemLabel="Entity Status" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100">
+		<div class="Container50">
+			<p:commandButton id="btnEntityTypeCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubEntityTypeController.addIclubEntityType}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnEntityTypeCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="#{labels['close']}" actionListener="#{iclubEntityTypeController.showView}" />
+		</div>
+	</div>
+</ui:composition>
