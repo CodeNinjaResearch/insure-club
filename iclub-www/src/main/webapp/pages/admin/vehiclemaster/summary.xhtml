@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmId}" />
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.iclubPerson}" />
+
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmMake}" />
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmModel}" />
+
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmOrigRate}" />
+
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmMrktRate}" />
+
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmRetRate}" />
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmProdDt}" />
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmCrtdDt}" />
+
+	</div>
+	<div class="EmptyBox5" />
+
+
+
+
+	<div class="Container100">
+		<p:commandButton id="btnVehicleMasterCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleMasterCont" value="#{labels['close']}" actionListener="#{iclubVehicleMasterController.showView}" />
+	</div>
+</ui:composition>
