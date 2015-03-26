@@ -1,0 +1,46 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="perAddress" value="Address:" />
+					<p:inputText id="perAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPre" showDetail="true" />
+
+				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubSupplMasterController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubSupplMasterController.draggableModelPer}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubSupplMasterController.onMarkerDragPer}" update="growlPre" />
+					<p:ajax event="geocode" listener="#{iclubSupplMasterController.onGeocodePer}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubSupplMasterController.onMarkerSelectPer}" update="growlPre" />
+				</p:gmap>
+
+
+
+			</p:panel>
+		</p:dialog>
+		<p:remoteCommand actionListener="#{iclubSupplMasterController.initializePage}" name="onload" autoRun="true" update="pnlSupplMasterContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlSupplMasterCont">
+				<p:panel id="pnlSupplMasterContMenu">
+					<p:commandLink value="#{labels['viewsupplmaster']}" actionListener="#{iclubSupplMasterController.showView}" update="pnlSupplMasterContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="#{labels['createsupplmaster']}" actionListener="#{iclubSupplMasterController.showCreate}" update="pnlSupplMasterContDet" />
+				</p:panel>
+				<p:panel id="pnlSupplMasterContDet">
+					<p:panel id="pnlSupplMasterContView" rendered="#{iclubSupplMasterController.showViewCont}">
+						<ui:include src="/pages/admin/supplmaster/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlSupplMasterContCreate" rendered="#{iclubSupplMasterController.showCreateCont}">
+						<ui:include src="/pages/admin/supplmaster/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlSupplMasterContEdit" rendered="#{iclubSupplMasterController.showEditCont}">
+						<ui:include src="/pages/admin/supplmaster/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

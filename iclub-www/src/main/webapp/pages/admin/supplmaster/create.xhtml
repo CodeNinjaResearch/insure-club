@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+
+
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smName}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smTradeName}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smRegNum}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubSupplMasterController.bean.iclubSupplierType}">
+			<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+			<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
+
+
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smAddress}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<!-- <div class="Container80 Responsive">
+
+
+		<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
+	</div>
+	<div class="EmptyBox5" /> -->
+
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smCrLimit}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+		<p:calendar styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.srActionDt}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" placeholder="" value="#{iclubSupplMasterController.bean.smRating}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container80 Responsive">
+
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubSupplMasterController.bean.smCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+
+
+	<div class="Container100">
+		<div class="Container50">
+
+			<p:commandButton id="btnSupplMasterCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubSupplMasterController.addIclubSupplMaster}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnSupplMasterCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="#{labels['close']}" actionListener="#{iclubSupplMasterController.showView}" />
+		</div>
+	</div>
+</ui:composition>
