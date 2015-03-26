@@ -59,6 +59,13 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
+			<from-outcome>master</from-outcome>
+			<to-view-id>/pages/admin/master.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
 			<from-outcome>iclubAccessType</from-outcome>
 			<to-view-id>/pages/admin/mdata/iclubAccessType.xhtml</to-view-id>
 		</navigation-case>
@@ -257,6 +264,13 @@
 		<navigation-case>
 			<from-outcome>iclubWallType</from-outcome>
 			<to-view-id>/pages/admin/mdata/iclubWallType.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubSecurityMaster</from-outcome>
+			<to-view-id>/pages/admin/securitymaster/container.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

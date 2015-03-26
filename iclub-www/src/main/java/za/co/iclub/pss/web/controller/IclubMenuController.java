@@ -44,6 +44,15 @@ public class IclubMenuController implements Serializable {
 		}
 	}
 
+	public void onMasterChange() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: onMasterChange");
+		if (selPage != null && !selPage.trim().equalsIgnoreCase("")) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
+			navigationHandler.handleNavigation(context, null, selPage + "?faces-redirect=true");
+		}
+	}
+
 	public String getLanguage() {
 		return language;
 	}

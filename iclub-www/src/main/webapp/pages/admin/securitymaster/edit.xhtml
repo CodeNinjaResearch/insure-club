@@ -7,9 +7,7 @@
 		<p:selectOneMenu value="#{iclubSecurityMasterController.bean.iclubInsuranceItemType}">
 			<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
 			<f:selectItems value="#{iclubSecurityMasterController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
-
 		</p:selectOneMenu>
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
@@ -21,26 +19,17 @@
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
 		<p:selectOneMenu value="#{iclubSecurityMasterController.bean.smStatus}">
 			<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
 			<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
 			<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
-
 		</p:selectOneMenu>
-
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
 		<p:calendar value="#{iclubSecurityMasterController.bean.smCrtdDt}" />
-
 	</div>
 	<div class="EmptyBox5" />
-
-
-
 	<div class="Container100">
 		<div class="Container33"></div>
 		<div class="Container33">
@@ -53,5 +42,4 @@
 			<p:commandButton id="btnSecurityMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSecurityMasterCont" value="#{labels['close']}" actionListener="#{iclubSecurityMasterController.showView}" />
 		</div>
 	</div>
-	</f:facet>
 </ui:composition>
