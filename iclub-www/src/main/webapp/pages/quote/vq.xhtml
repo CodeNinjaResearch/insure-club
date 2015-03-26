@@ -1,5 +1,28 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
 	<ui:define name="content">
-		<div class="ContainerIndent"></div>
+		<div class="ContainerIndent">
+			<p:panel id="qqPanel">
+				<p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubViewQuoteController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Quotes Available" reflow="true">
+					<p:column headerText="Quote Number">
+						<p:outputLabel value="#{bean.QNumber}" />
+					</p:column>
+					<p:column headerText="Gen Date">
+						<p:outputLabel value="#{bean.QGenDt}" />
+					</p:column>
+					<p:column headerText=" Prev Premium">
+						<p:outputLabel value="#{bean.QPrevPremium}" />
+					</p:column>
+					<p:column headerText="ValidUntil">
+						<p:outputLabel value="#{bean.QValidUntil}" />
+					</p:column>
+					<p:column headerText="Full Quote">
+						<p:commandButton id="btnQuoteEdit" icon="ui-icon-pencil" action="#{iclubViewQuoteController.quoteActionListener(bean)}" />
+					</p:column>
+					<p:column headerText="Policy">
+						<p:commandButton id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubViewQuoteController.policyActionListener(bean)}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</div>
 	</ui:define>
 </ui:composition>
