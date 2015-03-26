@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container80 Responsive">
+		<p:outputLabel value="#{iclubSecurityMasterController.bean.smId}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu value="#{iclubSecurityMasterController.bean.iclubInsuranceItemType}">
+			<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+			<f:selectItems value="#{iclubSecurityMasterController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+
+		</p:selectOneMenu>
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText value="#{iclubSecurityMasterController.bean.smDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel value="#{iclubSecurityMasterController.bean.iclubPerson}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:selectOneMenu value="#{iclubSecurityMasterController.bean.smStatus}">
+			<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+			<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+			<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+
+		</p:selectOneMenu>
+
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:calendar value="#{iclubSecurityMasterController.bean.smCrtdDt}" />
+
+	</div>
+	<div class="EmptyBox5" />
+
+
+
+	<div class="Container100">
+		<div class="Container33"></div>
+		<div class="Container33">
+			<p:commandButton id="btnSecurityMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSecurityMasterCont" value="#{labels['update']}" actionListener="#{iclubSecurityMasterController.modIclubSecurityMaster}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnSecurityMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlSecurityMasterCont" value="#{labels['delete']}" actionListener="#{iclubSecurityMasterController.delIclubSecurityMaster}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnSecurityMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSecurityMasterCont" value="#{labels['close']}" actionListener="#{iclubSecurityMasterController.showView}" />
+		</div>
+	</div>
+	</f:facet>
+</ui:composition>

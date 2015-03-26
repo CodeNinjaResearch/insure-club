@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtSecurityMasterCont" widgetVar="dtSecurityMasterCont" value="#{iclubSecurityMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No SecurityMasteres Available">
+
+		<p:column headerText="#{labels['securitymaster.view.smid']}">
+			<p:outputLabel value="#{bean.smId}" />
+		</p:column>
+		<p:column headerText="#{labels['securitymaster.view.iclubinsuranceitemtype']}">
+			<p:selectOneMenu value="#{bean.iclubInsuranceItemType}">
+				<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+				<f:selectItems value="#{iclubSecurityMasterController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+
+			</p:selectOneMenu>
+		</p:column>
+		<p:column headerText="#{labels['securitymaster.view.smdesc']}">
+			<p:outputLabel value="#{bean.smDesc}" />
+		</p:column>
+		<p:column headerText="#{labels['securitymaster.view.smstatus']}">
+			<p:outputLabel value="#{bean.smStatus}" />
+		</p:column>
+		<p:column headerText="#{labels['securitymaster.view.smcrtddt']}">
+			<p:outputLabel value="#{bean.smCrtdDt}" />
+		</p:column>
+		<p:column headerText="#{labels['securitymaster.view.userid']}">
+			<p:outputLabel value="#{bean.iclubPerson}" />
+		</p:column>
+
+		<p:column>
+			<p:commandButton id="btnSecurityMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubSecurityMasterController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubSecurityMasterController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubSecurityMasterController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>
