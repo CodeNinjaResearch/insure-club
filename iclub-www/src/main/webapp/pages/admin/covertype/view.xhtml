@@ -6,7 +6,7 @@
 		</p:column>
 		<p:column headerText="Insurance Item Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
-				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="treu" />
+				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
 				<f:selectItems value="#{iclubCoverTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 
 			</p:selectOneMenu>
