@@ -358,5 +358,11 @@
 		<property name="iclubDocumentDAO" ref="IclubDocumentDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
+	<bean id="IclubFieldService" class="za.co.iclub.pss.ws.service.IclubFieldService">
+		<property name="iclubFieldDAO" ref="IclubFieldDAO" />
+		<property name="iclubEntityTypeDAO" ref="IclubEntityTypeDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+
 
 </beans>
