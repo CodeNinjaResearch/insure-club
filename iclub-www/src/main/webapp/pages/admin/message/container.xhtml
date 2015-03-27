@@ -1,0 +1,22 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubMessageController.initializePage}" name="onload" autoRun="true" update="pnlMessageContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlMessageCont">
+				<p:panel id="pnlMessageContMenu">
+					<p:commandLink value="View Massage" actionListener="#{iclubMessageController.showView}" update="pnlMessageContDet" />
+				</p:panel>
+				<p:panel id="pnlMessageContDet">
+					<p:panel id="pnlMessageContView" styleClass="BordNone" rendered="#{iclubMessageController.showViewCont}">
+						<ui:include src="/pages/admin/message/view.xhtml" />
+					</p:panel>
+
+					<p:panel id="pnlMessageContSummary" styleClass="BordNone" rendered="#{iclubMessageController.showSummaryCont}">
+						<ui:include src="/pages/admin/message/summary.xhtml" />
+					</p:panel>
+
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

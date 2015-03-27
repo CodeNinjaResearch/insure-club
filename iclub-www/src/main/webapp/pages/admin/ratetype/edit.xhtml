@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubRateTypeController.bean.rtId}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubRateTypeController.bean.rtLongDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtStatus}">
+			<f:selectItem itemLabel="Status" itemDisabled="true" />
+			<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+			<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container100">
+		<div class="Container33">
+			<p:commandButton id="btnRateTypeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" value="#{labels['update']}" actionListener="#{iclubRateTypeController.modIclubRateType}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnRateTypeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" value="#{labels['delete']}" actionListener="#{iclubRateTypeController.delIclubRateType}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnRateTypeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" value="#{labels['close']}" actionListener="#{iclubRateTypeController.showView}" />
+		</div>
+	</div>
+</ui:composition>

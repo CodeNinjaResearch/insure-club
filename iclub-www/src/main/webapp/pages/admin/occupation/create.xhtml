@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Desc"  value="#{iclubOccupationController.bean.ODesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter"  value="#{iclubOccupationController.bean.OStatus}">
+			<f:selectItem itemLabel="Status" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubOccupationController.bean.OCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100">
+		<div class="Container50">
+			<p:commandButton id="btnOccupationCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubOccupationController.addIclubOccupation}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnOccupationCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="#{labels['close']}" actionListener="#{iclubOccupationController.showView}" />
+		</div>
+	</div>
+	</f:facet>
+</ui:composition>

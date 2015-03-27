@@ -1,81 +1,105 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-
 	<div class="Container80 Responsive">
 		<p:outputLabel styleClass="TexAlCenter" value="ID" />
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmId}" />
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NId}" />
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
+
+
 		<p:outputLabel styleClass="TexAlCenter" value="User ID" />
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.iclubPerson}" />
-	</div>
-	<div class="EmptyBox5" />
 
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Vm Make" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmMake}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Vm Model" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmModel}" />
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.iclubPerson}" />
+
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
 
-		<p:outputLabel styleClass="TexAlCenter" value="Orgi Rate" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmOrigRate}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Mrkt Rate" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmMrktRate}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Ret Rate" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmRetRate}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Prod Date" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmProdDt}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Creatd Date" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmCrtdDt}" />
-	</div>
-	<div class="EmptyBox5" />
 
-	<div class="Container100">
-		<p:commandButton id="btnVehicleMasterCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleMasterCont" value="#{labels['close']}" actionListener="#{iclubVehicleMasterController.showView}" />
+		<p:outputLabel styleClass="TexAlCenter" value="Notification Type" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.iclubNotificationType}" />
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="Title" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NTitle}" />
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="Body" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NBody}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="From Address" />
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NFromAddr}" />
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="To List" />
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NToList}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="Status" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NStatus}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="Crated Date" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div style="align: center !important">
+		<p:commandButton id="btnNotifCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlNotifCont" value="#{labels['close']}" actionListener="#{iclubNotifController.showView}" />
 	</div>
 </ui:composition>

@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="ID" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MId}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="User ID" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.iclubPerson}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="SysType From ID" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.iclubSystemTypeByMFromSysId}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="SysType To ID" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.iclubSystemTypeByMToSysId}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="Trans Id" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MTranId}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="Content" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MContent}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="Created Date" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+
+	<div class="Container100">
+		<p:commandButton id="btnMessageCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlMessageCont" value="#{labels['close']}" actionListener="#{iclubMessageController.showView}" />
+	</div>
+</ui:composition>

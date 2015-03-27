@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+
+
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" placeholder="Id" value="#{iclubLicenseCodeController.bean.lcId}" />
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Category" value="#{iclubLicenseCodeController.bean.lcCategory}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+
+		<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubLicenseCodeController.bean.lcDesc}" />
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubLicenseCodeController.bean.iclubPerson}" />
+
+
+
+
+
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubLicenseCodeController.bean.lcStatus}">
+			<f:selectItem itemLabel="Stataus" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+
+		</p:selectOneMenu>
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubLicenseCodeController.bean.lcCrtdDt}" />
+
+	</div>
+	<div class="EmptyBox5" />
+
+
+
+	<div class="Container100">
+		<div class="Container33">
+			<p:commandButton id="btnLicenseCodeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="#{labels['update']}" actionListener="#{iclubLicenseCodeController.modIclubLicenseCode}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnLicenseCodeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="#{labels['delete']}" actionListener="#{iclubLicenseCodeController.delIclubLicenseCode}" />
+		</div>
+		<div class="Container33">
+			<p:commandButton id="btnLicenseCodeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="#{labels['close']}" actionListener="#{iclubLicenseCodeController.showView}" />
+		</div>
+	</div>
+</ui:composition>

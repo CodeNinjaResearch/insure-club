@@ -1,0 +1,22 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubNotifController.initializePage}" name="onload" autoRun="true" update="pnlNotifContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlNotifCont">
+				<p:panel id="pnlNotifContMenu">
+					<p:commandLink value="View Notifacation" actionListener="#{iclubNotifController.showView}" update="pnlNotifContDet" />
+				</p:panel>
+				<p:panel id="pnlNotifContDet">
+					<p:panel id="pnlNotifContView" styleClass="BordNone" rendered="#{iclubNotifController.showViewCont}">
+						<ui:include src="/pages/admin/notif/view.xhtml" />
+					</p:panel>
+
+					<p:panel id="pnlNotifContSummary" styleClass="BordNone" rendered="#{iclubNotifController.showSummaryCont}">
+						<ui:include src="/pages/admin/notif/summary.xhtml" />
+					</p:panel>
+
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

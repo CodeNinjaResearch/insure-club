@@ -1,0 +1,25 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubLicenseCodeController.initializePage}" name="onload" autoRun="true" update="pnlLicenseCodeContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+		<p:panel id="pnlLicenseCodeCont">
+			<p:panel id="pnlLicenseCodeContMenu">
+				<p:commandLink value="#{labels['viewlicensecode']}" actionListener="#{iclubLicenseCodeController.showView}" update="pnlLicenseCodeContDet" />
+				<p:graphicImage name="separator.png" library="images" />
+				<p:commandLink value="#{labels['createlicensecode']}" actionListener="#{iclubLicenseCodeController.showCreate}" update="pnlLicenseCodeContDet" />
+			</p:panel>
+			<p:panel id="pnlLicenseCodeContDet">
+				<p:panel id="pnlLicenseCodeContView" rendered="#{iclubLicenseCodeController.showViewCont}">
+					<ui:include src="/pages/admin/licensecode/view.xhtml" />
+				</p:panel>
+				<p:panel id="pnlLicenseCodeContCreate" rendered="#{iclubLicenseCodeController.showCreateCont}">
+					<ui:include src="/pages/admin/licensecode/create.xhtml" />
+				</p:panel>
+				<p:panel id="pnlLicenseCodeContEdit" rendered="#{iclubLicenseCodeController.showEditCont}">
+					<ui:include src="/pages/admin/licensecode/edit.xhtml" />
+				</p:panel>
+			</p:panel>
+		</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

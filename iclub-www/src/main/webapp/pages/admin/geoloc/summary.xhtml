@@ -1,52 +1,32 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glId}" />
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.iclubPerson}" />
-
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glAddress}" />
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLat}" />
-
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLong}" />
-
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glRate}" />
-
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glCrtdDt}" />
-
-
-
-
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glId}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.iclubPerson}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glAddress}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLat}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLong}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glRate}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
 	<div class="Container100">
 		<p:commandButton id="btnGeoLocCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlGeoLocCont" value="#{labels['close']}" actionListener="#{iclubGeoLocController.showView}" />
 	</div>

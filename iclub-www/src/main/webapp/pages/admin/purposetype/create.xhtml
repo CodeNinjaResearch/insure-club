@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubPurposeTypeController.bean.iclubInsuranceItemType}">
+			<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
+			<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubPurposeTypeController.bean.ptShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Long Des" value="#{iclubPurposeTypeController.bean.ptLongDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubPurposeTypeController.bean.ptStatus}">
+			<f:selectItem itemLabel="Status" itemDisabled="true" />
+			<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
+			<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubPurposeTypeController.bean.ptCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100">
+		<div class="Container50">
+			<p:commandButton id="btnPurposeTypeCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlPurposeTypeCont" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubPurposeTypeController.addIclubPurposeType}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnPurposeTypeCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlPurposeTypeCont" value="#{labels['close']}" actionListener="#{iclubPurposeTypeController.showView}" />
+		</div>
+	</div>
+</ui:composition>

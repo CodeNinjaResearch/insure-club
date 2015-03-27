@@ -17,6 +17,14 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.event.map.GeocodeEvent;
+import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.event.map.OverlaySelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.GeocodeResult;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 import za.co.iclub.pss.web.bean.IclubSupplMasterBean;
 import za.co.iclub.pss.web.bean.IclubSupplierTypeBean;
@@ -33,7 +41,7 @@ public class IclubSupplMasterController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubSupplMasterController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplMasterService/";
-	private static final String ST_BASE_URL ="http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplierTypeService/";
+	private static final String ST_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplierTypeService/";
 	private List<IclubSupplMasterBean> beans;
 	private List<IclubSupplierTypeBean> supplierTypeBeans;
 	private List<IclubSupplMasterBean> dashBoardBeans;
@@ -46,8 +54,52 @@ public class IclubSupplMasterController implements Serializable {
 	private String userName;
 	private ResourceBundle labelBundle;
 
+	private MapModel draggableModelPer;
+	private Marker markerPer;
+	private String centerGeoMapPer = "36.890257,30.707417";
+
+	public MapModel getDraggableModelPer() {
+		return draggableModelPer;
+	}
+
+	public String getCenterGeoMapPer() {
+		return centerGeoMapPer;
+	}
+
+	public void onMarkerDragPer(MarkerDragEvent event) {
+		markerPer = event.getMarker();
+
+		bean.setSmLat(markerPer.getLatlng().getLat());
+		bean.setSmLong(markerPer.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng()));
+	}
+
+	public void onGeocodePer(GeocodeEvent event) {
+		List<GeocodeResult> results = event.getResults();
+
+		if (results != null && !results.isEmpty()) {
+			LatLng center = results.get(0).getLatLng();
+			centerGeoMapPer = center.getLat() + "," + center.getLng();
+
+			for (int i = 0; i < results.size(); i++) {
+				GeocodeResult result = results.get(i);
+				Marker marker = new Marker(result.getLatLng(), result.getAddress());
+				marker.setDraggable(true);
+				draggableModelPer.addOverlay(marker);
+			}
+		}
+	}
+
+	public void onMarkerSelectPer(OverlaySelectEvent event) {
+		markerPer = (Marker) event.getOverlay();
+		bean.setSmLat(markerPer.getLatlng().getLat());
+		bean.setSmLong(markerPer.getLatlng().getLng());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPer.getTitle()));
+	}
+
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
+		draggableModelPer = new DefaultMapModel();
 		if (viewParam == null || viewParam.longValue() == 1)
 			showView();
 		else if (viewParam != null && viewParam.longValue() == 2)
@@ -77,6 +129,17 @@ public class IclubSupplMasterController implements Serializable {
 		showCreateCont = false;
 		showViewCont = false;
 		showEditCont = true;
+		if (bean.getSmLat() != null && bean.getSmLat() != null) {
+			centerGeoMapPer = bean.getSmLat() + "," + bean.getSmLong();
+			LatLng coord = new LatLng(bean.getSmLat(), bean.getSmLong());
+			Marker marker = new Marker(coord, "");
+			marker.setDraggable(true);
+			draggableModelPer.addOverlay(marker);
+
+		} else {
+			draggableModelPer = new DefaultMapModel();
+			centerGeoMapPer = "36.890257,30.707417";
+		}
 		viewParam = 2l;
 	}
 
@@ -144,7 +207,6 @@ public class IclubSupplMasterController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubSupplMasterModel model = new IclubSupplMasterModel();
 
-				
 				model.setSmId(UUID.randomUUID().toString());
 				model.setSmCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setIclubSupplierType(bean.getIclubSupplierType());
@@ -158,7 +220,7 @@ public class IclubSupplMasterController implements Serializable {
 				model.setSmLat(bean.getSmLat());
 				model.setSmName(bean.getSmName());
 				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -196,9 +258,7 @@ public class IclubSupplMasterController implements Serializable {
 				model.setSmLat(bean.getSmLat());
 				model.setSmName(bean.getSmName());
 				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-				
-				
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -365,7 +425,7 @@ public class IclubSupplMasterController implements Serializable {
 	}
 
 	public List<IclubSupplierTypeBean> getSupplierTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(ST_BASE_URL + "list");
 		Collection<? extends IclubSupplierTypeModel> models = new ArrayList<IclubSupplierTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSupplierTypeModel.class));
 		client.close();

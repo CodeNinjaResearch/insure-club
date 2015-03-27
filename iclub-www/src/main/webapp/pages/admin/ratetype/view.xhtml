@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtRateTypeCont" widgetVar="dtRateTypeCont" value="#{iclubRateTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateTypees Available">
+		
+		<p:column headerText="ID">
+			<p:outputLabel value="#{bean.rtId}" />
+		</p:column>
+		<p:column headerText="Short Desc">
+			<p:outputLabel value="#{bean.rtShortDesc}" />
+		</p:column>
+		<p:column headerText="Long Desc">
+			<p:outputLabel value="#{bean.rtLongDesc}" />
+		</p:column>
+		<p:column headerText="Status">
+			<p:outputLabel value="#{bean.rtStatus}" />
+		</p:column>
+		  
+		<p:column>
+			<p:commandButton id="btnRateTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubRateTypeController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubRateTypeController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubRateTypeController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>
