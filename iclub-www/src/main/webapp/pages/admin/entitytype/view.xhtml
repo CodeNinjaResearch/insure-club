@@ -1,25 +1,17 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtEntityTypeCont" widgetVar="dtEntityTypeCont" value="#{iclubEntityTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Entity Types Available">
-
 		<p:column headerText="Id">
 			<p:outputLabel value="#{ bean.etId}" />
 		</p:column>
-
 		<p:column headerText="Short Desc">
 			<p:outputLabel value="#{bean.etShortDesc}" />
 		</p:column>
-
-
 		<p:column headerText="Long Desc">
 			<p:outputLabel value="#{bean.etLongDesc}" />
 		</p:column>
-
-
 		<p:column headerText="Status">
-
 			<p:outputLabel value="#{bean.etStatus}" />
 		</p:column>
-
 		<p:column>
 			<p:commandButton id="btnEntityTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubEntityTypeController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubEntityTypeController.bean}" value="#{bean}" />

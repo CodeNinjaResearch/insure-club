@@ -15,17 +15,14 @@
 		<div class="ContainerIndent TexAlCenter">
 			<p:tabView id="qqTabView">
 				<p:tab id="fqPerDet" title="Person details">
-
 					<div class="Container80 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubFullQuoteController.personBean.PTitle}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="Initials" value="#{iclubFullQuoteController.personBean.PInitials}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="First Name" value="#{iclubFullQuoteController.personBean.PFName}" />
 					</div>
@@ -42,7 +39,6 @@
 						<p:inputText styleClass="TexAlCenter" placeholder="Email" value="#{iclubFullQuoteController.personBean.PEmail}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="Contact Ref" value="#{iclubFullQuoteController.personBean.PContactPref}" />
 					</div>
@@ -51,7 +47,6 @@
 						<p:inputText styleClass="TexAlCenter" placeholder="Gender" value="#{iclubFullQuoteController.personBean.PGender}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuMarS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.iclubMaritialStatus}">
 							<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
@@ -59,8 +54,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuIdType" id="mnuIdType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.iclubIdType}">
@@ -69,12 +62,10 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="Id Num" value="#{iclubFullQuoteController.personBean.PIdNum}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuIdIss" id="mnuIdIss" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.PIdIssueCntry}">
 							<f:selectItem itemLabel="Id Issuer Country" itemDisabled="true" />
@@ -98,7 +89,6 @@
 						<p:calendar value="#{iclubFullQuoteController.personBean.PIdExpiryDt}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuOcc" id="mnuOcc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.POccupation}">
 							<f:selectItem itemLabel="Occupation" itemDisabled="true" />
@@ -110,7 +100,6 @@
 						<p:calendar placeholder="Date Of Birth" value="#{iclubFullQuoteController.personBean.PDob}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.PIsPensioner}">
 							<f:selectItem itemLabel="Is Pensioner" itemDisabled="true" />
@@ -120,13 +109,10 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-
-					<!-- 	<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" /> -->
+						<!-- 	<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" /> -->
 					</div>
 					<div class="EmptyBox5" />
-
 				</p:tab>
-
 				<p:tab id="qqVehDet" title="Vehicle Details">
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubSecurityMaster}" widgetVar="mnuSecM" id="mnuSecM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
@@ -142,7 +128,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubAccessTypeByVDdAccessTypeId}" widgetVar="mnuAccTVDd" id="mnuAccTVDd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Access Type VDd" itemDisabled="true" />
@@ -150,114 +135,74 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Vo Do Meter" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Vo Do Meter" value="#{iclubFullQuoteController.vehicleBean.VOdometer}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="On Area" value="#{iclubFullQuoteController.vehicleBean.VOnArea}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="On Lat" value="#{iclubFullQuoteController.vehicleBean.VOnLat}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="On Long" value="#{iclubFullQuoteController.vehicleBean.VOnLong}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="VDd Area" value="#{iclubFullQuoteController.vehicleBean.VDdArea}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="No Claims Years" value="#{iclubFullQuoteController.vehicleBean.VNoclaimYrs}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Owner" value="#{iclubFullQuoteController.vehicleBean.VOwner}" styleClass="TexAlCenter" />
 					</div>
-
-
-
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Gear Lock Yn" value="#{iclubFullQuoteController.vehicleBean.VGearLockYn}" styleClass="TexAlCenter" />
 					</div>
-
-
-
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="VImm Yn" value="#{iclubFullQuoteController.vehicleBean.VImmYn}" styleClass="TexAlCenter" />
 					</div>
-
-
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Concess Reason" value="#{iclubFullQuoteController.vehicleBean.VConcessReason}" styleClass="TexAlCenter" />
 					</div>
-
-
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Concess Prct" value="#{iclubFullQuoteController.vehicleBean.VConcessPrct}" styleClass="TexAlCenter" />
 					</div>
-
-
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Insured Value" value="#{iclubFullQuoteController.vehicleBean.VInsuredValue}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Comp Years" value="#{iclubFullQuoteController.vehicleBean.VCompYrs}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="VVin" value="#{iclubFullQuoteController.vehicleBean.VVin}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Engine Nr" value="#{iclubFullQuoteController.vehicleBean.VEngineNr}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Reg Number" value="#{iclubFullQuoteController.vehicleBean.VRegNum}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.vmMake}">
 							<p:ajax update="mnuVehModel" process="@this" event="change" listener="#{iclubFullQuoteController.vmMakeValueChangeListener}" />
@@ -274,7 +219,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu widgetVar="mnuYear" id="mnuYear" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuYear.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.vehicleBean.VYear}">
 							<f:selectItem itemLabel="Year" itemDisabled="true" />
@@ -290,9 +234,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubPurposeType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Purpose Type" itemDisabled="true" />
@@ -300,7 +241,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 				</p:tab>
 				<p:tab id="qqDriverDet" title="Driver Details">
 					<div class="Container80 Responsive">
@@ -324,12 +264,10 @@
 					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="fqExtDet" title="Extras">
-
 					<div class="Container80 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubFullQuoteController.extrasBean.EDesc}" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.extrasBean.EStatus}" widgetVar="mnuStu" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Status" itemDisabled="true" />
@@ -338,7 +276,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 				</p:tab>
 				<p:tab title="Property details">
 					<div class="Container80 Responsive">
@@ -348,7 +285,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubThatchType}" widgetVar="mnuThat" id="mnuThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Thatch Type" itemDisabled="true" />
@@ -356,8 +292,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubRoofType}" widgetVar="mnuRoofT" id="mnuRoofT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Roof Type" itemDisabled="true" />
@@ -365,8 +299,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuAccTd" id="mnuAccTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Access Type" itemDisabled="true" />
@@ -374,8 +306,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropertyType}" widgetVar="mnuProT" id="mnuProT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Property Type" itemDisabled="true" />
@@ -383,8 +313,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuOCS" id="mnuOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Ocupied Status" itemDisabled="true" />
@@ -392,8 +320,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPurposeType}" widgetVar="mnuPurTyp" id="mnuPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Purpose Type" itemDisabled="true" />
@@ -401,8 +327,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubCoverType}" widgetVar="mnuCvrTy" id="mnuCvrTy" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
@@ -410,61 +334,42 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Reg Number" value="#{iclubFullQuoteController.propertyBean.PRegNum}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Address" value="#{iclubFullQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Postal Cd" value="#{iclubFullQuoteController.propertyBean.PPostalCd}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="No Claim Years" value="#{iclubFullQuoteController.propertyBean.PNoclaimYrs}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Rent FurYn" value="#{iclubFullQuoteController.propertyBean.PRentFurYn}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Comp Yn" value="#{iclubFullQuoteController.propertyBean.PCompYn}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Norobbery Yn" value="#{iclubFullQuoteController.propertyBean.PNorobberyYn}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Sec Gates Yn" value="#{iclubFullQuoteController.propertyBean.PSecGatesYn}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Estimatted Value" value="#{iclubFullQuoteController.propertyBean.PEstValue}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
-
-
 				</p:tab>
 				<p:tab id="fqClaimDet" title="Claim Details">
 					<div class="Container80 Responsive">
@@ -486,8 +391,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 				</p:tab>
 				<p:tab id="fqAccDet" title="Account Details">
 					<div class="Container80 Responsive">
@@ -502,8 +405,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Bank Master" itemDisabled="true" />
@@ -511,8 +412,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubOwnerType}" widgetVar="mnuOT" id="mnuOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
@@ -520,8 +419,6 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
-
 					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubAccountType}" widgetVar="mnuAcType" id="mnuAcType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Account Type" itemDisabled="true" />
@@ -529,13 +426,11 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
-
 					<div class="Container80 Responsive">
 						<p:inputText placeholder="Debit Date" value="#{iclubFullQuoteController.debitDate}" styleClass="TexAlCenter" />
 						<p:inputText placeholder="Month" value="#{iclubFullQuoteController.debitMonth}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
-
 				</p:tab>
 			</p:tabView>
 			<div class="EmptyBox20" />

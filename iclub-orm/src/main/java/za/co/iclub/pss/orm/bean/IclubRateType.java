@@ -36,7 +36,7 @@ public class IclubRateType implements java.io.Serializable {
 	private IclubEntityType iclubEntityType;
 	private String rtShortDesc;
 	private String rtLongDesc;
-	private String rtFieldNm;
+	private Long rtFieldNm;
 	private String rtStatus;
 	private Timestamp rtCrtdDt;
 	private String rtType;
@@ -55,7 +55,7 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateType(Long rtId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtFieldNm, String rtStatus, Timestamp rtCrtdDt, String rtType, String rtQuoteType, Set<IclubRateEngine> iclubRateEngines) {
+	public IclubRateType(Long rtId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, Long rtFieldNm, String rtStatus, Timestamp rtCrtdDt, String rtType, String rtQuoteType, Set<IclubRateEngine> iclubRateEngines) {
 		this.rtId = rtId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
@@ -130,11 +130,11 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	@Column(name = "rt_field_nm", length = 450)
-	public String getRtFieldNm() {
+	public Long getRtFieldNm() {
 		return this.rtFieldNm;
 	}
 
-	public void setRtFieldNm(String rtFieldNm) {
+	public void setRtFieldNm(Long rtFieldNm) {
 		this.rtFieldNm = rtFieldNm;
 	}
 

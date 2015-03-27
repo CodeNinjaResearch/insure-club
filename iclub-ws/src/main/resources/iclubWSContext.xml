@@ -75,6 +75,9 @@
 	<bean id="IclubRateTypeService" class="za.co.iclub.pss.ws.service.IclubRateTypeService">
 		<property name="iclubRateTypeDAO" ref="IclubRateTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubEntityTypeDAO" ref="IclubEntityTypeDAO" />
+		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 	</bean>
 	<bean id="IclubSupplierTypeService" class="za.co.iclub.pss.ws.service.IclubSupplierTypeService">
 		<property name="iclubSupplierTypeDAO" ref="IclubSupplierTypeDAO" />

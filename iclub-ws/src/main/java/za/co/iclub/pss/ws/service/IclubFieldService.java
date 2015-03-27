@@ -80,7 +80,6 @@ public class IclubFieldService {
 			iF.setFDesc(model.getFDesc());
 			iF.setFStatus(model.getFStatus());
 			iF.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
-			;
 
 			iclubFieldDAO.merge(iF);
 

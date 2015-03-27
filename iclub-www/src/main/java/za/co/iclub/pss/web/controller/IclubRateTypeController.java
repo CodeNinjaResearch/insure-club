@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,10 +19,12 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.web.bean.IclubEntityTypeBean;
+import za.co.iclub.pss.web.bean.IclubFieldBean;
 import za.co.iclub.pss.web.bean.IclubInsuranceItemTypeBean;
 import za.co.iclub.pss.web.bean.IclubRateTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
+import za.co.iclub.pss.ws.model.IclubFieldModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.ws.model.IclubRateTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -35,11 +38,13 @@ public class IclubRateTypeController implements Serializable {
 	protected static final Logger LOGGER = Logger.getLogger(IclubRateTypeController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRateTypeService/";
 	private static final String E_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubEntityTypeService/";
+	private static final String F_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubFieldService/";
 	private static final String IIT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemTypeService/";
 	private List<IclubRateTypeBean> beans;
 	private List<IclubRateTypeBean> dashBoardBeans;
 	private List<IclubEntityTypeBean> entityTypeBeans;
 	private List<IclubInsuranceItemTypeBean> insuranceItemTypeBeans;
+	private List<IclubFieldBean> fieldBeans;
 	private List<String> fields;
 	private IclubRateTypeBean bean;
 	private boolean showCreateCont;
@@ -121,6 +126,23 @@ public class IclubRateTypeController implements Serializable {
 			bean.setRtLongDesc(model.getRtLongDesc());
 			bean.setRtShortDesc(model.getRtShortDesc());
 			bean.setRtStatus(model.getRtStatus());
+			bean.setRtQuoteType(model.getRtQuoteType());
+			bean.setIclubEntityType(model.getIclubEntityType());
+			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setRtCrtdDt(model.getRtCrtdDt());
+			bean.setRtType(model.getRtType());
+			bean.setRtFieldNm(model.getRtFieldNm());
+			if (model.getIclubRateEngines() != null && model.getIclubRateEngines().length > 0) {
+				String[] rateEngines = new String[model.getIclubRateEngines().length];
+				int i = 0;
+				for (String rateEngine : model.getIclubRateEngines()) {
+					rateEngines[i] = rateEngine;
+					i++;
+				}
+
+				model.setIclubRateEngines(rateEngines);
+			}
 
 			dashBoardBeans.add(bean);
 		}
@@ -143,14 +165,21 @@ public class IclubRateTypeController implements Serializable {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubRateTypeModel model = new IclubRateTypeModel();
-
+				
+				model.setRtLongDesc(bean.getRtLongDesc());
+				model.setRtShortDesc(bean.getRtShortDesc());
+				model.setRtStatus(bean.getRtStatus());
+				model.setRtQuoteType(bean.getRtQuoteType());
+				model.setIclubEntityType(bean.getIclubEntityType());
+				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
+				model.setIclubPerson(bean.getIclubPerson());
+				model.setRtCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setRtType(bean.getRtType());
+				model.setRtFieldNm(bean.getRtFieldNm());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
 
-					model.setRtLongDesc(bean.getRtLongDesc());
-					model.setRtShortDesc(bean.getRtShortDesc());
-					model.setRtStatus(bean.getRtStatus());
 					IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -175,7 +204,13 @@ public class IclubRateTypeController implements Serializable {
 				model.setRtLongDesc(bean.getRtLongDesc());
 				model.setRtShortDesc(bean.getRtShortDesc());
 				model.setRtStatus(bean.getRtStatus());
-
+				model.setRtQuoteType(bean.getRtQuoteType());
+				model.setIclubEntityType(bean.getIclubEntityType());
+				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
+				model.setIclubPerson(bean.getIclubPerson());
+				model.setRtCrtdDt(bean.getRtCrtdDt());
+				model.setRtType(bean.getRtType());
+				model.setRtFieldNm(bean.getRtFieldNm());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -325,6 +360,13 @@ public class IclubRateTypeController implements Serializable {
 			bean.setRtLongDesc(model.getRtLongDesc());
 			bean.setRtShortDesc(model.getRtShortDesc());
 			bean.setRtStatus(model.getRtStatus());
+			bean.setRtQuoteType(model.getRtQuoteType());
+			bean.setIclubEntityType(model.getIclubEntityType());
+			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setRtCrtdDt(model.getRtCrtdDt());
+			bean.setRtType(model.getRtType());
+			bean.setRtFieldNm(model.getRtFieldNm());
 			if (model.getIclubRateEngines() != null && model.getIclubRateEngines().length > 0) {
 				String[] rateEngines = new String[model.getIclubRateEngines().length];
 				int i = 0;
@@ -465,6 +507,28 @@ public class IclubRateTypeController implements Serializable {
 
 	public void setInsuranceItemTypeBeans(List<IclubInsuranceItemTypeBean> insuranceItemTypeBeans) {
 		this.insuranceItemTypeBeans = insuranceItemTypeBeans;
+	}
+
+	public List<IclubFieldBean> getFieldBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(F_BASE_URL + "list");
+		Collection<? extends IclubFieldModel> models = new ArrayList<IclubFieldModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubFieldModel.class));
+		client.close();
+		fieldBeans = new ArrayList<IclubFieldBean>();
+		for (IclubFieldModel model : models) {
+			IclubFieldBean bean = new IclubFieldBean();
+			bean.setFId(model.getFId());
+			bean.setFName(model.getFName());
+			bean.setFDesc(model.getFDesc());
+			bean.setFStatus(model.getFStatus());
+			bean.setIclubEntityType(model.getIclubEntityType());
+			fieldBeans.add(bean);
+		}
+
+		return fieldBeans;
+	}
+
+	public void setFieldBeans(List<IclubFieldBean> fieldBeans) {
+		this.fieldBeans = fieldBeans;
 	}
 
 }

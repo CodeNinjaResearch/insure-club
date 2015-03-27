@@ -1,119 +1,54 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-
-
-
 	<div class="Container80 Responsive">
-
 		<p:outputLabel styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smId}" />
-
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
-
 		<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubSupplMasterController.bean.smName}" />
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
-
 		<p:inputText styleClass="TexAlCenter" placeholder="Trade Name" value="#{iclubSupplMasterController.bean.smTradeName}" />
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
-
 		<p:inputText styleClass="TexAlCenter" placeholder="Reg Number" value="#{iclubSupplMasterController.bean.smRegNum}" />
-
-
-
-
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
-
 		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubSupplMasterController.bean.iclubSupplierType}">
 			<f:selectItem itemLabel="Supplier Type" itemDisabled="true" />
 			<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
-
-
 		</p:selectOneMenu>
-
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
 		<p:inputText styleClass="TexAlCenter" placeholder="Address" value="#{iclubSupplMasterController.bean.smAddress}" />
-
-
-
-
-
 		<!-- <p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" /> -->
-
-
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
 		<p:inputText styleClass="TexAlCenter" placeholder="Cr Limit" value="#{iclubSupplMasterController.bean.smCrLimit}" />
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
-
 		<p:calendar styleClass="TexAlCenter" placeholder="Action Date" value="#{iclubSupplMasterController.bean.srActionDt}" />
-
-
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
 		<p:inputText styleClass="TexAlCenter" placeholder="Rating" value="#{iclubSupplMasterController.bean.smRating}" />
-
-
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
-
 		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubSupplMasterController.bean.smCrtdDt}" />
-
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-
-
-
 		<p:outputLabel styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.iclubPerson}" />
-
 	</div>
 	<div class="EmptyBox5" />
-
-
-
 	<div class="Container100">
 		<div class="Container50">
-
-
 			<p:commandButton id="btnSupplMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Update" actionListener="#{iclubSupplMasterController.modIclubSupplMaster}" />
 		</div>
 		<div class="Container50">

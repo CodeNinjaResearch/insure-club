@@ -1,10 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtOccupationCont" widgetVar="dtOccupationCont" value="#{iclubOccupationController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Occupationes Available">
-		
 		<p:column headerText="ID">
 			<p:outputLabel value="#{bean.OId}" />
 		</p:column>
-		 
 		<p:column headerText="Description">
 			<p:outputLabel value="#{bean.ODesc}" />
 		</p:column>
@@ -15,9 +13,8 @@
 			<p:outputLabel value="#{bean.OCrtdDt}" />
 		</p:column>
 		<p:column headerText="User ID">
-				<p:outputLabel value="#{bean.iclubPerson}" />
-			</p:column>
-		
+			<p:outputLabel value="#{bean.iclubPerson}" />
+		</p:column>
 		<p:column>
 			<p:commandButton id="btnOccupationEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubOccupationController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubOccupationController.bean}" value="#{bean}" />

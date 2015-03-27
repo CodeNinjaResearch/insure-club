@@ -14,36 +14,45 @@
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtFieldNm}">
+			<f:selectItem itemLabel="Field Name" itemDisabled="true" />
+			<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
+		</p:selectOneMenu>
 	</div>
 	<div class="EmptyBox5" />
-	
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtType}">
+			<f:selectItem itemLabel="Rate Type" itemDisabled="true" />
+			<f:selectItem itemLabel="Lookup" itemValue="L" />
+			<f:selectItem itemLabel="Range" itemValue="R" />
+			<f:selectItem itemLabel="Value" itemValue="V" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtStatus}">
+			<f:selectItem itemLabel="Rate Status" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtQuoteType}">
+			<f:selectItem itemLabel="Quote Type" itemDisabled="true" />
+			<f:selectItem itemLabel="FULL" itemValue="F" />
+			<f:selectItem itemLabel="QUICK" itemValue="Q" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
 		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
 	</div>
 	<div class="EmptyBox5" />
-	
 	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+		<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubRateTypeController.bean.rtLongDesc}" />
 	</div>
 	<div class="EmptyBox5" />
-	
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
-	</div>
-	<div class="EmptyBox5" />
-	
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Quote Type" value="#{iclubRateTypeController.bean.rtShortDesc}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubRateTypeController.bean.rtCrtdDt}" />
-	</div>
 	<div class="EmptyBox5" />
 	<div class="Container100">
 		<div class="Container50">

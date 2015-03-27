@@ -20,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubRateEngine;
 import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubRateTypeDAO;
 import za.co.iclub.pss.ws.model.IclubRateTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +34,9 @@ public class IclubRateTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubRateTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubRateTypeDAO iclubRateTypeDAO;
+	private IclubEntityTypeDAO iclubEntityTypeDAO;
+	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
+	private IclubPersonDAO iclubPersonDAO;
 
 	@POST
 	@Path("/add")
@@ -45,6 +51,13 @@ public class IclubRateTypeService {
 			iRt.setRtLongDesc(model.getRtLongDesc());
 			iRt.setRtShortDesc(model.getRtShortDesc());
 			iRt.setRtStatus(model.getRtStatus());
+			iRt.setRtQuoteType(model.getRtQuoteType());
+			iRt.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
+			iRt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
+			iRt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			iRt.setRtCrtdDt(model.getRtCrtdDt());
+			iRt.setRtType(model.getRtType());
+			iRt.setRtFieldNm(model.getRtFieldNm());
 
 			iclubRateTypeDAO.save(iRt);
 
@@ -77,6 +90,13 @@ public class IclubRateTypeService {
 			iRt.setRtLongDesc(model.getRtLongDesc());
 			iRt.setRtShortDesc(model.getRtShortDesc());
 			iRt.setRtStatus(model.getRtStatus());
+			iRt.setRtQuoteType(model.getRtQuoteType());
+			iRt.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
+			iRt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
+			iRt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			iRt.setRtCrtdDt(model.getRtCrtdDt());
+			iRt.setRtType(model.getRtType());
+			iRt.setRtFieldNm(model.getRtFieldNm());
 
 			iclubRateTypeDAO.merge(iRt);
 
@@ -130,7 +150,14 @@ public class IclubRateTypeService {
 				model.setRtLongDesc(iRt.getRtLongDesc());
 				model.setRtShortDesc(iRt.getRtShortDesc());
 				model.setRtStatus(iRt.getRtStatus());
-				
+				model.setRtQuoteType(iRt.getRtQuoteType());
+				model.setIclubEntityType(iRt.getIclubEntityType() != null ? iRt.getIclubEntityType().getEtId() : null);
+				model.setIclubInsuranceItemType(iRt.getIclubInsuranceItemType() != null ? iRt.getIclubInsuranceItemType().getIitId() : null);
+				model.setIclubPerson(iRt.getIclubPerson() != null ? iRt.getIclubPerson().getPId() : null);
+				model.setRtCrtdDt(iRt.getRtCrtdDt());
+				model.setRtType(iRt.getRtType());
+				model.setRtFieldNm(iRt.getRtFieldNm());
+
 				if (iRt.getIclubRateEngines() != null && iRt.getIclubRateEngines().size() > 0) {
 					String[] rateEngines = new String[iRt.getIclubRateEngines().size()];
 					int i = 0;
@@ -138,7 +165,7 @@ public class IclubRateTypeService {
 						rateEngines[i] = rateEngine.getReId();
 						i++;
 					}
-					
+
 					model.setIclubRateEngines(rateEngines);
 				}
 
@@ -164,7 +191,14 @@ public class IclubRateTypeService {
 			model.setRtLongDesc(bean.getRtLongDesc());
 			model.setRtShortDesc(bean.getRtShortDesc());
 			model.setRtStatus(bean.getRtStatus());
-			
+			model.setRtQuoteType(bean.getRtQuoteType());
+			model.setIclubEntityType(bean.getIclubEntityType() != null ? bean.getIclubEntityType().getEtId() : null);
+			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
+			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+			model.setRtCrtdDt(bean.getRtCrtdDt());
+			model.setRtType(bean.getRtType());
+			model.setRtFieldNm(bean.getRtFieldNm());
+
 			if (bean.getIclubRateEngines() != null && bean.getIclubRateEngines().size() > 0) {
 				String[] rateEngines = new String[bean.getIclubRateEngines().size()];
 				int i = 0;
@@ -172,7 +206,7 @@ public class IclubRateTypeService {
 					rateEngines[i] = rateEngine.getReId();
 					i++;
 				}
-				
+
 				model.setIclubRateEngines(rateEngines);
 			}
 
@@ -222,5 +256,29 @@ public class IclubRateTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubEntityTypeDAO getIclubEntityTypeDAO() {
+		return iclubEntityTypeDAO;
+	}
+
+	public void setIclubEntityTypeDAO(IclubEntityTypeDAO iclubEntityTypeDAO) {
+		this.iclubEntityTypeDAO = iclubEntityTypeDAO;
+	}
+
+	public IclubPersonDAO getIclubPersonDAO() {
+		return iclubPersonDAO;
+	}
+
+	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
+		this.iclubPersonDAO = iclubPersonDAO;
+	}
+
+	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
+		return iclubInsuranceItemTypeDAO;
+	}
+
+	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
+		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
 }

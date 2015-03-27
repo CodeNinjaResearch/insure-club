@@ -1,6 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtSupplMasterCont" widgetVar="dtSupplMasterCont" value="#{iclubSupplMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No SupplMasteres Available">
-
 		<p:column headerText="Id">
 			<p:outputLabel value="#{bean.smId}" />
 		</p:column>
@@ -16,11 +15,9 @@
 		<p:column headerText="reg Number">
 			<p:outputLabel value="#{bean.smRegNum}" />
 		</p:column>
-
 		<p:column headerText="Supplier Type">
-
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubSupplierType}">
-				<f:selectItem itemLabel="Supplier Type" itemDisabled="true"/>
+				<f:selectItem itemLabel="Supplier Type" itemDisabled="true" />
 				<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
 			</p:selectOneMenu>
 		</p:column>
@@ -42,11 +39,9 @@
 		<p:column headerText="rating">
 			<p:outputLabel value="#{bean.smRating}" />
 		</p:column>
-
 		<p:column headerText="User Id">
 			<p:outputLabel value="#{bean.iclubPerson}" />
 		</p:column>
-
 		<p:column>
 			<p:commandButton id="btnSupplMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubSupplMasterController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubSupplMasterController.bean}" value="#{bean}" />

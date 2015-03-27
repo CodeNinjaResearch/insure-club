@@ -1,6 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtFieldCont" widgetVar="dtFieldCont" value="#{iclubFieldController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Entity Types Available">
-
 		<p:column headerText="Id">
 			<p:outputLabel value="#{ bean.FId}" />
 		</p:column>
@@ -16,7 +15,6 @@
 				<f:selectItems value="#{iclubFieldController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
 			</p:selectOneMenu>
 		</p:column>
-
 		<p:column headerText="Status">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.FStatus}">
 				<f:selectItem itemLabel="Field Status" itemDisabled="true" />
@@ -24,7 +22,6 @@
 				<f:selectItem itemLabel="No" itemValue="N" />
 			</p:selectOneMenu>
 		</p:column>
-
 		<p:column>
 			<p:commandButton id="btnFieldEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubFieldController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubFieldController.bean}" value="#{bean}" />
