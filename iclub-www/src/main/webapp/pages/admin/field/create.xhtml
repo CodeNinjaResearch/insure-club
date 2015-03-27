@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Desc" value="#{iclubFieldController.bean.FDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubFieldController.bean.FName}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.FStatus}">
+			<f:selectItem itemLabel="Field Status" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.iclubEntityType}">
+			<f:selectItem itemLabel="Entity Type" itemDisabled="true" />
+			<f:selectItems value="#{iclubFieldController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100">
+		<div class="Container50">
+			<p:commandButton id="btnFieldCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlFieldCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubFieldController.addIclubField}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnFieldCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlFieldCont" value="Close" actionListener="#{iclubFieldController.showView}" />
+		</div>
+	</div>
+</ui:composition>
