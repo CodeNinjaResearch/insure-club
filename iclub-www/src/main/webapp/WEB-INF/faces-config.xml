@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd" version="2.2">
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
 
 	<application>
 		<action-listener>org.primefaces.application.DialogActionListener</action-listener>
@@ -273,7 +276,7 @@
 			<to-view-id>/pages/admin/securitymaster/container.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -281,7 +284,7 @@
 			<to-view-id>/pages/admin/bankmaster/container.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -289,7 +292,7 @@
 			<to-view-id>/pages/admin/configuration/container.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -304,4 +307,91 @@
 			<to-view-id>/pages/admin/extras/container.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubEvent</from-outcome>
+			<to-view-id>/pages/admin/event/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubCoverType</from-outcome>
+			<to-view-id>/pages/admin/covertype/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubGeoLoc</from-outcome>
+			<to-view-id>/pages/admin/geoloc/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubLicenseCode</from-outcome>
+			<to-view-id>/pages/admin/licensecode/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubMessage</from-outcome>
+			<to-view-id>/pages/admin/message/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubNotif</from-outcome>
+			<to-view-id>/pages/admin/notif/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubOccupation</from-outcome>
+			<to-view-id>/pages/admin/occupation/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubPurposeType</from-outcome>
+			<to-view-id>/pages/admin/purposetype/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubRateType</from-outcome>
+			<to-view-id>/pages/admin/ratetype/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubSupplyMaster</from-outcome>
+			<to-view-id>/pages/admin/supplymaster/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubTrackMaster</from-outcome>
+			<to-view-id>/pages/admin/trackmaster/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubVehicleMaster</from-outcome>
+			<to-view-id>/pages/admin/vehiclemaster/container.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+
 </faces-config>
