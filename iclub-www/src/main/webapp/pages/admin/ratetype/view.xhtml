@@ -52,8 +52,8 @@
 		<p:column headerText="Status">
 			<p:outputLabel value="#{bean.rtStatus}" />
 		</p:column>
-		<p:column>
-			<p:outputLabel value="#{iclubRateTypeController.bean.rtCrtdDt}"></p:outputLabel>
+		<p:column headerText="Created Date">
+			<p:outputLabel value="#{bean.rtCrtdDt}"></p:outputLabel>
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnRateTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubRateTypeController.showEdit}" update=":iclubFrm:grlMsg">
