@@ -169,6 +169,20 @@ public class IclubFieldDAO {
 		}
 	}
 
+	public List getFieldBySD(String sd, Long id) {
+		log.debug("Fetching all Field by Query :: getFieldBySD");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getFieldBySD");
+			query.setString("sd", sd);
+			query.setLong("id", id);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Field", re);
+			throw re;
+		}
+	}
+
 	public static IclubFieldDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubFieldDAO) ctx.getBean("IclubFieldDAO");
 	}
