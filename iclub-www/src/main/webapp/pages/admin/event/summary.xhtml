@@ -1,44 +1,45 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.EId}" />
-
-
-
-	<!-- <p:outputLabel styleClass="TexAlCenter"  value="#{labels['event.summary.iclubeventtype']}" /> -->
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.iclubEventType}" />
-
-
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.iclubPerson}" />
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.EDesc}" />
-
-
-
-
-
-
-
-
-	<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.ECrtdDt}" />
-
-
-
-
-
-
-
-
+		<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="ID" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.EId}" />
+	</div>
+	<div class="EmptyBox5" />
+		<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="Event Type" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.iclubEventType}" />
+	</div>
+	<div class="EmptyBox5" />
+		<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="User Id" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.iclubPerson}" />
+	</div>
+	<div class="EmptyBox5" />
+		<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="Description" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.EDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+		<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="Created Date" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:outputLabel styleClass="TexAlCenter" value="#{iclubEventController.bean.ECrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
 
 	<div class="Container100">
 		<p:commandButton id="btnEventCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlEventCont" value="#{labels['close']}" actionListener="#{iclubEventController.showView}" />
