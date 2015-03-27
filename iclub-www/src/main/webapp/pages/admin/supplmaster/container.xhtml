@@ -25,9 +25,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlSupplMasterCont">
 				<p:panel id="pnlSupplMasterContMenu">
-					<p:commandLink value="#{labels['viewsupplmaster']}" actionListener="#{iclubSupplMasterController.showView}" update="pnlSupplMasterContDet" />
+					<p:commandLink value="View SupplMaster" actionListener="#{iclubSupplMasterController.showView}" update="pnlSupplMasterContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createsupplmaster']}" actionListener="#{iclubSupplMasterController.showCreate}" update="pnlSupplMasterContDet" />
+					<p:commandLink value="Create SupplMaster" actionListener="#{iclubSupplMasterController.showCreate}" update="pnlSupplMasterContDet" />
 				</p:panel>
 				<p:panel id="pnlSupplMasterContDet">
 					<p:panel id="pnlSupplMasterContView" rendered="#{iclubSupplMasterController.showViewCont}">

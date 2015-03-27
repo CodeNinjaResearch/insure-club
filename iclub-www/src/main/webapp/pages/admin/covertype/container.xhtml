@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlCoverTypeCont">
 				<p:panel id="pnlCoverTypeContMenu">
-					<p:commandLink value="#{labels['viewcovertype']}" actionListener="#{iclubCoverTypeController.showView}" update="pnlCoverTypeContDet" />
+					<p:commandLink value="View CoverType" actionListener="#{iclubCoverTypeController.showView}" update="pnlCoverTypeContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createcovertype']}" actionListener="#{iclubCoverTypeController.showCreate}" update="pnlCoverTypeContDet" />
+					<p:commandLink value="Create CoverType" actionListener="#{iclubCoverTypeController.showCreate}" update="pnlCoverTypeContDet" />
 				</p:panel>
 				<p:panel id="pnlCoverTypeContDet">
 					<p:panel id="pnlCoverTypeContView" styleClass="BordNone" rendered="#{iclubCoverTypeController.showViewCont}">

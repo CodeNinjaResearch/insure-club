@@ -23,13 +23,13 @@
 	<div class="EmptyBox5" />
 	<div class="Container100">
 		<div class="Container33">
-			<p:commandButton id="btnEntityTypeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="#{labels['update']}" actionListener="#{iclubEntityTypeController.modIclubEntityType}" />
+			<p:commandButton id="btnEntityTypeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="Update" actionListener="#{iclubEntityTypeController.modIclubEntityType}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnEntityTypeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="#{labels['delete']}" actionListener="#{iclubEntityTypeController.delIclubEntityType}" />
+			<p:commandButton id="btnEntityTypeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="Delete" actionListener="#{iclubEntityTypeController.delIclubEntityType}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnEntityTypeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="#{labels['close']}" actionListener="#{iclubEntityTypeController.showView}" />
+			<p:commandButton id="btnEntityTypeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="Close" actionListener="#{iclubEntityTypeController.showView}" />
 		</div>
 	</div>
 </ui:composition>

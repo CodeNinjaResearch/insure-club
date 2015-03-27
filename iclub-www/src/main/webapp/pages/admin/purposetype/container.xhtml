@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlPurposeTypeCont">
 				<p:panel id="pnlPurposeTypeContMenu">
-					<p:commandLink value="#{labels['viewpurposetype']}" actionListener="#{iclubPurposeTypeController.showView}" update="pnlPurposeTypeContDet" />
+					<p:commandLink value="View PurposeType" actionListener="#{iclubPurposeTypeController.showView}" update="pnlPurposeTypeContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createpurposetype']}" actionListener="#{iclubPurposeTypeController.showCreate}" update="pnlPurposeTypeContDet" />
+					<p:commandLink value="Create PurposeType" actionListener="#{iclubPurposeTypeController.showCreate}" update="pnlPurposeTypeContDet" />
 				</p:panel>
 				<p:panel id="pnlPurposeTypeContDet">
 					<p:panel id="pnlPurposeTypeContView" styleClass="BordNone" rendered="#{iclubPurposeTypeController.showViewCont}">

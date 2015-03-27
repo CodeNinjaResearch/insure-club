@@ -30,13 +30,13 @@
 	<div class="EmptyBox5" />
 	<div class="Container100">
 		<div class="Container33">
-			<p:commandButton id="btnConfigEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="#{labels['update']}" actionListener="#{iclubConfigController.modIclubConfig}" />
+			<p:commandButton id="btnConfigEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="Update" actionListener="#{iclubConfigController.modIclubConfig}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnConfigDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="#{labels['delete']}" actionListener="#{iclubConfigController.delIclubConfig}" />
+			<p:commandButton id="btnConfigDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="Delete" actionListener="#{iclubConfigController.delIclubConfig}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnConfigCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="#{labels['close']}" actionListener="#{iclubConfigController.showView}" />
+			<p:commandButton id="btnConfigCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="Close" actionListener="#{iclubConfigController.showView}" />
 		</div>
 	</div>
 </ui:composition>

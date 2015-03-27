@@ -51,13 +51,13 @@
 
 	<div class="Container100">
 		<div class="Container33">
-			<p:commandButton id="btnLicenseCodeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="#{labels['update']}" actionListener="#{iclubLicenseCodeController.modIclubLicenseCode}" />
+			<p:commandButton id="btnLicenseCodeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="Update" actionListener="#{iclubLicenseCodeController.modIclubLicenseCode}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnLicenseCodeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="#{labels['delete']}" actionListener="#{iclubLicenseCodeController.delIclubLicenseCode}" />
+			<p:commandButton id="btnLicenseCodeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="Delete" actionListener="#{iclubLicenseCodeController.delIclubLicenseCode}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnLicenseCodeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="#{labels['close']}" actionListener="#{iclubLicenseCodeController.showView}" />
+			<p:commandButton id="btnLicenseCodeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlLicenseCodeCont" value="Close" actionListener="#{iclubLicenseCodeController.showView}" />
 		</div>
 	</div>
 </ui:composition>

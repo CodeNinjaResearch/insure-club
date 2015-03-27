@@ -27,13 +27,13 @@
 
 	<div class="Container100">
 		<div class="Container33">
-			<p:commandButton id="btnOccupationEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="#{labels['update']}" actionListener="#{iclubOccupationController.modIclubOccupation}" />
+			<p:commandButton id="btnOccupationEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="Update" actionListener="#{iclubOccupationController.modIclubOccupation}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnOccupationDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="#{labels['delete']}" actionListener="#{iclubOccupationController.delIclubOccupation}" />
+			<p:commandButton id="btnOccupationDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="Delete" actionListener="#{iclubOccupationController.delIclubOccupation}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnOccupationCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="#{labels['close']}" actionListener="#{iclubOccupationController.showView}" />
+			<p:commandButton id="btnOccupationCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="Close" actionListener="#{iclubOccupationController.showView}" />
 		</div>
 	</div>
 </ui:composition>

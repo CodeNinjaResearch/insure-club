@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlTrackerMasterCont">
 				<p:panel id="pnlTrackerMasterContMenu">
-					<p:commandLink value="#{labels['viewtrackermaster']}" actionListener="#{iclubTrackerMasterController.showView}" update="pnlTrackerMasterContDet" />
+					<p:commandLink value="View TrackerMaster" actionListener="#{iclubTrackerMasterController.showView}" update="pnlTrackerMasterContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createtrackermaster']}" actionListener="#{iclubTrackerMasterController.showCreate}" update="pnlTrackerMasterContDet" />
+					<p:commandLink value="Create TrackerMaster" actionListener="#{iclubTrackerMasterController.showCreate}" update="pnlTrackerMasterContDet" />
 				</p:panel>
 				<p:panel id="pnlTrackerMasterContDet">
 					<p:panel id="pnlTrackerMasterContView" rendered="#{iclubTrackerMasterController.showViewCont}">

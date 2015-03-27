@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlOccupationCont">
 				<p:panel id="pnlOccupationContMenu">
-					<p:commandLink value="#{labels['viewoccupation']}" actionListener="#{iclubOccupationController.showView}" update="pnlOccupationContDet" />
+					<p:commandLink value="View Occupation" actionListener="#{iclubOccupationController.showView}" update="pnlOccupationContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createoccupation']}" actionListener="#{iclubOccupationController.showCreate}" update="pnlOccupationContDet" />
+					<p:commandLink value="Create Occupation" actionListener="#{iclubOccupationController.showCreate}" update="pnlOccupationContDet" />
 				</p:panel>
 				<p:panel id="pnlOccupationContDet">
 					<p:panel id="pnlOccupationContView" styleClass="BordNone" rendered="#{iclubOccupationController.showViewCont}">

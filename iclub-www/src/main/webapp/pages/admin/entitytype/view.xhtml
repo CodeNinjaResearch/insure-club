@@ -2,22 +2,22 @@
 	<p:dataTable id="dtEntityTypeCont" widgetVar="dtEntityTypeCont" value="#{iclubEntityTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Entity Types Available">
 
 		<p:column headerText="Id">
-			<p:outputLabel value="#{iclubEntityTypeController.bean.etId}" />
+			<p:outputLabel value="#{ bean.etId}" />
 		</p:column>
 
 		<p:column headerText="Short Desc">
-			<p:inputText value="#{iclubEntityTypeController.bean.etShortDesc}" />
+			<p:outputLabel value="#{bean.etShortDesc}" />
 		</p:column>
 
 
 		<p:column headerText="Long Desc">
-			<p:inputText value="#{iclubEntityTypeController.bean.etLongDesc}" />
+			<p:outputLabel value="#{bean.etLongDesc}" />
 		</p:column>
 
 
 		<p:column headerText="Status">
 
-			<p:outputLabel value="#{iclubEntityTypeController.bean.etStatus}" />
+			<p:outputLabel value="#{bean.etStatus}" />
 		</p:column>
 
 		<p:column>

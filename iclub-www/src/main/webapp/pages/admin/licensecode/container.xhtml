@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 		<p:panel id="pnlLicenseCodeCont">
 			<p:panel id="pnlLicenseCodeContMenu">
-				<p:commandLink value="#{labels['viewlicensecode']}" actionListener="#{iclubLicenseCodeController.showView}" update="pnlLicenseCodeContDet" />
+				<p:commandLink value="View LicenseCode" actionListener="#{iclubLicenseCodeController.showView}" update="pnlLicenseCodeContDet" />
 				<p:graphicImage name="separator.png" library="images" />
-				<p:commandLink value="#{labels['createlicensecode']}" actionListener="#{iclubLicenseCodeController.showCreate}" update="pnlLicenseCodeContDet" />
+				<p:commandLink value="Create LicenseCode" actionListener="#{iclubLicenseCodeController.showCreate}" update="pnlLicenseCodeContDet" />
 			</p:panel>
 			<p:panel id="pnlLicenseCodeContDet">
 				<p:panel id="pnlLicenseCodeContView" rendered="#{iclubLicenseCodeController.showViewCont}">

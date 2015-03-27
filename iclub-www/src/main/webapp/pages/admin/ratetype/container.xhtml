@@ -1,22 +1,22 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="master">
-		<p:remoteCommand actionListener="#{iclubEntityTypeController.initializePage}" name="onload" autoRun="true" update="pnlEntityTypeContDet" />
+		<p:remoteCommand actionListener="#{iclubRateTypeController.initializePage}" name="onload" autoRun="true" update="pnlRateTypeContDet" />
 		<div class="ContainerIndent Fnone TexAlCenter">
-			<p:panel id="pnlEntityTypeCont">
-				<p:panel id="pnlEntityTypeContMenu">
-					<p:commandLink value="#{labels['viewentitytype']}" actionListener="#{iclubEntityTypeController.showView}" update="pnlEntityTypeContDet" />
+			<p:panel id="pnlRateTypeCont">
+				<p:panel id="pnlRateTypeContMenu">
+					<p:commandLink value="View RateType" actionListener="#{iclubRateTypeController.showView}" update="pnlRateTypeContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createentitytype']}" actionListener="#{iclubEntityTypeController.showCreate}" update="pnlEntityTypeContDet" />
+					<p:commandLink value="Create RateType" actionListener="#{iclubRateTypeController.showCreate}" update="pnlRateTypeContDet" />
 				</p:panel>
-				<p:panel id="pnlEntityTypeContDet">
-					<p:panel id="pnlEntityTypeContView" styleClass="BordNone" rendered="#{iclubEntityTypeController.showViewCont}">
-						<ui:include src="/pages/admin/entitytype/view.xhtml" />
+				<p:panel id="pnlRateTypeContDet">
+					<p:panel id="pnlRateTypeContView" styleClass="BordNone" rendered="#{iclubRateTypeController.showViewCont}">
+						<ui:include src="/pages/admin/ratetype/view.xhtml" />
 					</p:panel>
-					<p:panel id="pnlEntityTypeContCreate" styleClass="BordNone" rendered="#{iclubEntityTypeController.showCreateCont}">
-						<ui:include src="/pages/admin/entitytype/create.xhtml" />
+					<p:panel id="pnlRateTypeContCreate" styleClass="BordNone" rendered="#{iclubRateTypeController.showCreateCont}">
+						<ui:include src="/pages/admin/ratetype/create.xhtml" />
 					</p:panel>
-					<p:panel id="pnlEntityTypeContEdit" styleClass="BordNone" rendered="#{iclubEntityTypeController.showEditCont}">
-						<ui:include src="/pages/admin/entitytype/edit.xhtml" />
+					<p:panel id="pnlRateTypeContEdit" styleClass="BordNone" rendered="#{iclubRateTypeController.showEditCont}">
+						<ui:include src="/pages/admin/ratetype/edit.xhtml" />
 					</p:panel>
 				</p:panel>
 			</p:panel>

@@ -1,3 +1,56 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<div style="align: center !important"></div>
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubInsuranceItemType}">
+			<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+			<f:selectItems value="#{iclubRateTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubEntityType}">
+			<f:selectItem itemLabel="Entity Type" itemDisabled="true" />
+			<f:selectItems value="#{iclubRateTypeController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
+		</p:selectOneMenu>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Quote Type" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubRateTypeController.bean.rtCrtdDt}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100">
+		<div class="Container50">
+			<p:commandButton id="btnRateTypeCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubRateTypeController.addIclubRateType}" />
+		</div>
+		<div class="Container50">
+			<p:commandButton id="btnRateTypeCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" value="Close" actionListener="#{iclubRateTypeController.showView}" />
+		</div>
+	</div>
 </ui:composition>

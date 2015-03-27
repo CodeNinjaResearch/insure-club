@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlExtrasCont">
 				<p:panel id="pnlExtrasContMenu">
-					<p:commandLink value="#{labels['viewextras']}" actionListener="#{iclubExtrasController.showView}" update="pnlExtrasContDet" />
+					<p:commandLink value="View Extras" actionListener="#{iclubExtrasController.showView}" update="pnlExtrasContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createextras']}" actionListener="#{iclubExtrasController.showCreate}" update="pnlExtrasContDet" />
+					<p:commandLink value="Create Extras" actionListener="#{iclubExtrasController.showCreate}" update="pnlExtrasContDet" />
 				</p:panel>
 				<p:panel id="pnlExtrasContDet">
 					<p:panel id="pnlExtrasContView" rendered="#{iclubExtrasController.showViewCont}">

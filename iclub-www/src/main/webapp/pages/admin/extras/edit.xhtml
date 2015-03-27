@@ -1,49 +1,56 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
+	<div class="Container80 Responsive">
 
-	
-	
-	
+
 		<p:outputLabel styleClass="TexAlCenter" value="#{iclubExtrasController.bean.EId}" />
-	
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
 
-	
-	
-	
+
+
+
 		<p:inputText styleClass="TexAlCenter" placeholder="Desc" value="#{iclubExtrasController.bean.EDesc}" />
-	
+
+
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
 
 
 
-	
-	
-	
 
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter"  value="#{iclubExtrasController.bean.EStatus}">
+
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubExtrasController.bean.EStatus}">
 			<f:selectItem itemLabel="extras Status" itemDisabled="true" />
-			<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
-			<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
 
 		</p:selectOneMenu>
-	
-	
-	
-	
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+
+
+
 		<p:calendar styleClass="TexAlCenter" placeholder="Created Date" value="#{iclubExtrasController.bean.ECrtdDt}" />
-	
+
+	</div>
+	<div class="EmptyBox5" />
 
 
 
 
 	<div class="Container100">
 		<div class="Container33">
-			<p:commandButton id="btnExtrasEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlExtrasCont" value="#{labels['update']}" actionListener="#{iclubExtrasController.modIclubExtras}" />
+			<p:commandButton id="btnExtrasEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlExtrasCont" value="Update" actionListener="#{iclubExtrasController.modIclubExtras}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnExtrasDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlExtrasCont" value="#{labels['delete']}" actionListener="#{iclubExtrasController.delIclubExtras}" />
+			<p:commandButton id="btnExtrasDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlExtrasCont" value="Delete" actionListener="#{iclubExtrasController.delIclubExtras}" />
 		</div>
 		<div class="Container33">
-			<p:commandButton id="btnExtrasCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlExtrasCont" value="#{labels['close']}" actionListener="#{iclubExtrasController.showView}" />
+			<p:commandButton id="btnExtrasCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlExtrasCont" value="Close" actionListener="#{iclubExtrasController.showView}" />
 		</div>
 	</div>
 </ui:composition>

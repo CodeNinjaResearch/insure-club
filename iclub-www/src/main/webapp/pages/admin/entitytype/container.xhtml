@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlEntityTypeCont">
 				<p:panel id="pnlEntityTypeContMenu">
-					<p:commandLink value="#{labels['viewentitytype']}" actionListener="#{iclubEntityTypeController.showView}" update="pnlEntityTypeContDet" />
+					<p:commandLink value="View EntityType" actionListener="#{iclubEntityTypeController.showView}" update="pnlEntityTypeContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createentitytype']}" actionListener="#{iclubEntityTypeController.showCreate}" update="pnlEntityTypeContDet" />
+					<p:commandLink value="Create EntityType" actionListener="#{iclubEntityTypeController.showCreate}" update="pnlEntityTypeContDet" />
 				</p:panel>
 				<p:panel id="pnlEntityTypeContDet">
 					<p:panel id="pnlEntityTypeContView" styleClass="BordNone" rendered="#{iclubEntityTypeController.showViewCont}">

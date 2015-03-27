@@ -4,9 +4,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlConfigCont">
 				<p:panel id="pnlConfigContMenu">
-					<p:commandLink value="#{labels['viewconfig']}" actionListener="#{iclubConfigController.showView}" update="pnlConfigContDet" />
+					<p:commandLink value="View Config" actionListener="#{iclubConfigController.showView}" update="pnlConfigContDet" />
 					<p:graphicImage name="separator.png" library="images" />
-					<p:commandLink value="#{labels['createconfig']}" actionListener="#{iclubConfigController.showCreate}" update="pnlConfigContDet" />
+					<p:commandLink value="Create Config" actionListener="#{iclubConfigController.showCreate}" update="pnlConfigContDet" />
 				</p:panel>
 				<p:panel id="pnlConfigContDet">
 					<p:panel id="pnlConfigContView" styleClass="BordNone" rendered="#{iclubConfigController.showViewCont}">
