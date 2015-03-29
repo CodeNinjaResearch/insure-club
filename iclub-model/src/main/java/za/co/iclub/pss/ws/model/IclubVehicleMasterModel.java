@@ -12,9 +12,9 @@ public class IclubVehicleMasterModel {
 	private String iclubPerson;
 	private String vmMake;
 	private String vmModel;
-	private Long vmOrigRate;
-	private Long vmMrktRate;
-	private Long vmRetRate;
+	private Double vmOrigRate;
+	private Double vmMrktRate;
+	private Double vmRetRate;
 	private Date vmProdDt;
 	private Timestamp vmCrtdDt;
 	private String[] iclubVehicles;
@@ -51,27 +51,27 @@ public class IclubVehicleMasterModel {
 		this.vmModel = vmModel;
 	}
 
-	public Long getVmOrigRate() {
+	public Double getVmOrigRate() {
 		return vmOrigRate;
 	}
 
-	public void setVmOrigRate(Long vmOrigRate) {
+	public void setVmOrigRate(Double vmOrigRate) {
 		this.vmOrigRate = vmOrigRate;
 	}
 
-	public Long getVmMrktRate() {
+	public Double getVmMrktRate() {
 		return vmMrktRate;
 	}
 
-	public void setVmMrktRate(Long vmMrktRate) {
+	public void setVmMrktRate(Double vmMrktRate) {
 		this.vmMrktRate = vmMrktRate;
 	}
 
-	public Long getVmRetRate() {
+	public Double getVmRetRate() {
 		return vmRetRate;
 	}
 
-	public void setVmRetRate(Long vmRetRate) {
+	public void setVmRetRate(Double vmRetRate) {
 		this.vmRetRate = vmRetRate;
 	}
 

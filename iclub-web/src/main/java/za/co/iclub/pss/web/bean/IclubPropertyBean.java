@@ -25,7 +25,7 @@ public class IclubPropertyBean {
 	private String PCompYn;
 	private String PNorobberyYn;
 	private String PSecGatesYn;
-	private Long PEstValue;
+	private Double PEstValue;
 	private Timestamp PCrtdDt;
 
 	public String getPId() {
@@ -196,11 +196,11 @@ public class IclubPropertyBean {
 		PSecGatesYn = pSecGatesYn;
 	}
 
-	public Long getPEstValue() {
+	public Double getPEstValue() {
 		return PEstValue;
 	}
 
-	public void setPEstValue(Long pEstValue) {
+	public void setPEstValue(Double pEstValue) {
 		PEstValue = pEstValue;
 	}
 

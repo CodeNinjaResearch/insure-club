@@ -29,7 +29,7 @@ public class IclubBankMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2443925257226951065L;
+	private static final long serialVersionUID = -767683235432582948L;
 	private Long bmId;
 	private IclubPerson iclubPerson;
 	private String bmBankName;
@@ -37,8 +37,8 @@ public class IclubBankMaster implements java.io.Serializable {
 	private String bmBranchName;
 	private Integer bmBranchCode;
 	private String bmBranchAddress;
-	private Long bmBranchLat;
-	private Long bmBranchLong;
+	private Double bmBranchLat;
+	private Double bmBranchLong;
 	private Integer bmBranchZip;
 	private Timestamp bmCrtdDt;
 	private Set<IclubAccount> iclubAccounts = new HashSet<IclubAccount>(0);
@@ -55,7 +55,7 @@ public class IclubBankMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubBankMaster(Long bmId, IclubPerson iclubPerson, String bmBankName, Integer bmBankCode, String bmBranchName, Integer bmBranchCode, String bmBranchAddress, Long bmBranchLat, Long bmBranchLong, Integer bmBranchZip, Timestamp bmCrtdDt, Set<IclubAccount> iclubAccounts) {
+	public IclubBankMaster(Long bmId, IclubPerson iclubPerson, String bmBankName, Integer bmBankCode, String bmBranchName, Integer bmBranchCode, String bmBranchAddress, Double bmBranchLat, Double bmBranchLong, Integer bmBranchZip, Timestamp bmCrtdDt, Set<IclubAccount> iclubAccounts) {
 		this.bmId = bmId;
 		this.iclubPerson = iclubPerson;
 		this.bmBankName = bmBankName;
@@ -137,20 +137,20 @@ public class IclubBankMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "bm_branch_lat", precision = 10, scale = 7)
-	public Long getBmBranchLat() {
+	public Double getBmBranchLat() {
 		return this.bmBranchLat;
 	}
 
-	public void setBmBranchLat(Long bmBranchLat) {
+	public void setBmBranchLat(Double bmBranchLat) {
 		this.bmBranchLat = bmBranchLat;
 	}
 
 	@Column(name = "bm_branch_long", precision = 10, scale = 7)
-	public Long getBmBranchLong() {
+	public Double getBmBranchLong() {
 		return this.bmBranchLong;
 	}
 
-	public void setBmBranchLong(Long bmBranchLong) {
+	public void setBmBranchLong(Double bmBranchLong) {
 		this.bmBranchLong = bmBranchLong;
 	}
 

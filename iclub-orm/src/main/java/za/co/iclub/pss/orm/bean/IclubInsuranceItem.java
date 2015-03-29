@@ -29,11 +29,13 @@ public class IclubInsuranceItem implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5529374939703795240L;
+	private static final long serialVersionUID = -2728078642723672789L;
 	private String iiId;
 	private IclubPerson iclubPerson;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private String iiQuoteId;
+	private Double iiInsureValue;
+	private Double iiActualValue;
 	private String iiItemId;
 	private Timestamp iiCrtdDt;
 	private Set<IclubClaimItem> iclubClaimItems = new HashSet<IclubClaimItem>(0);
@@ -50,11 +52,13 @@ public class IclubInsuranceItem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubInsuranceItem(String iiId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String iiQuoteId, String iiItemId, Timestamp iiCrtdDt, Set<IclubClaimItem> iclubClaimItems) {
+	public IclubInsuranceItem(String iiId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String iiQuoteId, Double iiInsureValue, Double iiActualValue, String iiItemId, Timestamp iiCrtdDt, Set<IclubClaimItem> iclubClaimItems) {
 		this.iiId = iiId;
 		this.iclubPerson = iclubPerson;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iiQuoteId = iiQuoteId;
+		this.iiInsureValue = iiInsureValue;
+		this.iiActualValue = iiActualValue;
 		this.iiItemId = iiItemId;
 		this.iiCrtdDt = iiCrtdDt;
 		this.iclubClaimItems = iclubClaimItems;
@@ -98,6 +102,24 @@ public class IclubInsuranceItem implements java.io.Serializable {
 
 	public void setIiQuoteId(String iiQuoteId) {
 		this.iiQuoteId = iiQuoteId;
+	}
+
+	@Column(name = "ii_insure_value", precision = 15, scale = 5)
+	public Double getIiInsureValue() {
+		return this.iiInsureValue;
+	}
+
+	public void setIiInsureValue(Double iiInsureValue) {
+		this.iiInsureValue = iiInsureValue;
+	}
+
+	@Column(name = "ii_actual_value", precision = 15, scale = 5)
+	public Double getIiActualValue() {
+		return this.iiActualValue;
+	}
+
+	public void setIiActualValue(Double iiActualValue) {
+		this.iiActualValue = iiActualValue;
 	}
 
 	@Column(name = "ii_item_id", length = 36)

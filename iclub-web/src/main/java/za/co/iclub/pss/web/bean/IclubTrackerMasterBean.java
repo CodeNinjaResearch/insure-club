@@ -9,8 +9,8 @@ public class IclubTrackerMasterBean {
 	private String tmName;
 	private String tmTradeName;
 	private String tmLocation;
-	private Long tmLat;
-	private Long tmLong;
+	private Double tmLat;
+	private Double tmLong;
 	private String tmRegNum;
 	private Timestamp tmCrtdDt;
 	private String[] iclubSecurityDevices;
@@ -55,19 +55,19 @@ public class IclubTrackerMasterBean {
 		this.tmLocation = tmLocation;
 	}
 
-	public Long getTmLat() {
+	public Double getTmLat() {
 		return tmLat;
 	}
 
-	public void setTmLat(Long tmLat) {
+	public void setTmLat(Double tmLat) {
 		this.tmLat = tmLat;
 	}
 
-	public Long getTmLong() {
+	public Double getTmLong() {
 		return tmLong;
 	}
 
-	public void setTmLong(Long tmLong) {
+	public void setTmLong(Double tmLong) {
 		this.tmLong = tmLong;
 	}
 

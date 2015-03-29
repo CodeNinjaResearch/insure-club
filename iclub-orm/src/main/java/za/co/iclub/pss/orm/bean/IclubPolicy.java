@@ -29,15 +29,15 @@ public class IclubPolicy implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1465948584010792421L;
+	private static final long serialVersionUID = -8421583454658393900L;
 	private String PId;
 	private IclubPolicyStatus iclubPolicyStatus;
 	private IclubQuote iclubQuote;
 	private IclubPerson iclubPerson;
 	private IclubAccount iclubAccount;
 	private Long PNumber;
-	private Long PPremium;
-	private Long PProrataPrm;
+	private Double PPremium;
+	private Double PProrataPrm;
 	private Integer PDebitDt;
 	private String PCrtdDt;
 	private Set<IclubClaim> iclubClaims = new HashSet<IclubClaim>(0);
@@ -56,7 +56,7 @@ public class IclubPolicy implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPolicy(String PId, IclubPolicyStatus iclubPolicyStatus, IclubQuote iclubQuote, IclubPerson iclubPerson, IclubAccount iclubAccount, Long PNumber, Long PPremium, Long PProrataPrm, Integer PDebitDt, String PCrtdDt, Set<IclubClaim> iclubClaims, Set<IclubPayment> iclubPayments) {
+	public IclubPolicy(String PId, IclubPolicyStatus iclubPolicyStatus, IclubQuote iclubQuote, IclubPerson iclubPerson, IclubAccount iclubAccount, Long PNumber, Double PPremium, Double PProrataPrm, Integer PDebitDt, String PCrtdDt, Set<IclubClaim> iclubClaims, Set<IclubPayment> iclubPayments) {
 		this.PId = PId;
 		this.iclubPolicyStatus = iclubPolicyStatus;
 		this.iclubQuote = iclubQuote;
@@ -132,20 +132,20 @@ public class IclubPolicy implements java.io.Serializable {
 	}
 
 	@Column(name = "p_premium", precision = 15, scale = 5)
-	public Long getPPremium() {
+	public Double getPPremium() {
 		return this.PPremium;
 	}
 
-	public void setPPremium(Long PPremium) {
+	public void setPPremium(Double PPremium) {
 		this.PPremium = PPremium;
 	}
 
 	@Column(name = "p_prorata_prm", precision = 15, scale = 5)
-	public Long getPProrataPrm() {
+	public Double getPProrataPrm() {
 		return this.PProrataPrm;
 	}
 
-	public void setPProrataPrm(Long PProrataPrm) {
+	public void setPProrataPrm(Double PProrataPrm) {
 		this.PProrataPrm = PProrataPrm;
 	}
 

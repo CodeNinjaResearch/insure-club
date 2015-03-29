@@ -12,8 +12,8 @@ public class IclubInsurerMasterModel {
 	private String imName;
 	private String imTradeName;
 	private String imLocation;
-	private Long imLat;
-	private Long imLong;
+	private Double imLat;
+	private Double imLong;
 	private String imRegNum;
 	private Timestamp imCrtdDt;
 	private String[] iclubQuotes;
@@ -58,19 +58,19 @@ public class IclubInsurerMasterModel {
 		this.imLocation = imLocation;
 	}
 
-	public Long getImLat() {
+	public Double getImLat() {
 		return imLat;
 	}
 
-	public void setImLat(Long imLat) {
+	public void setImLat(Double imLat) {
 		this.imLat = imLat;
 	}
 
-	public Long getImLong() {
+	public Double getImLong() {
 		return imLong;
 	}
 
-	public void setImLong(Long imLong) {
+	public void setImLong(Double imLong) {
 		this.imLong = imLong;
 	}
 

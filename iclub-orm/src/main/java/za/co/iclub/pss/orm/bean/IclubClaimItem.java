@@ -25,14 +25,14 @@ public class IclubClaimItem implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -880768550368231930L;
+	private static final long serialVersionUID = -5717386208407242724L;
 	private String ciId;
 	private IclubSupplMaster iclubSupplMasterByCiHandlerId;
 	private IclubInsuranceItem iclubInsuranceItem;
 	private IclubSupplMaster iclubSupplMasterByCiAssesorId;
 	private IclubClaim iclubClaim;
 	private IclubClaimStatus iclubClaimStatus;
-	private Long ciValue;
+	private Double ciValue;
 	private String ciCrtdBy;
 	private Timestamp ciCrtdDt;
 
@@ -48,7 +48,7 @@ public class IclubClaimItem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubClaimItem(String ciId, IclubSupplMaster iclubSupplMasterByCiHandlerId, IclubInsuranceItem iclubInsuranceItem, IclubSupplMaster iclubSupplMasterByCiAssesorId, IclubClaim iclubClaim, IclubClaimStatus iclubClaimStatus, Long ciValue, String ciCrtdBy, Timestamp ciCrtdDt) {
+	public IclubClaimItem(String ciId, IclubSupplMaster iclubSupplMasterByCiHandlerId, IclubInsuranceItem iclubInsuranceItem, IclubSupplMaster iclubSupplMasterByCiAssesorId, IclubClaim iclubClaim, IclubClaimStatus iclubClaimStatus, Double ciValue, String ciCrtdBy, Timestamp ciCrtdDt) {
 		this.ciId = ciId;
 		this.iclubSupplMasterByCiHandlerId = iclubSupplMasterByCiHandlerId;
 		this.iclubInsuranceItem = iclubInsuranceItem;
@@ -122,11 +122,11 @@ public class IclubClaimItem implements java.io.Serializable {
 	}
 
 	@Column(name = "ci_value", precision = 15, scale = 5)
-	public Long getCiValue() {
+	public Double getCiValue() {
 		return this.ciValue;
 	}
 
-	public void setCiValue(Long ciValue) {
+	public void setCiValue(Double ciValue) {
 		this.ciValue = ciValue;
 	}
 

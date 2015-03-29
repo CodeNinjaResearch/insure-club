@@ -25,15 +25,13 @@ public class IclubRateEngine implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8236117222466514401L;
+	private static final long serialVersionUID = 8486951601059001041L;
 	private String reId;
-	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;
 	private IclubRateType iclubRateType;
-	private String reFieldName;
 	private String reBaseValue;
 	private String reMaxValue;
-	private Long reRate;
+	private Double reRate;
 	private String reStatus;
 	private Timestamp reCrtdDt;
 
@@ -49,12 +47,10 @@ public class IclubRateEngine implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateEngine(String reId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubRateType iclubRateType, String reFieldName, String reBaseValue, String reMaxValue, Long reRate, String reStatus, Timestamp reCrtdDt) {
+	public IclubRateEngine(String reId, IclubPerson iclubPerson, IclubRateType iclubRateType, String reBaseValue, String reMaxValue, Double reRate, String reStatus, Timestamp reCrtdDt) {
 		this.reId = reId;
-		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
 		this.iclubRateType = iclubRateType;
-		this.reFieldName = reFieldName;
 		this.reBaseValue = reBaseValue;
 		this.reMaxValue = reMaxValue;
 		this.reRate = reRate;
@@ -71,16 +67,6 @@ public class IclubRateEngine implements java.io.Serializable {
 
 	public void setReId(String reId) {
 		this.reId = reId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "re_insure_item_type_id")
-	public IclubInsuranceItemType getIclubInsuranceItemType() {
-		return this.iclubInsuranceItemType;
-	}
-
-	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
-		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -103,15 +89,6 @@ public class IclubRateEngine implements java.io.Serializable {
 		this.iclubRateType = iclubRateType;
 	}
 
-	@Column(name = "re_field_name", length = 999)
-	public String getReFieldName() {
-		return this.reFieldName;
-	}
-
-	public void setReFieldName(String reFieldName) {
-		this.reFieldName = reFieldName;
-	}
-
 	@Column(name = "re_base_value", length = 999)
 	public String getReBaseValue() {
 		return this.reBaseValue;
@@ -131,11 +108,11 @@ public class IclubRateEngine implements java.io.Serializable {
 	}
 
 	@Column(name = "re_rate", precision = 15, scale = 5)
-	public Long getReRate() {
+	public Double getReRate() {
 		return this.reRate;
 	}
 
-	public void setReRate(Long reRate) {
+	public void setReRate(Double reRate) {
 		this.reRate = reRate;
 	}
 

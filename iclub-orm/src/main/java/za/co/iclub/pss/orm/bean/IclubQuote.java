@@ -30,7 +30,7 @@ public class IclubQuote implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5366586748589479424L;
+	private static final long serialVersionUID = 3397078116894068765L;
 	private String QId;
 	private IclubPerson iclubPersonByQCrtdBy;
 	private IclubPerson iclubPersonByQPersonId;
@@ -41,11 +41,11 @@ public class IclubQuote implements java.io.Serializable {
 	private Long QNumber;
 	private Timestamp QGenDt;
 	private Integer QNumItems;
-	private Long QGenPremium;
+	private Double QGenPremium;
 	private String QEmail;
 	private String QMobile;
 	private Timestamp QValidUntil;
-	private Long QPrevPremium;
+	private Double QPrevPremium;
 	private String QIsMatched;
 	private Timestamp QCrtdDt;
 	private Set<IclubPolicy> iclubPolicies = new HashSet<IclubPolicy>(0);
@@ -63,7 +63,7 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy, IclubPerson iclubPersonByQPersonId, IclubProductType iclubProductType, IclubInsurerMaster iclubInsurerMaster, IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus, Long QNumber, Timestamp QGenDt, Integer QNumItems, Long QGenPremium, String QEmail, String QMobile, Timestamp QValidUntil, Long QPrevPremium, String QIsMatched, Timestamp QCrtdDt, Set<IclubPolicy> iclubPolicies) {
+	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy, IclubPerson iclubPersonByQPersonId, IclubProductType iclubProductType, IclubInsurerMaster iclubInsurerMaster, IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus, Long QNumber, Timestamp QGenDt, Integer QNumItems, Double QGenPremium, String QEmail, String QMobile, Timestamp QValidUntil, Double QPrevPremium, String QIsMatched, Timestamp QCrtdDt, Set<IclubPolicy> iclubPolicies) {
 		this.QId = QId;
 		this.iclubPersonByQCrtdBy = iclubPersonByQCrtdBy;
 		this.iclubPersonByQPersonId = iclubPersonByQPersonId;
@@ -183,11 +183,11 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	@Column(name = "q_gen_premium", precision = 15, scale = 5)
-	public Long getQGenPremium() {
+	public Double getQGenPremium() {
 		return this.QGenPremium;
 	}
 
-	public void setQGenPremium(Long QGenPremium) {
+	public void setQGenPremium(Double QGenPremium) {
 		this.QGenPremium = QGenPremium;
 	}
 
@@ -219,11 +219,11 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	@Column(name = "q_prev_premium", precision = 15, scale = 5)
-	public Long getQPrevPremium() {
+	public Double getQPrevPremium() {
 		return this.QPrevPremium;
 	}
 
-	public void setQPrevPremium(Long QPrevPremium) {
+	public void setQPrevPremium(Double QPrevPremium) {
 		this.QPrevPremium = QPrevPremium;
 	}
 

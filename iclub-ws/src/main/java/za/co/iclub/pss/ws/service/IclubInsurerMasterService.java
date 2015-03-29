@@ -47,6 +47,7 @@ public class IclubInsurerMasterService {
 			iCIm.setImId(iclubCommonDAO.getNextId(IclubInsurerMaster.class));
 			iCIm.setImName(model.getImName());
 			iCIm.setImLat(model.getImLat());
+			iCIm.setImLong(model.getImLong());
 			iCIm.setImTradeName(model.getImTradeName());
 			iCIm.setImRegNum(model.getImRegNum());
 			iCIm.setImLocation(model.getImLocation());
@@ -85,6 +86,7 @@ public class IclubInsurerMasterService {
 			iCIm.setImId(model.getImId());
 			iCIm.setImName(model.getImName());
 			iCIm.setImLat(model.getImLat());
+			iCIm.setImLong(model.getImLong());
 			iCIm.setImTradeName(model.getImTradeName());
 			iCIm.setImRegNum(model.getImRegNum());
 			iCIm.setImLocation(model.getImLocation());
@@ -141,6 +143,7 @@ public class IclubInsurerMasterService {
 				iCIm.setImId(iCIMaster.getImId());
 				iCIm.setImName(iCIMaster.getImName());
 				iCIm.setImLat(iCIMaster.getImLat());
+				iCIm.setImLong(iCIMaster.getImLong());
 				iCIm.setImTradeName(iCIMaster.getImTradeName());
 				iCIm.setImRegNum(iCIMaster.getImRegNum());
 				iCIm.setImLocation(iCIMaster.getImLocation());
@@ -183,6 +186,7 @@ public class IclubInsurerMasterService {
 				iCIm.setImId(iCIMaster.getImId());
 				iCIm.setImName(iCIMaster.getImName());
 				iCIm.setImLat(iCIMaster.getImLat());
+				iCIm.setImLong(iCIMaster.getImLong());
 				iCIm.setImTradeName(iCIMaster.getImTradeName());
 				iCIm.setImRegNum(iCIMaster.getImRegNum());
 				iCIm.setImLocation(iCIMaster.getImLocation());
@@ -218,12 +222,13 @@ public class IclubInsurerMasterService {
 			model.setImId(bean.getImId());
 			model.setImName(bean.getImName());
 			model.setImLat(bean.getImLat());
+			model.setImLong(bean.getImLong());
 			model.setImTradeName(bean.getImTradeName());
 			model.setImRegNum(bean.getImRegNum());
 			model.setImLocation(bean.getImLocation());
 			model.setImCrtdDt(bean.getImCrtdDt());
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			
+
 			if (bean.getIclubQuotes() != null && bean.getIclubQuotes().size() > 0) {
 				String[] iclubQuotes = new String[bean.getIclubQuotes().size()];
 				int i = 0;

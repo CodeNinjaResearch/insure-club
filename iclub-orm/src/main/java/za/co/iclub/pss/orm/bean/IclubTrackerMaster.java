@@ -30,14 +30,14 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5669057725433825466L;
+	private static final long serialVersionUID = -1058814697847773963L;
 	private Long tmId;
 	private IclubPerson iclubPerson;
 	private String tmName;
 	private String tmTradeName;
 	private String tmLocation;
-	private Long tmLat;
-	private Long tmLong;
+	private Double tmLat;
+	private Double tmLong;
 	private String tmRegNum;
 	private Timestamp tmCrtdDt;
 	private Set<IclubSecurityDevice> iclubSecurityDevices = new HashSet<IclubSecurityDevice>(0);
@@ -54,7 +54,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubTrackerMaster(Long tmId, IclubPerson iclubPerson, String tmName, String tmTradeName, String tmLocation, Long tmLat, Long tmLong, String tmRegNum, Timestamp tmCrtdDt, Set<IclubSecurityDevice> iclubSecurityDevices) {
+	public IclubTrackerMaster(Long tmId, IclubPerson iclubPerson, String tmName, String tmTradeName, String tmLocation, Double tmLat, Double tmLong, String tmRegNum, Timestamp tmCrtdDt, Set<IclubSecurityDevice> iclubSecurityDevices) {
 		this.tmId = tmId;
 		this.iclubPerson = iclubPerson;
 		this.tmName = tmName;
@@ -116,20 +116,20 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "tm_lat", precision = 10, scale = 7)
-	public Long getTmLat() {
+	public Double getTmLat() {
 		return this.tmLat;
 	}
 
-	public void setTmLat(Long tmLat) {
+	public void setTmLat(Double tmLat) {
 		this.tmLat = tmLat;
 	}
 
 	@Column(name = "tm_long", precision = 10, scale = 7)
-	public Long getTmLong() {
+	public Double getTmLong() {
 		return this.tmLong;
 	}
 
-	public void setTmLong(Long tmLong) {
+	public void setTmLong(Double tmLong) {
 		this.tmLong = tmLong;
 	}
 

@@ -33,14 +33,15 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -991980648399076007L;
+	private static final long serialVersionUID = 6828650659263776074L;
 	private Long vmId;
 	private IclubPerson iclubPerson;
 	private String vmMake;
 	private String vmModel;
-	private Long vmOrigRate;
-	private Long vmMrktRate;
-	private Long vmRetRate;
+	private Double vmOrigRate;
+	private Double vmMrktRate;
+	private Double vmRetRate;
+	private Double vmRatePrct;
 	private Date vmProdDt;
 	private Timestamp vmCrtdDt;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
@@ -57,7 +58,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson, String vmMake, String vmModel, Long vmOrigRate, Long vmMrktRate, Long vmRetRate, Date vmProdDt, Timestamp vmCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson, String vmMake, String vmModel, Double vmOrigRate, Double vmMrktRate, Double vmRetRate, Double vmRatePrct, Date vmProdDt, Timestamp vmCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.vmId = vmId;
 		this.iclubPerson = iclubPerson;
 		this.vmMake = vmMake;
@@ -65,6 +66,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 		this.vmOrigRate = vmOrigRate;
 		this.vmMrktRate = vmMrktRate;
 		this.vmRetRate = vmRetRate;
+		this.vmRatePrct = vmRatePrct;
 		this.vmProdDt = vmProdDt;
 		this.vmCrtdDt = vmCrtdDt;
 		this.iclubVehicles = iclubVehicles;
@@ -110,30 +112,39 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "vm_orig_rate", precision = 15, scale = 5)
-	public Long getVmOrigRate() {
+	public Double getVmOrigRate() {
 		return this.vmOrigRate;
 	}
 
-	public void setVmOrigRate(Long vmOrigRate) {
+	public void setVmOrigRate(Double vmOrigRate) {
 		this.vmOrigRate = vmOrigRate;
 	}
 
 	@Column(name = "vm_mrkt_rate", precision = 15, scale = 5)
-	public Long getVmMrktRate() {
+	public Double getVmMrktRate() {
 		return this.vmMrktRate;
 	}
 
-	public void setVmMrktRate(Long vmMrktRate) {
+	public void setVmMrktRate(Double vmMrktRate) {
 		this.vmMrktRate = vmMrktRate;
 	}
 
 	@Column(name = "vm_ret_rate", precision = 15, scale = 5)
-	public Long getVmRetRate() {
+	public Double getVmRetRate() {
 		return this.vmRetRate;
 	}
 
-	public void setVmRetRate(Long vmRetRate) {
+	public void setVmRetRate(Double vmRetRate) {
 		this.vmRetRate = vmRetRate;
+	}
+
+	@Column(name = "vm_rate_prct", precision = 4)
+	public Double getVmRatePrct() {
+		return this.vmRatePrct;
+	}
+
+	public void setVmRatePrct(Double vmRatePrct) {
+		this.vmRatePrct = vmRatePrct;
 	}
 
 	@Temporal(TemporalType.DATE)

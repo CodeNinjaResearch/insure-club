@@ -14,8 +14,8 @@ public class IclubBankMasterModel {
 	private String bmBranchName;
 	private Integer bmBranchCode;
 	private String bmBranchAddress;
-	private Long bmBranchLat;
-	private Long bmBranchLong;
+	private Double bmBranchLat;
+	private Double bmBranchLong;
 	private Integer bmBranchZip;
 	private Timestamp bmCrtdDt;
 	private String[] iclubAccounts;
@@ -76,19 +76,19 @@ public class IclubBankMasterModel {
 		this.bmBranchAddress = bmBranchAddress;
 	}
 
-	public Long getBmBranchLat() {
+	public Double getBmBranchLat() {
 		return bmBranchLat;
 	}
 
-	public void setBmBranchLat(Long bmBranchLat) {
+	public void setBmBranchLat(Double bmBranchLat) {
 		this.bmBranchLat = bmBranchLat;
 	}
 
-	public Long getBmBranchLong() {
+	public Double getBmBranchLong() {
 		return bmBranchLong;
 	}
 
-	public void setBmBranchLong(Long bmBranchLong) {
+	public void setBmBranchLong(Double bmBranchLong) {
 		this.bmBranchLong = bmBranchLong;
 	}
 

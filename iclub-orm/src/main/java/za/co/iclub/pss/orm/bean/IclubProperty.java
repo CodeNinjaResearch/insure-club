@@ -25,7 +25,7 @@ public class IclubProperty implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2541992080633137713L;
+	private static final long serialVersionUID = 1225996941334011293L;
 	private String PId;
 	private IclubCoverType iclubCoverType;
 	private IclubPurposeType iclubPurposeType;
@@ -47,7 +47,7 @@ public class IclubProperty implements java.io.Serializable {
 	private String PCompYn;
 	private String PNorobberyYn;
 	private String PSecGatesYn;
-	private Long PEstValue;
+	private Double PEstValue;
 	private Timestamp PCrtdDt;
 
 	// Constructors
@@ -62,7 +62,7 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubPurposeType iclubPurposeType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Long PEstValue, Timestamp PCrtdDt) {
+	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubPurposeType iclubPurposeType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Double PEstValue, Timestamp PCrtdDt) {
 		this.PId = PId;
 		this.iclubCoverType = iclubCoverType;
 		this.iclubPurposeType = iclubPurposeType;
@@ -290,11 +290,11 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	@Column(name = "p_est_value", precision = 15, scale = 5)
-	public Long getPEstValue() {
+	public Double getPEstValue() {
 		return this.PEstValue;
 	}
 
-	public void setPEstValue(Long PEstValue) {
+	public void setPEstValue(Double PEstValue) {
 		this.PEstValue = PEstValue;
 	}
 

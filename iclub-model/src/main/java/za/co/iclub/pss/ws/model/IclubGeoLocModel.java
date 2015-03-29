@@ -10,9 +10,9 @@ public class IclubGeoLocModel {
 	private Long glId;
 	private String iclubPerson;
 	private String glAddress;
-	private Long glLat;
-	private Long glLong;
-	private Long glRate;
+	private Double glLat;
+	private Double glLong;
+	private Double glRate;
 	private Timestamp glCrtdDt;
 	private String glKey; 
 
@@ -40,27 +40,27 @@ public class IclubGeoLocModel {
 		this.glAddress = glAddress;
 	}
 
-	public Long getGlLat() {
+	public Double getGlLat() {
 		return glLat;
 	}
 
-	public void setGlLat(Long glLat) {
+	public void setGlLat(Double glLat) {
 		this.glLat = glLat;
 	}
 
-	public Long getGlLong() {
+	public Double getGlLong() {
 		return glLong;
 	}
 
-	public void setGlLong(Long glLong) {
+	public void setGlLong(Double glLong) {
 		this.glLong = glLong;
 	}
 
-	public Long getGlRate() {
+	public Double getGlRate() {
 		return glRate;
 	}
 
-	public void setGlRate(Long glRate) {
+	public void setGlRate(Double glRate) {
 		this.glRate = glRate;
 	}
 

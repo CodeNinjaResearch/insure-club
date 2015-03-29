@@ -13,7 +13,7 @@ public class IclubSupplMasterBean {
 	private String smAddress;
 	private Double smLat;
 	private Double smLong;
-	private Long smCrLimit;
+	private Double smCrLimit;
 	private Date srActionDt;
 	private Integer smRating;
 	private Date smCrtdDt;
@@ -92,11 +92,11 @@ public class IclubSupplMasterBean {
 		this.smLong = smLong;
 	}
 
-	public Long getSmCrLimit() {
+	public Double getSmCrLimit() {
 		return smCrLimit;
 	}
 
-	public void setSmCrLimit(Long smCrLimit) {
+	public void setSmCrLimit(Double smCrLimit) {
 		this.smCrLimit = smCrLimit;
 	}
 

@@ -52,8 +52,6 @@ public class IclubRateEngineService {
 			iCt.setReStatus(model.getReStatus());
 			iCt.setReMaxValue(model.getReMaxValue());
 			iCt.setReBaseValue(model.getReBaseValue());
-			iCt.setReFieldName(model.getReFieldName());
-			iCt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null  ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iCt.setIclubRateType(model.getIclubRateType() != null  ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
 			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			
@@ -90,8 +88,6 @@ public class IclubRateEngineService {
 			iCt.setReStatus(model.getReStatus());
 			iCt.setReMaxValue(model.getReMaxValue());
 			iCt.setReBaseValue(model.getReBaseValue());
-			iCt.setReFieldName(model.getReFieldName());
-			iCt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null  ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iCt.setIclubRateType(model.getIclubRateType() != null  ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
 			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			
@@ -150,8 +146,6 @@ public class IclubRateEngineService {
 				model.setReStatus(iCt.getReStatus());
 				model.setReMaxValue(iCt.getReMaxValue());
 				model.setReBaseValue(iCt.getReBaseValue());
-				model.setReFieldName(iCt.getReFieldName());
-				model.setIclubInsuranceItemType(iCt.getIclubInsuranceItemType() != null ? (iCt.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
 				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
@@ -185,8 +179,6 @@ public class IclubRateEngineService {
 				model.setReStatus(iCt.getReStatus());
 				model.setReMaxValue(iCt.getReMaxValue());
 				model.setReBaseValue(iCt.getReBaseValue());
-				model.setReFieldName(iCt.getReFieldName());
-				model.setIclubInsuranceItemType(iCt.getIclubInsuranceItemType() != null ? (iCt.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
 				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
@@ -214,8 +206,6 @@ public class IclubRateEngineService {
 			model.setReStatus(bean.getReStatus());
 			model.setReMaxValue(bean.getReMaxValue());
 			model.setReBaseValue(bean.getReBaseValue());
-			model.setReFieldName(bean.getReFieldName());
-			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
 			model.setIclubRateType(bean.getIclubRateType() != null ? (bean.getIclubRateType().getRtId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 

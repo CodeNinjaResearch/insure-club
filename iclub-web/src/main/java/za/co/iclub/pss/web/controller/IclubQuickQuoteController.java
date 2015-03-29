@@ -491,11 +491,11 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setQId(UUID.randomUUID().toString());
 		model.setQCrtdDt(new Timestamp(System.currentTimeMillis()));
 		model.setQIsMatched("N");
-		model.setQPrevPremium(0l);
+		model.setQPrevPremium(0.0d);
 		model.setQValidUntil(new Timestamp(System.currentTimeMillis()));
 		model.setQMobile(personModel.getPMobile());
 		model.setQEmail(personModel.getPEmail());
-		model.setQGenPremium(0l);
+		model.setQGenPremium(0.0d);
 		model.setQNumItems(2);
 		model.setQGenDt(new Timestamp(System.currentTimeMillis()));
 

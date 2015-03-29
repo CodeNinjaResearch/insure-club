@@ -25,14 +25,14 @@ public class IclubPayment implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7471030628228469297L;
+	private static final long serialVersionUID = -2317371728221000984L;
 	private String PId;
 	private IclubPolicy iclubPolicy;
 	private IclubPerson iclubPerson;
 	private IclubClaim iclubClaim;
 	private IclubAccount iclubAccount;
 	private IclubPaymentStatus iclubPaymentStatus;
-	private Long PValue;
+	private Double PValue;
 	private String PDrCrInd;
 	private Timestamp PGenDt;
 	private Timestamp PCrtdDt;
@@ -49,7 +49,7 @@ public class IclubPayment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPayment(String PId, IclubPolicy iclubPolicy, IclubPerson iclubPerson, IclubClaim iclubClaim, IclubAccount iclubAccount, IclubPaymentStatus iclubPaymentStatus, Long PValue, String PDrCrInd, Timestamp PGenDt, Timestamp PCrtdDt) {
+	public IclubPayment(String PId, IclubPolicy iclubPolicy, IclubPerson iclubPerson, IclubClaim iclubClaim, IclubAccount iclubAccount, IclubPaymentStatus iclubPaymentStatus, Double PValue, String PDrCrInd, Timestamp PGenDt, Timestamp PCrtdDt) {
 		this.PId = PId;
 		this.iclubPolicy = iclubPolicy;
 		this.iclubPerson = iclubPerson;
@@ -124,11 +124,11 @@ public class IclubPayment implements java.io.Serializable {
 	}
 
 	@Column(name = "p_value", precision = 15, scale = 5)
-	public Long getPValue() {
+	public Double getPValue() {
 		return this.PValue;
 	}
 
-	public void setPValue(Long PValue) {
+	public void setPValue(Double PValue) {
 		this.PValue = PValue;
 	}
 

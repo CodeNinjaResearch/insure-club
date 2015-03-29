@@ -11,8 +11,8 @@ public class IclubPolicyModel {
 	private String iclubPerson;
 	private String iclubAccount;
 	private Long PNumber;
-	private Long PPremium;
-	private Long PProrataPrm;
+	private Double PPremium;
+	private Double PProrataPrm;
 	private Integer PDebitDt;
 	private String PCrtdDt;
 	private String[] iclubClaims;
@@ -66,19 +66,19 @@ public class IclubPolicyModel {
 		PNumber = pNumber;
 	}
 
-	public Long getPPremium() {
+	public Double getPPremium() {
 		return PPremium;
 	}
 
-	public void setPPremium(Long pPremium) {
+	public void setPPremium(Double pPremium) {
 		PPremium = pPremium;
 	}
 
-	public Long getPProrataPrm() {
+	public Double getPProrataPrm() {
 		return PProrataPrm;
 	}
 
-	public void setPProrataPrm(Long pProrataPrm) {
+	public void setPProrataPrm(Double pProrataPrm) {
 		PProrataPrm = pProrataPrm;
 	}
 

@@ -13,7 +13,7 @@ public class IclubClaimItemModel {
 	private String iclubSupplMasterByCiAssesorId;
 	private String iclubClaim;
 	private Long iclubClaimStatus;
-	private Long ciValue;
+	private Double ciValue;
 	private String ciCrtdBy;
 	private Timestamp ciCrtdDt;
 
@@ -65,11 +65,11 @@ public class IclubClaimItemModel {
 		this.iclubClaimStatus = iclubClaimStatus;
 	}
 
-	public Long getCiValue() {
+	public Double getCiValue() {
 		return ciValue;
 	}
 
-	public void setCiValue(Long ciValue) {
+	public void setCiValue(Double ciValue) {
 		this.ciValue = ciValue;
 	}
 

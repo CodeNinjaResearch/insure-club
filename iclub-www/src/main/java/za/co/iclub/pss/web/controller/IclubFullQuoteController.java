@@ -706,8 +706,8 @@ public class IclubFullQuoteController implements Serializable {
 			bean = new IclubPolicyBean();
 		}
 
-		model.setPProrataPrm(0l);
-		model.setPPremium(0l);
+		model.setPProrataPrm(0.0d);
+		model.setPPremium(0.0d);
 		model.setPNumber(quoteModel.getQNumber());
 		model.setPDebitDt(debitDate != null && debitMonth != null ? Integer.parseInt(debitDate + debitMonth) : null);
 		model.setPCrtdDt((new Timestamp(System.currentTimeMillis())).toString());
@@ -774,11 +774,11 @@ public class IclubFullQuoteController implements Serializable {
 		model.setQId(bean.getQId());
 		model.setQCrtdDt(new Timestamp(System.currentTimeMillis()));
 		model.setQIsMatched("N");
-		model.setQPrevPremium(0l);
+		model.setQPrevPremium(0.0d);
 		model.setQValidUntil(new Timestamp(System.currentTimeMillis()));
 		model.setQMobile(personModel.getPMobile());
 		model.setQEmail(personModel.getPEmail());
-		model.setQGenPremium(0l);
+		model.setQGenPremium(0.0d);
 		model.setQNumItems(2);
 		model.setQGenDt(new Timestamp(System.currentTimeMillis()));
 

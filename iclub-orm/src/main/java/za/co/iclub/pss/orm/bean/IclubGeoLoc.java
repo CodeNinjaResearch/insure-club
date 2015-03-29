@@ -25,14 +25,14 @@ public class IclubGeoLoc implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 509313853940529348L;
+	private static final long serialVersionUID = -5619528734859414363L;
 	private Long glId;
 	private IclubPerson iclubPerson;
 	private String glKey;
 	private String glAddress;
-	private Long glLat;
-	private Long glLong;
-	private Long glRate;
+	private Double glLat;
+	private Double glLong;
+	private Double glRate;
 	private Timestamp glCrtdDt;
 
 	// Constructors
@@ -47,7 +47,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glKey, String glAddress, Long glLat, Long glLong, Long glRate, Timestamp glCrtdDt) {
+	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glKey, String glAddress, Double glLat, Double glLong, Double glRate, Timestamp glCrtdDt) {
 		this.glId = glId;
 		this.iclubPerson = iclubPerson;
 		this.glKey = glKey;
@@ -81,7 +81,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 
 	@Column(name = "gl_key", length = 450)
 	public String getGlKey() {
-		return glKey;
+		return this.glKey;
 	}
 
 	public void setGlKey(String glKey) {
@@ -98,29 +98,29 @@ public class IclubGeoLoc implements java.io.Serializable {
 	}
 
 	@Column(name = "gl_lat", precision = 10, scale = 7)
-	public Long getGlLat() {
+	public Double getGlLat() {
 		return this.glLat;
 	}
 
-	public void setGlLat(Long glLat) {
+	public void setGlLat(Double glLat) {
 		this.glLat = glLat;
 	}
 
 	@Column(name = "gl_long", precision = 10, scale = 7)
-	public Long getGlLong() {
+	public Double getGlLong() {
 		return this.glLong;
 	}
 
-	public void setGlLong(Long glLong) {
+	public void setGlLong(Double glLong) {
 		this.glLong = glLong;
 	}
 
 	@Column(name = "gl_rate", precision = 15, scale = 5)
-	public Long getGlRate() {
+	public Double getGlRate() {
 		return this.glRate;
 	}
 
-	public void setGlRate(Long glRate) {
+	public void setGlRate(Double glRate) {
 		this.glRate = glRate;
 	}
 

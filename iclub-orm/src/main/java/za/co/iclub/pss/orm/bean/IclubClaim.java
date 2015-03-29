@@ -29,14 +29,14 @@ public class IclubClaim implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1865079113835270691L;
+	private static final long serialVersionUID = -7065366325175419740L;
 	private String CId;
 	private IclubPerson iclubPerson;
 	private IclubClaimStatus iclubClaimStatus;
 	private IclubPolicy iclubPolicy;
 	private Long CNumber;
 	private Integer CNumItems;
-	private Long CValue;
+	private Double CValue;
 	private Timestamp CCrtdDt;
 	private Set<IclubPayment> iclubPayments = new HashSet<IclubPayment>(0);
 	private Set<IclubClaimItem> iclubClaimItems = new HashSet<IclubClaimItem>(0);
@@ -53,7 +53,7 @@ public class IclubClaim implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubClaim(String CId, IclubPerson iclubPerson, IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy, Long CNumber, Integer CNumItems, Long CValue, Timestamp CCrtdDt, Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
+	public IclubClaim(String CId, IclubPerson iclubPerson, IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy, Long CNumber, Integer CNumItems, Double CValue, Timestamp CCrtdDt, Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
 		this.CId = CId;
 		this.iclubPerson = iclubPerson;
 		this.iclubClaimStatus = iclubClaimStatus;
@@ -126,11 +126,11 @@ public class IclubClaim implements java.io.Serializable {
 	}
 
 	@Column(name = "c_value", precision = 15, scale = 5)
-	public Long getCValue() {
+	public Double getCValue() {
 		return this.CValue;
 	}
 
-	public void setCValue(Long CValue) {
+	public void setCValue(Double CValue) {
 		this.CValue = CValue;
 	}
 

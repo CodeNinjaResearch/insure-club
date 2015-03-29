@@ -30,14 +30,14 @@ public class IclubInsurerMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3767283760849227701L;
+	private static final long serialVersionUID = -4137448027884551871L;
 	private Long imId;
 	private IclubPerson iclubPerson;
 	private String imName;
 	private String imTradeName;
 	private String imLocation;
-	private Long imLat;
-	private Long imLong;
+	private Double imLat;
+	private Double imLong;
 	private String imRegNum;
 	private Timestamp imCrtdDt;
 	private Set<IclubQuote> iclubQuotes = new HashSet<IclubQuote>(0);
@@ -54,7 +54,7 @@ public class IclubInsurerMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubInsurerMaster(Long imId, IclubPerson iclubPerson, String imName, String imTradeName, String imLocation, Long imLat, Long imLong, String imRegNum, Timestamp imCrtdDt, Set<IclubQuote> iclubQuotes) {
+	public IclubInsurerMaster(Long imId, IclubPerson iclubPerson, String imName, String imTradeName, String imLocation, Double imLat, Double imLong, String imRegNum, Timestamp imCrtdDt, Set<IclubQuote> iclubQuotes) {
 		this.imId = imId;
 		this.iclubPerson = iclubPerson;
 		this.imName = imName;
@@ -116,20 +116,20 @@ public class IclubInsurerMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "im_lat", precision = 10, scale = 7)
-	public Long getImLat() {
+	public Double getImLat() {
 		return this.imLat;
 	}
 
-	public void setImLat(Long imLat) {
+	public void setImLat(Double imLat) {
 		this.imLat = imLat;
 	}
 
 	@Column(name = "im_long", precision = 10, scale = 7)
-	public Long getImLong() {
+	public Double getImLong() {
 		return this.imLong;
 	}
 
-	public void setImLong(Long imLong) {
+	public void setImLong(Double imLong) {
 		this.imLong = imLong;
 	}
 

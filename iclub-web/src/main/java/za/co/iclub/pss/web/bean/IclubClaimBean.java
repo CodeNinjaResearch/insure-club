@@ -4,16 +4,13 @@ import java.sql.Timestamp;
 
 public class IclubClaimBean {
 
-	
-	
-	
 	private String CId;
 	private String iclubPerson;
 	private Long iclubClaimStatus;
 	private String iclubPolicy;
 	private Long CNumber;
 	private Integer CNumItems;
-	private Long CValue;
+	private Double CValue;
 	private Timestamp CCrtdDt;
 	private String[] iclubPayments;
 	private String[] iclubClaimItems;
@@ -66,11 +63,11 @@ public class IclubClaimBean {
 		CNumItems = cNumItems;
 	}
 
-	public Long getCValue() {
+	public Double getCValue() {
 		return CValue;
 	}
 
-	public void setCValue(Long cValue) {
+	public void setCValue(Double cValue) {
 		CValue = cValue;
 	}
 

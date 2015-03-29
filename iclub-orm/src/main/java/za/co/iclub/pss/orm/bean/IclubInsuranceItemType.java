@@ -26,7 +26,7 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7415607150449851877L;
+	private static final long serialVersionUID = 4606204710234427722L;
 	private Long iitId;
 	private String iitShortDesc;
 	private String iitLongDesc;
@@ -35,7 +35,6 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 	private Set<IclubSecurityDevice> iclubSecurityDevices = new HashSet<IclubSecurityDevice>(0);
 	private Set<IclubSecurityMaster> iclubSecurityMasters = new HashSet<IclubSecurityMaster>(0);
 	private Set<IclubPurposeType> iclubPurposeTypes = new HashSet<IclubPurposeType>(0);
-	private Set<IclubRateEngine> iclubRateEngines = new HashSet<IclubRateEngine>(0);
 	private Set<IclubInsuranceItem> iclubInsuranceItems = new HashSet<IclubInsuranceItem>(0);
 	private Set<IclubInsuranceItem> iclubInsuranceItems_1 = new HashSet<IclubInsuranceItem>(0);
 	private Set<IclubCoverType> iclubCoverTypes = new HashSet<IclubCoverType>(0);
@@ -52,7 +51,7 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubInsuranceItemType(Long iitId, String iitShortDesc, String iitLongDesc, String iitStatus, Set<IclubRateType> iclubRateTypes, Set<IclubSecurityDevice> iclubSecurityDevices, Set<IclubSecurityMaster> iclubSecurityMasters, Set<IclubPurposeType> iclubPurposeTypes, Set<IclubRateEngine> iclubRateEngines, Set<IclubInsuranceItem> iclubInsuranceItems, Set<IclubInsuranceItem> iclubInsuranceItems_1, Set<IclubCoverType> iclubCoverTypes) {
+	public IclubInsuranceItemType(Long iitId, String iitShortDesc, String iitLongDesc, String iitStatus, Set<IclubRateType> iclubRateTypes, Set<IclubSecurityDevice> iclubSecurityDevices, Set<IclubSecurityMaster> iclubSecurityMasters, Set<IclubPurposeType> iclubPurposeTypes, Set<IclubInsuranceItem> iclubInsuranceItems, Set<IclubInsuranceItem> iclubInsuranceItems_1, Set<IclubCoverType> iclubCoverTypes) {
 		this.iitId = iitId;
 		this.iitShortDesc = iitShortDesc;
 		this.iitLongDesc = iitLongDesc;
@@ -61,7 +60,6 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 		this.iclubSecurityDevices = iclubSecurityDevices;
 		this.iclubSecurityMasters = iclubSecurityMasters;
 		this.iclubPurposeTypes = iclubPurposeTypes;
-		this.iclubRateEngines = iclubRateEngines;
 		this.iclubInsuranceItems = iclubInsuranceItems;
 		this.iclubInsuranceItems_1 = iclubInsuranceItems_1;
 		this.iclubCoverTypes = iclubCoverTypes;
@@ -139,15 +137,6 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 
 	public void setIclubPurposeTypes(Set<IclubPurposeType> iclubPurposeTypes) {
 		this.iclubPurposeTypes = iclubPurposeTypes;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsuranceItemType")
-	public Set<IclubRateEngine> getIclubRateEngines() {
-		return this.iclubRateEngines;
-	}
-
-	public void setIclubRateEngines(Set<IclubRateEngine> iclubRateEngines) {
-		this.iclubRateEngines = iclubRateEngines;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsuranceItemType")

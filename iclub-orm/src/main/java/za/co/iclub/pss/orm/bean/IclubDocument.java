@@ -25,7 +25,7 @@ public class IclubDocument implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5595608254237216420L;
+	private static final long serialVersionUID = -2606352964056689028L;
 	private String DId;
 	private IclubDocumentType iclubDocumentType;
 	private IclubPerson iclubPerson;
@@ -50,7 +50,7 @@ public class IclubDocument implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String DName, String DMimeType, Long DSize, String DEntityId, String DContent, Timestamp DCrtdDt) {
+	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String DName, String DMimeType, Long DSize, String DEntityId, String DContent, Timestamp DCrtdDt, byte[] DBlob) {
 		this.DId = DId;
 		this.iclubDocumentType = iclubDocumentType;
 		this.iclubPerson = iclubPerson;
@@ -61,6 +61,7 @@ public class IclubDocument implements java.io.Serializable {
 		this.DEntityId = DEntityId;
 		this.DContent = DContent;
 		this.DCrtdDt = DCrtdDt;
+		this.DBlob = DBlob;
 	}
 
 	// Property accessors
@@ -160,11 +161,11 @@ public class IclubDocument implements java.io.Serializable {
 
 	@Column(name = "d_blob")
 	public byte[] getDBlob() {
-		return DBlob;
+		return this.DBlob;
 	}
 
-	public void setDBlob(byte[] dBlob) {
-		DBlob = dBlob;
+	public void setDBlob(byte[] DBlob) {
+		this.DBlob = DBlob;
 	}
 
 }

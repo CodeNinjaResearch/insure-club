@@ -20,12 +20,14 @@ public class IclubField implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1910592171729543072L;
+	private static final long serialVersionUID = -3822582989563007101L;
 	private Long FId;
 	private IclubEntityType iclubEntityType;
 	private String FName;
 	private String FDesc;
 	private String FType;
+	private String FLTblName;
+	private String FRate;
 	private String FStatus;
 
 	// Constructors
@@ -40,12 +42,14 @@ public class IclubField implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubField(Long FId, IclubEntityType iclubEntityType, String FName, String FDesc, String FType, String FStatus) {
+	public IclubField(Long FId, IclubEntityType iclubEntityType, String FName, String FDesc, String FType, String FLTblName, String FRate, String FStatus) {
 		this.FId = FId;
 		this.iclubEntityType = iclubEntityType;
 		this.FName = FName;
 		this.FDesc = FDesc;
 		this.FType = FType;
+		this.FLTblName = FLTblName;
+		this.FRate = FRate;
 		this.FStatus = FStatus;
 	}
 
@@ -95,6 +99,24 @@ public class IclubField implements java.io.Serializable {
 
 	public void setFType(String FType) {
 		this.FType = FType;
+	}
+
+	@Column(name = "f_l_tbl_name", length = 450)
+	public String getFLTblName() {
+		return this.FLTblName;
+	}
+
+	public void setFLTblName(String FLTblName) {
+		this.FLTblName = FLTblName;
+	}
+
+	@Column(name = "f_rate", length = 1)
+	public String getFRate() {
+		return this.FRate;
+	}
+
+	public void setFRate(String FRate) {
+		this.FRate = FRate;
 	}
 
 	@Column(name = "f_status", length = 1)

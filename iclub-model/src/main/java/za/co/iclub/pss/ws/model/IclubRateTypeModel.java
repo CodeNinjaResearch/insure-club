@@ -13,7 +13,7 @@ public class IclubRateTypeModel {
 	private Long iclubEntityType;
 	private String rtShortDesc;
 	private String rtLongDesc;
-	private Long rtFieldNm;
+	private String rtFieldNm;
 	private String rtStatus;
 	private String rtType;
 	private String rtQuoteType;
@@ -68,11 +68,11 @@ public class IclubRateTypeModel {
 		this.rtLongDesc = rtLongDesc;
 	}
 
-	public Long getRtFieldNm() {
+	public String getRtFieldNm() {
 		return rtFieldNm;
 	}
 
-	public void setRtFieldNm(Long rtFieldNm) {
+	public void setRtFieldNm(String rtFieldNm) {
 		this.rtFieldNm = rtFieldNm;
 	}
 

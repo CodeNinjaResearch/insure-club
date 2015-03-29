@@ -17,7 +17,7 @@ public class IclubSupplMasterModel {
 	private String smAddress;
 	private Double smLat;
 	private Double smLong;
-	private Long smCrLimit;
+	private Double smCrLimit;
 	private Date srActionDt;
 	private Integer smRating;
 	private Timestamp smCrtdDt;
@@ -96,11 +96,11 @@ public class IclubSupplMasterModel {
 		this.smLong = smLong;
 	}
 
-	public Long getSmCrLimit() {
+	public Double getSmCrLimit() {
 		return smCrLimit;
 	}
 
-	public void setSmCrLimit(Long smCrLimit) {
+	public void setSmCrLimit(Double smCrLimit) {
 		this.smCrLimit = smCrLimit;
 	}
 

@@ -14,11 +14,11 @@ public class IclubQuoteBean {
 	private Long QNumber;
 	private Timestamp QGenDt;
 	private Integer QNumItems;
-	private Long QGenPremium;
+	private Double QGenPremium;
 	private String QEmail;
 	private String QMobile;
 	private Timestamp QValidUntil;
-	private Long QPrevPremium;
+	private Double QPrevPremium;
 	private String QIsMatched;
 	private Timestamp QCrtdDt;
 	private String[] iclubPolicies;
@@ -103,11 +103,11 @@ public class IclubQuoteBean {
 		QNumItems = qNumItems;
 	}
 
-	public Long getQGenPremium() {
+	public Double getQGenPremium() {
 		return QGenPremium;
 	}
 
-	public void setQGenPremium(Long qGenPremium) {
+	public void setQGenPremium(Double qGenPremium) {
 		QGenPremium = qGenPremium;
 	}
 
@@ -135,11 +135,11 @@ public class IclubQuoteBean {
 		QValidUntil = qValidUntil;
 	}
 
-	public Long getQPrevPremium() {
+	public Double getQPrevPremium() {
 		return QPrevPremium;
 	}
 
-	public void setQPrevPremium(Long qPrevPremium) {
+	public void setQPrevPremium(Double qPrevPremium) {
 		QPrevPremium = qPrevPremium;
 	}
 

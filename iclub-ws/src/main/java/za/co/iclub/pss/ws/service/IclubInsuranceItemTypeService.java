@@ -21,7 +21,6 @@ import za.co.iclub.pss.orm.bean.IclubCoverType;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
 import za.co.iclub.pss.orm.bean.IclubPurposeType;
-import za.co.iclub.pss.orm.bean.IclubRateEngine;
 import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
 import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
@@ -136,7 +135,7 @@ public class IclubInsuranceItemTypeService {
 				model.setIitLongDesc(iIit.getIitLongDesc());
 				model.setIitShortDesc(iIit.getIitShortDesc());
 				model.setIitStatus(iIit.getIitStatus());
-				
+
 				if (iIit.getIclubSecurityMasters() != null && iIit.getIclubSecurityMasters().size() > 0) {
 					String[] iclubSecurityMasters = new String[iIit.getIclubSecurityMasters().size()];
 					int i = 0;
@@ -166,16 +165,6 @@ public class IclubInsuranceItemTypeService {
 					}
 					model.setIclubSecurityDevices(iclubSecurityDevices);
 				}
-				if (iIit.getIclubRateEngines() != null && iIit.getIclubRateEngines().size() > 0) {
-					String[] iclubRateEngines = new String[iIit.getIclubRateEngines().size()];
-					int i = 0;
-					for (IclubRateEngine iclubRateEngine : iIit.getIclubRateEngines()) {
-						iclubRateEngines[i] = iclubRateEngine.getReId();
-						i++;
-					}
-					model.setIclubRateEngines(iclubRateEngines);
-				}
-
 				if (iIit.getIclubPurposeTypes() != null && iIit.getIclubPurposeTypes().size() > 0) {
 					Long[] purposeTypes = new Long[iIit.getIclubPurposeTypes().size()];
 					int i = 0;
@@ -267,16 +256,6 @@ public class IclubInsuranceItemTypeService {
 				}
 				model.setIclubSecurityDevices(iclubSecurityDevices);
 			}
-			if (bean.getIclubRateEngines() != null && bean.getIclubRateEngines().size() > 0) {
-				String[] iclubRateEngines = new String[bean.getIclubRateEngines().size()];
-				int i = 0;
-				for (IclubRateEngine iclubRateEngine : bean.getIclubRateEngines()) {
-					iclubRateEngines[i] = iclubRateEngine.getReId();
-					i++;
-				}
-				model.setIclubRateEngines(iclubRateEngines);
-			}
-
 			if (bean.getIclubPurposeTypes() != null && bean.getIclubPurposeTypes().size() > 0) {
 				Long[] purposeTypes = new Long[bean.getIclubPurposeTypes().size()];
 				int i = 0;

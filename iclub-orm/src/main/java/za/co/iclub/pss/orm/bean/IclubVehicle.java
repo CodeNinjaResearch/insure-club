@@ -25,7 +25,7 @@ public class IclubVehicle implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -9151297193348935652L;
+	private static final long serialVersionUID = -2857479614884547139L;
 	private String VId;
 	private IclubPurposeType iclubPurposeType;
 	private IclubSecurityMaster iclubSecurityMaster;
@@ -43,8 +43,8 @@ public class IclubVehicle implements java.io.Serializable {
 	private Double VDdLat;
 	private Double VDdLong;
 	private Integer VYear;
-	private Long VInsuredValue;
-	private Long VConcessPrct;
+	private Double VInsuredValue;
+	private Double VConcessPrct;
 	private String VConcessReason;
 	private String VImmYn;
 	private String VGearLockYn;
@@ -68,7 +68,7 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Long VInsuredValue, Long VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Timestamp VCrtdDt) {
+	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Timestamp VCrtdDt) {
 		this.VId = VId;
 		this.iclubPurposeType = iclubPurposeType;
 		this.iclubSecurityMaster = iclubSecurityMaster;
@@ -264,20 +264,20 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	@Column(name = "v_insured_value", precision = 15, scale = 5)
-	public Long getVInsuredValue() {
+	public Double getVInsuredValue() {
 		return this.VInsuredValue;
 	}
 
-	public void setVInsuredValue(Long VInsuredValue) {
+	public void setVInsuredValue(Double VInsuredValue) {
 		this.VInsuredValue = VInsuredValue;
 	}
 
 	@Column(name = "v_concess_prct", precision = 15, scale = 5)
-	public Long getVConcessPrct() {
+	public Double getVConcessPrct() {
 		return this.VConcessPrct;
 	}
 
-	public void setVConcessPrct(Long VConcessPrct) {
+	public void setVConcessPrct(Double VConcessPrct) {
 		this.VConcessPrct = VConcessPrct;
 	}
 
@@ -328,11 +328,11 @@ public class IclubVehicle implements java.io.Serializable {
 
 	@Column(name = "v_comp_yrs")
 	public Integer getVCompYrs() {
-		return VCompYrs;
+		return this.VCompYrs;
 	}
 
-	public void setVCompYrs(Integer vCompYrs) {
-		VCompYrs = vCompYrs;
+	public void setVCompYrs(Integer VCompYrs) {
+		this.VCompYrs = VCompYrs;
 	}
 
 	@Column(name = "v_vin", length = 50)

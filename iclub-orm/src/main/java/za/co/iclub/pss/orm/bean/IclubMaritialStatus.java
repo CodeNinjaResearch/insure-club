@@ -26,12 +26,13 @@ public class IclubMaritialStatus implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3253493791358844912L;
+	private static final long serialVersionUID = 5565570144782231426L;
 	private Long msId;
 	private String msShortDesc;
 	private String msLongDesc;
 	private String msStatus;
 	private Set<IclubPerson> iclubPersons = new HashSet<IclubPerson>(0);
+	private Set<IclubDriver> iclubDrivers = new HashSet<IclubDriver>(0);
 
 	// Constructors
 
@@ -45,12 +46,13 @@ public class IclubMaritialStatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMaritialStatus(Long msId, String msShortDesc, String msLongDesc, String msStatus, Set<IclubPerson> iclubPersons) {
+	public IclubMaritialStatus(Long msId, String msShortDesc, String msLongDesc, String msStatus, Set<IclubPerson> iclubPersons, Set<IclubDriver> iclubDrivers) {
 		this.msId = msId;
 		this.msShortDesc = msShortDesc;
 		this.msLongDesc = msLongDesc;
 		this.msStatus = msStatus;
 		this.iclubPersons = iclubPersons;
+		this.iclubDrivers = iclubDrivers;
 	}
 
 	// Property accessors
@@ -98,6 +100,15 @@ public class IclubMaritialStatus implements java.io.Serializable {
 
 	public void setIclubPersons(Set<IclubPerson> iclubPersons) {
 		this.iclubPersons = iclubPersons;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubMaritialStatus")
+	public Set<IclubDriver> getIclubDrivers() {
+		return this.iclubDrivers;
+	}
+
+	public void setIclubDrivers(Set<IclubDriver> iclubDrivers) {
+		this.iclubDrivers = iclubDrivers;
 	}
 
 }

@@ -29,18 +29,18 @@ public class IclubRateType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1222778689466584778L;
+	private static final long serialVersionUID = 375331902160845033L;
 	private Long rtId;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;
 	private IclubEntityType iclubEntityType;
 	private String rtShortDesc;
 	private String rtLongDesc;
-	private Long rtFieldNm;
+	private String rtFieldNm;
 	private String rtStatus;
-	private Timestamp rtCrtdDt;
 	private String rtType;
 	private String rtQuoteType;
+	private Timestamp rtCrtdDt;
 	private Set<IclubRateEngine> iclubRateEngines = new HashSet<IclubRateEngine>(0);
 
 	// Constructors
@@ -55,7 +55,7 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateType(Long rtId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, Long rtFieldNm, String rtStatus, Timestamp rtCrtdDt, String rtType, String rtQuoteType, Set<IclubRateEngine> iclubRateEngines) {
+	public IclubRateType(Long rtId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtFieldNm, String rtStatus, String rtType, String rtQuoteType, Timestamp rtCrtdDt, Set<IclubRateEngine> iclubRateEngines) {
 		this.rtId = rtId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
@@ -64,9 +64,9 @@ public class IclubRateType implements java.io.Serializable {
 		this.rtLongDesc = rtLongDesc;
 		this.rtFieldNm = rtFieldNm;
 		this.rtStatus = rtStatus;
-		this.rtCrtdDt = rtCrtdDt;
 		this.rtType = rtType;
 		this.rtQuoteType = rtQuoteType;
+		this.rtCrtdDt = rtCrtdDt;
 		this.iclubRateEngines = iclubRateEngines;
 	}
 
@@ -130,11 +130,11 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	@Column(name = "rt_field_nm", length = 450)
-	public Long getRtFieldNm() {
+	public String getRtFieldNm() {
 		return this.rtFieldNm;
 	}
 
-	public void setRtFieldNm(Long rtFieldNm) {
+	public void setRtFieldNm(String rtFieldNm) {
 		this.rtFieldNm = rtFieldNm;
 	}
 
@@ -147,18 +147,9 @@ public class IclubRateType implements java.io.Serializable {
 		this.rtStatus = rtStatus;
 	}
 
-	@Column(name = "rt_crtd_dt", length = 19)
-	public Timestamp getRtCrtdDt() {
-		return this.rtCrtdDt;
-	}
-
-	public void setRtCrtdDt(Timestamp rtCrtdDt) {
-		this.rtCrtdDt = rtCrtdDt;
-	}
-
 	@Column(name = "rt_type", length = 1)
 	public String getRtType() {
-		return rtType;
+		return this.rtType;
 	}
 
 	public void setRtType(String rtType) {
@@ -167,11 +158,20 @@ public class IclubRateType implements java.io.Serializable {
 
 	@Column(name = "rt_quote_type", length = 1)
 	public String getRtQuoteType() {
-		return rtQuoteType;
+		return this.rtQuoteType;
 	}
 
 	public void setRtQuoteType(String rtQuoteType) {
 		this.rtQuoteType = rtQuoteType;
+	}
+
+	@Column(name = "rt_crtd_dt", length = 19)
+	public Timestamp getRtCrtdDt() {
+		return this.rtCrtdDt;
+	}
+
+	public void setRtCrtdDt(Timestamp rtCrtdDt) {
+		this.rtCrtdDt = rtCrtdDt;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubRateType")

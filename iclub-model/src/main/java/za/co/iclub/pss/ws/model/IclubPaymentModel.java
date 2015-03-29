@@ -13,7 +13,7 @@ public class IclubPaymentModel {
 	private String iclubClaim;
 	private String iclubAccount;
 	private Long iclubPaymentStatus;
-	private Long PValue;
+	private Double PValue;
 	private String PDrCrInd;
 	private Timestamp PGenDt;
 	private Timestamp PCrtdDt;
@@ -66,11 +66,11 @@ public class IclubPaymentModel {
 		this.iclubPaymentStatus = iclubPaymentStatus;
 	}
 
-	public Long getPValue() {
+	public Double getPValue() {
 		return PValue;
 	}
 
-	public void setPValue(Long pValue) {
+	public void setPValue(Double pValue) {
 		PValue = pValue;
 	}
 

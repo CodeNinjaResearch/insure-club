@@ -24,8 +24,8 @@ public class IclubVehicleModel {
 	private Double VDdLat;
 	private Double VDdLong;
 	private Integer VYear;
-	private Long VInsuredValue;
-	private Long VConcessPrct;
+	private Double VInsuredValue;
+	private Double VConcessPrct;
 	private String VConcessReason;
 	private String VImmYn;
 	private String VGearLockYn;
@@ -173,19 +173,19 @@ public class IclubVehicleModel {
 		VYear = vYear;
 	}
 
-	public Long getVInsuredValue() {
+	public Double getVInsuredValue() {
 		return VInsuredValue;
 	}
 
-	public void setVInsuredValue(Long vInsuredValue) {
+	public void setVInsuredValue(Double vInsuredValue) {
 		VInsuredValue = vInsuredValue;
 	}
 
-	public Long getVConcessPrct() {
+	public Double getVConcessPrct() {
 		return VConcessPrct;
 	}
 
-	public void setVConcessPrct(Long vConcessPrct) {
+	public void setVConcessPrct(Double vConcessPrct) {
 		VConcessPrct = vConcessPrct;
 	}
 

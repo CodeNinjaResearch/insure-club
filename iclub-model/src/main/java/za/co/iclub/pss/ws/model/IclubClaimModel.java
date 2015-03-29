@@ -13,7 +13,7 @@ public class IclubClaimModel {
 	private String iclubPolicy;
 	private Long CNumber;
 	private Integer CNumItems;
-	private Long CValue;
+	private Double CValue;
 	private Timestamp CCrtdDt;
 	private String[] iclubPayments;
 	private String[] iclubClaimItems;
@@ -66,11 +66,11 @@ public class IclubClaimModel {
 		CNumItems = cNumItems;
 	}
 
-	public Long getCValue() {
+	public Double getCValue() {
 		return CValue;
 	}
 
-	public void setCValue(Long cValue) {
+	public void setCValue(Double cValue) {
 		CValue = cValue;
 	}
 
