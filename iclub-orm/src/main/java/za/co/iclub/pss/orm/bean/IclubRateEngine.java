@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_rate_engine")
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_rate_engine where re_crtd_by=:id", name = "getRateEngineByUser", resultClass = IclubRateEngine.class) })
+@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_rate_engine where re_crtd_by=:id", name = "getRateEngineByUser", resultClass = IclubRateEngine.class), @NamedNativeQuery(query = "select * from iclub_rate_engine where re_type_id=:id", name = "getRateEngineByRateType", resultClass = IclubRateEngine.class) })
 public class IclubRateEngine implements java.io.Serializable {
 
 	// Fields

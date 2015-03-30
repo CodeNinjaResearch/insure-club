@@ -11,7 +11,7 @@ public class IclubRateEngineBean {
 	private String reFieldName;
 	private String reBaseValue;
 	private String reMaxValue;
-	private Long reRate;
+	private Double reRate;
 	private String reStatus;
 	private Timestamp reCrtdDt;
 
@@ -71,11 +71,11 @@ public class IclubRateEngineBean {
 		this.reMaxValue = reMaxValue;
 	}
 
-	public Long getReRate() {
+	public Double getReRate() {
 		return reRate;
 	}
 
-	public void setReRate(Long reRate) {
+	public void setReRate(Double reRate) {
 		this.reRate = reRate;
 	}
 

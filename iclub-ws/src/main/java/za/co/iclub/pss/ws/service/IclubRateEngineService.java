@@ -52,9 +52,9 @@ public class IclubRateEngineService {
 			iCt.setReStatus(model.getReStatus());
 			iCt.setReMaxValue(model.getReMaxValue());
 			iCt.setReBaseValue(model.getReBaseValue());
-			iCt.setIclubRateType(model.getIclubRateType() != null  ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
+			iCt.setIclubRateType(model.getIclubRateType() != null ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
 			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			
+
 			iclubRateEngineDAO.save(iCt);
 
 			LOGGER.info("Save Success with ID :: " + iCt.getReId());
@@ -88,9 +88,8 @@ public class IclubRateEngineService {
 			iCt.setReStatus(model.getReStatus());
 			iCt.setReMaxValue(model.getReMaxValue());
 			iCt.setReBaseValue(model.getReBaseValue());
-			iCt.setIclubRateType(model.getIclubRateType() != null  ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
+			iCt.setIclubRateType(model.getIclubRateType() != null ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
 			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			
 
 			iclubRateEngineDAO.merge(iCt);
 
@@ -167,6 +166,39 @@ public class IclubRateEngineService {
 
 		try {
 			List batmod = iclubRateEngineDAO.findByUser(user);
+
+			for (Object object : batmod) {
+				IclubRateEngine iCt = (IclubRateEngine) object;
+
+				IclubRateEngineModel model = new IclubRateEngineModel();
+
+				model.setReId(iCt.getReId());
+				model.setReRate(iCt.getReRate());
+				model.setReCrtdDt(iCt.getReCrtdDt());
+				model.setReStatus(iCt.getReStatus());
+				model.setReMaxValue(iCt.getReMaxValue());
+				model.setReBaseValue(iCt.getReBaseValue());
+				model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
+				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
+
+				ret.add((T) model);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+
+	@GET
+	@Path("/get/rateType/{rateType}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubRateEngineModel> List<T> getByRateType(@PathParam("rateType") String rateType) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubRateEngineDAO.findByRateType(rateType);
 
 			for (Object object : batmod) {
 				IclubRateEngine iCt = (IclubRateEngine) object;
