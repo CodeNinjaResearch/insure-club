@@ -247,6 +247,24 @@ public class IclubRateEngineService {
 		return model;
 	}
 
+	@GET
+	@Path("/list/lookupdetails/{tableName}")
+	@Produces("application/json")
+	@Transactional
+	public <T extends String> List<T> listAllMake(@PathParam("tableName") String tableName) {
+		List<T> ret = new ArrayList<T>();
+		try {
+			List batmod = iclubCommonDAO.findAllLookValuesByTabelName(tableName);
+			for (Object object : batmod) {
+				String reDetails = (String) object;
+				ret.add((T) reDetails);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
+	}
+
 	public IclubRateEngineDAO getIclubRateEngineDAO() {
 		return iclubRateEngineDAO;
 	}

@@ -1,8 +1,10 @@
 package za.co.iclub.pss.orm.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -62,6 +64,46 @@ public class IclubCommonDAO {
 			throw new RuntimeException(e);
 		}
 		return ret;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List findAllLookValuesByTabelName(String tableName) {
+		log.debug("finding all IclubVehicleMaster instances by vmMake");
+		try {
+			String colShrtNm = getColumFormat(tableName);
+			String query = "select t." + colShrtNm + "_id, t." + colShrtNm + "_short_desc,t." + colShrtNm + "_long_desc from " + tableName + " t";
+			Query queryObject = getCurrentSession().createSQLQuery(query);
+			List<Object[]> objectArray = (List<Object[]>) queryObject.list();
+			List lookDetails = new ArrayList<String>();
+			for (Object[] objs : objectArray) {
+
+				String details = objs[0] + "-" + objs[1] + "-" + objs[2];
+				lookDetails.add(details);
+			}
+			return lookDetails;
+		} catch (RuntimeException re) {
+			log.error("find all by vmMake failed", re);
+			throw re;
+		}
+	}
+
+	public String getColumFormat(String tableName) {
+		String colShrtNm = "";
+		for (int i = 1; i < tableName.split("_").length; i++) {
+			colShrtNm += tableName.split("_")[i].substring(0, 1);
+		}
+		return colShrtNm;
+	}
+
+	public static void main(String[] args) {
+		String tableName = "iclub_rate_type";
+		String colShrtNm = "";
+		String tableNames[] = tableName.split("_");
+		for (int i = 1; i < tableNames.length; i++) {
+			colShrtNm += tableNames[i].substring(0, 1);
+		}
+		System.out.println(colShrtNm);
+
 	}
 
 	public static IclubCommonDAO getFromApplicationContext(ApplicationContext ctx) {
