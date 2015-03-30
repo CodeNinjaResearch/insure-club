@@ -398,7 +398,30 @@
 			<to-view-id>/pages/admin/vehiclemaster/container.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>fixed</from-outcome>
+			<to-view-id>/pages/admin/rating/fixed.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>lookup</from-outcome>
+			<to-view-id>/pages/admin/rating/lookup.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>range</from-outcome>
+			<to-view-id>/pages/admin/rating/range.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
 
 </faces-config>
