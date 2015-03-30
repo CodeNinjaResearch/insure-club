@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
@@ -57,8 +59,8 @@ public class IclubRateTypeController implements Serializable {
 	private String sessionUserId;
 	private String userName;
 	private ResourceBundle labelBundle;
-	private List<String> quoteType;
-	private List<String> rateType;
+	private Map<String, String> quoteType;
+	private Map<String, String> rateType;
 	private String selEntityType;
 	private String selQuoteType;
 	private String selRateType;
@@ -127,6 +129,7 @@ public class IclubRateTypeController implements Serializable {
 			bean.setRtShortDesc(model.getRtShortDesc());
 			bean.setRtStatus(model.getRtStatus());
 			bean.setRtQuoteType(model.getRtQuoteType());
+			bean.setRtLookupTblNm(model.getRtLookupTblNm());
 			bean.setIclubEntityType(model.getIclubEntityType());
 			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 			bean.setIclubPerson(model.getIclubPerson());
@@ -165,13 +168,14 @@ public class IclubRateTypeController implements Serializable {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubRateTypeModel model = new IclubRateTypeModel();
-				
+
 				model.setRtLongDesc(bean.getRtLongDesc());
 				model.setRtShortDesc(bean.getRtShortDesc());
 				model.setRtStatus(bean.getRtStatus());
 				model.setRtQuoteType(bean.getRtQuoteType());
 				model.setIclubEntityType(bean.getIclubEntityType());
-				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
+				model.setRtLookupTblNm(bean.getRtLookupTblNm());
+				model.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 				model.setIclubPerson(bean.getIclubPerson());
 				model.setRtCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setRtType(bean.getRtType());
@@ -205,6 +209,7 @@ public class IclubRateTypeController implements Serializable {
 				model.setRtShortDesc(bean.getRtShortDesc());
 				model.setRtStatus(bean.getRtStatus());
 				model.setRtQuoteType(bean.getRtQuoteType());
+				model.setRtLookupTblNm(bean.getRtLookupTblNm());
 				model.setIclubEntityType(bean.getIclubEntityType());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 				model.setIclubPerson(bean.getIclubPerson());
@@ -362,6 +367,7 @@ public class IclubRateTypeController implements Serializable {
 			bean.setRtStatus(model.getRtStatus());
 			bean.setRtQuoteType(model.getRtQuoteType());
 			bean.setIclubEntityType(model.getIclubEntityType());
+			bean.setRtLookupTblNm(model.getRtLookupTblNm());
 			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 			bean.setIclubPerson(model.getIclubPerson());
 			bean.setRtCrtdDt(model.getRtCrtdDt());
@@ -441,26 +447,26 @@ public class IclubRateTypeController implements Serializable {
 		this.fields = fields;
 	}
 
-	public List<String> getQuoteType() {
-		quoteType = new ArrayList<String>();
-		quoteType.add("F-Full");
-		quoteType.add("Q-Quick");
+	public Map<String, String> getQuoteType() {
+		quoteType = new HashMap<String, String>();
+		quoteType.put("F-Full", "F");
+		quoteType.put("Q-Quick", "Q");
 		return quoteType;
 	}
 
-	public void setQuoteType(List<String> quoteType) {
+	public void setQuoteType(Map<String, String> quoteType) {
 		this.quoteType = quoteType;
 	}
 
-	public List<String> getRateType() {
-		rateType = new ArrayList<String>();
-		rateType.add("L-Lookup");
-		rateType.add("R-Range");
-		rateType.add("F-Fixed");
+	public Map<String, String> getRateType() {
+		rateType = new HashMap<String, String>();
+		rateType.put("L-Lookup", "L");
+		rateType.put("R-Range", "R");
+		rateType.put("F-Fixed", "F");
 		return rateType;
 	}
 
-	public void setRateType(List<String> rateType) {
+	public void setRateType(Map<String, String> rateType) {
 		this.rateType = rateType;
 	}
 

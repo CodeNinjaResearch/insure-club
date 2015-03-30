@@ -51,6 +51,7 @@ public class IclubRateTypeService {
 			iRt.setRtLongDesc(model.getRtLongDesc());
 			iRt.setRtShortDesc(model.getRtShortDesc());
 			iRt.setRtStatus(model.getRtStatus());
+			iRt.setRtLookupTblNm(model.getRtLookupTblNm());
 			iRt.setRtQuoteType(model.getRtQuoteType());
 			iRt.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
 			iRt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
@@ -91,6 +92,7 @@ public class IclubRateTypeService {
 			iRt.setRtShortDesc(model.getRtShortDesc());
 			iRt.setRtStatus(model.getRtStatus());
 			iRt.setRtQuoteType(model.getRtQuoteType());
+			iRt.setRtLookupTblNm(model.getRtLookupTblNm());
 			iRt.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
 			iRt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iRt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
@@ -150,6 +152,7 @@ public class IclubRateTypeService {
 				model.setRtLongDesc(iRt.getRtLongDesc());
 				model.setRtShortDesc(iRt.getRtShortDesc());
 				model.setRtStatus(iRt.getRtStatus());
+				model.setRtLookupTblNm(iRt.getRtLookupTblNm());
 				model.setRtQuoteType(iRt.getRtQuoteType());
 				model.setIclubEntityType(iRt.getIclubEntityType() != null ? iRt.getIclubEntityType().getEtId() : null);
 				model.setIclubInsuranceItemType(iRt.getIclubInsuranceItemType() != null ? iRt.getIclubInsuranceItemType().getIitId() : null);
@@ -192,6 +195,7 @@ public class IclubRateTypeService {
 			model.setRtShortDesc(bean.getRtShortDesc());
 			model.setRtStatus(bean.getRtStatus());
 			model.setRtQuoteType(bean.getRtQuoteType());
+			model.setRtLookupTblNm(bean.getRtLookupTblNm());
 			model.setIclubEntityType(bean.getIclubEntityType() != null ? bean.getIclubEntityType().getEtId() : null);
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);

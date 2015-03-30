@@ -19,6 +19,7 @@ public class IclubRateTypeModel {
 	private String rtQuoteType;
 	private Timestamp rtCrtdDt;
 	private String[] iclubRateEngines;
+	private String rtLookupTblNm;
 
 	public Long getRtId() {
 		return rtId;
@@ -114,5 +115,13 @@ public class IclubRateTypeModel {
 
 	public void setIclubRateEngines(String[] iclubRateEngines) {
 		this.iclubRateEngines = iclubRateEngines;
+	}
+
+	public String getRtLookupTblNm() {
+		return rtLookupTblNm;
+	}
+
+	public void setRtLookupTblNm(String rtLookupTblNm) {
+		this.rtLookupTblNm = rtLookupTblNm;
 	}
 }

@@ -39,9 +39,11 @@
 		<p:column headerText="Quote Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.rtQuoteType}">
 				<f:selectItem itemLabel="Quote Type" itemDisabled="true" />
-				<f:selectItem itemLabel="FULL" itemValue="F" />
-				<f:selectItem itemLabel="QUICK" itemValue="Q" />
+				<f:selectItems value="#{iclubRateTypeController.quoteType}" />
 			</p:selectOneMenu>
+		</p:column>
+		<p:column headerText="LookupTable Name">
+			<p:outputLabel value="#{bean.rtLookupTblNm}" />
 		</p:column>
 		<p:column headerText="Short Desc">
 			<p:outputLabel value="#{bean.rtShortDesc}" />
