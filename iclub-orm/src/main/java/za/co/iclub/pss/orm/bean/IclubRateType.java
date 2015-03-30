@@ -24,12 +24,12 @@ import javax.persistence.Table;
 @NamedNativeQueries({ @NamedNativeQuery(name = "getRateTypeBySD", query = "select * from iclub_rate_type where lower(rt_short_desc) = lower(:sd) and rt_id <> :id", resultClass = IclubRateType.class) })
 public class IclubRateType implements java.io.Serializable {
 
-	// Fields
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 375331902160845033L;
+	private static final long serialVersionUID = -7522008745187105975L;
+	// Fields
+
 	private Long rtId;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;
@@ -40,6 +40,7 @@ public class IclubRateType implements java.io.Serializable {
 	private String rtStatus;
 	private String rtType;
 	private String rtQuoteType;
+	private String rtLookupTblNm;
 	private Timestamp rtCrtdDt;
 	private Set<IclubRateEngine> iclubRateEngines = new HashSet<IclubRateEngine>(0);
 
@@ -55,7 +56,7 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateType(Long rtId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtFieldNm, String rtStatus, String rtType, String rtQuoteType, Timestamp rtCrtdDt, Set<IclubRateEngine> iclubRateEngines) {
+	public IclubRateType(Long rtId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtFieldNm, String rtStatus, String rtType, String rtQuoteType, String rtLookupTblNm, Timestamp rtCrtdDt, Set<IclubRateEngine> iclubRateEngines) {
 		this.rtId = rtId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
@@ -66,6 +67,7 @@ public class IclubRateType implements java.io.Serializable {
 		this.rtStatus = rtStatus;
 		this.rtType = rtType;
 		this.rtQuoteType = rtQuoteType;
+		this.rtLookupTblNm = rtLookupTblNm;
 		this.rtCrtdDt = rtCrtdDt;
 		this.iclubRateEngines = iclubRateEngines;
 	}
@@ -163,6 +165,15 @@ public class IclubRateType implements java.io.Serializable {
 
 	public void setRtQuoteType(String rtQuoteType) {
 		this.rtQuoteType = rtQuoteType;
+	}
+
+	@Column(name = "rt_lookup_tbl_nm", length = 450)
+	public String getRtLookupTblNm() {
+		return this.rtLookupTblNm;
+	}
+
+	public void setRtLookupTblNm(String rtLookupTblNm) {
+		this.rtLookupTblNm = rtLookupTblNm;
 	}
 
 	@Column(name = "rt_crtd_dt", length = 19)
