@@ -1,5 +1,31 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
+	display: none;
+}
+</style>
+	</ui:define>
 	<ui:define name="content">
-		<div class="ContainerIndent"></div>
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<div class="Container100 Responsive">
+				<div class="Container50 Responsive Fright">
+					<p:selectOneMenu widgetVar="mnuRateTypeSel" id="mnuRateTypeSel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" styleClass="TexAlCenter Fnone" value="#{iclubRatingController.selRateType}">
+						<f:selectItem itemLabel="Select Rate Type" itemDisabled="true" />
+						<f:selectItems value="#{IclubRateTypeController.beans}" var="b" itemValue="#{b.rtId}" itemLabel="#{b.rtLongDesc - b.rtFieldNm}" />
+					</p:selectOneMenu>
+				</div>
+				<div class="Container50 Responsive Fleft">
+					<p:commandButton value="Generate Quote" styleClass="Fs16" action="#{iclubRatingController.refreshGrid}" ajax="false" />
+				</div>
+			</div>
+			<div class="Container100 Responsive">
+				<ui:insert name="rate" />
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>
