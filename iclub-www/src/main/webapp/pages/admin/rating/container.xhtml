@@ -5,7 +5,8 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
 	display: none;
 }
 </style>
@@ -14,9 +15,9 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<div class="Container100 Responsive">
 				<div class="Container50 Responsive Fright">
-					<p:selectOneMenu widgetVar="mnuRateTypeSel" id="mnuRateTypeSel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" styleClass="TexAlCenter Fnone" value="#{iclubRatingController.selRateType}">
+					<p:selectOneMenu widgetVar="mnuRateTypeSel" id="mnuRateTypeSel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubRatingController.selRateType}">
 						<f:selectItem itemLabel="Select Rate Type" itemDisabled="true" />
-						<f:selectItems value="#{IclubRateTypeController.beans}" var="b" itemValue="#{b.rtId}" itemLabel="#{b.rtLongDesc - b.rtFieldNm}" />
+						<f:selectItems value="#{iclubRateTypeController.beans}" var="b" itemValue="#{b.rtId}" itemLabel="#{b.rtLongDesc}" />
 					</p:selectOneMenu>
 				</div>
 				<div class="Container50 Responsive Fleft">
