@@ -45,22 +45,34 @@
 			</p:panel>
 			<p:panel id="temp1" rendered="#{iclubPolicyController.propertyFlag}">
 				<div class="Container90 Fnone MarAuto TexAlCenter">
-					<div class="Container80 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+					<div class="Container100">
+						<div class="Container50">
+							<div class="Container80 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+							</div>
+							<div class="EmptyBox5" />
+						</div>
+						<div class="Container50">
+							<div class="Container80 Responsive">
+								<!-- 	<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
+							</div>
+							<div class="EmptyBox5" />
+						</div>
 					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
-						<!-- 	<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
+					<div class="Container100">
+						<div class="Container50">
+							<div class="Container80 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+							</div>
+							<div class="EmptyBox5" />
+						</div>
+						<div class="Container50">
+							<div class="Container80 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubCoverType}" />
+							</div>
+							<div class="EmptyBox5" />
+						</div>
 					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubCoverType}" />
-					</div>
-					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Purpose Type :" />
 					</div>

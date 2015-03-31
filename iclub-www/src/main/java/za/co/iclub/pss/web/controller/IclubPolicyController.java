@@ -114,6 +114,7 @@ public class IclubPolicyController implements Serializable {
 
 		List<IclubInsuranceItemModel> models = (ArrayList<IclubInsuranceItemModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemModel.class));
 		iItemBeans = new ArrayList<IclubInsuranceItemBean>();
+		IclubWebHelper.addObjectIntoSession("policyBean", policyBean);
 		for (IclubInsuranceItemModel model : models) {
 			IclubInsuranceItemBean bean = new IclubInsuranceItemBean();
 
@@ -141,6 +142,7 @@ public class IclubPolicyController implements Serializable {
 	}
 
 	public String claimAction() {
+
 		return "claim";
 	}
 
