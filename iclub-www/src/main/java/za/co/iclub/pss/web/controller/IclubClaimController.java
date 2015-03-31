@@ -24,10 +24,13 @@ import za.co.iclub.pss.web.bean.IclubClaimBean;
 import za.co.iclub.pss.web.bean.IclubClaimStatusBean;
 import za.co.iclub.pss.web.bean.IclubInsuranceItemBean;
 import za.co.iclub.pss.web.bean.IclubPolicyBean;
+import za.co.iclub.pss.web.bean.IclubQuoteBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubClaimModel;
 import za.co.iclub.pss.ws.model.IclubClaimStatusModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
+import za.co.iclub.pss.ws.model.IclubPolicyModel;
+import za.co.iclub.pss.ws.model.IclubQuoteModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubClaimController")
@@ -37,11 +40,17 @@ public class IclubClaimController implements Serializable {
 	private static final long serialVersionUID = -1299854691643272437L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubClaimController.class);
+	private static final String QUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubQuoteService/";
+	private static final String PCY_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPolicyService/";
 	private static final String II_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemService/";
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubClaimService/";
 	private static final String CS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubClaimStatusService/";
 
+	private List<IclubQuoteBean> quoteBeans;
+
 	private List<IclubClaimStatusBean> claimStatusBeans;
+
+	private List<IclubPolicyBean> policyBeans;
 
 	private List<IclubClaimBean> beans;
 
@@ -49,6 +58,11 @@ public class IclubClaimController implements Serializable {
 
 	private IclubPolicyBean policyBean;
 
+	private boolean quoteFlag;
+
+	private boolean iItemFalg;
+
+	private boolean policyFlag;
 	private List<IclubInsuranceItemBean> iItemBeans;
 
 	private ResourceBundle labelBundle;
@@ -56,32 +70,35 @@ public class IclubClaimController implements Serializable {
 	private String sessionUserId;
 
 	@SuppressWarnings("unchecked")
-	public String policyListener(IclubPolicyBean policyBean) {
-		WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "get/quoteId/" + policyBean.getIclubQuote());
-
+	public String quoteListener(IclubQuoteBean quoteBean) {
+		WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "get/quoteId/" + quoteBean.getQId());
+		iItemFalg = false;
 		List<IclubInsuranceItemModel> models = (ArrayList<IclubInsuranceItemModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemModel.class));
 		iItemBeans = new ArrayList<IclubInsuranceItemBean>();
-		for (IclubInsuranceItemModel model : models) {
-			IclubInsuranceItemBean bean = new IclubInsuranceItemBean();
+		if (models != null && models.size() > 0) {
+			for (IclubInsuranceItemModel model : models) {
+				IclubInsuranceItemBean bean = new IclubInsuranceItemBean();
 
-			bean.setIiId(model.getIiId());
-			bean.setIiItemId(model.getIiItemId());
-			bean.setIiQuoteId(model.getIiQuoteId());
-			bean.setIiCrtdDt(model.getIiCrtdDt());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setIiId(model.getIiId());
+				bean.setIiItemId(model.getIiItemId());
+				bean.setIiQuoteId(model.getIiQuoteId());
+				bean.setIiCrtdDt(model.getIiCrtdDt());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			if (model.getIclubClaimItems() != null && model.getIclubClaimItems().length > 0) {
-				String[] claimItems = new String[model.getIclubClaimItems().length];
-				int i = 0;
-				for (String claimItem : model.getIclubClaimItems()) {
-					claimItems[i] = claimItem;
-					i++;
+				if (model.getIclubClaimItems() != null && model.getIclubClaimItems().length > 0) {
+					String[] claimItems = new String[model.getIclubClaimItems().length];
+					int i = 0;
+					for (String claimItem : model.getIclubClaimItems()) {
+						claimItems[i] = claimItem;
+						i++;
+					}
+					bean.setIclubClaimItems(claimItems);
 				}
-				bean.setIclubClaimItems(claimItems);
-			}
-			iItemBeans.add(bean);
+				iItemBeans.add(bean);
 
+			}
+			iItemFalg = true;
 		}
 		return null;
 	}
@@ -155,11 +172,11 @@ public class IclubClaimController implements Serializable {
 	@SuppressWarnings("unchecked")
 	public IclubPolicyBean getPolicyBean() {
 
-		policyBean = (IclubPolicyBean) IclubWebHelper.getObjectIntoSession("policyBean");
+		if (IclubWebHelper.getObjectIntoSession("policyBean") != null) {
 
-		if (policyBean != null && policyBean.getPId() != null) {
+			policyBean = (IclubPolicyBean) IclubWebHelper.getObjectIntoSession("policyBean");
 			WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "get/quoteId/" + policyBean.getIclubQuote());
-
+			IclubWebHelper.addObjectIntoSession("policyBean", null);
 			List<IclubInsuranceItemModel> models = (ArrayList<IclubInsuranceItemModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemModel.class));
 			iItemBeans = new ArrayList<IclubInsuranceItemBean>();
 			for (IclubInsuranceItemModel model : models) {
@@ -211,6 +228,105 @@ public class IclubClaimController implements Serializable {
 
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
+	}
+
+	@SuppressWarnings("unchecked")
+	public String claimToPolicyListener(IclubClaimBean claimBean) {
+
+		WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/user/" + getSessionUserId());
+
+		List<IclubPolicyModel> models = (ArrayList<IclubPolicyModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyModel.class));
+
+		quoteFlag = false;
+		policyFlag = false;
+		if (models != null && models.size() > 0) {
+			policyFlag = true;
+			policyBeans = new ArrayList<IclubPolicyBean>();
+			for (IclubPolicyModel model : models) {
+				if (model != null && model.getPId() != null) {
+					IclubPolicyBean bean = new IclubPolicyBean();
+					bean.setPId(model.getPId());
+					bean.setPProrataPrm(model.getPProrataPrm());
+					bean.setPPremium(model.getPPremium());
+					bean.setPNumber(model.getPNumber());
+					bean.setPDebitDt(model.getPDebitDt());
+					bean.setPCrtdDt(model.getPCrtdDt());
+					bean.setIclubAccount(model.getIclubAccount());
+					bean.setIclubQuote(model.getIclubQuote());
+					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
+					bean.setIclubPerson(model.getIclubPerson());
+					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
+
+					if (model.getIclubClaims() != null && model.getIclubClaims().length > 0) {
+						String[] claims = new String[model.getIclubClaims().length];
+						int i = 0;
+						for (String claim : model.getIclubClaims()) {
+							claims[i] = claim;
+							i++;
+						}
+						bean.setIclubClaims(claims);
+					}
+
+					if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+						String[] payments = new String[model.getIclubPayments().length];
+						int i = 0;
+						for (String payment : model.getIclubPayments()) {
+							payments[i] = payment;
+							i++;
+						}
+						bean.setIclubClaims(payments);
+					}
+					policyBeans.add(bean);
+				}
+
+			}
+		}
+
+		return "";
+	}
+
+	public String policyListener(IclubPolicyBean policyBean) {
+
+		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "/list");
+		Collection<? extends IclubQuoteModel> models = new ArrayList<IclubQuoteModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteModel.class));
+		client.close();
+
+		quoteBeans = new ArrayList<IclubQuoteBean>();
+		quoteFlag = true;
+		for (IclubQuoteModel model : models) {
+			IclubQuoteBean bean = new IclubQuoteBean();
+
+			bean.setQId(model.getQId());
+			bean.setQCrtdDt(model.getQCrtdDt());
+			bean.setQIsMatched(model.getQIsMatched());
+			bean.setQPrevPremium(model.getQPrevPremium());
+			bean.setQValidUntil(model.getQValidUntil());
+			bean.setQMobile(model.getQMobile());
+			bean.setQEmail(model.getQEmail());
+			bean.setQGenPremium(model.getQGenPremium());
+			bean.setQNumItems(model.getQNumItems());
+			bean.setQGenDt(model.getQGenDt());
+			bean.setQNumber(model.getQNumber());
+			bean.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy());
+			bean.setIclubProductType(model.getIclubProductType());
+			bean.setIclubProductType(model.getIclubProductType());
+			bean.setIclubInsurerMaster(model.getIclubInsurerMaster());
+			bean.setIclubCoverType(model.getIclubCoverType());
+			bean.setIclubQuoteStatus(model.getIclubQuoteStatus());
+			bean.setIclubPersonByQPersonId(model.getIclubPersonByQPersonId());
+
+			if (model.getIclubPolicies() != null && model.getIclubPolicies().length > 0) {
+				String[] policies = new String[model.getIclubPolicies().length];
+				int i = 0;
+				for (String policy : model.getIclubPolicies()) {
+					policies[i] = policy;
+					i++;
+				}
+			}
+			quoteBeans.add(bean);
+		}
+
+		return "";
 	}
 
 	public List<IclubClaimStatusBean> getClaimStatusBeans() {
@@ -277,6 +393,48 @@ public class IclubClaimController implements Serializable {
 
 	public void setBeans(List<IclubClaimBean> beans) {
 		this.beans = beans;
+	}
+
+	public List<IclubPolicyBean> getPolicyBeans() {
+
+		return policyBeans;
+	}
+
+	public void setPolicyBeans(List<IclubPolicyBean> policyBeans) {
+		this.policyBeans = policyBeans;
+	}
+
+	public List<IclubQuoteBean> getQuoteBeans() {
+
+		return quoteBeans;
+	}
+
+	public void setQuoteBeans(List<IclubQuoteBean> quoteBeans) {
+		this.quoteBeans = quoteBeans;
+	}
+
+	public boolean isPolicyFlag() {
+		return policyFlag;
+	}
+
+	public void setPolicyFlag(boolean policyFlag) {
+		this.policyFlag = policyFlag;
+	}
+
+	public boolean isQuoteFlag() {
+		return quoteFlag;
+	}
+
+	public void setQuoteFlag(boolean quoteFlag) {
+		this.quoteFlag = quoteFlag;
+	}
+
+	public boolean isiItemFalg() {
+		return iItemFalg;
+	}
+
+	public void setiItemFalg(boolean iItemFalg) {
+		this.iItemFalg = iItemFalg;
 	}
 
 }

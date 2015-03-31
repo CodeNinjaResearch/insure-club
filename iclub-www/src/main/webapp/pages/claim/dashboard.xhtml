@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlClaimCont">
+				<p:dataTable id="dtClmCont" widgetVar="dtClmCont" value="#{iclubClaimController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+					<f:facet name="footer">
+					</f:facet>
+					<p:column headerText="Claim Id">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CId}" />
+					</p:column>
+					<p:column headerText="Claim Number">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumber}" />
+					</p:column>
+					<p:column headerText="Number Of Items">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumItems}" />
+					</p:column>
+					<p:column headerText="Claim Value">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}" />
+					</p:column>
+					<p:column headerText="Policy">
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" id="btnClaimEdit" icon="ui-icon-pencil" action="#{iclubClaimController.claimToPolicyListener(bean)}">
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="plcPanel" rendered="#{iclubClaimController.policyFlag}">
+					<p:dataTable id="dtPlcCont" widgetVar="dtPlcCont" value="#{iclubClaimController.policyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+						<f:facet name="footer">
+						</f:facet>
+						<p:column headerText="Policy Id">
+							<p:outputLabel value="#{bean.PId}" />
+						</p:column>
+						<p:column headerText="Policy Number">
+							<p:outputLabel value="#{bean.PNumber}" />
+						</p:column>
+						<p:column headerText="Premium">
+							<p:outputLabel value="#{bean.PPremium}" />
+						</p:column>
+						<p:column headerText="Prorata Premium">
+							<p:outputLabel value="#{bean.PProrataPrm}" />
+						</p:column>
+						<p:column headerText="Policy">
+							<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubClaimController.policyListener(bean)}">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				<p:panel id="qutPanel" rendered="#{iclubClaimController.quoteFlag}">
+					<p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubClaimController.quoteBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Quotes Available" reflow="true">
+						<p:column headerText="Quote Number">
+							<p:outputLabel value="#{bean.QNumber}" />
+						</p:column>
+						<p:column headerText="Gen Date">
+							<p:outputLabel value="#{bean.QGenDt}" />
+						</p:column>
+						<p:column headerText=" Prev Premium">
+							<p:outputLabel value="#{bean.QPrevPremium}" />
+						</p:column>
+						<p:column headerText="ValidUntil">
+							<p:outputLabel value="#{bean.QValidUntil}" />
+						</p:column>
+						<p:column headerText="Full Quote">
+							<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" id="btnQuoteEdit" icon="ui-icon-pencil" action="#{iclubClaimController.quoteListener(bean)}" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				<p:panel id="iiPanel" rendered="#{iclubClaimController.iItemFalg}">
+					<p:dataTable id="dtIICont" widgetVar="dtIICont" value="#{iclubClaimController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+						<f:facet name="footer">
+						</f:facet>
+						<p:column headerText="Item Id">
+							<p:outputLabel value="#{bean.iiId}" />
+						</p:column>
+						<p:column headerText="Quote Id">
+							<p:outputLabel value="#{bean.iiQuoteId}" />
+						</p:column>
+						<p:column headerText="Gen Date">
+							<p:outputLabel value="#{bean.iiCrtdDt}" />
+						</p:column>
+						<p:column headerText="Item Type">
+							<p:outputLabel value="#{bean.iclubInsuranceItemType}" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>
