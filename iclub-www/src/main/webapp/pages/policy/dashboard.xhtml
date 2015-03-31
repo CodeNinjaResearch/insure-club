@@ -1,0 +1,423 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<p:panel id="qqPanel">
+			<p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+				</f:facet>
+				<p:column headerText="Policy Id">
+					<p:outputLabel value="#{bean.PId}" />
+				</p:column>
+				<p:column headerText="Policy Number">
+					<p:outputLabel value="#{bean.PNumber}" />
+				</p:column>
+				<p:column headerText="Premium">
+					<p:outputLabel value="#{bean.PPremium}" />
+				</p:column>
+				<p:column headerText="Prorata Premium">
+					<p:outputLabel value="#{bean.PProrataPrm}" />
+				</p:column>
+				<p:column headerText="Policy">
+					<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubPolicyController.policyListener(bean)}">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:panel id="iiPanel" rendered="#{iclubPolicyController.iItemFalg}">
+				<p:dataTable id="dtIICont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+					<f:facet name="footer">
+					</f:facet>
+					<p:column headerText="Item Id">
+						<p:outputLabel value="#{bean.iiId}" />
+					</p:column>
+					<p:column headerText="Quote Id">
+						<p:outputLabel value="#{bean.iiQuoteId}" />
+					</p:column>
+					<p:column headerText="Gen Date">
+						<p:outputLabel value="#{bean.iiCrtdDt}" />
+					</p:column>
+					<p:column headerText="Item Type">
+						<p:outputLabel value="#{bean.iclubInsuranceItemType}" />
+					</p:column>
+					<p:column>
+						<p:commandButton icon="ui-icon-pencil" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" action="#{iclubPolicyController.iItemListener(bean)}">
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			<p:panel id="temp1" rendered="#{iclubPolicyController.propertyFlag}">
+				<div class="Container90 Fnone MarAuto TexAlCenter">
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<!-- 	<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubCoverType}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Purpose Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubPurposeType}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Ocupied Status :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubOccupiedStatus}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Property Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubPropertyType}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubAccessType}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Bar Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubBarType}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Thatch Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubThatchType}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Roof Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubRoofType}">
+						</p:outputLabel>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Reg Number" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PRegNum}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Address" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PAddress}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Lat" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PLat}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Long" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PLong}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Postal Cd" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PPostalCd}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="No Claim Years" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PNoclaimYrs}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Rent FurYn" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PRentFurYn}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Comp Yn" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PCompYn}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Norobbery Yn" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PNorobberyYn}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Sec Gates Yn" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PSecGatesYn}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Estimatted Value" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PEstValue}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100">
+						<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubPolicyController.claimAction}" ajax="false" />
+					</div>
+				</div>
+			</p:panel>
+			<p:panel id="temp2" rendered="#{iclubPolicyController.vehhicleFlag}">
+				<div class="Container90 Fnone MarAuto TexAlCenter">
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Security Master" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.iclubSecurityMaster}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Access Type VOn" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.iclubAccessTypeByVOnAccessTypeId}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Access Type VD" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.iclubAccessTypeByVDdAccessTypeId}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Vo Do Meter" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VOdometer}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="On Area" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VOnArea}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="On Lat" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VOnLat}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="On Long" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VOnLong}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="VDd Area" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VDdArea}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="VDd Lat" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VDdLat}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="VDd Long" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VDdLong}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Insured Value" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VInsuredValue}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Concess Prct" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VConcessPrct}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Concess Reason" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VConcessReason}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="VImm Yn" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VImmYn}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Gear Lock Yn" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VGearLockYn}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Owner" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VOwner}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="No Claims Years" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VNoclaimYrs}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Comp Years" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VCompYrs}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="VVin" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VVin}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Engine Nr" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VEngineNr}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Reg Number" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VRegNum}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Location" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Model :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" id="vmm" value="#{iclubPolicyController.vehicleBean.iclubVehicleMaster}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="year :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VYear}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Purpose Type :" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.iclubPurposeType}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100">
+						<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubPolicyController.claimAction}" ajax="false" />
+					</div>
+				</div>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

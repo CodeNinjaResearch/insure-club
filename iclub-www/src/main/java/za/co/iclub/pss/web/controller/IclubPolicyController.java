@@ -140,6 +140,10 @@ public class IclubPolicyController implements Serializable {
 		return null;
 	}
 
+	public String claimAction() {
+		return "claim";
+	}
+
 	public void iItemListener(IclubInsuranceItemBean bean) {
 		if (bean != null && bean.getIclubInsuranceItemType().compareTo(1l) == 0) {
 			vehhicleFlag = true;
