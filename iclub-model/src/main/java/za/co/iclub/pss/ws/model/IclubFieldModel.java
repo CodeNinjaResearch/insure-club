@@ -11,6 +11,9 @@ public class IclubFieldModel {
 	private String FDesc;
 	private String FType;
 	private String FStatus;
+	private String FLTblName;
+	private String FRate;
+	private Long[] iclubRateTypes;
 
 	public Long getFId() {
 		return FId;
@@ -58,6 +61,30 @@ public class IclubFieldModel {
 
 	public void setFStatus(String fStatus) {
 		FStatus = fStatus;
+	}
+
+	public Long[] getIclubRateTypes() {
+		return iclubRateTypes;
+	}
+
+	public void setIclubRateTypes(Long[] iclubRateTypes) {
+		this.iclubRateTypes = iclubRateTypes;
+	}
+
+	public String getFLTblName() {
+		return FLTblName;
+	}
+
+	public void setFLTblName(String fLTblName) {
+		FLTblName = fLTblName;
+	}
+
+	public String getFRate() {
+		return FRate;
+	}
+
+	public void setFRate(String fRate) {
+		FRate = fRate;
 	}
 
 }

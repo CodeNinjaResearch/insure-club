@@ -16,8 +16,8 @@
 			</p:selectOneMenu>
 		</p:column>
 		<p:column headerText="Field Name">
-			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtFieldNm}">
-				<f:selectItem itemLabel="Field Name" itemDisabled="true" />
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubField}">
+				<f:selectItem itemLabel="Field" itemDisabled="true" />
 				<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
 			</p:selectOneMenu>
 		</p:column>
@@ -41,9 +41,6 @@
 				<f:selectItem itemLabel="Quote Type" itemDisabled="true" />
 				<f:selectItems value="#{iclubRateTypeController.quoteType}" />
 			</p:selectOneMenu>
-		</p:column>
-		<p:column headerText="LookupTable Name">
-			<p:outputLabel value="#{bean.rtLookupTblNm}" />
 		</p:column>
 		<p:column headerText="Short Desc">
 			<p:outputLabel value="#{bean.rtShortDesc}" />

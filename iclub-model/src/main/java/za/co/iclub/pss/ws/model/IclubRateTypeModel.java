@@ -9,17 +9,16 @@ public class IclubRateTypeModel {
 
 	private Long rtId;
 	private Long iclubInsuranceItemType;
+	private Long iclubField;
 	private String iclubPerson;
 	private Long iclubEntityType;
 	private String rtShortDesc;
 	private String rtLongDesc;
-	private String rtFieldNm;
 	private String rtStatus;
 	private String rtType;
 	private String rtQuoteType;
 	private Timestamp rtCrtdDt;
 	private String[] iclubRateEngines;
-	private String rtLookupTblNm;
 
 	public Long getRtId() {
 		return rtId;
@@ -69,14 +68,6 @@ public class IclubRateTypeModel {
 		this.rtLongDesc = rtLongDesc;
 	}
 
-	public String getRtFieldNm() {
-		return rtFieldNm;
-	}
-
-	public void setRtFieldNm(String rtFieldNm) {
-		this.rtFieldNm = rtFieldNm;
-	}
-
 	public String getRtStatus() {
 		return rtStatus;
 	}
@@ -117,11 +108,11 @@ public class IclubRateTypeModel {
 		this.iclubRateEngines = iclubRateEngines;
 	}
 
-	public String getRtLookupTblNm() {
-		return rtLookupTblNm;
+	public Long getIclubField() {
+		return iclubField;
 	}
 
-	public void setRtLookupTblNm(String rtLookupTblNm) {
-		this.rtLookupTblNm = rtLookupTblNm;
+	public void setIclubField(Long iclubField) {
+		this.iclubField = iclubField;
 	}
 }

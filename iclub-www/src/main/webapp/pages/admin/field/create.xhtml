@@ -17,6 +17,14 @@
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="LookupTable Name" value="#{iclubFieldController.bean.FLTblName}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
+		<p:inputText styleClass="TexAlCenter" placeholder="Rate" value="#{iclubFieldController.bean.FRate}" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container80 Responsive">
 		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.iclubEntityType}">
 			<f:selectItem itemLabel="Entity Type" itemDisabled="true" />
 			<f:selectItems value="#{iclubFieldController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />

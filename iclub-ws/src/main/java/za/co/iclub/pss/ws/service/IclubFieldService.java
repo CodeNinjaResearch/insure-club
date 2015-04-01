@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubField;
+import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubFieldDAO;
@@ -46,6 +47,8 @@ public class IclubFieldService {
 			iF.setFName(model.getFName());
 			iF.setFDesc(model.getFDesc());
 			iF.setFStatus(model.getFStatus());
+			iF.setFLTblName(model.getFLTblName());
+			iF.setFRate(model.getFRate());
 			iF.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
 
 			iclubFieldDAO.save(iF);
@@ -79,6 +82,8 @@ public class IclubFieldService {
 			iF.setFName(model.getFName());
 			iF.setFDesc(model.getFDesc());
 			iF.setFStatus(model.getFStatus());
+			iF.setFLTblName(model.getFLTblName());
+			iF.setFRate(model.getFRate());
 			iF.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
 
 			iclubFieldDAO.merge(iF);
@@ -133,7 +138,19 @@ public class IclubFieldService {
 				model.setFName(iF.getFName());
 				model.setFDesc(iF.getFDesc());
 				model.setFStatus(iF.getFStatus());
+				model.setFLTblName(iF.getFLTblName());
+				model.setFRate(iF.getFRate());
 				model.setIclubEntityType(iF.getIclubEntityType() != null ? iF.getIclubEntityType().getEtId() : null);
+				if (iF.getIclubRateTypes() != null && iF.getIclubRateTypes().size() > 0) {
+					Long[] rateTypes = new Long[iF.getIclubRateTypes().size()];
+					int i = 0;
+					for (IclubRateType rateType : iF.getIclubRateTypes()) {
+						rateTypes[i] = rateType.getRtId();
+						i++;
+					}
+
+					model.setIclubRateTypes(rateTypes);
+				}
 				ret.add((T) model);
 			}
 		} catch (Exception e) {
@@ -156,7 +173,19 @@ public class IclubFieldService {
 			model.setFName(bean.getFName());
 			model.setFDesc(bean.getFDesc());
 			model.setFStatus(bean.getFStatus());
+			model.setFLTblName(bean.getFLTblName());
+			model.setFRate(bean.getFRate());
 			model.setIclubEntityType(bean.getIclubEntityType() != null ? bean.getIclubEntityType().getEtId() : null);
+			if (bean.getIclubRateTypes() != null && bean.getIclubRateTypes().size() > 0) {
+				Long[] rateTypes = new Long[bean.getIclubRateTypes().size()];
+				int i = 0;
+				for (IclubRateType rateType : bean.getIclubRateTypes()) {
+					rateTypes[i] = rateType.getRtId();
+					i++;
+				}
+
+				model.setIclubRateTypes(rateTypes);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

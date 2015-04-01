@@ -129,13 +129,12 @@ public class IclubRateTypeController implements Serializable {
 			bean.setRtShortDesc(model.getRtShortDesc());
 			bean.setRtStatus(model.getRtStatus());
 			bean.setRtQuoteType(model.getRtQuoteType());
-			bean.setRtLookupTblNm(model.getRtLookupTblNm());
+			bean.setIclubField(model.getIclubField());
 			bean.setIclubEntityType(model.getIclubEntityType());
 			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 			bean.setIclubPerson(model.getIclubPerson());
 			bean.setRtCrtdDt(model.getRtCrtdDt());
 			bean.setRtType(model.getRtType());
-			bean.setRtFieldNm(model.getRtFieldNm());
 			if (model.getIclubRateEngines() != null && model.getIclubRateEngines().length > 0) {
 				String[] rateEngines = new String[model.getIclubRateEngines().length];
 				int i = 0;
@@ -174,12 +173,11 @@ public class IclubRateTypeController implements Serializable {
 				model.setRtStatus(bean.getRtStatus());
 				model.setRtQuoteType(bean.getRtQuoteType());
 				model.setIclubEntityType(bean.getIclubEntityType());
-				model.setRtLookupTblNm(bean.getRtLookupTblNm());
+				model.setIclubField(bean.getIclubField());
 				model.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 				model.setIclubPerson(bean.getIclubPerson());
 				model.setRtCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setRtType(bean.getRtType());
-				model.setRtFieldNm(bean.getRtFieldNm());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -209,13 +207,12 @@ public class IclubRateTypeController implements Serializable {
 				model.setRtShortDesc(bean.getRtShortDesc());
 				model.setRtStatus(bean.getRtStatus());
 				model.setRtQuoteType(bean.getRtQuoteType());
-				model.setRtLookupTblNm(bean.getRtLookupTblNm());
+				model.setIclubField(bean.getIclubField());
 				model.setIclubEntityType(bean.getIclubEntityType());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 				model.setIclubPerson(bean.getIclubPerson());
 				model.setRtCrtdDt(bean.getRtCrtdDt());
 				model.setRtType(bean.getRtType());
-				model.setRtFieldNm(bean.getRtFieldNm());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -367,12 +364,11 @@ public class IclubRateTypeController implements Serializable {
 			bean.setRtStatus(model.getRtStatus());
 			bean.setRtQuoteType(model.getRtQuoteType());
 			bean.setIclubEntityType(model.getIclubEntityType());
-			bean.setRtLookupTblNm(model.getRtLookupTblNm());
+			bean.setIclubField(model.getIclubField());
 			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 			bean.setIclubPerson(model.getIclubPerson());
 			bean.setRtCrtdDt(model.getRtCrtdDt());
 			bean.setRtType(model.getRtType());
-			bean.setRtFieldNm(model.getRtFieldNm());
 			if (model.getIclubRateEngines() != null && model.getIclubRateEngines().length > 0) {
 				String[] rateEngines = new String[model.getIclubRateEngines().length];
 				int i = 0;
@@ -526,7 +522,19 @@ public class IclubRateTypeController implements Serializable {
 			bean.setFName(model.getFName());
 			bean.setFDesc(model.getFDesc());
 			bean.setFStatus(model.getFStatus());
-			bean.setIclubEntityType(model.getIclubEntityType());
+			bean.setFLTblName(model.getFLTblName());
+			bean.setFRate(model.getFRate());
+			bean.setIclubEntityType(model.getIclubEntityType() != null ? model.getIclubEntityType() : null);
+			if (model.getIclubRateTypes() != null && model.getIclubRateTypes().length > 0) {
+				Long[] rateTypes = new Long[model.getIclubRateTypes().length];
+				int i = 0;
+				for (Long rateType : bean.getIclubRateTypes()) {
+					rateTypes[i] = rateType;
+					i++;
+				}
+
+				bean.setIclubRateTypes(rateTypes);
+			}
 			fieldBeans.add(bean);
 		}
 

@@ -102,6 +102,8 @@ public class IclubFieldController implements Serializable {
 			bean.setFName(model.getFName());
 			bean.setFDesc(model.getFDesc());
 			bean.setFStatus(model.getFStatus());
+			bean.setFRate(model.getFRate());
+			bean.setFLTblName(model.getFLTblName());
 			bean.setIclubEntityType(model.getIclubEntityType());
 
 			dashBoardBeans.add(bean);
@@ -129,6 +131,8 @@ public class IclubFieldController implements Serializable {
 				model.setFName(bean.getFName());
 				model.setFDesc(bean.getFDesc());
 				model.setFStatus(bean.getFStatus());
+				model.setFRate(bean.getFRate());
+				model.setFLTblName(bean.getFLTblName());
 				model.setIclubEntityType(bean.getIclubEntityType());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -158,6 +162,8 @@ public class IclubFieldController implements Serializable {
 				model.setFName(bean.getFName());
 				model.setFDesc(bean.getFDesc());
 				model.setFStatus(bean.getFStatus());
+				model.setFRate(bean.getFRate());
+				model.setFLTblName(bean.getFLTblName());
 				model.setIclubEntityType(bean.getIclubEntityType());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -284,6 +290,8 @@ public class IclubFieldController implements Serializable {
 			bean.setFName(model.getFName());
 			bean.setFDesc(model.getFDesc());
 			bean.setFStatus(model.getFStatus());
+			bean.setFRate(model.getFRate());
+			bean.setFLTblName(model.getFLTblName());
 			bean.setIclubEntityType(model.getIclubEntityType());
 
 			beans.add(bean);

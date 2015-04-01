@@ -14,8 +14,8 @@
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtFieldNm}">
-			<f:selectItem itemLabel="Field Name" itemDisabled="true" />
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubField}">
+			<f:selectItem itemLabel="Field" itemDisabled="true" />
 			<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
 		</p:selectOneMenu>
 	</div>
@@ -40,10 +40,6 @@
 			<f:selectItem itemLabel="Quote Type" itemDisabled="true" />
 			<f:selectItems value="#{iclubRateTypeController.quoteType}" />
 		</p:selectOneMenu>
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="LookupTable Name" value="#{iclubRateTypeController.bean.rtLookupTblNm}" />
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">

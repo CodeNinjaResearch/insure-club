@@ -9,6 +9,12 @@
 		<p:column headerText="Name">
 			<p:outputLabel value="#{bean.FName}" />
 		</p:column>
+		<p:column headerText="Lookup Table Name">
+			<p:outputLabel value="#{bean.FLTblName}" />
+		</p:column>
+		<p:column headerText="Rate">
+			<p:outputLabel value="#{bean.FRate}" />
+		</p:column>
 		<p:column headerText="Entity Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.iclubEntityType}">
 				<f:selectItem itemLabel="Entity Type" itemDisabled="true" />
