@@ -1,11 +1,15 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +24,7 @@ public class IclubField implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3822582989563007101L;
+	private static final long serialVersionUID = -6766278079672011994L;
 	private Long FId;
 	private IclubEntityType iclubEntityType;
 	private String FName;
@@ -29,6 +33,7 @@ public class IclubField implements java.io.Serializable {
 	private String FLTblName;
 	private String FRate;
 	private String FStatus;
+	private Set<IclubRateType> iclubRateTypes = new HashSet<IclubRateType>(0);
 
 	// Constructors
 
@@ -42,7 +47,7 @@ public class IclubField implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubField(Long FId, IclubEntityType iclubEntityType, String FName, String FDesc, String FType, String FLTblName, String FRate, String FStatus) {
+	public IclubField(Long FId, IclubEntityType iclubEntityType, String FName, String FDesc, String FType, String FLTblName, String FRate, String FStatus, Set<IclubRateType> iclubRateTypes) {
 		this.FId = FId;
 		this.iclubEntityType = iclubEntityType;
 		this.FName = FName;
@@ -51,6 +56,7 @@ public class IclubField implements java.io.Serializable {
 		this.FLTblName = FLTblName;
 		this.FRate = FRate;
 		this.FStatus = FStatus;
+		this.iclubRateTypes = iclubRateTypes;
 	}
 
 	// Property accessors
@@ -126,6 +132,15 @@ public class IclubField implements java.io.Serializable {
 
 	public void setFStatus(String FStatus) {
 		this.FStatus = FStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubField")
+	public Set<IclubRateType> getIclubRateTypes() {
+		return this.iclubRateTypes;
+	}
+
+	public void setIclubRateTypes(Set<IclubRateType> iclubRateTypes) {
+		this.iclubRateTypes = iclubRateTypes;
 	}
 
 }
