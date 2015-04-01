@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubWallType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
 import za.co.iclub.pss.ws.model.IclubWallTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubWallTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubWallTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubWallTypeDAO iclubWallTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -138,7 +140,7 @@ public class IclubWallTypeService {
 						properties[i] = property.getPId();
 						i++;
 					}
-					
+
 					model.setIclubProperties(properties);
 				}
 
@@ -172,7 +174,7 @@ public class IclubWallTypeService {
 					properties[i] = property.getPId();
 					i++;
 				}
-				
+
 				model.setIclubProperties(properties);
 			}
 
@@ -189,7 +191,7 @@ public class IclubWallTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubWallTypeDAO.getWallTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id,IclubWallType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -222,5 +224,13 @@ public class IclubWallTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

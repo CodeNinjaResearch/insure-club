@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubDocument;
 import za.co.iclub.pss.orm.bean.IclubDocumentType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDocumentTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.ws.model.IclubDocumentTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -31,6 +32,7 @@ public class IclubDocumentTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubDocumentTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubDocumentTypeDAO iclubDocumentTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -130,7 +132,7 @@ public class IclubDocumentTypeService {
 				model.setDtLongDesc(iDt.getDtLongDesc());
 				model.setDtShortDesc(iDt.getDtShortDesc());
 				model.setDtStatus(iDt.getDtStatus());
-				
+
 				if (iDt.getIclubDocuments() != null && iDt.getIclubDocuments().size() > 0) {
 					String[] iclubDocuments = new String[iDt.getIclubDocuments().size()];
 					int i = 0;
@@ -140,8 +142,6 @@ public class IclubDocumentTypeService {
 					}
 					model.setIclubDocuments(iclubDocuments);
 				}
-
-				
 
 				ret.add((T) model);
 			}
@@ -165,7 +165,7 @@ public class IclubDocumentTypeService {
 			model.setDtLongDesc(bean.getDtLongDesc());
 			model.setDtShortDesc(bean.getDtShortDesc());
 			model.setDtStatus(bean.getDtStatus());
-			
+
 			if (bean.getIclubDocuments() != null && bean.getIclubDocuments().size() > 0) {
 				String[] iclubDocuments = new String[bean.getIclubDocuments().size()];
 				int i = 0;
@@ -189,7 +189,7 @@ public class IclubDocumentTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubDocumentTypeDAO.getDocumentTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubDocumentType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -222,5 +222,13 @@ public class IclubDocumentTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

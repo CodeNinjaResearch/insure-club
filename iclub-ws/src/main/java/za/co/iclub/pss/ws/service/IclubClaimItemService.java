@@ -12,15 +12,18 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.dao.IclubClaimDAO;
 import za.co.iclub.pss.orm.dao.IclubClaimItemDAO;
 import za.co.iclub.pss.orm.dao.IclubClaimStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 import za.co.iclub.pss.ws.model.IclubClaimItemModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -36,6 +39,7 @@ public class IclubClaimItemService {
 	private IclubClaimDAO iclubClaimDAO;
 	private IclubClaimStatusDAO iclubClaimStatusDAO;
 	private IclubClaimItemDAO iclubClaimItemDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -54,8 +58,8 @@ public class IclubClaimItemService {
 			iCCI.setIclubInsuranceItem(model.getIclubInsuranceItem() != null && !model.getIclubInsuranceItem().trim().equalsIgnoreCase("") ? iclubInsuranceItemDAO.findById(model.getIclubInsuranceItem()) : null);
 			iCCI.setIclubSupplMasterByCiAssesorId(model.getIclubSupplMasterByCiAssesorId() != null && !model.getIclubSupplMasterByCiAssesorId().trim().equalsIgnoreCase("") ? iclubSupplMasterDAO.findById(model.getIclubSupplMasterByCiAssesorId()) : null);
 			iCCI.setIclubClaim(model.getIclubClaim() != null && !model.getIclubClaim().trim().equalsIgnoreCase("") ? iclubClaimDAO.findById(model.getIclubClaim()) : null);
-			iCCI.setIclubClaimStatus(model.getIclubClaimStatus() != null  ? iclubClaimStatusDAO.findById(model.getIclubClaimStatus()) : null);
-			
+			iCCI.setIclubClaimStatus(model.getIclubClaimStatus() != null ? iclubClaimStatusDAO.findById(model.getIclubClaimStatus()) : null);
+
 			iclubClaimItemDAO.save(iCCI);
 
 			LOGGER.info("Save Success with ID :: " + iCCI.getCiId());
@@ -91,8 +95,8 @@ public class IclubClaimItemService {
 			iCCI.setIclubInsuranceItem(model.getIclubInsuranceItem() != null && !model.getIclubInsuranceItem().trim().equalsIgnoreCase("") ? iclubInsuranceItemDAO.findById(model.getIclubInsuranceItem()) : null);
 			iCCI.setIclubSupplMasterByCiAssesorId(model.getIclubSupplMasterByCiAssesorId() != null && !model.getIclubSupplMasterByCiAssesorId().trim().equalsIgnoreCase("") ? iclubSupplMasterDAO.findById(model.getIclubSupplMasterByCiAssesorId()) : null);
 			iCCI.setIclubClaim(model.getIclubClaim() != null && !model.getIclubClaim().trim().equalsIgnoreCase("") ? iclubClaimDAO.findById(model.getIclubClaim()) : null);
-			iCCI.setIclubClaimStatus(model.getIclubClaimStatus() != null  ? iclubClaimStatusDAO.findById(model.getIclubClaimStatus()) : null);
-		
+			iCCI.setIclubClaimStatus(model.getIclubClaimStatus() != null ? iclubClaimStatusDAO.findById(model.getIclubClaimStatus()) : null);
+
 			iclubClaimItemDAO.merge(iCCI);
 
 			LOGGER.info("Merge Success with ID :: " + model.getCiId());
@@ -168,7 +172,7 @@ public class IclubClaimItemService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubClaimItemDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubClaimItem.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubClaimItem iCCI = (IclubClaimItem) object;
@@ -212,8 +216,6 @@ public class IclubClaimItemService {
 			model.setIclubSupplMasterByCiAssesorId(bean.getIclubSupplMasterByCiAssesorId() != null ? (bean.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
 			model.setIclubInsuranceItem(bean.getIclubInsuranceItem() != null ? (bean.getIclubInsuranceItem().getIiId()) : null);
 			model.setIclubSupplMasterByCiHandlerId(bean.getIclubSupplMasterByCiHandlerId() != null ? (bean.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
-
-
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -267,6 +269,14 @@ public class IclubClaimItemService {
 
 	public void setIclubClaimItemDAO(IclubClaimItemDAO iclubClaimItemDAO) {
 		this.iclubClaimItemDAO = iclubClaimItemDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

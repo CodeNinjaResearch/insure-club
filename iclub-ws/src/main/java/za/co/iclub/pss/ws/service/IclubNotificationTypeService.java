@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubNotif;
 import za.co.iclub.pss.orm.bean.IclubNotificationType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
 import za.co.iclub.pss.ws.model.IclubNotificationTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubNotificationTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubNotificationTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNotificationTypeDAO iclubNotificationTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -130,7 +132,6 @@ public class IclubNotificationTypeService {
 				model.setNtLongDesc(iNt.getNtLongDesc());
 				model.setNtShortDesc(iNt.getNtShortDesc());
 				model.setNtStatus(iNt.getNtStatus());
-				
 
 				if (iNt.getIclubNotifs() != null && iNt.getIclubNotifs().size() > 0) {
 					String[] iclubNotifs = new String[iNt.getIclubNotifs().size()];
@@ -164,7 +165,7 @@ public class IclubNotificationTypeService {
 			model.setNtLongDesc(bean.getNtLongDesc());
 			model.setNtShortDesc(bean.getNtShortDesc());
 			model.setNtStatus(bean.getNtStatus());
-			
+
 			if (bean.getIclubNotifs() != null && bean.getIclubNotifs().size() > 0) {
 				String[] iclubNotifs = new String[bean.getIclubNotifs().size()];
 				int i = 0;
@@ -188,7 +189,7 @@ public class IclubNotificationTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubNotificationTypeDAO.getNotificationTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubNotificationType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -222,4 +223,13 @@ public class IclubNotificationTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

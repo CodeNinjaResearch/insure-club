@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubOccupiedStatus;
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubOccupiedStatusDAO;
 import za.co.iclub.pss.ws.model.IclubOccupiedStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubOccupiedStatusService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubOccupiedStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubOccupiedStatusDAO iclubOccupiedStatusDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -130,7 +132,7 @@ public class IclubOccupiedStatusService {
 				model.setOsLongDesc(iOs.getOsLongDesc());
 				model.setOsShortDesc(iOs.getOsShortDesc());
 				model.setOsStatus(iOs.getOsStatus());
-				
+
 				if (iOs.getIclubProperties() != null && iOs.getIclubProperties().size() > 0) {
 					String[] iclubProperties = new String[iOs.getIclubProperties().size()];
 					int i = 0;
@@ -163,7 +165,7 @@ public class IclubOccupiedStatusService {
 			model.setOsLongDesc(bean.getOsLongDesc());
 			model.setOsShortDesc(bean.getOsShortDesc());
 			model.setOsStatus(bean.getOsStatus());
-			
+
 			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
 				String[] iclubProperties = new String[bean.getIclubProperties().size()];
 				int i = 0;
@@ -187,7 +189,7 @@ public class IclubOccupiedStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubOccupiedStatusDAO.getOccupiedStatusBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubOccupiedStatus.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -221,4 +223,13 @@ public class IclubOccupiedStatusService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

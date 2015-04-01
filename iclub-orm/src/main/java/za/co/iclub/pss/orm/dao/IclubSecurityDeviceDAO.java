@@ -163,19 +163,6 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
-	public List findByUser(String userId) {
-		log.debug("finding all IclubSecurityDevice instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getSecurityDeviceByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-	
 
 	public static IclubSecurityDeviceDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSecurityDeviceDAO) ctx.getBean("IclubSecurityDeviceDAO");

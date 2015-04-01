@@ -164,20 +164,6 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public List getOwnerTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Owner Type by Query :: getOwnerTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getOwnerTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Owner Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubOwnerTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubOwnerTypeDAO) ctx.getBean("IclubOwnerTypeDAO");
 	}

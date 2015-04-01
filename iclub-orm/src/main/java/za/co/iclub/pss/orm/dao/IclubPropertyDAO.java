@@ -203,18 +203,6 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
-	public List findByUser(String userId) {
-		log.debug("finding all IclubProperty instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getPropertyByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
 
 	public static IclubPropertyDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPropertyDAO) ctx.getBean("IclubPropertyDAO");

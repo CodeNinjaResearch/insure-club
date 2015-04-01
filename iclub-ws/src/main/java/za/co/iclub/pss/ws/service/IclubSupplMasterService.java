@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.bean.IclubSupplMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplierTypeDAO;
@@ -35,6 +36,7 @@ public class IclubSupplMasterService {
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubSupplierTypeDAO iclubSupplierTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -201,7 +203,7 @@ public class IclubSupplMasterService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubSupplMasterDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSupplMaster.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
@@ -331,6 +333,14 @@ public class IclubSupplMasterService {
 
 	public void setIclubSupplierTypeDAO(IclubSupplierTypeDAO iclubSupplierTypeDAO) {
 		this.iclubSupplierTypeDAO = iclubSupplierTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

@@ -164,20 +164,6 @@ public class IclubMessageTypeDAO {
 		}
 	}
 
-	public List getMessageTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Message Type by Query :: getMessageTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getMessageTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Message Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubMessageTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubMessageTypeDAO) ctx.getBean("IclubMessageTypeDAO");
 	}

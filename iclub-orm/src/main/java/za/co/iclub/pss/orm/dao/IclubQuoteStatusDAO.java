@@ -164,20 +164,6 @@ public class IclubQuoteStatusDAO {
 		}
 	}
 
-	public List getQuoteStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Quote Status by Query :: getQuoteStatusBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getQuoteStatusBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Quote Status", re);
-			throw re;
-		}
-	}
-
 	public static IclubQuoteStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubQuoteStatusDAO) ctx.getBean("IclubQuoteStatusDAO");
 	}

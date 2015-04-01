@@ -159,44 +159,6 @@ public class IclubInsuranceItemDAO {
 		}
 	}
 
-	public List findByUser(String userId) {
-		log.debug("finding all IclubInsuranceItem instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getInsuranceItemByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-
-	public IclubInsuranceItem findByQuoteIdAndItemTypeId(String quoteId, Long itemTypeId) {
-		log.debug("finding all IclubInsuranceItem instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getInsuranceItemByQuoteIdAndItemTypeId");
-			queryObject.setString("quoteId", quoteId);
-			queryObject.setLong("itemTypeId", itemTypeId);
-			return (IclubInsuranceItem) queryObject.uniqueResult();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-	
-	
-	public List findByQuoteId(String quoteId) {
-		log.debug("finding all IclubInsuranceItem instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getInsuranceItemByQuoteId");
-			queryObject.setString("quoteId", quoteId);
-			return   queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-
 	public static IclubInsuranceItemDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubInsuranceItemDAO) ctx.getBean("IclubInsuranceItemDAO");
 	}

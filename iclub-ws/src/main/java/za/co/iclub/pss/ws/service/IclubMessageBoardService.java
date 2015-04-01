@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,14 +12,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubMbComment;
 import za.co.iclub.pss.orm.bean.IclubMessageBoard;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubMessageBoardDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubMessageBoardModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -32,6 +36,7 @@ public class IclubMessageBoardService {
 	private IclubMessageBoardDAO iclubMessageBoardDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -166,7 +171,7 @@ public class IclubMessageBoardService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubMessageBoardDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubMessageBoard.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubMessageBoard iCMb = (IclubMessageBoard) object;
@@ -261,5 +266,13 @@ public class IclubMessageBoardService {
 
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

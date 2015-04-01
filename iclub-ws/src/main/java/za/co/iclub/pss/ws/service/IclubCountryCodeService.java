@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubCountryCode;
 import za.co.iclub.pss.orm.dao.IclubBankMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCountryCodeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubOwnerTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubCountryCodeModel;
@@ -36,6 +37,7 @@ public class IclubCountryCodeService {
 	private IclubOwnerTypeDAO iclubOwnerTypeDAO;
 	private IclubBankMasterDAO iclubBankMasterDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -164,7 +166,7 @@ public class IclubCountryCodeService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubCountryCodeDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubCountryCode.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubCountryCode iclubCc = (IclubCountryCode) object;
@@ -245,6 +247,14 @@ public class IclubCountryCodeService {
 
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

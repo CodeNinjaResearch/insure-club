@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityDeviceDAO;
 import za.co.iclub.pss.orm.dao.IclubTrackerMasterDAO;
@@ -37,6 +38,7 @@ public class IclubSecurityDeviceService {
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubTrackerMasterDAO iclubTrackerMasterDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -175,7 +177,7 @@ public class IclubSecurityDeviceService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubSecurityDeviceDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSecurityDevice.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubSecurityDevice iCSd = (IclubSecurityDevice) object;
@@ -190,14 +192,12 @@ public class IclubSecurityDeviceService {
 				model.setIclubInsuranceItemType(iCSd.getIclubInsuranceItemType() != null ? (iCSd.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubTrackerMaster(iCSd.getIclubTrackerMaster() != null ? (iCSd.getIclubTrackerMaster().getTmId()) : null);
 				model.setIclubPerson(iCSd.getIclubPerson() != null ? (iCSd.getIclubPerson().getPId()) : null);
-				if(iCSd.getIclubVehicles()!=null && iCSd.getIclubVehicles().size()>0)
-				{
-					String[] vehicales=new String[iCSd.getIclubVehicles().size()];
-					int i=0;
-					for(IclubVehicle vehicle:iCSd.getIclubVehicles())
-					{
-						vehicales[i]=vehicle.getVId();
-						
+				if (iCSd.getIclubVehicles() != null && iCSd.getIclubVehicles().size() > 0) {
+					String[] vehicales = new String[iCSd.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iCSd.getIclubVehicles()) {
+						vehicales[i] = vehicle.getVId();
+
 						i++;
 					}
 					model.setIclubVehicles(vehicales);
@@ -229,14 +229,12 @@ public class IclubSecurityDeviceService {
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
 			model.setIclubTrackerMaster(bean.getIclubTrackerMaster() != null ? (bean.getIclubTrackerMaster().getTmId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
-			if(bean.getIclubVehicles()!=null && bean.getIclubVehicles().size()>0)
-			{
-				String[] vehicales=new String[bean.getIclubVehicles().size()];
-				int i=0;
-				for(IclubVehicle vehicle:bean.getIclubVehicles())
-				{
-					vehicales[i]=vehicle.getVId();
-					
+			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
+				String[] vehicales = new String[bean.getIclubVehicles().size()];
+				int i = 0;
+				for (IclubVehicle vehicle : bean.getIclubVehicles()) {
+					vehicales[i] = vehicle.getVId();
+
 					i++;
 				}
 				model.setIclubVehicles(vehicales);
@@ -286,6 +284,14 @@ public class IclubSecurityDeviceService {
 
 	public void setIclubTrackerMasterDAO(IclubTrackerMasterDAO iclubTrackerMasterDAO) {
 		this.iclubTrackerMasterDAO = iclubTrackerMasterDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

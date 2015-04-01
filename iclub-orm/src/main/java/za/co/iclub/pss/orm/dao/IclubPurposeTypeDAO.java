@@ -163,30 +163,6 @@ public class IclubPurposeTypeDAO {
 			throw re;
 		}
 	}
-	
-	public List findByUser(String userId) {
-		log.debug("finding all IclubPurposeType instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getPurposeTypeByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-	
-	public List findByInsuranceItemType(String insurnceItemType) {
-		log.debug("finding all IclubPurposeType instances by insurnceItemType");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getPurposeTypeByInsurnceItemType");
-			queryObject.setString("iIType", insurnceItemType);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
 
 	public static IclubPurposeTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPurposeTypeDAO) ctx.getBean("IclubPurposeTypeDAO");

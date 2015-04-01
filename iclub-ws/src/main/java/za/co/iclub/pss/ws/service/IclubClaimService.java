@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,9 +12,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubClaim;
 import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.bean.IclubPayment;
@@ -21,6 +24,7 @@ import za.co.iclub.pss.orm.dao.IclubClaimDAO;
 import za.co.iclub.pss.orm.dao.IclubClaimStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubPolicyDAO;
 import za.co.iclub.pss.orm.dao.IclubProductTypeDAO;
@@ -39,6 +43,7 @@ public class IclubClaimService {
 	private IclubInsurerMasterDAO iclubInsurerMasterDAO;
 	private IclubPolicyDAO iclubPolicyDAO;
 	private IclubClaimStatusDAO iclubClaimStatusDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -189,7 +194,7 @@ public class IclubClaimService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubClaimDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubClaim.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubClaim iCC = (IclubClaim) object;
@@ -285,7 +290,7 @@ public class IclubClaimService {
 	public IclubClaimModel getByPolicyId(@PathParam("policyId") String policyId) {
 		IclubClaimModel model = new IclubClaimModel();
 		try {
-			IclubClaim bean = iclubClaimDAO.findByPolicyId(policyId);
+			IclubClaim bean = iclubNamedQueryDAO.findByPolicyId(policyId);
 
 			model.setCId(bean.getCId());
 			model.setCCrtdDt(bean.getCCrtdDt());
@@ -378,6 +383,14 @@ public class IclubClaimService {
 
 	public void setIclubClaimStatusDAO(IclubClaimStatusDAO iclubClaimStatusDAO) {
 		this.iclubClaimStatusDAO = iclubClaimStatusDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

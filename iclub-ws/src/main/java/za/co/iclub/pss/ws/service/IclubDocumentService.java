@@ -30,6 +30,7 @@ import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDocumentDAO;
 import za.co.iclub.pss.orm.dao.IclubDocumentTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubDocumentModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -44,6 +45,7 @@ public class IclubDocumentService {
 	private IclubDocumentTypeDAO iclubDocumentTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubEntityTypeDAO iclubEntityTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -179,7 +181,7 @@ public class IclubDocumentService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubDocumentDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubDocument.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubDocument iCD = (IclubDocument) object;
@@ -231,7 +233,7 @@ public class IclubDocumentService {
 		}
 		return model;
 	}
-	
+
 	@POST
 	@Path("/upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -319,6 +321,14 @@ public class IclubDocumentService {
 
 	public void setIclubEntityTypeDAO(IclubEntityTypeDAO iclubEntityTypeDAO) {
 		this.iclubEntityTypeDAO = iclubEntityTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

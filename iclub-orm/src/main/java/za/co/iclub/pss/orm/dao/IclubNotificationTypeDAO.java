@@ -164,20 +164,6 @@ public class IclubNotificationTypeDAO {
 		}
 	}
 
-	public List getNotificationTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Notification Type by Query :: getNotificationTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getNotificationTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Notification Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubNotificationTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubNotificationTypeDAO) ctx.getBean("IclubNotificationTypeDAO");
 	}

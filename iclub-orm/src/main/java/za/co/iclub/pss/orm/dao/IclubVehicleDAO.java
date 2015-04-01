@@ -238,30 +238,6 @@ public class IclubVehicleDAO {
 			throw re;
 		}
 	}
-	
-	public List findByUser(String userId) {
-		log.debug("finding all IclubVehicle instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getVehicleByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-	
-	public IclubVehicle findByDriverId(String driverId) {
-		log.debug("finding  IclubVehicle instance by getVehicleByDriverId");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getVehicleByDriverId");
-			queryObject.setString("driverId", driverId);
-			return (IclubVehicle)queryObject.uniqueResult();
-		} catch (RuntimeException re) {
-			log.error("find IclubVehicle failed", re);
-			throw re;
-		}
-	}
 
 	public static IclubVehicleDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehicleDAO) ctx.getBean("IclubVehicleDAO");

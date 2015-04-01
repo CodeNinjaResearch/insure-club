@@ -158,18 +158,6 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
-	public List findByUser(String userId) {
-		log.debug("finding all IclubPayment instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getPaymentByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
 
 	public static IclubPaymentDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPaymentDAO) ctx.getBean("IclubPaymentDAO");

@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.bean.IclubPolicyStatus;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPolicyStatusDAO;
 import za.co.iclub.pss.ws.model.IclubPolicyStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubPolicyStatusService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubPolicyStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPolicyStatusDAO iclubPolicyStatusDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -130,7 +132,7 @@ public class IclubPolicyStatusService {
 				model.setPsLongDesc(iPs.getPsLongDesc());
 				model.setPsShortDesc(iPs.getPsShortDesc());
 				model.setPsStatus(iPs.getPsStatus());
-				
+
 				if (iPs.getIclubPolicies() != null && iPs.getIclubPolicies().size() > 0) {
 					String[] iclubPolicies = new String[iPs.getIclubPolicies().size()];
 					int i = 0;
@@ -187,7 +189,7 @@ public class IclubPolicyStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubPolicyStatusDAO.getPolicyStatusBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubPolicyStatus.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -221,4 +223,13 @@ public class IclubPolicyStatusService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

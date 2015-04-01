@@ -164,20 +164,6 @@ public class IclubIdTypeDAO {
 		}
 	}
 
-	public List getIdTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Id Type by Query :: getIdTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getIdTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Id Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubIdTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubIdTypeDAO) ctx.getBean("IclubIdTypeDAO");
 	}

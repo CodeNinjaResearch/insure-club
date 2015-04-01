@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.bean.IclubPaymentStatus;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPaymentStatusDAO;
 import za.co.iclub.pss.ws.model.IclubPaymentStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubPaymentStatusService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubPaymentStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPaymentStatusDAO iclubPaymentStatusDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -187,7 +189,8 @@ public class IclubPaymentStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubPaymentStatusDAO.getPaymentStatusBySD(val, id);
+
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubPaymentStatus.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -221,4 +224,13 @@ public class IclubPaymentStatusService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

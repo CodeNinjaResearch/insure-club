@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubPropertyType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyTypeDAO;
 import za.co.iclub.pss.ws.model.IclubPropertyTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubPropertyTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropertyTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPropertyTypeDAO iclubPropertyTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -130,7 +132,7 @@ public class IclubPropertyTypeService {
 				model.setPtLongDesc(iPt.getPtLongDesc());
 				model.setPtShortDesc(iPt.getPtShortDesc());
 				model.setPtStatus(iPt.getPtStatus());
-				
+
 				if (iPt.getIclubProperties() != null && iPt.getIclubProperties().size() > 0) {
 					String[] properties = new String[iPt.getIclubProperties().size()];
 					int i = 0;
@@ -140,7 +142,6 @@ public class IclubPropertyTypeService {
 					}
 					model.setIclubProperties(properties);
 				}
-
 
 				ret.add((T) model);
 			}
@@ -188,7 +189,7 @@ public class IclubPropertyTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubPropertyTypeDAO.getPropertyTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubPropertyType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -222,4 +223,13 @@ public class IclubPropertyTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

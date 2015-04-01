@@ -24,6 +24,7 @@ import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
 import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubDriverModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -39,6 +40,7 @@ public class IclubDriverService {
 	private IclubAccessTypeDAO iclubAccessTypeDAO;
 	private IclubLicenseCodeDAO iclubLicenseCodeDAO;
 	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -188,7 +190,7 @@ public class IclubDriverService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubDriverDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubDriver.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubDriver iCt = (IclubDriver) object;
@@ -264,8 +266,7 @@ public class IclubDriverService {
 		}
 		return model;
 	}
-	
-	
+
 	@GET
 	@Path("/getByPersonId/{id}")
 	@Produces("application/json")
@@ -273,7 +274,7 @@ public class IclubDriverService {
 	public IclubDriverModel getByPersonId(@PathParam("id") String id) {
 		IclubDriverModel model = new IclubDriverModel();
 		try {
-			IclubDriver bean = iclubDriverDAO.findByPersonId(id);
+			IclubDriver bean = iclubNamedQueryDAO.findByPersonId(id);
 
 			model.setDId(bean.getDId());
 			model.setDDob(bean.getDDob());
@@ -303,7 +304,6 @@ public class IclubDriverService {
 		}
 		return model;
 	}
-
 
 	public IclubDriverDAO getIclubDriverDAO() {
 		return iclubDriverDAO;
@@ -351,6 +351,14 @@ public class IclubDriverService {
 
 	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
 		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

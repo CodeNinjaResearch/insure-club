@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubThatchType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubThatchTypeDAO;
 import za.co.iclub.pss.ws.model.IclubThatchTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubThatchTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubThatchTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubThatchTypeDAO iclubThatchTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -130,7 +132,7 @@ public class IclubThatchTypeService {
 				model.setTtLongDesc(iTt.getTtLongDesc());
 				model.setTtShortDesc(iTt.getTtShortDesc());
 				model.setTtStatus(iTt.getTtStatus());
-				
+
 				if (iTt.getIclubProperties() != null && iTt.getIclubProperties().size() > 0) {
 					String[] properties = new String[iTt.getIclubProperties().size()];
 					int i = 0;
@@ -187,7 +189,7 @@ public class IclubThatchTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubThatchTypeDAO.getThatchTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubThatchType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -221,4 +223,13 @@ public class IclubThatchTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

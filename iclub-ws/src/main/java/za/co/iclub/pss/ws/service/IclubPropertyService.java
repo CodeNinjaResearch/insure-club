@@ -22,6 +22,7 @@ import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubOccupiedStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyDAO;
@@ -50,6 +51,7 @@ public class IclubPropertyService {
 	private IclubBarTypeDAO iclubBarTypeDAO;
 	private IclubThatchTypeDAO iclubThatchTypeDAO;
 	private IclubRoofTypeDAO iclubRoofTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -223,7 +225,7 @@ public class IclubPropertyService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubPropertyDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubProperty.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubProperty iCP = (IclubProperty) object;
@@ -396,6 +398,14 @@ public class IclubPropertyService {
 
 	public void setIclubRoofTypeDAO(IclubRoofTypeDAO iclubRoofTypeDAO) {
 		this.iclubRoofTypeDAO = iclubRoofTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

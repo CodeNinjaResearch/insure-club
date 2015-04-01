@@ -229,18 +229,6 @@ public class IclubPersonDAO {
 		}
 	}
 
-	public List findByUser(String userId) {
-		log.debug("finding all IclubPerson instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getPersonByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-
 	public static IclubPersonDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPersonDAO) ctx.getBean("IclubPersonDAO");
 	}

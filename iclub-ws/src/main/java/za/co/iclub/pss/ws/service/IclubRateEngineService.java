@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubRateEngine;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubRateEngineDAO;
 import za.co.iclub.pss.orm.dao.IclubRateTypeDAO;
@@ -36,6 +37,7 @@ public class IclubRateEngineService {
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubRateTypeDAO iclubRateTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -165,7 +167,7 @@ public class IclubRateEngineService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubRateEngineDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubRateEngine.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubRateEngine iCt = (IclubRateEngine) object;
@@ -198,7 +200,7 @@ public class IclubRateEngineService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubRateEngineDAO.findByRateType(rateType);
+			List batmod = iclubNamedQueryDAO.findByRateType(rateType);
 
 			for (Object object : batmod) {
 				IclubRateEngine iCt = (IclubRateEngine) object;
@@ -303,6 +305,14 @@ public class IclubRateEngineService {
 
 	public void setIclubRateTypeDAO(IclubRateTypeDAO iclubRateTypeDAO) {
 		this.iclubRateTypeDAO = iclubRateTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

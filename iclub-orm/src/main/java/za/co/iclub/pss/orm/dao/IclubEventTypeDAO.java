@@ -164,20 +164,6 @@ public class IclubEventTypeDAO {
 		}
 	}
 
-	public List getEventTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Event Type by Query :: getEventTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getEventTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Event Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubEventTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubEventTypeDAO) ctx.getBean("IclubEventTypeDAO");
 	}

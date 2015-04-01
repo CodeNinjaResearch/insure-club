@@ -26,6 +26,7 @@ import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
 import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -36,6 +37,7 @@ public class IclubInsuranceItemTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubInsuranceItemTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -308,7 +310,7 @@ public class IclubInsuranceItemTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubInsuranceItemTypeDAO.getInsuranceItemTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubInsuranceItemType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -341,5 +343,13 @@ public class IclubInsuranceItemTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

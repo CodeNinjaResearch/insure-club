@@ -164,20 +164,6 @@ public class IclubRoofTypeDAO {
 		}
 	}
 
-	public List getRoofTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Roof Type by Query :: getRoofTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getRoofTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Roof Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubRoofTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRoofTypeDAO) ctx.getBean("IclubRoofTypeDAO");
 	}

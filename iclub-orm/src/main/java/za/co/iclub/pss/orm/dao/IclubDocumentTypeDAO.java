@@ -164,20 +164,6 @@ public class IclubDocumentTypeDAO {
 		}
 	}
 
-	public List getDocumentTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Document Type by Query :: getDocumentTypeySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getDocumentTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Document Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubDocumentTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubDocumentTypeDAO) ctx.getBean("IclubDocumentTypeDAO");
 	}

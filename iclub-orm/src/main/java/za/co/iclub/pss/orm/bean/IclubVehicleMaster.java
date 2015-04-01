@@ -12,8 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,7 +23,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "iclub_vehicle_master", uniqueConstraints = @UniqueConstraint(columnNames = "vm_make"))
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_vehicle_master where vm_crtd_by=:id", name = "getVehicleMasterByUser", resultClass = IclubVehicleMaster.class),  @NamedNativeQuery(query = "select * from iclub_vehicle_master where upper(vm_make) like upper(:vmMake)", name = "getVehicleMasterByMake", resultClass = IclubVehicleMaster.class),@NamedNativeQuery(query = "select distinct vm_make from iclub_vehicle_master", name = "getAllVmMakes", resultClass = IclubVehicleMaster.class) })
 public class IclubVehicleMaster implements java.io.Serializable {
 
 	// Fields

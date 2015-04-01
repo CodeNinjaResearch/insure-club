@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubMaritialStatus;
 import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.ws.model.IclubMaritialStatusModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -31,6 +32,7 @@ public class IclubMaritialStatusService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubMaritialStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -162,7 +164,7 @@ public class IclubMaritialStatusService {
 			model.setMsLongDesc(bean.getMsLongDesc());
 			model.setMsShortDesc(bean.getMsShortDesc());
 			model.setMsStatus(bean.getMsStatus());
-			
+
 			if (bean.getIclubPersons() != null && bean.getIclubPersons().size() > 0) {
 				String[] iclubPersons = new String[bean.getIclubPersons().size()];
 				int i = 0;
@@ -186,7 +188,7 @@ public class IclubMaritialStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubMaritialStatusDAO.getMaritialStatusBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubMaritialStatus.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -220,4 +222,13 @@ public class IclubMaritialStatusService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

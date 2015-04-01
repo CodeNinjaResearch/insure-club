@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,7 +16,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_product_type")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getProductTypeBySD", query = "select * from iclub_product_type where lower(pt_short_desc) = lower(:sd) and pt_id <> :id", resultClass = IclubProductType.class) })
 public class IclubProductType implements java.io.Serializable {
 
 	// Fields

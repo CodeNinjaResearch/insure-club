@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,11 +12,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubOccupation;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubOccupationDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubOccupationModel;
@@ -29,6 +33,7 @@ public class IclubOccupationService {
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubOccupationDAO iclubOccupationDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -149,7 +154,7 @@ public class IclubOccupationService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubOccupationDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubOccupation.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubOccupation iCO = (IclubOccupation) object;
@@ -214,6 +219,14 @@ public class IclubOccupationService {
 
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

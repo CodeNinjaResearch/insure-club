@@ -163,18 +163,6 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
-	public List findByUser(String userId) {
-		log.debug("finding all IclubLicenseCode instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getLicenseCodeByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
 
 	public static IclubLicenseCodeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubLicenseCodeDAO) ctx.getBean("IclubLicenseCodeDAO");

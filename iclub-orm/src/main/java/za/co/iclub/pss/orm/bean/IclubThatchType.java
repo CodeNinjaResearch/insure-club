@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,7 +16,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_thatch_type")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getThatchTypeBySD", query = "select * from iclub_thatch_type where lower(tt_short_desc) = lower(:sd) and tt_id <> :id", resultClass = IclubThatchType.class) })
 public class IclubThatchType implements java.io.Serializable {
 
 	// Fields

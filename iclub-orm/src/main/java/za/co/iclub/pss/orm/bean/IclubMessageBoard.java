@@ -11,8 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_message_board")
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_message_board where mb_crtd_by=:id", name = "getMessageBoardByUser", resultClass = IclubMessageBoard.class) })
 public class IclubMessageBoard implements java.io.Serializable {
 
 	// Fields

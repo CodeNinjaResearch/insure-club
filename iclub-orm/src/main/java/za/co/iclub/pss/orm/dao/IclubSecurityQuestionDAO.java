@@ -164,20 +164,6 @@ public class IclubSecurityQuestionDAO {
 		}
 	}
 
-	public List getSecurityQuestionBySD(String sd, Long id) {
-		log.debug("Fetching all Security Question by Query :: getSecurityQuestionBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getSecurityQuestionBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Security Question", re);
-			throw re;
-		}
-	}
-
 	public static IclubSecurityQuestionDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSecurityQuestionDAO) ctx.getBean("IclubSecurityQuestionDAO");
 	}

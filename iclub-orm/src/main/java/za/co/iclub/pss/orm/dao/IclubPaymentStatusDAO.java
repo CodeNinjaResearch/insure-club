@@ -164,20 +164,6 @@ public class IclubPaymentStatusDAO {
 		}
 	}
 
-	public List getPaymentStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Payment Status by Query :: getPaymentStatusBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getPaymentStatusBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Payment Status", re);
-			throw re;
-		}
-	}
-
 	public static IclubPaymentStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPaymentStatusDAO) ctx.getBean("IclubPaymentStatusDAO");
 	}

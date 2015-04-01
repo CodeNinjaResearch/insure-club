@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubLogin;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubLoginDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubRoleTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityQuestionDAO;
@@ -32,6 +33,7 @@ public class IclubLoginService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubLoginService.class);
 	private IclubLoginDAO iclubLoginDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubSecurityQuestionDAO iclubSecurityQuestionDAO;
 	private IclubRoleTypeDAO iclubRoleTypeDAO;
@@ -166,7 +168,7 @@ public class IclubLoginService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel login(@PathParam("name") String name, @PathParam("pwd") String pwd) {
 		try {
-			List logins = iclubLoginDAO.verifyLogin(name, pwd);
+			List logins = iclubNamedQueryDAO.verifyLogin(name, pwd);
 			ResponseModel message = new ResponseModel();
 			if (logins.size() == 0 || logins.get(0) == null) {
 				message.setStatusCode(-1);
@@ -259,6 +261,14 @@ public class IclubLoginService {
 
 	public void setIclubRoleTypeDAO(IclubRoleTypeDAO iclubRoleTypeDAO) {
 		this.iclubRoleTypeDAO = iclubRoleTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

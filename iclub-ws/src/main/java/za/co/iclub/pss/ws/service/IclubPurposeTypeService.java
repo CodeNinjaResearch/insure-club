@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,14 +12,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubPurposeType;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubPurposeTypeDAO;
 import za.co.iclub.pss.ws.model.IclubPurposeTypeModel;
@@ -33,6 +37,7 @@ public class IclubPurposeTypeService {
 	private IclubPurposeTypeDAO iclubPurposeTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -171,7 +176,6 @@ public class IclubPurposeTypeService {
 		return ret;
 	}
 
-	
 	@GET
 	@Path("/list/status/{insurnceItemType}")
 	@Produces("application/json")
@@ -180,7 +184,7 @@ public class IclubPurposeTypeService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubPurposeTypeDAO.findByInsuranceItemType(insurnceItemType);
+			List batmod = iclubNamedQueryDAO.findByInsuranceItemType(insurnceItemType);
 
 			for (Object object : batmod) {
 				IclubPurposeType iCPt = (IclubPurposeType) object;
@@ -223,8 +227,7 @@ public class IclubPurposeTypeService {
 
 		return ret;
 	}
-	
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
@@ -233,7 +236,7 @@ public class IclubPurposeTypeService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubPurposeTypeDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPurposeType.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubPurposeType iCPt = (IclubPurposeType) object;
@@ -351,4 +354,13 @@ public class IclubPurposeTypeService {
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+
 }

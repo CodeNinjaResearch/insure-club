@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubInsurerMaster;
 import za.co.iclub.pss.orm.bean.IclubQuote;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubInsurerMasterModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -33,6 +34,7 @@ public class IclubInsurerMasterService {
 	private IclubInsurerMasterDAO iclubInsurerMasterDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -177,7 +179,7 @@ public class IclubInsurerMasterService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubInsurerMasterDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubInsurerMaster.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubInsurerMaster iCIMaster = (IclubInsurerMaster) object;
@@ -267,6 +269,14 @@ public class IclubInsurerMasterService {
 
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

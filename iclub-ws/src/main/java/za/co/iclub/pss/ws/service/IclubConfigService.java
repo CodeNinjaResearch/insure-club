@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubConfig;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubConfigDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubConfigModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -32,6 +33,7 @@ public class IclubConfigService {
 	private IclubConfigDAO iclubConfigDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -157,7 +159,7 @@ public class IclubConfigService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubConfigDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubConfig.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubConfig iclubC = (IclubConfig) object;
@@ -222,6 +224,14 @@ public class IclubConfigService {
 
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

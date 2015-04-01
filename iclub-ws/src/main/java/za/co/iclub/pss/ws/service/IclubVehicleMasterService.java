@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.bean.IclubVehicleMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO;
 import za.co.iclub.pss.ws.model.IclubVehicleMasterModel;
@@ -33,6 +34,7 @@ public class IclubVehicleMasterService {
 	private IclubVehicleMasterDAO iclubVehicleMasterDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -236,7 +238,7 @@ public class IclubVehicleMasterService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubVehicleMasterDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehicleMaster.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
@@ -328,6 +330,14 @@ public class IclubVehicleMasterService {
 
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

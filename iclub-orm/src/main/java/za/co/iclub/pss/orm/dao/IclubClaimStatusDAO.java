@@ -163,20 +163,6 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
-	public List getClaimStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Claim Status by Query :: getClaimStatusBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getClaimStatusBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Claim Status", re);
-			throw re;
-		}
-	}
 
 	public static IclubClaimStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubClaimStatusDAO) ctx.getBean("IclubClaimStatusDAO");

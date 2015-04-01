@@ -158,18 +158,6 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
-	public List findByUser(String userId) {
-		log.debug("finding all IclubOccupation instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getOccupationByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
 
 	public static IclubOccupationDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubOccupationDAO) ctx.getBean("IclubOccupationDAO");

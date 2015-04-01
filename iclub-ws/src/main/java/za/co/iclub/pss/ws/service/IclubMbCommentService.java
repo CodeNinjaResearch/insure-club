@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubMbComment;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubMbCommentDAO;
 import za.co.iclub.pss.orm.dao.IclubMessageBoardDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubMbCommentModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -34,6 +35,7 @@ public class IclubMbCommentService {
 	private IclubMbCommentDAO iclubMbCommentDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubMessageBoardDAO iclubMessageBoardDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -154,7 +156,7 @@ public class IclubMbCommentService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubMbCommentDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubMbComment.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubMbComment iCMbc = (IclubMbComment) object;
@@ -227,6 +229,14 @@ public class IclubMbCommentService {
 
 	public void setIclubMessageBoardDAO(IclubMessageBoardDAO iclubMessageBoardDAO) {
 		this.iclubMessageBoardDAO = iclubMessageBoardDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

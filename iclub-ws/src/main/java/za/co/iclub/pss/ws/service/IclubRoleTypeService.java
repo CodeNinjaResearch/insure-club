@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubLogin;
 import za.co.iclub.pss.orm.bean.IclubRoleType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubRoleTypeDAO;
 import za.co.iclub.pss.ws.model.IclubRoleTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -32,6 +33,8 @@ public class IclubRoleTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubRoleTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubRoleTypeDAO iclubRoleTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
+
 
 	@POST
 	@Path("/add")
@@ -166,7 +169,7 @@ public class IclubRoleTypeService {
 			model.setRtLongDesc(bean.getRtLongDesc());
 			model.setRtShortDesc(bean.getRtShortDesc());
 			model.setRtStatus(bean.getRtStatus());
-			
+
 			if (bean.getIclubLogins() != null && bean.getIclubLogins().size() > 0) {
 				Set<IclubLogin> iLog = bean.getIclubLogins();
 				String[] iclubLogins = new String[iLog.size()];
@@ -192,7 +195,7 @@ public class IclubRoleTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubRoleTypeDAO.getRoleTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubRoleType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -225,5 +228,13 @@ public class IclubRoleTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

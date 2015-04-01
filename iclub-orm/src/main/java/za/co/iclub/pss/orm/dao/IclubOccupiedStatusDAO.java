@@ -164,20 +164,6 @@ public class IclubOccupiedStatusDAO {
 		}
 	}
 
-	public List getOccupiedStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Occupied Status by Query :: getOccupiedStatusBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getOccupiedStatusBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Occupied Status", re);
-			throw re;
-		}
-	}
-
 	public static IclubOccupiedStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubOccupiedStatusDAO) ctx.getBean("IclubOccupiedStatusDAO");
 	}

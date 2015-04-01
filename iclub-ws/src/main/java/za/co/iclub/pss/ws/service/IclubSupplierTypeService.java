@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubSupplMaster;
 import za.co.iclub.pss.orm.bean.IclubSupplierType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplierTypeDAO;
 import za.co.iclub.pss.ws.model.IclubSupplierTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubSupplierTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubSupplierTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubSupplierTypeDAO iclubSupplierTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -187,7 +189,7 @@ public class IclubSupplierTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubSupplierTypeDAO.getSupplierTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubSupplierType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -220,5 +222,13 @@ public class IclubSupplierTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

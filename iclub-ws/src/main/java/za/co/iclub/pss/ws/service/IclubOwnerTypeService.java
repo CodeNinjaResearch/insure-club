@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubAccount;
 import za.co.iclub.pss.orm.bean.IclubOwnerType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubOwnerTypeDAO;
 import za.co.iclub.pss.ws.model.IclubOwnerTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubOwnerTypeService {
 
 	protected static final Logger LOGGER = Logger.getLogger(IclubOwnerTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubOwnerTypeDAO iclubOwnerTypeDAO;
 
 	@POST
@@ -192,7 +194,7 @@ public class IclubOwnerTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubOwnerTypeDAO.getOwnerTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubOwnerType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -225,6 +227,14 @@ public class IclubOwnerTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

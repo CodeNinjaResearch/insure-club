@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityMasterDAO;
 import za.co.iclub.pss.ws.model.IclubSecurityMasterModel;
@@ -35,6 +36,7 @@ public class IclubSecurityMasterService {
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -144,8 +146,7 @@ public class IclubSecurityMasterService {
 				iCSm.setSmStatus(iclubSMaster.getSmStatus());
 				iCSm.setIclubInsuranceItemType(iclubSMaster.getIclubInsuranceItemType() != null ? iclubSMaster.getIclubInsuranceItemType().getIitId() : null);
 				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
-				
-				
+
 				if (iclubSMaster.getIclubVehicles() != null && iclubSMaster.getIclubVehicles().size() > 0) {
 					String[] vehicles = new String[iclubSMaster.getIclubVehicles().size()];
 					int i = 0;
@@ -155,7 +156,6 @@ public class IclubSecurityMasterService {
 					}
 					iCSm.setIclubVehicles(vehicles);
 				}
-				
 
 				ret.add((T) iCSm);
 			}
@@ -174,7 +174,7 @@ public class IclubSecurityMasterService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubSecurityMasterDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSecurityMaster.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubSecurityMaster iclubSMaster = (IclubSecurityMaster) object;
@@ -247,6 +247,14 @@ public class IclubSecurityMasterService {
 
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

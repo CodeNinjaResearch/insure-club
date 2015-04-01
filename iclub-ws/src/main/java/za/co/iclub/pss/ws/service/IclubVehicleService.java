@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubPurposeTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityDeviceDAO;
@@ -44,6 +45,7 @@ public class IclubVehicleService {
 	private IclubSecurityDeviceDAO iclubSecurityDeviceDAO;
 	private IclubVehicleMasterDAO iclubVehicleMasterDAO;
 	private IclubDriverDAO iclubDriverDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -235,7 +237,7 @@ public class IclubVehicleService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubVehicleDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehicle.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubVehicle iCV = (IclubVehicle) object;
@@ -303,7 +305,7 @@ public class IclubVehicleService {
 	public IclubVehicleModel getVehicleByDriverAndQuote(@PathParam("driverId") String driverId) {
 		IclubVehicleModel model = new IclubVehicleModel();
 		try {
-			IclubVehicle bean = iclubVehicleDAO.findByDriverId(driverId);
+			IclubVehicle bean = iclubNamedQueryDAO.findByDriverId(driverId);
 
 			model = getModelFromBean(bean);
 
@@ -419,5 +421,14 @@ public class IclubVehicleService {
 	public void setIclubDriverDAO(IclubDriverDAO iclubDriverDAO) {
 		this.iclubDriverDAO = iclubDriverDAO;
 	}
+	
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+			return iclubNamedQueryDAO;
+		}
+
+		public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+			this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+		}
 
 }

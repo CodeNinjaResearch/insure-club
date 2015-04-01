@@ -164,20 +164,6 @@ public class IclubWallTypeDAO {
 		}
 	}
 
-	public List getWallTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Wall Type by Query :: getWallTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getWallTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Wall Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubWallTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubWallTypeDAO) ctx.getBean("IclubWallTypeDAO");
 	}

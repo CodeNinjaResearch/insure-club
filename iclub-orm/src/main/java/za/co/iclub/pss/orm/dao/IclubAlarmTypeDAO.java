@@ -168,17 +168,4 @@ public class IclubAlarmTypeDAO {
 		return (IclubAlarmTypeDAO) ctx.getBean("IclubAlarmTypeDAO");
 	}
 
-	public List getAlarmTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Alarm Type by Query :: getAlarmTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getAlarmTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Alarm Type", re);
-			throw re;
-		}
-	}
 }

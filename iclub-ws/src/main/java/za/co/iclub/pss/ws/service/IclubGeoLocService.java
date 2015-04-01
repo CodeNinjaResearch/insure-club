@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubGeoLocDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -32,6 +33,7 @@ public class IclubGeoLocService {
 	private IclubGeoLocDAO iclubGeoLocDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -165,7 +167,7 @@ public class IclubGeoLocService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubGeoLocDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubGeoLoc.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
@@ -235,6 +237,14 @@ public class IclubGeoLocService {
 
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

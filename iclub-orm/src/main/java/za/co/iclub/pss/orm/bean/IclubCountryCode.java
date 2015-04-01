@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -18,7 +16,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "iclub_country_code", uniqueConstraints = { @UniqueConstraint(columnNames = "cc_short_id"), @UniqueConstraint(columnNames = "cc_iso_id") })
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_country_code where cc_crtd_by=:id", name = "getCountryCodeByUser", resultClass = IclubCountryCode.class) })
 public class IclubCountryCode implements java.io.Serializable {
 
 	// Fields

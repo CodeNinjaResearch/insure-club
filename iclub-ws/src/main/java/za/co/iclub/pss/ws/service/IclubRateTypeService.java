@@ -23,6 +23,7 @@ import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubFieldDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubRateTypeDAO;
 import za.co.iclub.pss.ws.model.IclubRateTypeModel;
@@ -39,6 +40,7 @@ public class IclubRateTypeService {
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubFieldDAO iclubFieldDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -225,7 +227,7 @@ public class IclubRateTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubRateTypeDAO.getRateTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubRateType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -290,5 +292,13 @@ public class IclubRateTypeService {
 
 	public void setIclubFieldDAO(IclubFieldDAO iclubFieldDAO) {
 		this.iclubFieldDAO = iclubFieldDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

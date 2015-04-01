@@ -168,20 +168,6 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
-	public List getEntityTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Entity Type by Query :: getEntityTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getEntityTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Event Type", re);
-			throw re;
-		}
-	}
 
 	public static IclubEntityTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubEntityTypeDAO) ctx.getBean("IclubEntityTypeDAO");

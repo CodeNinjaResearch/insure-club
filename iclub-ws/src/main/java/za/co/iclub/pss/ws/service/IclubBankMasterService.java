@@ -22,6 +22,7 @@ import za.co.iclub.pss.orm.bean.IclubBankMaster;
 import za.co.iclub.pss.orm.dao.IclubAccountDAO;
 import za.co.iclub.pss.orm.dao.IclubBankMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubBankMasterModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -35,6 +36,7 @@ public class IclubBankMasterService {
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubAccountDAO iclubAccountDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -182,7 +184,7 @@ public class IclubBankMasterService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubBankMasterDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubBankMaster.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubBankMaster iclubBMaster = (IclubBankMaster) object;
@@ -283,6 +285,14 @@ public class IclubBankMasterService {
 
 	public void setIclubAccountDAO(IclubAccountDAO iclubAccountDAO) {
 		this.iclubAccountDAO = iclubAccountDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

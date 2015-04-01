@@ -11,8 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_insurance_item")
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_insurance_item where ii_quote_id=:quoteId ", name = "getInsuranceItemByQuoteId", resultClass = IclubInsuranceItem.class), @NamedNativeQuery(query = "select * from iclub_insurance_item where ii_type_id=:itemTypeId and ii_quote_id =:quoteId ", name = "getInsuranceItemByQuoteIdAndItemTypeId", resultClass = IclubInsuranceItem.class),@NamedNativeQuery(query = "select * from iclub_insurance_item where a_crtd_by=:id", name = "getInsuranceItemByUser", resultClass = IclubInsuranceItem.class) })
 public class IclubInsuranceItem implements java.io.Serializable {
 
 	// Fields

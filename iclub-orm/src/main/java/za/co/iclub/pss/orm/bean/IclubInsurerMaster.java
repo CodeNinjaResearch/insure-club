@@ -11,8 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -22,7 +20,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "iclub_insurer_master", uniqueConstraints = @UniqueConstraint(columnNames = "im_name"))
-@NamedNativeQueries({ @NamedNativeQuery(query = "select * from iclub_insurer_master where aim_crtd_by=:id", name = "getInsurerMasterByUser", resultClass = IclubInsurerMaster.class) })
 public class IclubInsurerMaster implements java.io.Serializable {
 
 	// Fields

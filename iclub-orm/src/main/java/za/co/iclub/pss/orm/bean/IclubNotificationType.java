@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,7 +16,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_notification_type")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getNotificationTypeBySD", query = "select * from iclub_notification_type where lower(nt_short_desc) = lower(:sd) and nt_id <> :id", resultClass = IclubNotificationType.class) })
 public class IclubNotificationType implements java.io.Serializable {
 
 	// Fields

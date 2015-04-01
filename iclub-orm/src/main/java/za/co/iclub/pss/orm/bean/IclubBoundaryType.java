@@ -3,8 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 /**
@@ -12,7 +10,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "iclub_boundary_type")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getBoundaryTypeBySD", query = "select * from iclub_boundary_type where lower(bt_short_desc) = lower(:sd) and bt_id <> :id", resultClass = IclubBoundaryType.class) })
 public class IclubBoundaryType implements java.io.Serializable {
 
 	// Fields

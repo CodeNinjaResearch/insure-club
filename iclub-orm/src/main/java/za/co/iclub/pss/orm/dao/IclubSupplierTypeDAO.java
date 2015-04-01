@@ -164,20 +164,6 @@ public class IclubSupplierTypeDAO {
 		}
 	}
 
-	public List getSupplierTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Supplier Type by Query :: getSupplierTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getSupplierTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Supplier Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubSupplierTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSupplierTypeDAO) ctx.getBean("IclubSupplierTypeDAO");
 	}

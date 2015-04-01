@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubRoofType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubRoofTypeDAO;
 import za.co.iclub.pss.ws.model.IclubRoofTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -31,6 +32,7 @@ public class IclubRoofTypeService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubRoofTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubRoofTypeDAO iclubRoofTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -130,7 +132,7 @@ public class IclubRoofTypeService {
 				model.setRtLongDesc(iRt.getRtLongDesc());
 				model.setRtShortDesc(iRt.getRtShortDesc());
 				model.setRtStatus(iRt.getRtStatus());
-				
+
 				if (iRt.getIclubProperties() != null && iRt.getIclubProperties().size() > 0) {
 					String[] properties = new String[iRt.getIclubProperties().size()];
 					int i = 0;
@@ -138,10 +140,9 @@ public class IclubRoofTypeService {
 						properties[i] = property.getPId();
 						i++;
 					}
-					
-					 model.setIclubProperties(properties);
-				}
 
+					model.setIclubProperties(properties);
+				}
 
 				ret.add((T) model);
 			}
@@ -165,7 +166,7 @@ public class IclubRoofTypeService {
 			model.setRtLongDesc(bean.getRtLongDesc());
 			model.setRtShortDesc(bean.getRtShortDesc());
 			model.setRtStatus(bean.getRtStatus());
-			
+
 			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
 				String[] properties = new String[bean.getIclubProperties().size()];
 				int i = 0;
@@ -173,7 +174,7 @@ public class IclubRoofTypeService {
 					properties[i] = property.getPId();
 					i++;
 				}
-				 model.setIclubProperties(properties);
+				model.setIclubProperties(properties);
 			}
 
 		} catch (Exception e) {
@@ -189,7 +190,7 @@ public class IclubRoofTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubRoofTypeDAO.getRoofTypeBySD(val, id);
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubRoofType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -222,5 +223,13 @@ public class IclubRoofTypeService {
 
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

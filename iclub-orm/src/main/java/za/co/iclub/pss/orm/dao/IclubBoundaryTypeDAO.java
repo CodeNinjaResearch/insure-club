@@ -168,17 +168,4 @@ public class IclubBoundaryTypeDAO {
 		return (IclubBoundaryTypeDAO) ctx.getBean("IclubBoundaryTypeDAO");
 	}
 
-	public List getBoundaryTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Boundary Type by Query :: getBoundaryTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getBoundaryTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Boundary Type", re);
-			throw re;
-		}
-	}
 }

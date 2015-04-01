@@ -21,6 +21,7 @@ import za.co.iclub.pss.orm.bean.IclubMessage;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubMessageDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubMessageModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -34,6 +35,7 @@ public class IclubMessageService {
 	private IclubMessageDAO iclubMessageDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -166,7 +168,7 @@ public class IclubMessageService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubMessageDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubMessage.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubMessage iCM = (IclubMessage) object;
@@ -247,5 +249,13 @@ public class IclubMessageService {
 
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 }

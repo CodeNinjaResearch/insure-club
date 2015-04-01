@@ -12,13 +12,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.dao.IclubAccountDAO;
 import za.co.iclub.pss.orm.dao.IclubClaimDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPaymentDAO;
 import za.co.iclub.pss.orm.dao.IclubPaymentStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -38,6 +41,7 @@ public class IclubPaymentService {
 	private IclubAccountDAO iclubAccountDAO;
 	private IclubPaymentStatusDAO iclubPaymentStatusDAO;
 	private IclubPaymentDAO iclubPaymentDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -174,7 +178,7 @@ public class IclubPaymentService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubPaymentDAO.findByUser(user);
+			List batmod =iclubNamedQueryDAO.findByUser(user, IclubPayment.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubPayment iCP = (IclubPayment) object;
@@ -284,6 +288,14 @@ public class IclubPaymentService {
 
 	public void setIclubPaymentDAO(IclubPaymentDAO iclubPaymentDAO) {
 		this.iclubPaymentDAO = iclubPaymentDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }

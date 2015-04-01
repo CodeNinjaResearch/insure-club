@@ -174,37 +174,12 @@ public class IclubVehicleMasterDAO {
 		}
 	}
 
-	public List findByUser(String userId) {
-		log.debug("finding all IclubVehicleMaster instances by user");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getVehicleMasterByUser");
-			queryObject.setString("id", userId);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by user failed", re);
-			throw re;
-		}
-	}
-	
-	
-	public List findAllByMake(String vmMake) {
-		log.debug("finding all IclubVehicleMaster instances by vmMake");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getVehicleMasterByMake");
-			queryObject.setString("vmMake", vmMake);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all by vmMake failed", re);
-			throw re;
-		}
-	}
-	
 	public List findAllVmMakes() {
 		log.debug("finding all IclubVehicleMaster instances by vmMake");
 		try {
 			String queryString = "select  distinct model.vmMake from IclubVehicleMaster as model ";
 			Query queryObject = getCurrentSession().createQuery(queryString);
-			 
+
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all by vmMake failed", re);

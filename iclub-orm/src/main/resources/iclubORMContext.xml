@@ -88,6 +88,7 @@
 				<value>za.co.iclub.pss.orm.bean.IclubWallType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehicleType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubField</value>
+				<value>za.co.iclub.pss.orm.bean.IclubNamedQueries</value>
 
 			</list>
 		</property>
@@ -432,6 +433,11 @@
 		</property>
 	</bean>
 	<bean id="IclubFieldDAO" class="za.co.iclub.pss.orm.dao.IclubFieldDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubNamedQueryDAO" class="za.co.iclub.pss.orm.dao.IclubNamedQueryDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

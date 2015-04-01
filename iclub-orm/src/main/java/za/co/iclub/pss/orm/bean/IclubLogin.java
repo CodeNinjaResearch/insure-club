@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -18,7 +16,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "iclub_login", uniqueConstraints = @UniqueConstraint(columnNames = "l_name"))
-@NamedNativeQueries({ @NamedNativeQuery(name = "verifyLogin", query = "select * from iclub_login where l_name=:name and l_passwd=:pwd", resultClass = IclubLogin.class) })
 public class IclubLogin implements java.io.Serializable {
 
 	// Fields

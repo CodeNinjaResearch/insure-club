@@ -164,20 +164,6 @@ public class IclubThatchTypeDAO {
 		}
 	}
 
-	public List getThatchTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Thatch Type by Query :: getThatchTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getThatchTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Thatch Type", re);
-			throw re;
-		}
-	}
-
 	public static IclubThatchTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubThatchTypeDAO) ctx.getBean("IclubThatchTypeDAO");
 	}

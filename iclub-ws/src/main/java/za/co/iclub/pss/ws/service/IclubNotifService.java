@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubNotif;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubNotifDAO;
 import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -34,6 +35,7 @@ public class IclubNotifService {
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNotificationTypeDAO iclubNotificationTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
+	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
 	@Path("/add")
@@ -168,7 +170,7 @@ public class IclubNotifService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubNotifDAO.findByUser(user);
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubNotif.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubNotif iClubNotf = (IclubNotif) object;
@@ -247,6 +249,14 @@ public class IclubNotifService {
 
 	public void setIclubNotificationTypeDAO(IclubNotificationTypeDAO iclubNotificationTypeDAO) {
 		this.iclubNotificationTypeDAO = iclubNotificationTypeDAO;
+	}
+
+	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
+		return iclubNamedQueryDAO;
+	}
+
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
 
 }
