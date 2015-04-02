@@ -1939,11 +1939,11 @@ public class IclubFullQuoteController implements Serializable {
 			if (tableName != null) {
 				if (tableName.equalsIgnoreCase("iclub_vehicle")) {
 					IclubInsuranceItemBean insuranceItemBean = setInsuranceItemDetails(quoteId, 1l);
-					IclubVehicleBean vehicleBean = getVehicleDetails(insuranceItemBean.getIiItemId());
+					vehicleBean = getVehicleDetails(insuranceItemBean.getIiItemId());
 				}
 				if (tableName.equalsIgnoreCase("iclub_property")) {
 					IclubInsuranceItemBean insuranceItemBean = setInsuranceItemDetails(quoteId, 2l);
-					IclubPropertyBean proeprtyBean = getPropertyDetails(insuranceItemBean.getIiItemId());
+					propertyBean = getPropertyDetails(insuranceItemBean.getIiItemId());
 				}
 				if (tableName.equalsIgnoreCase("iclub_person")) {
 					IclubPersonBean personBean = getIclubPersonBean(quoteBean.getIclubPersonByQPersonId());
