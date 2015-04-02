@@ -1959,7 +1959,7 @@ public class IclubFullQuoteController implements Serializable {
 								if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(fieldValue.toString())) {
 									Long baseValue = 100l;
 									premium = premium + baseValue * rateEngineBean.getReRate();
-									
+ 
 								}
 
 							} else if (obj instanceof Double) {
