@@ -87,6 +87,22 @@ public class IclubCommonDAO {
 		}
 	}
 
+	public Object getFieldValueByFieldNameAndId(String fieldName, String tableName, String recordId) {
+
+		try {
+			String colShrtNm = getColumFormat(tableName);
+			String query = "select e." + fieldName + " from " + tableName + "where " + colShrtNm + "_id=" + recordId;
+
+			Query queryObject = getCurrentSession().createSQLQuery(query);
+
+			return queryObject.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("find FieldValue", re);
+			throw re;
+		}
+
+	}
+
 	public String getColumFormat(String tableName) {
 		String colShrtNm = "";
 		for (int i = 1; i < tableName.split("_").length; i++) {

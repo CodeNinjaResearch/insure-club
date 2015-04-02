@@ -267,6 +267,21 @@ public class IclubRateEngineService {
 		return ret;
 	}
 
+	@GET
+	@Path("/get/fieldValue/{fieldName}/{tableName}/{fieldId}")
+	@Produces("application/json")
+	@Transactional
+	public Object getFieldValueByFieldIdAndTableName(@PathParam("fieldName") String fieldName, @PathParam("tableName") String tableName, @PathParam("fieldId") String fieldId) {
+		Object batmod = null;
+		try {
+			batmod = iclubCommonDAO.getFieldValueByFieldNameAndId(fieldName, tableName, fieldId);
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return batmod;
+	}
+
 	public IclubRateEngineDAO getIclubRateEngineDAO() {
 		return iclubRateEngineDAO;
 	}
