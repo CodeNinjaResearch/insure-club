@@ -268,6 +268,21 @@ public class IclubRateEngineService {
 	}
 
 	@GET
+	@Path("/get/lookupdetails/{tableName}/{fieldId}")
+	@Produces("application/json")
+	@Transactional
+	public String getlookupDetails(@PathParam("tableName") String tableName, @PathParam("fieldId") String fieldId) {
+		String lookupDetails = "";
+		try {
+			lookupDetails = iclubCommonDAO.findAllLookValuesByTabelName(tableName, fieldId);
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return lookupDetails;
+	}
+
+	@GET
 	@Path("/get/fieldValue/{fieldName}/{tableName}/{fieldId}")
 	@Produces("application/json")
 	@Transactional
