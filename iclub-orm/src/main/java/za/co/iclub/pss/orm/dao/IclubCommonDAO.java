@@ -87,6 +87,23 @@ public class IclubCommonDAO {
 		}
 	}
 
+	public String findAllLookValuesByTabelName(String tableName, String id) {
+		log.debug("finding all IclubVehicleMaster instances by vmMake");
+		try {
+			String colShrtNm = getColumFormat(tableName);
+			String query = "select t." + colShrtNm + "_id, t." + colShrtNm + "_short_desc,t." + colShrtNm + "_long_desc from " + tableName + " t where " + colShrtNm + "_id=" + id;
+			Query queryObject = getCurrentSession().createSQLQuery(query);
+			Object[] obj = (Object[]) queryObject.uniqueResult();
+
+			String lookDetails = obj[0] + "-" + obj[1] + "-" + obj[2];
+
+			return lookDetails;
+		} catch (RuntimeException re) {
+			log.error("find all by vmMake failed", re);
+			throw re;
+		}
+	}
+
 	public Object getFieldValueByFieldNameAndId(String fieldName, String tableName, String recordId) {
 
 		try {
