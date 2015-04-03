@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlAccountCont">
+				<p:dataTable id="dtAccountCont" widgetVar="dtAccountCont" value="#{iclubDriverController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+					<f:facet name="footer">
+						<p:commandButton id="btnAccountShowAdd" value="Add" actionListener="#{iclubDriverController.showAddPanel}" update=":iclubFrm:pnlAccountCont" />
+					</f:facet>
+					<p:column headerText="Id">
+						<p:outputLabel value="#{bean.DId}" />
+					</p:column>
+					<p:column headerText="DLicenseNum">
+						<p:outputLabel value="#{bean.DLicenseNum}" />
+					</p:column>
+					<p:column headerText="Driver Name">
+						<p:outputLabel value="#{bean.DName}" />
+					</p:column>
+					<p:column headerText="User Id">
+						<p:outputLabel value="#{bean.iclubPersonByDPersonId}" />
+					</p:column>
+					<p:column headerText="Issue Date">
+						<p:outputLabel value="#{bean.DIssueDt}" />
+					</p:column>
+					<p:column headerText="DOB">
+						<p:outputLabel value="#{bean.DDob}" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubLicenseCode}">
+							<f:selectItem itemLabel="License Code" itemDisabled="true" />
+							<f:selectItems value="#{iclubDriverController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnAccountEdit" icon="ui-icon-pencil" actionListener="#{iclubDriverController.showModPanel}" update=":iclubFrm:pnlAccountCont">
+							<f:setPropertyActionListener target="#{iclubDriverController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="pnlAdd" rendered="#{iclubDriverController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Driver Name" value="#{iclubDriverController.bean.DName}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="License Number" value="#{iclubDriverController.bean.DLicenseNum}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubDriverController.bean.DIssueDt}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubDriverController.bean.iclubLicenseCode}">
+								<f:selectItem itemLabel="License Code" itemDisabled="true" />
+								<f:selectItems value="#{iclubDriverController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+					</div>
+				</p:panel>
+				<p:panel id="pnlMod" rendered="#{iclubDriverController.showModPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Driver Name" value="#{iclubDriverController.bean.DName}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="License Number" value="#{iclubDriverController.bean.DLicenseNum}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubDriverController.bean.DIssueDt}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubDriverController.bean.iclubLicenseCode}">
+								<f:selectItem itemLabel="License Code" itemDisabled="true" />
+								<f:selectItems value="#{iclubDriverController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container33">
+								<p:commandButton id="btnAccountModSave" value="Save" actionListener="#{iclubDriverController.modIclubDriver}" update=":iclubFrm:pnlAccountCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnAccountModDelete" value="Delete" actionListener="#{iclubDriverController.delIclubDriver}" update=":iclubFrm:pnlAccountCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnAccountModClose" value="Close" actionListener="#{iclubDriverController.clearForm}" update=":iclubFrm:pnlAccountCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>
