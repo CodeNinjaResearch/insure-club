@@ -55,10 +55,10 @@ public class IclubAccountService {
 			iCA.setAAccNum(model.getAAccNum());
 			iCA.setACrtdDt(model.getACrtdDt());
 			iCA.setAOwnerId(model.getAOwnerId());
-			iCA.setIclubBankMaster(iclubBankMasterDAO.findById(model.getIclubBankMaster()));
-			iCA.setIclubAccountType(iclubAccountTypeDAO.findById(model.getIclubAccountType()));
-			iCA.setIclubOwnerType(iclubOwnerTypeDAO.findById(model.getIclubOwnerType()));
-			iCA.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			iCA.setIclubBankMaster(model.getIclubBankMaster() != null ? iclubBankMasterDAO.findById(model.getIclubBankMaster()) : null);
+			iCA.setIclubAccountType(model.getIclubAccountType() != null ? iclubAccountTypeDAO.findById(model.getIclubAccountType()) : null);
+			iCA.setIclubOwnerType(model.getIclubOwnerType() != null ? iclubOwnerTypeDAO.findById(model.getIclubOwnerType()) : null);
+			iCA.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			iCA.setAStatus(model.getAStatus());
 
 			iclubAccountDAO.save(iCA);
@@ -94,10 +94,10 @@ public class IclubAccountService {
 			iCA.setAAccNum(model.getAAccNum());
 			iCA.setACrtdDt(model.getACrtdDt());
 			iCA.setAOwnerId(model.getAOwnerId());
-			iCA.setIclubBankMaster(iclubBankMasterDAO.findById(model.getIclubBankMaster()));
-			iCA.setIclubAccountType(iclubAccountTypeDAO.findById(model.getIclubAccountType()));
-			iCA.setIclubOwnerType(iclubOwnerTypeDAO.findById(model.getIclubOwnerType()));
-			iCA.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			iCA.setIclubBankMaster(model.getIclubBankMaster() != null ? iclubBankMasterDAO.findById(model.getIclubBankMaster()) : null);
+			iCA.setIclubAccountType(model.getIclubAccountType() != null ? iclubAccountTypeDAO.findById(model.getIclubAccountType()) : null);
+			iCA.setIclubOwnerType(model.getIclubOwnerType() != null ? iclubOwnerTypeDAO.findById(model.getIclubOwnerType()) : null);
+			iCA.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			iCA.setAStatus(model.getAStatus());
 
 			iclubAccountDAO.merge(iCA);
