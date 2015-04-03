@@ -13,10 +13,10 @@
 	</ui:define>
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
-			<p:panel id="pnlAccountCont">
-				<p:dataTable id="dtAccountCont" widgetVar="dtAccountCont" value="#{iclubDriverController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+			<p:panel id="pnlDriverCont">
+				<p:dataTable id="dtDriverCont" widgetVar="dtDriverCont" value="#{iclubDriverController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
 					<f:facet name="footer">
-						<p:commandButton id="btnAccountShowAdd" value="Add" actionListener="#{iclubDriverController.showAddPanel}" update=":iclubFrm:pnlAccountCont" />
+						<p:commandButton id="btnDriverShowAdd" value="Add" actionListener="#{iclubDriverController.showAddPanel}" update=":iclubFrm:pnlDriverCont" />
 					</f:facet>
 					<p:column headerText="Id">
 						<p:outputLabel value="#{bean.DId}" />
@@ -43,7 +43,7 @@
 						</p:selectOneMenu>
 					</p:column>
 					<p:column>
-						<p:commandButton id="btnAccountEdit" icon="ui-icon-pencil" actionListener="#{iclubDriverController.showModPanel}" update=":iclubFrm:pnlAccountCont">
+						<p:commandButton id="btnDriverEdit" icon="ui-icon-pencil" actionListener="#{iclubDriverController.showModPanel}" update=":iclubFrm:pnlDriverCont">
 							<f:setPropertyActionListener target="#{iclubDriverController.bean}" value="#{bean}" />
 						</p:commandButton>
 					</p:column>
@@ -94,13 +94,13 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnAccountModSave" value="Save" actionListener="#{iclubDriverController.modIclubDriver}" update=":iclubFrm:pnlAccountCont" />
+								<p:commandButton id="btnDriverModSave" value="Save" actionListener="#{iclubDriverController.modIclubDriver}" update=":iclubFrm:pnlDriverCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnAccountModDelete" value="Delete" actionListener="#{iclubDriverController.delIclubDriver}" update=":iclubFrm:pnlAccountCont" />
+								<p:commandButton id="btnDriverModDelete" value="Delete" actionListener="#{iclubDriverController.delIclubDriver}" update=":iclubFrm:pnlDriverCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnAccountModClose" value="Close" actionListener="#{iclubDriverController.clearForm}" update=":iclubFrm:pnlAccountCont" />
+								<p:commandButton id="btnDriverModClose" value="Close" actionListener="#{iclubDriverController.clearForm}" update=":iclubFrm:pnlDriverCont" />
 							</div>
 						</div>
 					</div>

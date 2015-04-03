@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlMbCont">
+				<p:dataGrid id="messagesGrid" var="bean" value="#{iclubMessageBoardController.beans}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubMessageBoardController.beans.size() > 0}">
+					<p:panel style="text-align:center" header="#{bean.mbTitle}">
+						<div class="Container80 Responsive">
+							<p:editor value="#{bean.mbContent}" widgetVar="editor" width="600" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<p:commandButton id="btnMbModSave" value="Save" actionListener="#{iclubMessageBoardController.summaryAction(bean)}" update=":iclubFrm:pnlMbCont" />
+						</div>
+					</p:panel>
+			</p:panel>
+			</p:dataGrid>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>
