@@ -30,7 +30,6 @@ public class IclubMessageBoardController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubMessageBoardController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubMessageBoardService/";
-	private static final String MBC_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubMbCommentService/";
 	private List<IclubMessageBoardBean> beans;
 	private List<IclubMessageBoardBean> dashBoardBeans;
 	private List<IclubMbCommentBean> mbCommentBeans;
