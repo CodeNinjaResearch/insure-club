@@ -1,26 +1,41 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.cxf.jaxrs.ext.multipart.Attachment;
+import org.apache.cxf.jaxrs.ext.multipart.ContentDisposition;
+import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.apache.log4j.Logger;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
+import za.co.iclub.pss.web.bean.IclubDocumentBean;
 import za.co.iclub.pss.web.bean.IclubInsuranceItemBean;
 import za.co.iclub.pss.web.bean.IclubPolicyBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
 import za.co.iclub.pss.web.bean.IclubVehicleBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
+import za.co.iclub.pss.ws.model.IclubDocumentModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubPolicyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubVehicleModel;
+import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubPolicyController")
 @SessionScoped
@@ -36,11 +51,17 @@ public class IclubPolicyController implements Serializable {
 	private static final String II_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemService/";
 	private static final String V_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehicleService/";
 	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
+	private static final String D_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubDocumentService/";
+
 	private List<IclubPolicyBean> beans;
+
+	private ResourceBundle labelBundle;
 
 	private boolean iItemFalg;
 
 	private List<IclubInsuranceItemBean> iItemBeans;
+
+	private IclubPolicyBean bean;
 
 	private IclubVehicleBean vehicleBean;
 
@@ -51,6 +72,12 @@ public class IclubPolicyController implements Serializable {
 	private IclubPropertyBean propertyBean;
 
 	private String sessionUserId;
+
+	private List<IclubDocumentBean> docs;
+
+	private List<String> docIds;
+
+	private StreamedContent file;
 
 	@SuppressWarnings("unchecked")
 	public List<IclubPolicyBean> getBeans() {
@@ -104,8 +131,89 @@ public class IclubPolicyController implements Serializable {
 		return beans;
 	}
 
+	public String delIclubPolicy() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubPolicy");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "del/" + bean.getPId());
+			Response response = client.accept(MediaType.APPLICATION_JSON).get();
+			if (response.getStatus() == 200) {
+				IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				clearForm();
+			} else {
+				IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		return "dashboard.xhtml?faces-redirect=true";
+	}
+
+	public String clearForm() {
+
+		return "dashboard.xhtml?faces-redirect=true";
+
+	}
+
 	public void setBeans(List<IclubPolicyBean> beans) {
 		this.beans = beans;
+	}
+
+	public String showModPanel() {
+
+		return "edit.xhtml?faces-redirect=true";
+
+	}
+
+	public String modIclubPolicy() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubPolicy");
+		try {
+			if (validateForm(false)) {
+				WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "mod");
+				IclubPolicyModel model = new IclubPolicyModel();
+				model.setPId(bean.getPId());
+				model.setPProrataPrm(bean.getPProrataPrm());
+				model.setPPremium(bean.getPPremium());
+				model.setPNumber(bean.getPNumber());
+				model.setPDebitDt(bean.getPDebitDt());
+				model.setPCrtdDt(bean.getPCrtdDt());
+				model.setIclubAccount(bean.getIclubAccount());
+				model.setIclubQuote(bean.getIclubQuote());
+				model.setIclubPolicyStatus(bean.getIclubPolicyStatus());
+				model.setIclubPolicyStatus(bean.getIclubPolicyStatus());
+				model.setIclubPerson(getSessionUserId());
+
+				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+				client.close();
+				if (response.getStatusCode() == 0) {
+					for (String doc : getDocIds()) {
+						IclubDocumentModel docModel = new IclubDocumentModel();
+						docModel.setDId(doc);
+						docModel.setDEntityId(model.getPId().toString());
+						docModel.setIclubEntityType(1l);
+						WebClient docClient = IclubWebHelper.createCustomClient(D_BASE_URL + "mod");
+						ResponseModel res = docClient.accept(MediaType.APPLICATION_JSON).put(docModel, ResponseModel.class);
+						if (res.getStatusCode() == 0)
+							LOGGER.info("Doc Merge Successful :: " + doc);
+					}
+					docIds = null;
+					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+				} else {
+					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+
+		return "dashboard.xhtml?faces-redirect=true";
+	}
+
+	public boolean validateForm(boolean flag) {
+		boolean ret = true;
+
+		return ret;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -291,6 +399,153 @@ public class IclubPolicyController implements Serializable {
 
 	public void setPropertyBean(IclubPropertyBean propertyBean) {
 		this.propertyBean = propertyBean;
+	}
+
+	public IclubPolicyBean getBean() {
+		if (bean == null) {
+			bean = new IclubPolicyBean();
+		}
+		return bean;
+	}
+
+	public void setBean(IclubPolicyBean bean) {
+		this.bean = bean;
+	}
+
+	public ResourceBundle getLabelBundle() {
+
+		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
+		return labelBundle;
+	}
+
+	public void setLabelBundle(ResourceBundle labelBundle) {
+		this.labelBundle = labelBundle;
+	}
+
+	public void showDocumentUpload() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showDocumentUpload");
+		if (getDocIds().size() != 0) {
+			for (String doc : getDocIds()) {
+				WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "del/" + doc);
+				client.get();
+				client.close();
+			}
+		}
+		getDocIds().clear();
+	}
+
+	public void handleFileUpload(FileUploadEvent fue) {
+		String docId = UUID.randomUUID().toString();
+		getDocIds().add(docId);
+		try {
+			IclubDocumentModel model = new IclubDocumentModel();
+			model.setIclubPerson(getSessionUserId());
+			model.setDCrtdDt(new Timestamp(System.currentTimeMillis()));
+			model.setDId(docId);
+			model.setDName(fue.getFile().getFileName());
+			model.setDContent(fue.getFile().getContentType());
+			model.setDSize(fue.getFile().getSize());
+
+			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "add");
+			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+			client.close();
+
+			if (response.getStatusCode() == 0) {
+				ContentDisposition cd = new ContentDisposition("attachment;filename=" + fue.getFile().getFileName() + ";filetype=" + fue.getFile().getContentType());
+				List<Attachment> attachments = new ArrayList<Attachment>();
+				Attachment attachment = new Attachment(docId, fue.getFile().getInputstream(), cd);
+				attachments.add(attachment);
+
+				WebClient uploadClient = WebClient.create(D_BASE_URL + "upload");
+				Response res = uploadClient.type("multipart/form-data").post(new MultipartBody(attachments));
+				uploadClient.close();
+
+				if (res.getStatus() == 200) {
+					IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadedsuccessfully"), FacesMessage.SEVERITY_INFO);
+				} else {
+					IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingfailed") + " :: " + (res.getHeaderString("status") != null ? res.getHeaderString("status") : res.getStatusInfo()), FacesMessage.SEVERITY_ERROR);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingerror") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void downloadDocument(String selDocId) {
+		try {
+			WebClient client = WebClient.create(D_BASE_URL + "download/" + selDocId);
+			client.type("multipart/form-data").accept(MediaType.MULTIPART_FORM_DATA);
+			List<Attachment> attachments = (List<Attachment>) client.getCollection(Attachment.class);
+			file = new DefaultStreamedContent(attachments.get(0).getDataHandler().getInputStream(), attachments.get(0).getContentDisposition().getParameter("filetype"), attachments.get(0).getContentDisposition().getParameter("filename"));
+			client.close();
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingerror") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+
+	public void deleteDocument(String selDocId) {
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "del/" + selDocId);
+			client.get();
+			client.close();
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingerror") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+
+	public List<IclubDocumentBean> getDocs() {
+		if (bean != null && bean.getPId() != null) {
+			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "get/entity/" + bean.getPId() + "" + "/1");
+			Collection<? extends IclubDocumentModel> models = new ArrayList<IclubDocumentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubDocumentModel.class));
+			client.close();
+			docs = new ArrayList<IclubDocumentBean>();
+			for (IclubDocumentModel model : models) {
+				IclubDocumentBean bean = new IclubDocumentBean();
+				bean.setDId(model.getDId());
+				bean.setDContent(model.getDContent());
+				bean.setDEntityId(model.getDEntityId());
+				bean.setDSize(model.getDSize());
+				bean.setDMimeType(model.getDMimeType());
+				bean.setDName(model.getDName());
+				bean.setDCrtdDt(model.getDCrtdDt());
+				bean.setIclubDocumentType(model.getIclubDocumentType());
+				bean.setIclubEntityType(model.getIclubEntityType());
+				bean.setIclubPerson(model.getIclubPerson());
+
+				docs.add(bean);
+			}
+		} else {
+			docs = new ArrayList<IclubDocumentBean>();
+		}
+		return docs;
+	}
+
+	public void setDocs(List<IclubDocumentBean> docs) {
+		this.docs = docs;
+	}
+
+	public StreamedContent getFile() {
+		return file;
+	}
+
+	public void setFile(StreamedContent file) {
+		this.file = file;
+	}
+
+	public List<String> getDocIds() {
+		if (docIds == null) {
+			docIds = new ArrayList<String>();
+		}
+
+		return docIds;
+	}
+
+	public void setDocIds(List<String> docIds) {
+		this.docIds = docIds;
 	}
 
 }

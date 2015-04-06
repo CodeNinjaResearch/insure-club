@@ -80,6 +80,7 @@ import javax.persistence.Table;
 		@NamedNativeQuery(query = "select distinct vm_make from iclub_vehicle_master", name = "getAllVmMakes", resultClass = IclubVehicleMaster.class),
 		@NamedNativeQuery(name = "getIclubVehicleTypeBySD", query = "select * from iclub_vehicle_type where lower(vt_short_desc) = lower(:sd) and vt_id <> :id", resultClass = IclubVehicleType.class),
 		@NamedNativeQuery(name = "getIclubWallTypeBySD", query = "select * from iclub_wall_type where lower(wt_short_desc) = lower(:sd) and wt_id <> :id", resultClass = IclubWallType.class),
+		@NamedNativeQuery(name = "getDocumentByEntity", query = "select * from iclub_document where lower(d_entity_id) = lower(:id) and d_entity_type_id = :typeId", resultClass = IclubDocument.class),
 		@NamedNativeQuery(name = "getIclubAccessTypeBySD", query = "select * from iclub_access_type where lower(at_short_desc) = lower(:sd) and at_id <> :id", resultClass = IclubAccessType.class),
         @NamedNativeQuery(name = "getIclubMbCommnetByMbId", query = "select * from iclub_mb_comment where lower(mbc_mb_id) = lower(:id)", resultClass =IclubMbComment.class) })
 @Table(name = "iclub_account_type")

@@ -283,6 +283,60 @@ public class IclubDocumentService {
 		return attachments;
 	}
 
+	@GET
+	@Path("/del/entity/{id}/{typeid}")
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Response delByEntity(@PathParam("id") String id, @PathParam("typeid") Long typeId) {
+		try {
+			List batmod = iclubNamedQueryDAO.getDocumentByEntity(id, typeId);
+
+			for (Object object : batmod) {
+				IclubDocument iDocument = (IclubDocument) object;
+				iclubDocumentDAO.delete(iDocument);
+			}
+			return Response.ok().build();
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
+	@GET
+	@Path("/get/entity/{id}/{typeid}")
+	@Produces("application/json")
+	@Consumes("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubDocumentModel> List<T> getByEntity(@PathParam("id") String id, @PathParam("typeid") Long typeId) {
+		List<T> ret = new ArrayList<T>();
+		try {
+			List batmod = iclubNamedQueryDAO.getDocumentByEntity(id, typeId);
+
+			for (Object object : batmod) {
+				IclubDocument iDocument = (IclubDocument) object;
+
+				IclubDocumentModel model = new IclubDocumentModel();
+
+				model.setDId(iDocument.getDId());
+				model.setDContent(iDocument.getDContent());
+				model.setDEntityId(iDocument.getDEntityId());
+				model.setDSize(iDocument.getDSize());
+				model.setDMimeType(iDocument.getDMimeType());
+				model.setDName(iDocument.getDName());
+				model.setDCrtdDt(iDocument.getDCrtdDt());
+				model.setIclubDocumentType(iDocument.getIclubDocumentType() != null ? (iDocument.getIclubDocumentType().getDtId()) : null);
+				model.setIclubEntityType(iDocument.getIclubEntityType() != null ? (iDocument.getIclubEntityType().getEtId()) : null);
+				model.setIclubPerson(iDocument.getIclubPerson() != null ? (iDocument.getIclubPerson().getPId()) : null);
+
+				ret.add((T) model);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
+	}
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}

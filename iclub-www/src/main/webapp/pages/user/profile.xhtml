@@ -12,6 +12,50 @@
 </style>
 	</ui:define>
 	<ui:define name="content">
+		<p:dialog id="documentUploadDialog" widgetVar="documentUploadDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">#{labels['documentmanagement']}</f:facet>
+			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubClaimController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubClaimController.docs.size() > 0}">
+				<p:panel style="text-align:center" header="#{bean.DName}">
+					<f:facet name="actions">
+						<p:commandButton ajax="false" actionListener="#{iclubClaimController.downloadDocument(bean.DId)}" icon="ui-icon-arrowthick-1-s">
+							<p:fileDownload value="#{iclubClaimController.file}" />
+						</p:commandButton>
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" actionListener="#{iclubClaimController.deleteDocument(bean.DId)}" icon="ui-icon-circle-close" />
+					</f:facet>
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentid']}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documenttype']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DContent}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentsizeinbytes']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DSize}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentcreatedDate']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DCrtdDt}" />
+						</p:column>
+					</p:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+			<p:panel id="documentUploadPanel">
+				<div align="center">
+					<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" fileUploadListener="#{iclubClaimController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(pdf|doc|docx|xls|xlsx|jpe?g)$/" value="#{labels['container.selectdocument']}" />
+				</div>
+			</p:panel>
+		</p:dialog>
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlClaimCont">
 				<div class="Container80 Responsive">

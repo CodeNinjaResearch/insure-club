@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -33,6 +34,7 @@ public class IclubMbCommentController implements Serializable {
 	private List<IclubMbCommentBean> beans;
 	private String sessionUserId;
 	private IclubMbCommentBean bean;
+	private IclubMessageBoardBean messageBoardBean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
@@ -44,10 +46,10 @@ public class IclubMbCommentController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubMbCommentModel model = new IclubMbCommentModel();
 
-				model.setMbcId(bean.getMbcId());
+				model.setMbcId(UUID.randomUUID().toString());
 				model.setMbcCrtdDt(bean.getMbcCrtdDt());
 				model.setMbcDesc(bean.getMbcDesc());
-				model.setIclubMessageBoard(bean.getIclubMessageBoard());
+				model.setIclubMessageBoard(messageBoardBean != null ? messageBoardBean.getMbId() : null);
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -74,7 +76,7 @@ public class IclubMbCommentController implements Serializable {
 				model.setMbcId(bean.getMbcId());
 				model.setMbcCrtdDt(bean.getMbcCrtdDt());
 				model.setMbcDesc(bean.getMbcDesc());
-				model.setIclubMessageBoard(bean.getIclubMessageBoard());
+				model.setIclubMessageBoard(messageBoardBean != null ? messageBoardBean.getMbId() : null);
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -135,8 +137,8 @@ public class IclubMbCommentController implements Serializable {
 	public List<IclubMbCommentBean> getBeans() {
 
 		if (IclubWebHelper.getObjectIntoSession("messageBoardBean") != null) {
-			IclubMessageBoardBean summeryBean = (IclubMessageBoardBean) IclubWebHelper.getObjectIntoSession("messageBoardBean");
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/messageboard/" + summeryBean.getMbId());
+			messageBoardBean = (IclubMessageBoardBean) IclubWebHelper.getObjectIntoSession("messageBoardBean");
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/messageboard/" + messageBoardBean.getMbId());
 			Collection<? extends IclubMbCommentModel> models = new ArrayList<IclubMbCommentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMbCommentModel.class));
 			client.close();
 			beans = new ArrayList<IclubMbCommentBean>();
@@ -202,5 +204,13 @@ public class IclubMbCommentController implements Serializable {
 
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
+	}
+
+	public IclubMessageBoardBean getMessageBoardBean() {
+		return messageBoardBean;
+	}
+
+	public void setMessageBoardBean(IclubMessageBoardBean messageBoardBean) {
+		this.messageBoardBean = messageBoardBean;
 	}
 }

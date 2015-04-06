@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<p:dialog id="documentUploadDialog" widgetVar="documentUploadDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">#{labels['documentmanagement']}</f:facet>
+			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubPolicyController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubPolicyController.docs.size() > 0}">
+				<p:panel style="text-align:center" header="#{bean.DName}">
+					<f:facet name="actions">
+						<p:commandButton ajax="false" actionListener="#{iclubPolicyController.downloadDocument(bean.DId)}" icon="ui-icon-arrowthick-1-s">
+							<p:fileDownload value="#{iclubPolicyController.file}" />
+						</p:commandButton>
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" actionListener="#{iclubPolicyController.deleteDocument(bean.DId)}" icon="ui-icon-circle-close" />
+					</f:facet>
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentid']}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documenttype']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DContent}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentsizeinbytes']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DSize}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentcreatedDate']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DCrtdDt}" />
+						</p:column>
+					</p:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+			<p:panel id="documentUploadPanel">
+				<div align="center">
+					<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" fileUploadListener="#{iclubPolicyController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(pdf|doc|docx|xls|xlsx|jpe?g)$/" value="#{labels['container.selectdocument']}" />
+				</div>
+			</p:panel>
+		</p:dialog>
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlPolicyCont">
+				<p:panel id="pnlAdd">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<div class="Container100">
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="Policy ID :" />
+								</div>
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.PId}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100">
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="Quote ID :" />
+								</div>
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.iclubQuote}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100">
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="Account ID :" />
+								</div>
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.iclubAccount}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100">
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="Created Date:" />
+								</div>
+								<div class="Container50">
+									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.PCrtdDt}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Policy Number" value="#{iclubPolicyController.bean.PNumber}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Premium" value="#{iclubPolicyController.bean.PPremium}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Prorata Premium" value="#{iclubPolicyController.bean.PProrataPrm}" />
+						</div>
+						<div class="EmptyBox5" />
+					</div>
+					<div class="Container100">
+						<div class="Container25">
+							<p:commandButton id="btnPlcViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubPolicyController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+						</div>
+						<div class="Container25">
+							<p:commandButton id="btnPolicySave" value="Save" action="#{iclubPolicyController.modIclubPolicy}" update=":iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
+						</div>
+						<div class="Container25">
+							<p:commandButton id="btnPolicyModDelete" value="Delete" action="#{iclubPolicyController.delIclubPolicy}" update=":iclubFrm:pnlPolicyCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
+						</div>
+						<div class="Container25">
+							<p:commandButton id="btnPolicyModClose" value="Close" action="#{iclubPolicyController.clearForm}" update=":iclubFrm:pnlPolicyCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

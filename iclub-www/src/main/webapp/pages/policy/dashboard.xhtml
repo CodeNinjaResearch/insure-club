@@ -17,7 +17,12 @@
 					<p:outputLabel value="#{bean.PProrataPrm}" />
 				</p:column>
 				<p:column headerText="Policy">
-					<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubPolicyController.policyListener(bean)}">
+					<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" id="btnShowItems" icon="ui-icon-pencil" action="#{iclubPolicyController.policyListener(bean)}">
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Policy Edit">
+					<p:commandButton icon="ui-icon-pencil" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" action="#{iclubPolicyController.showModPanel}">
+						<f:setPropertyActionListener target="#{iclubPolicyController.bean}" value="#{bean}" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

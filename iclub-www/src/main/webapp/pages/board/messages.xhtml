@@ -14,10 +14,10 @@
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlMbCont">
-				<p:dataGrid id="messagesGrid" var="bean" value="#{iclubMessageBoardController.beans}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubMessageBoardController.beans.size() > 0}">
+				<p:dataGrid id="messagesGrid" var="bean" value="#{iclubMessageBoardController.beans}" columns="2" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubMessageBoardController.beans.size() > 0}">
 					<p:panel style="text-align:center" header="#{bean.mbTitle}">
 						<div class="Container80 Responsive">
-							<p:editor value="#{bean.mbContent}" widgetVar="editor" width="600" />
+							<p:editor value="#{bean.mbContent}" widgetVar="editor" width="300" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container100">

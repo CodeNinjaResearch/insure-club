@@ -29,6 +29,11 @@
 					<p:column headerText="Claim Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}" />
 					</p:column>
+					<p:column headerText="Edit Claim">
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" id="btnClaimEdit" icon="ui-icon-pencil" action="#{iclubClaimController.showModPanel}">
+							<f:setPropertyActionListener target="#{iclubClaimController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
 				</p:dataTable>
 			</p:panel>
 		</div>

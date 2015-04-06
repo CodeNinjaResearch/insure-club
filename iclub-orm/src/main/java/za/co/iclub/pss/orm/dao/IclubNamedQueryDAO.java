@@ -181,6 +181,20 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
+	public List getDocumentByEntity(String id, Long typeId) {
+		log.debug("Fetching all Batch by Query :: getDocumentByEntity");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getDocumentByEntity");
+			query.setString("id", id);
+			query.setLong("typeId", typeId);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("Document", re);
+			throw re;
+		}
+	}
+
 	public List findClaimItemByUser(String userId) {
 		log.debug("finding all IclubClaimItem instances by user");
 		try {
