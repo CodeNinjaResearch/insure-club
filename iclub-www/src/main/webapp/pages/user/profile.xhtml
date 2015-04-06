@@ -14,13 +14,13 @@
 	<ui:define name="content">
 		<p:dialog id="documentUploadDialog" widgetVar="documentUploadDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">#{labels['documentmanagement']}</f:facet>
-			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubClaimController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubClaimController.docs.size() > 0}">
+			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubProfileController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubProfileController.docs.size() > 0}">
 				<p:panel style="text-align:center" header="#{bean.DName}">
 					<f:facet name="actions">
-						<p:commandButton ajax="false" actionListener="#{iclubClaimController.downloadDocument(bean.DId)}" icon="ui-icon-arrowthick-1-s">
-							<p:fileDownload value="#{iclubClaimController.file}" />
+						<p:commandButton ajax="false" actionListener="#{iclubProfileController.downloadDocument(bean.DId)}" icon="ui-icon-arrowthick-1-s">
+							<p:fileDownload value="#{iclubProfileController.file}" />
 						</p:commandButton>
-						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" actionListener="#{iclubClaimController.deleteDocument(bean.DId)}" icon="ui-icon-circle-close" />
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" actionListener="#{iclubProfileController.deleteDocument(bean.DId)}" icon="ui-icon-circle-close" />
 					</f:facet>
 					<p:panelGrid columns="2">
 						<p:column>
@@ -52,7 +52,7 @@
 			</p:dataGrid>
 			<p:panel id="documentUploadPanel">
 				<div align="center">
-					<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" fileUploadListener="#{iclubClaimController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(pdf|doc|docx|xls|xlsx|jpe?g)$/" value="#{labels['container.selectdocument']}" />
+					<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" fileUploadListener="#{iclubProfileController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(pdf|doc|docx|xls|xlsx|jpe?g)$/" value="#{labels['container.selectdocument']}" />
 				</div>
 			</p:panel>
 		</p:dialog>
@@ -151,8 +151,13 @@
 					</p:selectOneMenu>
 				</div>
 				<div class="EmptyBox5" />
-				<div class="Container80 Responsive">
-					<p:commandButton update=":iclubFrm:pnlClaimCont" icon="ui-icon-document" value="Update" actionListener="#{iclubProfileController.updatedPerson}" />
+				<div class="Container100 Responsive">
+					<div class="Container50">
+						<p:commandButton update=":iclubFrm:pnlClaimCont" icon="ui-icon-document" value="Update" actionListener="#{iclubProfileController.updatedPerson}" />
+					</div>
+					<div class="Container50">
+						<p:commandButton id="btnPrfViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubProfileController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+					</div>
 				</div>
 				<div class="EmptyBox5" />
 			</p:panel>
