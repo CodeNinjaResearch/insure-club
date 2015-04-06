@@ -21,11 +21,10 @@
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container100">
-							<p:commandButton id="btnMbModSave" value="Save" actionListener="#{iclubMessageBoardController.summaryAction(bean)}" update=":iclubFrm:pnlMbCont" />
+							<p:commandButton id="btnMbModSave" value="Add" action="#{iclubMessageBoardController.summaryAction(bean)}" update=":iclubFrm:pnlMbCont,:iclubFrm:grlMsg" />
 						</div>
 					</p:panel>
-			</p:panel>
-			</p:dataGrid>
+				</p:dataGrid>
 			</p:panel>
 		</div>
 	</ui:define>

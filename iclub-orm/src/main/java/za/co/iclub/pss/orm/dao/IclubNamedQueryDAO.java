@@ -37,7 +37,7 @@ public class IclubNamedQueryDAO {
 	}
 
 	public List findByUser(String userId, String className) {
-		log.debug("finding all "+className+" instances by user");
+		log.debug("finding all " + className + " instances by user");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("get" + className + "ByUser");
 			queryObject.setString("id", userId);
@@ -47,17 +47,30 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
-	public List getBySD(String sd, Long id,String className) {
-		log.debug("Fetching all "+className+" by Query :: get"+className+"SD");
+
+	public List getBySD(String sd, Long id, String className) {
+		log.debug("Fetching all " + className + " by Query :: get" + className + "SD");
 		try {
-			Query query = getCurrentSession().getNamedQuery("get"+className+"BySD");
+			Query query = getCurrentSession().getNamedQuery("get" + className + "BySD");
 			query.setString("sd", sd);
 			query.setLong("id", id);
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
 			log.error(className, re);
+			throw re;
+		}
+	}
+
+	public List getMbCommentsByMbId(String mbId) {
+		log.debug("Fetching all IclubMbCommnet by Query :: getIclubMbCommnetByMbId");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getIclubMbCommnetByMbId");
+			query.setString("id", mbId);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("MbComment", re);
 			throw re;
 		}
 	}
@@ -412,18 +425,18 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPolicy findIclubPlolicyByQuoteId(String quoteId) {
 		log.debug("finding IclubPolicy instances by user");
 		try {
-		Query queryObject = getCurrentSession().getNamedQuery("getPolicyByQuoteId");
-		queryObject.setString("quoteId", quoteId);
-		return (IclubPolicy)queryObject.uniqueResult();
+			Query queryObject = getCurrentSession().getNamedQuery("getPolicyByQuoteId");
+			queryObject.setString("quoteId", quoteId);
+			return (IclubPolicy) queryObject.uniqueResult();
 		} catch (RuntimeException re) {
-		log.error("find by user failed", re);
-		throw re;
+			log.error("find by user failed", re);
+			throw re;
 		}
-		}
+	}
 
 	public List getInsuranceItemTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Insurance Item Type by Query :: getInsuranceItemTypeBySD");

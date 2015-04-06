@@ -30,7 +30,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnMbAddSave" value="Save" actionListener="#{iclubMessageBoardController.addIclubMessageBoard}" update=":iclubFrm:pnlMbCont" />
+								<p:commandButton id="btnMbAddSave" value="Save" action="#{iclubMessageBoardController.addIclubMessageBoard}" update=":iclubFrm:pnlMbCont,:iclubFrm:grlMsg" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnMbAddClose" value="Close" actionListener="#{iclubMessageBoardController.clearForm}" update=":iclubFrm:pnlMbCont" />

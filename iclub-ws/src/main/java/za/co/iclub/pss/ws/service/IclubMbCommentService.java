@@ -136,7 +136,7 @@ public class IclubMbCommentService {
 				model.setMbcId(iCMbc.getMbcId());
 				model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
 				model.setMbcDesc(iCMbc.getMbcDesc());
-				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard()!=null ? iCMbc.getIclubMessageBoard().getMbId(): null);
+				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
 				model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
 
 				ret.add((T) model);
@@ -166,7 +166,7 @@ public class IclubMbCommentService {
 				model.setMbcId(iCMbc.getMbcId());
 				model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
 				model.setMbcDesc(iCMbc.getMbcDesc());
-				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard()!=null ? iCMbc.getIclubMessageBoard().getMbId(): null);
+				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
 				model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
 
 				ret.add((T) model);
@@ -190,13 +190,43 @@ public class IclubMbCommentService {
 			model.setMbcId(bean.getMbcId());
 			model.setMbcCrtdDt(bean.getMbcCrtdDt());
 			model.setMbcDesc(bean.getMbcDesc());
-			model.setIclubMessageBoard(bean.getIclubMessageBoard()!=null ? bean.getIclubMessageBoard().getMbId(): null);
+			model.setIclubMessageBoard(bean.getIclubMessageBoard() != null ? bean.getIclubMessageBoard().getMbId() : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
+	}
+
+	@GET
+	@Path("/get/messageboard/{mbId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubMbCommentModel> List<T> getByMbId(@PathParam("mbId") String mbId) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubNamedQueryDAO.getMbCommentsByMbId(mbId);
+
+			for (Object object : batmod) {
+				IclubMbComment iCMbc = (IclubMbComment) object;
+
+				IclubMbCommentModel model = new IclubMbCommentModel();
+
+				model.setMbcId(iCMbc.getMbcId());
+				model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
+				model.setMbcDesc(iCMbc.getMbcDesc());
+				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
+				model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
+
+				ret.add((T) model);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
 	}
 
 	public IclubMbCommentDAO getIclubMbCommentDAO() {

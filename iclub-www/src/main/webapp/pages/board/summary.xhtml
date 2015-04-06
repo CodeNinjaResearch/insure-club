@@ -33,6 +33,41 @@
 						</div>
 					</div>
 				</p:panel>
+				<p:panel id="pnlViewMbCmt">
+					<p:dataTable id="dtMbCont" widgetVar="dtQuoteCont" value="#{iclubMbCommentController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+						<f:facet name="footer">
+							<p:commandButton id="btnMbCommentShowAdd" value="Add Comment" actionListener="#{iclubMbCommentController.showAddPanel}" update=":iclubFrm:pnlMbCont" />
+						</f:facet>
+						<p:column headerText="ID">
+							<p:outputLabel value="#{bean.mbcId}" />
+						</p:column>
+						<p:column headerText="Description">
+							<p:outputLabel value="#{bean.mbcDesc}" />
+						</p:column>
+						<p:column headerText="Created Date">
+							<p:outputLabel value="#{bean.mbcCrtdDt}" />
+						</p:column>
+						<p:column headerText="Item Type">
+							<p:outputLabel value="#{bean.iclubInsuranceItemType}" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				<p:panel id="pnlAddMbc" rendered="#{iclubMbCommentController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText placeholder="MbComment Desc" value="#{iclubMbCommentController.bean.mbcDesc}" styleClass="TexAlCenter" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:commandButton id="btnMbCommentAddSave" value="Save" actionListener="#{iclubMbCommentController.addIclubMbComment}" update=":iclubFrm:pnlMbCont,iclubFrm:grlMsg" />
+							</div>
+							<div class="Container50">
+								<p:commandButton id="btnMbCommentAddClose" value="Close" actionListener="#{iclubMbCommentController.clearForm}" update=":iclubFrm:pnlMbCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
 			</p:panel>
 		</div>
 	</ui:define>

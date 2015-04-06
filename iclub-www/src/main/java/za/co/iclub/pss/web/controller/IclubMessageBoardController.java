@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -19,6 +20,7 @@ import org.apache.log4j.Logger;
 import za.co.iclub.pss.web.bean.IclubMbCommentBean;
 import za.co.iclub.pss.web.bean.IclubMessageBoardBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
+import za.co.iclub.pss.ws.model.IclubMbCommentModel;
 import za.co.iclub.pss.ws.model.IclubMessageBoardModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -30,6 +32,7 @@ public class IclubMessageBoardController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubMessageBoardController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubMessageBoardService/";
+	private static final String MB_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubMbCommentService/";
 	private List<IclubMessageBoardBean> beans;
 	private List<IclubMessageBoardBean> dashBoardBeans;
 	private List<IclubMbCommentBean> mbCommentBeans;
@@ -141,7 +144,7 @@ public class IclubMessageBoardController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubMessageBoardModel model = new IclubMessageBoardModel();
 
-				model.setMbId(bean.getMbId());
+				model.setMbId(UUID.randomUUID().toString());
 				model.setMbContent(bean.getMbContent());
 				model.setMbContent(bean.getMbContent());
 				model.setMbTag(bean.getMbTag());
@@ -353,6 +356,19 @@ public class IclubMessageBoardController implements Serializable {
 	}
 
 	public List<IclubMbCommentBean> getMbCommentBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(MB_BASE_URL + "list");
+		Collection<? extends IclubMbCommentModel> models = new ArrayList<IclubMbCommentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMbCommentModel.class));
+		client.close();
+		mbCommentBeans = new ArrayList<IclubMbCommentBean>();
+		for (IclubMbCommentModel model : models) {
+			IclubMbCommentBean bean = new IclubMbCommentBean();
+			bean.setMbcId(model.getMbcId());
+			bean.setMbcCrtdDt(model.getMbcCrtdDt());
+			bean.setMbcDesc(model.getMbcDesc());
+			bean.setIclubMessageBoard(model.getIclubMessageBoard());
+			bean.setIclubPerson(model.getIclubPerson());
+			mbCommentBeans.add(bean);
+		}
 		return mbCommentBeans;
 	}
 
