@@ -1,5 +1,39 @@
 <ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="perAddress" value="Address:" />
+					<p:inputText id="perAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPre" showDetail="true" />
+				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubPolicyController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubPolicyController.draggableModelPer}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubPolicyController.onMarkerDragPer}" update="growlPre" />
+					<p:ajax event="geocode" listener="#{iclubPolicyController.onGeocodePer}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubPolicyController.onMarkerSelectPer}" update="growlPre" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<p:dialog id="vehLocationDetailsDialog" widgetVar="vehLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehAddress" value="Address:" />
+					<p:inputText id="vehAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVeh" showDetail="true" />
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubPolicyController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubPolicyController.draggableModelVeh}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubPolicyController.onMarkerDragVeh}" update="growlVeh" />
+					<p:ajax event="geocode" listener="#{iclubPolicyController.onGeocodeVeh}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubPolicyController.onMarkerSelectVeh}" update="growlVeh" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
 		<p:panel id="qqPanel">
 			<p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 				<f:facet name="footer">
@@ -59,7 +93,7 @@
 						</div>
 						<div class="Container50">
 							<div class="Container80 Responsive">
-								<!-- 	<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
+								<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
 							</div>
 							<div class="EmptyBox5" />
 						</div>
@@ -403,7 +437,7 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+						<p:commandButton update=":iclubFrm:vehLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('vehLocationDetailsDialog').show();" />
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
