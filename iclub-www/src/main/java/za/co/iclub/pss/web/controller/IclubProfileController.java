@@ -42,7 +42,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubProfileController")
 @SessionScoped
 public class IclubProfileController implements Serializable {
-	
+
 	private static final long serialVersionUID = 4703596329233786371L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubProductTypeController.class);
@@ -52,29 +52,29 @@ public class IclubProfileController implements Serializable {
 	private static final String IT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubIdTypeService/";
 	private static final String CCDE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCountryCodeService/";
 	private static final String D_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubDocumentService/";
-	
+
 	private IclubPersonBean bean;
-	
+
 	private List<IclubOccupationBean> occupationBeans;
-	
+
 	private List<IclubCountryCodeBean> countryCodeBeans;
-	
+
 	private List<IclubMaritialStatusBean> maritialStatusBeans;
-	
+
 	private List<IclubIdTypeBean> idTypeBeans;
 	private String sessionUserId;
 	private List<IclubDocumentBean> docs;
-	
+
 	private List<String> docIds;
-	
+
 	private StreamedContent file;
-	
+
 	private ResourceBundle labelBundle;
-	
+
 	public void updatedPerson() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-		
+
 		IclubPersonModel model = new IclubPersonModel();
 		model.setPId(bean.getPId());
 		model.setPCrtdDt(bean.getPCrtdDt());
@@ -91,7 +91,7 @@ public class IclubProfileController implements Serializable {
 		model.setPIdExpiryDt(bean.getPIdExpiryDt());
 		model.setPInitials(bean.getPInitials());
 		model.setPIsPensioner(bean.getPIsPensioner());
-		model.setPIdIssueCntry(bean.getPIdIssueCntry().longValue());
+		model.setPIdIssueCntry(bean.getPIdIssueCntry() != null ? bean.getPIdIssueCntry().longValue() : null);
 		model.setPLat(bean.getPLat());
 		model.setPLong(bean.getPLong());
 		model.setPOccupation(bean.getPOccupation());
@@ -100,31 +100,41 @@ public class IclubProfileController implements Serializable {
 		model.setIclubIdType(bean.getIclubIdType());
 		model.setIclubPerson(getSessionUserId());
 		model.setIclubMaritialStatus(bean.getIclubMaritialStatus());
-		
+
 		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 		client.close();
-		
+
 		if (response.getStatusCode() == 0) {
-			
+			for (String doc : getDocIds()) {
+				IclubDocumentModel docModel = new IclubDocumentModel();
+				docModel.setDId(doc);
+				docModel.setDEntityId(model.getPId().toString());
+				docModel.setIclubEntityType(1l);
+				WebClient docClient = IclubWebHelper.createCustomClient(D_BASE_URL + "mod");
+				ResponseModel res = docClient.accept(MediaType.APPLICATION_JSON).put(docModel, ResponseModel.class);
+				if (res.getStatusCode() == 0)
+					LOGGER.info("Doc Merge Successful :: " + doc);
+			}
+			docIds = null;
 			IclubWebHelper.addMessage("Updated Successfully", FacesMessage.SEVERITY_INFO);
-			
+
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
-		
+
 	}
-	
+
 	public String getSessionUserId() {
 		if (sessionUserId == null) {
 			sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
 		}
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public List<IclubMaritialStatusBean> getMaritialStatusBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(MS_BASE_URL + "list");
 		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
@@ -140,11 +150,11 @@ public class IclubProfileController implements Serializable {
 		}
 		return maritialStatusBeans;
 	}
-	
+
 	public void setMaritialStatusBeans(List<IclubMaritialStatusBean> maritialStatusBeans) {
 		this.maritialStatusBeans = maritialStatusBeans;
 	}
-	
+
 	public List<IclubIdTypeBean> getIdTypeBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(IT_BASE_URL + "list");
 		Collection<? extends IclubIdTypeModel> models = new ArrayList<IclubIdTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubIdTypeModel.class));
@@ -160,15 +170,15 @@ public class IclubProfileController implements Serializable {
 		}
 		return idTypeBeans;
 	}
-	
+
 	public void setIdTypeBeans(List<IclubIdTypeBean> idTypeBeans) {
 		this.idTypeBeans = idTypeBeans;
 	}
-	
+
 	public IclubPersonBean getBean() {
 		if (getSessionUserId() != null) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + getSessionUserId());
-			
+
 			IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
 			bean = new IclubPersonBean();
 			bean.setPId(model.getPId());
@@ -198,35 +208,35 @@ public class IclubProfileController implements Serializable {
 		}
 		return bean;
 	}
-	
+
 	public void setBean(IclubPersonBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public List<IclubOccupationBean> getOccupationBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(OCN_BASE_URL + "list");
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
 		client.close();
 		occupationBeans = new ArrayList<IclubOccupationBean>();
 		for (IclubOccupationModel model : models) {
-			
+
 			IclubOccupationBean bean = new IclubOccupationBean();
-			
+
 			bean.setOId(model.getOId());
 			bean.setODesc(model.getODesc());
 			bean.setOCrtdDt(model.getOCrtdDt());
 			bean.setOStatus(model.getOStatus());
 			bean.setIclubPerson(model.getIclubPerson());
-			
+
 			occupationBeans.add(bean);
 		}
 		return occupationBeans;
 	}
-	
+
 	public void setOccupationBeans(List<IclubOccupationBean> occupationBeans) {
 		this.occupationBeans = occupationBeans;
 	}
-	
+
 	public List<IclubCountryCodeBean> getCountryCodeBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(CCDE_BASE_URL + "list");
 		Collection<? extends IclubCountryCodeModel> models = new ArrayList<IclubCountryCodeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCountryCodeModel.class));
@@ -244,11 +254,11 @@ public class IclubProfileController implements Serializable {
 		}
 		return countryCodeBeans;
 	}
-	
+
 	public void setCountryCodeBeans(List<IclubCountryCodeBean> countryCodeBeans) {
 		this.countryCodeBeans = countryCodeBeans;
 	}
-	
+
 	public void showDocumentUpload() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showDocumentUpload");
 		if (getDocIds().size() != 0) {
@@ -260,7 +270,7 @@ public class IclubProfileController implements Serializable {
 		}
 		getDocIds().clear();
 	}
-	
+
 	public void handleFileUpload(FileUploadEvent fue) {
 		String docId = UUID.randomUUID().toString();
 		getDocIds().add(docId);
@@ -272,21 +282,21 @@ public class IclubProfileController implements Serializable {
 			model.setDName(fue.getFile().getFileName());
 			model.setDContent(fue.getFile().getContentType());
 			model.setDSize(fue.getFile().getSize());
-			
+
 			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "add");
 			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 			client.close();
-			
+
 			if (response.getStatusCode() == 0) {
 				ContentDisposition cd = new ContentDisposition("attachment;filename=" + fue.getFile().getFileName() + ";filetype=" + fue.getFile().getContentType());
 				List<Attachment> attachments = new ArrayList<Attachment>();
 				Attachment attachment = new Attachment(docId, fue.getFile().getInputstream(), cd);
 				attachments.add(attachment);
-				
+
 				WebClient uploadClient = WebClient.create(D_BASE_URL + "upload");
 				Response res = uploadClient.type("multipart/form-data").post(new MultipartBody(attachments));
 				uploadClient.close();
-				
+
 				if (res.getStatus() == 200) {
 					IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadedsuccessfully"), FacesMessage.SEVERITY_INFO);
 				} else {
@@ -298,7 +308,7 @@ public class IclubProfileController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingerror") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void downloadDocument(String selDocId) {
 		try {
@@ -312,7 +322,7 @@ public class IclubProfileController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingerror") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void deleteDocument(String selDocId) {
 		try {
 			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "del/" + selDocId);
@@ -323,7 +333,7 @@ public class IclubProfileController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingerror") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public List<IclubDocumentBean> getDocs() {
 		if (bean != null && bean.getPId() != null) {
 			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "get/entity/" + bean.getPId() + "" + "/1");
@@ -342,7 +352,7 @@ public class IclubProfileController implements Serializable {
 				bean.setIclubDocumentType(model.getIclubDocumentType());
 				bean.setIclubEntityType(model.getIclubEntityType());
 				bean.setIclubPerson(model.getIclubPerson());
-				
+
 				docs.add(bean);
 			}
 		} else {
@@ -350,37 +360,37 @@ public class IclubProfileController implements Serializable {
 		}
 		return docs;
 	}
-	
+
 	public void setDocs(List<IclubDocumentBean> docs) {
 		this.docs = docs;
 	}
-	
+
 	public StreamedContent getFile() {
 		return file;
 	}
-	
+
 	public void setFile(StreamedContent file) {
 		this.file = file;
 	}
-	
+
 	public List<String> getDocIds() {
-		if (docIds != null) {
+		if (docIds == null) {
 			docIds = new ArrayList<String>();
 		}
-		
+
 		return docIds;
 	}
-	
+
 	public void setDocIds(List<String> docIds) {
 		this.docIds = docIds;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
-		
+
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
