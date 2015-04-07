@@ -260,6 +260,17 @@ public class IclubClaimController implements Serializable {
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
+					for (String doc : getDocIds()) {
+						IclubDocumentModel docModel = new IclubDocumentModel();
+						docModel.setDId(doc);
+						docModel.setDEntityId(model.getCId().toString());
+						docModel.setIclubEntityType(1l);
+						WebClient docClient = IclubWebHelper.createCustomClient(D_BASE_URL + "mod");
+						ResponseModel res = docClient.accept(MediaType.APPLICATION_JSON).put(docModel, ResponseModel.class);
+						if (res.getStatusCode() == 0)
+							LOGGER.info("Doc Merge Successful :: " + doc);
+					}
+					docIds = null;
 					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 				} else {
 					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -685,7 +696,7 @@ public class IclubClaimController implements Serializable {
 	}
 
 	public List<String> getDocIds() {
-		if (docIds != null) {
+		if (docIds == null) {
 			docIds = new ArrayList<String>();
 		}
 

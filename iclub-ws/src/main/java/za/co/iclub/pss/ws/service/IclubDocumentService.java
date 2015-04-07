@@ -92,18 +92,38 @@ public class IclubDocumentService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubDocumentModel model) {
 		try {
-			IclubDocument iCD = new IclubDocument();
+			IclubDocument iCD = iclubDocumentDAO.findById(model.getDId());
 
-			iCD.setDId(model.getDId());
-			iCD.setDContent(model.getDContent());
-			iCD.setDEntityId(model.getDEntityId());
-			iCD.setDSize(model.getDSize());
-			iCD.setDMimeType(model.getDMimeType());
-			iCD.setDName(model.getDName());
-			iCD.setDCrtdDt(model.getDCrtdDt());
-			iCD.setIclubDocumentType(model.getIclubDocumentType() != null ? iclubDocumentTypeDAO.findById(model.getIclubDocumentType()) : null);
-			iCD.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
-			iCD.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			if (model.getDId() != null) {
+				iCD.setDId(model.getDId());
+			}
+			if (model.getDContent() != null) {
+				iCD.setDContent(model.getDContent());
+			}
+			if (model.getDEntityId() != null) {
+				iCD.setDEntityId(model.getDEntityId());
+			}
+			if (model.getDSize() != null) {
+				iCD.setDSize(model.getDSize());
+			}
+			if (model.getDMimeType() != null) {
+				iCD.setDMimeType(model.getDMimeType());
+			}
+			if (model.getDName() != null) {
+				iCD.setDName(model.getDName());
+			}
+			if (model.getDCrtdDt() != null) {
+				iCD.setDCrtdDt(model.getDCrtdDt());
+			}
+			if (model.getIclubDocumentType() != null) {
+				iCD.setIclubDocumentType(model.getIclubDocumentType() != null ? iclubDocumentTypeDAO.findById(model.getIclubDocumentType()) : null);
+			}
+			if (model.getIclubEntityType() != null) {
+				iCD.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
+			}
+			if (model.getIclubPerson() != null) {
+				iCD.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			}
 
 			iclubDocumentDAO.merge(iCD);
 
