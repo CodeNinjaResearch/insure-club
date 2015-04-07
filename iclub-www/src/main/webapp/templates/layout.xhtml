@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
-
 <h:head>
 	<f:facet name="first">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,7 +9,20 @@
 	</f:facet>
 	<title>Insurance Club</title>
 	<h:outputScript name="js/layout.js" library="sentinel-layout" />
+	<script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
+	<script type="text/javascript">
+		function geocodePer() {
+			PF('geoMapPer').geocode(document.getElementById('perAddress').value);
+		}
+		function geocodePro() {
+			PF('geoMapPro').geocode(document.getElementById('proAddress').value);
+		}
+		function geocodeVeh() {
+			PF('geoMapVeh').geocode(document.getElementById('vehAddress').value);
+		}
 
+		 
+	</script>
 	<h:outputText value="&lt;!--[if gte IE 9]&gt;" escape="false" />
 	<style type="text/css">
 .ui-tabs-top .ui-tabs-nav li, .ui-tabs .ui-tabs-nav li {
@@ -18,25 +30,20 @@
 }
 </style>
 	<h:outputText value="&lt;![endif]--&gt;" escape="false" />
-
 	<ui:insert name="head" />
 </h:head>
-
 <h:body>
-	<h:form id="iclubFrm">
+	<h:form prependId="false" id="iclubFrm">
 		<!-- <ui:include src="top.xhtml" /> -->
 		<p:growl id="grlMsg" showDetail="true" showSummary="false" />
 		<ui:include src="menu.xhtml" />
-
 		<div id="layout-portlets-cover" class="fontRegular">
 			<ui:insert name="content">
 			</ui:insert>
 		</div>
 	</h:form>
-
 	<h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
 	<h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
 	<h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
 </h:body>
-
 </html>

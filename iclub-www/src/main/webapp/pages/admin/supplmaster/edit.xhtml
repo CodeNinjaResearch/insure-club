@@ -24,7 +24,7 @@
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
 		<p:inputText styleClass="TexAlCenter" placeholder="Address" value="#{iclubSupplMasterController.bean.smAddress}" />
-		<!-- <p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" /> -->
+		<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
@@ -48,13 +48,13 @@
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container100">
-		<div class="Container50">
+		<div class="Container30">
 			<p:commandButton id="btnSupplMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Update" actionListener="#{iclubSupplMasterController.modIclubSupplMaster}" />
 		</div>
-		<div class="Container50">
+		<div class="Container30">
 			<p:commandButton id="btnSupplMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Delete" actionListener="#{iclubSupplMasterController.delIclubSupplMaster}" />
 		</div>
-		<div class="Container50">
+		<div class="Container30">
 			<p:commandButton id="btnSupplMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Close" actionListener="#{iclubSupplMasterController.showView}" />
 		</div>
 	</div>
