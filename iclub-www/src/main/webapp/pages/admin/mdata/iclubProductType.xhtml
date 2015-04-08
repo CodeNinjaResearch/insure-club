@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnProductTypeAddSave" value="Save" actionListener="#{iclubProductTypeController.addIclubProductType}" update=":iclubFrm:pnlProductTypeCont" />
+								<p:commandButton id="btnProductTypeAddSave" value="Save" actionListener="#{iclubProductTypeController.addIclubProductType}" update="iclubFrm:grlMsg,:iclubFrm:pnlProductTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnProductTypeAddClose" value="Close" actionListener="#{iclubProductTypeController.clearForm}" update=":iclubFrm:pnlProductTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnProductTypeModSave" value="Save" actionListener="#{iclubProductTypeController.modIclubProductType}" update=":iclubFrm:pnlProductTypeCont" />
+								<p:commandButton id="btnProductTypeModSave" value="Save" actionListener="#{iclubProductTypeController.modIclubProductType}" update="iclubFrm:grlMsg,:iclubFrm:pnlProductTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnProductTypeModDelete" value="Delete" actionListener="#{iclubProductTypeController.delIclubProductType}" update=":iclubFrm:pnlProductTypeCont" />
+								<p:commandButton id="btnProductTypeModDelete" value="Delete" actionListener="#{iclubProductTypeController.delIclubProductType}" update="iclubFrm:grlMsg,:iclubFrm:pnlProductTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnProductTypeModClose" value="Close" actionListener="#{iclubProductTypeController.clearForm}" update=":iclubFrm:pnlProductTypeCont" />

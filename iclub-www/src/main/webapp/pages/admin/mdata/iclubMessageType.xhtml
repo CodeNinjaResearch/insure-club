@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnMessageTypeAddSave" value="Save" actionListener="#{iclubMessageTypeController.addIclubMessageType}" update=":iclubFrm:pnlMessageTypeCont" />
+								<p:commandButton id="btnMessageTypeAddSave" value="Save" actionListener="#{iclubMessageTypeController.addIclubMessageType}" update="iclubFrm:grlMsg,:iclubFrm:pnlMessageTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnMessageTypeAddClose" value="Close" actionListener="#{iclubMessageTypeController.clearForm}" update=":iclubFrm:pnlMessageTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnMessageTypeModSave" value="Save" actionListener="#{iclubMessageTypeController.modIclubMessageType}" update=":iclubFrm:pnlMessageTypeCont" />
+								<p:commandButton id="btnMessageTypeModSave" value="Save" actionListener="#{iclubMessageTypeController.modIclubMessageType}" update="iclubFrm:grlMsg,:iclubFrm:pnlMessageTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnMessageTypeModDelete" value="Delete" actionListener="#{iclubMessageTypeController.delIclubMessageType}" update=":iclubFrm:pnlMessageTypeCont" />
+								<p:commandButton id="btnMessageTypeModDelete" value="Delete" actionListener="#{iclubMessageTypeController.delIclubMessageType}" update="iclubFrm:grlMsg,:iclubFrm:pnlMessageTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnMessageTypeModClose" value="Close" actionListener="#{iclubMessageTypeController.clearForm}" update=":iclubFrm:pnlMessageTypeCont" />

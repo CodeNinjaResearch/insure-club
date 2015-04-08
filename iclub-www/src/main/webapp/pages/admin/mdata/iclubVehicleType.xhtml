@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnVehicleTypeAddSave" value="Save" actionListener="#{iclubVehicleTypeController.addIclubVehicleType}" update=":iclubFrm:pnlVehicleTypeCont" />
+								<p:commandButton id="btnVehicleTypeAddSave" value="Save" actionListener="#{iclubVehicleTypeController.addIclubVehicleType}" update=":iclubFrm:pnlVehicleTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnVehicleTypeAddClose" value="Close" actionListener="#{iclubVehicleTypeController.clearForm}" update=":iclubFrm:pnlVehicleTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnVehicleTypeModSave" value="Save" actionListener="#{iclubVehicleTypeController.modIclubVehicleType}" update=":iclubFrm:pnlVehicleTypeCont" />
+								<p:commandButton id="btnVehicleTypeModSave" value="Save" actionListener="#{iclubVehicleTypeController.modIclubVehicleType}" update=":iclubFrm:pnlVehicleTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnVehicleTypeModDelete" value="Delete" actionListener="#{iclubVehicleTypeController.delIclubVehicleType}" update=":iclubFrm:pnlVehicleTypeCont" />
+								<p:commandButton id="btnVehicleTypeModDelete" value="Delete" actionListener="#{iclubVehicleTypeController.delIclubVehicleType}" update=":iclubFrm:pnlVehicleTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnVehicleTypeModClose" value="Close" actionListener="#{iclubVehicleTypeController.clearForm}" update=":iclubFrm:pnlVehicleTypeCont" />

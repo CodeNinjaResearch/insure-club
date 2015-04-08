@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnAccessTypeAddSave" value="Save" actionListener="#{iclubAccessTypeController.addIclubAccessType}" update=":iclubFrm:pnlAccessTypeCont" />
+								<p:commandButton id="btnAccessTypeAddSave" value="Save" actionListener="#{iclubAccessTypeController.addIclubAccessType}" update=":iclubFrm:pnlAccessTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnAccessTypeAddClose" value="Close" actionListener="#{iclubAccessTypeController.clearForm}" update=":iclubFrm:pnlAccessTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnAccessTypeModSave" value="Save" actionListener="#{iclubAccessTypeController.modIclubAccessType}" update=":iclubFrm:pnlAccessTypeCont" />
+								<p:commandButton id="btnAccessTypeModSave" value="Save" actionListener="#{iclubAccessTypeController.modIclubAccessType}" update=":iclubFrm:pnlAccessTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnAccessTypeModDelete" value="Delete" actionListener="#{iclubAccessTypeController.delIclubAccessType}" update=":iclubFrm:pnlAccessTypeCont" />
+								<p:commandButton id="btnAccessTypeModDelete" value="Delete" actionListener="#{iclubAccessTypeController.delIclubAccessType}" update=":iclubFrm:pnlAccessTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnAccessTypeModClose" value="Close" actionListener="#{iclubAccessTypeController.clearForm}" update=":iclubFrm:pnlAccessTypeCont" />

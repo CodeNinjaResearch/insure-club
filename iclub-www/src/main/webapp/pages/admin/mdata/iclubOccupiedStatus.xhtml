@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnOccupiedStatusAddSave" value="Save" actionListener="#{iclubOccupiedStatusController.addIclubOccupiedStatus}" update=":iclubFrm:pnlOccupiedStatusCont" />
+								<p:commandButton id="btnOccupiedStatusAddSave" value="Save" actionListener="#{iclubOccupiedStatusController.addIclubOccupiedStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlOccupiedStatusCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnOccupiedStatusAddClose" value="Close" actionListener="#{iclubOccupiedStatusController.clearForm}" update=":iclubFrm:pnlOccupiedStatusCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnOccupiedStatusModSave" value="Save" actionListener="#{iclubOccupiedStatusController.modIclubOccupiedStatus}" update=":iclubFrm:pnlOccupiedStatusCont" />
+								<p:commandButton id="btnOccupiedStatusModSave" value="Save" actionListener="#{iclubOccupiedStatusController.modIclubOccupiedStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlOccupiedStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnOccupiedStatusModDelete" value="Delete" actionListener="#{iclubOccupiedStatusController.delIclubOccupiedStatus}" update=":iclubFrm:pnlOccupiedStatusCont" />
+								<p:commandButton id="btnOccupiedStatusModDelete" value="Delete" actionListener="#{iclubOccupiedStatusController.delIclubOccupiedStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlOccupiedStatusCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnOccupiedStatusModClose" value="Close" actionListener="#{iclubOccupiedStatusController.clearForm}" update=":iclubFrm:pnlOccupiedStatusCont" />

@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnInsuranceItemTypeAddSave" value="Save" actionListener="#{iclubInsuranceItemTypeController.addIclubInsuranceItemType}" update=":iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeAddSave" value="Save" actionListener="#{iclubInsuranceItemTypeController.addIclubInsuranceItemType}" update="iclubFrm:grlMsg,:iclubFrm:pnlInsuranceItemTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnInsuranceItemTypeAddClose" value="Close" actionListener="#{iclubInsuranceItemTypeController.clearForm}" update=":iclubFrm:pnlInsuranceItemTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnInsuranceItemTypeModSave" value="Save" actionListener="#{iclubInsuranceItemTypeController.modIclubInsuranceItemType}" update=":iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeModSave" value="Save" actionListener="#{iclubInsuranceItemTypeController.modIclubInsuranceItemType}" update="iclubFrm:grlMsg,:iclubFrm:pnlInsuranceItemTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnInsuranceItemTypeModDelete" value="Delete" actionListener="#{iclubInsuranceItemTypeController.delIclubInsuranceItemType}" update=":iclubFrm:pnlInsuranceItemTypeCont" />
+								<p:commandButton id="btnInsuranceItemTypeModDelete" value="Delete" actionListener="#{iclubInsuranceItemTypeController.delIclubInsuranceItemType}" update="iclubFrm:grlMsg,:iclubFrm:pnlInsuranceItemTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnInsuranceItemTypeModClose" value="Close" actionListener="#{iclubInsuranceItemTypeController.clearForm}" update=":iclubFrm:pnlInsuranceItemTypeCont" />

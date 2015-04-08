@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnPolicyStatusAddSave" value="Save" actionListener="#{iclubPolicyStatusController.addIclubPolicyStatus}" update=":iclubFrm:pnlPolicyStatusCont" />
+								<p:commandButton id="btnPolicyStatusAddSave" value="Save" actionListener="#{iclubPolicyStatusController.addIclubPolicyStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlPolicyStatusCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnPolicyStatusAddClose" value="Close" actionListener="#{iclubPolicyStatusController.clearForm}" update=":iclubFrm:pnlPolicyStatusCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnPolicyStatusModSave" value="Save" actionListener="#{iclubPolicyStatusController.modIclubPolicyStatus}" update=":iclubFrm:pnlPolicyStatusCont" />
+								<p:commandButton id="btnPolicyStatusModSave" value="Save" actionListener="#{iclubPolicyStatusController.modIclubPolicyStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlPolicyStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnPolicyStatusModDelete" value="Delete" actionListener="#{iclubPolicyStatusController.delIclubPolicyStatus}" update=":iclubFrm:pnlPolicyStatusCont" />
+								<p:commandButton id="btnPolicyStatusModDelete" value="Delete" actionListener="#{iclubPolicyStatusController.delIclubPolicyStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlPolicyStatusCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnPolicyStatusModClose" value="Close" actionListener="#{iclubPolicyStatusController.clearForm}" update=":iclubFrm:pnlPolicyStatusCont" />

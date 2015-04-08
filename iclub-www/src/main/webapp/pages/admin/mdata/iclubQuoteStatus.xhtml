@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnQuoteStatusAddSave" value="Save" actionListener="#{iclubQuoteStatusController.addIclubQuoteStatus}" update=":iclubFrm:pnlQuoteStatusCont" />
+								<p:commandButton id="btnQuoteStatusAddSave" value="Save" actionListener="#{iclubQuoteStatusController.addIclubQuoteStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlQuoteStatusCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnQuoteStatusAddClose" value="Close" actionListener="#{iclubQuoteStatusController.clearForm}" update=":iclubFrm:pnlQuoteStatusCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnQuoteStatusModSave" value="Save" actionListener="#{iclubQuoteStatusController.modIclubQuoteStatus}" update=":iclubFrm:pnlQuoteStatusCont" />
+								<p:commandButton id="btnQuoteStatusModSave" value="Save" actionListener="#{iclubQuoteStatusController.modIclubQuoteStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlQuoteStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnQuoteStatusModDelete" value="Delete" actionListener="#{iclubQuoteStatusController.delIclubQuoteStatus}" update=":iclubFrm:pnlQuoteStatusCont" />
+								<p:commandButton id="btnQuoteStatusModDelete" value="Delete" actionListener="#{iclubQuoteStatusController.delIclubQuoteStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlQuoteStatusCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnQuoteStatusModClose" value="Close" actionListener="#{iclubQuoteStatusController.clearForm}" update=":iclubFrm:pnlQuoteStatusCont" />

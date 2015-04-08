@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnOwnerTypeAddSave" value="Save" actionListener="#{iclubOwnerTypeController.addIclubOwnerType}" update=":iclubFrm:pnlOwnerTypeCont" />
+								<p:commandButton id="btnOwnerTypeAddSave" value="Save" actionListener="#{iclubOwnerTypeController.addIclubOwnerType}" update="iclubFrm:grlMsg,:iclubFrm:pnlOwnerTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnOwnerTypeAddClose" value="Close" actionListener="#{iclubOwnerTypeController.clearForm}" update=":iclubFrm:pnlOwnerTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnOwnerTypeModSave" value="Save" actionListener="#{iclubOwnerTypeController.modIclubOwnerType}" update=":iclubFrm:pnlOwnerTypeCont" />
+								<p:commandButton id="btnOwnerTypeModSave" value="Save" actionListener="#{iclubOwnerTypeController.modIclubOwnerType}" update="iclubFrm:grlMsg,:iclubFrm:pnlOwnerTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnOwnerTypeModDelete" value="Delete" actionListener="#{iclubOwnerTypeController.delIclubOwnerType}" update=":iclubFrm:pnlOwnerTypeCont" />
+								<p:commandButton id="btnOwnerTypeModDelete" value="Delete" actionListener="#{iclubOwnerTypeController.delIclubOwnerType}" update="iclubFrm:grlMsg,:iclubFrm:pnlOwnerTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnOwnerTypeModClose" value="Close" actionListener="#{iclubOwnerTypeController.clearForm}" update=":iclubFrm:pnlOwnerTypeCont" />

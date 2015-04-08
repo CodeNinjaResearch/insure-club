@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnThatchTypeAddSave" value="Save" actionListener="#{iclubThatchTypeController.addIclubThatchType}" update=":iclubFrm:pnlThatchTypeCont" />
+								<p:commandButton id="btnThatchTypeAddSave" value="Save" actionListener="#{iclubThatchTypeController.addIclubThatchType}" update="iclubfrm:grlMsg,:iclubFrm:pnlThatchTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnThatchTypeAddClose" value="Close" actionListener="#{iclubThatchTypeController.clearForm}" update=":iclubFrm:pnlThatchTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnThatchTypeModSave" value="Save" actionListener="#{iclubThatchTypeController.modIclubThatchType}" update=":iclubFrm:pnlThatchTypeCont" />
+								<p:commandButton id="btnThatchTypeModSave" value="Save" actionListener="#{iclubThatchTypeController.modIclubThatchType}" update="iclubfrm:grlMsg,:iclubFrm:pnlThatchTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnThatchTypeModDelete" value="Delete" actionListener="#{iclubThatchTypeController.delIclubThatchType}" update=":iclubFrm:pnlThatchTypeCont" />
+								<p:commandButton id="btnThatchTypeModDelete" value="Delete" actionListener="#{iclubThatchTypeController.delIclubThatchType}" update="iclubfrm:grlMsg,:iclubFrm:pnlThatchTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnThatchTypeModClose" value="Close" actionListener="#{iclubThatchTypeController.clearForm}" update=":iclubFrm:pnlThatchTypeCont" />

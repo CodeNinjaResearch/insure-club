@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnEventTypeAddSave" value="Save" actionListener="#{iclubEventTypeController.addIclubEventType}" update=":iclubFrm:pnlEventTypeCont" />
+								<p:commandButton id="btnEventTypeAddSave" value="Save" actionListener="#{iclubEventTypeController.addIclubEventType}" update="iclubFrm:grlMsg,:iclubFrm:pnlEventTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnEventTypeAddClose" value="Close" actionListener="#{iclubEventTypeController.clearForm}" update=":iclubFrm:pnlEventTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnEventTypeModSave" value="Save" actionListener="#{iclubEventTypeController.modIclubEventType}" update=":iclubFrm:pnlEventTypeCont" />
+								<p:commandButton id="btnEventTypeModSave" value="Save" actionListener="#{iclubEventTypeController.modIclubEventType}" update="iclubFrm:grlMsg,:iclubFrm:pnlEventTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnEventTypeModDelete" value="Delete" actionListener="#{iclubEventTypeController.delIclubEventType}" update=":iclubFrm:pnlEventTypeCont" />
+								<p:commandButton id="btnEventTypeModDelete" value="Delete" actionListener="#{iclubEventTypeController.delIclubEventType}" update="iclubFrm:grlMsg,:iclubFrm:pnlEventTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnEventTypeModClose" value="Close" actionListener="#{iclubEventTypeController.clearForm}" update=":iclubFrm:pnlEventTypeCont" />

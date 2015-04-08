@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnSecurityQuestionAddSave" value="Save" actionListener="#{iclubSecurityQuestionController.addIclubSecurityQuestion}" update=":iclubFrm:pnlSecurityQuestionCont" />
+								<p:commandButton id="btnSecurityQuestionAddSave" value="Save" actionListener="#{iclubSecurityQuestionController.addIclubSecurityQuestion}" update="iclubFrm:grlMsg,:iclubFrm:pnlSecurityQuestionCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnSecurityQuestionAddClose" value="Close" actionListener="#{iclubSecurityQuestionController.clearForm}" update=":iclubFrm:pnlSecurityQuestionCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnSecurityQuestionModSave" value="Save" actionListener="#{iclubSecurityQuestionController.modIclubSecurityQuestion}" update=":iclubFrm:pnlSecurityQuestionCont" />
+								<p:commandButton id="btnSecurityQuestionModSave" value="Save" actionListener="#{iclubSecurityQuestionController.modIclubSecurityQuestion}" update="iclubFrm:grlMsg,:iclubFrm:pnlSecurityQuestionCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnSecurityQuestionModDelete" value="Delete" actionListener="#{iclubSecurityQuestionController.delIclubSecurityQuestion}" update=":iclubFrm:pnlSecurityQuestionCont" />
+								<p:commandButton id="btnSecurityQuestionModDelete" value="Delete" actionListener="#{iclubSecurityQuestionController.delIclubSecurityQuestion}" update="iclubFrm:grlMsg,:iclubFrm:pnlSecurityQuestionCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnSecurityQuestionModClose" value="Close" actionListener="#{iclubSecurityQuestionController.clearForm}" update=":iclubFrm:pnlSecurityQuestionCont" />

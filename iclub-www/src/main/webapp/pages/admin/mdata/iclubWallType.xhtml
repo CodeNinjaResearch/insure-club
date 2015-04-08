@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnWallTypeAddSave" value="Save" actionListener="#{iclubWallTypeController.addIclubWallType}" update=":iclubFrm:pnlWallTypeCont" />
+								<p:commandButton id="btnWallTypeAddSave" value="Save" actionListener="#{iclubWallTypeController.addIclubWallType}" update=":iclubFrm:pnlWallTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnWallTypeAddClose" value="Close" actionListener="#{iclubWallTypeController.clearForm}" update=":iclubFrm:pnlWallTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnWallTypeModSave" value="Save" actionListener="#{iclubWallTypeController.modIclubWallType}" update=":iclubFrm:pnlWallTypeCont" />
+								<p:commandButton id="btnWallTypeModSave" value="Save" actionListener="#{iclubWallTypeController.modIclubWallType}" update=":iclubFrm:pnlWallTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnWallTypeModDelete" value="Delete" actionListener="#{iclubWallTypeController.delIclubWallType}" update=":iclubFrm:pnlWallTypeCont" />
+								<p:commandButton id="btnWallTypeModDelete" value="Delete" actionListener="#{iclubWallTypeController.delIclubWallType}" update=":iclubFrm:pnlWallTypeCont,iclubFrm:grlMsg" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnWallTypeModClose" value="Close" actionListener="#{iclubWallTypeController.clearForm}" update=":iclubFrm:pnlWallTypeCont" />

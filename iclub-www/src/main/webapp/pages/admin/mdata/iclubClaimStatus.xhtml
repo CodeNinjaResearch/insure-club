@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnClaimStatusAddSave" value="Save" actionListener="#{iclubClaimStatusController.addIclubClaimStatus}" update=":iclubFrm:pnlClaimStatusCont" />
+								<p:commandButton id="btnClaimStatusAddSave" value="Save" actionListener="#{iclubClaimStatusController.addIclubClaimStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlClaimStatusCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnClaimStatusAddClose" value="Close" actionListener="#{iclubClaimStatusController.clearForm}" update=":iclubFrm:pnlClaimStatusCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnClaimStatusModSave" value="Save" actionListener="#{iclubClaimStatusController.modIclubClaimStatus}" update=":iclubFrm:pnlClaimStatusCont" />
+								<p:commandButton id="btnClaimStatusModSave" value="Save" actionListener="#{iclubClaimStatusController.modIclubClaimStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlClaimStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnClaimStatusModDelete" value="Delete" actionListener="#{iclubClaimStatusController.delIclubClaimStatus}" update=":iclubFrm:pnlClaimStatusCont" />
+								<p:commandButton id="btnClaimStatusModDelete" value="Delete" actionListener="#{iclubClaimStatusController.delIclubClaimStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlClaimStatusCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnClaimStatusModClose" value="Close" actionListener="#{iclubClaimStatusController.clearForm}" update=":iclubFrm:pnlClaimStatusCont" />

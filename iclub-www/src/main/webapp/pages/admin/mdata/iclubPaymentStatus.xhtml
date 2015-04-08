@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnPaymentStatusAddSave" value="Save" actionListener="#{iclubPaymentStatusController.addIclubPaymentStatus}" update=":iclubFrm:pnlPaymentStatusCont" />
+								<p:commandButton id="btnPaymentStatusAddSave" value="Save" actionListener="#{iclubPaymentStatusController.addIclubPaymentStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlPaymentStatusCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnPaymentStatusAddClose" value="Close" actionListener="#{iclubPaymentStatusController.clearForm}" update=":iclubFrm:pnlPaymentStatusCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnPaymentStatusModSave" value="Save" actionListener="#{iclubPaymentStatusController.modIclubPaymentStatus}" update=":iclubFrm:pnlPaymentStatusCont" />
+								<p:commandButton id="btnPaymentStatusModSave" value="Save" actionListener="#{iclubPaymentStatusController.modIclubPaymentStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlPaymentStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnPaymentStatusModDelete" value="Delete" actionListener="#{iclubPaymentStatusController.delIclubPaymentStatus}" update=":iclubFrm:pnlPaymentStatusCont" />
+								<p:commandButton id="btnPaymentStatusModDelete" value="Delete" actionListener="#{iclubPaymentStatusController.delIclubPaymentStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlPaymentStatusCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnPaymentStatusModClose" value="Close" actionListener="#{iclubPaymentStatusController.clearForm}" update=":iclubFrm:pnlPaymentStatusCont" />

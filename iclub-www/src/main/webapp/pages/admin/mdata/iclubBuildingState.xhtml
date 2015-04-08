@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnBuildingStateAddSave" value="Save" actionListener="#{iclubBuildingStateController.addIclubBuildingState}" update=":iclubFrm:pnlBuildingStateCont" />
+								<p:commandButton id="btnBuildingStateAddSave" value="Save" actionListener="#{iclubBuildingStateController.addIclubBuildingState}" update="iclubFrm:grlMsg,:iclubFrm:pnlBuildingStateCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnBuildingStateAddClose" value="Close" actionListener="#{iclubBuildingStateController.clearForm}" update=":iclubFrm:pnlBuildingStateCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnBuildingStateModSave" value="Save" actionListener="#{iclubBuildingStateController.modIclubBuildingState}" update=":iclubFrm:pnlBuildingStateCont" />
+								<p:commandButton id="btnBuildingStateModSave" value="Save" actionListener="#{iclubBuildingStateController.modIclubBuildingState}" update="iclubFrm:grlMsg,:iclubFrm:pnlBuildingStateCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnBuildingStateModDelete" value="Delete" actionListener="#{iclubBuildingStateController.delIclubBuildingState}" update=":iclubFrm:pnlBuildingStateCont" />
+								<p:commandButton id="btnBuildingStateModDelete" value="Delete" actionListener="#{iclubBuildingStateController.delIclubBuildingState}" update="iclubFrm:grlMsg,:iclubFrm:pnlBuildingStateCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnBuildingStateModClose" value="Close" actionListener="#{iclubBuildingStateController.clearForm}" update=":iclubFrm:pnlBuildingStateCont" />

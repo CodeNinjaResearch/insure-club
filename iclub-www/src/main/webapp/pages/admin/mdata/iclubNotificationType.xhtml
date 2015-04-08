@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnNotificationTypeAddSave" value="Save" actionListener="#{iclubNotificationTypeController.addIclubNotificationType}" update=":iclubFrm:pnlNotificationTypeCont" />
+								<p:commandButton id="btnNotificationTypeAddSave" value="Save" actionListener="#{iclubNotificationTypeController.addIclubNotificationType}" update="iclubFrm:grlMsg,:iclubFrm:pnlNotificationTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnNotificationTypeAddClose" value="Close" actionListener="#{iclubNotificationTypeController.clearForm}" update=":iclubFrm:pnlNotificationTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnNotificationTypeModSave" value="Save" actionListener="#{iclubNotificationTypeController.modIclubNotificationType}" update=":iclubFrm:pnlNotificationTypeCont" />
+								<p:commandButton id="btnNotificationTypeModSave" value="Save" actionListener="#{iclubNotificationTypeController.modIclubNotificationType}" update="iclubFrm:grlMsg,:iclubFrm:pnlNotificationTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnNotificationTypeModDelete" value="Delete" actionListener="#{iclubNotificationTypeController.delIclubNotificationType}" update=":iclubFrm:pnlNotificationTypeCont" />
+								<p:commandButton id="btnNotificationTypeModDelete" value="Delete" actionListener="#{iclubNotificationTypeController.delIclubNotificationType}" update="iclubFrm:grlMsg,:iclubFrm:pnlNotificationTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnNotificationTypeModClose" value="Close" actionListener="#{iclubNotificationTypeController.clearForm}" update=":iclubFrm:pnlNotificationTypeCont" />

@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnDocumentTypeAddSave" value="Save" actionListener="#{iclubDocumentTypeController.addIclubDocumentType}" update=":iclubFrm:pnlDocumentTypeCont" />
+								<p:commandButton id="btnDocumentTypeAddSave" value="Save" actionListener="#{iclubDocumentTypeController.addIclubDocumentType}" update="iclubFrm:grlMsg,:iclubFrm:pnlDocumentTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnDocumentTypeAddClose" value="Close" actionListener="#{iclubDocumentTypeController.clearForm}" update=":iclubFrm:pnlDocumentTypeCont" />
@@ -79,10 +79,10 @@
 						</div>
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnDocumentTypeModSave" value="Save" actionListener="#{iclubDocumentTypeController.modIclubDocumentType}" update=":iclubFrm:pnlDocumentTypeCont" />
+								<p:commandButton id="btnDocumentTypeModSave" value="Save" actionListener="#{iclubDocumentTypeController.modIclubDocumentType}" update="iclubFrm:grlMsg,:iclubFrm:pnlDocumentTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnDocumentTypeModDelete" value="Delete" actionListener="#{iclubDocumentTypeController.delIclubDocumentType}" update=":iclubFrm:pnlDocumentTypeCont" />
+								<p:commandButton id="btnDocumentTypeModDelete" value="Delete" actionListener="#{iclubDocumentTypeController.delIclubDocumentType}" update="iclubFrm:grlMsg,:iclubFrm:pnlDocumentTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnDocumentTypeModClose" value="Close" actionListener="#{iclubDocumentTypeController.clearForm}" update=":iclubFrm:pnlDocumentTypeCont" />

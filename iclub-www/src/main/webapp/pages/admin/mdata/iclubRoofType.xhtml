@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnRoofTypeAddSave" value="Save" actionListener="#{iclubRoofTypeController.addIclubRoofType}" update=":iclubFrm:pnlRoofTypeCont" />
+								<p:commandButton id="btnRoofTypeAddSave" value="Save" actionListener="#{iclubRoofTypeController.addIclubRoofType}" update="iclubFrm:grlMsg,:iclubFrm:pnlRoofTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnRoofTypeAddClose" value="Close" actionListener="#{iclubRoofTypeController.clearForm}" update=":iclubFrm:pnlRoofTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnRoofTypeModSave" value="Save" actionListener="#{iclubRoofTypeController.modIclubRoofType}" update=":iclubFrm:pnlRoofTypeCont" />
+								<p:commandButton id="btnRoofTypeModSave" value="Save" actionListener="#{iclubRoofTypeController.modIclubRoofType}" update="iclubFrm:grlMsg,:iclubFrm:pnlRoofTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnRoofTypeModDelete" value="Delete" actionListener="#{iclubRoofTypeController.delIclubRoofType}" update=":iclubFrm:pnlRoofTypeCont" />
+								<p:commandButton id="btnRoofTypeModDelete" value="Delete" actionListener="#{iclubRoofTypeController.delIclubRoofType}" update="iclubFrm:grlMsg,:iclubFrm:pnlRoofTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnRoofTypeModClose" value="Close" actionListener="#{iclubRoofTypeController.clearForm}" update=":iclubFrm:pnlRoofTypeCont" />

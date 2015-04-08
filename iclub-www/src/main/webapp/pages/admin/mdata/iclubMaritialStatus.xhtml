@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnMaritialStatusAddSave" value="Save" actionListener="#{iclubMaritialStatusController.addIclubMaritialStatus}" update=":iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritialStatusAddSave" value="Save" actionListener="#{iclubMaritialStatusController.addIclubMaritialStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritialStatusCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnMaritialStatusAddClose" value="Close" actionListener="#{iclubMaritialStatusController.clearForm}" update=":iclubFrm:pnlMaritialStatusCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnMaritialStatusModSave" value="Save" actionListener="#{iclubMaritialStatusController.modIclubMaritialStatus}" update=":iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritialStatusModSave" value="Save" actionListener="#{iclubMaritialStatusController.modIclubMaritialStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritialStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnMaritialStatusModDelete" value="Delete" actionListener="#{iclubMaritialStatusController.delIclubMaritialStatus}" update=":iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritialStatusModDelete" value="Delete" actionListener="#{iclubMaritialStatusController.delIclubMaritialStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritialStatusCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnMaritialStatusModClose" value="Close" actionListener="#{iclubMaritialStatusController.clearForm}" update=":iclubFrm:pnlMaritialStatusCont" />

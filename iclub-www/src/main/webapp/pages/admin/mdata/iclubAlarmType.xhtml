@@ -48,7 +48,7 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnAlarmTypeAddSave" value="Save" actionListener="#{iclubAlarmTypeController.addIclubAlarmType}" update=":iclubFrm:pnlAlarmTypeCont" />
+								<p:commandButton id="btnAlarmTypeAddSave" value="Save" actionListener="#{iclubAlarmTypeController.addIclubAlarmType}" update="iclubFrm:grlMsg,:iclubFrm:pnlAlarmTypeCont" />
 							</div>
 							<div class="Container50">
 								<p:commandButton id="btnAlarmTypeAddClose" value="Close" actionListener="#{iclubAlarmTypeController.clearForm}" update=":iclubFrm:pnlAlarmTypeCont" />
@@ -80,10 +80,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnAlarmTypeModSave" value="Save" actionListener="#{iclubAlarmTypeController.modIclubAlarmType}" update=":iclubFrm:pnlAlarmTypeCont" />
+								<p:commandButton id="btnAlarmTypeModSave" value="Save" actionListener="#{iclubAlarmTypeController.modIclubAlarmType}" update="iclubFrm:grlMsg,:iclubFrm:pnlAlarmTypeCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnAlarmTypeModDelete" value="Delete" actionListener="#{iclubAlarmTypeController.delIclubAlarmType}" update=":iclubFrm:pnlAlarmTypeCont" />
+								<p:commandButton id="btnAlarmTypeModDelete" value="Delete" actionListener="#{iclubAlarmTypeController.delIclubAlarmType}" update="iclubFrm:grlMsg,:iclubFrm:pnlAlarmTypeCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnAlarmTypeModClose" value="Close" actionListener="#{iclubAlarmTypeController.clearForm}" update=":iclubFrm:pnlAlarmTypeCont" />
