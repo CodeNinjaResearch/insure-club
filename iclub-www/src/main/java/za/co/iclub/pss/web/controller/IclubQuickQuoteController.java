@@ -420,32 +420,32 @@ public class IclubQuickQuoteController implements Serializable {
 
 		if (personBean.getPFName() == null || personBean.getPFName().trim().equalsIgnoreCase("")) {
 
-			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pfname.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (personBean.getPLName() == null || personBean.getPLName().trim().equalsIgnoreCase("")) {
 
-			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.plname.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (personBean.getPMobile() == null || personBean.getPMobile().trim().equalsIgnoreCase("")) {
 
-			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pmobile.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (personBean.getPEmail() == null || personBean.getPEmail().trim().equalsIgnoreCase("")) {
 
-			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pemail.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (personBean.getPGender() == null || personBean.getPGender().trim().equalsIgnoreCase("")) {
 
-			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pgender.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (personBean.getPDob() == null) {
 
-			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pdob.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (vehicleBean.getIclubVehicleMaster() == null) {
