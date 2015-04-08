@@ -15,6 +15,7 @@ import java.util.UUID;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
@@ -86,6 +87,7 @@ public class IclubQuickQuoteController implements Serializable {
 	private IclubVehicleBean vehicleBean;
 	private String vmMake;
 	private String claimYN;
+	private ResourceBundle labelBundle;
 
 	public void initializePage() {
 		IclubWebHelper.addObjectIntoSession("page_key", "/pages/quote/qq.xhtml");
@@ -413,6 +415,79 @@ public class IclubQuickQuoteController implements Serializable {
 
 	}
 
+	public boolean validateForm(boolean flag) {
+		boolean ret = true;
+
+		if (personBean.getPFName() == null || personBean.getPFName().trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (personBean.getPLName() == null || personBean.getPLName().trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (personBean.getPMobile() == null || personBean.getPMobile().trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (personBean.getPEmail() == null || personBean.getPEmail().trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (personBean.getPGender() == null || personBean.getPGender().trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (personBean.getPDob() == null) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (vehicleBean.getIclubVehicleMaster() == null) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.ms.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (vmMake == null || vmMake.trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.vmmake.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (vehicleBean.getVYear() == null) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.vyear.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (claimYN == null || claimYN.trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.claimyn.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (driverBean.getDName() == null || driverBean.getDName().trim().equalsIgnoreCase("")) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.dname.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (driverBean.getIclubLicenseCode() == null) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.dlicensecode.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (driverBean.getDIssueDt() == null) {
+
+			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.dissuedt.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		return ret;
+	}
+
 	public List<String> getVmMakes() {
 
 		WebClient client = IclubWebHelper.createCustomClient(VM_BASE_URL + "/listAllMake");
@@ -687,6 +762,16 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public void setClaimYN(String claimYN) {
 		this.claimYN = claimYN;
+	}
+
+	public ResourceBundle getLabelBundle() {
+
+		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
+		return labelBundle;
+	}
+
+	public void setLabelBundle(ResourceBundle labelBundle) {
+		this.labelBundle = labelBundle;
 	}
 
 }
