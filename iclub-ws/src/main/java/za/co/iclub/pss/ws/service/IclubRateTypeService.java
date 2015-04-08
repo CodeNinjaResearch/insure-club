@@ -221,6 +221,53 @@ public class IclubRateTypeService {
 	}
 
 	@GET
+	@Path("/getByFieldIdANdQuoteType/{fieldId}/{quotetype}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubRateTypeModel> List<T> getByFieldIdAndQuoteId(@PathParam("fieldId") Long fieldId, @PathParam("quotetype") String quoteType) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubNamedQueryDAO.findIclubRateTypeByQuoteTypeAndFieldId(fieldId, quoteType);
+
+			for (Object object : batmod) {
+				IclubRateType iRt = (IclubRateType) object;
+
+				IclubRateTypeModel model = new IclubRateTypeModel();
+
+				model.setRtId(iRt.getRtId());
+				model.setRtLongDesc(iRt.getRtLongDesc());
+				model.setRtShortDesc(iRt.getRtShortDesc());
+				model.setRtStatus(iRt.getRtStatus());
+				model.setRtQuoteType(iRt.getRtQuoteType());
+				model.setIclubField(iRt.getIclubField() != null ? iRt.getIclubField().getFId() : null);
+				model.setIclubEntityType(iRt.getIclubEntityType() != null ? iRt.getIclubEntityType().getEtId() : null);
+				model.setIclubInsuranceItemType(iRt.getIclubInsuranceItemType() != null ? iRt.getIclubInsuranceItemType().getIitId() : null);
+				model.setIclubPerson(iRt.getIclubPerson() != null ? iRt.getIclubPerson().getPId() : null);
+				model.setRtCrtdDt(iRt.getRtCrtdDt());
+				model.setRtType(iRt.getRtType());
+
+				if (iRt.getIclubRateEngines() != null && iRt.getIclubRateEngines().size() > 0) {
+					String[] rateEngines = new String[iRt.getIclubRateEngines().size()];
+					int i = 0;
+					for (IclubRateEngine rateEngine : iRt.getIclubRateEngines()) {
+						rateEngines[i] = rateEngine.getReId();
+						i++;
+					}
+
+					model.setIclubRateEngines(rateEngines);
+				}
+
+				ret.add((T) model);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+
+	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
 	@Produces({ "application/json" })

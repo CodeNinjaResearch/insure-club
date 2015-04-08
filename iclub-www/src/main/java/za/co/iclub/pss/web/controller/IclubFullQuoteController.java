@@ -92,6 +92,7 @@ import za.co.iclub.pss.ws.model.IclubPropertyTypeModel;
 import za.co.iclub.pss.ws.model.IclubPurposeTypeModel;
 import za.co.iclub.pss.ws.model.IclubQuoteModel;
 import za.co.iclub.pss.ws.model.IclubRateEngineModel;
+import za.co.iclub.pss.ws.model.IclubRateTypeModel;
 import za.co.iclub.pss.ws.model.IclubRoofTypeModel;
 import za.co.iclub.pss.ws.model.IclubSecurityDeviceModel;
 import za.co.iclub.pss.ws.model.IclubSecurityMasterModel;
@@ -116,7 +117,8 @@ public class IclubFullQuoteController implements Serializable {
 	private static final String D_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubDriverService/";
 	private static final String LIC_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubLicenseCodeService/";
 	private static final String WT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubWallTypeService/";
-	private static final String RT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRoofTypeService/";
+	private static final String ROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRoofTypeService/";
+	private static final String RAT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRateTypeService/";
 	private static final String MS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubMaritialStatusService/";
 	private static final String IT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubIdTypeService/";
 	private static final String SM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSecurityMasterService/";
@@ -1326,7 +1328,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	public List<IclubRoofTypeBean> getRoofTypeBeans() {
 
-		WebClient client = IclubWebHelper.createCustomClient(RT_BASE_URL + "list");
+		WebClient client = IclubWebHelper.createCustomClient(ROT_BASE_URL + "list");
 		Collection<? extends IclubRoofTypeModel> models = new ArrayList<IclubRoofTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRoofTypeModel.class));
 		client.close();
 		roofTypeBeans = new ArrayList<IclubRoofTypeBean>();
@@ -1928,7 +1930,7 @@ public class IclubFullQuoteController implements Serializable {
 		this.claimYN = claimYN;
 	}
 
-	public void rateEngine(String quoteId, String quoteType) {
+	public void getUpdatePremium(String quoteId, String quoteType) {
 		List<IclubFieldBean> fieldBeans = new ArrayList<IclubFieldBean>();
 		IclubQuoteBean quoteBean = getQuoteDetailsById(quoteId);
 		Long baseValue = 100l;
@@ -2180,12 +2182,34 @@ public class IclubFullQuoteController implements Serializable {
 		personBean.setIclubPerson(model.getIclubPerson());
 		personBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
 		client.close();
-		return new IclubPersonBean();
+		return personBean;
 	}
 
 	public List<IclubRateTypeBean> getRateTypeBeanByFieldId(Long fieldId, String quoteType) {
 
-		return new ArrayList<IclubRateTypeBean>();
+		WebClient client = IclubWebHelper.createCustomClient(RAT_BASE_URL + "getByFieldIdANdQuoteType/" + fieldId + "/" + quoteType);
+		Collection<? extends IclubRateTypeModel> models = new ArrayList<IclubRateTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateTypeModel.class));
+		client.close();
+		List<IclubRateTypeBean> beans = new ArrayList<IclubRateTypeBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubRateTypeModel model : models) {
+
+				IclubRateTypeBean bean = new IclubRateTypeBean();
+				bean.setRtId(model.getRtId());
+				bean.setRtLongDesc(model.getRtLongDesc());
+				bean.setRtShortDesc(model.getRtShortDesc());
+				bean.setRtStatus(model.getRtStatus());
+				bean.setRtQuoteType(model.getRtQuoteType());
+				bean.setIclubField(model.getIclubField());
+				bean.setIclubEntityType(model.getIclubEntityType());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setRtCrtdDt(model.getRtCrtdDt());
+				bean.setRtType(model.getRtType());
+				beans.add(bean);
+			}
+		}
+		return beans;
 
 	}
 

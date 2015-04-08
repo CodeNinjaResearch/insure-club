@@ -151,9 +151,28 @@
 					</p:selectOneMenu>
 				</div>
 				<div class="EmptyBox5" />
+				<p:panel id="pnlUpdatePwdCont">
+					<div class="Container80 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Password" value="#{iclubProfileController.loginBean.LPasswd}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:selectOneMenu widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.loginBean.iclubSecurityQuestion}">
+							<f:selectItem itemLabel="Security Question" itemDisabled="true" />
+							<f:selectItems value="#{iclubProfileController.securityQuestionBeans}" var="c" itemLabel="#{c.sqShortDesc-c.sqLongDesc}" itemValue="#{c.sqId}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="Container80 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Security Answer" value="#{iclubProfileController.loginBean.LSecAns}" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<p:commandButton update=":iclubFrm:pnlClaimCont" icon="ui-icon-document" value="Update" action="#{iclubProfileController.updatePassword}" />
+					</div>
+				</p:panel>
 				<div class="Container100 Responsive">
 					<div class="Container50">
-						<p:commandButton update=":iclubFrm:pnlClaimCont" icon="ui-icon-document" value="Update" actionListener="#{iclubProfileController.updatedPerson}" />
+						<p:commandButton update=":iclubFrm:pnlClaimCont" icon="ui-icon-document" value="Update" action="#{iclubProfileController.updatedPerson}" />
 					</div>
 					<div class="Container50">
 						<p:commandButton id="btnPrfViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubProfileController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />

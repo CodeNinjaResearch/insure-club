@@ -12,6 +12,57 @@
 </style>
 	</ui:define>
 	<ui:define name="content">
+		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="perAddress" value="Address:" />
+					<p:inputText id="perAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPre" showDetail="true" />
+				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubQuickQuoteController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelPer}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragPer}" update="growlPre" />
+					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodePer}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectPer}" update="growlPre" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="proAddress" value="Address:" />
+					<p:inputText id="proAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPro" showDetail="true" />
+				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubQuickQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelPro}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragPro}" update="growlPro" />
+					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodePro}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectPro}" update="growlPro" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<p:dialog id="vehLocationDetailsDialog" widgetVar="vehLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehAddress" value="Address:" />
+					<p:inputText id="vehAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVeh" showDetail="true" />
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubQuickQuoteController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelVeh}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragVeh}" update="growlVeh" />
+					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodeVeh}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectVeh}" update="growlVeh" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
 		<p:remoteCommand actionListener="#{iclubQuickQuoteController.initializePage}" name="onload" autoRun="true" />
 		<div class="ContainerIndent TexAlCenter">
 			<p:tabView id="qqTabView">
@@ -103,6 +154,30 @@
 							<f:selectItem itemLabel="License Code" itemDisabled="true" />
 							<f:selectItems value="#{iclubQuickQuoteController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
 						</p:selectOneMenu>
+					</div>
+					<div class="EmptyBox5" />
+				</p:tab>
+				<p:tab title="Property Details">
+					<div class="Container80 Responsive">
+						<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.propertyBean.iclubWallType}">
+							<f:selectItem itemLabel="Wall Type" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.propertyBean.iclubRoofType}">
+							<f:selectItem itemLabel="Roof Type" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Estimated Value" value="#{iclubQuickQuoteController.propertyBean.PEstValue}" />
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>

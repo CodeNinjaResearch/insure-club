@@ -62,6 +62,20 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
+	public List findIclubRateTypeByQuoteTypeAndFieldId(Long fieldId, String quoteType) {
+		log.debug("Fetching all IclubMbCommnet by Query :: findIclubRateTypeByQuoteTypeAndFieldId");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getIclubRateTypeByQuoteTypeAndFieldId");
+			query.setLong("id", fieldId);
+			query.setString("quoteType", quoteType);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("MbComment", re);
+			throw re;
+		}
+	}
+
 	public List getMbCommentsByMbId(String mbId) {
 		log.debug("Fetching all IclubMbCommnet by Query :: getIclubMbCommnetByMbId");
 		try {
