@@ -203,7 +203,22 @@ public class IclubTrackerMasterController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		if (bean.getTmName() == null || bean.getTmName().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage("Tm Name Cannot be empty", FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getTmRegNum() == null || bean.getTmRegNum().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Reg Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getTmLat() == null || bean.getTmLong() == null) {
+			IclubWebHelper.addMessage(("Please select Map Location"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getTmLocation() == null || bean.getTmLocation().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please select Location"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 

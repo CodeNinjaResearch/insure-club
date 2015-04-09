@@ -222,7 +222,18 @@ public class IclubMessageBoardController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		if (bean.getMbTag() == null || bean.getMbTag().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Mb Tag Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getMbTitle() == null || bean.getMbTitle().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Mb Title Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getMbContent() == null || bean.getMbContent().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Mb Content Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 

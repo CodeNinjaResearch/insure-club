@@ -154,7 +154,26 @@ public class IclubDriverController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		if (bean.getDLicenseNum() == null || bean.getDLicenseNum().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("License Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getIclubLicenseCode() == null) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("Please select License Code"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getDIssueDt() == null) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("Issue Date Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getDDob() == null) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("DOB Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getIclubMaritialStatus() == null) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("Please select Maritial Status"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 

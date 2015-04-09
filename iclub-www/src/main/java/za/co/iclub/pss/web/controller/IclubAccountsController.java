@@ -209,8 +209,20 @@ public class IclubAccountsController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 
-		if (bean.getAStatus().equalsIgnoreCase("-1")) {
+		if (bean.getAStatus() == null || bean.getAStatus().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getAAccNum() == null || bean.getAAccNum().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Account Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getIclubAccountType() == null) {
+			IclubWebHelper.addMessage(("Please select Account Type"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getIclubBankMaster() == null) {
+			IclubWebHelper.addMessage(("Please select Branch Name"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 

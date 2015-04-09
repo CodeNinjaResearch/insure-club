@@ -249,7 +249,36 @@ public class IclubRateTypeController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
+		if (bean.getIclubField() == null) {
+			IclubWebHelper.addMessage("Please Select Field", FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getIclubInsuranceItemType() == null) {
+			IclubWebHelper.addMessage("Please Select Insureance Item Type", FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getIclubEntityType() == null) {
+			IclubWebHelper.addMessage(("Please Select Enity Type"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getRtShortDesc() == null || bean.getRtShortDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Short Description Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getRtStatus() == null || bean.getRtStatus().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please Select Status"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 
+		if (bean.getRtType() == null || bean.getRtType().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Rt Type Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getRtQuoteType() == null || bean.getRtQuoteType().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Quote Type Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 

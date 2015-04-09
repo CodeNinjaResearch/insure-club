@@ -341,7 +341,18 @@ public class IclubRatingController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		if (bean.getIclubRateType() == null) {
+			IclubWebHelper.addMessage(("Please Select Rate Type"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getReBaseValue() == null || bean.getReBaseValue().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Base Value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getReRate() == null) {
+			IclubWebHelper.addMessage(("Rate Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 

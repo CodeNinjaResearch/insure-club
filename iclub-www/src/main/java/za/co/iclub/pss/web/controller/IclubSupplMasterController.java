@@ -295,7 +295,32 @@ public class IclubSupplMasterController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
+		if (bean.getSmName() == null || bean.getSmName().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage("Sm Name Cannot be empty", FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getSmRegNum() == null || bean.getSmRegNum().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Reg Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getSmLat() == null || bean.getSmLong() == null) {
+			IclubWebHelper.addMessage(("Please select Map Location"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getSmAddress() == null || bean.getSmAddress().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Address Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 
+		if (bean.getSmCrLimit() == null) {
+			IclubWebHelper.addMessage(("Cr Limit Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getSrActionDt() == null) {
+			IclubWebHelper.addMessage(("Action Date Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 

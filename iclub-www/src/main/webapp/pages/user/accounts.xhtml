@@ -152,10 +152,10 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnAccountModSave" value="Save" actionListener="#{iclubAccountController.modIclubAccount}" update=":iclubFrm:pnlAccountCont" />
+								<p:commandButton id="btnAccountModSave" value="Save" actionListener="#{iclubAccountController.modIclubAccount}" update=":iclubFrm:grlMsg,:iclubFrm:pnlAccountCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnAccountModDelete" value="Delete" actionListener="#{iclubAccountController.delIclubAccount}" update=":iclubFrm:pnlAccountCont" />
+								<p:commandButton id="btnAccountModDelete" value="Delete" actionListener="#{iclubAccountController.delIclubAccount}" update=":iclubFrm:grlMsg,:iclubFrm:pnlAccountCont" />
 							</div>
 							<div class="Container33">
 								<p:commandButton id="btnAccountModClose" value="Close" actionListener="#{iclubAccountController.clearForm}" update=":iclubFrm:pnlAccountCont" />
