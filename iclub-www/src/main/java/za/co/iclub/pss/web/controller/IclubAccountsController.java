@@ -43,6 +43,8 @@ public class IclubAccountsController implements Serializable {
 	private List<IclubAccountTypeBean> accountTypeBeans;
 	private List<IclubOwnerTypeBean> ownerTypeBeans;
 	private List<IclubBankMasterBean> bankMasterBeans;
+	private List<String> bankNames;
+	private String bankName;
 	private IclubAccountBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
@@ -129,6 +131,17 @@ public class IclubAccountsController implements Serializable {
 		}
 	}
 
+	public void bankNameValueChangeListener() {
+		if (bankName != null) {
+			loadBankMasterBeans(bankName);
+		} else {
+			if (bankMasterBeans != null) {
+				bankMasterBeans.clear();
+			}
+
+		}
+	}
+
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
@@ -144,6 +157,53 @@ public class IclubAccountsController implements Serializable {
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
+		try {
+
+			WebClient client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "get/" + bean.getIclubBankMaster());
+			IclubBankMasterModel model = (IclubBankMasterModel) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
+			client.close();
+
+			bankName = model.getBmBankName();
+			loadBankMasterBeans(bankName);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	public void loadBankMasterBeans(String bankName) {
+		WebClient client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "get/bankName/" + bankName);
+		Collection<? extends IclubBankMasterModel> models = new ArrayList<IclubBankMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
+		client.close();
+		bankMasterBeans = new ArrayList<IclubBankMasterBean>();
+		for (IclubBankMasterModel model : models) {
+
+			IclubBankMasterBean bean = new IclubBankMasterBean();
+
+			bean.setBmId(model.getBmId());
+			bean.setBmBankName(model.getBmBankName());
+			bean.setBmBankCode(model.getBmBankCode());
+			bean.setBmBranchName(model.getBmBranchName());
+			bean.setBmBranchCode(model.getBmBranchCode());
+			bean.setBmBranchAddress(model.getBmBranchAddress());
+			bean.setBmBranchLat(model.getBmBranchLat());
+			bean.setBmBranchLong(model.getBmBranchLong());
+			bean.setBmCrtdDt(model.getBmCrtdDt());
+			bean.setIclubPerson(model.getIclubPerson());
+			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
+
+				String[] accounts = new String[model.getIclubAccounts().length];
+
+				int i = 0;
+				for (String account : model.getIclubAccounts()) {
+					accounts[i] = account;
+				}
+				bean.setIclubAccounts(accounts);
+			}
+
+			bankMasterBeans.add(bean);
+		}
 	}
 
 	public boolean validateForm(boolean flag) {
@@ -290,36 +350,8 @@ public class IclubAccountsController implements Serializable {
 
 	public List<IclubBankMasterBean> getBankMasterBeans() {
 
-		WebClient client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "list");
-		Collection<? extends IclubBankMasterModel> models = new ArrayList<IclubBankMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
-		client.close();
-		bankMasterBeans = new ArrayList<IclubBankMasterBean>();
-		for (IclubBankMasterModel model : models) {
-
-			IclubBankMasterBean bean = new IclubBankMasterBean();
-
-			bean.setBmId(model.getBmId());
-			bean.setBmBankName(model.getBmBankName());
-			bean.setBmBankCode(model.getBmBankCode());
-			bean.setBmBranchName(model.getBmBranchName());
-			bean.setBmBranchCode(model.getBmBranchCode());
-			bean.setBmBranchAddress(model.getBmBranchAddress());
-			bean.setBmBranchLat(model.getBmBranchLat());
-			bean.setBmBranchLong(model.getBmBranchLong());
-			bean.setBmCrtdDt(model.getBmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
-
-				String[] accounts = new String[model.getIclubAccounts().length];
-
-				int i = 0;
-				for (String account : model.getIclubAccounts()) {
-					accounts[i] = account;
-				}
-				bean.setIclubAccounts(accounts);
-			}
-
-			bankMasterBeans.add(bean);
+		if (bankMasterBeans == null) {
+			bankMasterBeans = new ArrayList<IclubBankMasterBean>();
 		}
 		return bankMasterBeans;
 	}
@@ -335,5 +367,26 @@ public class IclubAccountsController implements Serializable {
 
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<String> getBankNames() {
+		WebClient client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "list/banknames");
+		Collection<? extends String> models = new ArrayList<String>(client.accept(MediaType.APPLICATION_JSON).getCollection(String.class));
+		client.close();
+		bankNames = (List<String>) models;
+		return bankNames;
+	}
+
+	public void setBankNames(List<String> bankNames) {
+		this.bankNames = bankNames;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 }

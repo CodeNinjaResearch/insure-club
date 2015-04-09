@@ -177,6 +177,67 @@ public class IclubBankMasterService {
 	}
 
 	@GET
+	@Path("/list/banknames")
+	@Produces("application/json")
+	@Transactional
+	public <T extends String> List<T> listAllMake() {
+		List<T> ret = new ArrayList<T>();
+		try {
+			List batmod = iclubNamedQueryDAO.getAllBankNames();
+			for (Object object : batmod) {
+				String reDetails = (String) object;
+				ret.add((T) reDetails);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
+	}
+
+	@GET
+	@Path("/get/bankName/{bankName}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubBankMasterModel> List<T> getByBankName(@PathParam("bankName") String bankName) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubBankMastersByBankName(bankName);
+
+			for (Object object : batmod) {
+				IclubBankMaster iclubBMaster = (IclubBankMaster) object;
+				IclubBankMasterModel iCBm = new IclubBankMasterModel();
+
+				iCBm.setBmId(iclubBMaster.getBmId());
+				iCBm.setBmBankName(iclubBMaster.getBmBankName());
+				iCBm.setBmBankCode(iclubBMaster.getBmBankCode());
+				iCBm.setBmBranchName(iclubBMaster.getBmBranchName());
+				iCBm.setBmBranchCode(iclubBMaster.getBmBranchCode());
+				iCBm.setBmBranchAddress(iclubBMaster.getBmBranchAddress());
+				iCBm.setBmBranchLat(iclubBMaster.getBmBranchLat());
+				iCBm.setBmBranchLong(iclubBMaster.getBmBranchLong());
+				iCBm.setBmCrtdDt(iclubBMaster.getBmCrtdDt());
+				iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
+				if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
+
+					String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
+
+					int i = 0;
+					for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
+						accounts[i] = account.getAId();
+					}
+					iCBm.setIclubAccounts(accounts);
+				}
+
+				ret.add((T) iCBm);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
+	}
+
+	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)

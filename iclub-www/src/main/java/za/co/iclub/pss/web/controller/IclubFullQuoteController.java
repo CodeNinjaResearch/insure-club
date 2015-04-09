@@ -17,7 +17,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
@@ -167,6 +166,9 @@ public class IclubFullQuoteController implements Serializable {
 	private List<IclubOccupiedStatusBean> occupiedStatusBeans;
 
 	private List<IclubBarTypeBean> barTypeBeans;
+
+	private List<String> bankNames;
+	private String bankName;
 
 	private MapModel draggableModelPer;
 	private Marker markerPer;
@@ -358,10 +360,55 @@ public class IclubFullQuoteController implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerVeh.getTitle()));
 	}
 
-	public void vmMakeValueChangeListener(ValueChangeEvent valueChangeEvent) {
-		if (valueChangeEvent != null && valueChangeEvent.getNewValue() != null && !valueChangeEvent.getNewValue().toString().trim().equalsIgnoreCase("-1")) {
+	public void bankNameValueChangeListener() {
+		if (bankName != null) {
+			loadBankMasterBeans(bankName);
+		} else {
+			if (bankMasterBeans != null) {
+				bankMasterBeans.clear();
+			}
 
-			loadVmModels(valueChangeEvent.getNewValue().toString());
+		}
+	}
+
+	public void loadBankMasterBeans(String bankName) {
+		WebClient client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "get/bankName/" + bankName);
+		Collection<? extends IclubBankMasterModel> models = new ArrayList<IclubBankMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
+		client.close();
+		bankMasterBeans = new ArrayList<IclubBankMasterBean>();
+		for (IclubBankMasterModel model : models) {
+
+			IclubBankMasterBean bean = new IclubBankMasterBean();
+
+			bean.setBmId(model.getBmId());
+			bean.setBmBankName(model.getBmBankName());
+			bean.setBmBankCode(model.getBmBankCode());
+			bean.setBmBranchName(model.getBmBranchName());
+			bean.setBmBranchCode(model.getBmBranchCode());
+			bean.setBmBranchAddress(model.getBmBranchAddress());
+			bean.setBmBranchLat(model.getBmBranchLat());
+			bean.setBmBranchLong(model.getBmBranchLong());
+			bean.setBmCrtdDt(model.getBmCrtdDt());
+			bean.setIclubPerson(model.getIclubPerson());
+			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
+
+				String[] accounts = new String[model.getIclubAccounts().length];
+
+				int i = 0;
+				for (String account : model.getIclubAccounts()) {
+					accounts[i] = account;
+				}
+				bean.setIclubAccounts(accounts);
+			}
+
+			bankMasterBeans.add(bean);
+		}
+	}
+
+	public void vmMakeValueChangeListener() {
+		if (vmMake != null) {
+
+			loadVmModels(vmMake);
 
 		} else {
 			if (vBeans != null) {
@@ -405,10 +452,10 @@ public class IclubFullQuoteController implements Serializable {
 		}
 	}
 
-	public void vmModelValueChangeListener(ValueChangeEvent valueChangeEvent) {
-		if (valueChangeEvent != null && valueChangeEvent.getNewValue() != null && !valueChangeEvent.getNewValue().toString().trim().equalsIgnoreCase("-1")) {
+	public void vmModelValueChangeListener() {
+		if (vehicleBean != null && vehicleBean.getIclubVehicleMaster() != null) {
 
-			loadYears(valueChangeEvent.getNewValue().toString());
+			loadYears(vehicleBean.getIclubVehicleMaster().toString());
 
 		} else {
 			if (years != null) {
@@ -1092,6 +1139,7 @@ public class IclubFullQuoteController implements Serializable {
 
 		IclubAccountModel model = (IclubAccountModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubAccountModel.class));
 
+		client.close();
 		if (model != null && model.getAId() != null) {
 
 			accountBean = new IclubAccountBean();
@@ -1127,6 +1175,13 @@ public class IclubFullQuoteController implements Serializable {
 				}
 				accountBean.setIclubPayments(payments);
 			}
+
+			client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "get/" + accountBean.getIclubBankMaster());
+			IclubBankMasterModel bankMastermodel = (IclubBankMasterModel) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
+			client.close();
+
+			bankName = bankMastermodel.getBmBankName();
+			loadBankMasterBeans(bankName);
 		}
 	}
 
@@ -1698,36 +1753,8 @@ public class IclubFullQuoteController implements Serializable {
 
 	public List<IclubBankMasterBean> getBankMasterBeans() {
 
-		WebClient client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "list");
-		Collection<? extends IclubBankMasterModel> models = new ArrayList<IclubBankMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
-		client.close();
-		bankMasterBeans = new ArrayList<IclubBankMasterBean>();
-		for (IclubBankMasterModel model : models) {
-
-			IclubBankMasterBean bean = new IclubBankMasterBean();
-
-			bean.setBmId(model.getBmId());
-			bean.setBmBankName(model.getBmBankName());
-			bean.setBmBankCode(model.getBmBankCode());
-			bean.setBmBranchName(model.getBmBranchName());
-			bean.setBmBranchCode(model.getBmBranchCode());
-			bean.setBmBranchAddress(model.getBmBranchAddress());
-			bean.setBmBranchLat(model.getBmBranchLat());
-			bean.setBmBranchLong(model.getBmBranchLong());
-			bean.setBmCrtdDt(model.getBmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
-
-				String[] accounts = new String[model.getIclubAccounts().length];
-
-				int i = 0;
-				for (String account : model.getIclubAccounts()) {
-					accounts[i] = account;
-				}
-				bean.setIclubAccounts(accounts);
-			}
-
-			bankMasterBeans.add(bean);
+		if (bankMasterBeans == null) {
+			bankMasterBeans = new ArrayList<IclubBankMasterBean>();
 		}
 		return bankMasterBeans;
 	}
@@ -1928,6 +1955,27 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void setClaimYN(String claimYN) {
 		this.claimYN = claimYN;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<String> getBankNames() {
+		WebClient client = IclubWebHelper.createCustomClient(BNKM_BASE_URL + "list/banknames");
+		Collection<? extends String> models = new ArrayList<String>(client.accept(MediaType.APPLICATION_JSON).getCollection(String.class));
+		client.close();
+		bankNames = (List<String>) models;
+		return bankNames;
+	}
+
+	public void setBankNames(List<String> bankNames) {
+		this.bankNames = bankNames;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
 	public void getUpdatePremium(String quoteId, String quoteType) {

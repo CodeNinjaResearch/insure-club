@@ -62,6 +62,31 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
+	public List getAllBankNames() {
+		log.debug("Fetching all IclubBankMaster by Query :: getAllBankNames");
+		try {
+			Query query = getCurrentSession().createQuery("select distinct e.bmBankName from IclubBankMaster e");
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("BankNames", re);
+			throw re;
+		}
+	}
+
+	public List getIclubBankMastersByBankName(String bankName) {
+		log.debug("Fetching all IclubBankMaster by Query :: getAllBankNames");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getIclubBankMastersByBankName");
+			query.setString("bankName", bankName);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("MbComment", re);
+			throw re;
+		}
+	}
+
 	public List findIclubRateTypeByQuoteTypeAndFieldId(Long fieldId, String quoteType) {
 		log.debug("Fetching all IclubMbCommnet by Query :: findIclubRateTypeByQuoteTypeAndFieldId");
 		try {
@@ -836,6 +861,19 @@ public class IclubNamedQueryDAO {
 	// throw re;
 	// }
 	// }
+
+	public List findAllVmMakes() {
+		log.debug("finding all IclubVehicleMaster instances by vmMake");
+		try {
+			String queryString = "select  distinct model.vmMake from IclubVehicleMaster as model ";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all by vmMake failed", re);
+			throw re;
+		}
+	}
 
 	public List getQuoteStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Quote Status by Query :: getQuoteStatusBySD");

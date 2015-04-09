@@ -177,7 +177,7 @@ public class IclubVehicleMasterService {
 	public <T extends String> List<T> listAllMake() {
 		List<T> ret = new ArrayList<T>();
 		try {
-			List batmod = iclubVehicleMasterDAO.findAllVmMakes();
+			List batmod = iclubNamedQueryDAO.findAllVmMakes();
 			for (Object object : batmod) {
 				String vmMake = (String) object;
 				ret.add((T) vmMake);

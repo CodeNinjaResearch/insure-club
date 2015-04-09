@@ -464,9 +464,16 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
+						<p:selectOneMenu widgetVar="mnuBankName" id="mnuBankName" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.bankName}">
+							<p:ajax update="mnuBM" process="@this" event="change" listener="#{iclubFullQuoteController.bankNameValueChangeListener}" />
+							<f:selectItem itemLabel="Bank Name" itemDisabled="true" />
+							<f:selectItems value="#{iclubFullQuoteController.bankNames}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Bank Master" itemDisabled="true" />
-							<f:selectItems var="c" itemLabel="#{c.bmBankCode}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
+							<f:selectItems var="c" itemLabel="#{c.bmBankName}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />

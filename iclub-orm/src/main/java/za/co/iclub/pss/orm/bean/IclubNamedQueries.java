@@ -83,6 +83,8 @@ import javax.persistence.Table;
 		@NamedNativeQuery(name = "getDocumentByEntity", query = "select * from iclub_document where lower(d_entity_id) = lower(:id) and d_entity_type_id = :typeId", resultClass = IclubDocument.class),
 		@NamedNativeQuery(name = "getIclubAccessTypeBySD", query = "select * from iclub_access_type where lower(at_short_desc) = lower(:sd) and at_id <> :id", resultClass = IclubAccessType.class),
         @NamedNativeQuery(name = "getIclubMbCommnetByMbId", query = "select * from iclub_mb_comment where lower(mbc_mb_id) = lower(:id)", resultClass =IclubMbComment.class),
+        @NamedNativeQuery(query = "select distinct bm_bank_name from iclub_bank_master", name = "getAllBankNames", resultClass = IclubBankMaster.class),
+        @NamedNativeQuery(query = "select * from iclub_bank_master where lower(bm_bank_name)=lower(:bankName)", name = "getIclubBankMastersByBankName", resultClass = IclubBankMaster.class),
         @NamedNativeQuery(name = "getIclubRateTypeByQuoteTypeAndFieldId", query = "select * from iclub_rate_type where lower(rt_quote_type) = lower(:quoteType) and rt_field_id =:id", resultClass = IclubRateType.class),})
 @Table(name = "iclub_account_type")
 public class IclubNamedQueries implements java.io.Serializable {
