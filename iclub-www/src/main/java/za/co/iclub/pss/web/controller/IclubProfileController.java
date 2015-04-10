@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.ContentDisposition;
@@ -85,6 +87,12 @@ public class IclubProfileController implements Serializable {
 
 	private boolean updateLogin;
 
+	@PostConstruct
+	public void Init() {
+		loadPersonBean();
+		loadLoginBean();
+	}
+
 	public String updatedPerson() {
 
 		try {
@@ -146,7 +154,7 @@ public class IclubProfileController implements Serializable {
 			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 
-		return null;
+		return "";
 
 	}
 
@@ -168,7 +176,7 @@ public class IclubProfileController implements Serializable {
 				model.setLCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setLLastDate(loginBean.getLLastDate());
 				model.setLName(bean.getPFName());
-				model.setLPasswd(loginBean.getLPasswd());
+				model.setLPasswd(DigestUtils.md5(loginBean.getLPasswd()).toString());
 				model.setLSecAns(loginBean.getLSecAns());
 				model.setIclubPersonByLCrtdBy(bean.getPId());
 				model.setIclubPersonByLPersonId(getSessionUserId());
@@ -197,16 +205,16 @@ public class IclubProfileController implements Serializable {
 	public boolean validateLoginForm(boolean flag) {
 		boolean ret = true;
 		if (loginBean.getLPasswd() == null || loginBean.getLPasswd().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Password Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Password Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (loginBean.getIclubSecurityQuestion() == null) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Please select Security Question"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Please select Security Question"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
 		if (loginBean.getLSecAns() == null || loginBean.getLSecAns().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Security Ans Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Security Ans Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
@@ -216,37 +224,37 @@ public class IclubProfileController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		if (bean.getPFName() == null || bean.getPFName().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("First Name Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("First Name Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getPLName() == null || bean.getPLName().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Last Name Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Last Name Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getPMobile() == null || bean.getPMobile().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Mobile Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Mobile Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
 		if (bean.getPGender() == null || bean.getPGender().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Gender Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Gender Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
 		if (bean.getPIdNum() == null || bean.getPIdNum().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Id Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Id Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getIclubIdType() == null) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Please Select ID Type"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Please Select ID Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getPIsPensioner() == null || bean.getPIsPensioner().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Please Select Pensioner"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Please Select Pensioner"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getPDob() == null) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		return ret;
@@ -304,37 +312,65 @@ public class IclubProfileController implements Serializable {
 	}
 
 	public IclubPersonBean getBean() {
-		if (getSessionUserId() != null) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + getSessionUserId());
-
-			IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+		if (bean == null) {
 			bean = new IclubPersonBean();
-			bean.setPId(model.getPId());
-			bean.setPCrtdDt(model.getPCrtdDt());
-			bean.setPDob(model.getPDob());
-			bean.setPEmail(model.getPEmail());
-			bean.setPFName(model.getPFName());
-			bean.setPIdNum(model.getPIdNum());
-			bean.setPLName(model.getPLName());
-			bean.setPMobile(model.getPMobile());
-			bean.setPAddress(model.getPAddress());
-			bean.setPContactPref(model.getPContactPref());
-			bean.setPGender(model.getPGender());
-			bean.setPContactPref(model.getPContactPref());
-			bean.setPIdExpiryDt(model.getPIdExpiryDt());
-			bean.setPInitials(model.getPInitials());
-			bean.setPIsPensioner(model.getPIsPensioner());
-			bean.setPIdIssueCntry(model.getPIdIssueCntry());
-			bean.setPLat(model.getPLat());
-			bean.setPLong(model.getPLong());
-			bean.setPOccupation(model.getPOccupation());
-			bean.setPTitle(model.getPTitle());
-			bean.setPZipCd(model.getPZipCd());
-			bean.setIclubIdType(model.getIclubIdType());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
 		}
 		return bean;
+	}
+
+	public void loadLoginBean() {
+		WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "person/" + bean.getPFName());
+
+		IclubLoginModel model = (IclubLoginModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class));
+		if (model != null && model.getLId() != null) {
+			updateLogin = true;
+			loginBean = new IclubLoginBean();
+			loginBean.setLId(model.getLId());
+			loginBean.setLCrtdDt(model.getLCrtdDt());
+			loginBean.setLLastDate(model.getLLastDate());
+			loginBean.setLName(model.getLName());
+			// loginBean.setLPasswd(model.getLPasswd());
+			loginBean.setLSecAns(model.getLSecAns());
+			loginBean.setLSecAns(model.getLSecAns());
+			loginBean.setIclubPersonByLCrtdBy(model.getIclubPersonByLCrtdBy());
+			loginBean.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId());
+			loginBean.setIclubRoleType(model.getIclubRoleType());
+			loginBean.setIclubSecurityQuestion(model.getIclubSecurityQuestion());
+		} else {
+			loginBean = new IclubLoginBean();
+		}
+	}
+
+	public void loadPersonBean() {
+		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + getSessionUserId());
+
+		IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+		bean = new IclubPersonBean();
+		bean.setPId(model.getPId());
+		bean.setPCrtdDt(model.getPCrtdDt());
+		bean.setPDob(model.getPDob());
+		bean.setPEmail(model.getPEmail());
+		bean.setPFName(model.getPFName());
+		bean.setPIdNum(model.getPIdNum());
+		bean.setPLName(model.getPLName());
+		bean.setPMobile(model.getPMobile());
+		bean.setPAddress(model.getPAddress());
+		bean.setPContactPref(model.getPContactPref());
+		bean.setPGender(model.getPGender());
+		bean.setPContactPref(model.getPContactPref());
+		bean.setPIdExpiryDt(model.getPIdExpiryDt());
+		bean.setPInitials(model.getPInitials());
+		bean.setPIsPensioner(model.getPIsPensioner());
+		bean.setPIdIssueCntry(model.getPIdIssueCntry());
+		bean.setPLat(model.getPLat());
+		bean.setPLong(model.getPLong());
+		bean.setPOccupation(model.getPOccupation());
+		bean.setPTitle(model.getPTitle());
+		bean.setPZipCd(model.getPZipCd());
+		bean.setIclubIdType(model.getIclubIdType());
+		bean.setIclubPerson(model.getIclubPerson());
+		bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+
 	}
 
 	public void setBean(IclubPersonBean bean) {
@@ -524,28 +560,9 @@ public class IclubProfileController implements Serializable {
 	}
 
 	public IclubLoginBean getLoginBean() {
-		getBean();
-		if (bean != null) {
-			WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "/person/" + bean.getPFName());
 
-			IclubLoginModel model = (IclubLoginModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class));
-			if (model != null && model.getLId() != null) {
-				updateLogin = true;
-				loginBean = new IclubLoginBean();
-				loginBean.setLId(model.getLId());
-				loginBean.setLCrtdDt(model.getLCrtdDt());
-				loginBean.setLLastDate(model.getLLastDate());
-				loginBean.setLName(model.getLName());
-				loginBean.setLPasswd(model.getLPasswd());
-				loginBean.setLSecAns(model.getLSecAns());
-				loginBean.setLSecAns(model.getLSecAns());
-				loginBean.setIclubPersonByLCrtdBy(model.getIclubPersonByLCrtdBy());
-				loginBean.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId());
-				loginBean.setIclubRoleType(model.getIclubRoleType());
-				loginBean.setIclubSecurityQuestion(model.getIclubSecurityQuestion());
-			} else {
-				loginBean = new IclubLoginBean();
-			}
+		if (loginBean == null) {
+			loginBean = new IclubLoginBean();
 
 		}
 		return loginBean;

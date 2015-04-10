@@ -13,7 +13,7 @@
 	</ui:define>
 	<ui:define name="content">
 		<p:dialog id="documentUploadDialog" widgetVar="documentUploadDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-			<f:facet name="header">#{labels['documentmanagement']}</f:facet>
+			<f:facet name="header">Document Management</f:facet>
 			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubProfileController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubProfileController.docs.size() > 0}">
 				<p:panel style="text-align:center" header="#{bean.DName}">
 					<f:facet name="actions">
@@ -57,7 +57,7 @@
 			</p:panel>
 		</p:dialog>
 		<div class="ContainerIndent Fnone TexAlCenter">
-			<p:panel id="pnlClaimCont">
+			<p:panel id="pnlProfileCont">
 				<div class="Container80 Responsive">
 					<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubProfileController.bean.PTitle}" />
 				</div>
@@ -157,9 +157,9 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:selectOneMenu widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.loginBean.iclubSecurityQuestion}">
+						<p:selectOneMenu widgetVar="mnuSec" id="mnuSec" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.loginBean.iclubSecurityQuestion}">
 							<f:selectItem itemLabel="Security Question" itemDisabled="true" />
-							<f:selectItems value="#{iclubProfileController.securityQuestionBeans}" var="c" itemLabel="#{c.sqShortDesc-c.sqLongDesc}" itemValue="#{c.sqId}" />
+							<f:selectItems value="#{iclubProfileController.securityQuestionBeans}" var="c" itemLabel="#{c.sqLongDesc}" itemValue="#{c.sqId}" />
 						</p:selectOneMenu>
 					</div>
 					<div class="Container80 Responsive">
@@ -167,15 +167,15 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
-						<p:commandButton update=":iclubFrm:grlMsg,:iclubFrm:pnlClaimCont" icon="ui-icon-document" value="Update" action="#{iclubProfileController.updatePassword}" />
+						<p:commandButton update=":iclubFrm:grlMsg,:iclubFrm:pnlProfileCont" styleClass="Fs16" value="Update Login" ajax="false" actionListener="#{iclubProfileController.updatePassword}" />
 					</div>
 				</p:panel>
 				<div class="Container100 Responsive">
 					<div class="Container50">
-						<p:commandButton update=":iclubFrm:pnlClaimCont,:iclubFrm:grlMsg" icon="ui-icon-document" value="Update" action="#{iclubProfileController.updatedPerson}" />
+						<p:commandButton update=":iclubFrm:pnlProfileCont,:iclubFrm:grlMsg" styleClass="Fs16" value="Update" ajax="false" action="#{iclubProfileController.updatedPerson}" />
 					</div>
 					<div class="Container50">
-						<p:commandButton id="btnPrfViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubProfileController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+						<p:commandButton id="btnPrfViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="View Docs" actionListener="#{iclubProfileController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />

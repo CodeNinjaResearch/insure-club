@@ -1,6 +1,8 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.primefaces.event.map.GeocodeEvent;
 import org.primefaces.event.map.MarkerDragEvent;
@@ -2459,6 +2462,29 @@ public class IclubFullQuoteController implements Serializable {
 		}
 		return beans;
 
+	}
+
+	private static MessageDigest md;
+
+	public static String cryptWithMD5(String pass) {
+		try {
+			md = MessageDigest.getInstance("MD5");
+			byte[] passBytes = pass.getBytes();
+			md.reset();
+			byte[] digested = md.digest(passBytes);
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < digested.length; i++) {
+				sb.append(Integer.toHexString(0xff & digested[i]));
+			}
+			return sb.toString();
+		} catch (NoSuchAlgorithmException ex) {
+			System.out.println("---hekk");
+		}
+		return null;
+
+	}
+
+	public static void main(String[] args) throws NoSuchAlgorithmException {
 	}
 
 }

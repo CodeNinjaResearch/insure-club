@@ -201,7 +201,7 @@ public class IclubLoginService {
 		IclubLoginModel message = new IclubLoginModel();
 		try {
 			List logins = iclubLoginDAO.findByProperty("LName", name);
-			if (logins.size() != 0 || logins.get(0) != null) {
+			if (logins!=null && (logins.size() != 0 || logins.get(0) != null)) {
 				IclubLogin login = (IclubLogin) logins.get(0);
 
 				message.setLId(login.getLId());

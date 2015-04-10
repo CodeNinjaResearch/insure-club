@@ -52,7 +52,7 @@ public class IclubSecurityMasterService {
 			iCSm.setSmCrtdDt(model.getSmCrtdDt());
 			iCSm.setSmDesc(model.getSmDesc());
 			iCSm.setSmStatus(model.getSmStatus());
-			iCSm.setIclubInsuranceItemType(iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()));
+			iCSm.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iCSm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 			iCSm.setSmStatus(model.getSmStatus());
 

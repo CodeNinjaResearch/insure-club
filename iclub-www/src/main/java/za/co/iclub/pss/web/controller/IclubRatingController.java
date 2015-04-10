@@ -55,7 +55,7 @@ public class IclubRatingController implements Serializable {
 					if (bean.getRtType().toUpperCase().equalsIgnoreCase("L")) {
 						IclubWebHelper.addObjectIntoSession("ratetype", bean);
 						return "lookup";
-					} else if (bean.getRtType().toUpperCase().equalsIgnoreCase("V")) {
+					} else if (bean.getRtType().toUpperCase().equalsIgnoreCase("F")) {
 						IclubWebHelper.addObjectIntoSession("ratetype", bean);
 						return "fixed";
 					} else if (bean.getRtType().toUpperCase().equalsIgnoreCase("R")) {
@@ -341,7 +341,7 @@ public class IclubRatingController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		if (bean.getIclubRateType() == null) {
+		if (selRateType == null) {
 			IclubWebHelper.addMessage(("Please Select Rate Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}

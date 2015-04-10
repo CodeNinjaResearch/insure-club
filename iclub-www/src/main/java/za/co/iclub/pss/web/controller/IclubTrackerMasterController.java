@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -130,7 +131,7 @@ public class IclubTrackerMasterController implements Serializable {
 				model.setTmLong(bean.getTmLong());
 				model.setTmTradeName(bean.getTmTradeName());
 				model.setTmRegNum(bean.getTmRegNum());
-				model.setTmCrtdDt(bean.getTmCrtdDt());
+				model.setTmCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);

@@ -557,7 +557,7 @@ public class IclubRateTypeController implements Serializable {
 			if (model.getIclubRateTypes() != null && model.getIclubRateTypes().length > 0) {
 				Long[] rateTypes = new Long[model.getIclubRateTypes().length];
 				int i = 0;
-				for (Long rateType : bean.getIclubRateTypes()) {
+				for (Long rateType : model.getIclubRateTypes()) {
 					rateTypes[i] = rateType;
 					i++;
 				}
