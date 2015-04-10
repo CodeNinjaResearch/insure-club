@@ -22,7 +22,6 @@ import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.primefaces.event.map.GeocodeEvent;
 import org.primefaces.event.map.MarkerDragEvent;
