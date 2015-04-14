@@ -140,7 +140,7 @@ public class IclubCoverTypeController implements Serializable {
 				model.setCtStatus(bean.getCtStatus());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 				model.setCtCrtdDt(new Timestamp(bean.getCtCrtdDt().getTime()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -172,7 +172,7 @@ public class IclubCoverTypeController implements Serializable {
 				model.setCtStatus(bean.getCtStatus());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 				model.setCtCrtdDt(new Timestamp(bean.getCtCrtdDt().getTime()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -262,9 +262,11 @@ public class IclubCoverTypeController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 

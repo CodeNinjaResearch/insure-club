@@ -124,7 +124,7 @@ public class IclubLicenseCodeController implements Serializable {
 				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setLcDesc(bean.getLcDesc());
 				model.setLcStatus(bean.getLcStatus());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setLcCategory(bean.getLcCategory());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -153,7 +153,7 @@ public class IclubLicenseCodeController implements Serializable {
 				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setLcDesc(bean.getLcDesc());
 				model.setLcStatus(bean.getLcStatus());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setLcCategory(bean.getLcCategory());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -239,9 +239,11 @@ public class IclubLicenseCodeController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 

@@ -88,7 +88,7 @@ public class IclubConfigController implements Serializable {
 			bean.setCKey(model.getCKey());
 			bean.setCCrtdDt(model.getCCrtdDt());
 			bean.setCValue(model.getCValue());
-			bean.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+			bean.setIclubPerson(getSessionUserId());
 			bean.setCStatus(model.getCStatus());
 
 			dashBoardBeans.add(bean);
@@ -116,7 +116,7 @@ public class IclubConfigController implements Serializable {
 				model.setCKey(bean.getCKey());
 				model.setCCrtdDt(new Timestamp(bean.getCCrtdDt().getTime()));
 				model.setCValue(bean.getCValue());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -147,7 +147,7 @@ public class IclubConfigController implements Serializable {
 				model.setCKey(bean.getCKey());
 				model.setCCrtdDt(new Timestamp(bean.getCCrtdDt().getTime()));
 				model.setCValue(bean.getCValue());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -239,9 +239,11 @@ public class IclubConfigController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -281,7 +283,7 @@ public class IclubConfigController implements Serializable {
 			bean.setCKey(model.getCKey());
 			bean.setCCrtdDt(model.getCCrtdDt());
 			bean.setCValue(model.getCValue());
-			bean.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+			bean.setIclubPerson(getSessionUserId());
 			bean.setCStatus(model.getCStatus());
 
 			beans.add(bean);

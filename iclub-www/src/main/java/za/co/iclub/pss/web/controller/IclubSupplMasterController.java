@@ -219,7 +219,7 @@ public class IclubSupplMasterController implements Serializable {
 				model.setSmTradeName(bean.getSmTradeName());
 				model.setSmLat(bean.getSmLat());
 				model.setSmName(bean.getSmName());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -257,7 +257,7 @@ public class IclubSupplMasterController implements Serializable {
 				model.setSmTradeName(bean.getSmTradeName());
 				model.setSmLat(bean.getSmLat());
 				model.setSmName(bean.getSmName());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -367,9 +367,11 @@ public class IclubSupplMasterController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 

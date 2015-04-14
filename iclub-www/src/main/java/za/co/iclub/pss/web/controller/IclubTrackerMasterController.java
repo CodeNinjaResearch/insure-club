@@ -132,7 +132,7 @@ public class IclubTrackerMasterController implements Serializable {
 				model.setTmTradeName(bean.getTmTradeName());
 				model.setTmRegNum(bean.getTmRegNum());
 				model.setTmCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -166,7 +166,7 @@ public class IclubTrackerMasterController implements Serializable {
 				model.setTmTradeName(bean.getTmTradeName());
 				model.setTmRegNum(bean.getTmRegNum());
 				model.setTmCrtdDt(bean.getTmCrtdDt());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -266,9 +266,11 @@ public class IclubTrackerMasterController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 

@@ -357,7 +357,7 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setPTitle(personBean.getPTitle());
 		model.setPZipCd(personBean.getPZipCd());
 		model.setIclubIdType(personBean.getIclubIdType());
-		model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+		model.setIclubPerson(getSessionUserId());
 		model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
 
 		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -563,7 +563,7 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setIclubLicenseCode(bean.getIclubLicenseCode());
 		model.setIclubMaritialStatus(personModel.getIclubMaritialStatus());
 		model.setIclubPersonByDPersonId(personModel.getPId());
-		model.setIclubPersonByDCrtdBy(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+		model.setIclubPersonByDCrtdBy(getSessionUserId());
 
 		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 		client.close();
@@ -740,9 +740,11 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 

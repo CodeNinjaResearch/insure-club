@@ -6,14 +6,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+
 import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubGeoLocModel;
@@ -127,7 +130,7 @@ public class IclubGeoLocController implements Serializable {
 				model.setGlLong(bean.getGlLong());
 				model.setGlRate(bean.getGlRate());
 				model.setGlCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -159,7 +162,7 @@ public class IclubGeoLocController implements Serializable {
 				model.setGlLong(bean.getGlLong());
 				model.setGlRate(bean.getGlRate());
 				model.setGlCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -243,9 +246,11 @@ public class IclubGeoLocController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 

@@ -140,7 +140,7 @@ public class IclubMessageController implements Serializable {
 				model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId());
 
 				model.setMCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -175,7 +175,7 @@ public class IclubMessageController implements Serializable {
 				model.setIclubSystemTypeByMFromSysId(bean.getIclubSystemTypeByMFromSysId());
 				model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId());
 				model.setMCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				model.setIclubPerson(bean.getIclubPerson());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -261,9 +261,11 @@ public class IclubMessageController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 

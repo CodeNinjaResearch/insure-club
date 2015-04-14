@@ -147,7 +147,7 @@ public class IclubVehicleMasterController implements Serializable {
 				model.setVmRetRate(bean.getVmRetRate());
 				model.setVmProdDt(bean.getVmProdDt());
 				model.setVmCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -180,7 +180,7 @@ public class IclubVehicleMasterController implements Serializable {
 				model.setVmOrigRate(bean.getVmOrigRate());
 				model.setVmRetRate(bean.getVmRetRate());
 				model.setVmProdDt(bean.getVmProdDt());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setVmCrtdDt(new Timestamp(System.currentTimeMillis()));
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -265,9 +265,11 @@ public class IclubVehicleMasterController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		if (sessionUserId == null)
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
 			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
