@@ -32,9 +32,9 @@ public class IclubViewQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "/list");
 		Collection<? extends IclubQuoteModel> models = new ArrayList<IclubQuoteModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteModel.class));
 		client.close();
-		
-		beans=new ArrayList<IclubQuoteBean>();
-		
+
+		beans = new ArrayList<IclubQuoteBean>();
+
 		for (IclubQuoteModel model : models) {
 			IclubQuoteBean bean = new IclubQuoteBean();
 
@@ -49,7 +49,7 @@ public class IclubViewQuoteController implements Serializable {
 			bean.setQNumItems(model.getQNumItems());
 			bean.setQGenDt(model.getQGenDt());
 			bean.setQNumber(model.getQNumber());
-			bean.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy() );
+			bean.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy());
 			bean.setIclubProductType(model.getIclubProductType());
 			bean.setIclubProductType(model.getIclubProductType());
 			bean.setIclubInsurerMaster(model.getIclubInsurerMaster());
@@ -69,19 +69,17 @@ public class IclubViewQuoteController implements Serializable {
 		}
 		return beans;
 	}
-	
-	public String quoteActionListener(IclubQuoteBean bean)
-	{
+
+	public String quoteActionListener(IclubQuoteBean bean) {
 		IclubWebHelper.addObjectIntoSession("fullquote", bean);
-		
+
 		return "fq";
 	}
-	
-	public String policyActionListener(IclubQuoteBean bean)
-	{
+
+	public String policyActionListener(IclubQuoteBean bean) {
 		IclubWebHelper.addObjectIntoSession("fullquote", bean);
-		
-		return "dashboard";
+
+		return "pdash";
 	}
 
 	public void setBeans(List<IclubQuoteBean> beans) {

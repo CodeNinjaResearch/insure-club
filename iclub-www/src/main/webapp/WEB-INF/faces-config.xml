@@ -447,8 +447,17 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>dashboard</from-outcome>
+			<from-outcome>pdash</from-outcome>
 			<to-view-id>/pages/policy/dashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cdash</from-outcome>
+			<to-view-id>/pages/claim/dashboard.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
