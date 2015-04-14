@@ -520,6 +520,7 @@ public class IclubFullQuoteController implements Serializable {
 
 		try {
 			addQuote(quoteBean, personBean);
+			return "pdash";
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage("Load Person Fail ::" + e.getMessage(), FacesMessage.SEVERITY_ERROR);

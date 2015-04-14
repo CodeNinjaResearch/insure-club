@@ -141,7 +141,7 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:selectOneMenu disabled="true"  widgetVar="mnuOcc" id="mnuOcc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.POccupation}">
+						<p:selectOneMenu disabled="true" widgetVar="mnuOcc" id="mnuOcc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.POccupation}">
 							<f:selectItem itemLabel="Occupation" itemDisabled="true" />
 							<f:selectItems value="#{iclubFullQuoteController.occupationBeans}" var="c" itemLabel="#{c.ODesc}" itemValue="#{c.OId}" />
 						</p:selectOneMenu>
@@ -492,8 +492,8 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:inputText placeholder="Debit Date" value="#{iclubFullQuoteController.debitDate.substring(0,1)}" styleClass="TexAlCenter" />
-						<p:inputText placeholder="Month" value="#{iclubFullQuoteController.debitMonth.substring(0,1)}" styleClass="TexAlCenter" />
+						<p:inputText placeholder="Debit Date" value="#{iclubFullQuoteController.debitDate}" styleClass="TexAlCenter" />
+						<p:inputText placeholder="Month" value="#{iclubFullQuoteController.debitMonth}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>
