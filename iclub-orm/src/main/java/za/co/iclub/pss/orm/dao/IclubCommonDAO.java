@@ -108,7 +108,7 @@ public class IclubCommonDAO {
 
 		try {
 			String colShrtNm = getColumFormat(tableName);
-			String query = "select e." + fieldName + " from " + tableName + "where " + colShrtNm + "_id=" + recordId;
+			String query = "select  " + fieldName + " from " + tableName + " where " + colShrtNm + "_id like " + "'" + recordId + "'";
 
 			Query queryObject = getCurrentSession().createSQLQuery(query);
 

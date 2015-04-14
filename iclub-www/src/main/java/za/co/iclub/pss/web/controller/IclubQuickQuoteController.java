@@ -1455,7 +1455,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public List<IclubRateEngineBean> getRateEnginesByRateType(Long rateType) {
 
-		WebClient client = IclubWebHelper.createCustomClient(PUR_BASE_URL + "get/rateType/" + rateType);
+		WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/rateType/" + rateType);
 		Collection<? extends IclubRateEngineModel> models = new ArrayList<IclubRateEngineModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateEngineModel.class));
 		client.close();
 		List<IclubRateEngineBean> beans = new ArrayList<IclubRateEngineBean>();
