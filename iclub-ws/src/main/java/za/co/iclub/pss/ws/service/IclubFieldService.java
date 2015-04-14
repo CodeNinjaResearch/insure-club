@@ -196,6 +196,47 @@ public class IclubFieldService {
 	}
 
 	@GET
+	@Path("/getByStatus/{fieldStatus}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubFieldModel> List<T> getByFieldStatus(@PathParam("fieldStatus") String fieldStatus) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubFieldByFieldStatus(fieldStatus);
+
+			for (Object object : batmod) {
+				IclubField iF = (IclubField) object;
+
+				IclubFieldModel model = new IclubFieldModel();
+
+				model.setFId(iF.getFId());
+				model.setFName(iF.getFName());
+				model.setFDesc(iF.getFDesc());
+				model.setFStatus(iF.getFStatus());
+				model.setFLTblName(iF.getFLTblName());
+				model.setFRate(iF.getFRate());
+				model.setIclubEntityType(iF.getIclubEntityType() != null ? iF.getIclubEntityType().getEtId() : null);
+				if (iF.getIclubRateTypes() != null && iF.getIclubRateTypes().size() > 0) {
+					Long[] rateTypes = new Long[iF.getIclubRateTypes().size()];
+					int i = 0;
+					for (IclubRateType rateType : iF.getIclubRateTypes()) {
+						rateTypes[i] = rateType.getRtId();
+						i++;
+					}
+
+					model.setIclubRateTypes(rateTypes);
+				}
+				ret.add((T) model);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+
+	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
 	@Produces({ "application/json" })

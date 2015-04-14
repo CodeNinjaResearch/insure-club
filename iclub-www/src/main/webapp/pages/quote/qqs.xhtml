@@ -61,6 +61,10 @@
 						<f:selectItem itemLabel="No" itemValue="N" />
 					</p:selectOneMenu>
 				</div>
+				<div class="Container80 Responsive">
+					<p:outputLabel id="genPremium" value="Gen Premium :" />
+					<p:outputLabel id="genPremiumValue" value="#{iclubQuickQuoteController.genPremium}" />
+				</div>
 				<div class="EmptyBox5" />
 				<div class="Container80 Responsive">
 					<p:selectBooleanCheckbox value="#{iclubQuickQuoteController.termsAndConditionFlag}">
@@ -70,7 +74,7 @@
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100">
-					<p:commandButton value="Register" disabled="#{!iclubQuickQuoteController.termsAndConditionFlag}" styleClass="Fs16" action="profile" ajax="false" />
+					<p:commandButton value="Register" disabled="#{!iclubQuickQuoteController.termsAndConditionFlag}" styleClass="Fs16" action="#{iclubQuickQuoteController.registerActionListener}" ajax="false" />
 				</div>
 			</p:panel>
 		</div>

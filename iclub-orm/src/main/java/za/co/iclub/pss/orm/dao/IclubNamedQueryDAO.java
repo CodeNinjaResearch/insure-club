@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubClaim;
+import za.co.iclub.pss.orm.bean.IclubConfig;
 import za.co.iclub.pss.orm.bean.IclubDriver;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
@@ -58,6 +59,19 @@ public class IclubNamedQueryDAO {
 			return ret;
 		} catch (RuntimeException re) {
 			log.error(className, re);
+			throw re;
+		}
+	}
+
+	public List getIclubFieldByFieldStatus(String fieldStatus) {
+		log.debug("Fetching all IclubBankMaster by Query :: getAllBankNames");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getIclubFieldByFieldStatus");
+			query.setString("fieldStatus", fieldStatus);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("BankNames", re);
 			throw re;
 		}
 	}
@@ -216,6 +230,18 @@ public class IclubNamedQueryDAO {
 			return (IclubClaim) queryObject.uniqueResult();
 		} catch (RuntimeException re) {
 			log.error("find all by user failed", re);
+			throw re;
+		}
+	}
+
+	public IclubConfig getIclubConfigByKey(String key) {
+		log.debug("finding IclubConfig instance by config key");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubConfigByKey");
+			queryObject.setString("key", key);
+			return (IclubConfig) queryObject.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("get IclubConfig failed", re);
 			throw re;
 		}
 	}

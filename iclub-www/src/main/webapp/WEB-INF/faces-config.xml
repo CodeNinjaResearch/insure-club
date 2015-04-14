@@ -48,6 +48,7 @@
 		<navigation-case>
 			<from-outcome>vq</from-outcome>
 			<to-view-id>/pages/quote/vq.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -63,6 +64,14 @@
 		<navigation-case>
 			<from-outcome>profile</from-outcome>
 			<to-view-id>/pages/user/profile.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>register</from-outcome>
+			<to-view-id>/pages/user/register.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

@@ -20,6 +20,7 @@ import javax.persistence.Table;
 		@NamedNativeQuery(query = "select * from iclub_claim_item where ci_crtd_by=:id", name = "getIclubClaimItemByUser", resultClass = IclubClaimItem.class),
 		@NamedNativeQuery(name = "getIclubClaimStatusBySD", query = "select * from iclub_claim_status where lower(cs_short_desc) = lower(:sd) and cs_id <> :id", resultClass = IclubClaimStatus.class),
 		@NamedNativeQuery(query = "select * from iclub_config where c_crtd_by=:id", name = "getIclubConfigByUser", resultClass = IclubConfig.class),
+		@NamedNativeQuery(query = "select * from iclub_config where lower(c_key)=lower(:key)", name = "getIclubConfigByKey", resultClass = IclubConfig.class),
 		@NamedNativeQuery(query = "select * from iclub_country_code where cc_crtd_by=:id", name = "getIclubCountryCodeByUser", resultClass = IclubCountryCode.class),
 		@NamedNativeQuery(query = "select * from iclub_cover_type where ct_crtd_by=:id", name = "getIclubCoverTypeByUser", resultClass = IclubCoverType.class),
 		@NamedNativeQuery(query = "select * from iclub_document where d_crtd_by=:id", name = "getIclubDocumentByUser", resultClass = IclubDocument.class),
@@ -86,7 +87,8 @@ import javax.persistence.Table;
         @NamedNativeQuery(query = "select distinct bm_bank_name from iclub_bank_master", name = "getAllBankNames", resultClass = IclubBankMaster.class),
         @NamedNativeQuery(query = "select * from iclub_bank_master where lower(bm_bank_name)=lower(:bankName)", name = "getIclubBankMastersByBankName", resultClass = IclubBankMaster.class),
         @NamedNativeQuery(name = "getIclubRoofTypeBySD", query = "select * from iclub_roof_type where lower(rt_short_desc) = lower(:sd) and rt_id <> :id", resultClass = IclubRoofType.class),
-        @NamedNativeQuery(name = "getIclubRateTypeByQuoteTypeAndFieldId", query = "select * from iclub_rate_type where lower(rt_quote_type) = lower(:quoteType) and rt_field_id =:id", resultClass = IclubRateType.class),})
+        @NamedNativeQuery(name = "getIclubRateTypeByQuoteTypeAndFieldId", query = "select * from iclub_rate_type where lower(rt_quote_type) = lower(:quoteType) and rt_field_id =:id", resultClass = IclubRateType.class),
+        @NamedNativeQuery(name = "getIclubFieldByFieldStatus", query = "select * from iclub_field where lower(f_status) = lower(:fieldStatus)", resultClass = IclubField.class)})
 @Table(name = "iclub_account_type")
 public class IclubNamedQueries implements java.io.Serializable {
 

@@ -157,30 +157,6 @@
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>
-				<p:tab title="Property Details">
-					<div class="Container80 Responsive">
-						<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
-						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.propertyBean.iclubWallType}">
-							<f:selectItem itemLabel="Wall Type" itemDisabled="true" />
-							<f:selectItems value="#{iclubQuickQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
-						</p:selectOneMenu>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
-						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.propertyBean.iclubRoofType}">
-							<f:selectItem itemLabel="Roof Type" itemDisabled="true" />
-							<f:selectItems value="#{iclubQuickQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
-						</p:selectOneMenu>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Estimated Value" value="#{iclubQuickQuoteController.propertyBean.PEstValue}" />
-					</div>
-					<div class="EmptyBox5" />
-				</p:tab>
 			</p:tabView>
 			<div class="EmptyBox20" />
 			<p:panel styleClass="Fnone TexAlCenter">

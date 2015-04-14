@@ -1166,6 +1166,7 @@ public class IclubFullQuoteController implements Serializable {
 				personBean.setPInitials(model.getPInitials());
 				personBean.setPIsPensioner(model.getPIsPensioner());
 				personBean.setPIdIssueCntry(model.getPIdIssueCntry());
+				personBean.setPIdIssueDt(model.getPIdIssueDt());
 				personBean.setPLat(model.getPLat());
 				personBean.setPLong(model.getPLong());
 				personBean.setPOccupation(model.getPOccupation());

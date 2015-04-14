@@ -202,6 +202,28 @@ public class IclubConfigService {
 		return model;
 	}
 
+	@GET
+	@Path("/getByKey/{key}")
+	@Produces("application/json")
+	@Transactional
+	public IclubConfigModel getByKey(@PathParam("key") String key) {
+		IclubConfigModel model = new IclubConfigModel();
+		try {
+			IclubConfig bean = iclubNamedQueryDAO.getIclubConfigByKey(key);
+
+			model.setCId(bean.getCId());
+			model.setCKey(bean.getCKey());
+			model.setCCrtdDt(bean.getCCrtdDt());
+			model.setCValue(bean.getCValue());
+			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+			model.setCStatus(bean.getCStatus());
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return model;
+	}
+
 	public IclubConfigDAO getIclubConfigDAO() {
 		return iclubConfigDAO;
 	}

@@ -10,8 +10,8 @@
 			<p:menuitem id="sm_logout" value="Logout" ajax="false" action="#{iclubLoginController.doIclubLogout}" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
 			<p:submenu id="sm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
 				<p:menuitem id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
-				<p:menuitem id="sm_viewquote" outcome="pdash" value="View Policies" containerStyleClass="layout-menubar-active" />
-				<p:menuitem id="sm_viewquote" outcome="cdash" value="View Claims" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_pdash" outcome="pdash" value="View Policies" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_cdash" outcome="cdash" value="View Claims" containerStyleClass="layout-menubar-active" />
 				<p:submenu id="sm_admin" label="Admin Screens">
 					<p:menuitem id="sm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
 					<p:menuitem id="sm_master" value="Master Data" outcome="master" containerStyleClass="layout-menubar-active" />

@@ -15,6 +15,9 @@
 					<p:column headerText="ValidUntil">
 						<p:outputLabel value="#{bean.QValidUntil}" />
 					</p:column>
+					<p:column headerText="Status">
+						<p:outputLabel value="#{bean.iclubQuoteStatus}" />
+					</p:column>
 					<p:column headerText="Full Quote">
 						<p:commandButton id="btnQuoteEdit" icon="ui-icon-pencil" action="#{iclubViewQuoteController.quoteActionListener(bean)}" />
 					</p:column>

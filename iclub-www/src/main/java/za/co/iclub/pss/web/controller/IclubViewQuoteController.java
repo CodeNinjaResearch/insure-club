@@ -26,10 +26,11 @@ public class IclubViewQuoteController implements Serializable {
 	protected static final Logger LOGGER = Logger.getLogger(IclubViewQuoteController.class);
 	private static final String QUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubQuoteService/";
 	private List<IclubQuoteBean> beans;
+	private String sessionUserId;
 
 	public List<IclubQuoteBean> getBeans() {
 
-		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "/list");
+		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/user/" + getSessionUserId());
 		Collection<? extends IclubQuoteModel> models = new ArrayList<IclubQuoteModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteModel.class));
 		client.close();
 
@@ -84,6 +85,20 @@ public class IclubViewQuoteController implements Serializable {
 
 	public void setBeans(List<IclubQuoteBean> beans) {
 		this.beans = beans;
+	}
+
+	public String getSessionUserId() {
+
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+
+		if (sessUsrId != null)
+			sessionUserId = sessUsrId.toString();
+
+		return sessionUserId;
+	}
+
+	public void setSessionUserId(String sessionUserId) {
+		this.sessionUserId = sessionUserId;
 	}
 
 }

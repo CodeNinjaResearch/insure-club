@@ -51,7 +51,7 @@ public class IclubProfileController implements Serializable {
 
 	private static final long serialVersionUID = 4703596329233786371L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	private static final Logger LOGGER = Logger.getLogger(IclubProductTypeController.class);
+	private static final Logger LOGGER = Logger.getLogger(IclubProfileController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPersonService/";
 	private static final String OCN_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOccupationService/";
 	private static final String MS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubMaritialStatusService/";
