@@ -283,24 +283,24 @@ public class IclubInsuranceItemService {
 		IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 		try {
 			IclubInsuranceItem bean = iclubNamedQueryDAO.findByQuoteIdAndItemTypeId(quoteId, itemTypeId);
+			if (bean != null) {
+				model.setIiId(bean.getIiId());
+				model.setIiItemId(bean.getIiItemId());
+				model.setIiQuoteId(bean.getIiQuoteId());
+				model.setIiCrtdDt(bean.getIiCrtdDt());
+				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
+				model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 
-			model.setIiId(bean.getIiId());
-			model.setIiItemId(bean.getIiItemId());
-			model.setIiQuoteId(bean.getIiQuoteId());
-			model.setIiCrtdDt(bean.getIiCrtdDt());
-			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
-			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
-
-			if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
-				String[] claimItems = new String[bean.getIclubClaimItems().size()];
-				int i = 0;
-				for (IclubClaimItem claimItem : bean.getIclubClaimItems()) {
-					claimItems[i] = claimItem.getCiId();
-					i++;
+				if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
+					String[] claimItems = new String[bean.getIclubClaimItems().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : bean.getIclubClaimItems()) {
+						claimItems[i] = claimItem.getCiId();
+						i++;
+					}
+					model.setIclubClaimItems(claimItems);
 				}
-				model.setIclubClaimItems(claimItems);
 			}
-
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

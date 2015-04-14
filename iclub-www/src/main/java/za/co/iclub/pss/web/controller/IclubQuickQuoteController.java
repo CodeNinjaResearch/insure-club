@@ -55,6 +55,7 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubConfigModel;
 import za.co.iclub.pss.ws.model.IclubCountryCodeModel;
 import za.co.iclub.pss.ws.model.IclubDriverModel;
+import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
 import za.co.iclub.pss.ws.model.IclubFieldModel;
 import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
@@ -103,6 +104,7 @@ public class IclubQuickQuoteController implements Serializable {
 	private static final String CCDE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCountryCodeService/";
 	private static final String LOG_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubLoginService/";
 	private static final String SECQ_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSecurityQuestionService/";
+	private static final String ET_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubEntityTypeService/";
 
 	private List<String> vmMakes;
 	private IclubVehicleMasterBean vehicleMasterBean;
@@ -1564,8 +1566,26 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 
 	public IclubEntityTypeBean getEntityType(Long entityId) {
+		WebClient client = IclubWebHelper.createCustomClient(ET_BASE_URL + "get/" + entityId);
+		IclubEntityTypeModel model = (IclubEntityTypeModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubEntityTypeModel.class));
+		client.close();
 
-		return new IclubEntityTypeBean();
+		IclubEntityTypeBean bean = new IclubEntityTypeBean();
+		bean.setEtId(model.getEtId());
+		bean.setEtLongDesc(model.getEtLongDesc());
+		bean.setEtShortDesc(model.getEtShortDesc());
+		bean.setEtStatus(model.getEtStatus());
+
+		if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
+			String[] documents = new String[bean.getIclubDocuments().length];
+			int i = 0;
+			for (String iclubDocument : bean.getIclubDocuments()) {
+				documents[i] = iclubDocument;
+				i++;
+			}
+			bean.setIclubDocuments(documents);
+		}
+		return bean;
 
 	}
 

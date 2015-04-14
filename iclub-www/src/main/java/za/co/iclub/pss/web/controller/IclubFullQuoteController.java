@@ -75,10 +75,13 @@ import za.co.iclub.pss.ws.model.IclubBankMasterModel;
 import za.co.iclub.pss.ws.model.IclubBarTypeModel;
 import za.co.iclub.pss.ws.model.IclubClaimModel;
 import za.co.iclub.pss.ws.model.IclubClaimStatusModel;
+import za.co.iclub.pss.ws.model.IclubConfigModel;
 import za.co.iclub.pss.ws.model.IclubCountryCodeModel;
 import za.co.iclub.pss.ws.model.IclubCoverTypeModel;
 import za.co.iclub.pss.ws.model.IclubDriverModel;
+import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
 import za.co.iclub.pss.ws.model.IclubExtrasModel;
+import za.co.iclub.pss.ws.model.IclubFieldModel;
 import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubLicenseCodeModel;
@@ -143,6 +146,9 @@ public class IclubFullQuoteController implements Serializable {
 	private static final String BNKM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBankMasterService/";
 	private static final String OCN_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOccupationService/";
 	private static final String CCDE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCountryCodeService/";
+	private static final String CONF_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubConfigService/";
+	private static final String FD_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubFieldService/";
+	private static final String ET_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubEntityTypeService/";
 	private List<IclubSecurityMasterBean> securityMasterBeans;
 
 	private List<IclubOccupationBean> occupationBeans;
@@ -170,7 +176,14 @@ public class IclubFullQuoteController implements Serializable {
 	private List<IclubBarTypeBean> barTypeBeans;
 
 	private List<String> bankNames;
+
 	private String bankName;
+
+	private Double genPremium;
+
+	private boolean termsAndConditionFlag;
+
+	private String quoteId;
 
 	private MapModel draggableModelPer;
 	private Marker markerPer;
@@ -485,12 +498,14 @@ public class IclubFullQuoteController implements Serializable {
 		}
 	}
 
-	public void saveFullQuoteDetails() {
+	public String saveFullQuoteDetails() {
 
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
 			if (validateForm(true)) {
-				addPerson(personBean);
+				addPropertiy(propertyBean, quoteBean);
+				addDriver(driverBean, personBean, quoteBean);
+				return "fqs";
 			} else {
 				IclubWebHelper.addMessage("Fail :: ", FacesMessage.SEVERITY_ERROR);
 			}
@@ -498,7 +513,18 @@ public class IclubFullQuoteController implements Serializable {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
+		return null;
+	}
 
+	public String registerActionListener() {
+
+		try {
+			addQuote(quoteBean, personBean);
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage("Load Person Fail ::" + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		return null;
 	}
 
 	public boolean validateForm(boolean flag) {
@@ -720,8 +746,6 @@ public class IclubFullQuoteController implements Serializable {
 
 		if (response.getStatusCode() == 0) {
 
-			addQuote(quoteBean, model);
-
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -729,7 +753,7 @@ public class IclubFullQuoteController implements Serializable {
 		return response;
 	}
 
-	public ResponseModel addVehicle(IclubVehicleBean bean, IclubDriverModel driverModel, IclubQuoteModel quoteModel) {
+	public ResponseModel addVehicle(IclubVehicleBean bean, IclubDriverModel driverModel, IclubQuoteBean quoteModel) {
 
 		WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "mod");
 
@@ -782,7 +806,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	}
 
-	public ResponseModel addDriver(IclubDriverBean bean, IclubPersonModel personModel, IclubQuoteModel quoteModel) {
+	public ResponseModel addDriver(IclubDriverBean bean, IclubPersonBean personModel, IclubQuoteBean quoteModel) {
 
 		WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "mod");
 
@@ -816,9 +840,16 @@ public class IclubFullQuoteController implements Serializable {
 
 	}
 
-	public ResponseModel addPropertiy(IclubPropertyBean bean, IclubQuoteModel quoteModel) {
+	public ResponseModel addPropertiy(IclubPropertyBean bean, IclubQuoteBean quoteModel) {
 
-		WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "mod");
+		WebClient client = null;
+		boolean addOrMod = false;
+		if (propertyBean != null && propertyBean.getPId() != null) {
+			client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "mod");
+			addOrMod = true;
+		} else {
+			client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "add");
+		}
 
 		IclubPropertyModel model = new IclubPropertyModel();
 
@@ -845,8 +876,12 @@ public class IclubFullQuoteController implements Serializable {
 		model.setIclubBarType(bean.getIclubBarType());
 		model.setIclubThatchType(bean.getIclubThatchType());
 		model.setIclubRoofType(bean.getIclubRoofType());
-
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+		ResponseModel response = null;
+		if (addOrMod) {
+			response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+		} else {
+			response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		}
 		client.close();
 
 		if (response.getStatusCode() == 0) {
@@ -979,7 +1014,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	}
 
-	public ResponseModel addAccount(IclubAccountBean bean, IclubPersonModel personModel, IclubQuoteModel quoteModel) {
+	public ResponseModel addAccount(IclubAccountBean bean, IclubPersonBean personModel, IclubQuoteModel quoteModel) {
 		IclubAccountModel model = new IclubAccountModel();
 		WebClient client = null;
 		if (bean != null && bean.getAId() != null) {
@@ -1014,7 +1049,7 @@ public class IclubFullQuoteController implements Serializable {
 		return response;
 	}
 
-	public ResponseModel addQuote(IclubQuoteBean bean, IclubPersonModel personModel) {
+	public ResponseModel addQuote(IclubQuoteBean bean, IclubPersonBean personModel) {
 
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "mod");
 		IclubQuoteModel model = new IclubQuoteModel();
@@ -1022,28 +1057,27 @@ public class IclubFullQuoteController implements Serializable {
 		model.setQCrtdDt(new Timestamp(System.currentTimeMillis()));
 		model.setQIsMatched("N");
 		model.setQPrevPremium(0.0d);
-		model.setQValidUntil(new Timestamp(System.currentTimeMillis()));
+		model.setQValidUntil(new Timestamp(System.currentTimeMillis() + (3 * 24 * 3600)));
 		model.setQMobile(personModel.getPMobile());
 		model.setQEmail(personModel.getPEmail());
 		model.setQGenPremium(0.0d);
 		model.setQNumItems(2);
 		model.setQGenDt(new Timestamp(System.currentTimeMillis()));
 
-		model.setQNumber(quoteBean.getQNumber());
+		model.setQNumber(bean.getQNumber());
 		model.setIclubPersonByQCrtdBy(getSessionUserId());
 		model.setIclubProductType(bean.getIclubProductType());
 		model.setIclubInsurerMaster(bean.getIclubInsurerMaster());
 		model.setIclubCoverType(bean.getIclubCoverType());
-		model.setIclubQuoteStatus(bean.getIclubQuoteStatus());
+		model.setIclubQuoteStatus(2l);
 		model.setIclubPersonByQPersonId(personModel.getPId());
 
 		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 		client.close();
 		if (response.getStatusCode() == 0) {
 
-			addPropertiy(propertyBean, model);
 			addAccount(accountBean, personModel, model);
-			addDriver(driverBean, personModel, model);
+
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -2183,10 +2217,10 @@ public class IclubFullQuoteController implements Serializable {
 		this.bankName = bankName;
 	}
 
-	public void getUpdatePremium(String quoteId, String quoteType) {
-		List<IclubFieldBean> fieldBeans = new ArrayList<IclubFieldBean>();
+	public Double getUpdatePremium(String quoteId, String quoteType) {
+		List<IclubFieldBean> fieldBeans = getIclubFieldBeans();
 		IclubQuoteBean quoteBean = getQuoteDetailsById(quoteId);
-		Long baseValue = 100l;
+		Double baseValue = getBasePremium();
 		Double premium = quoteBean.getQGenPremium();
 		for (IclubFieldBean fieldBean : fieldBeans) {
 			if (fieldBean.getFRate() != null && fieldBean.getFStatus().equalsIgnoreCase("Y")) {
@@ -2222,20 +2256,26 @@ public class IclubFullQuoteController implements Serializable {
 								Long fieldValue = (Long) obj;
 								if ((rateTypeBean.getRtType().equalsIgnoreCase("F") && rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(fieldValue.toString()) || (rateTypeBean.getRtType().trim().equalsIgnoreCase("R") && (Double.parseDouble(rateEngineBean.getReBaseValue().trim()) <= Double.parseDouble(fieldValue.toString()) && Double.parseDouble(rateEngineBean.getReMaxValue().trim()) >= Double.parseDouble(fieldValue.toString()))))) {
 
-									premium = premium + baseValue * rateEngineBean.getReRate();
+									premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 
 								} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
 									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + tableName + "/" + obj.toString());
 									String lookupDetails = client.accept(MediaType.APPLICATION_JSON).get(String.class);
 									if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
-										premium = premium + baseValue * rateEngineBean.getReRate();
+										premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 									}
 								}
 
 							} else if (obj instanceof Double) {
 								Double fieldValue = (Double) obj;
 								if ((rateTypeBean.getRtType().equalsIgnoreCase("F") && rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(fieldValue.toString()) || (rateTypeBean.getRtType().trim().equalsIgnoreCase("R") && (Double.parseDouble(rateEngineBean.getReBaseValue().trim()) <= Double.parseDouble(fieldValue.toString()) && Double.parseDouble(rateEngineBean.getReMaxValue().trim()) >= Double.parseDouble(fieldValue.toString()))))) {
-									premium = premium + baseValue * rateEngineBean.getReRate();
+									premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
+								} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
+									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + tableName + "/" + obj.toString());
+									String lookupDetails = client.accept(MediaType.APPLICATION_JSON).get(String.class);
+									if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
+										premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
+									}
 								}
 							}
 						}
@@ -2245,6 +2285,7 @@ public class IclubFullQuoteController implements Serializable {
 				}
 			}
 		}
+		return premium;
 	}
 
 	public List<IclubRateEngineBean> getRateEnginesByRateType(Long rateType) {
@@ -2360,8 +2401,26 @@ public class IclubFullQuoteController implements Serializable {
 	}
 
 	public IclubEntityTypeBean getEntityType(Long entityId) {
+		WebClient client = IclubWebHelper.createCustomClient(ET_BASE_URL + "get/" + entityId);
+		IclubEntityTypeModel model = (IclubEntityTypeModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubEntityTypeModel.class));
+		client.close();
 
-		return new IclubEntityTypeBean();
+		IclubEntityTypeBean bean = new IclubEntityTypeBean();
+		bean.setEtId(model.getEtId());
+		bean.setEtLongDesc(model.getEtLongDesc());
+		bean.setEtShortDesc(model.getEtShortDesc());
+		bean.setEtStatus(model.getEtStatus());
+
+		if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
+			String[] documents = new String[bean.getIclubDocuments().length];
+			int i = 0;
+			for (String iclubDocument : bean.getIclubDocuments()) {
+				documents[i] = iclubDocument;
+				i++;
+			}
+			bean.setIclubDocuments(documents);
+		}
+		return bean;
 
 	}
 
@@ -2486,7 +2545,73 @@ public class IclubFullQuoteController implements Serializable {
 
 	}
 
-	public static void main(String[] args) throws NoSuchAlgorithmException {
+	public List<IclubFieldBean> getIclubFieldBeans() {
+
+		WebClient client = IclubWebHelper.createCustomClient(FD_BASE_URL + "getByStatus/Y");
+		Collection<? extends IclubFieldModel> models = new ArrayList<IclubFieldModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubFieldModel.class));
+		client.close();
+		List<IclubFieldBean> beans = new ArrayList<IclubFieldBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubFieldModel model : models) {
+
+				IclubFieldBean bean = new IclubFieldBean();
+				bean.setFId(model.getFId());
+				bean.setFName(model.getFName());
+				bean.setFDesc(model.getFDesc());
+				bean.setFStatus(model.getFStatus());
+				bean.setFLTblName(model.getFLTblName());
+				bean.setFRate(model.getFRate());
+				bean.setIclubEntityType(model.getIclubEntityType());
+				if (model.getIclubRateTypes() != null && model.getIclubRateTypes().length > 0) {
+					Long[] rateTypes = new Long[model.getIclubRateTypes().length];
+					int i = 0;
+					for (Long rateType : model.getIclubRateTypes()) {
+						rateTypes[i] = rateType;
+						i++;
+					}
+
+					bean.setIclubRateTypes(rateTypes);
+					beans.add(bean);
+				}
+			}
+
+		}
+		return beans;
+	}
+
+	public Double getBasePremium() {
+		WebClient client = IclubWebHelper.createCustomClient(CONF_BASE_URL + "/getByKey/base.premium");
+
+		IclubConfigModel model = (IclubConfigModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubConfigModel.class));
+		if (model != null) {
+			return new Double(model.getCValue());
+		} else {
+			return 100d;
+		}
+	}
+
+	public Double getGenPremium() {
+		return genPremium;
+	}
+
+	public void setGenPremium(Double genPremium) {
+		this.genPremium = genPremium;
+	}
+
+	public String getQuoteId() {
+		return quoteId;
+	}
+
+	public void setQuoteId(String quoteId) {
+		this.quoteId = quoteId;
+	}
+
+	public boolean isTermsAndConditionFlag() {
+		return termsAndConditionFlag;
+	}
+
+	public void setTermsAndConditionFlag(boolean termsAndConditionFlag) {
+		this.termsAndConditionFlag = termsAndConditionFlag;
 	}
 
 }
