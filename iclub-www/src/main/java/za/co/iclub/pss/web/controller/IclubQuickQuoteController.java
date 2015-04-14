@@ -387,6 +387,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setPInitials(bean.getPInitials());
 				model.setPIsPensioner(bean.getPIsPensioner());
 				model.setPIdIssueCntry(bean.getPIdIssueCntry() != null ? bean.getPIdIssueCntry().longValue() : null);
+				model.setPIdIssueDt(bean.getPIdIssueDt());
 				model.setPLat(bean.getPLat());
 				model.setPLong(bean.getPLong());
 				model.setPOccupation(bean.getPOccupation());
