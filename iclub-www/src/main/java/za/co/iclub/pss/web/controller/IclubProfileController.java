@@ -261,9 +261,9 @@ public class IclubProfileController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		if (sessionUserId == null) {
-			sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-		}
+		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		if (sessionUserId == null)
+			sessionUserId = "1";
 		return sessionUserId;
 	}
 

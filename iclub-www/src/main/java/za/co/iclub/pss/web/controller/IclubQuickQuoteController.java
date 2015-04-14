@@ -245,7 +245,6 @@ public class IclubQuickQuoteController implements Serializable {
 	public void initializePage() {
 		IclubWebHelper.addObjectIntoSession("page_key", "/pages/quote/qq.xhtml");
 	}
-	
 
 	public void vmMakeValueChangeListener() {
 		if (vmMake != null) {
@@ -415,7 +414,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 			addInsuranceItem(model.getVId(), quoteModel.getQId(), 1l, getSessionUserId());
 
-			quoteModel.setQGenPremium(getUpdatePremium(quoteModel.getQId(),"Q"));
+			quoteModel.setQGenPremium(getUpdatePremium(quoteModel.getQId(), "Q"));
 			client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "mod");
 
 			response = client.accept(MediaType.APPLICATION_JSON).put(quoteModel, ResponseModel.class);
@@ -741,6 +740,9 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 
 	public String getSessionUserId() {
+		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		if (sessionUserId == null)
+			sessionUserId = "1";
 		return sessionUserId;
 	}
 

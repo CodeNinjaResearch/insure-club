@@ -260,6 +260,8 @@ public class IclubPurposeTypeController implements Serializable {
 
 	public String getSessionUserId() {
 		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		if (sessionUserId == null)
+			sessionUserId = "1";
 		return sessionUserId;
 	}
 
