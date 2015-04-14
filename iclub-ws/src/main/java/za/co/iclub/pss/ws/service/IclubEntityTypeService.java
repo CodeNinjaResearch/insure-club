@@ -195,6 +195,7 @@ public class IclubEntityTypeService {
 			model.setEtLongDesc(bean.getEtLongDesc());
 			model.setEtShortDesc(bean.getEtShortDesc());
 			model.setEtStatus(bean.getEtStatus());
+			model.setEtTblNm(bean.getEtTblNm());
 
 			if (bean.getIclubDocuments() != null && bean.getIclubDocuments().size() > 0) {
 				String[] documents = new String[bean.getIclubDocuments().size()];

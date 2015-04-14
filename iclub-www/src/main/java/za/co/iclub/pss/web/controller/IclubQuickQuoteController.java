@@ -1575,7 +1575,7 @@ public class IclubQuickQuoteController implements Serializable {
 		bean.setEtLongDesc(model.getEtLongDesc());
 		bean.setEtShortDesc(model.getEtShortDesc());
 		bean.setEtStatus(model.getEtStatus());
-
+		bean.setEtTblNm(model.getEtTblNm());
 		if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
 			String[] documents = new String[bean.getIclubDocuments().length];
 			int i = 0;
