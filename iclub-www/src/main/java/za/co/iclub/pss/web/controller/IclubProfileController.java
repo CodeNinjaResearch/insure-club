@@ -180,7 +180,7 @@ public class IclubProfileController implements Serializable {
 				model.setLSecAns(loginBean.getLSecAns());
 				model.setIclubPersonByLCrtdBy(bean.getPId());
 				model.setIclubPersonByLPersonId(getSessionUserId());
-				model.setIclubRoleType(loginBean.getIclubRoleType());
+				model.setIclubRoleType(2l);
 				model.setIclubSecurityQuestion(loginBean.getIclubSecurityQuestion());
 
 				ResponseModel response = null;

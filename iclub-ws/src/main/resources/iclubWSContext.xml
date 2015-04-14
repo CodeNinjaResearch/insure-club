@@ -181,6 +181,7 @@
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubSecurityQuestionDAO" ref="IclubSecurityQuestionDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubRoleTypeDAO" ref="IclubRoleTypeDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
 
