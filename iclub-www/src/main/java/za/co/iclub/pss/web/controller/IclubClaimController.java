@@ -709,4 +709,9 @@ public class IclubClaimController implements Serializable {
 		this.docIds = docIds;
 	}
 
+	public static void main(String[] args) {
+		String s = "/ttt<<ggg/jjj/kk>>//rrr/yutr/";
+		System.out.println(s);
+	}
+
 }

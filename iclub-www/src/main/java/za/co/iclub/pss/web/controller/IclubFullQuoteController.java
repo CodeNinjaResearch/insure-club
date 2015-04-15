@@ -803,6 +803,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setVYear(bean.getVYear());
 		model.setVDdLong(bean.getVDdLong());
 		model.setVDdLat(bean.getVDdLat());
+		model.setVCompYrs(bean.getVCompYrs());
 		model.setVDdArea(bean.getVDdArea());
 		model.setVOnLong(bean.getVOnLong());
 		model.setVOnLat(bean.getVOnLat());

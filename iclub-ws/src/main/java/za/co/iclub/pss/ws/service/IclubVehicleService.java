@@ -65,6 +65,7 @@ public class IclubVehicleService {
 			iCV.setVInsuredValue(model.getVInsuredValue());
 			iCV.setVYear(model.getVYear());
 			iCV.setVDdLong(model.getVDdLong());
+			iCV.setVCompYrs(model.getVCompYrs());
 			iCV.setVDdLat(model.getVDdLat());
 			iCV.setVDdArea(model.getVDdArea());
 			iCV.setVOnLong(model.getVOnLong());
@@ -128,20 +129,22 @@ public class IclubVehicleService {
 			iCV.setVOnLat(model.getVOnLat());
 			iCV.setVOnArea(model.getVOnArea());
 			iCV.setVOdometer(model.getVOdometer());
+			iCV.setVCompYrs(model.getVCompYrs());
 			iCV.setVCrtdDt(model.getVCrtdDt());
 			iCV.setVRegNum(model.getVRegNum());
 			iCV.setVEngineNr(model.getVEngineNr());
 			iCV.setVVin(model.getVVin());
 			iCV.setVNoclaimYrs(model.getVNoclaimYrs());
 
-			iCV.setIclubPurposeType(model.getIclubPurposeType()!=null ? iclubPurposeTypeDAO.findById(model.getIclubPurposeType()): null);
-			iCV.setIclubSecurityMaster(model.getIclubSecurityMaster()!=null ? iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster()):null);;
-			iCV.setIclubPerson(model.getIclubPerson()!=null ? iclubPersonDAO.findById(model.getIclubPerson()):null);
-			iCV.setIclubDriver(model.getIclubDriver()!=null ? iclubDriverDAO.findById(model.getIclubDriver()):null);
-			iCV.setIclubSecurityDevice(model.getIclubSecurityDevice()!=null ? iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice()):null);
-			iCV.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId()!=null ? iclubAccessTypeDAO.findById( model.getIclubAccessTypeByVDdAccessTypeId()):null);
-			iCV.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId()!=null ?iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()):null);
-			iCV.setIclubVehicleMaster(model.getIclubVehicleMaster()!=null ? iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()):null);
+			iCV.setIclubPurposeType(model.getIclubPurposeType() != null ? iclubPurposeTypeDAO.findById(model.getIclubPurposeType()) : null);
+			iCV.setIclubSecurityMaster(model.getIclubSecurityMaster() != null ? iclubSecurityMasterDAO.findById(model.getIclubSecurityMaster()) : null);
+			;
+			iCV.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			iCV.setIclubDriver(model.getIclubDriver() != null ? iclubDriverDAO.findById(model.getIclubDriver()) : null);
+			iCV.setIclubSecurityDevice(model.getIclubSecurityDevice() != null ? iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice()) : null);
+			iCV.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId()) : null);
+			iCV.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()) : null);
+			iCV.setIclubVehicleMaster(model.getIclubVehicleMaster() != null ? iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()) : null);
 
 			iclubVehicleDAO.merge(iCV);
 
@@ -200,6 +203,7 @@ public class IclubVehicleService {
 				model.setVInsuredValue(iCV.getVInsuredValue());
 				model.setVYear(iCV.getVYear());
 				model.setVDdLong(iCV.getVDdLong());
+				model.setVCompYrs(iCV.getVCompYrs());
 				model.setVDdLat(iCV.getVDdLat());
 				model.setVDdArea(iCV.getVDdArea());
 				model.setVOnLong(iCV.getVOnLong());
@@ -258,6 +262,7 @@ public class IclubVehicleService {
 				model.setVOnLong(iCV.getVOnLong());
 				model.setVOnLat(iCV.getVOnLat());
 				model.setVOnArea(iCV.getVOnArea());
+				model.setVCompYrs(iCV.getVCompYrs());
 				model.setVOdometer(iCV.getVOdometer());
 				model.setVCrtdDt(iCV.getVCrtdDt());
 				model.setVRegNum(iCV.getVRegNum());
@@ -332,6 +337,7 @@ public class IclubVehicleService {
 		model.setVOnLong(bean.getVOnLong());
 		model.setVOnLat(bean.getVOnLat());
 		model.setVOnArea(bean.getVOnArea());
+		model.setVCompYrs(bean.getVCompYrs());
 		model.setVOdometer(bean.getVOdometer());
 		model.setVCrtdDt(bean.getVCrtdDt());
 		model.setVRegNum(bean.getVRegNum());
@@ -421,14 +427,13 @@ public class IclubVehicleService {
 	public void setIclubDriverDAO(IclubDriverDAO iclubDriverDAO) {
 		this.iclubDriverDAO = iclubDriverDAO;
 	}
-	
 
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
-			return iclubNamedQueryDAO;
-		}
+		return iclubNamedQueryDAO;
+	}
 
-		public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
-			this.iclubNamedQueryDAO = iclubNamedQueryDAO;
-		}
+	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
+		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
 
 }
