@@ -30,7 +30,7 @@ public class IclubViewQuoteController implements Serializable {
 
 	public List<IclubQuoteBean> getBeans() {
 
-		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/user/" + getSessionUserId());
+		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/userstatusId/" + getSessionUserId() + "/1");
 		Collection<? extends IclubQuoteModel> models = new ArrayList<IclubQuoteModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteModel.class));
 		client.close();
 

@@ -286,10 +286,14 @@ public class IclubRateEngineService {
 	@Path("/get/fieldValue/{fieldName}/{tableName}/{fieldId}")
 	@Produces("application/json")
 	@Transactional
-	public Object getFieldValueByFieldIdAndTableName(@PathParam("fieldName") String fieldName, @PathParam("tableName") String tableName, @PathParam("fieldId") String fieldId) {
-		Object batmod = null;
+	public String getFieldValueByFieldIdAndTableName(@PathParam("fieldName") String fieldName, @PathParam("tableName") String tableName, @PathParam("fieldId") String fieldId) {
+		String batmod = null;
 		try {
-			batmod = iclubCommonDAO.getFieldValueByFieldNameAndId(fieldName, tableName, fieldId);
+			Object batObj = iclubCommonDAO.getFieldValueByFieldNameAndId(fieldName, tableName, fieldId);
+
+			if (batObj != null) {
+				batmod = batObj.toString();
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);

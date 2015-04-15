@@ -46,6 +46,8 @@ public class IclubRatingController implements Serializable {
 	private ResourceBundle labelBundle;
 	private String sessionUserId;
 
+	private IclubRateTypeBean rateTypeBean;
+
 	public String refreshGrid() {
 		lookupSaveFlag = false;
 		if (selRateType != null) {
@@ -142,9 +144,11 @@ public class IclubRatingController implements Serializable {
 	}
 
 	public List<IclubRateEngineBean> getBeans() {
-		IclubRateTypeBean rateTypeBean = (IclubRateTypeBean) IclubWebHelper.getObjectIntoSession("ratetype");
+		if (IclubWebHelper.getObjectIntoSession("ratetype") != null) {
+			rateTypeBean = (IclubRateTypeBean) IclubWebHelper.getObjectIntoSession("ratetype");
+			IclubWebHelper.addObjectIntoSession("ratetype", null);
+		}
 
-		IclubWebHelper.addObjectIntoSession("ratetype", null);
 		if (rateTypeBean != null && rateTypeBean.getRtId() != null) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/rateType/" + rateTypeBean.getRtId());
 			Collection<? extends IclubRateEngineModel> models = new ArrayList<IclubRateEngineModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateEngineModel.class));

@@ -87,7 +87,11 @@
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container80 Responsive">
-					<p:inputText styleClass="TexAlCenter" placeholder="Gender" value="#{iclubProfileController.bean.PGender}" />
+					<p:selectOneMenu widgetVar="mnuGender" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuGender.jq.removeClass('with-placeholder')" value="#{iclubProfileController.bean.PGender}">
+						<f:selectItem itemLabel="Gender" itemDisabled="true" />
+						<f:selectItem itemLabel="Male" itemValue="M" />
+						<f:selectItem itemLabel="Female" itemValue="F" />
+					</p:selectOneMenu>
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container80 Responsive">

@@ -30,6 +30,7 @@ public class IclubPersonModel {
 	private Double PLat;
 	private Double PLong;
 	private Integer PZipCd;
+	private Integer PAge;
 	private Date PCrtdDt;
 	private String[] iclubMessageBoards;
 	private String[] iclubPersons;
@@ -555,6 +556,14 @@ public class IclubPersonModel {
 
 	public void setIclubEvents(String[] iclubEvents) {
 		this.iclubEvents = iclubEvents;
+	}
+
+	public Integer getPAge() {
+		return PAge;
+	}
+
+	public void setPAge(Integer pAge) {
+		PAge = pAge;
 	}
 
 }

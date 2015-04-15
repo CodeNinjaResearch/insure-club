@@ -49,6 +49,19 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
+	public List findIclubQuotesByUserAndStatusId(String userId, Long statusId) {
+		log.debug("finding all IclubQuote instances by user");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteByUserAndStatus");
+			queryObject.setString("id", userId);
+			queryObject.setLong("statusId", statusId);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all IclubQuote by user failed", re);
+			throw re;
+		}
+	}
+
 	public List getBySD(String sd, Long id, String className) {
 		log.debug("Fetching all " + className + " by Query :: get" + className + "SD");
 		try {

@@ -172,7 +172,7 @@ public class IclubPurposeTypeController implements Serializable {
 				model.setPtLongDesc(bean.getPtLongDesc());
 				model.setPtShortDesc(bean.getPtShortDesc());
 				model.setPtStatus(bean.getPtStatus());
-				model.setPtCrtdDt(new Timestamp(bean.getPtCrtdDt().getTime()));
+				model.setPtCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 

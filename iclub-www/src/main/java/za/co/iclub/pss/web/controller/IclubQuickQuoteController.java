@@ -356,7 +356,13 @@ public class IclubQuickQuoteController implements Serializable {
 
 			{
 				loadPersonBean(model.getIclubPersonByQPersonId());
-				return "register";
+				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null) {
+					clearForm();
+					return "register";
+				} else {
+					clearForm();
+					return "vq";
+				}
 			}
 
 		} catch (Exception e) {
@@ -364,6 +370,13 @@ public class IclubQuickQuoteController implements Serializable {
 			IclubWebHelper.addMessage("Load Person Fail ::" + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 		return null;
+	}
+
+	public void clearForm() {
+		vehicleBean = new IclubVehicleBean();
+		driverBean = new IclubDriverBean();
+		personBean = new IclubPersonBean();
+		claimYN = "";
 	}
 
 	public String updatedPerson() {
@@ -380,6 +393,8 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setPFName(bean.getPFName());
 				model.setPIdNum(bean.getPIdNum());
 				model.setPLName(bean.getPLName());
+				// need to write age logic
+				model.setPAge(30);
 				model.setPMobile(bean.getPMobile());
 				model.setPAddress(bean.getPAddress());
 				model.setPContactPref(bean.getPContactPref());
@@ -620,6 +635,8 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setPId(UUID.randomUUID().toString());
 		model.setPCrtdDt(personBean.getPCrtdDt());
 		model.setPDob(personBean.getPDob());
+		// Need to update
+		model.setPAge(30);
 		model.setPEmail(personBean.getPEmail());
 		model.setPFName(personBean.getPFName());
 		model.setPIdNum(personBean.getPIdNum());
@@ -630,6 +647,7 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setPGender(personBean.getPGender());
 		model.setPContactPref(personBean.getPContactPref());
 		model.setPIdExpiryDt(personBean.getPIdExpiryDt());
+		model.setPIdIssueDt(personBean.getPIdIssueDt());
 		model.setPInitials(personBean.getPInitials());
 		model.setPIsPensioner(personBean.getPIsPensioner());
 		model.setPIdIssueCntry(personBean.getPIdIssueCntry());
@@ -795,7 +813,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 		model.setQNumber(getQnumber());
 		model.setIclubPersonByQCrtdBy(getSessionUserId());
-		model.setIclubProductType(bean.getIclubProductType());
+		model.setIclubProductType(1l);
 		model.setIclubInsurerMaster(bean.getIclubInsurerMaster());
 		model.setIclubCoverType(bean.getIclubCoverType());
 		model.setIclubQuoteStatus(1l);
@@ -1370,53 +1388,41 @@ public class IclubQuickQuoteController implements Serializable {
 				String fieldName = fieldBean.getFName();
 				if (tableName != null) {
 					List<IclubRateTypeBean> rateTypeBeans = getRateTypeBeanByFieldId(fieldBean.getFId(), quoteType);
-					Object obj = null;
+					String fieldValue = null;
 					if (tableName.equalsIgnoreCase("iclub_vehicle")) {
 						IclubInsuranceItemBean insuranceItemBean = setInsuranceItemDetails(quoteId, 1l);
 						IclubVehicleBean vehicleBean = getVehicleDetails(insuranceItemBean.getIiItemId());
-						obj = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId());
+						fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId());
 
 					}
 					if (tableName.equalsIgnoreCase("iclub_property")) {
 						IclubInsuranceItemBean insuranceItemBean = setInsuranceItemDetails(quoteId, 2l);
 						IclubPropertyBean proeprtyBean = getPropertyDetails(insuranceItemBean.getIiItemId());
-						obj = getFieldValueFromDB(fieldName, tableName, proeprtyBean.getPId());
+						fieldValue = getFieldValueFromDB(fieldName, tableName, proeprtyBean.getPId());
 					}
 					if (tableName.equalsIgnoreCase("iclub_person")) {
 						IclubPersonBean personBean = getIclubPersonBean(quoteBean.getIclubPersonByQPersonId());
 
-						obj = getFieldValueFromDB(fieldName, tableName, personBean.getPId());
+						fieldValue = getFieldValueFromDB(fieldName, tableName, personBean.getPId());
 
 					}
 
 					for (IclubRateTypeBean rateTypeBean : rateTypeBeans) {
 						List<IclubRateEngineBean> rateEngineBeans = getRateEnginesByRateType(rateTypeBean.getRtId());
 						for (IclubRateEngineBean rateEngineBean : rateEngineBeans) {
-							if (obj instanceof Long) {
-								Long fieldValue = (Long) obj;
+							if (fieldValue != null) {
 								if ((rateTypeBean.getRtType().equalsIgnoreCase("F") && rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(fieldValue.toString()) || (rateTypeBean.getRtType().trim().equalsIgnoreCase("R") && (Double.parseDouble(rateEngineBean.getReBaseValue().trim()) <= Double.parseDouble(fieldValue.toString()) && Double.parseDouble(rateEngineBean.getReMaxValue().trim()) >= Double.parseDouble(fieldValue.toString()))))) {
 
 									premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 
 								} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
-									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + tableName + "/" + obj.toString());
+									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + tableName + "/" + fieldValue.toString());
 									String lookupDetails = client.accept(MediaType.APPLICATION_JSON).get(String.class);
 									if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
 										premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 									}
 								}
 
-							} else if (obj instanceof Double) {
-								Double fieldValue = (Double) obj;
-								if ((rateTypeBean.getRtType().equalsIgnoreCase("F") && rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(fieldValue.toString()) || (rateTypeBean.getRtType().trim().equalsIgnoreCase("R") && (Double.parseDouble(rateEngineBean.getReBaseValue().trim()) <= Double.parseDouble(fieldValue.toString()) && Double.parseDouble(rateEngineBean.getReMaxValue().trim()) >= Double.parseDouble(fieldValue.toString()))))) {
-									premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
-								} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
-									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + tableName + "/" + obj.toString());
-									String lookupDetails = client.accept(MediaType.APPLICATION_JSON).get(String.class);
-									if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
-										premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
-									}
-								}
 							}
 						}
 
@@ -1477,13 +1483,13 @@ public class IclubQuickQuoteController implements Serializable {
 		return beans;
 	}
 
-	public Object getFieldValueFromDB(String fieldName, String tableName, String id) {
+	public String getFieldValueFromDB(String fieldName, String tableName, String id) {
 
 		WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/fieldValue/" + fieldName + "/" + tableName + "/" + id);
 
-		Object obj = client.accept(MediaType.APPLICATION_JSON).get();
+		String fieldValue = client.accept(MediaType.APPLICATION_JSON).get(String.class);
 
-		return obj;
+		return fieldValue;
 
 	}
 

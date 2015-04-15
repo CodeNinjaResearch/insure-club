@@ -15,7 +15,11 @@
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Rate" value="#{iclubFieldController.bean.FRate}" />
+		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.FRate}">
+			<f:selectItem itemLabel="Field Rate" itemDisabled="true" />
+			<f:selectItem itemLabel="Yes" itemValue="Y" />
+			<f:selectItem itemLabel="No" itemValue="N" />
+		</p:selectOneMenu>
 	</div>
 	<div class="EmptyBox5" />
 	<div class="EmptyBox5" />

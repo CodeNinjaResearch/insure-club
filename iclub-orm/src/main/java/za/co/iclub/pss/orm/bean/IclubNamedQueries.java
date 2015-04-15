@@ -60,6 +60,7 @@ import javax.persistence.Table;
 		@NamedNativeQuery(query = "select * from iclub_property where p_crtd_by=:id", name = "getIclubPropertyByUser", resultClass = IclubProperty.class),
 		@NamedNativeQuery(name = "getIclubPropertyTypeBySD", query = "select * from iclub_property_type where lower(pt_short_desc) = lower(:sd) and pt_id <> :id", resultClass = IclubPropertyType.class),
 		@NamedNativeQuery(query = "select * from iclub_quote where q_crtd_by=:id", name = "getIclubQuoteByUser", resultClass = IclubQuote.class),
+		@NamedNativeQuery(query = "select * from iclub_quote where q_crtd_by=:id and q_status_id=:statusId ", name = "getIclubQuoteByUserAndStatus", resultClass = IclubQuote.class),
 		@NamedNativeQuery(query = "select * from iclub_purpose_type where pt_crtd_by=:id", name = "getIclubPurposeTypeByUser", resultClass = IclubPurposeType.class),
 		@NamedNativeQuery(query = "select * from iclub_purpose_type where pt_item_type_id=:iIType", name = "getPurposeTypeByInsurnceItemType", resultClass = IclubPurposeType.class),
 		@NamedNativeQuery(name = "getIclubQuoteStatusBySD", query = "select * from iclub_quote_status where lower(qs_short_desc) = lower(:sd) and qs_id <> :id", resultClass = IclubQuoteStatus.class),

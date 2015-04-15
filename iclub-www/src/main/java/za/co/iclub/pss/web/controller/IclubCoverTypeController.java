@@ -139,7 +139,7 @@ public class IclubCoverTypeController implements Serializable {
 				model.setCtShortDesc(bean.getCtShortDesc());
 				model.setCtStatus(bean.getCtStatus());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
-				model.setCtCrtdDt(new Timestamp(bean.getCtCrtdDt().getTime()));
+				model.setCtCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -171,7 +171,7 @@ public class IclubCoverTypeController implements Serializable {
 				model.setCtShortDesc(bean.getCtShortDesc());
 				model.setCtStatus(bean.getCtStatus());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
-				model.setCtCrtdDt(new Timestamp(bean.getCtCrtdDt().getTime()));
+				model.setCtCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);

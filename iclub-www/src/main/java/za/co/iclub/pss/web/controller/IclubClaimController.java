@@ -337,17 +337,8 @@ public class IclubClaimController implements Serializable {
 		this.sessionUserId = sessionUserId;
 	}
 
-	public List<IclubInsuranceItemBean> getiItemBeans() {
-		return iItemBeans;
-	}
-
-	public void setiItemBeans(List<IclubInsuranceItemBean> iItemBeans) {
-		this.iItemBeans = iItemBeans;
-	}
-
 	@SuppressWarnings("unchecked")
-	public IclubPolicyBean getPolicyBean() {
-
+	public List<IclubInsuranceItemBean> getiItemBeans() {
 		if (IclubWebHelper.getObjectIntoSession("policyBean") != null) {
 
 			policyBean = (IclubPolicyBean) IclubWebHelper.getObjectIntoSession("policyBean");
@@ -377,6 +368,15 @@ public class IclubClaimController implements Serializable {
 				iItemBeans.add(bean);
 			}
 		}
+		return iItemBeans;
+	}
+
+	public void setiItemBeans(List<IclubInsuranceItemBean> iItemBeans) {
+		this.iItemBeans = iItemBeans;
+	}
+
+	public IclubPolicyBean getPolicyBean() {
+
 		if (policyBean == null)
 			policyBean = new IclubPolicyBean();
 		return policyBean;
@@ -482,7 +482,7 @@ public class IclubClaimController implements Serializable {
 	}
 
 	public List<IclubClaimBean> getBeans() {
-		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
+		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/user/" + getSessionUserId());
 		Collection<? extends IclubClaimModel> models = new ArrayList<IclubClaimModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimModel.class));
 		client.close();
 		beans = new ArrayList<IclubClaimBean>();

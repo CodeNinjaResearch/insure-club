@@ -90,6 +90,7 @@ public class IclubPersonService {
 			person.setPIdNum(model.getPIdNum());
 			person.setPContactPref(model.getPContactPref());
 			person.setPIdExpiryDt(model.getPIdExpiryDt());
+			person.setPIdIssueDt(model.getPIdIssueDt());
 			person.setPInitials(model.getPInitials());
 			person.setPIsPensioner(model.getPIsPensioner());
 			person.setPIdIssueCntry(model.getPIdIssueCntry());
@@ -97,6 +98,7 @@ public class IclubPersonService {
 			person.setPLong(model.getPLong());
 			person.setPOccupation(model.getPOccupation());
 			person.setPTitle(model.getPTitle());
+			person.setPAge(model.getPAge());
 			person.setPZipCd(model.getPZipCd());
 			person.setIclubIdType(model.getIclubIdType() != null ? iclubIdTypeDAO.findById(model.getIclubIdType()) : null);
 			person.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
@@ -139,6 +141,8 @@ public class IclubPersonService {
 			person.setPContactPref(model.getPContactPref());
 			person.setPGender(model.getPGender());
 			person.setPIdNum(model.getPIdNum());
+			person.setPIdIssueDt(model.getPIdIssueDt());
+			person.setPAge(model.getPAge());
 			person.setPContactPref(model.getPContactPref());
 			person.setPIdExpiryDt(model.getPIdExpiryDt());
 			person.setPInitials(model.getPInitials());
@@ -206,9 +210,11 @@ public class IclubPersonService {
 				model.setPEmail(iPerson.getPEmail());
 				model.setPFName(iPerson.getPFName());
 				model.setPIdNum(iPerson.getPIdNum());
+				model.setPAge(iPerson.getPAge());
 				model.setPLName(iPerson.getPLName());
 				model.setPMobile(iPerson.getPMobile());
 				model.setPAddress(iPerson.getPAddress());
+				model.setPIdIssueDt(iPerson.getPIdIssueDt());
 				model.setPContactPref(iPerson.getPContactPref());
 				model.setPGender(iPerson.getPGender());
 				model.setPIdNum(iPerson.getPIdNum());
@@ -579,7 +585,7 @@ public class IclubPersonService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod =iclubNamedQueryDAO.findByUser(user, IclubPerson.class.getSimpleName());
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPerson.class.getSimpleName());
 
 			for (Object object : batmod) {
 				IclubPerson iPerson = (IclubPerson) object;
@@ -602,6 +608,7 @@ public class IclubPersonService {
 				model.setPInitials(iPerson.getPInitials());
 				model.setPIsPensioner(iPerson.getPIsPensioner());
 				model.setPIdIssueCntry(iPerson.getPIdIssueCntry());
+				model.setPIdIssueDt(iPerson.getPIdIssueDt());
 				model.setPLat(iPerson.getPLat());
 				model.setPLong(iPerson.getPLong());
 				model.setPOccupation(iPerson.getPOccupation());
@@ -972,6 +979,7 @@ public class IclubPersonService {
 			model.setPFName(bean.getPFName());
 			model.setPIdNum(bean.getPIdNum());
 			model.setPLName(bean.getPLName());
+			model.setPAge(bean.getPAge());
 			model.setPMobile(bean.getPMobile());
 			model.setPAddress(bean.getPAddress());
 			model.setPContactPref(bean.getPContactPref());
@@ -981,6 +989,7 @@ public class IclubPersonService {
 			model.setPInitials(bean.getPInitials());
 			model.setPIsPensioner(bean.getPIsPensioner());
 			model.setPIdIssueCntry(bean.getPIdIssueCntry());
+			model.setPIdIssueDt(bean.getPIdIssueDt());
 			model.setPLat(bean.getPLat());
 			model.setPLong(bean.getPLong());
 			model.setPOccupation(bean.getPOccupation());

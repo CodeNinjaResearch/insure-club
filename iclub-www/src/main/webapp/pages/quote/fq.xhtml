@@ -95,7 +95,11 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Gender" value="#{iclubFullQuoteController.personBean.PGender}" />
+						<p:selectOneMenu disabled="true" widgetVar="mnuGender" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuGender.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.PGender}">
+							<f:selectItem itemLabel="Gender" itemDisabled="true" />
+							<f:selectItem itemLabel="Male" itemValue="M" />
+							<f:selectItem itemLabel="Female" itemValue="F" />
+						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
@@ -295,6 +299,13 @@
 						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:selectOneMenu value="#{iclubFullQuoteController.vehCoverType}" widgetVar="mnuVehCvrTy" id="mnuVehCvrTy" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
+							<f:selectItems value="#{iclubFullQuoteController.coverTypeBeans}" var="c" itemValue="#{c.ctId}" itemLabel="#{c.ctLongDesc}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="qqDriverDet" title="Driver Details">
 					<div class="Container80 Responsive">
@@ -358,7 +369,14 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuAccTd" id="mnuAccTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubWallType}" widgetVar="mnuWT" id="mnuWT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="WallType" itemDisabled="true" />
+							<f:selectItems value="#{iclubFullQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container80 Responsive">
+						<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuWTTd" id="mnuWTTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Access Type" itemDisabled="true" />
 							<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
 						</p:selectOneMenu>
@@ -431,10 +449,6 @@
 				</p:tab>
 				<p:tab id="fqClaimDet" title="Claim Details">
 					<div class="Container80 Responsive">
-						<p:inputText placeholder="Claim Number" value="#{iclubFullQuoteController.claimBean.CNumber}" styleClass="TexAlCenter" />
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
 						<p:inputText placeholder="Number Items" value="#{iclubFullQuoteController.claimBean.CNumItems}" styleClass="TexAlCenter" />
 					</div>
 					<div class="EmptyBox5" />
@@ -492,8 +506,14 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:inputText placeholder="Debit Date" value="#{iclubFullQuoteController.debitDate}" styleClass="TexAlCenter" />
-						<p:inputText placeholder="Month" value="#{iclubFullQuoteController.debitMonth}" styleClass="TexAlCenter" />
+						<p:selectOneMenu value="#{iclubFullQuoteController.debitDate}" widgetVar="mnuDbtDt" id="mnuDbtDt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="Debit Date" itemDisabled="true" />
+							<f:selectItems value="#{iclubFullQuoteController.debitDates}" />
+						</p:selectOneMenu>
+						<p:selectOneMenu value="#{iclubFullQuoteController.debitMonth}" widgetVar="mnuDbtMt" id="mnuDbtMt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="Debit Date" itemDisabled="true" />
+							<f:selectItems value="#{iclubFullQuoteController.debitMonths}" />
+						</p:selectOneMenu>
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>

@@ -446,6 +446,14 @@ public class IclubPolicyController implements Serializable {
 				vehicleBean.setIclubSecurityDevice(model.getIclubSecurityDevice());
 				vehicleBean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
 				vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
+				if (vehicleBean.getVDdLat() != null && vehicleBean.getVDdLong() != null) {
+					centerGeoMapVeh = vehicleBean.getVDdLat() + "," + vehicleBean.getVDdLong();
+					LatLng coord = new LatLng(vehicleBean.getVDdLat(), vehicleBean.getVDdLong());
+					Marker marker = new Marker(coord, "");
+					marker.setDraggable(true);
+					draggableModelVeh.addOverlay(marker);
+
+				}
 				client.close();
 			}
 		} else if (bean != null && bean.getIclubInsuranceItemType().compareTo(2l) == 0) {

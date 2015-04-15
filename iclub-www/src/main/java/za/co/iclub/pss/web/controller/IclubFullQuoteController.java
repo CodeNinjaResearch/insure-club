@@ -1,8 +1,6 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -177,6 +175,12 @@ public class IclubFullQuoteController implements Serializable {
 
 	private List<String> bankNames;
 
+	private List<String> debitDates;
+
+	private List<String> debitMonths;
+
+	private String vehCoverType;
+
 	private String bankName;
 
 	private Double genPremium;
@@ -260,6 +264,24 @@ public class IclubFullQuoteController implements Serializable {
 		draggableModelPer = new DefaultMapModel();
 		draggableModelPro = new DefaultMapModel();
 		draggableModelVeh = new DefaultMapModel();
+
+		debitDates = new ArrayList<String>();
+		debitMonths = new ArrayList<String>();
+		for (int i = 1; i <= 31; i++) {
+
+			if (i < 10) {
+				debitDates.add("0" + i);
+			} else {
+				debitDates.add("" + i);
+			}
+		}
+		for (int i = 1; i <= 12; i++) {
+			if (i < 10) {
+				debitMonths.add("0" + i);
+			} else {
+				debitMonths.add("" + i);
+			}
+		}
 
 	}
 
@@ -373,7 +395,8 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onMarkerSelectVeh(OverlaySelectEvent event) {
 		markerVeh = (Marker) event.getOverlay();
-
+		vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
+		vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerVeh.getTitle()));
 	}
 
@@ -520,12 +543,23 @@ public class IclubFullQuoteController implements Serializable {
 
 		try {
 			addQuote(quoteBean, personBean);
+
 			return "pdash";
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage("Load Person Fail ::" + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 		return null;
+	}
+
+	public void clearForm() {
+		claimBean = new IclubClaimBean();
+		quoteBean = new IclubQuoteBean();
+		personBean = new IclubPersonBean();
+		vehicleBean = new IclubVehicleBean();
+		propertyBean = new IclubPropertyBean();
+		accountBean = new IclubAccountBean();
+		driverBean = new IclubDriverBean();
 	}
 
 	public boolean validateForm(boolean flag) {
@@ -845,16 +879,16 @@ public class IclubFullQuoteController implements Serializable {
 
 		WebClient client = null;
 		boolean addOrMod = false;
+		IclubPropertyModel model = new IclubPropertyModel();
 		if (propertyBean != null && propertyBean.getPId() != null) {
 			client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "mod");
 			addOrMod = true;
+			model.setPId(bean.getPId());
 		} else {
 			client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "add");
+			model.setPId(UUID.randomUUID().toString());
 		}
 
-		IclubPropertyModel model = new IclubPropertyModel();
-
-		model.setPId(bean.getPId());
 		model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
 		model.setPEstValue(bean.getPEstValue());
 		model.setPSecGatesYn(bean.getPSecGatesYn());
@@ -954,7 +988,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
 		model.setCValue(bean.getCValue());
 		model.setCNumItems(bean.getCNumItems());
-		model.setCNumber(bean.getCNumber());
+		model.setCNumber(getCnumber());
 		model.setIclubPolicy(policyModel.getPId());
 		model.setIclubClaimStatus(bean.getIclubClaimStatus());
 		model.setIclubPerson(getSessionUserId());
@@ -974,6 +1008,16 @@ public class IclubFullQuoteController implements Serializable {
 		}
 
 		return response;
+	}
+
+	public Long getCnumber() {
+		Random r = new Random();
+		int Low = 1000000;
+		int High = 9999999;
+		int R = r.nextInt(High - Low) + Low;
+		SimpleDateFormat formate = new SimpleDateFormat("YYYYMMDD");
+		return Long.parseLong((formate.format(new Date()) + R));
+
 	}
 
 	public ResponseModel addPolicy(IclubPolicyBean bean, IclubQuoteModel quoteModel, IclubAccountModel accountModel) {
@@ -996,7 +1040,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setPCrtdDt((new Timestamp(System.currentTimeMillis())).toString());
 		model.setIclubAccount(accountModel.getAId());
 		model.setIclubQuote(quoteModel.getQId());
-		model.setIclubPolicyStatus(bean.getIclubPolicyStatus());
+		model.setIclubPolicyStatus(1l);
 		model.setIclubPerson(getSessionUserId());
 		ResponseModel response = null;
 		if (bean != null && bean.getPId() != null) {
@@ -1067,9 +1111,9 @@ public class IclubFullQuoteController implements Serializable {
 
 		model.setQNumber(bean.getQNumber());
 		model.setIclubPersonByQCrtdBy(getSessionUserId());
-		model.setIclubProductType(bean.getIclubProductType());
+		model.setIclubProductType(1l);
 		model.setIclubInsurerMaster(bean.getIclubInsurerMaster());
-		model.setIclubCoverType(bean.getIclubCoverType());
+		model.setIclubCoverType(vehCoverType != null ? new Long(vehCoverType) : null);
 		model.setIclubQuoteStatus(2l);
 		model.setIclubPersonByQPersonId(personModel.getPId());
 
@@ -1280,6 +1324,7 @@ public class IclubFullQuoteController implements Serializable {
 
 		IclubPolicyModel model = (IclubPolicyModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPolicyModel.class));
 
+		client.close();
 		if (model != null && model.getPId() != null) {
 			policyBean = new IclubPolicyBean();
 			policyBean.setPId(model.getPId());
@@ -1325,6 +1370,7 @@ public class IclubFullQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(CLM_BASE_URL + "getByPolicyId/" + policyBean.getPId());
 
 		IclubClaimModel model = (IclubClaimModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubClaimModel.class));
+		client.close();
 
 		if (model != null && model.getCId() != null) {
 			claimBean = new IclubClaimBean();
@@ -1491,6 +1537,7 @@ public class IclubFullQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(VM_BASE_URL + "get/" + vehicleBean.getIclubVehicleMaster());
 
 		IclubVehicleMasterModel model = (IclubVehicleMasterModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubVehicleMasterModel.class));
+		client.close();
 		if (model != null && model.getVmId() != null) {
 			vmMake = model.getVmMake();
 			loadVmModels(vmMake);
@@ -2262,6 +2309,7 @@ public class IclubFullQuoteController implements Serializable {
 								} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
 									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + tableName + "/" + obj.toString());
 									String lookupDetails = client.accept(MediaType.APPLICATION_JSON).get(String.class);
+									client.close();
 									if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
 										premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 									}
@@ -2318,7 +2366,7 @@ public class IclubFullQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/fieldValue/" + fieldName + "/" + tableName + "/" + id);
 
 		Object obj = client.accept(MediaType.APPLICATION_JSON).get();
-
+		client.close();
 		return obj;
 
 	}
@@ -2526,26 +2574,6 @@ public class IclubFullQuoteController implements Serializable {
 
 	}
 
-	private static MessageDigest md;
-
-	public static String cryptWithMD5(String pass) {
-		try {
-			md = MessageDigest.getInstance("MD5");
-			byte[] passBytes = pass.getBytes();
-			md.reset();
-			byte[] digested = md.digest(passBytes);
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < digested.length; i++) {
-				sb.append(Integer.toHexString(0xff & digested[i]));
-			}
-			return sb.toString();
-		} catch (NoSuchAlgorithmException ex) {
-			System.out.println("---hekk");
-		}
-		return null;
-
-	}
-
 	public List<IclubFieldBean> getIclubFieldBeans() {
 
 		WebClient client = IclubWebHelper.createCustomClient(FD_BASE_URL + "getByStatus/Y");
@@ -2584,6 +2612,7 @@ public class IclubFullQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(CONF_BASE_URL + "/getByKey/base.premium");
 
 		IclubConfigModel model = (IclubConfigModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubConfigModel.class));
+		client.close();
 		if (model != null) {
 			return new Double(model.getCValue());
 		} else {
@@ -2613,6 +2642,30 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void setTermsAndConditionFlag(boolean termsAndConditionFlag) {
 		this.termsAndConditionFlag = termsAndConditionFlag;
+	}
+
+	public List<String> getDebitDates() {
+		return debitDates;
+	}
+
+	public void setDebitDates(List<String> debitDates) {
+		this.debitDates = debitDates;
+	}
+
+	public List<String> getDebitMonths() {
+		return debitMonths;
+	}
+
+	public void setDebitMonths(List<String> debitMonths) {
+		this.debitMonths = debitMonths;
+	}
+
+	public String getVehCoverType() {
+		return vehCoverType;
+	}
+
+	public void setVehCoverType(String vehCoverType) {
+		this.vehCoverType = vehCoverType;
 	}
 
 }

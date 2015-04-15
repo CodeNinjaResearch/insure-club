@@ -26,8 +26,6 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @SessionScoped
 public class IclubConfigController implements Serializable {
 
-	
-	
 	private static final long serialVersionUID = -7437744045926990807L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubConfigController.class);
@@ -114,7 +112,7 @@ public class IclubConfigController implements Serializable {
 				IclubConfigModel model = new IclubConfigModel();
 
 				model.setCKey(bean.getCKey());
-				model.setCCrtdDt(new Timestamp(bean.getCCrtdDt().getTime()));
+				model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
 				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());
@@ -145,7 +143,7 @@ public class IclubConfigController implements Serializable {
 
 				model.setCId(bean.getCId());
 				model.setCKey(bean.getCKey());
-				model.setCCrtdDt(new Timestamp(bean.getCCrtdDt().getTime()));
+				model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
 				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());
@@ -187,14 +185,13 @@ public class IclubConfigController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 
-		if (bean.getIclubPerson()!=null && bean.getIclubPerson().equals(-1)) {
+		if (bean.getIclubPerson() != null && bean.getIclubPerson().equals(-1)) {
 			IclubWebHelper.addMessage("Please select a valid value for EntityStatus", FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
 		return ret;
 	}
-
 
 	public IclubConfigBean getBean() {
 		if (bean == null)
