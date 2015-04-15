@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlMessageTypeCont">
-				<p:dataTable id="dtMessageTypeCont" widgetVar="dtMessageTypeCont" value="#{iclubMessageTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+				<p:dataTable id="dtMessageTypeCont" widgetVar="dtMessageTypeCont" value="#{iclubMessageTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Message Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnMessageTypeShowAdd" value="Add" actionListener="#{iclubMessageTypeController.showAddPanel}" update=":iclubFrm:pnlMessageTypeCont" />
 					</f:facet>

@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlBoundaryTypeCont">
-				<p:dataTable id="dtBoundaryTypeCont" widgetVar="dtBoundaryTypeCont" value="#{iclubBoundaryTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+				<p:dataTable id="dtBoundaryTypeCont" widgetVar="dtBoundaryTypeCont" value="#{iclubBoundaryTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No BoundaryType Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnBoundaryTypeShowAdd" value="Add" actionListener="#{iclubBoundaryTypeController.showAddPanel}" update=":iclubFrm:pnlBoundaryTypeCont" />
 					</f:facet>

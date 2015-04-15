@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlOwnerTypeCont">
-				<p:dataTable id="dtOwnerTypeCont" widgetVar="dtOwnerTypeCont" value="#{iclubOwnerTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+				<p:dataTable id="dtOwnerTypeCont" widgetVar="dtOwnerTypeCont" value="#{iclubOwnerTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Owner Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnOwnerTypeShowAdd" value="Add" actionListener="#{iclubOwnerTypeController.showAddPanel}" update=":iclubFrm:pnlOwnerTypeCont" />
 					</f:facet>

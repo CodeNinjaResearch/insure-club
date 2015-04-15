@@ -162,6 +162,11 @@
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container80 Responsive">
+					<p:outputLabel id="genPremium" value="Gen Premium :" />
+					<p:outputLabel id="genPremiumValue" value="#{iclubFullQuoteController.genPremium}" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container80 Responsive">
 					<p:selectBooleanCheckbox value="#{iclubFullQuoteController.termsAndConditionFlag}">
 						<p:ajax update=":iclubFrm:pnlViewVehCont"></p:ajax>
 					</p:selectBooleanCheckbox>

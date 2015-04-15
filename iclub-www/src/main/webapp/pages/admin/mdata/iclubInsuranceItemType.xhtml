@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlInsuranceItemTypeCont">
-				<p:dataTable id="dtInsuranceItemTypeCont" widgetVar="dtInsuranceItemTypeCont" value="#{iclubInsuranceItemTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+				<p:dataTable id="dtInsuranceItemTypeCont" widgetVar="dtInsuranceItemTypeCont" value="#{iclubInsuranceItemTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No InsuranceItem Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnInsuranceItemTypeShowAdd" value="Add" actionListener="#{iclubInsuranceItemTypeController.showAddPanel}" update=":iclubFrm:pnlInsuranceItemTypeCont" />
 					</f:facet>

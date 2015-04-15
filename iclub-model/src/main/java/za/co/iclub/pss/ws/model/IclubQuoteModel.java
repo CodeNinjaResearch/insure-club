@@ -24,6 +24,7 @@ public class IclubQuoteModel {
 	private Double QPrevPremium;
 	private String QIsMatched;
 	private Timestamp QCrtdDt;
+	private String QClaimYn;
 	private String[] iclubPolicies;
 
 	public String getQId() {
@@ -168,6 +169,14 @@ public class IclubQuoteModel {
 
 	public void setIclubPolicies(String[] iclubPolicies) {
 		this.iclubPolicies = iclubPolicies;
+	}
+
+	public String getQClaimYn() {
+		return QClaimYn;
+	}
+
+	public void setQClaimYn(String qClaimYn) {
+		QClaimYn = qClaimYn;
 	}
 
 }

@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlDocumentTypeCont">
-				<p:dataTable id="dtDocumentTypeCont" widgetVar="dtDocumentTypeCont" value="#{iclubDocumentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Type Found" reflow="true">
+				<p:dataTable id="dtDocumentTypeCont" widgetVar="dtDocumentTypeCont" value="#{iclubDocumentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No DocumentType Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnDocumentTypeShowAdd" value="Add" actionListener="#{iclubDocumentTypeController.showAddPanel}" update=":iclubFrm:pnlDocumentTypeCont" />
 					</f:facet>

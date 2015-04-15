@@ -255,8 +255,6 @@ public class IclubFullQuoteController implements Serializable {
 
 	private IclubPolicyBean policyBean;
 
-	private String claimYN;
-
 	private ResourceBundle labelBundle;
 
 	@PostConstruct
@@ -528,6 +526,7 @@ public class IclubFullQuoteController implements Serializable {
 			if (validateForm(true)) {
 				addPropertiy(propertyBean, quoteBean);
 				addDriver(driverBean, personBean, quoteBean);
+				genPremium = getUpdatePremium(quoteBean.getQId(), "F");
 				return "fqs";
 			} else {
 				IclubWebHelper.addMessage("Fail :: ", FacesMessage.SEVERITY_ERROR);
@@ -1034,7 +1033,7 @@ public class IclubFullQuoteController implements Serializable {
 		}
 
 		model.setPProrataPrm(0.0d);
-		model.setPPremium(0.0d);
+		model.setPPremium(genPremium);
 		model.setPNumber(quoteModel.getQNumber());
 		model.setPDebitDt(debitDate != null && debitMonth != null ? Integer.parseInt(debitDate + debitMonth) : null);
 		model.setPCrtdDt((new Timestamp(System.currentTimeMillis())).toString());
@@ -1105,7 +1104,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setQValidUntil(new Timestamp(System.currentTimeMillis() + (3 * 24 * 3600)));
 		model.setQMobile(personModel.getPMobile());
 		model.setQEmail(personModel.getPEmail());
-		model.setQGenPremium(0.0d);
+		model.setQGenPremium(genPremium);
 		model.setQNumItems(2);
 		model.setQGenDt(new Timestamp(System.currentTimeMillis()));
 
@@ -2224,14 +2223,6 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void setpPurposeTypeBeans(List<IclubPurposeTypeBean> pPurposeTypeBeans) {
 		this.pPurposeTypeBeans = pPurposeTypeBeans;
-	}
-
-	public String getClaimYN() {
-		return claimYN;
-	}
-
-	public void setClaimYN(String claimYN) {
-		this.claimYN = claimYN;
 	}
 
 	public ResourceBundle getLabelBundle() {

@@ -285,14 +285,6 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container80 Responsive">
-						<p:selectOneMenu widgetVar="mnuClaimYrs" id="mnuClaimYrs" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuClaimYrs.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.claimYN}">
-							<f:selectItem itemLabel="Claims in Last 3 Years" itemDisabled="true" />
-							<f:selectItem itemLabel="Yes" itemValue="Y" />
-							<f:selectItem itemLabel="No" itemValue="N" />
-						</p:selectOneMenu>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container80 Responsive">
 						<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubPurposeType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Purpose Type" itemDisabled="true" />
 							<f:selectItems value="#{iclubFullQuoteController.purposeTypeBeans}" var="p" itemLabel="#{p.ptLongDesc}" itemValue="#{p.ptId}" />

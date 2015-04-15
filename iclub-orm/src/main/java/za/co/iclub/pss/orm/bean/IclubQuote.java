@@ -45,6 +45,7 @@ public class IclubQuote implements java.io.Serializable {
 	private Double QPrevPremium;
 	private String QIsMatched;
 	private Timestamp QCrtdDt;
+	private String QClaimYn;
 	private Set<IclubPolicy> iclubPolicies = new HashSet<IclubPolicy>(0);
 
 	// Constructors
@@ -249,6 +250,15 @@ public class IclubQuote implements java.io.Serializable {
 
 	public void setIclubPolicies(Set<IclubPolicy> iclubPolicies) {
 		this.iclubPolicies = iclubPolicies;
+	}
+
+	@Column(name = "q_claim_yn", length = 1)
+	public String getQClaimYn() {
+		return QClaimYn;
+	}
+
+	public void setQClaimYn(String qClaimYn) {
+		QClaimYn = qClaimYn;
 	}
 
 }
