@@ -185,16 +185,22 @@
 								<f:selectItems value="#{iclubFullQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
 							</p:selectOneMenu>
 						</div>
-						<div class="Container80 Responsive">
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
 							<p:outputLabel value="Id Issue Date :" />
 						</div>
-						<div class="Container80 Responsive">
+						<div class="Container50 Responsive">
 							<p:calendar disabled="true" value="#{iclubFullQuoteController.personBean.PIdIssueDt}" />
 						</div>
-						<div class="Container80 Responsive">
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
 							<p:outputLabel value="Id Expiry Date :" />
 						</div>
-						<div class="Container80 Responsive">
+						<div class="Container50 Responsive">
 							<p:calendar disabled="true" value="#{iclubFullQuoteController.personBean.PIdExpiryDt}" />
 						</div>
 					</div>
@@ -241,6 +247,7 @@
 							<p:commandButton disabled="true" update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
 						</div>
 					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="qqVehDet" title="Vehicle Details">
 					<div class="Container100 Responsive">
@@ -493,6 +500,7 @@
 							</p:selectOneMenu>
 						</div>
 					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="qqDriverDet" title="Driver Details">
 					<div class="Container100 Responsive">
@@ -533,6 +541,7 @@
 							</p:selectOneMenu>
 						</div>
 					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="fqExtDet" title="Extras">
 					<div class="EmptyBox5" />
@@ -557,6 +566,7 @@
 							</p:selectOneMenu>
 						</div>
 					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab title="Property details">
 					<div class="Container100 Responsive">
@@ -756,6 +766,7 @@
 							<p:inputText placeholder="Estimatted Value" value="#{iclubFullQuoteController.propertyBean.PEstValue}" styleClass="TexAlCenter" />
 						</div>
 					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="fqClaimDet" title="Claim Details">
 					<div class="Container100 Responsive">
@@ -787,6 +798,7 @@
 							</p:selectOneMenu>
 						</div>
 					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="fqAccDet" title="Account Details">
 					<div class="Container100 Responsive">
