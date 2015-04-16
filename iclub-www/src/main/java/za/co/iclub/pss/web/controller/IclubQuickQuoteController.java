@@ -393,8 +393,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setPFName(bean.getPFName());
 				model.setPIdNum(bean.getPIdNum());
 				model.setPLName(bean.getPLName());
-				// need to write age logic
-				model.setPAge(30);
+				model.setPAge(IclubWebHelper.calculateMyAge(bean.getPDob().getTime()));
 				model.setPMobile(bean.getPMobile());
 				model.setPAddress(bean.getPAddress());
 				model.setPContactPref(bean.getPContactPref());
@@ -635,8 +634,7 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setPId(UUID.randomUUID().toString());
 		model.setPCrtdDt(personBean.getPCrtdDt());
 		model.setPDob(personBean.getPDob());
-		// Need to update
-		model.setPAge(30);
+		model.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
 		model.setPEmail(personBean.getPEmail());
 		model.setPFName(personBean.getPFName());
 		model.setPIdNum(personBean.getPIdNum());

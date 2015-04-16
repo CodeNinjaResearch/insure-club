@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -759,6 +760,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setPLName(personBean.getPLName());
 		model.setPMobile(personBean.getPMobile());
 		model.setPAddress(personBean.getPAddress());
+		model.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
 		model.setPContactPref(personBean.getPContactPref());
 		model.setPGender(personBean.getPGender());
 		model.setPContactPref(personBean.getPContactPref());
@@ -1237,6 +1239,7 @@ public class IclubFullQuoteController implements Serializable {
 				personBean.setPIdNum(model.getPIdNum());
 				personBean.setPLName(model.getPLName());
 				personBean.setPMobile(model.getPMobile());
+				personBean.setPAge(model.getPAge());
 				personBean.setPAddress(model.getPAddress());
 				personBean.setPContactPref(model.getPContactPref());
 				personBean.setPGender(model.getPGender());
@@ -2520,6 +2523,7 @@ public class IclubFullQuoteController implements Serializable {
 		personBean.setPMobile(model.getPMobile());
 		personBean.setPAddress(model.getPAddress());
 		personBean.setPContactPref(model.getPContactPref());
+		personBean.setPAge(model.getPAge());
 		personBean.setPGender(model.getPGender());
 		personBean.setPContactPref(model.getPContactPref());
 		personBean.setPIdExpiryDt(model.getPIdExpiryDt());

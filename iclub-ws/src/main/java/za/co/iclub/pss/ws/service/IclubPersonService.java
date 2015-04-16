@@ -609,6 +609,7 @@ public class IclubPersonService {
 				model.setPIsPensioner(iPerson.getPIsPensioner());
 				model.setPIdIssueCntry(iPerson.getPIdIssueCntry());
 				model.setPIdIssueDt(iPerson.getPIdIssueDt());
+				model.setPAge(iPerson.getPAge());
 				model.setPLat(iPerson.getPLat());
 				model.setPLong(iPerson.getPLong());
 				model.setPOccupation(iPerson.getPOccupation());

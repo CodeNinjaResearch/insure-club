@@ -1,6 +1,8 @@
 package za.co.iclub.pss.web.util;
 
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.GregorianCalendar;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -37,5 +39,24 @@ public class IclubWebHelper {
 	public static Object getObjectIntoSession(String key) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		return context.getExternalContext().getSessionMap().get(key);
+	}
+
+	public static int calculateMyAge(Long timeStamp) {
+
+		Calendar birthCal = Calendar.getInstance();
+		birthCal.setTimeInMillis(timeStamp);
+
+		Calendar nowCal = new GregorianCalendar();
+
+		int age = nowCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
+
+		boolean isMonthGreater = birthCal.get(Calendar.MONTH) > nowCal.get(Calendar.MONTH);
+
+		boolean isMonthSameButDayGreater = birthCal.get(Calendar.MONTH) == nowCal.get(Calendar.MONTH) && birthCal.get(Calendar.DAY_OF_MONTH) > nowCal.get(Calendar.DAY_OF_MONTH);
+
+		if (isMonthGreater || isMonthSameButDayGreater) {
+			age = age - 1;
+		}
+		return age;
 	}
 }
