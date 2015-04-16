@@ -31,8 +31,8 @@
 		</p:dialog>
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlViewVehCont">
-				<div class="Container100">
-					<div class="Container50">
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Make :" />
 					</div>
 					<div class="Container50 Responsive">
@@ -43,8 +43,9 @@
 						</p:selectOneMenu>
 					</div>
 				</div>
-				<div class="Container100">
-					<div class="Container50">
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Model :" />
 					</div>
 					<div class="Container50 Responsive">
@@ -55,8 +56,9 @@
 						</p:selectOneMenu>
 					</div>
 				</div>
-				<div class="Container100">
-					<div class="Container50">
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Year :" />
 					</div>
 					<div class="Container50 Responsive">
@@ -66,8 +68,9 @@
 						</p:selectOneMenu>
 					</div>
 				</div>
-				<div class="Container100">
-					<div class="Container50">
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Claims in Last 3 Years :" />
 					</div>
 					<div class="Container50 Responsive">
@@ -78,21 +81,24 @@
 						</p:selectOneMenu>
 					</div>
 				</div>
-				<div class="Container100">
-					<div class="Container50">
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" id="genPremium" value="Gen Premium :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:outputLabel id="genPremiumValue" value="#{iclubQuickQuoteController.genPremium}" />
 					</div>
 				</div>
+				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<p:selectBooleanCheckbox value="#{iclubQuickQuoteController.termsAndConditionFlag}">
 						<p:ajax update=":iclubFrm:pnlViewVehCont"></p:ajax>
 					</p:selectBooleanCheckbox>
 					I Agree With Terms &amp; Conditions
 				</div>
-				<div class="Container100">
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
 					<p:commandButton value="Register" disabled="#{!iclubQuickQuoteController.termsAndConditionFlag}" styleClass="Fs16" action="#{iclubQuickQuoteController.registerActionListener}" ajax="false" />
 				</div>
 			</p:panel>

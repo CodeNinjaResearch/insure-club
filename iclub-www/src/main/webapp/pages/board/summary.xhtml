@@ -16,16 +16,31 @@
 			<p:panel id="pnlMbCont">
 				<p:panel id="pnlAdd">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubMessageBoardController.summeryBean.mbTitle}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Title :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubMessageBoardController.summeryBean.mbTitle}" />
+							</div>
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Mb Content" value="#{iclubMessageBoardController.summeryBean.mbContent}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Mb Content :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Mb Content" value="#{iclubMessageBoardController.summeryBean.mbContent}" />
+							</div>
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Mb Tag" value="#{iclubMessageBoardController.summeryBean.mbTag}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Mb Tag :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Mb Tag" value="#{iclubMessageBoardController.summeryBean.mbTag}" />
+							</div>
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container100">
@@ -51,8 +66,13 @@
 				</p:panel>
 				<p:panel id="pnlAddMbc" rendered="#{iclubMbCommentController.showAddPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<p:inputText placeholder="MbComment Desc" value="#{iclubMbCommentController.bean.mbcDesc}" styleClass="TexAlCenter" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Mb Comment Desc :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="MbComment Desc" value="#{iclubMbCommentController.bean.mbcDesc}" styleClass="TexAlCenter" />
+							</div>
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container100">

@@ -60,32 +60,35 @@
 			<p:panel id="pnlClaimCont">
 				<p:panel id="pnlAdd">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container100">
-							<div class="Container50">
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="Claim ID :" />
 							</div>
-							<div class="Container50">
+							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.bean.CId}" />
 							</div>
 						</div>
-						<div class="Container100">
-							<div class="Container50">
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="Cliam Value :" />
 							</div>
 							<div class="Container50 Responsive">
 								<p:inputText styleClass="TexAlCenter" placeholder="Cliam Value" value="#{iclubClaimController.bean.CValue}" />
 							</div>
 						</div>
-						<div class="Container100">
-							<div class="Container50">
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="Num Of Items :" />
 							</div>
 							<div class="Container50 Responsive">
 								<p:inputText styleClass="TexAlCenter" placeholder="Num Of Items" value="#{iclubClaimController.bean.CNumItems}" />
 							</div>
 						</div>
-						<div class="Container100">
-							<div class="Container50">
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="Calim Status :" />
 							</div>
 							<div class="Container50 Responsive">
@@ -95,7 +98,8 @@
 								</p:selectOneMenu>
 							</div>
 						</div>
-						<div class="Container100">
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
 							<div class="Container25">
 								<p:commandButton id="btnPlcViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubClaimController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 							</div>

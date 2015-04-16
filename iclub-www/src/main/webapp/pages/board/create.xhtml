@@ -16,23 +16,38 @@
 			<p:panel id="pnlMbCont">
 				<p:panel id="pnlAdd">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubMessageBoardController.bean.mbTitle}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Titel :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubMessageBoardController.bean.mbTitle}" />
+							</div>
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Mb Content" value="#{iclubMessageBoardController.bean.mbContent}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Mb Content :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Mb Content" value="#{iclubMessageBoardController.bean.mbContent}" />
+							</div>
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Mb Tag" value="#{iclubMessageBoardController.bean.mbTag}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Mb Tag :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Mb Tag" value="#{iclubMessageBoardController.bean.mbTag}" />
+							</div>
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container100">
-							<div class="Container50">
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
 								<p:commandButton id="btnMbAddSave" value="Save" action="#{iclubMessageBoardController.addIclubMessageBoard}" update=":iclubFrm:pnlMbCont,:iclubFrm:grlMsg" />
 							</div>
-							<div class="Container50">
+							<div class="Container50 Responsive">
 								<p:commandButton id="btnMbAddClose" value="Close" actionListener="#{iclubMessageBoardController.clearForm}" update=":iclubFrm:pnlMbCont" />
 							</div>
 						</div>
