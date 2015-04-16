@@ -60,44 +60,54 @@
 			<p:panel id="pnlClaimCont">
 				<p:panel id="pnlAdd">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<div class="Container100">
-								<div class="Container50">
-									<p:outputLabel styleClass="TexAlCenter" value="Claim ID :" />
-								</div>
-								<div class="Container50">
-									<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.bean.CId}" />
-								</div>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Claim ID :" />
+							</div>
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.bean.CId}" />
 							</div>
 						</div>
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Cliam Value" value="#{iclubClaimController.bean.CValue}" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Cliam Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Cliam Value" value="#{iclubClaimController.bean.CValue}" />
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Num Of Items" value="#{iclubClaimController.bean.CNumItems}" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Num Of Items :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Num Of Items" value="#{iclubClaimController.bean.CNumItems}" />
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubClaimController.bean.iclubClaimStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Calim Status" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.csLongDesc}" itemValue="#{c.csId}" value="#{iclubClaimController.claimStatusBeans}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Calim Status :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubClaimController.bean.iclubClaimStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Calim Status" itemDisabled="true" />
+									<f:selectItems var="c" itemLabel="#{c.csLongDesc}" itemValue="#{c.csId}" value="#{iclubClaimController.claimStatusBeans}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-					</div>
-					<div class="Container100">
-					<div class="Container25">
-							<p:commandButton id="btnPlcViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubClaimController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
-						</div>
-						<div class="Container25">
-							<p:commandButton id="btnClaimSave" value="Save" action="#{iclubClaimController.modIclubClaim}" update=":iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
-						</div>
-						<div class="Container25">
-							<p:commandButton id="btnClaimModDelete" value="Delete" action="#{iclubClaimController.delIclubClaim}" update=":iclubFrm:pnlClaimCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
-						</div>
-						<div class="Container25">
-							<p:commandButton id="btnClaimModClose" value="Close" action="#{iclubClaimController.clearForm}" update=":iclubFrm:pnlClaimCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
+						<div class="Container100">
+							<div class="Container25">
+								<p:commandButton id="btnPlcViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubClaimController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+							</div>
+							<div class="Container25">
+								<p:commandButton id="btnClaimSave" value="Save" action="#{iclubClaimController.modIclubClaim}" update=":iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
+							</div>
+							<div class="Container25">
+								<p:commandButton id="btnClaimModDelete" value="Delete" action="#{iclubClaimController.delIclubClaim}" update=":iclubFrm:pnlClaimCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
+							</div>
+							<div class="Container25">
+								<p:commandButton id="btnClaimModClose" value="Close" action="#{iclubClaimController.clearForm}" update=":iclubFrm:pnlClaimCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
+							</div>
 						</div>
 					</div>
 				</p:panel>

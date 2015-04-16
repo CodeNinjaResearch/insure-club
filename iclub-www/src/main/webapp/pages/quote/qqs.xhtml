@@ -31,48 +31,67 @@
 		</p:dialog>
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlViewVehCont">
-				<div class="Container80 Responsive">
-					<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vmMake}">
-						<p:ajax update=":iclubFrm:mnuVehModel" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
-						<f:selectItem itemLabel="Vehicle Make" itemDisabled="true" />
-						<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
-					</p:selectOneMenu>
+				<div class="Container100">
+					<div class="Container50">
+						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Make :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vmMake}">
+							<p:ajax update=":iclubFrm:mnuVehModel" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
+							<f:selectItem itemLabel="Vehicle Make" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
+						</p:selectOneMenu>
+					</div>
 				</div>
-				<div class="EmptyBox5" />
-				<div class="Container80 Responsive">
-					<p:selectOneMenu widgetVar="mnuVehModel" id="mnuVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubVehicleMaster}">
-						<p:ajax update=":iclubFrm:mnuYear" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
-						<f:selectItem itemLabel="Vehicle Model" itemDisabled="true" />
-						<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
-					</p:selectOneMenu>
+				<div class="Container100">
+					<div class="Container50">
+						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Model :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuVehModel" id="mnuVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubVehicleMaster}">
+							<p:ajax update=":iclubFrm:mnuYear" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
+							<f:selectItem itemLabel="Vehicle Model" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
+						</p:selectOneMenu>
+					</div>
 				</div>
-				<div class="EmptyBox5" />
-				<div class="Container80 Responsive">
-					<p:selectOneMenu widgetVar="mnuYear" id="mnuYear" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuYear.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.vehicleBean.VYear}">
-						<f:selectItem itemLabel="Year" itemDisabled="true" />
-						<f:selectItems value="#{iclubQuickQuoteController.years}" />
-					</p:selectOneMenu>
+				<div class="Container100">
+					<div class="Container50">
+						<p:outputLabel styleClass="TexAlCenter" value="Year :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuYear" id="mnuYear" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuYear.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.vehicleBean.VYear}">
+							<f:selectItem itemLabel="Year" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.years}" />
+						</p:selectOneMenu>
+					</div>
 				</div>
-				<div class="EmptyBox5" />
-				<div class="Container80 Responsive">
-					<p:selectOneMenu widgetVar="mnuClaimYrs" id="mnuClaimYrs" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuClaimYrs.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.claimYN}">
-						<f:selectItem itemLabel="Claims in Last 3 Years" itemDisabled="true" />
-						<f:selectItem itemLabel="Yes" itemValue="Y" />
-						<f:selectItem itemLabel="No" itemValue="N" />
-					</p:selectOneMenu>
+				<div class="Container100">
+					<div class="Container50">
+						<p:outputLabel styleClass="TexAlCenter" value="Claims in Last 3 Years :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuClaimYrs" id="mnuClaimYrs" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuClaimYrs.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.claimYN}">
+							<f:selectItem itemLabel="Claims in Last 3 Years" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</div>
 				</div>
-				<div class="Container80 Responsive">
-					<p:outputLabel id="genPremium" value="Gen Premium :" />
-					<p:outputLabel id="genPremiumValue" value="#{iclubQuickQuoteController.genPremium}" />
+				<div class="Container100">
+					<div class="Container50">
+						<p:outputLabel styleClass="TexAlCenter" id="genPremium" value="Gen Premium :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:outputLabel id="genPremiumValue" value="#{iclubQuickQuoteController.genPremium}" />
+					</div>
 				</div>
-				<div class="EmptyBox5" />
-				<div class="Container80 Responsive">
+				<div class="Container100 Responsive">
 					<p:selectBooleanCheckbox value="#{iclubQuickQuoteController.termsAndConditionFlag}">
 						<p:ajax update=":iclubFrm:pnlViewVehCont"></p:ajax>
 					</p:selectBooleanCheckbox>
 					I Agree With Terms &amp; Conditions
 				</div>
-				<div class="EmptyBox5" />
 				<div class="Container100">
 					<p:commandButton value="Register" disabled="#{!iclubQuickQuoteController.termsAndConditionFlag}" styleClass="Fs16" action="#{iclubQuickQuoteController.registerActionListener}" ajax="false" />
 				</div>

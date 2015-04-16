@@ -19,13 +19,13 @@
 						<p:commandButton id="btnAccountShowAdd" value="Add" actionListener="#{iclubAccountController.showAddPanel}" update=":iclubFrm:pnlAccountCont" />
 					</f:facet>
 					<p:column headerText="Id">
-						<p:outputLabel value="#{bean.AId}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.AId}" />
 					</p:column>
 					<p:column headerText="Account Number">
-						<p:outputLabel value="#{bean.AAccNum}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.AAccNum}" />
 					</p:column>
 					<p:column headerText="Owner ID">
-						<p:outputLabel value="#{bean.AOwnerId}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.AOwnerId}" />
 					</p:column>
 					<p:column headerText="Status">
 						<p:selectOneMenu value="#{bean.AStatus}" disabled="true">
@@ -60,47 +60,71 @@
 				</p:dataTable>
 				<p:panel id="pnlAdd" rendered="#{iclubAccountController.showAddPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<p:inputText placeholder="Account Number" value="#{iclubAccountController.bean.AAccNum}" styleClass="TexAlCenter" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Account Number :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="Account Number" value="#{iclubAccountController.bean.AAccNum}" styleClass="TexAlCenter" />
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.AStatus}" widgetVar="mnuAStat" id="mnuAStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Account Status" itemDisabled="true" />
-								<f:selectItem itemLabel="Yes" itemValue="Y" />
-								<f:selectItem itemLabel="No" itemValue="N" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Account Status :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.AStatus}" widgetVar="mnuAStat" id="mnuAStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Account Status" itemDisabled="true" />
+									<f:selectItem itemLabel="Yes" itemValue="Y" />
+									<f:selectItem itemLabel="No" itemValue="N" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuBankName" id="mnuBankName" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubAccountController.bankName}">
-								<p:ajax update="mnuBM" process="@this" event="change" listener="#{iclubAccountController.bankNameValueChangeListener}" />
-								<f:selectItem itemLabel="Bank Name" itemDisabled="true" />
-								<f:selectItems value="#{iclubAccountController.bankNames}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Bank Name :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu widgetVar="mnuBankName" id="mnuBankName" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubAccountController.bankName}">
+									<p:ajax update="mnuBM" process="@this" event="change" listener="#{iclubAccountController.bankNameValueChangeListener}" />
+									<f:selectItem itemLabel="Bank Name" itemDisabled="true" />
+									<f:selectItems value="#{iclubAccountController.bankNames}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Branch Name" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.bmBranchName}" itemValue="#{c.bmId}" value="#{iclubAccountController.bankMasterBeans}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Branch Name :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Branch Name" itemDisabled="true" />
+									<f:selectItems var="c" itemLabel="#{c.bmBranchName}" itemValue="#{c.bmId}" value="#{iclubAccountController.bankMasterBeans}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.iclubOwnerType}" widgetVar="mnuOT" id="mnuOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubAccountController.ownerTypeBeans}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Owner Type :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.iclubOwnerType}" widgetVar="mnuOT" id="mnuOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
+									<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubAccountController.ownerTypeBeans}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.iclubAccountType}" widgetVar="mnuAcType" id="mnuAcType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Account Type" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubAccountController.accountTypeBeans}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Account Type :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.iclubAccountType}" widgetVar="mnuAcType" id="mnuAcType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Account Type" itemDisabled="true" />
+									<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubAccountController.accountTypeBeans}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
 								<p:commandButton id="btnAccountAddSave" value="Save" actionListener="#{iclubAccountController.addIclubAccount}" update=":iclubFrm:pnlAccountCont" />
@@ -113,43 +137,67 @@
 				</p:panel>
 				<p:panel id="pnlMod" rendered="#{iclubAccountController.showModPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<p:inputText placeholder="AccountId" value="#{iclubAccountController.bean.AId}" styleClass="TexAlCenter" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Account Id :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="AccountId" value="#{iclubAccountController.bean.AId}" styleClass="TexAlCenter" />
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText placeholder="Account Number" value="#{iclubAccountController.bean.AAccNum}" styleClass="TexAlCenter" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Account Number :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="Account Number" value="#{iclubAccountController.bean.AAccNum}" styleClass="TexAlCenter" />
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.AStatus}" widgetVar="mnuModAStat" id="mnuModAStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Account Status" itemDisabled="true" />
-								<f:selectItem itemLabel="Yes" itemValue="Y" />
-								<f:selectItem itemLabel="No" itemValue="N" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Account Status :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.AStatus}" widgetVar="mnuModAStat" id="mnuModAStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Account Status" itemDisabled="true" />
+									<f:selectItem itemLabel="Yes" itemValue="Y" />
+									<f:selectItem itemLabel="No" itemValue="N" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.iclubBankMaster}" widgetVar="mnuModBM" id="mnuModBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Bank Master" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.bmBankCode}" itemValue="#{c.bmId}" value="#{iclubAccountController.bankMasterBeans}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Bank Master :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.iclubBankMaster}" widgetVar="mnuModBM" id="mnuModBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Bank Master" itemDisabled="true" />
+									<f:selectItems var="c" itemLabel="#{c.bmBankCode}" itemValue="#{c.bmId}" value="#{iclubAccountController.bankMasterBeans}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.iclubOwnerType}" widgetVar="mnuModOT" id="mnuModOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubAccountController.ownerTypeBeans}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Owner Type :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.iclubOwnerType}" widgetVar="mnuModOT" id="mnuModOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
+									<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubAccountController.ownerTypeBeans}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu value="#{iclubAccountController.bean.iclubAccountType}" widgetVar="mnuModAcType" id="mnuModAcType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Account Type" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubAccountController.accountTypeBeans}" />
-							</p:selectOneMenu>
+						<div class="Container100">
+							<div class="Container50">
+								<p:outputLabel styleClass="TexAlCenter" value="Account Type :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubAccountController.bean.iclubAccountType}" widgetVar="mnuModAcType" id="mnuModAcType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Account Type" itemDisabled="true" />
+									<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubAccountController.accountTypeBeans}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
 								<p:commandButton id="btnAccountModSave" value="Save" actionListener="#{iclubAccountController.modIclubAccount}" update=":iclubFrm:grlMsg,:iclubFrm:pnlAccountCont" />
