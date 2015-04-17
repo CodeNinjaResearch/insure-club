@@ -405,6 +405,11 @@ public class IclubPolicyController implements Serializable {
 
 	public String claimAction() {
 
+		bean = new IclubPolicyBean();
+		beans = new ArrayList<IclubPolicyBean>();
+		vehhicleFlag = false;
+		propertyFlag = false;
+		iItemFalg = false;
 		return "claim";
 	}
 
