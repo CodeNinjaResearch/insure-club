@@ -90,7 +90,10 @@
 				<value>za.co.iclub.pss.orm.bean.IclubField</value>
 				<value>za.co.iclub.pss.orm.bean.IclubNamedQueries</value>
 
-			</list>
+				<value>za.co.iclub.pss.orm.bean.IclubCohortType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubCohortPerson</value>
+				<value>za.co.iclub.pss.orm.bean.IclubCohortClaim</value>
+				<value>za.co.iclub.pss.orm.bean.IclubCohort</value></list>
 		</property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -442,4 +445,23 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-</beans>
+	<bean id="IclubCohortTypeDAO" class="za.co.iclub.pss.orm.dao.IclubCohortTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCohortPersonDAO" class="za.co.iclub.pss.orm.dao.IclubCohortPersonDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCohortClaimDAO" class="za.co.iclub.pss.orm.dao.IclubCohortClaimDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCohortDAO" class="za.co.iclub.pss.orm.dao.IclubCohortDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>

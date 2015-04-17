@@ -46,6 +46,7 @@ public class IclubPersonDAO {
 	public static final String _PLAT = "PLat";
 	public static final String _PLONG = "PLong";
 	public static final String _PZIP_CD = "PZipCd";
+	public static final String _PAGE = "PAge";
 
 	private SessionFactory sessionFactory;
 
@@ -181,6 +182,10 @@ public class IclubPersonDAO {
 
 	public List<IclubPerson> findByPZipCd(Object PZipCd) {
 		return findByProperty(_PZIP_CD, PZipCd);
+	}
+
+	public List<IclubPerson> findByPAge(Object PAge) {
+		return findByProperty(_PAGE, PAge);
 	}
 
 	public List findAll() {

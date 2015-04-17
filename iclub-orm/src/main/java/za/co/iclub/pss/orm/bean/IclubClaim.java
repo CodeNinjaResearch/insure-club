@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +17,7 @@ import javax.persistence.Table;
  * IclubClaim entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_claim")
+@Table(name = "iclub_claim", catalog = "iclubdb")
 public class IclubClaim implements java.io.Serializable {
 
 	// Fields
@@ -26,7 +25,7 @@ public class IclubClaim implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7065366325175419740L;
+	private static final long serialVersionUID = -1890685393644135374L;
 	private String CId;
 	private IclubPerson iclubPerson;
 	private IclubClaimStatus iclubClaimStatus;
@@ -35,6 +34,7 @@ public class IclubClaim implements java.io.Serializable {
 	private Integer CNumItems;
 	private Double CValue;
 	private Timestamp CCrtdDt;
+	private Set<IclubCohortClaim> iclubCohortClaims = new HashSet<IclubCohortClaim>(0);
 	private Set<IclubPayment> iclubPayments = new HashSet<IclubPayment>(0);
 	private Set<IclubClaimItem> iclubClaimItems = new HashSet<IclubClaimItem>(0);
 
@@ -50,7 +50,7 @@ public class IclubClaim implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubClaim(String CId, IclubPerson iclubPerson, IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy, Long CNumber, Integer CNumItems, Double CValue, Timestamp CCrtdDt, Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
+	public IclubClaim(String CId, IclubPerson iclubPerson, IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy, Long CNumber, Integer CNumItems, Double CValue, Timestamp CCrtdDt, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
 		this.CId = CId;
 		this.iclubPerson = iclubPerson;
 		this.iclubClaimStatus = iclubClaimStatus;
@@ -59,6 +59,7 @@ public class IclubClaim implements java.io.Serializable {
 		this.CNumItems = CNumItems;
 		this.CValue = CValue;
 		this.CCrtdDt = CCrtdDt;
+		this.iclubCohortClaims = iclubCohortClaims;
 		this.iclubPayments = iclubPayments;
 		this.iclubClaimItems = iclubClaimItems;
 	}
@@ -138,6 +139,15 @@ public class IclubClaim implements java.io.Serializable {
 
 	public void setCCrtdDt(Timestamp CCrtdDt) {
 		this.CCrtdDt = CCrtdDt;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubClaim")
+	public Set<IclubCohortClaim> getIclubCohortClaims() {
+		return this.iclubCohortClaims;
+	}
+
+	public void setIclubCohortClaims(Set<IclubCohortClaim> iclubCohortClaims) {
+		this.iclubCohortClaims = iclubCohortClaims;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubClaim")
