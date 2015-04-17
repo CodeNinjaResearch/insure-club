@@ -452,6 +452,38 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 
 	</bean>
+	<bean id="IclubCohortPersonService" class="za.co.iclub.pss.ws.service.IclubCohortPersonService">
+		<property name="iclubCohortPersonDAO" ref="IclubCohortPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
+
+	</bean>
+
+	<bean id="IclubCohortService" class="za.co.iclub.pss.ws.service.IclubCohortService">
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCohortTypeDAO" ref="IclubCohortTypeDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+
+	<bean id="IclubCohortClaimService" class="za.co.iclub.pss.ws.service.IclubCohortClaimService">
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+		<property name="iclubCohortClaimDAO" ref="iclubCohortClaimDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubClaimDAO" ref="IclubClaimDAO" />
+		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+
+	<bean id="IclubCohortTypeService" class="za.co.iclub.pss.ws.service.IclubCohortTypeService">
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+		<property name="iclubCohortTypeDAO" ref="IclubCohortTypeDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
+
 
 
 </beans>
