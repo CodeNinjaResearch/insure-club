@@ -1,19 +1,19 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtEventCont" widgetVar="dtEventCont" value="#{iclubEventController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Eventes Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{bean.EId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EId}" />
 		</p:column>
 		<p:column headerText="User Id">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column headerText="Event Type">
-			<p:outputLabel value="#{bean.iclubEventType}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubEventType}" />
 		</p:column>
 		<p:column headerText="Desc">
-			<p:outputLabel value="#{bean.EDesc}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EDesc}" />
 		</p:column>
 		<p:column headerText="Created Date">
-			<p:outputLabel value="#{bean.ECrtdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ECrtdDt}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnEventSummary" icon="ui-icon-summary" ajax="false" action="#{iclubEventController.showSummary}" update=":eventFrm:grlMsg">

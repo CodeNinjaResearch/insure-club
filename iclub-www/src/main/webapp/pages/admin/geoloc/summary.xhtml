@@ -1,61 +1,70 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="ID" />
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="ID" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glId}" />
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glId}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="User ID" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.iclubPerson}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="User ID" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Address" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glAddress}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.iclubPerson}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Lat" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLat}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Address" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Long" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLong}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glAddress}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Rate" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glRate}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Lat" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Created Date" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glCrtdDt}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLat}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Long" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glLong}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Rate" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glRate}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="Created Date" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubGeoLocController.bean.glCrtdDt}" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container100">
+	<div class="Container100 Responsive">
 		<p:commandButton id="btnGeoLocCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlGeoLocCont" value="Close" actionListener="#{iclubGeoLocController.showView}" />
 	</div>
 </ui:composition>

@@ -1,32 +1,56 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubPurposeTypeController.bean.iclubInsuranceItemType}">
-			<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
-			<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
-		</p:selectOneMenu>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Insurance Item Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubPurposeTypeController.bean.iclubInsuranceItemType}">
+				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+			</p:selectOneMenu>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubPurposeTypeController.bean.ptShortDesc}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Short Desc :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubPurposeTypeController.bean.ptShortDesc}" />
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Long Des" value="#{iclubPurposeTypeController.bean.ptLongDesc}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Long Desc :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubPurposeTypeController.bean.ptLongDesc}" />
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubPurposeTypeController.bean.ptStatus}">
-			<f:selectItem itemLabel="Status" itemDisabled="true" />
-			<f:selectItem itemLabel="Yes" itemValue="Y" />
-			<f:selectItem itemLabel="No" itemValue="N" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubPurposeTypeController.bean.ptStatus}">
+				<f:selectItem itemLabel="Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container100">
-		<div class="Container50">
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
 			<p:commandButton id="btnPurposeTypeCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlPurposeTypeCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubPurposeTypeController.addIclubPurposeType}" />
 		</div>
-		<div class="Container50">
+		<div class="Container50 Responsive">
 			<p:commandButton id="btnPurposeTypeCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlPurposeTypeCont" value="Close" actionListener="#{iclubPurposeTypeController.showView}" />
 		</div>
 	</div>

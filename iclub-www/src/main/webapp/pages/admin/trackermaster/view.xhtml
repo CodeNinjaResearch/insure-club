@@ -1,28 +1,28 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtTrackerMasterCont" widgetVar="dtTrackerMasterCont" value="#{iclubTrackerMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No TrackerMasteres Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{bean.tmId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmId}" />
 		</p:column>
 		<p:column headerText="User Id">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column headerText="Name">
-			<p:outputLabel value="#{bean.tmName}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmName}" />
 		</p:column>
 		<p:column headerText="Trade Name">
-			<p:outputLabel value="#{bean.tmTradeName}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmTradeName}" />
 		</p:column>
 		<p:column headerText="Location">
-			<p:outputLabel value="#{bean.tmLocation}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmLocation}" />
 		</p:column>
 		<p:column headerText="Lat">
-			<p:outputLabel value="#{bean.tmLat}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmLat}" />
 		</p:column>
 		<p:column headerText="Reg Number">
-			<p:outputLabel value="#{bean.tmRegNum}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmRegNum}" />
 		</p:column>
 		<p:column headerText="Created Date">
-			<p:outputLabel value="#{bean.tmCrtdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmCrtdDt}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnTrackerMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubTrackerMasterController.showEdit}" update=":iclubFrm:grlMsg">

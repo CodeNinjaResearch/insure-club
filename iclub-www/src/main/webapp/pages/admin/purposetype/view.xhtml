@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtPurposeTypeCont" widgetVar="dtPurposeTypeCont" value="#{iclubPurposeTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PurposeTypees Available">
 		<p:column headerText="ID">
-			<p:outputLabel value="#{bean.ptId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptId}" />
 		</p:column>
 		<p:column headerText="Insuranance Item Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
@@ -10,19 +10,19 @@
 			</p:selectOneMenu>
 		</p:column>
 		<p:column headerText="Short Desc">
-			<p:outputLabel value="#{bean.ptShortDesc}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptShortDesc}" />
 		</p:column>
 		<p:column headerText="Long Desc">
-			<p:outputLabel value="#{bean.ptLongDesc}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptLongDesc}" />
 		</p:column>
 		<p:column headerText="Status">
-			<p:outputLabel value="#{bean.ptStatus}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptStatus}" />
 		</p:column>
 		<p:column headerText="Created Date">
-			<p:outputLabel value="#{bean.ptCrtdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptCrtdDt}" />
 		</p:column>
 		<p:column headerText="User ID">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnPurposeTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubPurposeTypeController.showEdit}" update=":iclubFrm:grlMsg">

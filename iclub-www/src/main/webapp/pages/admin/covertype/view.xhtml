@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtCoverTypeCont" widgetVar="dtCoverTypeCont" value="#{iclubCoverTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No CoverTypees Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{bean.ctId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctId}" />
 		</p:column>
 		<p:column headerText="Insurance Item Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
@@ -10,16 +10,16 @@
 			</p:selectOneMenu>
 		</p:column>
 		<p:column headerText="Short Desc">
-			<p:outputLabel value="#{bean.ctShortDesc}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctShortDesc}" />
 		</p:column>
 		<p:column headerText="Long Desc">
-			<p:outputLabel value="#{bean.ctLongDesc}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctLongDesc}" />
 		</p:column>
 		<p:column headerText="Status">
-			<p:outputLabel value="#{bean.ctStatus}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctStatus}" />
 		</p:column>
 		<p:column headerText="Created Date">
-			<p:outputLabel value="#{bean.ctCrtdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctCrtdDt}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnCoverTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubCoverTypeController.showEdit}" update=":iclubFrm:grlMsg">

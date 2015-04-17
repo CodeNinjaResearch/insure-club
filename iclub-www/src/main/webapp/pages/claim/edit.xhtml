@@ -100,16 +100,16 @@
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">
-							<div class="Container25">
+							<div class="Container25 Responsive">
 								<p:commandButton id="btnPlcViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubClaimController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 							</div>
-							<div class="Container25">
+							<div class="Container25 Responsive">
 								<p:commandButton id="btnClaimSave" value="Save" action="#{iclubClaimController.modIclubClaim}" update=":iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
 							</div>
-							<div class="Container25">
+							<div class="Container25 Responsive">
 								<p:commandButton id="btnClaimModDelete" value="Delete" action="#{iclubClaimController.delIclubClaim}" update=":iclubFrm:pnlClaimCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
 							</div>
-							<div class="Container25">
+							<div class="Container25 Responsive">
 								<p:commandButton id="btnClaimModClose" value="Close" action="#{iclubClaimController.clearForm}" update=":iclubFrm:pnlClaimCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
 							</div>
 						</div>

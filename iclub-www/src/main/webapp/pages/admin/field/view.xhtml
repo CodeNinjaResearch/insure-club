@@ -1,16 +1,16 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtFieldCont" widgetVar="dtFieldCont" value="#{iclubFieldController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Entity Types Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{ bean.FId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{ bean.FId}" />
 		</p:column>
 		<p:column headerText="Desc">
-			<p:outputLabel value="#{bean.FDesc}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.FDesc}" />
 		</p:column>
 		<p:column headerText="Name">
-			<p:outputLabel value="#{bean.FName}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.FName}" />
 		</p:column>
 		<p:column headerText="Lookup Table Name">
-			<p:outputLabel value="#{bean.FLTblName}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.FLTblName}" />
 		</p:column>
 		<p:column headerText="Rate">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.FRate}">

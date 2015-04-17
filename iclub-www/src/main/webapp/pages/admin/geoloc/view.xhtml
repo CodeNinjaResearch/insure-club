@@ -1,25 +1,25 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtGeoLocCont" widgetVar="dtGeoLocCont" value="#{iclubGeoLocController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No GeoLoces Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{bean.glId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glId}" />
 		</p:column>
 		<p:column headerText="User Id">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column headerText="Adress">
-			<p:outputLabel value="#{bean.glAddress}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glAddress}" />
 		</p:column>
 		<p:column headerText="lat">
-			<p:outputLabel value="#{bean.glLat}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glLat}" />
 		</p:column>
 		<p:column headerText="Long">
-			<p:outputLabel value="#{bean.glLong}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glLong}" />
 		</p:column>
 		<p:column headerText="Rate">
-			<p:outputLabel value="#{bean.glRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glRate}" />
 		</p:column>
 		<p:column headerText="created Date">
-			<p:outputLabel value="#{bean.glCrtdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glCrtdDt}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnGeoLocSummary" icon="ui-icon-summary" ajax="false" action="#{iclubGeoLocController.showSummary}" update=":geolocFrm:grlMsg">

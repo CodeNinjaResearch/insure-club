@@ -1,25 +1,25 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtSecurityMasterCont" widgetVar="dtSecurityMasterCont" value="#{iclubSecurityMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No SecurityMasteres Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{bean.smId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
 		</p:column>
 		<p:column headerText="Item Type">
-			<p:selectOneMenu value="#{bean.iclubInsuranceItemType}">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
 				<f:selectItem itemLabel="Please Select" itemValue="-1" />
 				<f:selectItems value="#{iclubSecurityMasterController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 			</p:selectOneMenu>
 		</p:column>
 		<p:column headerText="Description">
-			<p:outputLabel value="#{bean.smDesc}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smDesc}" />
 		</p:column>
 		<p:column headerText="Status">
-			<p:outputLabel value="#{bean.smStatus}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smStatus}" />
 		</p:column>
 		<p:column headerText="Created Date">
-			<p:outputLabel value="#{bean.smCrtdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
 		</p:column>
 		<p:column headerText="User Id">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnSecurityMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubSecurityMasterController.showEdit}" update=":iclubFrm:grlMsg">

@@ -7,22 +7,22 @@
 						<p:commandButton id="btnRateEngineShowAdd" value="Add" actionListener="#{iclubRatingController.showAddPanel}" update=":iclubFrm:pnlRateEngineCont" />
 					</f:facet>
 					<p:column headerText="Id">
-						<p:outputLabel value="#{bean.reId}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reId}" />
 					</p:column>
 					<p:column headerText="Rate">
-						<p:outputLabel value="#{bean.reRate}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reRate}" />
 					</p:column>
 					<p:column headerText="Max Value">
-						<p:outputLabel value="#{bean.reMaxValue}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reMaxValue}" />
 					</p:column>
 					<p:column headerText="Base Value">
-						<p:outputLabel value="#{bean.reBaseValue}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
 					</p:column>
 					<p:column headerText="Field Name">
-						<p:outputLabel value="#{bean.reFieldName}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reFieldName}" />
 					</p:column>
 					<p:column headerText="Rate Type">
-						<p:outputLabel value="#{bean.iclubRateType}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubRateType}" />
 					</p:column>
 					<p:column headerText="Status">
 						<p:selectOneMenu widgetVar="mnuViewStatus" id="mnuViewStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.reStatus}" disabled="true">
@@ -39,31 +39,55 @@
 				</p:dataTable>
 				<p:panel id="pnlAdd" rendered="#{iclubRatingController.showAddPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Base Value" value="#{iclubRatingController.bean.reBaseValue}" />
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Base Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Base Value" value="#{iclubRatingController.bean.reBaseValue}" />
+							</div>
+							<div class="EmptyBox5" />
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Max Value" value="#{iclubRatingController.bean.reMaxValue}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Max Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Max Value" value="#{iclubRatingController.bean.reMaxValue}" />
+							</div>
+							<div class="EmptyBox5" />
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Rate" value="#{iclubRatingController.bean.reRate}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Rate :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Rate" value="#{iclubRatingController.bean.reRate}" />
+							</div>
+							<div class="EmptyBox5" />
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubRatingController.bean.reStatus}">
-								<f:selectItem itemLabel="Status" itemDisabled="true" />
-								<f:selectItem itemLabel="Yes" itemValue="Y" />
-								<f:selectItem itemLabel="No" itemValue="N" />
-							</p:selectOneMenu>
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubRatingController.bean.reStatus}">
+									<f:selectItem itemLabel="Status" itemDisabled="true" />
+									<f:selectItem itemLabel="Yes" itemValue="Y" />
+									<f:selectItem itemLabel="No" itemValue="N" />
+								</p:selectOneMenu>
+							</div>
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container100">
-							<div class="Container50">
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
 								<p:commandButton id="btnRateEngineAddSave" value="Save" actionListener="#{iclubRatingController.addIclubRateEngine}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
 							</div>
-							<div class="Container50">
+							<div class="Container50 Responsive">
 								<p:commandButton id="btnRateEngineAddClose" value="Close" actionListener="#{iclubRatingController.clearForm}" update=":iclubFrm:pnlRateEngineCont" />
 							</div>
 						</div>
@@ -71,38 +95,68 @@
 				</p:panel>
 				<p:panel id="pnlMod" rendered="#{iclubRatingController.showModPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container80 Responsive">
-							<p:outputLabel value="#{iclubRatingController.bean.reId}" />
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Rate Engine ID :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubRatingController.bean.reId}" />
+							</div>
+							<div class="EmptyBox5" />
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Base Value" value="#{iclubRatingController.bean.reBaseValue}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Base Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Base Value" value="#{iclubRatingController.bean.reBaseValue}" />
+							</div>
+							<div class="EmptyBox5" />
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Max Value" value="#{iclubRatingController.bean.reMaxValue}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Max Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Max Value" value="#{iclubRatingController.bean.reMaxValue}" />
+							</div>
+							<div class="EmptyBox5" />
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Rate" value="#{iclubRatingController.bean.reRate}" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Rate :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Rate" value="#{iclubRatingController.bean.reRate}" />
+							</div>
+							<div class="EmptyBox5" />
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubRatingController.bean.reStatus}">
-								<f:selectItem itemLabel="Status" itemDisabled="true" />
-								<f:selectItem itemLabel="Yes" itemValue="Y" />
-								<f:selectItem itemLabel="No" itemValue="N" />
-							</p:selectOneMenu>
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubRatingController.bean.reStatus}">
+									<f:selectItem itemLabel="Status" itemDisabled="true" />
+									<f:selectItem itemLabel="Yes" itemValue="Y" />
+									<f:selectItem itemLabel="No" itemValue="N" />
+								</p:selectOneMenu>
+							</div>
 						</div>
 						<div class="EmptyBox5" />
-						<div class="Container100">
-							<div class="Container33">
+						<div class="Container100 Responsive">
+							<div class="Container33 Responsive">
 								<p:commandButton id="btnRateEngineModSave" value="Save" actionListener="#{iclubRatingController.modIclubRateEngine}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
 							</div>
-							<div class="Container33">
+							<div class="Container33 Responsive">
 								<p:commandButton id="btnRateEngineModDelete" value="Delete" actionListener="#{iclubRatingController.delIclubRateEngine}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
 							</div>
-							<div class="Container33">
+							<div class="Container33 Responsive">
 								<p:commandButton id="btnRateEngineModClose" value="Close" actionListener="#{iclubRatingController.clearForm}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
 							</div>
 						</div>

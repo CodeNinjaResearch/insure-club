@@ -61,41 +61,41 @@
 				<p:panel id="pnlAdd">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<div class="Container100">
-								<div class="Container50">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="Policy ID :" />
 								</div>
-								<div class="Container50">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.PId}" />
 								</div>
 							</div>
 						</div>
 						<div class="Container80 Responsive">
-							<div class="Container100">
-								<div class="Container50">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="Quote ID :" />
 								</div>
-								<div class="Container50">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.iclubQuote}" />
 								</div>
 							</div>
 						</div>
 						<div class="Container80 Responsive">
-							<div class="Container100">
-								<div class="Container50">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="Account ID :" />
 								</div>
-								<div class="Container50">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.iclubAccount}" />
 								</div>
 							</div>
 						</div>
 						<div class="Container80 Responsive">
-							<div class="Container100">
-								<div class="Container50">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="Created Date:" />
 								</div>
-								<div class="Container50">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.PCrtdDt}" />
 								</div>
 							</div>
@@ -113,17 +113,17 @@
 						</div>
 						<div class="EmptyBox5" />
 					</div>
-					<div class="Container100">
-						<div class="Container25">
+					<div class="Container100 Responsive">
+						<div class="Container25 Responsive">
 							<p:commandButton id="btnPlcViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubPolicyController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 						</div>
-						<div class="Container25">
+						<div class="Container25 Responsive">
 							<p:commandButton id="btnPolicySave" value="Save" action="#{iclubPolicyController.modIclubPolicy}" update=":iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
 						</div>
-						<div class="Container25">
+						<div class="Container25 Responsive">
 							<p:commandButton id="btnPolicyModDelete" value="Delete" action="#{iclubPolicyController.delIclubPolicy}" update=":iclubFrm:pnlPolicyCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
 						</div>
-						<div class="Container25">
+						<div class="Container25 Responsive">
 							<p:commandButton id="btnPolicyModClose" value="Close" action="#{iclubPolicyController.clearForm}" update=":iclubFrm:pnlPolicyCont,:iclubFrm:pnlAdd,:iclubFrm:grlMsg" />
 						</div>
 					</div>

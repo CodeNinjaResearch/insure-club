@@ -1,73 +1,129 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubRateTypeController.bean.rtId}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Rate Type ID :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubRateTypeController.bean.rtId}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubRateTypeController.bean.iclubPerson}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="User ID :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubRateTypeController.bean.iclubPerson}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubInsuranceItemType}">
-			<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
-			<f:selectItems value="#{iclubRateTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Insurance Item Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubInsuranceItemType}">
+				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubRateTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+			</p:selectOneMenu>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubEntityType}">
-			<f:selectItem itemLabel="Entity Type" itemDisabled="true" />
-			<f:selectItems value="#{iclubRateTypeController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Entity Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubEntityType}">
+				<f:selectItem itemLabel="Entity Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubRateTypeController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
+			</p:selectOneMenu>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubField}">
-			<f:selectItem itemLabel="Field" itemDisabled="true" />
-			<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Field :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubField}">
+				<f:selectItem itemLabel="Field" itemDisabled="true" />
+				<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
+			</p:selectOneMenu>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtType}">
-			<f:selectItem itemLabel="Rate Type" itemDisabled="true" />
-			<f:selectItems value="#{iclubRateTypeController.rateType}" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Rate Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtType}">
+				<f:selectItem itemLabel="Rate Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubRateTypeController.rateType}" />
+			</p:selectOneMenu>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtStatus}">
-			<f:selectItem itemLabel="Rate Status" itemDisabled="true" />
-			<f:selectItem itemLabel="Yes" itemValue="Y" />
-			<f:selectItem itemLabel="No" itemValue="N" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Rate Status :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtStatus}">
+				<f:selectItem itemLabel="Rate Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtQuoteType}">
-			<f:selectItem itemLabel="Quote Type" itemDisabled="true" />
-			<f:selectItems value="#{iclubRateTypeController.quoteType}" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Quote Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtQuoteType}">
+				<f:selectItem itemLabel="Quote Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubRateTypeController.quoteType}" />
+			</p:selectOneMenu>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Short Desc :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubRateTypeController.bean.rtShortDesc}" />
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubRateTypeController.bean.rtLongDesc}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Long Desc :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubRateTypeController.bean.rtLongDesc}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container100">
-		<div class="Container33">
+	<div class="Container100 Responsive">
+		<div class="Container33 Responsive">
 			<p:commandButton id="btnRateTypeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" value="Update" actionListener="#{iclubRateTypeController.modIclubRateType}" />
 		</div>
-		<div class="Container33">
+		<div class="Container33 Responsive">
 			<p:commandButton id="btnRateTypeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" value="Delete" actionListener="#{iclubRateTypeController.delIclubRateType}" />
 		</div>
-		<div class="Container33">
+		<div class="Container33 Responsive">
 			<p:commandButton id="btnRateTypeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlRateTypeCont" value="Close" actionListener="#{iclubRateTypeController.showView}" />
 		</div>
 	</div>

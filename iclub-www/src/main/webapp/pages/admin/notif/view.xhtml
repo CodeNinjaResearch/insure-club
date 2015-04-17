@@ -1,28 +1,28 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtNotifCont" widgetVar="dtNotifCont" value="#{iclubNotifController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Notifes Available">
 		<p:column headerText="ID">
-			<p:outputLabel value="#{bean.NId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.NId}" />
 		</p:column>
 		<p:column headerText="User Id">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column headerText="Notification Type">
-			<p:outputLabel value="#{bean.iclubNotificationType}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubNotificationType}" />
 		</p:column>
 		<p:column headerText="Title">
-			<p:outputLabel value="#{bean.NTitle}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.NTitle}" />
 		</p:column>
 		<p:column headerText="Body">
-			<p:outputLabel value="#{bean.NBody}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.NBody}" />
 		</p:column>
 		<p:column headerText="From Address">
-			<p:outputLabel value="#{bean.NFromAddr}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.NFromAddr}" />
 		</p:column>
 		<p:column headerText="To List">
-			<p:outputLabel value="#{bean.NToList}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.NToList}" />
 		</p:column>
 		<p:column headerText="Status">
-			<p:outputLabel value="#{bean.NStatus}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.NStatus}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnNotifSummary" icon="ui-icon-summary" ajax="false" action="#{iclubNotifController.showSummary}" update=":notifFrm:grlMsg">

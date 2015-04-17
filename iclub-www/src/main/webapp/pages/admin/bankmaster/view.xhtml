@@ -1,13 +1,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtBankMasterCont" widgetVar="dtBankMasterCont" value="#{iclubBankMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No BankMasteres Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{bean.bmId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmId}" />
 		</p:column>
 		<p:column headerText="Bank Name">
-			<p:outputLabel value="#{bean.bmBankName}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBankName}" />
 		</p:column>
 		<p:column headerText="Branch Name">
-			<p:outputLabel value="#{bean.bmBranchName}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBranchName}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnBankMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubBankMasterController.showSummary}" update=":bankmasterFrm:grlMsg">

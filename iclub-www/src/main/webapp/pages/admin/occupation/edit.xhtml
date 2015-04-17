@@ -1,32 +1,53 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubOccupationController.bean.OId}" />
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Occupation ID :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubOccupationController.bean.OId}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubOccupationController.bean.ODesc}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="User ID :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubOccupationController.bean.iclubPerson}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:outputLabel styleClass="TexAlCenter" value="#{iclubOccupationController.bean.iclubPerson}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Description :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Desc" value="#{iclubOccupationController.bean.ODesc}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubOccupationController.bean.OStatus}">
-			<f:selectItem itemLabel="Status" itemDisabled="true" />
-			<f:selectItem itemLabel="Yes" itemValue="Y" />
-			<f:selectItem itemLabel="No" itemValue="N" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubOccupationController.bean.OStatus}">
+				<f:selectItem itemLabel="Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container100">
-		<div class="Container33">
+	<div class="Container100 Responsive">
+		<div class="Container33 Responsive">
 			<p:commandButton id="btnOccupationEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="Update" actionListener="#{iclubOccupationController.modIclubOccupation}" />
 		</div>
-		<div class="Container33">
+		<div class="Container33 Responsive">
 			<p:commandButton id="btnOccupationDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="Delete" actionListener="#{iclubOccupationController.delIclubOccupation}" />
 		</div>
-		<div class="Container33">
+		<div class="Container33 Responsive">
 			<p:commandButton id="btnOccupationCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlOccupationCont" value="Close" actionListener="#{iclubOccupationController.showView}" />
 		</div>
 	</div>

@@ -1,29 +1,44 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubSecurityMasterController.bean.iclubInsuranceItemType}">
-			<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
-			<f:selectItems value="#{iclubSecurityMasterController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Insurance Item Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubSecurityMasterController.bean.iclubInsuranceItemType}">
+				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubSecurityMasterController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+			</p:selectOneMenu>
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubSecurityMasterController.bean.smDesc}" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Description :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubSecurityMasterController.bean.smDesc}" />
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container80 Responsive">
-		<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubSecurityMasterController.bean.smStatus}">
-			<f:selectItem itemLabel="Security Master Status" itemDisabled="true" />
-			<f:selectItem itemLabel="Yes" itemValue="Y" />
-			<f:selectItem itemLabel="No" itemValue="N" />
-		</p:selectOneMenu>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Security Master Status :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubSecurityMasterController.bean.smStatus}">
+				<f:selectItem itemLabel="Security Master Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
 	</div>
 	<div class="EmptyBox5" />
-	<div class="Container100">
-		<div class="Container50">
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
 			<p:commandButton id="btnSecurityMasterCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlSecurityMasterCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubSecurityMasterController.addIclubSecurityMaster}" />
 		</div>
-		<div class="Container50">
+		<div class="Container50 Responsive">
 			<p:commandButton id="btnSecurityMasterCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSecurityMasterCont" value="Close" actionListener="#{iclubSecurityMasterController.showView}" />
 		</div>
 	</div>

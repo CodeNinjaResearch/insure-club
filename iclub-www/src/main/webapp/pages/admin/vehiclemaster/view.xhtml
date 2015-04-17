@@ -1,31 +1,31 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtVehicleMasterCont" widgetVar="dtVehicleMasterCont" value="#{iclubVehicleMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No VehicleMasteres Available">
 		<p:column headerText="Id">
-			<p:outputLabel value="#{bean.vmId}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmId}" />
 		</p:column>
 		<p:column headerText="User Id">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column headerText="Vm Make">
-			<p:outputLabel value="#{bean.vmMake}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMake}" />
 		</p:column>
 		<p:column headerText="Vm Model">
-			<p:outputLabel value="#{bean.vmModel}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmModel}" />
 		</p:column>
 		<p:column headerText="Orgin Rate">
-			<p:outputLabel value="#{bean.vmOrigRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmOrigRate}" />
 		</p:column>
 		<p:column headerText="Market Rate">
-			<p:outputLabel value="#{bean.vmMrktRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMrktRate}" />
 		</p:column>
 		<p:column headerText="Ret Rate">
-			<p:outputLabel value="#{bean.vmRetRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRetRate}" />
 		</p:column>
 		<p:column headerText="Prod Date">
-			<p:outputLabel value="#{bean.vmProdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmProdDt}" />
 		</p:column>
 		<p:column headerText="Created Date">
-			<p:outputLabel value="#{bean.vmCrtdDt}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmCrtdDt}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnVehicleMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubVehicleMasterController.showSummary}" update=":vehiclemasterFrm:grlMsg">
