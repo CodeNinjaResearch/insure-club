@@ -471,7 +471,7 @@
 
 	<bean id="IclubCohortClaimService" class="za.co.iclub.pss.ws.service.IclubCohortClaimService">
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
-		<property name="iclubCohortClaimDAO" ref="iclubCohortClaimDAO" />
+		<property name="iclubCohortClaimDAO" ref="IclubCohortClaimDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubClaimDAO" ref="IclubClaimDAO" />
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
