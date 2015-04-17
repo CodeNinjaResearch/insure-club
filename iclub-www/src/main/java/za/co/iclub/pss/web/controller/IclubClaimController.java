@@ -497,6 +497,12 @@ public class IclubClaimController implements Serializable {
 			bean.setIclubClaimStatus(model.getIclubClaimStatus());
 			bean.setIclubPerson(model.getIclubPerson());
 
+			if (model.getIclubCohortClaims() != null && model.getIclubCohortClaims().length > 0) {
+				String[] iclubCohortClaims = model.getIclubCohortClaims();
+
+				bean.setIclubCohortClaims(iclubCohortClaims);
+			}
+
 			if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
 				String[] payments = new String[model.getIclubPayments().length];
 				int i = 0;

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubClaim;
 import za.co.iclub.pss.orm.bean.IclubClaimItem;
+import za.co.iclub.pss.orm.bean.IclubCohortClaim;
 import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.dao.IclubClaimDAO;
 import za.co.iclub.pss.orm.dao.IclubClaimStatusDAO;
@@ -158,6 +159,16 @@ public class IclubClaimService {
 				model.setIclubClaimStatus(iCC.getIclubClaimStatus() != null ? (iCC.getIclubClaimStatus().getCsId()) : null);
 				model.setIclubPerson(iCC.getIclubPerson() != null ? (iCC.getIclubPerson().getPId()) : null);
 
+				if (iCC.getIclubCohortClaims() != null && iCC.getIclubCohortClaims().size() > 0) {
+					String[] iclubCohortClaims = new String[iCC.getIclubCohortClaims().size()];
+					int i = 0;
+					for (IclubCohortClaim iclubCohortClaim : iCC.getIclubCohortClaims()) {
+						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+						i++;
+					}
+					model.setIclubCohortClaims(iclubCohortClaims);
+				}
+
 				if (iCC.getIclubPayments() != null && iCC.getIclubPayments().size() > 0) {
 					String[] payments = new String[iCC.getIclubPayments().size()];
 					int i = 0;
@@ -210,6 +221,15 @@ public class IclubClaimService {
 				model.setIclubClaimStatus(iCC.getIclubClaimStatus() != null ? (iCC.getIclubClaimStatus().getCsId()) : null);
 				model.setIclubPerson(iCC.getIclubPerson() != null ? (iCC.getIclubPerson().getPId()) : null);
 
+				if (iCC.getIclubCohortClaims() != null && iCC.getIclubCohortClaims().size() > 0) {
+					String[] iclubCohortClaims = new String[iCC.getIclubCohortClaims().size()];
+					int i = 0;
+					for (IclubCohortClaim iclubCohortClaim : iCC.getIclubCohortClaims()) {
+						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+						i++;
+					}
+					model.setIclubCohortClaims(iclubCohortClaims);
+				}
 				if (iCC.getIclubPayments() != null && iCC.getIclubPayments().size() > 0) {
 					String[] payments = new String[iCC.getIclubPayments().size()];
 					int i = 0;
@@ -256,6 +276,15 @@ public class IclubClaimService {
 			model.setIclubClaimStatus(bean.getIclubClaimStatus() != null ? (bean.getIclubClaimStatus().getCsId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 
+			if (bean.getIclubCohortClaims() != null && bean.getIclubCohortClaims().size() > 0) {
+				String[] iclubCohortClaims = new String[bean.getIclubCohortClaims().size()];
+				int i = 0;
+				for (IclubCohortClaim iclubCohortClaim : bean.getIclubCohortClaims()) {
+					iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+					i++;
+				}
+				model.setIclubCohortClaims(iclubCohortClaims);
+			}
 			if (bean.getIclubPayments() != null && bean.getIclubPayments().size() > 0) {
 				String[] payments = new String[bean.getIclubPayments().size()];
 				int i = 0;
@@ -263,7 +292,7 @@ public class IclubClaimService {
 					payments[i] = payment.getPId();
 					i++;
 				}
-				
+
 				model.setIclubPayments(payments);
 			}
 
@@ -282,7 +311,7 @@ public class IclubClaimService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/getByPolicyId/{policyId}")
 	@Produces("application/json")
@@ -301,6 +330,15 @@ public class IclubClaimService {
 			model.setIclubClaimStatus(bean.getIclubClaimStatus() != null ? (bean.getIclubClaimStatus().getCsId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 
+			if (bean.getIclubCohortClaims() != null && bean.getIclubCohortClaims().size() > 0) {
+				String[] iclubCohortClaims = new String[bean.getIclubCohortClaims().size()];
+				int i = 0;
+				for (IclubCohortClaim iclubCohortClaim : bean.getIclubCohortClaims()) {
+					iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+					i++;
+				}
+				model.setIclubCohortClaims(iclubCohortClaims);
+			}
 			if (bean.getIclubPayments() != null && bean.getIclubPayments().size() > 0) {
 				String[] payments = new String[bean.getIclubPayments().size()];
 				int i = 0;
@@ -308,7 +346,7 @@ public class IclubClaimService {
 					payments[i] = payment.getPId();
 					i++;
 				}
-				
+
 				model.setIclubPayments(payments);
 			}
 
@@ -327,7 +365,6 @@ public class IclubClaimService {
 		}
 		return model;
 	}
-
 
 	public IclubClaimDAO getIclubClaimDAO() {
 		return iclubClaimDAO;

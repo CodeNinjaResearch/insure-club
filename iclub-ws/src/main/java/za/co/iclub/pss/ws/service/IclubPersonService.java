@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubAccount;
 import za.co.iclub.pss.orm.bean.IclubBankMaster;
 import za.co.iclub.pss.orm.bean.IclubClaim;
+import za.co.iclub.pss.orm.bean.IclubCohort;
+import za.co.iclub.pss.orm.bean.IclubCohortClaim;
+import za.co.iclub.pss.orm.bean.IclubCohortPerson;
 import za.co.iclub.pss.orm.bean.IclubConfig;
 import za.co.iclub.pss.orm.bean.IclubCountryCode;
 import za.co.iclub.pss.orm.bean.IclubCoverType;
@@ -231,6 +234,55 @@ public class IclubPersonService {
 				model.setIclubIdType(iPerson.getIclubIdType() != null ? (iPerson.getIclubIdType().getItId()) : null);
 				model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
 				model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
+
+				if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
+					String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
+					int i = 0;
+					for (IclubCohortPerson iclubCohortPersonsForCpPersonId : iPerson.getIclubCohortPersonsForCpPersonId()) {
+						iclubCohortPersonsForCpPersonIds[i] = iclubCohortPersonsForCpPersonId.getCpId();
+						i++;
+					}
+					model.setIclubCohortPersonsForCpPersonId(iclubCohortPersonsForCpPersonIds);
+				}
+				if (iPerson.getIclubCohortsForCPrimaryUserId() != null && iPerson.getIclubCohortsForCPrimaryUserId().size() > 0) {
+					String[] iclubCohortsForCPrimaryUserIds = new String[iPerson.getIclubCohortsForCPrimaryUserId().size()];
+					int i = 0;
+					for (IclubCohort iclubCohortsForCPrimaryUserId : iPerson.getIclubCohortsForCPrimaryUserId()) {
+						iclubCohortsForCPrimaryUserIds[i] = iclubCohortsForCPrimaryUserId.getCId();
+						i++;
+					}
+					model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
+				}
+
+				if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
+					String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
+					int i = 0;
+					for (IclubCohortClaim iclubCohortClaim : iPerson.getIclubCohortClaims()) {
+						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+						i++;
+					}
+					model.setIclubCohortClaims(iclubCohortClaims);
+				}
+
+				if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
+					String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
+					int i = 0;
+					for (IclubCohortPerson iclubCohortPersonsForCpCrtdBy : iPerson.getIclubCohortPersonsForCpCrtdBy()) {
+						iclubCohortPersonsForCpCrtdBys[i] = iclubCohortPersonsForCpCrtdBy.getCpId();
+						i++;
+					}
+					model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
+				}
+
+				if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
+					String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
+					int i = 0;
+					for (IclubCohort iclubCohortsForCCrtdBy : iPerson.getIclubCohortsForCCrtdBy()) {
+						iclubCohortsForCCrtdBys[i] = iclubCohortsForCCrtdBy.getCId();
+						i++;
+					}
+					model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
+				}
 
 				if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
 					String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
@@ -619,6 +671,55 @@ public class IclubPersonService {
 				model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
 				model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
 
+				if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
+					String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
+					int i = 0;
+					for (IclubCohortPerson iclubCohortPersonsForCpPersonId : iPerson.getIclubCohortPersonsForCpPersonId()) {
+						iclubCohortPersonsForCpPersonIds[i] = iclubCohortPersonsForCpPersonId.getCpId();
+						i++;
+					}
+					model.setIclubCohortPersonsForCpPersonId(iclubCohortPersonsForCpPersonIds);
+				}
+				if (iPerson.getIclubCohortsForCPrimaryUserId() != null && iPerson.getIclubCohortsForCPrimaryUserId().size() > 0) {
+					String[] iclubCohortsForCPrimaryUserIds = new String[iPerson.getIclubCohortsForCPrimaryUserId().size()];
+					int i = 0;
+					for (IclubCohort iclubCohortsForCPrimaryUserId : iPerson.getIclubCohortsForCPrimaryUserId()) {
+						iclubCohortsForCPrimaryUserIds[i] = iclubCohortsForCPrimaryUserId.getCId();
+						i++;
+					}
+					model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
+				}
+
+				if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
+					String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
+					int i = 0;
+					for (IclubCohortClaim iclubCohortClaim : iPerson.getIclubCohortClaims()) {
+						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+						i++;
+					}
+					model.setIclubCohortClaims(iclubCohortClaims);
+				}
+
+				if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
+					String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
+					int i = 0;
+					for (IclubCohortPerson iclubCohortPersonsForCpCrtdBy : iPerson.getIclubCohortPersonsForCpCrtdBy()) {
+						iclubCohortPersonsForCpCrtdBys[i] = iclubCohortPersonsForCpCrtdBy.getCpId();
+						i++;
+					}
+					model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
+				}
+
+				if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
+					String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
+					int i = 0;
+					for (IclubCohort iclubCohortsForCCrtdBy : iPerson.getIclubCohortsForCCrtdBy()) {
+						iclubCohortsForCCrtdBys[i] = iclubCohortsForCCrtdBy.getCId();
+						i++;
+					}
+					model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
+				}
+
 				if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
 					String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
 					int i = 0;
@@ -1000,6 +1101,54 @@ public class IclubPersonService {
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 			model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
 
+			if (bean.getIclubCohortPersonsForCpPersonId() != null && bean.getIclubCohortPersonsForCpPersonId().size() > 0) {
+				String[] iclubCohortPersonsForCpPersonIds = new String[bean.getIclubCohortPersonsForCpPersonId().size()];
+				int i = 0;
+				for (IclubCohortPerson iclubCohortPersonsForCpPersonId : bean.getIclubCohortPersonsForCpPersonId()) {
+					iclubCohortPersonsForCpPersonIds[i] = iclubCohortPersonsForCpPersonId.getCpId();
+					i++;
+				}
+				model.setIclubCohortPersonsForCpPersonId(iclubCohortPersonsForCpPersonIds);
+			}
+			if (bean.getIclubCohortsForCPrimaryUserId() != null && bean.getIclubCohortsForCPrimaryUserId().size() > 0) {
+				String[] iclubCohortsForCPrimaryUserIds = new String[bean.getIclubCohortsForCPrimaryUserId().size()];
+				int i = 0;
+				for (IclubCohort iclubCohortsForCPrimaryUserId : bean.getIclubCohortsForCPrimaryUserId()) {
+					iclubCohortsForCPrimaryUserIds[i] = iclubCohortsForCPrimaryUserId.getCId();
+					i++;
+				}
+				model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
+			}
+
+			if (bean.getIclubCohortClaims() != null && bean.getIclubCohortClaims().size() > 0) {
+				String[] iclubCohortClaims = new String[bean.getIclubCohortClaims().size()];
+				int i = 0;
+				for (IclubCohortClaim iclubCohortClaim : bean.getIclubCohortClaims()) {
+					iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+					i++;
+				}
+				model.setIclubCohortClaims(iclubCohortClaims);
+			}
+
+			if (bean.getIclubCohortPersonsForCpCrtdBy() != null && bean.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
+				String[] iclubCohortPersonsForCpCrtdBys = new String[bean.getIclubCohortPersonsForCpCrtdBy().size()];
+				int i = 0;
+				for (IclubCohortPerson iclubCohortPersonsForCpCrtdBy : bean.getIclubCohortPersonsForCpCrtdBy()) {
+					iclubCohortPersonsForCpCrtdBys[i] = iclubCohortPersonsForCpCrtdBy.getCpId();
+					i++;
+				}
+				model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
+			}
+
+			if (bean.getIclubCohortsForCCrtdBy() != null && bean.getIclubCohortsForCCrtdBy().size() > 0) {
+				String[] iclubCohortsForCCrtdBys = new String[bean.getIclubCohortsForCCrtdBy().size()];
+				int i = 0;
+				for (IclubCohort iclubCohortsForCCrtdBy : bean.getIclubCohortsForCCrtdBy()) {
+					iclubCohortsForCCrtdBys[i] = iclubCohortsForCCrtdBy.getCId();
+					i++;
+				}
+				model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
+			}
 			if (bean.getIclubMessageBoards() != null && bean.getIclubMessageBoards().size() > 0) {
 				String[] iclubMessageBoards = new String[bean.getIclubMessageBoards().size()];
 				int i = 0;

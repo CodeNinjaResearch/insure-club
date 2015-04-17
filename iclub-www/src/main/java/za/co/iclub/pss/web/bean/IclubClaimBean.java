@@ -14,6 +14,7 @@ public class IclubClaimBean {
 	private Timestamp CCrtdDt;
 	private String[] iclubPayments;
 	private String[] iclubClaimItems;
+	private String[] iclubCohortClaims;
 
 	public String getCId() {
 		return CId;
@@ -93,6 +94,14 @@ public class IclubClaimBean {
 
 	public void setIclubClaimItems(String[] iclubClaimItems) {
 		this.iclubClaimItems = iclubClaimItems;
+	}
+
+	public String[] getIclubCohortClaims() {
+		return iclubCohortClaims;
+	}
+
+	public void setIclubCohortClaims(String[] iclubCohortClaims) {
+		this.iclubCohortClaims = iclubCohortClaims;
 	}
 
 }
