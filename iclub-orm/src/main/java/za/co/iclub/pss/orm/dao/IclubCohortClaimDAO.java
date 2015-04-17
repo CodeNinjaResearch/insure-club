@@ -12,27 +12,25 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubClaim;
+import za.co.iclub.pss.orm.bean.IclubCohortClaim;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * IclubClaim entities. Transaction control of the save(), update() and delete()
- * operations can directly support Spring container-managed transactions or they
- * can be augmented to handle user-managed Spring transactions. Each of these
- * methods provides additional information for how to configure it for the
- * desired type of transaction control.
+ * IclubCohortClaim entities. Transaction control of the save(), update() and
+ * delete() operations can directly support Spring container-managed
+ * transactions or they can be augmented to handle user-managed Spring
+ * transactions. Each of these methods provides additional information for how
+ * to configure it for the desired type of transaction control.
  * 
- * @see za.co.iclub.pss.orm.bean.IclubClaim
+ * @see za.co.iclub.pss.orm.bean.IclubCohortClaim
  * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class IclubClaimDAO {
-	private static final Logger log = Logger.getLogger(IclubClaimDAO.class);
+public class IclubCohortClaimDAO {
+	private static final Logger log = Logger.getLogger(IclubCohortClaimDAO.class);
 	// property constants
-	public static final String _CNUMBER = "CNumber";
-	public static final String _CNUM_ITEMS = "CNumItems";
-	public static final String _CVALUE = "CValue";
+	public static final String CC_CLAIM_AMT = "ccClaimAmt";
 
 	private SessionFactory sessionFactory;
 
@@ -48,8 +46,8 @@ public class IclubClaimDAO {
 		// do nothing
 	}
 
-	public void save(IclubClaim transientInstance) {
-		log.debug("saving IclubClaim instance");
+	public void save(IclubCohortClaim transientInstance) {
+		log.debug("saving IclubCohortClaim instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -59,8 +57,8 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public void delete(IclubClaim persistentInstance) {
-		log.debug("deleting IclubClaim instance");
+	public void delete(IclubCohortClaim persistentInstance) {
+		log.debug("deleting IclubCohortClaim instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -70,10 +68,10 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public IclubClaim findById(java.lang.String id) {
-		log.debug("getting IclubClaim instance with id: " + id);
+	public IclubCohortClaim findById(java.lang.String id) {
+		log.debug("getting IclubCohortClaim instance with id: " + id);
 		try {
-			IclubClaim instance = (IclubClaim) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubClaim", id);
+			IclubCohortClaim instance = (IclubCohortClaim) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubCohortClaim", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -81,10 +79,10 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public List<IclubClaim> findByExample(IclubClaim instance) {
-		log.debug("finding IclubClaim instance by example");
+	public List<IclubCohortClaim> findByExample(IclubCohortClaim instance) {
+		log.debug("finding IclubCohortClaim instance by example");
 		try {
-			List<IclubClaim> results = (List<IclubClaim>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubClaim").add(create(instance)).list();
+			List<IclubCohortClaim> results = (List<IclubCohortClaim>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubCohortClaim").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -94,9 +92,9 @@ public class IclubClaimDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubClaim instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubCohortClaim instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubClaim as model where model." + propertyName + "= ?";
+			String queryString = "from IclubCohortClaim as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -106,22 +104,14 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public List<IclubClaim> findByCNumber(Object CNumber) {
-		return findByProperty(_CNUMBER, CNumber);
-	}
-
-	public List<IclubClaim> findByCNumItems(Object CNumItems) {
-		return findByProperty(_CNUM_ITEMS, CNumItems);
-	}
-
-	public List<IclubClaim> findByCValue(Object CValue) {
-		return findByProperty(_CVALUE, CValue);
+	public List<IclubCohortClaim> findByCcClaimAmt(Object ccClaimAmt) {
+		return findByProperty(CC_CLAIM_AMT, ccClaimAmt);
 	}
 
 	public List findAll() {
-		log.debug("finding all IclubClaim instances");
+		log.debug("finding all IclubCohortClaim instances");
 		try {
-			String queryString = "from IclubClaim";
+			String queryString = "from IclubCohortClaim";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -130,10 +120,10 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public IclubClaim merge(IclubClaim detachedInstance) {
-		log.debug("merging IclubClaim instance");
+	public IclubCohortClaim merge(IclubCohortClaim detachedInstance) {
+		log.debug("merging IclubCohortClaim instance");
 		try {
-			IclubClaim result = (IclubClaim) getCurrentSession().merge(detachedInstance);
+			IclubCohortClaim result = (IclubCohortClaim) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -142,8 +132,8 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public void attachDirty(IclubClaim instance) {
-		log.debug("attaching dirty IclubClaim instance");
+	public void attachDirty(IclubCohortClaim instance) {
+		log.debug("attaching dirty IclubCohortClaim instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -153,8 +143,8 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public void attachClean(IclubClaim instance) {
-		log.debug("attaching clean IclubClaim instance");
+	public void attachClean(IclubCohortClaim instance) {
+		log.debug("attaching clean IclubCohortClaim instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
@@ -164,7 +154,7 @@ public class IclubClaimDAO {
 		}
 	}
 
-	public static IclubClaimDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (IclubClaimDAO) ctx.getBean("IclubClaimDAO");
+	public static IclubCohortClaimDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (IclubCohortClaimDAO) ctx.getBean("IclubCohortClaimDAO");
 	}
 }
