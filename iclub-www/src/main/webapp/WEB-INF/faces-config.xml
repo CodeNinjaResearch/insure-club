@@ -107,6 +107,13 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
+			<from-outcome>iclubCohortType</from-outcome>
+			<to-view-id>/pages/admin/mdata/iclubCohortType.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
 			<from-outcome>iclubAccountType</from-outcome>
 			<to-view-id>/pages/admin/mdata/iclubAccountType.xhtml</to-view-id>
 		</navigation-case>
