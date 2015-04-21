@@ -21,7 +21,7 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubThatchTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@ManagedBean(name = "iclubThatchTypeController")
+@ManagedBean(name = "iclubCohortTypeController")
 @SessionScoped
 public class IclubCohortTypeController implements Serializable {
 
