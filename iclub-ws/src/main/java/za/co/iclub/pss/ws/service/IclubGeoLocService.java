@@ -215,6 +215,32 @@ public class IclubGeoLocService {
 		return model;
 	}
 
+	@GET
+	@Path("/get/{geoLat}/{geoLong}")
+	@Produces("application/json")
+	@Transactional
+	public IclubGeoLocModel getByGeoLangAndLat(@PathParam("geoLat") Double geoLat, @PathParam("geoLong") Double geoLong) {
+		IclubGeoLocModel model = new IclubGeoLocModel();
+		try {
+			IclubGeoLoc bean = iclubNamedQueryDAO.getIclubGeoLocByLatAndLong(geoLong, geoLat);
+
+			if (bean != null) {
+				model.setGlKey(bean.getGlKey());
+				model.setGlId(bean.getGlId());
+				model.setGlAddress(bean.getGlAddress());
+				model.setGlLat(bean.getGlLat());
+				model.setGlLong(bean.getGlLong());
+				model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+				model.setGlRate(bean.getGlRate());
+				model.setGlCrtdDt(bean.getGlCrtdDt());
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return model;
+	}
+
 	public IclubGeoLocDAO getIclubGeoLocDAO() {
 		return iclubGeoLocDAO;
 	}

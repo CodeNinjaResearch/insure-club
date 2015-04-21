@@ -43,6 +43,7 @@ import za.co.iclub.pss.web.bean.IclubDriverBean;
 import za.co.iclub.pss.web.bean.IclubEntityTypeBean;
 import za.co.iclub.pss.web.bean.IclubExtrasBean;
 import za.co.iclub.pss.web.bean.IclubFieldBean;
+import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.bean.IclubIdTypeBean;
 import za.co.iclub.pss.web.bean.IclubInsuranceItemBean;
 import za.co.iclub.pss.web.bean.IclubLicenseCodeBean;
@@ -80,6 +81,7 @@ import za.co.iclub.pss.ws.model.IclubDriverModel;
 import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
 import za.co.iclub.pss.ws.model.IclubExtrasModel;
 import za.co.iclub.pss.ws.model.IclubFieldModel;
+import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubLicenseCodeModel;
@@ -147,6 +149,7 @@ public class IclubFullQuoteController implements Serializable {
 	private static final String CONF_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubConfigService/";
 	private static final String FD_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubFieldService/";
 	private static final String ET_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubEntityTypeService/";
+	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
 	private List<IclubSecurityMasterBean> securityMasterBeans;
 
 	private List<IclubOccupationBean> occupationBeans;
@@ -309,10 +312,30 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onMarkerDragPer(MarkerDragEvent event) {
 		markerPer = event.getMarker();
-
-		personBean.setPLat(markerPer.getLatlng().getLat());
-		personBean.setPLong(markerPer.getLatlng().getLng());
+		IclubGeoLocBean bean = getGeoLocBean(markerPer.getLatlng().getLat(), markerPer.getLatlng().getLng());
+		personBean.setPLat(bean.getGlLat());
+		personBean.setPLong(bean.getGlLong());
+		personBean.setPAddress(bean.getGlAddress());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng()));
+	}
+
+	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
+		WebClient client = IclubWebHelper.createCustomClient(GL_BASE_URL + "get/" + geoLat + "/" + geoLong);
+		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
+		client.close();
+		IclubGeoLocBean bean = new IclubGeoLocBean();
+		if (model != null) {
+			bean.setGlKey(model.getGlKey());
+			bean.setGlId(model.getGlId());
+			bean.setGlAddress(model.getGlAddress());
+			bean.setGlLat(model.getGlLat());
+			bean.setGlLong(model.getGlLong());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setGlRate(model.getGlRate());
+			bean.setGlCrtdDt(model.getGlCrtdDt());
+		}
+		return bean;
+
 	}
 
 	public void onGeocodePer(GeocodeEvent event) {
@@ -333,15 +356,20 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onMarkerSelectPer(OverlaySelectEvent event) {
 		markerPer = (Marker) event.getOverlay();
-		personBean.setPLat(markerPer.getLatlng().getLat());
-		personBean.setPLong(markerPer.getLatlng().getLng());
+		IclubGeoLocBean bean = getGeoLocBean(markerPer.getLatlng().getLat(), markerPer.getLatlng().getLng());
+		personBean.setPLat(bean.getGlLat());
+		personBean.setPLong(bean.getGlLong());
+		personBean.setPAddress(bean.getGlAddress());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPer.getTitle()));
 	}
 
 	public void onMarkerDragPro(MarkerDragEvent event) {
 		markerPro = event.getMarker();
-		propertyBean.setPLat(markerPro.getLatlng().getLat());
-		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		IclubGeoLocBean bean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
+		propertyBean.setPLat(bean.getGlLat());
+		propertyBean.setPLong(bean.getGlLong());
+		propertyBean.setPAddress(bean.getGlAddress());
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng()));
 	}
 
@@ -363,15 +391,19 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onMarkerSelectPro(OverlaySelectEvent event) {
 		markerPro = (Marker) event.getOverlay();
-		propertyBean.setPLat(markerPro.getLatlng().getLat());
-		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		IclubGeoLocBean bean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
+		propertyBean.setPLat(bean.getGlLat());
+		propertyBean.setPLong(bean.getGlLong());
+		propertyBean.setPAddress(bean.getGlAddress());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPro.getTitle()));
 	}
 
 	public void onMarkerDragVeh(MarkerDragEvent event) {
 		markerVeh = event.getMarker();
-		vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
-		vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
+		IclubGeoLocBean bean = getGeoLocBean(markerVeh.getLatlng().getLat(), markerVeh.getLatlng().getLng());
+		vehicleBean.setVDdLat(bean.getGlLat());
+		vehicleBean.setVDdLong(bean.getGlLong());
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
 	}
 
@@ -393,8 +425,9 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onMarkerSelectVeh(OverlaySelectEvent event) {
 		markerVeh = (Marker) event.getOverlay();
-		vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
-		vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
+		IclubGeoLocBean bean = getGeoLocBean(markerVeh.getLatlng().getLat(), markerVeh.getLatlng().getLng());
+		vehicleBean.setVDdLat(bean.getGlLat());
+		vehicleBean.setVDdLong(bean.getGlLong());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerVeh.getTitle()));
 	}
 
