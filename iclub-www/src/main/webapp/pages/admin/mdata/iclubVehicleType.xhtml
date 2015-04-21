@@ -6,7 +6,7 @@
 					<f:facet name="footer">
 						<p:commandButton id="btnVehicleTypeShowAdd" value="Add" actionListener="#{iclubVehicleTypeController.showAddPanel}" update=":iclubFrm:pnlVehicleTypeCont" />
 					</f:facet>
-					<p:column headerText="Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel value="#{bean.vtId}" />
 					</p:column>
 					<p:column headerText="Short Description">
@@ -16,8 +16,8 @@
 						<p:outputLabel value="#{bean.vtLongDesc}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:selectOneMenu value="#{bean.vtStatus}" disabled="true">
-							<f:selectItem itemLabel="Please Select" itemValue="-1" />
+						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.vtStatus}" disabled="true">
+							<f:selectItem itemLabel="Please Select" itemDisabled="true" />
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
 						</p:selectOneMenu>

@@ -15,6 +15,7 @@ public class IclubVehicleMasterModel {
 	private Double vmOrigRate;
 	private Double vmMrktRate;
 	private Double vmRetRate;
+	private Double vmRatePrct;
 	private Date vmProdDt;
 	private Timestamp vmCrtdDt;
 	private String[] iclubVehicles;
@@ -97,6 +98,14 @@ public class IclubVehicleMasterModel {
 
 	public void setIclubVehicles(String[] iclubVehicles) {
 		this.iclubVehicles = iclubVehicles;
+	}
+
+	public Double getVmRatePrct() {
+		return vmRatePrct;
+	}
+
+	public void setVmRatePrct(Double vmRatePrct) {
+		this.vmRatePrct = vmRatePrct;
 	}
 
 }

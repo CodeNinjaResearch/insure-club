@@ -9,6 +9,8 @@ public class IclubInsuranceItemBean {
 	private Long iclubInsuranceItemType;
 	private String iiQuoteId;
 	private String iiItemId;
+	private Double iiInsureValue;
+	private Double iiActualValue;
 	private Timestamp iiCrtdDt;
 	private String[] iclubClaimItems;
 
@@ -66,6 +68,22 @@ public class IclubInsuranceItemBean {
 
 	public void setIclubClaimItems(String[] iclubClaimItems) {
 		this.iclubClaimItems = iclubClaimItems;
+	}
+
+	public Double getIiInsureValue() {
+		return iiInsureValue;
+	}
+
+	public void setIiInsureValue(Double iiInsureValue) {
+		this.iiInsureValue = iiInsureValue;
+	}
+
+	public Double getIiActualValue() {
+		return iiActualValue;
+	}
+
+	public void setIiActualValue(Double iiActualValue) {
+		this.iiActualValue = iiActualValue;
 	}
 
 }

@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtBankMasterCont" widgetVar="dtBankMasterCont" value="#{iclubBankMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No BankMasteres Available">
-		<p:column headerText="Id">
+		<p:column headerText="Unique Id">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmId}" />
 		</p:column>
 		<p:column headerText="Bank Name">
@@ -8,6 +8,30 @@
 		</p:column>
 		<p:column headerText="Branch Name">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBranchName}" />
+		</p:column>
+		<p:column headerText="Bank Code">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBankCode}" />
+		</p:column>
+		<p:column headerText="Branch Adress">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBranchAddress}" />
+		</p:column>
+		<p:column headerText="Branch Code">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBranchCode}" />
+		</p:column>
+		<p:column headerText="Latitude">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBranchLat}" />
+		</p:column>
+		<p:column headerText="Logitude">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBranchLong}" />
+		</p:column>
+		<p:column headerText="Zip Code">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmBranchZip}" />
+		</p:column>
+		<p:column headerText="Creatd By">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+		</p:column>
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.bmCrtdDt}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnBankMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubBankMasterController.showSummary}" update=":bankmasterFrm:grlMsg">

@@ -17,17 +17,32 @@
 				<p:dataTable id="dtClmCont" widgetVar="dtClmCont" value="#{iclubClaimController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<f:facet name="footer">
 					</f:facet>
-					<p:column headerText="Claim Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CId}" />
 					</p:column>
 					<p:column headerText="Claim Number">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumber}" />
 					</p:column>
-					<p:column headerText="Number Of Items">
+					<p:column headerText="Number Of Items Claimed">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumItems}" />
 					</p:column>
 					<p:column headerText="Claim Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}" />
+					</p:column>
+					<p:column headerText="Created By">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+					</p:column>
+					<p:column headerText="Claim Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
+					</p:column>
+					<p:column headerText="Policy Id">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPolicy}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:selectOneMenu value="#{bean.iclubClaimStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.csLongDesc}" itemValue="#{c.csId}" value="#{iclubClaimController.claimStatusBeans}" />
+						</p:selectOneMenu>
 					</p:column>
 					<p:column headerText="Policy">
 						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubClaimController.claimToPolicyListener(bean)}">
@@ -38,17 +53,29 @@
 					<p:dataTable id="dtPlcCont" widgetVar="dtPlcCont" value="#{iclubClaimController.policyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 						<f:facet name="footer">
 						</f:facet>
-						<p:column headerText="Policy Id">
+						<p:column headerText="Id">
 							<p:outputLabel value="#{bean.PId}" />
 						</p:column>
-						<p:column headerText="Policy Number">
+						<p:column headerText="Number">
 							<p:outputLabel value="#{bean.PNumber}" />
 						</p:column>
 						<p:column headerText="Premium">
 							<p:outputLabel value="#{bean.PPremium}" />
 						</p:column>
-						<p:column headerText="Prorata Premium">
+						<p:column headerText="Pro-rata Premium">
 							<p:outputLabel value="#{bean.PProrataPrm}" />
+						</p:column>
+						<p:column headerText="Quote Id">
+							<p:outputLabel value="#{bean.iclubQuote}" />
+						</p:column>
+						<p:column headerText="Pro-rata Premium">
+							<p:outputLabel value="#{bean.PProrataPrm}" />
+						</p:column>
+						<p:column headerText="Status">
+							<p:selectOneMenu value="#{bean.iclubPolicyStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.psLongDesc}" itemValue="#{c.psId}" value="#{iclubClaimController.policyStatusBeans}" />
+							</p:selectOneMenu>
 						</p:column>
 						<p:column headerText="Policy">
 							<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubClaimController.policyListener(bean)}">
@@ -60,17 +87,32 @@
 					<p:dataTable id="dtIICont" widgetVar="dtIICont" value="#{iclubClaimController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 						<f:facet name="footer">
 						</f:facet>
-						<p:column headerText="Item Id">
-							<p:outputLabel value="#{bean.iiId}" />
+						<p:column headerText="Unique Id">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiId}" />
 						</p:column>
 						<p:column headerText="Quote Id">
-							<p:outputLabel value="#{bean.iiQuoteId}" />
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
 						</p:column>
-						<p:column headerText="Gen Date">
-							<p:outputLabel value="#{bean.iiCrtdDt}" />
+						<p:column headerText="Insured Value">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}" />
 						</p:column>
-						<p:column headerText="Item Type">
-							<p:outputLabel value="#{bean.iclubInsuranceItemType}" />
+						<p:column headerText="Actual Value">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}" />
+						</p:column>
+						<p:column headerText="Created By">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+						</p:column>
+						<p:column headerText="Created Date">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiCrtdDt}" />
+						</p:column>
+						<p:column headerText="Item Id">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiItemId}" />
+						</p:column>
+						<p:column headerText="Type">
+							<p:selectOneMenu value="#{bean.iclubInsuranceItemType}" widgetVar="mnuIiType" id="mnuIiType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" value="#{iclubClaimController.insuranceItemTypebeans}" />
+							</p:selectOneMenu>
 						</p:column>
 						<p:column>
 							<p:commandButton icon="ui-icon-pencil" update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" action="#{iclubClaimController.iItemListener(bean)}">

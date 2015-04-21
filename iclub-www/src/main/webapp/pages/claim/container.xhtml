@@ -17,26 +17,40 @@
 				<p:dataTable id="dtIICont" widgetVar="dtQuoteCont" value="#{iclubClaimController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<f:facet name="footer">
 					</f:facet>
-					<p:column headerText="Item Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiId}" />
 					</p:column>
 					<p:column headerText="Quote Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
 					</p:column>
-					<p:column headerText="Gen Date">
+					<p:column headerText="Insured Value">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}" />
+					</p:column>
+					<p:column headerText="Actual Value">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}" />
+					</p:column>
+					<p:column headerText="Created By">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+					</p:column>
+					<p:column headerText="Created Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiCrtdDt}" />
 					</p:column>
-					<p:column headerText="Item Type">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubInsuranceItemType}" />
+					<p:column headerText="Item Id">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiItemId}" />
+					</p:column>
+					<p:column headerText="Type">
+						<p:selectOneMenu value="#{bean.iclubInsuranceItemType}" widgetVar="mnuIiType" id="mnuIiType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="Type" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" value="#{iclubClaimController.insuranceItemTypebeans}" />
+						</p:selectOneMenu>
 					</p:column>
 				</p:dataTable>
 			</p:panel>
 			<p:panel id="pnlPlc">
 				<div class="Container90 Fnone MarAuto TexAlCenter">
-					 
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Policy Number" />
+							<p:outputLabel styleClass="TexAlCenter" value="Number" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.policyBean.PNumber}" />
@@ -45,7 +59,25 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="QuoteId" />
+							<p:outputLabel styleClass="TexAlCenter" value="Created Date" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.policyBean.PCrtdDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Debited Date" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.policyBean.PDebitDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Quote Id" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.policyBean.iclubQuote}" />
@@ -54,7 +86,7 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="UserId" />
+							<p:outputLabel styleClass="TexAlCenter" value="Created By" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.policyBean.iclubPerson}" />
@@ -63,7 +95,7 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Prorata Premium" />
+							<p:outputLabel styleClass="TexAlCenter" value="Pro-rata Premium" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.policyBean.PProrataPrm}" />
@@ -78,6 +110,18 @@
 							<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.policyBean.PPremium}" />
 						</div>
 					</div>
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubClaimController.policyBean.iclubPolicyStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.psLongDesc}" itemValue="#{c.psId}" value="#{iclubClaimController.policyStatusBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
 				</div>
 			</p:panel>
 			<p:panel id="pnlAdd">
@@ -93,24 +137,25 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Num Of Items :" />
+							<p:outputLabel styleClass="TexAlCenter" value="Num Of Items Claimed :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Num Of Items" value="#{iclubClaimController.bean.CNumItems}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Num Of Items Claimed" value="#{iclubClaimController.bean.CNumItems}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Cliam Status :" />
+							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:selectOneMenu value="#{iclubClaimController.bean.iclubClaimStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Calim Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItems var="c" itemLabel="#{c.csLongDesc}" itemValue="#{c.csId}" value="#{iclubClaimController.claimStatusBeans}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
+					<div class="EmptyBox5" />
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">

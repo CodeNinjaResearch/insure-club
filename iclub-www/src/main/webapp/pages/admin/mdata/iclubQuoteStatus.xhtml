@@ -6,7 +6,7 @@
 					<f:facet name="footer">
 						<p:commandButton id="btnQuoteStatusShowAdd" value="Add" actionListener="#{iclubQuoteStatusController.showAddPanel}" update=":iclubFrm:pnlQuoteStatusCont" />
 					</f:facet>
-					<p:column headerText="Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel value="#{bean.qsId}" />
 					</p:column>
 					<p:column headerText="Short Description">
@@ -16,8 +16,8 @@
 						<p:outputLabel value="#{bean.qsLongDesc}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:selectOneMenu value="#{bean.qsStatus}" disabled="true">
-							<f:selectItem itemLabel="Please Select" itemValue="-1" />
+						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.qsStatus}" disabled="true">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
 						</p:selectOneMenu>

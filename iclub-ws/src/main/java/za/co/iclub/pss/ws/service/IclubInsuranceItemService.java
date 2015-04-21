@@ -51,6 +51,8 @@ public class IclubInsuranceItemService {
 			iCTt.setIiItemId(model.getIiItemId());
 			iCTt.setIiQuoteId(model.getIiQuoteId());
 			iCTt.setIiCrtdDt(model.getIiCrtdDt());
+			iCTt.setIiInsureValue(model.getIiInsureValue());
+			iCTt.setIiActualValue(model.getIiActualValue());
 			iCTt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iCTt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			iclubInsuranceItemDAO.save(iCTt);
@@ -84,6 +86,8 @@ public class IclubInsuranceItemService {
 			iCTt.setIiItemId(model.getIiItemId());
 			iCTt.setIiQuoteId(model.getIiQuoteId());
 			iCTt.setIiCrtdDt(model.getIiCrtdDt());
+			iCTt.setIiInsureValue(model.getIiInsureValue());
+			iCTt.setIiActualValue(model.getIiActualValue());
 			iCTt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 			iCTt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 
@@ -139,6 +143,8 @@ public class IclubInsuranceItemService {
 				model.setIiItemId(iCTt.getIiItemId());
 				model.setIiQuoteId(iCTt.getIiQuoteId());
 				model.setIiCrtdDt(iCTt.getIiCrtdDt());
+				model.setIiInsureValue(iCTt.getIiInsureValue());
+				model.setIiActualValue(iCTt.getIiActualValue());
 				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
 
@@ -180,6 +186,8 @@ public class IclubInsuranceItemService {
 				model.setIiItemId(iCTt.getIiItemId());
 				model.setIiQuoteId(iCTt.getIiQuoteId());
 				model.setIiCrtdDt(iCTt.getIiCrtdDt());
+				model.setIiInsureValue(iCTt.getIiInsureValue());
+				model.setIiActualValue(iCTt.getIiActualValue());
 				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
 
@@ -221,6 +229,8 @@ public class IclubInsuranceItemService {
 				model.setIiItemId(iCTt.getIiItemId());
 				model.setIiQuoteId(iCTt.getIiQuoteId());
 				model.setIiCrtdDt(iCTt.getIiCrtdDt());
+				model.setIiInsureValue(iCTt.getIiInsureValue());
+				model.setIiActualValue(iCTt.getIiActualValue());
 				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
 
@@ -256,6 +266,8 @@ public class IclubInsuranceItemService {
 			model.setIiItemId(bean.getIiItemId());
 			model.setIiQuoteId(bean.getIiQuoteId());
 			model.setIiCrtdDt(bean.getIiCrtdDt());
+			model.setIiInsureValue(bean.getIiInsureValue());
+			model.setIiActualValue(bean.getIiActualValue());
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 
@@ -288,6 +300,8 @@ public class IclubInsuranceItemService {
 				model.setIiItemId(bean.getIiItemId());
 				model.setIiQuoteId(bean.getIiQuoteId());
 				model.setIiCrtdDt(bean.getIiCrtdDt());
+				model.setIiInsureValue(bean.getIiInsureValue());
+				model.setIiActualValue(bean.getIiActualValue());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
 				model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 

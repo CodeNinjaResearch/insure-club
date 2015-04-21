@@ -10,6 +10,8 @@ public class IclubInsuranceItemModel {
 	private String iiQuoteId;
 	private String iiItemId;
 	private Timestamp iiCrtdDt;
+	private Double iiInsureValue;
+	private Double iiActualValue;
 	private String[] iclubClaimItems;
 
 	public String getIiId() {
@@ -66,6 +68,22 @@ public class IclubInsuranceItemModel {
 
 	public void setIclubClaimItems(String[] iclubClaimItems) {
 		this.iclubClaimItems = iclubClaimItems;
+	}
+
+	public Double getIiInsureValue() {
+		return iiInsureValue;
+	}
+
+	public void setIiInsureValue(Double iiInsureValue) {
+		this.iiInsureValue = iiInsureValue;
+	}
+
+	public Double getIiActualValue() {
+		return iiActualValue;
+	}
+
+	public void setIiActualValue(Double iiActualValue) {
+		this.iiActualValue = iiActualValue;
 	}
 
 }

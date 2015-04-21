@@ -2,7 +2,7 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Tracker ID :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.tmId}" />
@@ -11,7 +11,7 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="User ID :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Created By :" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.iclubPerson}" />
@@ -20,10 +20,19 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Track Name :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Created Date :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:inputText styleClass="TexAlCenter" placeholder="Track Name" value="#{iclubTrackerMasterController.bean.tmName}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.tmCrtdDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Name :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubTrackerMasterController.bean.tmName}" />
 		</div>
 		<div class="EmptyBox5" />
 	</div>
@@ -50,30 +59,30 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Lat :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Latitude :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:inputText styleClass="TexAlCenter" placeholder="Lat" value="#{iclubTrackerMasterController.bean.tmLat}" />
-		</div>
-		<div class="EmptyBox5" />
-	</div>
-	<div class="EmptyBox5" />
-	<div class="Container100 Responsive">
-		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Long :" />
-		</div>
-		<div class="Container50 Responsive">
-			<p:inputText styleClass="TexAlCenter" placeholder="Long" value="#{iclubTrackerMasterController.bean.tmLong}" />
+			<p:inputText styleClass="TexAlCenter" placeholder="Latitude" value="#{iclubTrackerMasterController.bean.tmLat}" />
 		</div>
 		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Reg Number :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Longitude :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:inputText styleClass="TexAlCenter" placeholder="Reg Number" value="#{iclubTrackerMasterController.bean.tmRegNum}" />
+			<p:inputText styleClass="TexAlCenter" placeholder="Longitude" value="#{iclubTrackerMasterController.bean.tmLong}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Registration Number" value="#{iclubTrackerMasterController.bean.tmRegNum}" />
 		</div>
 	</div>
 	<div class="EmptyBox5" />

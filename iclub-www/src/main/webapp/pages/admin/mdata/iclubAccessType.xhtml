@@ -6,7 +6,7 @@
 					<f:facet name="footer">
 						<p:commandButton id="btnAccessTypeShowAdd" value="Add" actionListener="#{iclubAccessTypeController.showAddPanel}" update=":iclubFrm:pnlAccessTypeCont" />
 					</f:facet>
-					<p:column headerText="Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel value="#{bean.atId}" />
 					</p:column>
 					<p:column headerText="Short Description">
@@ -16,8 +16,8 @@
 						<p:outputLabel value="#{bean.atLongDesc}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:selectOneMenu value="#{bean.atStatus}" disabled="true">
-							<f:selectItem itemLabel="Please Select" itemValue="-1" />
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.atStatus}" disabled="true">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
 						</p:selectOneMenu>
@@ -59,7 +59,7 @@
 				<p:panel id="pnlMod" rendered="#{iclubAccessTypeController.showModPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:outputLabel value="#{iclubAccessTypeController.bean.atId}" />
+							<p:outputLabel  value="#{iclubAccessTypeController.bean.atId}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">

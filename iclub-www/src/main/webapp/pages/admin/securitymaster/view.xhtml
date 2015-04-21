@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtSecurityMasterCont" widgetVar="dtSecurityMasterCont" value="#{iclubSecurityMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No SecurityMasteres Available">
-		<p:column headerText="Id">
+		<p:column headerText="Unique Id">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
 		</p:column>
 		<p:column headerText="Item Type">
@@ -18,7 +18,7 @@
 		<p:column headerText="Created Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
 		</p:column>
-		<p:column headerText="User Id">
+		<p:column headerText="Created By">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column>

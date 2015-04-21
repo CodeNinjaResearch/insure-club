@@ -31,7 +31,9 @@ import za.co.iclub.pss.web.bean.IclubClaimBean;
 import za.co.iclub.pss.web.bean.IclubClaimStatusBean;
 import za.co.iclub.pss.web.bean.IclubDocumentBean;
 import za.co.iclub.pss.web.bean.IclubInsuranceItemBean;
+import za.co.iclub.pss.web.bean.IclubInsuranceItemTypeBean;
 import za.co.iclub.pss.web.bean.IclubPolicyBean;
+import za.co.iclub.pss.web.bean.IclubPolicyStatusBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
 import za.co.iclub.pss.web.bean.IclubVehicleBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
@@ -39,7 +41,9 @@ import za.co.iclub.pss.ws.model.IclubClaimModel;
 import za.co.iclub.pss.ws.model.IclubClaimStatusModel;
 import za.co.iclub.pss.ws.model.IclubDocumentModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
+import za.co.iclub.pss.ws.model.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.ws.model.IclubPolicyModel;
+import za.co.iclub.pss.ws.model.IclubPolicyStatusModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubVehicleModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -58,8 +62,14 @@ public class IclubClaimController implements Serializable {
 	private static final String V_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehicleService/";
 	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
 	private static final String D_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubDocumentService/";
+	private static final String IIT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemTypeService/";
+	private static final String PS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPolicyStatusService/";
 
 	private List<IclubClaimStatusBean> claimStatusBeans;
+
+	private List<IclubInsuranceItemTypeBean> insuranceItemTypebeans;
+
+	private List<IclubPolicyStatusBean> policyStatusBeans;
 
 	private List<IclubPolicyBean> policyBeans;
 
@@ -715,9 +725,45 @@ public class IclubClaimController implements Serializable {
 		this.docIds = docIds;
 	}
 
-	public static void main(String[] args) {
-		String s = "/ttt<<ggg/jjj/kk>>//rrr/yutr/";
-		System.out.println(s);
+	public List<IclubInsuranceItemTypeBean> getInsuranceItemTypebeans() {
+
+		WebClient client = IclubWebHelper.createCustomClient(IIT_BASE_URL + "list");
+		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
+		client.close();
+		insuranceItemTypebeans = new ArrayList<IclubInsuranceItemTypeBean>();
+		for (IclubInsuranceItemTypeModel model : models) {
+			IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
+			bean.setIitId(model.getIitId());
+			bean.setIitLongDesc(model.getIitLongDesc());
+			bean.setIitShortDesc(model.getIitShortDesc());
+			bean.setIitStatus(model.getIitStatus());
+			insuranceItemTypebeans.add(bean);
+		}
+		return insuranceItemTypebeans;
+	}
+
+	public void setInsuranceItemTypebeans(List<IclubInsuranceItemTypeBean> insuranceItemTypebeans) {
+		this.insuranceItemTypebeans = insuranceItemTypebeans;
+	}
+
+	public List<IclubPolicyStatusBean> getPolicyStatusBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(PS_BASE_URL + "list");
+		Collection<? extends IclubPolicyStatusModel> models = new ArrayList<IclubPolicyStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyStatusModel.class));
+		client.close();
+		policyStatusBeans = new ArrayList<IclubPolicyStatusBean>();
+		for (IclubPolicyStatusModel model : models) {
+			IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
+			bean.setPsId(model.getPsId());
+			bean.setPsLongDesc(model.getPsLongDesc());
+			bean.setPsShortDesc(model.getPsShortDesc());
+			bean.setPsStatus(model.getPsStatus());
+			policyStatusBeans.add(bean);
+		}
+		return policyStatusBeans;
+	}
+
+	public void setPolicyStatusBeans(List<IclubPolicyStatusBean> policyStatusBeans) {
+		this.policyStatusBeans = policyStatusBeans;
 	}
 
 }

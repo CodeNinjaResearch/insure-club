@@ -6,7 +6,7 @@
 					<f:facet name="footer">
 						<p:commandButton id="btnBoundaryTypeShowAdd" value="Add" actionListener="#{iclubBoundaryTypeController.showAddPanel}" update=":iclubFrm:pnlBoundaryTypeCont" />
 					</f:facet>
-					<p:column headerText="Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel value="#{bean.btId}" />
 					</p:column>
 					<p:column headerText="Short Description">
@@ -16,8 +16,8 @@
 						<p:outputLabel value="#{bean.btLongDesc}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:selectOneMenu value="#{bean.btStatus}" disabled="true">
-							<f:selectItem itemLabel="Please Select" itemValue="-1" />
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled"   value="#{bean.btStatus}" disabled="true">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
 						</p:selectOneMenu>

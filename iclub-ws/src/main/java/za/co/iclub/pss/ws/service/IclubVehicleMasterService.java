@@ -54,6 +54,7 @@ public class IclubVehicleMasterService {
 			iCVm.setVmRetRate(model.getVmRetRate());
 			iCVm.setVmProdDt(model.getVmProdDt());
 			iCVm.setVmCrtdDt(model.getVmCrtdDt());
+			iCVm.setVmRatePrct(model.getVmRatePrct());
 			iCVm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 
 			iclubVehicleMasterDAO.save(iCVm);
@@ -93,6 +94,7 @@ public class IclubVehicleMasterService {
 			iCVm.setVmRetRate(model.getVmRetRate());
 			iCVm.setVmProdDt(model.getVmProdDt());
 			iCVm.setVmCrtdDt(model.getVmCrtdDt());
+			iCVm.setVmRatePrct(model.getVmRatePrct());
 			iCVm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 
 			iclubVehicleMasterDAO.merge(iCVm);
@@ -150,6 +152,7 @@ public class IclubVehicleMasterService {
 				iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
 				iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
 				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
+				iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
 				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
 				if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
@@ -210,6 +213,7 @@ public class IclubVehicleMasterService {
 				iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
 				iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
 				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
+				iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
 				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
 				if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
@@ -252,6 +256,7 @@ public class IclubVehicleMasterService {
 				iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
 				iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
 				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
+				iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
 				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
 				if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {

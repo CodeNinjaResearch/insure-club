@@ -11,6 +11,7 @@ public class IclubVehicleMasterBean {
 	private Double vmOrigRate;
 	private Double vmMrktRate;
 	private Double vmRetRate;
+	private Double vmRatePrct;
 	private Date vmProdDt;
 	private Date vmCrtdDt;
 	private String[] iclubVehicles;
@@ -93,6 +94,14 @@ public class IclubVehicleMasterBean {
 
 	public void setIclubVehicles(String[] iclubVehicles) {
 		this.iclubVehicles = iclubVehicles;
+	}
+
+	public Double getVmRatePrct() {
+		return vmRatePrct;
+	}
+
+	public void setVmRatePrct(Double vmRatePrct) {
+		this.vmRatePrct = vmRatePrct;
 	}
 
 }

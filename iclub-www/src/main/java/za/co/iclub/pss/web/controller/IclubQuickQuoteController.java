@@ -298,6 +298,7 @@ public class IclubQuickQuoteController implements Serializable {
 				bean.setVmProdDt(model.getVmProdDt());
 				bean.setVmCrtdDt(model.getVmCrtdDt());
 				bean.setIclubPerson(model.getIclubPerson());
+				bean.setVmRatePrct(model.getVmRatePrct());
 
 				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
 					String[] vehicles = new String[model.getIclubVehicles().length];

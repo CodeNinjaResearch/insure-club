@@ -1,11 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtRateTypeCont" widgetVar="dtRateTypeCont" value="#{iclubRateTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateTypees Available">
-		<p:column headerText="ID">
+		<p:column headerText="Unique Id">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtId}" />
 		</p:column>
-		<p:column headerText="Insurance Item Type">
+		<p:column headerText="Item Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
-				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+				<f:selectItem itemLabel="Item Type" itemDisabled="true" />
 				<f:selectItems value="#{iclubRateTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 			</p:selectOneMenu>
 		</p:column>
@@ -15,9 +15,9 @@
 				<f:selectItems value="#{iclubRateTypeController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
 			</p:selectOneMenu>
 		</p:column>
-		<p:column headerText="Field Name">
+		<p:column headerText="Field Id">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubField}">
-				<f:selectItem itemLabel="Field" itemDisabled="true" />
+				<f:selectItem itemLabel="Field Id" itemDisabled="true" />
 				<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
 			</p:selectOneMenu>
 		</p:column>
@@ -29,9 +29,9 @@
 				<f:selectItem itemLabel="Value" itemValue="V" />
 			</p:selectOneMenu>
 		</p:column>
-		<p:column headerText="Rate Status">
+		<p:column headerText="Status">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.rtStatus}">
-				<f:selectItem itemLabel="Rate Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Status" itemDisabled="true" />
 				<f:selectItem itemLabel="Yes" itemValue="Y" />
 				<f:selectItem itemLabel="No" itemValue="N" />
 			</p:selectOneMenu>
@@ -42,17 +42,18 @@
 				<f:selectItems value="#{iclubRateTypeController.quoteType}" />
 			</p:selectOneMenu>
 		</p:column>
-		<p:column headerText="Short Desc">
+		<p:column headerText="Short Description">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtShortDesc}" />
 		</p:column>
-		<p:column headerText="Long Desc">
+		<p:column headerText="Long Description">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtLongDesc}" />
-		</p:column>
-		<p:column headerText="Status">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtStatus}" />
 		</p:column>
 		<p:column headerText="Created Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtCrtdDt}"></p:outputLabel>
+		</p:column>
+		<p:column headerText="Created By>
+			<p:outputLabel styleClass=" TexAlCenter" value="#{bean.iclubPerson}">
+			</p:outputLabel>
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnRateTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubRateTypeController.showEdit}" update=":iclubFrm:grlMsg">
