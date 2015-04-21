@@ -324,7 +324,7 @@ public class IclubFullQuoteController implements Serializable {
 		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
 		client.close();
 		IclubGeoLocBean bean = new IclubGeoLocBean();
-		if (model != null) {
+		if (model != null) { 
 			bean.setGlKey(model.getGlKey());
 			bean.setGlId(model.getGlId());
 			bean.setGlAddress(model.getGlAddress());
