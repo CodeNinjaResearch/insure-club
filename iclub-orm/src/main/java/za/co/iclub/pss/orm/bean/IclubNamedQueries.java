@@ -89,7 +89,8 @@ import javax.persistence.Table;
         @NamedNativeQuery(query = "select * from iclub_bank_master where lower(bm_bank_name)=lower(:bankName)", name = "getIclubBankMastersByBankName", resultClass = IclubBankMaster.class),
         @NamedNativeQuery(name = "getIclubRoofTypeBySD", query = "select * from iclub_roof_type where lower(rt_short_desc) = lower(:sd) and rt_id <> :id", resultClass = IclubRoofType.class),
         @NamedNativeQuery(name = "getIclubRateTypeByQuoteTypeAndFieldId", query = "select * from iclub_rate_type where lower(rt_quote_type) = lower(:quoteType) and rt_field_id =:id", resultClass = IclubRateType.class),
-        @NamedNativeQuery(name = "getIclubFieldByFieldStatus", query = "select * from iclub_field where lower(f_status) = lower(:fieldStatus)", resultClass = IclubField.class)})
+        @NamedNativeQuery(name = "getIclubFieldByFieldStatus", query = "select * from iclub_field where lower(f_status) = lower(:fieldStatus)", resultClass = IclubField.class),
+        @NamedNativeQuery(name = "getIclubGeoLocByLatAndLong", query = "SELECT gl_id, ( 3959 * acos( cos( radians(:lat) ) * cos( radians( gl_lat ) ) * cos( radians( gl_long ) - radians(:geoLong) ) + sin( radians(:lat) ) * sin( radians( gl_lat ) ) ) ) AS distance FROM iclub_geo_loc   ORDER BY distance LIMIT 0 , 1;", resultClass = IclubGeoLoc.class)})
 @Table(name = "iclub_account_type")
 public class IclubNamedQueries implements java.io.Serializable {
 
