@@ -63,7 +63,7 @@
 						<div class="Container80 Responsive">
 							<div class="Container100 Responsive">
 								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Policy ID :" />
+									<p:outputLabel styleClass="TexAlCenter" value="Uninqe Id :" />
 								</div>
 								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.PId}" />
@@ -93,6 +93,56 @@
 						<div class="Container80 Responsive">
 							<div class="Container100 Responsive">
 								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" value="Debit Date :" />
+								</div>
+								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.PDebitDt}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" value="Premium :" />
+								</div>
+								<div class="Container50 Responsive">
+									<p:inputText styleClass="TexAlCenter" placeholder="Premium" value="#{iclubPolicyController.bean.PPremium}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" value="Pro-rata Premium :" />
+								</div>
+								<div class="Container50 Responsive">
+									<p:inputText styleClass="TexAlCenter" placeholder="Prorata Premium" value="#{iclubPolicyController.bean.PProrataPrm}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" value="Number :" />
+								</div>
+								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" placeholder="Policy Number" value="#{iclubPolicyController.bean.PNumber}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" value="Created By :" />
+								</div>
+								<div class="Container50 Responsive">
+									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.bean.iclubPerson}" />
+								</div>
+							</div>
+						</div>
+						<div class="Container80 Responsive">
+							<div class="Container100 Responsive">
+								<div class="Container50 Responsive">
 									<p:outputLabel styleClass="TexAlCenter" value="Created Date:" />
 								</div>
 								<div class="Container50 Responsive">
@@ -100,18 +150,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Policy Number" value="#{iclubPolicyController.bean.PNumber}" />
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Premium" value="#{iclubPolicyController.bean.PPremium}" />
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Prorata Premium" value="#{iclubPolicyController.bean.PProrataPrm}" />
-						</div>
-						<div class="EmptyBox5" />
 					</div>
 					<div class="Container100 Responsive">
 						<div class="Container25 Responsive">

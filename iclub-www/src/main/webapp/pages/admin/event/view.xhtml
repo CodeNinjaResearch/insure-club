@@ -1,15 +1,15 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtEventCont" widgetVar="dtEventCont" value="#{iclubEventController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Eventes Available">
-		<p:column headerText="Id">
+		<p:column headerText="Unique Id">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EId}" />
 		</p:column>
-		<p:column headerText="User Id">
+		<p:column headerText="Created By">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
-		<p:column headerText="Event Type">
+		<p:column headerText="Type">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubEventType}" />
 		</p:column>
-		<p:column headerText="Desc">
+		<p:column headerText=Description>
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EDesc}" />
 		</p:column>
 		<p:column headerText="Created Date">

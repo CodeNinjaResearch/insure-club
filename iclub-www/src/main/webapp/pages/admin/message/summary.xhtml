@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="ID" />
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MId}" />
@@ -10,7 +10,7 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="User ID" />
+			<p:outputLabel styleClass="TexAlCenter" value="Created By" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.iclubPerson}" />
@@ -19,7 +19,7 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="SysType From ID" />
+			<p:outputLabel styleClass="TexAlCenter" value="From System" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.iclubSystemTypeByMFromSysId}" />
@@ -28,7 +28,7 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="SysType To ID" />
+			<p:outputLabel styleClass="TexAlCenter" value="To System" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.iclubSystemTypeByMToSysId}" />
@@ -37,7 +37,7 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Trans Id" />
+			<p:outputLabel styleClass="TexAlCenter" value="Transaction Id" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MTranId}" />
@@ -59,6 +59,15 @@
 		</div>
 		<div class="Container50 Responsive">
 			<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MCrtdDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Sent Date" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubMessageController.bean.MSentDt}" />
 		</div>
 	</div>
 	<div class="EmptyBox5" />

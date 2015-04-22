@@ -33,12 +33,12 @@
 			<p:panel id="pnlViewVehCont">
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Make :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Make :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vmMake}">
 							<p:ajax update=":iclubFrm:mnuVehModel" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
-							<f:selectItem itemLabel="Vehicle Make" itemDisabled="true" />
+							<f:selectItem itemLabel="Make" itemDisabled="true" />
 							<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
 						</p:selectOneMenu>
 					</div>
@@ -46,12 +46,12 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Model :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Model :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:selectOneMenu widgetVar="mnuVehModel" id="mnuVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubVehicleMaster}">
 							<p:ajax update=":iclubFrm:mnuYear" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
-							<f:selectItem itemLabel="Vehicle Model" itemDisabled="true" />
+							<f:selectItem itemLabel="Model" itemDisabled="true" />
 							<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
 						</p:selectOneMenu>
 					</div>
@@ -84,7 +84,7 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" id="genPremium" value="Gen Premium :" />
+						<p:outputLabel styleClass="TexAlCenter" id="genPremium" value="Generated Premium :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:outputLabel id="genPremiumValue" value="#{iclubQuickQuoteController.genPremium}" />

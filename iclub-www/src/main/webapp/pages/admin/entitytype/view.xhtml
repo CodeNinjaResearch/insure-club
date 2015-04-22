@@ -1,12 +1,12 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtEntityTypeCont" widgetVar="dtEntityTypeCont" value="#{iclubEntityTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Entity Types Available">
-		<p:column headerText="Id">
-			<p:outputLabel styleClass="TexAlCenter" value="#{ bean.etId}" />
+		<p:column headerText="Unique  Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.etId}" />
 		</p:column>
-		<p:column headerText="Short Desc">
+		<p:column headerText="Short Description">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.etShortDesc}" />
 		</p:column>
-		<p:column headerText="Long Desc">
+		<p:column headerText="Long Description">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.etLongDesc}" />
 		</p:column>
 		<p:column headerText="Status">

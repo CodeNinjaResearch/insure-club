@@ -69,12 +69,12 @@
 				<p:tab id="qqVehDet" title="Vehicle Details">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Make :" />
+							<p:outputLabel styleClass="TexAlCenter" value="Make :" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vmMake}">
 								<p:ajax update=":iclubFrm:qqTabView:mnuVehModel" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
-								<f:selectItem itemLabel="Vehicle Make" itemDisabled="true" />
+								<f:selectItem itemLabel="Make" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
 							</p:selectOneMenu>
 						</div>
@@ -82,12 +82,12 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Model :" />
+							<p:outputLabel styleClass="TexAlCenter" value="Model :" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:selectOneMenu widgetVar="mnuVehModel" id="mnuVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubVehicleMaster}">
 								<p:ajax update=":iclubFrm:qqTabView:mnuYear" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
-								<f:selectItem itemLabel="Vehicle Model" itemDisabled="true" />
+								<f:selectItem itemLabel="Model" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
 							</p:selectOneMenu>
 						</div>
@@ -140,10 +140,10 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Mobile Number :" />
+							<p:outputLabel styleClass="TexAlCenter" value="Mobile :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Mobile Number" value="#{iclubQuickQuoteController.personBean.PMobile}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Mobile" value="#{iclubQuickQuoteController.personBean.PMobile}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -194,10 +194,10 @@
 				<p:tab id="qqDriverDet" title="Driver Details">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Driver Name :" />
+							<p:outputLabel styleClass="TexAlCenter" value="Name :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Driver Name" value="#{iclubQuickQuoteController.driverBean.DName}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubQuickQuoteController.driverBean.DName}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />

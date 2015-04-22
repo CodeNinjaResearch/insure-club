@@ -2,11 +2,11 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Insurance Item Type :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Item Type :" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubPurposeTypeController.bean.iclubInsuranceItemType}">
-				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+				<f:selectItem itemLabel="Item Type" itemDisabled="true" />
 				<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 			</p:selectOneMenu>
 		</div>
@@ -15,20 +15,20 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Short Desc :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Short Description :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:inputText styleClass="TexAlCenter" placeholder="Short Desc" value="#{iclubPurposeTypeController.bean.ptShortDesc}" />
+			<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubPurposeTypeController.bean.ptShortDesc}" />
 		</div>
 		<div class="EmptyBox5" />
 	</div>
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Long Desc :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Long Description :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:inputText styleClass="TexAlCenter" placeholder="Long Desc" value="#{iclubPurposeTypeController.bean.ptLongDesc}" />
+			<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubPurposeTypeController.bean.ptLongDesc}" />
 		</div>
 		<div class="EmptyBox5" />
 	</div>

@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtOccupationCont" widgetVar="dtOccupationCont" value="#{iclubOccupationController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Occupationes Available">
-		<p:column headerText="ID">
+		<p:column headerText="Unique Id">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.OId}" />
 		</p:column>
 		<p:column headerText="Description">
@@ -12,7 +12,7 @@
 		<p:column headerText="Created Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.OCrtdDt}" />
 		</p:column>
-		<p:column headerText="User ID">
+		<p:column headerText="Created By">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column>

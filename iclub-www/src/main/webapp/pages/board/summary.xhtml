@@ -27,19 +27,19 @@
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Mb Content :" />
+								<p:outputLabel styleClass="TexAlCenter" value="Content :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText styleClass="TexAlCenter" placeholder="Mb Content" value="#{iclubMessageBoardController.summeryBean.mbContent}" />
+								<p:inputText styleClass="TexAlCenter" placeholder="Content" value="#{iclubMessageBoardController.summeryBean.mbContent}" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Mb Tag :" />
+								<p:outputLabel styleClass="TexAlCenter" value="Tags :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText styleClass="TexAlCenter" placeholder="Mb Tag" value="#{iclubMessageBoardController.summeryBean.mbTag}" />
+								<p:inputText styleClass="TexAlCenter" placeholder="Tags" value="#{iclubMessageBoardController.summeryBean.mbTag}" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -53,7 +53,7 @@
 						<f:facet name="footer">
 							<p:commandButton id="btnMbCommentShowAdd" value="Add Comment" actionListener="#{iclubMbCommentController.showAddPanel}" update=":iclubFrm:pnlMbCont" />
 						</f:facet>
-						<p:column headerText="ID">
+						<p:column headerText="Unique Id">
 							<p:outputLabel value="#{bean.mbcId}" />
 						</p:column>
 						<p:column headerText="Description">
@@ -62,13 +62,16 @@
 						<p:column headerText="Created Date">
 							<p:outputLabel value="#{bean.mbcCrtdDt}" />
 						</p:column>
+						<p:column headerText="Created By">
+							<p:outputLabel value="#{bean.iclubPerson}" />
+						</p:column>
 					</p:dataTable>
 				</p:panel>
 				<p:panel id="pnlAddMbc" rendered="#{iclubMbCommentController.showAddPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Mb Comment Desc :" />
+								<p:outputLabel styleClass="TexAlCenter" value="Description :" />
 							</div>
 							<div class="Container50 Responsive">
 								<p:inputText placeholder="MbComment Desc" value="#{iclubMbCommentController.bean.mbcDesc}" styleClass="TexAlCenter" />

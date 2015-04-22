@@ -6,7 +6,7 @@
 		</div>
 		<div class="Container50 Responsive">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubInsuranceItemType}">
-				<f:selectItem itemLabel="Insurance Item Type" itemDisabled="true" />
+				<f:selectItem itemLabel="Item Type" itemDisabled="true" />
 				<f:selectItems value="#{iclubRateTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 			</p:selectOneMenu>
 		</div>
@@ -41,11 +41,11 @@
 	<div class="EmptyBox5" />
 	<div class="Container100 Responsive">
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="Rate Type :" />
+			<p:outputLabel styleClass="TexAlCenter" value="Type :" />
 		</div>
 		<div class="Container50 Responsive">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.rtType}">
-				<f:selectItem itemLabel="Rate Type" itemDisabled="true" />
+				<f:selectItem itemLabel="Type" itemDisabled="true" />
 				<f:selectItems value="#{iclubRateTypeController.rateType}" />
 			</p:selectOneMenu>
 		</div>

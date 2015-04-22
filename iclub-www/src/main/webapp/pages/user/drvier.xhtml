@@ -18,17 +18,20 @@
 					<f:facet name="footer">
 						<p:commandButton id="btnDriverShowAdd" value="Add" actionListener="#{iclubDriverController.showAddPanel}" update=":iclubFrm:pnlDriverCont" />
 					</f:facet>
-					<p:column headerText="Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.DId}" />
 					</p:column>
-					<p:column headerText="DLicenseNum">
+					<p:column headerText="License Number">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.DLicenseNum}" />
 					</p:column>
-					<p:column headerText="Driver Name">
+					<p:column headerText="Name">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.DName}" />
 					</p:column>
-					<p:column headerText="User Id">
+					<p:column headerText="Created By">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPersonByDPersonId}" />
+					</p:column>
+					<p:column headerText="Created Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.DCrtdDt}" />
 					</p:column>
 					<p:column headerText="Issue Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.DIssueDt}" />
@@ -95,10 +98,37 @@
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Driver Name :" />
+								<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText styleClass="TexAlCenter" placeholder="Driver Name" value="#{iclubDriverController.bean.DName}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubDriverController.bean.DId}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Created By :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubDriverController.bean.iclubPersonByDCrtdBy}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Created Date :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubDriverController.bean.DCrtdDt}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Name :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubDriverController.bean.DName}" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />

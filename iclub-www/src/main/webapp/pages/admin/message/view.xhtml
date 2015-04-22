@@ -1,24 +1,24 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtMessageCont" widgetVar="dtMessageCont" value="#{iclubMessageController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Messagees Available">
-		<p:column headerText="ID">
+		<p:column headerText="Unique Id">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.MId}" />
 		</p:column>
-		<p:column headerText="User ID">
+		<p:column headerText="Creatd By">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
-		<p:column headerText="SysType To ID">
+		<p:column headerText="To System">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubSystemTypeByMToSysId}" />
 		</p:column>
-		<p:column headerText="SysType From ID">
+		<p:column headerText="From System">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubSystemTypeByMFromSysId}" />
 		</p:column>
-		<p:column headerText="MessageType">
+		<p:column headerText="Type">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubMessageType}" />
 		</p:column>
 		<p:column headerText="Sent Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.MSentDt}" />
 		</p:column>
-		<p:column headerText="Tran ID">
+		<p:column headerText="Transaction Id">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.MTranId}" />
 		</p:column>
 		<p:column headerText="Content">

@@ -6,7 +6,7 @@
 					<f:facet name="footer">
 						<p:commandButton id="btnRateEngineShowAdd" value="Add" actionListener="#{iclubRatingController.showAddPanel}" update=":iclubFrm:pnlRateEngineCont" />
 					</f:facet>
-					<p:column headerText="Id">
+					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reId}" />
 					</p:column>
 					<p:column headerText="Rate">
@@ -15,11 +15,20 @@
 					<p:column headerText="Base Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
 					</p:column>
+					<p:column headerText="Maximum Value">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reMaxValue}" />
+					</p:column>
 					<p:column headerText="Field Name">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reFieldName}" />
 					</p:column>
-					<p:column headerText="Rate Type">
+					<p:column headerText="Type">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubRateType}" />
+					</p:column>
+					<p:column headerText="Created By">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+					</p:column>
+					<p:column headerText="Created Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reCrtdDt}" />
 					</p:column>
 					<p:column headerText="Status">
 						<p:selectOneMenu widgetVar="mnuViewStatus" id="mnuViewStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.reStatus}" disabled="true">

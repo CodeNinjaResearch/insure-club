@@ -69,7 +69,7 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Security Answer :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Initials :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="Initials" value="#{iclubProfileController.bean.PInitials}" />
@@ -96,10 +96,10 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Mobile Number :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Mobile :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Mobile Number" value="#{iclubProfileController.bean.PMobile}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Mobile" value="#{iclubProfileController.bean.PMobile}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -114,10 +114,10 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Contact Ref :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Contact Ref" value="#{iclubProfileController.bean.PContactPref}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Contact Reference" value="#{iclubProfileController.bean.PContactPref}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -160,20 +160,20 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Id Num :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Id Number :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Id Num" value="#{iclubProfileController.bean.PIdNum}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Id Number" value="#{iclubProfileController.bean.PIdNum}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Id Issuer Country :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Issuer Country :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:selectOneMenu widgetVar="mnuIdIss" id="mnuIdIss" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.bean.PIdIssueCntry}">
-							<f:selectItem itemLabel="Id Issuer Country" itemDisabled="true" />
+							<f:selectItem itemLabel="Issuer Country" itemDisabled="true" />
 							<f:selectItems value="#{iclubProfileController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
 						</p:selectOneMenu>
 					</div>
@@ -181,19 +181,19 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel value="Id Issue Date :" />
+						<p:outputLabel value="Issue Date :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar value="#{iclubProfileController.bean.PIdIssueDt}" />
+						<p:calendar placeholder="Issue Date" value="#{iclubProfileController.bean.PIdIssueDt}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel value="Id Expiry Date :" />
+						<p:outputLabel value="Expiry Date :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar value="#{iclubProfileController.bean.PIdExpiryDt}" />
+						<p:calendar placeholder="Expiry Date" value="#{iclubProfileController.bean.PIdExpiryDt}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />

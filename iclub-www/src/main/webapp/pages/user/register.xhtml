@@ -52,10 +52,10 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Mobile Number :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Mobile :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Mobile Number" value="#{iclubQuickQuoteController.bean.PMobile}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Mobile" value="#{iclubQuickQuoteController.bean.PMobile}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -70,10 +70,10 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Contact Ref :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Contact Ref" value="#{iclubQuickQuoteController.bean.PContactPref}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Contact Reference" value="#{iclubQuickQuoteController.bean.PContactPref}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -125,11 +125,11 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Id Issuer Country :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Issuer Country :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:selectOneMenu widgetVar="mnuIdIss" id="mnuIdIss" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.bean.PIdIssueCntry}">
-							<f:selectItem itemLabel="Id Issuer Country" itemDisabled="true" />
+							<f:selectItem itemLabel="Issuer Country" itemDisabled="true" />
 							<f:selectItems value="#{iclubQuickQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
 						</p:selectOneMenu>
 					</div>
@@ -137,19 +137,19 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Id Issue Date :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar styleClass="TexAlCenter" value="#{iclubQuickQuoteController.bean.PIdIssueDt}" />
+						<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubQuickQuoteController.bean.PIdIssueDt}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel value="Id Expiry Date :" />
+						<p:outputLabel value="Expiry Date :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar value="#{iclubQuickQuoteController.bean.PIdExpiryDt}" />
+						<p:calendar styleClass="TexAlCenter" placeholder="Expiry Date" value="#{iclubQuickQuoteController.bean.PIdExpiryDt}" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -176,7 +176,7 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Pensioner :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Is Pensioner :" />
 					</div>
 					<div class="Container50 Responsive">
 						<p:selectOneMenu widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.bean.PIsPensioner}">
