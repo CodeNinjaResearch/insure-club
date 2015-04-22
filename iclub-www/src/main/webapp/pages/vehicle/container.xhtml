@@ -1,0 +1,42 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubVehicleController.initializePage}" name="onload" autoRun="true" update="pnlVehicleContDet" />
+		<p:dialog id="vehLocationDetailsDialog" widgetVar="vehLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehAddress" value="Address:" />
+					<p:inputText id="vehAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVeh" showDetail="true" />
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubVehicleController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubVehicleController.draggableModelVeh}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubVehicleController.onMarkerDragVeh}" update="growlVeh" />
+					<p:ajax event="geocode" listener="#{iclubVehicleController.onGeocodeVeh}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubVehicleController.onMarkerSelectVeh}" update="growlVeh" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlVehicleCont">
+				<p:panel id="pnlVehicleContMenu">
+					<p:commandLink value="View Vehicle" actionListener="#{iclubVehicleController.showView}" update="pnlVehicleContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create Vehicle" actionListener="#{iclubVehicleController.showCreate}" update="pnlVehicleContDet" />
+				</p:panel>
+				<p:panel id="pnlVehicleContDet">
+					<p:panel id="pnlVehicleContView" styleClass="BordNone" rendered="#{iclubVehicleController.showViewCont}">
+						<ui:include src="/pages/vehicle/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlVehicleContCreate" styleClass="BordNone" rendered="#{iclubVehicleController.showCreateCont}">
+						<ui:include src="/pages/vehicle/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlVehicleContEdit" styleClass="BordNone" rendered="#{iclubVehicleController.showEditCont}">
+						<ui:include src="/pages/vehicle/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

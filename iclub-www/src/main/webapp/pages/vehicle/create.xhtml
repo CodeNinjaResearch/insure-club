@@ -1,0 +1,250 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubSecurityMaster}" widgetVar="mnuSecVM" id="mnuSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+				<f:selectItem itemLabel="Security Master" itemDisabled="true" />
+				<f:selectItems value="#{iclubVehicleController.securityMasterBeans}" var="c" itemLabel="#{c.smDesc}" itemValue="#{c.smId}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Access Type Over Night :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubAccessTypeByVOnAccessTypeId}" widgetVar="mnuAccTV" id="mnuAccTV" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+				<f:selectItem itemLabel="Access Type VOn" itemDisabled="true" />
+				<f:selectItems value="#{iclubVehicleController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Access Type During Day :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubAccessTypeByVDdAccessTypeId}" widgetVar="mnuAccTVDd" id="mnuAccTVDd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+				<f:selectItem itemLabel="Access Type VDd" itemDisabled="true" />
+				<f:selectItems value="#{iclubVehicleController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="OdoMeter :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Vo Do Meter" value="#{iclubVehicleController.bean.VOdometer}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Location Overnight :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="On Area" value="#{iclubVehicleController.bean.VOnArea}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="On Latitude :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="On Lat" value="#{iclubVehicleController.bean.VOnLat}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="On Longitude  :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="On Long" value="#{iclubVehicleController.bean.VOnLong}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Location During Day :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="VDd Area" value="#{iclubVehicleController.bean.VDdArea}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Claim Free years :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="No Claims Years" value="#{iclubVehicleController.bean.VNoclaimYrs}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Owner :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Owner" value="#{iclubVehicleController.bean.VOwner}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Is the vehicle equipped with a gear lock :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Gear Lock Yn" value="#{iclubVehicleController.bean.VGearLockYn}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Is the vehicle equipped with immobiliser :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="VImm Yn" value="#{iclubVehicleController.bean.VImmYn}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Concession Reason :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Concession Reason" value="#{iclubVehicleController.bean.VConcessReason}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Concession Percentage :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Concession Percentage" value="#{iclubVehicleController.bean.VConcessPrct}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Insured Value :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Insured Value" value="#{iclubVehicleController.bean.VInsuredValue}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Years of Comprehensive Insurance :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Years of Comprehensive Insurance" value="#{iclubVehicleController.bean.VCompYrs}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Vin :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Vin" value="#{iclubVehicleController.bean.VVin}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Engine Number :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Engine Number" value="#{iclubVehicleController.bean.VEngineNr}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText placeholder="Registration Number" value="#{iclubVehicleController.bean.VRegNum}" styleClass="TexAlCenter" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:commandButton update=":iclubFrm:vehLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('vehLocationDetailsDialog').show();" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Make :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehicleController.vmMake}">
+				<p:ajax update="mnuVehModel" process="@this" event="change" listener="#{iclubVehicleController.vmMakeValueChangeListener}" />
+				<f:selectItem itemLabel="Make" itemDisabled="true" />
+				<f:selectItems value="#{iclubVehicleController.vmMakes}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Model :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu widgetVar="mnuVehModel" id="mnuVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehicleController.bean.iclubVehicleMaster}">
+				<p:ajax update="mnuYear" process="@this" event="change" listener="#{iclubVehicleController.vmModelValueChangeListener}" />
+				<f:selectItem itemLabel="Model" itemDisabled="true" />
+				<f:selectItems value="#{iclubVehicleController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Year :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu widgetVar="mnuYear" id="mnuYear" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuYear.jq.removeClass('with-placeholder')" value="#{iclubVehicleController.bean.VYear}">
+				<f:selectItem itemLabel="Year" itemDisabled="true" />
+				<f:selectItems value="#{iclubVehicleController.years}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Vehicle Usage Purpose :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubPurposeType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+				<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
+				<f:selectItems value="#{iclubVehicleController.purposeTypeBeans}" var="p" itemLabel="#{p.ptLongDesc}" itemValue="#{p.ptId}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:commandButton id="btnVehicleCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubVehicleController.addIclubVehicle}" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:commandButton id="btnVehicleCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleCont" value="Close" actionListener="#{iclubVehicleController.showView}" />
+		</div>
+	</div>
+</ui:composition>
