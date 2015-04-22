@@ -16,9 +16,9 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubThatchTypeBean;
+import za.co.iclub.pss.web.bean.IclubCohortTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubThatchTypeModel;
+import za.co.iclub.pss.ws.model.IclubCohortTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubCohortTypeController")
@@ -28,92 +28,92 @@ public class IclubCohortTypeController implements Serializable {
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubCohortTypeController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubThatchTypeService/";
-	private List<IclubThatchTypeBean> beans;
-	private IclubThatchTypeBean bean;
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCohortTypeService/";
+	private List<IclubCohortTypeBean> beans;
+	private IclubCohortTypeBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
 
-	public void addIclubThatchType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubThatchType");
+	public void addIclubCohortType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohortType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubThatchTypeModel model = new IclubThatchTypeModel();
+				IclubCohortTypeModel model = new IclubCohortTypeModel();
 
-				model.setTtLongDesc(bean.getTtLongDesc());
-				model.setTtShortDesc(bean.getTtShortDesc());
-				model.setTtStatus(bean.getTtStatus());
+				model.setCtLongDesc(bean.getCtLongDesc());
+				model.setCtShortDesc(bean.getCtShortDesc());
+				model.setCtStatus(bean.getCtStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
-	public void modIclubThatchType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubThatchType");
+	public void modIclubCohortType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubCohortType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubThatchTypeModel model = new IclubThatchTypeModel();
-				model.setTtId(bean.getTtId());
-				model.setTtLongDesc(bean.getTtLongDesc());
-				model.setTtShortDesc(bean.getTtShortDesc());
-				model.setTtStatus(bean.getTtStatus());
+				IclubCohortTypeModel model = new IclubCohortTypeModel();
+				model.setCtId(bean.getCtId());
+				model.setCtLongDesc(bean.getCtLongDesc());
+				model.setCtShortDesc(bean.getCtShortDesc());
+				model.setCtStatus(bean.getCtStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
-	public void delIclubThatchType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubThatchType");
+	public void delIclubCohortType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubCohortType");
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getTtId());
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getCtId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
-				IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
 				clearForm();
 			} else {
-				IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+				IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
-		bean = new IclubThatchTypeBean();
+		bean = new IclubCohortTypeBean();
 	}
 
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
-		bean = new IclubThatchTypeBean();
+		bean = new IclubCohortTypeBean();
 	}
 
 	public void showModPanel() {
@@ -124,8 +124,8 @@ public class IclubCohortTypeController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 
-		if (bean.getTtShortDesc() != null && !bean.getTtShortDesc().trim().equalsIgnoreCase("")) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getTtShortDesc().trim() + "/" + ((bean.getTtId() == null) ? -999l : bean.getTtId()));
+		if (bean.getCtShortDesc() != null && !bean.getCtShortDesc().trim().equalsIgnoreCase("")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getCtShortDesc().trim() + "/" + ((bean.getCtId() == null) ? -999l : bean.getCtId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
 			if (message.getStatusCode() != 0) {
@@ -137,12 +137,12 @@ public class IclubCohortTypeController implements Serializable {
 			ret = ret && false;
 		}
 
-		if (bean.getTtLongDesc() == null || bean.getTtLongDesc().trim().equalsIgnoreCase("")) {
+		if (bean.getCtLongDesc() == null || bean.getCtLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
-		if (bean.getTtStatus() == null || bean.getTtStatus().trim().equalsIgnoreCase("")) {
+		if (bean.getCtStatus() == null || bean.getCtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -150,33 +150,33 @@ public class IclubCohortTypeController implements Serializable {
 		return ret;
 	}
 
-	public List<IclubThatchTypeBean> getBeans() {
+	public List<IclubCohortTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
-		Collection<? extends IclubThatchTypeModel> models = new ArrayList<IclubThatchTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubThatchTypeModel.class));
+		Collection<? extends IclubCohortTypeModel> models = new ArrayList<IclubCohortTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCohortTypeModel.class));
 		client.close();
-		beans = new ArrayList<IclubThatchTypeBean>();
-		for (IclubThatchTypeModel model : models) {
-			IclubThatchTypeBean bean = new IclubThatchTypeBean();
-			bean.setTtId(model.getTtId());
-			bean.setTtLongDesc(model.getTtLongDesc());
-			bean.setTtShortDesc(model.getTtShortDesc());
-			bean.setTtStatus(model.getTtStatus());
+		beans = new ArrayList<IclubCohortTypeBean>();
+		for (IclubCohortTypeModel model : models) {
+			IclubCohortTypeBean bean = new IclubCohortTypeBean();
+			bean.setCtId(model.getCtId());
+			bean.setCtLongDesc(model.getCtLongDesc());
+			bean.setCtShortDesc(model.getCtShortDesc());
+			bean.setCtStatus(model.getCtStatus());
 			beans.add(bean);
 		}
 		return beans;
 	}
 
-	public void setBeans(List<IclubThatchTypeBean> beans) {
+	public void setBeans(List<IclubCohortTypeBean> beans) {
 		this.beans = beans;
 	}
 
-	public IclubThatchTypeBean getBean() {
+	public IclubCohortTypeBean getBean() {
 		if (bean == null)
-			bean = new IclubThatchTypeBean();
+			bean = new IclubCohortTypeBean();
 		return bean;
 	}
 
-	public void setBean(IclubThatchTypeBean bean) {
+	public void setBean(IclubCohortTypeBean bean) {
 		this.bean = bean;
 	}
 
