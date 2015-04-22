@@ -21,9 +21,9 @@
 				<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
 			</p:selectOneMenu>
 		</p:column>
-		<p:column headerText="Rate Type">
+		<p:column headerText="Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.rtType}">
-				<f:selectItem itemLabel="Rate Type" itemDisabled="true" />
+				<f:selectItem itemLabel="Type" itemDisabled="true" />
 				<f:selectItem itemLabel="Lookup" itemValue="L" />
 				<f:selectItem itemLabel="Range" itemValue="R" />
 				<f:selectItem itemLabel="Value" itemValue="V" />
@@ -51,7 +51,7 @@
 		<p:column headerText="Created Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtCrtdDt}"></p:outputLabel>
 		</p:column>
-		<p:column headerText="Created By>
+		<p:column headerText="Created By">
 			<p:outputLabel styleClass=" TexAlCenter" value="#{bean.iclubPerson}">
 			</p:outputLabel>
 		</p:column>
