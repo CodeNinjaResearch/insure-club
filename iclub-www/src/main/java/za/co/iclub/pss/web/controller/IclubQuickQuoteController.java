@@ -238,7 +238,6 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubProperty");
 		try {
 			if (validateProForm(true)) {
-				WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "add");
 				IclubPropertyModel model = new IclubPropertyModel();
 
 				propertyBean.setPId(UUID.randomUUID().toString());
@@ -266,17 +265,11 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubThatchType(propertyBean.getIclubThatchType());
 				model.setIclubRoofType(propertyBean.getIclubRoofType());
 
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-				client.close();
-				if (response.getStatusCode() == 0) {
+				propertyBeans.add(propertyBean);
+				clearProForm();
 
-					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
-					propertyBeans.add(propertyBean);
-					clearProForm();
+				IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 
-				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
-				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -288,7 +281,6 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubProperty");
 		try {
 			if (validateVehForm(false)) {
-				WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "mod");
 				IclubPropertyModel model = new IclubPropertyModel();
 
 				model.setPId(propertyBean.getPId());
@@ -314,15 +306,10 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubBarType(propertyBean.getIclubBarType());
 				model.setIclubThatchType(propertyBean.getIclubThatchType());
 				model.setIclubRoofType(propertyBean.getIclubRoofType());
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
-				client.close();
-				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
-					clearProForm();
 
-				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
-				}
+				IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+				clearProForm();
+
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -428,7 +415,6 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubVehicle");
 		try {
 			if (validateVehForm(true)) {
-				WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "add");
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				vehicleBean.setVId(UUID.randomUUID().toString());
@@ -464,16 +450,10 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubAccessTypeByVDdAccessTypeId(vehicleBean.getIclubAccessTypeByVDdAccessTypeId());
 				model.setIclubAccessTypeByVOnAccessTypeId(vehicleBean.getIclubAccessTypeByVOnAccessTypeId());
 
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-				client.close();
-				if (response.getStatusCode() == 0) {
+				IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+				vehicleBeans.add(vehicleBean);
+				clearVehForm();
 
-					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
-					vehicleBeans.add(vehicleBean);
-					clearVehForm();
-				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
-				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -1206,7 +1186,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (beans != null && beans.size() > 0) {
 			for (IclubVehicleBean bean : beans) {
 
-				WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "mod");
+				WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "add");
 
 				IclubVehicleModel model = new IclubVehicleModel();
 
@@ -1239,7 +1219,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
 				model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId());
 
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
 					addInsuranceItem(model.getVId(), quoteModel.getQId(), 1l, getSessionUserId());
@@ -1265,7 +1245,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 		if (beans != null && beans.size() > 0) {
 			for (IclubPropertyBean bean : beans) {
-				WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "mod");
+				WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "add");
 
 				IclubPropertyModel model = new IclubPropertyModel();
 
@@ -1293,7 +1273,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubThatchType(bean.getIclubThatchType());
 				model.setIclubRoofType(bean.getIclubRoofType());
 
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 
 				if (response.getStatusCode() == 0) {
