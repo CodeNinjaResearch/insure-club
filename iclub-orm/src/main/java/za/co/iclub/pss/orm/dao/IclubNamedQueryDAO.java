@@ -530,7 +530,24 @@ public class IclubNamedQueryDAO {
 			Query queryObject = getCurrentSession().getNamedQuery("getInsuranceItemByQuoteIdAndItemTypeId");
 			queryObject.setString("quoteId", quoteId);
 			queryObject.setLong("itemTypeId", itemTypeId);
-			return (IclubInsuranceItem) queryObject.uniqueResult();
+			List ret = queryObject.list();
+
+			return (IclubInsuranceItem) ret.get(0);
+
+		} catch (RuntimeException re) {
+			log.error("find all by user failed", re);
+			throw re;
+		}
+	}
+
+	public List findIclubInsuranceItemsByQuoteIdAndItemTypeId(String quoteId, Long itemTypeId) {
+		log.debug("finding all IclubInsuranceItem instances by user");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getInsuranceItemByQuoteIdAndItemTypeId");
+			queryObject.setString("quoteId", quoteId);
+			queryObject.setLong("itemTypeId", itemTypeId);
+			List ret = queryObject.list();
+			return ret;
 		} catch (RuntimeException re) {
 			log.error("find all by user failed", re);
 			throw re;

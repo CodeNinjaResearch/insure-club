@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -85,6 +86,8 @@ public class IclubPropertyController implements Serializable {
 	private boolean showCreateCont;
 	private boolean showViewCont;
 	private boolean showEditCont;
+	private boolean showAddPanel;
+	private boolean showModPanel;
 	private Long viewParam;
 	private String sessionUserId;
 	private String userName;
@@ -103,6 +106,11 @@ public class IclubPropertyController implements Serializable {
 		else if (viewParam != null && viewParam.longValue() == 2)
 			showEdit();
 
+	}
+
+	@PostConstruct
+	public void init() {
+		draggableModelPro = new DefaultMapModel();
 	}
 
 	public void showView() {
@@ -128,6 +136,17 @@ public class IclubPropertyController implements Serializable {
 		showViewCont = false;
 		showEditCont = true;
 		viewParam = 2l;
+	}
+
+	public void showAddPanel() {
+		showAddPanel = true;
+		showModPanel = false;
+		bean = new IclubPropertyBean();
+	}
+
+	public void showModPanel() {
+		showAddPanel = false;
+		showModPanel = true;
 	}
 
 	public MapModel getDraggableModelPro() {
@@ -244,6 +263,8 @@ public class IclubPropertyController implements Serializable {
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
+		showAddPanel = false;
+		showModPanel = false;
 		bean = new IclubPropertyBean();
 	}
 
@@ -286,6 +307,7 @@ public class IclubPropertyController implements Serializable {
 					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					beans.add(bean);
+					clearForm();
 					showView();
 				} else {
 					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -332,6 +354,7 @@ public class IclubPropertyController implements Serializable {
 				if (response.getStatusCode() == 0) {
 					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
+					clearForm();
 					showView();
 				} else {
 					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -759,6 +782,22 @@ public class IclubPropertyController implements Serializable {
 
 	public void setCoverTypeBeans(List<IclubCoverTypeBean> coverTypeBeans) {
 		this.coverTypeBeans = coverTypeBeans;
+	}
+
+	public boolean isShowAddPanel() {
+		return showAddPanel;
+	}
+
+	public void setShowAddPanel(boolean showAddPanel) {
+		this.showAddPanel = showAddPanel;
+	}
+
+	public boolean isShowModPanel() {
+		return showModPanel;
+	}
+
+	public void setShowModPanel(boolean showModPanel) {
+		this.showModPanel = showModPanel;
 	}
 
 }

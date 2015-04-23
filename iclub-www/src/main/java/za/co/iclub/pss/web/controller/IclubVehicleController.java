@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -61,6 +62,8 @@ public class IclubVehicleController implements Serializable {
 	private List<IclubSecurityMasterBean> securityMasterBeans;
 	private List<IclubAccessTypeBean> accessTypeBeans;
 	private List<IclubPurposeTypeBean> purposeTypeBeans;
+	private boolean showAddPanel;
+	private boolean showModPanel;
 	private String vmMake;
 	private List<String> vmMakes;
 	private List<IclubVehicleMasterBean> vBeans;
@@ -89,6 +92,13 @@ public class IclubVehicleController implements Serializable {
 
 	}
 
+	@PostConstruct
+	public void init() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
+
+		draggableModelVeh = new DefaultMapModel();
+	}
+
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -112,6 +122,17 @@ public class IclubVehicleController implements Serializable {
 		showViewCont = false;
 		showEditCont = true;
 		viewParam = 2l;
+	}
+
+	public void showAddPanel() {
+		showAddPanel = true;
+		showModPanel = false;
+		bean = new IclubVehicleBean();
+	}
+
+	public void showModPanel() {
+		showAddPanel = false;
+		showModPanel = true;
 	}
 
 	public MapModel getDraggableModelVeh() {
@@ -301,6 +322,8 @@ public class IclubVehicleController implements Serializable {
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
+		showAddPanel = false;
+		showModPanel = false;
 		bean = new IclubVehicleBean();
 	}
 
@@ -312,6 +335,8 @@ public class IclubVehicleController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				bean.setVId(UUID.randomUUID().toString());
+				bean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				bean.setIclubPerson(getSessionUserId());
 				model.setVId(bean.getVId());
 				model.setVOwner(bean.getVOwner());
 				model.setVGearLockYn(bean.getVGearLockYn());
@@ -328,7 +353,7 @@ public class IclubVehicleController implements Serializable {
 				model.setVOnArea(bean.getVOnArea());
 				model.setVCompYrs(bean.getVCompYrs());
 				model.setVOdometer(bean.getVOdometer());
-				model.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setVCrtdDt(bean.getVCrtdDt());
 				model.setVRegNum(bean.getVRegNum());
 				model.setVEngineNr(bean.getVEngineNr());
 				model.setVVin(bean.getVVin());
@@ -336,7 +361,7 @@ public class IclubVehicleController implements Serializable {
 				model.setIclubVehicleMaster(bean.getIclubVehicleMaster());
 				model.setIclubPurposeType(bean.getIclubPurposeType());
 				model.setIclubSecurityMaster(bean.getIclubSecurityMaster());
-				model.setIclubPerson(getSessionUserId());
+				model.setIclubPerson(bean.getIclubPerson());
 				model.setIclubDriver(bean.getIclubDriver());
 				model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
 				model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
@@ -349,6 +374,7 @@ public class IclubVehicleController implements Serializable {
 					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					beans.add(bean);
+					clearForm();
 					showView();
 				} else {
 					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -368,7 +394,8 @@ public class IclubVehicleController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				model.setVId(bean.getVId());
-
+				bean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				bean.setIclubPerson(getSessionUserId());
 				model.setVOwner(bean.getVOwner());
 				model.setVGearLockYn(bean.getVGearLockYn());
 				model.setVImmYn(bean.getVImmYn());
@@ -384,7 +411,7 @@ public class IclubVehicleController implements Serializable {
 				model.setVOnArea(bean.getVOnArea());
 				model.setVCompYrs(bean.getVCompYrs());
 				model.setVOdometer(bean.getVOdometer());
-				model.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setVCrtdDt(bean.getVCrtdDt());
 				model.setVRegNum(bean.getVRegNum());
 				model.setVEngineNr(bean.getVEngineNr());
 				model.setVVin(bean.getVVin());
@@ -392,7 +419,7 @@ public class IclubVehicleController implements Serializable {
 				model.setIclubVehicleMaster(bean.getIclubVehicleMaster());
 				model.setIclubPurposeType(bean.getIclubPurposeType());
 				model.setIclubSecurityMaster(bean.getIclubSecurityMaster());
-				model.setIclubPerson(getSessionUserId());
+				model.setIclubPerson(bean.getIclubPerson());
 				model.setIclubDriver(bean.getIclubDriver());
 				model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
 				model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
@@ -403,6 +430,7 @@ public class IclubVehicleController implements Serializable {
 				if (response.getStatusCode() == 0) {
 					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
+					clearForm();
 					showView();
 				} else {
 					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -727,6 +755,22 @@ public class IclubVehicleController implements Serializable {
 
 	public void setPurposeTypeBeans(List<IclubPurposeTypeBean> purposeTypeBeans) {
 		this.purposeTypeBeans = purposeTypeBeans;
+	}
+
+	public boolean isShowAddPanel() {
+		return showAddPanel;
+	}
+
+	public void setShowAddPanel(boolean showAddPanel) {
+		this.showAddPanel = showAddPanel;
+	}
+
+	public boolean isShowModPanel() {
+		return showModPanel;
+	}
+
+	public void setShowModPanel(boolean showModPanel) {
+		this.showModPanel = showModPanel;
 	}
 
 }

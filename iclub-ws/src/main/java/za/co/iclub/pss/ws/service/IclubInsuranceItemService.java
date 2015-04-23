@@ -321,6 +321,41 @@ public class IclubInsuranceItemService {
 		return model;
 	}
 
+	@GET
+	@Path("/lsitByQuoteIdAndItemTypeId/{quoteId}/{itemTypeId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public IclubInsuranceItemModel listByQuoteIdAndItemTypeId(@PathParam("quoteId") String quoteId, @PathParam("itemTypeId") Long itemTypeId) {
+		IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+		try {
+			List batmod = iclubNamedQueryDAO.findIclubInsuranceItemsByQuoteIdAndItemTypeId(quoteId, itemTypeId);
+			for (Object object : batmod) {
+				IclubInsuranceItem bean = (IclubInsuranceItem) object;
+				model.setIiId(bean.getIiId());
+				model.setIiItemId(bean.getIiItemId());
+				model.setIiQuoteId(bean.getIiQuoteId());
+				model.setIiCrtdDt(bean.getIiCrtdDt());
+				model.setIiInsureValue(bean.getIiInsureValue());
+				model.setIiActualValue(bean.getIiActualValue());
+				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
+				model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
+
+				if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
+					String[] claimItems = new String[bean.getIclubClaimItems().size()];
+					int i = 0;
+					for (IclubClaimItem claimItem : bean.getIclubClaimItems()) {
+						claimItems[i] = claimItem.getCiId();
+						i++;
+					}
+					model.setIclubClaimItems(claimItems);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return model;
+	}
+
 	public IclubInsuranceItemDAO getIclubInsuranceItemDAO() {
 		return iclubInsuranceItemDAO;
 	}
