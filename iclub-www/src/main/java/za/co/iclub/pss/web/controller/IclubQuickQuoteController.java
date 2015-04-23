@@ -465,7 +465,7 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubVehicle");
 		try {
 			if (validateVehForm(false)) {
-				WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "mod");
+				 
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				model.setVId(vehicleBean.getVId());
@@ -500,15 +500,11 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubAccessTypeByVDdAccessTypeId(vehicleBean.getIclubAccessTypeByVDdAccessTypeId());
 				model.setIclubAccessTypeByVOnAccessTypeId(vehicleBean.getIclubAccessTypeByVOnAccessTypeId());
 
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
-				client.close();
-				if (response.getStatusCode() == 0) {
+				 
 					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					clearVehForm();
 
-				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
-				}
+				 
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -1223,7 +1219,7 @@ public class IclubQuickQuoteController implements Serializable {
 				client.close();
 				if (response.getStatusCode() == 0) {
 					addInsuranceItem(model.getVId(), quoteModel.getQId(), 1l, getSessionUserId());
-					genPremium = getUpdatePremium(quoteModel.getQId(), "Q");
+					genPremium += getUpdatePremium(quoteModel.getQId(), "Q", bean);
 					quoteId = quoteModel.getQId();
 					IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
 
@@ -1875,7 +1871,7 @@ public class IclubQuickQuoteController implements Serializable {
 		this.countryCodeBeans = countryCodeBeans;
 	}
 
-	public Double getUpdatePremium(String quoteId, String quoteType) {
+	public Double getUpdatePremium(String quoteId, String quoteType, IclubVehicleBean vehicleBean) {
 		List<IclubFieldBean> fieldBeans = getIclubFieldBeans();
 		IclubQuoteBean quoteBean = getQuoteDetailsById(quoteId);
 		Double baseValue = getBasePremium();
@@ -1890,8 +1886,7 @@ public class IclubQuickQuoteController implements Serializable {
 					List<IclubRateTypeBean> rateTypeBeans = getRateTypeBeanByFieldId(fieldBean.getFId(), quoteType);
 					String fieldValue = null;
 					if (tableName.equalsIgnoreCase("iclub_vehicle")) {
-						IclubInsuranceItemBean insuranceItemBean = setInsuranceItemDetails(quoteId, 1l);
-						IclubVehicleBean vehicleBean = getVehicleDetails(insuranceItemBean.getIiItemId());
+
 						fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId());
 
 					}
