@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
@@ -41,6 +43,7 @@ import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubLoginModel;
 import za.co.iclub.pss.ws.model.IclubMaritialStatusModel;
 import za.co.iclub.pss.ws.model.IclubOccupationModel;
+import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.IclubSecurityQuestionModel;
 import za.co.iclub.pss.ws.model.IclubSupplMasterModel;
 import za.co.iclub.pss.ws.model.IclubSupplierTypeModel;
@@ -82,6 +85,7 @@ public class IclubSupplMasterController implements Serializable {
 	private List<IclubMaritialStatusBean> maritialStatusBeans;
 	private List<IclubIdTypeBean> idTypeBeans;
 	private List<IclubPersonBean> personBeans;
+	private Map<String, IclubLoginBean> loginBeans;
 	private List<IclubOccupationBean> occupationBeans;
 	private List<IclubCountryCodeBean> countryCodeBeans;
 	private List<IclubSecurityQuestionBean> securityQuestionBeans;
@@ -273,6 +277,14 @@ public class IclubSupplMasterController implements Serializable {
 				client.close();
 				if (response.getStatusCode() == 0) {
 
+					if (personBeans != null && personBeans.size() > 0) {
+
+						for (IclubPersonBean bean : personBeans) {
+							insertIntoPerson(bean);
+						}
+
+					}
+
 					IclubWebHelper.addMessage(getLabelBundle().getString("supplmaster") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -347,9 +359,12 @@ public class IclubSupplMasterController implements Serializable {
 		try {
 			if (validatePersonForm(true) && validateLoginForm(true)) {
 
+				personBean.setPId(UUID.randomUUID().toString());
+
 				personBean.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
 				personBean.setIclubPerson(getSessionUserId());
 
+				getLoginBeans().put(personBean.getPId(), loginBean);
 				personBeans.add(personBean);
 
 				clearPerForm();
@@ -369,13 +384,92 @@ public class IclubSupplMasterController implements Serializable {
 
 				personBean.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
 				personBean.setIclubPerson(getSessionUserId());
-
+				getLoginBeans().put(personBean.getPId(), loginBean);
 				clearPerForm();
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage(getLabelBundle().getString("supplmaster") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
+	}
+
+	public ResponseModel insertIntoPerson(IclubPersonBean personBean) {
+
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: insertIntoPerson");
+
+		WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "add");
+
+		IclubPersonModel model = new IclubPersonModel();
+		model.setPId(UUID.randomUUID().toString());
+		model.setPCrtdDt(personBean.getPCrtdDt());
+		model.setPDob(personBean.getPDob());
+		model.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
+		model.setPEmail(personBean.getPEmail());
+		model.setPFName(personBean.getPFName());
+		model.setPIdNum(personBean.getPIdNum());
+		model.setPLName(personBean.getPLName());
+		model.setPMobile(personBean.getPMobile());
+		model.setPAddress(personBean.getPAddress());
+		model.setPContactPref(personBean.getPContactPref());
+		model.setPGender(personBean.getPGender());
+		model.setPContactPref(personBean.getPContactPref());
+		model.setPIdExpiryDt(personBean.getPIdExpiryDt());
+		model.setPIdIssueDt(personBean.getPIdIssueDt());
+		model.setPInitials(personBean.getPInitials());
+		model.setPIsPensioner(personBean.getPIsPensioner());
+		model.setPIdIssueCntry(personBean.getPIdIssueCntry());
+		model.setPLat(personBean.getPLat());
+		model.setPLong(personBean.getPLong());
+		model.setPOccupation(personBean.getPOccupation());
+		model.setPTitle(personBean.getPTitle());
+		model.setPZipCd(personBean.getPZipCd());
+		model.setIclubIdType(personBean.getIclubIdType());
+		model.setIclubPerson(getSessionUserId());
+		model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
+
+		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+		client.close();
+
+		if (response.getStatusCode() == 0) {
+			addLogin(getLoginBeans().get(model.getPId()), model.getPId());
+		} else {
+			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+		}
+
+		return response;
+	}
+
+	public ResponseModel addLogin(IclubLoginBean loginBean, String personId) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addLogin");
+		try {
+			if (validateLoginForm(true)) {
+				IclubLoginModel model = new IclubLoginModel();
+				WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "add");
+				model.setLId(UUID.randomUUID().toString());
+
+				model.setLCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLLastDate(loginBean.getLLastDate());
+				model.setLName(loginBean.getLName());
+				model.setLPasswd((loginBean.getLPasswd()).toString());
+				model.setLSecAns(loginBean.getLSecAns());
+				model.setIclubPersonByLCrtdBy(getSessionUserId());
+				model.setIclubPersonByLPersonId(personId);
+				// need to change
+				model.setIclubRoleType(4l);
+				model.setIclubSecurityQuestion(loginBean.getIclubSecurityQuestion());
+
+				ResponseModel response = null;
+
+				response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+
+				return response;
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		return new ResponseModel();
 	}
 
 	public void delIclubPerson() {
@@ -828,6 +922,18 @@ public class IclubSupplMasterController implements Serializable {
 
 	public void setSecurityQuestionBeans(List<IclubSecurityQuestionBean> securityQuestionBeans) {
 		this.securityQuestionBeans = securityQuestionBeans;
+	}
+
+	public Map<String, IclubLoginBean> getLoginBeans() {
+
+		if (loginBeans == null) {
+			loginBeans = new TreeMap<String, IclubLoginBean>();
+		}
+		return loginBeans;
+	}
+
+	public void setLoginBeans(Map<String, IclubLoginBean> loginBeans) {
+		this.loginBeans = loginBeans;
 	}
 
 }
