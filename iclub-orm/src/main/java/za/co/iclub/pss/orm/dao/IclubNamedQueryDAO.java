@@ -16,7 +16,6 @@ import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
-import za.co.iclub.pss.orm.bean.IclubVehicle;
 
 @Transactional
 @SuppressWarnings("rawtypes")
@@ -1163,12 +1162,13 @@ public class IclubNamedQueryDAO {
 	// }
 	// }
 
-	public IclubVehicle findByDriverId(String driverId) {
+	public List findByDriverId(String driverId) {
 		log.debug("finding  IclubVehicle instance by getVehicleByDriverId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getVehicleByDriverId");
 			queryObject.setString("driverId", driverId);
-			return (IclubVehicle) queryObject.uniqueResult();
+			List ret = queryObject.list();
+			return ret;
 		} catch (RuntimeException re) {
 			log.error("find IclubVehicle failed", re);
 			throw re;

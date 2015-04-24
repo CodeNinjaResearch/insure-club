@@ -322,15 +322,16 @@ public class IclubInsuranceItemService {
 	}
 
 	@GET
-	@Path("/lsitByQuoteIdAndItemTypeId/{quoteId}/{itemTypeId}")
+	@Path("/listByQuoteIdAndItemTypeId/{quoteId}/{itemTypeId}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public IclubInsuranceItemModel listByQuoteIdAndItemTypeId(@PathParam("quoteId") String quoteId, @PathParam("itemTypeId") Long itemTypeId) {
-		IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+	public <T extends IclubInsuranceItemModel> List<T> listByQuoteIdAndItemTypeId(@PathParam("quoteId") String quoteId, @PathParam("itemTypeId") Long itemTypeId) {
+		List<T> ret = new ArrayList<T>();
 		try {
 			List batmod = iclubNamedQueryDAO.findIclubInsuranceItemsByQuoteIdAndItemTypeId(quoteId, itemTypeId);
 			for (Object object : batmod) {
 				IclubInsuranceItem bean = (IclubInsuranceItem) object;
+				IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 				model.setIiId(bean.getIiId());
 				model.setIiItemId(bean.getIiItemId());
 				model.setIiQuoteId(bean.getIiQuoteId());
@@ -349,11 +350,12 @@ public class IclubInsuranceItemService {
 					}
 					model.setIclubClaimItems(claimItems);
 				}
+				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		return model;
+		return ret;
 	}
 
 	public IclubInsuranceItemDAO getIclubInsuranceItemDAO() {

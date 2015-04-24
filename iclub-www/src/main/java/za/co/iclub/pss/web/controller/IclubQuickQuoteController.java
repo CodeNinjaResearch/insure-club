@@ -157,8 +157,10 @@ public class IclubQuickQuoteController implements Serializable {
 	private String claimYN;
 	private ResourceBundle labelBundle;
 	private boolean termsAndConditionFlag;
-	private Double genPremium;
+	private Double genPremium = 0.0d;
 	private String quoteId;
+	private String vehAddress;
+	private String proAddress;
 
 	private MapModel draggableModelPer;
 	private Marker markerPer;
@@ -209,6 +211,7 @@ public class IclubQuickQuoteController implements Serializable {
 	public void clearVehForm() {
 		showVehAddPanel = false;
 		showVehModPanel = false;
+		vehAddress = "";
 		vehicleBean = new IclubVehicleBean();
 	}
 
@@ -226,6 +229,7 @@ public class IclubQuickQuoteController implements Serializable {
 	public void clearProForm() {
 		showProAddPanel = false;
 		showProModPanel = false;
+		proAddress = "";
 		propertyBean = new IclubPropertyBean();
 	}
 
@@ -452,6 +456,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 				IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 				vehicleBeans.add(vehicleBean);
+
 				clearVehForm();
 
 			}
@@ -465,7 +470,7 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubVehicle");
 		try {
 			if (validateVehForm(false)) {
-				 
+
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				model.setVId(vehicleBean.getVId());
@@ -500,11 +505,9 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubAccessTypeByVDdAccessTypeId(vehicleBean.getIclubAccessTypeByVDdAccessTypeId());
 				model.setIclubAccessTypeByVOnAccessTypeId(vehicleBean.getIclubAccessTypeByVOnAccessTypeId());
 
-				 
-					IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
-					clearVehForm();
+				IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+				clearVehForm();
 
-				 
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -1522,6 +1525,7 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 
 	public IclubPersonBean getPersonBean() {
+
 		if (personBean == null)
 			personBean = new IclubPersonBean();
 		return personBean;
@@ -2237,6 +2241,9 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 
 	public Double getGenPremium() {
+		if (genPremium == null) {
+			genPremium = 0d;
+		}
 		return genPremium;
 	}
 
@@ -2596,6 +2603,22 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public void setShowProModPanel(boolean showProModPanel) {
 		this.showProModPanel = showProModPanel;
+	}
+
+	public String getVehAddress() {
+		return vehAddress;
+	}
+
+	public void setVehAddress(String vehAddress) {
+		this.vehAddress = vehAddress;
+	}
+
+	public String getProAddress() {
+		return proAddress;
+	}
+
+	public void setProAddress(String proAddress) {
+		this.proAddress = proAddress;
 	}
 
 }
