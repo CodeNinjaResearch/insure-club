@@ -201,7 +201,37 @@ public class IclubLoginService {
 		IclubLoginModel message = new IclubLoginModel();
 		try {
 			List logins = iclubLoginDAO.findByProperty("LName", name);
-			if (logins!=null && (logins.size() != 0 || logins.get(0) != null)) {
+			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
+				IclubLogin login = (IclubLogin) logins.get(0);
+
+				message.setLId(login.getLId());
+				message.setLCrtdDt(login.getLCrtdDt());
+				message.setLLastDate(login.getLLastDate());
+				message.setLName(login.getLName());
+				message.setLPasswd(login.getLPasswd());
+				message.setLSecAns(login.getLSecAns());
+				message.setLSecAns(login.getLSecAns());
+				message.setIclubPersonByLCrtdBy(login.getIclubPersonByLCrtdBy() != null ? login.getIclubPersonByLCrtdBy().getPId() : null);
+				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
+				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
+				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
+
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return message;
+	}
+
+	@GET
+	@Path("/personId/{id}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public IclubLoginModel getByPersonId(@PathParam("id") String id) {
+		IclubLoginModel message = new IclubLoginModel();
+		try {
+			List logins = iclubNamedQueryDAO.getIclubLoginByPersonId(id);
+			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
 				IclubLogin login = (IclubLogin) logins.get(0);
 
 				message.setLId(login.getLId());

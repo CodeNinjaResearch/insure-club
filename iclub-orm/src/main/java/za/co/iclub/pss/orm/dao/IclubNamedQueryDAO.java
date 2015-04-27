@@ -64,6 +64,18 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
+	public List findIclubSupplPersonBySmId(String smId) {
+		log.debug("finding all IclubSupplPerson instances by smId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubSupplPersonBySmId");
+			queryObject.setString("id", smId);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find all IclubSupplPerson by smId failed", re);
+			throw re;
+		}
+	}
+
 	public List getBySD(String sd, Long id, String className) {
 		log.debug("Fetching all " + className + " by Query :: get" + className + "SD");
 		try {
@@ -1224,6 +1236,18 @@ public class IclubNamedQueryDAO {
 			return ret;
 		} catch (RuntimeException re) {
 			log.error("Wall Type", re);
+			throw re;
+		}
+	}
+
+	public List getIclubLoginByPersonId(String personId) {
+		log.debug("finding IclubLogin instance by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubLoginByPersonId");
+			queryObject.setString("personId", personId);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("get IclubLogin failed", re);
 			throw re;
 		}
 	}

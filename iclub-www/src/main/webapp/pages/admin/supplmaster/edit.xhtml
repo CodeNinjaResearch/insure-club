@@ -122,22 +122,23 @@
 				</div>
 				<div class="EmptyBox5" />
 				<div class="EmptyBox5" />
-				<div class="Container100 Responsive">
-					<div class="Container30">
-						<p:commandButton id="btnSupplMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Update" actionListener="#{iclubSupplMasterController.modIclubSupplMaster}" />
-					</div>
-					<div class="Container30">
-						<p:commandButton id="btnSupplMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Delete" actionListener="#{iclubSupplMasterController.delIclubSupplMaster}" />
-					</div>
-					<div class="Container30">
-						<p:commandButton id="btnSupplMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Close" actionListener="#{iclubSupplMasterController.showView}" />
-					</div>
-				</div>
-				<div class="EmptyBox5" />
 			</p:tab>
 			<p:tab id="supPerMModDet" title="Person details">
 				<ui:include src="/pages/admin/supplmaster/registerEdit.xhtml" />
 			</p:tab>
 		</p:tabView>
+		<div class="EmptyBox5" />
+		<div class="Container100 Responsive">
+			<div class="Container30">
+				<p:commandButton id="btnSupplMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Update" actionListener="#{iclubSupplMasterController.modIclubSupplMaster}" />
+			</div>
+			<div class="Container30">
+				<p:commandButton id="btnSupplMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Delete" actionListener="#{iclubSupplMasterController.delIclubSupplMaster}" />
+			</div>
+			<div class="Container30">
+				<p:commandButton id="btnSupplMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Close" actionListener="#{iclubSupplMasterController.showView}" />
+			</div>
+		</div>
+		<div class="EmptyBox5" />
 	</div>
 </ui:composition>

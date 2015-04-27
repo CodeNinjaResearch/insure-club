@@ -96,19 +96,19 @@
 				</div>
 				<div class="EmptyBox5" />
 				<div class="EmptyBox5" />
-				<div class="Container100 Responsive">
-					<div class="Container50 Responsive">
-						<p:commandButton id="btnSupplMasterCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubSupplMasterController.addIclubSupplMaster}" />
-					</div>
-					<div class="Container50 Responsive">
-						<p:commandButton id="btnSupplMasterCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Close" actionListener="#{iclubSupplMasterController.showView}" />
-					</div>
-				</div>
-				<div class="EmptyBox5" />
 			</p:tab>
 			<p:tab id="perAddDet" title="Person details">
 				<ui:include src="/pages/admin/supplmaster/register.xhtml" />
 			</p:tab>
 		</p:tabView>
+		<div class="EmptyBox5" />
+		<div class="Container100 Responsive">
+			<div class="Container50 Responsive">
+				<p:commandButton id="btnSupplMasterCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubSupplMasterController.addIclubSupplMaster}" />
+			</div>
+			<div class="Container50 Responsive">
+				<p:commandButton id="btnSupplMasterCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Close" actionListener="#{iclubSupplMasterController.showView}" />
+			</div>
+		</div>
 	</div>
 </ui:composition>

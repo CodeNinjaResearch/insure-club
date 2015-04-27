@@ -46,6 +46,7 @@ import za.co.iclub.pss.ws.model.IclubOccupationModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.IclubSecurityQuestionModel;
 import za.co.iclub.pss.ws.model.IclubSupplMasterModel;
+import za.co.iclub.pss.ws.model.IclubSupplPersonModel;
 import za.co.iclub.pss.ws.model.IclubSupplierTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -57,6 +58,7 @@ public class IclubSupplMasterController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubSupplMasterController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplMasterService/";
+	private static final String SP_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplPersonService/";
 	private static final String ST_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplierTypeService/";
 	private static final String LOG_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubLoginService/";
 	private static final String PER_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPersonService/";
@@ -91,6 +93,7 @@ public class IclubSupplMasterController implements Serializable {
 	private List<IclubSecurityQuestionBean> securityQuestionBeans;
 	private boolean showPerAddPanel;
 	private boolean showPerModPanel;
+	private Integer activeIndex;
 
 	public void showPerAddPanel() {
 		showPerAddPanel = true;
@@ -108,6 +111,7 @@ public class IclubSupplMasterController implements Serializable {
 	public void showPerModPanel() {
 		showPerAddPanel = false;
 		showPerModPanel = true;
+		loginBean = getLoginBeans().get(personBean.getPId());
 	}
 
 	public MapModel getDraggableModelPer() {
@@ -164,23 +168,32 @@ public class IclubSupplMasterController implements Serializable {
 		showCreateCont = false;
 		showViewCont = true;
 		showEditCont = false;
+		activeIndex = 0;
 		viewParam = 1l;
 	}
 
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubSupplMasterBean();
+		draggableModelPer = new DefaultMapModel();
+		personBean = new IclubPersonBean();
+		loginBean = new IclubLoginBean();
+		personBeans = new ArrayList<IclubPersonBean>();
+		loginBeans = new TreeMap<String, IclubLoginBean>();
 		showCreateCont = true;
 		showViewCont = false;
 		showEditCont = false;
+		activeIndex = 0;
 		viewParam = 1l;
 	}
 
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
+		activeIndex = 0;
 		showCreateCont = false;
 		showViewCont = false;
 		showEditCont = true;
+		setIclubPersonsList();
 		if (bean.getSmLat() != null && bean.getSmLat() != null) {
 			centerGeoMapPer = bean.getSmLat() + "," + bean.getSmLong();
 			LatLng coord = new LatLng(bean.getSmLat(), bean.getSmLong());
@@ -193,6 +206,81 @@ public class IclubSupplMasterController implements Serializable {
 			centerGeoMapPer = "36.890257,30.707417";
 		}
 		viewParam = 2l;
+	}
+
+	public void setIclubPersonsList() {
+
+		WebClient client = IclubWebHelper.createCustomClient(SP_BASE_URL + "get/supplMaster/" + bean.getSmId());
+		Collection<? extends IclubSupplPersonModel> models = new ArrayList<IclubSupplPersonModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSupplPersonModel.class));
+		client.close();
+		personBeans = new ArrayList<IclubPersonBean>();
+		for (IclubSupplPersonModel spModel : models) {
+
+			client = IclubWebHelper.createCustomClient(PER_BASE_URL + "get/" + spModel.getIclubPersonBySpPersonId());
+			IclubPersonModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
+			client.close();
+
+			if (model != null && model.getPId() != null) {
+
+				IclubPersonBean personBean = new IclubPersonBean();
+
+				personBean.setPId(model.getPId());
+				personBean.setPCrtdDt(model.getPCrtdDt());
+				personBean.setPDob(model.getPDob());
+				personBean.setPEmail(model.getPEmail());
+				personBean.setPFName(model.getPFName());
+				personBean.setPIdNum(model.getPIdNum());
+				personBean.setPLName(model.getPLName());
+				personBean.setPMobile(model.getPMobile());
+				personBean.setPAge(model.getPAge());
+				personBean.setPAddress(model.getPAddress());
+				personBean.setPContactPref(model.getPContactPref());
+				personBean.setPGender(model.getPGender());
+				personBean.setPContactPref(model.getPContactPref());
+				personBean.setPIdExpiryDt(model.getPIdExpiryDt());
+				personBean.setPInitials(model.getPInitials());
+				personBean.setPIsPensioner(model.getPIsPensioner());
+				personBean.setPIdIssueCntry(model.getPIdIssueCntry());
+				personBean.setPIdIssueDt(model.getPIdIssueDt());
+				personBean.setPLat(model.getPLat());
+				personBean.setPLong(model.getPLong());
+				personBean.setPOccupation(model.getPOccupation());
+				personBean.setPTitle(model.getPTitle());
+				personBean.setPZipCd(model.getPZipCd());
+				personBean.setIclubIdType(model.getIclubIdType());
+				personBean.setIclubPerson(model.getIclubPerson());
+				personBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+
+				getIclubLoginBean(personBean.getPId());
+
+				personBeans.add(personBean);
+			}
+		}
+
+	}
+
+	public void getIclubLoginBean(String personId) {
+		WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "personId/" + personId);
+
+		IclubLoginModel model = (IclubLoginModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class));
+		if (model != null && model.getLId() != null) {
+			IclubLoginBean loginBean = new IclubLoginBean();
+
+			loginBean.setLId(model.getLId());
+			loginBean.setLCrtdDt(model.getLCrtdDt());
+			loginBean.setLLastDate(model.getLLastDate());
+			loginBean.setLName(model.getLName());
+			loginBean.setLPasswd(model.getLPasswd());
+			loginBean.setLSecAns(model.getLSecAns());
+			loginBean.setIclubPersonByLCrtdBy(model.getIclubPersonByLCrtdBy());
+			loginBean.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId());
+			loginBean.setIclubRoleType(model.getIclubRoleType());
+			loginBean.setIclubSecurityQuestion(model.getIclubSecurityQuestion());
+
+			getLoginBeans().put(personId, loginBean);
+
+		}
+
 	}
 
 	public List<IclubSupplMasterBean> getDashBoardBeans() {
@@ -249,6 +337,7 @@ public class IclubSupplMasterController implements Serializable {
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
+		activeIndex = 0;
 		bean = new IclubSupplMasterBean();
 	}
 
@@ -258,8 +347,9 @@ public class IclubSupplMasterController implements Serializable {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubSupplMasterModel model = new IclubSupplMasterModel();
+				bean.setSmId(UUID.randomUUID().toString());
 
-				model.setSmId(UUID.randomUUID().toString());
+				model.setSmId(bean.getSmId());
 				model.setSmCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setIclubSupplierType(bean.getIclubSupplierType());
 				model.setSmRating(bean.getSmRating());
@@ -322,6 +412,12 @@ public class IclubSupplMasterController implements Serializable {
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
+					if (personBeans != null && personBeans.size() > 0) {
+
+						for (IclubPersonBean bean : personBeans) {
+							insertIntoPerson(bean);
+						}
+					}
 					IclubWebHelper.addMessage(getLabelBundle().getString("supplmaster") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -396,12 +492,19 @@ public class IclubSupplMasterController implements Serializable {
 	public ResponseModel insertIntoPerson(IclubPersonBean personBean) {
 
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: insertIntoPerson");
-
-		WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "add");
-
+		WebClient client = null;
+		boolean createOrUpdate = false;
 		IclubPersonModel model = new IclubPersonModel();
-		model.setPId(UUID.randomUUID().toString());
-		model.setPCrtdDt(personBean.getPCrtdDt());
+		if (personBean.getPCrtdDt() != null) {
+			client = IclubWebHelper.createCustomClient(PER_BASE_URL + "mod");
+			model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+		} else {
+			client = IclubWebHelper.createCustomClient(PER_BASE_URL + "add");
+			model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+		}
+
+		model.setPId(personBean.getPId());
+
 		model.setPDob(personBean.getPDob());
 		model.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
 		model.setPEmail(personBean.getPEmail());
@@ -427,11 +530,22 @@ public class IclubSupplMasterController implements Serializable {
 		model.setIclubPerson(getSessionUserId());
 		model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
 
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-		client.close();
+		ResponseModel response = null;
+		if (personBean.getPCrtdDt() != null) {
+			response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+			client.close();
+		} else {
+			response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+			createOrUpdate = true;
+			client.close();
+		}
 
 		if (response.getStatusCode() == 0) {
-			addLogin(getLoginBeans().get(model.getPId()), model.getPId());
+			insertIntoIclubLogin(getLoginBeans().get(model.getPId()), model.getPId(), createOrUpdate);
+			if (createOrUpdate) {
+				insertIntoIclubSupplMaster(model);
+			}
+
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -439,13 +553,19 @@ public class IclubSupplMasterController implements Serializable {
 		return response;
 	}
 
-	public ResponseModel addLogin(IclubLoginBean loginBean, String personId) {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addLogin");
+	public ResponseModel insertIntoIclubLogin(IclubLoginBean loginBean, String personId, boolean createOrUpdate) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: insertIntoIclubLogin");
 		try {
-			if (validateLoginForm(true)) {
+			if ((true)) {
 				IclubLoginModel model = new IclubLoginModel();
-				WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "add");
-				model.setLId(UUID.randomUUID().toString());
+				WebClient client = null;
+				if (createOrUpdate) {
+					client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "add");
+					model.setLId(UUID.randomUUID().toString());
+				} else {
+					client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "mod");
+					model.setLId(loginBean.getLId());
+				}
 
 				model.setLCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setLLastDate(loginBean.getLLastDate());
@@ -457,6 +577,39 @@ public class IclubSupplMasterController implements Serializable {
 				// need to change
 				model.setIclubRoleType(4l);
 				model.setIclubSecurityQuestion(loginBean.getIclubSecurityQuestion());
+
+				ResponseModel response = null;
+				if (createOrUpdate) {
+					response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+				} else {
+					response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+				}
+
+				client.close();
+				return response;
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		return new ResponseModel();
+	}
+
+	public ResponseModel insertIntoIclubSupplMaster(IclubPersonModel personModel) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: insertIntoIclubSupplMaster");
+		try {
+
+			if (personModel != null && personModel.getPId() != null) {
+
+				WebClient client = IclubWebHelper.createCustomClient(SP_BASE_URL + "add");
+
+				IclubSupplPersonModel model = new IclubSupplPersonModel();
+
+				model.setSpId(UUID.randomUUID().toString());
+				model.setIclubPersonBySpCrtdBy(getSessionUserId());
+				model.setIclubPersonBySpPersonId(personModel.getPId());
+				model.setIclubSupplMaster(bean.getSmId());
 
 				ResponseModel response = null;
 
@@ -934,6 +1087,17 @@ public class IclubSupplMasterController implements Serializable {
 
 	public void setLoginBeans(Map<String, IclubLoginBean> loginBeans) {
 		this.loginBeans = loginBeans;
+	}
+
+	public Integer getActiveIndex() {
+		if (activeIndex == null) {
+			activeIndex = 0;
+		}
+		return activeIndex;
+	}
+
+	public void setActiveIndex(Integer activeIndex) {
+		this.activeIndex = activeIndex;
 	}
 
 }
