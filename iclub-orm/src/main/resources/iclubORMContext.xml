@@ -93,7 +93,9 @@
 				<value>za.co.iclub.pss.orm.bean.IclubCohortType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubCohortPerson</value>
 				<value>za.co.iclub.pss.orm.bean.IclubCohortClaim</value>
-				<value>za.co.iclub.pss.orm.bean.IclubCohort</value></list>
+				<value>za.co.iclub.pss.orm.bean.IclubCohort</value>
+				<value>za.co.iclub.pss.orm.bean.IclubSupplPerson</value>
+				<value>za.co.iclub.pss.orm.bean.IclubCohortInvite</value></list>
 		</property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -461,6 +463,16 @@
 		</property>
 	</bean>
 	<bean id="IclubCohortDAO" class="za.co.iclub.pss.orm.dao.IclubCohortDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubSupplPersonDAO" class="za.co.iclub.pss.orm.dao.IclubSupplPersonDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCohortInviteDAO" class="za.co.iclub.pss.orm.bean.IclubCohortInviteDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

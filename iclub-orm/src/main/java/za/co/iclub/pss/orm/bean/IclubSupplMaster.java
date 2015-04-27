@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +20,7 @@ import javax.persistence.TemporalType;
  * IclubSupplMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_suppl_master")
+@Table(name = "iclub_suppl_master", catalog = "iclubdb")
 public class IclubSupplMaster implements java.io.Serializable {
 
 	// Fields
@@ -29,7 +28,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 178164329861311959L;
+	private static final long serialVersionUID = -4062225518734453736L;
 	private String smId;
 	private IclubPerson iclubPerson;
 	private IclubSupplierType iclubSupplierType;
@@ -45,6 +44,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	private Timestamp smCrtdDt;
 	private Set<IclubClaimItem> iclubClaimItemsForCiAssesorId = new HashSet<IclubClaimItem>(0);
 	private Set<IclubClaimItem> iclubClaimItemsForCiHandlerId = new HashSet<IclubClaimItem>(0);
+	private Set<IclubSupplPerson> iclubSupplPersons = new HashSet<IclubSupplPerson>(0);
 
 	// Constructors
 
@@ -58,7 +58,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Double smCrLimit, Date srActionDt, Integer smRating, Timestamp smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId) {
+	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Double smCrLimit, Date srActionDt, Integer smRating, Timestamp smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId, Set<IclubSupplPerson> iclubSupplPersons) {
 		this.smId = smId;
 		this.iclubPerson = iclubPerson;
 		this.iclubSupplierType = iclubSupplierType;
@@ -74,6 +74,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 		this.smCrtdDt = smCrtdDt;
 		this.iclubClaimItemsForCiAssesorId = iclubClaimItemsForCiAssesorId;
 		this.iclubClaimItemsForCiHandlerId = iclubClaimItemsForCiHandlerId;
+		this.iclubSupplPersons = iclubSupplPersons;
 	}
 
 	// Property accessors
@@ -214,6 +215,15 @@ public class IclubSupplMaster implements java.io.Serializable {
 
 	public void setIclubClaimItemsForCiHandlerId(Set<IclubClaimItem> iclubClaimItemsForCiHandlerId) {
 		this.iclubClaimItemsForCiHandlerId = iclubClaimItemsForCiHandlerId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubSupplMaster")
+	public Set<IclubSupplPerson> getIclubSupplPersons() {
+		return this.iclubSupplPersons;
+	}
+
+	public void setIclubSupplPersons(Set<IclubSupplPerson> iclubSupplPersons) {
+		this.iclubSupplPersons = iclubSupplPersons;
 	}
 
 }
