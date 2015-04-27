@@ -186,6 +186,15 @@ public class IclubSecurityMasterService {
 				iCSm.setSmStatus(iclubSMaster.getSmStatus());
 				iCSm.setIclubInsuranceItemType(iclubSMaster.getIclubInsuranceItemType() != null ? iclubSMaster.getIclubInsuranceItemType().getIitId() : null);
 				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
+				if (iclubSMaster.getIclubVehicles() != null && iclubSMaster.getIclubVehicles().size() > 0) {
+					String[] vehicles = new String[iclubSMaster.getIclubVehicles().size()];
+					int i = 0;
+					for (IclubVehicle vehicle : iclubSMaster.getIclubVehicles()) {
+						vehicles[i] = vehicle.getVId();
+						i++;
+					}
+					iCSm.setIclubVehicles(vehicles);
+				}
 
 				ret.add((T) iCSm);
 			}
@@ -210,6 +219,15 @@ public class IclubSecurityMasterService {
 			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 			model.setSmStatus(bean.getSmStatus());
+			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
+				String[] vehicles = new String[bean.getIclubVehicles().size()];
+				int i = 0;
+				for (IclubVehicle vehicle : bean.getIclubVehicles()) {
+					vehicles[i] = vehicle.getVId();
+					i++;
+				}
+				model.setIclubVehicles(vehicles);
+			}
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);
