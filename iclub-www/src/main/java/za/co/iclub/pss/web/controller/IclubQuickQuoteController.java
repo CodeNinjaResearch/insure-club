@@ -1117,6 +1117,16 @@ public class IclubQuickQuoteController implements Serializable {
 		if (bean.getPDob() == null) {
 			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
+		} else if (IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()) <= 18) {
+			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getPIdIssueDt() == null) {
+			IclubWebHelper.addMessage(("Please Select IssueDate"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (IclubWebHelper.isCurrentDate(bean.getPIdIssueDt().getTime())) {
+			IclubWebHelper.addMessage(("Issue Date less than Current Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 		return ret;
 	}

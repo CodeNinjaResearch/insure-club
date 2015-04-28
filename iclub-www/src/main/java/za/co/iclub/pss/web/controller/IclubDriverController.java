@@ -169,11 +169,22 @@ public class IclubDriverController implements Serializable {
 		if (bean.getDDob() == null) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("DOB Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
+		} else if (IclubWebHelper.calculateMyAge(bean.getDDob().getTime()) <= 18) {
+			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 		if (bean.getIclubMaritialStatus() == null) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("Please select Maritial Status"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
+		if (bean.getDIssueDt() == null) {
+			IclubWebHelper.addMessage(("Please Select IssueDate"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (IclubWebHelper.isCurrentDate(bean.getDIssueDt().getTime())) {
+			IclubWebHelper.addMessage(("Issue Date less than Current Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
 		return ret;
 	}
 
