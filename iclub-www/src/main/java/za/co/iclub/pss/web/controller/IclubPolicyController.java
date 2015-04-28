@@ -62,6 +62,8 @@ public class IclubPolicyController implements Serializable {
 	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
 	private static final String D_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubDocumentService/";
 
+	private boolean viewPolicy;
+
 	private List<IclubPolicyBean> beans;
 
 	private ResourceBundle labelBundle;
@@ -306,6 +308,10 @@ public class IclubPolicyController implements Serializable {
 
 		return "edit.xhtml?faces-redirect=true";
 
+	}
+
+	public void viewPolicy() {
+		viewPolicy = true;
 	}
 
 	public String modIclubPolicy() {
@@ -717,6 +723,14 @@ public class IclubPolicyController implements Serializable {
 
 	public void setDocIds(List<String> docIds) {
 		this.docIds = docIds;
+	}
+
+	public boolean isViewPolicy() {
+		return viewPolicy;
+	}
+
+	public void setViewPolicy(boolean viewPolicy) {
+		this.viewPolicy = viewPolicy;
 	}
 
 }
