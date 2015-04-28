@@ -80,26 +80,28 @@ public class IclubLicenseCodeController implements Serializable {
 		Collection<? extends IclubLicenseCodeModel> models = new ArrayList<IclubLicenseCodeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubLicenseCodeModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubLicenseCodeBean>();
-		for (IclubLicenseCodeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubLicenseCodeModel model : models) {
 
-			IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
+				IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
 
-			bean.setLcId(model.getLcId());
-			bean.setLcCrtdDt(model.getLcCrtdDt());
-			bean.setLcDesc(model.getLcDesc());
-			bean.setLcStatus(model.getLcStatus());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setLcCategory(model.getLcCategory());
-			if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
-				String[] drivers = new String[model.getIclubDrivers().length];
-				int i = 0;
-				for (String iclubMessage : model.getIclubDrivers()) {
-					drivers[i] = iclubMessage;
-					i++;
+				bean.setLcId(model.getLcId());
+				bean.setLcCrtdDt(model.getLcCrtdDt());
+				bean.setLcDesc(model.getLcDesc());
+				bean.setLcStatus(model.getLcStatus());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setLcCategory(model.getLcCategory());
+				if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
+					String[] drivers = new String[model.getIclubDrivers().length];
+					int i = 0;
+					for (String iclubMessage : model.getIclubDrivers()) {
+						drivers[i] = iclubMessage;
+						i++;
+					}
+					bean.setIclubDrivers(drivers);
 				}
-				bean.setIclubDrivers(drivers);
+				dashBoardBeans.add(bean);
 			}
-			dashBoardBeans.add(bean);
 		}
 		return dashBoardBeans;
 	}
@@ -277,27 +279,29 @@ public class IclubLicenseCodeController implements Serializable {
 		Collection<? extends IclubLicenseCodeModel> models = new ArrayList<IclubLicenseCodeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubLicenseCodeModel.class));
 		client.close();
 		beans = new ArrayList<IclubLicenseCodeBean>();
-		for (IclubLicenseCodeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubLicenseCodeModel model : models) {
 
-			IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
+				IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
 
-			bean.setLcId(model.getLcId());
-			bean.setLcCrtdDt(model.getLcCrtdDt());
-			bean.setLcDesc(model.getLcDesc());
-			bean.setLcStatus(model.getLcStatus());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setLcCategory(model.getLcCategory());
-			if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
-				String[] drivers = new String[model.getIclubDrivers().length];
-				int i = 0;
-				for (String iclubMessage : model.getIclubDrivers()) {
-					drivers[i] = iclubMessage;
-					i++;
+				bean.setLcId(model.getLcId());
+				bean.setLcCrtdDt(model.getLcCrtdDt());
+				bean.setLcDesc(model.getLcDesc());
+				bean.setLcStatus(model.getLcStatus());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setLcCategory(model.getLcCategory());
+				if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
+					String[] drivers = new String[model.getIclubDrivers().length];
+					int i = 0;
+					for (String iclubMessage : model.getIclubDrivers()) {
+						drivers[i] = iclubMessage;
+						i++;
+					}
+					bean.setIclubDrivers(drivers);
 				}
-				bean.setIclubDrivers(drivers);
-			}
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

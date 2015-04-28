@@ -122,28 +122,29 @@ public class IclubOccupiedStatusService {
 
 		try {
 			List batmod = iclubOccupiedStatusDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubOccupiedStatus iOs = (IclubOccupiedStatus) object;
 
-			for (Object object : batmod) {
-				IclubOccupiedStatus iOs = (IclubOccupiedStatus) object;
+					IclubOccupiedStatusModel model = new IclubOccupiedStatusModel();
 
-				IclubOccupiedStatusModel model = new IclubOccupiedStatusModel();
+					model.setOsId(iOs.getOsId());
+					model.setOsLongDesc(iOs.getOsLongDesc());
+					model.setOsShortDesc(iOs.getOsShortDesc());
+					model.setOsStatus(iOs.getOsStatus());
 
-				model.setOsId(iOs.getOsId());
-				model.setOsLongDesc(iOs.getOsLongDesc());
-				model.setOsShortDesc(iOs.getOsShortDesc());
-				model.setOsStatus(iOs.getOsStatus());
-
-				if (iOs.getIclubProperties() != null && iOs.getIclubProperties().size() > 0) {
-					String[] iclubProperties = new String[iOs.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty iclubProperty : iOs.getIclubProperties()) {
-						iclubProperties[i] = iclubProperty.getPId();
-						i++;
+					if (iOs.getIclubProperties() != null && iOs.getIclubProperties().size() > 0) {
+						String[] iclubProperties = new String[iOs.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty iclubProperty : iOs.getIclubProperties()) {
+							iclubProperties[i] = iclubProperty.getPId();
+							i++;
+						}
+						model.setIclubProperties(iclubProperties);
 					}
-					model.setIclubProperties(iclubProperties);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

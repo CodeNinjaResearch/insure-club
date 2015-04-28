@@ -155,13 +155,15 @@ public class IclubThatchTypeController implements Serializable {
 		Collection<? extends IclubThatchTypeModel> models = new ArrayList<IclubThatchTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubThatchTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubThatchTypeBean>();
-		for (IclubThatchTypeModel model : models) {
-			IclubThatchTypeBean bean = new IclubThatchTypeBean();
-			bean.setTtId(model.getTtId());
-			bean.setTtLongDesc(model.getTtLongDesc());
-			bean.setTtShortDesc(model.getTtShortDesc());
-			bean.setTtStatus(model.getTtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubThatchTypeModel model : models) {
+				IclubThatchTypeBean bean = new IclubThatchTypeBean();
+				bean.setTtId(model.getTtId());
+				bean.setTtLongDesc(model.getTtLongDesc());
+				bean.setTtShortDesc(model.getTtShortDesc());
+				bean.setTtStatus(model.getTtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

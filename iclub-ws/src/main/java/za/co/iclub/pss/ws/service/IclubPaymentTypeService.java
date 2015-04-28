@@ -121,18 +121,19 @@ public class IclubPaymentTypeService {
 
 		try {
 			List batmod = iclubPaymentTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPaymentType iPt = (IclubPaymentType) object;
 
-			for (Object object : batmod) {
-				IclubPaymentType iPt = (IclubPaymentType) object;
+					IclubPaymentTypeModel model = new IclubPaymentTypeModel();
 
-				IclubPaymentTypeModel model = new IclubPaymentTypeModel();
+					model.setPtId(iPt.getPtId());
+					model.setPtLongDesc(iPt.getPtLongDesc());
+					model.setPtShortDesc(iPt.getPtShortDesc());
+					model.setPtStatus(iPt.getPtStatus());
 
-				model.setPtId(iPt.getPtId());
-				model.setPtLongDesc(iPt.getPtLongDesc());
-				model.setPtShortDesc(iPt.getPtShortDesc());
-				model.setPtStatus(iPt.getPtStatus());
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

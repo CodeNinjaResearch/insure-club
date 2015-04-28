@@ -123,30 +123,31 @@ public class IclubSecurityQuestionService {
 
 		try {
 			List batmod = iclubSecurityQuestionDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSecurityQuestion iSq = (IclubSecurityQuestion) object;
 
-			for (Object object : batmod) {
-				IclubSecurityQuestion iSq = (IclubSecurityQuestion) object;
+					IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
 
-				IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
+					model.setSqId(iSq.getSqId());
+					model.setSqLongDesc(iSq.getSqLongDesc());
+					model.setSqShortDesc(iSq.getSqShortDesc());
+					model.setSqStatus(iSq.getSqStatus());
 
-				model.setSqId(iSq.getSqId());
-				model.setSqLongDesc(iSq.getSqLongDesc());
-				model.setSqShortDesc(iSq.getSqShortDesc());
-				model.setSqStatus(iSq.getSqStatus());
+					if (iSq.getIclubLogins() != null && iSq.getIclubLogins().size() > 0) {
+						Set<IclubLogin> iLog = iSq.getIclubLogins();
+						String[] iclubLogins = new String[iLog.size()];
 
-				if (iSq.getIclubLogins() != null && iSq.getIclubLogins().size() > 0) {
-					Set<IclubLogin> iLog = iSq.getIclubLogins();
-					String[] iclubLogins = new String[iLog.size()];
-
-					int i = 0;
-					for (IclubLogin iL : iLog) {
-						iclubLogins[i] = iL.getLId();
-						i++;
+						int i = 0;
+						for (IclubLogin iL : iLog) {
+							iclubLogins[i] = iL.getLId();
+							i++;
+						}
+						model.setIclubLogins(iclubLogins);
 					}
-					model.setIclubLogins(iclubLogins);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -178,37 +178,38 @@ public class IclubPropertyService {
 
 		try {
 			List batmod = iclubPropertyDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubProperty iCP = (IclubProperty) object;
 
-			for (Object object : batmod) {
-				IclubProperty iCP = (IclubProperty) object;
+					IclubPropertyModel model = new IclubPropertyModel();
 
-				IclubPropertyModel model = new IclubPropertyModel();
+					model.setPId(iCP.getPId());
+					model.setPCrtdDt(iCP.getPCrtdDt());
+					model.setPEstValue(iCP.getPEstValue());
+					model.setPSecGatesYn(iCP.getPSecGatesYn());
+					model.setPNorobberyYn(iCP.getPNorobberyYn());
+					model.setPCompYn(iCP.getPCompYn());
+					model.setPRentFurYn(iCP.getPRentFurYn());
+					model.setPNoclaimYrs(iCP.getPNoclaimYrs());
+					model.setPPostalCd(iCP.getPPostalCd());
+					model.setPLong(iCP.getPLong());
+					model.setPLat(iCP.getPLat());
+					model.setPAddress(iCP.getPAddress());
+					model.setPRegNum(iCP.getPRegNum());
+					model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
+					model.setIclubPurposeType(iCP.getIclubPurposeType() != null ? (iCP.getIclubPurposeType().getPtId()) : null);
+					model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
+					model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
+					model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
+					model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
+					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
+					model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
+					model.setIclubThatchType(iCP.getIclubThatchType() != null ? (iCP.getIclubThatchType().getTtId()) : null);
+					model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
 
-				model.setPId(iCP.getPId());
-				model.setPCrtdDt(iCP.getPCrtdDt());
-				model.setPEstValue(iCP.getPEstValue());
-				model.setPSecGatesYn(iCP.getPSecGatesYn());
-				model.setPNorobberyYn(iCP.getPNorobberyYn());
-				model.setPCompYn(iCP.getPCompYn());
-				model.setPRentFurYn(iCP.getPRentFurYn());
-				model.setPNoclaimYrs(iCP.getPNoclaimYrs());
-				model.setPPostalCd(iCP.getPPostalCd());
-				model.setPLong(iCP.getPLong());
-				model.setPLat(iCP.getPLat());
-				model.setPAddress(iCP.getPAddress());
-				model.setPRegNum(iCP.getPRegNum());
-				model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
-				model.setIclubPurposeType(iCP.getIclubPurposeType() != null ? (iCP.getIclubPurposeType().getPtId()) : null);
-				model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
-				model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
-				model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
-				model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
-				model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
-				model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
-				model.setIclubThatchType(iCP.getIclubThatchType() != null ? (iCP.getIclubThatchType().getTtId()) : null);
-				model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -226,37 +227,38 @@ public class IclubPropertyService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubProperty.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubProperty iCP = (IclubProperty) object;
 
-			for (Object object : batmod) {
-				IclubProperty iCP = (IclubProperty) object;
+					IclubPropertyModel model = new IclubPropertyModel();
 
-				IclubPropertyModel model = new IclubPropertyModel();
+					model.setPId(iCP.getPId());
+					model.setPCrtdDt(iCP.getPCrtdDt());
+					model.setPEstValue(iCP.getPEstValue());
+					model.setPSecGatesYn(iCP.getPSecGatesYn());
+					model.setPNorobberyYn(iCP.getPNorobberyYn());
+					model.setPCompYn(iCP.getPCompYn());
+					model.setPRentFurYn(iCP.getPRentFurYn());
+					model.setPNoclaimYrs(iCP.getPNoclaimYrs());
+					model.setPPostalCd(iCP.getPPostalCd());
+					model.setPLong(iCP.getPLong());
+					model.setPLat(iCP.getPLat());
+					model.setPAddress(iCP.getPAddress());
+					model.setPRegNum(iCP.getPRegNum());
+					model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
+					model.setIclubPurposeType(iCP.getIclubPurposeType() != null ? (iCP.getIclubPurposeType().getPtId()) : null);
+					model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
+					model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
+					model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
+					model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
+					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
+					model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
+					model.setIclubThatchType(iCP.getIclubThatchType() != null ? (iCP.getIclubThatchType().getTtId()) : null);
+					model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
 
-				model.setPId(iCP.getPId());
-				model.setPCrtdDt(iCP.getPCrtdDt());
-				model.setPEstValue(iCP.getPEstValue());
-				model.setPSecGatesYn(iCP.getPSecGatesYn());
-				model.setPNorobberyYn(iCP.getPNorobberyYn());
-				model.setPCompYn(iCP.getPCompYn());
-				model.setPRentFurYn(iCP.getPRentFurYn());
-				model.setPNoclaimYrs(iCP.getPNoclaimYrs());
-				model.setPPostalCd(iCP.getPPostalCd());
-				model.setPLong(iCP.getPLong());
-				model.setPLat(iCP.getPLat());
-				model.setPAddress(iCP.getPAddress());
-				model.setPRegNum(iCP.getPRegNum());
-				model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
-				model.setIclubPurposeType(iCP.getIclubPurposeType() != null ? (iCP.getIclubPurposeType().getPtId()) : null);
-				model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
-				model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
-				model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
-				model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
-				model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
-				model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
-				model.setIclubThatchType(iCP.getIclubThatchType() != null ? (iCP.getIclubThatchType().getTtId()) : null);
-				model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

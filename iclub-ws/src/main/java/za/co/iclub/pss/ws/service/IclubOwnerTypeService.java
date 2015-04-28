@@ -123,30 +123,31 @@ public class IclubOwnerTypeService {
 
 		try {
 			List batmod = iclubOwnerTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubOwnerType iOt = (IclubOwnerType) object;
 
-			for (Object object : batmod) {
-				IclubOwnerType iOt = (IclubOwnerType) object;
+					IclubOwnerTypeModel model = new IclubOwnerTypeModel();
 
-				IclubOwnerTypeModel model = new IclubOwnerTypeModel();
+					model.setOtId(iOt.getOtId());
+					model.setOtLongDesc(iOt.getOtLongDesc());
+					model.setOtShortDesc(iOt.getOtShortDesc());
+					model.setOtStatus(iOt.getOtStatus());
 
-				model.setOtId(iOt.getOtId());
-				model.setOtLongDesc(iOt.getOtLongDesc());
-				model.setOtShortDesc(iOt.getOtShortDesc());
-				model.setOtStatus(iOt.getOtStatus());
+					if (iOt.getIclubAccounts() != null && iOt.getIclubAccounts().size() > 0) {
+						Set<IclubAccount> iAcc = iOt.getIclubAccounts();
+						String[] iclubAccounts = new String[iAcc.size()];
 
-				if (iOt.getIclubAccounts() != null && iOt.getIclubAccounts().size() > 0) {
-					Set<IclubAccount> iAcc = iOt.getIclubAccounts();
-					String[] iclubAccounts = new String[iAcc.size()];
-
-					int i = 0;
-					for (IclubAccount iA : iAcc) {
-						iclubAccounts[i] = iA.getAId();
-						i++;
+						int i = 0;
+						for (IclubAccount iA : iAcc) {
+							iclubAccounts[i] = iA.getAId();
+							i++;
+						}
+						model.setIclubAccounts(iclubAccounts);
 					}
-					model.setIclubAccounts(iclubAccounts);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

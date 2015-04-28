@@ -135,29 +135,30 @@ public class IclubSecurityMasterService {
 
 		try {
 			List batmod = iclubSecurityMasterDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSecurityMaster iclubSMaster = (IclubSecurityMaster) object;
+					IclubSecurityMasterModel iCSm = new IclubSecurityMasterModel();
 
-			for (Object object : batmod) {
-				IclubSecurityMaster iclubSMaster = (IclubSecurityMaster) object;
-				IclubSecurityMasterModel iCSm = new IclubSecurityMasterModel();
+					iCSm.setSmId(iclubSMaster.getSmId());
+					iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
+					iCSm.setSmDesc(iclubSMaster.getSmDesc());
+					iCSm.setSmStatus(iclubSMaster.getSmStatus());
+					iCSm.setIclubInsuranceItemType(iclubSMaster.getIclubInsuranceItemType() != null ? iclubSMaster.getIclubInsuranceItemType().getIitId() : null);
+					iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
 
-				iCSm.setSmId(iclubSMaster.getSmId());
-				iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
-				iCSm.setSmDesc(iclubSMaster.getSmDesc());
-				iCSm.setSmStatus(iclubSMaster.getSmStatus());
-				iCSm.setIclubInsuranceItemType(iclubSMaster.getIclubInsuranceItemType() != null ? iclubSMaster.getIclubInsuranceItemType().getIitId() : null);
-				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
-
-				if (iclubSMaster.getIclubVehicles() != null && iclubSMaster.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iclubSMaster.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iclubSMaster.getIclubVehicles()) {
-						vehicles[i] = vehicle.getVId();
-						i++;
+					if (iclubSMaster.getIclubVehicles() != null && iclubSMaster.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iclubSMaster.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iclubSMaster.getIclubVehicles()) {
+							vehicles[i] = vehicle.getVId();
+							i++;
+						}
+						iCSm.setIclubVehicles(vehicles);
 					}
-					iCSm.setIclubVehicles(vehicles);
-				}
 
-				ret.add((T) iCSm);
+					ret.add((T) iCSm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -175,28 +176,29 @@ public class IclubSecurityMasterService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSecurityMaster.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSecurityMaster iclubSMaster = (IclubSecurityMaster) object;
+					IclubSecurityMasterModel iCSm = new IclubSecurityMasterModel();
 
-			for (Object object : batmod) {
-				IclubSecurityMaster iclubSMaster = (IclubSecurityMaster) object;
-				IclubSecurityMasterModel iCSm = new IclubSecurityMasterModel();
-
-				iCSm.setSmId(iclubSMaster.getSmId());
-				iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
-				iCSm.setSmDesc(iclubSMaster.getSmDesc());
-				iCSm.setSmStatus(iclubSMaster.getSmStatus());
-				iCSm.setIclubInsuranceItemType(iclubSMaster.getIclubInsuranceItemType() != null ? iclubSMaster.getIclubInsuranceItemType().getIitId() : null);
-				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
-				if (iclubSMaster.getIclubVehicles() != null && iclubSMaster.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iclubSMaster.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iclubSMaster.getIclubVehicles()) {
-						vehicles[i] = vehicle.getVId();
-						i++;
+					iCSm.setSmId(iclubSMaster.getSmId());
+					iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
+					iCSm.setSmDesc(iclubSMaster.getSmDesc());
+					iCSm.setSmStatus(iclubSMaster.getSmStatus());
+					iCSm.setIclubInsuranceItemType(iclubSMaster.getIclubInsuranceItemType() != null ? iclubSMaster.getIclubInsuranceItemType().getIitId() : null);
+					iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
+					if (iclubSMaster.getIclubVehicles() != null && iclubSMaster.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iclubSMaster.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iclubSMaster.getIclubVehicles()) {
+							vehicles[i] = vehicle.getVId();
+							i++;
+						}
+						iCSm.setIclubVehicles(vehicles);
 					}
-					iCSm.setIclubVehicles(vehicles);
-				}
 
-				ret.add((T) iCSm);
+					ret.add((T) iCSm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

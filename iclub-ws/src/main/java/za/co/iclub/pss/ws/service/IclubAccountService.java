@@ -142,44 +142,45 @@ public class IclubAccountService {
 
 		try {
 			List batmod = iclubAccountDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubAccount iclubAtype = (IclubAccount) object;
+					IclubAccountModel iCA = new IclubAccountModel();
 
-			for (Object object : batmod) {
-				IclubAccount iclubAtype = (IclubAccount) object;
-				IclubAccountModel iCA = new IclubAccountModel();
+					iCA.setAId(iclubAtype.getAId());
+					iCA.setAAccNum(iclubAtype.getAAccNum());
+					iCA.setACrtdDt(iclubAtype.getACrtdDt());
+					iCA.setAOwnerId(iclubAtype.getAOwnerId());
+					iCA.setIclubBankMaster(iclubAtype.getIclubBankMaster() != null ? iclubAtype.getIclubBankMaster().getBmId() : null);
+					iCA.setIclubAccountType(iclubAtype.getIclubAccountType() != null ? iclubAtype.getIclubAccountType().getAtId() : null);
+					iCA.setIclubOwnerType(iclubAtype.getIclubOwnerType() != null ? iclubAtype.getIclubOwnerType().getOtId() : null);
+					iCA.setIclubPerson(iclubAtype.getIclubPerson() != null ? iclubAtype.getIclubPerson().getPId() : null);
+					iCA.setAStatus(iclubAtype.getAStatus());
 
-				iCA.setAId(iclubAtype.getAId());
-				iCA.setAAccNum(iclubAtype.getAAccNum());
-				iCA.setACrtdDt(iclubAtype.getACrtdDt());
-				iCA.setAOwnerId(iclubAtype.getAOwnerId());
-				iCA.setIclubBankMaster(iclubAtype.getIclubBankMaster() != null ? iclubAtype.getIclubBankMaster().getBmId() : null);
-				iCA.setIclubAccountType(iclubAtype.getIclubAccountType() != null ? iclubAtype.getIclubAccountType().getAtId() : null);
-				iCA.setIclubOwnerType(iclubAtype.getIclubOwnerType() != null ? iclubAtype.getIclubOwnerType().getOtId() : null);
-				iCA.setIclubPerson(iclubAtype.getIclubPerson() != null ? iclubAtype.getIclubPerson().getPId() : null);
-				iCA.setAStatus(iclubAtype.getAStatus());
+					if (iclubAtype.getIclubPolicies() != null && iclubAtype.getIclubPolicies().size() > 0) {
+						String[] policies = new String[iclubAtype.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy policy : iclubAtype.getIclubPolicies()) {
 
-				if (iclubAtype.getIclubPolicies() != null && iclubAtype.getIclubPolicies().size() > 0) {
-					String[] policies = new String[iclubAtype.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy policy : iclubAtype.getIclubPolicies()) {
-
-						policies[i] = policy.getPId();
-						i++;
+							policies[i] = policy.getPId();
+							i++;
+						}
+						iCA.setIclubPolicies(policies);
 					}
-					iCA.setIclubPolicies(policies);
-				}
 
-				if (iclubAtype.getIclubPayments() != null && iclubAtype.getIclubPayments().size() > 0) {
-					String[] payments = new String[iclubAtype.getIclubPayments().size()];
-					int i = 0;
-					for (IclubPayment payment : iclubAtype.getIclubPayments()) {
+					if (iclubAtype.getIclubPayments() != null && iclubAtype.getIclubPayments().size() > 0) {
+						String[] payments = new String[iclubAtype.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment payment : iclubAtype.getIclubPayments()) {
 
-						payments[i] = payment.getPId();
-						i++;
+							payments[i] = payment.getPId();
+							i++;
+						}
+						iCA.setIclubPayments(payments);
 					}
-					iCA.setIclubPayments(payments);
-				}
 
-				ret.add((T) iCA);
+					ret.add((T) iCA);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -197,44 +198,45 @@ public class IclubAccountService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubAccount.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubAccount iclubAtype = (IclubAccount) object;
+					IclubAccountModel iCA = new IclubAccountModel();
 
-			for (Object object : batmod) {
-				IclubAccount iclubAtype = (IclubAccount) object;
-				IclubAccountModel iCA = new IclubAccountModel();
+					iCA.setAId(iclubAtype.getAId());
+					iCA.setAAccNum(iclubAtype.getAAccNum());
+					iCA.setACrtdDt(iclubAtype.getACrtdDt());
+					iCA.setAOwnerId(iclubAtype.getAOwnerId());
+					iCA.setIclubBankMaster(iclubAtype.getIclubBankMaster() != null ? iclubAtype.getIclubBankMaster().getBmId() : null);
+					iCA.setIclubAccountType(iclubAtype.getIclubAccountType() != null ? iclubAtype.getIclubAccountType().getAtId() : null);
+					iCA.setIclubOwnerType(iclubAtype.getIclubOwnerType() != null ? iclubAtype.getIclubOwnerType().getOtId() : null);
+					iCA.setIclubPerson(iclubAtype.getIclubPerson() != null ? iclubAtype.getIclubPerson().getPId() : null);
+					iCA.setAStatus(iclubAtype.getAStatus());
 
-				iCA.setAId(iclubAtype.getAId());
-				iCA.setAAccNum(iclubAtype.getAAccNum());
-				iCA.setACrtdDt(iclubAtype.getACrtdDt());
-				iCA.setAOwnerId(iclubAtype.getAOwnerId());
-				iCA.setIclubBankMaster(iclubAtype.getIclubBankMaster() != null ? iclubAtype.getIclubBankMaster().getBmId() : null);
-				iCA.setIclubAccountType(iclubAtype.getIclubAccountType() != null ? iclubAtype.getIclubAccountType().getAtId() : null);
-				iCA.setIclubOwnerType(iclubAtype.getIclubOwnerType() != null ? iclubAtype.getIclubOwnerType().getOtId() : null);
-				iCA.setIclubPerson(iclubAtype.getIclubPerson() != null ? iclubAtype.getIclubPerson().getPId() : null);
-				iCA.setAStatus(iclubAtype.getAStatus());
+					if (iclubAtype.getIclubPolicies() != null && iclubAtype.getIclubPolicies().size() > 0) {
+						String[] policies = new String[iclubAtype.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy policy : iclubAtype.getIclubPolicies()) {
 
-				if (iclubAtype.getIclubPolicies() != null && iclubAtype.getIclubPolicies().size() > 0) {
-					String[] policies = new String[iclubAtype.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy policy : iclubAtype.getIclubPolicies()) {
-
-						policies[i] = policy.getPId();
-						i++;
+							policies[i] = policy.getPId();
+							i++;
+						}
+						iCA.setIclubPolicies(policies);
 					}
-					iCA.setIclubPolicies(policies);
-				}
 
-				if (iclubAtype.getIclubPayments() != null && iclubAtype.getIclubPayments().size() > 0) {
-					String[] payments = new String[iclubAtype.getIclubPayments().size()];
-					int i = 0;
-					for (IclubPayment payment : iclubAtype.getIclubPayments()) {
+					if (iclubAtype.getIclubPayments() != null && iclubAtype.getIclubPayments().size() > 0) {
+						String[] payments = new String[iclubAtype.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment payment : iclubAtype.getIclubPayments()) {
 
-						payments[i] = payment.getPId();
-						i++;
+							payments[i] = payment.getPId();
+							i++;
+						}
+						iCA.setIclubPayments(payments);
 					}
-					iCA.setIclubPayments(payments);
-				}
 
-				ret.add((T) iCA);
+					ret.add((T) iCA);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

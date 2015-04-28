@@ -122,18 +122,19 @@ public class IclubProductTypeService {
 
 		try {
 			List batmod = iclubProductTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubProductType iPt = (IclubProductType) object;
 
-			for (Object object : batmod) {
-				IclubProductType iPt = (IclubProductType) object;
+					IclubProductTypeModel model = new IclubProductTypeModel();
 
-				IclubProductTypeModel model = new IclubProductTypeModel();
+					model.setPtId(iPt.getPtId());
+					model.setPtLongDesc(iPt.getPtLongDesc());
+					model.setPtShortDesc(iPt.getPtShortDesc());
+					model.setPtStatus(iPt.getPtStatus());
 
-				model.setPtId(iPt.getPtId());
-				model.setPtLongDesc(iPt.getPtLongDesc());
-				model.setPtShortDesc(iPt.getPtShortDesc());
-				model.setPtStatus(iPt.getPtStatus());
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

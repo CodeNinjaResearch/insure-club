@@ -147,46 +147,47 @@ public class IclubSupplMasterService {
 
 		try {
 			List batmod = iclubSupplMasterDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
+					IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
 
-			for (Object object : batmod) {
-				IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
-				IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
-			
-				iCSm.setSmId(iclubSMaster.getSmId());
-				iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
-				iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
-				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
-				iCSm.setSmRating(iclubSMaster.getSmRating());
-				iCSm.setSrActionDt(iclubSMaster.getSrActionDt());
-				iCSm.setSmLong(iclubSMaster.getSmLong());
-				iCSm.setSmCrLimit(iclubSMaster.getSmCrLimit());
-				iCSm.setSmAddress(iclubSMaster.getSmAddress());
-				iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
-				iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
-				iCSm.setSmLat(iclubSMaster.getSmLat());
-				iCSm.setSmName(iclubSMaster.getSmName());
-				
-				if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
-					String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
-						claimItemsForCiAssesorIds[i] = claimItem.getCiId();
-						i++;
+					iCSm.setSmId(iclubSMaster.getSmId());
+					iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
+					iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
+					iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
+					iCSm.setSmRating(iclubSMaster.getSmRating());
+					iCSm.setSrActionDt(iclubSMaster.getSrActionDt());
+					iCSm.setSmLong(iclubSMaster.getSmLong());
+					iCSm.setSmCrLimit(iclubSMaster.getSmCrLimit());
+					iCSm.setSmAddress(iclubSMaster.getSmAddress());
+					iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
+					iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
+					iCSm.setSmLat(iclubSMaster.getSmLat());
+					iCSm.setSmName(iclubSMaster.getSmName());
+
+					if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
+						String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
+							claimItemsForCiAssesorIds[i] = claimItem.getCiId();
+							i++;
+						}
+						iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
 					}
-					iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
-				}
 
-				if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
-					String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
-						claimItemsForCiHandlerIds[i] = claimItem.getCiId();
-						i++;
+					if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
+						String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
+							claimItemsForCiHandlerIds[i] = claimItem.getCiId();
+							i++;
+						}
+						iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
 					}
-					iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
-				}
 
-				ret.add((T) iCSm);
+					ret.add((T) iCSm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -204,48 +205,48 @@ public class IclubSupplMasterService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSupplMaster.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
+					IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
 
-			for (Object object : batmod) {
-				IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
-				IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
+					iCSm.setSmId(iclubSMaster.getSmId());
+					iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
+					iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
+					iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
+					iCSm.setSmRating(iclubSMaster.getSmRating());
+					iCSm.setSrActionDt(iclubSMaster.getSrActionDt());
+					iCSm.setSmLong(iclubSMaster.getSmLong());
+					iCSm.setSmCrLimit(iclubSMaster.getSmCrLimit());
+					iCSm.setSmAddress(iclubSMaster.getSmAddress());
+					iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
+					iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
 
-				iCSm.setSmId(iclubSMaster.getSmId());
-				iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
-				iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
-				iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
-				iCSm.setSmRating(iclubSMaster.getSmRating());
-				iCSm.setSrActionDt(iclubSMaster.getSrActionDt());
-				iCSm.setSmLong(iclubSMaster.getSmLong());
-				iCSm.setSmCrLimit(iclubSMaster.getSmCrLimit());
-				iCSm.setSmAddress(iclubSMaster.getSmAddress());
-				iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
-				iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
-				
-				iCSm.setSmLat(iclubSMaster.getSmLat());
-				iCSm.setSmName(iclubSMaster.getSmName());
-				
-				if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
-					String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
-						claimItemsForCiAssesorIds[i] = claimItem.getCiId();
-						i++;
+					iCSm.setSmLat(iclubSMaster.getSmLat());
+					iCSm.setSmName(iclubSMaster.getSmName());
+
+					if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
+						String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
+							claimItemsForCiAssesorIds[i] = claimItem.getCiId();
+							i++;
+						}
+						iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
 					}
-					iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
-				}
 
-				if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
-					String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
-						claimItemsForCiHandlerIds[i] = claimItem.getCiId();
-						i++;
+					if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
+						String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
+							claimItemsForCiHandlerIds[i] = claimItem.getCiId();
+							i++;
+						}
+						iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
 					}
-					iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
+
+					ret.add((T) iCSm);
 				}
-
-
-				ret.add((T) iCSm);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -273,10 +274,10 @@ public class IclubSupplMasterService {
 			model.setSmAddress(bean.getSmAddress());
 			model.setSmRegNum(bean.getSmRegNum());
 			model.setSmTradeName(bean.getSmTradeName());
-			
+
 			model.setSmLat(bean.getSmLat());
 			model.setSmName(bean.getSmName());
-			
+
 			if (bean.getIclubClaimItemsForCiAssesorId() != null && bean.getIclubClaimItemsForCiAssesorId().size() > 0) {
 				String[] claimItemsForCiAssesorIds = new String[bean.getIclubClaimItemsForCiAssesorId().size()];
 				int i = 0;

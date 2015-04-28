@@ -182,31 +182,33 @@ public class IclubDriverController implements Serializable {
 		Collection<? extends IclubDriverModel> models = new ArrayList<IclubDriverModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubDriverModel.class));
 		client.close();
 		beans = new ArrayList<IclubDriverBean>();
-		for (IclubDriverModel model : models) {
-			IclubDriverBean bean = new IclubDriverBean();
-			bean.setDId(model.getDId());
-			bean.setDDob(model.getDDob());
-			bean.setDIssueDt(model.getDIssueDt());
-			bean.setDLicenseNum(model.getDLicenseNum());
-			bean.setDName(model.getDName());
-			bean.setDCrtdDt(model.getDCrtdDt());
-			bean.setIclubAccessType(model.getIclubAccessType());
-			bean.setIclubLicenseCode(model.getIclubLicenseCode());
-			bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
-			bean.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId());
-			bean.setIclubPersonByDCrtdBy(model.getIclubPersonByDCrtdBy());
+		if (models != null && models.size() > 0) {
+			for (IclubDriverModel model : models) {
+				IclubDriverBean bean = new IclubDriverBean();
+				bean.setDId(model.getDId());
+				bean.setDDob(model.getDDob());
+				bean.setDIssueDt(model.getDIssueDt());
+				bean.setDLicenseNum(model.getDLicenseNum());
+				bean.setDName(model.getDName());
+				bean.setDCrtdDt(model.getDCrtdDt());
+				bean.setIclubAccessType(model.getIclubAccessType());
+				bean.setIclubLicenseCode(model.getIclubLicenseCode());
+				bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+				bean.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId());
+				bean.setIclubPersonByDCrtdBy(model.getIclubPersonByDCrtdBy());
 
-			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-				String[] vehicles = new String[model.getIclubVehicles().length];
-				int i = 0;
-				for (String vehicle : model.getIclubVehicles()) {
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String vehicle : model.getIclubVehicles()) {
 
-					vehicles[i] = vehicle;
-					i++;
+						vehicles[i] = vehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
 				}
-				bean.setIclubVehicles(vehicles);
+				beans.add(bean);
 			}
-			beans.add(bean);
 		}
 		return beans;
 	}
@@ -270,13 +272,15 @@ public class IclubDriverController implements Serializable {
 		Collection<? extends IclubAccessTypeModel> models = new ArrayList<IclubAccessTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccessTypeModel.class));
 		client.close();
 		accessTypeBeans = new ArrayList<IclubAccessTypeBean>();
-		for (IclubAccessTypeModel model : models) {
-			IclubAccessTypeBean bean = new IclubAccessTypeBean();
-			bean.setAtId(model.getAtId());
-			bean.setAtLongDesc(model.getAtLongDesc());
-			bean.setAtShortDesc(model.getAtShortDesc());
-			bean.setAtStatus(model.getAtStatus());
-			accessTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubAccessTypeModel model : models) {
+				IclubAccessTypeBean bean = new IclubAccessTypeBean();
+				bean.setAtId(model.getAtId());
+				bean.setAtLongDesc(model.getAtLongDesc());
+				bean.setAtShortDesc(model.getAtShortDesc());
+				bean.setAtStatus(model.getAtStatus());
+				accessTypeBeans.add(bean);
+			}
 		}
 		return accessTypeBeans;
 	}
@@ -330,13 +334,15 @@ public class IclubDriverController implements Serializable {
 		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
 		client.close();
 		maritialStatusBeans = new ArrayList<IclubMaritialStatusBean>();
-		for (IclubMaritialStatusModel model : models) {
-			IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
-			bean.setMsId(model.getMsId());
-			bean.setMsLongDesc(model.getMsLongDesc());
-			bean.setMsShortDesc(model.getMsShortDesc());
-			bean.setMsStatus(model.getMsStatus());
-			maritialStatusBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubMaritialStatusModel model : models) {
+				IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
+				bean.setMsId(model.getMsId());
+				bean.setMsLongDesc(model.getMsLongDesc());
+				bean.setMsShortDesc(model.getMsShortDesc());
+				bean.setMsStatus(model.getMsStatus());
+				maritialStatusBeans.add(bean);
+			}
 		}
 		return maritialStatusBeans;
 	}

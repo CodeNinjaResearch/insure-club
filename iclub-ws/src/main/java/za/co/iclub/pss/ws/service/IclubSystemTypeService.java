@@ -126,38 +126,39 @@ public class IclubSystemTypeService {
 
 		try {
 			List batmod = iclubSystemTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSystemType iCSt = (IclubSystemType) object;
 
-			for (Object object : batmod) {
-				IclubSystemType iCSt = (IclubSystemType) object;
+					IclubSystemTypeModel model = new IclubSystemTypeModel();
 
-				IclubSystemTypeModel model = new IclubSystemTypeModel();
+					model.setStId(iCSt.getStId());
+					model.setStLongDesc(iCSt.getStLongDesc());
+					model.setStShortDesc(iCSt.getStShortDesc());
+					model.setStStatus(iCSt.getStStatus());
 
-				model.setStId(iCSt.getStId());
-				model.setStLongDesc(iCSt.getStLongDesc());
-				model.setStShortDesc(iCSt.getStShortDesc());
-				model.setStStatus(iCSt.getStStatus());
-
-				if (iCSt.getIclubMessagesForMFromSysId() != null && iCSt.getIclubMessagesForMFromSysId().size() > 0) {
-					String[] messagesForMFromSysId = new String[iCSt.getIclubMessagesForMFromSysId().size()];
-					int i = 0;
-					for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMFromSysId()) {
-						messagesForMFromSysId[i] = iclubMessage.getMId();
-						i++;
+					if (iCSt.getIclubMessagesForMFromSysId() != null && iCSt.getIclubMessagesForMFromSysId().size() > 0) {
+						String[] messagesForMFromSysId = new String[iCSt.getIclubMessagesForMFromSysId().size()];
+						int i = 0;
+						for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMFromSysId()) {
+							messagesForMFromSysId[i] = iclubMessage.getMId();
+							i++;
+						}
+						model.setIclubMessagesForMFromSysId(messagesForMFromSysId);
 					}
-					model.setIclubMessagesForMFromSysId(messagesForMFromSysId);
-				}
 
-				if (iCSt.getIclubMessagesForMToSysId() != null && iCSt.getIclubMessagesForMToSysId().size() > 0) {
-					String[] messagesForMToSysId = new String[iCSt.getIclubMessagesForMToSysId().size()];
-					int i = 0;
-					for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMToSysId()) {
-						messagesForMToSysId[i] = iclubMessage.getMId();
-						i++;
+					if (iCSt.getIclubMessagesForMToSysId() != null && iCSt.getIclubMessagesForMToSysId().size() > 0) {
+						String[] messagesForMToSysId = new String[iCSt.getIclubMessagesForMToSysId().size()];
+						int i = 0;
+						for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMToSysId()) {
+							messagesForMToSysId[i] = iclubMessage.getMId();
+							i++;
+						}
+						model.setIclubMessagesForMToSysId(messagesForMToSysId);
 					}
-					model.setIclubMessagesForMToSysId(messagesForMToSysId);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -175,37 +176,38 @@ public class IclubSystemTypeService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSystemType.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSystemType iCSt = (IclubSystemType) object;
 
-			for (Object object : batmod) {
-				IclubSystemType iCSt = (IclubSystemType) object;
+					IclubSystemTypeModel model = new IclubSystemTypeModel();
 
-				IclubSystemTypeModel model = new IclubSystemTypeModel();
-
-				model.setStId(iCSt.getStId());
-				model.setStLongDesc(iCSt.getStLongDesc());
-				model.setStShortDesc(iCSt.getStShortDesc());
-				model.setStStatus(iCSt.getStStatus());
-				if (iCSt.getIclubMessagesForMFromSysId() != null && iCSt.getIclubMessagesForMFromSysId().size() > 0) {
-					String[] messagesForMFromSysId = new String[iCSt.getIclubMessagesForMFromSysId().size()];
-					int i = 0;
-					for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMFromSysId()) {
-						messagesForMFromSysId[i] = iclubMessage.getMId();
-						i++;
+					model.setStId(iCSt.getStId());
+					model.setStLongDesc(iCSt.getStLongDesc());
+					model.setStShortDesc(iCSt.getStShortDesc());
+					model.setStStatus(iCSt.getStStatus());
+					if (iCSt.getIclubMessagesForMFromSysId() != null && iCSt.getIclubMessagesForMFromSysId().size() > 0) {
+						String[] messagesForMFromSysId = new String[iCSt.getIclubMessagesForMFromSysId().size()];
+						int i = 0;
+						for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMFromSysId()) {
+							messagesForMFromSysId[i] = iclubMessage.getMId();
+							i++;
+						}
+						model.setIclubMessagesForMFromSysId(messagesForMFromSysId);
 					}
-					model.setIclubMessagesForMFromSysId(messagesForMFromSysId);
-				}
 
-				if (iCSt.getIclubMessagesForMToSysId() != null && iCSt.getIclubMessagesForMToSysId().size() > 0) {
-					String[] messagesForMToSysId = new String[iCSt.getIclubMessagesForMToSysId().size()];
-					int i = 0;
-					for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMToSysId()) {
-						messagesForMToSysId[i] = iclubMessage.getMId();
-						i++;
+					if (iCSt.getIclubMessagesForMToSysId() != null && iCSt.getIclubMessagesForMToSysId().size() > 0) {
+						String[] messagesForMToSysId = new String[iCSt.getIclubMessagesForMToSysId().size()];
+						int i = 0;
+						for (IclubMessage iclubMessage : iCSt.getIclubMessagesForMToSysId()) {
+							messagesForMToSysId[i] = iclubMessage.getMId();
+							i++;
+						}
+						model.setIclubMessagesForMToSysId(messagesForMToSysId);
 					}
-					model.setIclubMessagesForMToSysId(messagesForMToSysId);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

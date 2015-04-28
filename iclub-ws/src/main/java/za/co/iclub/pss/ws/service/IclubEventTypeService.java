@@ -122,28 +122,29 @@ public class IclubEventTypeService {
 
 		try {
 			List batmod = iclubEventTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubEventType iEt = (IclubEventType) object;
 
-			for (Object object : batmod) {
-				IclubEventType iEt = (IclubEventType) object;
+					IclubEventTypeModel model = new IclubEventTypeModel();
 
-				IclubEventTypeModel model = new IclubEventTypeModel();
+					model.setEtId(iEt.getEtId());
+					model.setEtLongDesc(iEt.getEtLongDesc());
+					model.setEtShortDesc(iEt.getEtShortDesc());
+					model.setEtStatus(iEt.getEtStatus());
 
-				model.setEtId(iEt.getEtId());
-				model.setEtLongDesc(iEt.getEtLongDesc());
-				model.setEtShortDesc(iEt.getEtShortDesc());
-				model.setEtStatus(iEt.getEtStatus());
-
-				if (iEt.getIclubEvents() != null && iEt.getIclubEvents().size() > 0) {
-					String[] iclubEvents = new String[iEt.getIclubEvents().size()];
-					int i = 0;
-					for (IclubEvent iclubEvent : iEt.getIclubEvents()) {
-						iclubEvents[i] = iclubEvent.getEId();
-						i++;
+					if (iEt.getIclubEvents() != null && iEt.getIclubEvents().size() > 0) {
+						String[] iclubEvents = new String[iEt.getIclubEvents().size()];
+						int i = 0;
+						for (IclubEvent iclubEvent : iEt.getIclubEvents()) {
+							iclubEvents[i] = iclubEvent.getEId();
+							i++;
+						}
+						model.setIclubEvents(iclubEvents);
 					}
-					model.setIclubEvents(iclubEvents);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -121,18 +121,19 @@ public class IclubVehicleTypeService {
 
 		try {
 			List batmod = iclubVehicleTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubVehicleType iTt = (IclubVehicleType) object;
 
-			for (Object object : batmod) {
-				IclubVehicleType iTt = (IclubVehicleType) object;
+					IclubVehicleTypeModel model = new IclubVehicleTypeModel();
 
-				IclubVehicleTypeModel model = new IclubVehicleTypeModel();
+					model.setVtId(iTt.getVtId());
+					model.setVtLongDesc(iTt.getVtLongDesc());
+					model.setVtShortDesc(iTt.getVtShortDesc());
+					model.setVtStatus(iTt.getVtStatus());
 
-				model.setVtId(iTt.getVtId());
-				model.setVtLongDesc(iTt.getVtLongDesc());
-				model.setVtShortDesc(iTt.getVtShortDesc());
-				model.setVtStatus(iTt.getVtStatus());
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -168,7 +169,7 @@ public class IclubVehicleTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubNamedQueryDAO.getBySD(val, id,IclubVehicleType.class.getSimpleName());
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubVehicleType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));

@@ -29,7 +29,6 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @SessionScoped
 public class IclubSecurityMasterController implements Serializable {
 
- 
 	private static final long serialVersionUID = 2577696720206392227L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubSecurityMasterController.class);
@@ -86,18 +85,19 @@ public class IclubSecurityMasterController implements Serializable {
 		Collection<? extends IclubSecurityMasterModel> models = new ArrayList<IclubSecurityMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSecurityMasterModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubSecurityMasterBean>();
-		for (IclubSecurityMasterModel model : models) {
-			IclubSecurityMasterBean bean = new IclubSecurityMasterBean();
+		if (models != null && models.size() > 0) {
+			for (IclubSecurityMasterModel model : models) {
+				IclubSecurityMasterBean bean = new IclubSecurityMasterBean();
 
-			bean.setSmId(model.getSmId());
-			bean.setSmCrtdDt(model.getSmCrtdDt());
-			bean.setSmDesc(model.getSmDesc());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-			bean.setIclubPerson(model.getIclubPerson() );
-			bean.setSmStatus(model.getSmStatus());
-			 
+				bean.setSmId(model.getSmId());
+				bean.setSmCrtdDt(model.getSmCrtdDt());
+				bean.setSmDesc(model.getSmDesc());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setSmStatus(model.getSmStatus());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -119,14 +119,12 @@ public class IclubSecurityMasterController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubSecurityMasterModel model = new IclubSecurityMasterModel();
 
-				
 				model.setSmId(UUID.randomUUID().toString());
 				model.setSmDesc(bean.getSmDesc());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 				model.setIclubPerson(getSessionUserId());
 				model.setSmCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setSmStatus(bean.getSmStatus());
-				 
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -280,20 +278,20 @@ public class IclubSecurityMasterController implements Serializable {
 		Collection<? extends IclubSecurityMasterModel> models = new ArrayList<IclubSecurityMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSecurityMasterModel.class));
 		client.close();
 		beans = new ArrayList<IclubSecurityMasterBean>();
-		for (IclubSecurityMasterModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubSecurityMasterModel model : models) {
 
-			IclubSecurityMasterBean bean = new IclubSecurityMasterBean();
-			
-			bean.setSmId(model.getSmId());
-			bean.setSmCrtdDt(model.getSmCrtdDt());
-			bean.setSmDesc(model.getSmDesc());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-			bean.setIclubPerson(model.getIclubPerson() );
-			bean.setSmStatus(model.getSmStatus());
+				IclubSecurityMasterBean bean = new IclubSecurityMasterBean();
 
-			 
+				bean.setSmId(model.getSmId());
+				bean.setSmCrtdDt(model.getSmCrtdDt());
+				bean.setSmDesc(model.getSmDesc());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setSmStatus(model.getSmStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}
@@ -302,20 +300,21 @@ public class IclubSecurityMasterController implements Serializable {
 		this.beans = beans;
 	}
 
-
 	public List<IclubInsuranceItemTypeBean> getInsuranceItemTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(IIT_BASE_URL + "list");
 		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
 		client.close();
 		insuranceItemTypeBeans = new ArrayList<IclubInsuranceItemTypeBean>();
-		for (IclubInsuranceItemTypeModel model : models) {
-			IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
-			bean.setIitId(model.getIitId());
-			bean.setIitLongDesc(model.getIitLongDesc());
-			bean.setIitShortDesc(model.getIitShortDesc());
-			bean.setIitStatus(model.getIitStatus());
-			insuranceItemTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubInsuranceItemTypeModel model : models) {
+				IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
+				bean.setIitId(model.getIitId());
+				bean.setIitLongDesc(model.getIitLongDesc());
+				bean.setIitShortDesc(model.getIitShortDesc());
+				bean.setIitStatus(model.getIitStatus());
+				insuranceItemTypeBeans.add(bean);
+			}
 		}
 		return insuranceItemTypeBeans;
 	}

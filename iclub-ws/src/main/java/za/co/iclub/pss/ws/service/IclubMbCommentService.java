@@ -127,19 +127,20 @@ public class IclubMbCommentService {
 
 		try {
 			List batmod = iclubMbCommentDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMbComment iCMbc = (IclubMbComment) object;
 
-			for (Object object : batmod) {
-				IclubMbComment iCMbc = (IclubMbComment) object;
+					IclubMbCommentModel model = new IclubMbCommentModel();
 
-				IclubMbCommentModel model = new IclubMbCommentModel();
+					model.setMbcId(iCMbc.getMbcId());
+					model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
+					model.setMbcDesc(iCMbc.getMbcDesc());
+					model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
+					model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
 
-				model.setMbcId(iCMbc.getMbcId());
-				model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
-				model.setMbcDesc(iCMbc.getMbcDesc());
-				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
-				model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -157,19 +158,20 @@ public class IclubMbCommentService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubMbComment.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMbComment iCMbc = (IclubMbComment) object;
 
-			for (Object object : batmod) {
-				IclubMbComment iCMbc = (IclubMbComment) object;
+					IclubMbCommentModel model = new IclubMbCommentModel();
 
-				IclubMbCommentModel model = new IclubMbCommentModel();
+					model.setMbcId(iCMbc.getMbcId());
+					model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
+					model.setMbcDesc(iCMbc.getMbcDesc());
+					model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
+					model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
 
-				model.setMbcId(iCMbc.getMbcId());
-				model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
-				model.setMbcDesc(iCMbc.getMbcDesc());
-				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
-				model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -208,19 +210,20 @@ public class IclubMbCommentService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.getMbCommentsByMbId(mbId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMbComment iCMbc = (IclubMbComment) object;
 
-			for (Object object : batmod) {
-				IclubMbComment iCMbc = (IclubMbComment) object;
+					IclubMbCommentModel model = new IclubMbCommentModel();
 
-				IclubMbCommentModel model = new IclubMbCommentModel();
+					model.setMbcId(iCMbc.getMbcId());
+					model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
+					model.setMbcDesc(iCMbc.getMbcDesc());
+					model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
+					model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
 
-				model.setMbcId(iCMbc.getMbcId());
-				model.setMbcCrtdDt(iCMbc.getMbcCrtdDt());
-				model.setMbcDesc(iCMbc.getMbcDesc());
-				model.setIclubMessageBoard(iCMbc.getIclubMessageBoard() != null ? iCMbc.getIclubMessageBoard().getMbId() : null);
-				model.setIclubPerson(iCMbc.getIclubPerson() != null ? (iCMbc.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

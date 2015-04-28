@@ -157,13 +157,15 @@ public class IclubNotificationTypeController implements Serializable {
 		Collection<? extends IclubNotificationTypeModel> models = new ArrayList<IclubNotificationTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubNotificationTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubNotificationTypeBean>();
-		for (IclubNotificationTypeModel model : models) {
-			IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
-			bean.setNtId(model.getNtId());
-			bean.setNtLongDesc(model.getNtLongDesc());
-			bean.setNtShortDesc(model.getNtShortDesc());
-			bean.setNtStatus(model.getNtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubNotificationTypeModel model : models) {
+				IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
+				bean.setNtId(model.getNtId());
+				bean.setNtLongDesc(model.getNtLongDesc());
+				bean.setNtShortDesc(model.getNtShortDesc());
+				bean.setNtStatus(model.getNtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

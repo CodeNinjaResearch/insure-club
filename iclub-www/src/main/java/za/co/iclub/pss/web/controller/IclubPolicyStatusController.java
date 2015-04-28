@@ -157,13 +157,15 @@ public class IclubPolicyStatusController implements Serializable {
 		Collection<? extends IclubPolicyStatusModel> models = new ArrayList<IclubPolicyStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubPolicyStatusBean>();
-		for (IclubPolicyStatusModel model : models) {
-			IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
-			bean.setPsId(model.getPsId());
-			bean.setPsLongDesc(model.getPsLongDesc());
-			bean.setPsShortDesc(model.getPsShortDesc());
-			bean.setPsStatus(model.getPsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubPolicyStatusModel model : models) {
+				IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
+				bean.setPsId(model.getPsId());
+				bean.setPsLongDesc(model.getPsLongDesc());
+				bean.setPsShortDesc(model.getPsShortDesc());
+				bean.setPsStatus(model.getPsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

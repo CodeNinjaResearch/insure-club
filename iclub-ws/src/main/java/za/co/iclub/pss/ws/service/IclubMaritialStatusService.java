@@ -122,27 +122,28 @@ public class IclubMaritialStatusService {
 
 		try {
 			List batmod = iclubMaritialStatusDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMaritialStatus iMs = (IclubMaritialStatus) object;
 
-			for (Object object : batmod) {
-				IclubMaritialStatus iMs = (IclubMaritialStatus) object;
+					IclubMaritialStatusModel model = new IclubMaritialStatusModel();
 
-				IclubMaritialStatusModel model = new IclubMaritialStatusModel();
+					model.setMsId(iMs.getMsId());
+					model.setMsLongDesc(iMs.getMsLongDesc());
+					model.setMsShortDesc(iMs.getMsShortDesc());
+					model.setMsStatus(iMs.getMsStatus());
 
-				model.setMsId(iMs.getMsId());
-				model.setMsLongDesc(iMs.getMsLongDesc());
-				model.setMsShortDesc(iMs.getMsShortDesc());
-				model.setMsStatus(iMs.getMsStatus());
-
-				if (iMs.getIclubPersons() != null && iMs.getIclubPersons().size() > 0) {
-					String[] iclubPersons = new String[iMs.getIclubPersons().size()];
-					int i = 0;
-					for (IclubPerson iclubPerson : iMs.getIclubPersons()) {
-						iclubPersons[i] = iclubPerson.getPId();
-						i++;
+					if (iMs.getIclubPersons() != null && iMs.getIclubPersons().size() > 0) {
+						String[] iclubPersons = new String[iMs.getIclubPersons().size()];
+						int i = 0;
+						for (IclubPerson iclubPerson : iMs.getIclubPersons()) {
+							iclubPersons[i] = iclubPerson.getPId();
+							i++;
+						}
+						model.setIclubPersons(iclubPersons);
 					}
-					model.setIclubPersons(iclubPersons);
+					ret.add((T) model);
 				}
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

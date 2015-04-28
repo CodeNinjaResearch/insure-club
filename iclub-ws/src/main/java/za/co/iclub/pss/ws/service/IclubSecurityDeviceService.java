@@ -136,31 +136,32 @@ public class IclubSecurityDeviceService {
 
 		try {
 			List batmod = iclubSecurityDeviceDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSecurityDevice iCSd = (IclubSecurityDevice) object;
 
-			for (Object object : batmod) {
-				IclubSecurityDevice iCSd = (IclubSecurityDevice) object;
+					IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
+					model.setSdId(iCSd.getSdId());
+					model.setSdItemId(iCSd.getSdItemId());
+					model.setSdContractNum(iCSd.getSdContractNum());
+					model.setSdSerNum(iCSd.getSdSerNum());
+					model.setSdCrtdDt(iCSd.getSdCrtdDt());
+					model.setIclubInsuranceItemType(iCSd.getIclubInsuranceItemType() != null ? (iCSd.getIclubInsuranceItemType().getIitId()) : null);
+					model.setIclubTrackerMaster(iCSd.getIclubTrackerMaster() != null ? (iCSd.getIclubTrackerMaster().getTmId()) : null);
+					model.setIclubPerson(iCSd.getIclubPerson() != null ? (iCSd.getIclubPerson().getPId()) : null);
+					if (iCSd.getIclubVehicles() != null && iCSd.getIclubVehicles().size() > 0) {
+						String[] vehicales = new String[iCSd.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iCSd.getIclubVehicles()) {
+							vehicales[i] = vehicle.getVId();
 
-				IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
-				model.setSdId(iCSd.getSdId());
-				model.setSdItemId(iCSd.getSdItemId());
-				model.setSdContractNum(iCSd.getSdContractNum());
-				model.setSdSerNum(iCSd.getSdSerNum());
-				model.setSdCrtdDt(iCSd.getSdCrtdDt());
-				model.setIclubInsuranceItemType(iCSd.getIclubInsuranceItemType() != null ? (iCSd.getIclubInsuranceItemType().getIitId()) : null);
-				model.setIclubTrackerMaster(iCSd.getIclubTrackerMaster() != null ? (iCSd.getIclubTrackerMaster().getTmId()) : null);
-				model.setIclubPerson(iCSd.getIclubPerson() != null ? (iCSd.getIclubPerson().getPId()) : null);
-				if (iCSd.getIclubVehicles() != null && iCSd.getIclubVehicles().size() > 0) {
-					String[] vehicales = new String[iCSd.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iCSd.getIclubVehicles()) {
-						vehicales[i] = vehicle.getVId();
-
-						i++;
+							i++;
+						}
+						model.setIclubVehicles(vehicales);
 					}
-					model.setIclubVehicles(vehicales);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -178,32 +179,33 @@ public class IclubSecurityDeviceService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSecurityDevice.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSecurityDevice iCSd = (IclubSecurityDevice) object;
 
-			for (Object object : batmod) {
-				IclubSecurityDevice iCSd = (IclubSecurityDevice) object;
+					IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
 
-				IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
+					model.setSdId(iCSd.getSdId());
+					model.setSdItemId(iCSd.getSdItemId());
+					model.setSdContractNum(iCSd.getSdContractNum());
+					model.setSdSerNum(iCSd.getSdSerNum());
+					model.setSdCrtdDt(iCSd.getSdCrtdDt());
+					model.setIclubInsuranceItemType(iCSd.getIclubInsuranceItemType() != null ? (iCSd.getIclubInsuranceItemType().getIitId()) : null);
+					model.setIclubTrackerMaster(iCSd.getIclubTrackerMaster() != null ? (iCSd.getIclubTrackerMaster().getTmId()) : null);
+					model.setIclubPerson(iCSd.getIclubPerson() != null ? (iCSd.getIclubPerson().getPId()) : null);
+					if (iCSd.getIclubVehicles() != null && iCSd.getIclubVehicles().size() > 0) {
+						String[] vehicales = new String[iCSd.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iCSd.getIclubVehicles()) {
+							vehicales[i] = vehicle.getVId();
 
-				model.setSdId(iCSd.getSdId());
-				model.setSdItemId(iCSd.getSdItemId());
-				model.setSdContractNum(iCSd.getSdContractNum());
-				model.setSdSerNum(iCSd.getSdSerNum());
-				model.setSdCrtdDt(iCSd.getSdCrtdDt());
-				model.setIclubInsuranceItemType(iCSd.getIclubInsuranceItemType() != null ? (iCSd.getIclubInsuranceItemType().getIitId()) : null);
-				model.setIclubTrackerMaster(iCSd.getIclubTrackerMaster() != null ? (iCSd.getIclubTrackerMaster().getTmId()) : null);
-				model.setIclubPerson(iCSd.getIclubPerson() != null ? (iCSd.getIclubPerson().getPId()) : null);
-				if (iCSd.getIclubVehicles() != null && iCSd.getIclubVehicles().size() > 0) {
-					String[] vehicales = new String[iCSd.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iCSd.getIclubVehicles()) {
-						vehicales[i] = vehicle.getVId();
-
-						i++;
+							i++;
+						}
+						model.setIclubVehicles(vehicales);
 					}
-					model.setIclubVehicles(vehicales);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

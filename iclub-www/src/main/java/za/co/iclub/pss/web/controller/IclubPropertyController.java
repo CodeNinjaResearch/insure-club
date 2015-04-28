@@ -224,34 +224,36 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubPropertyModel> models = new ArrayList<IclubPropertyModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropertyModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubPropertyBean>();
-		for (IclubPropertyModel model : models) {
-			IclubPropertyBean bean = new IclubPropertyBean();
+		if (models != null && models.size() > 0) {
+			for (IclubPropertyModel model : models) {
+				IclubPropertyBean bean = new IclubPropertyBean();
 
-			bean.setPId(model.getPId());
-			bean.setPCrtdDt(model.getPCrtdDt());
-			bean.setPEstValue(model.getPEstValue());
-			bean.setPSecGatesYn(model.getPSecGatesYn());
-			bean.setPNorobberyYn(model.getPNorobberyYn());
-			bean.setPCompYn(model.getPCompYn());
-			bean.setPRentFurYn(model.getPRentFurYn());
-			bean.setPNoclaimYrs(model.getPNoclaimYrs());
-			bean.setPPostalCd(model.getPPostalCd());
-			bean.setPLong(model.getPLong());
-			bean.setPLat(model.getPLat());
-			bean.setPAddress(model.getPAddress());
-			bean.setPRegNum(model.getPRegNum());
-			bean.setIclubCoverType(model.getIclubCoverType());
-			bean.setIclubPurposeType(model.getIclubPurposeType());
-			bean.setIclubOccupiedStatus(model.getIclubOccupiedStatus());
-			bean.setIclubPropertyType(model.getIclubPropertyType());
-			bean.setIclubWallType(model.getIclubWallType());
-			bean.setIclubAccessType(model.getIclubAccessType());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubBarType(model.getIclubBarType());
-			bean.setIclubThatchType(model.getIclubThatchType());
-			bean.setIclubRoofType(model.getIclubRoofType());
+				bean.setPId(model.getPId());
+				bean.setPCrtdDt(model.getPCrtdDt());
+				bean.setPEstValue(model.getPEstValue());
+				bean.setPSecGatesYn(model.getPSecGatesYn());
+				bean.setPNorobberyYn(model.getPNorobberyYn());
+				bean.setPCompYn(model.getPCompYn());
+				bean.setPRentFurYn(model.getPRentFurYn());
+				bean.setPNoclaimYrs(model.getPNoclaimYrs());
+				bean.setPPostalCd(model.getPPostalCd());
+				bean.setPLong(model.getPLong());
+				bean.setPLat(model.getPLat());
+				bean.setPAddress(model.getPAddress());
+				bean.setPRegNum(model.getPRegNum());
+				bean.setIclubCoverType(model.getIclubCoverType());
+				bean.setIclubPurposeType(model.getIclubPurposeType());
+				bean.setIclubOccupiedStatus(model.getIclubOccupiedStatus());
+				bean.setIclubPropertyType(model.getIclubPropertyType());
+				bean.setIclubWallType(model.getIclubWallType());
+				bean.setIclubAccessType(model.getIclubAccessType());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubBarType(model.getIclubBarType());
+				bean.setIclubThatchType(model.getIclubThatchType());
+				bean.setIclubRoofType(model.getIclubRoofType());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -554,13 +556,15 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubAccessTypeModel> models = new ArrayList<IclubAccessTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccessTypeModel.class));
 		client.close();
 		accessTypeBeans = new ArrayList<IclubAccessTypeBean>();
-		for (IclubAccessTypeModel model : models) {
-			IclubAccessTypeBean bean = new IclubAccessTypeBean();
-			bean.setAtId(model.getAtId());
-			bean.setAtLongDesc(model.getAtLongDesc());
-			bean.setAtShortDesc(model.getAtShortDesc());
-			bean.setAtStatus(model.getAtStatus());
-			accessTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubAccessTypeModel model : models) {
+				IclubAccessTypeBean bean = new IclubAccessTypeBean();
+				bean.setAtId(model.getAtId());
+				bean.setAtLongDesc(model.getAtLongDesc());
+				bean.setAtShortDesc(model.getAtShortDesc());
+				bean.setAtStatus(model.getAtStatus());
+				accessTypeBeans.add(bean);
+			}
 		}
 		return accessTypeBeans;
 	}
@@ -575,13 +579,15 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubBarTypeModel> models = new ArrayList<IclubBarTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBarTypeModel.class));
 		client.close();
 		barTypeBeans = new ArrayList<IclubBarTypeBean>();
-		for (IclubBarTypeModel model : models) {
-			IclubBarTypeBean bean = new IclubBarTypeBean();
-			bean.setBtId(model.getBtId());
-			bean.setBtLongDesc(model.getBtLongDesc());
-			bean.setBtShortDesc(model.getBtShortDesc());
-			bean.setBtStatus(model.getBtStatus());
-			barTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubBarTypeModel model : models) {
+				IclubBarTypeBean bean = new IclubBarTypeBean();
+				bean.setBtId(model.getBtId());
+				bean.setBtLongDesc(model.getBtLongDesc());
+				bean.setBtShortDesc(model.getBtShortDesc());
+				bean.setBtStatus(model.getBtStatus());
+				barTypeBeans.add(bean);
+			}
 		}
 		return barTypeBeans;
 	}
@@ -596,13 +602,15 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubThatchTypeModel> models = new ArrayList<IclubThatchTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubThatchTypeModel.class));
 		client.close();
 		thatchTypeBeans = new ArrayList<IclubThatchTypeBean>();
-		for (IclubThatchTypeModel model : models) {
-			IclubThatchTypeBean bean = new IclubThatchTypeBean();
-			bean.setTtId(model.getTtId());
-			bean.setTtLongDesc(model.getTtLongDesc());
-			bean.setTtShortDesc(model.getTtShortDesc());
-			bean.setTtStatus(model.getTtStatus());
-			thatchTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubThatchTypeModel model : models) {
+				IclubThatchTypeBean bean = new IclubThatchTypeBean();
+				bean.setTtId(model.getTtId());
+				bean.setTtLongDesc(model.getTtLongDesc());
+				bean.setTtShortDesc(model.getTtShortDesc());
+				bean.setTtStatus(model.getTtStatus());
+				thatchTypeBeans.add(bean);
+			}
 		}
 		return thatchTypeBeans;
 	}
@@ -617,13 +625,15 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubRoofTypeModel> models = new ArrayList<IclubRoofTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRoofTypeModel.class));
 		client.close();
 		roofTypeBeans = new ArrayList<IclubRoofTypeBean>();
-		for (IclubRoofTypeModel model : models) {
-			IclubRoofTypeBean bean = new IclubRoofTypeBean();
-			bean.setRtId(model.getRtId());
-			bean.setRtLongDesc(model.getRtLongDesc());
-			bean.setRtShortDesc(model.getRtShortDesc());
-			bean.setRtStatus(model.getRtStatus());
-			roofTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubRoofTypeModel model : models) {
+				IclubRoofTypeBean bean = new IclubRoofTypeBean();
+				bean.setRtId(model.getRtId());
+				bean.setRtLongDesc(model.getRtLongDesc());
+				bean.setRtShortDesc(model.getRtShortDesc());
+				bean.setRtStatus(model.getRtStatus());
+				roofTypeBeans.add(bean);
+			}
 		}
 		return roofTypeBeans;
 	}
@@ -638,13 +648,15 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubWallTypeModel> models = new ArrayList<IclubWallTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubWallTypeModel.class));
 		client.close();
 		wallTypeBeans = new ArrayList<IclubWallTypeBean>();
-		for (IclubWallTypeModel model : models) {
-			IclubWallTypeBean bean = new IclubWallTypeBean();
-			bean.setWtId(model.getWtId());
-			bean.setWtLongDesc(model.getWtLongDesc());
-			bean.setWtShortDesc(model.getWtShortDesc());
-			bean.setWtStatus(model.getWtStatus());
-			wallTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubWallTypeModel model : models) {
+				IclubWallTypeBean bean = new IclubWallTypeBean();
+				bean.setWtId(model.getWtId());
+				bean.setWtLongDesc(model.getWtLongDesc());
+				bean.setWtShortDesc(model.getWtShortDesc());
+				bean.setWtStatus(model.getWtStatus());
+				wallTypeBeans.add(bean);
+			}
 		}
 		return wallTypeBeans;
 	}
@@ -659,14 +671,16 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubPropertyTypeModel> models = new ArrayList<IclubPropertyTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropertyTypeModel.class));
 		client.close();
 		propertyTypeBeans = new ArrayList<IclubPropertyTypeBean>();
-		for (IclubPropertyTypeModel model : models) {
-			IclubPropertyTypeBean bean = new IclubPropertyTypeBean();
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubPropertyTypeModel model : models) {
+				IclubPropertyTypeBean bean = new IclubPropertyTypeBean();
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
 
-			propertyTypeBeans.add(bean);
+				propertyTypeBeans.add(bean);
+			}
 		}
 		return propertyTypeBeans;
 	}
@@ -681,13 +695,15 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubOccupiedStatusModel> models = new ArrayList<IclubOccupiedStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupiedStatusModel.class));
 		client.close();
 		occupiedStatusBeans = new ArrayList<IclubOccupiedStatusBean>();
-		for (IclubOccupiedStatusModel model : models) {
-			IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
-			bean.setOsId(model.getOsId());
-			bean.setOsLongDesc(model.getOsLongDesc());
-			bean.setOsShortDesc(model.getOsShortDesc());
-			bean.setOsStatus(model.getOsStatus());
-			occupiedStatusBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubOccupiedStatusModel model : models) {
+				IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
+				bean.setOsId(model.getOsId());
+				bean.setOsLongDesc(model.getOsLongDesc());
+				bean.setOsShortDesc(model.getOsShortDesc());
+				bean.setOsStatus(model.getOsStatus());
+				occupiedStatusBeans.add(bean);
+			}
 		}
 		return occupiedStatusBeans;
 	}
@@ -701,37 +717,39 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubPurposeTypeModel> models = new ArrayList<IclubPurposeTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPurposeTypeModel.class));
 		client.close();
 		pPurposeTypeBeans = new ArrayList<IclubPurposeTypeBean>();
-		for (IclubPurposeTypeModel model : models) {
-			IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
+		if (models != null && models.size() > 0) {
+			for (IclubPurposeTypeModel model : models) {
+				IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
 
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
-			bean.setPtCrtdDt(model.getPtCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
+				bean.setPtCrtdDt(model.getPtCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 
-			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
-				String[] properties = new String[model.getIclubProperties().length];
-				int i = 0;
-				for (String iclubProperty : model.getIclubProperties()) {
-					properties[i] = iclubProperty;
-					i++;
+				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
+					String[] properties = new String[model.getIclubProperties().length];
+					int i = 0;
+					for (String iclubProperty : model.getIclubProperties()) {
+						properties[i] = iclubProperty;
+						i++;
+					}
+					bean.setIclubProperties(properties);
 				}
-				bean.setIclubProperties(properties);
-			}
 
-			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-				String[] vehicles = new String[model.getIclubVehicles().length];
-				int i = 0;
-				for (String iclubVehicle : model.getIclubVehicles()) {
-					vehicles[i] = iclubVehicle;
-					i++;
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String iclubVehicle : model.getIclubVehicles()) {
+						vehicles[i] = iclubVehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
 				}
-				bean.setIclubVehicles(vehicles);
+				pPurposeTypeBeans.add(bean);
 			}
-			pPurposeTypeBeans.add(bean);
 		}
 		return pPurposeTypeBeans;
 	}
@@ -746,36 +764,38 @@ public class IclubPropertyController implements Serializable {
 		Collection<? extends IclubCoverTypeModel> models = new ArrayList<IclubCoverTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCoverTypeModel.class));
 		client.close();
 		coverTypeBeans = new ArrayList<IclubCoverTypeBean>();
-		for (IclubCoverTypeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubCoverTypeModel model : models) {
 
-			IclubCoverTypeBean bean = new IclubCoverTypeBean();
+				IclubCoverTypeBean bean = new IclubCoverTypeBean();
 
-			bean.setCtId(model.getCtId());
-			bean.setCtLongDesc(model.getCtLongDesc());
-			bean.setCtShortDesc(model.getCtShortDesc());
-			bean.setCtStatus(model.getCtStatus());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setCtCrtdDt(model.getCtCrtdDt());
-			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
-				String[] iclubProperties = new String[model.getIclubProperties().length];
-				int i = 0;
-				for (String iclubProperty : model.getIclubProperties()) {
-					iclubProperties[i] = iclubProperty;
-					i++;
+				bean.setCtId(model.getCtId());
+				bean.setCtLongDesc(model.getCtLongDesc());
+				bean.setCtShortDesc(model.getCtShortDesc());
+				bean.setCtStatus(model.getCtStatus());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setCtCrtdDt(model.getCtCrtdDt());
+				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
+					String[] iclubProperties = new String[model.getIclubProperties().length];
+					int i = 0;
+					for (String iclubProperty : model.getIclubProperties()) {
+						iclubProperties[i] = iclubProperty;
+						i++;
+					}
+					bean.setIclubProperties(iclubProperties);
 				}
-				bean.setIclubProperties(iclubProperties);
-			}
-			if (model.getIclubQuotes() != null && model.getIclubQuotes().length > 0) {
-				String[] iclubQuotes = new String[model.getIclubQuotes().length];
-				int i = 0;
-				for (String iclubQuote : model.getIclubQuotes()) {
-					iclubQuotes[i] = iclubQuote;
-					i++;
+				if (model.getIclubQuotes() != null && model.getIclubQuotes().length > 0) {
+					String[] iclubQuotes = new String[model.getIclubQuotes().length];
+					int i = 0;
+					for (String iclubQuote : model.getIclubQuotes()) {
+						iclubQuotes[i] = iclubQuote;
+						i++;
+					}
+					bean.setIclubQuotes(iclubQuotes);
 				}
-				bean.setIclubQuotes(iclubQuotes);
+				coverTypeBeans.add(bean);
 			}
-			coverTypeBeans.add(bean);
 		}
 		return coverTypeBeans;
 	}

@@ -79,25 +79,27 @@ public class IclubEntityTypeController implements Serializable {
 		Collection<? extends IclubEntityTypeModel> models = new ArrayList<IclubEntityTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEntityTypeModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubEntityTypeBean>();
-		for (IclubEntityTypeModel model : models) {
-			IclubEntityTypeBean bean = new IclubEntityTypeBean();
+		if (models != null && models.size() > 0) {
+			for (IclubEntityTypeModel model : models) {
+				IclubEntityTypeBean bean = new IclubEntityTypeBean();
 
-			bean.setEtId(model.getEtId());
-			bean.setEtLongDesc(model.getEtLongDesc());
-			bean.setEtShortDesc(model.getEtShortDesc());
-			bean.setEtStatus(model.getEtStatus());
+				bean.setEtId(model.getEtId());
+				bean.setEtLongDesc(model.getEtLongDesc());
+				bean.setEtShortDesc(model.getEtShortDesc());
+				bean.setEtStatus(model.getEtStatus());
 
-			if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
-				String[] documents = new String[model.getIclubDocuments().length];
-				int i = 0;
-				for (String iclubDocument : model.getIclubDocuments()) {
-					documents[i] = iclubDocument;
-					i++;
+				if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
+					String[] documents = new String[model.getIclubDocuments().length];
+					int i = 0;
+					for (String iclubDocument : model.getIclubDocuments()) {
+						documents[i] = iclubDocument;
+						i++;
+					}
+					bean.setIclubDocuments(documents);
 				}
-				bean.setIclubDocuments(documents);
-			}
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -273,16 +275,18 @@ public class IclubEntityTypeController implements Serializable {
 		Collection<? extends IclubEntityTypeModel> models = new ArrayList<IclubEntityTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEntityTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubEntityTypeBean>();
-		for (IclubEntityTypeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubEntityTypeModel model : models) {
 
-			IclubEntityTypeBean bean = new IclubEntityTypeBean();
+				IclubEntityTypeBean bean = new IclubEntityTypeBean();
 
-			bean.setEtId(model.getEtId());
-			bean.setEtLongDesc(model.getEtLongDesc());
-			bean.setEtShortDesc(model.getEtShortDesc());
-			bean.setEtStatus(model.getEtStatus());
+				bean.setEtId(model.getEtId());
+				bean.setEtLongDesc(model.getEtLongDesc());
+				bean.setEtShortDesc(model.getEtShortDesc());
+				bean.setEtStatus(model.getEtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

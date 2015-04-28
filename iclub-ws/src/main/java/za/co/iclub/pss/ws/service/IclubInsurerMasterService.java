@@ -137,32 +137,33 @@ public class IclubInsurerMasterService {
 
 		try {
 			List batmod = iclubInsurerMasterDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubInsurerMaster iCIMaster = (IclubInsurerMaster) object;
+					IclubInsurerMasterModel iCIm = new IclubInsurerMasterModel();
 
-			for (Object object : batmod) {
-				IclubInsurerMaster iCIMaster = (IclubInsurerMaster) object;
-				IclubInsurerMasterModel iCIm = new IclubInsurerMasterModel();
+					iCIm.setImId(iCIMaster.getImId());
+					iCIm.setImName(iCIMaster.getImName());
+					iCIm.setImLat(iCIMaster.getImLat());
+					iCIm.setImLong(iCIMaster.getImLong());
+					iCIm.setImTradeName(iCIMaster.getImTradeName());
+					iCIm.setImRegNum(iCIMaster.getImRegNum());
+					iCIm.setImLocation(iCIMaster.getImLocation());
+					iCIm.setImCrtdDt(iCIMaster.getImCrtdDt());
+					iCIm.setIclubPerson(iCIMaster.getIclubPerson() != null ? iCIMaster.getIclubPerson().getPId() : null);
 
-				iCIm.setImId(iCIMaster.getImId());
-				iCIm.setImName(iCIMaster.getImName());
-				iCIm.setImLat(iCIMaster.getImLat());
-				iCIm.setImLong(iCIMaster.getImLong());
-				iCIm.setImTradeName(iCIMaster.getImTradeName());
-				iCIm.setImRegNum(iCIMaster.getImRegNum());
-				iCIm.setImLocation(iCIMaster.getImLocation());
-				iCIm.setImCrtdDt(iCIMaster.getImCrtdDt());
-				iCIm.setIclubPerson(iCIMaster.getIclubPerson() != null ? iCIMaster.getIclubPerson().getPId() : null);
-
-				if (iCIMaster.getIclubQuotes() != null && iCIMaster.getIclubQuotes().size() > 0) {
-					String[] iclubQuotes = new String[iCIMaster.getIclubQuotes().size()];
-					int i = 0;
-					for (IclubQuote iclubQuote : iCIMaster.getIclubQuotes()) {
-						iclubQuotes[i] = iclubQuote.getQId();
-						i++;
+					if (iCIMaster.getIclubQuotes() != null && iCIMaster.getIclubQuotes().size() > 0) {
+						String[] iclubQuotes = new String[iCIMaster.getIclubQuotes().size()];
+						int i = 0;
+						for (IclubQuote iclubQuote : iCIMaster.getIclubQuotes()) {
+							iclubQuotes[i] = iclubQuote.getQId();
+							i++;
+						}
+						iCIm.setIclubQuotes(iclubQuotes);
 					}
-					iCIm.setIclubQuotes(iclubQuotes);
-				}
 
-				ret.add((T) iCIm);
+					ret.add((T) iCIm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -180,31 +181,32 @@ public class IclubInsurerMasterService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubInsurerMaster.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubInsurerMaster iCIMaster = (IclubInsurerMaster) object;
+					IclubInsurerMasterModel iCIm = new IclubInsurerMasterModel();
 
-			for (Object object : batmod) {
-				IclubInsurerMaster iCIMaster = (IclubInsurerMaster) object;
-				IclubInsurerMasterModel iCIm = new IclubInsurerMasterModel();
-
-				iCIm.setImId(iCIMaster.getImId());
-				iCIm.setImName(iCIMaster.getImName());
-				iCIm.setImLat(iCIMaster.getImLat());
-				iCIm.setImLong(iCIMaster.getImLong());
-				iCIm.setImTradeName(iCIMaster.getImTradeName());
-				iCIm.setImRegNum(iCIMaster.getImRegNum());
-				iCIm.setImLocation(iCIMaster.getImLocation());
-				iCIm.setImCrtdDt(iCIMaster.getImCrtdDt());
-				iCIm.setIclubPerson(iCIMaster.getIclubPerson() != null ? iCIMaster.getIclubPerson().getPId() : null);
-				if (iCIMaster.getIclubQuotes() != null && iCIMaster.getIclubQuotes().size() > 0) {
-					String[] iclubQuotes = new String[iCIMaster.getIclubQuotes().size()];
-					int i = 0;
-					for (IclubQuote iclubQuote : iCIMaster.getIclubQuotes()) {
-						iclubQuotes[i] = iclubQuote.getQId();
-						i++;
+					iCIm.setImId(iCIMaster.getImId());
+					iCIm.setImName(iCIMaster.getImName());
+					iCIm.setImLat(iCIMaster.getImLat());
+					iCIm.setImLong(iCIMaster.getImLong());
+					iCIm.setImTradeName(iCIMaster.getImTradeName());
+					iCIm.setImRegNum(iCIMaster.getImRegNum());
+					iCIm.setImLocation(iCIMaster.getImLocation());
+					iCIm.setImCrtdDt(iCIMaster.getImCrtdDt());
+					iCIm.setIclubPerson(iCIMaster.getIclubPerson() != null ? iCIMaster.getIclubPerson().getPId() : null);
+					if (iCIMaster.getIclubQuotes() != null && iCIMaster.getIclubQuotes().size() > 0) {
+						String[] iclubQuotes = new String[iCIMaster.getIclubQuotes().size()];
+						int i = 0;
+						for (IclubQuote iclubQuote : iCIMaster.getIclubQuotes()) {
+							iclubQuotes[i] = iclubQuote.getQId();
+							i++;
+						}
+						iCIm.setIclubQuotes(iclubQuotes);
 					}
-					iCIm.setIclubQuotes(iclubQuotes);
-				}
 
-				ret.add((T) iCIm);
+					ret.add((T) iCIm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

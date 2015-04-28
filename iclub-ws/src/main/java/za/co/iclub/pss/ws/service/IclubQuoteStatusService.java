@@ -122,28 +122,29 @@ public class IclubQuoteStatusService {
 
 		try {
 			List batmod = iclubQuoteStatusDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubQuoteStatus iQs = (IclubQuoteStatus) object;
 
-			for (Object object : batmod) {
-				IclubQuoteStatus iQs = (IclubQuoteStatus) object;
+					IclubQuoteStatusModel model = new IclubQuoteStatusModel();
 
-				IclubQuoteStatusModel model = new IclubQuoteStatusModel();
+					model.setQsId(iQs.getQsId());
+					model.setQsLongDesc(iQs.getQsLongDesc());
+					model.setQsShortDesc(iQs.getQsShortDesc());
+					model.setQsStatus(iQs.getQsStatus());
 
-				model.setQsId(iQs.getQsId());
-				model.setQsLongDesc(iQs.getQsLongDesc());
-				model.setQsShortDesc(iQs.getQsShortDesc());
-				model.setQsStatus(iQs.getQsStatus());
-
-				if (iQs.getIclubQuotes() != null && iQs.getIclubQuotes().size() > 0) {
-					String[] quotes = new String[iQs.getIclubQuotes().size()];
-					int i = 0;
-					for (IclubQuote quote : iQs.getIclubQuotes()) {
-						quotes[i] = quote.getQId();
-						i++;
+					if (iQs.getIclubQuotes() != null && iQs.getIclubQuotes().size() > 0) {
+						String[] quotes = new String[iQs.getIclubQuotes().size()];
+						int i = 0;
+						for (IclubQuote quote : iQs.getIclubQuotes()) {
+							quotes[i] = quote.getQId();
+							i++;
+						}
+						model.setIclubQuotes(quotes);
 					}
-					model.setIclubQuotes(quotes);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

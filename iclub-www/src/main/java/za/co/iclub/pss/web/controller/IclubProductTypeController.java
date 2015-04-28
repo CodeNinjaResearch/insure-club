@@ -157,14 +157,16 @@ public class IclubProductTypeController implements Serializable {
 		Collection<? extends IclubProductTypeModel> models = new ArrayList<IclubProductTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubProductTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubProductTypeBean>();
-		for (IclubProductTypeModel model : models) {
-			IclubProductTypeBean bean = new IclubProductTypeBean();
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubProductTypeModel model : models) {
+				IclubProductTypeBean bean = new IclubProductTypeBean();
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

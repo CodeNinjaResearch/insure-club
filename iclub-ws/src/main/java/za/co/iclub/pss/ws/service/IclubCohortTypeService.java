@@ -122,28 +122,29 @@ public class IclubCohortTypeService {
 
 		try {
 			List batmod = iclubCohortTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubCohortType iTt = (IclubCohortType) object;
 
-			for (Object object : batmod) {
-				IclubCohortType iTt = (IclubCohortType) object;
+					IclubCohortTypeModel model = new IclubCohortTypeModel();
 
-				IclubCohortTypeModel model = new IclubCohortTypeModel();
+					model.setCtId(iTt.getCtId());
+					model.setCtLongDesc(iTt.getCtLongDesc());
+					model.setCtShortDesc(iTt.getCtShortDesc());
+					model.setCtStatus(iTt.getCtStatus());
 
-				model.setCtId(iTt.getCtId());
-				model.setCtLongDesc(iTt.getCtLongDesc());
-				model.setCtShortDesc(iTt.getCtShortDesc());
-				model.setCtStatus(iTt.getCtStatus());
-
-				if (iTt.getIclubCohorts() != null && iTt.getIclubCohorts().size() > 0) {
-					String[] iclubCohorts = new String[iTt.getIclubCohorts().size()];
-					int i = 0;
-					for (IclubCohort iclubCohort : iTt.getIclubCohorts()) {
-						iclubCohorts[i] = iclubCohort.getCId();
-						i++;
+					if (iTt.getIclubCohorts() != null && iTt.getIclubCohorts().size() > 0) {
+						String[] iclubCohorts = new String[iTt.getIclubCohorts().size()];
+						int i = 0;
+						for (IclubCohort iclubCohort : iTt.getIclubCohorts()) {
+							iclubCohorts[i] = iclubCohort.getCId();
+							i++;
+						}
+						model.setIclubCohorts(iclubCohorts);
 					}
-					model.setIclubCohorts(iclubCohorts);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

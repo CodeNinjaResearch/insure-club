@@ -127,19 +127,20 @@ public class IclubEventService {
 
 		try {
 			List batmod = iclubEventDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubEvent iCE = (IclubEvent) object;
 
-			for (Object object : batmod) {
-				IclubEvent iCE = (IclubEvent) object;
+					IclubEventModel model = new IclubEventModel();
 
-				IclubEventModel model = new IclubEventModel();
+					model.setEId(iCE.getEId());
+					model.setECrtdDt(iCE.getECrtdDt());
+					model.setEDesc(iCE.getEDesc());
+					model.setIclubPerson(iCE.getIclubPerson() != null ? iCE.getIclubPerson().getPId() : null);
+					model.setIclubEventType(iCE.getIclubEventType() != null ? iCE.getIclubEventType().getEtId() : null);
 
-				model.setEId(iCE.getEId());
-				model.setECrtdDt(iCE.getECrtdDt());
-				model.setEDesc(iCE.getEDesc());
-				model.setIclubPerson(iCE.getIclubPerson() != null ? iCE.getIclubPerson().getPId() : null);
-				model.setIclubEventType(iCE.getIclubEventType() != null ? iCE.getIclubEventType().getEtId() : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -157,19 +158,20 @@ public class IclubEventService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubEvent.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubEvent iCE = (IclubEvent) object;
 
-			for (Object object : batmod) {
-				IclubEvent iCE = (IclubEvent) object;
+					IclubEventModel model = new IclubEventModel();
 
-				IclubEventModel model = new IclubEventModel();
+					model.setEId(iCE.getEId());
+					model.setECrtdDt(iCE.getECrtdDt());
+					model.setEDesc(iCE.getEDesc());
+					model.setIclubPerson(iCE.getIclubPerson() != null ? iCE.getIclubPerson().getPId() : null);
+					model.setIclubEventType(iCE.getIclubEventType() != null ? iCE.getIclubEventType().getEtId() : null);
 
-				model.setEId(iCE.getEId());
-				model.setECrtdDt(iCE.getECrtdDt());
-				model.setEDesc(iCE.getEDesc());
-				model.setIclubPerson(iCE.getIclubPerson() != null ? iCE.getIclubPerson().getPId() : null);
-				model.setIclubEventType(iCE.getIclubEventType() != null ? iCE.getIclubEventType().getEtId() : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

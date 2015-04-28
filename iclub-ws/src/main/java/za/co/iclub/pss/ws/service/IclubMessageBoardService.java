@@ -132,29 +132,30 @@ public class IclubMessageBoardService {
 
 		try {
 			List batmod = iclubMessageBoardDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMessageBoard iCMb = (IclubMessageBoard) object;
 
-			for (Object object : batmod) {
-				IclubMessageBoard iCMb = (IclubMessageBoard) object;
+					IclubMessageBoardModel model = new IclubMessageBoardModel();
 
-				IclubMessageBoardModel model = new IclubMessageBoardModel();
-
-				model.setMbId(iCMb.getMbId());
-				model.setMbContent(iCMb.getMbContent());
-				model.setMbContent(iCMb.getMbContent());
-				model.setMbTag(iCMb.getMbTag());
-				model.setMbTitle(iCMb.getMbTitle());
-				model.setMbCrtdDt(iCMb.getMbCrtdDt());
-				model.setIclubPerson(iCMb.getIclubPerson() != null ? (iCMb.getIclubPerson().getPId()) : null);
-				if (iCMb.getIclubMbComments() != null && iCMb.getIclubMbComments().size() > 0) {
-					String[] iclubMbComments = new String[iCMb.getIclubMbComments().size()];
-					int i = 0;
-					for (IclubMbComment iclubMbComment : iCMb.getIclubMbComments()) {
-						iclubMbComments[i] = iclubMbComment.getMbcId();
-						i++;
+					model.setMbId(iCMb.getMbId());
+					model.setMbContent(iCMb.getMbContent());
+					model.setMbContent(iCMb.getMbContent());
+					model.setMbTag(iCMb.getMbTag());
+					model.setMbTitle(iCMb.getMbTitle());
+					model.setMbCrtdDt(iCMb.getMbCrtdDt());
+					model.setIclubPerson(iCMb.getIclubPerson() != null ? (iCMb.getIclubPerson().getPId()) : null);
+					if (iCMb.getIclubMbComments() != null && iCMb.getIclubMbComments().size() > 0) {
+						String[] iclubMbComments = new String[iCMb.getIclubMbComments().size()];
+						int i = 0;
+						for (IclubMbComment iclubMbComment : iCMb.getIclubMbComments()) {
+							iclubMbComments[i] = iclubMbComment.getMbcId();
+							i++;
+						}
+						model.setIclubMbComments(iclubMbComments);
 					}
-					model.setIclubMbComments(iclubMbComments);
+					ret.add((T) model);
 				}
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -172,30 +173,31 @@ public class IclubMessageBoardService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubMessageBoard.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMessageBoard iCMb = (IclubMessageBoard) object;
 
-			for (Object object : batmod) {
-				IclubMessageBoard iCMb = (IclubMessageBoard) object;
+					IclubMessageBoardModel model = new IclubMessageBoardModel();
 
-				IclubMessageBoardModel model = new IclubMessageBoardModel();
-
-				model.setMbId(iCMb.getMbId());
-				model.setMbContent(iCMb.getMbContent());
-				model.setMbContent(iCMb.getMbContent());
-				model.setMbTag(iCMb.getMbTag());
-				model.setMbTitle(iCMb.getMbTitle());
-				model.setMbCrtdDt(iCMb.getMbCrtdDt());
-				model.setIclubPerson(iCMb.getIclubPerson() != null ? (iCMb.getIclubPerson().getPId()) : null);
-				if (iCMb.getIclubMbComments() != null && iCMb.getIclubMbComments().size() > 0) {
-					String[] iclubMbComments = new String[iCMb.getIclubMbComments().size()];
-					int i = 0;
-					for (IclubMbComment iclubMbComment : iCMb.getIclubMbComments()) {
-						iclubMbComments[i] = iclubMbComment.getMbcId();
-						i++;
+					model.setMbId(iCMb.getMbId());
+					model.setMbContent(iCMb.getMbContent());
+					model.setMbContent(iCMb.getMbContent());
+					model.setMbTag(iCMb.getMbTag());
+					model.setMbTitle(iCMb.getMbTitle());
+					model.setMbCrtdDt(iCMb.getMbCrtdDt());
+					model.setIclubPerson(iCMb.getIclubPerson() != null ? (iCMb.getIclubPerson().getPId()) : null);
+					if (iCMb.getIclubMbComments() != null && iCMb.getIclubMbComments().size() > 0) {
+						String[] iclubMbComments = new String[iCMb.getIclubMbComments().size()];
+						int i = 0;
+						for (IclubMbComment iclubMbComment : iCMb.getIclubMbComments()) {
+							iclubMbComments[i] = iclubMbComment.getMbcId();
+							i++;
+						}
+						model.setIclubMbComments(iclubMbComments);
 					}
-					model.setIclubMbComments(iclubMbComments);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

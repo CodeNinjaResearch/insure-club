@@ -139,32 +139,33 @@ public class IclubTrackerMasterService {
 
 		try {
 			List batmod = iclubTrackerMasterDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubTrackerMaster iclubTMaster = (IclubTrackerMaster) object;
+					IclubTrackerMasterModel iCTm = new IclubTrackerMasterModel();
 
-			for (Object object : batmod) {
-				IclubTrackerMaster iclubTMaster = (IclubTrackerMaster) object;
-				IclubTrackerMasterModel iCTm = new IclubTrackerMasterModel();
+					iCTm.setTmId(iclubTMaster.getTmId());
+					iCTm.setTmName(iclubTMaster.getTmName());
+					iCTm.setTmLat(iclubTMaster.getTmLat());
+					iCTm.setTmLocation(iclubTMaster.getTmLocation());
+					iCTm.setTmLong(iclubTMaster.getTmLong());
+					iCTm.setTmTradeName(iclubTMaster.getTmTradeName());
+					iCTm.setTmRegNum(iclubTMaster.getTmRegNum());
+					iCTm.setTmCrtdDt(iclubTMaster.getTmCrtdDt());
+					iCTm.setIclubPerson(iclubTMaster.getIclubPerson() != null ? iclubTMaster.getIclubPerson().getPId() : null);
 
-				iCTm.setTmId(iclubTMaster.getTmId());
-				iCTm.setTmName(iclubTMaster.getTmName());
-				iCTm.setTmLat(iclubTMaster.getTmLat());
-				iCTm.setTmLocation(iclubTMaster.getTmLocation());
-				iCTm.setTmLong(iclubTMaster.getTmLong());
-				iCTm.setTmTradeName(iclubTMaster.getTmTradeName());
-				iCTm.setTmRegNum(iclubTMaster.getTmRegNum());
-				iCTm.setTmCrtdDt(iclubTMaster.getTmCrtdDt());
-				iCTm.setIclubPerson(iclubTMaster.getIclubPerson() != null ? iclubTMaster.getIclubPerson().getPId() : null);
-
-				if (iclubTMaster.getIclubSecurityDevices() != null && iclubTMaster.getIclubSecurityDevices().size() > 0) {
-					String[] securityDevices = new String[iclubTMaster.getIclubSecurityDevices().size()];
-					int i = 0;
-					for (IclubSecurityDevice securityDevice : iclubTMaster.getIclubSecurityDevices()) {
-						securityDevices[i] = securityDevice.getSdId();
-						i++;
+					if (iclubTMaster.getIclubSecurityDevices() != null && iclubTMaster.getIclubSecurityDevices().size() > 0) {
+						String[] securityDevices = new String[iclubTMaster.getIclubSecurityDevices().size()];
+						int i = 0;
+						for (IclubSecurityDevice securityDevice : iclubTMaster.getIclubSecurityDevices()) {
+							securityDevices[i] = securityDevice.getSdId();
+							i++;
+						}
+						iCTm.setIclubSecurityDevices(securityDevices);
 					}
-					iCTm.setIclubSecurityDevices(securityDevices);
-				}
 
-				ret.add((T) iCTm);
+					ret.add((T) iCTm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -182,32 +183,33 @@ public class IclubTrackerMasterService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubTrackerMaster.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubTrackerMaster iclubTMaster = (IclubTrackerMaster) object;
+					IclubTrackerMasterModel iCTm = new IclubTrackerMasterModel();
 
-			for (Object object : batmod) {
-				IclubTrackerMaster iclubTMaster = (IclubTrackerMaster) object;
-				IclubTrackerMasterModel iCTm = new IclubTrackerMasterModel();
+					iCTm.setTmId(iclubTMaster.getTmId());
+					iCTm.setTmName(iclubTMaster.getTmName());
+					iCTm.setTmLat(iclubTMaster.getTmLat());
+					iCTm.setTmLocation(iclubTMaster.getTmLocation());
+					iCTm.setTmLong(iclubTMaster.getTmLong());
+					iCTm.setTmTradeName(iclubTMaster.getTmTradeName());
+					iCTm.setTmRegNum(iclubTMaster.getTmRegNum());
+					iCTm.setTmCrtdDt(iclubTMaster.getTmCrtdDt());
+					iCTm.setIclubPerson(iclubTMaster.getIclubPerson() != null ? iclubTMaster.getIclubPerson().getPId() : null);
 
-				iCTm.setTmId(iclubTMaster.getTmId());
-				iCTm.setTmName(iclubTMaster.getTmName());
-				iCTm.setTmLat(iclubTMaster.getTmLat());
-				iCTm.setTmLocation(iclubTMaster.getTmLocation());
-				iCTm.setTmLong(iclubTMaster.getTmLong());
-				iCTm.setTmTradeName(iclubTMaster.getTmTradeName());
-				iCTm.setTmRegNum(iclubTMaster.getTmRegNum());
-				iCTm.setTmCrtdDt(iclubTMaster.getTmCrtdDt());
-				iCTm.setIclubPerson(iclubTMaster.getIclubPerson() != null ? iclubTMaster.getIclubPerson().getPId() : null);
-
-				if (iclubTMaster.getIclubSecurityDevices() != null && iclubTMaster.getIclubSecurityDevices().size() > 0) {
-					String[] securityDevices = new String[iclubTMaster.getIclubSecurityDevices().size()];
-					int i = 0;
-					for (IclubSecurityDevice securityDevice : iclubTMaster.getIclubSecurityDevices()) {
-						securityDevices[i] = securityDevice.getSdId();
-						i++;
+					if (iclubTMaster.getIclubSecurityDevices() != null && iclubTMaster.getIclubSecurityDevices().size() > 0) {
+						String[] securityDevices = new String[iclubTMaster.getIclubSecurityDevices().size()];
+						int i = 0;
+						for (IclubSecurityDevice securityDevice : iclubTMaster.getIclubSecurityDevices()) {
+							securityDevices[i] = securityDevice.getSdId();
+							i++;
+						}
+						iCTm.setIclubSecurityDevices(securityDevices);
 					}
-					iCTm.setIclubSecurityDevices(securityDevices);
-				}
 
-				ret.add((T) iCTm);
+					ret.add((T) iCTm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

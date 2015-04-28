@@ -157,14 +157,16 @@ public class IclubPaymentTypeController implements Serializable {
 		Collection<? extends IclubPaymentTypeModel> models = new ArrayList<IclubPaymentTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubPaymentTypeBean>();
-		for (IclubPaymentTypeModel model : models) {
-			IclubPaymentTypeBean bean = new IclubPaymentTypeBean();
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubPaymentTypeModel model : models) {
+				IclubPaymentTypeBean bean = new IclubPaymentTypeBean();
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

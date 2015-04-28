@@ -133,32 +133,33 @@ public class IclubInsuranceItemService {
 
 		try {
 			List batmod = iclubInsuranceItemDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
 
-			for (Object object : batmod) {
-				IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
+					IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 
-				IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+					model.setIiId(iCTt.getIiId());
+					model.setIiItemId(iCTt.getIiItemId());
+					model.setIiQuoteId(iCTt.getIiQuoteId());
+					model.setIiCrtdDt(iCTt.getIiCrtdDt());
+					model.setIiInsureValue(iCTt.getIiInsureValue());
+					model.setIiActualValue(iCTt.getIiActualValue());
+					model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
+					model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
 
-				model.setIiId(iCTt.getIiId());
-				model.setIiItemId(iCTt.getIiItemId());
-				model.setIiQuoteId(iCTt.getIiQuoteId());
-				model.setIiCrtdDt(iCTt.getIiCrtdDt());
-				model.setIiInsureValue(iCTt.getIiInsureValue());
-				model.setIiActualValue(iCTt.getIiActualValue());
-				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
-				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
-
-				if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
-					String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
-						claimItems[i] = claimItem.getCiId();
-						i++;
+					if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
+						String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
+							claimItems[i] = claimItem.getCiId();
+							i++;
+						}
+						model.setIclubClaimItems(claimItems);
 					}
-					model.setIclubClaimItems(claimItems);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -176,32 +177,33 @@ public class IclubInsuranceItemService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubInsuranceItem.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
 
-			for (Object object : batmod) {
-				IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
+					IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 
-				IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+					model.setIiId(iCTt.getIiId());
+					model.setIiItemId(iCTt.getIiItemId());
+					model.setIiQuoteId(iCTt.getIiQuoteId());
+					model.setIiCrtdDt(iCTt.getIiCrtdDt());
+					model.setIiInsureValue(iCTt.getIiInsureValue());
+					model.setIiActualValue(iCTt.getIiActualValue());
+					model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
+					model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
 
-				model.setIiId(iCTt.getIiId());
-				model.setIiItemId(iCTt.getIiItemId());
-				model.setIiQuoteId(iCTt.getIiQuoteId());
-				model.setIiCrtdDt(iCTt.getIiCrtdDt());
-				model.setIiInsureValue(iCTt.getIiInsureValue());
-				model.setIiActualValue(iCTt.getIiActualValue());
-				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
-				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
-
-				if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
-					String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
-						claimItems[i] = claimItem.getCiId();
-						i++;
+					if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
+						String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
+							claimItems[i] = claimItem.getCiId();
+							i++;
+						}
+						model.setIclubClaimItems(claimItems);
 					}
-					model.setIclubClaimItems(claimItems);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -219,32 +221,33 @@ public class IclubInsuranceItemService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByQuoteId(user);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
 
-			for (Object object : batmod) {
-				IclubInsuranceItem iCTt = (IclubInsuranceItem) object;
+					IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 
-				IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+					model.setIiId(iCTt.getIiId());
+					model.setIiItemId(iCTt.getIiItemId());
+					model.setIiQuoteId(iCTt.getIiQuoteId());
+					model.setIiCrtdDt(iCTt.getIiCrtdDt());
+					model.setIiInsureValue(iCTt.getIiInsureValue());
+					model.setIiActualValue(iCTt.getIiActualValue());
+					model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
+					model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
 
-				model.setIiId(iCTt.getIiId());
-				model.setIiItemId(iCTt.getIiItemId());
-				model.setIiQuoteId(iCTt.getIiQuoteId());
-				model.setIiCrtdDt(iCTt.getIiCrtdDt());
-				model.setIiInsureValue(iCTt.getIiInsureValue());
-				model.setIiActualValue(iCTt.getIiActualValue());
-				model.setIclubInsuranceItemType(iCTt.getIclubInsuranceItemType() != null ? (iCTt.getIclubInsuranceItemType().getIitId()) : null);
-				model.setIclubPerson(iCTt.getIclubPerson() != null ? (iCTt.getIclubPerson().getPId()) : null);
-
-				if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
-					String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
-						claimItems[i] = claimItem.getCiId();
-						i++;
+					if (iCTt.getIclubClaimItems() != null && iCTt.getIclubClaimItems().size() > 0) {
+						String[] claimItems = new String[iCTt.getIclubClaimItems().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iCTt.getIclubClaimItems()) {
+							claimItems[i] = claimItem.getCiId();
+							i++;
+						}
+						model.setIclubClaimItems(claimItems);
 					}
-					model.setIclubClaimItems(claimItems);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -329,28 +332,30 @@ public class IclubInsuranceItemService {
 		List<T> ret = new ArrayList<T>();
 		try {
 			List batmod = iclubNamedQueryDAO.findIclubInsuranceItemsByQuoteIdAndItemTypeId(quoteId, itemTypeId);
-			for (Object object : batmod) {
-				IclubInsuranceItem bean = (IclubInsuranceItem) object;
-				IclubInsuranceItemModel model = new IclubInsuranceItemModel();
-				model.setIiId(bean.getIiId());
-				model.setIiItemId(bean.getIiItemId());
-				model.setIiQuoteId(bean.getIiQuoteId());
-				model.setIiCrtdDt(bean.getIiCrtdDt());
-				model.setIiInsureValue(bean.getIiInsureValue());
-				model.setIiActualValue(bean.getIiActualValue());
-				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
-				model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubInsuranceItem bean = (IclubInsuranceItem) object;
+					IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+					model.setIiId(bean.getIiId());
+					model.setIiItemId(bean.getIiItemId());
+					model.setIiQuoteId(bean.getIiQuoteId());
+					model.setIiCrtdDt(bean.getIiCrtdDt());
+					model.setIiInsureValue(bean.getIiInsureValue());
+					model.setIiActualValue(bean.getIiActualValue());
+					model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? (bean.getIclubInsuranceItemType().getIitId()) : null);
+					model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 
-				if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
-					String[] claimItems = new String[bean.getIclubClaimItems().size()];
-					int i = 0;
-					for (IclubClaimItem claimItem : bean.getIclubClaimItems()) {
-						claimItems[i] = claimItem.getCiId();
-						i++;
+					if (bean.getIclubClaimItems() != null && bean.getIclubClaimItems().size() > 0) {
+						String[] claimItems = new String[bean.getIclubClaimItems().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : bean.getIclubClaimItems()) {
+							claimItems[i] = claimItem.getCiId();
+							i++;
+						}
+						model.setIclubClaimItems(claimItems);
 					}
-					model.setIclubClaimItems(claimItems);
+					ret.add((T) model);
 				}
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

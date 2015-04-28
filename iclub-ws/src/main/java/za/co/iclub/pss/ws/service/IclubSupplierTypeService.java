@@ -122,28 +122,29 @@ public class IclubSupplierTypeService {
 
 		try {
 			List batmod = iclubSupplierTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSupplierType iSt = (IclubSupplierType) object;
 
-			for (Object object : batmod) {
-				IclubSupplierType iSt = (IclubSupplierType) object;
+					IclubSupplierTypeModel model = new IclubSupplierTypeModel();
 
-				IclubSupplierTypeModel model = new IclubSupplierTypeModel();
+					model.setStId(iSt.getStId());
+					model.setStLongDesc(iSt.getStLongDesc());
+					model.setStShortDesc(iSt.getStShortDesc());
+					model.setStStatus(iSt.getStStatus());
 
-				model.setStId(iSt.getStId());
-				model.setStLongDesc(iSt.getStLongDesc());
-				model.setStShortDesc(iSt.getStShortDesc());
-				model.setStStatus(iSt.getStStatus());
-
-				if (iSt.getIclubSupplMasters() != null && iSt.getIclubSupplMasters().size() > 0) {
-					String[] supplMasters = new String[iSt.getIclubSupplMasters().size()];
-					int i = 0;
-					for (IclubSupplMaster supplMaster : iSt.getIclubSupplMasters()) {
-						supplMasters[i] = supplMaster.getSmId();
-						i++;
+					if (iSt.getIclubSupplMasters() != null && iSt.getIclubSupplMasters().size() > 0) {
+						String[] supplMasters = new String[iSt.getIclubSupplMasters().size()];
+						int i = 0;
+						for (IclubSupplMaster supplMaster : iSt.getIclubSupplMasters()) {
+							supplMasters[i] = supplMaster.getSmId();
+							i++;
+						}
+						model.setIclubSupplMasters(supplMasters);
 					}
-					model.setIclubSupplMasters(supplMasters);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

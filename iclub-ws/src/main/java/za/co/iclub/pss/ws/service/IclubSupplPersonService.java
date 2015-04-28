@@ -128,17 +128,18 @@ public class IclubSupplPersonService {
 
 		try {
 			List batmod = iclubSupplPersonDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
+					IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
 
-			for (Object object : batmod) {
-				IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
-				IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
+					iCSp.setSpId(iclubSMaster.getSpId());
+					iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
+					iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
+					iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
 
-				iCSp.setSpId(iclubSMaster.getSpId());
-				iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
-				iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
-				iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
-
-				ret.add((T) iCSp);
+					ret.add((T) iCSp);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -156,17 +157,18 @@ public class IclubSupplPersonService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSupplPerson.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
+					IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
 
-			for (Object object : batmod) {
-				IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
-				IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
+					iCSp.setSpId(iclubSMaster.getSpId());
+					iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
+					iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
+					iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
 
-				iCSp.setSpId(iclubSMaster.getSpId());
-				iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
-				iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
-				iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
-
-				ret.add((T) iCSp);
+					ret.add((T) iCSp);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -203,17 +205,18 @@ public class IclubSupplPersonService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findIclubSupplPersonBySmId(smId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
+					IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
 
-			for (Object object : batmod) {
-				IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
-				IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
+					iCSp.setSpId(iclubSMaster.getSpId());
+					iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
+					iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
+					iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
 
-				iCSp.setSpId(iclubSMaster.getSpId());
-				iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
-				iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
-				iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
-
-				ret.add((T) iCSp);
+					ret.add((T) iCSp);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

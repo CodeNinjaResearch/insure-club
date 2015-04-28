@@ -95,30 +95,32 @@ public class IclubVehicleMasterController implements Serializable {
 		Collection<? extends IclubVehicleMasterModel> models = new ArrayList<IclubVehicleMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleMasterModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubVehicleMasterBean>();
-		for (IclubVehicleMasterModel model : models) {
-			IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
+		if (models != null && models.size() > 0) {
+			for (IclubVehicleMasterModel model : models) {
+				IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
 
-			bean.setVmId(model.getVmId());
+				bean.setVmId(model.getVmId());
 
-			bean.setVmMake(model.getVmMake());
-			bean.setVmModel(model.getVmModel());
-			bean.setVmMrktRate(model.getVmMrktRate());
-			bean.setVmOrigRate(model.getVmOrigRate());
-			bean.setVmRetRate(model.getVmRetRate());
-			bean.setVmProdDt(model.getVmProdDt());
-			bean.setVmCrtdDt(model.getVmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setVmRatePrct(model.getVmRatePrct());
-			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-				String[] vehicles = new String[model.getIclubVehicles().length];
-				int i = 0;
-				for (String vehicle : model.getIclubVehicles()) {
-					vehicles[i] = vehicle;
-					i++;
+				bean.setVmMake(model.getVmMake());
+				bean.setVmModel(model.getVmModel());
+				bean.setVmMrktRate(model.getVmMrktRate());
+				bean.setVmOrigRate(model.getVmOrigRate());
+				bean.setVmRetRate(model.getVmRetRate());
+				bean.setVmProdDt(model.getVmProdDt());
+				bean.setVmCrtdDt(model.getVmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setVmRatePrct(model.getVmRatePrct());
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String vehicle : model.getIclubVehicles()) {
+						vehicles[i] = vehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
 				}
-				bean.setIclubVehicles(vehicles);
+				dashBoardBeans.add(bean);
 			}
-			dashBoardBeans.add(bean);
 		}
 		return dashBoardBeans;
 	}
@@ -302,7 +304,7 @@ public class IclubVehicleMasterController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubVehicleMasterModel> models = new ArrayList<IclubVehicleMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleMasterModel.class));
 		client.close();
-		beans = new ArrayList<IclubVehicleMasterBean>();
+		beans = new ArrayList<IclubVehicleMasterBean>();	if (models != null && models.size() > 0) {
 		for (IclubVehicleMasterModel model : models) {
 
 			IclubVehicleMasterBean bean = new IclubVehicleMasterBean();

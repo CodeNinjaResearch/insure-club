@@ -157,19 +157,21 @@ public class IclubOwnerTypeController implements Serializable {
 		Collection<? extends IclubOwnerTypeModel> models = new ArrayList<IclubOwnerTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOwnerTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubOwnerTypeBean>();
-		for (IclubOwnerTypeModel model : models) {
-			IclubOwnerTypeBean bean = new IclubOwnerTypeBean();
-			bean.setOtId(model.getOtId());
-			bean.setOtLongDesc(model.getOtLongDesc());
-			bean.setOtShortDesc(model.getOtShortDesc());
-			bean.setOtStatus(model.getOtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubOwnerTypeModel model : models) {
+				IclubOwnerTypeBean bean = new IclubOwnerTypeBean();
+				bean.setOtId(model.getOtId());
+				bean.setOtLongDesc(model.getOtLongDesc());
+				bean.setOtShortDesc(model.getOtShortDesc());
+				bean.setOtStatus(model.getOtStatus());
 
-			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
+				if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
 
-				bean.setIclubAccounts(model.getIclubAccounts());
+					bean.setIclubAccounts(model.getIclubAccounts());
+				}
+
+				beans.add(bean);
 			}
-
-			beans.add(bean);
 		}
 		return beans;
 	}

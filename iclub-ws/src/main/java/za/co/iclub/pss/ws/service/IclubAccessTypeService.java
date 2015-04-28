@@ -154,56 +154,58 @@ public class IclubAccessTypeService {
 		try {
 			List batmod = iclubAccessTypeDAO.findAll();
 
-			for (Object object : batmod) {
-				IclubAccessType iclubAtype = (IclubAccessType) object;
-				IclubAccessTypeModel iCB = new IclubAccessTypeModel();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubAccessType iclubAtype = (IclubAccessType) object;
+					IclubAccessTypeModel iCB = new IclubAccessTypeModel();
 
-				iCB.setAtId(iclubAtype.getAtId().longValue());
-				iCB.setAtLongDesc(iclubAtype.getAtLongDesc());
-				iCB.setAtShortDesc(iclubAtype.getAtShortDesc());
-				iCB.setAtStatus(iclubAtype.getAtStatus());
+					iCB.setAtId(iclubAtype.getAtId().longValue());
+					iCB.setAtLongDesc(iclubAtype.getAtLongDesc());
+					iCB.setAtShortDesc(iclubAtype.getAtShortDesc());
+					iCB.setAtStatus(iclubAtype.getAtStatus());
 
-				if (iclubAtype.getIclubVehiclesForVOnAccessTypeId() != null && iclubAtype.getIclubVehiclesForVOnAccessTypeId().size() > 0) {
-					String[] vehiclesForVOnAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVOnAccessTypeId().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVOnAccessTypeId()) {
-						vehiclesForVOnAccessTypeIds[i] = vehicle.getVId();
-						i++;
+					if (iclubAtype.getIclubVehiclesForVOnAccessTypeId() != null && iclubAtype.getIclubVehiclesForVOnAccessTypeId().size() > 0) {
+						String[] vehiclesForVOnAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVOnAccessTypeId().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVOnAccessTypeId()) {
+							vehiclesForVOnAccessTypeIds[i] = vehicle.getVId();
+							i++;
+						}
+						iCB.setIclubVehiclesForVOnAccessTypeId(vehiclesForVOnAccessTypeIds);
 					}
-					iCB.setIclubVehiclesForVOnAccessTypeId(vehiclesForVOnAccessTypeIds);
-				}
 
-				if (iclubAtype.getIclubVehiclesForVDdAccessTypeId() != null && iclubAtype.getIclubVehiclesForVDdAccessTypeId().size() > 0) {
-					String[] vehiclesForVDdAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVDdAccessTypeId().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVDdAccessTypeId()) {
-						vehiclesForVDdAccessTypeIds[i] = vehicle.getVId();
-						i++;
+					if (iclubAtype.getIclubVehiclesForVDdAccessTypeId() != null && iclubAtype.getIclubVehiclesForVDdAccessTypeId().size() > 0) {
+						String[] vehiclesForVDdAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVDdAccessTypeId().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVDdAccessTypeId()) {
+							vehiclesForVDdAccessTypeIds[i] = vehicle.getVId();
+							i++;
+						}
+						iCB.setIclubVehiclesForVDdAccessTypeId(vehiclesForVDdAccessTypeIds);
 					}
-					iCB.setIclubVehiclesForVDdAccessTypeId(vehiclesForVDdAccessTypeIds);
-				}
 
-				if (iclubAtype.getIclubDrivers() != null && iclubAtype.getIclubDrivers().size() > 0) {
-					String[] drivers = new String[iclubAtype.getIclubDrivers().size()];
-					int i = 0;
-					for (IclubDriver driver : iclubAtype.getIclubDrivers()) {
-						drivers[i] = driver.getDId();
-						i++;
+					if (iclubAtype.getIclubDrivers() != null && iclubAtype.getIclubDrivers().size() > 0) {
+						String[] drivers = new String[iclubAtype.getIclubDrivers().size()];
+						int i = 0;
+						for (IclubDriver driver : iclubAtype.getIclubDrivers()) {
+							drivers[i] = driver.getDId();
+							i++;
+						}
+						iCB.setIclubDrivers(drivers);
 					}
-					iCB.setIclubDrivers(drivers);
-				}
 
-				if (iclubAtype.getIclubProperties() != null && iclubAtype.getIclubProperties().size() > 0) {
-					String[] properties = new String[iclubAtype.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty property : iclubAtype.getIclubProperties()) {
-						properties[i] = property.getPId();
-						i++;
+					if (iclubAtype.getIclubProperties() != null && iclubAtype.getIclubProperties().size() > 0) {
+						String[] properties = new String[iclubAtype.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty property : iclubAtype.getIclubProperties()) {
+							properties[i] = property.getPId();
+							i++;
+						}
+						iCB.setIclubProperties(properties);
 					}
-					iCB.setIclubProperties(properties);
-				}
 
-				ret.add((T) iCB);
+					ret.add((T) iCB);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

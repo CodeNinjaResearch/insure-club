@@ -672,20 +672,22 @@ public class IclubPolicyController implements Serializable {
 			Collection<? extends IclubDocumentModel> models = new ArrayList<IclubDocumentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubDocumentModel.class));
 			client.close();
 			docs = new ArrayList<IclubDocumentBean>();
-			for (IclubDocumentModel model : models) {
-				IclubDocumentBean bean = new IclubDocumentBean();
-				bean.setDId(model.getDId());
-				bean.setDContent(model.getDContent());
-				bean.setDEntityId(model.getDEntityId());
-				bean.setDSize(model.getDSize());
-				bean.setDMimeType(model.getDMimeType());
-				bean.setDName(model.getDName());
-				bean.setDCrtdDt(model.getDCrtdDt());
-				bean.setIclubDocumentType(model.getIclubDocumentType());
-				bean.setIclubEntityType(model.getIclubEntityType());
-				bean.setIclubPerson(model.getIclubPerson());
+			if (models != null && models.size() > 0) {
+				for (IclubDocumentModel model : models) {
+					IclubDocumentBean bean = new IclubDocumentBean();
+					bean.setDId(model.getDId());
+					bean.setDContent(model.getDContent());
+					bean.setDEntityId(model.getDEntityId());
+					bean.setDSize(model.getDSize());
+					bean.setDMimeType(model.getDMimeType());
+					bean.setDName(model.getDName());
+					bean.setDCrtdDt(model.getDCrtdDt());
+					bean.setIclubDocumentType(model.getIclubDocumentType());
+					bean.setIclubEntityType(model.getIclubEntityType());
+					bean.setIclubPerson(model.getIclubPerson());
 
-				docs.add(bean);
+					docs.add(bean);
+				}
 			}
 		} else {
 			docs = new ArrayList<IclubDocumentBean>();

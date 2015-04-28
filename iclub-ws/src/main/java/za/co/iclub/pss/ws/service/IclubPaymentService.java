@@ -143,25 +143,26 @@ public class IclubPaymentService {
 
 		try {
 			List batmod = iclubPaymentDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPayment iCP = (IclubPayment) object;
 
-			for (Object object : batmod) {
-				IclubPayment iCP = (IclubPayment) object;
+					IclubPaymentModel model = new IclubPaymentModel();
 
-				IclubPaymentModel model = new IclubPaymentModel();
+					model.setPId(iCP.getPId());
+					model.setPCrtdDt(iCP.getPCrtdDt());
+					model.setPGenDt(iCP.getPGenDt());
+					model.setPDrCrInd(iCP.getPDrCrInd());
+					model.setPValue(iCP.getPValue());
+					model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
+					model.setIclubPaymentStatus(iCP.getIclubPaymentStatus() != null ? (iCP.getIclubPaymentStatus().getPsId()) : null);
+					model.setIclubAccount(iCP.getIclubAccount() != null ? (iCP.getIclubAccount().getAId()) : null);
+					model.setIclubClaim(iCP.getIclubClaim() != null ? (iCP.getIclubClaim().getCId()) : null);
+					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
+					model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
 
-				model.setPId(iCP.getPId());
-				model.setPCrtdDt(iCP.getPCrtdDt());
-				model.setPGenDt(iCP.getPGenDt());
-				model.setPDrCrInd(iCP.getPDrCrInd());
-				model.setPValue(iCP.getPValue());
-				model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
-				model.setIclubPaymentStatus(iCP.getIclubPaymentStatus() != null ? (iCP.getIclubPaymentStatus().getPsId()) : null);
-				model.setIclubAccount(iCP.getIclubAccount() != null ? (iCP.getIclubAccount().getAId()) : null);
-				model.setIclubClaim(iCP.getIclubClaim() != null ? (iCP.getIclubClaim().getCId()) : null);
-				model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
-				model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -178,26 +179,27 @@ public class IclubPaymentService {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod =iclubNamedQueryDAO.findByUser(user, IclubPayment.class.getSimpleName());
+			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPayment.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPayment iCP = (IclubPayment) object;
 
-			for (Object object : batmod) {
-				IclubPayment iCP = (IclubPayment) object;
+					IclubPaymentModel model = new IclubPaymentModel();
 
-				IclubPaymentModel model = new IclubPaymentModel();
+					model.setPId(iCP.getPId());
+					model.setPCrtdDt(iCP.getPCrtdDt());
+					model.setPGenDt(iCP.getPGenDt());
+					model.setPDrCrInd(iCP.getPDrCrInd());
+					model.setPValue(iCP.getPValue());
+					model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
+					model.setIclubPaymentStatus(iCP.getIclubPaymentStatus() != null ? (iCP.getIclubPaymentStatus().getPsId()) : null);
+					model.setIclubAccount(iCP.getIclubAccount() != null ? (iCP.getIclubAccount().getAId()) : null);
+					model.setIclubClaim(iCP.getIclubClaim() != null ? (iCP.getIclubClaim().getCId()) : null);
+					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
+					model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
 
-				model.setPId(iCP.getPId());
-				model.setPCrtdDt(iCP.getPCrtdDt());
-				model.setPGenDt(iCP.getPGenDt());
-				model.setPDrCrInd(iCP.getPDrCrInd());
-				model.setPValue(iCP.getPValue());
-				model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
-				model.setIclubPaymentStatus(iCP.getIclubPaymentStatus() != null ? (iCP.getIclubPaymentStatus().getPsId()) : null);
-				model.setIclubAccount(iCP.getIclubAccount() != null ? (iCP.getIclubAccount().getAId()) : null);
-				model.setIclubClaim(iCP.getIclubClaim() != null ? (iCP.getIclubClaim().getCId()) : null);
-				model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
-				model.setIclubPolicy(iCP.getIclubPolicy() != null ? (iCP.getIclubPolicy().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -133,41 +133,42 @@ public class IclubPurposeTypeService {
 
 		try {
 			List batmod = iclubPurposeTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPurposeType iCPt = (IclubPurposeType) object;
 
-			for (Object object : batmod) {
-				IclubPurposeType iCPt = (IclubPurposeType) object;
+					IclubPurposeTypeModel model = new IclubPurposeTypeModel();
 
-				IclubPurposeTypeModel model = new IclubPurposeTypeModel();
+					model.setPtId(iCPt.getPtId());
+					model.setPtLongDesc(iCPt.getPtLongDesc());
+					model.setPtShortDesc(iCPt.getPtShortDesc());
+					model.setPtStatus(iCPt.getPtStatus());
+					model.setPtCrtdDt(iCPt.getPtCrtdDt());
+					model.setIclubPerson(iCPt.getIclubPerson() != null ? iCPt.getIclubPerson().getPId() : null);
+					model.setIclubInsuranceItemType(iCPt.getIclubInsuranceItemType() != null ? iCPt.getIclubInsuranceItemType().getIitId() : null);
 
-				model.setPtId(iCPt.getPtId());
-				model.setPtLongDesc(iCPt.getPtLongDesc());
-				model.setPtShortDesc(iCPt.getPtShortDesc());
-				model.setPtStatus(iCPt.getPtStatus());
-				model.setPtCrtdDt(iCPt.getPtCrtdDt());
-				model.setIclubPerson(iCPt.getIclubPerson() != null ? iCPt.getIclubPerson().getPId() : null);
-				model.setIclubInsuranceItemType(iCPt.getIclubInsuranceItemType() != null ? iCPt.getIclubInsuranceItemType().getIitId() : null);
-
-				if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-					String[] properties = new String[iCPt.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-						properties[i] = iclubProperty.getPId();
-						i++;
+					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
+						String[] properties = new String[iCPt.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
+							properties[i] = iclubProperty.getPId();
+							i++;
+						}
+						model.setIclubProperties(properties);
 					}
-					model.setIclubProperties(properties);
-				}
 
-				if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iCPt.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
-						vehicles[i] = iclubVehicle.getVId();
-						i++;
+					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
+							vehicles[i] = iclubVehicle.getVId();
+							i++;
+						}
+						model.setIclubVehicles(vehicles);
 					}
-					model.setIclubVehicles(vehicles);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -185,41 +186,42 @@ public class IclubPurposeTypeService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByInsuranceItemType(insurnceItemType);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPurposeType iCPt = (IclubPurposeType) object;
 
-			for (Object object : batmod) {
-				IclubPurposeType iCPt = (IclubPurposeType) object;
+					IclubPurposeTypeModel model = new IclubPurposeTypeModel();
 
-				IclubPurposeTypeModel model = new IclubPurposeTypeModel();
+					model.setPtId(iCPt.getPtId());
+					model.setPtLongDesc(iCPt.getPtLongDesc());
+					model.setPtShortDesc(iCPt.getPtShortDesc());
+					model.setPtStatus(iCPt.getPtStatus());
+					model.setPtCrtdDt(iCPt.getPtCrtdDt());
+					model.setIclubPerson(iCPt.getIclubPerson() != null ? iCPt.getIclubPerson().getPId() : null);
+					model.setIclubInsuranceItemType(iCPt.getIclubInsuranceItemType() != null ? iCPt.getIclubInsuranceItemType().getIitId() : null);
 
-				model.setPtId(iCPt.getPtId());
-				model.setPtLongDesc(iCPt.getPtLongDesc());
-				model.setPtShortDesc(iCPt.getPtShortDesc());
-				model.setPtStatus(iCPt.getPtStatus());
-				model.setPtCrtdDt(iCPt.getPtCrtdDt());
-				model.setIclubPerson(iCPt.getIclubPerson() != null ? iCPt.getIclubPerson().getPId() : null);
-				model.setIclubInsuranceItemType(iCPt.getIclubInsuranceItemType() != null ? iCPt.getIclubInsuranceItemType().getIitId() : null);
-
-				if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-					String[] properties = new String[iCPt.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-						properties[i] = iclubProperty.getPId();
-						i++;
+					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
+						String[] properties = new String[iCPt.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
+							properties[i] = iclubProperty.getPId();
+							i++;
+						}
+						model.setIclubProperties(properties);
 					}
-					model.setIclubProperties(properties);
-				}
 
-				if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iCPt.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
-						vehicles[i] = iclubVehicle.getVId();
-						i++;
+					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
+							vehicles[i] = iclubVehicle.getVId();
+							i++;
+						}
+						model.setIclubVehicles(vehicles);
 					}
-					model.setIclubVehicles(vehicles);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -237,41 +239,42 @@ public class IclubPurposeTypeService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPurposeType.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPurposeType iCPt = (IclubPurposeType) object;
 
-			for (Object object : batmod) {
-				IclubPurposeType iCPt = (IclubPurposeType) object;
+					IclubPurposeTypeModel model = new IclubPurposeTypeModel();
 
-				IclubPurposeTypeModel model = new IclubPurposeTypeModel();
+					model.setPtId(iCPt.getPtId());
+					model.setPtLongDesc(iCPt.getPtLongDesc());
+					model.setPtShortDesc(iCPt.getPtShortDesc());
+					model.setPtStatus(iCPt.getPtStatus());
+					model.setPtCrtdDt(iCPt.getPtCrtdDt());
+					model.setIclubPerson(iCPt.getIclubPerson() != null ? iCPt.getIclubPerson().getPId() : null);
+					model.setIclubInsuranceItemType(iCPt.getIclubInsuranceItemType() != null ? iCPt.getIclubInsuranceItemType().getIitId() : null);
 
-				model.setPtId(iCPt.getPtId());
-				model.setPtLongDesc(iCPt.getPtLongDesc());
-				model.setPtShortDesc(iCPt.getPtShortDesc());
-				model.setPtStatus(iCPt.getPtStatus());
-				model.setPtCrtdDt(iCPt.getPtCrtdDt());
-				model.setIclubPerson(iCPt.getIclubPerson() != null ? iCPt.getIclubPerson().getPId() : null);
-				model.setIclubInsuranceItemType(iCPt.getIclubInsuranceItemType() != null ? iCPt.getIclubInsuranceItemType().getIitId() : null);
-
-				if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-					String[] properties = new String[iCPt.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-						properties[i] = iclubProperty.getPId();
-						i++;
+					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
+						String[] properties = new String[iCPt.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
+							properties[i] = iclubProperty.getPId();
+							i++;
+						}
+						model.setIclubProperties(properties);
 					}
-					model.setIclubProperties(properties);
-				}
 
-				if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iCPt.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
-						vehicles[i] = iclubVehicle.getVId();
-						i++;
+					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
+							vehicles[i] = iclubVehicle.getVId();
+							i++;
+						}
+						model.setIclubVehicles(vehicles);
 					}
-					model.setIclubVehicles(vehicles);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

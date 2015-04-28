@@ -128,29 +128,30 @@ public class IclubLicenseCodeService {
 
 		try {
 			List batmod = iclubLicenseCodeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubLicenseCode iCt = (IclubLicenseCode) object;
 
-			for (Object object : batmod) {
-				IclubLicenseCode iCt = (IclubLicenseCode) object;
+					IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 
-				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
-
-				model.setLcId(iCt.getLcId());
-				model.setLcCrtdDt(iCt.getLcCrtdDt());
-				model.setLcDesc(iCt.getLcDesc());
-				model.setLcStatus(iCt.getLcStatus());
-				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-				model.setLcCategory(iCt.getLcCategory());
-				if (iCt.getIclubDrivers() != null && iCt.getIclubDrivers().size() > 0) {
-					String[] drivers = new String[iCt.getIclubDrivers().size()];
-					int i = 0;
-					for (IclubDriver iclubMessage : iCt.getIclubDrivers()) {
-						drivers[i] = iclubMessage.getDId();
-						i++;
+					model.setLcId(iCt.getLcId());
+					model.setLcCrtdDt(iCt.getLcCrtdDt());
+					model.setLcDesc(iCt.getLcDesc());
+					model.setLcStatus(iCt.getLcStatus());
+					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
+					model.setLcCategory(iCt.getLcCategory());
+					if (iCt.getIclubDrivers() != null && iCt.getIclubDrivers().size() > 0) {
+						String[] drivers = new String[iCt.getIclubDrivers().size()];
+						int i = 0;
+						for (IclubDriver iclubMessage : iCt.getIclubDrivers()) {
+							drivers[i] = iclubMessage.getDId();
+							i++;
+						}
+						model.setIclubDrivers(drivers);
 					}
-					model.setIclubDrivers(drivers);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -168,29 +169,30 @@ public class IclubLicenseCodeService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubLicenseCode.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubLicenseCode iCt = (IclubLicenseCode) object;
 
-			for (Object object : batmod) {
-				IclubLicenseCode iCt = (IclubLicenseCode) object;
+					IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 
-				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
-
-				model.setLcId(iCt.getLcId());
-				model.setLcCrtdDt(iCt.getLcCrtdDt());
-				model.setLcDesc(iCt.getLcDesc());
-				model.setLcStatus(iCt.getLcStatus());
-				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-				model.setLcCategory(iCt.getLcCategory());
-				if (iCt.getIclubDrivers() != null && iCt.getIclubDrivers().size() > 0) {
-					String[] drivers = new String[iCt.getIclubDrivers().size()];
-					int i = 0;
-					for (IclubDriver iclubMessage : iCt.getIclubDrivers()) {
-						drivers[i] = iclubMessage.getDId();
-						i++;
+					model.setLcId(iCt.getLcId());
+					model.setLcCrtdDt(iCt.getLcCrtdDt());
+					model.setLcDesc(iCt.getLcDesc());
+					model.setLcStatus(iCt.getLcStatus());
+					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
+					model.setLcCategory(iCt.getLcCategory());
+					if (iCt.getIclubDrivers() != null && iCt.getIclubDrivers().size() > 0) {
+						String[] drivers = new String[iCt.getIclubDrivers().size()];
+						int i = 0;
+						for (IclubDriver iclubMessage : iCt.getIclubDrivers()) {
+							drivers[i] = iclubMessage.getDId();
+							i++;
+						}
+						model.setIclubDrivers(drivers);
 					}
-					model.setIclubDrivers(drivers);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -138,23 +138,24 @@ public class IclubLoginService {
 		List<T> ret = new ArrayList<T>();
 		try {
 			List loginmod = iclubLoginDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : loginmod) {
+					IclubLogin iclubLogin = (IclubLogin) object;
+					IclubLoginModel ibm = new IclubLoginModel();
 
-			for (Object object : loginmod) {
-				IclubLogin iclubLogin = (IclubLogin) object;
-				IclubLoginModel ibm = new IclubLoginModel();
+					ibm.setLId(iclubLogin.getLId());
+					ibm.setLCrtdDt(iclubLogin.getLCrtdDt());
+					ibm.setLLastDate(iclubLogin.getLLastDate());
+					ibm.setLName(iclubLogin.getLName());
+					ibm.setLPasswd(iclubLogin.getLPasswd());
+					ibm.setLSecAns(iclubLogin.getLSecAns());
+					ibm.setIclubPersonByLCrtdBy(iclubLogin.getIclubPersonByLCrtdBy() != null ? iclubLogin.getIclubPersonByLCrtdBy().getPId() : null);
+					ibm.setIclubPersonByLPersonId(iclubLogin.getIclubPersonByLPersonId() != null ? iclubLogin.getIclubPersonByLPersonId().getPId() : null);
+					ibm.setIclubRoleType(iclubLogin.getIclubRoleType() != null ? iclubLogin.getIclubRoleType().getRtId() : null);
+					ibm.setIclubSecurityQuestion(iclubLogin.getIclubSecurityQuestion() != null ? iclubLogin.getIclubSecurityQuestion().getSqId() : null);
 
-				ibm.setLId(iclubLogin.getLId());
-				ibm.setLCrtdDt(iclubLogin.getLCrtdDt());
-				ibm.setLLastDate(iclubLogin.getLLastDate());
-				ibm.setLName(iclubLogin.getLName());
-				ibm.setLPasswd(iclubLogin.getLPasswd());
-				ibm.setLSecAns(iclubLogin.getLSecAns());
-				ibm.setIclubPersonByLCrtdBy(iclubLogin.getIclubPersonByLCrtdBy() != null ? iclubLogin.getIclubPersonByLCrtdBy().getPId() : null);
-				ibm.setIclubPersonByLPersonId(iclubLogin.getIclubPersonByLPersonId() != null ? iclubLogin.getIclubPersonByLPersonId().getPId() : null);
-				ibm.setIclubRoleType(iclubLogin.getIclubRoleType() != null ? iclubLogin.getIclubRoleType().getRtId() : null);
-				ibm.setIclubSecurityQuestion(iclubLogin.getIclubSecurityQuestion() != null ? iclubLogin.getIclubSecurityQuestion().getSqId() : null);
-
-				ret.add((T) ibm);
+					ret.add((T) ibm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

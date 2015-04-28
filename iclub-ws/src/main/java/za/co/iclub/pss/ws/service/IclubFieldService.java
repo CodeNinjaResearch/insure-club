@@ -130,30 +130,31 @@ public class IclubFieldService {
 
 		try {
 			List batmod = iclubFieldDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubField iF = (IclubField) object;
 
-			for (Object object : batmod) {
-				IclubField iF = (IclubField) object;
+					IclubFieldModel model = new IclubFieldModel();
 
-				IclubFieldModel model = new IclubFieldModel();
+					model.setFId(iF.getFId());
+					model.setFName(iF.getFName());
+					model.setFDesc(iF.getFDesc());
+					model.setFStatus(iF.getFStatus());
+					model.setFLTblName(iF.getFLTblName());
+					model.setFRate(iF.getFRate());
+					model.setIclubEntityType(iF.getIclubEntityType() != null ? iF.getIclubEntityType().getEtId() : null);
+					if (iF.getIclubRateTypes() != null && iF.getIclubRateTypes().size() > 0) {
+						Long[] rateTypes = new Long[iF.getIclubRateTypes().size()];
+						int i = 0;
+						for (IclubRateType rateType : iF.getIclubRateTypes()) {
+							rateTypes[i] = rateType.getRtId();
+							i++;
+						}
 
-				model.setFId(iF.getFId());
-				model.setFName(iF.getFName());
-				model.setFDesc(iF.getFDesc());
-				model.setFStatus(iF.getFStatus());
-				model.setFLTblName(iF.getFLTblName());
-				model.setFRate(iF.getFRate());
-				model.setIclubEntityType(iF.getIclubEntityType() != null ? iF.getIclubEntityType().getEtId() : null);
-				if (iF.getIclubRateTypes() != null && iF.getIclubRateTypes().size() > 0) {
-					Long[] rateTypes = new Long[iF.getIclubRateTypes().size()];
-					int i = 0;
-					for (IclubRateType rateType : iF.getIclubRateTypes()) {
-						rateTypes[i] = rateType.getRtId();
-						i++;
+						model.setIclubRateTypes(rateTypes);
 					}
-
-					model.setIclubRateTypes(rateTypes);
+					ret.add((T) model);
 				}
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -204,30 +205,31 @@ public class IclubFieldService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.getIclubFieldByFieldStatus(fieldStatus);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubField iF = (IclubField) object;
 
-			for (Object object : batmod) {
-				IclubField iF = (IclubField) object;
+					IclubFieldModel model = new IclubFieldModel();
 
-				IclubFieldModel model = new IclubFieldModel();
+					model.setFId(iF.getFId());
+					model.setFName(iF.getFName());
+					model.setFDesc(iF.getFDesc());
+					model.setFStatus(iF.getFStatus());
+					model.setFLTblName(iF.getFLTblName());
+					model.setFRate(iF.getFRate());
+					model.setIclubEntityType(iF.getIclubEntityType() != null ? iF.getIclubEntityType().getEtId() : null);
+					if (iF.getIclubRateTypes() != null && iF.getIclubRateTypes().size() > 0) {
+						Long[] rateTypes = new Long[iF.getIclubRateTypes().size()];
+						int i = 0;
+						for (IclubRateType rateType : iF.getIclubRateTypes()) {
+							rateTypes[i] = rateType.getRtId();
+							i++;
+						}
 
-				model.setFId(iF.getFId());
-				model.setFName(iF.getFName());
-				model.setFDesc(iF.getFDesc());
-				model.setFStatus(iF.getFStatus());
-				model.setFLTblName(iF.getFLTblName());
-				model.setFRate(iF.getFRate());
-				model.setIclubEntityType(iF.getIclubEntityType() != null ? iF.getIclubEntityType().getEtId() : null);
-				if (iF.getIclubRateTypes() != null && iF.getIclubRateTypes().size() > 0) {
-					Long[] rateTypes = new Long[iF.getIclubRateTypes().size()];
-					int i = 0;
-					for (IclubRateType rateType : iF.getIclubRateTypes()) {
-						rateTypes[i] = rateType.getRtId();
-						i++;
+						model.setIclubRateTypes(rateTypes);
 					}
-
-					model.setIclubRateTypes(rateTypes);
+					ret.add((T) model);
 				}
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

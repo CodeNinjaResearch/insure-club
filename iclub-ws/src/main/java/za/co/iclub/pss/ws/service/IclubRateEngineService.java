@@ -135,22 +135,23 @@ public class IclubRateEngineService {
 
 		try {
 			List batmod = iclubRateEngineDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubRateEngine iCt = (IclubRateEngine) object;
 
-			for (Object object : batmod) {
-				IclubRateEngine iCt = (IclubRateEngine) object;
+					IclubRateEngineModel model = new IclubRateEngineModel();
 
-				IclubRateEngineModel model = new IclubRateEngineModel();
+					model.setReId(iCt.getReId());
+					model.setReRate(iCt.getReRate());
+					model.setReCrtdDt(iCt.getReCrtdDt());
+					model.setReStatus(iCt.getReStatus());
+					model.setReMaxValue(iCt.getReMaxValue());
+					model.setReBaseValue(iCt.getReBaseValue());
+					model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
+					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
-				model.setReId(iCt.getReId());
-				model.setReRate(iCt.getReRate());
-				model.setReCrtdDt(iCt.getReCrtdDt());
-				model.setReStatus(iCt.getReStatus());
-				model.setReMaxValue(iCt.getReMaxValue());
-				model.setReBaseValue(iCt.getReBaseValue());
-				model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
-				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -168,22 +169,23 @@ public class IclubRateEngineService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubRateEngine.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubRateEngine iCt = (IclubRateEngine) object;
 
-			for (Object object : batmod) {
-				IclubRateEngine iCt = (IclubRateEngine) object;
+					IclubRateEngineModel model = new IclubRateEngineModel();
 
-				IclubRateEngineModel model = new IclubRateEngineModel();
+					model.setReId(iCt.getReId());
+					model.setReRate(iCt.getReRate());
+					model.setReCrtdDt(iCt.getReCrtdDt());
+					model.setReStatus(iCt.getReStatus());
+					model.setReMaxValue(iCt.getReMaxValue());
+					model.setReBaseValue(iCt.getReBaseValue());
+					model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
+					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
-				model.setReId(iCt.getReId());
-				model.setReRate(iCt.getReRate());
-				model.setReCrtdDt(iCt.getReCrtdDt());
-				model.setReStatus(iCt.getReStatus());
-				model.setReMaxValue(iCt.getReMaxValue());
-				model.setReBaseValue(iCt.getReBaseValue());
-				model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
-				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -201,22 +203,23 @@ public class IclubRateEngineService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByRateType(rateType);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubRateEngine iCt = (IclubRateEngine) object;
 
-			for (Object object : batmod) {
-				IclubRateEngine iCt = (IclubRateEngine) object;
+					IclubRateEngineModel model = new IclubRateEngineModel();
 
-				IclubRateEngineModel model = new IclubRateEngineModel();
+					model.setReId(iCt.getReId());
+					model.setReRate(iCt.getReRate());
+					model.setReCrtdDt(iCt.getReCrtdDt());
+					model.setReStatus(iCt.getReStatus());
+					model.setReMaxValue(iCt.getReMaxValue());
+					model.setReBaseValue(iCt.getReBaseValue());
+					model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
+					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
-				model.setReId(iCt.getReId());
-				model.setReRate(iCt.getReRate());
-				model.setReCrtdDt(iCt.getReCrtdDt());
-				model.setReStatus(iCt.getReStatus());
-				model.setReMaxValue(iCt.getReMaxValue());
-				model.setReBaseValue(iCt.getReBaseValue());
-				model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
-				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -257,9 +260,11 @@ public class IclubRateEngineService {
 		List<T> ret = new ArrayList<T>();
 		try {
 			List batmod = iclubCommonDAO.findAllLookValuesByTabelName(tableName);
-			for (Object object : batmod) {
-				String reDetails = (String) object;
-				ret.add((T) reDetails);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					String reDetails = (String) object;
+					ret.add((T) reDetails);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -155,13 +155,15 @@ public class IclubSupplierTypeController implements Serializable {
 		Collection<? extends IclubSupplierTypeModel> models = new ArrayList<IclubSupplierTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSupplierTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubSupplierTypeBean>();
-		for (IclubSupplierTypeModel model : models) {
-			IclubSupplierTypeBean bean = new IclubSupplierTypeBean();
-			bean.setStId(model.getStId());
-			bean.setStLongDesc(model.getStLongDesc());
-			bean.setStShortDesc(model.getStShortDesc());
-			bean.setStStatus(model.getStStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubSupplierTypeModel model : models) {
+				IclubSupplierTypeBean bean = new IclubSupplierTypeBean();
+				bean.setStId(model.getStId());
+				bean.setStLongDesc(model.getStLongDesc());
+				bean.setStShortDesc(model.getStShortDesc());
+				bean.setStStatus(model.getStStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

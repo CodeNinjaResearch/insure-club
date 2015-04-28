@@ -122,28 +122,29 @@ public class IclubMessageTypeService {
 
 		try {
 			List batmod = iclubMessageTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMessageType iMt = (IclubMessageType) object;
 
-			for (Object object : batmod) {
-				IclubMessageType iMt = (IclubMessageType) object;
+					IclubMessageTypeModel model = new IclubMessageTypeModel();
 
-				IclubMessageTypeModel model = new IclubMessageTypeModel();
+					model.setMtId(iMt.getMtId());
+					model.setMtLongDesc(iMt.getMtLongDesc());
+					model.setMtShortDesc(iMt.getMtShortDesc());
+					model.setMtStatus(iMt.getMtStatus());
 
-				model.setMtId(iMt.getMtId());
-				model.setMtLongDesc(iMt.getMtLongDesc());
-				model.setMtShortDesc(iMt.getMtShortDesc());
-				model.setMtStatus(iMt.getMtStatus());
-
-				if (iMt.getIclubMessages() != null && iMt.getIclubMessages().size() > 0) {
-					String[] iclubMessages = new String[iMt.getIclubMessages().size()];
-					int i = 0;
-					for (IclubMessage iclubMessage : iMt.getIclubMessages()) {
-						iclubMessages[i] = iclubMessage.getMId();
-						i++;
+					if (iMt.getIclubMessages() != null && iMt.getIclubMessages().size() > 0) {
+						String[] iclubMessages = new String[iMt.getIclubMessages().size()];
+						int i = 0;
+						for (IclubMessage iclubMessage : iMt.getIclubMessages()) {
+							iclubMessages[i] = iclubMessage.getMId();
+							i++;
+						}
+						model.setIclubMessages(iclubMessages);
 					}
-					model.setIclubMessages(iclubMessages);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

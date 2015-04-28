@@ -35,7 +35,6 @@ public class IclubRoleTypeService {
 	private IclubRoleTypeDAO iclubRoleTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
-
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -124,30 +123,31 @@ public class IclubRoleTypeService {
 
 		try {
 			List batmod = iclubRoleTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubRoleType iRt = (IclubRoleType) object;
 
-			for (Object object : batmod) {
-				IclubRoleType iRt = (IclubRoleType) object;
+					IclubRoleTypeModel model = new IclubRoleTypeModel();
 
-				IclubRoleTypeModel model = new IclubRoleTypeModel();
+					model.setRtId(iRt.getRtId());
+					model.setRtLongDesc(iRt.getRtLongDesc());
+					model.setRtShortDesc(iRt.getRtShortDesc());
+					model.setRtStatus(iRt.getRtStatus());
 
-				model.setRtId(iRt.getRtId());
-				model.setRtLongDesc(iRt.getRtLongDesc());
-				model.setRtShortDesc(iRt.getRtShortDesc());
-				model.setRtStatus(iRt.getRtStatus());
+					if (iRt.getIclubLogins() != null && iRt.getIclubLogins().size() > 0) {
+						Set<IclubLogin> iLog = iRt.getIclubLogins();
+						String[] iclubLogins = new String[iLog.size()];
 
-				if (iRt.getIclubLogins() != null && iRt.getIclubLogins().size() > 0) {
-					Set<IclubLogin> iLog = iRt.getIclubLogins();
-					String[] iclubLogins = new String[iLog.size()];
-
-					int i = 0;
-					for (IclubLogin iL : iLog) {
-						iclubLogins[i] = iL.getLId();
-						i++;
+						int i = 0;
+						for (IclubLogin iL : iLog) {
+							iclubLogins[i] = iL.getLId();
+							i++;
+						}
+						model.setIclubLogins(iclubLogins);
 					}
-					model.setIclubLogins(iclubLogins);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -150,17 +150,18 @@ public class IclubBuildingStateService {
 
 		try {
 			List batmod = iclubBuildingStateDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubBuildingState iclubBsype = (IclubBuildingState) object;
+					IclubBuildingStateModel iCB = new IclubBuildingStateModel();
 
-			for (Object object : batmod) {
-				IclubBuildingState iclubBsype = (IclubBuildingState) object;
-				IclubBuildingStateModel iCB = new IclubBuildingStateModel();
+					iCB.setBsId(iclubBsype.getBsId().longValue());
+					iCB.setBsLongDesc(iclubBsype.getBsLongDesc());
+					iCB.setBsShortDesc(iclubBsype.getBsShortDesc());
+					iCB.setBsStatus(iclubBsype.getBsStatus());
 
-				iCB.setBsId(iclubBsype.getBsId().longValue());
-				iCB.setBsLongDesc(iclubBsype.getBsLongDesc());
-				iCB.setBsShortDesc(iclubBsype.getBsShortDesc());
-				iCB.setBsStatus(iclubBsype.getBsStatus());
-
-				ret.add((T) iCB);
+					ret.add((T) iCB);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -125,19 +125,20 @@ public class IclubExtrasService {
 
 		try {
 			List batmod = iclubExtrasDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubExtras iCt = (IclubExtras) object;
 
-			for (Object object : batmod) {
-				IclubExtras iCt = (IclubExtras) object;
+					IclubExtrasModel model = new IclubExtrasModel();
 
-				IclubExtrasModel model = new IclubExtrasModel();
+					model.setEId(iCt.getEId());
+					model.setECrtdDt(iCt.getECrtdDt());
+					model.setEDesc(iCt.getEDesc());
+					model.setEStatus(iCt.getEStatus());
+					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
-				model.setEId(iCt.getEId());
-				model.setECrtdDt(iCt.getECrtdDt());
-				model.setEDesc(iCt.getEDesc());
-				model.setEStatus(iCt.getEStatus());
-				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -155,19 +156,20 @@ public class IclubExtrasService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubExtras.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubExtras iCt = (IclubExtras) object;
 
-			for (Object object : batmod) {
-				IclubExtras iCt = (IclubExtras) object;
+					IclubExtrasModel model = new IclubExtrasModel();
 
-				IclubExtrasModel model = new IclubExtrasModel();
+					model.setEId(iCt.getEId());
+					model.setECrtdDt(iCt.getECrtdDt());
+					model.setEDesc(iCt.getEDesc());
+					model.setEStatus(iCt.getEStatus());
+					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
 
-				model.setEId(iCt.getEId());
-				model.setECrtdDt(iCt.getECrtdDt());
-				model.setEDesc(iCt.getEDesc());
-				model.setEStatus(iCt.getEStatus());
-				model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

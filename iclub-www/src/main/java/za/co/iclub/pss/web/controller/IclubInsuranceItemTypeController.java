@@ -155,13 +155,15 @@ public class IclubInsuranceItemTypeController implements Serializable {
 		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubInsuranceItemTypeBean>();
-		for (IclubInsuranceItemTypeModel model : models) {
-			IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
-			bean.setIitId(model.getIitId());
-			bean.setIitLongDesc(model.getIitLongDesc());
-			bean.setIitShortDesc(model.getIitShortDesc());
-			bean.setIitStatus(model.getIitStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubInsuranceItemTypeModel model : models) {
+				IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
+				bean.setIitId(model.getIitId());
+				bean.setIitLongDesc(model.getIitLongDesc());
+				bean.setIitShortDesc(model.getIitShortDesc());
+				bean.setIitStatus(model.getIitStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

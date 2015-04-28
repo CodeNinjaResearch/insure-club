@@ -81,7 +81,7 @@ public class IclubNotifController implements Serializable {
 		showSummaryCont = false;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -96,20 +96,22 @@ public class IclubNotifController implements Serializable {
 		Collection<? extends IclubNotifModel> models = new ArrayList<IclubNotifModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubNotifModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubNotifBean>();
-		for (IclubNotifModel model : models) {
-			IclubNotifBean bean = new IclubNotifBean();
+		if (models != null && models.size() > 0) {
+			for (IclubNotifModel model : models) {
+				IclubNotifBean bean = new IclubNotifBean();
 
-			bean.setNId(model.getNId());
-			bean.setNTitle(model.getNTitle());
-			bean.setNBody(model.getNBody());
-			bean.setNFromAddr(model.getNFromAddr());
-			bean.setNToList(model.getNToList());
-			bean.setNCrtdDt(model.getNCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubNotificationType(model.getIclubNotificationType());
-			bean.setNStatus(model.getNStatus());
+				bean.setNId(model.getNId());
+				bean.setNTitle(model.getNTitle());
+				bean.setNBody(model.getNBody());
+				bean.setNFromAddr(model.getNFromAddr());
+				bean.setNToList(model.getNToList());
+				bean.setNCrtdDt(model.getNCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubNotificationType(model.getIclubNotificationType());
+				bean.setNStatus(model.getNStatus());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -295,21 +297,23 @@ public class IclubNotifController implements Serializable {
 		Collection<? extends IclubNotifModel> models = new ArrayList<IclubNotifModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubNotifModel.class));
 		client.close();
 		beans = new ArrayList<IclubNotifBean>();
-		for (IclubNotifModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubNotifModel model : models) {
 
-			IclubNotifBean bean = new IclubNotifBean();
+				IclubNotifBean bean = new IclubNotifBean();
 
-			bean.setNId(model.getNId());
-			bean.setNTitle(model.getNTitle());
-			bean.setNBody(model.getNBody());
-			bean.setNFromAddr(model.getNFromAddr());
-			bean.setNToList(model.getNToList());
-			bean.setNCrtdDt(model.getNCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubNotificationType(model.getIclubNotificationType());
-			bean.setNStatus(model.getNStatus());
+				bean.setNId(model.getNId());
+				bean.setNTitle(model.getNTitle());
+				bean.setNBody(model.getNBody());
+				bean.setNFromAddr(model.getNFromAddr());
+				bean.setNToList(model.getNToList());
+				bean.setNCrtdDt(model.getNCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubNotificationType(model.getIclubNotificationType());
+				bean.setNStatus(model.getNStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

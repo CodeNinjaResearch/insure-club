@@ -80,16 +80,18 @@ public class IclubConfigController implements Serializable {
 		Collection<? extends IclubConfigModel> models = new ArrayList<IclubConfigModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubConfigModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubConfigBean>();
-		for (IclubConfigModel model : models) {
-			IclubConfigBean bean = new IclubConfigBean();
-			bean.setCId(model.getCId());
-			bean.setCKey(model.getCKey());
-			bean.setCCrtdDt(model.getCCrtdDt());
-			bean.setCValue(model.getCValue());
-			bean.setIclubPerson(getSessionUserId());
-			bean.setCStatus(model.getCStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubConfigModel model : models) {
+				IclubConfigBean bean = new IclubConfigBean();
+				bean.setCId(model.getCId());
+				bean.setCKey(model.getCKey());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setIclubPerson(getSessionUserId());
+				bean.setCStatus(model.getCStatus());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -274,16 +276,18 @@ public class IclubConfigController implements Serializable {
 		Collection<? extends IclubConfigModel> models = new ArrayList<IclubConfigModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubConfigModel.class));
 		client.close();
 		beans = new ArrayList<IclubConfigBean>();
-		for (IclubConfigModel model : models) {
-			IclubConfigBean bean = new IclubConfigBean();
-			bean.setCId(model.getCId());
-			bean.setCKey(model.getCKey());
-			bean.setCCrtdDt(model.getCCrtdDt());
-			bean.setCValue(model.getCValue());
-			bean.setIclubPerson(getSessionUserId());
-			bean.setCStatus(model.getCStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubConfigModel model : models) {
+				IclubConfigBean bean = new IclubConfigBean();
+				bean.setCId(model.getCId());
+				bean.setCKey(model.getCKey());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setIclubPerson(getSessionUserId());
+				bean.setCStatus(model.getCStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

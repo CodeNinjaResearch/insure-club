@@ -122,28 +122,29 @@ public class IclubPaymentStatusService {
 
 		try {
 			List batmod = iclubPaymentStatusDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPaymentStatus iPs = (IclubPaymentStatus) object;
 
-			for (Object object : batmod) {
-				IclubPaymentStatus iPs = (IclubPaymentStatus) object;
+					IclubPaymentStatusModel model = new IclubPaymentStatusModel();
 
-				IclubPaymentStatusModel model = new IclubPaymentStatusModel();
+					model.setPsId(iPs.getPsId());
+					model.setPsLongDesc(iPs.getPsLongDesc());
+					model.setPsShortDesc(iPs.getPsShortDesc());
+					model.setPsStatus(iPs.getPsStatus());
 
-				model.setPsId(iPs.getPsId());
-				model.setPsLongDesc(iPs.getPsLongDesc());
-				model.setPsShortDesc(iPs.getPsShortDesc());
-				model.setPsStatus(iPs.getPsStatus());
-
-				if (iPs.getIclubPayments() != null && iPs.getIclubPayments().size() > 0) {
-					String[] payments = new String[iPs.getIclubPayments().size()];
-					int i = 0;
-					for (IclubPayment iclubPayment : iPs.getIclubPayments()) {
-						payments[i] = iclubPayment.getPId();
-						i++;
+					if (iPs.getIclubPayments() != null && iPs.getIclubPayments().size() > 0) {
+						String[] payments = new String[iPs.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment iclubPayment : iPs.getIclubPayments()) {
+							payments[i] = iclubPayment.getPId();
+							i++;
+						}
+						model.setIclubPayments(payments);
 					}
-					model.setIclubPayments(payments);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

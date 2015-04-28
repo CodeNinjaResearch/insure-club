@@ -135,22 +135,23 @@ public class IclubGeoLocService {
 
 		try {
 			List batmod = iclubGeoLocDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
+					IclubGeoLocModel iCGl = new IclubGeoLocModel();
 
-			for (Object object : batmod) {
-				IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
-				IclubGeoLocModel iCGl = new IclubGeoLocModel();
+					iCGl.setGlId(iclubGLoc.getGlId());
+					iCGl.setGlAddress(iclubGLoc.getGlAddress());
+					iCGl.setGlKey(iclubGLoc.getGlKey());
+					iCGl.setGlLat(iclubGLoc.getGlLat());
+					iCGl.setGlLong(iclubGLoc.getGlLong());
+					iCGl.setIclubPerson(iclubGLoc.getIclubPerson() != null ? iclubGLoc.getIclubPerson().getPId() : null);
+					iCGl.setGlRate(iclubGLoc.getGlRate());
+					iCGl.setGlCrtdDt(iclubGLoc.getGlCrtdDt());
+					;
 
-				iCGl.setGlId(iclubGLoc.getGlId());
-				iCGl.setGlAddress(iclubGLoc.getGlAddress());
-				iCGl.setGlKey(iclubGLoc.getGlKey());
-				iCGl.setGlLat(iclubGLoc.getGlLat());
-				iCGl.setGlLong(iclubGLoc.getGlLong());
-				iCGl.setIclubPerson(iclubGLoc.getIclubPerson() != null ? iclubGLoc.getIclubPerson().getPId() : null);
-				iCGl.setGlRate(iclubGLoc.getGlRate());
-				iCGl.setGlCrtdDt(iclubGLoc.getGlCrtdDt());
-				;
-
-				ret.add((T) iCGl);
+					ret.add((T) iCGl);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -168,22 +169,23 @@ public class IclubGeoLocService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubGeoLoc.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
+					IclubGeoLocModel iCGl = new IclubGeoLocModel();
 
-			for (Object object : batmod) {
-				IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
-				IclubGeoLocModel iCGl = new IclubGeoLocModel();
+					iCGl.setGlKey(iclubGLoc.getGlKey());
+					iCGl.setGlId(iclubGLoc.getGlId());
+					iCGl.setGlAddress(iclubGLoc.getGlAddress());
+					iCGl.setGlLat(iclubGLoc.getGlLat());
+					iCGl.setGlLong(iclubGLoc.getGlLong());
+					iCGl.setIclubPerson(iclubGLoc.getIclubPerson() != null ? iclubGLoc.getIclubPerson().getPId() : null);
+					iCGl.setGlRate(iclubGLoc.getGlRate());
+					iCGl.setGlCrtdDt(iclubGLoc.getGlCrtdDt());
+					;
 
-				iCGl.setGlKey(iclubGLoc.getGlKey());
-				iCGl.setGlId(iclubGLoc.getGlId());
-				iCGl.setGlAddress(iclubGLoc.getGlAddress());
-				iCGl.setGlLat(iclubGLoc.getGlLat());
-				iCGl.setGlLong(iclubGLoc.getGlLong());
-				iCGl.setIclubPerson(iclubGLoc.getIclubPerson() != null ? iclubGLoc.getIclubPerson().getPId() : null);
-				iCGl.setGlRate(iclubGLoc.getGlRate());
-				iCGl.setGlCrtdDt(iclubGLoc.getGlCrtdDt());
-				;
-
-				ret.add((T) iCGl);
+					ret.add((T) iCGl);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

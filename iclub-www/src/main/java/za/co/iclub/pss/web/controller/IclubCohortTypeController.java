@@ -155,13 +155,15 @@ public class IclubCohortTypeController implements Serializable {
 		Collection<? extends IclubCohortTypeModel> models = new ArrayList<IclubCohortTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCohortTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubCohortTypeBean>();
-		for (IclubCohortTypeModel model : models) {
-			IclubCohortTypeBean bean = new IclubCohortTypeBean();
-			bean.setCtId(model.getCtId());
-			bean.setCtLongDesc(model.getCtLongDesc());
-			bean.setCtShortDesc(model.getCtShortDesc());
-			bean.setCtStatus(model.getCtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubCohortTypeModel model : models) {
+				IclubCohortTypeBean bean = new IclubCohortTypeBean();
+				bean.setCtId(model.getCtId());
+				bean.setCtLongDesc(model.getCtLongDesc());
+				bean.setCtShortDesc(model.getCtShortDesc());
+				bean.setCtStatus(model.getCtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

@@ -122,28 +122,29 @@ public class IclubIdTypeService {
 
 		try {
 			List batmod = iclubIdTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubIdType iIt = (IclubIdType) object;
 
-			for (Object object : batmod) {
-				IclubIdType iIt = (IclubIdType) object;
+					IclubIdTypeModel model = new IclubIdTypeModel();
 
-				IclubIdTypeModel model = new IclubIdTypeModel();
+					model.setItId(iIt.getItId());
+					model.setItLongDesc(iIt.getItLongDesc());
+					model.setItShortDesc(iIt.getItShortDesc());
+					model.setItStatus(iIt.getItStatus());
 
-				model.setItId(iIt.getItId());
-				model.setItLongDesc(iIt.getItLongDesc());
-				model.setItShortDesc(iIt.getItShortDesc());
-				model.setItStatus(iIt.getItStatus());
-
-				if (iIt.getIclubPersons() != null && iIt.getIclubPersons().size() > 0) {
-					String[] iclubPersons = new String[iIt.getIclubPersons().size()];
-					int i = 0;
-					for (IclubPerson iclubPerson : iIt.getIclubPersons()) {
-						iclubPersons[i] = iclubPerson.getPId();
-						i++;
+					if (iIt.getIclubPersons() != null && iIt.getIclubPersons().size() > 0) {
+						String[] iclubPersons = new String[iIt.getIclubPersons().size()];
+						int i = 0;
+						for (IclubPerson iclubPerson : iIt.getIclubPersons()) {
+							iclubPersons[i] = iclubPerson.getPId();
+							i++;
+						}
+						model.setIclubPersons(iclubPersons);
 					}
-					model.setIclubPersons(iclubPersons);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -278,13 +278,15 @@ public class IclubProfileController implements Serializable {
 		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
 		client.close();
 		maritialStatusBeans = new ArrayList<IclubMaritialStatusBean>();
-		for (IclubMaritialStatusModel model : models) {
-			IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
-			bean.setMsId(model.getMsId());
-			bean.setMsLongDesc(model.getMsLongDesc());
-			bean.setMsShortDesc(model.getMsShortDesc());
-			bean.setMsStatus(model.getMsStatus());
-			maritialStatusBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubMaritialStatusModel model : models) {
+				IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
+				bean.setMsId(model.getMsId());
+				bean.setMsLongDesc(model.getMsLongDesc());
+				bean.setMsShortDesc(model.getMsShortDesc());
+				bean.setMsStatus(model.getMsStatus());
+				maritialStatusBeans.add(bean);
+			}
 		}
 		return maritialStatusBeans;
 	}
@@ -298,13 +300,15 @@ public class IclubProfileController implements Serializable {
 		Collection<? extends IclubIdTypeModel> models = new ArrayList<IclubIdTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubIdTypeModel.class));
 		client.close();
 		idTypeBeans = new ArrayList<IclubIdTypeBean>();
-		for (IclubIdTypeModel model : models) {
-			IclubIdTypeBean bean = new IclubIdTypeBean();
-			bean.setItId(model.getItId());
-			bean.setItLongDesc(model.getItLongDesc());
-			bean.setItShortDesc(model.getItShortDesc());
-			bean.setItStatus(model.getItStatus());
-			idTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubIdTypeModel model : models) {
+				IclubIdTypeBean bean = new IclubIdTypeBean();
+				bean.setItId(model.getItId());
+				bean.setItLongDesc(model.getItLongDesc());
+				bean.setItShortDesc(model.getItShortDesc());
+				bean.setItStatus(model.getItStatus());
+				idTypeBeans.add(bean);
+			}
 		}
 		return idTypeBeans;
 	}
@@ -384,17 +388,19 @@ public class IclubProfileController implements Serializable {
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
 		client.close();
 		occupationBeans = new ArrayList<IclubOccupationBean>();
-		for (IclubOccupationModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubOccupationModel model : models) {
 
-			IclubOccupationBean bean = new IclubOccupationBean();
+				IclubOccupationBean bean = new IclubOccupationBean();
 
-			bean.setOId(model.getOId());
-			bean.setODesc(model.getODesc());
-			bean.setOCrtdDt(model.getOCrtdDt());
-			bean.setOStatus(model.getOStatus());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setOId(model.getOId());
+				bean.setODesc(model.getODesc());
+				bean.setOCrtdDt(model.getOCrtdDt());
+				bean.setOStatus(model.getOStatus());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			occupationBeans.add(bean);
+				occupationBeans.add(bean);
+			}
 		}
 		return occupationBeans;
 	}
@@ -408,15 +414,17 @@ public class IclubProfileController implements Serializable {
 		Collection<? extends IclubCountryCodeModel> models = new ArrayList<IclubCountryCodeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCountryCodeModel.class));
 		client.close();
 		countryCodeBeans = new ArrayList<IclubCountryCodeBean>();
-		for (IclubCountryCodeModel model : models) {
-			IclubCountryCodeBean bean = new IclubCountryCodeBean();
-			bean.setCcId(model.getCcId().intValue());
-			bean.setCcIsoId(model.getCcIsoId());
-			bean.setCcShortId(model.getCcShortId());
-			bean.setCcCrtdDt(model.getCcCrtdDt());
-			bean.setCcName(model.getCcName());
-			bean.setIclubPerson(model.getIclubPerson());
-			countryCodeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubCountryCodeModel model : models) {
+				IclubCountryCodeBean bean = new IclubCountryCodeBean();
+				bean.setCcId(model.getCcId().intValue());
+				bean.setCcIsoId(model.getCcIsoId());
+				bean.setCcShortId(model.getCcShortId());
+				bean.setCcCrtdDt(model.getCcCrtdDt());
+				bean.setCcName(model.getCcName());
+				bean.setIclubPerson(model.getIclubPerson());
+				countryCodeBeans.add(bean);
+			}
 		}
 		return countryCodeBeans;
 	}
@@ -506,20 +514,22 @@ public class IclubProfileController implements Serializable {
 			Collection<? extends IclubDocumentModel> models = new ArrayList<IclubDocumentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubDocumentModel.class));
 			client.close();
 			docs = new ArrayList<IclubDocumentBean>();
-			for (IclubDocumentModel model : models) {
-				IclubDocumentBean bean = new IclubDocumentBean();
-				bean.setDId(model.getDId());
-				bean.setDContent(model.getDContent());
-				bean.setDEntityId(model.getDEntityId());
-				bean.setDSize(model.getDSize());
-				bean.setDMimeType(model.getDMimeType());
-				bean.setDName(model.getDName());
-				bean.setDCrtdDt(model.getDCrtdDt());
-				bean.setIclubDocumentType(model.getIclubDocumentType());
-				bean.setIclubEntityType(model.getIclubEntityType());
-				bean.setIclubPerson(model.getIclubPerson());
+			if (models != null && models.size() > 0) {
+				for (IclubDocumentModel model : models) {
+					IclubDocumentBean bean = new IclubDocumentBean();
+					bean.setDId(model.getDId());
+					bean.setDContent(model.getDContent());
+					bean.setDEntityId(model.getDEntityId());
+					bean.setDSize(model.getDSize());
+					bean.setDMimeType(model.getDMimeType());
+					bean.setDName(model.getDName());
+					bean.setDCrtdDt(model.getDCrtdDt());
+					bean.setIclubDocumentType(model.getIclubDocumentType());
+					bean.setIclubEntityType(model.getIclubEntityType());
+					bean.setIclubPerson(model.getIclubPerson());
 
-				docs.add(bean);
+					docs.add(bean);
+				}
 			}
 		} else {
 			docs = new ArrayList<IclubDocumentBean>();
@@ -580,14 +590,16 @@ public class IclubProfileController implements Serializable {
 		Collection<? extends IclubSecurityQuestionModel> models = new ArrayList<IclubSecurityQuestionModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSecurityQuestionModel.class));
 		client.close();
 		securityQuestionBeans = new ArrayList<IclubSecurityQuestionBean>();
-		for (IclubSecurityQuestionModel model : models) {
-			IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
-			bean.setSqId(model.getSqId());
-			bean.setSqLongDesc(model.getSqLongDesc());
-			bean.setSqShortDesc(model.getSqShortDesc());
-			bean.setSqStatus(model.getSqStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubSecurityQuestionModel model : models) {
+				IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
+				bean.setSqId(model.getSqId());
+				bean.setSqLongDesc(model.getSqLongDesc());
+				bean.setSqShortDesc(model.getSqShortDesc());
+				bean.setSqStatus(model.getSqStatus());
 
-			securityQuestionBeans.add(bean);
+				securityQuestionBeans.add(bean);
+			}
 		}
 		return securityQuestionBeans;
 	}

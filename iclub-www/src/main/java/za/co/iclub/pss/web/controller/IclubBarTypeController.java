@@ -157,13 +157,15 @@ public class IclubBarTypeController implements Serializable {
 		Collection<? extends IclubBarTypeModel> models = new ArrayList<IclubBarTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBarTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubBarTypeBean>();
-		for (IclubBarTypeModel model : models) {
-			IclubBarTypeBean bean = new IclubBarTypeBean();
-			bean.setBtId(model.getBtId());
-			bean.setBtLongDesc(model.getBtLongDesc());
-			bean.setBtShortDesc(model.getBtShortDesc());
-			bean.setBtStatus(model.getBtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubBarTypeModel model : models) {
+				IclubBarTypeBean bean = new IclubBarTypeBean();
+				bean.setBtId(model.getBtId());
+				bean.setBtLongDesc(model.getBtLongDesc());
+				bean.setBtShortDesc(model.getBtShortDesc());
+				bean.setBtStatus(model.getBtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

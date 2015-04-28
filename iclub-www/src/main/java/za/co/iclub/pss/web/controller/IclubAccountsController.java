@@ -177,32 +177,34 @@ public class IclubAccountsController implements Serializable {
 		Collection<? extends IclubBankMasterModel> models = new ArrayList<IclubBankMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
 		client.close();
 		bankMasterBeans = new ArrayList<IclubBankMasterBean>();
-		for (IclubBankMasterModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubBankMasterModel model : models) {
 
-			IclubBankMasterBean bean = new IclubBankMasterBean();
+				IclubBankMasterBean bean = new IclubBankMasterBean();
 
-			bean.setBmId(model.getBmId());
-			bean.setBmBankName(model.getBmBankName());
-			bean.setBmBankCode(model.getBmBankCode());
-			bean.setBmBranchName(model.getBmBranchName());
-			bean.setBmBranchCode(model.getBmBranchCode());
-			bean.setBmBranchAddress(model.getBmBranchAddress());
-			bean.setBmBranchLat(model.getBmBranchLat());
-			bean.setBmBranchLong(model.getBmBranchLong());
-			bean.setBmCrtdDt(model.getBmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
+				bean.setBmId(model.getBmId());
+				bean.setBmBankName(model.getBmBankName());
+				bean.setBmBankCode(model.getBmBankCode());
+				bean.setBmBranchName(model.getBmBranchName());
+				bean.setBmBranchCode(model.getBmBranchCode());
+				bean.setBmBranchAddress(model.getBmBranchAddress());
+				bean.setBmBranchLat(model.getBmBranchLat());
+				bean.setBmBranchLong(model.getBmBranchLong());
+				bean.setBmCrtdDt(model.getBmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
 
-				String[] accounts = new String[model.getIclubAccounts().length];
+					String[] accounts = new String[model.getIclubAccounts().length];
 
-				int i = 0;
-				for (String account : model.getIclubAccounts()) {
-					accounts[i] = account;
+					int i = 0;
+					for (String account : model.getIclubAccounts()) {
+						accounts[i] = account;
+					}
+					bean.setIclubAccounts(accounts);
 				}
-				bean.setIclubAccounts(accounts);
-			}
 
-			bankMasterBeans.add(bean);
+				bankMasterBeans.add(bean);
+			}
 		}
 	}
 
@@ -234,40 +236,42 @@ public class IclubAccountsController implements Serializable {
 		Collection<? extends IclubAccountModel> models = new ArrayList<IclubAccountModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccountModel.class));
 		client.close();
 		beans = new ArrayList<IclubAccountBean>();
-		for (IclubAccountModel model : models) {
-			IclubAccountBean bean = new IclubAccountBean();
-			bean.setAId(model.getAId());
-			bean.setAAccNum(model.getAAccNum());
-			bean.setACrtdDt(model.getACrtdDt());
-			bean.setAOwnerId(model.getAOwnerId());
-			bean.setIclubBankMaster(model.getIclubBankMaster());
-			bean.setIclubAccountType(model.getIclubAccountType());
-			bean.setIclubOwnerType(model.getIclubOwnerType());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setAStatus(model.getAStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubAccountModel model : models) {
+				IclubAccountBean bean = new IclubAccountBean();
+				bean.setAId(model.getAId());
+				bean.setAAccNum(model.getAAccNum());
+				bean.setACrtdDt(model.getACrtdDt());
+				bean.setAOwnerId(model.getAOwnerId());
+				bean.setIclubBankMaster(model.getIclubBankMaster());
+				bean.setIclubAccountType(model.getIclubAccountType());
+				bean.setIclubOwnerType(model.getIclubOwnerType());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setAStatus(model.getAStatus());
 
-			if (model.getIclubPolicies() != null && model.getIclubPolicies().length > 0) {
-				String[] policies = new String[model.getIclubPolicies().length];
-				int i = 0;
-				for (String policy : model.getIclubPolicies()) {
+				if (model.getIclubPolicies() != null && model.getIclubPolicies().length > 0) {
+					String[] policies = new String[model.getIclubPolicies().length];
+					int i = 0;
+					for (String policy : model.getIclubPolicies()) {
 
-					policies[i] = policy;
-					i++;
+						policies[i] = policy;
+						i++;
+					}
+					bean.setIclubPolicies(policies);
 				}
-				bean.setIclubPolicies(policies);
-			}
 
-			if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
-				String[] payments = new String[model.getIclubPayments().length];
-				int i = 0;
-				for (String payment : model.getIclubPayments()) {
+				if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+					String[] payments = new String[model.getIclubPayments().length];
+					int i = 0;
+					for (String payment : model.getIclubPayments()) {
 
-					payments[i] = payment;
-					i++;
+						payments[i] = payment;
+						i++;
+					}
+					bean.setIclubPayments(payments);
 				}
-				bean.setIclubPayments(payments);
+				beans.add(bean);
 			}
-			beans.add(bean);
 		}
 		return beans;
 	}
@@ -318,13 +322,15 @@ public class IclubAccountsController implements Serializable {
 		Collection<? extends IclubAccountTypeModel> models = new ArrayList<IclubAccountTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccountTypeModel.class));
 		client.close();
 		accountTypeBeans = new ArrayList<IclubAccountTypeBean>();
-		for (IclubAccountTypeModel model : models) {
-			IclubAccountTypeBean bean = new IclubAccountTypeBean();
-			bean.setAtId(model.getAtId());
-			bean.setAtLongDesc(model.getAtLongDesc());
-			bean.setAtShortDesc(model.getAtShortDesc());
-			bean.setAtStatus(model.getAtStatus());
-			accountTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubAccountTypeModel model : models) {
+				IclubAccountTypeBean bean = new IclubAccountTypeBean();
+				bean.setAtId(model.getAtId());
+				bean.setAtLongDesc(model.getAtLongDesc());
+				bean.setAtShortDesc(model.getAtShortDesc());
+				bean.setAtStatus(model.getAtStatus());
+				accountTypeBeans.add(bean);
+			}
 		}
 		return accountTypeBeans;
 	}
@@ -339,19 +345,21 @@ public class IclubAccountsController implements Serializable {
 		Collection<? extends IclubOwnerTypeModel> models = new ArrayList<IclubOwnerTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOwnerTypeModel.class));
 		client.close();
 		ownerTypeBeans = new ArrayList<IclubOwnerTypeBean>();
-		for (IclubOwnerTypeModel model : models) {
-			IclubOwnerTypeBean bean = new IclubOwnerTypeBean();
-			bean.setOtId(model.getOtId());
-			bean.setOtLongDesc(model.getOtLongDesc());
-			bean.setOtShortDesc(model.getOtShortDesc());
-			bean.setOtStatus(model.getOtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubOwnerTypeModel model : models) {
+				IclubOwnerTypeBean bean = new IclubOwnerTypeBean();
+				bean.setOtId(model.getOtId());
+				bean.setOtLongDesc(model.getOtLongDesc());
+				bean.setOtShortDesc(model.getOtShortDesc());
+				bean.setOtStatus(model.getOtStatus());
 
-			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
+				if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
 
-				bean.setIclubAccounts(model.getIclubAccounts());
+					bean.setIclubAccounts(model.getIclubAccounts());
+				}
+
+				ownerTypeBeans.add(bean);
 			}
-
-			ownerTypeBeans.add(bean);
 		}
 		return ownerTypeBeans;
 	}

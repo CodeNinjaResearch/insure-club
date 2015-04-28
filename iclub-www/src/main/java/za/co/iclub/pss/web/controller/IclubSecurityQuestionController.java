@@ -155,19 +155,21 @@ public class IclubSecurityQuestionController implements Serializable {
 		Collection<? extends IclubSecurityQuestionModel> models = new ArrayList<IclubSecurityQuestionModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSecurityQuestionModel.class));
 		client.close();
 		beans = new ArrayList<IclubSecurityQuestionBean>();
-		for (IclubSecurityQuestionModel model : models) {
-			IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
-			bean.setSqId(model.getSqId());
-			bean.setSqLongDesc(model.getSqLongDesc());
-			bean.setSqShortDesc(model.getSqShortDesc());
-			bean.setSqStatus(model.getSqStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubSecurityQuestionModel model : models) {
+				IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
+				bean.setSqId(model.getSqId());
+				bean.setSqLongDesc(model.getSqLongDesc());
+				bean.setSqShortDesc(model.getSqShortDesc());
+				bean.setSqStatus(model.getSqStatus());
 
-			if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
+				if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
 
-				bean.setIclubLogins(model.getIclubLogins());
+					bean.setIclubLogins(model.getIclubLogins());
+				}
+
+				beans.add(bean);
 			}
-
-			beans.add(bean);
 		}
 		return beans;
 	}

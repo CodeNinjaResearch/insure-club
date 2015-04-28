@@ -135,23 +135,24 @@ public class IclubMessageService {
 
 		try {
 			List batmod = iclubMessageDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMessage iCM = (IclubMessage) object;
 
-			for (Object object : batmod) {
-				IclubMessage iCM = (IclubMessage) object;
+					IclubMessageModel model = new IclubMessageModel();
 
-				IclubMessageModel model = new IclubMessageModel();
+					model.setMId(iCM.getMId());
+					model.setMContent(iCM.getMContent());
+					model.setMTranId(iCM.getMTranId());
+					model.setMCrtdDt(iCM.getMCrtdDt());
+					model.setMSentDt(iCM.getMSentDt());
+					model.setIclubPerson(iCM.getIclubPerson() != null ? iCM.getIclubPerson().getPId() : null);
+					model.setIclubMessageType(iCM.getIclubMessageType() != null ? iCM.getIclubMessageType().getMtId() : null);
+					model.setIclubSystemTypeByMFromSysId(iCM.getIclubSystemTypeByMFromSysId() != null ? iCM.getIclubSystemTypeByMFromSysId().getStId() : null);
+					model.setIclubSystemTypeByMToSysId(iCM.getIclubSystemTypeByMToSysId() != null ? iCM.getIclubSystemTypeByMToSysId().getStId() : null);
 
-				model.setMId(iCM.getMId());
-				model.setMContent(iCM.getMContent());
-				model.setMTranId(iCM.getMTranId());
-				model.setMCrtdDt(iCM.getMCrtdDt());
-				model.setMSentDt(iCM.getMSentDt());
-				model.setIclubPerson(iCM.getIclubPerson() != null ? iCM.getIclubPerson().getPId() : null);
-				model.setIclubMessageType(iCM.getIclubMessageType() != null ? iCM.getIclubMessageType().getMtId() : null);
-				model.setIclubSystemTypeByMFromSysId(iCM.getIclubSystemTypeByMFromSysId() != null ? iCM.getIclubSystemTypeByMFromSysId().getStId() : null);
-				model.setIclubSystemTypeByMToSysId(iCM.getIclubSystemTypeByMToSysId() != null ? iCM.getIclubSystemTypeByMToSysId().getStId() : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -169,23 +170,24 @@ public class IclubMessageService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubMessage.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubMessage iCM = (IclubMessage) object;
 
-			for (Object object : batmod) {
-				IclubMessage iCM = (IclubMessage) object;
+					IclubMessageModel model = new IclubMessageModel();
 
-				IclubMessageModel model = new IclubMessageModel();
+					model.setMId(iCM.getMId());
+					model.setMContent(iCM.getMContent());
+					model.setMTranId(iCM.getMTranId());
+					model.setMCrtdDt(iCM.getMCrtdDt());
+					model.setMSentDt(iCM.getMSentDt());
+					model.setIclubPerson(iCM.getIclubPerson() != null ? iCM.getIclubPerson().getPId() : null);
+					model.setIclubMessageType(iCM.getIclubMessageType() != null ? iCM.getIclubMessageType().getMtId() : null);
+					model.setIclubSystemTypeByMFromSysId(iCM.getIclubSystemTypeByMFromSysId() != null ? iCM.getIclubSystemTypeByMFromSysId().getStId() : null);
+					model.setIclubSystemTypeByMToSysId(iCM.getIclubSystemTypeByMToSysId() != null ? iCM.getIclubSystemTypeByMToSysId().getStId() : null);
 
-				model.setMId(iCM.getMId());
-				model.setMContent(iCM.getMContent());
-				model.setMTranId(iCM.getMTranId());
-				model.setMCrtdDt(iCM.getMCrtdDt());
-				model.setMSentDt(iCM.getMSentDt());
-				model.setIclubPerson(iCM.getIclubPerson() != null ? iCM.getIclubPerson().getPId() : null);
-				model.setIclubMessageType(iCM.getIclubMessageType() != null ? iCM.getIclubMessageType().getMtId() : null);
-				model.setIclubSystemTypeByMFromSysId(iCM.getIclubSystemTypeByMFromSysId() != null ? iCM.getIclubSystemTypeByMFromSysId().getStId() : null);
-				model.setIclubSystemTypeByMToSysId(iCM.getIclubSystemTypeByMToSysId() != null ? iCM.getIclubSystemTypeByMToSysId().getStId() : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

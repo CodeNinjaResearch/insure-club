@@ -157,14 +157,16 @@ public class IclubDocumentTypeController implements Serializable {
 		Collection<? extends IclubDocumentTypeModel> models = new ArrayList<IclubDocumentTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubDocumentTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubDocumentTypeBean>();
-		for (IclubDocumentTypeModel model : models) {
-			IclubDocumentTypeBean bean = new IclubDocumentTypeBean();
-			bean.setDtId(model.getDtId());
-			bean.setDtLongDesc(model.getDtLongDesc());
-			bean.setDtShortDesc(model.getDtShortDesc());
-			bean.setDtStatus(model.getDtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubDocumentTypeModel model : models) {
+				IclubDocumentTypeBean bean = new IclubDocumentTypeBean();
+				bean.setDtId(model.getDtId());
+				bean.setDtLongDesc(model.getDtLongDesc());
+				bean.setDtShortDesc(model.getDtShortDesc());
+				bean.setDtStatus(model.getDtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

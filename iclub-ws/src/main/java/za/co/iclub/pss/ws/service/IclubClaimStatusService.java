@@ -123,37 +123,38 @@ public class IclubClaimStatusService {
 
 		try {
 			List batmod = iclubClaimStatusDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubClaimStatus iCS = (IclubClaimStatus) object;
 
-			for (Object object : batmod) {
-				IclubClaimStatus iCS = (IclubClaimStatus) object;
+					IclubClaimStatusModel model = new IclubClaimStatusModel();
 
-				IclubClaimStatusModel model = new IclubClaimStatusModel();
+					model.setCsId(iCS.getCsId());
+					model.setCsLongDesc(iCS.getCsLongDesc());
+					model.setCsShortDesc(iCS.getCsShortDesc());
+					model.setCsStatus(iCS.getCsStatus());
 
-				model.setCsId(iCS.getCsId());
-				model.setCsLongDesc(iCS.getCsLongDesc());
-				model.setCsShortDesc(iCS.getCsShortDesc());
-				model.setCsStatus(iCS.getCsStatus());
-
-				if (iCS.getIclubClaimItems() != null && iCS.getIclubClaimItems().size() > 0) {
-					String[] iclubClaimItems = new String[iCS.getIclubClaimItems().size()];
-					int i = 0;
-					for (IclubClaimItem iclubClaimItem : iCS.getIclubClaimItems()) {
-						iclubClaimItems[i] = iclubClaimItem.getCiId();
-						i++;
+					if (iCS.getIclubClaimItems() != null && iCS.getIclubClaimItems().size() > 0) {
+						String[] iclubClaimItems = new String[iCS.getIclubClaimItems().size()];
+						int i = 0;
+						for (IclubClaimItem iclubClaimItem : iCS.getIclubClaimItems()) {
+							iclubClaimItems[i] = iclubClaimItem.getCiId();
+							i++;
+						}
+						model.setIclubClaimItems(iclubClaimItems);
 					}
-					model.setIclubClaimItems(iclubClaimItems);
-				}
-				if (iCS.getIclubClaims() != null && iCS.getIclubClaims().size() > 0) {
-					String[] iclubClaims = new String[iCS.getIclubClaims().size()];
-					int i = 0;
-					for (IclubClaim iclubClaim : iCS.getIclubClaims()) {
-						iclubClaims[i] = iclubClaim.getCId();
-						i++;
+					if (iCS.getIclubClaims() != null && iCS.getIclubClaims().size() > 0) {
+						String[] iclubClaims = new String[iCS.getIclubClaims().size()];
+						int i = 0;
+						for (IclubClaim iclubClaim : iCS.getIclubClaims()) {
+							iclubClaims[i] = iclubClaim.getCId();
+							i++;
+						}
+						model.setIclubClaims(iclubClaims);
 					}
-					model.setIclubClaims(iclubClaims);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

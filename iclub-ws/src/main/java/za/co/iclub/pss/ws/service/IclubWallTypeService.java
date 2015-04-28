@@ -122,29 +122,30 @@ public class IclubWallTypeService {
 
 		try {
 			List batmod = iclubWallTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubWallType iWt = (IclubWallType) object;
 
-			for (Object object : batmod) {
-				IclubWallType iWt = (IclubWallType) object;
+					IclubWallTypeModel model = new IclubWallTypeModel();
 
-				IclubWallTypeModel model = new IclubWallTypeModel();
+					model.setWtId(iWt.getWtId());
+					model.setWtLongDesc(iWt.getWtLongDesc());
+					model.setWtShortDesc(iWt.getWtShortDesc());
+					model.setWtStatus(iWt.getWtStatus());
 
-				model.setWtId(iWt.getWtId());
-				model.setWtLongDesc(iWt.getWtLongDesc());
-				model.setWtShortDesc(iWt.getWtShortDesc());
-				model.setWtStatus(iWt.getWtStatus());
+					if (iWt.getIclubProperties() != null && iWt.getIclubProperties().size() > 0) {
+						String[] properties = new String[iWt.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty property : iWt.getIclubProperties()) {
+							properties[i] = property.getPId();
+							i++;
+						}
 
-				if (iWt.getIclubProperties() != null && iWt.getIclubProperties().size() > 0) {
-					String[] properties = new String[iWt.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty property : iWt.getIclubProperties()) {
-						properties[i] = property.getPId();
-						i++;
+						model.setIclubProperties(properties);
 					}
 
-					model.setIclubProperties(properties);
+					ret.add((T) model);
 				}
-
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -191,7 +192,7 @@ public class IclubWallTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubNamedQueryDAO.getBySD(val, id,IclubWallType.class.getSimpleName());
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubWallType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));

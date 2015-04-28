@@ -184,9 +184,11 @@ public class IclubBankMasterService {
 		List<T> ret = new ArrayList<T>();
 		try {
 			List batmod = iclubNamedQueryDAO.getAllBankNames();
-			for (Object object : batmod) {
-				String reDetails = (String) object;
-				ret.add((T) reDetails);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					String reDetails = (String) object;
+					ret.add((T) reDetails);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -246,33 +248,34 @@ public class IclubBankMasterService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubBankMaster.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubBankMaster iclubBMaster = (IclubBankMaster) object;
+					IclubBankMasterModel iCBm = new IclubBankMasterModel();
 
-			for (Object object : batmod) {
-				IclubBankMaster iclubBMaster = (IclubBankMaster) object;
-				IclubBankMasterModel iCBm = new IclubBankMasterModel();
+					iCBm.setBmId(iclubBMaster.getBmId());
+					iCBm.setBmBankName(iclubBMaster.getBmBankName());
+					iCBm.setBmBankCode(iclubBMaster.getBmBankCode());
+					iCBm.setBmBranchName(iclubBMaster.getBmBranchName());
+					iCBm.setBmBranchCode(iclubBMaster.getBmBranchCode());
+					iCBm.setBmBranchAddress(iclubBMaster.getBmBranchAddress());
+					iCBm.setBmBranchLat(iclubBMaster.getBmBranchLat());
+					iCBm.setBmBranchLong(iclubBMaster.getBmBranchLong());
+					iCBm.setBmCrtdDt(iclubBMaster.getBmCrtdDt());
+					iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
+					if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
 
-				iCBm.setBmId(iclubBMaster.getBmId());
-				iCBm.setBmBankName(iclubBMaster.getBmBankName());
-				iCBm.setBmBankCode(iclubBMaster.getBmBankCode());
-				iCBm.setBmBranchName(iclubBMaster.getBmBranchName());
-				iCBm.setBmBranchCode(iclubBMaster.getBmBranchCode());
-				iCBm.setBmBranchAddress(iclubBMaster.getBmBranchAddress());
-				iCBm.setBmBranchLat(iclubBMaster.getBmBranchLat());
-				iCBm.setBmBranchLong(iclubBMaster.getBmBranchLong());
-				iCBm.setBmCrtdDt(iclubBMaster.getBmCrtdDt());
-				iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
-				if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
+						String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
 
-					String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
-
-					int i = 0;
-					for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
-						accounts[i] = account.getAId();
+						int i = 0;
+						for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
+							accounts[i] = account.getAId();
+						}
+						iCBm.setIclubAccounts(accounts);
 					}
-					iCBm.setIclubAccounts(accounts);
-				}
 
-				ret.add((T) iCBm);
+					ret.add((T) iCBm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

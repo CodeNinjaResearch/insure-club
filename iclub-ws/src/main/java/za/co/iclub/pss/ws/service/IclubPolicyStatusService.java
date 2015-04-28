@@ -122,28 +122,29 @@ public class IclubPolicyStatusService {
 
 		try {
 			List batmod = iclubPolicyStatusDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPolicyStatus iPs = (IclubPolicyStatus) object;
 
-			for (Object object : batmod) {
-				IclubPolicyStatus iPs = (IclubPolicyStatus) object;
+					IclubPolicyStatusModel model = new IclubPolicyStatusModel();
 
-				IclubPolicyStatusModel model = new IclubPolicyStatusModel();
+					model.setPsId(iPs.getPsId());
+					model.setPsLongDesc(iPs.getPsLongDesc());
+					model.setPsShortDesc(iPs.getPsShortDesc());
+					model.setPsStatus(iPs.getPsStatus());
 
-				model.setPsId(iPs.getPsId());
-				model.setPsLongDesc(iPs.getPsLongDesc());
-				model.setPsShortDesc(iPs.getPsShortDesc());
-				model.setPsStatus(iPs.getPsStatus());
-
-				if (iPs.getIclubPolicies() != null && iPs.getIclubPolicies().size() > 0) {
-					String[] iclubPolicies = new String[iPs.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy iclubPolicy : iPs.getIclubPolicies()) {
-						iclubPolicies[i] = iclubPolicy.getPId();
-						i++;
+					if (iPs.getIclubPolicies() != null && iPs.getIclubPolicies().size() > 0) {
+						String[] iclubPolicies = new String[iPs.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy iclubPolicy : iPs.getIclubPolicies()) {
+							iclubPolicies[i] = iclubPolicy.getPId();
+							i++;
+						}
+						model.setIclubPolicies(iclubPolicies);
 					}
-					model.setIclubPolicies(iclubPolicies);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

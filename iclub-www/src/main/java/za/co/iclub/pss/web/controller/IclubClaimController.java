@@ -479,13 +479,15 @@ public class IclubClaimController implements Serializable {
 		Collection<? extends IclubClaimStatusModel> models = new ArrayList<IclubClaimStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimStatusModel.class));
 		client.close();
 		claimStatusBeans = new ArrayList<IclubClaimStatusBean>();
-		for (IclubClaimStatusModel model : models) {
-			IclubClaimStatusBean bean = new IclubClaimStatusBean();
-			bean.setCsId(model.getCsId());
-			bean.setCsLongDesc(model.getCsLongDesc());
-			bean.setCsShortDesc(model.getCsShortDesc());
-			bean.setCsStatus(model.getCsStatus());
-			claimStatusBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubClaimStatusModel model : models) {
+				IclubClaimStatusBean bean = new IclubClaimStatusBean();
+				bean.setCsId(model.getCsId());
+				bean.setCsLongDesc(model.getCsLongDesc());
+				bean.setCsShortDesc(model.getCsShortDesc());
+				bean.setCsStatus(model.getCsStatus());
+				claimStatusBeans.add(bean);
+			}
 		}
 		return claimStatusBeans;
 	}
@@ -499,44 +501,46 @@ public class IclubClaimController implements Serializable {
 		Collection<? extends IclubClaimModel> models = new ArrayList<IclubClaimModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimModel.class));
 		client.close();
 		beans = new ArrayList<IclubClaimBean>();
-		for (IclubClaimModel model : models) {
-			IclubClaimBean bean = new IclubClaimBean();
-			bean.setCId(model.getCId());
-			bean.setCCrtdDt(model.getCCrtdDt());
-			bean.setCValue(model.getCValue());
-			bean.setCNumItems(model.getCNumItems());
-			bean.setCNumber(model.getCNumber());
-			bean.setIclubPolicy(model.getIclubPolicy());
-			bean.setIclubClaimStatus(model.getIclubClaimStatus());
-			bean.setIclubPerson(model.getIclubPerson());
+		if (models != null && models.size() > 0) {
+			for (IclubClaimModel model : models) {
+				IclubClaimBean bean = new IclubClaimBean();
+				bean.setCId(model.getCId());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setCNumItems(model.getCNumItems());
+				bean.setCNumber(model.getCNumber());
+				bean.setIclubPolicy(model.getIclubPolicy());
+				bean.setIclubClaimStatus(model.getIclubClaimStatus());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			if (model.getIclubCohortClaims() != null && model.getIclubCohortClaims().length > 0) {
-				String[] iclubCohortClaims = model.getIclubCohortClaims();
+				if (model.getIclubCohortClaims() != null && model.getIclubCohortClaims().length > 0) {
+					String[] iclubCohortClaims = model.getIclubCohortClaims();
 
-				bean.setIclubCohortClaims(iclubCohortClaims);
-			}
-
-			if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
-				String[] payments = new String[model.getIclubPayments().length];
-				int i = 0;
-				for (String payment : model.getIclubPayments()) {
-					payments[i] = payment;
-					i++;
+					bean.setIclubCohortClaims(iclubCohortClaims);
 				}
 
-				bean.setIclubPayments(payments);
-			}
+				if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+					String[] payments = new String[model.getIclubPayments().length];
+					int i = 0;
+					for (String payment : model.getIclubPayments()) {
+						payments[i] = payment;
+						i++;
+					}
 
-			if (model.getIclubClaimItems() != null && model.getIclubClaimItems().length > 0) {
-				String[] claimItems = new String[model.getIclubClaimItems().length];
-				int i = 0;
-				for (String claimItem : model.getIclubClaimItems()) {
-					claimItems[i] = claimItem;
-					i++;
+					bean.setIclubPayments(payments);
 				}
-				bean.setIclubClaimItems(claimItems);
+
+				if (model.getIclubClaimItems() != null && model.getIclubClaimItems().length > 0) {
+					String[] claimItems = new String[model.getIclubClaimItems().length];
+					int i = 0;
+					for (String claimItem : model.getIclubClaimItems()) {
+						claimItems[i] = claimItem;
+						i++;
+					}
+					bean.setIclubClaimItems(claimItems);
+				}
+				beans.add(bean);
 			}
-			beans.add(bean);
 		}
 		return beans;
 	}
@@ -683,24 +687,27 @@ public class IclubClaimController implements Serializable {
 			Collection<? extends IclubDocumentModel> models = new ArrayList<IclubDocumentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubDocumentModel.class));
 			client.close();
 			docs = new ArrayList<IclubDocumentBean>();
-			for (IclubDocumentModel model : models) {
-				IclubDocumentBean bean = new IclubDocumentBean();
-				bean.setDId(model.getDId());
-				bean.setDContent(model.getDContent());
-				bean.setDEntityId(model.getDEntityId());
-				bean.setDSize(model.getDSize());
-				bean.setDMimeType(model.getDMimeType());
-				bean.setDName(model.getDName());
-				bean.setDCrtdDt(model.getDCrtdDt());
-				bean.setIclubDocumentType(model.getIclubDocumentType());
-				bean.setIclubEntityType(model.getIclubEntityType());
-				bean.setIclubPerson(model.getIclubPerson());
+			if (models != null && models.size() > 0) {
+				for (IclubDocumentModel model : models) {
+					IclubDocumentBean bean = new IclubDocumentBean();
+					bean.setDId(model.getDId());
+					bean.setDContent(model.getDContent());
+					bean.setDEntityId(model.getDEntityId());
+					bean.setDSize(model.getDSize());
+					bean.setDMimeType(model.getDMimeType());
+					bean.setDName(model.getDName());
+					bean.setDCrtdDt(model.getDCrtdDt());
+					bean.setIclubDocumentType(model.getIclubDocumentType());
+					bean.setIclubEntityType(model.getIclubEntityType());
+					bean.setIclubPerson(model.getIclubPerson());
 
-				docs.add(bean);
+					docs.add(bean);
+				}
 			}
 		} else {
 			docs = new ArrayList<IclubDocumentBean>();
 		}
+
 		return docs;
 	}
 
@@ -734,13 +741,15 @@ public class IclubClaimController implements Serializable {
 		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
 		client.close();
 		insuranceItemTypebeans = new ArrayList<IclubInsuranceItemTypeBean>();
-		for (IclubInsuranceItemTypeModel model : models) {
-			IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
-			bean.setIitId(model.getIitId());
-			bean.setIitLongDesc(model.getIitLongDesc());
-			bean.setIitShortDesc(model.getIitShortDesc());
-			bean.setIitStatus(model.getIitStatus());
-			insuranceItemTypebeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubInsuranceItemTypeModel model : models) {
+				IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
+				bean.setIitId(model.getIitId());
+				bean.setIitLongDesc(model.getIitLongDesc());
+				bean.setIitShortDesc(model.getIitShortDesc());
+				bean.setIitStatus(model.getIitStatus());
+				insuranceItemTypebeans.add(bean);
+			}
 		}
 		return insuranceItemTypebeans;
 	}
@@ -754,13 +763,15 @@ public class IclubClaimController implements Serializable {
 		Collection<? extends IclubPolicyStatusModel> models = new ArrayList<IclubPolicyStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyStatusModel.class));
 		client.close();
 		policyStatusBeans = new ArrayList<IclubPolicyStatusBean>();
-		for (IclubPolicyStatusModel model : models) {
-			IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
-			bean.setPsId(model.getPsId());
-			bean.setPsLongDesc(model.getPsLongDesc());
-			bean.setPsShortDesc(model.getPsShortDesc());
-			bean.setPsStatus(model.getPsStatus());
-			policyStatusBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubPolicyStatusModel model : models) {
+				IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
+				bean.setPsId(model.getPsId());
+				bean.setPsLongDesc(model.getPsLongDesc());
+				bean.setPsShortDesc(model.getPsShortDesc());
+				bean.setPsStatus(model.getPsStatus());
+				policyStatusBeans.add(bean);
+			}
 		}
 		return policyStatusBeans;
 	}

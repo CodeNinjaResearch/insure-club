@@ -122,29 +122,30 @@ public class IclubRoofTypeService {
 
 		try {
 			List batmod = iclubRoofTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubRoofType iRt = (IclubRoofType) object;
 
-			for (Object object : batmod) {
-				IclubRoofType iRt = (IclubRoofType) object;
+					IclubRoofTypeModel model = new IclubRoofTypeModel();
 
-				IclubRoofTypeModel model = new IclubRoofTypeModel();
+					model.setRtId(iRt.getRtId());
+					model.setRtLongDesc(iRt.getRtLongDesc());
+					model.setRtShortDesc(iRt.getRtShortDesc());
+					model.setRtStatus(iRt.getRtStatus());
 
-				model.setRtId(iRt.getRtId());
-				model.setRtLongDesc(iRt.getRtLongDesc());
-				model.setRtShortDesc(iRt.getRtShortDesc());
-				model.setRtStatus(iRt.getRtStatus());
+					if (iRt.getIclubProperties() != null && iRt.getIclubProperties().size() > 0) {
+						String[] properties = new String[iRt.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty property : iRt.getIclubProperties()) {
+							properties[i] = property.getPId();
+							i++;
+						}
 
-				if (iRt.getIclubProperties() != null && iRt.getIclubProperties().size() > 0) {
-					String[] properties = new String[iRt.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty property : iRt.getIclubProperties()) {
-						properties[i] = property.getPId();
-						i++;
+						model.setIclubProperties(properties);
 					}
 
-					model.setIclubProperties(properties);
+					ret.add((T) model);
 				}
-
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

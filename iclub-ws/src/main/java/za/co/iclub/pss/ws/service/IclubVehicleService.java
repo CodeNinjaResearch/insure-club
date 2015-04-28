@@ -188,43 +188,44 @@ public class IclubVehicleService {
 
 		try {
 			List batmod = iclubVehicleDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubVehicle iCV = (IclubVehicle) object;
 
-			for (Object object : batmod) {
-				IclubVehicle iCV = (IclubVehicle) object;
+					IclubVehicleModel model = new IclubVehicleModel();
 
-				IclubVehicleModel model = new IclubVehicleModel();
+					model.setVId(iCV.getVId());
+					model.setVOwner(iCV.getVOwner());
+					model.setVGearLockYn(iCV.getVGearLockYn());
+					model.setVImmYn(iCV.getVImmYn());
+					model.setVConcessReason(iCV.getVConcessReason());
+					model.setVConcessPrct(iCV.getVConcessPrct());
+					model.setVInsuredValue(iCV.getVInsuredValue());
+					model.setVYear(iCV.getVYear());
+					model.setVDdLong(iCV.getVDdLong());
+					model.setVCompYrs(iCV.getVCompYrs());
+					model.setVDdLat(iCV.getVDdLat());
+					model.setVDdArea(iCV.getVDdArea());
+					model.setVOnLong(iCV.getVOnLong());
+					model.setVOnLat(iCV.getVOnLat());
+					model.setVOnArea(iCV.getVOnArea());
+					model.setVOdometer(iCV.getVOdometer());
+					model.setVCrtdDt(iCV.getVCrtdDt());
+					model.setVRegNum(iCV.getVRegNum());
+					model.setVEngineNr(iCV.getVEngineNr());
+					model.setVVin(iCV.getVVin());
+					model.setVNoclaimYrs(iCV.getVNoclaimYrs());
+					model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
+					model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
+					model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
+					model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
+					model.setIclubDriver(iCV.getIclubDriver() != null ? (iCV.getIclubDriver().getDId()) : null);
+					model.setIclubSecurityDevice(iCV.getIclubSecurityDevice() != null ? (iCV.getIclubSecurityDevice().getSdId()) : null);
+					model.setIclubAccessTypeByVDdAccessTypeId(iCV.getIclubAccessTypeByVDdAccessTypeId() != null ? (iCV.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
+					model.setIclubAccessTypeByVOnAccessTypeId(iCV.getIclubAccessTypeByVOnAccessTypeId() != null ? (iCV.getIclubAccessTypeByVOnAccessTypeId().getAtId()) : null);
 
-				model.setVId(iCV.getVId());
-				model.setVOwner(iCV.getVOwner());
-				model.setVGearLockYn(iCV.getVGearLockYn());
-				model.setVImmYn(iCV.getVImmYn());
-				model.setVConcessReason(iCV.getVConcessReason());
-				model.setVConcessPrct(iCV.getVConcessPrct());
-				model.setVInsuredValue(iCV.getVInsuredValue());
-				model.setVYear(iCV.getVYear());
-				model.setVDdLong(iCV.getVDdLong());
-				model.setVCompYrs(iCV.getVCompYrs());
-				model.setVDdLat(iCV.getVDdLat());
-				model.setVDdArea(iCV.getVDdArea());
-				model.setVOnLong(iCV.getVOnLong());
-				model.setVOnLat(iCV.getVOnLat());
-				model.setVOnArea(iCV.getVOnArea());
-				model.setVOdometer(iCV.getVOdometer());
-				model.setVCrtdDt(iCV.getVCrtdDt());
-				model.setVRegNum(iCV.getVRegNum());
-				model.setVEngineNr(iCV.getVEngineNr());
-				model.setVVin(iCV.getVVin());
-				model.setVNoclaimYrs(iCV.getVNoclaimYrs());
-				model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
-				model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
-				model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
-				model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
-				model.setIclubDriver(iCV.getIclubDriver() != null ? (iCV.getIclubDriver().getDId()) : null);
-				model.setIclubSecurityDevice(iCV.getIclubSecurityDevice() != null ? (iCV.getIclubSecurityDevice().getSdId()) : null);
-				model.setIclubAccessTypeByVDdAccessTypeId(iCV.getIclubAccessTypeByVDdAccessTypeId() != null ? (iCV.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
-				model.setIclubAccessTypeByVOnAccessTypeId(iCV.getIclubAccessTypeByVOnAccessTypeId() != null ? (iCV.getIclubAccessTypeByVOnAccessTypeId().getAtId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -242,43 +243,44 @@ public class IclubVehicleService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehicle.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubVehicle iCV = (IclubVehicle) object;
 
-			for (Object object : batmod) {
-				IclubVehicle iCV = (IclubVehicle) object;
+					IclubVehicleModel model = new IclubVehicleModel();
 
-				IclubVehicleModel model = new IclubVehicleModel();
+					model.setVId(iCV.getVId());
+					model.setVOwner(iCV.getVOwner());
+					model.setVGearLockYn(iCV.getVGearLockYn());
+					model.setVImmYn(iCV.getVImmYn());
+					model.setVConcessReason(iCV.getVConcessReason());
+					model.setVConcessPrct(iCV.getVConcessPrct());
+					model.setVInsuredValue(iCV.getVInsuredValue());
+					model.setVYear(iCV.getVYear());
+					model.setVDdLong(iCV.getVDdLong());
+					model.setVDdLat(iCV.getVDdLat());
+					model.setVDdArea(iCV.getVDdArea());
+					model.setVOnLong(iCV.getVOnLong());
+					model.setVOnLat(iCV.getVOnLat());
+					model.setVOnArea(iCV.getVOnArea());
+					model.setVCompYrs(iCV.getVCompYrs());
+					model.setVOdometer(iCV.getVOdometer());
+					model.setVCrtdDt(iCV.getVCrtdDt());
+					model.setVRegNum(iCV.getVRegNum());
+					model.setVEngineNr(iCV.getVEngineNr());
+					model.setVVin(iCV.getVVin());
+					model.setVNoclaimYrs(iCV.getVNoclaimYrs());
+					model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
+					model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
+					model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
+					model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
+					model.setIclubDriver(iCV.getIclubDriver() != null ? (iCV.getIclubDriver().getDId()) : null);
+					model.setIclubSecurityDevice(iCV.getIclubSecurityDevice() != null ? (iCV.getIclubSecurityDevice().getSdId()) : null);
+					model.setIclubAccessTypeByVDdAccessTypeId(iCV.getIclubAccessTypeByVDdAccessTypeId() != null ? (iCV.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
+					model.setIclubAccessTypeByVOnAccessTypeId(iCV.getIclubAccessTypeByVOnAccessTypeId() != null ? (iCV.getIclubAccessTypeByVOnAccessTypeId().getAtId()) : null);
 
-				model.setVId(iCV.getVId());
-				model.setVOwner(iCV.getVOwner());
-				model.setVGearLockYn(iCV.getVGearLockYn());
-				model.setVImmYn(iCV.getVImmYn());
-				model.setVConcessReason(iCV.getVConcessReason());
-				model.setVConcessPrct(iCV.getVConcessPrct());
-				model.setVInsuredValue(iCV.getVInsuredValue());
-				model.setVYear(iCV.getVYear());
-				model.setVDdLong(iCV.getVDdLong());
-				model.setVDdLat(iCV.getVDdLat());
-				model.setVDdArea(iCV.getVDdArea());
-				model.setVOnLong(iCV.getVOnLong());
-				model.setVOnLat(iCV.getVOnLat());
-				model.setVOnArea(iCV.getVOnArea());
-				model.setVCompYrs(iCV.getVCompYrs());
-				model.setVOdometer(iCV.getVOdometer());
-				model.setVCrtdDt(iCV.getVCrtdDt());
-				model.setVRegNum(iCV.getVRegNum());
-				model.setVEngineNr(iCV.getVEngineNr());
-				model.setVVin(iCV.getVVin());
-				model.setVNoclaimYrs(iCV.getVNoclaimYrs());
-				model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
-				model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
-				model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
-				model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
-				model.setIclubDriver(iCV.getIclubDriver() != null ? (iCV.getIclubDriver().getDId()) : null);
-				model.setIclubSecurityDevice(iCV.getIclubSecurityDevice() != null ? (iCV.getIclubSecurityDevice().getSdId()) : null);
-				model.setIclubAccessTypeByVDdAccessTypeId(iCV.getIclubAccessTypeByVDdAccessTypeId() != null ? (iCV.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
-				model.setIclubAccessTypeByVOnAccessTypeId(iCV.getIclubAccessTypeByVOnAccessTypeId() != null ? (iCV.getIclubAccessTypeByVOnAccessTypeId().getAtId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -312,43 +314,44 @@ public class IclubVehicleService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByDriverId(driverId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubVehicle iCV = (IclubVehicle) object;
 
-			for (Object object : batmod) {
-				IclubVehicle iCV = (IclubVehicle) object;
+					IclubVehicleModel model = new IclubVehicleModel();
 
-				IclubVehicleModel model = new IclubVehicleModel();
+					model.setVId(iCV.getVId());
+					model.setVOwner(iCV.getVOwner());
+					model.setVGearLockYn(iCV.getVGearLockYn());
+					model.setVImmYn(iCV.getVImmYn());
+					model.setVConcessReason(iCV.getVConcessReason());
+					model.setVConcessPrct(iCV.getVConcessPrct());
+					model.setVInsuredValue(iCV.getVInsuredValue());
+					model.setVYear(iCV.getVYear());
+					model.setVDdLong(iCV.getVDdLong());
+					model.setVDdLat(iCV.getVDdLat());
+					model.setVDdArea(iCV.getVDdArea());
+					model.setVOnLong(iCV.getVOnLong());
+					model.setVOnLat(iCV.getVOnLat());
+					model.setVOnArea(iCV.getVOnArea());
+					model.setVCompYrs(iCV.getVCompYrs());
+					model.setVOdometer(iCV.getVOdometer());
+					model.setVCrtdDt(iCV.getVCrtdDt());
+					model.setVRegNum(iCV.getVRegNum());
+					model.setVEngineNr(iCV.getVEngineNr());
+					model.setVVin(iCV.getVVin());
+					model.setVNoclaimYrs(iCV.getVNoclaimYrs());
+					model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
+					model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
+					model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
+					model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
+					model.setIclubDriver(iCV.getIclubDriver() != null ? (iCV.getIclubDriver().getDId()) : null);
+					model.setIclubSecurityDevice(iCV.getIclubSecurityDevice() != null ? (iCV.getIclubSecurityDevice().getSdId()) : null);
+					model.setIclubAccessTypeByVDdAccessTypeId(iCV.getIclubAccessTypeByVDdAccessTypeId() != null ? (iCV.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
+					model.setIclubAccessTypeByVOnAccessTypeId(iCV.getIclubAccessTypeByVOnAccessTypeId() != null ? (iCV.getIclubAccessTypeByVOnAccessTypeId().getAtId()) : null);
 
-				model.setVId(iCV.getVId());
-				model.setVOwner(iCV.getVOwner());
-				model.setVGearLockYn(iCV.getVGearLockYn());
-				model.setVImmYn(iCV.getVImmYn());
-				model.setVConcessReason(iCV.getVConcessReason());
-				model.setVConcessPrct(iCV.getVConcessPrct());
-				model.setVInsuredValue(iCV.getVInsuredValue());
-				model.setVYear(iCV.getVYear());
-				model.setVDdLong(iCV.getVDdLong());
-				model.setVDdLat(iCV.getVDdLat());
-				model.setVDdArea(iCV.getVDdArea());
-				model.setVOnLong(iCV.getVOnLong());
-				model.setVOnLat(iCV.getVOnLat());
-				model.setVOnArea(iCV.getVOnArea());
-				model.setVCompYrs(iCV.getVCompYrs());
-				model.setVOdometer(iCV.getVOdometer());
-				model.setVCrtdDt(iCV.getVCrtdDt());
-				model.setVRegNum(iCV.getVRegNum());
-				model.setVEngineNr(iCV.getVEngineNr());
-				model.setVVin(iCV.getVVin());
-				model.setVNoclaimYrs(iCV.getVNoclaimYrs());
-				model.setIclubPurposeType(iCV.getIclubPurposeType() != null ? (iCV.getIclubPurposeType().getPtId()) : null);
-				model.setIclubSecurityMaster(iCV.getIclubSecurityMaster() != null ? (iCV.getIclubSecurityMaster().getSmId()) : null);
-				model.setIclubPerson(iCV.getIclubPerson() != null ? (iCV.getIclubPerson().getPId()) : null);
-				model.setIclubVehicleMaster(iCV.getIclubVehicleMaster() != null ? (iCV.getIclubVehicleMaster().getVmId()) : null);
-				model.setIclubDriver(iCV.getIclubDriver() != null ? (iCV.getIclubDriver().getDId()) : null);
-				model.setIclubSecurityDevice(iCV.getIclubSecurityDevice() != null ? (iCV.getIclubSecurityDevice().getSdId()) : null);
-				model.setIclubAccessTypeByVDdAccessTypeId(iCV.getIclubAccessTypeByVDdAccessTypeId() != null ? (iCV.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
-				model.setIclubAccessTypeByVOnAccessTypeId(iCV.getIclubAccessTypeByVOnAccessTypeId() != null ? (iCV.getIclubAccessTypeByVOnAccessTypeId().getAtId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -79,7 +79,6 @@ public class IclubEventController implements Serializable {
 		viewParam = 2l;
 	}
 
-	
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -88,21 +87,24 @@ public class IclubEventController implements Serializable {
 		showSummaryCont = true;
 		viewParam = 3l;
 	}
+
 	public List<IclubEventBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubEventModel> models = new ArrayList<IclubEventModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEventModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubEventBean>();
-		for (IclubEventModel model : models) {
-			IclubEventBean bean = new IclubEventBean();
+		if (models != null && models.size() > 0) {
+			for (IclubEventModel model : models) {
+				IclubEventBean bean = new IclubEventBean();
 
-			bean.setEId(model.getEId());
-			bean.setECrtdDt(model.getECrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubEventType(model.getIclubEventType());
-			bean.setEDesc(model.getEDesc());
+				bean.setEId(model.getEId());
+				bean.setECrtdDt(model.getECrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubEventType(model.getIclubEventType());
+				bean.setEDesc(model.getEDesc());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -280,17 +282,19 @@ public class IclubEventController implements Serializable {
 		Collection<? extends IclubEventModel> models = new ArrayList<IclubEventModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEventModel.class));
 		client.close();
 		beans = new ArrayList<IclubEventBean>();
-		for (IclubEventModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubEventModel model : models) {
 
-			IclubEventBean bean = new IclubEventBean();
+				IclubEventBean bean = new IclubEventBean();
 
-			bean.setEId(model.getEId());
-			bean.setECrtdDt(model.getECrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubEventType(model.getIclubEventType());
-			bean.setEDesc(model.getEDesc());
+				bean.setEId(model.getEId());
+				bean.setECrtdDt(model.getECrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubEventType(model.getIclubEventType());
+				bean.setEDesc(model.getEDesc());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

@@ -125,19 +125,20 @@ public class IclubOccupationService {
 
 		try {
 			List batmod = iclubOccupationDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubOccupation iCO = (IclubOccupation) object;
 
-			for (Object object : batmod) {
-				IclubOccupation iCO = (IclubOccupation) object;
+					IclubOccupationModel model = new IclubOccupationModel();
 
-				IclubOccupationModel model = new IclubOccupationModel();
+					model.setOId(iCO.getOId());
+					model.setODesc(iCO.getODesc());
+					model.setOCrtdDt(iCO.getOCrtdDt());
+					model.setOStatus(iCO.getOStatus());
+					model.setIclubPerson(iCO.getIclubPerson() != null ? iCO.getIclubPerson().getPId() : null);
 
-				model.setOId(iCO.getOId());
-				model.setODesc(iCO.getODesc());
-				model.setOCrtdDt(iCO.getOCrtdDt());
-				model.setOStatus(iCO.getOStatus());
-				model.setIclubPerson(iCO.getIclubPerson() != null ? iCO.getIclubPerson().getPId() : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -155,19 +156,20 @@ public class IclubOccupationService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubOccupation.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubOccupation iCO = (IclubOccupation) object;
 
-			for (Object object : batmod) {
-				IclubOccupation iCO = (IclubOccupation) object;
+					IclubOccupationModel model = new IclubOccupationModel();
 
-				IclubOccupationModel model = new IclubOccupationModel();
+					model.setOId(iCO.getOId());
+					model.setODesc(iCO.getODesc());
+					model.setOCrtdDt(iCO.getOCrtdDt());
+					model.setOStatus(iCO.getOStatus());
+					model.setIclubPerson(iCO.getIclubPerson() != null ? iCO.getIclubPerson().getPId() : null);
 
-				model.setOId(iCO.getOId());
-				model.setODesc(iCO.getODesc());
-				model.setOCrtdDt(iCO.getOCrtdDt());
-				model.setOStatus(iCO.getOStatus());
-				model.setIclubPerson(iCO.getIclubPerson() != null ? iCO.getIclubPerson().getPId() : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

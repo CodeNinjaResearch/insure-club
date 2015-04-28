@@ -142,14 +142,16 @@ public class IclubMbCommentController implements Serializable {
 			Collection<? extends IclubMbCommentModel> models = new ArrayList<IclubMbCommentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMbCommentModel.class));
 			client.close();
 			beans = new ArrayList<IclubMbCommentBean>();
-			for (IclubMbCommentModel model : models) {
-				IclubMbCommentBean bean = new IclubMbCommentBean();
-				bean.setMbcId(model.getMbcId());
-				bean.setMbcCrtdDt(model.getMbcCrtdDt());
-				bean.setMbcDesc(model.getMbcDesc());
-				bean.setIclubMessageBoard(model.getIclubMessageBoard());
-				bean.setIclubPerson(model.getIclubPerson());
-				beans.add(bean);
+			if (models != null && models.size() > 0) {
+				for (IclubMbCommentModel model : models) {
+					IclubMbCommentBean bean = new IclubMbCommentBean();
+					bean.setMbcId(model.getMbcId());
+					bean.setMbcCrtdDt(model.getMbcCrtdDt());
+					bean.setMbcDesc(model.getMbcDesc());
+					bean.setIclubMessageBoard(model.getIclubMessageBoard());
+					bean.setIclubPerson(model.getIclubPerson());
+					beans.add(bean);
+				}
 			}
 
 		}

@@ -122,7 +122,7 @@ public class IclubBarTypeService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubNamedQueryDAO.getBySD(val, id,IclubBarType.class.getSimpleName());
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubBarType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
 				message.setStatusCode(1);
@@ -151,27 +151,28 @@ public class IclubBarTypeService {
 
 		try {
 			List batmod = iclubBarTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubBarType iclubBtype = (IclubBarType) object;
+					IclubBarTypeModel iCB = new IclubBarTypeModel();
 
-			for (Object object : batmod) {
-				IclubBarType iclubBtype = (IclubBarType) object;
-				IclubBarTypeModel iCB = new IclubBarTypeModel();
+					iCB.setBtId(iclubBtype.getBtId().longValue());
+					iCB.setBtLongDesc(iclubBtype.getBtLongDesc());
+					iCB.setBtShortDesc(iclubBtype.getBtShortDesc());
+					iCB.setBtStatus(iclubBtype.getBtStatus());
 
-				iCB.setBtId(iclubBtype.getBtId().longValue());
-				iCB.setBtLongDesc(iclubBtype.getBtLongDesc());
-				iCB.setBtShortDesc(iclubBtype.getBtShortDesc());
-				iCB.setBtStatus(iclubBtype.getBtStatus());
-				
-				if (iclubBtype.getIclubProperties() != null && iclubBtype.getIclubProperties().size() > 0) {
-					String[] iclubProperties = new String[iclubBtype.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty iclubProperty : iclubBtype.getIclubProperties()) {
-						iclubProperties[i] = iclubProperty.getPId();
-						i++;
+					if (iclubBtype.getIclubProperties() != null && iclubBtype.getIclubProperties().size() > 0) {
+						String[] iclubProperties = new String[iclubBtype.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty iclubProperty : iclubBtype.getIclubProperties()) {
+							iclubProperties[i] = iclubProperty.getPId();
+							i++;
+						}
+						iCB.setIclubProperties(iclubProperties);
 					}
-					iCB.setIclubProperties(iclubProperties);
-				}
 
-				ret.add((T) iCB);
+					ret.add((T) iCB);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -193,7 +194,7 @@ public class IclubBarTypeService {
 			model.setBtLongDesc(bean.getBtLongDesc());
 			model.setBtShortDesc(bean.getBtShortDesc());
 			model.setBtStatus(bean.getBtStatus());
-			
+
 			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
 				String[] iclubProperties = new String[bean.getIclubProperties().size()];
 				int i = 0;
@@ -225,6 +226,7 @@ public class IclubBarTypeService {
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}

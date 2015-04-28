@@ -132,17 +132,15 @@ public class IclubWallTypeController implements Serializable {
 				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				ret = ret && false;
 			}
-		}else{
+		} else {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getWtLongDesc() == null || bean.getWtLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
-		
 
 		if (bean.getWtStatus() == null || bean.getWtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
@@ -157,13 +155,15 @@ public class IclubWallTypeController implements Serializable {
 		Collection<? extends IclubWallTypeModel> models = new ArrayList<IclubWallTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubWallTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubWallTypeBean>();
-		for (IclubWallTypeModel model : models) {
-			IclubWallTypeBean bean = new IclubWallTypeBean();
-			bean.setWtId(model.getWtId());
-			bean.setWtLongDesc(model.getWtLongDesc());
-			bean.setWtShortDesc(model.getWtShortDesc());
-			bean.setWtStatus(model.getWtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubWallTypeModel model : models) {
+				IclubWallTypeBean bean = new IclubWallTypeBean();
+				bean.setWtId(model.getWtId());
+				bean.setWtLongDesc(model.getWtLongDesc());
+				bean.setWtShortDesc(model.getWtShortDesc());
+				bean.setWtStatus(model.getWtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

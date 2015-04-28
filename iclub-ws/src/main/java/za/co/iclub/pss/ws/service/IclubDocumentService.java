@@ -167,24 +167,25 @@ public class IclubDocumentService {
 
 		try {
 			List batmod = iclubDocumentDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubDocument iCD = (IclubDocument) object;
 
-			for (Object object : batmod) {
-				IclubDocument iCD = (IclubDocument) object;
+					IclubDocumentModel model = new IclubDocumentModel();
 
-				IclubDocumentModel model = new IclubDocumentModel();
+					model.setDId(iCD.getDId());
+					model.setDContent(iCD.getDContent());
+					model.setDEntityId(iCD.getDEntityId());
+					model.setDSize(iCD.getDSize());
+					model.setDMimeType(iCD.getDMimeType());
+					model.setDName(iCD.getDName());
+					model.setDCrtdDt(iCD.getDCrtdDt());
+					model.setIclubDocumentType(iCD.getIclubDocumentType() != null ? (iCD.getIclubDocumentType().getDtId()) : null);
+					model.setIclubEntityType(iCD.getIclubEntityType() != null ? (iCD.getIclubEntityType().getEtId()) : null);
+					model.setIclubPerson(iCD.getIclubPerson() != null ? (iCD.getIclubPerson().getPId()) : null);
 
-				model.setDId(iCD.getDId());
-				model.setDContent(iCD.getDContent());
-				model.setDEntityId(iCD.getDEntityId());
-				model.setDSize(iCD.getDSize());
-				model.setDMimeType(iCD.getDMimeType());
-				model.setDName(iCD.getDName());
-				model.setDCrtdDt(iCD.getDCrtdDt());
-				model.setIclubDocumentType(iCD.getIclubDocumentType() != null ? (iCD.getIclubDocumentType().getDtId()) : null);
-				model.setIclubEntityType(iCD.getIclubEntityType() != null ? (iCD.getIclubEntityType().getEtId()) : null);
-				model.setIclubPerson(iCD.getIclubPerson() != null ? (iCD.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -202,24 +203,25 @@ public class IclubDocumentService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubDocument.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubDocument iCD = (IclubDocument) object;
 
-			for (Object object : batmod) {
-				IclubDocument iCD = (IclubDocument) object;
+					IclubDocumentModel model = new IclubDocumentModel();
 
-				IclubDocumentModel model = new IclubDocumentModel();
+					model.setDId(iCD.getDId());
+					model.setDContent(iCD.getDContent());
+					model.setDEntityId(iCD.getDEntityId());
+					model.setDSize(iCD.getDSize());
+					model.setDMimeType(iCD.getDMimeType());
+					model.setDName(iCD.getDName());
+					model.setDCrtdDt(iCD.getDCrtdDt());
+					model.setIclubDocumentType(iCD.getIclubDocumentType() != null ? (iCD.getIclubDocumentType().getDtId()) : null);
+					model.setIclubEntityType(iCD.getIclubEntityType() != null ? (iCD.getIclubEntityType().getEtId()) : null);
+					model.setIclubPerson(iCD.getIclubPerson() != null ? (iCD.getIclubPerson().getPId()) : null);
 
-				model.setDId(iCD.getDId());
-				model.setDContent(iCD.getDContent());
-				model.setDEntityId(iCD.getDEntityId());
-				model.setDSize(iCD.getDSize());
-				model.setDMimeType(iCD.getDMimeType());
-				model.setDName(iCD.getDName());
-				model.setDCrtdDt(iCD.getDCrtdDt());
-				model.setIclubDocumentType(iCD.getIclubDocumentType() != null ? (iCD.getIclubDocumentType().getDtId()) : null);
-				model.setIclubEntityType(iCD.getIclubEntityType() != null ? (iCD.getIclubEntityType().getEtId()) : null);
-				model.setIclubPerson(iCD.getIclubPerson() != null ? (iCD.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -332,24 +334,25 @@ public class IclubDocumentService {
 		List<T> ret = new ArrayList<T>();
 		try {
 			List batmod = iclubNamedQueryDAO.getDocumentByEntity(id, typeId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubDocument iDocument = (IclubDocument) object;
 
-			for (Object object : batmod) {
-				IclubDocument iDocument = (IclubDocument) object;
+					IclubDocumentModel model = new IclubDocumentModel();
 
-				IclubDocumentModel model = new IclubDocumentModel();
+					model.setDId(iDocument.getDId());
+					model.setDContent(iDocument.getDContent());
+					model.setDEntityId(iDocument.getDEntityId());
+					model.setDSize(iDocument.getDSize());
+					model.setDMimeType(iDocument.getDMimeType());
+					model.setDName(iDocument.getDName());
+					model.setDCrtdDt(iDocument.getDCrtdDt());
+					model.setIclubDocumentType(iDocument.getIclubDocumentType() != null ? (iDocument.getIclubDocumentType().getDtId()) : null);
+					model.setIclubEntityType(iDocument.getIclubEntityType() != null ? (iDocument.getIclubEntityType().getEtId()) : null);
+					model.setIclubPerson(iDocument.getIclubPerson() != null ? (iDocument.getIclubPerson().getPId()) : null);
 
-				model.setDId(iDocument.getDId());
-				model.setDContent(iDocument.getDContent());
-				model.setDEntityId(iDocument.getDEntityId());
-				model.setDSize(iDocument.getDSize());
-				model.setDMimeType(iDocument.getDMimeType());
-				model.setDName(iDocument.getDName());
-				model.setDCrtdDt(iDocument.getDCrtdDt());
-				model.setIclubDocumentType(iDocument.getIclubDocumentType() != null ? (iDocument.getIclubDocumentType().getDtId()) : null);
-				model.setIclubEntityType(iDocument.getIclubEntityType() != null ? (iDocument.getIclubEntityType().getEtId()) : null);
-				model.setIclubPerson(iDocument.getIclubPerson() != null ? (iDocument.getIclubPerson().getPId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

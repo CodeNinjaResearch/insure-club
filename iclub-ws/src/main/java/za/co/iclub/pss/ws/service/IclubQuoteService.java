@@ -158,40 +158,41 @@ public class IclubQuoteService {
 
 		try {
 			List batmod = iclubQuoteDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubQuote iCQ = (IclubQuote) object;
 
-			for (Object object : batmod) {
-				IclubQuote iCQ = (IclubQuote) object;
+					IclubQuoteModel model = new IclubQuoteModel();
 
-				IclubQuoteModel model = new IclubQuoteModel();
+					model.setQId(iCQ.getQId());
+					model.setQCrtdDt(iCQ.getQCrtdDt());
+					model.setQIsMatched(iCQ.getQIsMatched());
+					model.setQPrevPremium(iCQ.getQPrevPremium());
+					model.setQValidUntil(iCQ.getQValidUntil());
+					model.setQMobile(iCQ.getQMobile());
+					model.setQEmail(iCQ.getQEmail());
+					model.setQGenPremium(iCQ.getQGenPremium());
+					model.setQNumItems(iCQ.getQNumItems());
+					model.setQGenDt(iCQ.getQGenDt());
+					model.setQNumber(iCQ.getQNumber());
+					model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
+					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
+					model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
+					model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
+					model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
+					model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
 
-				model.setQId(iCQ.getQId());
-				model.setQCrtdDt(iCQ.getQCrtdDt());
-				model.setQIsMatched(iCQ.getQIsMatched());
-				model.setQPrevPremium(iCQ.getQPrevPremium());
-				model.setQValidUntil(iCQ.getQValidUntil());
-				model.setQMobile(iCQ.getQMobile());
-				model.setQEmail(iCQ.getQEmail());
-				model.setQGenPremium(iCQ.getQGenPremium());
-				model.setQNumItems(iCQ.getQNumItems());
-				model.setQGenDt(iCQ.getQGenDt());
-				model.setQNumber(iCQ.getQNumber());
-				model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
-				model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-				model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
-				model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
-				model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
-				model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
-
-				if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
-					String[] policies = new String[iCQ.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy policy : iCQ.getIclubPolicies()) {
-						policies[i] = policy.getPId();
-						i++;
+					if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
+						String[] policies = new String[iCQ.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy policy : iCQ.getIclubPolicies()) {
+							policies[i] = policy.getPId();
+							i++;
+						}
 					}
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -209,41 +210,42 @@ public class IclubQuoteService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubQuote.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubQuote iCQ = (IclubQuote) object;
 
-			for (Object object : batmod) {
-				IclubQuote iCQ = (IclubQuote) object;
+					IclubQuoteModel model = new IclubQuoteModel();
 
-				IclubQuoteModel model = new IclubQuoteModel();
+					model.setQId(iCQ.getQId());
+					model.setQCrtdDt(iCQ.getQCrtdDt());
+					model.setQIsMatched(iCQ.getQIsMatched());
+					model.setQPrevPremium(iCQ.getQPrevPremium());
+					model.setQValidUntil(iCQ.getQValidUntil());
+					model.setQMobile(iCQ.getQMobile());
+					model.setQEmail(iCQ.getQEmail());
+					model.setQGenPremium(iCQ.getQGenPremium());
+					model.setQNumItems(iCQ.getQNumItems());
+					model.setQGenDt(iCQ.getQGenDt());
+					model.setQNumber(iCQ.getQNumber());
+					model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
+					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
+					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
+					model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
+					model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
+					model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
+					model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
 
-				model.setQId(iCQ.getQId());
-				model.setQCrtdDt(iCQ.getQCrtdDt());
-				model.setQIsMatched(iCQ.getQIsMatched());
-				model.setQPrevPremium(iCQ.getQPrevPremium());
-				model.setQValidUntil(iCQ.getQValidUntil());
-				model.setQMobile(iCQ.getQMobile());
-				model.setQEmail(iCQ.getQEmail());
-				model.setQGenPremium(iCQ.getQGenPremium());
-				model.setQNumItems(iCQ.getQNumItems());
-				model.setQGenDt(iCQ.getQGenDt());
-				model.setQNumber(iCQ.getQNumber());
-				model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
-				model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-				model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-				model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
-				model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
-				model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
-				model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
-
-				if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
-					String[] policies = new String[iCQ.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy policy : iCQ.getIclubPolicies()) {
-						policies[i] = policy.getPId();
-						i++;
+					if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
+						String[] policies = new String[iCQ.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy policy : iCQ.getIclubPolicies()) {
+							policies[i] = policy.getPId();
+							i++;
+						}
 					}
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -261,41 +263,42 @@ public class IclubQuoteService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findIclubQuotesByUserAndStatusId(user, statusId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubQuote iCQ = (IclubQuote) object;
 
-			for (Object object : batmod) {
-				IclubQuote iCQ = (IclubQuote) object;
+					IclubQuoteModel model = new IclubQuoteModel();
 
-				IclubQuoteModel model = new IclubQuoteModel();
+					model.setQId(iCQ.getQId());
+					model.setQCrtdDt(iCQ.getQCrtdDt());
+					model.setQIsMatched(iCQ.getQIsMatched());
+					model.setQPrevPremium(iCQ.getQPrevPremium());
+					model.setQValidUntil(iCQ.getQValidUntil());
+					model.setQMobile(iCQ.getQMobile());
+					model.setQEmail(iCQ.getQEmail());
+					model.setQGenPremium(iCQ.getQGenPremium());
+					model.setQNumItems(iCQ.getQNumItems());
+					model.setQGenDt(iCQ.getQGenDt());
+					model.setQNumber(iCQ.getQNumber());
+					model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
+					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
+					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
+					model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
+					model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
+					model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
+					model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
 
-				model.setQId(iCQ.getQId());
-				model.setQCrtdDt(iCQ.getQCrtdDt());
-				model.setQIsMatched(iCQ.getQIsMatched());
-				model.setQPrevPremium(iCQ.getQPrevPremium());
-				model.setQValidUntil(iCQ.getQValidUntil());
-				model.setQMobile(iCQ.getQMobile());
-				model.setQEmail(iCQ.getQEmail());
-				model.setQGenPremium(iCQ.getQGenPremium());
-				model.setQNumItems(iCQ.getQNumItems());
-				model.setQGenDt(iCQ.getQGenDt());
-				model.setQNumber(iCQ.getQNumber());
-				model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
-				model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-				model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-				model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
-				model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
-				model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
-				model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
-
-				if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
-					String[] policies = new String[iCQ.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy policy : iCQ.getIclubPolicies()) {
-						policies[i] = policy.getPId();
-						i++;
+					if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
+						String[] policies = new String[iCQ.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy policy : iCQ.getIclubPolicies()) {
+							policies[i] = policy.getPId();
+							i++;
+						}
 					}
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -122,28 +122,29 @@ public class IclubDocumentTypeService {
 
 		try {
 			List batmod = iclubDocumentTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubDocumentType iDt = (IclubDocumentType) object;
 
-			for (Object object : batmod) {
-				IclubDocumentType iDt = (IclubDocumentType) object;
+					IclubDocumentTypeModel model = new IclubDocumentTypeModel();
 
-				IclubDocumentTypeModel model = new IclubDocumentTypeModel();
+					model.setDtId(iDt.getDtId());
+					model.setDtLongDesc(iDt.getDtLongDesc());
+					model.setDtShortDesc(iDt.getDtShortDesc());
+					model.setDtStatus(iDt.getDtStatus());
 
-				model.setDtId(iDt.getDtId());
-				model.setDtLongDesc(iDt.getDtLongDesc());
-				model.setDtShortDesc(iDt.getDtShortDesc());
-				model.setDtStatus(iDt.getDtStatus());
-
-				if (iDt.getIclubDocuments() != null && iDt.getIclubDocuments().size() > 0) {
-					String[] iclubDocuments = new String[iDt.getIclubDocuments().size()];
-					int i = 0;
-					for (IclubDocument iclubDocument : iDt.getIclubDocuments()) {
-						iclubDocuments[i] = iclubDocument.getDId();
-						i++;
+					if (iDt.getIclubDocuments() != null && iDt.getIclubDocuments().size() > 0) {
+						String[] iclubDocuments = new String[iDt.getIclubDocuments().size()];
+						int i = 0;
+						for (IclubDocument iclubDocument : iDt.getIclubDocuments()) {
+							iclubDocuments[i] = iclubDocument.getDId();
+							i++;
+						}
+						model.setIclubDocuments(iclubDocuments);
 					}
-					model.setIclubDocuments(iclubDocuments);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

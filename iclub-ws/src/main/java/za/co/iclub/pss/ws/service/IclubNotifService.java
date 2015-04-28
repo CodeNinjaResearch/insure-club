@@ -138,22 +138,23 @@ public class IclubNotifService {
 
 		try {
 			List batmod = iclubNotifDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubNotif iClubNotf = (IclubNotif) object;
+					IclubNotifModel iCN = new IclubNotifModel();
 
-			for (Object object : batmod) {
-				IclubNotif iClubNotf = (IclubNotif) object;
-				IclubNotifModel iCN = new IclubNotifModel();
+					iCN.setNId(iClubNotf.getNId());
+					iCN.setNTitle(iClubNotf.getNTitle());
+					iCN.setNBody(iClubNotf.getNBody());
+					iCN.setNFromAddr(iClubNotf.getNFromAddr());
+					iCN.setNToList(iClubNotf.getNToList());
+					iCN.setNCrtdDt(iClubNotf.getNCrtdDt());
+					iCN.setIclubPerson(iClubNotf.getIclubPerson() != null ? iClubNotf.getIclubPerson().getPId() : null);
+					iCN.setIclubNotificationType(iClubNotf.getIclubNotificationType() != null ? iClubNotf.getIclubNotificationType().getNtId() : null);
+					iCN.setNStatus(iClubNotf.getNStatus());
 
-				iCN.setNId(iClubNotf.getNId());
-				iCN.setNTitle(iClubNotf.getNTitle());
-				iCN.setNBody(iClubNotf.getNBody());
-				iCN.setNFromAddr(iClubNotf.getNFromAddr());
-				iCN.setNToList(iClubNotf.getNToList());
-				iCN.setNCrtdDt(iClubNotf.getNCrtdDt());
-				iCN.setIclubPerson(iClubNotf.getIclubPerson() != null ? iClubNotf.getIclubPerson().getPId() : null);
-				iCN.setIclubNotificationType(iClubNotf.getIclubNotificationType() != null ? iClubNotf.getIclubNotificationType().getNtId() : null);
-				iCN.setNStatus(iClubNotf.getNStatus());
-
-				ret.add((T) iCN);
+					ret.add((T) iCN);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -171,22 +172,23 @@ public class IclubNotifService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubNotif.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubNotif iClubNotf = (IclubNotif) object;
+					IclubNotifModel iCN = new IclubNotifModel();
 
-			for (Object object : batmod) {
-				IclubNotif iClubNotf = (IclubNotif) object;
-				IclubNotifModel iCN = new IclubNotifModel();
+					iCN.setNId(iClubNotf.getNId());
+					iCN.setNTitle(iClubNotf.getNTitle());
+					iCN.setNBody(iClubNotf.getNBody());
+					iCN.setNFromAddr(iClubNotf.getNFromAddr());
+					iCN.setNToList(iClubNotf.getNToList());
+					iCN.setNCrtdDt(iClubNotf.getNCrtdDt());
+					iCN.setIclubPerson(iClubNotf.getIclubPerson() != null ? iClubNotf.getIclubPerson().getPId() : null);
+					iCN.setIclubNotificationType(iClubNotf.getIclubNotificationType() != null ? iClubNotf.getIclubNotificationType().getNtId() : null);
+					iCN.setNStatus(iClubNotf.getNStatus());
 
-				iCN.setNId(iClubNotf.getNId());
-				iCN.setNTitle(iClubNotf.getNTitle());
-				iCN.setNBody(iClubNotf.getNBody());
-				iCN.setNFromAddr(iClubNotf.getNFromAddr());
-				iCN.setNToList(iClubNotf.getNToList());
-				iCN.setNCrtdDt(iClubNotf.getNCrtdDt());
-				iCN.setIclubPerson(iClubNotf.getIclubPerson() != null ? iClubNotf.getIclubPerson().getPId() : null);
-				iCN.setIclubNotificationType(iClubNotf.getIclubNotificationType() != null ? iClubNotf.getIclubNotificationType().getNtId() : null);
-				iCN.setNStatus(iClubNotf.getNStatus());
-
-				ret.add((T) iCN);
+					ret.add((T) iCN);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

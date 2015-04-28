@@ -136,20 +136,21 @@ public class IclubCountryCodeService {
 
 		try {
 			List batmod = iclubCountryCodeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubCountryCode iclubCc = (IclubCountryCode) object;
+					IclubCountryCodeModel iCCc = new IclubCountryCodeModel();
 
-			for (Object object : batmod) {
-				IclubCountryCode iclubCc = (IclubCountryCode) object;
-				IclubCountryCodeModel iCCc = new IclubCountryCodeModel();
+					iCCc.setCcId(iclubCc.getCcId());
+					iCCc.setCcId(iclubCc.getCcId());
+					iCCc.setCcIsoId(iclubCc.getCcIsoId());
+					iCCc.setCcShortId(iclubCc.getCcShortId());
+					iCCc.setCcCrtdDt(iclubCc.getCcCrtdDt());
+					iCCc.setCcName(iclubCc.getCcName());
+					iCCc.setIclubPerson(iclubCc.getIclubPerson() != null ? iclubCc.getIclubPerson().getPId() : null);
 
-				iCCc.setCcId(iclubCc.getCcId());
-				iCCc.setCcId(iclubCc.getCcId());
-				iCCc.setCcIsoId(iclubCc.getCcIsoId());
-				iCCc.setCcShortId(iclubCc.getCcShortId());
-				iCCc.setCcCrtdDt(iclubCc.getCcCrtdDt());
-				iCCc.setCcName(iclubCc.getCcName());
-				iCCc.setIclubPerson(iclubCc.getIclubPerson() != null ? iclubCc.getIclubPerson().getPId() : null);
-
-				ret.add((T) iCCc);
+					ret.add((T) iCCc);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -167,19 +168,20 @@ public class IclubCountryCodeService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubCountryCode.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubCountryCode iclubCc = (IclubCountryCode) object;
+					IclubCountryCodeModel iCCc = new IclubCountryCodeModel();
 
-			for (Object object : batmod) {
-				IclubCountryCode iclubCc = (IclubCountryCode) object;
-				IclubCountryCodeModel iCCc = new IclubCountryCodeModel();
+					iCCc.setCcId(iclubCc.getCcId());
+					iCCc.setCcIsoId(iclubCc.getCcIsoId());
+					iCCc.setCcShortId(iclubCc.getCcShortId());
+					iCCc.setCcCrtdDt(iclubCc.getCcCrtdDt());
+					iCCc.setCcName(iclubCc.getCcName());
+					iCCc.setIclubPerson(iclubCc.getIclubPerson() != null ? iclubCc.getIclubPerson().getPId() : null);
 
-				iCCc.setCcId(iclubCc.getCcId());
-				iCCc.setCcIsoId(iclubCc.getCcIsoId());
-				iCCc.setCcShortId(iclubCc.getCcShortId());
-				iCCc.setCcCrtdDt(iclubCc.getCcCrtdDt());
-				iCCc.setCcName(iclubCc.getCcName());
-				iCCc.setIclubPerson(iclubCc.getIclubPerson() != null ? iclubCc.getIclubPerson().getPId() : null);
-
-				ret.add((T) iCCc);
+					ret.add((T) iCCc);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -80,30 +80,32 @@ public class IclubTrackerMasterController implements Serializable {
 		Collection<? extends IclubTrackerMasterModel> models = new ArrayList<IclubTrackerMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubTrackerMasterModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubTrackerMasterBean>();
-		for (IclubTrackerMasterModel model : models) {
-			IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
+		if (models != null && models.size() > 0) {
+			for (IclubTrackerMasterModel model : models) {
+				IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
 
-			bean.setTmId(model.getTmId());
-			bean.setTmName(model.getTmName());
-			bean.setTmLat(model.getTmLat());
-			bean.setTmLocation(model.getTmLocation());
-			bean.setTmLong(model.getTmLong());
-			bean.setTmTradeName(model.getTmTradeName());
-			bean.setTmRegNum(model.getTmRegNum());
-			bean.setTmCrtdDt(model.getTmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setTmId(model.getTmId());
+				bean.setTmName(model.getTmName());
+				bean.setTmLat(model.getTmLat());
+				bean.setTmLocation(model.getTmLocation());
+				bean.setTmLong(model.getTmLong());
+				bean.setTmTradeName(model.getTmTradeName());
+				bean.setTmRegNum(model.getTmRegNum());
+				bean.setTmCrtdDt(model.getTmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
-				String[] securityDevices = new String[model.getIclubSecurityDevices().length];
-				int i = 0;
-				for (String securityDevice : model.getIclubSecurityDevices()) {
-					securityDevices[i] = securityDevice;
-					i++;
+				if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
+					String[] securityDevices = new String[model.getIclubSecurityDevices().length];
+					int i = 0;
+					for (String securityDevice : model.getIclubSecurityDevices()) {
+						securityDevices[i] = securityDevice;
+						i++;
+					}
+					bean.setIclubSecurityDevices(securityDevices);
 				}
-				bean.setIclubSecurityDevices(securityDevices);
-			}
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -304,31 +306,33 @@ public class IclubTrackerMasterController implements Serializable {
 		Collection<? extends IclubTrackerMasterModel> models = new ArrayList<IclubTrackerMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubTrackerMasterModel.class));
 		client.close();
 		beans = new ArrayList<IclubTrackerMasterBean>();
-		for (IclubTrackerMasterModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubTrackerMasterModel model : models) {
 
-			IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
+				IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
 
-			bean.setTmId(model.getTmId());
-			bean.setTmName(model.getTmName());
-			bean.setTmLat(model.getTmLat());
-			bean.setTmLocation(model.getTmLocation());
-			bean.setTmLong(model.getTmLong());
-			bean.setTmTradeName(model.getTmTradeName());
-			bean.setTmRegNum(model.getTmRegNum());
-			bean.setTmCrtdDt(model.getTmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setTmId(model.getTmId());
+				bean.setTmName(model.getTmName());
+				bean.setTmLat(model.getTmLat());
+				bean.setTmLocation(model.getTmLocation());
+				bean.setTmLong(model.getTmLong());
+				bean.setTmTradeName(model.getTmTradeName());
+				bean.setTmRegNum(model.getTmRegNum());
+				bean.setTmCrtdDt(model.getTmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
-				String[] securityDevices = new String[model.getIclubSecurityDevices().length];
-				int i = 0;
-				for (String securityDevice : model.getIclubSecurityDevices()) {
-					securityDevices[i] = securityDevice;
-					i++;
+				if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
+					String[] securityDevices = new String[model.getIclubSecurityDevices().length];
+					int i = 0;
+					for (String securityDevice : model.getIclubSecurityDevices()) {
+						securityDevices[i] = securityDevice;
+						i++;
+					}
+					bean.setIclubSecurityDevices(securityDevices);
 				}
-				bean.setIclubSecurityDevices(securityDevices);
-			}
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

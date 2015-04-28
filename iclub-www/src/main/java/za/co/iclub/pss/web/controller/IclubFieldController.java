@@ -95,18 +95,20 @@ public class IclubFieldController implements Serializable {
 		Collection<? extends IclubFieldModel> models = new ArrayList<IclubFieldModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubFieldModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubFieldBean>();
-		for (IclubFieldModel model : models) {
-			IclubFieldBean bean = new IclubFieldBean();
+		if (models != null && models.size() > 0) {
+			for (IclubFieldModel model : models) {
+				IclubFieldBean bean = new IclubFieldBean();
 
-			bean.setFId(model.getFId());
-			bean.setFName(model.getFName());
-			bean.setFDesc(model.getFDesc());
-			bean.setFStatus(model.getFStatus());
-			bean.setFRate(model.getFRate());
-			bean.setFLTblName(model.getFLTblName());
-			bean.setIclubEntityType(model.getIclubEntityType());
+				bean.setFId(model.getFId());
+				bean.setFName(model.getFName());
+				bean.setFDesc(model.getFDesc());
+				bean.setFStatus(model.getFStatus());
+				bean.setFRate(model.getFRate());
+				bean.setFLTblName(model.getFLTblName());
+				bean.setIclubEntityType(model.getIclubEntityType());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -286,19 +288,21 @@ public class IclubFieldController implements Serializable {
 		Collection<? extends IclubFieldModel> models = new ArrayList<IclubFieldModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubFieldModel.class));
 		client.close();
 		beans = new ArrayList<IclubFieldBean>();
-		for (IclubFieldModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubFieldModel model : models) {
 
-			IclubFieldBean bean = new IclubFieldBean();
+				IclubFieldBean bean = new IclubFieldBean();
 
-			bean.setFId(model.getFId());
-			bean.setFName(model.getFName());
-			bean.setFDesc(model.getFDesc());
-			bean.setFStatus(model.getFStatus());
-			bean.setFRate(model.getFRate());
-			bean.setFLTblName(model.getFLTblName());
-			bean.setIclubEntityType(model.getIclubEntityType());
+				bean.setFId(model.getFId());
+				bean.setFName(model.getFName());
+				bean.setFDesc(model.getFDesc());
+				bean.setFStatus(model.getFStatus());
+				bean.setFRate(model.getFRate());
+				bean.setFLTblName(model.getFLTblName());
+				bean.setIclubEntityType(model.getIclubEntityType());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}
@@ -321,13 +325,15 @@ public class IclubFieldController implements Serializable {
 		Collection<? extends IclubEntityTypeModel> models = new ArrayList<IclubEntityTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEntityTypeModel.class));
 		client.close();
 		entityTypeBeans = new ArrayList<IclubEntityTypeBean>();
-		for (IclubEntityTypeModel model : models) {
-			IclubEntityTypeBean bean = new IclubEntityTypeBean();
-			bean.setEtId(model.getEtId());
-			bean.setEtLongDesc(model.getEtLongDesc());
-			bean.setEtShortDesc(model.getEtShortDesc());
-			bean.setEtStatus(model.getEtStatus());
-			entityTypeBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubEntityTypeModel model : models) {
+				IclubEntityTypeBean bean = new IclubEntityTypeBean();
+				bean.setEtId(model.getEtId());
+				bean.setEtLongDesc(model.getEtLongDesc());
+				bean.setEtShortDesc(model.getEtShortDesc());
+				bean.setEtStatus(model.getEtStatus());
+				entityTypeBeans.add(bean);
+			}
 		}
 		return entityTypeBeans;
 	}

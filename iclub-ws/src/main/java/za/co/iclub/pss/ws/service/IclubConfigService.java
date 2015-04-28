@@ -130,19 +130,20 @@ public class IclubConfigService {
 
 		try {
 			List batmod = iclubConfigDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubConfig iclubC = (IclubConfig) object;
+					IclubConfigModel iCC = new IclubConfigModel();
 
-			for (Object object : batmod) {
-				IclubConfig iclubC = (IclubConfig) object;
-				IclubConfigModel iCC = new IclubConfigModel();
+					iCC.setCId(iclubC.getCId());
+					iCC.setCKey(iclubC.getCKey());
+					iCC.setCCrtdDt(iclubC.getCCrtdDt());
+					iCC.setCValue(iclubC.getCValue());
+					iCC.setIclubPerson(iclubC.getIclubPerson() != null ? iclubC.getIclubPerson().getPId() : null);
+					iCC.setCStatus(iclubC.getCStatus());
 
-				iCC.setCId(iclubC.getCId());
-				iCC.setCKey(iclubC.getCKey());
-				iCC.setCCrtdDt(iclubC.getCCrtdDt());
-				iCC.setCValue(iclubC.getCValue());
-				iCC.setIclubPerson(iclubC.getIclubPerson() != null ? iclubC.getIclubPerson().getPId() : null);
-				iCC.setCStatus(iclubC.getCStatus());
-
-				ret.add((T) iCC);
+					ret.add((T) iCC);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -160,19 +161,20 @@ public class IclubConfigService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubConfig.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubConfig iclubC = (IclubConfig) object;
+					IclubConfigModel iCC = new IclubConfigModel();
 
-			for (Object object : batmod) {
-				IclubConfig iclubC = (IclubConfig) object;
-				IclubConfigModel iCC = new IclubConfigModel();
+					iCC.setCId(iclubC.getCId());
+					iCC.setCKey(iclubC.getCKey());
+					iCC.setCCrtdDt(iclubC.getCCrtdDt());
+					iCC.setCValue(iclubC.getCValue());
+					iCC.setIclubPerson(iclubC.getIclubPerson() != null ? iclubC.getIclubPerson().getPId() : null);
+					iCC.setCStatus(iclubC.getCStatus());
 
-				iCC.setCId(iclubC.getCId());
-				iCC.setCKey(iclubC.getCKey());
-				iCC.setCCrtdDt(iclubC.getCCrtdDt());
-				iCC.setCValue(iclubC.getCValue());
-				iCC.setIclubPerson(iclubC.getIclubPerson() != null ? iclubC.getIclubPerson().getPId() : null);
-				iCC.setCStatus(iclubC.getCStatus());
-
-				ret.add((T) iCC);
+					ret.add((T) iCC);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

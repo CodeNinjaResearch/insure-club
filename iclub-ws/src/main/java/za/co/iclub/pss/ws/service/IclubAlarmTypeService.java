@@ -149,17 +149,18 @@ public class IclubAlarmTypeService {
 
 		try {
 			List batmod = iclubAlarmTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubAlarmType iclubAlamtype = (IclubAlarmType) object;
+					IclubAlarmTypeModel iCB = new IclubAlarmTypeModel();
 
-			for (Object object : batmod) {
-				IclubAlarmType iclubAlamtype = (IclubAlarmType) object;
-				IclubAlarmTypeModel iCB = new IclubAlarmTypeModel();
+					iCB.setAtId(iclubAlamtype.getAtId().longValue());
+					iCB.setAtLongDesc(iclubAlamtype.getAtLongDesc());
+					iCB.setAtShortDesc(iclubAlamtype.getAtShortDesc());
+					iCB.setAtStatus(iclubAlamtype.getAtStatus());
 
-				iCB.setAtId(iclubAlamtype.getAtId().longValue());
-				iCB.setAtLongDesc(iclubAlamtype.getAtLongDesc());
-				iCB.setAtShortDesc(iclubAlamtype.getAtShortDesc());
-				iCB.setAtStatus(iclubAlamtype.getAtStatus());
-
-				ret.add((T) iCB);
+					ret.add((T) iCB);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

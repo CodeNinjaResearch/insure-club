@@ -144,36 +144,37 @@ public class IclubDriverService {
 
 		try {
 			List batmod = iclubDriverDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubDriver iCt = (IclubDriver) object;
 
-			for (Object object : batmod) {
-				IclubDriver iCt = (IclubDriver) object;
+					IclubDriverModel model = new IclubDriverModel();
 
-				IclubDriverModel model = new IclubDriverModel();
+					model.setDId(iCt.getDId());
+					model.setDDob(iCt.getDDob());
+					model.setDIssueDt(iCt.getDIssueDt());
+					model.setDLicenseNum(iCt.getDLicenseNum());
+					model.setDName(iCt.getDName());
+					model.setDCrtdDt(iCt.getDCrtdDt());
+					model.setIclubAccessType(iCt.getIclubAccessType() != null ? (iCt.getIclubAccessType().getAtId()) : null);
+					model.setIclubLicenseCode(iCt.getIclubLicenseCode() != null ? (iCt.getIclubLicenseCode().getLcId()) : null);
+					model.setIclubMaritialStatus(iCt.getIclubMaritialStatus() != null ? (iCt.getIclubMaritialStatus().getMsId()) : null);
+					model.setIclubPersonByDPersonId(iCt.getIclubPersonByDPersonId() != null ? (iCt.getIclubPersonByDPersonId().getPId()) : null);
+					model.setIclubPersonByDCrtdBy(iCt.getIclubPersonByDCrtdBy() != null ? (iCt.getIclubPersonByDCrtdBy().getPId()) : null);
 
-				model.setDId(iCt.getDId());
-				model.setDDob(iCt.getDDob());
-				model.setDIssueDt(iCt.getDIssueDt());
-				model.setDLicenseNum(iCt.getDLicenseNum());
-				model.setDName(iCt.getDName());
-				model.setDCrtdDt(iCt.getDCrtdDt());
-				model.setIclubAccessType(iCt.getIclubAccessType() != null ? (iCt.getIclubAccessType().getAtId()) : null);
-				model.setIclubLicenseCode(iCt.getIclubLicenseCode() != null ? (iCt.getIclubLicenseCode().getLcId()) : null);
-				model.setIclubMaritialStatus(iCt.getIclubMaritialStatus() != null ? (iCt.getIclubMaritialStatus().getMsId()) : null);
-				model.setIclubPersonByDPersonId(iCt.getIclubPersonByDPersonId() != null ? (iCt.getIclubPersonByDPersonId().getPId()) : null);
-				model.setIclubPersonByDCrtdBy(iCt.getIclubPersonByDCrtdBy() != null ? (iCt.getIclubPersonByDCrtdBy().getPId()) : null);
+					if (iCt.getIclubVehicles() != null && iCt.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iCt.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iCt.getIclubVehicles()) {
 
-				if (iCt.getIclubVehicles() != null && iCt.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iCt.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iCt.getIclubVehicles()) {
-
-						vehicles[i] = vehicle.getVId();
-						i++;
+							vehicles[i] = vehicle.getVId();
+							i++;
+						}
+						model.setIclubVehicles(vehicles);
 					}
-					model.setIclubVehicles(vehicles);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -191,36 +192,37 @@ public class IclubDriverService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubDriver.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubDriver iCt = (IclubDriver) object;
 
-			for (Object object : batmod) {
-				IclubDriver iCt = (IclubDriver) object;
+					IclubDriverModel model = new IclubDriverModel();
 
-				IclubDriverModel model = new IclubDriverModel();
+					model.setDId(iCt.getDId());
+					model.setDDob(iCt.getDDob());
+					model.setDIssueDt(iCt.getDIssueDt());
+					model.setDLicenseNum(iCt.getDLicenseNum());
+					model.setDName(iCt.getDName());
+					model.setDCrtdDt(iCt.getDCrtdDt());
+					model.setIclubAccessType(iCt.getIclubAccessType() != null ? (iCt.getIclubAccessType().getAtId()) : null);
+					model.setIclubLicenseCode(iCt.getIclubLicenseCode() != null ? (iCt.getIclubLicenseCode().getLcId()) : null);
+					model.setIclubMaritialStatus(iCt.getIclubMaritialStatus() != null ? (iCt.getIclubMaritialStatus().getMsId()) : null);
+					model.setIclubPersonByDPersonId(iCt.getIclubPersonByDPersonId() != null ? (iCt.getIclubPersonByDPersonId().getPId()) : null);
+					model.setIclubPersonByDCrtdBy(iCt.getIclubPersonByDCrtdBy() != null ? (iCt.getIclubPersonByDCrtdBy().getPId()) : null);
 
-				model.setDId(iCt.getDId());
-				model.setDDob(iCt.getDDob());
-				model.setDIssueDt(iCt.getDIssueDt());
-				model.setDLicenseNum(iCt.getDLicenseNum());
-				model.setDName(iCt.getDName());
-				model.setDCrtdDt(iCt.getDCrtdDt());
-				model.setIclubAccessType(iCt.getIclubAccessType() != null ? (iCt.getIclubAccessType().getAtId()) : null);
-				model.setIclubLicenseCode(iCt.getIclubLicenseCode() != null ? (iCt.getIclubLicenseCode().getLcId()) : null);
-				model.setIclubMaritialStatus(iCt.getIclubMaritialStatus() != null ? (iCt.getIclubMaritialStatus().getMsId()) : null);
-				model.setIclubPersonByDPersonId(iCt.getIclubPersonByDPersonId() != null ? (iCt.getIclubPersonByDPersonId().getPId()) : null);
-				model.setIclubPersonByDCrtdBy(iCt.getIclubPersonByDCrtdBy() != null ? (iCt.getIclubPersonByDCrtdBy().getPId()) : null);
+					if (iCt.getIclubVehicles() != null && iCt.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iCt.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iCt.getIclubVehicles()) {
 
-				if (iCt.getIclubVehicles() != null && iCt.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iCt.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iCt.getIclubVehicles()) {
-
-						vehicles[i] = vehicle.getVId();
-						i++;
+							vehicles[i] = vehicle.getVId();
+							i++;
+						}
+						model.setIclubVehicles(vehicles);
 					}
-					model.setIclubVehicles(vehicles);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

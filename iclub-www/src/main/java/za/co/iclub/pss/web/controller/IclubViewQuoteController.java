@@ -35,38 +35,39 @@ public class IclubViewQuoteController implements Serializable {
 		client.close();
 
 		beans = new ArrayList<IclubQuoteBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubQuoteModel model : models) {
+				IclubQuoteBean bean = new IclubQuoteBean();
 
-		for (IclubQuoteModel model : models) {
-			IclubQuoteBean bean = new IclubQuoteBean();
+				bean.setQId(model.getQId());
+				bean.setQCrtdDt(model.getQCrtdDt());
+				bean.setQIsMatched(model.getQIsMatched());
+				bean.setQPrevPremium(model.getQPrevPremium());
+				bean.setQValidUntil(model.getQValidUntil());
+				bean.setQMobile(model.getQMobile());
+				bean.setQEmail(model.getQEmail());
+				bean.setQGenPremium(model.getQGenPremium());
+				bean.setQNumItems(model.getQNumItems());
+				bean.setQGenDt(model.getQGenDt());
+				bean.setQNumber(model.getQNumber());
+				bean.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy());
+				bean.setIclubProductType(model.getIclubProductType());
+				bean.setIclubProductType(model.getIclubProductType());
+				bean.setIclubInsurerMaster(model.getIclubInsurerMaster());
+				bean.setIclubCoverType(model.getIclubCoverType());
+				bean.setIclubQuoteStatus(model.getIclubQuoteStatus());
+				bean.setIclubPersonByQPersonId(model.getIclubPersonByQPersonId());
 
-			bean.setQId(model.getQId());
-			bean.setQCrtdDt(model.getQCrtdDt());
-			bean.setQIsMatched(model.getQIsMatched());
-			bean.setQPrevPremium(model.getQPrevPremium());
-			bean.setQValidUntil(model.getQValidUntil());
-			bean.setQMobile(model.getQMobile());
-			bean.setQEmail(model.getQEmail());
-			bean.setQGenPremium(model.getQGenPremium());
-			bean.setQNumItems(model.getQNumItems());
-			bean.setQGenDt(model.getQGenDt());
-			bean.setQNumber(model.getQNumber());
-			bean.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy());
-			bean.setIclubProductType(model.getIclubProductType());
-			bean.setIclubProductType(model.getIclubProductType());
-			bean.setIclubInsurerMaster(model.getIclubInsurerMaster());
-			bean.setIclubCoverType(model.getIclubCoverType());
-			bean.setIclubQuoteStatus(model.getIclubQuoteStatus());
-			bean.setIclubPersonByQPersonId(model.getIclubPersonByQPersonId());
-
-			if (model.getIclubPolicies() != null && model.getIclubPolicies().length > 0) {
-				String[] policies = new String[model.getIclubPolicies().length];
-				int i = 0;
-				for (String policy : model.getIclubPolicies()) {
-					policies[i] = policy;
-					i++;
+				if (model.getIclubPolicies() != null && model.getIclubPolicies().length > 0) {
+					String[] policies = new String[model.getIclubPolicies().length];
+					int i = 0;
+					for (String policy : model.getIclubPolicies()) {
+						policies[i] = policy;
+						i++;
+					}
 				}
+				beans.add(bean);
 			}
-			beans.add(bean);
 		}
 		return beans;
 	}

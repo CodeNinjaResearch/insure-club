@@ -78,7 +78,7 @@ public class IclubMessageController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -93,22 +93,24 @@ public class IclubMessageController implements Serializable {
 		Collection<? extends IclubMessageModel> models = new ArrayList<IclubMessageModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMessageModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubMessageBean>();
-		for (IclubMessageModel model : models) {
-			IclubMessageBean bean = new IclubMessageBean();
+		if (models != null && models.size() > 0) {
+			for (IclubMessageModel model : models) {
+				IclubMessageBean bean = new IclubMessageBean();
 
-			bean.setMId(model.getMId());
-			bean.setMContent(model.getMContent());
-			bean.setMTranId(model.getMTranId());
-			bean.setMCrtdDt(model.getMCrtdDt());
-			bean.setMSentDt(model.getMSentDt());
-			bean.setIclubMessageType(model.getIclubMessageType());
-			bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId());
-			bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId());
+				bean.setMId(model.getMId());
+				bean.setMContent(model.getMContent());
+				bean.setMTranId(model.getMTranId());
+				bean.setMCrtdDt(model.getMCrtdDt());
+				bean.setMSentDt(model.getMSentDt());
+				bean.setIclubMessageType(model.getIclubMessageType());
+				bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId());
+				bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId());
 
-			bean.setMCrtdDt(model.getMCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setMCrtdDt(model.getMCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -299,23 +301,25 @@ public class IclubMessageController implements Serializable {
 		Collection<? extends IclubMessageModel> models = new ArrayList<IclubMessageModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMessageModel.class));
 		client.close();
 		beans = new ArrayList<IclubMessageBean>();
-		for (IclubMessageModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubMessageModel model : models) {
 
-			IclubMessageBean bean = new IclubMessageBean();
+				IclubMessageBean bean = new IclubMessageBean();
 
-			bean.setMId(model.getMId());
-			bean.setMContent(model.getMContent());
-			bean.setMTranId(model.getMTranId());
-			bean.setMCrtdDt(model.getMCrtdDt());
-			bean.setMSentDt(model.getMSentDt());
-			bean.setIclubMessageType(model.getIclubMessageType());
-			bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId());
-			bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId());
+				bean.setMId(model.getMId());
+				bean.setMContent(model.getMContent());
+				bean.setMTranId(model.getMTranId());
+				bean.setMCrtdDt(model.getMCrtdDt());
+				bean.setMSentDt(model.getMSentDt());
+				bean.setIclubMessageType(model.getIclubMessageType());
+				bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId());
+				bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId());
 
-			bean.setMCrtdDt(model.getMCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setMCrtdDt(model.getMCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

@@ -157,13 +157,15 @@ public class IclubOccupiedStatusController implements Serializable {
 		Collection<? extends IclubOccupiedStatusModel> models = new ArrayList<IclubOccupiedStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupiedStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubOccupiedStatusBean>();
-		for (IclubOccupiedStatusModel model : models) {
-			IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
-			bean.setOsId(model.getOsId());
-			bean.setOsLongDesc(model.getOsLongDesc());
-			bean.setOsShortDesc(model.getOsShortDesc());
-			bean.setOsStatus(model.getOsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubOccupiedStatusModel model : models) {
+				IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
+				bean.setOsId(model.getOsId());
+				bean.setOsLongDesc(model.getOsLongDesc());
+				bean.setOsShortDesc(model.getOsShortDesc());
+				bean.setOsStatus(model.getOsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

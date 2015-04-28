@@ -157,13 +157,15 @@ public class IclubClaimStatusController implements Serializable {
 		Collection<? extends IclubClaimStatusModel> models = new ArrayList<IclubClaimStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubClaimStatusBean>();
-		for (IclubClaimStatusModel model : models) {
-			IclubClaimStatusBean bean = new IclubClaimStatusBean();
-			bean.setCsId(model.getCsId());
-			bean.setCsLongDesc(model.getCsLongDesc());
-			bean.setCsShortDesc(model.getCsShortDesc());
-			bean.setCsStatus(model.getCsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubClaimStatusModel model : models) {
+				IclubClaimStatusBean bean = new IclubClaimStatusBean();
+				bean.setCsId(model.getCsId());
+				bean.setCsLongDesc(model.getCsLongDesc());
+				bean.setCsShortDesc(model.getCsShortDesc());
+				bean.setCsStatus(model.getCsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

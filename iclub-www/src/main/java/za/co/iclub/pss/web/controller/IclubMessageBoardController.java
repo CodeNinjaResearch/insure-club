@@ -102,27 +102,29 @@ public class IclubMessageBoardController implements Serializable {
 		Collection<? extends IclubMessageBoardModel> models = new ArrayList<IclubMessageBoardModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMessageBoardModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubMessageBoardBean>();
-		for (IclubMessageBoardModel model : models) {
-			IclubMessageBoardBean bean = new IclubMessageBoardBean();
+		if (models != null && models.size() > 0) {
+			for (IclubMessageBoardModel model : models) {
+				IclubMessageBoardBean bean = new IclubMessageBoardBean();
 
-			bean.setMbId(model.getMbId());
-			bean.setMbContent(model.getMbContent());
-			bean.setMbContent(model.getMbContent());
-			bean.setMbTag(model.getMbTag());
-			bean.setMbTitle(model.getMbTitle());
-			bean.setMbCrtdDt(model.getMbCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			if (model.getIclubMbComments() != null && model.getIclubMbComments().length > 0) {
-				String[] iclubMbComments = new String[model.getIclubMbComments().length];
-				int i = 0;
-				for (String iclubMbComment : model.getIclubMbComments()) {
-					iclubMbComments[i] = iclubMbComment;
-					i++;
+				bean.setMbId(model.getMbId());
+				bean.setMbContent(model.getMbContent());
+				bean.setMbContent(model.getMbContent());
+				bean.setMbTag(model.getMbTag());
+				bean.setMbTitle(model.getMbTitle());
+				bean.setMbCrtdDt(model.getMbCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				if (model.getIclubMbComments() != null && model.getIclubMbComments().length > 0) {
+					String[] iclubMbComments = new String[model.getIclubMbComments().length];
+					int i = 0;
+					for (String iclubMbComment : model.getIclubMbComments()) {
+						iclubMbComments[i] = iclubMbComment;
+						i++;
+					}
+					bean.setIclubMbComments(iclubMbComments);
 				}
-				bean.setIclubMbComments(iclubMbComments);
-			}
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -318,27 +320,29 @@ public class IclubMessageBoardController implements Serializable {
 		Collection<? extends IclubMessageBoardModel> models = new ArrayList<IclubMessageBoardModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMessageBoardModel.class));
 		client.close();
 		beans = new ArrayList<IclubMessageBoardBean>();
-		for (IclubMessageBoardModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubMessageBoardModel model : models) {
 
-			IclubMessageBoardBean bean = new IclubMessageBoardBean();
-			bean.setMbId(model.getMbId());
-			bean.setMbContent(model.getMbContent());
-			bean.setMbContent(model.getMbContent());
-			bean.setMbTag(model.getMbTag());
-			bean.setMbTitle(model.getMbTitle());
-			bean.setMbCrtdDt(model.getMbCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			if (model.getIclubMbComments() != null && model.getIclubMbComments().length > 0) {
-				String[] iclubMbComments = new String[model.getIclubMbComments().length];
-				int i = 0;
-				for (String iclubMbComment : model.getIclubMbComments()) {
-					iclubMbComments[i] = iclubMbComment;
-					i++;
+				IclubMessageBoardBean bean = new IclubMessageBoardBean();
+				bean.setMbId(model.getMbId());
+				bean.setMbContent(model.getMbContent());
+				bean.setMbContent(model.getMbContent());
+				bean.setMbTag(model.getMbTag());
+				bean.setMbTitle(model.getMbTitle());
+				bean.setMbCrtdDt(model.getMbCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				if (model.getIclubMbComments() != null && model.getIclubMbComments().length > 0) {
+					String[] iclubMbComments = new String[model.getIclubMbComments().length];
+					int i = 0;
+					for (String iclubMbComment : model.getIclubMbComments()) {
+						iclubMbComments[i] = iclubMbComment;
+						i++;
+					}
+					bean.setIclubMbComments(iclubMbComments);
 				}
-				bean.setIclubMbComments(iclubMbComments);
-			}
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}
@@ -375,14 +379,16 @@ public class IclubMessageBoardController implements Serializable {
 		Collection<? extends IclubMbCommentModel> models = new ArrayList<IclubMbCommentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMbCommentModel.class));
 		client.close();
 		mbCommentBeans = new ArrayList<IclubMbCommentBean>();
-		for (IclubMbCommentModel model : models) {
-			IclubMbCommentBean bean = new IclubMbCommentBean();
-			bean.setMbcId(model.getMbcId());
-			bean.setMbcCrtdDt(model.getMbcCrtdDt());
-			bean.setMbcDesc(model.getMbcDesc());
-			bean.setIclubMessageBoard(model.getIclubMessageBoard());
-			bean.setIclubPerson(model.getIclubPerson());
-			mbCommentBeans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubMbCommentModel model : models) {
+				IclubMbCommentBean bean = new IclubMbCommentBean();
+				bean.setMbcId(model.getMbcId());
+				bean.setMbcCrtdDt(model.getMbcCrtdDt());
+				bean.setMbcDesc(model.getMbcDesc());
+				bean.setIclubMessageBoard(model.getIclubMessageBoard());
+				bean.setIclubPerson(model.getIclubPerson());
+				mbCommentBeans.add(bean);
+			}
 		}
 		return mbCommentBeans;
 	}

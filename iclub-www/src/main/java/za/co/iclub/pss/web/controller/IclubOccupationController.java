@@ -80,16 +80,18 @@ public class IclubOccupationController implements Serializable {
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubOccupationBean>();
-		for (IclubOccupationModel model : models) {
-			IclubOccupationBean bean = new IclubOccupationBean();
+		if (models != null && models.size() > 0) {
+			for (IclubOccupationModel model : models) {
+				IclubOccupationBean bean = new IclubOccupationBean();
 
-			bean.setOId(model.getOId());
-			bean.setODesc(model.getODesc());
-			bean.setOCrtdDt(model.getOCrtdDt());
-			bean.setOStatus(model.getOStatus());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setOId(model.getOId());
+				bean.setODesc(model.getODesc());
+				bean.setOCrtdDt(model.getOCrtdDt());
+				bean.setOStatus(model.getOStatus());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -267,17 +269,19 @@ public class IclubOccupationController implements Serializable {
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
 		client.close();
 		beans = new ArrayList<IclubOccupationBean>();
-		for (IclubOccupationModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubOccupationModel model : models) {
 
-			IclubOccupationBean bean = new IclubOccupationBean();
+				IclubOccupationBean bean = new IclubOccupationBean();
 
-			bean.setOId(model.getOId());
-			bean.setODesc(model.getODesc());
-			bean.setOCrtdDt(model.getOCrtdDt());
-			bean.setOStatus(model.getOStatus());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setOId(model.getOId());
+				bean.setODesc(model.getODesc());
+				bean.setOCrtdDt(model.getOCrtdDt());
+				bean.setOStatus(model.getOStatus());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

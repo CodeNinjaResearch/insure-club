@@ -123,30 +123,31 @@ public class IclubAccountTypeService {
 
 		try {
 			List batmod = iclubAccountTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubAccountType iAt = (IclubAccountType) object;
 
-			for (Object object : batmod) {
-				IclubAccountType iAt = (IclubAccountType) object;
+					IclubAccountTypeModel model = new IclubAccountTypeModel();
 
-				IclubAccountTypeModel model = new IclubAccountTypeModel();
+					model.setAtId(iAt.getAtId());
+					model.setAtLongDesc(iAt.getAtLongDesc());
+					model.setAtShortDesc(iAt.getAtShortDesc());
+					model.setAtStatus(iAt.getAtStatus());
 
-				model.setAtId(iAt.getAtId());
-				model.setAtLongDesc(iAt.getAtLongDesc());
-				model.setAtShortDesc(iAt.getAtShortDesc());
-				model.setAtStatus(iAt.getAtStatus());
+					if (iAt.getIclubAccounts() != null && iAt.getIclubAccounts().size() > 0) {
+						Set<IclubAccount> iAcc = iAt.getIclubAccounts();
+						String[] iclubAccounts = new String[iAcc.size()];
 
-				if (iAt.getIclubAccounts() != null && iAt.getIclubAccounts().size() > 0) {
-					Set<IclubAccount> iAcc = iAt.getIclubAccounts();
-					String[] iclubAccounts = new String[iAcc.size()];
-
-					int i = 0;
-					for (IclubAccount iA : iAcc) {
-						iclubAccounts[i] = iA.getAId();
-						i++;
+						int i = 0;
+						for (IclubAccount iA : iAcc) {
+							iclubAccounts[i] = iA.getAId();
+							i++;
+						}
+						model.setIclubAccounts(iclubAccounts);
 					}
-					model.setIclubAccounts(iclubAccounts);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

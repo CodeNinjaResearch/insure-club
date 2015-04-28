@@ -139,23 +139,24 @@ public class IclubClaimItemService {
 
 		try {
 			List batmod = iclubClaimItemDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubClaimItem iCCI = (IclubClaimItem) object;
 
-			for (Object object : batmod) {
-				IclubClaimItem iCCI = (IclubClaimItem) object;
+					IclubClaimItemModel model = new IclubClaimItemModel();
 
-				IclubClaimItemModel model = new IclubClaimItemModel();
+					model.setCiId(iCCI.getCiId());
+					model.setCiCrtdBy(iCCI.getCiCrtdBy());
+					model.setCiCrtdDt(iCCI.getCiCrtdDt());
+					model.setCiValue(iCCI.getCiValue());
+					model.setIclubClaimStatus(iCCI.getIclubClaimStatus() != null ? (iCCI.getIclubClaimStatus().getCsId()) : null);
+					model.setIclubClaim(iCCI.getIclubClaim() != null ? (iCCI.getIclubClaim().getCId()) : null);
+					model.setIclubSupplMasterByCiAssesorId(iCCI.getIclubSupplMasterByCiAssesorId() != null ? (iCCI.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
+					model.setIclubInsuranceItem(iCCI.getIclubInsuranceItem() != null ? (iCCI.getIclubInsuranceItem().getIiId()) : null);
+					model.setIclubSupplMasterByCiHandlerId(iCCI.getIclubSupplMasterByCiHandlerId() != null ? (iCCI.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
 
-				model.setCiId(iCCI.getCiId());
-				model.setCiCrtdBy(iCCI.getCiCrtdBy());
-				model.setCiCrtdDt(iCCI.getCiCrtdDt());
-				model.setCiValue(iCCI.getCiValue());
-				model.setIclubClaimStatus(iCCI.getIclubClaimStatus() != null ? (iCCI.getIclubClaimStatus().getCsId()) : null);
-				model.setIclubClaim(iCCI.getIclubClaim() != null ? (iCCI.getIclubClaim().getCId()) : null);
-				model.setIclubSupplMasterByCiAssesorId(iCCI.getIclubSupplMasterByCiAssesorId() != null ? (iCCI.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
-				model.setIclubInsuranceItem(iCCI.getIclubInsuranceItem() != null ? (iCCI.getIclubInsuranceItem().getIiId()) : null);
-				model.setIclubSupplMasterByCiHandlerId(iCCI.getIclubSupplMasterByCiHandlerId() != null ? (iCCI.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -173,23 +174,24 @@ public class IclubClaimItemService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubClaimItem.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubClaimItem iCCI = (IclubClaimItem) object;
 
-			for (Object object : batmod) {
-				IclubClaimItem iCCI = (IclubClaimItem) object;
+					IclubClaimItemModel model = new IclubClaimItemModel();
 
-				IclubClaimItemModel model = new IclubClaimItemModel();
+					model.setCiId(iCCI.getCiId());
+					model.setCiCrtdBy(iCCI.getCiCrtdBy());
+					model.setCiCrtdDt(iCCI.getCiCrtdDt());
+					model.setCiValue(iCCI.getCiValue());
+					model.setIclubClaimStatus(iCCI.getIclubClaimStatus() != null ? (iCCI.getIclubClaimStatus().getCsId()) : null);
+					model.setIclubClaim(iCCI.getIclubClaim() != null ? (iCCI.getIclubClaim().getCId()) : null);
+					model.setIclubSupplMasterByCiAssesorId(iCCI.getIclubSupplMasterByCiAssesorId() != null ? (iCCI.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
+					model.setIclubInsuranceItem(iCCI.getIclubInsuranceItem() != null ? (iCCI.getIclubInsuranceItem().getIiId()) : null);
+					model.setIclubSupplMasterByCiHandlerId(iCCI.getIclubSupplMasterByCiHandlerId() != null ? (iCCI.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
 
-				model.setCiId(iCCI.getCiId());
-				model.setCiCrtdBy(iCCI.getCiCrtdBy());
-				model.setCiCrtdDt(iCCI.getCiCrtdDt());
-				model.setCiValue(iCCI.getCiValue());
-				model.setIclubClaimStatus(iCCI.getIclubClaimStatus() != null ? (iCCI.getIclubClaimStatus().getCsId()) : null);
-				model.setIclubClaim(iCCI.getIclubClaim() != null ? (iCCI.getIclubClaim().getCId()) : null);
-				model.setIclubSupplMasterByCiAssesorId(iCCI.getIclubSupplMasterByCiAssesorId() != null ? (iCCI.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
-				model.setIclubInsuranceItem(iCCI.getIclubInsuranceItem() != null ? (iCCI.getIclubInsuranceItem().getIiId()) : null);
-				model.setIclubSupplMasterByCiHandlerId(iCCI.getIclubSupplMasterByCiHandlerId() != null ? (iCCI.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
-
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

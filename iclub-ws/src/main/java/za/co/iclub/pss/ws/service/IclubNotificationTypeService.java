@@ -122,28 +122,29 @@ public class IclubNotificationTypeService {
 
 		try {
 			List batmod = iclubNotificationTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubNotificationType iNt = (IclubNotificationType) object;
 
-			for (Object object : batmod) {
-				IclubNotificationType iNt = (IclubNotificationType) object;
+					IclubNotificationTypeModel model = new IclubNotificationTypeModel();
 
-				IclubNotificationTypeModel model = new IclubNotificationTypeModel();
+					model.setNtId(iNt.getNtId());
+					model.setNtLongDesc(iNt.getNtLongDesc());
+					model.setNtShortDesc(iNt.getNtShortDesc());
+					model.setNtStatus(iNt.getNtStatus());
 
-				model.setNtId(iNt.getNtId());
-				model.setNtLongDesc(iNt.getNtLongDesc());
-				model.setNtShortDesc(iNt.getNtShortDesc());
-				model.setNtStatus(iNt.getNtStatus());
-
-				if (iNt.getIclubNotifs() != null && iNt.getIclubNotifs().size() > 0) {
-					String[] iclubNotifs = new String[iNt.getIclubNotifs().size()];
-					int i = 0;
-					for (IclubNotif iclubNotif : iNt.getIclubNotifs()) {
-						iclubNotifs[i] = iclubNotif.getNId();
-						i++;
+					if (iNt.getIclubNotifs() != null && iNt.getIclubNotifs().size() > 0) {
+						String[] iclubNotifs = new String[iNt.getIclubNotifs().size()];
+						int i = 0;
+						for (IclubNotif iclubNotif : iNt.getIclubNotifs()) {
+							iclubNotifs[i] = iclubNotif.getNId();
+							i++;
+						}
+						model.setIclubNotifs(iclubNotifs);
 					}
-					model.setIclubNotifs(iclubNotifs);
-				}
 
-				ret.add((T) model);
+					ret.add((T) model);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

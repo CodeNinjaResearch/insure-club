@@ -139,32 +139,33 @@ public class IclubVehicleMasterService {
 
 		try {
 			List batmod = iclubVehicleMasterDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
+					IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
 
-			for (Object object : batmod) {
-				IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
-				IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
+					iCVm.setVmId(iclubVMaster.getVmId());
+					iCVm.setVmMake(iclubVMaster.getVmMake());
+					iCVm.setVmModel(iclubVMaster.getVmModel());
+					iCVm.setVmMrktRate(iclubVMaster.getVmMrktRate());
+					iCVm.setVmOrigRate(iclubVMaster.getVmOrigRate());
+					iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
+					iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
+					iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
+					iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
+					iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
 
-				iCVm.setVmId(iclubVMaster.getVmId());
-				iCVm.setVmMake(iclubVMaster.getVmMake());
-				iCVm.setVmModel(iclubVMaster.getVmModel());
-				iCVm.setVmMrktRate(iclubVMaster.getVmMrktRate());
-				iCVm.setVmOrigRate(iclubVMaster.getVmOrigRate());
-				iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
-				iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
-				iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
-				iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
-				iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
-
-				if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
-					String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
-						vehicles[i] = vehicle.getVId();
-						i++;
+					if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
+						String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
+							vehicles[i] = vehicle.getVId();
+							i++;
+						}
 					}
-				}
 
-				ret.add((T) iCVm);
+					ret.add((T) iCVm);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -181,9 +182,11 @@ public class IclubVehicleMasterService {
 		List<T> ret = new ArrayList<T>();
 		try {
 			List batmod = iclubNamedQueryDAO.findAllVmMakes();
-			for (Object object : batmod) {
-				String vmMake = (String) object;
-				ret.add((T) vmMake);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					String vmMake = (String) object;
+					ret.add((T) vmMake);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -200,7 +203,7 @@ public class IclubVehicleMasterService {
 
 		try {
 			List batmod = iclubVehicleMasterDAO.findByVmMake(vmMake);
-
+			if(batmod!=null&& batmod.size()>0){
 			for (Object object : batmod) {
 				IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
 				IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
@@ -227,7 +230,7 @@ public class IclubVehicleMasterService {
 				}
 
 				ret.add((T) iCVm);
-			}
+			}}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
@@ -243,7 +246,7 @@ public class IclubVehicleMasterService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehicleMaster.class.getSimpleName());
-
+			if(batmod!=null&& batmod.size()>0){
 			for (Object object : batmod) {
 				IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
 				IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
@@ -270,7 +273,7 @@ public class IclubVehicleMasterService {
 				}
 
 				ret.add((T) iCVm);
-			}
+			}}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

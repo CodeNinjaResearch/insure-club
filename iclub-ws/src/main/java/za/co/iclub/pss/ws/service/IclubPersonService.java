@@ -202,424 +202,425 @@ public class IclubPersonService {
 
 		try {
 			List batmod = iclubPersonDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPerson iPerson = (IclubPerson) object;
 
-			for (Object object : batmod) {
-				IclubPerson iPerson = (IclubPerson) object;
+					IclubPersonModel model = new IclubPersonModel();
+					model.setPId(iPerson.getPId());
+					model.setPCrtdDt(iPerson.getPCrtdDt());
+					model.setPDob(iPerson.getPDob());
+					model.setPEmail(iPerson.getPEmail());
+					model.setPFName(iPerson.getPFName());
+					model.setPIdNum(iPerson.getPIdNum());
+					model.setPAge(iPerson.getPAge());
+					model.setPLName(iPerson.getPLName());
+					model.setPMobile(iPerson.getPMobile());
+					model.setPAddress(iPerson.getPAddress());
+					model.setPIdIssueDt(iPerson.getPIdIssueDt());
+					model.setPContactPref(iPerson.getPContactPref());
+					model.setPGender(iPerson.getPGender());
+					model.setPIdNum(iPerson.getPIdNum());
+					model.setPContactPref(iPerson.getPContactPref());
+					model.setPIdExpiryDt(iPerson.getPIdExpiryDt());
+					model.setPInitials(iPerson.getPInitials());
+					model.setPIsPensioner(iPerson.getPIsPensioner());
+					model.setPIdIssueCntry(iPerson.getPIdIssueCntry());
+					model.setPLat(iPerson.getPLat());
+					model.setPLong(iPerson.getPLong());
+					model.setPOccupation(iPerson.getPOccupation());
+					model.setPTitle(iPerson.getPTitle());
+					model.setPZipCd(iPerson.getPZipCd());
+					model.setIclubIdType(iPerson.getIclubIdType() != null ? (iPerson.getIclubIdType().getItId()) : null);
+					model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
+					model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
 
-				IclubPersonModel model = new IclubPersonModel();
-				model.setPId(iPerson.getPId());
-				model.setPCrtdDt(iPerson.getPCrtdDt());
-				model.setPDob(iPerson.getPDob());
-				model.setPEmail(iPerson.getPEmail());
-				model.setPFName(iPerson.getPFName());
-				model.setPIdNum(iPerson.getPIdNum());
-				model.setPAge(iPerson.getPAge());
-				model.setPLName(iPerson.getPLName());
-				model.setPMobile(iPerson.getPMobile());
-				model.setPAddress(iPerson.getPAddress());
-				model.setPIdIssueDt(iPerson.getPIdIssueDt());
-				model.setPContactPref(iPerson.getPContactPref());
-				model.setPGender(iPerson.getPGender());
-				model.setPIdNum(iPerson.getPIdNum());
-				model.setPContactPref(iPerson.getPContactPref());
-				model.setPIdExpiryDt(iPerson.getPIdExpiryDt());
-				model.setPInitials(iPerson.getPInitials());
-				model.setPIsPensioner(iPerson.getPIsPensioner());
-				model.setPIdIssueCntry(iPerson.getPIdIssueCntry());
-				model.setPLat(iPerson.getPLat());
-				model.setPLong(iPerson.getPLong());
-				model.setPOccupation(iPerson.getPOccupation());
-				model.setPTitle(iPerson.getPTitle());
-				model.setPZipCd(iPerson.getPZipCd());
-				model.setIclubIdType(iPerson.getIclubIdType() != null ? (iPerson.getIclubIdType().getItId()) : null);
-				model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
-				model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
+					if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
+						String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
+						int i = 0;
+						for (IclubCohortPerson iclubCohortPersonsForCpPersonId : iPerson.getIclubCohortPersonsForCpPersonId()) {
+							iclubCohortPersonsForCpPersonIds[i] = iclubCohortPersonsForCpPersonId.getCpId();
+							i++;
+						}
+						model.setIclubCohortPersonsForCpPersonId(iclubCohortPersonsForCpPersonIds);
+					}
+					if (iPerson.getIclubCohortsForCPrimaryUserId() != null && iPerson.getIclubCohortsForCPrimaryUserId().size() > 0) {
+						String[] iclubCohortsForCPrimaryUserIds = new String[iPerson.getIclubCohortsForCPrimaryUserId().size()];
+						int i = 0;
+						for (IclubCohort iclubCohortsForCPrimaryUserId : iPerson.getIclubCohortsForCPrimaryUserId()) {
+							iclubCohortsForCPrimaryUserIds[i] = iclubCohortsForCPrimaryUserId.getCId();
+							i++;
+						}
+						model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
+					}
 
-				if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
-					String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
-					int i = 0;
-					for (IclubCohortPerson iclubCohortPersonsForCpPersonId : iPerson.getIclubCohortPersonsForCpPersonId()) {
-						iclubCohortPersonsForCpPersonIds[i] = iclubCohortPersonsForCpPersonId.getCpId();
-						i++;
+					if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
+						String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
+						int i = 0;
+						for (IclubCohortClaim iclubCohortClaim : iPerson.getIclubCohortClaims()) {
+							iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+							i++;
+						}
+						model.setIclubCohortClaims(iclubCohortClaims);
 					}
-					model.setIclubCohortPersonsForCpPersonId(iclubCohortPersonsForCpPersonIds);
-				}
-				if (iPerson.getIclubCohortsForCPrimaryUserId() != null && iPerson.getIclubCohortsForCPrimaryUserId().size() > 0) {
-					String[] iclubCohortsForCPrimaryUserIds = new String[iPerson.getIclubCohortsForCPrimaryUserId().size()];
-					int i = 0;
-					for (IclubCohort iclubCohortsForCPrimaryUserId : iPerson.getIclubCohortsForCPrimaryUserId()) {
-						iclubCohortsForCPrimaryUserIds[i] = iclubCohortsForCPrimaryUserId.getCId();
-						i++;
-					}
-					model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
-				}
 
-				if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
-					String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
-					int i = 0;
-					for (IclubCohortClaim iclubCohortClaim : iPerson.getIclubCohortClaims()) {
-						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
-						i++;
+					if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
+						String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
+						int i = 0;
+						for (IclubCohortPerson iclubCohortPersonsForCpCrtdBy : iPerson.getIclubCohortPersonsForCpCrtdBy()) {
+							iclubCohortPersonsForCpCrtdBys[i] = iclubCohortPersonsForCpCrtdBy.getCpId();
+							i++;
+						}
+						model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
 					}
-					model.setIclubCohortClaims(iclubCohortClaims);
-				}
 
-				if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
-					String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
-					int i = 0;
-					for (IclubCohortPerson iclubCohortPersonsForCpCrtdBy : iPerson.getIclubCohortPersonsForCpCrtdBy()) {
-						iclubCohortPersonsForCpCrtdBys[i] = iclubCohortPersonsForCpCrtdBy.getCpId();
-						i++;
+					if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
+						String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
+						int i = 0;
+						for (IclubCohort iclubCohortsForCCrtdBy : iPerson.getIclubCohortsForCCrtdBy()) {
+							iclubCohortsForCCrtdBys[i] = iclubCohortsForCCrtdBy.getCId();
+							i++;
+						}
+						model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
 					}
-					model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
-				}
 
-				if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
-					String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
-					int i = 0;
-					for (IclubCohort iclubCohortsForCCrtdBy : iPerson.getIclubCohortsForCCrtdBy()) {
-						iclubCohortsForCCrtdBys[i] = iclubCohortsForCCrtdBy.getCId();
-						i++;
+					if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
+						String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
+						int i = 0;
+						for (IclubMessageBoard iclubMessageBoard : iPerson.getIclubMessageBoards()) {
+							iclubMessageBoards[i] = iclubMessageBoard.getMbId();
+							i++;
+						}
+						model.setIclubMessageBoards(iclubMessageBoards);
 					}
-					model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
-				}
+					if (iPerson.getIclubPersons() != null && iPerson.getIclubPersons().size() > 0) {
+						String[] iclubPersons = new String[iPerson.getIclubPersons().size()];
+						int i = 0;
+						for (IclubPerson iclubPerson : iPerson.getIclubPersons()) {
+							iclubPersons[i] = iclubPerson.getPId();
+							i++;
+						}
+						model.setIclubPersons(iclubPersons);
+					}
+					if (iPerson.getIclubExtrases() != null && iPerson.getIclubExtrases().size() > 0) {
+						Long[] iclubExtrases = new Long[iPerson.getIclubExtrases().size()];
+						int i = 0;
+						for (IclubExtras iclubExtras : iPerson.getIclubExtrases()) {
+							iclubExtrases[i] = iclubExtras.getEId();
+							i++;
+						}
+						model.setIclubExtrases(iclubExtrases);
+					}
+					if (iPerson.getIclubSecurityMasters() != null && iPerson.getIclubSecurityMasters().size() > 0) {
+						String[] iclubSecurityMasters = new String[iPerson.getIclubSecurityMasters().size()];
+						int i = 0;
+						for (IclubSecurityMaster iclubSecurityMaster : iPerson.getIclubSecurityMasters()) {
+							iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
+							i++;
+						}
+						model.setIclubSecurityMasters(iclubSecurityMasters);
+					}
+					if (iPerson.getIclubProperties() != null && iPerson.getIclubProperties().size() > 0) {
+						String[] iclubProperties = new String[iPerson.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty iclubProperty : iPerson.getIclubProperties()) {
+							iclubProperties[i] = iclubProperty.getPId();
+							i++;
+						}
+						model.setIclubProperties(iclubProperties);
+					}
+					if (iPerson.getIclubInsurerMasters() != null && iPerson.getIclubInsurerMasters().size() > 0) {
+						Long[] iclubInsurerMasters = new Long[iPerson.getIclubInsurerMasters().size()];
+						int i = 0;
+						for (IclubInsurerMaster iclubInsurerMaster : iPerson.getIclubInsurerMasters()) {
+							iclubInsurerMasters[i] = iclubInsurerMaster.getImId();
+							i++;
+						}
+						model.setIclubInsurerMasters(iclubInsurerMasters);
+					}
+					if (iPerson.getIclubLicenseCodes() != null && iPerson.getIclubLicenseCodes().size() > 0) {
+						Long[] iclubLicenseCodes = new Long[iPerson.getIclubLicenseCodes().size()];
+						int i = 0;
+						for (IclubLicenseCode iclubLicenseCode : iPerson.getIclubLicenseCodes()) {
+							iclubLicenseCodes[i] = iclubLicenseCode.getLcId();
+							i++;
+						}
+						model.setIclubLicenseCodes(iclubLicenseCodes);
+					}
+					if (iPerson.getIclubAccounts() != null && iPerson.getIclubAccounts().size() > 0) {
+						String[] iclubAccounts = new String[iPerson.getIclubAccounts().size()];
+						int i = 0;
+						for (IclubAccount iclubAccount : iPerson.getIclubAccounts()) {
+							iclubAccounts[i] = iclubAccount.getAId();
+							i++;
+						}
+						model.setIclubAccounts(iclubAccounts);
+					}
+					if (iPerson.getIclubVehicles() != null && iPerson.getIclubVehicles().size() > 0) {
+						String[] iclubVehicles = new String[iPerson.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle iclubVehicle : iPerson.getIclubVehicles()) {
+							iclubVehicles[i] = iclubVehicle.getVId();
+							i++;
+						}
+						model.setIclubVehicles(iclubVehicles);
+					}
+					if (iPerson.getIclubSupplMasters() != null && iPerson.getIclubSupplMasters().size() > 0) {
+						String[] iclubSupplMasters = new String[iPerson.getIclubSupplMasters().size()];
+						int i = 0;
+						for (IclubSupplMaster iclubSupplMaster : iPerson.getIclubSupplMasters()) {
+							iclubSupplMasters[i] = iclubSupplMaster.getSmId();
+							i++;
+						}
+						model.setIclubSupplMasters(iclubSupplMasters);
+					}
+					if (iPerson.getIclubConfigs() != null && iPerson.getIclubConfigs().size() > 0) {
+						Long[] iclubConfigs = new Long[iPerson.getIclubConfigs().size()];
+						int i = 0;
+						for (IclubConfig iclubConfig : iPerson.getIclubConfigs()) {
+							iclubConfigs[i] = iclubConfig.getCId();
+							i++;
+						}
+						model.setIclubConfigs(iclubConfigs);
+					}
+					if (iPerson.getIclubClaims() != null && iPerson.getIclubClaims().size() > 0) {
+						String[] iclubClaims = new String[iPerson.getIclubClaims().size()];
+						int i = 0;
+						for (IclubClaim iclubClaim : iPerson.getIclubClaims()) {
+							iclubClaims[i] = iclubClaim.getCId();
+							i++;
+						}
+						model.setIclubClaims(iclubClaims);
+					}
+					if (iPerson.getIclubRateTypes() != null && iPerson.getIclubRateTypes().size() > 0) {
+						Long[] iclubRateTypes = new Long[iPerson.getIclubRateTypes().size()];
+						int i = 0;
+						for (IclubRateType iclubRateType : iPerson.getIclubRateTypes()) {
+							iclubRateTypes[i] = iclubRateType.getRtId();
+							i++;
+						}
+						model.setIclubRateTypes(iclubRateTypes);
+					}
+					if (iPerson.getIclubEvents() != null && iPerson.getIclubEvents().size() > 0) {
+						String[] iclubEvents = new String[iPerson.getIclubEvents().size()];
+						int i = 0;
+						for (IclubEvent iclubEvent : iPerson.getIclubEvents()) {
+							iclubEvents[i] = iclubEvent.getEId();
+							i++;
+						}
+						model.setIclubEvents(iclubEvents);
+					}
+					if (iPerson.getIclubOccupations() != null && iPerson.getIclubOccupations().size() > 0) {
+						Long[] iclubOccupations = new Long[iPerson.getIclubOccupations().size()];
+						int i = 0;
+						for (IclubOccupation iclubOccupation : iPerson.getIclubOccupations()) {
+							iclubOccupations[i] = iclubOccupation.getOId();
+							i++;
+						}
+						model.setIclubOccupations(iclubOccupations);
+					}
+					if (iPerson.getIclubPayments() != null && iPerson.getIclubPayments().size() > 0) {
+						String[] iclubPayments = new String[iPerson.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment iclubPayment : iPerson.getIclubPayments()) {
+							iclubPayments[i] = iclubPayment.getPId();
+							i++;
+						}
+						model.setIclubPayments(iclubPayments);
+					}
+					if (iPerson.getIclubSecurityDevices() != null && iPerson.getIclubSecurityDevices().size() > 0) {
+						String[] iclubSecurityDevices = new String[iPerson.getIclubSecurityDevices().size()];
+						int i = 0;
+						for (IclubSecurityDevice iclubSecurityDevice : iPerson.getIclubSecurityDevices()) {
+							iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
+							i++;
+						}
+						model.setIclubSecurityDevices(iclubSecurityDevices);
+					}
+					if (iPerson.getIclubPolicies() != null && iPerson.getIclubPolicies().size() > 0) {
+						String[] iclubPolicies = new String[iPerson.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy iclubPolicy : iPerson.getIclubPolicies()) {
+							iclubPolicies[i] = iclubPolicy.getPId();
+							i++;
+						}
+						model.setIclubPolicies(iclubPolicies);
+					}
+					if (iPerson.getIclubMbComments() != null && iPerson.getIclubMbComments().size() > 0) {
+						String[] iclubMbComments = new String[iPerson.getIclubMbComments().size()];
+						int i = 0;
+						for (IclubMbComment iclubMbComment : iPerson.getIclubMbComments()) {
+							iclubMbComments[i] = iclubMbComment.getMbcId();
+							i++;
+						}
+						model.setIclubMbComments(iclubMbComments);
+					}
+					if (iPerson.getIclubQuotesForQCrtdBy() != null && iPerson.getIclubQuotesForQCrtdBy().size() > 0) {
+						String[] iclubQuotesForQCrtdBy = new String[iPerson.getIclubQuotesForQCrtdBy().size()];
+						int i = 0;
+						for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQCrtdBy()) {
+							iclubQuotesForQCrtdBy[i] = iclubQuote.getQId();
+							i++;
+						}
+						model.setIclubQuotesForQCrtdBy(iclubQuotesForQCrtdBy);
+					}
 
-				if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
-					String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
-					int i = 0;
-					for (IclubMessageBoard iclubMessageBoard : iPerson.getIclubMessageBoards()) {
-						iclubMessageBoards[i] = iclubMessageBoard.getMbId();
-						i++;
+					if (iPerson.getIclubDocuments() != null && iPerson.getIclubDocuments().size() > 0) {
+						String[] iclubDocuments = new String[iPerson.getIclubDocuments().size()];
+						int i = 0;
+						for (IclubDocument iclubDocument : iPerson.getIclubDocuments()) {
+							iclubDocuments[i] = iclubDocument.getDId();
+							i++;
+						}
+						model.setIclubDocuments(iclubDocuments);
 					}
-					model.setIclubMessageBoards(iclubMessageBoards);
-				}
-				if (iPerson.getIclubPersons() != null && iPerson.getIclubPersons().size() > 0) {
-					String[] iclubPersons = new String[iPerson.getIclubPersons().size()];
-					int i = 0;
-					for (IclubPerson iclubPerson : iPerson.getIclubPersons()) {
-						iclubPersons[i] = iclubPerson.getPId();
-						i++;
+					if (iPerson.getIclubRateEngines() != null && iPerson.getIclubRateEngines().size() > 0) {
+						String[] iclubRateEngines = new String[iPerson.getIclubRateEngines().size()];
+						int i = 0;
+						for (IclubRateEngine iclubRateEngine : iPerson.getIclubRateEngines()) {
+							iclubRateEngines[i] = iclubRateEngine.getReId();
+							i++;
+						}
+						model.setIclubRateEngines(iclubRateEngines);
 					}
-					model.setIclubPersons(iclubPersons);
-				}
-				if (iPerson.getIclubExtrases() != null && iPerson.getIclubExtrases().size() > 0) {
-					Long[] iclubExtrases = new Long[iPerson.getIclubExtrases().size()];
-					int i = 0;
-					for (IclubExtras iclubExtras : iPerson.getIclubExtrases()) {
-						iclubExtrases[i] = iclubExtras.getEId();
-						i++;
+					if (iPerson.getIclubGeoLocs() != null && iPerson.getIclubGeoLocs().size() > 0) {
+						Long[] iclubGeoLocs = new Long[iPerson.getIclubGeoLocs().size()];
+						int i = 0;
+						for (IclubGeoLoc iclubGeoLoc : iPerson.getIclubGeoLocs()) {
+							iclubGeoLocs[i] = iclubGeoLoc.getGlId();
+							i++;
+						}
+						model.setIclubGeoLocs(iclubGeoLocs);
 					}
-					model.setIclubExtrases(iclubExtrases);
-				}
-				if (iPerson.getIclubSecurityMasters() != null && iPerson.getIclubSecurityMasters().size() > 0) {
-					String[] iclubSecurityMasters = new String[iPerson.getIclubSecurityMasters().size()];
-					int i = 0;
-					for (IclubSecurityMaster iclubSecurityMaster : iPerson.getIclubSecurityMasters()) {
-						iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
-						i++;
+					if (iPerson.getIclubQuotesForQPersonId() != null && iPerson.getIclubQuotesForQPersonId().size() > 0) {
+						String[] iclubQuotesForQPersonId = new String[iPerson.getIclubQuotesForQPersonId().size()];
+						int i = 0;
+						for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQPersonId()) {
+							iclubQuotesForQPersonId[i] = iclubQuote.getQId();
+							i++;
+						}
+						model.setIclubQuotesForQPersonId(iclubQuotesForQPersonId);
 					}
-					model.setIclubSecurityMasters(iclubSecurityMasters);
-				}
-				if (iPerson.getIclubProperties() != null && iPerson.getIclubProperties().size() > 0) {
-					String[] iclubProperties = new String[iPerson.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty iclubProperty : iPerson.getIclubProperties()) {
-						iclubProperties[i] = iclubProperty.getPId();
-						i++;
+					if (iPerson.getIclubTrackerMasters() != null && iPerson.getIclubTrackerMasters().size() > 0) {
+						Long[] iclubTrackerMasters = new Long[iPerson.getIclubTrackerMasters().size()];
+						int i = 0;
+						for (IclubTrackerMaster iclubTrackerMaster : iPerson.getIclubTrackerMasters()) {
+							iclubTrackerMasters[i] = iclubTrackerMaster.getTmId();
+							i++;
+						}
+						model.setIclubTrackerMasters(iclubTrackerMasters);
 					}
-					model.setIclubProperties(iclubProperties);
-				}
-				if (iPerson.getIclubInsurerMasters() != null && iPerson.getIclubInsurerMasters().size() > 0) {
-					Long[] iclubInsurerMasters = new Long[iPerson.getIclubInsurerMasters().size()];
-					int i = 0;
-					for (IclubInsurerMaster iclubInsurerMaster : iPerson.getIclubInsurerMasters()) {
-						iclubInsurerMasters[i] = iclubInsurerMaster.getImId();
-						i++;
+					if (iPerson.getIclubCoverTypes() != null && iPerson.getIclubCoverTypes().size() > 0) {
+						Long[] iclubCoverTypes = new Long[iPerson.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubCoverType iclubCoverType : iPerson.getIclubCoverTypes()) {
+							iclubCoverTypes[i] = iclubCoverType.getCtId();
+							i++;
+						}
+						model.setIclubCoverTypes(iclubCoverTypes);
 					}
-					model.setIclubInsurerMasters(iclubInsurerMasters);
-				}
-				if (iPerson.getIclubLicenseCodes() != null && iPerson.getIclubLicenseCodes().size() > 0) {
-					Long[] iclubLicenseCodes = new Long[iPerson.getIclubLicenseCodes().size()];
-					int i = 0;
-					for (IclubLicenseCode iclubLicenseCode : iPerson.getIclubLicenseCodes()) {
-						iclubLicenseCodes[i] = iclubLicenseCode.getLcId();
-						i++;
+					if (iPerson.getIclubCountryCodes() != null && iPerson.getIclubCountryCodes().size() > 0) {
+						Integer[] iclubCountryCodes = new Integer[iPerson.getIclubCountryCodes().size()];
+						int i = 0;
+						for (IclubCountryCode iclubCountryCode : iPerson.getIclubCountryCodes()) {
+							iclubCountryCodes[i] = iclubCountryCode.getCcId();
+							i++;
+						}
+						model.setIclubCountryCodes(iclubCountryCodes);
 					}
-					model.setIclubLicenseCodes(iclubLicenseCodes);
-				}
-				if (iPerson.getIclubAccounts() != null && iPerson.getIclubAccounts().size() > 0) {
-					String[] iclubAccounts = new String[iPerson.getIclubAccounts().size()];
-					int i = 0;
-					for (IclubAccount iclubAccount : iPerson.getIclubAccounts()) {
-						iclubAccounts[i] = iclubAccount.getAId();
-						i++;
+					if (iPerson.getIclubBankMasters() != null && iPerson.getIclubBankMasters().size() > 0) {
+						Long[] iclubBankMasters = new Long[iPerson.getIclubBankMasters().size()];
+						int i = 0;
+						for (IclubBankMaster iclubBankMaster : iPerson.getIclubBankMasters()) {
+							iclubBankMasters[i] = iclubBankMaster.getBmId();
+							i++;
+						}
+						model.setIclubBankMasters(iclubBankMasters);
 					}
-					model.setIclubAccounts(iclubAccounts);
-				}
-				if (iPerson.getIclubVehicles() != null && iPerson.getIclubVehicles().size() > 0) {
-					String[] iclubVehicles = new String[iPerson.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle iclubVehicle : iPerson.getIclubVehicles()) {
-						iclubVehicles[i] = iclubVehicle.getVId();
-						i++;
-					}
-					model.setIclubVehicles(iclubVehicles);
-				}
-				if (iPerson.getIclubSupplMasters() != null && iPerson.getIclubSupplMasters().size() > 0) {
-					String[] iclubSupplMasters = new String[iPerson.getIclubSupplMasters().size()];
-					int i = 0;
-					for (IclubSupplMaster iclubSupplMaster : iPerson.getIclubSupplMasters()) {
-						iclubSupplMasters[i] = iclubSupplMaster.getSmId();
-						i++;
-					}
-					model.setIclubSupplMasters(iclubSupplMasters);
-				}
-				if (iPerson.getIclubConfigs() != null && iPerson.getIclubConfigs().size() > 0) {
-					Long[] iclubConfigs = new Long[iPerson.getIclubConfigs().size()];
-					int i = 0;
-					for (IclubConfig iclubConfig : iPerson.getIclubConfigs()) {
-						iclubConfigs[i] = iclubConfig.getCId();
-						i++;
-					}
-					model.setIclubConfigs(iclubConfigs);
-				}
-				if (iPerson.getIclubClaims() != null && iPerson.getIclubClaims().size() > 0) {
-					String[] iclubClaims = new String[iPerson.getIclubClaims().size()];
-					int i = 0;
-					for (IclubClaim iclubClaim : iPerson.getIclubClaims()) {
-						iclubClaims[i] = iclubClaim.getCId();
-						i++;
-					}
-					model.setIclubClaims(iclubClaims);
-				}
-				if (iPerson.getIclubRateTypes() != null && iPerson.getIclubRateTypes().size() > 0) {
-					Long[] iclubRateTypes = new Long[iPerson.getIclubRateTypes().size()];
-					int i = 0;
-					for (IclubRateType iclubRateType : iPerson.getIclubRateTypes()) {
-						iclubRateTypes[i] = iclubRateType.getRtId();
-						i++;
-					}
-					model.setIclubRateTypes(iclubRateTypes);
-				}
-				if (iPerson.getIclubEvents() != null && iPerson.getIclubEvents().size() > 0) {
-					String[] iclubEvents = new String[iPerson.getIclubEvents().size()];
-					int i = 0;
-					for (IclubEvent iclubEvent : iPerson.getIclubEvents()) {
-						iclubEvents[i] = iclubEvent.getEId();
-						i++;
-					}
-					model.setIclubEvents(iclubEvents);
-				}
-				if (iPerson.getIclubOccupations() != null && iPerson.getIclubOccupations().size() > 0) {
-					Long[] iclubOccupations = new Long[iPerson.getIclubOccupations().size()];
-					int i = 0;
-					for (IclubOccupation iclubOccupation : iPerson.getIclubOccupations()) {
-						iclubOccupations[i] = iclubOccupation.getOId();
-						i++;
-					}
-					model.setIclubOccupations(iclubOccupations);
-				}
-				if (iPerson.getIclubPayments() != null && iPerson.getIclubPayments().size() > 0) {
-					String[] iclubPayments = new String[iPerson.getIclubPayments().size()];
-					int i = 0;
-					for (IclubPayment iclubPayment : iPerson.getIclubPayments()) {
-						iclubPayments[i] = iclubPayment.getPId();
-						i++;
-					}
-					model.setIclubPayments(iclubPayments);
-				}
-				if (iPerson.getIclubSecurityDevices() != null && iPerson.getIclubSecurityDevices().size() > 0) {
-					String[] iclubSecurityDevices = new String[iPerson.getIclubSecurityDevices().size()];
-					int i = 0;
-					for (IclubSecurityDevice iclubSecurityDevice : iPerson.getIclubSecurityDevices()) {
-						iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
-						i++;
-					}
-					model.setIclubSecurityDevices(iclubSecurityDevices);
-				}
-				if (iPerson.getIclubPolicies() != null && iPerson.getIclubPolicies().size() > 0) {
-					String[] iclubPolicies = new String[iPerson.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy iclubPolicy : iPerson.getIclubPolicies()) {
-						iclubPolicies[i] = iclubPolicy.getPId();
-						i++;
-					}
-					model.setIclubPolicies(iclubPolicies);
-				}
-				if (iPerson.getIclubMbComments() != null && iPerson.getIclubMbComments().size() > 0) {
-					String[] iclubMbComments = new String[iPerson.getIclubMbComments().size()];
-					int i = 0;
-					for (IclubMbComment iclubMbComment : iPerson.getIclubMbComments()) {
-						iclubMbComments[i] = iclubMbComment.getMbcId();
-						i++;
-					}
-					model.setIclubMbComments(iclubMbComments);
-				}
-				if (iPerson.getIclubQuotesForQCrtdBy() != null && iPerson.getIclubQuotesForQCrtdBy().size() > 0) {
-					String[] iclubQuotesForQCrtdBy = new String[iPerson.getIclubQuotesForQCrtdBy().size()];
-					int i = 0;
-					for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQCrtdBy()) {
-						iclubQuotesForQCrtdBy[i] = iclubQuote.getQId();
-						i++;
-					}
-					model.setIclubQuotesForQCrtdBy(iclubQuotesForQCrtdBy);
-				}
 
-				if (iPerson.getIclubDocuments() != null && iPerson.getIclubDocuments().size() > 0) {
-					String[] iclubDocuments = new String[iPerson.getIclubDocuments().size()];
-					int i = 0;
-					for (IclubDocument iclubDocument : iPerson.getIclubDocuments()) {
-						iclubDocuments[i] = iclubDocument.getDId();
-						i++;
+					if (iPerson.getIclubNotifs() != null && iPerson.getIclubNotifs().size() > 0) {
+						String[] iclubNotifs = new String[iPerson.getIclubNotifs().size()];
+						int i = 0;
+						for (IclubNotif iclubNotif : iPerson.getIclubNotifs()) {
+							iclubNotifs[i] = iclubNotif.getNId();
+							i++;
+						}
+						model.setIclubNotifs(iclubNotifs);
 					}
-					model.setIclubDocuments(iclubDocuments);
-				}
-				if (iPerson.getIclubRateEngines() != null && iPerson.getIclubRateEngines().size() > 0) {
-					String[] iclubRateEngines = new String[iPerson.getIclubRateEngines().size()];
-					int i = 0;
-					for (IclubRateEngine iclubRateEngine : iPerson.getIclubRateEngines()) {
-						iclubRateEngines[i] = iclubRateEngine.getReId();
-						i++;
+					if (iPerson.getIclubVehicleMasters() != null && iPerson.getIclubVehicleMasters().size() > 0) {
+						Long[] iclubVehicleMasters = new Long[iPerson.getIclubVehicleMasters().size()];
+						int i = 0;
+						for (IclubVehicleMaster iclubVehicleMaster : iPerson.getIclubVehicleMasters()) {
+							iclubVehicleMasters[i] = iclubVehicleMaster.getVmId();
+							i++;
+						}
+						model.setIclubVehicleMasters(iclubVehicleMasters);
 					}
-					model.setIclubRateEngines(iclubRateEngines);
-				}
-				if (iPerson.getIclubGeoLocs() != null && iPerson.getIclubGeoLocs().size() > 0) {
-					Long[] iclubGeoLocs = new Long[iPerson.getIclubGeoLocs().size()];
-					int i = 0;
-					for (IclubGeoLoc iclubGeoLoc : iPerson.getIclubGeoLocs()) {
-						iclubGeoLocs[i] = iclubGeoLoc.getGlId();
-						i++;
+					if (iPerson.getIclubDriversForDCrtdBy() != null && iPerson.getIclubDriversForDCrtdBy().size() > 0) {
+						String[] iclubDriversForDCrtdBy = new String[iPerson.getIclubDriversForDCrtdBy().size()];
+						int i = 0;
+						for (IclubDriver iclubDriver : iPerson.getIclubDriversForDCrtdBy()) {
+							iclubDriversForDCrtdBy[i] = iclubDriver.getDId();
+							i++;
+						}
+						model.setIclubDriversForDCrtdBy(iclubDriversForDCrtdBy);
 					}
-					model.setIclubGeoLocs(iclubGeoLocs);
-				}
-				if (iPerson.getIclubQuotesForQPersonId() != null && iPerson.getIclubQuotesForQPersonId().size() > 0) {
-					String[] iclubQuotesForQPersonId = new String[iPerson.getIclubQuotesForQPersonId().size()];
-					int i = 0;
-					for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQPersonId()) {
-						iclubQuotesForQPersonId[i] = iclubQuote.getQId();
-						i++;
+					if (iPerson.getIclubPurposeTypes() != null && iPerson.getIclubPurposeTypes().size() > 0) {
+						Long[] purposeTypes = new Long[iPerson.getIclubPurposeTypes().size()];
+						int i = 0;
+						for (IclubPurposeType iclubPurposeType : iPerson.getIclubPurposeTypes()) {
+							purposeTypes[i] = iclubPurposeType.getPtId();
+							i++;
+						}
+						model.setIclubPurposeTypes(purposeTypes);
 					}
-					model.setIclubQuotesForQPersonId(iclubQuotesForQPersonId);
-				}
-				if (iPerson.getIclubTrackerMasters() != null && iPerson.getIclubTrackerMasters().size() > 0) {
-					Long[] iclubTrackerMasters = new Long[iPerson.getIclubTrackerMasters().size()];
-					int i = 0;
-					for (IclubTrackerMaster iclubTrackerMaster : iPerson.getIclubTrackerMasters()) {
-						iclubTrackerMasters[i] = iclubTrackerMaster.getTmId();
-						i++;
+					if (iPerson.getIclubDriversForDPersonId() != null && iPerson.getIclubDriversForDPersonId().size() > 0) {
+						String[] driversForDPersonId = new String[iPerson.getIclubDriversForDPersonId().size()];
+						int i = 0;
+						for (IclubDriver iclubDriver : iPerson.getIclubDriversForDPersonId()) {
+							driversForDPersonId[i] = iclubDriver.getDId();
+							i++;
+						}
+						model.setIclubDriversForDPersonId(driversForDPersonId);
 					}
-					model.setIclubTrackerMasters(iclubTrackerMasters);
-				}
-				if (iPerson.getIclubCoverTypes() != null && iPerson.getIclubCoverTypes().size() > 0) {
-					Long[] iclubCoverTypes = new Long[iPerson.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubCoverType iclubCoverType : iPerson.getIclubCoverTypes()) {
-						iclubCoverTypes[i] = iclubCoverType.getCtId();
-						i++;
+					if (iPerson.getIclubInsuranceItems() != null && iPerson.getIclubInsuranceItems().size() > 0) {
+						String[] insuranceItems = new String[iPerson.getIclubInsuranceItems().size()];
+						int i = 0;
+						for (IclubInsuranceItem iclubInsuranceItem : iPerson.getIclubInsuranceItems()) {
+							insuranceItems[i] = iclubInsuranceItem.getIiId();
+							i++;
+						}
+						model.setIclubInsuranceItems(insuranceItems);
 					}
-					model.setIclubCoverTypes(iclubCoverTypes);
-				}
-				if (iPerson.getIclubCountryCodes() != null && iPerson.getIclubCountryCodes().size() > 0) {
-					Integer[] iclubCountryCodes = new Integer[iPerson.getIclubCountryCodes().size()];
-					int i = 0;
-					for (IclubCountryCode iclubCountryCode : iPerson.getIclubCountryCodes()) {
-						iclubCountryCodes[i] = iclubCountryCode.getCcId();
-						i++;
+					if (iPerson.getIclubLoginsForLPersonId() != null && iPerson.getIclubLoginsForLPersonId().size() > 0) {
+						String[] loginsForLPersonId = new String[iPerson.getIclubLoginsForLPersonId().size()];
+						int i = 0;
+						for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLPersonId()) {
+							loginsForLPersonId[i] = iclubLogin.getLId();
+							i++;
+						}
+						model.setIclubLoginsForLPersonId(loginsForLPersonId);
 					}
-					model.setIclubCountryCodes(iclubCountryCodes);
-				}
-				if (iPerson.getIclubBankMasters() != null && iPerson.getIclubBankMasters().size() > 0) {
-					Long[] iclubBankMasters = new Long[iPerson.getIclubBankMasters().size()];
-					int i = 0;
-					for (IclubBankMaster iclubBankMaster : iPerson.getIclubBankMasters()) {
-						iclubBankMasters[i] = iclubBankMaster.getBmId();
-						i++;
+					if (iPerson.getIclubLoginsForLCrtdBy() != null && iPerson.getIclubLoginsForLCrtdBy().size() > 0) {
+						String[] LoginsForLCrtdBy = new String[iPerson.getIclubLoginsForLCrtdBy().size()];
+						int i = 0;
+						for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLCrtdBy()) {
+							LoginsForLCrtdBy[i] = iclubLogin.getLId();
+							i++;
+						}
+						model.setIclubLoginsForLCrtdBy(LoginsForLCrtdBy);
 					}
-					model.setIclubBankMasters(iclubBankMasters);
-				}
-
-				if (iPerson.getIclubNotifs() != null && iPerson.getIclubNotifs().size() > 0) {
-					String[] iclubNotifs = new String[iPerson.getIclubNotifs().size()];
-					int i = 0;
-					for (IclubNotif iclubNotif : iPerson.getIclubNotifs()) {
-						iclubNotifs[i] = iclubNotif.getNId();
-						i++;
+					if (iPerson.getIclubMessages() != null && iPerson.getIclubMessages().size() > 0) {
+						String[] messages = new String[iPerson.getIclubMessages().size()];
+						int i = 0;
+						for (IclubMessage iclubMessage : iPerson.getIclubMessages()) {
+							messages[i] = iclubMessage.getMId();
+							i++;
+						}
+						model.setIclubMessages(messages);
 					}
-					model.setIclubNotifs(iclubNotifs);
+					ret.add((T) model);
 				}
-				if (iPerson.getIclubVehicleMasters() != null && iPerson.getIclubVehicleMasters().size() > 0) {
-					Long[] iclubVehicleMasters = new Long[iPerson.getIclubVehicleMasters().size()];
-					int i = 0;
-					for (IclubVehicleMaster iclubVehicleMaster : iPerson.getIclubVehicleMasters()) {
-						iclubVehicleMasters[i] = iclubVehicleMaster.getVmId();
-						i++;
-					}
-					model.setIclubVehicleMasters(iclubVehicleMasters);
-				}
-				if (iPerson.getIclubDriversForDCrtdBy() != null && iPerson.getIclubDriversForDCrtdBy().size() > 0) {
-					String[] iclubDriversForDCrtdBy = new String[iPerson.getIclubDriversForDCrtdBy().size()];
-					int i = 0;
-					for (IclubDriver iclubDriver : iPerson.getIclubDriversForDCrtdBy()) {
-						iclubDriversForDCrtdBy[i] = iclubDriver.getDId();
-						i++;
-					}
-					model.setIclubDriversForDCrtdBy(iclubDriversForDCrtdBy);
-				}
-				if (iPerson.getIclubPurposeTypes() != null && iPerson.getIclubPurposeTypes().size() > 0) {
-					Long[] purposeTypes = new Long[iPerson.getIclubPurposeTypes().size()];
-					int i = 0;
-					for (IclubPurposeType iclubPurposeType : iPerson.getIclubPurposeTypes()) {
-						purposeTypes[i] = iclubPurposeType.getPtId();
-						i++;
-					}
-					model.setIclubPurposeTypes(purposeTypes);
-				}
-				if (iPerson.getIclubDriversForDPersonId() != null && iPerson.getIclubDriversForDPersonId().size() > 0) {
-					String[] driversForDPersonId = new String[iPerson.getIclubDriversForDPersonId().size()];
-					int i = 0;
-					for (IclubDriver iclubDriver : iPerson.getIclubDriversForDPersonId()) {
-						driversForDPersonId[i] = iclubDriver.getDId();
-						i++;
-					}
-					model.setIclubDriversForDPersonId(driversForDPersonId);
-				}
-				if (iPerson.getIclubInsuranceItems() != null && iPerson.getIclubInsuranceItems().size() > 0) {
-					String[] insuranceItems = new String[iPerson.getIclubInsuranceItems().size()];
-					int i = 0;
-					for (IclubInsuranceItem iclubInsuranceItem : iPerson.getIclubInsuranceItems()) {
-						insuranceItems[i] = iclubInsuranceItem.getIiId();
-						i++;
-					}
-					model.setIclubInsuranceItems(insuranceItems);
-				}
-				if (iPerson.getIclubLoginsForLPersonId() != null && iPerson.getIclubLoginsForLPersonId().size() > 0) {
-					String[] loginsForLPersonId = new String[iPerson.getIclubLoginsForLPersonId().size()];
-					int i = 0;
-					for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLPersonId()) {
-						loginsForLPersonId[i] = iclubLogin.getLId();
-						i++;
-					}
-					model.setIclubLoginsForLPersonId(loginsForLPersonId);
-				}
-				if (iPerson.getIclubLoginsForLCrtdBy() != null && iPerson.getIclubLoginsForLCrtdBy().size() > 0) {
-					String[] LoginsForLCrtdBy = new String[iPerson.getIclubLoginsForLCrtdBy().size()];
-					int i = 0;
-					for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLCrtdBy()) {
-						LoginsForLCrtdBy[i] = iclubLogin.getLId();
-						i++;
-					}
-					model.setIclubLoginsForLCrtdBy(LoginsForLCrtdBy);
-				}
-				if (iPerson.getIclubMessages() != null && iPerson.getIclubMessages().size() > 0) {
-					String[] messages = new String[iPerson.getIclubMessages().size()];
-					int i = 0;
-					for (IclubMessage iclubMessage : iPerson.getIclubMessages()) {
-						messages[i] = iclubMessage.getMId();
-						i++;
-					}
-					model.setIclubMessages(messages);
-				}
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -638,425 +639,426 @@ public class IclubPersonService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPerson.class.getSimpleName());
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPerson iPerson = (IclubPerson) object;
 
-			for (Object object : batmod) {
-				IclubPerson iPerson = (IclubPerson) object;
+					IclubPersonModel model = new IclubPersonModel();
+					model.setPId(iPerson.getPId());
+					model.setPCrtdDt(iPerson.getPCrtdDt());
+					model.setPDob(iPerson.getPDob());
+					model.setPEmail(iPerson.getPEmail());
+					model.setPFName(iPerson.getPFName());
+					model.setPIdNum(iPerson.getPIdNum());
+					model.setPLName(iPerson.getPLName());
+					model.setPMobile(iPerson.getPMobile());
+					model.setPAddress(iPerson.getPAddress());
+					model.setPContactPref(iPerson.getPContactPref());
+					model.setPGender(iPerson.getPGender());
+					model.setPIdNum(iPerson.getPIdNum());
+					model.setPContactPref(iPerson.getPContactPref());
+					model.setPIdExpiryDt(iPerson.getPIdExpiryDt());
+					model.setPInitials(iPerson.getPInitials());
+					model.setPIsPensioner(iPerson.getPIsPensioner());
+					model.setPIdIssueCntry(iPerson.getPIdIssueCntry());
+					model.setPIdIssueDt(iPerson.getPIdIssueDt());
+					model.setPAge(iPerson.getPAge());
+					model.setPLat(iPerson.getPLat());
+					model.setPLong(iPerson.getPLong());
+					model.setPOccupation(iPerson.getPOccupation());
+					model.setPTitle(iPerson.getPTitle());
+					model.setPZipCd(iPerson.getPZipCd());
+					model.setIclubIdType(iPerson.getIclubIdType() != null ? (iPerson.getIclubIdType().getItId()) : null);
+					model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
+					model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
 
-				IclubPersonModel model = new IclubPersonModel();
-				model.setPId(iPerson.getPId());
-				model.setPCrtdDt(iPerson.getPCrtdDt());
-				model.setPDob(iPerson.getPDob());
-				model.setPEmail(iPerson.getPEmail());
-				model.setPFName(iPerson.getPFName());
-				model.setPIdNum(iPerson.getPIdNum());
-				model.setPLName(iPerson.getPLName());
-				model.setPMobile(iPerson.getPMobile());
-				model.setPAddress(iPerson.getPAddress());
-				model.setPContactPref(iPerson.getPContactPref());
-				model.setPGender(iPerson.getPGender());
-				model.setPIdNum(iPerson.getPIdNum());
-				model.setPContactPref(iPerson.getPContactPref());
-				model.setPIdExpiryDt(iPerson.getPIdExpiryDt());
-				model.setPInitials(iPerson.getPInitials());
-				model.setPIsPensioner(iPerson.getPIsPensioner());
-				model.setPIdIssueCntry(iPerson.getPIdIssueCntry());
-				model.setPIdIssueDt(iPerson.getPIdIssueDt());
-				model.setPAge(iPerson.getPAge());
-				model.setPLat(iPerson.getPLat());
-				model.setPLong(iPerson.getPLong());
-				model.setPOccupation(iPerson.getPOccupation());
-				model.setPTitle(iPerson.getPTitle());
-				model.setPZipCd(iPerson.getPZipCd());
-				model.setIclubIdType(iPerson.getIclubIdType() != null ? (iPerson.getIclubIdType().getItId()) : null);
-				model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
-				model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
+					if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
+						String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
+						int i = 0;
+						for (IclubCohortPerson iclubCohortPersonsForCpPersonId : iPerson.getIclubCohortPersonsForCpPersonId()) {
+							iclubCohortPersonsForCpPersonIds[i] = iclubCohortPersonsForCpPersonId.getCpId();
+							i++;
+						}
+						model.setIclubCohortPersonsForCpPersonId(iclubCohortPersonsForCpPersonIds);
+					}
+					if (iPerson.getIclubCohortsForCPrimaryUserId() != null && iPerson.getIclubCohortsForCPrimaryUserId().size() > 0) {
+						String[] iclubCohortsForCPrimaryUserIds = new String[iPerson.getIclubCohortsForCPrimaryUserId().size()];
+						int i = 0;
+						for (IclubCohort iclubCohortsForCPrimaryUserId : iPerson.getIclubCohortsForCPrimaryUserId()) {
+							iclubCohortsForCPrimaryUserIds[i] = iclubCohortsForCPrimaryUserId.getCId();
+							i++;
+						}
+						model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
+					}
 
-				if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
-					String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
-					int i = 0;
-					for (IclubCohortPerson iclubCohortPersonsForCpPersonId : iPerson.getIclubCohortPersonsForCpPersonId()) {
-						iclubCohortPersonsForCpPersonIds[i] = iclubCohortPersonsForCpPersonId.getCpId();
-						i++;
+					if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
+						String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
+						int i = 0;
+						for (IclubCohortClaim iclubCohortClaim : iPerson.getIclubCohortClaims()) {
+							iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+							i++;
+						}
+						model.setIclubCohortClaims(iclubCohortClaims);
 					}
-					model.setIclubCohortPersonsForCpPersonId(iclubCohortPersonsForCpPersonIds);
-				}
-				if (iPerson.getIclubCohortsForCPrimaryUserId() != null && iPerson.getIclubCohortsForCPrimaryUserId().size() > 0) {
-					String[] iclubCohortsForCPrimaryUserIds = new String[iPerson.getIclubCohortsForCPrimaryUserId().size()];
-					int i = 0;
-					for (IclubCohort iclubCohortsForCPrimaryUserId : iPerson.getIclubCohortsForCPrimaryUserId()) {
-						iclubCohortsForCPrimaryUserIds[i] = iclubCohortsForCPrimaryUserId.getCId();
-						i++;
-					}
-					model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
-				}
 
-				if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
-					String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
-					int i = 0;
-					for (IclubCohortClaim iclubCohortClaim : iPerson.getIclubCohortClaims()) {
-						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
-						i++;
+					if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
+						String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
+						int i = 0;
+						for (IclubCohortPerson iclubCohortPersonsForCpCrtdBy : iPerson.getIclubCohortPersonsForCpCrtdBy()) {
+							iclubCohortPersonsForCpCrtdBys[i] = iclubCohortPersonsForCpCrtdBy.getCpId();
+							i++;
+						}
+						model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
 					}
-					model.setIclubCohortClaims(iclubCohortClaims);
-				}
 
-				if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
-					String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
-					int i = 0;
-					for (IclubCohortPerson iclubCohortPersonsForCpCrtdBy : iPerson.getIclubCohortPersonsForCpCrtdBy()) {
-						iclubCohortPersonsForCpCrtdBys[i] = iclubCohortPersonsForCpCrtdBy.getCpId();
-						i++;
+					if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
+						String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
+						int i = 0;
+						for (IclubCohort iclubCohortsForCCrtdBy : iPerson.getIclubCohortsForCCrtdBy()) {
+							iclubCohortsForCCrtdBys[i] = iclubCohortsForCCrtdBy.getCId();
+							i++;
+						}
+						model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
 					}
-					model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
-				}
 
-				if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
-					String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
-					int i = 0;
-					for (IclubCohort iclubCohortsForCCrtdBy : iPerson.getIclubCohortsForCCrtdBy()) {
-						iclubCohortsForCCrtdBys[i] = iclubCohortsForCCrtdBy.getCId();
-						i++;
+					if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
+						String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
+						int i = 0;
+						for (IclubMessageBoard iclubMessageBoard : iPerson.getIclubMessageBoards()) {
+							iclubMessageBoards[i] = iclubMessageBoard.getMbId();
+							i++;
+						}
+						model.setIclubMessageBoards(iclubMessageBoards);
 					}
-					model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
-				}
+					if (iPerson.getIclubPersons() != null && iPerson.getIclubPersons().size() > 0) {
+						String[] iclubPersons = new String[iPerson.getIclubPersons().size()];
+						int i = 0;
+						for (IclubPerson iclubPerson : iPerson.getIclubPersons()) {
+							iclubPersons[i] = iclubPerson.getPId();
+							i++;
+						}
+						model.setIclubPersons(iclubPersons);
+					}
+					if (iPerson.getIclubExtrases() != null && iPerson.getIclubExtrases().size() > 0) {
+						Long[] iclubExtrases = new Long[iPerson.getIclubExtrases().size()];
+						int i = 0;
+						for (IclubExtras iclubExtras : iPerson.getIclubExtrases()) {
+							iclubExtrases[i] = iclubExtras.getEId();
+							i++;
+						}
+						model.setIclubExtrases(iclubExtrases);
+					}
+					if (iPerson.getIclubSecurityMasters() != null && iPerson.getIclubSecurityMasters().size() > 0) {
+						String[] iclubSecurityMasters = new String[iPerson.getIclubSecurityMasters().size()];
+						int i = 0;
+						for (IclubSecurityMaster iclubSecurityMaster : iPerson.getIclubSecurityMasters()) {
+							iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
+							i++;
+						}
+						model.setIclubSecurityMasters(iclubSecurityMasters);
+					}
+					if (iPerson.getIclubProperties() != null && iPerson.getIclubProperties().size() > 0) {
+						String[] iclubProperties = new String[iPerson.getIclubProperties().size()];
+						int i = 0;
+						for (IclubProperty iclubProperty : iPerson.getIclubProperties()) {
+							iclubProperties[i] = iclubProperty.getPId();
+							i++;
+						}
+						model.setIclubProperties(iclubProperties);
+					}
+					if (iPerson.getIclubInsurerMasters() != null && iPerson.getIclubInsurerMasters().size() > 0) {
+						Long[] iclubInsurerMasters = new Long[iPerson.getIclubInsurerMasters().size()];
+						int i = 0;
+						for (IclubInsurerMaster iclubInsurerMaster : iPerson.getIclubInsurerMasters()) {
+							iclubInsurerMasters[i] = iclubInsurerMaster.getImId();
+							i++;
+						}
+						model.setIclubInsurerMasters(iclubInsurerMasters);
+					}
+					if (iPerson.getIclubLicenseCodes() != null && iPerson.getIclubLicenseCodes().size() > 0) {
+						Long[] iclubLicenseCodes = new Long[iPerson.getIclubLicenseCodes().size()];
+						int i = 0;
+						for (IclubLicenseCode iclubLicenseCode : iPerson.getIclubLicenseCodes()) {
+							iclubLicenseCodes[i] = iclubLicenseCode.getLcId();
+							i++;
+						}
+						model.setIclubLicenseCodes(iclubLicenseCodes);
+					}
+					if (iPerson.getIclubAccounts() != null && iPerson.getIclubAccounts().size() > 0) {
+						String[] iclubAccounts = new String[iPerson.getIclubAccounts().size()];
+						int i = 0;
+						for (IclubAccount iclubAccount : iPerson.getIclubAccounts()) {
+							iclubAccounts[i] = iclubAccount.getAId();
+							i++;
+						}
+						model.setIclubAccounts(iclubAccounts);
+					}
+					if (iPerson.getIclubVehicles() != null && iPerson.getIclubVehicles().size() > 0) {
+						String[] iclubVehicles = new String[iPerson.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubVehicle iclubVehicle : iPerson.getIclubVehicles()) {
+							iclubVehicles[i] = iclubVehicle.getVId();
+							i++;
+						}
+						model.setIclubVehicles(iclubVehicles);
+					}
+					if (iPerson.getIclubSupplMasters() != null && iPerson.getIclubSupplMasters().size() > 0) {
+						String[] iclubSupplMasters = new String[iPerson.getIclubSupplMasters().size()];
+						int i = 0;
+						for (IclubSupplMaster iclubSupplMaster : iPerson.getIclubSupplMasters()) {
+							iclubSupplMasters[i] = iclubSupplMaster.getSmId();
+							i++;
+						}
+						model.setIclubSupplMasters(iclubSupplMasters);
+					}
+					if (iPerson.getIclubConfigs() != null && iPerson.getIclubConfigs().size() > 0) {
+						Long[] iclubConfigs = new Long[iPerson.getIclubConfigs().size()];
+						int i = 0;
+						for (IclubConfig iclubConfig : iPerson.getIclubConfigs()) {
+							iclubConfigs[i] = iclubConfig.getCId();
+							i++;
+						}
+						model.setIclubConfigs(iclubConfigs);
+					}
+					if (iPerson.getIclubClaims() != null && iPerson.getIclubClaims().size() > 0) {
+						String[] iclubClaims = new String[iPerson.getIclubClaims().size()];
+						int i = 0;
+						for (IclubClaim iclubClaim : iPerson.getIclubClaims()) {
+							iclubClaims[i] = iclubClaim.getCId();
+							i++;
+						}
+						model.setIclubClaims(iclubClaims);
+					}
+					if (iPerson.getIclubRateTypes() != null && iPerson.getIclubRateTypes().size() > 0) {
+						Long[] iclubRateTypes = new Long[iPerson.getIclubRateTypes().size()];
+						int i = 0;
+						for (IclubRateType iclubRateType : iPerson.getIclubRateTypes()) {
+							iclubRateTypes[i] = iclubRateType.getRtId();
+							i++;
+						}
+						model.setIclubRateTypes(iclubRateTypes);
+					}
+					if (iPerson.getIclubEvents() != null && iPerson.getIclubEvents().size() > 0) {
+						String[] iclubEvents = new String[iPerson.getIclubEvents().size()];
+						int i = 0;
+						for (IclubEvent iclubEvent : iPerson.getIclubEvents()) {
+							iclubEvents[i] = iclubEvent.getEId();
+							i++;
+						}
+						model.setIclubEvents(iclubEvents);
+					}
+					if (iPerson.getIclubOccupations() != null && iPerson.getIclubOccupations().size() > 0) {
+						Long[] iclubOccupations = new Long[iPerson.getIclubOccupations().size()];
+						int i = 0;
+						for (IclubOccupation iclubOccupation : iPerson.getIclubOccupations()) {
+							iclubOccupations[i] = iclubOccupation.getOId();
+							i++;
+						}
+						model.setIclubOccupations(iclubOccupations);
+					}
+					if (iPerson.getIclubPayments() != null && iPerson.getIclubPayments().size() > 0) {
+						String[] iclubPayments = new String[iPerson.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment iclubPayment : iPerson.getIclubPayments()) {
+							iclubPayments[i] = iclubPayment.getPId();
+							i++;
+						}
+						model.setIclubPayments(iclubPayments);
+					}
+					if (iPerson.getIclubSecurityDevices() != null && iPerson.getIclubSecurityDevices().size() > 0) {
+						String[] iclubSecurityDevices = new String[iPerson.getIclubSecurityDevices().size()];
+						int i = 0;
+						for (IclubSecurityDevice iclubSecurityDevice : iPerson.getIclubSecurityDevices()) {
+							iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
+							i++;
+						}
+						model.setIclubSecurityDevices(iclubSecurityDevices);
+					}
+					if (iPerson.getIclubPolicies() != null && iPerson.getIclubPolicies().size() > 0) {
+						String[] iclubPolicies = new String[iPerson.getIclubPolicies().size()];
+						int i = 0;
+						for (IclubPolicy iclubPolicy : iPerson.getIclubPolicies()) {
+							iclubPolicies[i] = iclubPolicy.getPId();
+							i++;
+						}
+						model.setIclubPolicies(iclubPolicies);
+					}
+					if (iPerson.getIclubMbComments() != null && iPerson.getIclubMbComments().size() > 0) {
+						String[] iclubMbComments = new String[iPerson.getIclubMbComments().size()];
+						int i = 0;
+						for (IclubMbComment iclubMbComment : iPerson.getIclubMbComments()) {
+							iclubMbComments[i] = iclubMbComment.getMbcId();
+							i++;
+						}
+						model.setIclubMbComments(iclubMbComments);
+					}
+					if (iPerson.getIclubQuotesForQCrtdBy() != null && iPerson.getIclubQuotesForQCrtdBy().size() > 0) {
+						String[] iclubQuotesForQCrtdBy = new String[iPerson.getIclubQuotesForQCrtdBy().size()];
+						int i = 0;
+						for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQCrtdBy()) {
+							iclubQuotesForQCrtdBy[i] = iclubQuote.getQId();
+							i++;
+						}
+						model.setIclubQuotesForQCrtdBy(iclubQuotesForQCrtdBy);
+					}
 
-				if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
-					String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
-					int i = 0;
-					for (IclubMessageBoard iclubMessageBoard : iPerson.getIclubMessageBoards()) {
-						iclubMessageBoards[i] = iclubMessageBoard.getMbId();
-						i++;
+					if (iPerson.getIclubDocuments() != null && iPerson.getIclubDocuments().size() > 0) {
+						String[] iclubDocuments = new String[iPerson.getIclubDocuments().size()];
+						int i = 0;
+						for (IclubDocument iclubDocument : iPerson.getIclubDocuments()) {
+							iclubDocuments[i] = iclubDocument.getDId();
+							i++;
+						}
+						model.setIclubDocuments(iclubDocuments);
 					}
-					model.setIclubMessageBoards(iclubMessageBoards);
-				}
-				if (iPerson.getIclubPersons() != null && iPerson.getIclubPersons().size() > 0) {
-					String[] iclubPersons = new String[iPerson.getIclubPersons().size()];
-					int i = 0;
-					for (IclubPerson iclubPerson : iPerson.getIclubPersons()) {
-						iclubPersons[i] = iclubPerson.getPId();
-						i++;
+					if (iPerson.getIclubRateEngines() != null && iPerson.getIclubRateEngines().size() > 0) {
+						String[] iclubRateEngines = new String[iPerson.getIclubRateEngines().size()];
+						int i = 0;
+						for (IclubRateEngine iclubRateEngine : iPerson.getIclubRateEngines()) {
+							iclubRateEngines[i] = iclubRateEngine.getReId();
+							i++;
+						}
+						model.setIclubRateEngines(iclubRateEngines);
 					}
-					model.setIclubPersons(iclubPersons);
-				}
-				if (iPerson.getIclubExtrases() != null && iPerson.getIclubExtrases().size() > 0) {
-					Long[] iclubExtrases = new Long[iPerson.getIclubExtrases().size()];
-					int i = 0;
-					for (IclubExtras iclubExtras : iPerson.getIclubExtrases()) {
-						iclubExtrases[i] = iclubExtras.getEId();
-						i++;
+					if (iPerson.getIclubGeoLocs() != null && iPerson.getIclubGeoLocs().size() > 0) {
+						Long[] iclubGeoLocs = new Long[iPerson.getIclubGeoLocs().size()];
+						int i = 0;
+						for (IclubGeoLoc iclubGeoLoc : iPerson.getIclubGeoLocs()) {
+							iclubGeoLocs[i] = iclubGeoLoc.getGlId();
+							i++;
+						}
+						model.setIclubGeoLocs(iclubGeoLocs);
 					}
-					model.setIclubExtrases(iclubExtrases);
-				}
-				if (iPerson.getIclubSecurityMasters() != null && iPerson.getIclubSecurityMasters().size() > 0) {
-					String[] iclubSecurityMasters = new String[iPerson.getIclubSecurityMasters().size()];
-					int i = 0;
-					for (IclubSecurityMaster iclubSecurityMaster : iPerson.getIclubSecurityMasters()) {
-						iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
-						i++;
+					if (iPerson.getIclubQuotesForQPersonId() != null && iPerson.getIclubQuotesForQPersonId().size() > 0) {
+						String[] iclubQuotesForQPersonId = new String[iPerson.getIclubQuotesForQPersonId().size()];
+						int i = 0;
+						for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQPersonId()) {
+							iclubQuotesForQPersonId[i] = iclubQuote.getQId();
+							i++;
+						}
+						model.setIclubQuotesForQPersonId(iclubQuotesForQPersonId);
 					}
-					model.setIclubSecurityMasters(iclubSecurityMasters);
-				}
-				if (iPerson.getIclubProperties() != null && iPerson.getIclubProperties().size() > 0) {
-					String[] iclubProperties = new String[iPerson.getIclubProperties().size()];
-					int i = 0;
-					for (IclubProperty iclubProperty : iPerson.getIclubProperties()) {
-						iclubProperties[i] = iclubProperty.getPId();
-						i++;
+					if (iPerson.getIclubTrackerMasters() != null && iPerson.getIclubTrackerMasters().size() > 0) {
+						Long[] iclubTrackerMasters = new Long[iPerson.getIclubTrackerMasters().size()];
+						int i = 0;
+						for (IclubTrackerMaster iclubTrackerMaster : iPerson.getIclubTrackerMasters()) {
+							iclubTrackerMasters[i] = iclubTrackerMaster.getTmId();
+							i++;
+						}
+						model.setIclubTrackerMasters(iclubTrackerMasters);
 					}
-					model.setIclubProperties(iclubProperties);
-				}
-				if (iPerson.getIclubInsurerMasters() != null && iPerson.getIclubInsurerMasters().size() > 0) {
-					Long[] iclubInsurerMasters = new Long[iPerson.getIclubInsurerMasters().size()];
-					int i = 0;
-					for (IclubInsurerMaster iclubInsurerMaster : iPerson.getIclubInsurerMasters()) {
-						iclubInsurerMasters[i] = iclubInsurerMaster.getImId();
-						i++;
+					if (iPerson.getIclubCoverTypes() != null && iPerson.getIclubCoverTypes().size() > 0) {
+						Long[] iclubCoverTypes = new Long[iPerson.getIclubVehicles().size()];
+						int i = 0;
+						for (IclubCoverType iclubCoverType : iPerson.getIclubCoverTypes()) {
+							iclubCoverTypes[i] = iclubCoverType.getCtId();
+							i++;
+						}
+						model.setIclubCoverTypes(iclubCoverTypes);
 					}
-					model.setIclubInsurerMasters(iclubInsurerMasters);
-				}
-				if (iPerson.getIclubLicenseCodes() != null && iPerson.getIclubLicenseCodes().size() > 0) {
-					Long[] iclubLicenseCodes = new Long[iPerson.getIclubLicenseCodes().size()];
-					int i = 0;
-					for (IclubLicenseCode iclubLicenseCode : iPerson.getIclubLicenseCodes()) {
-						iclubLicenseCodes[i] = iclubLicenseCode.getLcId();
-						i++;
+					if (iPerson.getIclubCountryCodes() != null && iPerson.getIclubCountryCodes().size() > 0) {
+						Integer[] iclubCountryCodes = new Integer[iPerson.getIclubCountryCodes().size()];
+						int i = 0;
+						for (IclubCountryCode iclubCountryCode : iPerson.getIclubCountryCodes()) {
+							iclubCountryCodes[i] = iclubCountryCode.getCcId();
+							i++;
+						}
+						model.setIclubCountryCodes(iclubCountryCodes);
 					}
-					model.setIclubLicenseCodes(iclubLicenseCodes);
-				}
-				if (iPerson.getIclubAccounts() != null && iPerson.getIclubAccounts().size() > 0) {
-					String[] iclubAccounts = new String[iPerson.getIclubAccounts().size()];
-					int i = 0;
-					for (IclubAccount iclubAccount : iPerson.getIclubAccounts()) {
-						iclubAccounts[i] = iclubAccount.getAId();
-						i++;
+					if (iPerson.getIclubBankMasters() != null && iPerson.getIclubBankMasters().size() > 0) {
+						Long[] iclubBankMasters = new Long[iPerson.getIclubBankMasters().size()];
+						int i = 0;
+						for (IclubBankMaster iclubBankMaster : iPerson.getIclubBankMasters()) {
+							iclubBankMasters[i] = iclubBankMaster.getBmId();
+							i++;
+						}
+						model.setIclubBankMasters(iclubBankMasters);
 					}
-					model.setIclubAccounts(iclubAccounts);
-				}
-				if (iPerson.getIclubVehicles() != null && iPerson.getIclubVehicles().size() > 0) {
-					String[] iclubVehicles = new String[iPerson.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubVehicle iclubVehicle : iPerson.getIclubVehicles()) {
-						iclubVehicles[i] = iclubVehicle.getVId();
-						i++;
-					}
-					model.setIclubVehicles(iclubVehicles);
-				}
-				if (iPerson.getIclubSupplMasters() != null && iPerson.getIclubSupplMasters().size() > 0) {
-					String[] iclubSupplMasters = new String[iPerson.getIclubSupplMasters().size()];
-					int i = 0;
-					for (IclubSupplMaster iclubSupplMaster : iPerson.getIclubSupplMasters()) {
-						iclubSupplMasters[i] = iclubSupplMaster.getSmId();
-						i++;
-					}
-					model.setIclubSupplMasters(iclubSupplMasters);
-				}
-				if (iPerson.getIclubConfigs() != null && iPerson.getIclubConfigs().size() > 0) {
-					Long[] iclubConfigs = new Long[iPerson.getIclubConfigs().size()];
-					int i = 0;
-					for (IclubConfig iclubConfig : iPerson.getIclubConfigs()) {
-						iclubConfigs[i] = iclubConfig.getCId();
-						i++;
-					}
-					model.setIclubConfigs(iclubConfigs);
-				}
-				if (iPerson.getIclubClaims() != null && iPerson.getIclubClaims().size() > 0) {
-					String[] iclubClaims = new String[iPerson.getIclubClaims().size()];
-					int i = 0;
-					for (IclubClaim iclubClaim : iPerson.getIclubClaims()) {
-						iclubClaims[i] = iclubClaim.getCId();
-						i++;
-					}
-					model.setIclubClaims(iclubClaims);
-				}
-				if (iPerson.getIclubRateTypes() != null && iPerson.getIclubRateTypes().size() > 0) {
-					Long[] iclubRateTypes = new Long[iPerson.getIclubRateTypes().size()];
-					int i = 0;
-					for (IclubRateType iclubRateType : iPerson.getIclubRateTypes()) {
-						iclubRateTypes[i] = iclubRateType.getRtId();
-						i++;
-					}
-					model.setIclubRateTypes(iclubRateTypes);
-				}
-				if (iPerson.getIclubEvents() != null && iPerson.getIclubEvents().size() > 0) {
-					String[] iclubEvents = new String[iPerson.getIclubEvents().size()];
-					int i = 0;
-					for (IclubEvent iclubEvent : iPerson.getIclubEvents()) {
-						iclubEvents[i] = iclubEvent.getEId();
-						i++;
-					}
-					model.setIclubEvents(iclubEvents);
-				}
-				if (iPerson.getIclubOccupations() != null && iPerson.getIclubOccupations().size() > 0) {
-					Long[] iclubOccupations = new Long[iPerson.getIclubOccupations().size()];
-					int i = 0;
-					for (IclubOccupation iclubOccupation : iPerson.getIclubOccupations()) {
-						iclubOccupations[i] = iclubOccupation.getOId();
-						i++;
-					}
-					model.setIclubOccupations(iclubOccupations);
-				}
-				if (iPerson.getIclubPayments() != null && iPerson.getIclubPayments().size() > 0) {
-					String[] iclubPayments = new String[iPerson.getIclubPayments().size()];
-					int i = 0;
-					for (IclubPayment iclubPayment : iPerson.getIclubPayments()) {
-						iclubPayments[i] = iclubPayment.getPId();
-						i++;
-					}
-					model.setIclubPayments(iclubPayments);
-				}
-				if (iPerson.getIclubSecurityDevices() != null && iPerson.getIclubSecurityDevices().size() > 0) {
-					String[] iclubSecurityDevices = new String[iPerson.getIclubSecurityDevices().size()];
-					int i = 0;
-					for (IclubSecurityDevice iclubSecurityDevice : iPerson.getIclubSecurityDevices()) {
-						iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
-						i++;
-					}
-					model.setIclubSecurityDevices(iclubSecurityDevices);
-				}
-				if (iPerson.getIclubPolicies() != null && iPerson.getIclubPolicies().size() > 0) {
-					String[] iclubPolicies = new String[iPerson.getIclubPolicies().size()];
-					int i = 0;
-					for (IclubPolicy iclubPolicy : iPerson.getIclubPolicies()) {
-						iclubPolicies[i] = iclubPolicy.getPId();
-						i++;
-					}
-					model.setIclubPolicies(iclubPolicies);
-				}
-				if (iPerson.getIclubMbComments() != null && iPerson.getIclubMbComments().size() > 0) {
-					String[] iclubMbComments = new String[iPerson.getIclubMbComments().size()];
-					int i = 0;
-					for (IclubMbComment iclubMbComment : iPerson.getIclubMbComments()) {
-						iclubMbComments[i] = iclubMbComment.getMbcId();
-						i++;
-					}
-					model.setIclubMbComments(iclubMbComments);
-				}
-				if (iPerson.getIclubQuotesForQCrtdBy() != null && iPerson.getIclubQuotesForQCrtdBy().size() > 0) {
-					String[] iclubQuotesForQCrtdBy = new String[iPerson.getIclubQuotesForQCrtdBy().size()];
-					int i = 0;
-					for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQCrtdBy()) {
-						iclubQuotesForQCrtdBy[i] = iclubQuote.getQId();
-						i++;
-					}
-					model.setIclubQuotesForQCrtdBy(iclubQuotesForQCrtdBy);
-				}
 
-				if (iPerson.getIclubDocuments() != null && iPerson.getIclubDocuments().size() > 0) {
-					String[] iclubDocuments = new String[iPerson.getIclubDocuments().size()];
-					int i = 0;
-					for (IclubDocument iclubDocument : iPerson.getIclubDocuments()) {
-						iclubDocuments[i] = iclubDocument.getDId();
-						i++;
+					if (iPerson.getIclubNotifs() != null && iPerson.getIclubNotifs().size() > 0) {
+						String[] iclubNotifs = new String[iPerson.getIclubNotifs().size()];
+						int i = 0;
+						for (IclubNotif iclubNotif : iPerson.getIclubNotifs()) {
+							iclubNotifs[i] = iclubNotif.getNId();
+							i++;
+						}
+						model.setIclubNotifs(iclubNotifs);
 					}
-					model.setIclubDocuments(iclubDocuments);
-				}
-				if (iPerson.getIclubRateEngines() != null && iPerson.getIclubRateEngines().size() > 0) {
-					String[] iclubRateEngines = new String[iPerson.getIclubRateEngines().size()];
-					int i = 0;
-					for (IclubRateEngine iclubRateEngine : iPerson.getIclubRateEngines()) {
-						iclubRateEngines[i] = iclubRateEngine.getReId();
-						i++;
+					if (iPerson.getIclubVehicleMasters() != null && iPerson.getIclubVehicleMasters().size() > 0) {
+						Long[] iclubVehicleMasters = new Long[iPerson.getIclubVehicleMasters().size()];
+						int i = 0;
+						for (IclubVehicleMaster iclubVehicleMaster : iPerson.getIclubVehicleMasters()) {
+							iclubVehicleMasters[i] = iclubVehicleMaster.getVmId();
+							i++;
+						}
+						model.setIclubVehicleMasters(iclubVehicleMasters);
 					}
-					model.setIclubRateEngines(iclubRateEngines);
-				}
-				if (iPerson.getIclubGeoLocs() != null && iPerson.getIclubGeoLocs().size() > 0) {
-					Long[] iclubGeoLocs = new Long[iPerson.getIclubGeoLocs().size()];
-					int i = 0;
-					for (IclubGeoLoc iclubGeoLoc : iPerson.getIclubGeoLocs()) {
-						iclubGeoLocs[i] = iclubGeoLoc.getGlId();
-						i++;
+					if (iPerson.getIclubDriversForDCrtdBy() != null && iPerson.getIclubDriversForDCrtdBy().size() > 0) {
+						String[] iclubDriversForDCrtdBy = new String[iPerson.getIclubDriversForDCrtdBy().size()];
+						int i = 0;
+						for (IclubDriver iclubDriver : iPerson.getIclubDriversForDCrtdBy()) {
+							iclubDriversForDCrtdBy[i] = iclubDriver.getDId();
+							i++;
+						}
+						model.setIclubDriversForDCrtdBy(iclubDriversForDCrtdBy);
 					}
-					model.setIclubGeoLocs(iclubGeoLocs);
-				}
-				if (iPerson.getIclubQuotesForQPersonId() != null && iPerson.getIclubQuotesForQPersonId().size() > 0) {
-					String[] iclubQuotesForQPersonId = new String[iPerson.getIclubQuotesForQPersonId().size()];
-					int i = 0;
-					for (IclubQuote iclubQuote : iPerson.getIclubQuotesForQPersonId()) {
-						iclubQuotesForQPersonId[i] = iclubQuote.getQId();
-						i++;
+					if (iPerson.getIclubPurposeTypes() != null && iPerson.getIclubPurposeTypes().size() > 0) {
+						Long[] purposeTypes = new Long[iPerson.getIclubPurposeTypes().size()];
+						int i = 0;
+						for (IclubPurposeType iclubPurposeType : iPerson.getIclubPurposeTypes()) {
+							purposeTypes[i] = iclubPurposeType.getPtId();
+							i++;
+						}
+						model.setIclubPurposeTypes(purposeTypes);
 					}
-					model.setIclubQuotesForQPersonId(iclubQuotesForQPersonId);
-				}
-				if (iPerson.getIclubTrackerMasters() != null && iPerson.getIclubTrackerMasters().size() > 0) {
-					Long[] iclubTrackerMasters = new Long[iPerson.getIclubTrackerMasters().size()];
-					int i = 0;
-					for (IclubTrackerMaster iclubTrackerMaster : iPerson.getIclubTrackerMasters()) {
-						iclubTrackerMasters[i] = iclubTrackerMaster.getTmId();
-						i++;
+					if (iPerson.getIclubDriversForDPersonId() != null && iPerson.getIclubDriversForDPersonId().size() > 0) {
+						String[] driversForDPersonId = new String[iPerson.getIclubDriversForDPersonId().size()];
+						int i = 0;
+						for (IclubDriver iclubDriver : iPerson.getIclubDriversForDPersonId()) {
+							driversForDPersonId[i] = iclubDriver.getDId();
+							i++;
+						}
+						model.setIclubDriversForDPersonId(driversForDPersonId);
 					}
-					model.setIclubTrackerMasters(iclubTrackerMasters);
-				}
-				if (iPerson.getIclubCoverTypes() != null && iPerson.getIclubCoverTypes().size() > 0) {
-					Long[] iclubCoverTypes = new Long[iPerson.getIclubVehicles().size()];
-					int i = 0;
-					for (IclubCoverType iclubCoverType : iPerson.getIclubCoverTypes()) {
-						iclubCoverTypes[i] = iclubCoverType.getCtId();
-						i++;
+					if (iPerson.getIclubInsuranceItems() != null && iPerson.getIclubInsuranceItems().size() > 0) {
+						String[] insuranceItems = new String[iPerson.getIclubInsuranceItems().size()];
+						int i = 0;
+						for (IclubInsuranceItem iclubInsuranceItem : iPerson.getIclubInsuranceItems()) {
+							insuranceItems[i] = iclubInsuranceItem.getIiId();
+							i++;
+						}
+						model.setIclubInsuranceItems(insuranceItems);
 					}
-					model.setIclubCoverTypes(iclubCoverTypes);
-				}
-				if (iPerson.getIclubCountryCodes() != null && iPerson.getIclubCountryCodes().size() > 0) {
-					Integer[] iclubCountryCodes = new Integer[iPerson.getIclubCountryCodes().size()];
-					int i = 0;
-					for (IclubCountryCode iclubCountryCode : iPerson.getIclubCountryCodes()) {
-						iclubCountryCodes[i] = iclubCountryCode.getCcId();
-						i++;
+					if (iPerson.getIclubLoginsForLPersonId() != null && iPerson.getIclubLoginsForLPersonId().size() > 0) {
+						String[] loginsForLPersonId = new String[iPerson.getIclubLoginsForLPersonId().size()];
+						int i = 0;
+						for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLPersonId()) {
+							loginsForLPersonId[i] = iclubLogin.getLId();
+							i++;
+						}
+						model.setIclubLoginsForLPersonId(loginsForLPersonId);
 					}
-					model.setIclubCountryCodes(iclubCountryCodes);
-				}
-				if (iPerson.getIclubBankMasters() != null && iPerson.getIclubBankMasters().size() > 0) {
-					Long[] iclubBankMasters = new Long[iPerson.getIclubBankMasters().size()];
-					int i = 0;
-					for (IclubBankMaster iclubBankMaster : iPerson.getIclubBankMasters()) {
-						iclubBankMasters[i] = iclubBankMaster.getBmId();
-						i++;
+					if (iPerson.getIclubLoginsForLCrtdBy() != null && iPerson.getIclubLoginsForLCrtdBy().size() > 0) {
+						String[] LoginsForLCrtdBy = new String[iPerson.getIclubLoginsForLCrtdBy().size()];
+						int i = 0;
+						for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLCrtdBy()) {
+							LoginsForLCrtdBy[i] = iclubLogin.getLId();
+							i++;
+						}
+						model.setIclubLoginsForLCrtdBy(LoginsForLCrtdBy);
 					}
-					model.setIclubBankMasters(iclubBankMasters);
-				}
+					if (iPerson.getIclubMessages() != null && iPerson.getIclubMessages().size() > 0) {
+						String[] messages = new String[iPerson.getIclubMessages().size()];
+						int i = 0;
+						for (IclubMessage iclubMessage : iPerson.getIclubMessages()) {
+							messages[i] = iclubMessage.getMId();
+							i++;
+						}
+						model.setIclubMessages(messages);
+					}
 
-				if (iPerson.getIclubNotifs() != null && iPerson.getIclubNotifs().size() > 0) {
-					String[] iclubNotifs = new String[iPerson.getIclubNotifs().size()];
-					int i = 0;
-					for (IclubNotif iclubNotif : iPerson.getIclubNotifs()) {
-						iclubNotifs[i] = iclubNotif.getNId();
-						i++;
-					}
-					model.setIclubNotifs(iclubNotifs);
+					ret.add((T) model);
 				}
-				if (iPerson.getIclubVehicleMasters() != null && iPerson.getIclubVehicleMasters().size() > 0) {
-					Long[] iclubVehicleMasters = new Long[iPerson.getIclubVehicleMasters().size()];
-					int i = 0;
-					for (IclubVehicleMaster iclubVehicleMaster : iPerson.getIclubVehicleMasters()) {
-						iclubVehicleMasters[i] = iclubVehicleMaster.getVmId();
-						i++;
-					}
-					model.setIclubVehicleMasters(iclubVehicleMasters);
-				}
-				if (iPerson.getIclubDriversForDCrtdBy() != null && iPerson.getIclubDriversForDCrtdBy().size() > 0) {
-					String[] iclubDriversForDCrtdBy = new String[iPerson.getIclubDriversForDCrtdBy().size()];
-					int i = 0;
-					for (IclubDriver iclubDriver : iPerson.getIclubDriversForDCrtdBy()) {
-						iclubDriversForDCrtdBy[i] = iclubDriver.getDId();
-						i++;
-					}
-					model.setIclubDriversForDCrtdBy(iclubDriversForDCrtdBy);
-				}
-				if (iPerson.getIclubPurposeTypes() != null && iPerson.getIclubPurposeTypes().size() > 0) {
-					Long[] purposeTypes = new Long[iPerson.getIclubPurposeTypes().size()];
-					int i = 0;
-					for (IclubPurposeType iclubPurposeType : iPerson.getIclubPurposeTypes()) {
-						purposeTypes[i] = iclubPurposeType.getPtId();
-						i++;
-					}
-					model.setIclubPurposeTypes(purposeTypes);
-				}
-				if (iPerson.getIclubDriversForDPersonId() != null && iPerson.getIclubDriversForDPersonId().size() > 0) {
-					String[] driversForDPersonId = new String[iPerson.getIclubDriversForDPersonId().size()];
-					int i = 0;
-					for (IclubDriver iclubDriver : iPerson.getIclubDriversForDPersonId()) {
-						driversForDPersonId[i] = iclubDriver.getDId();
-						i++;
-					}
-					model.setIclubDriversForDPersonId(driversForDPersonId);
-				}
-				if (iPerson.getIclubInsuranceItems() != null && iPerson.getIclubInsuranceItems().size() > 0) {
-					String[] insuranceItems = new String[iPerson.getIclubInsuranceItems().size()];
-					int i = 0;
-					for (IclubInsuranceItem iclubInsuranceItem : iPerson.getIclubInsuranceItems()) {
-						insuranceItems[i] = iclubInsuranceItem.getIiId();
-						i++;
-					}
-					model.setIclubInsuranceItems(insuranceItems);
-				}
-				if (iPerson.getIclubLoginsForLPersonId() != null && iPerson.getIclubLoginsForLPersonId().size() > 0) {
-					String[] loginsForLPersonId = new String[iPerson.getIclubLoginsForLPersonId().size()];
-					int i = 0;
-					for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLPersonId()) {
-						loginsForLPersonId[i] = iclubLogin.getLId();
-						i++;
-					}
-					model.setIclubLoginsForLPersonId(loginsForLPersonId);
-				}
-				if (iPerson.getIclubLoginsForLCrtdBy() != null && iPerson.getIclubLoginsForLCrtdBy().size() > 0) {
-					String[] LoginsForLCrtdBy = new String[iPerson.getIclubLoginsForLCrtdBy().size()];
-					int i = 0;
-					for (IclubLogin iclubLogin : iPerson.getIclubLoginsForLCrtdBy()) {
-						LoginsForLCrtdBy[i] = iclubLogin.getLId();
-						i++;
-					}
-					model.setIclubLoginsForLCrtdBy(LoginsForLCrtdBy);
-				}
-				if (iPerson.getIclubMessages() != null && iPerson.getIclubMessages().size() > 0) {
-					String[] messages = new String[iPerson.getIclubMessages().size()];
-					int i = 0;
-					for (IclubMessage iclubMessage : iPerson.getIclubMessages()) {
-						messages[i] = iclubMessage.getMId();
-						i++;
-					}
-					model.setIclubMessages(messages);
-				}
-
-				ret.add((T) model);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

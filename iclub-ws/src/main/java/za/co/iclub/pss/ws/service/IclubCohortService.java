@@ -146,7 +146,7 @@ public class IclubCohortService {
 
 		try {
 			List batmod = iclubCohortDAO.findAll();
-
+			if(batmod!=null&& batmod.size()>0){
 			for (Object object : batmod) {
 				IclubCohort iclubC = (IclubCohort) object;
 				IclubCohortModel iCC = new IclubCohortModel();
@@ -186,7 +186,7 @@ public class IclubCohortService {
 				}
 
 				ret.add((T) iCC);
-			}
+			}}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
@@ -203,7 +203,7 @@ public class IclubCohortService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubCohort.class.getSimpleName());
-
+			if(batmod!=null&& batmod.size()>0){
 			for (Object object : batmod) {
 				IclubCohort iclubC = (IclubCohort) object;
 				IclubCohortModel iCC = new IclubCohortModel();
@@ -242,7 +242,7 @@ public class IclubCohortService {
 				}
 
 				ret.add((T) iCC);
-			}
+			}}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

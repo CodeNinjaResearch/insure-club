@@ -151,17 +151,18 @@ public class IclubBoundaryTypeService {
 
 		try {
 			List batmod = iclubBoundaryTypeDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubBoundaryType iclubBoutype = (IclubBoundaryType) object;
+					IclubBoundaryTypeModel iCB = new IclubBoundaryTypeModel();
 
-			for (Object object : batmod) {
-				IclubBoundaryType iclubBoutype = (IclubBoundaryType) object;
-				IclubBoundaryTypeModel iCB = new IclubBoundaryTypeModel();
+					iCB.setBtId(iclubBoutype.getBtId().longValue());
+					iCB.setBtLongDesc(iclubBoutype.getBtLongDesc());
+					iCB.setBtShortDesc(iclubBoutype.getBtShortDesc());
+					iCB.setBtStatus(iclubBoutype.getBtStatus());
 
-				iCB.setBtId(iclubBoutype.getBtId().longValue());
-				iCB.setBtLongDesc(iclubBoutype.getBtLongDesc());
-				iCB.setBtShortDesc(iclubBoutype.getBtShortDesc());
-				iCB.setBtStatus(iclubBoutype.getBtStatus());
-
-				ret.add((T) iCB);
+					ret.add((T) iCB);
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);

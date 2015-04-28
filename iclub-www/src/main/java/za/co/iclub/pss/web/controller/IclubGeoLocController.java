@@ -77,7 +77,7 @@ public class IclubGeoLocController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -92,18 +92,20 @@ public class IclubGeoLocController implements Serializable {
 		Collection<? extends IclubGeoLocModel> models = new ArrayList<IclubGeoLocModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubGeoLocModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubGeoLocBean>();
-		for (IclubGeoLocModel model : models) {
-			IclubGeoLocBean bean = new IclubGeoLocBean();
+		if (models != null && models.size() > 0) {
+			for (IclubGeoLocModel model : models) {
+				IclubGeoLocBean bean = new IclubGeoLocBean();
 
-			bean.setGlId(model.getGlId());
-			bean.setGlAddress(model.getGlAddress());
-			bean.setGlLat(model.getGlLat());
-			bean.setGlLong(model.getGlLong());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setGlRate(model.getGlRate());
-			bean.setGlCrtdDt(model.getGlCrtdDt());
+				bean.setGlId(model.getGlId());
+				bean.setGlAddress(model.getGlAddress());
+				bean.setGlLat(model.getGlLat());
+				bean.setGlLong(model.getGlLong());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setGlRate(model.getGlRate());
+				bean.setGlCrtdDt(model.getGlCrtdDt());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -284,19 +286,21 @@ public class IclubGeoLocController implements Serializable {
 		Collection<? extends IclubGeoLocModel> models = new ArrayList<IclubGeoLocModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubGeoLocModel.class));
 		client.close();
 		beans = new ArrayList<IclubGeoLocBean>();
-		for (IclubGeoLocModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubGeoLocModel model : models) {
 
-			IclubGeoLocBean bean = new IclubGeoLocBean();
+				IclubGeoLocBean bean = new IclubGeoLocBean();
 
-			bean.setGlId(model.getGlId());
-			bean.setGlAddress(model.getGlAddress());
-			bean.setGlLat(model.getGlLat());
-			bean.setGlLong(model.getGlLong());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setGlRate(model.getGlRate());
-			bean.setGlCrtdDt(model.getGlCrtdDt());
+				bean.setGlId(model.getGlId());
+				bean.setGlAddress(model.getGlAddress());
+				bean.setGlLat(model.getGlLat());
+				bean.setGlLong(model.getGlLong());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setGlRate(model.getGlRate());
+				bean.setGlCrtdDt(model.getGlCrtdDt());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

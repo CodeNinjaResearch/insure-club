@@ -80,16 +80,18 @@ public class IclubExtrasController implements Serializable {
 		Collection<? extends IclubExtrasModel> models = new ArrayList<IclubExtrasModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubExtrasModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubExtrasBean>();
-		for (IclubExtrasModel model : models) {
-			IclubExtrasBean bean = new IclubExtrasBean();
+		if (models != null && models.size() > 0) {
+			for (IclubExtrasModel model : models) {
+				IclubExtrasBean bean = new IclubExtrasBean();
 
-			bean.setEId(model.getEId());
-			bean.setEDesc(model.getEDesc());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setEStatus(model.getEStatus());
-			bean.setECrtdDt(model.getECrtdDt());
+				bean.setEId(model.getEId());
+				bean.setEDesc(model.getEDesc());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setEStatus(model.getEStatus());
+				bean.setECrtdDt(model.getECrtdDt());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -267,17 +269,19 @@ public class IclubExtrasController implements Serializable {
 		Collection<? extends IclubExtrasModel> models = new ArrayList<IclubExtrasModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubExtrasModel.class));
 		client.close();
 		beans = new ArrayList<IclubExtrasBean>();
-		for (IclubExtrasModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubExtrasModel model : models) {
 
-			IclubExtrasBean bean = new IclubExtrasBean();
+				IclubExtrasBean bean = new IclubExtrasBean();
 
-			bean.setEId(model.getEId());
-			bean.setEDesc(model.getEDesc());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setEStatus(model.getEStatus());
-			bean.setECrtdDt(model.getECrtdDt());
+				bean.setEId(model.getEId());
+				bean.setEDesc(model.getEDesc());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setEStatus(model.getEStatus());
+				bean.setECrtdDt(model.getECrtdDt());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

@@ -155,13 +155,15 @@ public class IclubQuoteStatusController implements Serializable {
 		Collection<? extends IclubQuoteStatusModel> models = new ArrayList<IclubQuoteStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubQuoteStatusBean>();
-		for (IclubQuoteStatusModel model : models) {
-			IclubQuoteStatusBean bean = new IclubQuoteStatusBean();
-			bean.setQsId(model.getQsId());
-			bean.setQsLongDesc(model.getQsLongDesc());
-			bean.setQsShortDesc(model.getQsShortDesc());
-			bean.setQsStatus(model.getQsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubQuoteStatusModel model : models) {
+				IclubQuoteStatusBean bean = new IclubQuoteStatusBean();
+				bean.setQsId(model.getQsId());
+				bean.setQsLongDesc(model.getQsLongDesc());
+				bean.setQsShortDesc(model.getQsShortDesc());
+				bean.setQsStatus(model.getQsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}
