@@ -306,6 +306,58 @@ public class IclubRateEngineService {
 		return batmod;
 	}
 
+	@GET
+	@Path("/validate/baseValue/{baseValue}/{rateTypeId}/{reId}")
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	@Transactional(propagation = Propagation.REQUIRED)
+	public ResponseModel validateFixedAndLookUp(@PathParam("baseValue") String baseValue, @PathParam("rateTypeId") Long rateTypeId, @PathParam("reId") String reId) {
+		try {
+			List data = iclubNamedQueryDAO.getIclubRateEngineByBaseValueAndRateTypeId(baseValue, rateTypeId, reId);
+			ResponseModel message = new ResponseModel();
+			if ((data != null) && (data.size() > 0)) {
+				message.setStatusCode(Integer.valueOf(1));
+				message.setStatusDesc("Duplicate Base Value");
+			} else {
+				message.setStatusCode(Integer.valueOf(0));
+				message.setStatusDesc("Success");
+			}
+			return message;
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			ResponseModel message = new ResponseModel();
+			message.setStatusCode(Integer.valueOf(2));
+			message.setStatusDesc(e.getMessage());
+			return message;
+		}
+	}
+
+	@GET
+	@Path("/validate/rangeValue/{baseValue}/{maxValue}/{rateTypeId}/{reId}")
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	@Transactional(propagation = Propagation.REQUIRED)
+	public ResponseModel validateRange(@PathParam("baseValue") String baseValue, @PathParam("maxValue") String maxValue, @PathParam("rateTypeId") Long rateTypeId, @PathParam("reId") String reId) {
+		try {
+			List data = iclubNamedQueryDAO.getIclubRateEngineByBaseMaxValueAndRateTypeId(baseValue, maxValue, rateTypeId, reId);
+			ResponseModel message = new ResponseModel();
+			if ((data != null) && (data.size() > 0)) {
+				message.setStatusCode(Integer.valueOf(1));
+				message.setStatusDesc("Duplicate Base Value");
+			} else {
+				message.setStatusCode(Integer.valueOf(0));
+				message.setStatusDesc("Success");
+			}
+			return message;
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			ResponseModel message = new ResponseModel();
+			message.setStatusCode(Integer.valueOf(2));
+			message.setStatusDesc(e.getMessage());
+			return message;
+		}
+	}
+
 	public IclubRateEngineDAO getIclubRateEngineDAO() {
 		return iclubRateEngineDAO;
 	}

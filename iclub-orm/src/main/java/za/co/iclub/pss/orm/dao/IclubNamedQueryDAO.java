@@ -1251,4 +1251,55 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
+
+	public List getIclubRateEngineByBaseValueAndRateTypeId(String baseValue, Long rateTypeId, String reId) {
+		log.debug("Fetching all IclubRateEngine by Query :: getIclubRateEngineByBaseValueAndRateTypeId");
+		try {
+			Query query = getCurrentSession().getNamedQuery("getIclubRateEngineByBaseValueAndRateTypeId");
+			query.setString("baseValue", baseValue);
+			query.setString("reId", reId);
+			query.setLong("rateTypeId", rateTypeId);
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("IclubRateEngine", re);
+			throw re;
+		}
+	}
+
+	public List getIclubRateEngineByBaseMaxValueAndRateTypeId(String baseValue, String maxValue, Long rateTypeId, String reId) {
+		log.debug("Fetching all IclubRateEngine by Query :: getIclubRateEngineByBaseValueAndRateTypeId");
+		try {
+			// Query query =
+			// getCurrentSession().getNamedQuery("getIclubRateEngineByBaseMaxValueAndRateTypeId");
+			String queryString = "select e from IclubRateEngine e where e.reId is not null ";
+
+			if (reId != null && !reId.trim().equalsIgnoreCase("null") && !reId.trim().equalsIgnoreCase("")) {
+				queryString += " and e.reId like :reId";
+			}
+			if (baseValue != null) {
+				queryString += " and (( e.reBaseValue <= :baseValue and :baseValue <= reMaxValue) or ( e.reBaseValue <= :maxValue and :maxValue <= reMaxValue) )";
+			}
+
+			if (rateTypeId != null) {
+				queryString += " and e.iclubRateType.rtId =:rateTypeId";
+			}
+			Query query = getCurrentSession().createQuery(queryString);
+
+			query.setParameter("baseValue", baseValue);
+			query.setParameter("maxValue", maxValue);
+			if (reId != null && !reId.trim().equalsIgnoreCase("null") && !reId.trim().equalsIgnoreCase("")) {
+				query.setParameter("reId", reId);
+			}
+			if (rateTypeId != null) {
+				query.setParameter("rateTypeId", rateTypeId);
+			}
+			List ret = query.list();
+			return ret;
+		} catch (RuntimeException re) {
+			log.error("IclubRateEngine", re);
+			throw re;
+		}
+	}
+
 }

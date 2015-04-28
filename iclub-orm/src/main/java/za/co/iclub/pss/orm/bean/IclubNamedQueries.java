@@ -93,6 +93,9 @@ import javax.persistence.Table;
         @NamedNativeQuery(name = "getIclubCohortTypeBySD", query = "select * from iclub_cohort_type where lower(ct_short_desc) = lower(:sd) and ct_id <> :id", resultClass = IclubCohortType.class),
         @NamedNativeQuery(query = "select * from iclub_suppl_person where sp_suppl_id=:id", name = "getIclubSupplPersonBySmId", resultClass = IclubSupplPerson.class),
         @NamedNativeQuery(query = "select * from iclub_login where l_person_id=:personId", name = "getIclubLoginByPersonId", resultClass = IclubLogin.class),
+        @NamedNativeQuery(query = "select * from iclub_rate_engine where re_type_id=:rateTypeId and re_base_value=:baseValue and re_id <> :reId", name = "getIclubRateEngineByBaseValueAndRateTypeId", resultClass = IclubRateEngine.class),
+        @NamedNativeQuery(query = "select * from iclub_rate_engine where ((re_base_value<=:baseValue and :baseValue<=re_max_value) or (re_base_value<=:maxValue and :maxValue<=re_max_value)) and re_id <> :reId and re_type_id=:rateTypeId", name = "getIclubRateEngineByBaseMaxValueAndRateTypeId", resultClass = IclubRateEngine.class),
+//        @NamedNativeQuery(query = "select * from iclub_rate_engine where (:baseValue between re_base_value and re_max_value) or (:maxValue between re_base_value and re_max_value) and re_id <> :reId and re_type_id=:rateTypeId", name = "getIclubRateEngineByBaseMaxValueAndRateTypeId", resultClass = IclubRateEngine.class),
         @NamedNativeQuery(name = "getIclubGeoLocByLatAndLong", query = "SELECT gl_id, ( 3959 * acos( cos( radians(:lat) ) * cos( radians( gl_lat ) ) * cos( radians( gl_long ) - radians(:geoLong) ) + sin( radians(:lat) ) * sin( radians( gl_lat ) ) ) ) AS distance FROM iclub_geo_loc   ORDER BY distance LIMIT 0 , 1;", resultClass = IclubGeoLoc.class)})
 @Table(name = "iclub_account_type")
 public class IclubNamedQueries implements java.io.Serializable {

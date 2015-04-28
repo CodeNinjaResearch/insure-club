@@ -131,7 +131,7 @@ public class IclubRatingController implements Serializable {
 			if (model.getIclubRateTypes() != null && model.getIclubRateTypes().length > 0) {
 				Long[] rateTypes = new Long[model.getIclubRateTypes().length];
 				int i = 0;
-				for (Long rateType : bean.getIclubRateTypes()) {
+				for (Long rateType : model.getIclubRateTypes()) {
 					rateTypes[i] = rateType;
 					i++;
 				}
@@ -349,6 +349,25 @@ public class IclubRatingController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select Rate Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
+
+		if (rateTypeBean != null && (rateTypeBean.getRtType().equalsIgnoreCase("F") || rateTypeBean.getRtType().equalsIgnoreCase("L"))) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/baseValue/" + bean.getReBaseValue() + "/" + rateTypeBean.getRtId() + "/" + bean.getReId());
+			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
+			client.close();
+			if (message.getStatusCode() != 0) {
+				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				ret = ret && false;
+			}
+		} else if (rateTypeBean != null && rateTypeBean.getRtType().equalsIgnoreCase("R")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/rangeValue/" + bean.getReBaseValue() + "/" + bean.getReMaxValue() + "/" + rateTypeBean.getRtId() + "/" + bean.getReId());
+			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
+			client.close();
+			if (message.getStatusCode() != 0) {
+				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				ret = ret && false;
+			}
+		}
+
 		if (bean.getReBaseValue() == null || bean.getReBaseValue().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("Base Value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
