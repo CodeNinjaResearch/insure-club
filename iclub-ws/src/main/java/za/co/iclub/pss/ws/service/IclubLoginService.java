@@ -138,7 +138,7 @@ public class IclubLoginService {
 		List<T> ret = new ArrayList<T>();
 		try {
 			List loginmod = iclubLoginDAO.findAll();
-			if (batmod != null && batmod.size() > 0) {
+			if (loginmod != null && loginmod.size() > 0) {
 				for (Object object : loginmod) {
 					IclubLogin iclubLogin = (IclubLogin) object;
 					IclubLoginModel ibm = new IclubLoginModel();
