@@ -1302,4 +1302,16 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
+	public List getIclubPolicyByPolicyStatus(String policyStatus) {
+		log.debug("finding IclubPolicy instance by policyStatus");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicyByPolicyStatus");
+			queryObject.setString("policyStatus", policyStatus);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("get IclubPolicy failed", re);
+			throw re;
+		}
+	}
+
 }

@@ -247,6 +247,62 @@ public class IclubPolicyService {
 	}
 
 	@GET
+	@Path("/get/policyStauts/{statusId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubPolicyModel> List<T> getByPolicyStatus(@PathParam("statusId") String statusId) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubPolicyByPolicyStatus(statusId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPolicy iCP = (IclubPolicy) object;
+
+					IclubPolicyModel model = new IclubPolicyModel();
+
+					model.setPId(iCP.getPId());
+					model.setPProrataPrm(iCP.getPProrataPrm());
+					model.setPPremium(iCP.getPPremium());
+					model.setPNumber(iCP.getPNumber());
+					model.setPDebitDt(iCP.getPDebitDt());
+					model.setPCrtdDt(iCP.getPCrtdDt());
+					model.setIclubAccount(iCP.getIclubAccount() != null ? (iCP.getIclubAccount().getAId()) : null);
+					model.setIclubQuote(iCP.getIclubQuote() != null ? (iCP.getIclubQuote().getQId()) : null);
+					model.setIclubPolicyStatus(iCP.getIclubPolicyStatus() != null ? (iCP.getIclubPolicyStatus().getPsId()) : null);
+					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
+					model.setIclubPolicyStatus(iCP.getIclubPolicyStatus() != null ? (iCP.getIclubPolicyStatus().getPsId()) : null);
+
+					if (iCP.getIclubClaims() != null && iCP.getIclubClaims().size() > 0) {
+						String[] claims = new String[iCP.getIclubClaims().size()];
+						int i = 0;
+						for (IclubClaim claim : iCP.getIclubClaims()) {
+							claims[i] = claim.getCId();
+							i++;
+						}
+						model.setIclubClaims(claims);
+					}
+
+					if (iCP.getIclubPayments() != null && iCP.getIclubPayments().size() > 0) {
+						String[] payments = new String[iCP.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment payment : iCP.getIclubPayments()) {
+							payments[i] = payment.getPId();
+							i++;
+						}
+						model.setIclubClaims(payments);
+					}
+					ret.add((T) model);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+
+	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)

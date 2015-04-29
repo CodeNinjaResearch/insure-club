@@ -1,0 +1,39 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<p:panel id="qqPanel">
+			<p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.acDashboardBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+				</f:facet>
+				<p:column headerText="Unique Id">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PId}" />
+				</p:column>
+				<p:column headerText="Number">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
+				</p:column>
+				<p:column headerText="Premium">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}" />
+				</p:column>
+				<p:column headerText="Pro-rata Premium">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PProrataPrm}" />
+				</p:column>
+				<p:column headerText="Debit Date">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PDebitDt}" />
+				</p:column>
+				<p:column headerText="Quote Id">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubQuote}" />
+				</p:column>
+				<p:column headerText="Created By">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+				</p:column>
+				<p:column headerText="Created Date">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PCrtdDt}" />
+				</p:column>
+				<p:column headerText="View">
+					<p:commandButton value="Verify" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" action="#{iclubPolicyController.verifyAction}">
+						<f:setPropertyActionListener target="#{iclubPolicyController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>
