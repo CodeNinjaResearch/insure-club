@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
@@ -17,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.event.CellEditEvent;
 
 import za.co.iclub.pss.web.bean.IclubFieldBean;
 import za.co.iclub.pss.web.bean.IclubRateEngineBean;
@@ -56,12 +59,15 @@ public class IclubRatingController implements Serializable {
 				if (bean.getRtType() != null && !bean.getRtType().trim().equalsIgnoreCase("")) {
 					if (bean.getRtType().toUpperCase().equalsIgnoreCase("L")) {
 						IclubWebHelper.addObjectIntoSession("ratetype", bean);
+						loadBeans();
 						return "lookup";
 					} else if (bean.getRtType().toUpperCase().equalsIgnoreCase("F")) {
 						IclubWebHelper.addObjectIntoSession("ratetype", bean);
+						loadBeans();
 						return "fixed";
 					} else if (bean.getRtType().toUpperCase().equalsIgnoreCase("R")) {
 						IclubWebHelper.addObjectIntoSession("ratetype", bean);
+						loadBeans();
 						return "range";
 					}
 				}
@@ -112,6 +118,95 @@ public class IclubRatingController implements Serializable {
 		return bean;
 	}
 
+	public void loadBeans() {
+		if (IclubWebHelper.getObjectIntoSession("ratetype") != null) {
+			rateTypeBean = (IclubRateTypeBean) IclubWebHelper.getObjectIntoSession("ratetype");
+			IclubWebHelper.addObjectIntoSession("ratetype", null);
+		}
+
+		if (rateTypeBean != null && rateTypeBean.getRtId() != null && rateTypeBean.getRtType().equalsIgnoreCase("L")) {
+
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/rateType/" + rateTypeBean.getRtId());
+			Collection<? extends IclubRateEngineModel> models = new ArrayList<IclubRateEngineModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateEngineModel.class));
+			client.close();
+			beans = new ArrayList<IclubRateEngineBean>();
+
+			lookupSaveFlag = true;
+			Map<String, IclubRateEngineBean> rateEngineMap = new TreeMap<String, IclubRateEngineBean>();
+			if (models != null && models.size() > 0) {
+				for (IclubRateEngineModel model : models) {
+
+					IclubRateEngineBean bean = new IclubRateEngineBean();
+					bean.setReId(model.getReId());
+					bean.setReRate(model.getReRate());
+					bean.setReCrtdDt(model.getReCrtdDt());
+					bean.setReStatus(model.getReStatus());
+					bean.setReMaxValue(model.getReMaxValue());
+					bean.setReBaseValue(model.getReBaseValue());
+					bean.setIclubRateType(model.getIclubRateType());
+					bean.setIclubPerson(model.getIclubPerson());
+					rateEngineMap.put(bean.getReBaseValue(), bean);
+					beans.add(bean);
+				}
+			}
+			IclubFieldBean fieldBean = getFieldById(rateTypeBean.getIclubField());
+
+			if (fieldBean != null) {
+				client = IclubWebHelper.createCustomClient(BASE_URL + "/list/lookupdetails/" + fieldBean.getFLTblName());
+				Collection<? extends String> lookupModels = new ArrayList<String>(client.accept(MediaType.APPLICATION_JSON).getCollection(String.class));
+				client.close();
+
+				if (lookupModels != null && lookupModels.size() > 0 && lookupModels.size() != rateEngineMap.size()) {
+					for (String model : lookupModels) {
+						if (rateEngineMap.get(model) == null) {
+							IclubRateEngineBean bean = new IclubRateEngineBean();
+							bean.setReId(UUID.randomUUID().toString());
+							bean.setReRate(0.0);
+							bean.setReCrtdDt(new Timestamp(System.currentTimeMillis()));
+							bean.setReStatus("Y");
+							bean.setReBaseValue(model);
+							bean.setIclubRateType(rateTypeBean.getRtId());
+							bean.setIclubPerson(getSessionUserId());
+							beans.add(bean);
+						}
+					}
+				}
+			}
+
+		} else {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/rateType/" + rateTypeBean.getRtId());
+			Collection<? extends IclubRateEngineModel> models = new ArrayList<IclubRateEngineModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateEngineModel.class));
+			client.close();
+			beans = new ArrayList<IclubRateEngineBean>();
+
+			if (models != null && models.size() > 0) {
+				lookupSaveFlag = false;
+				for (IclubRateEngineModel model : models) {
+
+					IclubRateEngineBean bean = new IclubRateEngineBean();
+					bean.setReId(model.getReId());
+					bean.setReRate(model.getReRate());
+					bean.setReCrtdDt(model.getReCrtdDt());
+					bean.setReStatus(model.getReStatus());
+					bean.setReMaxValue(model.getReMaxValue());
+					bean.setReBaseValue(model.getReBaseValue());
+					bean.setIclubRateType(model.getIclubRateType());
+					bean.setIclubPerson(model.getIclubPerson());
+					beans.add(bean);
+				}
+			}
+		}
+	}
+
+	public void onCellEdit(CellEditEvent event) {
+		Object oldValue = event.getOldValue();
+		Object newValue = event.getNewValue();
+
+		if (newValue != null && !newValue.equals(oldValue)) {
+			IclubWebHelper.addMessage("Rate Changed :::: Old Rate: " + oldValue + ", New Rate:" + newValue, FacesMessage.SEVERITY_INFO);
+		}
+	}
+
 	public IclubFieldBean getFieldById(Long fieldId) {
 
 		WebClient client = IclubWebHelper.createCustomClient(FLD_BASE_URL + "get/" + fieldId);
@@ -144,59 +239,8 @@ public class IclubRatingController implements Serializable {
 	}
 
 	public List<IclubRateEngineBean> getBeans() {
-		if (IclubWebHelper.getObjectIntoSession("ratetype") != null) {
-			rateTypeBean = (IclubRateTypeBean) IclubWebHelper.getObjectIntoSession("ratetype");
-			IclubWebHelper.addObjectIntoSession("ratetype", null);
-		}
-
-		if (rateTypeBean != null && rateTypeBean.getRtId() != null) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/rateType/" + rateTypeBean.getRtId());
-			Collection<? extends IclubRateEngineModel> models = new ArrayList<IclubRateEngineModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateEngineModel.class));
-			client.close();
+		if (beans == null) {
 			beans = new ArrayList<IclubRateEngineBean>();
-
-			if (models != null && models.size() > 0) {
-				lookupSaveFlag = false;
-				for (IclubRateEngineModel model : models) {
-
-					IclubRateEngineBean bean = new IclubRateEngineBean();
-					bean.setReId(model.getReId());
-					bean.setReRate(model.getReRate());
-					bean.setReCrtdDt(model.getReCrtdDt());
-					bean.setReStatus(model.getReStatus());
-					bean.setReMaxValue(model.getReMaxValue());
-					bean.setReBaseValue(model.getReBaseValue());
-					bean.setIclubRateType(model.getIclubRateType());
-					bean.setIclubPerson(model.getIclubPerson());
-					beans.add(bean);
-				}
-			} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
-
-				IclubFieldBean fieldBean = getFieldById(rateTypeBean.getIclubField());
-
-				if (fieldBean != null) {
-					client = IclubWebHelper.createCustomClient(BASE_URL + "/list/lookupdetails/" + fieldBean.getFLTblName());
-					Collection<? extends String> lookupModels = new ArrayList<String>(client.accept(MediaType.APPLICATION_JSON).getCollection(String.class));
-					client.close();
-					beans = new ArrayList<IclubRateEngineBean>();
-
-					if (lookupModels != null && lookupModels.size() > 0) {
-						lookupSaveFlag = true;
-						for (String model : lookupModels) {
-							IclubRateEngineBean bean = new IclubRateEngineBean();
-							bean.setReId(UUID.randomUUID().toString());
-							bean.setReRate(0.0);
-							bean.setReCrtdDt(new Timestamp(System.currentTimeMillis()));
-							bean.setReStatus("Y");
-							bean.setReBaseValue(model);
-							bean.setIclubRateType(rateTypeBean.getRtId());
-							bean.setIclubPerson(getSessionUserId());
-							beans.add(bean);
-						}
-					}
-
-				}
-			}
 		}
 		return beans;
 	}
@@ -216,7 +260,7 @@ public class IclubRatingController implements Serializable {
 	public void addIclubRateEngine() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubRateEngine");
 		try {
-			if (validateForm(true)) {
+			if (validateForm(true, false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubRateEngineModel model = new IclubRateEngineModel();
 
@@ -247,12 +291,17 @@ public class IclubRatingController implements Serializable {
 	public void addIclubRateEngines() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubRateEngine");
 		try {
-			if (validateForm(true)) {
-				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
+			if (validateForm(true, true)) {
+
 				ResponseModel response = null;
+				WebClient client = null;
 				for (IclubRateEngineBean bean : beans) {
 					IclubRateEngineModel model = new IclubRateEngineModel();
-
+					if (bean.getReCrtdDt() == null) {
+						client = IclubWebHelper.createCustomClient(BASE_URL + "add");
+					} else {
+						client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
+					}
 					model.setReId(bean.getReId());
 					model.setReRate(bean.getReRate());
 					model.setReCrtdDt(new Timestamp(System.currentTimeMillis()));
@@ -261,11 +310,15 @@ public class IclubRatingController implements Serializable {
 					model.setReBaseValue(bean.getReBaseValue());
 					model.setIclubRateType(bean.getIclubRateType());
 					model.setIclubPerson(getSessionUserId());
-
-					response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-					lookupSaveFlag = false;
+					if (bean.getReCrtdDt() == null) {
+						response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+					} else {
+						response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+					}
+					client.close();
+					lookupSaveFlag = true;
 				}
-				client.close();
+
 				if (response != null && response.getStatusCode() == 0) {
 					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
@@ -283,7 +336,7 @@ public class IclubRatingController implements Serializable {
 	public void modIclubRateEngine() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubRateEngine");
 		try {
-			if (validateForm(false)) {
+			if (validateForm(false, false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubRateEngineModel model = new IclubRateEngineModel();
 				model.setReId(bean.getReId());
@@ -343,14 +396,14 @@ public class IclubRatingController implements Serializable {
 		showModPanel = true;
 	}
 
-	public boolean validateForm(boolean flag) {
+	public boolean validateForm(boolean flag, boolean bulkSave) {
 		boolean ret = true;
 		if (selRateType == null) {
 			IclubWebHelper.addMessage(("Please Select Rate Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
-		if (rateTypeBean != null && (rateTypeBean.getRtType().equalsIgnoreCase("F") || rateTypeBean.getRtType().equalsIgnoreCase("L"))) {
+		if (rateTypeBean != null && (rateTypeBean.getRtType().equalsIgnoreCase("F"))) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/baseValue/" + bean.getReBaseValue() + "/" + rateTypeBean.getRtId() + "/" + bean.getReId());
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
@@ -368,11 +421,11 @@ public class IclubRatingController implements Serializable {
 			}
 		}
 
-		if (bean.getReBaseValue() == null || bean.getReBaseValue().trim().equalsIgnoreCase("")) {
+		if (!bulkSave && bean != null && (bean.getReBaseValue() == null || bean.getReBaseValue().trim().equalsIgnoreCase(""))) {
 			IclubWebHelper.addMessage(("Base Value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (bean.getReRate() == null) {
+		if (!bulkSave && bean != null && bean.getReRate() == null) {
 			IclubWebHelper.addMessage(("Rate Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}

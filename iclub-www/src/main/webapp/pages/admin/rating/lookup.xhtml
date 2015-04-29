@@ -2,16 +2,28 @@
 	<ui:define name="rate">
 		<div class="ContainerIndent">
 			<p:panel id="pnlRateEngineCont">
-				<p:dataTable id="dtRateEngineCont" widgetVar="dtRateEngineCont" value="#{iclubRatingController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateEngines Found" reflow="true">
+				<p:contextMenu for="dtRateEngineCont" widgetVar="cMenu">
+					<p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('dtRateEngineCont').showCellEditor();return false;" />
+					<p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()" />
+				</p:contextMenu>
+				<p:dataTable id="dtRateEngineCont" editable="true" editMode="cell" widgetVar="dtRateEngineCont" value="#{iclubRatingController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateEngines Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnRateEngineShowAdd" rendered="#{!iclubRatingController.lookupSaveFlag}" value="Add" actionListener="#{iclubRatingController.showAddPanel}" update=":iclubFrm:pnlRateEngineCont" />
 						<p:commandButton id="btnRateEngineSave" rendered="#{iclubRatingController.lookupSaveFlag}" value="Save" actionListener="#{iclubRatingController.addIclubRateEngines}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
 					</f:facet>
+					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
 					<p:column headerText="Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reId}" />
 					</p:column>
 					<p:column headerText="Rate">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reRate}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel styleClass="TexAlCenter" value="#{bean.reRate}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="rateInput" value="#{bean.reRate}" styleClass="TexAlCenter" placeholder="Rate" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 					<p:column headerText="Base Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
@@ -28,11 +40,6 @@
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
 						</p:selectOneMenu>
-					</p:column>
-					<p:column>
-						<p:commandButton id="btnRateEngineEdit" icon="ui-icon-pencil" actionListener="#{iclubRatingController.showModPanel}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg">
-							<f:setPropertyActionListener target="#{iclubRatingController.bean}" value="#{bean}" />
-						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 				<p:panel id="pnlAdd" rendered="#{iclubRatingController.showAddPanel}">
