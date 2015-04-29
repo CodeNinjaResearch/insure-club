@@ -66,6 +66,9 @@ public class IclubPolicyController implements Serializable {
 
 	private List<IclubPolicyBean> beans;
 
+	private List<IclubPolicyBean> paDashboardBeans;
+	private List<IclubPolicyBean> acDashboardBeans;
+
 	private ResourceBundle labelBundle;
 
 	private boolean iItemFalg;
@@ -731,6 +734,116 @@ public class IclubPolicyController implements Serializable {
 
 	public void setViewPolicy(boolean viewPolicy) {
 		this.viewPolicy = viewPolicy;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<IclubPolicyBean> getPaDashboardBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/user/" + getSessionUserId());
+
+		List<IclubPolicyModel> models = (ArrayList<IclubPolicyModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyModel.class));
+
+		if (models != null && models.size() > 0) {
+			paDashboardBeans = new ArrayList<IclubPolicyBean>();
+			for (IclubPolicyModel model : models) {
+				if (model != null && model.getPId() != null) {
+					IclubPolicyBean bean = new IclubPolicyBean();
+					bean.setPId(model.getPId());
+					bean.setPProrataPrm(model.getPProrataPrm());
+					bean.setPPremium(model.getPPremium());
+					bean.setPNumber(model.getPNumber());
+					bean.setPDebitDt(model.getPDebitDt());
+					bean.setPCrtdDt(model.getPCrtdDt());
+					bean.setIclubAccount(model.getIclubAccount());
+					bean.setIclubQuote(model.getIclubQuote());
+					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
+					bean.setIclubPerson(model.getIclubPerson());
+					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
+
+					if (model.getIclubClaims() != null && model.getIclubClaims().length > 0) {
+						String[] claims = new String[model.getIclubClaims().length];
+						int i = 0;
+						for (String claim : model.getIclubClaims()) {
+							claims[i] = claim;
+							i++;
+						}
+						bean.setIclubClaims(claims);
+					}
+
+					if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+						String[] payments = new String[model.getIclubPayments().length];
+						int i = 0;
+						for (String payment : model.getIclubPayments()) {
+							payments[i] = payment;
+							i++;
+						}
+						bean.setIclubClaims(payments);
+					}
+					paDashboardBeans.add(bean);
+				}
+
+			}
+		}
+
+		return paDashboardBeans;
+	}
+
+	public void setPaDashboardBeans(List<IclubPolicyBean> paDashboardBeans) {
+		this.paDashboardBeans = paDashboardBeans;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<IclubPolicyBean> getAcDashboardBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/user/" + getSessionUserId());
+
+		List<IclubPolicyModel> models = (ArrayList<IclubPolicyModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyModel.class));
+
+		if (models != null && models.size() > 0) {
+			acDashboardBeans = new ArrayList<IclubPolicyBean>();
+			for (IclubPolicyModel model : models) {
+				if (model != null && model.getPId() != null) {
+					IclubPolicyBean bean = new IclubPolicyBean();
+					bean.setPId(model.getPId());
+					bean.setPProrataPrm(model.getPProrataPrm());
+					bean.setPPremium(model.getPPremium());
+					bean.setPNumber(model.getPNumber());
+					bean.setPDebitDt(model.getPDebitDt());
+					bean.setPCrtdDt(model.getPCrtdDt());
+					bean.setIclubAccount(model.getIclubAccount());
+					bean.setIclubQuote(model.getIclubQuote());
+					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
+					bean.setIclubPerson(model.getIclubPerson());
+					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
+
+					if (model.getIclubClaims() != null && model.getIclubClaims().length > 0) {
+						String[] claims = new String[model.getIclubClaims().length];
+						int i = 0;
+						for (String claim : model.getIclubClaims()) {
+							claims[i] = claim;
+							i++;
+						}
+						bean.setIclubClaims(claims);
+					}
+
+					if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+						String[] payments = new String[model.getIclubPayments().length];
+						int i = 0;
+						for (String payment : model.getIclubPayments()) {
+							payments[i] = payment;
+							i++;
+						}
+						bean.setIclubClaims(payments);
+					}
+					acDashboardBeans.add(bean);
+				}
+
+			}
+		}
+
+		return acDashboardBeans;
+	}
+
+	public void setAcDashboardBeans(List<IclubPolicyBean> acDashboardBeans) {
+		this.acDashboardBeans = acDashboardBeans;
 	}
 
 }
