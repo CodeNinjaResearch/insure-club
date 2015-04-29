@@ -105,6 +105,12 @@ public class IclubClaimController implements Serializable {
 
 	private StreamedContent file;
 
+	private boolean viewClaimFlag;
+
+	public void viewCalimAction() {
+		viewClaimFlag = true;
+	}
+
 	public String showModPanel() {
 		return "edit.xhtml?faces-redirect=true";
 	}
@@ -786,6 +792,14 @@ public class IclubClaimController implements Serializable {
 
 	public void setPurposeTypeBeans(List<IclubPurposeTypeBean> purposeTypeBeans) {
 		this.purposeTypeBeans = purposeTypeBeans;
+	}
+
+	public boolean isViewClaimFlag() {
+		return viewClaimFlag;
+	}
+
+	public void setViewClaimFlag(boolean viewClaimFlag) {
+		this.viewClaimFlag = viewClaimFlag;
 	}
 
 }

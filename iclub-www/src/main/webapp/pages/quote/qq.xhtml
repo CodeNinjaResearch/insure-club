@@ -66,7 +66,7 @@
 		<p:remoteCommand actionListener="#{iclubQuickQuoteController.initializePage}" name="onload" autoRun="true" />
 		<div class="ContainerIndent TexAlCenter">
 			<p:tabView id="qqTabView">
-				<p:tab id="qqPerDet" title="Person Details">
+				<p:tab id="qqPerDet" title="Person Details" rendered="#{iclubQuickQuoteController.profileTabFlag}">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="First Name :" />

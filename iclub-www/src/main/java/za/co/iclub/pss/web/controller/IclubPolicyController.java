@@ -857,7 +857,7 @@ public class IclubPolicyController implements Serializable {
 
 	@SuppressWarnings("unchecked")
 	public List<IclubPolicyBean> getAllDashboardBeans() {
-		WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/user/" + getSessionUserId());
+		WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/createdate");
 
 		List<IclubPolicyModel> models = (ArrayList<IclubPolicyModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyModel.class));
 

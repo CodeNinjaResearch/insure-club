@@ -1270,15 +1270,14 @@ public class IclubNamedQueryDAO {
 	public List getIclubRateEngineByBaseMaxValueAndRateTypeId(String baseValue, String maxValue, Long rateTypeId, String reId) {
 		log.debug("Fetching all IclubRateEngine by Query :: getIclubRateEngineByBaseValueAndRateTypeId");
 		try {
-			// Query query =
-			// getCurrentSession().getNamedQuery("getIclubRateEngineByBaseMaxValueAndRateTypeId");
-			String queryString = "select e from IclubRateEngine e where e.reId is not null ";
+			 Query query = getCurrentSession().getNamedQuery("getIclubRateEngineByBaseMaxValueAndRateTypeId");
+			/*String queryString = "select e from IclubRateEngine e where e.reId is not null ";
 
 			if (reId != null && !reId.trim().equalsIgnoreCase("null") && !reId.trim().equalsIgnoreCase("")) {
-				queryString += " and e.reId like :reId";
+				queryString += " and e.reId <> :reId";
 			}
 			if (baseValue != null) {
-				queryString += " and (( e.reBaseValue <= :baseValue and :baseValue <= reMaxValue) or ( e.reBaseValue <= :maxValue and :maxValue <= reMaxValue) )";
+				queryString += " and (( e.reBaseValue <= :baseValue and :baseValue <= e.reMaxValue) or ( e.reBaseValue <= :maxValue and :maxValue <= e.reMaxValue) )";
 			}
 
 			if (rateTypeId != null) {
@@ -1293,7 +1292,12 @@ public class IclubNamedQueryDAO {
 			}
 			if (rateTypeId != null) {
 				query.setParameter("rateTypeId", rateTypeId);
-			}
+			}*/
+			 
+			 query.setDouble("baseValue", new Double(baseValue));
+			 query.setDouble("maxValue", new Double(maxValue));
+			 query.setString("reId", reId);
+			 query.setLong("rateTypeId", rateTypeId);
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
@@ -1307,6 +1311,17 @@ public class IclubNamedQueryDAO {
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicyByPolicyStatus");
 			queryObject.setString("policyStatus", policyStatus);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("get IclubPolicy failed", re);
+			throw re;
+		}
+	}
+
+	public List getIclubPolicies() {
+		log.debug("finding IclubPolicy instance");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicies");
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("get IclubPolicy failed", re);
