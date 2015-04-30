@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 
 import za.co.iclub.pss.web.bean.IclubFieldBean;
@@ -283,6 +284,7 @@ public class IclubRatingController implements Serializable {
 					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
 					bean.setReRate(0d);
+					RequestContext.getCurrentInstance().addCallbackParam("saved", true);
 				}
 
 			}

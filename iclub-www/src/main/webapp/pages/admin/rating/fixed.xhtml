@@ -16,7 +16,7 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:commandButton id="btnRateEngineAddPnlSave" value="Save" oncomplete="PF('addRateEngineDailog').hide();" actionListener="#{iclubRatingController.addRateEngine}" update=" :iclubFrm:addRateEnginePnl,:iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
+							<p:commandButton id="btnRateEngineAddPnlSave" value="Save" oncomplete="hideDialog(xhr, status, args);" actionListener="#{iclubRatingController.addRateEngine}" update=" :iclubFrm:addRateEnginePnl,:iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
 						</div>
 						<div class="Container50 Responsive">
 							<p:commandButton id="btnRateEngineAddPnlClose" value="Close" onclick="PF('addRateEngineDailog').close();" action="#{iclubRatingController.clearForm()}" update=":iclubFrm:addRateEngineDailog,:iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
