@@ -199,6 +199,132 @@ public class IclubClaimService {
 	}
 
 	@GET
+	@Path("/listOrderByCrtDt")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubClaimModel> List<T> getByCreatedDate() {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubClaimByCrtDt();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubClaim iCC = (IclubClaim) object;
+
+					IclubClaimModel model = new IclubClaimModel();
+
+					model.setCId(iCC.getCId());
+					model.setCCrtdDt(iCC.getCCrtdDt());
+					model.setCValue(iCC.getCValue());
+					model.setCNumItems(iCC.getCNumItems());
+					model.setCNumber(iCC.getCNumber());
+					model.setIclubPolicy(iCC.getIclubPolicy() != null ? (iCC.getIclubPolicy().getPId()) : null);
+					model.setIclubClaimStatus(iCC.getIclubClaimStatus() != null ? (iCC.getIclubClaimStatus().getCsId()) : null);
+					model.setIclubPerson(iCC.getIclubPerson() != null ? (iCC.getIclubPerson().getPId()) : null);
+
+					if (iCC.getIclubCohortClaims() != null && iCC.getIclubCohortClaims().size() > 0) {
+						String[] iclubCohortClaims = new String[iCC.getIclubCohortClaims().size()];
+						int i = 0;
+						for (IclubCohortClaim iclubCohortClaim : iCC.getIclubCohortClaims()) {
+							iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+							i++;
+						}
+						model.setIclubCohortClaims(iclubCohortClaims);
+					}
+
+					if (iCC.getIclubPayments() != null && iCC.getIclubPayments().size() > 0) {
+						String[] payments = new String[iCC.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment payment : iCC.getIclubPayments()) {
+							payments[i] = payment.getPId();
+							i++;
+						}
+						model.setIclubPayments(payments);
+					}
+
+					if (iCC.getIclubClaimItems() != null && iCC.getIclubClaimItems().size() > 0) {
+						String[] claimItems = new String[iCC.getIclubClaimItems().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iCC.getIclubClaimItems()) {
+							claimItems[i] = claimItem.getCiId();
+							i++;
+						}
+						model.setIclubClaimItems(claimItems);
+					}
+					ret.add((T) model);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+
+	@GET
+	@Path("/get/statusId/{statusId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubClaimModel> List<T> getByStatusId(@PathParam("statusId") String statusId) {
+		List<T> ret = new ArrayList<T>();
+
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubCalimByClaimStatus(statusId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubClaim iCC = (IclubClaim) object;
+
+					IclubClaimModel model = new IclubClaimModel();
+
+					model.setCId(iCC.getCId());
+					model.setCCrtdDt(iCC.getCCrtdDt());
+					model.setCValue(iCC.getCValue());
+					model.setCNumItems(iCC.getCNumItems());
+					model.setCNumber(iCC.getCNumber());
+					model.setIclubPolicy(iCC.getIclubPolicy() != null ? (iCC.getIclubPolicy().getPId()) : null);
+					model.setIclubClaimStatus(iCC.getIclubClaimStatus() != null ? (iCC.getIclubClaimStatus().getCsId()) : null);
+					model.setIclubPerson(iCC.getIclubPerson() != null ? (iCC.getIclubPerson().getPId()) : null);
+
+					if (iCC.getIclubCohortClaims() != null && iCC.getIclubCohortClaims().size() > 0) {
+						String[] iclubCohortClaims = new String[iCC.getIclubCohortClaims().size()];
+						int i = 0;
+						for (IclubCohortClaim iclubCohortClaim : iCC.getIclubCohortClaims()) {
+							iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+							i++;
+						}
+						model.setIclubCohortClaims(iclubCohortClaims);
+					}
+
+					if (iCC.getIclubPayments() != null && iCC.getIclubPayments().size() > 0) {
+						String[] payments = new String[iCC.getIclubPayments().size()];
+						int i = 0;
+						for (IclubPayment payment : iCC.getIclubPayments()) {
+							payments[i] = payment.getPId();
+							i++;
+						}
+						model.setIclubPayments(payments);
+					}
+
+					if (iCC.getIclubClaimItems() != null && iCC.getIclubClaimItems().size() > 0) {
+						String[] claimItems = new String[iCC.getIclubClaimItems().size()];
+						int i = 0;
+						for (IclubClaimItem claimItem : iCC.getIclubClaimItems()) {
+							claimItems[i] = claimItem.getCiId();
+							i++;
+						}
+						model.setIclubClaimItems(claimItems);
+					}
+					ret.add((T) model);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+
+		return ret;
+	}
+
+	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)

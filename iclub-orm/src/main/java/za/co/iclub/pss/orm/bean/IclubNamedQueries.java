@@ -99,6 +99,10 @@ import javax.persistence.Table;
         
         @NamedNativeQuery(query = "select * from iclub_policy order by p_crtd_dt desc", name = "getIclubPolicies", resultClass = IclubPolicy.class),
         
+        @NamedNativeQuery(query = "select * from iclub_claim order by c_crtd_dt desc", name = "getIclubClaimByCrtDt", resultClass = IclubClaim.class),
+        
+        @NamedNativeQuery(query = "select * from iclub_claim order where c_status_id=:claimStatus order by c_crtd_dt asc", name = "getIclubCalimByClaimStatus", resultClass = IclubClaim.class),
+        
         @NamedNativeQuery(query = "select * from iclub_rate_engine where ((cast(re_base_value as decimal(15,5))<=:baseValue and :baseValue<=cast(re_max_value as decimal(15,5))) or (cast(re_base_value as decimal(15,5))<=:maxValue and :maxValue<=cast(re_max_value as decimal(15,5)))) and re_id <> :reId and re_type_id=:rateTypeId", name = "getIclubRateEngineByBaseMaxValueAndRateTypeId", resultClass = IclubRateEngine.class),
 //        @NamedNativeQuery(query = "select * from iclub_rate_engine where (:baseValue between re_base_value and re_max_value) or (:maxValue between re_base_value and re_max_value) and re_id <> :reId and re_type_id=:rateTypeId", name = "getIclubRateEngineByBaseMaxValueAndRateTypeId", resultClass = IclubRateEngine.class),
         @NamedNativeQuery(name = "getIclubGeoLocByLatAndLong", query = "SELECT gl_id, ( 3959 * acos( cos( radians(:lat) ) * cos( radians( gl_lat ) ) * cos( radians( gl_long ) - radians(:geoLong) ) + sin( radians(:lat) ) * sin( radians( gl_lat ) ) ) ) AS distance FROM iclub_geo_loc   ORDER BY distance LIMIT 0 , 1;", resultClass = IclubGeoLoc.class)})

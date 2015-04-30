@@ -77,6 +77,9 @@ public class IclubClaimController implements Serializable {
 	private List<IclubPolicyBean> policyBeans;
 
 	private List<IclubClaimBean> beans;
+	private List<IclubClaimBean> acBeans;
+	private List<IclubClaimBean> allBeans;
+	private List<IclubClaimBean> paBeans;
 
 	private IclubClaimBean bean;
 
@@ -800,6 +803,165 @@ public class IclubClaimController implements Serializable {
 
 	public void setViewClaimFlag(boolean viewClaimFlag) {
 		this.viewClaimFlag = viewClaimFlag;
+	}
+
+	public List<IclubClaimBean> getAcBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/statusId/" + 4);
+		Collection<? extends IclubClaimModel> models = new ArrayList<IclubClaimModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimModel.class));
+		client.close();
+		acBeans = new ArrayList<IclubClaimBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubClaimModel model : models) {
+				IclubClaimBean bean = new IclubClaimBean();
+				bean.setCId(model.getCId());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setCNumItems(model.getCNumItems());
+				bean.setCNumber(model.getCNumber());
+				bean.setIclubPolicy(model.getIclubPolicy());
+				bean.setIclubClaimStatus(model.getIclubClaimStatus());
+				bean.setIclubPerson(model.getIclubPerson());
+
+				if (model.getIclubCohortClaims() != null && model.getIclubCohortClaims().length > 0) {
+					String[] iclubCohortClaims = model.getIclubCohortClaims();
+
+					bean.setIclubCohortClaims(iclubCohortClaims);
+				}
+
+				if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+					String[] payments = new String[model.getIclubPayments().length];
+					int i = 0;
+					for (String payment : model.getIclubPayments()) {
+						payments[i] = payment;
+						i++;
+					}
+
+					bean.setIclubPayments(payments);
+				}
+
+				if (model.getIclubClaimItems() != null && model.getIclubClaimItems().length > 0) {
+					String[] claimItems = new String[model.getIclubClaimItems().length];
+					int i = 0;
+					for (String claimItem : model.getIclubClaimItems()) {
+						claimItems[i] = claimItem;
+						i++;
+					}
+					bean.setIclubClaimItems(claimItems);
+				}
+				acBeans.add(bean);
+			}
+		}
+		return acBeans;
+	}
+
+	public void setAcBeans(List<IclubClaimBean> acBeans) {
+		this.acBeans = acBeans;
+	}
+
+	public List<IclubClaimBean> getAllBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "listOrderByCrtDt");
+		Collection<? extends IclubClaimModel> models = new ArrayList<IclubClaimModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimModel.class));
+		client.close();
+		allBeans = new ArrayList<IclubClaimBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubClaimModel model : models) {
+				IclubClaimBean bean = new IclubClaimBean();
+				bean.setCId(model.getCId());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setCNumItems(model.getCNumItems());
+				bean.setCNumber(model.getCNumber());
+				bean.setIclubPolicy(model.getIclubPolicy());
+				bean.setIclubClaimStatus(model.getIclubClaimStatus());
+				bean.setIclubPerson(model.getIclubPerson());
+
+				if (model.getIclubCohortClaims() != null && model.getIclubCohortClaims().length > 0) {
+					String[] iclubCohortClaims = model.getIclubCohortClaims();
+
+					bean.setIclubCohortClaims(iclubCohortClaims);
+				}
+
+				if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+					String[] payments = new String[model.getIclubPayments().length];
+					int i = 0;
+					for (String payment : model.getIclubPayments()) {
+						payments[i] = payment;
+						i++;
+					}
+
+					bean.setIclubPayments(payments);
+				}
+
+				if (model.getIclubClaimItems() != null && model.getIclubClaimItems().length > 0) {
+					String[] claimItems = new String[model.getIclubClaimItems().length];
+					int i = 0;
+					for (String claimItem : model.getIclubClaimItems()) {
+						claimItems[i] = claimItem;
+						i++;
+					}
+					bean.setIclubClaimItems(claimItems);
+				}
+				allBeans.add(bean);
+			}
+		}
+		return allBeans;
+	}
+
+	public void setAllBeans(List<IclubClaimBean> allBeans) {
+		this.allBeans = allBeans;
+	}
+
+	public List<IclubClaimBean> getPaBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/statusId" + 2);
+		Collection<? extends IclubClaimModel> models = new ArrayList<IclubClaimModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimModel.class));
+		client.close();
+		paBeans = new ArrayList<IclubClaimBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubClaimModel model : models) {
+				IclubClaimBean bean = new IclubClaimBean();
+				bean.setCId(model.getCId());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setCNumItems(model.getCNumItems());
+				bean.setCNumber(model.getCNumber());
+				bean.setIclubPolicy(model.getIclubPolicy());
+				bean.setIclubClaimStatus(model.getIclubClaimStatus());
+				bean.setIclubPerson(model.getIclubPerson());
+
+				if (model.getIclubCohortClaims() != null && model.getIclubCohortClaims().length > 0) {
+					String[] iclubCohortClaims = model.getIclubCohortClaims();
+
+					bean.setIclubCohortClaims(iclubCohortClaims);
+				}
+
+				if (model.getIclubPayments() != null && model.getIclubPayments().length > 0) {
+					String[] payments = new String[model.getIclubPayments().length];
+					int i = 0;
+					for (String payment : model.getIclubPayments()) {
+						payments[i] = payment;
+						i++;
+					}
+
+					bean.setIclubPayments(payments);
+				}
+
+				if (model.getIclubClaimItems() != null && model.getIclubClaimItems().length > 0) {
+					String[] claimItems = new String[model.getIclubClaimItems().length];
+					int i = 0;
+					for (String claimItem : model.getIclubClaimItems()) {
+						claimItems[i] = claimItem;
+						i++;
+					}
+					bean.setIclubClaimItems(claimItems);
+				}
+				paBeans.add(bean);
+			}
+		}
+		return paBeans;
+	}
+
+	public void setPaBeans(List<IclubClaimBean> paBeans) {
+		this.paBeans = paBeans;
 	}
 
 }

@@ -1270,34 +1270,33 @@ public class IclubNamedQueryDAO {
 	public List getIclubRateEngineByBaseMaxValueAndRateTypeId(String baseValue, String maxValue, Long rateTypeId, String reId) {
 		log.debug("Fetching all IclubRateEngine by Query :: getIclubRateEngineByBaseValueAndRateTypeId");
 		try {
-			 Query query = getCurrentSession().getNamedQuery("getIclubRateEngineByBaseMaxValueAndRateTypeId");
-			/*String queryString = "select e from IclubRateEngine e where e.reId is not null ";
+			Query query = getCurrentSession().getNamedQuery("getIclubRateEngineByBaseMaxValueAndRateTypeId");
+			/*
+			 * String queryString =
+			 * "select e from IclubRateEngine e where e.reId is not null ";
+			 * 
+			 * if (reId != null && !reId.trim().equalsIgnoreCase("null") &&
+			 * !reId.trim().equalsIgnoreCase("")) { queryString +=
+			 * " and e.reId <> :reId"; } if (baseValue != null) { queryString +=
+			 * " and (( e.reBaseValue <= :baseValue and :baseValue <= e.reMaxValue) or ( e.reBaseValue <= :maxValue and :maxValue <= e.reMaxValue) )"
+			 * ; }
+			 * 
+			 * if (rateTypeId != null) { queryString +=
+			 * " and e.iclubRateType.rtId =:rateTypeId"; } Query query =
+			 * getCurrentSession().createQuery(queryString);
+			 * 
+			 * query.setParameter("baseValue", baseValue);
+			 * query.setParameter("maxValue", maxValue); if (reId != null &&
+			 * !reId.trim().equalsIgnoreCase("null") &&
+			 * !reId.trim().equalsIgnoreCase("")) { query.setParameter("reId",
+			 * reId); } if (rateTypeId != null) {
+			 * query.setParameter("rateTypeId", rateTypeId); }
+			 */
 
-			if (reId != null && !reId.trim().equalsIgnoreCase("null") && !reId.trim().equalsIgnoreCase("")) {
-				queryString += " and e.reId <> :reId";
-			}
-			if (baseValue != null) {
-				queryString += " and (( e.reBaseValue <= :baseValue and :baseValue <= e.reMaxValue) or ( e.reBaseValue <= :maxValue and :maxValue <= e.reMaxValue) )";
-			}
-
-			if (rateTypeId != null) {
-				queryString += " and e.iclubRateType.rtId =:rateTypeId";
-			}
-			Query query = getCurrentSession().createQuery(queryString);
-
-			query.setParameter("baseValue", baseValue);
-			query.setParameter("maxValue", maxValue);
-			if (reId != null && !reId.trim().equalsIgnoreCase("null") && !reId.trim().equalsIgnoreCase("")) {
-				query.setParameter("reId", reId);
-			}
-			if (rateTypeId != null) {
-				query.setParameter("rateTypeId", rateTypeId);
-			}*/
-			 
-			 query.setDouble("baseValue", new Double(baseValue));
-			 query.setDouble("maxValue", new Double(maxValue));
-			 query.setString("reId", reId);
-			 query.setLong("rateTypeId", rateTypeId);
+			query.setDouble("baseValue", new Double(baseValue));
+			query.setDouble("maxValue", new Double(maxValue));
+			query.setString("reId", reId);
+			query.setLong("rateTypeId", rateTypeId);
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
@@ -1325,6 +1324,29 @@ public class IclubNamedQueryDAO {
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("get IclubPolicy failed", re);
+			throw re;
+		}
+	}
+
+	public List getIclubClaimByCrtDt() {
+		log.debug("finding IclubCalim instance");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubClaimByCrtDt");
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("get IclubPolicy failed", re);
+			throw re;
+		}
+	}
+
+	public List getIclubCalimByClaimStatus(String claimStatus) {
+		log.debug("finding IclubCalim  instance by CalimStatus");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubCalimByClaimStatus");
+			queryObject.setString("claimStatus", claimStatus);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("get IclubClaim failed", re);
 			throw re;
 		}
 	}
