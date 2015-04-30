@@ -1,16 +1,52 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/rating/container.xhtml">
 	<ui:define name="rate">
-		<div class="ContainerIndent">
+		<p:dialog id="addRateEngineDailog" widgetVar="addRateEngineDailog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:panel id="addRateEnginePnl">
+				<div class="Container100 Fnone MarAuto TexAlCenter">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Base Value :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Base Value" value="#{iclubRatingController.bean.reBaseValue}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnRateEngineAddPnlSave" value="Save" actionListener="#{iclubRatingController.addRateEngine}" update=" :iclubFrm:addRateEnginePnl,:iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnRateEngineAddPnlClose" value="Close" onclick="PF('addRateEngineDailog').close();" action="#{iclubRatingController.clearForm()}" update=":iclubFrm:addRateEngineDailog,:iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
+						</div>
+					</div>
+				</div>
+			</p:panel>
+		</p:dialog>
+		<div class="ContainerIndent  Fnone TexAlCenter">
 			<p:panel id="pnlRateEngineCont">
-				<p:dataTable id="dtRateEngineCont" widgetVar="dtRateEngineCont" value="#{iclubRatingController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateEngines Found" reflow="true">
+				<p:contextMenu for="dtRateEngineCont" widgetVar="cMenu">
+					<p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('dtRateEngineCont').showCellEditor();return false;" />
+					<p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()" />
+				</p:contextMenu>
+				<p:dataTable id="dtRateEngineCont" editable="true" editMode="cell" widgetVar="dtRateEngineCont" value="#{iclubRatingController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateEngines Found" reflow="true">
 					<f:facet name="footer">
-						<p:commandButton id="btnRateEngineShowAdd" value="Add" actionListener="#{iclubRatingController.showAddPanel}" update=":iclubFrm:pnlRateEngineCont" />
 					</f:facet>
+					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
 					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reId}" />
 					</p:column>
 					<p:column headerText="Rate">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reRate}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<p:outputLabel styleClass="TexAlCenter" value="#{bean.reRate}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="rateInput" value="#{bean.reRate}" styleClass="TexAlCenter" placeholder="Rate" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 					<p:column headerText="Base Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
@@ -38,12 +74,22 @@
 						</p:selectOneMenu>
 					</p:column>
 					<p:column>
-						<p:commandButton id="btnRateEngineEdit" icon="ui-icon-pencil" actionListener="#{iclubRatingController.showModPanel}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg">
-							<f:setPropertyActionListener target="#{iclubRatingController.bean}" value="#{bean}" />
+						<p:commandButton id="btnRateEngineEdit" value="Delete" actionListener="#{iclubRatingController.delIclubRateEngine(bean)}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg">
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
-				<p:panel id="pnlAdd" rendered="#{iclubRatingController.showAddPanel}">
+				<p:panel id="pnlAdds">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnRateEngineShowAdd" styleClass="Fs16" value="Add" actionListener="#{iclubRatingController.showAddPanel}" update=" :iclubFrm" oncomplete="PF('addRateEngineDailog').show();" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnRateEngineSave" ajax="false" styleClass="Fs16" value="Save" actionListener="#{iclubRatingController.addIclubRateEngines}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlAdd" rendered="false">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">

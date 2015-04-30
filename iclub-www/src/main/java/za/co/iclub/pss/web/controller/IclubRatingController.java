@@ -48,11 +48,15 @@ public class IclubRatingController implements Serializable {
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
 	private String sessionUserId;
+	private boolean showRateEngineDlg;
+	private Map<Double, IclubRateEngineBean> rateEngineMap;
 
 	private IclubRateTypeBean rateTypeBean;
 
 	public String refreshGrid() {
 		lookupSaveFlag = false;
+		showRateEngineDlg = false;
+		rateEngineMap = new TreeMap<Double, IclubRateEngineBean>();
 		if (selRateType != null) {
 			try {
 				IclubRateTypeBean bean = getRateTypeById(selRateType);
@@ -192,6 +196,8 @@ public class IclubRatingController implements Serializable {
 					bean.setReBaseValue(model.getReBaseValue());
 					bean.setIclubRateType(model.getIclubRateType());
 					bean.setIclubPerson(model.getIclubPerson());
+
+					rateEngineMap.put(new Double(bean.getReBaseValue()), bean);
 					beans.add(bean);
 				}
 			}
@@ -257,6 +263,36 @@ public class IclubRatingController implements Serializable {
 		this.selRateType = selRateType;
 	}
 
+	public void addRateEngine() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addRateEngine");
+		try {
+			if (validateForm(true, false)) {
+				boolean lookupOrNot = true;
+				if (rateTypeBean.getRtType().equalsIgnoreCase("R")) {
+					lookupOrNot = validateLookUp();
+
+				}
+				if (lookupOrNot) {
+					bean.setReId(UUID.randomUUID().toString());
+					bean.setIclubRateType(rateTypeBean.getRtId());
+					bean.setIclubPerson(getSessionUserId());
+					bean.setReStatus("Y");
+					rateEngineMap.put(new Double(bean.getReBaseValue()), bean);
+					beans.add(bean);
+
+					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					clearForm();
+					bean.setReRate(0d);
+				}
+
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+
+	}
+
 	public void addIclubRateEngine() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubRateEngine");
 		try {
@@ -320,11 +356,12 @@ public class IclubRatingController implements Serializable {
 				}
 
 				if (response != null && response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
+					loadBeans();
 
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
@@ -362,13 +399,15 @@ public class IclubRatingController implements Serializable {
 		}
 	}
 
-	public void delIclubRateEngine() {
+	public void delIclubRateEngine(IclubRateEngineBean bean) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubRateEngine");
 		try {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getReId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
 				IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				rateEngineMap.remove(new Double(bean.getReBaseValue()));
+				beans.remove(bean);
 				clearForm();
 			} else {
 				IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
@@ -383,12 +422,15 @@ public class IclubRatingController implements Serializable {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubRateEngineBean();
+
 	}
 
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
+		showRateEngineDlg = true;
 		bean = new IclubRateEngineBean();
+		bean.setReRate(0d);
 	}
 
 	public void showModPanel() {
@@ -403,7 +445,15 @@ public class IclubRatingController implements Serializable {
 			ret = ret && false;
 		}
 
-		if (rateTypeBean != null && (rateTypeBean.getRtType().equalsIgnoreCase("F"))) {
+		if (!bulkSave && bean != null && (bean.getReBaseValue() == null || bean.getReBaseValue().trim().equalsIgnoreCase(""))) {
+			IclubWebHelper.addMessage(("Base Value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (bean != null && !bean.getReBaseValue().trim().equalsIgnoreCase("") && rateEngineMap != null && rateEngineMap.get(new Double(bean.getReBaseValue())) != null) {
+			IclubWebHelper.addMessage(("Duplicate Base Value"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		else if (rateTypeBean != null && (rateTypeBean.getRtType().equalsIgnoreCase("F")) && bean.getReBaseValue() != null && !bean.getReBaseValue().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/baseValue/" + bean.getReBaseValue() + "/" + rateTypeBean.getRtId() + "/" + bean.getReId());
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
@@ -411,7 +461,7 @@ public class IclubRatingController implements Serializable {
 				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				ret = ret && false;
 			}
-		} else if (rateTypeBean != null && rateTypeBean.getRtType().equalsIgnoreCase("R")) {
+		} else if (rateTypeBean != null && rateTypeBean.getRtType().equalsIgnoreCase("R") && bean.getReBaseValue() != null && !bean.getReBaseValue().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/rangeValue/" + bean.getReBaseValue() + "/" + bean.getReMaxValue() + "/" + rateTypeBean.getRtId() + "/" + bean.getReId());
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
@@ -420,16 +470,29 @@ public class IclubRatingController implements Serializable {
 				ret = ret && false;
 			}
 		}
-
-		if (!bulkSave && bean != null && (bean.getReBaseValue() == null || bean.getReBaseValue().trim().equalsIgnoreCase(""))) {
-			IclubWebHelper.addMessage(("Base Value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
 		if (!bulkSave && bean != null && bean.getReRate() == null) {
 			IclubWebHelper.addMessage(("Rate Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		return ret;
+	}
+
+	public boolean validateLookUp() {
+
+		if (rateEngineMap != null && rateEngineMap.size() > 0) {
+			for (Double baseValue : rateEngineMap.keySet()) {
+				if ((baseValue <= new Double(bean.getReBaseValue())) && (new Double(bean.getReBaseValue()) <= new Double(rateEngineMap.get(baseValue).getReMaxValue()))) {
+					IclubWebHelper.addMessage(("Duplicate Base Value"), FacesMessage.SEVERITY_ERROR);
+					return false;
+				} else if ((baseValue <= new Double(bean.getReMaxValue())) && (new Double(bean.getReMaxValue()) <= new Double(rateEngineMap.get(baseValue).getReMaxValue()))) {
+					IclubWebHelper.addMessage(("Duplicate Base Value"), FacesMessage.SEVERITY_ERROR);
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+
 	}
 
 	public IclubRateEngineBean getBean() {
@@ -487,6 +550,22 @@ public class IclubRatingController implements Serializable {
 
 	public void setLookupSaveFlag(boolean lookupSaveFlag) {
 		this.lookupSaveFlag = lookupSaveFlag;
+	}
+
+	public boolean isShowRateEngineDlg() {
+		return showRateEngineDlg;
+	}
+
+	public void setShowRateEngineDlg(boolean showRateEngineDlg) {
+		this.showRateEngineDlg = showRateEngineDlg;
+	}
+
+	public Map<Double, IclubRateEngineBean> getRateEngineMap() {
+		return rateEngineMap;
+	}
+
+	public void setRateEngineMap(Map<Double, IclubRateEngineBean> rateEngineMap) {
+		this.rateEngineMap = rateEngineMap;
 	}
 
 }
