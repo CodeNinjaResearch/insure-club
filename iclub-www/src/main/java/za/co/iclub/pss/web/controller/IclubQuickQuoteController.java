@@ -1119,7 +1119,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (bean.getPDob() == null) {
 			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()) <= 18) {
+		} else if (IclubWebHelper.calculateMyAge(bean.getPDob().getTime()) <= 18) {
 			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -1957,7 +1957,7 @@ public class IclubQuickQuoteController implements Serializable {
 									premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 
 								} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
-									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + tableName + "/" + fieldValue.toString());
+									WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/lookupdetails/" + fieldBean.getFLTblName() + "/" + fieldValue.toString());
 									String lookupDetails = client.accept(MediaType.APPLICATION_JSON).get(String.class);
 									if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
 										premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
