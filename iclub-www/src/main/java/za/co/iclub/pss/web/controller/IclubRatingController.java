@@ -50,14 +50,14 @@ public class IclubRatingController implements Serializable {
 	private ResourceBundle labelBundle;
 	private String sessionUserId;
 	private boolean showRateEngineDlg;
-	private Map<Double, IclubRateEngineBean> rateEngineMap;
+	private Map<String, IclubRateEngineBean> rateEngineMap;
 
 	private IclubRateTypeBean rateTypeBean;
 
 	public String refreshGrid() {
 		lookupSaveFlag = false;
 		showRateEngineDlg = false;
-		rateEngineMap = new TreeMap<Double, IclubRateEngineBean>();
+		rateEngineMap = new TreeMap<String, IclubRateEngineBean>();
 		if (selRateType != null) {
 			try {
 				IclubRateTypeBean bean = getRateTypeById(selRateType);
@@ -198,7 +198,7 @@ public class IclubRatingController implements Serializable {
 					bean.setIclubRateType(model.getIclubRateType());
 					bean.setIclubPerson(model.getIclubPerson());
 
-					rateEngineMap.put(new Double(bean.getReBaseValue()), bean);
+					rateEngineMap.put(bean.getReBaseValue(), bean);
 					beans.add(bean);
 				}
 			}
@@ -278,7 +278,7 @@ public class IclubRatingController implements Serializable {
 					bean.setIclubRateType(rateTypeBean.getRtId());
 					bean.setIclubPerson(getSessionUserId());
 					bean.setReStatus("Y");
-					rateEngineMap.put(new Double(bean.getReBaseValue()), bean);
+					rateEngineMap.put(bean.getReBaseValue(), bean);
 					beans.add(bean);
 
 					IclubWebHelper.addMessage(getLabelBundle().getString("rateengine") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
@@ -482,11 +482,11 @@ public class IclubRatingController implements Serializable {
 	public boolean validateLookUp() {
 
 		if (rateEngineMap != null && rateEngineMap.size() > 0) {
-			for (Double baseValue : rateEngineMap.keySet()) {
-				if ((baseValue <= new Double(bean.getReBaseValue())) && (new Double(bean.getReBaseValue()) <= new Double(rateEngineMap.get(baseValue).getReMaxValue()))) {
+			for (String baseValue : rateEngineMap.keySet()) {
+				if ((new Double(baseValue) <= new Double(bean.getReBaseValue())) && (new Double(bean.getReBaseValue()) <= new Double(rateEngineMap.get(baseValue).getReMaxValue()))) {
 					IclubWebHelper.addMessage(("Duplicate Base Value"), FacesMessage.SEVERITY_ERROR);
 					return false;
-				} else if ((baseValue <= new Double(bean.getReMaxValue())) && (new Double(bean.getReMaxValue()) <= new Double(rateEngineMap.get(baseValue).getReMaxValue()))) {
+				} else if ((new Double(baseValue) <= new Double(bean.getReMaxValue())) && (new Double(bean.getReMaxValue()) <= new Double(rateEngineMap.get(baseValue).getReMaxValue()))) {
 					IclubWebHelper.addMessage(("Duplicate Base Value"), FacesMessage.SEVERITY_ERROR);
 					return false;
 				}
@@ -562,11 +562,11 @@ public class IclubRatingController implements Serializable {
 		this.showRateEngineDlg = showRateEngineDlg;
 	}
 
-	public Map<Double, IclubRateEngineBean> getRateEngineMap() {
+	public Map<String, IclubRateEngineBean> getRateEngineMap() {
 		return rateEngineMap;
 	}
 
-	public void setRateEngineMap(Map<Double, IclubRateEngineBean> rateEngineMap) {
+	public void setRateEngineMap(Map<String, IclubRateEngineBean> rateEngineMap) {
 		this.rateEngineMap = rateEngineMap;
 	}
 
