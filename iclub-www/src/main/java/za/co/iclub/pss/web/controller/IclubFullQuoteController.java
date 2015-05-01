@@ -253,7 +253,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	private String debitMonth;
 
-	// private IclubInsuranceItemBean vehicleIItemBean;
+	private List<IclubInsuranceItemBean> vehicleIItemBeans;
 
 	// private IclubInsuranceItemBean propertyIItemBean;
 
@@ -1089,148 +1089,129 @@ public class IclubFullQuoteController implements Serializable {
 			ret = ret && false;
 		}
 
-		if (propertyBean.getPRegNum() == null || propertyBean.getPRegNum().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Premium Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPAddress() == null || propertyBean.getPAddress().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Address Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPLat() == null || propertyBean.getPLong() == null) {
-			IclubWebHelper.addMessage("Please Select Location", FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-
-		if (propertyBean.getPPostalCd() == null) {
-			IclubWebHelper.addMessage(("Postel Code Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getIclubCoverType() == null) {
-			IclubWebHelper.addMessage(("Please Select Cover Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getIclubPurposeType() == null) {
-			IclubWebHelper.addMessage(("Please Select Purpose Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPNoclaimYrs() == null) {
-			IclubWebHelper.addMessage(("Noclaim Years Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-
-		if (propertyBean.getIclubWallType() == null) {
-			IclubWebHelper.addMessage(("Please Select WallType"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getIclubRoofType() == null) {
-			IclubWebHelper.addMessage(("Please Select Roof Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getIclubThatchType() == null) {
-			IclubWebHelper.addMessage(("Please Select Thatch Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getIclubBarType() == null) {
-			IclubWebHelper.addMessage(("Please Select Bar Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getIclubAccessType() == null) {
-			IclubWebHelper.addMessage(("Please Select Access Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPRentFurYn() == null || propertyBean.getPRentFurYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("RentFur Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPCompYn() == null || propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Comp Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPSecGatesYn() == null || propertyBean.getPSecGatesYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Sec Gates Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPEstValue() == null) {
-			IclubWebHelper.addMessage(("Est value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-
-		if (propertyBean.getPNorobberyYn() == null || propertyBean.getPNorobberyYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("No Robbery Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-
-		if (vehicleBean.getIclubVehicleMaster() == null) {
-			IclubWebHelper.addMessage(("Please Select Vm Make and Model"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-
-		if (vehicleBean.getVOdometer() == null) {
-			IclubWebHelper.addMessage(("Odo Meter Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVOnArea() == null || vehicleBean.getVOnArea().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("On Area Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVOnLat() == null || vehicleBean.getVOnLong() == null) {
-			IclubWebHelper.addMessage(("Please Select Location"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getIclubAccessTypeByVOnAccessTypeId() == null) {
-			IclubWebHelper.addMessage(("Please Select On AccessType"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getIclubAccessTypeByVDdAccessTypeId() == null) {
-			IclubWebHelper.addMessage(("Please Select Dd AccessType"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVYear() == null) {
-			IclubWebHelper.addMessage(("Year Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getIclubDriver() == null) {
-			IclubWebHelper.addMessage(("Please Select Driver"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVImmYn() == null || vehicleBean.getVImmYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Imn Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVGearLockYn() == null || vehicleBean.getVGearLockYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Gear Lock Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getIclubSecurityMaster() == null) {
-			IclubWebHelper.addMessage(("Please Select Security Master"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getIclubPurposeType() == null) {
-			IclubWebHelper.addMessage(("Please Select Purpose Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVNoclaimYrs() == null) {
-			IclubWebHelper.addMessage(("No Claim Years Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-
-		if (vehicleBean.getVCompYrs() == null) {
-			IclubWebHelper.addMessage(("Comp Years Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVVin() == null || vehicleBean.getVVin().toString().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Vin Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVEngineNr() == null || vehicleBean.getVEngineNr().toString().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("EngineNr Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (vehicleBean.getVRegNum() == null || vehicleBean.getVRegNum().toString().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("RegNum Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
+		/*
+		 * if (propertyBean.getPRegNum() == null ||
+		 * propertyBean.getPRegNum().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Premium Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPAddress() == null ||
+		 * propertyBean.getPAddress().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Address Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPLat() == null || propertyBean.getPLong() == null) {
+		 * IclubWebHelper.addMessage("Please Select Location",
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (propertyBean.getPPostalCd() == null) {
+		 * IclubWebHelper.addMessage(("Postel Code Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getIclubCoverType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Cover Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getIclubPurposeType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Purpose Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPNoclaimYrs() == null) {
+		 * IclubWebHelper.addMessage(("Noclaim Years Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (propertyBean.getIclubWallType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select WallType"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getIclubRoofType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Roof Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getIclubThatchType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Thatch Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getIclubBarType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Bar Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getIclubAccessType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Access Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPRentFurYn() == null ||
+		 * propertyBean.getPRentFurYn().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("RentFur Yn Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPCompYn() == null ||
+		 * propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Comp Yn Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPSecGatesYn() == null ||
+		 * propertyBean.getPSecGatesYn().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Sec Gates Yn Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPEstValue() == null) {
+		 * IclubWebHelper.addMessage(("Est value Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (propertyBean.getPNorobberyYn() == null ||
+		 * propertyBean.getPNorobberyYn().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("No Robbery Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 */
+		/*
+		 * if (vehicleBean.getIclubVehicleMaster() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Vm Make and Model"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (vehicleBean.getVOdometer() == null) {
+		 * IclubWebHelper.addMessage(("Odo Meter Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVOnArea() == null ||
+		 * vehicleBean.getVOnArea().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("On Area Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVOnLat() == null || vehicleBean.getVOnLong() == null)
+		 * { IclubWebHelper.addMessage(("Please Select Location"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getIclubAccessTypeByVOnAccessTypeId() == null) {
+		 * IclubWebHelper.addMessage(("Please Select On AccessType"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getIclubAccessTypeByVDdAccessTypeId() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Dd AccessType"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVYear() == null) {
+		 * IclubWebHelper.addMessage(("Year Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getIclubDriver() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Driver"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVImmYn() == null ||
+		 * vehicleBean.getVImmYn().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Imn Yn Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVGearLockYn() == null ||
+		 * vehicleBean.getVGearLockYn().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Gear Lock Yn Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getIclubSecurityMaster() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Security Master"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getIclubPurposeType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Purpose Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVNoclaimYrs() == null) {
+		 * IclubWebHelper.addMessage(("No Claim Years Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (vehicleBean.getVCompYrs() == null) {
+		 * IclubWebHelper.addMessage(("Comp Years Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVVin() == null ||
+		 * vehicleBean.getVVin().toString().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Vin Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVEngineNr() == null ||
+		 * vehicleBean.getVEngineNr().toString().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("EngineNr Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVRegNum() == null ||
+		 * vehicleBean.getVRegNum().toString().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("RegNum Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 */
 
 		return ret;
 	}
@@ -1328,12 +1309,18 @@ public class IclubFullQuoteController implements Serializable {
 						client.close();
 						if (response != null && response.getStatusCode() != 0) {
 							IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+						} else {
+							genPremium = getGenPremium() + getUpdatePremium(quoteModel.getQId(), "Q", bean, null);
+							quoteId = quoteModel.getQId();
 						}
 					} else {
 						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 						client.close();
 						if (response != null && response.getStatusCode() != 0) {
 							IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+						} else {
+							genPremium = getGenPremium() + getUpdatePremium(quoteModel.getQId(), "F", bean, null);
+							quoteId = quoteModel.getQId();
 						}
 					}
 
@@ -1552,7 +1539,7 @@ public class IclubFullQuoteController implements Serializable {
 		}
 
 		model.setPProrataPrm(0.0d);
-		model.setPPremium(genPremium);
+		model.setPPremium(getGenPremium());
 		model.setPNumber(quoteModel.getQNumber());
 		model.setPDebitDt(debitDate != null && debitMonth != null ? Integer.parseInt(debitDate + debitMonth) : null);
 		model.setPCrtdDt((new Timestamp(System.currentTimeMillis())).toString());
@@ -1568,7 +1555,7 @@ public class IclubFullQuoteController implements Serializable {
 		}
 		client.close();
 		if (response.getStatusCode() == 0) {
-			addClaim(claimBean, model);
+			addClaim(getClaimBean(), model);
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -1623,7 +1610,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setQValidUntil(new Timestamp(System.currentTimeMillis() + (3 * 24 * 3600)));
 		model.setQMobile(personModel.getPMobile());
 		model.setQEmail(personModel.getPEmail());
-		model.setQGenPremium(genPremium);
+		model.setQGenPremium(getGenPremium());
 		model.setQNumItems(2);
 		model.setQGenDt(new Timestamp(System.currentTimeMillis()));
 
@@ -1744,6 +1731,15 @@ public class IclubFullQuoteController implements Serializable {
 		if (IclubWebHelper.getObjectIntoSession("fullquote") != null) {
 			quoteBean = (IclubQuoteBean) IclubWebHelper.getObjectIntoSession("fullquote");
 
+			IclubWebHelper.addObjectIntoSession("fullquote", null);
+			driverBean = new IclubDriverBean();
+			vehicleBeans = new ArrayList<IclubVehicleBean>();
+			extrasBean = new IclubExtrasBean();
+			accountBean = new IclubAccountBean();
+			propertyBeans = new ArrayList<IclubPropertyBean>();
+			claimBean = new IclubClaimBean();
+			policyBean = new IclubPolicyBean();
+			vehicleIItemBeans = new ArrayList<IclubInsuranceItemBean>();
 			if (quoteBean != null && quoteBean.getIclubPersonByQPersonId() != null && !quoteBean.getIclubPersonByQPersonId().trim().equalsIgnoreCase("")) {
 				WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "get/" + quoteBean.getIclubPersonByQPersonId());
 
@@ -1785,7 +1781,10 @@ public class IclubFullQuoteController implements Serializable {
 				}
 
 				client.close();
-				setDriverDetails();
+				vehicleIItemBeans = setInsuranceItemDetails(quoteBean.getQId(), 1l);
+
+				setVehicleDetails(vehicleIItemBeans);
+
 				setPropertyDetails();
 				setPolicyDetails();
 			}
@@ -1986,8 +1985,8 @@ public class IclubFullQuoteController implements Serializable {
 		}
 	}
 
-	public void setDriverDetails() {
-		WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "getByPersonId/" + personBean.getPId());
+	public void setDriverDetails(String driverId) {
+		WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "get/" + driverId);
 
 		IclubDriverModel model = (IclubDriverModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubDriverModel.class));
 		driverBean = new IclubDriverBean();
@@ -2005,57 +2004,64 @@ public class IclubFullQuoteController implements Serializable {
 		driverBean.setIclubPersonByDCrtdBy(model.getIclubPersonByDCrtdBy());
 
 		client.close();
-		setVehicleDetails();
+
 	}
 
-	public void setVehicleDetails() {
+	public void setVehicleDetails(List<IclubInsuranceItemBean> vehilcItemBeans) {
 
 		vehicleBeans = new ArrayList<IclubVehicleBean>();
-		WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "getByDriverId/" + driverBean.getDId());
+		if (vehilcItemBeans != null) {
+			boolean flag = false;
+			for (IclubInsuranceItemBean itemBean : vehilcItemBeans) {
+				try {
+					WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "get/" + itemBean.getIiItemId());
 
-		Collection<? extends IclubVehicleModel> models = new ArrayList<IclubVehicleModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleModel.class));
-		client.close();
-		if (models != null && models.size() > 0) {
+					IclubVehicleModel model = (client.accept(MediaType.APPLICATION_JSON).get(IclubVehicleModel.class));
+					client.close();
 
-			for (IclubVehicleModel model : models) {
-				IclubVehicleBean vehicleBean = new IclubVehicleBean();
+					IclubVehicleBean vehicleBean = new IclubVehicleBean();
 
-				vehicleBean.setVId(model.getVId());
-				vehicleBean.setVOwner(model.getVOwner());
-				vehicleBean.setVGearLockYn(model.getVGearLockYn());
-				vehicleBean.setVImmYn(model.getVImmYn());
-				vehicleBean.setVConcessReason(model.getVConcessReason());
-				vehicleBean.setVConcessPrct(model.getVConcessPrct());
-				vehicleBean.setVInsuredValue(model.getVInsuredValue());
-				vehicleBean.setVYear(model.getVYear());
-				vehicleBean.setVDdLong(model.getVDdLong());
-				vehicleBean.setVDdLat(model.getVDdLat());
-				vehicleBean.setVDdArea(model.getVDdArea());
-				vehicleBean.setVOnLong(model.getVOnLong());
-				vehicleBean.setVOnLat(model.getVOnLat());
-				vehicleBean.setVOnArea(model.getVOnArea());
-				vehicleBean.setVOdometer(model.getVOdometer());
-				vehicleBean.setVCrtdDt(model.getVCrtdDt());
-				vehicleBean.setVRegNum(model.getVRegNum());
-				vehicleBean.setVEngineNr(model.getVEngineNr());
-				vehicleBean.setVVin(model.getVVin());
-				vehicleBean.setVNoclaimYrs(model.getVNoclaimYrs());
-				vehicleBean.setIclubVehicleMaster(model.getIclubVehicleMaster());
-				vehicleBean.setIclubPurposeType(model.getIclubPurposeType());
-				vehicleBean.setIclubSecurityMaster(model.getIclubSecurityMaster());
-				vehicleBean.setIclubPerson(model.getIclubPerson());
-				vehicleBean.setIclubDriver(model.getIclubDriver());
-				vehicleBean.setIclubSecurityDevice(model.getIclubSecurityDevice());
-				vehicleBean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
-				vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
+					vehicleBean.setVId(model.getVId());
+					vehicleBean.setVOwner(model.getVOwner());
+					vehicleBean.setVGearLockYn(model.getVGearLockYn());
+					vehicleBean.setVImmYn(model.getVImmYn());
+					vehicleBean.setVConcessReason(model.getVConcessReason());
+					vehicleBean.setVConcessPrct(model.getVConcessPrct());
+					vehicleBean.setVInsuredValue(model.getVInsuredValue());
+					vehicleBean.setVYear(model.getVYear());
+					vehicleBean.setVDdLong(model.getVDdLong());
+					vehicleBean.setVDdLat(model.getVDdLat());
+					vehicleBean.setVDdArea(model.getVDdArea());
+					vehicleBean.setVOnLong(model.getVOnLong());
+					vehicleBean.setVOnLat(model.getVOnLat());
+					vehicleBean.setVOnArea(model.getVOnArea());
+					vehicleBean.setVOdometer(model.getVOdometer());
+					vehicleBean.setVCrtdDt(model.getVCrtdDt());
+					vehicleBean.setVRegNum(model.getVRegNum());
+					vehicleBean.setVEngineNr(model.getVEngineNr());
+					vehicleBean.setVVin(model.getVVin());
+					vehicleBean.setVNoclaimYrs(model.getVNoclaimYrs());
+					vehicleBean.setIclubVehicleMaster(model.getIclubVehicleMaster());
+					vehicleBean.setIclubPurposeType(model.getIclubPurposeType());
+					vehicleBean.setIclubSecurityMaster(model.getIclubSecurityMaster());
+					vehicleBean.setIclubPerson(model.getIclubPerson());
+					vehicleBean.setIclubDriver(model.getIclubDriver());
+					vehicleBean.setIclubSecurityDevice(model.getIclubSecurityDevice());
+					vehicleBean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
+					vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
 
-				vehicleBeans.add(vehicleBean);
+					vehicleBeans.add(vehicleBean);
+					if (!flag) {
 
-				// vehicleIItemBean =
-				// setInsuranceItemDetails(quoteBean.getQId(), 1l);
-				// setVmMakeAndMode();
+						setDriverDetails(vehicleBean.getIclubDriver());
+						flag = true;
+					}
+				} catch (Exception e) {
+					LOGGER.error(e, e);
+					IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+				}
+
 			}
-
 		}
 
 	}
@@ -3190,6 +3196,9 @@ public class IclubFullQuoteController implements Serializable {
 	}
 
 	public Double getGenPremium() {
+		if (genPremium == null) {
+			genPremium = 0d;
+		}
 		return genPremium;
 	}
 
@@ -3305,6 +3314,17 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void setProAddress(String proAddress) {
 		this.proAddress = proAddress;
+	}
+
+	public List<IclubInsuranceItemBean> getVehicleIItemBeans() {
+		if (vehicleIItemBeans == null) {
+			vehicleIItemBeans = new ArrayList<IclubInsuranceItemBean>();
+		}
+		return vehicleIItemBeans;
+	}
+
+	public void setVehicleIItemBeans(List<IclubInsuranceItemBean> vehicleIItemBeans) {
+		this.vehicleIItemBeans = vehicleIItemBeans;
 	}
 
 }

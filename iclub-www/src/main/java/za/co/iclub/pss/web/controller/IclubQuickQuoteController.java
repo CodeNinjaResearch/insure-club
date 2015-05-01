@@ -874,6 +874,34 @@ public class IclubQuickQuoteController implements Serializable {
 					clearProForm();
 					return "register";
 				} else {
+					client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/" + quoteId);
+
+					IclubQuoteModel quoteModel = (IclubQuoteModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubQuoteModel.class));
+					client.close();
+					if (quoteModel != null) {
+
+						quoteModel.setQGenPremium(genPremium);
+						quoteModel.setIclubPersonByQCrtdBy(getSessionUserId());
+						quoteModel.setIclubPersonByQPersonId(getSessionUserId());
+						client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "mod");
+						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(quoteModel, ResponseModel.class);
+						client.close();
+						if (response != null && response.getStatusCode() == 0) {
+
+							client = IclubWebHelper.createCustomClient(II_BASE_URL + "getByQuoteIdAndItemTypeId/" + quoteId + "/" + 1l);
+
+							IclubInsuranceItemModel insurancemodel = (IclubInsuranceItemModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubInsuranceItemModel.class));
+							client.close();
+							if (insurancemodel != null) {
+								insurancemodel.setIclubPerson(getSessionUserId());
+								client = IclubWebHelper.createCustomClient(II_BASE_URL + "mod");
+								response = client.accept(MediaType.APPLICATION_JSON).put(insurancemodel, ResponseModel.class);
+								client.close();
+							}
+
+						}
+					}
+
 					clearForm();
 					return "vq";
 				}
@@ -949,7 +977,7 @@ public class IclubQuickQuoteController implements Serializable {
 						client = IclubWebHelper.createCustomClient(II_BASE_URL + "getByQuoteIdAndItemTypeId/" + quoteId + "/" + 1l);
 
 						IclubInsuranceItemModel insurancemodel = (IclubInsuranceItemModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubInsuranceItemModel.class));
-						model.setIclubPerson(model.getPId());
+						insurancemodel.setIclubPerson(model.getPId());
 						client = IclubWebHelper.createCustomClient(II_BASE_URL + "mod");
 						response = client.accept(MediaType.APPLICATION_JSON).put(insurancemodel, ResponseModel.class);
 						client.close();
@@ -1137,11 +1165,11 @@ public class IclubQuickQuoteController implements Serializable {
 
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
-			if (validateForm(true)) {
+			if (validateForm(true, IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null)) {
 				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null) {
 					insertIntoPerson(personBean);
 				} else {
-
+					personBean = getIclubPersonBean(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
 					addQuote(new IclubQuoteBean(), personBean);
 				}
 				return "qqs.xhtml?faces-redirect=true";
@@ -1417,35 +1445,35 @@ public class IclubQuickQuoteController implements Serializable {
 
 	}
 
-	public boolean validateForm(boolean flag) {
+	public boolean validateForm(boolean flag, boolean loginFlag) {
 		boolean ret = true;
 
-		if (personBean.getPFName() == null || personBean.getPFName().trim().equalsIgnoreCase("")) {
+		if (loginFlag && (personBean.getPFName() == null || personBean.getPFName().trim().equalsIgnoreCase(""))) {
 
 			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pfname.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (personBean.getPLName() == null || personBean.getPLName().trim().equalsIgnoreCase("")) {
+		if (loginFlag && (personBean.getPLName() == null || personBean.getPLName().trim().equalsIgnoreCase(""))) {
 
 			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.plname.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (personBean.getPMobile() == null || personBean.getPMobile().trim().equalsIgnoreCase("")) {
+		if (loginFlag && (personBean.getPMobile() == null || personBean.getPMobile().trim().equalsIgnoreCase(""))) {
 
 			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pmobile.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (personBean.getPEmail() == null || personBean.getPEmail().trim().equalsIgnoreCase("")) {
+		if (loginFlag && (personBean.getPEmail() == null || personBean.getPEmail().trim().equalsIgnoreCase(""))) {
 
 			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pemail.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (personBean.getPGender() == null || personBean.getPGender().trim().equalsIgnoreCase("")) {
+		if (loginFlag && (personBean.getPGender() == null || personBean.getPGender().trim().equalsIgnoreCase(""))) {
 
 			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pgender.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (personBean.getPDob() == null) {
+		if (loginFlag && (personBean.getPDob() == null)) {
 
 			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.pdob.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
