@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,9 +35,9 @@ public class IclubDriver implements java.io.Serializable {
 	private IclubPerson iclubPersonByDPersonId;
 	private String DName;
 	private String DLicenseNum;
-	private Timestamp DIssueDt;
-	private Timestamp DDob;
-	private Timestamp DCrtdDt;
+	private Date DIssueDt;
+	private Date DDob;
+	private Date DCrtdDt;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
@@ -52,7 +52,7 @@ public class IclubDriver implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDriver(String DId, IclubAccessType iclubAccessType, IclubLicenseCode iclubLicenseCode, IclubPerson iclubPersonByDCrtdBy, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPersonByDPersonId, String DName, String DLicenseNum, Timestamp DIssueDt, Timestamp DDob, Timestamp DCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubDriver(String DId, IclubAccessType iclubAccessType, IclubLicenseCode iclubLicenseCode, IclubPerson iclubPersonByDCrtdBy, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPersonByDPersonId, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Date DCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.DId = DId;
 		this.iclubAccessType = iclubAccessType;
 		this.iclubLicenseCode = iclubLicenseCode;
@@ -147,29 +147,29 @@ public class IclubDriver implements java.io.Serializable {
 	}
 
 	@Column(name = "d_issue_dt", length = 19)
-	public Timestamp getDIssueDt() {
+	public Date getDIssueDt() {
 		return this.DIssueDt;
 	}
 
-	public void setDIssueDt(Timestamp DIssueDt) {
+	public void setDIssueDt(Date DIssueDt) {
 		this.DIssueDt = DIssueDt;
 	}
 
 	@Column(name = "d_dob", length = 19)
-	public Timestamp getDDob() {
+	public Date getDDob() {
 		return this.DDob;
 	}
 
-	public void setDDob(Timestamp DDob) {
+	public void setDDob(Date DDob) {
 		this.DDob = DDob;
 	}
 
 	@Column(name = "d_crtd_dt", length = 19)
-	public Timestamp getDCrtdDt() {
+	public Date getDCrtdDt() {
 		return this.DCrtdDt;
 	}
 
-	public void setDCrtdDt(Timestamp DCrtdDt) {
+	public void setDCrtdDt(Date DCrtdDt) {
 		this.DCrtdDt = DCrtdDt;
 	}
 

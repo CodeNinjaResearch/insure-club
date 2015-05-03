@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class IclubSecurityMaster implements java.io.Serializable {
 	private IclubPerson iclubPerson;
 	private String smDesc;
 	private String smStatus;
-	private Timestamp smCrtdDt;
+	private Date smCrtdDt;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
@@ -47,7 +47,7 @@ public class IclubSecurityMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSecurityMaster(String smId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String smDesc, String smStatus, Timestamp smCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubSecurityMaster(String smId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String smDesc, String smStatus, Date smCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.smId = smId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
@@ -107,11 +107,11 @@ public class IclubSecurityMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "sm_crtd_dt", length = 19)
-	public Timestamp getSmCrtdDt() {
+	public Date getSmCrtdDt() {
 		return this.smCrtdDt;
 	}
 
-	public void setSmCrtdDt(Timestamp smCrtdDt) {
+	public void setSmCrtdDt(Date smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
 	}
 

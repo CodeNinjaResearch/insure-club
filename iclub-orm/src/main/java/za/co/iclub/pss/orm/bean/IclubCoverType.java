@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class IclubCoverType implements java.io.Serializable {
 	private String ctShortDesc;
 	private String ctLongDesc;
 	private String ctStatus;
-	private Timestamp ctCrtdDt;
+	private Date ctCrtdDt;
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 	private Set<IclubQuote> iclubQuotes = new HashSet<IclubQuote>(0);
 
@@ -49,7 +49,7 @@ public class IclubCoverType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubCoverType(Long ctId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc, String ctLongDesc, String ctStatus, Timestamp ctCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubQuote> iclubQuotes) {
+	public IclubCoverType(Long ctId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc, String ctLongDesc, String ctStatus, Date ctCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubQuote> iclubQuotes) {
 		this.ctId = ctId;
 		this.iclubPerson = iclubPerson;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
@@ -120,11 +120,11 @@ public class IclubCoverType implements java.io.Serializable {
 	}
 
 	@Column(name = "ct_crtd_dt", length = 19)
-	public Timestamp getCtCrtdDt() {
+	public Date getCtCrtdDt() {
 		return this.ctCrtdDt;
 	}
 
-	public void setCtCrtdDt(Timestamp ctCrtdDt) {
+	public void setCtCrtdDt(Date ctCrtdDt) {
 		this.ctCrtdDt = ctCrtdDt;
 	}
 

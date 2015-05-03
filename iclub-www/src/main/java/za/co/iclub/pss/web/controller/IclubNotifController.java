@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -139,7 +139,7 @@ public class IclubNotifController implements Serializable {
 				model.setNFromAddr(bean.getNFromAddr());
 				model.setNToList(bean.getNToList());
 				model.setIclubNotificationType(bean.getIclubNotificationType());
-				model.setNCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setNCrtdDt(new Date(System.currentTimeMillis()));
 				model.setNStatus(bean.getNStatus());
 				model.setIclubPerson(getSessionUserId());
 
@@ -173,7 +173,7 @@ public class IclubNotifController implements Serializable {
 				model.setNFromAddr(bean.getNFromAddr());
 				model.setNToList(bean.getNToList());
 				model.setIclubNotificationType(bean.getIclubNotificationType());
-				model.setNCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setNCrtdDt(new Date(System.currentTimeMillis()));
 				model.setNStatus(bean.getNStatus());
 				model.setIclubPerson(bean.getIclubPerson());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);

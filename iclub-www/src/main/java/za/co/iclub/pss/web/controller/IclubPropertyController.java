@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -206,7 +206,8 @@ public class IclubPropertyController implements Serializable {
 		client.close();
 		IclubGeoLocBean bean = new IclubGeoLocBean();
 		if (model != null) {
-			bean.setGlKey(model.getGlKey());
+			bean.setGlProvince(model.getGlProvince());
+			bean.setGlSuburb(model.getGlSuburb());
 			bean.setGlId(model.getGlId());
 			bean.setGlAddress(model.getGlAddress());
 			bean.setGlLat(model.getGlLat());
@@ -279,7 +280,7 @@ public class IclubPropertyController implements Serializable {
 
 				bean.setPId(UUID.randomUUID().toString());
 				model.setPId(bean.getPId());
-				model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(bean.getPEstValue());
 				model.setPSecGatesYn(bean.getPSecGatesYn());
 				model.setPNorobberyYn(bean.getPNorobberyYn());
@@ -329,7 +330,7 @@ public class IclubPropertyController implements Serializable {
 				IclubPropertyModel model = new IclubPropertyModel();
 
 				model.setPId(bean.getPId());
-				model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(bean.getPEstValue());
 				model.setPSecGatesYn(bean.getPSecGatesYn());
 				model.setPNorobberyYn(bean.getPNorobberyYn());

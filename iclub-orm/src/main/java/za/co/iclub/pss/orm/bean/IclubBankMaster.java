@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,7 +37,7 @@ public class IclubBankMaster implements java.io.Serializable {
 	private Double bmBranchLat;
 	private Double bmBranchLong;
 	private Integer bmBranchZip;
-	private Timestamp bmCrtdDt;
+	private Date bmCrtdDt;
 	private Set<IclubAccount> iclubAccounts = new HashSet<IclubAccount>(0);
 
 	// Constructors
@@ -52,7 +52,7 @@ public class IclubBankMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubBankMaster(Long bmId, IclubPerson iclubPerson, String bmBankName, Integer bmBankCode, String bmBranchName, Integer bmBranchCode, String bmBranchAddress, Double bmBranchLat, Double bmBranchLong, Integer bmBranchZip, Timestamp bmCrtdDt, Set<IclubAccount> iclubAccounts) {
+	public IclubBankMaster(Long bmId, IclubPerson iclubPerson, String bmBankName, Integer bmBankCode, String bmBranchName, Integer bmBranchCode, String bmBranchAddress, Double bmBranchLat, Double bmBranchLong, Integer bmBranchZip, Date bmCrtdDt, Set<IclubAccount> iclubAccounts) {
 		this.bmId = bmId;
 		this.iclubPerson = iclubPerson;
 		this.bmBankName = bmBankName;
@@ -161,11 +161,11 @@ public class IclubBankMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "bm_crtd_dt", length = 19)
-	public Timestamp getBmCrtdDt() {
+	public Date getBmCrtdDt() {
 		return this.bmCrtdDt;
 	}
 
-	public void setBmCrtdDt(Timestamp bmCrtdDt) {
+	public void setBmCrtdDt(Date bmCrtdDt) {
 		this.bmCrtdDt = bmCrtdDt;
 	}
 

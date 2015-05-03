@@ -6,12 +6,13 @@ public class IclubGeoLocBean {
 
 	private Long glId;
 	private String iclubPerson;
+	private String glProvince;
+	private String glSuburb;
 	private String glAddress;
 	private Double glLat;
 	private Double glLong;
-	private Double glRate;
 	private Date glCrtdDt;
-	private String glKey;
+	private Double glRate;
 
 	public Long getGlId() {
 		return glId;
@@ -27,6 +28,22 @@ public class IclubGeoLocBean {
 
 	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
+	}
+
+	public String getGlProvince() {
+		return glProvince;
+	}
+
+	public void setGlProvince(String glProvince) {
+		this.glProvince = glProvince;
+	}
+
+	public String getGlSuburb() {
+		return glSuburb;
+	}
+
+	public void setGlSuburb(String glSuburb) {
+		this.glSuburb = glSuburb;
 	}
 
 	public String getGlAddress() {
@@ -53,14 +70,6 @@ public class IclubGeoLocBean {
 		this.glLong = glLong;
 	}
 
-	public Double getGlRate() {
-		return glRate;
-	}
-
-	public void setGlRate(Double glRate) {
-		this.glRate = glRate;
-	}
-
 	public Date getGlCrtdDt() {
 		return glCrtdDt;
 	}
@@ -69,12 +78,12 @@ public class IclubGeoLocBean {
 		this.glCrtdDt = glCrtdDt;
 	}
 
-	public String getGlKey() {
-		return glKey;
+	public Double getGlRate() {
+		return glRate;
 	}
 
-	public void setGlKey(String glKey) {
-		this.glKey = glKey;
+	public void setGlRate(Double glRate) {
+		this.glRate = glRate;
 	}
 
 }

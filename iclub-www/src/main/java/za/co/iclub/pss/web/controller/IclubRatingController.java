@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -167,7 +167,7 @@ public class IclubRatingController implements Serializable {
 							IclubRateEngineBean bean = new IclubRateEngineBean();
 							bean.setReId(UUID.randomUUID().toString());
 							bean.setReRate(0.0);
-							bean.setReCrtdDt(new Timestamp(System.currentTimeMillis()));
+							bean.setReCrtdDt(new Date(System.currentTimeMillis()));
 							bean.setReStatus("Y");
 							bean.setReBaseValue(model);
 							bean.setIclubRateType(rateTypeBean.getRtId());
@@ -304,7 +304,7 @@ public class IclubRatingController implements Serializable {
 
 				model.setReId(UUID.randomUUID().toString());
 				model.setReRate(bean.getReRate());
-				model.setReCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setReCrtdDt(new Date(System.currentTimeMillis()));
 				model.setReStatus(bean.getReStatus());
 				model.setReMaxValue(bean.getReMaxValue());
 				model.setReBaseValue(bean.getReBaseValue());
@@ -342,7 +342,7 @@ public class IclubRatingController implements Serializable {
 					}
 					model.setReId(bean.getReId());
 					model.setReRate(bean.getReRate());
-					model.setReCrtdDt(new Timestamp(System.currentTimeMillis()));
+					model.setReCrtdDt(new Date(System.currentTimeMillis()));
 					model.setReStatus(bean.getReStatus());
 					model.setReMaxValue(bean.getReMaxValue());
 					model.setReBaseValue(bean.getReBaseValue());
@@ -380,7 +380,7 @@ public class IclubRatingController implements Serializable {
 				IclubRateEngineModel model = new IclubRateEngineModel();
 				model.setReId(bean.getReId());
 				model.setReRate(bean.getReRate());
-				model.setReCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setReCrtdDt(new Date(System.currentTimeMillis()));
 				model.setReStatus(bean.getReStatus());
 				model.setReMaxValue(bean.getReMaxValue());
 				model.setReBaseValue(bean.getReBaseValue());

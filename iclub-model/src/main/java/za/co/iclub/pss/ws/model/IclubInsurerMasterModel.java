@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +15,7 @@ public class IclubInsurerMasterModel {
 	private Double imLat;
 	private Double imLong;
 	private String imRegNum;
-	private Timestamp imCrtdDt;
+	private Date imCrtdDt;
 	private String[] iclubQuotes;
 
 	public Long getImId() {
@@ -82,11 +82,11 @@ public class IclubInsurerMasterModel {
 		this.imRegNum = imRegNum;
 	}
 
-	public Timestamp getImCrtdDt() {
+	public Date getImCrtdDt() {
 		return imCrtdDt;
 	}
 
-	public void setImCrtdDt(Timestamp imCrtdDt) {
+	public void setImCrtdDt(Date imCrtdDt) {
 		this.imCrtdDt = imCrtdDt;
 	}
 

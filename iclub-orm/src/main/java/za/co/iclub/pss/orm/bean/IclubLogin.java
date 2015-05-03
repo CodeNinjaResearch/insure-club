@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,9 +31,9 @@ public class IclubLogin implements java.io.Serializable {
 	private IclubRoleType iclubRoleType;
 	private String LName;
 	private String LPasswd;
-	private Timestamp LLastDate;
+	private Date LLastDate;
 	private String LSecAns;
-	private Timestamp LCrtdDt;
+	private Date LCrtdDt;
 
 	// Constructors
 
@@ -47,7 +47,7 @@ public class IclubLogin implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubLogin(String LId, IclubSecurityQuestion iclubSecurityQuestion, IclubPerson iclubPersonByLCrtdBy, IclubPerson iclubPersonByLPersonId, IclubRoleType iclubRoleType, String LName, String LPasswd, Timestamp LLastDate, String LSecAns, Timestamp LCrtdDt) {
+	public IclubLogin(String LId, IclubSecurityQuestion iclubSecurityQuestion, IclubPerson iclubPersonByLCrtdBy, IclubPerson iclubPersonByLPersonId, IclubRoleType iclubRoleType, String LName, String LPasswd, Date LLastDate, String LSecAns, Date LCrtdDt) {
 		this.LId = LId;
 		this.iclubSecurityQuestion = iclubSecurityQuestion;
 		this.iclubPersonByLCrtdBy = iclubPersonByLCrtdBy;
@@ -130,11 +130,11 @@ public class IclubLogin implements java.io.Serializable {
 	}
 
 	@Column(name = "l_last_date", length = 19)
-	public Timestamp getLLastDate() {
+	public Date getLLastDate() {
 		return this.LLastDate;
 	}
 
-	public void setLLastDate(Timestamp LLastDate) {
+	public void setLLastDate(Date LLastDate) {
 		this.LLastDate = LLastDate;
 	}
 
@@ -148,11 +148,11 @@ public class IclubLogin implements java.io.Serializable {
 	}
 
 	@Column(name = "l_crtd_dt", length = 19)
-	public Timestamp getLCrtdDt() {
+	public Date getLCrtdDt() {
 		return this.LCrtdDt;
 	}
 
-	public void setLCrtdDt(Timestamp LCrtdDt) {
+	public void setLCrtdDt(Date LCrtdDt) {
 		this.LCrtdDt = LCrtdDt;
 	}
 

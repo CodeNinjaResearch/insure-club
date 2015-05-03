@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,7 +11,7 @@ public class IclubOccupationModel {
 	private String iclubPerson;
 	private String ODesc;
 	private String OStatus;
-	private Timestamp OCrtdDt;
+	private Date OCrtdDt;
 
 	public Long getOId() {
 		return OId;
@@ -45,11 +45,11 @@ public class IclubOccupationModel {
 		OStatus = oStatus;
 	}
 
-	public Timestamp getOCrtdDt() {
+	public Date getOCrtdDt() {
 		return OCrtdDt;
 	}
 
-	public void setOCrtdDt(Timestamp oCrtdDt) {
+	public void setOCrtdDt(Date oCrtdDt) {
 		OCrtdDt = oCrtdDt;
 	}
 

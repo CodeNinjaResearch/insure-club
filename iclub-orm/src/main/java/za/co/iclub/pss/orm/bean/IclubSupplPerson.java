@@ -1,6 +1,7 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
  * IclubSupplPerson entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_suppl_person", catalog = "iclubdb")
+@Table(name = "iclub_suppl_person")
 public class IclubSupplPerson implements java.io.Serializable {
 
 	// Fields
@@ -26,7 +27,7 @@ public class IclubSupplPerson implements java.io.Serializable {
 	private IclubPerson iclubPersonBySpCrtdBy;
 	private IclubPerson iclubPersonBySpPersonId;
 	private IclubSupplMaster iclubSupplMaster;
-	private Timestamp spCrtdDt;
+	private Date spCrtdDt;
 
 	// Constructors
 
@@ -40,7 +41,7 @@ public class IclubSupplPerson implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSupplPerson(String spId, IclubPerson iclubPersonBySpCrtdBy, IclubPerson iclubPersonBySpPersonId, IclubSupplMaster iclubSupplMaster, Timestamp spCrtdDt) {
+	public IclubSupplPerson(String spId, IclubPerson iclubPersonBySpCrtdBy, IclubPerson iclubPersonBySpPersonId, IclubSupplMaster iclubSupplMaster, Date spCrtdDt) {
 		this.spId = spId;
 		this.iclubPersonBySpCrtdBy = iclubPersonBySpCrtdBy;
 		this.iclubPersonBySpPersonId = iclubPersonBySpPersonId;
@@ -90,11 +91,11 @@ public class IclubSupplPerson implements java.io.Serializable {
 	}
 
 	@Column(name = "sp_crtd_dt", length = 19)
-	public Timestamp getSpCrtdDt() {
+	public Date getSpCrtdDt() {
 		return this.spCrtdDt;
 	}
 
-	public void setSpCrtdDt(Timestamp spCrtdDt) {
+	public void setSpCrtdDt(Date spCrtdDt) {
 		this.spCrtdDt = spCrtdDt;
 	}
 

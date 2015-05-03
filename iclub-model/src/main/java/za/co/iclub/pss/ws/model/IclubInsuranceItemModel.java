@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubInsuranceItemModel {
 
@@ -9,7 +9,7 @@ public class IclubInsuranceItemModel {
 	private Long iclubInsuranceItemType;
 	private String iiQuoteId;
 	private String iiItemId;
-	private Timestamp iiCrtdDt;
+	private Date iiCrtdDt;
 	private Double iiInsureValue;
 	private Double iiActualValue;
 	private String[] iclubClaimItems;
@@ -54,11 +54,11 @@ public class IclubInsuranceItemModel {
 		this.iiItemId = iiItemId;
 	}
 
-	public Timestamp getIiCrtdDt() {
+	public Date getIiCrtdDt() {
 		return iiCrtdDt;
 	}
 
-	public void setIiCrtdDt(Timestamp iiCrtdDt) {
+	public void setIiCrtdDt(Date iiCrtdDt) {
 		this.iiCrtdDt = iiCrtdDt;
 	}
 

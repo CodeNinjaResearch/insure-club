@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,7 +11,7 @@ public class IclubSupplPersonModel {
 	private String iclubPersonBySpCrtdBy;
 	private String iclubPersonBySpPersonId;
 	private String iclubSupplMaster;
-	private Timestamp spCrtdDt;
+	private Date spCrtdDt;
 
 	public String getSpId() {
 		return spId;
@@ -45,11 +45,11 @@ public class IclubSupplPersonModel {
 		this.iclubSupplMaster = iclubSupplMaster;
 	}
 
-	public Timestamp getSpCrtdDt() {
+	public Date getSpCrtdDt() {
 		return spCrtdDt;
 	}
 
-	public void setSpCrtdDt(Timestamp spCrtdDt) {
+	public void setSpCrtdDt(Date spCrtdDt) {
 		this.spCrtdDt = spCrtdDt;
 	}
 }

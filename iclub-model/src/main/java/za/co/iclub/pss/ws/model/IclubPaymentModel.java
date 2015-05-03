@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,8 +15,8 @@ public class IclubPaymentModel {
 	private Long iclubPaymentStatus;
 	private Double PValue;
 	private String PDrCrInd;
-	private Timestamp PGenDt;
-	private Timestamp PCrtdDt;
+	private Date PGenDt;
+	private Date PCrtdDt;
 
 	public String getPId() {
 		return PId;
@@ -82,19 +82,19 @@ public class IclubPaymentModel {
 		PDrCrInd = pDrCrInd;
 	}
 
-	public Timestamp getPGenDt() {
+	public Date getPGenDt() {
 		return PGenDt;
 	}
 
-	public void setPGenDt(Timestamp pGenDt) {
+	public void setPGenDt(Date pGenDt) {
 		PGenDt = pGenDt;
 	}
 
-	public Timestamp getPCrtdDt() {
+	public Date getPCrtdDt() {
 		return PCrtdDt;
 	}
 
-	public void setPCrtdDt(Timestamp pCrtdDt) {
+	public void setPCrtdDt(Date pCrtdDt) {
 		PCrtdDt = pCrtdDt;
 	}
 

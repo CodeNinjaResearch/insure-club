@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +15,7 @@ public class IclubTrackerMasterModel {
 	private Double tmLat;
 	private Double tmLong;
 	private String tmRegNum;
-	private Timestamp tmCrtdDt;
+	private Date tmCrtdDt;
 	private String[] iclubSecurityDevices;
 
 	public Long getTmId() {
@@ -82,11 +82,11 @@ public class IclubTrackerMasterModel {
 		this.tmRegNum = tmRegNum;
 	}
 
-	public Timestamp getTmCrtdDt() {
+	public Date getTmCrtdDt() {
 		return tmCrtdDt;
 	}
 
-	public void setTmCrtdDt(Timestamp tmCrtdDt) {
+	public void setTmCrtdDt(Date tmCrtdDt) {
 		this.tmCrtdDt = tmCrtdDt;
 	}
 

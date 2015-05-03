@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,7 +16,7 @@ public class IclubRateEngineModel {
 	private String reMaxValue;
 	private Double reRate;
 	private String reStatus;
-	private Timestamp reCrtdDt;
+	private Date reCrtdDt;
 
 	public String getReId() {
 		return reId;
@@ -90,11 +90,11 @@ public class IclubRateEngineModel {
 		this.reStatus = reStatus;
 	}
 
-	public Timestamp getReCrtdDt() {
+	public Date getReCrtdDt() {
 		return reCrtdDt;
 	}
 
-	public void setReCrtdDt(Timestamp reCrtdDt) {
+	public void setReCrtdDt(Date reCrtdDt) {
 		this.reCrtdDt = reCrtdDt;
 	}
 

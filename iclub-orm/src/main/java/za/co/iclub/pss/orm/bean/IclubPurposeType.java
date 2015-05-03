@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class IclubPurposeType implements java.io.Serializable {
 	private String ptShortDesc;
 	private String ptLongDesc;
 	private String ptStatus;
-	private Timestamp ptCrtdDt;
+	private Date ptCrtdDt;
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
@@ -49,7 +49,7 @@ public class IclubPurposeType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPurposeType(Long ptId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String ptShortDesc, String ptLongDesc, String ptStatus, Timestamp ptCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubVehicle> iclubVehicles) {
+	public IclubPurposeType(Long ptId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String ptShortDesc, String ptLongDesc, String ptStatus, Date ptCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubVehicle> iclubVehicles) {
 		this.ptId = ptId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
@@ -120,11 +120,11 @@ public class IclubPurposeType implements java.io.Serializable {
 	}
 
 	@Column(name = "pt_crtd_dt", length = 19)
-	public Timestamp getPtCrtdDt() {
+	public Date getPtCrtdDt() {
 		return this.ptCrtdDt;
 	}
 
-	public void setPtCrtdDt(Timestamp ptCrtdDt) {
+	public void setPtCrtdDt(Date ptCrtdDt) {
 		this.ptCrtdDt = ptCrtdDt;
 	}
 

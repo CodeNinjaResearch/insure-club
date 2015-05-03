@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubTrackerMasterBean {
 
@@ -12,7 +12,7 @@ public class IclubTrackerMasterBean {
 	private Double tmLat;
 	private Double tmLong;
 	private String tmRegNum;
-	private Timestamp tmCrtdDt;
+	private Date tmCrtdDt;
 	private String[] iclubSecurityDevices;
 
 	public Long getTmId() {
@@ -79,11 +79,11 @@ public class IclubTrackerMasterBean {
 		this.tmRegNum = tmRegNum;
 	}
 
-	public Timestamp getTmCrtdDt() {
+	public Date getTmCrtdDt() {
 		return tmCrtdDt;
 	}
 
-	public void setTmCrtdDt(Timestamp tmCrtdDt) {
+	public void setTmCrtdDt(Date tmCrtdDt) {
 		this.tmCrtdDt = tmCrtdDt;
 	}
 

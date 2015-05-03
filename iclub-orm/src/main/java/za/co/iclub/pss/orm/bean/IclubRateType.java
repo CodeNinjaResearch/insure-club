@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,7 +37,7 @@ public class IclubRateType implements java.io.Serializable {
 	private String rtStatus;
 	private String rtType;
 	private String rtQuoteType;
-	private Timestamp rtCrtdDt;
+	private Date rtCrtdDt;
 	private Set<IclubRateEngine> iclubRateEngines = new HashSet<IclubRateEngine>(0);
 
 	// Constructors
@@ -52,7 +52,7 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateType(Long rtId, IclubField iclubField, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtStatus, String rtType, String rtQuoteType, Timestamp rtCrtdDt, Set<IclubRateEngine> iclubRateEngines) {
+	public IclubRateType(Long rtId, IclubField iclubField, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtStatus, String rtType, String rtQuoteType, Date rtCrtdDt, Set<IclubRateEngine> iclubRateEngines) {
 		this.rtId = rtId;
 		this.iclubField = iclubField;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
@@ -164,11 +164,11 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	@Column(name = "rt_crtd_dt", length = 19)
-	public Timestamp getRtCrtdDt() {
+	public Date getRtCrtdDt() {
 		return this.rtCrtdDt;
 	}
 
-	public void setRtCrtdDt(Timestamp rtCrtdDt) {
+	public void setRtCrtdDt(Date rtCrtdDt) {
 		this.rtCrtdDt = rtCrtdDt;
 	}
 

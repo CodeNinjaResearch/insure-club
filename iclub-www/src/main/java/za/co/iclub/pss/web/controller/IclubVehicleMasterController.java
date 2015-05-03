@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -148,7 +148,7 @@ public class IclubVehicleMasterController implements Serializable {
 				model.setVmOrigRate(bean.getVmOrigRate());
 				model.setVmRetRate(bean.getVmRetRate());
 				model.setVmProdDt(bean.getVmProdDt());
-				model.setVmCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setVmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -183,7 +183,7 @@ public class IclubVehicleMasterController implements Serializable {
 				model.setVmRetRate(bean.getVmRetRate());
 				model.setVmProdDt(bean.getVmProdDt());
 				model.setIclubPerson(getSessionUserId());
-				model.setVmCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setVmCrtdDt(new Date(System.currentTimeMillis()));
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {

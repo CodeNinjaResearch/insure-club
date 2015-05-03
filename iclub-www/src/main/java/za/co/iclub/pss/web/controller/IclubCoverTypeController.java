@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -141,7 +141,7 @@ public class IclubCoverTypeController implements Serializable {
 				model.setCtShortDesc(bean.getCtShortDesc());
 				model.setCtStatus(bean.getCtStatus());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
-				model.setCtCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setCtCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -173,7 +173,7 @@ public class IclubCoverTypeController implements Serializable {
 				model.setCtShortDesc(bean.getCtShortDesc());
 				model.setCtStatus(bean.getCtStatus());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
-				model.setCtCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setCtCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);

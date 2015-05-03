@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubInsuranceItemBean {
 
@@ -11,7 +11,7 @@ public class IclubInsuranceItemBean {
 	private String iiItemId;
 	private Double iiInsureValue;
 	private Double iiActualValue;
-	private Timestamp iiCrtdDt;
+	private Date iiCrtdDt;
 	private String[] iclubClaimItems;
 
 	public String getIiId() {
@@ -54,11 +54,11 @@ public class IclubInsuranceItemBean {
 		this.iiItemId = iiItemId;
 	}
 
-	public Timestamp getIiCrtdDt() {
+	public Date getIiCrtdDt() {
 		return iiCrtdDt;
 	}
 
-	public void setIiCrtdDt(Timestamp iiCrtdDt) {
+	public void setIiCrtdDt(Date iiCrtdDt) {
 		this.iiCrtdDt = iiCrtdDt;
 	}
 

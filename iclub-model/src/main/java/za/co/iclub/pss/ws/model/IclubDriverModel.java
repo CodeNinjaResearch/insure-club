@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,9 +15,9 @@ public class IclubDriverModel {
 	private String iclubPersonByDPersonId;
 	private String DName;
 	private String DLicenseNum;
-	private Timestamp DIssueDt;
-	private Timestamp DDob;
-	private Timestamp DCrtdDt;
+	private Date DIssueDt;
+	private Date DDob;
+	private Date DCrtdDt;
 	private String[] iclubVehicles;
 
 	public String getDId() {
@@ -84,27 +84,27 @@ public class IclubDriverModel {
 		DLicenseNum = dLicenseNum;
 	}
 
-	public Timestamp getDIssueDt() {
+	public Date getDIssueDt() {
 		return DIssueDt;
 	}
 
-	public void setDIssueDt(Timestamp dIssueDt) {
+	public void setDIssueDt(Date dIssueDt) {
 		DIssueDt = dIssueDt;
 	}
 
-	public Timestamp getDDob() {
+	public Date getDDob() {
 		return DDob;
 	}
 
-	public void setDDob(Timestamp dDob) {
+	public void setDDob(Date dDob) {
 		DDob = dDob;
 	}
 
-	public Timestamp getDCrtdDt() {
+	public Date getDCrtdDt() {
 		return DCrtdDt;
 	}
 
-	public void setDCrtdDt(Timestamp dCrtdDt) {
+	public void setDCrtdDt(Date dCrtdDt) {
 		DCrtdDt = dCrtdDt;
 	}
 

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,7 +45,7 @@ public class IclubProperty implements java.io.Serializable {
 	private String PNorobberyYn;
 	private String PSecGatesYn;
 	private Double PEstValue;
-	private Timestamp PCrtdDt;
+	private Date PCrtdDt;
 
 	// Constructors
 
@@ -59,7 +59,7 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubPurposeType iclubPurposeType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Double PEstValue, Timestamp PCrtdDt) {
+	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubPurposeType iclubPurposeType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Double PEstValue, Date PCrtdDt) {
 		this.PId = PId;
 		this.iclubCoverType = iclubCoverType;
 		this.iclubPurposeType = iclubPurposeType;
@@ -296,11 +296,11 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	@Column(name = "p_crtd_dt", length = 19)
-	public Timestamp getPCrtdDt() {
+	public Date getPCrtdDt() {
 		return this.PCrtdDt;
 	}
 
-	public void setPCrtdDt(Timestamp PCrtdDt) {
+	public void setPCrtdDt(Date PCrtdDt) {
 		this.PCrtdDt = PCrtdDt;
 	}
 

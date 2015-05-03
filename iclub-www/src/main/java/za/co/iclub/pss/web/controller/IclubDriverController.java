@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -60,7 +60,7 @@ public class IclubDriverController implements Serializable {
 
 				model.setDId(UUID.randomUUID().toString());
 				model.setDDob(bean.getDDob());
-				model.setDIssueDt(new Timestamp(System.currentTimeMillis()));
+				model.setDIssueDt(new Date(System.currentTimeMillis()));
 				model.setDLicenseNum(bean.getDLicenseNum());
 				model.setDName(bean.getDName());
 				model.setDCrtdDt(bean.getDCrtdDt());
@@ -93,7 +93,7 @@ public class IclubDriverController implements Serializable {
 				IclubDriverModel model = new IclubDriverModel();
 				model.setDId(bean.getDId());
 				model.setDDob(bean.getDDob());
-				model.setDIssueDt(new Timestamp(System.currentTimeMillis()));
+				model.setDIssueDt(new Date(System.currentTimeMillis()));
 				model.setDLicenseNum(bean.getDLicenseNum());
 				model.setDName(bean.getDName());
 				model.setDCrtdDt(bean.getDCrtdDt());

@@ -30,7 +30,8 @@ import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 public class IclubGeoLocDAO {
 	private static final Logger log = Logger.getLogger(IclubGeoLocDAO.class);
 	// property constants
-	public static final String GL_KEY = "glKey";
+	public static final String GL_PROVINCE = "glProvince";
+	public static final String GL_SUBURB = "glSuburb";
 	public static final String GL_ADDRESS = "glAddress";
 	public static final String GL_LAT = "glLat";
 	public static final String GL_LONG = "glLong";
@@ -108,8 +109,12 @@ public class IclubGeoLocDAO {
 		}
 	}
 
-	public List<IclubGeoLoc> findByGlKey(Object glKey) {
-		return findByProperty(GL_KEY, glKey);
+	public List<IclubGeoLoc> findByGlProvince(Object glProvince) {
+		return findByProperty(GL_PROVINCE, glProvince);
+	}
+
+	public List<IclubGeoLoc> findByGlSuburb(Object glSuburb) {
+		return findByProperty(GL_SUBURB, glSuburb);
 	}
 
 	public List<IclubGeoLoc> findByGlAddress(Object glAddress) {

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,7 +16,7 @@ public class IclubDocumentModel {
 	private Long DSize;
 	private String DEntityId;
 	private String DContent;
-	private Timestamp DCrtdDt;
+	private Date DCrtdDt;
 //	private byte[] DBlob;
 
 	public String getDId() {
@@ -91,11 +91,11 @@ public class IclubDocumentModel {
 		DContent = dContent;
 	}
 
-	public Timestamp getDCrtdDt() {
+	public Date getDCrtdDt() {
 		return DCrtdDt;
 	}
 
-	public void setDCrtdDt(Timestamp dCrtdDt) {
+	public void setDCrtdDt(Date dCrtdDt) {
 		DCrtdDt = dCrtdDt;
 	}
 

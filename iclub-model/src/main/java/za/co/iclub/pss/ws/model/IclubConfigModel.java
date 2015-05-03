@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,7 +12,7 @@ public class IclubConfigModel {
 	private String CKey;
 	private String CValue;
 	private String CStatus;
-	private Timestamp CCrtdDt;
+	private Date CCrtdDt;
 
 	public Long getCId() {
 		return CId;
@@ -54,11 +54,11 @@ public class IclubConfigModel {
 		CStatus = cStatus;
 	}
 
-	public Timestamp getCCrtdDt() {
+	public Date getCCrtdDt() {
 		return CCrtdDt;
 	}
 
-	public void setCCrtdDt(Timestamp cCrtdDt) {
+	public void setCCrtdDt(Date cCrtdDt) {
 		CCrtdDt = cCrtdDt;
 	}
 

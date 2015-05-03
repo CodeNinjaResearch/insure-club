@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -141,7 +141,7 @@ public class IclubMessageController implements Serializable {
 				model.setIclubSystemTypeByMFromSysId(bean.getIclubSystemTypeByMFromSysId());
 				model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId());
 
-				model.setMCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setMCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -176,7 +176,7 @@ public class IclubMessageController implements Serializable {
 				model.setIclubMessageType(bean.getIclubMessageType());
 				model.setIclubSystemTypeByMFromSysId(bean.getIclubSystemTypeByMFromSysId());
 				model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId());
-				model.setMCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setMCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				model.setIclubPerson(bean.getIclubPerson());

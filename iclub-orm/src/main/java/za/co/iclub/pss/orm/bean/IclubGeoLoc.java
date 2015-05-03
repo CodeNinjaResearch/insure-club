@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,15 +22,16 @@ public class IclubGeoLoc implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5619528734859414363L;
+	private static final long serialVersionUID = 7975855546692116552L;
 	private Long glId;
 	private IclubPerson iclubPerson;
-	private String glKey;
+	private String glProvince;
+	private String glSuburb;
 	private String glAddress;
 	private Double glLat;
 	private Double glLong;
+	private Date glCrtdDt;
 	private Double glRate;
-	private Timestamp glCrtdDt;
 
 	// Constructors
 
@@ -44,15 +45,16 @@ public class IclubGeoLoc implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glKey, String glAddress, Double glLat, Double glLong, Double glRate, Timestamp glCrtdDt) {
+	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glProvince, String glSuburb, String glAddress, Double glLat, Double glLong, Date glCrtdDt, Double glRate) {
 		this.glId = glId;
 		this.iclubPerson = iclubPerson;
-		this.glKey = glKey;
+		this.glProvince = glProvince;
+		this.glSuburb = glSuburb;
 		this.glAddress = glAddress;
 		this.glLat = glLat;
 		this.glLong = glLong;
-		this.glRate = glRate;
 		this.glCrtdDt = glCrtdDt;
+		this.glRate = glRate;
 	}
 
 	// Property accessors
@@ -76,13 +78,22 @@ public class IclubGeoLoc implements java.io.Serializable {
 		this.iclubPerson = iclubPerson;
 	}
 
-	@Column(name = "gl_key", length = 450)
-	public String getGlKey() {
-		return this.glKey;
+	@Column(name = "gl_province", length = 450)
+	public String getGlProvince() {
+		return this.glProvince;
 	}
 
-	public void setGlKey(String glKey) {
-		this.glKey = glKey;
+	public void setGlProvince(String glProvince) {
+		this.glProvince = glProvince;
+	}
+
+	@Column(name = "gl_suburb", length = 999)
+	public String getGlSuburb() {
+		return this.glSuburb;
+	}
+
+	public void setGlSuburb(String glSuburb) {
+		this.glSuburb = glSuburb;
 	}
 
 	@Column(name = "gl_address", length = 999)
@@ -112,22 +123,22 @@ public class IclubGeoLoc implements java.io.Serializable {
 		this.glLong = glLong;
 	}
 
-	@Column(name = "gl_rate", precision = 15, scale = 5)
+	@Column(name = "gl_crtd_dt", length = 19)
+	public Date getGlCrtdDt() {
+		return this.glCrtdDt;
+	}
+
+	public void setGlCrtdDt(Date glCrtdDt) {
+		this.glCrtdDt = glCrtdDt;
+	}
+
+	@Column(name = "gl_rate", precision = 22, scale = 0)
 	public Double getGlRate() {
 		return this.glRate;
 	}
 
 	public void setGlRate(Double glRate) {
 		this.glRate = glRate;
-	}
-
-	@Column(name = "gl_crtd_dt", length = 19)
-	public Timestamp getGlCrtdDt() {
-		return this.glCrtdDt;
-	}
-
-	public void setGlCrtdDt(Timestamp glCrtdDt) {
-		this.glCrtdDt = glCrtdDt;
 	}
 
 }

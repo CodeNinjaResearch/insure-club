@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class IclubClaimItem implements java.io.Serializable {
 	private IclubClaimStatus iclubClaimStatus;
 	private Double ciValue;
 	private String ciCrtdBy;
-	private Timestamp ciCrtdDt;
+	private Date ciCrtdDt;
 
 	// Constructors
 
@@ -45,7 +45,7 @@ public class IclubClaimItem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubClaimItem(String ciId, IclubSupplMaster iclubSupplMasterByCiHandlerId, IclubInsuranceItem iclubInsuranceItem, IclubSupplMaster iclubSupplMasterByCiAssesorId, IclubClaim iclubClaim, IclubClaimStatus iclubClaimStatus, Double ciValue, String ciCrtdBy, Timestamp ciCrtdDt) {
+	public IclubClaimItem(String ciId, IclubSupplMaster iclubSupplMasterByCiHandlerId, IclubInsuranceItem iclubInsuranceItem, IclubSupplMaster iclubSupplMasterByCiAssesorId, IclubClaim iclubClaim, IclubClaimStatus iclubClaimStatus, Double ciValue, String ciCrtdBy, Date ciCrtdDt) {
 		this.ciId = ciId;
 		this.iclubSupplMasterByCiHandlerId = iclubSupplMasterByCiHandlerId;
 		this.iclubInsuranceItem = iclubInsuranceItem;
@@ -137,11 +137,11 @@ public class IclubClaimItem implements java.io.Serializable {
 	}
 
 	@Column(name = "ci_crtd_dt", length = 19)
-	public Timestamp getCiCrtdDt() {
+	public Date getCiCrtdDt() {
 		return this.ciCrtdDt;
 	}
 
-	public void setCiCrtdDt(Timestamp ciCrtdDt) {
+	public void setCiCrtdDt(Date ciCrtdDt) {
 		this.ciCrtdDt = ciCrtdDt;
 	}
 

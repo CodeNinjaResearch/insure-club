@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubMessageBean {
 
@@ -9,10 +9,10 @@ public class IclubMessageBean {
 	private Long iclubSystemTypeByMToSysId;
 	private Long iclubMessageType;
 	private Long iclubSystemTypeByMFromSysId;
-	private Timestamp MSentDt;
+	private Date MSentDt;
 	private String MTranId;
 	private String MContent;
-	private Timestamp MCrtdDt;
+	private Date MCrtdDt;
 
 	public String getMId() {
 		return MId;
@@ -54,11 +54,11 @@ public class IclubMessageBean {
 		this.iclubSystemTypeByMFromSysId = iclubSystemTypeByMFromSysId;
 	}
 
-	public Timestamp getMSentDt() {
+	public Date getMSentDt() {
 		return MSentDt;
 	}
 
-	public void setMSentDt(Timestamp mSentDt) {
+	public void setMSentDt(Date mSentDt) {
 		MSentDt = mSentDt;
 	}
 
@@ -78,11 +78,11 @@ public class IclubMessageBean {
 		MContent = mContent;
 	}
 
-	public Timestamp getMCrtdDt() {
+	public Date getMCrtdDt() {
 		return MCrtdDt;
 	}
 
-	public void setMCrtdDt(Timestamp mCrtdDt) {
+	public void setMCrtdDt(Date mCrtdDt) {
 		MCrtdDt = mCrtdDt;
 	}
 

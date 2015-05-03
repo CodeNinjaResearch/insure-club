@@ -1,6 +1,5 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,7 +19,7 @@ public class IclubSupplMasterModel {
 	private Double smCrLimit;
 	private Date srActionDt;
 	private Integer smRating;
-	private Timestamp smCrtdDt;
+	private Date smCrtdDt;
 	private String[] iclubClaimItemsForCiAssesorId;
 	private String[] iclubClaimItemsForCiHandlerId;
 
@@ -120,11 +119,11 @@ public class IclubSupplMasterModel {
 		this.smRating = smRating;
 	}
 
-	public Timestamp getSmCrtdDt() {
+	public Date getSmCrtdDt() {
 		return smCrtdDt;
 	}
 
-	public void setSmCrtdDt(Timestamp smCrtdDt) {
+	public void setSmCrtdDt(Date smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
 	}
 

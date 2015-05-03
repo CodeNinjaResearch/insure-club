@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -154,7 +154,7 @@ public class IclubBankMasterController implements Serializable {
 				model.setBmBranchAddress(bean.getBmBranchAddress());
 				model.setBmBranchLat(bean.getBmBranchLat());
 				model.setBmBranchLong(bean.getBmBranchLong());
-				model.setBmCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setBmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -189,7 +189,7 @@ public class IclubBankMasterController implements Serializable {
 				model.setBmBranchAddress(bean.getBmBranchAddress());
 				model.setBmBranchLat(bean.getBmBranchLat());
 				model.setBmBranchLong(bean.getBmBranchLong());
-				model.setBmCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setBmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);

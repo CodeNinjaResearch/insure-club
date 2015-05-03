@@ -2,6 +2,7 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  * IclubCohortType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_cohort_type", catalog = "iclubdb")
+@Table(name = "iclub_cohort_type")
 public class IclubCohortType implements java.io.Serializable {
 
 	// Fields

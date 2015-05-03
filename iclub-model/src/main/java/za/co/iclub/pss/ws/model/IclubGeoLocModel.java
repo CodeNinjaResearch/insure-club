@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -9,12 +9,13 @@ public class IclubGeoLocModel {
 
 	private Long glId;
 	private String iclubPerson;
+	private String glProvince;
+	private String glSuburb;
 	private String glAddress;
 	private Double glLat;
 	private Double glLong;
+	private Date glCrtdDt;
 	private Double glRate;
-	private Timestamp glCrtdDt;
-	private String glKey; 
 
 	public Long getGlId() {
 		return glId;
@@ -30,6 +31,22 @@ public class IclubGeoLocModel {
 
 	public void setIclubPerson(String iclubPerson) {
 		this.iclubPerson = iclubPerson;
+	}
+
+	public String getGlProvince() {
+		return glProvince;
+	}
+
+	public void setGlProvince(String glProvince) {
+		this.glProvince = glProvince;
+	}
+
+	public String getGlSuburb() {
+		return glSuburb;
+	}
+
+	public void setGlSuburb(String glSuburb) {
+		this.glSuburb = glSuburb;
 	}
 
 	public String getGlAddress() {
@@ -56,28 +73,20 @@ public class IclubGeoLocModel {
 		this.glLong = glLong;
 	}
 
+	public Date getGlCrtdDt() {
+		return glCrtdDt;
+	}
+
+	public void setGlCrtdDt(Date glCrtdDt) {
+		this.glCrtdDt = glCrtdDt;
+	}
+
 	public Double getGlRate() {
 		return glRate;
 	}
 
 	public void setGlRate(Double glRate) {
 		this.glRate = glRate;
-	}
-
-	public Timestamp getGlCrtdDt() {
-		return glCrtdDt;
-	}
-
-	public void setGlCrtdDt(Timestamp glCrtdDt) {
-		this.glCrtdDt = glCrtdDt;
-	}
-
-	public String getGlKey() {
-		return glKey;
-	}
-
-	public void setGlKey(String glKey) {
-		this.glKey = glKey;
 	}
 
 }

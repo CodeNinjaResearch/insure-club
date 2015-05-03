@@ -1,7 +1,6 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -248,7 +247,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 				propertyBean.setPId(UUID.randomUUID().toString());
 				model.setPId(propertyBean.getPId());
-				model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(propertyBean.getPEstValue());
 				model.setPSecGatesYn(propertyBean.getPSecGatesYn());
 				model.setPNorobberyYn(propertyBean.getPNorobberyYn());
@@ -290,7 +289,7 @@ public class IclubQuickQuoteController implements Serializable {
 				IclubPropertyModel model = new IclubPropertyModel();
 
 				model.setPId(propertyBean.getPId());
-				model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(propertyBean.getPEstValue());
 				model.setPSecGatesYn(propertyBean.getPSecGatesYn());
 				model.setPNorobberyYn(propertyBean.getPNorobberyYn());
@@ -424,7 +423,7 @@ public class IclubQuickQuoteController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				vehicleBean.setVId(UUID.randomUUID().toString());
-				vehicleBean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				vehicleBean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				vehicleBean.setIclubPerson(getSessionUserId());
 				model.setVId(vehicleBean.getVId());
 				model.setVOwner(vehicleBean.getVOwner());
@@ -476,7 +475,7 @@ public class IclubQuickQuoteController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				model.setVId(vehicleBean.getVId());
-				vehicleBean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				vehicleBean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				vehicleBean.setIclubPerson(getSessionUserId());
 				model.setVOwner(vehicleBean.getVOwner());
 				model.setVGearLockYn(vehicleBean.getVGearLockYn());
@@ -741,7 +740,8 @@ public class IclubQuickQuoteController implements Serializable {
 		client.close();
 		IclubGeoLocBean bean = new IclubGeoLocBean();
 		if (model != null) {
-			bean.setGlKey(model.getGlKey());
+			bean.setGlProvince(model.getGlProvince());
+			bean.setGlSuburb(model.getGlSuburb());
 			bean.setGlId(model.getGlId());
 			bean.setGlAddress(model.getGlAddress());
 			bean.setGlLat(model.getGlLat());
@@ -1066,7 +1066,7 @@ public class IclubQuickQuoteController implements Serializable {
 					client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "add");
 					model.setLId(UUID.randomUUID().toString());
 				}
-				model.setLCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLLastDate(loginBean.getLLastDate());
 				model.setLName(loginBean.getLName());
 				model.setLPasswd((loginBean.getLPasswd()).toString());
@@ -1346,7 +1346,7 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setIiId(UUID.randomUUID().toString());
 		model.setIiItemId(itemId);
 		model.setIiQuoteId(quoteId);
-		model.setIiCrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setIiCrtdDt(new Date(System.currentTimeMillis()));
 		model.setIclubInsuranceItemType(iItemType);
 		model.setIclubPerson(userId);
 		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -1369,15 +1369,15 @@ public class IclubQuickQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "add");
 		IclubQuoteModel model = new IclubQuoteModel();
 		model.setQId(UUID.randomUUID().toString());
-		model.setQCrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setQCrtdDt(new Date(System.currentTimeMillis()));
 		model.setQIsMatched("N");
 		model.setQPrevPremium(0.0d);
-		model.setQValidUntil(new Timestamp(System.currentTimeMillis() + (3 * 24 * 3600)));
+		model.setQValidUntil(new Date(System.currentTimeMillis() + (3 * 24 * 3600)));
 		model.setQMobile(personBean.getPMobile());
 		model.setQEmail(personBean.getPEmail());
 		model.setQGenPremium(0.0d);
 		model.setQNumItems(1);
-		model.setQGenDt(new Timestamp(System.currentTimeMillis()));
+		model.setQGenDt(new Date(System.currentTimeMillis()));
 
 		model.setQNumber(getQnumber());
 		model.setIclubPersonByQCrtdBy(getSessionUserId());
@@ -1420,10 +1420,10 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setDId(UUID.randomUUID().toString());
 
 		model.setDDob(bean.getDDob());
-		model.setDIssueDt(new Timestamp(bean.getDIssueDt().getTime()));
+		model.setDIssueDt(new Date(bean.getDIssueDt().getTime()));
 		model.setDLicenseNum(bean.getDLicenseNum());
 		model.setDName(bean.getDName());
-		model.setDCrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setDCrtdDt(new Date(System.currentTimeMillis()));
 		model.setIclubAccessType(bean.getIclubAccessType());
 		model.setIclubLicenseCode(bean.getIclubLicenseCode());
 		model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());

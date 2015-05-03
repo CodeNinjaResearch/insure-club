@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class IclubMessageBoard implements java.io.Serializable {
 	private String mbTitle;
 	private String mbContent;
 	private String mbTag;
-	private Timestamp mbCrtdDt;
+	private Date mbCrtdDt;
 	private Set<IclubMbComment> iclubMbComments = new HashSet<IclubMbComment>(0);
 
 	// Constructors
@@ -47,7 +47,7 @@ public class IclubMessageBoard implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMessageBoard(String mbId, IclubPerson iclubPerson, String mbTitle, String mbContent, String mbTag, Timestamp mbCrtdDt, Set<IclubMbComment> iclubMbComments) {
+	public IclubMessageBoard(String mbId, IclubPerson iclubPerson, String mbTitle, String mbContent, String mbTag, Date mbCrtdDt, Set<IclubMbComment> iclubMbComments) {
 		this.mbId = mbId;
 		this.iclubPerson = iclubPerson;
 		this.mbTitle = mbTitle;
@@ -106,11 +106,11 @@ public class IclubMessageBoard implements java.io.Serializable {
 	}
 
 	@Column(name = "mb_crtd_dt", length = 19)
-	public Timestamp getMbCrtdDt() {
+	public Date getMbCrtdDt() {
 		return this.mbCrtdDt;
 	}
 
-	public void setMbCrtdDt(Timestamp mbCrtdDt) {
+	public void setMbCrtdDt(Date mbCrtdDt) {
 		this.mbCrtdDt = mbCrtdDt;
 	}
 

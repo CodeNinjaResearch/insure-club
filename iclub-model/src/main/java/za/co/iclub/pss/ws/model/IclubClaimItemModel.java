@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +15,7 @@ public class IclubClaimItemModel {
 	private Long iclubClaimStatus;
 	private Double ciValue;
 	private String ciCrtdBy;
-	private Timestamp ciCrtdDt;
+	private Date ciCrtdDt;
 
 	public String getCiId() {
 		return ciId;
@@ -81,11 +81,11 @@ public class IclubClaimItemModel {
 		this.ciCrtdBy = ciCrtdBy;
 	}
 
-	public Timestamp getCiCrtdDt() {
+	public Date getCiCrtdDt() {
 		return ciCrtdDt;
 	}
 
-	public void setCiCrtdDt(Timestamp ciCrtdDt) {
+	public void setCiCrtdDt(Date ciCrtdDt) {
 		this.ciCrtdDt = ciCrtdDt;
 	}
 

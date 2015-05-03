@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubBankMasterBean {
 
@@ -14,7 +14,7 @@ public class IclubBankMasterBean {
 	private Double bmBranchLat;
 	private Double bmBranchLong;
 	private Integer bmBranchZip;
-	private Timestamp bmCrtdDt;
+	private Date bmCrtdDt;
 	private String[] iclubAccounts;
 
 	public Long getBmId() {
@@ -97,11 +97,11 @@ public class IclubBankMasterBean {
 		this.bmBranchZip = bmBranchZip;
 	}
 
-	public Timestamp getBmCrtdDt() {
+	public Date getBmCrtdDt() {
 		return bmCrtdDt;
 	}
 
-	public void setBmCrtdDt(Timestamp bmCrtdDt) {
+	public void setBmCrtdDt(Date bmCrtdDt) {
 		this.bmCrtdDt = bmCrtdDt;
 	}
 

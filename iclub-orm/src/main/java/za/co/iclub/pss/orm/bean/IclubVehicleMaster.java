@@ -1,6 +1,5 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	private Double vmRetRate;
 	private Double vmRatePrct;
 	private Date vmProdDt;
-	private Timestamp vmCrtdDt;
+	private Date vmCrtdDt;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
@@ -55,7 +54,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson, String vmMake, String vmModel, Double vmOrigRate, Double vmMrktRate, Double vmRetRate, Double vmRatePrct, Date vmProdDt, Timestamp vmCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson, String vmMake, String vmModel, Double vmOrigRate, Double vmMrktRate, Double vmRetRate, Double vmRatePrct, Date vmProdDt, Date vmCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.vmId = vmId;
 		this.iclubPerson = iclubPerson;
 		this.vmMake = vmMake;
@@ -155,11 +154,11 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "vm_crtd_dt", length = 19)
-	public Timestamp getVmCrtdDt() {
+	public Date getVmCrtdDt() {
 		return this.vmCrtdDt;
 	}
 
-	public void setVmCrtdDt(Timestamp vmCrtdDt) {
+	public void setVmCrtdDt(Date vmCrtdDt) {
 		this.vmCrtdDt = vmCrtdDt;
 	}
 

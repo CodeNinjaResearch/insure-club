@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -123,7 +123,7 @@ public class IclubLicenseCodeController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 
-				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLcCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLcDesc(bean.getLcDesc());
 				model.setLcStatus(bean.getLcStatus());
 				model.setIclubPerson(getSessionUserId());
@@ -152,7 +152,7 @@ public class IclubLicenseCodeController implements Serializable {
 				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 
 				model.setLcId(bean.getLcId());
-				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLcCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLcDesc(bean.getLcDesc());
 				model.setLcStatus(bean.getLcStatus());
 				model.setIclubPerson(getSessionUserId());

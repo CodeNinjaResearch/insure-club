@@ -1,6 +1,5 @@
 package za.co.iclub.pss.orm.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubClaim;
 import za.co.iclub.pss.orm.bean.IclubConfig;
 import za.co.iclub.pss.orm.bean.IclubDriver;
-import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
-import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
 
 @Transactional
@@ -103,28 +100,19 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	public IclubGeoLoc getIclubGeoLocByLatAndLong(Double geoLong, Double lat) {
-		log.debug("Fetching all IclubGeoLoc by Query :: getAllBankNames");
+	public Long getIclubGeoLocByLatAndLong(Double gLong, Double gLat) {
+		log.debug("Fetching all IclubGeoLoc by Query :: getIclubGeoLocByLatAndLong");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getIclubGeoLocByLatAndLong");
-			query.setDouble("geoLong", geoLong);
-			query.setDouble("lat", lat);
-			Object[] ret = (Object[]) query.uniqueResult();
-
-			if (ret != null && ret.length > 0) {
-				IclubGeoLoc bean = new IclubGeoLoc();
-				bean.setGlId(ret[0] != null ? (Long) ret[0] : null);
-				bean.setIclubPerson(ret[1] != null ? (IclubPerson) ret[1] : null);
-				bean.setGlKey(ret[0] != null ? (String) ret[2] : null);
-				bean.setGlAddress(ret[0] != null ? (String) ret[3] : null);
-				bean.setGlLat(ret[0] != null ? (Double) ret[4] : null);
-				bean.setGlLong(ret[0] != null ? (Double) ret[5] : null);
-				bean.setGlRate(ret[0] != null ? (Double) ret[6] : null);
-				bean.setGlCrtdDt(ret[0] != null ? (Timestamp) ret[7] : null);
-
+			query.setDouble("gLong", gLong);
+			query.setDouble("gLat", gLat);
+			Object[] res = (Object[]) query.uniqueResult();
+			Long ret = -999l;
+			if (res != null && res.length > 0) {
+				ret = (Long) res[0];
 			}
+			return ret;
 
-			return new IclubGeoLoc();
 		} catch (RuntimeException re) {
 			log.error("BankNames", re);
 			throw re;

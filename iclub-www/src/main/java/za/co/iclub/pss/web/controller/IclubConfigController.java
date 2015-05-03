@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -114,7 +114,7 @@ public class IclubConfigController implements Serializable {
 				IclubConfigModel model = new IclubConfigModel();
 
 				model.setCKey(bean.getCKey());
-				model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
 				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());
@@ -145,7 +145,7 @@ public class IclubConfigController implements Serializable {
 
 				model.setCId(bean.getCId());
 				model.setCKey(bean.getCKey());
-				model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
 				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());

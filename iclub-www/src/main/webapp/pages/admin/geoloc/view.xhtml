@@ -1,19 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<p:dataTable id="dtGeoLocCont" widgetVar="dtGeoLocCont" value="#{iclubGeoLocController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No GeoLoces Available">
-		<p:column headerText="Unique Id">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glId}" />
+	<p:dataTable id="dtGeoLocCont" widgetVar="dtGeoLocCont" value="#{iclubGeoLocController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No GeoLoces Available" reflow="true">
+		<p:column headerText="Province">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glProvince}" />
 		</p:column>
-		<p:column headerText="Created By">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
-		</p:column>
-		<p:column headerText="Address">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glAddress}" />
-		</p:column>
-		<p:column headerText="Latitude">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glLat}" />
-		</p:column>
-		<p:column headerText="Longitude">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glLong}" />
+		<p:column headerText="Suburb">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glSuburb}" />
 		</p:column>
 		<p:column headerText="Rate">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glRate}" />

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,9 +14,9 @@ public class IclubLoginModel {
 	private Long iclubRoleType;
 	private String LName;
 	private String LPasswd;
-	private Timestamp LLastDate;
+	private Date LLastDate;
 	private String LSecAns;
-	private Timestamp LCrtdDt;
+	private Date LCrtdDt;
 
 	public String getLId() {
 		return LId;
@@ -74,11 +74,11 @@ public class IclubLoginModel {
 		LPasswd = lPasswd;
 	}
 
-	public Timestamp getLLastDate() {
+	public Date getLLastDate() {
 		return LLastDate;
 	}
 
-	public void setLLastDate(Timestamp lLastDate) {
+	public void setLLastDate(Date lLastDate) {
 		LLastDate = lLastDate;
 	}
 
@@ -90,11 +90,11 @@ public class IclubLoginModel {
 		LSecAns = lSecAns;
 	}
 
-	public Timestamp getLCrtdDt() {
+	public Date getLCrtdDt() {
 		return LCrtdDt;
 	}
 
-	public void setLCrtdDt(Timestamp lCrtdDt) {
+	public void setLCrtdDt(Date lCrtdDt) {
 		LCrtdDt = lCrtdDt;
 	}
 

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +30,7 @@ public class IclubRateEngine implements java.io.Serializable {
 	private String reMaxValue;
 	private Double reRate;
 	private String reStatus;
-	private Timestamp reCrtdDt;
+	private Date reCrtdDt;
 
 	// Constructors
 
@@ -44,7 +44,7 @@ public class IclubRateEngine implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateEngine(String reId, IclubPerson iclubPerson, IclubRateType iclubRateType, String reBaseValue, String reMaxValue, Double reRate, String reStatus, Timestamp reCrtdDt) {
+	public IclubRateEngine(String reId, IclubPerson iclubPerson, IclubRateType iclubRateType, String reBaseValue, String reMaxValue, Double reRate, String reStatus, Date reCrtdDt) {
 		this.reId = reId;
 		this.iclubPerson = iclubPerson;
 		this.iclubRateType = iclubRateType;
@@ -123,11 +123,11 @@ public class IclubRateEngine implements java.io.Serializable {
 	}
 
 	@Column(name = "re_crtd_dt", length = 19)
-	public Timestamp getReCrtdDt() {
+	public Date getReCrtdDt() {
 		return this.reCrtdDt;
 	}
 
-	public void setReCrtdDt(Timestamp reCrtdDt) {
+	public void setReCrtdDt(Date reCrtdDt) {
 		this.reCrtdDt = reCrtdDt;
 	}
 

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,7 +13,7 @@ public class IclubCoverTypeModel {
 	private String ctShortDesc;
 	private String ctLongDesc;
 	private String ctStatus;
-	private Timestamp ctCrtdDt;
+	private Date ctCrtdDt;
 	private String[] iclubProperties;
 	private String[] iclubQuotes;
 
@@ -65,11 +65,11 @@ public class IclubCoverTypeModel {
 		this.ctStatus = ctStatus;
 	}
 
-	public Timestamp getCtCrtdDt() {
+	public Date getCtCrtdDt() {
 		return ctCrtdDt;
 	}
 
-	public void setCtCrtdDt(Timestamp ctCrtdDt) {
+	public void setCtCrtdDt(Date ctCrtdDt) {
 		this.ctCrtdDt = ctCrtdDt;
 	}
 

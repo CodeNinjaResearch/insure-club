@@ -1,6 +1,7 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +16,7 @@ import javax.persistence.TemporalType;
  * IclubCohortInvite entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_cohort_invite", catalog = "iclubdb")
+@Table(name = "iclub_cohort_invite")
 public class IclubCohortInvite implements java.io.Serializable {
 
 	// Fields

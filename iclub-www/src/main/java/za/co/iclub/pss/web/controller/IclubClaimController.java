@@ -1,7 +1,6 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -240,7 +239,7 @@ public class IclubClaimController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubClaimModel model = new IclubClaimModel();
 				model.setCId(UUID.randomUUID().toString());
-				model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
 				model.setCNumItems(bean.getCNumItems());
 				model.setCNumber(getCnumber());
@@ -271,7 +270,7 @@ public class IclubClaimController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubClaimModel model = new IclubClaimModel();
 				model.setCId(bean.getCId());
-				model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
 				model.setCNumItems(bean.getCNumItems());
 				model.setCNumber(bean.getCNumber());
@@ -633,7 +632,7 @@ public class IclubClaimController implements Serializable {
 		try {
 			IclubDocumentModel model = new IclubDocumentModel();
 			model.setIclubPerson(getSessionUserId());
-			model.setDCrtdDt(new Timestamp(System.currentTimeMillis()));
+			model.setDCrtdDt(new Date(System.currentTimeMillis()));
 			model.setDId(docId);
 			model.setDName(fue.getFile().getFileName());
 			model.setDContent(fue.getFile().getContentType());

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubRateTypeBean {
 
@@ -14,7 +14,7 @@ public class IclubRateTypeBean {
 	private String rtStatus;
 	private String rtType;
 	private String rtQuoteType;
-	private Timestamp rtCrtdDt;
+	private Date rtCrtdDt;
 	private String[] iclubRateEngines;
 
 	public Long getRtId() {
@@ -89,11 +89,11 @@ public class IclubRateTypeBean {
 		this.rtQuoteType = rtQuoteType;
 	}
 
-	public Timestamp getRtCrtdDt() {
+	public Date getRtCrtdDt() {
 		return rtCrtdDt;
 	}
 
-	public void setRtCrtdDt(Timestamp rtCrtdDt) {
+	public void setRtCrtdDt(Date rtCrtdDt) {
 		this.rtCrtdDt = rtCrtdDt;
 	}
 

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,7 +12,7 @@ public class IclubMessageBoardModel {
 	private String mbTitle;
 	private String mbContent;
 	private String mbTag;
-	private Timestamp mbCrtdDt;
+	private Date mbCrtdDt;
 	private String[] iclubMbComments;
 
 	public String getMbId() {
@@ -55,11 +55,11 @@ public class IclubMessageBoardModel {
 		this.mbTag = mbTag;
 	}
 
-	public Timestamp getMbCrtdDt() {
+	public Date getMbCrtdDt() {
 		return mbCrtdDt;
 	}
 
-	public void setMbCrtdDt(Timestamp mbCrtdDt) {
+	public void setMbCrtdDt(Date mbCrtdDt) {
 		this.mbCrtdDt = mbCrtdDt;
 	}
 

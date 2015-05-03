@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubClaimItemBean {
 
@@ -12,7 +12,7 @@ public class IclubClaimItemBean {
 	private Long iclubClaimStatus;
 	private Long ciValue;
 	private String ciCrtdBy;
-	private Timestamp ciCrtdDt;
+	private Date ciCrtdDt;
 
 	public String getCiId() {
 		return ciId;
@@ -78,11 +78,11 @@ public class IclubClaimItemBean {
 		this.ciCrtdBy = ciCrtdBy;
 	}
 
-	public Timestamp getCiCrtdDt() {
+	public Date getCiCrtdDt() {
 		return ciCrtdDt;
 	}
 
-	public void setCiCrtdDt(Timestamp ciCrtdDt) {
+	public void setCiCrtdDt(Date ciCrtdDt) {
 		this.ciCrtdDt = ciCrtdDt;
 	}
 

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -35,7 +35,7 @@ public class IclubVehicleModel {
 	private String VVin;
 	private String VEngineNr;
 	private String VRegNum;
-	private Timestamp VCrtdDt;
+	private Date VCrtdDt;
 
 	public String getVId() {
 		return VId;
@@ -261,11 +261,11 @@ public class IclubVehicleModel {
 		VRegNum = vRegNum;
 	}
 
-	public Timestamp getVCrtdDt() {
+	public Date getVCrtdDt() {
 		return VCrtdDt;
 	}
 
-	public void setVCrtdDt(Timestamp vCrtdDt) {
+	public void setVCrtdDt(Date vCrtdDt) {
 		VCrtdDt = vCrtdDt;
 	}
 

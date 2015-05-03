@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,10 +28,10 @@ public class IclubMessage implements java.io.Serializable {
 	private IclubSystemType iclubSystemTypeByMToSysId;
 	private IclubMessageType iclubMessageType;
 	private IclubSystemType iclubSystemTypeByMFromSysId;
-	private Timestamp MSentDt;
+	private Date MSentDt;
 	private String MTranId;
 	private String MContent;
-	private Timestamp MCrtdDt;
+	private Date MCrtdDt;
 
 	// Constructors
 
@@ -45,7 +45,7 @@ public class IclubMessage implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMessage(String MId, IclubPerson iclubPerson, IclubSystemType iclubSystemTypeByMToSysId, IclubMessageType iclubMessageType, IclubSystemType iclubSystemTypeByMFromSysId, Timestamp MSentDt, String MTranId, String MContent, Timestamp MCrtdDt) {
+	public IclubMessage(String MId, IclubPerson iclubPerson, IclubSystemType iclubSystemTypeByMToSysId, IclubMessageType iclubMessageType, IclubSystemType iclubSystemTypeByMFromSysId, Date MSentDt, String MTranId, String MContent, Date MCrtdDt) {
 		this.MId = MId;
 		this.iclubPerson = iclubPerson;
 		this.iclubSystemTypeByMToSysId = iclubSystemTypeByMToSysId;
@@ -109,11 +109,11 @@ public class IclubMessage implements java.io.Serializable {
 	}
 
 	@Column(name = "m_sent_dt", length = 19)
-	public Timestamp getMSentDt() {
+	public Date getMSentDt() {
 		return this.MSentDt;
 	}
 
-	public void setMSentDt(Timestamp MSentDt) {
+	public void setMSentDt(Date MSentDt) {
 		this.MSentDt = MSentDt;
 	}
 
@@ -136,11 +136,11 @@ public class IclubMessage implements java.io.Serializable {
 	}
 
 	@Column(name = "m_crtd_dt", length = 19)
-	public Timestamp getMCrtdDt() {
+	public Date getMCrtdDt() {
 		return this.MCrtdDt;
 	}
 
-	public void setMCrtdDt(Timestamp MCrtdDt) {
+	public void setMCrtdDt(Date MCrtdDt) {
 		this.MCrtdDt = MCrtdDt;
 	}
 

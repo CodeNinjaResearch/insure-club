@@ -1,8 +1,9 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  * IclubClaim entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_claim", catalog = "iclubdb")
+@Table(name = "iclub_claim")
 public class IclubClaim implements java.io.Serializable {
 
 	// Fields
@@ -33,7 +34,7 @@ public class IclubClaim implements java.io.Serializable {
 	private Long CNumber;
 	private Integer CNumItems;
 	private Double CValue;
-	private Timestamp CCrtdDt;
+	private Date CCrtdDt;
 	private Set<IclubCohortClaim> iclubCohortClaims = new HashSet<IclubCohortClaim>(0);
 	private Set<IclubPayment> iclubPayments = new HashSet<IclubPayment>(0);
 	private Set<IclubClaimItem> iclubClaimItems = new HashSet<IclubClaimItem>(0);
@@ -50,7 +51,7 @@ public class IclubClaim implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubClaim(String CId, IclubPerson iclubPerson, IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy, Long CNumber, Integer CNumItems, Double CValue, Timestamp CCrtdDt, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
+	public IclubClaim(String CId, IclubPerson iclubPerson, IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy, Long CNumber, Integer CNumItems, Double CValue, Date CCrtdDt, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
 		this.CId = CId;
 		this.iclubPerson = iclubPerson;
 		this.iclubClaimStatus = iclubClaimStatus;
@@ -133,11 +134,11 @@ public class IclubClaim implements java.io.Serializable {
 	}
 
 	@Column(name = "c_crtd_dt", length = 19)
-	public Timestamp getCCrtdDt() {
+	public Date getCCrtdDt() {
 		return this.CCrtdDt;
 	}
 
-	public void setCCrtdDt(Timestamp CCrtdDt) {
+	public void setCCrtdDt(Date CCrtdDt) {
 		this.CCrtdDt = CCrtdDt;
 	}
 

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,15 +36,15 @@ public class IclubQuote implements java.io.Serializable {
 	private IclubCoverType iclubCoverType;
 	private IclubQuoteStatus iclubQuoteStatus;
 	private Long QNumber;
-	private Timestamp QGenDt;
+	private Date QGenDt;
 	private Integer QNumItems;
 	private Double QGenPremium;
 	private String QEmail;
 	private String QMobile;
-	private Timestamp QValidUntil;
+	private Date QValidUntil;
 	private Double QPrevPremium;
 	private String QIsMatched;
-	private Timestamp QCrtdDt;
+	private Date QCrtdDt;
 	private String QClaimYn;
 	private Set<IclubPolicy> iclubPolicies = new HashSet<IclubPolicy>(0);
 
@@ -61,7 +61,7 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy, IclubPerson iclubPersonByQPersonId, IclubProductType iclubProductType, IclubInsurerMaster iclubInsurerMaster, IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus, Long QNumber, Timestamp QGenDt, Integer QNumItems, Double QGenPremium, String QEmail, String QMobile, Timestamp QValidUntil, Double QPrevPremium, String QIsMatched, Timestamp QCrtdDt, Set<IclubPolicy> iclubPolicies) {
+	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy, IclubPerson iclubPersonByQPersonId, IclubProductType iclubProductType, IclubInsurerMaster iclubInsurerMaster, IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus, Long QNumber, Date QGenDt, Integer QNumItems, Double QGenPremium, String QEmail, String QMobile, Date QValidUntil, Double QPrevPremium, String QIsMatched, Date QCrtdDt, Set<IclubPolicy> iclubPolicies) {
 		this.QId = QId;
 		this.iclubPersonByQCrtdBy = iclubPersonByQCrtdBy;
 		this.iclubPersonByQPersonId = iclubPersonByQPersonId;
@@ -163,11 +163,11 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	@Column(name = "q_gen_dt", length = 19)
-	public Timestamp getQGenDt() {
+	public Date getQGenDt() {
 		return this.QGenDt;
 	}
 
-	public void setQGenDt(Timestamp QGenDt) {
+	public void setQGenDt(Date QGenDt) {
 		this.QGenDt = QGenDt;
 	}
 
@@ -208,11 +208,11 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	@Column(name = "q_valid_until", length = 19)
-	public Timestamp getQValidUntil() {
+	public Date getQValidUntil() {
 		return this.QValidUntil;
 	}
 
-	public void setQValidUntil(Timestamp QValidUntil) {
+	public void setQValidUntil(Date QValidUntil) {
 		this.QValidUntil = QValidUntil;
 	}
 
@@ -235,11 +235,11 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	@Column(name = "q_crtd_dt", length = 19)
-	public Timestamp getQCrtdDt() {
+	public Date getQCrtdDt() {
 		return this.QCrtdDt;
 	}
 
-	public void setQCrtdDt(Timestamp QCrtdDt) {
+	public void setQCrtdDt(Date QCrtdDt) {
 		this.QCrtdDt = QCrtdDt;
 	}
 

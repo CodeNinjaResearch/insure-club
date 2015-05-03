@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -619,7 +619,7 @@ public class IclubPolicyController implements Serializable {
 		try {
 			IclubDocumentModel model = new IclubDocumentModel();
 			model.setIclubPerson(getSessionUserId());
-			model.setDCrtdDt(new Timestamp(System.currentTimeMillis()));
+			model.setDCrtdDt(new Date(System.currentTimeMillis()));
 			model.setDId(docId);
 			model.setDName(fue.getFile().getFileName());
 			model.setDContent(fue.getFile().getContentType());

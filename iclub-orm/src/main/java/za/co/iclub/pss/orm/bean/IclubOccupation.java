@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class IclubOccupation implements java.io.Serializable {
 	private IclubPerson iclubPerson;
 	private String ODesc;
 	private String OStatus;
-	private Timestamp OCrtdDt;
+	private Date OCrtdDt;
 
 	// Constructors
 
@@ -41,7 +41,7 @@ public class IclubOccupation implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubOccupation(Long OId, IclubPerson iclubPerson, String ODesc, String OStatus, Timestamp OCrtdDt) {
+	public IclubOccupation(Long OId, IclubPerson iclubPerson, String ODesc, String OStatus, Date OCrtdDt) {
 		this.OId = OId;
 		this.iclubPerson = iclubPerson;
 		this.ODesc = ODesc;
@@ -89,11 +89,11 @@ public class IclubOccupation implements java.io.Serializable {
 	}
 
 	@Column(name = "o_crtd_dt", length = 19)
-	public Timestamp getOCrtdDt() {
+	public Date getOCrtdDt() {
 		return this.OCrtdDt;
 	}
 
-	public void setOCrtdDt(Timestamp OCrtdDt) {
+	public void setOCrtdDt(Date OCrtdDt) {
 		this.OCrtdDt = OCrtdDt;
 	}
 

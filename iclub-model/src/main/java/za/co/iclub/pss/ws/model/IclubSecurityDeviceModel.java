@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,7 +14,7 @@ public class IclubSecurityDeviceModel {
 	private String sdItemId;
 	private String sdSerNum;
 	private String sdContractNum;
-	private Timestamp sdCrtdDt;
+	private Date sdCrtdDt;
 	private String[] iclubVehicles;
 
 	public String getSdId() {
@@ -73,11 +73,11 @@ public class IclubSecurityDeviceModel {
 		this.sdContractNum = sdContractNum;
 	}
 
-	public Timestamp getSdCrtdDt() {
+	public Date getSdCrtdDt() {
 		return sdCrtdDt;
 	}
 
-	public void setSdCrtdDt(Timestamp sdCrtdDt) {
+	public void setSdCrtdDt(Date sdCrtdDt) {
 		this.sdCrtdDt = sdCrtdDt;
 	}
 

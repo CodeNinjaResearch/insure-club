@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -178,7 +178,7 @@ public class IclubRateTypeController implements Serializable {
 				model.setIclubField(bean.getIclubField());
 				model.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 				model.setIclubPerson(bean.getIclubPerson());
-				model.setRtCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setRtCrtdDt(new Date(System.currentTimeMillis()));
 				model.setRtType(bean.getRtType());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();

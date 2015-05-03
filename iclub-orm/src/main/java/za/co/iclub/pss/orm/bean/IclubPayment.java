@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,8 +31,8 @@ public class IclubPayment implements java.io.Serializable {
 	private IclubPaymentStatus iclubPaymentStatus;
 	private Double PValue;
 	private String PDrCrInd;
-	private Timestamp PGenDt;
-	private Timestamp PCrtdDt;
+	private Date PGenDt;
+	private Date PCrtdDt;
 
 	// Constructors
 
@@ -46,7 +46,7 @@ public class IclubPayment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPayment(String PId, IclubPolicy iclubPolicy, IclubPerson iclubPerson, IclubClaim iclubClaim, IclubAccount iclubAccount, IclubPaymentStatus iclubPaymentStatus, Double PValue, String PDrCrInd, Timestamp PGenDt, Timestamp PCrtdDt) {
+	public IclubPayment(String PId, IclubPolicy iclubPolicy, IclubPerson iclubPerson, IclubClaim iclubClaim, IclubAccount iclubAccount, IclubPaymentStatus iclubPaymentStatus, Double PValue, String PDrCrInd, Date PGenDt, Date PCrtdDt) {
 		this.PId = PId;
 		this.iclubPolicy = iclubPolicy;
 		this.iclubPerson = iclubPerson;
@@ -139,20 +139,20 @@ public class IclubPayment implements java.io.Serializable {
 	}
 
 	@Column(name = "p_gen_dt", length = 19)
-	public Timestamp getPGenDt() {
+	public Date getPGenDt() {
 		return this.PGenDt;
 	}
 
-	public void setPGenDt(Timestamp PGenDt) {
+	public void setPGenDt(Date PGenDt) {
 		this.PGenDt = PGenDt;
 	}
 
 	@Column(name = "p_crtd_dt", length = 19)
-	public Timestamp getPCrtdDt() {
+	public Date getPCrtdDt() {
 		return this.PCrtdDt;
 	}
 
-	public void setPCrtdDt(Timestamp PCrtdDt) {
+	public void setPCrtdDt(Date PCrtdDt) {
 		this.PCrtdDt = PCrtdDt;
 	}
 

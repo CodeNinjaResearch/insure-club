@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +32,7 @@ public class IclubDocument implements java.io.Serializable {
 	private Long DSize;
 	private String DEntityId;
 	private String DContent;
-	private Timestamp DCrtdDt;
+	private Date DCrtdDt;
 	private byte[] DBlob;
 
 	// Constructors
@@ -47,7 +47,7 @@ public class IclubDocument implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String DName, String DMimeType, Long DSize, String DEntityId, String DContent, Timestamp DCrtdDt, byte[] DBlob) {
+	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String DName, String DMimeType, Long DSize, String DEntityId, String DContent, Date DCrtdDt, byte[] DBlob) {
 		this.DId = DId;
 		this.iclubDocumentType = iclubDocumentType;
 		this.iclubPerson = iclubPerson;
@@ -148,11 +148,11 @@ public class IclubDocument implements java.io.Serializable {
 	}
 
 	@Column(name = "d_crtd_dt", length = 19)
-	public Timestamp getDCrtdDt() {
+	public Date getDCrtdDt() {
 		return this.DCrtdDt;
 	}
 
-	public void setDCrtdDt(Timestamp DCrtdDt) {
+	public void setDCrtdDt(Date DCrtdDt) {
 		this.DCrtdDt = DCrtdDt;
 	}
 

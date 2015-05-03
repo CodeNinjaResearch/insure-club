@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +15,7 @@ public class IclubNotifModel {
 	private String NFromAddr;
 	private String NToList;
 	private String NStatus;
-	private Timestamp NCrtdDt;
+	private Date NCrtdDt;
 
 	public String getNId() {
 		return NId;
@@ -81,11 +81,11 @@ public class IclubNotifModel {
 		NStatus = nStatus;
 	}
 
-	public Timestamp getNCrtdDt() {
+	public Date getNCrtdDt() {
 		return NCrtdDt;
 	}
 
-	public void setNCrtdDt(Timestamp nCrtdDt) {
+	public void setNCrtdDt(Date nCrtdDt) {
 		NCrtdDt = nCrtdDt;
 	}
 

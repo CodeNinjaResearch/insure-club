@@ -1,10 +1,10 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -182,8 +182,9 @@ public class IclubVehicleController implements Serializable {
 		client.close();
 		IclubGeoLocBean bean = new IclubGeoLocBean();
 		if (model != null) {
-			bean.setGlKey(model.getGlKey());
 			bean.setGlId(model.getGlId());
+			bean.setGlProvince(model.getGlProvince());
+			bean.setGlSuburb(model.getGlSuburb());
 			bean.setGlAddress(model.getGlAddress());
 			bean.setGlLat(model.getGlLat());
 			bean.setGlLong(model.getGlLong());
@@ -339,7 +340,7 @@ public class IclubVehicleController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				bean.setVId(UUID.randomUUID().toString());
-				bean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				bean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				bean.setIclubPerson(getSessionUserId());
 				model.setVId(bean.getVId());
 				model.setVOwner(bean.getVOwner());
@@ -398,7 +399,7 @@ public class IclubVehicleController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				model.setVId(bean.getVId());
-				bean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				bean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				bean.setIclubPerson(getSessionUserId());
 				model.setVOwner(bean.getVOwner());
 				model.setVGearLockYn(bean.getVGearLockYn());

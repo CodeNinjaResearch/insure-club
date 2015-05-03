@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +51,7 @@ public class IclubVehicle implements java.io.Serializable {
 	private String VVin;
 	private String VEngineNr;
 	private String VRegNum;
-	private Timestamp VCrtdDt;
+	private Date VCrtdDt;
 
 	// Constructors
 
@@ -66,7 +66,7 @@ public class IclubVehicle implements java.io.Serializable {
 
 	/** full constructor */
 	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue,
-			Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Timestamp VCrtdDt) {
+			Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Date VCrtdDt) {
 		this.VId = VId;
 		this.iclubPurposeType = iclubPurposeType;
 		this.iclubSecurityMaster = iclubSecurityMaster;
@@ -361,11 +361,11 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	@Column(name = "v_crtd_dt", length = 19)
-	public Timestamp getVCrtdDt() {
+	public Date getVCrtdDt() {
 		return this.VCrtdDt;
 	}
 
-	public void setVCrtdDt(Timestamp VCrtdDt) {
+	public void setVCrtdDt(Date VCrtdDt) {
 		this.VCrtdDt = VCrtdDt;
 	}
 

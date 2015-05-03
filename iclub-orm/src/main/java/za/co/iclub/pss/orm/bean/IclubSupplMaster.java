@@ -1,9 +1,9 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  * IclubSupplMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_suppl_master", catalog = "iclubdb")
+@Table(name = "iclub_suppl_master")
 public class IclubSupplMaster implements java.io.Serializable {
 
 	// Fields
@@ -41,7 +41,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	private Double smCrLimit;
 	private Date srActionDt;
 	private Integer smRating;
-	private Timestamp smCrtdDt;
+	private Date smCrtdDt;
 	private Set<IclubClaimItem> iclubClaimItemsForCiAssesorId = new HashSet<IclubClaimItem>(0);
 	private Set<IclubClaimItem> iclubClaimItemsForCiHandlerId = new HashSet<IclubClaimItem>(0);
 	private Set<IclubSupplPerson> iclubSupplPersons = new HashSet<IclubSupplPerson>(0);
@@ -58,7 +58,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Double smCrLimit, Date srActionDt, Integer smRating, Timestamp smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId, Set<IclubSupplPerson> iclubSupplPersons) {
+	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Double smCrLimit, Date srActionDt, Integer smRating, Date smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId, Set<IclubSupplPerson> iclubSupplPersons) {
 		this.smId = smId;
 		this.iclubPerson = iclubPerson;
 		this.iclubSupplierType = iclubSupplierType;
@@ -191,11 +191,11 @@ public class IclubSupplMaster implements java.io.Serializable {
 	}
 
 	@Column(name = "sm_crtd_dt", length = 19)
-	public Timestamp getSmCrtdDt() {
+	public Date getSmCrtdDt() {
 		return this.smCrtdDt;
 	}
 
-	public void setSmCrtdDt(Timestamp smCrtdDt) {
+	public void setSmCrtdDt(Date smCrtdDt) {
 		this.smCrtdDt = smCrtdDt;
 	}
 

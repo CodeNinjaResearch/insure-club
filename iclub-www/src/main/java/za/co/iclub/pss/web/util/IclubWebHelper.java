@@ -1,8 +1,8 @@
 package za.co.iclub.pss.web.util;
 
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.faces.application.FacesMessage;
@@ -66,16 +66,14 @@ public class IclubWebHelper {
 
 		try {
 			if (timeStamp != null) {
-				Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+				Date currentDate = new Date(System.currentTimeMillis());
 				currentDate.setHours(0);
 				currentDate.setMinutes(0);
 				currentDate.setSeconds(0);
-				currentDate.setNanos(0);
-				Timestamp issueDate = new Timestamp(timeStamp);
+				Date issueDate = new Date(timeStamp);
 				issueDate.setHours(0);
 				issueDate.setMinutes(0);
 				issueDate.setSeconds(0);
-				issueDate.setNanos(0);
 
 				return issueDate.compareTo(currentDate) < 0;
 			}

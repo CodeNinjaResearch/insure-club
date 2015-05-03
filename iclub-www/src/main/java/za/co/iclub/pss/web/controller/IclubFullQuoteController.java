@@ -1,7 +1,6 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -361,7 +360,7 @@ public class IclubFullQuoteController implements Serializable {
 
 				propertyBean.setPId(UUID.randomUUID().toString());
 				model.setPId(propertyBean.getPId());
-				model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(propertyBean.getPEstValue());
 				model.setPSecGatesYn(propertyBean.getPSecGatesYn());
 				model.setPNorobberyYn(propertyBean.getPNorobberyYn());
@@ -403,7 +402,7 @@ public class IclubFullQuoteController implements Serializable {
 				IclubPropertyModel model = new IclubPropertyModel();
 
 				model.setPId(propertyBean.getPId());
-				model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(propertyBean.getPEstValue());
 				model.setPSecGatesYn(propertyBean.getPSecGatesYn());
 				model.setPNorobberyYn(propertyBean.getPNorobberyYn());
@@ -537,7 +536,7 @@ public class IclubFullQuoteController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				// vehicleBean.setVId(UUID.randomUUID().toString());
-				vehicleBean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				vehicleBean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				vehicleBean.setIclubPerson(getSessionUserId());
 				model.setVId(vehicleBean.getVId());
 				model.setVOwner(vehicleBean.getVOwner());
@@ -589,7 +588,7 @@ public class IclubFullQuoteController implements Serializable {
 				IclubVehicleModel model = new IclubVehicleModel();
 
 				model.setVId(vehicleBean.getVId());
-				vehicleBean.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+				vehicleBean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				vehicleBean.setIclubPerson(getSessionUserId());
 				model.setVOwner(vehicleBean.getVOwner());
 				model.setVGearLockYn(vehicleBean.getVGearLockYn());
@@ -680,11 +679,7 @@ public class IclubFullQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Year Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		/*
-		 * if (bean.getIclubDriver() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Driver"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
+
 		if (vehicleBean.getVImmYn() == null || vehicleBean.getVImmYn().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("Imn Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
@@ -765,7 +760,8 @@ public class IclubFullQuoteController implements Serializable {
 		client.close();
 		IclubGeoLocBean bean = new IclubGeoLocBean();
 		if (model != null) {
-			bean.setGlKey(model.getGlKey());
+			bean.setGlProvince(model.getGlProvince());
+			bean.setGlSuburb(model.getGlSuburb());
 			bean.setGlId(model.getGlId());
 			bean.setGlAddress(model.getGlAddress());
 			bean.setGlLat(model.getGlLat());
@@ -1290,7 +1286,7 @@ public class IclubFullQuoteController implements Serializable {
 					model.setVOnLat(bean.getVOnLat());
 					model.setVOnArea(bean.getVOnArea());
 					model.setVOdometer(bean.getVOdometer());
-					model.setVCrtdDt(new Timestamp(System.currentTimeMillis()));
+					model.setVCrtdDt(new Date(System.currentTimeMillis()));
 					model.setVRegNum(bean.getVRegNum());
 					model.setVEngineNr(bean.getVEngineNr());
 					model.setVVin(bean.getVVin());
@@ -1345,10 +1341,10 @@ public class IclubFullQuoteController implements Serializable {
 		model.setDId(bean.getDId());
 
 		model.setDDob(bean.getDDob());
-		model.setDIssueDt(new Timestamp(bean.getDIssueDt().getTime()));
+		model.setDIssueDt(new Date(bean.getDIssueDt().getTime()));
 		model.setDLicenseNum(bean.getDLicenseNum());
 		model.setDName(bean.getDName());
-		model.setDCrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setDCrtdDt(new Date(System.currentTimeMillis()));
 		model.setIclubAccessType(bean.getIclubAccessType());
 		model.setIclubLicenseCode(bean.getIclubLicenseCode());
 		model.setIclubMaritialStatus(personModel.getIclubMaritialStatus());
@@ -1387,7 +1383,7 @@ public class IclubFullQuoteController implements Serializable {
 					model.setPId(UUID.randomUUID().toString());
 				}
 
-				model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(bean.getPEstValue());
 				model.setPSecGatesYn(bean.getPSecGatesYn());
 				model.setPNorobberyYn(bean.getPNorobberyYn());
@@ -1438,7 +1434,7 @@ public class IclubFullQuoteController implements Serializable {
 	// model.setIiId(UUID.randomUUID().toString());
 	// model.setIiItemId(itemId);
 	// model.setIiQuoteId(quoteId);
-	// model.setIiCrtdDt(new Timestamp(System.currentTimeMillis()));
+	// model.setIiCrtdDt(new Date(System.currentTimeMillis()));
 	// model.setIclubInsuranceItemType(iItemType);
 	// model.setIclubPerson(userId);
 	// ResponseModel response =
@@ -1462,7 +1458,7 @@ public class IclubFullQuoteController implements Serializable {
 
 		IclubExtrasModel model = new IclubExtrasModel();
 		model.setEId(bean.getEId());
-		model.setECrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setECrtdDt(new Date(System.currentTimeMillis()));
 		model.setEDesc(bean.getEDesc());
 		model.setEStatus(bean.getEStatus());
 		model.setIclubPerson(getSessionUserId());
@@ -1490,7 +1486,7 @@ public class IclubFullQuoteController implements Serializable {
 			model.setCId(UUID.randomUUID().toString());
 		}
 
-		model.setCCrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setCCrtdDt(new Date(System.currentTimeMillis()));
 		model.setCValue(bean.getCValue());
 		model.setCNumItems(bean.getCNumItems());
 		model.setCNumber(getCnumber());
@@ -1542,7 +1538,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setPPremium(getGenPremium());
 		model.setPNumber(quoteModel.getQNumber());
 		model.setPDebitDt(debitDate != null && debitMonth != null ? Integer.parseInt(debitDate + debitMonth) : null);
-		model.setPCrtdDt((new Timestamp(System.currentTimeMillis())).toString());
+		model.setPCrtdDt((new Date(System.currentTimeMillis())).toString());
 		model.setIclubAccount(accountModel.getAId());
 		model.setIclubQuote(quoteModel.getQId());
 		model.setIclubPolicyStatus(1l);
@@ -1576,7 +1572,7 @@ public class IclubFullQuoteController implements Serializable {
 		}
 
 		model.setAAccNum(bean.getAAccNum());
-		model.setACrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setACrtdDt(new Date(System.currentTimeMillis()));
 		model.setAOwnerId(personModel.getPId());
 		model.setIclubBankMaster(bean.getIclubBankMaster());
 		model.setIclubAccountType(bean.getIclubAccountType());
@@ -1604,15 +1600,15 @@ public class IclubFullQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "mod");
 		IclubQuoteModel model = new IclubQuoteModel();
 		model.setQId(bean.getQId());
-		model.setQCrtdDt(new Timestamp(System.currentTimeMillis()));
+		model.setQCrtdDt(new Date(System.currentTimeMillis()));
 		model.setQIsMatched("N");
 		model.setQPrevPremium(0.0d);
-		model.setQValidUntil(new Timestamp(System.currentTimeMillis() + (3 * 24 * 3600)));
+		model.setQValidUntil(new Date(System.currentTimeMillis() + (3 * 24 * 3600)));
 		model.setQMobile(personModel.getPMobile());
 		model.setQEmail(personModel.getPEmail());
 		model.setQGenPremium(getGenPremium());
 		model.setQNumItems(2);
-		model.setQGenDt(new Timestamp(System.currentTimeMillis()));
+		model.setQGenDt(new Date(System.currentTimeMillis()));
 
 		model.setQNumber(bean.getQNumber());
 		model.setIclubPersonByQCrtdBy(getSessionUserId());

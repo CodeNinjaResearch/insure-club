@@ -1,6 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class IclubLicenseCode implements java.io.Serializable {
 	private String lcCategory;
 	private String lcDesc;
 	private String lcStatus;
-	private Timestamp lcCrtdDt;
+	private Date lcCrtdDt;
 	private Set<IclubDriver> iclubDrivers = new HashSet<IclubDriver>(0);
 
 	// Constructors
@@ -48,7 +48,7 @@ public class IclubLicenseCode implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson, String lcCategory, String lcDesc, String lcStatus, Timestamp lcCrtdDt, Set<IclubDriver> iclubDrivers) {
+	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson, String lcCategory, String lcDesc, String lcStatus, Date lcCrtdDt, Set<IclubDriver> iclubDrivers) {
 		this.lcId = lcId;
 		this.iclubPerson = iclubPerson;
 		this.lcCategory = lcCategory;
@@ -107,11 +107,11 @@ public class IclubLicenseCode implements java.io.Serializable {
 	}
 
 	@Column(name = "lc_crtd_dt", length = 19)
-	public Timestamp getLcCrtdDt() {
+	public Date getLcCrtdDt() {
 		return this.lcCrtdDt;
 	}
 
-	public void setLcCrtdDt(Timestamp lcCrtdDt) {
+	public void setLcCrtdDt(Date lcCrtdDt) {
 		this.lcCrtdDt = lcCrtdDt;
 	}
 

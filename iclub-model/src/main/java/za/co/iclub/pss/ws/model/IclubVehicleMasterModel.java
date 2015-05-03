@@ -1,6 +1,5 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +16,7 @@ public class IclubVehicleMasterModel {
 	private Double vmRetRate;
 	private Double vmRatePrct;
 	private Date vmProdDt;
-	private Timestamp vmCrtdDt;
+	private Date vmCrtdDt;
 	private String[] iclubVehicles;
 
 	public Long getVmId() {
@@ -84,11 +83,11 @@ public class IclubVehicleMasterModel {
 		this.vmProdDt = vmProdDt;
 	}
 
-	public Timestamp getVmCrtdDt() {
+	public Date getVmCrtdDt() {
 		return vmCrtdDt;
 	}
 
-	public void setVmCrtdDt(Timestamp vmCrtdDt) {
+	public void setVmCrtdDt(Date vmCrtdDt) {
 		this.vmCrtdDt = vmCrtdDt;
 	}
 

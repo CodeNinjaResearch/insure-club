@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubPropertyBean {
 
@@ -26,7 +26,7 @@ public class IclubPropertyBean {
 	private String PNorobberyYn;
 	private String PSecGatesYn;
 	private Double PEstValue;
-	private Timestamp PCrtdDt;
+	private Date PCrtdDt;
 
 	public String getPId() {
 		return PId;
@@ -204,11 +204,11 @@ public class IclubPropertyBean {
 		PEstValue = pEstValue;
 	}
 
-	public Timestamp getPCrtdDt() {
+	public Date getPCrtdDt() {
 		return PCrtdDt;
 	}
 
-	public void setPCrtdDt(Timestamp pCrtdDt) {
+	public void setPCrtdDt(Date pCrtdDt) {
 		PCrtdDt = pCrtdDt;
 	}
 

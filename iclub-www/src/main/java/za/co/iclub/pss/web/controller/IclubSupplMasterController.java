@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -354,7 +354,7 @@ public class IclubSupplMasterController implements Serializable {
 				bean.setSmId(UUID.randomUUID().toString());
 
 				model.setSmId(bean.getSmId());
-				model.setSmCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setSmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubSupplierType(bean.getIclubSupplierType());
 				model.setSmRating(bean.getSmRating());
 				model.setSrActionDt(bean.getSrActionDt());
@@ -400,7 +400,7 @@ public class IclubSupplMasterController implements Serializable {
 				IclubSupplMasterModel model = new IclubSupplMasterModel();
 
 				model.setSmId(bean.getSmId());
-				model.setSmCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setSmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubSupplierType(bean.getIclubSupplierType());
 				model.setSmRating(bean.getSmRating());
 				model.setSrActionDt(bean.getSrActionDt());
@@ -501,10 +501,10 @@ public class IclubSupplMasterController implements Serializable {
 		IclubPersonModel model = new IclubPersonModel();
 		if (personBean.getPCrtdDt() != null) {
 			client = IclubWebHelper.createCustomClient(PER_BASE_URL + "mod");
-			model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+			model.setPCrtdDt(new Date(System.currentTimeMillis()));
 		} else {
 			client = IclubWebHelper.createCustomClient(PER_BASE_URL + "add");
-			model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+			model.setPCrtdDt(new Date(System.currentTimeMillis()));
 		}
 
 		model.setPId(personBean.getPId());
@@ -571,7 +571,7 @@ public class IclubSupplMasterController implements Serializable {
 					model.setLId(loginBean.getLId());
 				}
 
-				model.setLCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLLastDate(loginBean.getLLastDate());
 				model.setLName(loginBean.getLName());
 				model.setLPasswd((loginBean.getLPasswd()).toString());
@@ -655,7 +655,7 @@ public class IclubSupplMasterController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "add");
 				model.setLId(UUID.randomUUID().toString());
 
-				model.setLCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLLastDate(loginBean.getLLastDate());
 				model.setLName(loginBean.getLName());
 				model.setLPasswd((loginBean.getLPasswd()).toString());

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,7 +29,7 @@ public class IclubPropertyModel {
 	private String PNorobberyYn;
 	private String PSecGatesYn;
 	private Double PEstValue;
-	private Timestamp PCrtdDt;
+	private Date PCrtdDt;
 
 	public String getPId() {
 		return PId;
@@ -207,11 +207,11 @@ public class IclubPropertyModel {
 		PEstValue = pEstValue;
 	}
 
-	public Timestamp getPCrtdDt() {
+	public Date getPCrtdDt() {
 		return PCrtdDt;
 	}
 
-	public void setPCrtdDt(Timestamp pCrtdDt) {
+	public void setPCrtdDt(Date pCrtdDt) {
 		PCrtdDt = pCrtdDt;
 	}
 
