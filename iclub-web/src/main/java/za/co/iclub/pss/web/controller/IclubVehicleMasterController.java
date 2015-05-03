@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -95,30 +95,32 @@ public class IclubVehicleMasterController implements Serializable {
 		Collection<? extends IclubVehicleMasterModel> models = new ArrayList<IclubVehicleMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleMasterModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubVehicleMasterBean>();
-		for (IclubVehicleMasterModel model : models) {
-			IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
+		if (models != null && models.size() > 0) {
+			for (IclubVehicleMasterModel model : models) {
+				IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
 
-			bean.setVmId(model.getVmId());
+				bean.setVmId(model.getVmId());
 
-			bean.setVmMake(model.getVmMake());
-			bean.setVmModel(model.getVmModel());
-			bean.setVmMrktRate(model.getVmMrktRate());
-			bean.setVmOrigRate(model.getVmOrigRate());
-			bean.setVmRetRate(model.getVmRetRate());
-			bean.setVmProdDt(model.getVmProdDt());
-			bean.setVmCrtdDt(model.getVmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-
-			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-				String[] vehicles = new String[model.getIclubVehicles().length];
-				int i = 0;
-				for (String vehicle : model.getIclubVehicles()) {
-					vehicles[i] = vehicle;
-					i++;
+				bean.setVmMake(model.getVmMake());
+				bean.setVmModel(model.getVmModel());
+				bean.setVmMrktRate(model.getVmMrktRate());
+				bean.setVmOrigRate(model.getVmOrigRate());
+				bean.setVmRetRate(model.getVmRetRate());
+				bean.setVmProdDt(model.getVmProdDt());
+				bean.setVmCrtdDt(model.getVmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setVmRatePrct(model.getVmRatePrct());
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String vehicle : model.getIclubVehicles()) {
+						vehicles[i] = vehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
 				}
-				bean.setIclubVehicles(vehicles);
+				dashBoardBeans.add(bean);
 			}
-			dashBoardBeans.add(bean);
 		}
 		return dashBoardBeans;
 	}
@@ -146,8 +148,8 @@ public class IclubVehicleMasterController implements Serializable {
 				model.setVmOrigRate(bean.getVmOrigRate());
 				model.setVmRetRate(bean.getVmRetRate());
 				model.setVmProdDt(bean.getVmProdDt());
-				model.setVmCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setVmCrtdDt(new Date(System.currentTimeMillis()));
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -180,8 +182,8 @@ public class IclubVehicleMasterController implements Serializable {
 				model.setVmOrigRate(bean.getVmOrigRate());
 				model.setVmRetRate(bean.getVmRetRate());
 				model.setVmProdDt(bean.getVmProdDt());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-				model.setVmCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setIclubPerson(getSessionUserId());
+				model.setVmCrtdDt(new Date(System.currentTimeMillis()));
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -265,7 +267,11 @@ public class IclubVehicleMasterController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -299,33 +305,37 @@ public class IclubVehicleMasterController implements Serializable {
 		Collection<? extends IclubVehicleMasterModel> models = new ArrayList<IclubVehicleMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleMasterModel.class));
 		client.close();
 		beans = new ArrayList<IclubVehicleMasterBean>();
-		for (IclubVehicleMasterModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubVehicleMasterModel model : models) {
 
-			IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
+				IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
 
-			bean.setVmId(model.getVmId());
+				bean.setVmId(model.getVmId());
 
-			bean.setVmMake(model.getVmMake());
-			bean.setVmModel(model.getVmModel());
-			bean.setVmMrktRate(model.getVmMrktRate());
-			bean.setVmOrigRate(model.getVmOrigRate());
-			bean.setVmRetRate(model.getVmRetRate());
-			bean.setVmProdDt(model.getVmProdDt());
-			bean.setVmCrtdDt(model.getVmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setVmMake(model.getVmMake());
+				bean.setVmModel(model.getVmModel());
+				bean.setVmMrktRate(model.getVmMrktRate());
+				bean.setVmOrigRate(model.getVmOrigRate());
+				bean.setVmRetRate(model.getVmRetRate());
+				bean.setVmProdDt(model.getVmProdDt());
+				bean.setVmCrtdDt(model.getVmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setVmRatePrct(model.getVmRatePrct());
 
-			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-				String[] vehicles = new String[model.getIclubVehicles().length];
-				int i = 0;
-				for (String vehicle : model.getIclubVehicles()) {
-					vehicles[i] = vehicle;
-					i++;
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String vehicle : model.getIclubVehicles()) {
+						vehicles[i] = vehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
 				}
-				bean.setIclubVehicles(vehicles);
+				beans.add(bean);
 			}
-			beans.add(bean);
 		}
 		return beans;
+
 	}
 
 	public void setBeans(List<IclubVehicleMasterBean> beans) {

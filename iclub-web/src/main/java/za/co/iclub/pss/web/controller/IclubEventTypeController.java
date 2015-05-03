@@ -134,7 +134,17 @@ public class IclubEventTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getEtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getEtLongDesc() == null || bean.getEtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getEtStatus() == null || bean.getEtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubEventTypeController implements Serializable {
 		Collection<? extends IclubEventTypeModel> models = new ArrayList<IclubEventTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEventTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubEventTypeBean>();
-		for (IclubEventTypeModel model : models) {
-			IclubEventTypeBean bean = new IclubEventTypeBean();
-			bean.setEtId(model.getEtId());
-			bean.setEtLongDesc(model.getEtLongDesc());
-			bean.setEtShortDesc(model.getEtShortDesc());
-			bean.setEtStatus(model.getEtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubEventTypeModel model : models) {
+				IclubEventTypeBean bean = new IclubEventTypeBean();
+				bean.setEtId(model.getEtId());
+				bean.setEtLongDesc(model.getEtLongDesc());
+				bean.setEtShortDesc(model.getEtShortDesc());
+				bean.setEtStatus(model.getEtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

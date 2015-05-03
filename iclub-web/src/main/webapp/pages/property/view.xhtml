@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtVehicleCont" widgetVar="dtVehicleCont" value="#{iclubPropertyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Property Available">
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{ bean.PId}" />
+		</p:column>
+		<p:column headerText="Registration Number">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.PRegNum}" />
+		</p:column>
+		<p:column headerText="Estimatted Value">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.PEstValue}" />
+		</p:column>
+		<p:column>
+			<p:commandButton id="btnVehicleEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubPropertyController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubPropertyController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubPropertyController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

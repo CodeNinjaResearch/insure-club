@@ -1,0 +1,42 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubPropertyController.initializePage}" name="onload" autoRun="true" update="pnlPropertyContDet" />
+		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="proAddress" value="Address:" />
+					<p:inputText id="proAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPro" showDetail="true" />
+				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubPropertyController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubPropertyController.draggableModelPro}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubPropertyController.onMarkerDragPro}" update="growlPro" />
+					<p:ajax event="geocode" listener="#{iclubPropertyController.onGeocodePro}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubPropertyController.onMarkerSelectPro}" update="growlPro" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlPropertyCont">
+				<p:panel id="pnlPropertyContMenu">
+					<p:commandLink value="View Property" actionListener="#{iclubPropertyController.showView}" update="pnlPropertyContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create Property" actionListener="#{iclubPropertyController.showCreate}" update="pnlPropertyContDet" />
+				</p:panel>
+				<p:panel id="pnlPropertyContDet">
+					<p:panel id="pnlPropertyContView" styleClass="BordNone" rendered="#{iclubPropertyController.showViewCont}">
+						<ui:include src="/pages/property/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlPropertyContCreate" styleClass="BordNone" rendered="#{iclubPropertyController.showCreateCont}">
+						<ui:include src="/pages/property/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlPropertyContEdit" styleClass="BordNone" rendered="#{iclubPropertyController.showEditCont}">
+						<ui:include src="/pages/property/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

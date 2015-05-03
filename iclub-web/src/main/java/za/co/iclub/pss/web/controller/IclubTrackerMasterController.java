@@ -3,6 +3,7 @@ package za.co.iclub.pss.web.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -79,30 +80,32 @@ public class IclubTrackerMasterController implements Serializable {
 		Collection<? extends IclubTrackerMasterModel> models = new ArrayList<IclubTrackerMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubTrackerMasterModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubTrackerMasterBean>();
-		for (IclubTrackerMasterModel model : models) {
-			IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
+		if (models != null && models.size() > 0) {
+			for (IclubTrackerMasterModel model : models) {
+				IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
 
-			bean.setTmId(model.getTmId());
-			bean.setTmName(model.getTmName());
-			bean.setTmLat(model.getTmLat());
-			bean.setTmLocation(model.getTmLocation());
-			bean.setTmLong(model.getTmLong());
-			bean.setTmTradeName(model.getTmTradeName());
-			bean.setTmRegNum(model.getTmRegNum());
-			bean.setTmCrtdDt(model.getTmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setTmId(model.getTmId());
+				bean.setTmName(model.getTmName());
+				bean.setTmLat(model.getTmLat());
+				bean.setTmLocation(model.getTmLocation());
+				bean.setTmLong(model.getTmLong());
+				bean.setTmTradeName(model.getTmTradeName());
+				bean.setTmRegNum(model.getTmRegNum());
+				bean.setTmCrtdDt(model.getTmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
-				String[] securityDevices = new String[model.getIclubSecurityDevices().length];
-				int i = 0;
-				for (String securityDevice : model.getIclubSecurityDevices()) {
-					securityDevices[i] = securityDevice;
-					i++;
+				if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
+					String[] securityDevices = new String[model.getIclubSecurityDevices().length];
+					int i = 0;
+					for (String securityDevice : model.getIclubSecurityDevices()) {
+						securityDevices[i] = securityDevice;
+						i++;
+					}
+					bean.setIclubSecurityDevices(securityDevices);
 				}
-				bean.setIclubSecurityDevices(securityDevices);
-			}
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -130,8 +133,8 @@ public class IclubTrackerMasterController implements Serializable {
 				model.setTmLong(bean.getTmLong());
 				model.setTmTradeName(bean.getTmTradeName());
 				model.setTmRegNum(bean.getTmRegNum());
-				model.setTmCrtdDt(bean.getTmCrtdDt());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setTmCrtdDt(new Date(System.currentTimeMillis()));
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -165,7 +168,7 @@ public class IclubTrackerMasterController implements Serializable {
 				model.setTmTradeName(bean.getTmTradeName());
 				model.setTmRegNum(bean.getTmRegNum());
 				model.setTmCrtdDt(bean.getTmCrtdDt());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -203,7 +206,22 @@ public class IclubTrackerMasterController implements Serializable {
 
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		if (bean.getTmName() == null || bean.getTmName().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage("Tm Name Cannot be empty", FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getTmRegNum() == null || bean.getTmRegNum().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Reg Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getTmLat() == null || bean.getTmLong() == null) {
+			IclubWebHelper.addMessage(("Please select Map Location"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (bean.getTmLocation() == null || bean.getTmLocation().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please select Location"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 
@@ -250,7 +268,11 @@ public class IclubTrackerMasterController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -284,31 +306,33 @@ public class IclubTrackerMasterController implements Serializable {
 		Collection<? extends IclubTrackerMasterModel> models = new ArrayList<IclubTrackerMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubTrackerMasterModel.class));
 		client.close();
 		beans = new ArrayList<IclubTrackerMasterBean>();
-		for (IclubTrackerMasterModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubTrackerMasterModel model : models) {
 
-			IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
+				IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
 
-			bean.setTmId(model.getTmId());
-			bean.setTmName(model.getTmName());
-			bean.setTmLat(model.getTmLat());
-			bean.setTmLocation(model.getTmLocation());
-			bean.setTmLong(model.getTmLong());
-			bean.setTmTradeName(model.getTmTradeName());
-			bean.setTmRegNum(model.getTmRegNum());
-			bean.setTmCrtdDt(model.getTmCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setTmId(model.getTmId());
+				bean.setTmName(model.getTmName());
+				bean.setTmLat(model.getTmLat());
+				bean.setTmLocation(model.getTmLocation());
+				bean.setTmLong(model.getTmLong());
+				bean.setTmTradeName(model.getTmTradeName());
+				bean.setTmRegNum(model.getTmRegNum());
+				bean.setTmCrtdDt(model.getTmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
-				String[] securityDevices = new String[model.getIclubSecurityDevices().length];
-				int i = 0;
-				for (String securityDevice : model.getIclubSecurityDevices()) {
-					securityDevices[i] = securityDevice;
-					i++;
+				if (model.getIclubSecurityDevices() != null && model.getIclubSecurityDevices().length > 0) {
+					String[] securityDevices = new String[model.getIclubSecurityDevices().length];
+					int i = 0;
+					for (String securityDevice : model.getIclubSecurityDevices()) {
+						securityDevices[i] = securityDevice;
+						i++;
+					}
+					bean.setIclubSecurityDevices(securityDevices);
 				}
-				bean.setIclubSecurityDevices(securityDevices);
-			}
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

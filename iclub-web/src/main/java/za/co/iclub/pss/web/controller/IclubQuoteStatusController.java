@@ -132,9 +132,17 @@ public class IclubQuoteStatusController implements Serializable {
 				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				ret = ret && false;
 			}
+		} else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 
-		if (bean.getQsStatus().equalsIgnoreCase("-1")) {
+		if (bean.getQsLongDesc() == null || bean.getQsLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getQsStatus() == null || bean.getQsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +155,15 @@ public class IclubQuoteStatusController implements Serializable {
 		Collection<? extends IclubQuoteStatusModel> models = new ArrayList<IclubQuoteStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubQuoteStatusBean>();
-		for (IclubQuoteStatusModel model : models) {
-			IclubQuoteStatusBean bean = new IclubQuoteStatusBean();
-			bean.setQsId(model.getQsId());
-			bean.setQsLongDesc(model.getQsLongDesc());
-			bean.setQsShortDesc(model.getQsShortDesc());
-			bean.setQsStatus(model.getQsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubQuoteStatusModel model : models) {
+				IclubQuoteStatusBean bean = new IclubQuoteStatusBean();
+				bean.setQsId(model.getQsId());
+				bean.setQsLongDesc(model.getQsLongDesc());
+				bean.setQsShortDesc(model.getQsShortDesc());
+				bean.setQsStatus(model.getQsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

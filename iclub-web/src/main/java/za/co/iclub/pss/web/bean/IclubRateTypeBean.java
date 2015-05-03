@@ -1,20 +1,20 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubRateTypeBean {
 
 	private Long rtId;
 	private Long iclubInsuranceItemType;
+	private Long iclubField;
 	private String iclubPerson;
 	private Long iclubEntityType;
 	private String rtShortDesc;
 	private String rtLongDesc;
-	private String rtFieldNm;
 	private String rtStatus;
 	private String rtType;
 	private String rtQuoteType;
-	private Timestamp rtCrtdDt;
+	private Date rtCrtdDt;
 	private String[] iclubRateEngines;
 
 	public Long getRtId() {
@@ -65,14 +65,6 @@ public class IclubRateTypeBean {
 		this.rtLongDesc = rtLongDesc;
 	}
 
-	public String getRtFieldNm() {
-		return rtFieldNm;
-	}
-
-	public void setRtFieldNm(String rtFieldNm) {
-		this.rtFieldNm = rtFieldNm;
-	}
-
 	public String getRtStatus() {
 		return rtStatus;
 	}
@@ -97,11 +89,11 @@ public class IclubRateTypeBean {
 		this.rtQuoteType = rtQuoteType;
 	}
 
-	public Timestamp getRtCrtdDt() {
+	public Date getRtCrtdDt() {
 		return rtCrtdDt;
 	}
 
-	public void setRtCrtdDt(Timestamp rtCrtdDt) {
+	public void setRtCrtdDt(Date rtCrtdDt) {
 		this.rtCrtdDt = rtCrtdDt;
 	}
 
@@ -111,5 +103,13 @@ public class IclubRateTypeBean {
 
 	public void setIclubRateEngines(String[] iclubRateEngines) {
 		this.iclubRateEngines = iclubRateEngines;
+	}
+
+	public Long getIclubField() {
+		return iclubField;
+	}
+
+	public void setIclubField(Long iclubField) {
+		this.iclubField = iclubField;
 	}
 }

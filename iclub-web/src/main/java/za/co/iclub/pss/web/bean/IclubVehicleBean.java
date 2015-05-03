@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubVehicleBean {
 
@@ -32,7 +32,7 @@ public class IclubVehicleBean {
 	private String VVin;
 	private String VEngineNr;
 	private String VRegNum;
-	private Timestamp VCrtdDt;
+	private Date VCrtdDt;
 
 	public String getVId() {
 		return VId;
@@ -258,11 +258,11 @@ public class IclubVehicleBean {
 		VRegNum = vRegNum;
 	}
 
-	public Timestamp getVCrtdDt() {
+	public Date getVCrtdDt() {
 		return VCrtdDt;
 	}
 
-	public void setVCrtdDt(Timestamp vCrtdDt) {
+	public void setVCrtdDt(Date vCrtdDt) {
 		VCrtdDt = vCrtdDt;
 	}
 

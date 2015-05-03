@@ -1,0 +1,25 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubFieldController.initializePage}" name="onload" autoRun="true" update="pnlFieldContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlFieldCont">
+				<p:panel id="pnlFieldContMenu">
+					<p:commandLink value="View Field" actionListener="#{iclubFieldController.showView}" update="pnlFieldContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create Field" actionListener="#{iclubFieldController.showCreate}" update="pnlFieldContDet" />
+				</p:panel>
+				<p:panel id="pnlFieldContDet">
+					<p:panel id="pnlFieldContView" styleClass="BordNone" rendered="#{iclubFieldController.showViewCont}">
+						<ui:include src="/pages/admin/field/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlFieldContCreate" styleClass="BordNone" rendered="#{iclubFieldController.showCreateCont}">
+						<ui:include src="/pages/admin/field/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlFieldContEdit" styleClass="BordNone" rendered="#{iclubFieldController.showEditCont}">
+						<ui:include src="/pages/admin/field/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

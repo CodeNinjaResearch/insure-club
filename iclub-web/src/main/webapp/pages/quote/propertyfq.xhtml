@@ -1,0 +1,467 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<div class="ContainerIndent">
+		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="proAddress" value="Address:" />
+					<p:inputText id="proAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPro" showDetail="true" />
+				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubFullQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPro}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPro}" update="growlPro" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePro}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPro}" update="growlPro" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<p:panel id="pnlPropertyCont">
+			<p:dataTable id="dtPropertyCont" widgetVar="dtPropertyCont" value="#{iclubFullQuoteController.propertyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Property Available">
+				<f:facet name="footer">
+					<p:commandButton id="btnPropertyShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showProAddPanel}" update=":iclubFrm:qqTabView:pnlPropertyCont" />
+				</f:facet>
+				<p:column headerText="Unique Id">
+					<p:outputLabel styleClass="TexAlCenter" value="#{ bean.PId}" />
+				</p:column>
+				<p:column headerText="Registration Number">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PRegNum}" />
+				</p:column>
+				<p:column headerText="Estimatted Value">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PEstValue}" />
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnPropertyEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubFullQuoteController.showProModPanel}" update=":iclubFrm:grlMsg">
+						<f:setPropertyActionListener target="#{iclubFullQuoteController.propertyBean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:panel id="pnlProAdd" rendered="#{iclubFullQuoteController.showProAddPanel}">
+				<div class="Container90 Fnone MarAuto TexAlCenter">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Bar Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubBarType}" widgetVar="mnuBarT" id="mnuBarT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Bar Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.barTypeBeans}" var="c" itemValue="#{c.btId}" itemLabel="#{c.btLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Thatch Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubThatchType}" widgetVar="mnuThat" id="mnuThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Thatch Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.thatchTypeBeans}" var="c" itemValue="#{c.ttId}" itemLabel="#{c.ttLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type of Roof :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubRoofType}" widgetVar="mnuRoofT" id="mnuRoofT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type of Roof" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type of Walls :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubWallType}" widgetVar="mnuWT" id="mnuWT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type of Walls" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuWTTd" id="mnuWTTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Access Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropertyType}" widgetVar="mnuProT" id="mnuProT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.propertyTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Occupied Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuOCS" id="mnuOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Ocupied Status" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.occupiedStatusBeans}" var="c" itemValue="#{c.osId}" itemLabel="#{c.osLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Whatt is the property used for :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPurposeType}" widgetVar="mnuPurTyp" id="mnuPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.pPurposeTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubCoverType}" widgetVar="mnuCvrTy" id="mnuCvrTy" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.coverTypeBeans}" var="c" itemValue="#{c.ctId}" itemLabel="#{c.ctLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Registration Number" value="#{iclubFullQuoteController.propertyBean.PRegNum}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Address :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Address" value="#{iclubFullQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Zip Code :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Zip Code" value="#{iclubFullQuoteController.propertyBean.PPostalCd}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Claim Free years :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Claim Free years" value="#{iclubFullQuoteController.propertyBean.PNoclaimYrs}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is it Rent Furnished :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Is it Rent Furnished" value="#{iclubFullQuoteController.propertyBean.PRentFurYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is it Compleed :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Is it Compleed" value="#{iclubFullQuoteController.propertyBean.PCompYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Robbery Free Years :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Robbery Free Years" value="#{iclubFullQuoteController.propertyBean.PNorobberyYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is the premises secured with gates :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Is the premises secured with gates" value="#{iclubFullQuoteController.propertyBean.PSecGatesYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Estimatted Value :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Estimatted Value" value="#{iclubFullQuoteController.propertyBean.PEstValue}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnPropertyCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubFullQuoteController.addIclubProperty}" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnPropertyCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Close" actionListener="#{iclubFullQuoteController.clearForm}" />
+						</div>
+					</div>
+				</div>
+			</p:panel>
+			<p:panel id="pnlProMod" rendered="#{iclubFullQuoteController.showProModPanel}">
+				<div class="Container90 Fnone MarAuto TexAlCenter">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Bar Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubBarType}" widgetVar="mnuModBarT" id="mnuModBarT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Bar Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.barTypeBeans}" var="c" itemValue="#{c.btId}" itemLabel="#{c.btLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Thatch Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubThatchType}" widgetVar="mnuModThat" id="mnuModThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Thatch Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.thatchTypeBeans}" var="c" itemValue="#{c.ttId}" itemLabel="#{c.ttLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type of Roof :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubRoofType}" widgetVar="mnuModRoofT" id="mnuModRoofT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type of Roof" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type of Walls :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubWallType}" widgetVar="mnuModWT" id="mnuModWT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type of Walls" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuModWTTd" id="mnuModWTTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Access Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropertyType}" widgetVar="mnuModProT" id="mnuModProT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.propertyTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Occupied Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuModOCS" id="mnuModOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Ocupied Status" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.occupiedStatusBeans}" var="c" itemValue="#{c.osId}" itemLabel="#{c.osLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Whatt is the property used for :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPurposeType}" widgetVar="mnuModPurTyp" id="mnuModPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.pPurposeTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubCoverType}" widgetVar="mnuModCvrTy" id="mnuModCvrTy" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.coverTypeBeans}" var="c" itemValue="#{c.ctId}" itemLabel="#{c.ctLongDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Registration Number" value="#{iclubFullQuoteController.propertyBean.PRegNum}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Address :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Address" value="#{iclubFullQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Zip Code :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Zip Code" value="#{iclubFullQuoteController.propertyBean.PPostalCd}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Claim Free years :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Claim Free years" value="#{iclubFullQuoteController.propertyBean.PNoclaimYrs}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is it Rent Furnished :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Is it Rent Furnished" value="#{iclubFullQuoteController.propertyBean.PRentFurYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is it Compleed :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Is it Compleed" value="#{iclubFullQuoteController.propertyBean.PCompYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Robbery Free Years :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Robbery Free Years" value="#{iclubFullQuoteController.propertyBean.PNorobberyYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is the premises secured with gates :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Is the premises secured with gates" value="#{iclubFullQuoteController.propertyBean.PSecGatesYn}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Estimatted Value :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Estimatted Value" value="#{iclubFullQuoteController.propertyBean.PEstValue}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container33 Responsive">
+							<p:commandButton id="btnPropertyEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Update" actionListener="#{iclubFullQuoteController.modIclubProperty}" />
+						</div>
+						<div class="Container33 Responsive">
+							<p:commandButton id="btnPropertyDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Delete" actionListener="#{iclubFullQuoteController.delIclubProperty}" />
+						</div>
+						<div class="Container33 Responsive">
+							<p:commandButton id="btnPropertyCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Close" actionListener="#{iclubFullQuoteController.clearForm}" />
+						</div>
+					</div>
+				</div>
+			</p:panel>
+		</p:panel>
+	</div>
+</ui:composition>

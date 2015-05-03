@@ -17,7 +17,7 @@ public class IclubPersonBean {
 	private String PContactPref;
 	private String PGender;
 	private String PIdNum;
-	private Integer PIdIssueCntry;
+	private Long PIdIssueCntry;
 	private Date PIdIssueDt;
 	private Date PIdExpiryDt;
 	private Long POccupation;
@@ -27,6 +27,7 @@ public class IclubPersonBean {
 	private Double PLat;
 	private Double PLong;
 	private Integer PZipCd;
+	private Integer PAge;
 	private Date PCrtdDt;
 	private String[] iclubMessageBoards;
 	private String[] iclubPersons;
@@ -65,6 +66,11 @@ public class IclubPersonBean {
 	private Long[] iclubConfigs;
 	private String[] iclubClaims;
 	private String[] iclubEvents;
+	private String[] iclubCohortPersonsForCpPersonId;
+	private String[] iclubCohortClaims;
+	private String[] iclubCohortPersonsForCpCrtdBy;
+	private String[] iclubCohortsForCCrtdBy;
+	private String[] iclubCohortsForCPrimaryUserId;
 
 	public String getPId() {
 		return PId;
@@ -170,11 +176,11 @@ public class IclubPersonBean {
 		PIdNum = pIdNum;
 	}
 
-	public Integer getPIdIssueCntry() {
+	public Long getPIdIssueCntry() {
 		return PIdIssueCntry;
 	}
 
-	public void setPIdIssueCntry(Integer pIdIssueCntry) {
+	public void setPIdIssueCntry(Long pIdIssueCntry) {
 		PIdIssueCntry = pIdIssueCntry;
 	}
 
@@ -552,6 +558,54 @@ public class IclubPersonBean {
 
 	public void setIclubEvents(String[] iclubEvents) {
 		this.iclubEvents = iclubEvents;
+	}
+
+	public Integer getPAge() {
+		return PAge;
+	}
+
+	public void setPAge(Integer pAge) {
+		PAge = pAge;
+	}
+
+	public String[] getIclubCohortPersonsForCpPersonId() {
+		return iclubCohortPersonsForCpPersonId;
+	}
+
+	public void setIclubCohortPersonsForCpPersonId(String[] iclubCohortPersonsForCpPersonId) {
+		this.iclubCohortPersonsForCpPersonId = iclubCohortPersonsForCpPersonId;
+	}
+
+	public String[] getIclubCohortClaims() {
+		return iclubCohortClaims;
+	}
+
+	public void setIclubCohortClaims(String[] iclubCohortClaims) {
+		this.iclubCohortClaims = iclubCohortClaims;
+	}
+
+	public String[] getIclubCohortPersonsForCpCrtdBy() {
+		return iclubCohortPersonsForCpCrtdBy;
+	}
+
+	public void setIclubCohortPersonsForCpCrtdBy(String[] iclubCohortPersonsForCpCrtdBy) {
+		this.iclubCohortPersonsForCpCrtdBy = iclubCohortPersonsForCpCrtdBy;
+	}
+
+	public String[] getIclubCohortsForCCrtdBy() {
+		return iclubCohortsForCCrtdBy;
+	}
+
+	public void setIclubCohortsForCCrtdBy(String[] iclubCohortsForCCrtdBy) {
+		this.iclubCohortsForCCrtdBy = iclubCohortsForCCrtdBy;
+	}
+
+	public String[] getIclubCohortsForCPrimaryUserId() {
+		return iclubCohortsForCPrimaryUserId;
+	}
+
+	public void setIclubCohortsForCPrimaryUserId(String[] iclubCohortsForCPrimaryUserId) {
+		this.iclubCohortsForCPrimaryUserId = iclubCohortsForCPrimaryUserId;
 	}
 
 }

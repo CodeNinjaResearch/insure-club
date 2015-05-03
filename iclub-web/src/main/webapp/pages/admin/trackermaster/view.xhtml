@@ -1,33 +1,32 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtTrackerMasterCont" widgetVar="dtTrackerMasterCont" value="#{iclubTrackerMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No TrackerMasteres Available">
-		
-		<p:column headerText="#{labels['trackermaster.view.tmid']}">
-			<p:outputLabel value="#{bean.tmId}" />
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmId}" />
 		</p:column>
-		<p:column headerText="#{labels['trackermaster.view.userid']}">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+		<p:column headerText="Created By">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
-		<p:column headerText="#{labels['trackermaster.view.tmname']}">
-			<p:outputLabel value="#{bean.tmName}" />
+		<p:column headerText="Name">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmName}" />
 		</p:column>
-		<p:column headerText="#{labels['trackermaster.view.tmtradename']}">
-			<p:outputLabel value="#{bean.tmTradeName}" />
+		<p:column headerText="Trading Name">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmTradeName}" />
 		</p:column>
-		<p:column headerText="#{labels['trackermaster.view.tmlocation']}">
-			<p:outputLabel value="#{bean.tmLocation}" />
+		<p:column headerText="Location">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmLocation}" />
 		</p:column>
-		<p:column headerText="#{labels['trackermaster.view.tmlat']}">
-			<p:outputLabel value="#{bean.tmLat}" />
+		<p:column headerText="Latitude">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmLat}" />
 		</p:column>
-		<p:column headerText="#{labels['trackermaster.view.tmregnum']}">
-			<p:outputLabel value="#{bean.tmRegNum}" />
+		<p:column headerText="Longitude">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmLong}" />
 		</p:column>
-		<p:column headerText="#{labels['trackermaster.view.tmcrtddt']}">
-			<p:outputLabel value="#{bean.tmCrtdDt}" />
+		<p:column headerText="Regstration Number">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmRegNum}" />
 		</p:column>
-		 
-		
-		 
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmCrtdDt}" />
+		</p:column>
 		<p:column>
 			<p:commandButton id="btnTrackerMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubTrackerMasterController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubTrackerMasterController.bean}" value="#{bean}" />

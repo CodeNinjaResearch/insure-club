@@ -132,9 +132,17 @@ public class IclubSecurityQuestionController implements Serializable {
 				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				ret = ret && false;
 			}
+		} else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 
-		if (bean.getSqStatus().equalsIgnoreCase("-1")) {
+		if (bean.getSqLongDesc() == null || bean.getSqLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getSqStatus() == null || bean.getSqStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,19 +155,21 @@ public class IclubSecurityQuestionController implements Serializable {
 		Collection<? extends IclubSecurityQuestionModel> models = new ArrayList<IclubSecurityQuestionModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSecurityQuestionModel.class));
 		client.close();
 		beans = new ArrayList<IclubSecurityQuestionBean>();
-		for (IclubSecurityQuestionModel model : models) {
-			IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
-			bean.setSqId(model.getSqId());
-			bean.setSqLongDesc(model.getSqLongDesc());
-			bean.setSqShortDesc(model.getSqShortDesc());
-			bean.setSqStatus(model.getSqStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubSecurityQuestionModel model : models) {
+				IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
+				bean.setSqId(model.getSqId());
+				bean.setSqLongDesc(model.getSqLongDesc());
+				bean.setSqShortDesc(model.getSqShortDesc());
+				bean.setSqStatus(model.getSqStatus());
 
-			if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
+				if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
 
-				bean.setIclubLogins(model.getIclubLogins());
+					bean.setIclubLogins(model.getIclubLogins());
+				}
+
+				beans.add(bean);
 			}
-
-			beans.add(bean);
 		}
 		return beans;
 	}

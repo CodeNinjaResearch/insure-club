@@ -134,7 +134,17 @@ public class IclubMaritialStatusController implements Serializable {
 			}
 		}
 
-		if (bean.getMsStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getMsLongDesc() == null || bean.getMsLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getMsStatus() == null || bean.getMsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubMaritialStatusController implements Serializable {
 		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubMaritialStatusBean>();
-		for (IclubMaritialStatusModel model : models) {
-			IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
-			bean.setMsId(model.getMsId());
-			bean.setMsLongDesc(model.getMsLongDesc());
-			bean.setMsShortDesc(model.getMsShortDesc());
-			bean.setMsStatus(model.getMsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubMaritialStatusModel model : models) {
+				IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
+				bean.setMsId(model.getMsId());
+				bean.setMsLongDesc(model.getMsLongDesc());
+				bean.setMsShortDesc(model.getMsShortDesc());
+				bean.setMsStatus(model.getMsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

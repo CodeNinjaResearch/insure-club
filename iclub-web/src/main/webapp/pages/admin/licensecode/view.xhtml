@@ -1,17 +1,22 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtLicenseCodeCont" widgetVar="dtLicenseCodeCont" value="#{iclubLicenseCodeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No LicenseCodees Available">
-
-		<p:column headerText="#{labels['licensecode.view.lcid']}">
-			<p:outputLabel value="#{bean.lcId}" />
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcId}" />
 		</p:column>
-		<p:column headerText="#{labels['licensecode.view.lccategory']}">
-			<p:outputLabel value="#{bean.lcCategory}" />
+		<p:column headerText="Category">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcCategory}" />
 		</p:column>
-		<p:column headerText="#{labels['licensecode.view.lcdesc']}">
-			<p:outputLabel value="#{bean.lcDesc}" />
+		<p:column headerText="Description">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcDesc}" />
 		</p:column>
-		<p:column headerText="#{labels['licensecode.view.lcstatus']}">
-			<p:outputLabel value="#{bean.lcStatus}" />
+		<p:column headerText="Status">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcStatus}" />
+		</p:column>
+		<p:column headerText="Creatd By">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+		</p:column>
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcCrtdDt}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnLicenseCodeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubLicenseCodeController.showEdit}" update=":iclubFrm:grlMsg">

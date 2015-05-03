@@ -1,7 +1,17 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
 
-	<ui:define name="title">Maintain FullQuote</ui:define>
-	<ui:define name="body">
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
 		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">Location Details</f:facet>
 			<p:panel>
@@ -12,18 +22,13 @@
 					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlPre" showDetail="true" />
-
 				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubFullQuoteController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPer}" style="width:400px;height:400px">
 					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPer}" update="growlPre" />
 					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePer}" update="@this" />
 					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPer}" update="growlPre" />
 				</p:gmap>
-
-
-
 			</p:panel>
 		</p:dialog>
-
 		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">Location Details</f:facet>
 			<p:panel>
@@ -34,19 +39,13 @@
 					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlPro" showDetail="true" />
-
 				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubFullQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPro}" style="width:400px;height:400px">
 					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPro}" update="growlPro" />
 					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePro}" update="@this" />
 					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPro}" update="growlPro" />
 				</p:gmap>
-
-
-
 			</p:panel>
 		</p:dialog>
-
-
 		<p:dialog id="vehLocationDetailsDialog" widgetVar="vehLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">Location Details</f:facet>
 			<p:panel>
@@ -57,748 +56,374 @@
 					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlVeh" showDetail="true" />
-
 				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubFullQuoteController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelVeh}" style="width:400px;height:400px">
 					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragVeh}" update="growlVeh" />
 					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodeVeh}" update="@this" />
 					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectVeh}" update="growlVeh" />
 				</p:gmap>
-
-
-
 			</p:panel>
 		</p:dialog>
-
-		<p:panel id="qqPanel">
-			<p:tabView id="tabView">
-				<p:tab title="Person details">
-
-
-					<div align="center">
-						<p:panelGrid columns="2">
-							<p:column>
-								<p:outputLabel value="Title :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PTitle}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Initials :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PInitials}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="First Name :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PFName}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Last Name :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PLName}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Mobile Number :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PMobile}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Email :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PEmail}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Contact Ref :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PContactPref}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Gender :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PGender}" />
-							</p:column>
-							<p:column>
-
-								<p:outputLabel value="Maritial Status" />
-
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.iclubMaritialStatus}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msId}" value="#{iclubFullQuoteController.maritialStatusBeans}" />
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-
-								<p:outputLabel value="Id Type" />
-
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.iclubIdType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems var="c" itemLabel="#{c.itLongDesc}" itemValue="#{c.itId}" value="#{iclubFullQuoteController.idTypeBeans}" />
-								</p:selectOneMenu>
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Id Num :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.personBean.PIdNum}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Id Issuer Country :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.PIdIssueCntry}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
-								</p:selectOneMenu>
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Id Issue Date :" />
-							</p:column>
-							<p:column>
-								<p:calendar value="#{iclubFullQuoteController.personBean.PIdIssueDt}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Id Expiry Date :" />
-							</p:column>
-							<p:column>
-								<p:calendar value="#{iclubFullQuoteController.personBean.PIdExpiryDt}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Occupation :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.POccupation}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.occupationBeans}" var="c" itemLabel="#{c.ODesc}" itemValue="#{c.OId}" />
-								</p:selectOneMenu>
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Date Of Birth :" />
-							</p:column>
-							<p:column>
-								<p:calendar value="#{iclubFullQuoteController.personBean.PDob}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Is Pensioner :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.personBean.PIsPensioner}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
-									<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
-								</p:selectOneMenu>
-							</p:column>
-							<p:column>
-
-								<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
-							</p:column>
-
-						</p:panelGrid>
+		<div class="ContainerIndent TexAlCenter">
+			<p:tabView id="qqTabView">
+				<p:tab id="fqPerDet" title="Person details">
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Title :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Title" value="#{iclubFullQuoteController.personBean.PTitle}" />
+						</div>
 					</div>
-				</p:tab>
-				<p:tab title="Vechicle details">
-					<div align="center">
-						<p:panelGrid columns="2">
-
-							<p:column>
-								<p:outputLabel value="Security Master" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubSecurityMaster}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.securityMasterBeans}" var="c" itemLabel="#{c.smDesc}" itemValue="#{c.smId}" />
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Access Type VOn" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubAccessTypeByVOnAccessTypeId}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Access Type VD" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubAccessTypeByVDdAccessTypeId}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Vo Do Meter" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VOdometer}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="On Area" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VOnArea}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="On Lat" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VOnLat}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="On Long" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VOnLong}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="VDd Area" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VDdArea}" />
-							</p:column>
-
-
-							 
-
-							<p:column>
-								<p:outputLabel value="Insured Value" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VInsuredValue}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Concess Prct" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VConcessPrct}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Concess Reason" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VConcessReason}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="VImm Yn" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VImmYn}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Gear Lock Yn" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VGearLockYn}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Owner" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VOwner}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="No Claims Years" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VNoclaimYrs}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Comp Years" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VCompYrs}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="VVin" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VVin}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Engine Nr" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VEngineNr}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Reg Number" />
-							</p:column>
-
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.vehicleBean.VRegNum}" />
-							</p:column>
-
-
-
-
-
-							<p:column>
-								<p:outputLabel value="Location" />
-							</p:column>
-							<p:column>
-								<p:commandButton update=":iclubFrm:vehLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('vehLocationDetailsDialog').show();" />
-								<!-- <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Vehicle Make :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu onchange="submit()" value="#{iclubFullQuoteController.vmMake}" valueChangeListener="#{iclubFullQuoteController.vmMakeValueChangeListener}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.vmMakes}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Vehicle Model :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu id="vmm" value="#{iclubFullQuoteController.vehicleBean.iclubVehicleMaster}" onchange="submit()" valueChangeListener="#{iclubFullQuoteController.vmModelValueChangeListener}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="year :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.VYear}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.years}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Purpose Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubPurposeType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.purposeTypeBeans}" var="p" itemLabel="#{p.ptLongDesc}" itemValue="#{p.ptId}" />
-
-								</p:selectOneMenu>
-							</p:column>
-						</p:panelGrid>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Initials :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Initials" value="#{iclubFullQuoteController.personBean.PInitials}" />
+						</div>
 					</div>
-
-
-				</p:tab>
-				<p:tab id="tabDriverDetails" title="Driver Details">
-					<div align="center">
-
-						<p:panelGrid columns="2">
-							<p:column>
-								<p:outputLabel value=" Driver Name :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.driverBean.DName}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value=" License Number :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.driverBean.DLicenseNum}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value=" Issue Date :" />
-							</p:column>
-							<p:column>
-								<p:calendar value="#{iclubFullQuoteController.driverBean.DIssueDt}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value=" License Code :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.driverBean.iclubLicenseCode}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
-								</p:selectOneMenu>
-							</p:column>
-						</p:panelGrid>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="First Name :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="First Name" value="#{iclubFullQuoteController.personBean.PFName}" />
+						</div>
 					</div>
-
-				</p:tab>
-				<p:tab id="extras" title="Extras">
-					<div align="center">
-						<p:panelGrid columns="2">
-
-							<p:column>
-								<p:outputLabel value="Description :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.extrasBean.EDesc}" />
-							</p:column>
-							<p:column>
-								<p:outputLabel value="Status :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.extrasBean.EStatus}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
-									<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
-								</p:selectOneMenu>
-							</p:column>
-
-						</p:panelGrid>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Last Name :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Last Name" value="#{iclubFullQuoteController.personBean.PLName}" />
+						</div>
 					</div>
-
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Mobile :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Mobile" value="#{iclubFullQuoteController.personBean.PMobile}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Email :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Email" value="#{iclubFullQuoteController.personBean.PEmail}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Contact Reference" value="#{iclubFullQuoteController.personBean.PContactPref}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Gender :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu disabled="true" widgetVar="mnuGender" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuGender.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.PGender}">
+								<f:selectItem itemLabel="Gender" itemDisabled="true" />
+								<f:selectItem itemLabel="Male" itemValue="M" />
+								<f:selectItem itemLabel="Female" itemValue="F" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Maritial Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuMarS" disabled="true" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.iclubMaritialStatus}">
+								<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msId}" value="#{iclubFullQuoteController.maritialStatusBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Id Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuIdType" disabled="true" id="mnuIdType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.iclubIdType}">
+								<f:selectItem itemLabel="Id Type" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.itLongDesc}" itemValue="#{c.itId}" value="#{iclubFullQuoteController.idTypeBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Id Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Id Number" value="#{iclubFullQuoteController.personBean.PIdNum}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Issuer Country :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuIdIss" disabled="true" id="mnuIdIss" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.PIdIssueCntry}">
+								<f:selectItem itemLabel="Issuer Country" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel value="Issue Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar disabled="true" placeholder="Issue Date" value="#{iclubFullQuoteController.personBean.PIdIssueDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel value="Expiry Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar disabled="true" placeholder="Expiry Date" value="#{iclubFullQuoteController.personBean.PIdExpiryDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Occupation :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu disabled="true" widgetVar="mnuOcc" id="mnuOcc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.POccupation}">
+								<f:selectItem itemLabel="Occupation" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.occupationBeans}" var="c" itemLabel="#{c.ODesc}" itemValue="#{c.OId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar disabled="true" placeholder="Date Of Birth" value="#{iclubFullQuoteController.personBean.PDob}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is Pensioner :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu disabled="true" widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.PIsPensioner}">
+								<f:selectItem itemLabel="Is Pensioner" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton disabled="true" update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
-
+				<p:tab id="qqVehDet" title="Vehicle Details">
+					<ui:include src="/pages/quote/vehiclefq.xhtml" />
+				</p:tab>
+				<p:tab id="qqDriverDet" title="Driver Details">
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubFullQuoteController.driverBean.DName}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="License Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="License Number" value="#{iclubFullQuoteController.driverBean.DLicenseNum}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubFullQuoteController.driverBean.DIssueDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar styleClass="TexAlCenter" placeholder="Date Of Birth" value="#{iclubFullQuoteController.driverBean.DDob}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="License Code :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.driverBean.iclubLicenseCode}">
+								<f:selectItem itemLabel="License Code" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:tab>
+				<p:tab id="fqExtDet" title="Extras">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Description :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubFullQuoteController.extrasBean.EDesc}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.extrasBean.EStatus}" widgetVar="mnuStu" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:tab>
 				<p:tab title="Property details">
-
-
-					<div align="center">
-						<p:panelGrid columns="2">
-							<p:column>
-								<p:outputLabel value="Location :" />
-							</p:column>
-							<p:column>
-
-								<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
-								<!-- <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" /> -->
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Cover Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubCoverType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.coverTypeBeans}" var="c" itemValue="#{c.ctId}" itemLabel="#{c.ctLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Purpose Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPurposeType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.pPurposeTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Ocupied Status :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubOccupiedStatus}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.occupiedStatusBeans}" var="c" itemValue="#{c.osId}" itemLabel="#{c.osLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Property Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropertyType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.propertyTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Access Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubAccessType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemValue="#{c.atId}" itemLabel="#{c.atLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Bar Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubBarType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.barTypeBeans}" var="c" itemValue="#{c.btId}" itemLabel="#{c.btLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Thatch Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubThatchType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.thatchTypeBeans}" var="c" itemValue="#{c.ttId}" itemLabel="#{c.ttLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Roof Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubRoofType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems value="#{iclubFullQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
-
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Reg Number" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PRegNum}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Address" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PAddress}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Postal Cd" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PPostalCd}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="No Claim Years" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PNoclaimYrs}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Rent FurYn" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PRentFurYn}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Comp Yn" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PCompYn}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Norobbery Yn" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PNorobberyYn}" />
-							</p:column>
-
-
-							<p:column>
-								<p:outputLabel value="Sec Gates Yn" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PSecGatesYn}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Estimatted Value" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.propertyBean.PEstValue}" />
-							</p:column>
-
-
-
-
-						</p:panelGrid>
-					</div>
-
-
+					<ui:include src="/pages/quote/propertyfq.xhtml" />
 				</p:tab>
-				<p:tab id="tabClaim" title="Claim Details">
-
-					<div align="center">
-						<p:panelGrid columns="2">
-							<p:column>
-								<p:outputLabel value="Claim Number :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.claimBean.CNumber}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Number Items :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.claimBean.CNumItems}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Value :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.claimBean.CValue}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Calim Status :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.claimBean.iclubClaimStatus}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems var="c" itemLabel="#{c.csLongDesc}" itemValue="#{c.csId}" value="#{iclubFullQuoteController.claimStatusBeans}" />
-								</p:selectOneMenu>
-							</p:column>
-						</p:panelGrid>
+				<p:tab id="fqAccDet" title="Account Details">
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Account Number" value="#{iclubFullQuoteController.accountBean.AAccNum}" styleClass="TexAlCenter" />
+						</div>
 					</div>
-
-				</p:tab>
-
-				<p:tab id="tabAccountDetails" title="Account Details">
-
-					<div align="center">
-						<p:panelGrid columns="2">
-							<p:column>
-								<p:outputLabel value="Account Number :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.accountBean.AAccNum}" />
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Account Status :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.AStatus}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItem itemLabel="#{labels['yes']}" itemValue="Y" />
-									<f:selectItem itemLabel="#{labels['no']}" itemValue="N" />
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Bank Master :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems var="c" itemLabel="#{c.bmBankCode}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Owner Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubOwnerType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubFullQuoteController.ownerTypeBeans}" />
-								</p:selectOneMenu>
-							</p:column>
-
-							<p:column>
-								<p:outputLabel value="Account Type :" />
-							</p:column>
-							<p:column>
-								<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubAccountType}">
-									<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-									<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubFullQuoteController.accountTypeBeans}" />
-								</p:selectOneMenu>
-							</p:column>
-							<p:column>
-
-								<p:outputLabel value="Debit Date :" />
-							</p:column>
-							<p:column>
-								<p:inputText value="#{iclubFullQuoteController.debitDate}" />
-								<p:inputText value="#{iclubFullQuoteController.debitMonth}" />
-							</p:column>
-						</p:panelGrid>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.AStatus}" widgetVar="mnuAStat" id="mnuAStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
 					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Bank :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuBankName" id="mnuBankName" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.bankName}">
+								<p:ajax update="mnuBM" process="@this" event="change" listener="#{iclubFullQuoteController.bankNameValueChangeListener}" />
+								<f:selectItem itemLabel="Bank" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.bankNames}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Branch :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Branch" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.bmBranchName}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Owner Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubOwnerType}" widgetVar="mnuOT" id="mnuOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubFullQuoteController.ownerTypeBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubAccountType}" widgetVar="mnuAcType" id="mnuAcType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubFullQuoteController.accountTypeBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Debit Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.debitDate}" widgetVar="mnuDbtDt" id="mnuDbtDt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Debit Date" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.debitDates}" />
+							</p:selectOneMenu>
+							<p:selectOneMenu value="#{iclubFullQuoteController.debitMonth}" widgetVar="mnuDbtMt" id="mnuDbtMt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Debit Month" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.debitMonths}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 			</p:tabView>
-			<f:facet name="footer">
-				<div style="align: center !important">
-					<p:commandButton id="btnqqCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" icon="ui-icon-disk" value="#{labels['save']}" actionListener="#{iclubFullQuoteController.saveQuickQuoteDetails}" />
-
-				</div>
-			</f:facet>
-
-		</p:panel>
-
-
+			<div class="EmptyBox20" />
+			<p:panel styleClass="Fnone TexAlCenter">
+				<p:commandButton update=":iclubFrm:grlMsg" value="Generate Quote" styleClass="Fs16" action="#{iclubFullQuoteController.saveFullQuoteDetails}" ajax="false" />
+			</p:panel>
+		</div>
 	</ui:define>
-
-
 </ui:composition>

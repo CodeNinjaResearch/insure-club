@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -81,7 +81,7 @@ public class IclubNotifController implements Serializable {
 		showSummaryCont = false;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -96,20 +96,22 @@ public class IclubNotifController implements Serializable {
 		Collection<? extends IclubNotifModel> models = new ArrayList<IclubNotifModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubNotifModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubNotifBean>();
-		for (IclubNotifModel model : models) {
-			IclubNotifBean bean = new IclubNotifBean();
+		if (models != null && models.size() > 0) {
+			for (IclubNotifModel model : models) {
+				IclubNotifBean bean = new IclubNotifBean();
 
-			bean.setNId(model.getNId());
-			bean.setNTitle(model.getNTitle());
-			bean.setNBody(model.getNBody());
-			bean.setNFromAddr(model.getNFromAddr());
-			bean.setNToList(model.getNToList());
-			bean.setNCrtdDt(model.getNCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubNotificationType(model.getIclubNotificationType());
-			bean.setNStatus(model.getNStatus());
+				bean.setNId(model.getNId());
+				bean.setNTitle(model.getNTitle());
+				bean.setNBody(model.getNBody());
+				bean.setNFromAddr(model.getNFromAddr());
+				bean.setNToList(model.getNToList());
+				bean.setNCrtdDt(model.getNCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubNotificationType(model.getIclubNotificationType());
+				bean.setNStatus(model.getNStatus());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -137,9 +139,9 @@ public class IclubNotifController implements Serializable {
 				model.setNFromAddr(bean.getNFromAddr());
 				model.setNToList(bean.getNToList());
 				model.setIclubNotificationType(bean.getIclubNotificationType());
-				model.setNCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setNCrtdDt(new Date(System.currentTimeMillis()));
 				model.setNStatus(bean.getNStatus());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -171,7 +173,7 @@ public class IclubNotifController implements Serializable {
 				model.setNFromAddr(bean.getNFromAddr());
 				model.setNToList(bean.getNToList());
 				model.setIclubNotificationType(bean.getIclubNotificationType());
-				model.setNCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setNCrtdDt(new Date(System.currentTimeMillis()));
 				model.setNStatus(bean.getNStatus());
 				model.setIclubPerson(bean.getIclubPerson());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -257,7 +259,11 @@ public class IclubNotifController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -291,21 +297,23 @@ public class IclubNotifController implements Serializable {
 		Collection<? extends IclubNotifModel> models = new ArrayList<IclubNotifModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubNotifModel.class));
 		client.close();
 		beans = new ArrayList<IclubNotifBean>();
-		for (IclubNotifModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubNotifModel model : models) {
 
-			IclubNotifBean bean = new IclubNotifBean();
+				IclubNotifBean bean = new IclubNotifBean();
 
-			bean.setNId(model.getNId());
-			bean.setNTitle(model.getNTitle());
-			bean.setNBody(model.getNBody());
-			bean.setNFromAddr(model.getNFromAddr());
-			bean.setNToList(model.getNToList());
-			bean.setNCrtdDt(model.getNCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubNotificationType(model.getIclubNotificationType());
-			bean.setNStatus(model.getNStatus());
+				bean.setNId(model.getNId());
+				bean.setNTitle(model.getNTitle());
+				bean.setNBody(model.getNBody());
+				bean.setNFromAddr(model.getNFromAddr());
+				bean.setNToList(model.getNToList());
+				bean.setNCrtdDt(model.getNCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubNotificationType(model.getIclubNotificationType());
+				bean.setNStatus(model.getNStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

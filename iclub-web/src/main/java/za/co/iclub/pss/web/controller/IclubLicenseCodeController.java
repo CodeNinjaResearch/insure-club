@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -80,26 +80,28 @@ public class IclubLicenseCodeController implements Serializable {
 		Collection<? extends IclubLicenseCodeModel> models = new ArrayList<IclubLicenseCodeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubLicenseCodeModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubLicenseCodeBean>();
-		for (IclubLicenseCodeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubLicenseCodeModel model : models) {
 
-			IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
+				IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
 
-			bean.setLcId(model.getLcId());
-			bean.setLcCrtdDt(model.getLcCrtdDt());
-			bean.setLcDesc(model.getLcDesc());
-			bean.setLcStatus(model.getLcStatus());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setLcCategory(model.getLcCategory());
-			if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
-				String[] drivers = new String[model.getIclubDrivers().length];
-				int i = 0;
-				for (String iclubMessage : model.getIclubDrivers()) {
-					drivers[i] = iclubMessage;
-					i++;
+				bean.setLcId(model.getLcId());
+				bean.setLcCrtdDt(model.getLcCrtdDt());
+				bean.setLcDesc(model.getLcDesc());
+				bean.setLcStatus(model.getLcStatus());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setLcCategory(model.getLcCategory());
+				if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
+					String[] drivers = new String[model.getIclubDrivers().length];
+					int i = 0;
+					for (String iclubMessage : model.getIclubDrivers()) {
+						drivers[i] = iclubMessage;
+						i++;
+					}
+					bean.setIclubDrivers(drivers);
 				}
-				bean.setIclubDrivers(drivers);
+				dashBoardBeans.add(bean);
 			}
-			dashBoardBeans.add(bean);
 		}
 		return dashBoardBeans;
 	}
@@ -121,10 +123,10 @@ public class IclubLicenseCodeController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 
-				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLcCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLcDesc(bean.getLcDesc());
 				model.setLcStatus(bean.getLcStatus());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setLcCategory(bean.getLcCategory());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -150,10 +152,10 @@ public class IclubLicenseCodeController implements Serializable {
 				IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 
 				model.setLcId(bean.getLcId());
-				model.setLcCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setLcCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLcDesc(bean.getLcDesc());
 				model.setLcStatus(bean.getLcStatus());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setLcCategory(bean.getLcCategory());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -239,7 +241,11 @@ public class IclubLicenseCodeController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -273,27 +279,29 @@ public class IclubLicenseCodeController implements Serializable {
 		Collection<? extends IclubLicenseCodeModel> models = new ArrayList<IclubLicenseCodeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubLicenseCodeModel.class));
 		client.close();
 		beans = new ArrayList<IclubLicenseCodeBean>();
-		for (IclubLicenseCodeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubLicenseCodeModel model : models) {
 
-			IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
+				IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
 
-			bean.setLcId(model.getLcId());
-			bean.setLcCrtdDt(model.getLcCrtdDt());
-			bean.setLcDesc(model.getLcDesc());
-			bean.setLcStatus(model.getLcStatus());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setLcCategory(model.getLcCategory());
-			if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
-				String[] drivers = new String[model.getIclubDrivers().length];
-				int i = 0;
-				for (String iclubMessage : model.getIclubDrivers()) {
-					drivers[i] = iclubMessage;
-					i++;
+				bean.setLcId(model.getLcId());
+				bean.setLcCrtdDt(model.getLcCrtdDt());
+				bean.setLcDesc(model.getLcDesc());
+				bean.setLcStatus(model.getLcStatus());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setLcCategory(model.getLcCategory());
+				if (model.getIclubDrivers() != null && model.getIclubDrivers().length > 0) {
+					String[] drivers = new String[model.getIclubDrivers().length];
+					int i = 0;
+					for (String iclubMessage : model.getIclubDrivers()) {
+						drivers[i] = iclubMessage;
+						i++;
+					}
+					bean.setIclubDrivers(drivers);
 				}
-				bean.setIclubDrivers(drivers);
-			}
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

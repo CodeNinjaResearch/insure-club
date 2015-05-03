@@ -132,9 +132,17 @@ public class IclubThatchTypeController implements Serializable {
 				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				ret = ret && false;
 			}
+		} else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 
-		if (bean.getTtStatus().equalsIgnoreCase("-1")) {
+		if (bean.getTtLongDesc() == null || bean.getTtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getTtStatus() == null || bean.getTtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +155,15 @@ public class IclubThatchTypeController implements Serializable {
 		Collection<? extends IclubThatchTypeModel> models = new ArrayList<IclubThatchTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubThatchTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubThatchTypeBean>();
-		for (IclubThatchTypeModel model : models) {
-			IclubThatchTypeBean bean = new IclubThatchTypeBean();
-			bean.setTtId(model.getTtId());
-			bean.setTtLongDesc(model.getTtLongDesc());
-			bean.setTtShortDesc(model.getTtShortDesc());
-			bean.setTtStatus(model.getTtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubThatchTypeModel model : models) {
+				IclubThatchTypeBean bean = new IclubThatchTypeBean();
+				bean.setTtId(model.getTtId());
+				bean.setTtLongDesc(model.getTtLongDesc());
+				bean.setTtShortDesc(model.getTtShortDesc());
+				bean.setTtStatus(model.getTtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

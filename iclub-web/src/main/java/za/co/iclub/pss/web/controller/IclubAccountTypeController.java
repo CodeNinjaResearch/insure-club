@@ -134,7 +134,17 @@ public class IclubAccountTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getAtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getAtLongDesc() == null || bean.getAtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getAtStatus() == null || bean.getAtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,19 +157,21 @@ public class IclubAccountTypeController implements Serializable {
 		Collection<? extends IclubAccountTypeModel> models = new ArrayList<IclubAccountTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccountTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubAccountTypeBean>();
-		for (IclubAccountTypeModel model : models) {
-			IclubAccountTypeBean bean = new IclubAccountTypeBean();
-			bean.setAtId(model.getAtId());
-			bean.setAtLongDesc(model.getAtLongDesc());
-			bean.setAtShortDesc(model.getAtShortDesc());
-			bean.setAtStatus(model.getAtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubAccountTypeModel model : models) {
+				IclubAccountTypeBean bean = new IclubAccountTypeBean();
+				bean.setAtId(model.getAtId());
+				bean.setAtLongDesc(model.getAtLongDesc());
+				bean.setAtShortDesc(model.getAtShortDesc());
+				bean.setAtStatus(model.getAtStatus());
 
-			if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
+				if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
 
-				bean.setIclubAccounts(model.getIclubAccounts());
+					bean.setIclubAccounts(model.getIclubAccounts());
+				}
+
+				beans.add(bean);
 			}
-
-			beans.add(bean);
 		}
 		return beans;
 	}

@@ -95,7 +95,8 @@ public class IclubGeoLocController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubGeoLocModel model : models) {
 				IclubGeoLocBean bean = new IclubGeoLocBean();
-
+				bean.setGlProvince(model.getGlProvince());
+				bean.setGlSuburb(model.getGlSuburb());
 				bean.setGlId(model.getGlId());
 				bean.setGlAddress(model.getGlAddress());
 				bean.setGlLat(model.getGlLat());
@@ -126,7 +127,8 @@ public class IclubGeoLocController implements Serializable {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubGeoLocModel model = new IclubGeoLocModel();
-
+				model.setGlProvince(bean.getGlProvince());
+				model.setGlSuburb(bean.getGlSuburb());
 				model.setGlAddress(bean.getGlAddress());
 				model.setGlLat(bean.getGlLat());
 				model.setGlLong(bean.getGlLong());
@@ -157,6 +159,8 @@ public class IclubGeoLocController implements Serializable {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubGeoLocModel model = new IclubGeoLocModel();
+				model.setGlProvince(bean.getGlProvince());
+				model.setGlSuburb(bean.getGlSuburb());
 
 				model.setGlId(bean.getGlId());
 				model.setGlAddress(bean.getGlAddress());
@@ -290,6 +294,8 @@ public class IclubGeoLocController implements Serializable {
 			for (IclubGeoLocModel model : models) {
 
 				IclubGeoLocBean bean = new IclubGeoLocBean();
+				bean.setGlProvince(model.getGlProvince());
+				bean.setGlSuburb(model.getGlSuburb());
 
 				bean.setGlId(model.getGlId());
 				bean.setGlAddress(model.getGlAddress());

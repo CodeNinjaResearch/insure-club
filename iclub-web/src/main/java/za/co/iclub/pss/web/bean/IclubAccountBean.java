@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubAccountBean {
 
@@ -12,7 +12,7 @@ public class IclubAccountBean {
 	private String AAccNum;
 	private String AOwnerId;
 	private String AStatus;
-	private Timestamp ACrtdDt;
+	private Date ACrtdDt;
 	private String[] iclubPolicies;
 	private String[] iclubPayments;
 
@@ -80,11 +80,11 @@ public class IclubAccountBean {
 		AStatus = aStatus;
 	}
 
-	public Timestamp getACrtdDt() {
+	public Date getACrtdDt() {
 		return ACrtdDt;
 	}
 
-	public void setACrtdDt(Timestamp aCrtdDt) {
+	public void setACrtdDt(Date aCrtdDt) {
 		ACrtdDt = aCrtdDt;
 	}
 

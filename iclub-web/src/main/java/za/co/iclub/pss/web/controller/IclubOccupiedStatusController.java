@@ -134,7 +134,17 @@ public class IclubOccupiedStatusController implements Serializable {
 			}
 		}
 
-		if (bean.getOsStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getOsLongDesc() == null || bean.getOsLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getOsStatus() == null || bean.getOsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubOccupiedStatusController implements Serializable {
 		Collection<? extends IclubOccupiedStatusModel> models = new ArrayList<IclubOccupiedStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupiedStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubOccupiedStatusBean>();
-		for (IclubOccupiedStatusModel model : models) {
-			IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
-			bean.setOsId(model.getOsId());
-			bean.setOsLongDesc(model.getOsLongDesc());
-			bean.setOsShortDesc(model.getOsShortDesc());
-			bean.setOsStatus(model.getOsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubOccupiedStatusModel model : models) {
+				IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
+				bean.setOsId(model.getOsId());
+				bean.setOsLongDesc(model.getOsLongDesc());
+				bean.setOsShortDesc(model.getOsShortDesc());
+				bean.setOsStatus(model.getOsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

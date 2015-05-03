@@ -1,22 +1,20 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtExtrasCont" widgetVar="dtExtrasCont" value="#{iclubExtrasController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Extrases Available">
-		
-		<p:column headerText="#{labels['extras.view.eid']}">
-			<p:outputLabel value="#{bean.EId}" />
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EId}" />
 		</p:column>
-		<p:column headerText="#{labels['extras.view.edesc']}">
-			<p:outputLabel value="#{bean.EDesc}" />
+		<p:column headerText="Description">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EDesc}" />
 		</p:column>
-		<p:column headerText="#{labels['extras.view.estatus']}">
-			<p:outputLabel value="#{bean.EStatus}" />
+		<p:column headerText="Status">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EStatus}" />
 		</p:column>
-		<p:column headerText="#{labels['extras.view.ecrtddt']}">
-			<p:outputLabel value="#{bean.ECrtdDt}" />
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ECrtdDt}" />
 		</p:column>
-		<p:column headerText="#{labels['extras.view.userid']}">
-				<p:outputLabel value="#{bean.iclubPerson}" />
-			</p:column>
-		
+		<p:column headerText="Created By">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+		</p:column>
 		<p:column>
 			<p:commandButton id="btnExtrasEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubExtrasController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubExtrasController.bean}" value="#{bean}" />

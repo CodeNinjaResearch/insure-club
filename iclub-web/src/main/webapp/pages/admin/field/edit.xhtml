@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubFieldController.bean.FId}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Description :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubFieldController.bean.FDesc}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Name :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubFieldController.bean.FName}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.FStatus}">
+				<f:selectItem itemLabel="Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Table Name :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Table Name" value="#{iclubFieldController.bean.FLTblName}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Rate :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.FRate}">
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Entity Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubFieldController.bean.iclubEntityType}">
+				<f:selectItem itemLabel="Entity Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubFieldController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnFieldEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlFieldCont" value="Update" actionListener="#{iclubFieldController.modIclubField}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnFieldDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlFieldCont" value="Delete" actionListener="#{iclubFieldController.delIclubField}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnFieldCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlFieldCont" value="Close" actionListener="#{iclubFieldController.showView}" />
+		</div>
+	</div>
+</ui:composition>

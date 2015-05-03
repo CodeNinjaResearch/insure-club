@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -80,16 +80,18 @@ public class IclubOccupationController implements Serializable {
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubOccupationBean>();
-		for (IclubOccupationModel model : models) {
-			IclubOccupationBean bean = new IclubOccupationBean();
+		if (models != null && models.size() > 0) {
+			for (IclubOccupationModel model : models) {
+				IclubOccupationBean bean = new IclubOccupationBean();
 
-			bean.setOId(model.getOId());
-			bean.setODesc(model.getODesc());
-			bean.setOCrtdDt(model.getOCrtdDt());
-			bean.setOStatus(model.getOStatus());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setOId(model.getOId());
+				bean.setODesc(model.getODesc());
+				bean.setOCrtdDt(model.getOCrtdDt());
+				bean.setOStatus(model.getOStatus());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -112,9 +114,9 @@ public class IclubOccupationController implements Serializable {
 				IclubOccupationModel model = new IclubOccupationModel();
 
 				model.setODesc(bean.getODesc());
-				model.setOCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setOCrtdDt(new Date(System.currentTimeMillis()));
 				model.setOStatus(bean.getOStatus());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -142,7 +144,7 @@ public class IclubOccupationController implements Serializable {
 
 				model.setOId(bean.getOId());
 				model.setODesc(bean.getODesc());
-				model.setOCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setOCrtdDt(new Date(System.currentTimeMillis()));
 				model.setOStatus(bean.getOStatus());
 				model.setIclubPerson(bean.getIclubPerson());
 
@@ -229,7 +231,11 @@ public class IclubOccupationController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -263,17 +269,19 @@ public class IclubOccupationController implements Serializable {
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
 		client.close();
 		beans = new ArrayList<IclubOccupationBean>();
-		for (IclubOccupationModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubOccupationModel model : models) {
 
-			IclubOccupationBean bean = new IclubOccupationBean();
+				IclubOccupationBean bean = new IclubOccupationBean();
 
-			bean.setOId(model.getOId());
-			bean.setODesc(model.getODesc());
-			bean.setOCrtdDt(model.getOCrtdDt());
-			bean.setOStatus(model.getOStatus());
-			bean.setIclubPerson(model.getIclubPerson());
+				bean.setOId(model.getOId());
+				bean.setODesc(model.getODesc());
+				bean.setOCrtdDt(model.getOCrtdDt());
+				bean.setOStatus(model.getOStatus());
+				bean.setIclubPerson(model.getIclubPerson());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

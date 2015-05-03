@@ -134,7 +134,17 @@ public class IclubPaymentTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getPtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPtLongDesc() == null || bean.getPtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPtStatus() == null || bean.getPtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,14 +157,16 @@ public class IclubPaymentTypeController implements Serializable {
 		Collection<? extends IclubPaymentTypeModel> models = new ArrayList<IclubPaymentTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubPaymentTypeBean>();
-		for (IclubPaymentTypeModel model : models) {
-			IclubPaymentTypeBean bean = new IclubPaymentTypeBean();
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubPaymentTypeModel model : models) {
+				IclubPaymentTypeBean bean = new IclubPaymentTypeBean();
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

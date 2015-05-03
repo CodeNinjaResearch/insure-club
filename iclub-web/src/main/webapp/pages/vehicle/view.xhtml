@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable id="dtVehicleCont" widgetVar="dtVehicleCont" value="#{iclubVehicleController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{ bean.VId}" />
+		</p:column>
+		<p:column headerText="Registration Number">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.VRegNum}" />
+		</p:column>
+		<p:column>
+			<p:commandButton id="btnVehicleEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubVehicleController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubVehicleController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubVehicleController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

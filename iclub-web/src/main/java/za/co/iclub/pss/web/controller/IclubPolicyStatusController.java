@@ -134,7 +134,17 @@ public class IclubPolicyStatusController implements Serializable {
 			}
 		}
 
-		if (bean.getPsStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPsLongDesc() == null || bean.getPsLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPsStatus() == null || bean.getPsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubPolicyStatusController implements Serializable {
 		Collection<? extends IclubPolicyStatusModel> models = new ArrayList<IclubPolicyStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubPolicyStatusBean>();
-		for (IclubPolicyStatusModel model : models) {
-			IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
-			bean.setPsId(model.getPsId());
-			bean.setPsLongDesc(model.getPsLongDesc());
-			bean.setPsShortDesc(model.getPsShortDesc());
-			bean.setPsStatus(model.getPsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubPolicyStatusModel model : models) {
+				IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
+				bean.setPsId(model.getPsId());
+				bean.setPsLongDesc(model.getPsLongDesc());
+				bean.setPsShortDesc(model.getPsShortDesc());
+				bean.setPsStatus(model.getPsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

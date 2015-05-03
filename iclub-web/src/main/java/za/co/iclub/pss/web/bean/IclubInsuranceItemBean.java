@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubInsuranceItemBean {
 
@@ -9,7 +9,9 @@ public class IclubInsuranceItemBean {
 	private Long iclubInsuranceItemType;
 	private String iiQuoteId;
 	private String iiItemId;
-	private Timestamp iiCrtdDt;
+	private Double iiInsureValue;
+	private Double iiActualValue;
+	private Date iiCrtdDt;
 	private String[] iclubClaimItems;
 
 	public String getIiId() {
@@ -52,11 +54,11 @@ public class IclubInsuranceItemBean {
 		this.iiItemId = iiItemId;
 	}
 
-	public Timestamp getIiCrtdDt() {
+	public Date getIiCrtdDt() {
 		return iiCrtdDt;
 	}
 
-	public void setIiCrtdDt(Timestamp iiCrtdDt) {
+	public void setIiCrtdDt(Date iiCrtdDt) {
 		this.iiCrtdDt = iiCrtdDt;
 	}
 
@@ -66,6 +68,22 @@ public class IclubInsuranceItemBean {
 
 	public void setIclubClaimItems(String[] iclubClaimItems) {
 		this.iclubClaimItems = iclubClaimItems;
+	}
+
+	public Double getIiInsureValue() {
+		return iiInsureValue;
+	}
+
+	public void setIiInsureValue(Double iiInsureValue) {
+		this.iiInsureValue = iiInsureValue;
+	}
+
+	public Double getIiActualValue() {
+		return iiActualValue;
+	}
+
+	public void setIiActualValue(Double iiActualValue) {
+		this.iiActualValue = iiActualValue;
 	}
 
 }

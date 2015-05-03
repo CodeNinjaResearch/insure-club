@@ -134,7 +134,17 @@ public class IclubProductTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getPtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPtLongDesc() == null || bean.getPtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPtStatus() == null || bean.getPtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,14 +157,16 @@ public class IclubProductTypeController implements Serializable {
 		Collection<? extends IclubProductTypeModel> models = new ArrayList<IclubProductTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubProductTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubProductTypeBean>();
-		for (IclubProductTypeModel model : models) {
-			IclubProductTypeBean bean = new IclubProductTypeBean();
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubProductTypeModel model : models) {
+				IclubProductTypeBean bean = new IclubProductTypeBean();
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubEventBean {
 
@@ -8,7 +8,7 @@ public class IclubEventBean {
 	private Long iclubEventType;
 	private String iclubPerson;
 	private String EDesc;
-	private Timestamp ECrtdDt;
+	private Date ECrtdDt;
 
 	public String getEId() {
 		return EId;
@@ -42,11 +42,11 @@ public class IclubEventBean {
 		EDesc = eDesc;
 	}
 
-	public Timestamp getECrtdDt() {
+	public Date getECrtdDt() {
 		return ECrtdDt;
 	}
 
-	public void setECrtdDt(Timestamp eCrtdDt) {
+	public void setECrtdDt(Date eCrtdDt) {
 		ECrtdDt = eCrtdDt;
 	}
 

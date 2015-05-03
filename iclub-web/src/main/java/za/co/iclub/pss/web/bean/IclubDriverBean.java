@@ -1,6 +1,5 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class IclubDriverBean {
@@ -14,8 +13,8 @@ public class IclubDriverBean {
 	private String DName;
 	private String DLicenseNum;
 	private Date DIssueDt;
-	private Timestamp DDob;
-	private Timestamp DCrtdDt;
+	private Date DDob;
+	private Date DCrtdDt;
 	private String[] iclubVehicles;
 
 	public String getDId() {
@@ -90,19 +89,19 @@ public class IclubDriverBean {
 		DIssueDt = dIssueDt;
 	}
 
-	public Timestamp getDDob() {
+	public Date getDDob() {
 		return DDob;
 	}
 
-	public void setDDob(Timestamp dDob) {
+	public void setDDob(Date dDob) {
 		DDob = dDob;
 	}
 
-	public Timestamp getDCrtdDt() {
+	public Date getDCrtdDt() {
 		return DCrtdDt;
 	}
 
-	public void setDCrtdDt(Timestamp dCrtdDt) {
+	public void setDCrtdDt(Date dCrtdDt) {
 		DCrtdDt = dCrtdDt;
 	}
 

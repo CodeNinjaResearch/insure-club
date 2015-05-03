@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -79,7 +79,6 @@ public class IclubEventController implements Serializable {
 		viewParam = 2l;
 	}
 
-	
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -88,21 +87,24 @@ public class IclubEventController implements Serializable {
 		showSummaryCont = true;
 		viewParam = 3l;
 	}
+
 	public List<IclubEventBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubEventModel> models = new ArrayList<IclubEventModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEventModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubEventBean>();
-		for (IclubEventModel model : models) {
-			IclubEventBean bean = new IclubEventBean();
+		if (models != null && models.size() > 0) {
+			for (IclubEventModel model : models) {
+				IclubEventBean bean = new IclubEventBean();
 
-			bean.setEId(model.getEId());
-			bean.setECrtdDt(model.getECrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubEventType(model.getIclubEventType());
-			bean.setEDesc(model.getEDesc());
+				bean.setEId(model.getEId());
+				bean.setECrtdDt(model.getECrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubEventType(model.getIclubEventType());
+				bean.setEDesc(model.getEDesc());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -126,9 +128,9 @@ public class IclubEventController implements Serializable {
 
 				model.setEId(UUID.randomUUID().toString());
 				model.setIclubEventType(bean.getIclubEventType());
-				model.setECrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setECrtdDt(new Date(System.currentTimeMillis()));
 				model.setEDesc(bean.getEDesc());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -156,7 +158,7 @@ public class IclubEventController implements Serializable {
 
 				model.setEId(bean.getEId());
 				model.setIclubEventType(bean.getIclubEventType());
-				model.setECrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setECrtdDt(new Date(System.currentTimeMillis()));
 				model.setEDesc(bean.getEDesc());
 				model.setIclubPerson(bean.getIclubPerson());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -242,7 +244,11 @@ public class IclubEventController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -276,17 +282,19 @@ public class IclubEventController implements Serializable {
 		Collection<? extends IclubEventModel> models = new ArrayList<IclubEventModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEventModel.class));
 		client.close();
 		beans = new ArrayList<IclubEventBean>();
-		for (IclubEventModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubEventModel model : models) {
 
-			IclubEventBean bean = new IclubEventBean();
+				IclubEventBean bean = new IclubEventBean();
 
-			bean.setEId(model.getEId());
-			bean.setECrtdDt(model.getECrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubEventType(model.getIclubEventType());
-			bean.setEDesc(model.getEDesc());
+				bean.setEId(model.getEId());
+				bean.setECrtdDt(model.getECrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubEventType(model.getIclubEventType());
+				bean.setEDesc(model.getEDesc());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

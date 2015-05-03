@@ -1,21 +1,20 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<ui:define name="title">Maintain GeoLoc</ui:define>
-	<ui:define name="body">
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
 		<p:remoteCommand actionListener="#{iclubGeoLocController.initializePage}" name="onload" autoRun="true" update="pnlGeoLocContDet" />
-		<p:panel id="pnlGeoLocCont">
-			<p:panel id="pnlGeoLocContMenu">
-				<p:commandLink value="#{labels['viewgeoloc']}" actionListener="#{iclubGeoLocController.showView}" update="pnlGeoLocContDet" />
-			</p:panel>
-			<p:panel id="pnlGeoLocContDet">
-				<p:panel id="pnlGeoLocContView" rendered="#{iclubGeoLocController.showViewCont}">
-					<ui:include src="/pages/admin/geoloc/view.xhtml" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlGeoLocCont">
+				<p:panel id="pnlGeoLocContMenu">
+					<p:commandLink value="View GeoLoc" actionListener="#{iclubGeoLocController.showView}" update="pnlGeoLocContDet" />
 				</p:panel>
-				
-				<p:panel id="pnlGeoLocContSummary" rendered="#{iclubGeoLocController.showSummaryCont}">
-					<ui:include src="/pages/admin/geoloc/summary.xhtml" />
+				<p:panel id="pnlGeoLocContDet">
+					<p:panel id="pnlGeoLocContView" rendered="#{iclubGeoLocController.showViewCont}">
+						<ui:include src="/pages/admin/geoloc/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlGeoLocContSummary" rendered="#{iclubGeoLocController.showSummaryCont}">
+						<ui:include src="/pages/admin/geoloc/summary.xhtml" />
+					</p:panel>
 				</p:panel>
-				  
 			</p:panel>
-		</p:panel>
+		</div>
 	</ui:define>
 </ui:composition>

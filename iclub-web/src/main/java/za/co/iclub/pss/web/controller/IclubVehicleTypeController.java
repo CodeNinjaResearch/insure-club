@@ -132,9 +132,17 @@ public class IclubVehicleTypeController implements Serializable {
 				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				ret = ret && false;
 			}
+		} else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 
-		if (bean.getVtStatus().equalsIgnoreCase("-1")) {
+		if (bean.getVtLongDesc() == null || bean.getVtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getVtStatus() == null || bean.getVtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +155,15 @@ public class IclubVehicleTypeController implements Serializable {
 		Collection<? extends IclubVehicleTypeModel> models = new ArrayList<IclubVehicleTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubVehicleTypeBean>();
-		for (IclubVehicleTypeModel model : models) {
-			IclubVehicleTypeBean bean = new IclubVehicleTypeBean();
-			bean.setVtId(model.getVtId());
-			bean.setVtLongDesc(model.getVtLongDesc());
-			bean.setVtShortDesc(model.getVtShortDesc());
-			bean.setVtStatus(model.getVtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubVehicleTypeModel model : models) {
+				IclubVehicleTypeBean bean = new IclubVehicleTypeBean();
+				bean.setVtId(model.getVtId());
+				bean.setVtLongDesc(model.getVtLongDesc());
+				bean.setVtShortDesc(model.getVtShortDesc());
+				bean.setVtStatus(model.getVtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

@@ -1,45 +1,35 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtVehicleMasterCont" widgetVar="dtVehicleMasterCont" value="#{iclubVehicleMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No VehicleMasteres Available">
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmid']}">
-			<p:outputLabel value="#{bean.vmId}" />
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmId}" />
 		</p:column>
-
-		<p:column headerText="#{labels['vehiclemaster.view.userid']}">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+		<p:column headerText="Created By">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
-
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmmake']}">
-			<p:outputLabel value="#{bean.vmMake}" />
+		<p:column headerText="Make">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMake}" />
 		</p:column>
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmmodel']}">
-			<p:outputLabel value="#{bean.vmModel}" />
+		<p:column headerText="Model">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmModel}" />
 		</p:column>
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmorigrate']}">
-			<p:outputLabel value="#{bean.vmOrigRate}" />
+		<p:column headerText="Orginal Rate">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmOrigRate}" />
 		</p:column>
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmmrktrate']}">
-			<p:outputLabel value="#{bean.vmMrktRate}" />
+		<p:column headerText="Market Rate">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMrktRate}" />
 		</p:column>
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmretrate']}">
-			<p:outputLabel value="#{bean.vmRetRate}" />
+		<p:column headerText="Retail Rate">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRetRate}" />
 		</p:column>
-
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmproddt']}">
-			<p:outputLabel value="#{bean.vmProdDt}" />
+		<p:column headerText="Production Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmProdDt}" />
 		</p:column>
-
-		<p:column headerText="#{labels['vehiclemaster.view.vmcrtddt']}">
-			<p:outputLabel value="#{bean.vmCrtdDt}" />
+		<p:column headerText="Rate Percentage">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRatePrct}" />
 		</p:column>
-
-
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmCrtdDt}" />
+		</p:column>
 		<p:column>
 			<p:commandButton id="btnVehicleMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubVehicleMasterController.showSummary}" update=":vehiclemasterFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubVehicleMasterController.bean}" value="#{bean}" />

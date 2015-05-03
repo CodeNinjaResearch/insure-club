@@ -132,9 +132,17 @@ public class IclubIdTypeController implements Serializable {
 				IclubWebHelper.addMessage(message.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				ret = ret && false;
 			}
+		} else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 
-		if (bean.getItStatus().equalsIgnoreCase("-1")) {
+		if (bean.getItLongDesc() == null || bean.getItLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getItStatus() == null || bean.getItStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +155,15 @@ public class IclubIdTypeController implements Serializable {
 		Collection<? extends IclubIdTypeModel> models = new ArrayList<IclubIdTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubIdTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubIdTypeBean>();
-		for (IclubIdTypeModel model : models) {
-			IclubIdTypeBean bean = new IclubIdTypeBean();
-			bean.setItId(model.getItId());
-			bean.setItLongDesc(model.getItLongDesc());
-			bean.setItShortDesc(model.getItShortDesc());
-			bean.setItStatus(model.getItStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubIdTypeModel model : models) {
+				IclubIdTypeBean bean = new IclubIdTypeBean();
+				bean.setItId(model.getItId());
+				bean.setItLongDesc(model.getItLongDesc());
+				bean.setItShortDesc(model.getItShortDesc());
+				bean.setItStatus(model.getItStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

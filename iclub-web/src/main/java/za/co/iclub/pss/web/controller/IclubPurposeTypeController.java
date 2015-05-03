@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -84,38 +84,40 @@ public class IclubPurposeTypeController implements Serializable {
 		Collection<? extends IclubPurposeTypeModel> models = new ArrayList<IclubPurposeTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPurposeTypeModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubPurposeTypeBean>();
-		for (IclubPurposeTypeModel model : models) {
-			IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
+		if (models != null && models.size() > 0) {
+			for (IclubPurposeTypeModel model : models) {
+				IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
 
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
-			bean.setPtCrtdDt(model.getPtCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
+				bean.setPtCrtdDt(model.getPtCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 
-			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
-				String[] properties = new String[model.getIclubProperties().length];
-				int i = 0;
-				for (String iclubProperty : model.getIclubProperties()) {
-					properties[i] = iclubProperty;
-					i++;
+				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
+					String[] properties = new String[model.getIclubProperties().length];
+					int i = 0;
+					for (String iclubProperty : model.getIclubProperties()) {
+						properties[i] = iclubProperty;
+						i++;
+					}
+					bean.setIclubProperties(properties);
 				}
-				bean.setIclubProperties(properties);
-			}
 
-			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-				String[] vehicles = new String[model.getIclubVehicles().length];
-				int i = 0;
-				for (String iclubVehicle : model.getIclubVehicles()) {
-					vehicles[i] = iclubVehicle;
-					i++;
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String iclubVehicle : model.getIclubVehicles()) {
+						vehicles[i] = iclubVehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
 				}
-				bean.setIclubVehicles(vehicles);
-			}
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -140,8 +142,8 @@ public class IclubPurposeTypeController implements Serializable {
 				model.setPtLongDesc(bean.getPtLongDesc());
 				model.setPtShortDesc(bean.getPtShortDesc());
 				model.setPtStatus(bean.getPtStatus());
-				model.setPtCrtdDt(new Timestamp(System.currentTimeMillis()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setPtCrtdDt(new Date(System.currentTimeMillis()));
+				model.setIclubPerson(getSessionUserId());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -172,8 +174,8 @@ public class IclubPurposeTypeController implements Serializable {
 				model.setPtLongDesc(bean.getPtLongDesc());
 				model.setPtShortDesc(bean.getPtShortDesc());
 				model.setPtStatus(bean.getPtStatus());
-				model.setPtCrtdDt(new Timestamp(bean.getPtCrtdDt().getTime()));
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setPtCrtdDt(new Date(System.currentTimeMillis()));
+				model.setIclubPerson(getSessionUserId());
 				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -259,7 +261,11 @@ public class IclubPurposeTypeController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -293,39 +299,41 @@ public class IclubPurposeTypeController implements Serializable {
 		Collection<? extends IclubPurposeTypeModel> models = new ArrayList<IclubPurposeTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPurposeTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubPurposeTypeBean>();
-		for (IclubPurposeTypeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubPurposeTypeModel model : models) {
 
-			IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
+				IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
 
-			bean.setPtId(model.getPtId());
-			bean.setPtLongDesc(model.getPtLongDesc());
-			bean.setPtShortDesc(model.getPtShortDesc());
-			bean.setPtStatus(model.getPtStatus());
-			bean.setPtCrtdDt(model.getPtCrtdDt());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				bean.setPtId(model.getPtId());
+				bean.setPtLongDesc(model.getPtLongDesc());
+				bean.setPtShortDesc(model.getPtShortDesc());
+				bean.setPtStatus(model.getPtStatus());
+				bean.setPtCrtdDt(model.getPtCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 
-			if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
-				String[] properties = new String[model.getIclubProperties().length];
-				int i = 0;
-				for (String iclubProperty : model.getIclubProperties()) {
-					properties[i] = iclubProperty;
-					i++;
+				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
+					String[] properties = new String[model.getIclubProperties().length];
+					int i = 0;
+					for (String iclubProperty : model.getIclubProperties()) {
+						properties[i] = iclubProperty;
+						i++;
+					}
+					bean.setIclubProperties(properties);
 				}
-				bean.setIclubProperties(properties);
-			}
 
-			if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-				String[] vehicles = new String[model.getIclubVehicles().length];
-				int i = 0;
-				for (String iclubVehicle : model.getIclubVehicles()) {
-					vehicles[i] = iclubVehicle;
-					i++;
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String iclubVehicle : model.getIclubVehicles()) {
+						vehicles[i] = iclubVehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
 				}
-				bean.setIclubVehicles(vehicles);
-			}
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

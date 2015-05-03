@@ -79,25 +79,27 @@ public class IclubEntityTypeController implements Serializable {
 		Collection<? extends IclubEntityTypeModel> models = new ArrayList<IclubEntityTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEntityTypeModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubEntityTypeBean>();
-		for (IclubEntityTypeModel model : models) {
-			IclubEntityTypeBean bean = new IclubEntityTypeBean();
+		if (models != null && models.size() > 0) {
+			for (IclubEntityTypeModel model : models) {
+				IclubEntityTypeBean bean = new IclubEntityTypeBean();
 
-			bean.setEtId(model.getEtId());
-			bean.setEtLongDesc(model.getEtLongDesc());
-			bean.setEtShortDesc(model.getEtShortDesc());
-			bean.setEtStatus(model.getEtStatus());
+				bean.setEtId(model.getEtId());
+				bean.setEtLongDesc(model.getEtLongDesc());
+				bean.setEtShortDesc(model.getEtShortDesc());
+				bean.setEtStatus(model.getEtStatus());
 
-			if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
-				String[] documents = new String[model.getIclubDocuments().length];
-				int i = 0;
-				for (String iclubDocument : model.getIclubDocuments()) {
-					documents[i] = iclubDocument;
-					i++;
+				if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
+					String[] documents = new String[model.getIclubDocuments().length];
+					int i = 0;
+					for (String iclubDocument : model.getIclubDocuments()) {
+						documents[i] = iclubDocument;
+						i++;
+					}
+					bean.setIclubDocuments(documents);
 				}
-				bean.setIclubDocuments(documents);
-			}
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -127,16 +129,16 @@ public class IclubEntityTypeController implements Serializable {
 				client.close();
 				if (response.getStatusCode() == 0) {
 
-					IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
@@ -155,16 +157,16 @@ public class IclubEntityTypeController implements Serializable {
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
@@ -174,15 +176,15 @@ public class IclubEntityTypeController implements Serializable {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getEtId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
-				IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
 				viewParam = 1l;
 				showView();
 			} else {
-				IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+				IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("covertype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("entitytype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
@@ -235,7 +237,11 @@ public class IclubEntityTypeController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -269,16 +275,18 @@ public class IclubEntityTypeController implements Serializable {
 		Collection<? extends IclubEntityTypeModel> models = new ArrayList<IclubEntityTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEntityTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubEntityTypeBean>();
-		for (IclubEntityTypeModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubEntityTypeModel model : models) {
 
-			IclubEntityTypeBean bean = new IclubEntityTypeBean();
+				IclubEntityTypeBean bean = new IclubEntityTypeBean();
 
-			bean.setEtId(model.getEtId());
-			bean.setEtLongDesc(model.getEtLongDesc());
-			bean.setEtShortDesc(model.getEtShortDesc());
-			bean.setEtStatus(model.getEtStatus());
+				bean.setEtId(model.getEtId());
+				bean.setEtLongDesc(model.getEtLongDesc());
+				bean.setEtShortDesc(model.getEtShortDesc());
+				bean.setEtStatus(model.getEtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

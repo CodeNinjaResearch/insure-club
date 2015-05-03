@@ -1,24 +1,25 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<ui:define name="title">Maintain Extras</ui:define>
-	<ui:define name="body">
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
 		<p:remoteCommand actionListener="#{iclubExtrasController.initializePage}" name="onload" autoRun="true" update="pnlExtrasContDet" />
-		<p:panel id="pnlExtrasCont">
-			<p:panel id="pnlExtrasContMenu">
-				<p:commandLink value="#{labels['viewextras']}" actionListener="#{iclubExtrasController.showView}" update="pnlExtrasContDet" />
-				<p:graphicImage name="separator.png" library="images" />
-				<p:commandLink value="#{labels['createextras']}"  actionListener="#{iclubExtrasController.showCreate}" update="pnlExtrasContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlExtrasCont">
+				<p:panel id="pnlExtrasContMenu">
+					<p:commandLink value="View Extras" actionListener="#{iclubExtrasController.showView}" update="pnlExtrasContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create Extras" actionListener="#{iclubExtrasController.showCreate}" update="pnlExtrasContDet" />
+				</p:panel>
+				<p:panel id="pnlExtrasContDet">
+					<p:panel id="pnlExtrasContView" rendered="#{iclubExtrasController.showViewCont}">
+						<ui:include src="/pages/admin/extras/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlExtrasContCreate" rendered="#{iclubExtrasController.showCreateCont}">
+						<ui:include src="/pages/admin/extras/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlExtrasContEdit" rendered="#{iclubExtrasController.showEditCont}">
+						<ui:include src="/pages/admin/extras/edit.xhtml" />
+					</p:panel>
+				</p:panel>
 			</p:panel>
-			<p:panel id="pnlExtrasContDet">
-				<p:panel id="pnlExtrasContView" rendered="#{iclubExtrasController.showViewCont}">
-					<ui:include src="/pages/admin/extras/view.xhtml" />
-				</p:panel>
-				<p:panel id="pnlExtrasContCreate" rendered="#{iclubExtrasController.showCreateCont}">
-					<ui:include src="/pages/admin/extras/create.xhtml" />
-				</p:panel>
-				<p:panel id="pnlExtrasContEdit" rendered="#{iclubExtrasController.showEditCont}">
-					<ui:include src="/pages/admin/extras/edit.xhtml" />
-				</p:panel>
-			</p:panel>
-		</p:panel>
+		</div>
 	</ui:define>
 </ui:composition>

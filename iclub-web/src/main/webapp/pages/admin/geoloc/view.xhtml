@@ -1,42 +1,17 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<p:dataTable id="dtGeoLocCont" widgetVar="dtGeoLocCont" value="#{iclubGeoLocController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No GeoLoces Available">
-
-		<p:column headerText="#{labels['geoloc.view.glid']}">
-			<p:outputLabel value="#{bean.glId}" />
+	<p:dataTable id="dtGeoLocCont" widgetVar="dtGeoLocCont" value="#{iclubGeoLocController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No GeoLoces Available" reflow="true">
+		<p:column headerText="Province">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glProvince}" />
 		</p:column>
-		<p:column headerText="#{labels['geoloc.view.userid']}">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+		<p:column headerText="Suburb">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glSuburb}" />
 		</p:column>
-
-
-		<p:column headerText="#{labels['geoloc.view.gladdress']}">
-			<p:outputLabel value="#{bean.glAddress}" />
+		<p:column headerText="Rate">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glRate}" />
 		</p:column>
-
-		<p:column headerText="#{labels['geoloc.view.gllat']}">
-			<p:outputLabel value="#{bean.glLat}" />
+		<p:column headerText="created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glCrtdDt}" />
 		</p:column>
-
-		<p:column headerText="#{labels['geoloc.view.gllong']}">
-			<p:outputLabel value="#{bean.glLong}" />
-		</p:column>
-
-		<p:column headerText="#{labels['geoloc.view.glrate']}">
-			<p:outputLabel value="#{bean.glRate}" />
-		</p:column>
-
-		<p:column headerText="#{labels['geoloc.view.glcrtddt']}">
-			<p:outputLabel value="#{bean.glCrtdDt}" />
-		</p:column>
-
-
-
-
-
-
-
-
-
 		<p:column>
 			<p:commandButton id="btnGeoLocSummary" icon="ui-icon-summary" ajax="false" action="#{iclubGeoLocController.showSummary}" update=":geolocFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubGeoLocController.bean}" value="#{bean}" />

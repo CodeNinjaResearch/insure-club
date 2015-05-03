@@ -134,7 +134,17 @@ public class IclubRoleTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getRtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getRtLongDesc() == null || bean.getRtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getRtStatus() == null || bean.getRtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,20 +157,22 @@ public class IclubRoleTypeController implements Serializable {
 		Collection<? extends IclubRoleTypeModel> models = new ArrayList<IclubRoleTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRoleTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubRoleTypeBean>();
-		for (IclubRoleTypeModel model : models) {
-			IclubRoleTypeBean bean = new IclubRoleTypeBean();
-			bean.setRtId(model.getRtId());
-			bean.setRtLongDesc(model.getRtLongDesc());
-			bean.setRtShortDesc(model.getRtShortDesc());
-			bean.setRtStatus(model.getRtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubRoleTypeModel model : models) {
+				IclubRoleTypeBean bean = new IclubRoleTypeBean();
+				bean.setRtId(model.getRtId());
+				bean.setRtLongDesc(model.getRtLongDesc());
+				bean.setRtShortDesc(model.getRtShortDesc());
+				bean.setRtStatus(model.getRtStatus());
 
-			// need to verify is required or not
-			if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
+				// need to verify is required or not
+				if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
 
-				bean.setIclubLogins(model.getIclubLogins());
+					bean.setIclubLogins(model.getIclubLogins());
+				}
+
+				beans.add(bean);
 			}
-
-			beans.add(bean);
 		}
 		return beans;
 	}

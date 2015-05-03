@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/mdata/container.xhtml">
+	<ui:define name="mdata">
+		<div class="ContainerIndent">
+			<p:panel id="pnlCohortTypeCont">
+				<p:dataTable id="dtCohortTypeCont" widgetVar="dtCohortTypeCont" value="#{iclubCohortTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohort Type Found" reflow="true">
+					<f:facet name="footer">
+						<p:commandButton id="btnCohortTypeShowAdd" value="Add" actionListener="#{iclubCohortTypeController.showAddPanel}" update=":iclubFrm:pnlCohortTypeCont" />
+					</f:facet>
+					<p:column headerText="Unique Id">
+						<p:outputLabel value="#{bean.ctId}" />
+					</p:column>
+					<p:column headerText="Short Description">
+						<p:outputLabel value="#{bean.ctShortDesc}" />
+					</p:column>
+					<p:column headerText="Long Description">
+						<p:outputLabel value="#{bean.ctLongDesc}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.ctStatus}" disabled="true">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnCohortTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubCohortTypeController.showModPanel}" update=":iclubFrm:pnlCohortTypeCont">
+							<f:setPropertyActionListener target="#{iclubCohortTypeController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="pnlAdd" rendered="#{iclubCohortTypeController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubCohortTypeController.bean.ctShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubCohortTypeController.bean.ctLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubCohortTypeController.bean.ctStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:commandButton id="btnCohortTypeAddSave" value="Save" actionListener="#{iclubCohortTypeController.addIclubCohortType}" update="iclubFrm:grlMsg,:iclubFrm:pnlCohortTypeCont" />
+							</div>
+							<div class="Container50">
+								<p:commandButton id="btnCohortTypeAddClose" value="Close" actionListener="#{iclubCohortTypeController.clearForm}" update=":iclubFrm:pnlCohortTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlMod" rendered="#{iclubCohortTypeController.showModPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:outputLabel value="#{iclubCohortTypeController.bean.ctId}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubCohortTypeController.bean.ctShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubCohortTypeController.bean.ctLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubCohortTypeController.bean.ctStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container33">
+								<p:commandButton id="btnCohortTypeModSave" value="Save" actionListener="#{iclubCohortTypeController.modIclubCohortType}" update="iclubFrm:grlMsg,:iclubFrm:pnlCohortTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnCohortTypeModDelete" value="Delete" actionListener="#{iclubCohortTypeController.delIclubCohortType}" update="iclubFrm:grlMsg,:iclubFrm:pnlCohortTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnCohortTypeModClose" value="Close" actionListener="#{iclubCohortTypeController.clearForm}" update=":iclubFrm:pnlCohortTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

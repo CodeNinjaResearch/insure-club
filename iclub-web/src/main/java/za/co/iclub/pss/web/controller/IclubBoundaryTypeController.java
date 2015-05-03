@@ -134,7 +134,17 @@ public class IclubBoundaryTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getBtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getBtLongDesc() == null || bean.getBtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getBtStatus() == null || bean.getBtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubBoundaryTypeController implements Serializable {
 		Collection<? extends IclubBoundaryTypeModel> models = new ArrayList<IclubBoundaryTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBoundaryTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubBoundaryTypeBean>();
-		for (IclubBoundaryTypeModel model : models) {
-			IclubBoundaryTypeBean bean = new IclubBoundaryTypeBean();
-			bean.setBtId(model.getBtId());
-			bean.setBtLongDesc(model.getBtLongDesc());
-			bean.setBtShortDesc(model.getBtShortDesc());
-			bean.setBtStatus(model.getBtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubBoundaryTypeModel model : models) {
+				IclubBoundaryTypeBean bean = new IclubBoundaryTypeBean();
+				bean.setBtId(model.getBtId());
+				bean.setBtLongDesc(model.getBtLongDesc());
+				bean.setBtShortDesc(model.getBtShortDesc());
+				bean.setBtStatus(model.getBtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

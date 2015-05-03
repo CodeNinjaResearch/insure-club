@@ -1,24 +1,25 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<ui:define name="title">Maintain CoverType</ui:define>
-	<ui:define name="body">
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
 		<p:remoteCommand actionListener="#{iclubCoverTypeController.initializePage}" name="onload" autoRun="true" update="pnlCoverTypeContDet" />
-		<p:panel id="pnlCoverTypeCont">
-			<p:panel id="pnlCoverTypeContMenu">
-				<p:commandLink value="#{labels['viewcovertype']}" actionListener="#{iclubCoverTypeController.showView}" update="pnlCoverTypeContDet" />
-				<p:graphicImage name="separator.png" library="images" />
-				<p:commandLink value="#{labels['createcovertype']}"  actionListener="#{iclubCoverTypeController.showCreate}" update="pnlCoverTypeContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlCoverTypeCont">
+				<p:panel id="pnlCoverTypeContMenu">
+					<p:commandLink value="View CoverType" actionListener="#{iclubCoverTypeController.showView}" update="pnlCoverTypeContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create CoverType" actionListener="#{iclubCoverTypeController.showCreate}" update="pnlCoverTypeContDet" />
+				</p:panel>
+				<p:panel id="pnlCoverTypeContDet">
+					<p:panel id="pnlCoverTypeContView" styleClass="BordNone" rendered="#{iclubCoverTypeController.showViewCont}">
+						<ui:include src="/pages/admin/covertype/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlCoverTypeContCreate" styleClass="BordNone" rendered="#{iclubCoverTypeController.showCreateCont}">
+						<ui:include src="/pages/admin/covertype/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlCoverTypeContEdit" styleClass="BordNone" rendered="#{iclubCoverTypeController.showEditCont}">
+						<ui:include src="/pages/admin/covertype/edit.xhtml" />
+					</p:panel>
+				</p:panel>
 			</p:panel>
-			<p:panel id="pnlCoverTypeContDet">
-				<p:panel id="pnlCoverTypeContView" rendered="#{iclubCoverTypeController.showViewCont}">
-					<ui:include src="/pages/admin/covertype/view.xhtml" />
-				</p:panel>
-				<p:panel id="pnlCoverTypeContCreate" rendered="#{iclubCoverTypeController.showCreateCont}">
-					<ui:include src="/pages/admin/covertype/create.xhtml" />
-				</p:panel>
-				<p:panel id="pnlCoverTypeContEdit" rendered="#{iclubCoverTypeController.showEditCont}">
-					<ui:include src="/pages/admin/covertype/edit.xhtml" />
-				</p:panel>
-			</p:panel>
-		</p:panel>
+		</div>
 	</ui:define>
 </ui:composition>

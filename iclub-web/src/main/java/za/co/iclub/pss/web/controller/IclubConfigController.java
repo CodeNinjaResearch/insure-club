@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,8 +26,6 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @SessionScoped
 public class IclubConfigController implements Serializable {
 
-	
-	
 	private static final long serialVersionUID = -7437744045926990807L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubConfigController.class);
@@ -82,16 +80,18 @@ public class IclubConfigController implements Serializable {
 		Collection<? extends IclubConfigModel> models = new ArrayList<IclubConfigModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubConfigModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubConfigBean>();
-		for (IclubConfigModel model : models) {
-			IclubConfigBean bean = new IclubConfigBean();
-			bean.setCId(model.getCId());
-			bean.setCKey(model.getCKey());
-			bean.setCCrtdDt(model.getCCrtdDt());
-			bean.setCValue(model.getCValue());
-			bean.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-			bean.setCStatus(model.getCStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubConfigModel model : models) {
+				IclubConfigBean bean = new IclubConfigBean();
+				bean.setCId(model.getCId());
+				bean.setCKey(model.getCKey());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setIclubPerson(getSessionUserId());
+				bean.setCStatus(model.getCStatus());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -114,9 +114,9 @@ public class IclubConfigController implements Serializable {
 				IclubConfigModel model = new IclubConfigModel();
 
 				model.setCKey(bean.getCKey());
-				model.setCCrtdDt(new Timestamp(bean.getCCrtdDt().getTime()));
+				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -145,9 +145,9 @@ public class IclubConfigController implements Serializable {
 
 				model.setCId(bean.getCId());
 				model.setCKey(bean.getCKey());
-				model.setCCrtdDt(new Timestamp(bean.getCCrtdDt().getTime()));
+				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				model.setCValue(bean.getCValue());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setCStatus(bean.getCStatus());
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -187,14 +187,13 @@ public class IclubConfigController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 
-		if (bean.getIclubPerson()!=null && bean.getIclubPerson().equals(-1)) {
+		if (bean.getIclubPerson() != null && bean.getIclubPerson().equals(-1)) {
 			IclubWebHelper.addMessage("Please select a valid value for EntityStatus", FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 
 		return ret;
 	}
-
 
 	public IclubConfigBean getBean() {
 		if (bean == null)
@@ -239,7 +238,11 @@ public class IclubConfigController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -273,16 +276,18 @@ public class IclubConfigController implements Serializable {
 		Collection<? extends IclubConfigModel> models = new ArrayList<IclubConfigModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubConfigModel.class));
 		client.close();
 		beans = new ArrayList<IclubConfigBean>();
-		for (IclubConfigModel model : models) {
-			IclubConfigBean bean = new IclubConfigBean();
-			bean.setCId(model.getCId());
-			bean.setCKey(model.getCKey());
-			bean.setCCrtdDt(model.getCCrtdDt());
-			bean.setCValue(model.getCValue());
-			bean.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-			bean.setCStatus(model.getCStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubConfigModel model : models) {
+				IclubConfigBean bean = new IclubConfigBean();
+				bean.setCId(model.getCId());
+				bean.setCKey(model.getCKey());
+				bean.setCCrtdDt(model.getCCrtdDt());
+				bean.setCValue(model.getCValue());
+				bean.setIclubPerson(getSessionUserId());
+				bean.setCStatus(model.getCStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

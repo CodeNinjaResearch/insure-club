@@ -1,81 +1,97 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<div style="align: center !important">
-		<p:panelGrid columns="2">
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmid']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmId}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.userid']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.iclubPerson}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmmake']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmMake}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmmodel']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmModel}" />
-			</p:column>
-
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmorigrate']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmOrigRate}" />
-			</p:column>
-
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmmrktrate']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmMrktRate}" />
-			</p:column>
-
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmretrate']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmRetRate}" />
-			</p:column>
-
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmproddt']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmProdDt}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['vehiclemaster.summary.vmcrtddt']}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubVehicleMasterController.bean.vmCrtdDt}" />
-			</p:column>
-
-
-
-
-		</p:panelGrid>
-	</div>
-	<f:facet name="footer">
-		<div style="align: center !important">
-			<p:commandButton id="btnVehicleMasterCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleMasterCont" value="#{labels['close']}" actionListener="#{iclubVehicleMasterController.showView}" />
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id" />
 		</div>
-	</f:facet>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmId}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Created By" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.iclubPerson}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Make" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmMake}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Model" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmModel}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Orginal Rate" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmOrigRate}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Market Rate" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmMrktRate}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Retail Rate" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmRetRate}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Production Date" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmProdDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Rate Percentage" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmRatePrct}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Creatd Date" />
+		</div>
+		<div class="EmptyBox5" />
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmCrtdDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<p:commandButton id="btnVehicleMasterCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleMasterCont" value="Close" actionListener="#{iclubVehicleMasterController.showView}" />
+	</div>
 </ui:composition>

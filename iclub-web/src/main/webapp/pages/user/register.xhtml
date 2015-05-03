@@ -1,0 +1,237 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlProfileCont">
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Title :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubQuickQuoteController.bean.PTitle}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Intials :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Initials" value="#{iclubQuickQuoteController.bean.PInitials}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="First Name :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="First Name" value="#{iclubQuickQuoteController.bean.PFName}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Last Name :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Last Name" value="#{iclubQuickQuoteController.bean.PLName}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Mobile :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Mobile" value="#{iclubQuickQuoteController.bean.PMobile}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Email :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Email" value="#{iclubQuickQuoteController.bean.PEmail}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Contact Reference" value="#{iclubQuickQuoteController.bean.PContactPref}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Gender :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuGender" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuGender.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.bean.PGender}">
+							<f:selectItem itemLabel="Gender" itemDisabled="true" />
+							<f:selectItem itemLabel="Male" itemValue="M" />
+							<f:selectItem itemLabel="Female" itemValue="F" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Maritial Status :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuMarS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.bean.iclubMaritialStatus}">
+							<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msId}" value="#{iclubQuickQuoteController.maritialStatusBeans}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Id Type :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuIdType" id="mnuIdType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.bean.iclubIdType}">
+							<f:selectItem itemLabel="Id Type" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.itLongDesc}" itemValue="#{c.itId}" value="#{iclubQuickQuoteController.idTypeBeans}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Id Num :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Id Num" value="#{iclubQuickQuoteController.bean.PIdNum}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Issuer Country :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuIdIss" id="mnuIdIss" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.bean.PIdIssueCntry}">
+							<f:selectItem itemLabel="Issuer Country" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubQuickQuoteController.bean.PIdIssueDt}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel value="Expiry Date :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:calendar styleClass="TexAlCenter" placeholder="Expiry Date" value="#{iclubQuickQuoteController.bean.PIdExpiryDt}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Occupation :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuOcc" id="mnuOcc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.bean.POccupation}">
+							<f:selectItem itemLabel="Occupation" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.occupationBeans}" var="c" itemLabel="#{c.ODesc}" itemValue="#{c.OId}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:calendar placeholder="Date Of Birth" value="#{iclubQuickQuoteController.bean.PDob}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Is Pensioner :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.bean.PIsPensioner}">
+							<f:selectItem itemLabel="Is Pensioner" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<p:panel id="pnlUpdatePwdCont">
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Login Name :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Login Name" value="#{iclubQuickQuoteController.loginBean.LName}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Password :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Password" value="#{iclubQuickQuoteController.loginBean.LPasswd}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Security Question :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuSec" id="mnuSec" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.loginBean.iclubSecurityQuestion}">
+								<f:selectItem itemLabel="Security Question" itemDisabled="true" />
+								<f:selectItems value="#{iclubQuickQuoteController.securityQuestionBeans}" var="c" itemLabel="#{c.sqLongDesc}" itemValue="#{c.sqId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Security Answer :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Security Answer" value="#{iclubQuickQuoteController.loginBean.LSecAns}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:panel>
+				<div class="Container100 Responsive">
+					<p:commandButton update=":iclubFrm:pnlProfileCont,:iclubFrm:grlMsg" styleClass="Fs16" value="Update" ajax="false" action="#{iclubQuickQuoteController.updatedPerson}" />
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

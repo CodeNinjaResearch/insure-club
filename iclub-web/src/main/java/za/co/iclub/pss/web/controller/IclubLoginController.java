@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.codec.binary.Base64;
@@ -55,16 +57,6 @@ public class IclubLoginController implements Serializable {
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
 
-						/*
-						 * ResponseModel eResponse =
-						 * IclubWebHelper.createEvent("Person Logged in :: " +
-						 * bean.getLName(), 12l, personModel.getPId()); if
-						 * (eResponse.getStatusCode() == 0) { return "home"; }
-						 * else { IclubWebHelper.addMessage(
-						 * "Login event generation failed :: " +
-						 * eResponse.getStatusDesc(),
-						 * FacesMessage.SEVERITY_INFO); return "home"; }
-						 */
 						return "home";
 
 					} else {
@@ -87,6 +79,9 @@ public class IclubLoginController implements Serializable {
 
 	public void doIclubLogout() {
 		IclubWebHelper.invalidateSession();
+		FacesContext context = FacesContext.getCurrentInstance();
+		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
+		navigationHandler.handleNavigation(context, null, "/templates/home.xhtml?faces-redirect=true");
 	}
 
 	public boolean validateLogin() {

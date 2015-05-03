@@ -3,18 +3,25 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
-	<display-name>iclub-web</display-name>
+	<display-name>iclub-www</display-name>
+	<welcome-file-list>
+		<welcome-file>/templates/home.xhtml</welcome-file>
+	</welcome-file-list>
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>#{themeSwitcherController.theme}</param-value>
+		<param-value>sentinel</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
 	</context-param>
 	<context-param>
 		<param-name>primefaces.UPLOADER</param-name>
 		<param-value>commons</param-value>
-	</context-param>
-	<context-param>
-		<param-name>facelets.SKIP_COMMENTS</param-name>
-		<param-value>true</param-value>
 	</context-param>
 	<filter>
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
@@ -41,7 +48,45 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Production</param-value>
 	</context-param>
-	<welcome-file-list>
-		<welcome-file>/pages/iclubLogin.xhtml</welcome-file>
-	</welcome-file-list>
+
+	<mime-mapping>
+		<extension>ttf</extension>
+		<mime-type>application/font-sfnt</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>woff</extension>
+		<mime-type>application/font-woff</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>eot</extension>
+		<mime-type>application/vnd.ms-fontobject</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>eot?#iefix</extension>
+		<mime-type>application/vnd.ms-fontobject</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg#exosemibold</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg#exobolditalic</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg#exomedium</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg#exoregular</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg#fontawesomeregular</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
 </web-app>

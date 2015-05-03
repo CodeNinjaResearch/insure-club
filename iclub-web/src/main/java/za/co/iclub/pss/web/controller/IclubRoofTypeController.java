@@ -134,7 +134,17 @@ public class IclubRoofTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getRtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getRtLongDesc() == null || bean.getRtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getRtStatus() == null || bean.getRtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubRoofTypeController implements Serializable {
 		Collection<? extends IclubRoofTypeModel> models = new ArrayList<IclubRoofTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRoofTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubRoofTypeBean>();
-		for (IclubRoofTypeModel model : models) {
-			IclubRoofTypeBean bean = new IclubRoofTypeBean();
-			bean.setRtId(model.getRtId());
-			bean.setRtLongDesc(model.getRtLongDesc());
-			bean.setRtShortDesc(model.getRtShortDesc());
-			bean.setRtStatus(model.getRtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubRoofTypeModel model : models) {
+				IclubRoofTypeBean bean = new IclubRoofTypeBean();
+				bean.setRtId(model.getRtId());
+				bean.setRtLongDesc(model.getRtLongDesc());
+				bean.setRtShortDesc(model.getRtShortDesc());
+				bean.setRtStatus(model.getRtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

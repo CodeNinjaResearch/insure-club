@@ -134,7 +134,17 @@ public class IclubDocumentTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getDtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getDtLongDesc() == null || bean.getDtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getDtStatus() == null || bean.getDtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,14 +157,16 @@ public class IclubDocumentTypeController implements Serializable {
 		Collection<? extends IclubDocumentTypeModel> models = new ArrayList<IclubDocumentTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubDocumentTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubDocumentTypeBean>();
-		for (IclubDocumentTypeModel model : models) {
-			IclubDocumentTypeBean bean = new IclubDocumentTypeBean();
-			bean.setDtId(model.getDtId());
-			bean.setDtLongDesc(model.getDtLongDesc());
-			bean.setDtShortDesc(model.getDtShortDesc());
-			bean.setDtStatus(model.getDtStatus());
+		if (models != null && models.size() > 0) {
+			for (IclubDocumentTypeModel model : models) {
+				IclubDocumentTypeBean bean = new IclubDocumentTypeBean();
+				bean.setDtId(model.getDtId());
+				bean.setDtLongDesc(model.getDtLongDesc());
+				bean.setDtShortDesc(model.getDtShortDesc());
+				bean.setDtStatus(model.getDtStatus());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

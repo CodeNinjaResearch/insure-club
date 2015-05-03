@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/mdata/container.xhtml">
+	<ui:define name="mdata">
+		<div class="ContainerIndent">
+			<p:panel id="pnlMessageTypeCont">
+				<p:dataTable id="dtMessageTypeCont" widgetVar="dtMessageTypeCont" value="#{iclubMessageTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Message Type Found" reflow="true">
+					<f:facet name="footer">
+						<p:commandButton id="btnMessageTypeShowAdd" value="Add" actionListener="#{iclubMessageTypeController.showAddPanel}" update=":iclubFrm:pnlMessageTypeCont" />
+					</f:facet>
+					<p:column headerText="Unique Id">
+						<p:outputLabel value="#{bean.mtId}" />
+					</p:column>
+					<p:column headerText="Short Description">
+						<p:outputLabel value="#{bean.mtShortDesc}" />
+					</p:column>
+					<p:column headerText="Long Description">
+						<p:outputLabel value="#{bean.mtLongDesc}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.mtStatus}" disabled="true">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnMessageTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubMessageTypeController.showModPanel}" update=":iclubFrm:pnlMessageTypeCont">
+							<f:setPropertyActionListener target="#{iclubMessageTypeController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="pnlAdd" rendered="#{iclubMessageTypeController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubMessageTypeController.bean.mtShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubMessageTypeController.bean.mtLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubMessageTypeController.bean.mtStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:commandButton id="btnMessageTypeAddSave" value="Save" actionListener="#{iclubMessageTypeController.addIclubMessageType}" update="iclubFrm:grlMsg,:iclubFrm:pnlMessageTypeCont" />
+							</div>
+							<div class="Container50">
+								<p:commandButton id="btnMessageTypeAddClose" value="Close" actionListener="#{iclubMessageTypeController.clearForm}" update=":iclubFrm:pnlMessageTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlMod" rendered="#{iclubMessageTypeController.showModPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:outputLabel value="#{iclubMessageTypeController.bean.mtId}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubMessageTypeController.bean.mtShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubMessageTypeController.bean.mtLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubMessageTypeController.bean.mtStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container33">
+								<p:commandButton id="btnMessageTypeModSave" value="Save" actionListener="#{iclubMessageTypeController.modIclubMessageType}" update="iclubFrm:grlMsg,:iclubFrm:pnlMessageTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnMessageTypeModDelete" value="Delete" actionListener="#{iclubMessageTypeController.delIclubMessageType}" update="iclubFrm:grlMsg,:iclubFrm:pnlMessageTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnMessageTypeModClose" value="Close" actionListener="#{iclubMessageTypeController.clearForm}" update=":iclubFrm:pnlMessageTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

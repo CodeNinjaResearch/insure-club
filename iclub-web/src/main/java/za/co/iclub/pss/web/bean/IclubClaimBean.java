@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubClaimBean {
 
@@ -11,9 +11,10 @@ public class IclubClaimBean {
 	private Long CNumber;
 	private Integer CNumItems;
 	private Double CValue;
-	private Timestamp CCrtdDt;
+	private Date CCrtdDt;
 	private String[] iclubPayments;
 	private String[] iclubClaimItems;
+	private String[] iclubCohortClaims;
 
 	public String getCId() {
 		return CId;
@@ -71,11 +72,11 @@ public class IclubClaimBean {
 		CValue = cValue;
 	}
 
-	public Timestamp getCCrtdDt() {
+	public Date getCCrtdDt() {
 		return CCrtdDt;
 	}
 
-	public void setCCrtdDt(Timestamp cCrtdDt) {
+	public void setCCrtdDt(Date cCrtdDt) {
 		CCrtdDt = cCrtdDt;
 	}
 
@@ -93,6 +94,14 @@ public class IclubClaimBean {
 
 	public void setIclubClaimItems(String[] iclubClaimItems) {
 		this.iclubClaimItems = iclubClaimItems;
+	}
+
+	public String[] getIclubCohortClaims() {
+		return iclubCohortClaims;
+	}
+
+	public void setIclubCohortClaims(String[] iclubCohortClaims) {
+		this.iclubCohortClaims = iclubCohortClaims;
 	}
 
 }

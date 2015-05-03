@@ -134,7 +134,17 @@ public class IclubAlarmTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getAtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getAtLongDesc() == null || bean.getAtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getAtStatus() == null || bean.getAtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubAlarmTypeController implements Serializable {
 		Collection<? extends IclubAlarmTypeModel> models = new ArrayList<IclubAlarmTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAlarmTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubAlarmTypeBean>();
-		for (IclubAlarmTypeModel model : models) {
-			IclubAlarmTypeBean bean = new IclubAlarmTypeBean();
-			bean.setAtId(model.getAtId());
-			bean.setAtLongDesc(model.getAtLongDesc());
-			bean.setAtShortDesc(model.getAtShortDesc());
-			bean.setAtStatus(model.getAtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubAlarmTypeModel model : models) {
+				IclubAlarmTypeBean bean = new IclubAlarmTypeBean();
+				bean.setAtId(model.getAtId());
+				bean.setAtLongDesc(model.getAtLongDesc());
+				bean.setAtShortDesc(model.getAtShortDesc());
+				bean.setAtStatus(model.getAtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

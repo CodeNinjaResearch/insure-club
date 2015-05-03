@@ -134,7 +134,17 @@ public class IclubBuildingStateController implements Serializable {
 			}
 		}
 
-		if (bean.getBsStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getBsLongDesc() == null || bean.getBsLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getBsStatus() == null || bean.getBsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubBuildingStateController implements Serializable {
 		Collection<? extends IclubBuildingStateModel> models = new ArrayList<IclubBuildingStateModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBuildingStateModel.class));
 		client.close();
 		beans = new ArrayList<IclubBuildingStateBean>();
-		for (IclubBuildingStateModel model : models) {
-			IclubBuildingStateBean bean = new IclubBuildingStateBean();
-			bean.setBsId(model.getBsId());
-			bean.setBsLongDesc(model.getBsLongDesc());
-			bean.setBsShortDesc(model.getBsShortDesc());
-			bean.setBsStatus(model.getBsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubBuildingStateModel model : models) {
+				IclubBuildingStateBean bean = new IclubBuildingStateBean();
+				bean.setBsId(model.getBsId());
+				bean.setBsLongDesc(model.getBsLongDesc());
+				bean.setBsShortDesc(model.getBsShortDesc());
+				bean.setBsStatus(model.getBsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

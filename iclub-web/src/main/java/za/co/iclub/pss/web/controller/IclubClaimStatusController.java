@@ -49,15 +49,15 @@ public class IclubClaimStatusController implements Serializable {
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
@@ -75,15 +75,15 @@ public class IclubClaimStatusController implements Serializable {
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
@@ -93,14 +93,14 @@ public class IclubClaimStatusController implements Serializable {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getCsId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
-				IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
 				clearForm();
 			} else {
-				IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+				IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("ClaimStatus") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("claimstatus") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
@@ -134,7 +134,17 @@ public class IclubClaimStatusController implements Serializable {
 			}
 		}
 
-		if (bean.getCsStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getCsLongDesc() == null || bean.getCsLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getCsStatus() == null || bean.getCsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubClaimStatusController implements Serializable {
 		Collection<? extends IclubClaimStatusModel> models = new ArrayList<IclubClaimStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubClaimStatusBean>();
-		for (IclubClaimStatusModel model : models) {
-			IclubClaimStatusBean bean = new IclubClaimStatusBean();
-			bean.setCsId(model.getCsId());
-			bean.setCsLongDesc(model.getCsLongDesc());
-			bean.setCsShortDesc(model.getCsShortDesc());
-			bean.setCsStatus(model.getCsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubClaimStatusModel model : models) {
+				IclubClaimStatusBean bean = new IclubClaimStatusBean();
+				bean.setCsId(model.getCsId());
+				bean.setCsLongDesc(model.getCsLongDesc());
+				bean.setCsShortDesc(model.getCsShortDesc());
+				bean.setCsStatus(model.getCsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

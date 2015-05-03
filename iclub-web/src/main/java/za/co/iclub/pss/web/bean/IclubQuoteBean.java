@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubQuoteBean {
 
@@ -12,15 +12,16 @@ public class IclubQuoteBean {
 	private Long iclubCoverType;
 	private Long iclubQuoteStatus;
 	private Long QNumber;
-	private Timestamp QGenDt;
+	private Date QGenDt;
 	private Integer QNumItems;
 	private Double QGenPremium;
 	private String QEmail;
 	private String QMobile;
-	private Timestamp QValidUntil;
+	private Date QValidUntil;
 	private Double QPrevPremium;
 	private String QIsMatched;
-	private Timestamp QCrtdDt;
+	private Date QCrtdDt;
+	private String QClaimYn;
 	private String[] iclubPolicies;
 
 	public String getQId() {
@@ -87,11 +88,11 @@ public class IclubQuoteBean {
 		QNumber = qNumber;
 	}
 
-	public Timestamp getQGenDt() {
+	public Date getQGenDt() {
 		return QGenDt;
 	}
 
-	public void setQGenDt(Timestamp qGenDt) {
+	public void setQGenDt(Date qGenDt) {
 		QGenDt = qGenDt;
 	}
 
@@ -127,11 +128,11 @@ public class IclubQuoteBean {
 		QMobile = qMobile;
 	}
 
-	public Timestamp getQValidUntil() {
+	public Date getQValidUntil() {
 		return QValidUntil;
 	}
 
-	public void setQValidUntil(Timestamp qValidUntil) {
+	public void setQValidUntil(Date qValidUntil) {
 		QValidUntil = qValidUntil;
 	}
 
@@ -151,11 +152,11 @@ public class IclubQuoteBean {
 		QIsMatched = qIsMatched;
 	}
 
-	public Timestamp getQCrtdDt() {
+	public Date getQCrtdDt() {
 		return QCrtdDt;
 	}
 
-	public void setQCrtdDt(Timestamp qCrtdDt) {
+	public void setQCrtdDt(Date qCrtdDt) {
 		QCrtdDt = qCrtdDt;
 	}
 
@@ -165,6 +166,14 @@ public class IclubQuoteBean {
 
 	public void setIclubPolicies(String[] iclubPolicies) {
 		this.iclubPolicies = iclubPolicies;
+	}
+
+	public String getQClaimYn() {
+		return QClaimYn;
+	}
+
+	public void setQClaimYn(String qClaimYn) {
+		QClaimYn = qClaimYn;
 	}
 
 }

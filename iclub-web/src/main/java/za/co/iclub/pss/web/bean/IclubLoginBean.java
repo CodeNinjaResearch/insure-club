@@ -1,6 +1,6 @@
 package za.co.iclub.pss.web.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class IclubLoginBean {
 
@@ -11,9 +11,9 @@ public class IclubLoginBean {
 	private Long iclubRoleType;
 	private String LName;
 	private String LPasswd;
-	private Timestamp LLastDate;
+	private Date LLastDate;
 	private String LSecAns;
-	private Timestamp LCrtdDt;
+	private Date LCrtdDt;
 
 	public String getLId() {
 		return LId;
@@ -71,11 +71,11 @@ public class IclubLoginBean {
 		LPasswd = lPasswd;
 	}
 
-	public Timestamp getLLastDate() {
+	public Date getLLastDate() {
 		return LLastDate;
 	}
 
-	public void setLLastDate(Timestamp lLastDate) {
+	public void setLLastDate(Date lLastDate) {
 		LLastDate = lLastDate;
 	}
 
@@ -87,11 +87,11 @@ public class IclubLoginBean {
 		LSecAns = lSecAns;
 	}
 
-	public Timestamp getLCrtdDt() {
+	public Date getLCrtdDt() {
 		return LCrtdDt;
 	}
 
-	public void setLCrtdDt(Timestamp lCrtdDt) {
+	public void setLCrtdDt(Date lCrtdDt) {
 		LCrtdDt = lCrtdDt;
 	}
 

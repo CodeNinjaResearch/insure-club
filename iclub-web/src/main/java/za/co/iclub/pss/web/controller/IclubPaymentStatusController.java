@@ -134,7 +134,17 @@ public class IclubPaymentStatusController implements Serializable {
 			}
 		}
 
-		if (bean.getPsStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPsLongDesc() == null || bean.getPsLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getPsStatus() == null || bean.getPsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubPaymentStatusController implements Serializable {
 		Collection<? extends IclubPaymentStatusModel> models = new ArrayList<IclubPaymentStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentStatusModel.class));
 		client.close();
 		beans = new ArrayList<IclubPaymentStatusBean>();
-		for (IclubPaymentStatusModel model : models) {
-			IclubPaymentStatusBean bean = new IclubPaymentStatusBean();
-			bean.setPsId(model.getPsId());
-			bean.setPsLongDesc(model.getPsLongDesc());
-			bean.setPsShortDesc(model.getPsShortDesc());
-			bean.setPsStatus(model.getPsStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubPaymentStatusModel model : models) {
+				IclubPaymentStatusBean bean = new IclubPaymentStatusBean();
+				bean.setPsId(model.getPsId());
+				bean.setPsLongDesc(model.getPsLongDesc());
+				bean.setPsShortDesc(model.getPsShortDesc());
+				bean.setPsStatus(model.getPsStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

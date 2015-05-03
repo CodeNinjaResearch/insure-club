@@ -1,35 +1,29 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable id="dtPurposeTypeCont" widgetVar="dtPurposeTypeCont" value="#{iclubPurposeTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PurposeTypees Available">
-
-		<p:column headerText="#{labels['purposetype.view.ptid']}">
-			<p:outputLabel value="#{bean.ptId}" />
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptId}" />
 		</p:column>
-		<p:column headerText="#{labels['purposetype.view.iclubinsuranceitemtype']}">
-				<p:selectOneMenu value="#{bean.iclubInsuranceItemType}">
-					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-					<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
-
-				</p:selectOneMenu>
-			</p:column>
-		<p:column headerText="#{labels['purposetype.view.ptshortdesc']}">
-			<p:outputLabel value="#{bean.ptShortDesc}" />
+		<p:column headerText="Item Type">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
+				<f:selectItem itemLabel="Insuranance Item Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubPurposeTypeController.insuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
+			</p:selectOneMenu>
 		</p:column>
-		<p:column headerText="#{labels['purposetype.view.ptlongdesc']}">
-			<p:outputLabel value="#{bean.ptLongDesc}" />
+		<p:column headerText="Short Description">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptShortDesc}" />
 		</p:column>
-		<p:column headerText="#{labels['purposetype.view.ptstatus']}">
-			<p:outputLabel value="#{bean.ptStatus}" />
+		<p:column headerText="Long Description">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptLongDesc}" />
 		</p:column>
-		<p:column headerText="#{labels['purposetype.view.ptcrtddt']}">
-			<p:outputLabel value="#{bean.ptCrtdDt}" />
+		<p:column headerText="Status">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptStatus}" />
 		</p:column>
-		<p:column headerText="#{labels['purposetype.view.iclubinsuranceitemtype']}">
-			<p:outputLabel value="#{bean.iclubInsuranceItemType}" />
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ptCrtdDt}" />
 		</p:column>
-		<p:column headerText="#{labels['purposetype.view.userid']}">
-			<p:outputLabel value="#{bean.iclubPerson}" />
+		<p:column headerText="Created By">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
-
 		<p:column>
 			<p:commandButton id="btnPurposeTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubPurposeTypeController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubPurposeTypeController.bean}" value="#{bean}" />

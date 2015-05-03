@@ -134,7 +134,17 @@ public class IclubNotificationTypeController implements Serializable {
 			}
 		}
 
-		if (bean.getNtStatus().equalsIgnoreCase("-1")) {
+		else {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getNtLongDesc() == null || bean.getNtLongDesc().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+
+		if (bean.getNtStatus() == null || bean.getNtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -147,13 +157,15 @@ public class IclubNotificationTypeController implements Serializable {
 		Collection<? extends IclubNotificationTypeModel> models = new ArrayList<IclubNotificationTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubNotificationTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubNotificationTypeBean>();
-		for (IclubNotificationTypeModel model : models) {
-			IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
-			bean.setNtId(model.getNtId());
-			bean.setNtLongDesc(model.getNtLongDesc());
-			bean.setNtShortDesc(model.getNtShortDesc());
-			bean.setNtStatus(model.getNtStatus());
-			beans.add(bean);
+		if (models != null && models.size() > 0) {
+			for (IclubNotificationTypeModel model : models) {
+				IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
+				bean.setNtId(model.getNtId());
+				bean.setNtLongDesc(model.getNtLongDesc());
+				bean.setNtShortDesc(model.getNtShortDesc());
+				bean.setNtStatus(model.getNtStatus());
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}

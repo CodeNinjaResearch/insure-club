@@ -1,102 +1,144 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
-	<div style="align: center !important">
-		<p:panelGrid columns="2">
-
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smid']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubSupplMasterController.bean.smId}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smname']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smName}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smtradename']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smTradeName}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smregnum']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smRegNum}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['suppliertype']}"></p:outputLabel>
-
-			</p:column>
-			<p:column>
-
-				<p:selectOneMenu value="#{iclubSupplMasterController.bean.iclubSupplierType}">
-					<f:selectItem itemLabel="#{labels['pleaseselect']}" itemValue="-1" />
-					<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
-
-
-				</p:selectOneMenu>
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smaddress']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smAddress}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smlat']}"></p:outputLabel>
-			</p:column>
-
-			<p:column>
-				<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smcrlimit']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smCrLimit}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.sractiondt']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:calendar value="#{iclubSupplMasterController.bean.srActionDt}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smrating']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:inputText value="#{iclubSupplMasterController.bean.smRating}" />
-			</p:column>
-
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.smcrtddt']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:calendar value="#{iclubSupplMasterController.bean.smCrtdDt}" />
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{labels['supplmaster.edit.userid']}"></p:outputLabel>
-			</p:column>
-			<p:column>
-				<p:outputLabel value="#{iclubSupplMasterController.bean.iclubPerson}" />
-			</p:column>
-
-
-
-		</p:panelGrid>
-	</div>
-	<f:facet name="footer">
-		<div style="align: center !important">
-			<p:commandButton id="btnSupplMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="#{labels['update']}" actionListener="#{iclubSupplMasterController.modIclubSupplMaster}" />
-			<p:commandButton id="btnSupplMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="#{labels['delete']}" actionListener="#{iclubSupplMasterController.delIclubSupplMaster}" />
-			<p:commandButton id="btnSupplMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="#{labels['close']}" actionListener="#{iclubSupplMasterController.showView}" />
+	<div class="ContainerIndent TexAlCenter">
+		<p:tabView id="supMModTabView">
+			<p:tab id="supMModDet" title="SupplMaster">
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smId}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Created By :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.iclubPerson}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Created Date :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubSupplMasterController.bean.smCrtdDt}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Name :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubSupplMasterController.bean.smName}" />
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Trading Name :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Trading Name" value="#{iclubSupplMasterController.bean.smTradeName}" />
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Registration Number" value="#{iclubSupplMasterController.bean.smRegNum}" />
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Type :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubSupplMasterController.bean.iclubSupplierType}">
+							<f:selectItem itemLabel="Type" itemDisabled="true" />
+							<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
+						</p:selectOneMenu>
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Address :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Address" value="#{iclubSupplMasterController.bean.smAddress}" />
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Creidt Limit :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Creidt Limit" value="#{iclubSupplMasterController.bean.smCrLimit}" />
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Action Date :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:calendar styleClass="TexAlCenter" placeholder="Action Date" value="#{iclubSupplMasterController.bean.srActionDt}" />
+					</div>
+					<div class="EmptyBox5" />
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Rating :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Rating" value="#{iclubSupplMasterController.bean.smRating}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="EmptyBox5" />
+			</p:tab>
+			<p:tab id="supPerMModDet" title="Person details">
+				<ui:include src="/pages/admin/supplmaster/registerEdit.xhtml" />
+			</p:tab>
+		</p:tabView>
+		<div class="EmptyBox5" />
+		<div class="Container100 Responsive">
+			<div class="Container30">
+				<p:commandButton id="btnSupplMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Update" actionListener="#{iclubSupplMasterController.modIclubSupplMaster}" />
+			</div>
+			<div class="Container30">
+				<p:commandButton id="btnSupplMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Delete" actionListener="#{iclubSupplMasterController.delIclubSupplMaster}" />
+			</div>
+			<div class="Container30">
+				<p:commandButton id="btnSupplMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlSupplMasterCont" value="Close" actionListener="#{iclubSupplMasterController.showView}" />
+			</div>
 		</div>
-	</f:facet>
+		<div class="EmptyBox5" />
+	</div>
 </ui:composition>

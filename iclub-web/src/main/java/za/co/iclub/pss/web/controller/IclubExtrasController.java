@@ -1,9 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -80,16 +80,18 @@ public class IclubExtrasController implements Serializable {
 		Collection<? extends IclubExtrasModel> models = new ArrayList<IclubExtrasModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubExtrasModel.class));
 		client.close();
 		dashBoardBeans = new ArrayList<IclubExtrasBean>();
-		for (IclubExtrasModel model : models) {
-			IclubExtrasBean bean = new IclubExtrasBean();
+		if (models != null && models.size() > 0) {
+			for (IclubExtrasModel model : models) {
+				IclubExtrasBean bean = new IclubExtrasBean();
 
-			bean.setEId(model.getEId());
-			bean.setEDesc(model.getEDesc());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setEStatus(model.getEStatus());
-			bean.setECrtdDt(model.getECrtdDt());
+				bean.setEId(model.getEId());
+				bean.setEDesc(model.getEDesc());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setEStatus(model.getEStatus());
+				bean.setECrtdDt(model.getECrtdDt());
 
-			dashBoardBeans.add(bean);
+				dashBoardBeans.add(bean);
+			}
 		}
 		return dashBoardBeans;
 	}
@@ -112,9 +114,9 @@ public class IclubExtrasController implements Serializable {
 				IclubExtrasModel model = new IclubExtrasModel();
 
 				model.setEDesc(bean.getEDesc());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setEStatus(bean.getEStatus());
-				model.setECrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setECrtdDt(new Date(System.currentTimeMillis()));
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -142,9 +144,9 @@ public class IclubExtrasController implements Serializable {
 
 				model.setEId(bean.getEId());
 				model.setEDesc(bean.getEDesc());
-				model.setIclubPerson(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				model.setIclubPerson(getSessionUserId());
 				model.setEStatus(bean.getEStatus());
-				model.setECrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setECrtdDt(new Date(System.currentTimeMillis()));
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -229,7 +231,11 @@ public class IclubExtrasController implements Serializable {
 	}
 
 	public String getSessionUserId() {
-		sessionUserId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
+		if (sessUsrId == null)
+			sessionUserId = "1";
+		else
+			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
 
@@ -263,17 +269,19 @@ public class IclubExtrasController implements Serializable {
 		Collection<? extends IclubExtrasModel> models = new ArrayList<IclubExtrasModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubExtrasModel.class));
 		client.close();
 		beans = new ArrayList<IclubExtrasBean>();
-		for (IclubExtrasModel model : models) {
+		if (models != null && models.size() > 0) {
+			for (IclubExtrasModel model : models) {
 
-			IclubExtrasBean bean = new IclubExtrasBean();
+				IclubExtrasBean bean = new IclubExtrasBean();
 
-			bean.setEId(model.getEId());
-			bean.setEDesc(model.getEDesc());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setEStatus(model.getEStatus());
-			bean.setECrtdDt(model.getECrtdDt());
+				bean.setEId(model.getEId());
+				bean.setEDesc(model.getEDesc());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setEStatus(model.getEStatus());
+				bean.setECrtdDt(model.getECrtdDt());
 
-			beans.add(bean);
+				beans.add(bean);
+			}
 		}
 		return beans;
 	}
