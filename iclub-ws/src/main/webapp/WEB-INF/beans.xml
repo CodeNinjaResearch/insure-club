@@ -90,6 +90,8 @@
 			<ref bean="IclubCohortService" />
 			<ref bean="IclubCohortPersonService" />
 			<ref bean="IclubSupplPersonService" />
+			<ref bean="IclubAssessmentTypeService" />
+			<ref bean="IclubSupplItemService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">

@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/mdata/container.xhtml">
+	<ui:define name="mdata">
+		<div class="ContainerIndent">
+			<p:panel id="pnlAssessmentTypeCont">
+				<p:dataTable id="dtAssessmentTypeCont" widgetVar="dtAssessmentTypeCont" value="#{iclubAssessmentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Role Type Found" reflow="true">
+					<f:facet name="footer">
+						<p:commandButton id="btnAssessmentTypeShowAdd" value="Add" actionListener="#{iclubAssessmentTypeController.showAddPanel}" update=":iclubFrm:pnlAssessmentTypeCont" />
+					</f:facet>
+					<p:column headerText="Unique Id">
+						<p:outputLabel value="#{bean.atId}" />
+					</p:column>
+					<p:column headerText="Short Description">
+						<p:outputLabel value="#{bean.atShortDesc}" />
+					</p:column>
+					<p:column headerText="Long Description">
+						<p:outputLabel value="#{bean.atLongDesc}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.atStatus}" disabled="true">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnAssessmentTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubAssessmentTypeController.showModPanel}" update=":iclubFrm:pnlAssessmentTypeCont">
+							<f:setPropertyActionListener target="#{iclubAssessmentTypeController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="pnlAdd" rendered="#{iclubAssessmentTypeController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubAssessmentTypeController.bean.atShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubAssessmentTypeController.bean.atLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubAssessmentTypeController.bean.atStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:commandButton id="btnAssessmentTypeAddSave" value="Save" actionListener="#{iclubAssessmentTypeController.addIclubAssessmentType}" update="iclubFrm:grlMsg,:iclubFrm:pnlAssessmentTypeCont" />
+							</div>
+							<div class="Container50">
+								<p:commandButton id="btnAssessmentTypeAddClose" value="Close" actionListener="#{iclubAssessmentTypeController.clearForm}" update=":iclubFrm:pnlAssessmentTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlMod" rendered="#{iclubAssessmentTypeController.showModPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:outputLabel value="#{iclubAssessmentTypeController.bean.atId}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubAssessmentTypeController.bean.atShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubAssessmentTypeController.bean.atLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubAssessmentTypeController.bean.atStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container33">
+								<p:commandButton id="btnAssessmentTypeModSave" value="Save" actionListener="#{iclubAssessmentTypeController.modIclubAssessmentType}" update="iclubFrm:grlMsg,:iclubFrm:pnlAssessmentTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnAssessmentTypeModDelete" value="Delete" actionListener="#{iclubAssessmentTypeController.delIclubAssessmentType}" update="iclubFrm:grlMsg,:iclubFrm:pnlAssessmentTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnAssessmentTypeModClose" value="Close" actionListener="#{iclubAssessmentTypeController.clearForm}" update=":iclubFrm:pnlAssessmentTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>
