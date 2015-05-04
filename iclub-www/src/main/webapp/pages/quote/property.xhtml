@@ -18,7 +18,7 @@
 			</p:panel>
 		</p:dialog>
 		<p:panel id="pnlPropertyCont">
-			<p:dataTable id="dtPropertyCont" widgetVar="dtPropertyCont" value="#{iclubQuickQuoteController.propertyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Property Available">
+			<p:dataTable reflow="true" id="dtPropertyCont" widgetVar="dtPropertyCont" value="#{iclubQuickQuoteController.propertyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Property Available">
 				<f:facet name="footer">
 					<p:commandButton id="btnPropertyShowAdd" value="Add" actionListener="#{iclubQuickQuoteController.showProAddPanel}" update=":iclubFrm:qqTabView:pnlPropertyCont" />
 				</f:facet>

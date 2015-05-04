@@ -14,7 +14,7 @@
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlClaimCont">
-				<p:dataTable id="dtIICont" widgetVar="dtQuoteCont" value="#{iclubClaimController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<p:dataTable reflow="true" id="dtIICont" widgetVar="dtQuoteCont" value="#{iclubClaimController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<f:facet name="footer">
 					</f:facet>
 					<p:column headerText="Unique Id">

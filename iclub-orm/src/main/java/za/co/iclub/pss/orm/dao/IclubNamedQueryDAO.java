@@ -1,5 +1,6 @@
 package za.co.iclub.pss.orm.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -109,7 +110,8 @@ public class IclubNamedQueryDAO {
 			Object[] res = (Object[]) query.uniqueResult();
 			Long ret = -999l;
 			if (res != null && res.length > 0) {
-				ret = (Long) res[0];
+				ret = ((BigInteger) res[0]).longValue();
+
 			}
 			return ret;
 

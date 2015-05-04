@@ -213,17 +213,28 @@ public class IclubQuickQuoteController implements Serializable {
 		showVehAddPanel = false;
 		showVehModPanel = false;
 		vehAddress = "";
+		draggableModelVeh = new DefaultMapModel();
 		vehicleBean = new IclubVehicleBean();
 	}
 
 	public void showVehModPanel() {
 		showVehAddPanel = false;
 		showVehModPanel = true;
+		draggableModelPro = new DefaultMapModel();
+		if (vehicleBean != null && vehicleBean.getVDdLat() != null && vehicleBean.getVDdLong() != null) {
+			centerGeoMapPer = vehicleBean.getVDdLat() + "," + vehicleBean.getVDdLong();
+			LatLng coord = new LatLng(vehicleBean.getVDdLat(), vehicleBean.getVDdLong());
+			Marker marker = new Marker(coord, "");
+			marker.setDraggable(true);
+			draggableModelVeh.addOverlay(marker);
+
+		}
 	}
 
 	public void showProAddPanel() {
 		showProAddPanel = true;
 		showProModPanel = false;
+		draggableModelPro = new DefaultMapModel();
 		propertyBean = new IclubPropertyBean();
 	}
 
@@ -231,12 +242,22 @@ public class IclubQuickQuoteController implements Serializable {
 		showProAddPanel = false;
 		showProModPanel = false;
 		proAddress = "";
+		draggableModelPro = new DefaultMapModel();
 		propertyBean = new IclubPropertyBean();
 	}
 
 	public void showProModPanel() {
 		showProAddPanel = false;
 		showProModPanel = true;
+		draggableModelPro = new DefaultMapModel();
+		if (propertyBean != null && propertyBean.getPLat() != null && propertyBean.getPLong() != null) {
+			centerGeoMapPer = propertyBean.getPLat() + "," + propertyBean.getPLong();
+			LatLng coord = new LatLng(propertyBean.getPLat(), propertyBean.getPLong());
+			Marker marker = new Marker(coord, "");
+			marker.setDraggable(true);
+			draggableModelPro.addOverlay(marker);
+
+		}
 	}
 
 	public void addIclubProperty() {
@@ -285,7 +306,7 @@ public class IclubQuickQuoteController implements Serializable {
 	public void modIclubProperty() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubProperty");
 		try {
-			if (validateVehForm(false)) {
+			if (validateProForm(false)) {
 				IclubPropertyModel model = new IclubPropertyModel();
 
 				model.setPId(propertyBean.getPId());
@@ -652,7 +673,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public void onGeocodePer(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelPer = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPer = center.getLat() + "," + center.getLng();
@@ -694,7 +715,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public void onGeocodePro(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelPro = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPro = center.getLat() + "," + center.getLng();
@@ -756,7 +777,7 @@ public class IclubQuickQuoteController implements Serializable {
 
 	public void onGeocodeVeh(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelVeh = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapVeh = center.getLat() + "," + center.getLng();
