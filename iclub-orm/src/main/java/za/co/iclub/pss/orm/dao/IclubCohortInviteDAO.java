@@ -1,4 +1,4 @@
-package za.co.iclub.pss.orm.bean;
+package za.co.iclub.pss.orm.dao;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -11,6 +11,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
+
+import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 
 /**
  * A data access object (DAO) providing persistence and search support for

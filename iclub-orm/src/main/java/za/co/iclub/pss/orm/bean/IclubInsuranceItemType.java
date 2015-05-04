@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * IclubInsuranceItemType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_insurance_item_type")
+@Table(name = "iclub_insurance_item_type", catalog = "iclubdb")
 public class IclubInsuranceItemType implements java.io.Serializable {
 
 	// Fields
@@ -23,13 +23,14 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4606204710234427722L;
+	private static final long serialVersionUID = 572874875102906119L;
 	private Long iitId;
 	private String iitShortDesc;
 	private String iitLongDesc;
 	private String iitStatus;
 	private Set<IclubRateType> iclubRateTypes = new HashSet<IclubRateType>(0);
 	private Set<IclubSecurityDevice> iclubSecurityDevices = new HashSet<IclubSecurityDevice>(0);
+	private Set<IclubSupplItem> iclubSupplItems = new HashSet<IclubSupplItem>(0);
 	private Set<IclubSecurityMaster> iclubSecurityMasters = new HashSet<IclubSecurityMaster>(0);
 	private Set<IclubPurposeType> iclubPurposeTypes = new HashSet<IclubPurposeType>(0);
 	private Set<IclubInsuranceItem> iclubInsuranceItems = new HashSet<IclubInsuranceItem>(0);
@@ -48,13 +49,14 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubInsuranceItemType(Long iitId, String iitShortDesc, String iitLongDesc, String iitStatus, Set<IclubRateType> iclubRateTypes, Set<IclubSecurityDevice> iclubSecurityDevices, Set<IclubSecurityMaster> iclubSecurityMasters, Set<IclubPurposeType> iclubPurposeTypes, Set<IclubInsuranceItem> iclubInsuranceItems, Set<IclubInsuranceItem> iclubInsuranceItems_1, Set<IclubCoverType> iclubCoverTypes) {
+	public IclubInsuranceItemType(Long iitId, String iitShortDesc, String iitLongDesc, String iitStatus, Set<IclubRateType> iclubRateTypes, Set<IclubSecurityDevice> iclubSecurityDevices, Set<IclubSupplItem> iclubSupplItems, Set<IclubSecurityMaster> iclubSecurityMasters, Set<IclubPurposeType> iclubPurposeTypes, Set<IclubInsuranceItem> iclubInsuranceItems, Set<IclubInsuranceItem> iclubInsuranceItems_1, Set<IclubCoverType> iclubCoverTypes) {
 		this.iitId = iitId;
 		this.iitShortDesc = iitShortDesc;
 		this.iitLongDesc = iitLongDesc;
 		this.iitStatus = iitStatus;
 		this.iclubRateTypes = iclubRateTypes;
 		this.iclubSecurityDevices = iclubSecurityDevices;
+		this.iclubSupplItems = iclubSupplItems;
 		this.iclubSecurityMasters = iclubSecurityMasters;
 		this.iclubPurposeTypes = iclubPurposeTypes;
 		this.iclubInsuranceItems = iclubInsuranceItems;
@@ -116,6 +118,15 @@ public class IclubInsuranceItemType implements java.io.Serializable {
 
 	public void setIclubSecurityDevices(Set<IclubSecurityDevice> iclubSecurityDevices) {
 		this.iclubSecurityDevices = iclubSecurityDevices;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsuranceItemType")
+	public Set<IclubSupplItem> getIclubSupplItems() {
+		return this.iclubSupplItems;
+	}
+
+	public void setIclubSupplItems(Set<IclubSupplItem> iclubSupplItems) {
+		this.iclubSupplItems = iclubSupplItems;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsuranceItemType")

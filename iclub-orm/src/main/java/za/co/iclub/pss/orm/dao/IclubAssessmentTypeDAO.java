@@ -12,27 +12,27 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
+import za.co.iclub.pss.orm.bean.IclubAssessmentType;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * IclubInsuranceItemType entities. Transaction control of the save(), update()
- * and delete() operations can directly support Spring container-managed
+ * IclubAssessmentType entities. Transaction control of the save(), update() and
+ * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see za.co.iclub.pss.orm.bean.IclubInsuranceItemType
+ * @see za.co.iclub.pss.orm.bean.IclubAssessmentType
  * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class IclubInsuranceItemTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubInsuranceItemTypeDAO.class);
+public class IclubAssessmentTypeDAO {
+	private static final Logger log = Logger.getLogger(IclubAssessmentTypeDAO.class);
 	// property constants
-	public static final String IIT_SHORT_DESC = "iitShortDesc";
-	public static final String IIT_LONG_DESC = "iitLongDesc";
-	public static final String IIT_STATUS = "iitStatus";
+	public static final String AT_SHORT_DESC = "atShortDesc";
+	public static final String AT_LONG_DESC = "atLongDesc";
+	public static final String AT_STATUS = "atStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -48,8 +48,8 @@ public class IclubInsuranceItemTypeDAO {
 		// do nothing
 	}
 
-	public void save(IclubInsuranceItemType transientInstance) {
-		log.debug("saving IclubInsuranceItemType instance");
+	public void save(IclubAssessmentType transientInstance) {
+		log.debug("saving IclubAssessmentType instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -59,8 +59,8 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public void delete(IclubInsuranceItemType persistentInstance) {
-		log.debug("deleting IclubInsuranceItemType instance");
+	public void delete(IclubAssessmentType persistentInstance) {
+		log.debug("deleting IclubAssessmentType instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -70,10 +70,10 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public IclubInsuranceItemType findById(java.lang.Long id) {
-		log.debug("getting IclubInsuranceItemType instance with id: " + id);
+	public IclubAssessmentType findById(java.lang.Long id) {
+		log.debug("getting IclubAssessmentType instance with id: " + id);
 		try {
-			IclubInsuranceItemType instance = (IclubInsuranceItemType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubInsuranceItemType", id);
+			IclubAssessmentType instance = (IclubAssessmentType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubAssessmentType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -81,10 +81,10 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public List<IclubInsuranceItemType> findByExample(IclubInsuranceItemType instance) {
-		log.debug("finding IclubInsuranceItemType instance by example");
+	public List<IclubAssessmentType> findByExample(IclubAssessmentType instance) {
+		log.debug("finding IclubAssessmentType instance by example");
 		try {
-			List<IclubInsuranceItemType> results = (List<IclubInsuranceItemType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubInsuranceItemType").add(create(instance)).list();
+			List<IclubAssessmentType> results = (List<IclubAssessmentType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubAssessmentType").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -94,9 +94,9 @@ public class IclubInsuranceItemTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubInsuranceItemType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubAssessmentType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubInsuranceItemType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubAssessmentType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -106,22 +106,22 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public List<IclubInsuranceItemType> findByIitShortDesc(Object iitShortDesc) {
-		return findByProperty(IIT_SHORT_DESC, iitShortDesc);
+	public List<IclubAssessmentType> findByAtShortDesc(Object atShortDesc) {
+		return findByProperty(AT_SHORT_DESC, atShortDesc);
 	}
 
-	public List<IclubInsuranceItemType> findByIitLongDesc(Object iitLongDesc) {
-		return findByProperty(IIT_LONG_DESC, iitLongDesc);
+	public List<IclubAssessmentType> findByAtLongDesc(Object atLongDesc) {
+		return findByProperty(AT_LONG_DESC, atLongDesc);
 	}
 
-	public List<IclubInsuranceItemType> findByIitStatus(Object iitStatus) {
-		return findByProperty(IIT_STATUS, iitStatus);
+	public List<IclubAssessmentType> findByAtStatus(Object atStatus) {
+		return findByProperty(AT_STATUS, atStatus);
 	}
 
 	public List findAll() {
-		log.debug("finding all IclubInsuranceItemType instances");
+		log.debug("finding all IclubAssessmentType instances");
 		try {
-			String queryString = "from IclubInsuranceItemType";
+			String queryString = "from IclubAssessmentType";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -130,10 +130,10 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public IclubInsuranceItemType merge(IclubInsuranceItemType detachedInstance) {
-		log.debug("merging IclubInsuranceItemType instance");
+	public IclubAssessmentType merge(IclubAssessmentType detachedInstance) {
+		log.debug("merging IclubAssessmentType instance");
 		try {
-			IclubInsuranceItemType result = (IclubInsuranceItemType) getCurrentSession().merge(detachedInstance);
+			IclubAssessmentType result = (IclubAssessmentType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -142,8 +142,8 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public void attachDirty(IclubInsuranceItemType instance) {
-		log.debug("attaching dirty IclubInsuranceItemType instance");
+	public void attachDirty(IclubAssessmentType instance) {
+		log.debug("attaching dirty IclubAssessmentType instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -153,8 +153,8 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public void attachClean(IclubInsuranceItemType instance) {
-		log.debug("attaching clean IclubInsuranceItemType instance");
+	public void attachClean(IclubAssessmentType instance) {
+		log.debug("attaching clean IclubAssessmentType instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
@@ -164,7 +164,7 @@ public class IclubInsuranceItemTypeDAO {
 		}
 	}
 
-	public static IclubInsuranceItemTypeDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (IclubInsuranceItemTypeDAO) ctx.getBean("IclubInsuranceItemTypeDAO");
+	public static IclubAssessmentTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (IclubAssessmentTypeDAO) ctx.getBean("IclubAssessmentTypeDAO");
 	}
 }

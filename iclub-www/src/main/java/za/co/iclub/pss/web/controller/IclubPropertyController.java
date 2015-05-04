@@ -460,7 +460,7 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(("No Robbery Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		return ret;
+		return ret||true;
 	}
 
 	public IclubPropertyBean getBean() {
