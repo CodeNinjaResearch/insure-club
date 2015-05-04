@@ -173,7 +173,7 @@ public class IclubPropertyController implements Serializable {
 
 	public void onGeocodePro(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelPro = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPro = center.getLat() + "," + center.getLng();
@@ -460,7 +460,7 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(("No Robbery Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		return ret||true;
+		return ret || true;
 	}
 
 	public IclubPropertyBean getBean() {

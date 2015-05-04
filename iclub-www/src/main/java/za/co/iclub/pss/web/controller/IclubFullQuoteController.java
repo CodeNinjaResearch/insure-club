@@ -776,7 +776,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onGeocodePer(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelPer = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPer = center.getLat() + "," + center.getLng();
@@ -811,7 +811,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onGeocodePro(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelPro = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPro = center.getLat() + "," + center.getLng();
@@ -845,7 +845,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	public void onGeocodeVeh(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelPro = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapVeh = center.getLat() + "," + center.getLng();

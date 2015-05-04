@@ -34,12 +34,14 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import za.co.iclub.pss.web.bean.IclubDocumentBean;
+import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.bean.IclubInsuranceItemBean;
 import za.co.iclub.pss.web.bean.IclubPolicyBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
 import za.co.iclub.pss.web.bean.IclubVehicleBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubDocumentModel;
+import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubPolicyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
@@ -61,7 +63,7 @@ public class IclubPolicyController implements Serializable {
 	private static final String V_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehicleService/";
 	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
 	private static final String D_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubDocumentService/";
-
+	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
 	private boolean viewPolicy;
 
 	private List<IclubPolicyBean> beans;
@@ -102,7 +104,7 @@ public class IclubPolicyController implements Serializable {
 	private Marker markerPro;
 	private String centerGeoMapPro = "36.890257,30.707417";
 
-	private MapModel draggableModelVeh;
+	 private MapModel draggableModelVeh;
 	private Marker markerVeh;
 	private String centerGeoMapVeh = "36.890257,30.707417";
 
@@ -140,19 +142,44 @@ public class IclubPolicyController implements Serializable {
 
 	public void onMarkerDragPer(MarkerDragEvent event) {
 		markerPer = event.getMarker();
-
-		propertyBean.setPLat(markerPer.getLatlng().getLat());
-		propertyBean.setPLong(markerPer.getLatlng().getLng());
+		IclubGeoLocBean geoBean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
+		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
+			propertyBean.setPLat(geoBean.getGlLat());
+			propertyBean.setPLong(geoBean.getGlLong());
+		} else {
+			propertyBean.setPLat(markerPro.getLatlng().getLat());
+			propertyBean.setPLong(markerPro.getLatlng().getLng());
+		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng()));
+	}
+
+	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
+		WebClient client = IclubWebHelper.createCustomClient(GL_BASE_URL + "get/" + geoLat + "/" + geoLong);
+		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
+		client.close();
+		IclubGeoLocBean bean = new IclubGeoLocBean();
+		if (model != null) {
+			bean.setGlProvince(model.getGlProvince());
+			bean.setGlSuburb(model.getGlSuburb());
+			bean.setGlId(model.getGlId());
+			bean.setGlAddress(model.getGlAddress());
+			bean.setGlLat(model.getGlLat());
+			bean.setGlLong(model.getGlLong());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setGlRate(model.getGlRate());
+			bean.setGlCrtdDt(model.getGlCrtdDt());
+		}
+		return bean;
+
 	}
 
 	public void onGeocodePer(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
-
+		draggableModelPer = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPer = center.getLat() + "," + center.getLng();
-
+			draggableModelPer = new DefaultMapModel();
 			for (int i = 0; i < results.size(); i++) {
 				GeocodeResult result = results.get(i);
 				Marker marker = new Marker(result.getLatLng(), result.getAddress());
@@ -171,8 +198,14 @@ public class IclubPolicyController implements Serializable {
 
 	public void onMarkerDragPro(MarkerDragEvent event) {
 		markerPro = event.getMarker();
-		propertyBean.setPLat(markerPro.getLatlng().getLat());
-		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		IclubGeoLocBean geoBean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
+		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
+			propertyBean.setPLat(geoBean.getGlLat());
+			propertyBean.setPLong(geoBean.getGlLong());
+		} else {
+			propertyBean.setPLat(markerPro.getLatlng().getLat());
+			propertyBean.setPLong(markerPro.getLatlng().getLng());
+		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng()));
 	}
 
@@ -182,7 +215,7 @@ public class IclubPolicyController implements Serializable {
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPro = center.getLat() + "," + center.getLng();
-
+			draggableModelPro = new DefaultMapModel();
 			for (int i = 0; i < results.size(); i++) {
 				GeocodeResult result = results.get(i);
 				Marker marker = new Marker(result.getLatLng(), result.getAddress());
@@ -201,8 +234,14 @@ public class IclubPolicyController implements Serializable {
 
 	public void onMarkerDragVeh(MarkerDragEvent event) {
 		markerVeh = event.getMarker();
-		vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
-		vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
+		IclubGeoLocBean geoBean = getGeoLocBean(markerVeh.getLatlng().getLat(), markerVeh.getLatlng().getLng());
+		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
+			vehicleBean.setVDdLat(geoBean.getGlLat());
+			vehicleBean.setVDdLong(geoBean.getGlLong());
+		} else {
+			vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
+			vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
+		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
 	}
 
@@ -212,7 +251,7 @@ public class IclubPolicyController implements Serializable {
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapVeh = center.getLat() + "," + center.getLng();
-
+			draggableModelVeh = new DefaultMapModel();
 			for (int i = 0; i < results.size(); i++) {
 				GeocodeResult result = results.get(i);
 				Marker marker = new Marker(result.getLatLng(), result.getAddress());
@@ -466,6 +505,7 @@ public class IclubPolicyController implements Serializable {
 					LatLng coord = new LatLng(vehicleBean.getVDdLat(), vehicleBean.getVDdLong());
 					Marker marker = new Marker(coord, "");
 					marker.setDraggable(true);
+					draggableModelVeh = new DefaultMapModel();
 					draggableModelVeh.addOverlay(marker);
 
 				}

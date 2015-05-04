@@ -29,6 +29,7 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import za.co.iclub.pss.web.bean.IclubCountryCodeBean;
+import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.bean.IclubIdTypeBean;
 import za.co.iclub.pss.web.bean.IclubLoginBean;
 import za.co.iclub.pss.web.bean.IclubMaritialStatusBean;
@@ -39,6 +40,7 @@ import za.co.iclub.pss.web.bean.IclubSupplMasterBean;
 import za.co.iclub.pss.web.bean.IclubSupplierTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubCountryCodeModel;
+import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubLoginModel;
 import za.co.iclub.pss.ws.model.IclubMaritialStatusModel;
@@ -67,6 +69,7 @@ public class IclubSupplMasterController implements Serializable {
 	private static final String SECQ_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSecurityQuestionService/";
 	private static final String OCN_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOccupationService/";
 	private static final String CCDE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCountryCodeService/";
+	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
 	private List<IclubSupplMasterBean> beans;
 	private List<IclubSupplierTypeBean> supplierTypeBeans;
 	private List<IclubSupplMasterBean> dashBoardBeans;
@@ -125,8 +128,14 @@ public class IclubSupplMasterController implements Serializable {
 	public void onMarkerDragPer(MarkerDragEvent event) {
 		markerPer = event.getMarker();
 
-		bean.setSmLat(markerPer.getLatlng().getLat());
-		bean.setSmLong(markerPer.getLatlng().getLng());
+		IclubGeoLocBean geoBean = getGeoLocBean(markerPer.getLatlng().getLat(), markerPer.getLatlng().getLng());
+		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
+			bean.setSmLat(geoBean.getGlLat());
+			bean.setSmLong(geoBean.getGlLong());
+		} else {
+			bean.setSmLat(markerPer.getLatlng().getLat());
+			bean.setSmLong(markerPer.getLatlng().getLng());
+		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng()));
 	}
 
@@ -136,7 +145,7 @@ public class IclubSupplMasterController implements Serializable {
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPer = center.getLat() + "," + center.getLng();
-
+			draggableModelPer = new DefaultMapModel();
 			for (int i = 0; i < results.size(); i++) {
 				GeocodeResult result = results.get(i);
 				Marker marker = new Marker(result.getLatLng(), result.getAddress());
@@ -148,9 +157,36 @@ public class IclubSupplMasterController implements Serializable {
 
 	public void onMarkerSelectPer(OverlaySelectEvent event) {
 		markerPer = (Marker) event.getOverlay();
-		bean.setSmLat(markerPer.getLatlng().getLat());
-		bean.setSmLong(markerPer.getLatlng().getLng());
+		IclubGeoLocBean geoBean = getGeoLocBean(markerPer.getLatlng().getLat(), markerPer.getLatlng().getLng());
+		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
+			bean.setSmLat(geoBean.getGlLat());
+			bean.setSmLong(geoBean.getGlLong());
+		} else {
+			bean.setSmLat(markerPer.getLatlng().getLat());
+			bean.setSmLong(markerPer.getLatlng().getLng());
+		}
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPer.getTitle()));
+	}
+
+	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
+		WebClient client = IclubWebHelper.createCustomClient(GL_BASE_URL + "get/" + geoLat + "/" + geoLong);
+		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
+		client.close();
+		IclubGeoLocBean bean = new IclubGeoLocBean();
+		if (model != null) {
+			bean.setGlProvince(model.getGlProvince());
+			bean.setGlSuburb(model.getGlSuburb());
+			bean.setGlId(model.getGlId());
+			bean.setGlAddress(model.getGlAddress());
+			bean.setGlLat(model.getGlLat());
+			bean.setGlLong(model.getGlLong());
+			bean.setIclubPerson(model.getIclubPerson());
+			bean.setGlRate(model.getGlRate());
+			bean.setGlCrtdDt(model.getGlCrtdDt());
+		}
+		return bean;
+
 	}
 
 	public void initializePage() {
