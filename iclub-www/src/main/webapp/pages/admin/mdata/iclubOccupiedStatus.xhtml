@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlOccupiedStatusCont">
-				<p:dataTable id="dtOccupiedStatusCont" widgetVar="dtOccupiedStatusCont" value="#{iclubOccupiedStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Occupied Type Found" reflow="true">
+				<p:dataTable widgetVar="dtOccupiedStatusCont" value="#{iclubOccupiedStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Occupied Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnOccupiedStatusShowAdd" value="Add" actionListener="#{iclubOccupiedStatusController.showAddPanel}" update=":iclubFrm:pnlOccupiedStatusCont" />
 					</f:facet>

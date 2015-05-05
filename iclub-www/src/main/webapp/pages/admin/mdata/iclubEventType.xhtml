@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlEventTypeCont">
-				<p:dataTable id="dtEventTypeCont" widgetVar="dtEventTypeCont" value="#{iclubEventTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Event Type Found" reflow="true">
+				<p:dataTable widgetVar="dtEventTypeCont" value="#{iclubEventTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Event Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnEventTypeShowAdd" value="Add" actionListener="#{iclubEventTypeController.showAddPanel}" update=":iclubFrm:pnlEventTypeCont" />
 					</f:facet>

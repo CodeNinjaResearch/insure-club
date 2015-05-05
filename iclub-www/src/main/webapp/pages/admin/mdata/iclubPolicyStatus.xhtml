@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlPolicyStatusCont">
-				<p:dataTable id="dtPolicyStatusCont" widgetVar="dtPolicyStatusCont" value="#{iclubPolicyStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Policy Status Found" reflow="true">
+				<p:dataTable widgetVar="dtPolicyStatusCont" value="#{iclubPolicyStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Policy Status Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnPolicyStatusShowAdd" value="Add" actionListener="#{iclubPolicyStatusController.showAddPanel}" update=":iclubFrm:pnlPolicyStatusCont" />
 					</f:facet>

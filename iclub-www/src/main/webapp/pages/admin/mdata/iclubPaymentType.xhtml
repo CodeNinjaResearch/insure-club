@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlPaymentTypeCont">
-				<p:dataTable id="dtPaymentTypeCont" widgetVar="dtPaymentTypeCont" value="#{iclubPaymentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Payment Type Found" reflow="true">
+				<p:dataTable widgetVar="dtPaymentTypeCont" value="#{iclubPaymentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Payment Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnPaymentTypeShowAdd" value="Add" actionListener="#{iclubPaymentTypeController.showAddPanel}" update=":iclubFrm:pnlPaymentTypeCont" />
 					</f:facet>

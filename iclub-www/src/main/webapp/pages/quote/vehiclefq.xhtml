@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	<div class="ContainerIndent">
 		<p:panel id="pnlVehicleCont">
-			<p:dataTable reflow="true" id="dtVehicleCont" widgetVar="dtVehicleCont" value="#{iclubFullQuoteController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
+			<p:dataTable reflow="true" widgetVar="dtVehicleCont" value="#{iclubFullQuoteController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
 				<f:facet name="footer">
 					<p:commandButton id="btnVehicleShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showVehAddPanel}" update=":iclubFrm:qqTabView:pnlVehicleCont" />
 				</f:facet>

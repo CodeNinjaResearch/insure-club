@@ -5,7 +5,8 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
 	display: none;
 }
 </style>
@@ -13,7 +14,7 @@
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlAccountCont">
-				<p:dataTable id="dtAccountCont" widgetVar="dtAccountCont" value="#{iclubAccountController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Accounts Found" reflow="true">
+				<p:dataTable widgetVar="dtAccountCont" value="#{iclubAccountController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Accounts Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnAccountShowAdd" value="Add" actionListener="#{iclubAccountController.showAddPanel}" update=":iclubFrm:pnlAccountCont" />
 					</f:facet>

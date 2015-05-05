@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlAlarmTypeCont">
-				<p:dataTable id="dtAlarmTypeCont" widgetVar="dtAlarmTypeCont" value="#{iclubAlarmTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Alarm Type Found" reflow="true">
+				<p:dataTable widgetVar="dtAlarmTypeCont" value="#{iclubAlarmTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Alarm Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnAlarmTypeShowAdd" value="Add" actionListener="#{iclubAlarmTypeController.showAddPanel}" update=":iclubFrm:pnlAlarmTypeCont" />
 					</f:facet>

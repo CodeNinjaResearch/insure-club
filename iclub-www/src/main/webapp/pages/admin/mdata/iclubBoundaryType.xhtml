@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlBoundaryTypeCont">
-				<p:dataTable id="dtBoundaryTypeCont" widgetVar="dtBoundaryTypeCont" value="#{iclubBoundaryTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No BoundaryType Found" reflow="true">
+				<p:dataTable widgetVar="dtBoundaryTypeCont" value="#{iclubBoundaryTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No BoundaryType Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnBoundaryTypeShowAdd" value="Add" actionListener="#{iclubBoundaryTypeController.showAddPanel}" update=":iclubFrm:pnlBoundaryTypeCont" />
 					</f:facet>
@@ -16,7 +16,7 @@
 						<p:outputLabel value="#{bean.btLongDesc}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled"   value="#{bean.btStatus}" disabled="true">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.btStatus}" disabled="true">
 							<f:selectItem itemLabel="Status" itemDisabled="true" />
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
