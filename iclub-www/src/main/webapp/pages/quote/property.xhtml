@@ -271,13 +271,13 @@
 							<p:commandButton id="btnPropertyCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubQuickQuoteController.addIclubProperty}" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:commandButton id="btnPropertyCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Close" actionListener="#{iclubQuickQuoteController.clearForm}" />
+							<p:commandButton id="btnPropertyCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Close" actionListener="#{iclubQuickQuoteController.clearProForm}" />
 						</div>
 					</div>
 				</div>
 			</p:panel>
-			<p:tabView id="qqSubProDetViewMod">
-				<p:tab id="qqSubProLocDetMod" title="Location Details">
+			<p:tabView id="qqSubProDetViewMod" rendered="#{iclubQuickQuoteController.showProModPanel}">
+				<p:tab title="Location Details">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
@@ -495,7 +495,7 @@
 							<p:commandButton id="btnPropertyDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Delete" actionListener="#{iclubQuickQuoteController.delIclubProperty}" />
 						</div>
 						<div class="Container33 Responsive">
-							<p:commandButton id="btnPropertyCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Close" actionListener="#{iclubQuickQuoteController.clearForm}" />
+							<p:commandButton id="btnPropertyCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Close" actionListener="#{iclubQuickQuoteController.clearProForm}" />
 						</div>
 					</div>
 				</div>
