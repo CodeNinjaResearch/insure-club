@@ -63,6 +63,23 @@
 				</p:gmap>
 			</p:panel>
 		</p:dialog>
+		<p:dialog id="vehDdLocationDetailsDialog" widgetVar="vehDdLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehDdAddress" value="Address:" />
+					<p:inputText id="vehDdAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVehDd()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVehDd" showDetail="true" />
+				<p:gmap id="geoGmapVehDd" widgetVar="geoMapVehDd" center="#{iclubQuickQuoteController.centerGeoMapVehDd}" zoom="13" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelVehDd}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragVehDd}" update="growlVehDd" />
+					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodeVehDd}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectVehDd}" update="growlVehDd" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
 		<div class="ContainerIndent TexAlCenter">
 			<p:tabView id="qqTabView">
 				<p:tab id="fqPerDet" title="Person details">
