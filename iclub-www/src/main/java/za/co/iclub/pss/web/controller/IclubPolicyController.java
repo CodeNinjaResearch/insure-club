@@ -49,7 +49,6 @@ import za.co.iclub.pss.ws.model.IclubPolicyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubSupplItemModel;
 import za.co.iclub.pss.ws.model.IclubSupplMasterModel;
-import za.co.iclub.pss.ws.model.IclubSupplPersonModel;
 import za.co.iclub.pss.ws.model.IclubVehicleModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
