@@ -2,7 +2,7 @@
 	<ui:define name="content">
 		<p:panel id="asnSulPanel">
 			<p:panel id="asnDdSulPanel">
-				<p:dataTable reflow="true" widgetVar="dtDdSulCont" value="#{iclubPolicyController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
+				<p:dataTable reflow="true" widgetVar="dtDdSulCont" value="#{iclubClaimController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
 					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
 					</p:column>
@@ -48,9 +48,7 @@
 				</p:dataTable>
 			</p:panel>
 			<p:panel id="asnOnSulPanel">
-				<p:dataTable reflow="true" style="margin-bottom:0" selectionMode="single" selection="#{iclubPolicyController.supplMasterBean}" rowKey="#{bean.smId}" widgetVar="dtOnSulCont" value="#{iclubPolicyController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
-					<p:column selectionMode="single" style="width:16px;text-align:center" />
-				
+				<p:dataTable reflow="true" style="margin-bottom:0" selectionMode="single" selection="#{iclubClaimController.supplMasterBean}" rowKey="#{bean.smId}" widgetVar="dtOnSulCont" value="#{iclubClaimController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
 					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
 					</p:column>
@@ -95,7 +93,6 @@
 					</p:column>
 				</p:dataTable>
 			</p:panel>
-			<p:commandButton update=":iclubFrm:asnSulPanel" icon="ui-icon-search" value="Assign Supp" action="#{iclubPolicyController.assignSupplAction}" />
 		</p:panel>
 	</ui:define>
 </ui:composition>

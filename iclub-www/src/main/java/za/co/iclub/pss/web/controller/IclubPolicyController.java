@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -22,6 +23,8 @@ import org.apache.cxf.jaxrs.ext.multipart.ContentDisposition;
 import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.apache.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.event.map.GeocodeEvent;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.event.map.OverlaySelectEvent;
@@ -46,6 +49,7 @@ import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubPolicyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
+import za.co.iclub.pss.ws.model.IclubSupplItemModel;
 import za.co.iclub.pss.ws.model.IclubSupplMasterModel;
 import za.co.iclub.pss.ws.model.IclubVehicleModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -61,6 +65,7 @@ public class IclubPolicyController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubPolicyController.class);
 	private static final String SM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplMasterService/";
+	private static final String SI_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplItemService/";
 	private static final String PCY_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPolicyService/";
 	private static final String II_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemService/";
 	private static final String V_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehicleService/";
@@ -87,6 +92,8 @@ public class IclubPolicyController implements Serializable {
 	private IclubPolicyBean bean;
 	
 	private IclubVehicleBean vehicleBean;
+	
+	private IclubSupplMasterBean supplMasterBean;
 	
 	private boolean vehhicleFlag;
 	
@@ -333,14 +340,14 @@ public class IclubPolicyController implements Serializable {
 			WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "del/" + bean.getPId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
-				IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
 				clearForm();
 			} else {
-				IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+				IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 		return "dashboard.xhtml?faces-redirect=true";
 	}
@@ -397,14 +404,18 @@ public class IclubPolicyController implements Serializable {
 							LOGGER.info("Doc Merge Successful :: " + doc);
 					}
 					docIds = null;
-					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					
+					IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					return null;
+					
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("thatchtype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			
+			IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 		
 		return "dashboard.xhtml?faces-redirect=true";
@@ -792,8 +803,57 @@ public class IclubPolicyController implements Serializable {
 		return null;
 	}
 	
-	public void addIclubSupplItem() {
+	public String assignSupplAction() {
 		
+		if (supplMasterBean != null) {
+			
+		}
+		return null;
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+		FacesMessage msg = new FacesMessage("SupplMaste Selected", ((IclubSupplMasterBean) event.getObject()).getSmId());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public void onRowUnselect(UnselectEvent event) {
+		FacesMessage msg = new FacesMessage("SupplMaste Unselected", ((IclubSupplMasterBean) event.getObject()).getSmId());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+	
+	public void addIclubSupplItem() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubSupplItem");
+		try {
+			if (supplMasterBean != null) {
+				WebClient client = IclubWebHelper.createCustomClient(SI_BASE_URL + "add");
+				
+				IclubSupplItemModel model = new IclubSupplItemModel();
+				model.setSiId(UUID.randomUUID().toString());
+				model.setIclubPerson(getSessionUserId());
+				model.setSiCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setSiAssessNumber(IclubWebHelper.getRandomNumber());
+				model.setIclubInsuranceItemType(1l);
+				model.setSiItemId(vehicleBean.getVId());
+				model.setIclubAssessmentType(1l);
+				model.setIclubSupplMaster(supplMasterBean.getSmId());
+				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+				client.close();
+				if (response.getStatusCode() == 0) {
+					IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+				} else {
+					
+					IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					
+				}
+			} else {
+				
+				IclubWebHelper.addMessage(getLabelBundle().getString("roletype") + " " + getLabelBundle().getString("mod.error"), FacesMessage.SEVERITY_ERROR);
+				
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("policy") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
 	}
 	
 	public List<IclubSupplMasterBean> getSupplMasterBeans(Double smLong, Double smLat) {
@@ -1168,6 +1228,17 @@ public class IclubPolicyController implements Serializable {
 	
 	public void setVehicleBeans(List<IclubVehicleBean> vehicleBeans) {
 		this.vehicleBeans = vehicleBeans;
+	}
+	
+	public IclubSupplMasterBean getSupplMasterBean() {
+		if (supplMasterBean == null) {
+			supplMasterBean = new IclubSupplMasterBean();
+		}
+		return supplMasterBean;
+	}
+	
+	public void setSupplMasterBean(IclubSupplMasterBean supplMasterBean) {
+		this.supplMasterBean = supplMasterBean;
 	}
 	
 }

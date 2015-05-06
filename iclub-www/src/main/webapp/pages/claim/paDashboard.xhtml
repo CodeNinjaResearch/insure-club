@@ -45,10 +45,44 @@
 						</p:selectOneMenu>
 					</p:column>
 					<p:column headerText="View">
-						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" value="View" id="btnPolicyEdit" action="#{iclubClaimController.viewCalimAction}">
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" value="View" id="btnPolicyEdit" action="#{iclubClaimController.assignAction}">
+							<f:setPropertyActionListener target="#{iclubClaimController.bean}" value="#{bean}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
+				<p:panel id="pnlVehicleCont" rendered="#{iclubClaimController.paVehicleFlag}">
+					<p:dataTable reflow="true" widgetVar="dtVehicleCont" value="#{iclubClaimController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
+						<p:column headerText="Unique Id">
+							<p:outputLabel styleClass="TexAlCenter" value="#{ bean.VId}" />
+						</p:column>
+						<p:column headerText="Registration Number">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VRegNum}" />
+						</p:column>
+						<p:column headerText="Dd Address">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VDdArea}" />
+						</p:column>
+						<p:column headerText="Dd Long">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VDdLong}" />
+						</p:column>
+						<p:column headerText="Dd Lat">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VDdLat}" />
+						</p:column>
+						<p:column headerText="On Address">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VOnArea}" />
+						</p:column>
+						<p:column headerText="On Long">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VOnLong}" />
+						</p:column>
+						<p:column headerText="On Lat">
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VOnLat}" />
+						</p:column>
+						<p:column>
+							<p:commandButton id="btnVehicleEdit" value="Assign" action="#{iclubClaimController.assignAction}" update=":iclubFrm:grlMsg">
+								<f:setPropertyActionListener target="#{iclubClaimController.vehicleBean}" value="#{bean}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:panel>
 			</p:panel>
 		</div>
 	</ui:define>
