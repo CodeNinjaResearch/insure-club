@@ -40,9 +40,9 @@
 				</h:panelGrid>
 				<p:growl id="growlPro" showDetail="true" />
 				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubFullQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPro}" style="width:400px;height:400px">
-					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPro}" update="growlPro" />
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPro}" update=":iclubFrm:qqTabView:qqSubProDetView:qqSubProLocDet,growlPro" />
 					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePro}" update="@this" />
-					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPro}" update="growlPro" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPro}" update=":iclubFrm:qqTabView:qqSubProDetView:qqSubProLocDet,growlPro" />
 				</p:gmap>
 			</p:panel>
 		</p:dialog>
@@ -57,9 +57,9 @@
 				</h:panelGrid>
 				<p:growl id="growlVeh" showDetail="true" />
 				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubFullQuoteController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelVeh}" style="width:400px;height:400px">
-					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragVeh}" update="growlVeh" />
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,growlVeh" />
 					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodeVeh}" update="@this" />
-					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectVeh}" update="growlVeh" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,growlVeh" />
 				</p:gmap>
 			</p:panel>
 		</p:dialog>

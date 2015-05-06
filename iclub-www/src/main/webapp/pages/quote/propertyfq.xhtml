@@ -1,22 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	<div class="ContainerIndent">
-		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-			<f:facet name="header">Location Details</f:facet>
-			<p:panel>
-				<h3 style="margin-top: 0">Geocode</h3>
-				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
-					<p:outputLabel for="proAddress" value="Address:" />
-					<p:inputText id="proAddress" />
-					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
-				</h:panelGrid>
-				<p:growl id="growlPro" showDetail="true" />
-				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubFullQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPro}" style="width:400px;height:400px">
-					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPro}" update="growlPro" />
-					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePro}" update="@this" />
-					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPro}" update="growlPro" />
-				</p:gmap>
-			</p:panel>
-		</p:dialog>
 		<p:panel id="pnlPropertyCont">
 			<p:dataTable reflow="true" widgetVar="dtPropertyCont" value="#{iclubFullQuoteController.propertyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Property Available">
 				<f:facet name="footer">
