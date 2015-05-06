@@ -1,39 +1,98 @@
 <ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<p:panel id="asnSulPanel">
-			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.paDashboardBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
-				<f:facet name="footer">
-				</f:facet>
-				<p:column headerText="Unique Id">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PId}" />
-				</p:column>
-				<p:column headerText="Number">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
-				</p:column>
-				<p:column headerText="Premium">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}" />
-				</p:column>
-				<p:column headerText="Pro-rata Premium">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PProrataPrm}" />
-				</p:column>
-				<p:column headerText="Debit Date">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PDebitDt}" />
-				</p:column>
-				<p:column headerText="Quote Id">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubQuote}" />
-				</p:column>
-				<p:column headerText="Created By">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
-				</p:column>
-				<p:column headerText="Created Date">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PCrtdDt}" />
-				</p:column>
-				<p:column headerText="View">
-					<p:commandButton value="Assign" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" action="#{iclubPolicyController.assignAction}">
-						<f:setPropertyActionListener target="#{iclubPolicyController.bean}" value="#{bean}" />
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
+			<p:panel id="asnDdSulPanel">
+				<p:dataTable reflow="true" widgetVar="dtDdSulCont" value="#{iclubPolicyController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
+					<p:column headerText="Unique Id">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
+					</p:column>
+					<p:column headerText="Name">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smName}" />
+					</p:column>
+					<p:column headerText="Trading Name">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smTradeName}" />
+					</p:column>
+					<p:column headerText="Registration Number">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smRegNum}" />
+					</p:column>
+					<p:column headerText="Type">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubSupplierType}" disabled="true">
+							<f:selectItem itemLabel="Type" itemDisabled="true" />
+							<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column headerText="Address">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smAddress}" />
+					</p:column>
+					<p:column headerText="Latitude">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smLat}" />
+					</p:column>
+					<p:column headerText="Longitude">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smLong}" />
+					</p:column>
+					<p:column headerText="Credit Limit">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrLimit}" />
+					</p:column>
+					<p:column headerText="Action Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.srActionDt}" />
+					</p:column>
+					<p:column headerText="Rating">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smRating}" />
+					</p:column>
+					<p:column headerText="Creted By">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+					</p:column>
+					<p:column headerText="Creted Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+			<p:panel id="asnOnSulPanel">
+				<p:dataTable reflow="true" widgetVar="dtOnSulCont" value="#{iclubPolicyController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
+					<p:column headerText="Unique Id">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
+					</p:column>
+					<p:column headerText="Name">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smName}" />
+					</p:column>
+					<p:column headerText="Trading Name">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smTradeName}" />
+					</p:column>
+					<p:column headerText="Registration Number">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smRegNum}" />
+					</p:column>
+					<p:column headerText="Type">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubSupplierType}" disabled="true">
+							<f:selectItem itemLabel="Type" itemDisabled="true" />
+							<f:selectItems value="#{iclubSupplMasterController.supplierTypeBeans}" var="c" itemLabel="#{c.stLongDesc}" itemValue="#{c.stId}" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column headerText="Address">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smAddress}" />
+					</p:column>
+					<p:column headerText="Latitude">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smLat}" />
+					</p:column>
+					<p:column headerText="Longitude">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smLong}" />
+					</p:column>
+					<p:column headerText="Credit Limit">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrLimit}" />
+					</p:column>
+					<p:column headerText="Action Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.srActionDt}" />
+					</p:column>
+					<p:column headerText="Rating">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smRating}" />
+					</p:column>
+					<p:column headerText="Creted By">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
+					</p:column>
+					<p:column headerText="Creted Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
 		</p:panel>
 	</ui:define>
 </ui:composition>

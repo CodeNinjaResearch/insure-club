@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlAssessmentTypeCont">
-				<p:dataTable widgetVar="dtAssessmentTypeCont" value="#{iclubAssessmentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Role Type Found" reflow="true">
+				<p:dataTable widgetVar="dtAssessmentTypeCont" value="#{iclubAssessmentTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No AssessmentType Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnAssessmentTypeShowAdd" value="Add" actionListener="#{iclubAssessmentTypeController.showAddPanel}" update=":iclubFrm:pnlAssessmentTypeCont" />
 					</f:facet>

@@ -46,6 +46,7 @@ import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubPolicyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
+import za.co.iclub.pss.ws.model.IclubSupplMasterModel;
 import za.co.iclub.pss.ws.model.IclubVehicleModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -59,6 +60,7 @@ public class IclubPolicyController implements Serializable {
 	private static final long serialVersionUID = -1299854691643272437L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubPolicyController.class);
+	private static final String SM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubSupplMasterService/";
 	private static final String PCY_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPolicyService/";
 	private static final String II_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemService/";
 	private static final String V_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehicleService/";
@@ -782,9 +784,68 @@ public class IclubPolicyController implements Serializable {
 	public String assignAction() {
 		
 		if (vehicleBean != null) {
+			dDSupplMasterBeans = getSupplMasterBeans(vehicleBean.getVDdLong(), vehicleBean.getVDdLat());
+			oNSupplMasterBeans = getSupplMasterBeans(vehicleBean.getVOnLong(), vehicleBean.getVOnLat());
 			
+			return "assignSupplier.xhtml?faces-redirect=true";
 		}
 		return null;
+	}
+	
+	public void addIclubSupplItem() {
+		
+	}
+	
+	public List<IclubSupplMasterBean> getSupplMasterBeans(Double smLong, Double smLat) {
+		
+		WebClient client = IclubWebHelper.createCustomClient(SM_BASE_URL + "getByLongAndLat/" + smLat + "/" + smLong);
+		Collection<? extends IclubSupplMasterModel> models = new ArrayList<IclubSupplMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubSupplMasterModel.class));
+		client.close();
+		ArrayList<IclubSupplMasterBean> supplMasterBeans = new ArrayList<IclubSupplMasterBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubSupplMasterModel model : models) {
+				
+				IclubSupplMasterBean bean = new IclubSupplMasterBean();
+				
+				bean.setSmId(model.getSmId());
+				bean.setSmCrtdDt(model.getSmCrtdDt());
+				bean.setIclubSupplierType(model.getIclubSupplierType());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setSmRating(model.getSmRating());
+				bean.setSrActionDt(model.getSrActionDt());
+				bean.setSmLong(model.getSmLong());
+				bean.setSmCrLimit(model.getSmCrLimit());
+				bean.setSmAddress(model.getSmAddress());
+				bean.setSmRegNum(model.getSmRegNum());
+				bean.setSmTradeName(model.getSmTradeName());
+				
+				bean.setSmLat(model.getSmLat());
+				bean.setSmName(model.getSmName());
+				
+				if (model.getIclubClaimItemsForCiAssesorId() != null && model.getIclubClaimItemsForCiAssesorId().length > 0) {
+					String[] claimItemsForCiAssesorIds = new String[model.getIclubClaimItemsForCiAssesorId().length];
+					int i = 0;
+					for (String claimItem : model.getIclubClaimItemsForCiAssesorId()) {
+						claimItemsForCiAssesorIds[i] = claimItem;
+						i++;
+					}
+					bean.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
+				}
+				
+				if (model.getIclubClaimItemsForCiHandlerId() != null && model.getIclubClaimItemsForCiHandlerId().length > 0) {
+					String[] claimItemsForCiHandlerIds = new String[model.getIclubClaimItemsForCiHandlerId().length];
+					int i = 0;
+					for (String claimItem : model.getIclubClaimItemsForCiHandlerId()) {
+						claimItemsForCiHandlerIds[i] = claimItem;
+						i++;
+					}
+					bean.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
+				}
+				
+				supplMasterBeans.add(bean);
+			}
+		}
+		return supplMasterBeans;
 	}
 	
 	public String viewVehicleAction() {

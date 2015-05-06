@@ -61,8 +61,8 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VOnLat}" />
 					</p:column>
 					<p:column>
-						<p:commandButton id="btnVehicleEdit" value="Assign" ajax="false" action="#{iclubPolicyController.assignAction}" update=":iclubFrm:grlMsg">
-							<f:setPropertyActionListener target="#{iclubQuickQuoteController.vehicleBean}" value="#{bean}" />
+						<p:commandButton id="btnVehicleEdit" value="Assign" action="#{iclubPolicyController.assignAction}" update=":iclubFrm:grlMsg">
+							<f:setPropertyActionListener target="#{iclubPolicyController.vehicleBean}" value="#{bean}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
