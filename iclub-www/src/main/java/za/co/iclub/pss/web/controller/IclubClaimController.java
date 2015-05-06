@@ -24,8 +24,6 @@ import org.apache.cxf.jaxrs.ext.multipart.ContentDisposition;
 import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.apache.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -143,16 +141,6 @@ public class IclubClaimController implements Serializable {
 		return null;
 	}
 	
-	public void onRowSelect(SelectEvent event) {
-		FacesMessage msg = new FacesMessage("SupplMaste Selected", ((IclubSupplMasterBean) event.getObject()).getSmId());
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-	
-	public void onRowUnselect(UnselectEvent event) {
-		FacesMessage msg = new FacesMessage("SupplMaste Unselected", ((IclubSupplMasterBean) event.getObject()).getSmId());
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-	
 	public List<IclubSupplMasterBean> getSupplMasterBeans(Double smLong, Double smLat) {
 		
 		WebClient client = IclubWebHelper.createCustomClient(SM_BASE_URL + "getByLongAndLat/" + smLat + "/" + smLong);
@@ -205,7 +193,7 @@ public class IclubClaimController implements Serializable {
 		return supplMasterBeans;
 	}
 	
-	public void addIclubSupplItem() {
+	public void assignSupplAction() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubSupplItem");
 		try {
 			if (supplMasterBean != null) {
@@ -220,15 +208,27 @@ public class IclubClaimController implements Serializable {
 				model.setSiItemId(vehicleBean.getVId());
 				model.setIclubAssessmentType(1l);
 				model.setIclubSupplMaster(supplMasterBean.getSmId());
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("claim") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+					client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/" + policyBean.getPId());
+					IclubPolicyModel pModel = client.accept(MediaType.APPLICATION_JSON).get(IclubPolicyModel.class);
+					client.close();
+					
+					pModel.setPCrtdDt(new Timestamp(System.currentTimeMillis()).toString());
+					pModel.setIclubPolicyStatus(4l);
+					pModel.setIclubPerson(getSessionUserId());
+					client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "mod");
+					response = client.accept(MediaType.APPLICATION_JSON).put(pModel, ResponseModel.class);
+					client.close();
+					if (response.getStatusCode() == 0)
+						IclubWebHelper.addMessage(getLabelBundle().getString("claim") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 				} else {
 					
 					IclubWebHelper.addMessage(getLabelBundle().getString("claim") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 					
 				}
+				
 			} else {
 				
 				IclubWebHelper.addMessage(getLabelBundle().getString("claim") + " " + getLabelBundle().getString("mod.error"), FacesMessage.SEVERITY_ERROR);

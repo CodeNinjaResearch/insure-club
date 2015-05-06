@@ -14,6 +14,9 @@
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlClaimCont">
+				<f:facet name="header">
+					<p:outputLabel value="Policy Details"></p:outputLabel>
+				</f:facet>
 				<p:dataTable reflow="true" widgetVar="dtClmCont" value="#{iclubClaimController.paBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<f:facet name="footer">
 					</f:facet>
@@ -51,6 +54,9 @@
 					</p:column>
 				</p:dataTable>
 				<p:panel id="pnlVehicleCont" rendered="#{iclubClaimController.paVehicleFlag}">
+					<f:facet name="header">
+						<p:outputLabel value="Vehicle Details"></p:outputLabel>
+					</f:facet>
 					<p:dataTable reflow="true" widgetVar="dtVehicleCont" value="#{iclubClaimController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
 						<p:column headerText="Unique Id">
 							<p:outputLabel styleClass="TexAlCenter" value="#{ bean.VId}" />

@@ -2,6 +2,9 @@
 	<ui:define name="content">
 		<p:panel id="asnSulPanel">
 			<p:panel id="asnDdSulPanel">
+				<f:facet name="header">
+					<p:outputLabel value="Close To Work"></p:outputLabel>
+				</f:facet>
 				<p:dataTable reflow="true" widgetVar="dtDdSulCont" value="#{iclubClaimController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
 					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
@@ -45,10 +48,18 @@
 					<p:column headerText="Creted Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
 					</p:column>
+					<p:column>
+						<p:commandButton update=":iclubFrm:grlMsg" value="Assign Supplier" action="#{iclubClaimController.assignSupplAction}">
+							<f:setPropertyActionListener target="#{iclubClaimController.supplMasterBean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
 				</p:dataTable>
 			</p:panel>
 			<p:panel id="asnOnSulPanel">
-				<p:dataTable reflow="true" style="margin-bottom:0" selectionMode="single" selection="#{iclubClaimController.supplMasterBean}" rowKey="#{bean.smId}" widgetVar="dtOnSulCont" value="#{iclubClaimController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
+				<f:facet name="header">
+					<p:outputLabel value="Close To Home"></p:outputLabel>
+				</f:facet>
+				<p:dataTable reflow="true" widgetVar="dtOnSulCont" value="#{iclubClaimController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
 					<p:column headerText="Unique Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
 					</p:column>
@@ -90,6 +101,11 @@
 					</p:column>
 					<p:column headerText="Creted Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
+					</p:column>
+					<p:column>
+						<p:commandButton update=":iclubFrm:grlMsg" value="Assign Supplier" action="#{iclubClaimController.assignSupplAction}">
+							<f:setPropertyActionListener target="#{iclubClaimController.supplMasterBean}" value="#{bean}" />
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 			</p:panel>
