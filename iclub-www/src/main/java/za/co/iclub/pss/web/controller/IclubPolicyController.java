@@ -242,6 +242,7 @@ public class IclubPolicyController implements Serializable {
 		markerPro = (Marker) event.getOverlay();
 		propertyBean.setPLat(markerPro.getLatlng().getLat());
 		propertyBean.setPLong(markerPro.getLatlng().getLng());
+		propertyBean.setPAddress(markerPro.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPro.getTitle()));
 	}
 	
@@ -255,6 +256,7 @@ public class IclubPolicyController implements Serializable {
 			vehicleBean.setVDdLat(markerVeh.getLatlng().getLat());
 			vehicleBean.setVDdLong(markerVeh.getLatlng().getLng());
 		}
+		vehicleBean.setVDdArea(markerVeh.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
 	}
 	
