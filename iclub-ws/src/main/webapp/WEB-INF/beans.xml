@@ -92,6 +92,9 @@
 			<ref bean="IclubSupplPersonService" />
 			<ref bean="IclubAssessmentTypeService" />
 			<ref bean="IclubSupplItemService" />
+			<ref bean="IclubPropUsageTypeService" />
+			<ref bean="IclubVehUsageTypeService" />
+
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">

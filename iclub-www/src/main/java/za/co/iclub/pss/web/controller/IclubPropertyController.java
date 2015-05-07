@@ -32,9 +32,9 @@ import za.co.iclub.pss.web.bean.IclubBarTypeBean;
 import za.co.iclub.pss.web.bean.IclubCoverTypeBean;
 import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.bean.IclubOccupiedStatusBean;
+import za.co.iclub.pss.web.bean.IclubPropUsageTypeBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
 import za.co.iclub.pss.web.bean.IclubPropertyTypeBean;
-import za.co.iclub.pss.web.bean.IclubPurposeTypeBean;
 import za.co.iclub.pss.web.bean.IclubRoofTypeBean;
 import za.co.iclub.pss.web.bean.IclubThatchTypeBean;
 import za.co.iclub.pss.web.bean.IclubWallTypeBean;
@@ -44,9 +44,9 @@ import za.co.iclub.pss.ws.model.IclubBarTypeModel;
 import za.co.iclub.pss.ws.model.IclubCoverTypeModel;
 import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubOccupiedStatusModel;
+import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyTypeModel;
-import za.co.iclub.pss.ws.model.IclubPurposeTypeModel;
 import za.co.iclub.pss.ws.model.IclubRoofTypeModel;
 import za.co.iclub.pss.ws.model.IclubThatchTypeModel;
 import za.co.iclub.pss.ws.model.IclubWallTypeModel;
@@ -61,7 +61,7 @@ public class IclubPropertyController implements Serializable {
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropertyController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
 	private static final String AEST_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubAccessTypeService/";
-	private static final String PUR_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPurposeTypeService/";
+	private static final String VEHU_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehUsageTypeService/";
 	private static final String BT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBarTypeService/";
 	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
 	private static final String TT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubThatchTypeService/";
@@ -74,7 +74,7 @@ public class IclubPropertyController implements Serializable {
 	private List<IclubPropertyBean> beans;
 	private List<IclubPropertyBean> dashBoardBeans;
 	private List<IclubAccessTypeBean> accessTypeBeans;
-	private List<IclubPurposeTypeBean> pPurposeTypeBeans;
+	private List<IclubPropUsageTypeBean> pPropUsageTypeBeans;
 	private List<IclubBarTypeBean> barTypeBeans;
 	private List<IclubThatchTypeBean> thatchTypeBeans;
 	private List<IclubRoofTypeBean> roofTypeBeans;
@@ -244,7 +244,7 @@ public class IclubPropertyController implements Serializable {
 				bean.setPAddress(model.getPAddress());
 				bean.setPRegNum(model.getPRegNum());
 				bean.setIclubCoverType(model.getIclubCoverType());
-				bean.setIclubPurposeType(model.getIclubPurposeType());
+				bean.setIclubPropUsageType(model.getIclubPropUsageType());
 				bean.setIclubOccupiedStatus(model.getIclubOccupiedStatus());
 				bean.setIclubPropertyType(model.getIclubPropertyType());
 				bean.setIclubWallType(model.getIclubWallType());
@@ -294,7 +294,7 @@ public class IclubPropertyController implements Serializable {
 				model.setPAddress(bean.getPAddress());
 				model.setPRegNum(bean.getPRegNum());
 				model.setIclubCoverType(bean.getIclubCoverType());
-				model.setIclubPurposeType(bean.getIclubPurposeType());
+				model.setIclubPropUsageType(bean.getIclubPropUsageType());
 				model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus());
 				model.setIclubPropertyType(bean.getIclubPropertyType());
 				model.setIclubWallType(bean.getIclubWallType());
@@ -344,7 +344,7 @@ public class IclubPropertyController implements Serializable {
 				model.setPAddress(bean.getPAddress());
 				model.setPRegNum(bean.getPRegNum());
 				model.setIclubCoverType(bean.getIclubCoverType());
-				model.setIclubPurposeType(bean.getIclubPurposeType());
+				model.setIclubPropUsageType(bean.getIclubPropUsageType());
 				model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus());
 				model.setIclubPropertyType(bean.getIclubPropertyType());
 				model.setIclubWallType(bean.getIclubWallType());
@@ -411,8 +411,8 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select Cover Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (bean.getIclubPurposeType() == null) {
-			IclubWebHelper.addMessage(("Please Select Purpose Type"), FacesMessage.SEVERITY_ERROR);
+		if (bean.getIclubPropUsageType() == null) {
+			IclubWebHelper.addMessage(("Please Select PropUsage Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getPNoclaimYrs() == null) {
@@ -714,23 +714,19 @@ public class IclubPropertyController implements Serializable {
 		this.occupiedStatusBeans = occupiedStatusBeans;
 	}
 	
-	public List<IclubPurposeTypeBean> getpPurposeTypeBeans() {
-		WebClient client = IclubWebHelper.createCustomClient(PUR_BASE_URL + "/list/status/" + "2");
-		Collection<? extends IclubPurposeTypeModel> models = new ArrayList<IclubPurposeTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPurposeTypeModel.class));
+	public List<IclubPropUsageTypeBean> getpPropUsageTypeBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(VEHU_BASE_URL + "/list");
+		Collection<? extends IclubPropUsageTypeModel> models = new ArrayList<IclubPropUsageTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropUsageTypeModel.class));
 		client.close();
-		pPurposeTypeBeans = new ArrayList<IclubPurposeTypeBean>();
+		pPropUsageTypeBeans = new ArrayList<IclubPropUsageTypeBean>();
 		if (models != null && models.size() > 0) {
-			for (IclubPurposeTypeModel model : models) {
-				IclubPurposeTypeBean bean = new IclubPurposeTypeBean();
+			for (IclubPropUsageTypeModel model : models) {
+				IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
 				
-				bean.setPtId(model.getPtId());
-				bean.setPtLongDesc(model.getPtLongDesc());
-				bean.setPtShortDesc(model.getPtShortDesc());
-				bean.setPtStatus(model.getPtStatus());
-				bean.setPtCrtdDt(model.getPtCrtdDt());
-				bean.setIclubPerson(model.getIclubPerson());
-				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-				
+				bean.setPuId(model.getPuId());
+				bean.setPuLongDesc(model.getPuLongDesc());
+				bean.setPuShortDesc(model.getPuShortDesc());
+				bean.setPuStatus(model.getPuStatus());
 				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
 					String[] properties = new String[model.getIclubProperties().length];
 					int i = 0;
@@ -741,23 +737,14 @@ public class IclubPropertyController implements Serializable {
 					bean.setIclubProperties(properties);
 				}
 				
-				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
-					String[] vehicles = new String[model.getIclubVehicles().length];
-					int i = 0;
-					for (String iclubVehicle : model.getIclubVehicles()) {
-						vehicles[i] = iclubVehicle;
-						i++;
-					}
-					bean.setIclubVehicles(vehicles);
-				}
-				pPurposeTypeBeans.add(bean);
+				pPropUsageTypeBeans.add(bean);
 			}
 		}
-		return pPurposeTypeBeans;
+		return pPropUsageTypeBeans;
 	}
 	
-	public void setpPurposeTypeBeans(List<IclubPurposeTypeBean> pPurposeTypeBeans) {
-		this.pPurposeTypeBeans = pPurposeTypeBeans;
+	public void setpPropUsageTypeBeans(List<IclubPropUsageTypeBean> pPropUsageTypeBeans) {
+		this.pPropUsageTypeBeans = pPropUsageTypeBeans;
 	}
 	
 	public List<IclubCoverTypeBean> getCoverTypeBeans() {

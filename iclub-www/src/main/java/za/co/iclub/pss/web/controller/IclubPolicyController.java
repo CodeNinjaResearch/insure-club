@@ -511,7 +511,7 @@ public class IclubPolicyController implements Serializable {
 				vehicleBean.setVVin(model.getVVin());
 				vehicleBean.setVNoclaimYrs(model.getVNoclaimYrs());
 				vehicleBean.setIclubVehicleMaster(model.getIclubVehicleMaster());
-				vehicleBean.setIclubPurposeType(model.getIclubPurposeType());
+				vehicleBean.setIclubVehUsageType(model.getIclubVehUsageType());
 				vehicleBean.setIclubSecurityMaster(model.getIclubSecurityMaster());
 				vehicleBean.setIclubPerson(model.getIclubPerson());
 				vehicleBean.setIclubDriver(model.getIclubDriver());
@@ -552,7 +552,7 @@ public class IclubPolicyController implements Serializable {
 				propertyBean.setPAddress(model.getPAddress());
 				propertyBean.setPRegNum(model.getPRegNum());
 				propertyBean.setIclubCoverType(model.getIclubCoverType());
-				propertyBean.setIclubPurposeType(model.getIclubPurposeType());
+				propertyBean.setIclubPropUsageType(model.getIclubPropUsageType());
 				propertyBean.setIclubOccupiedStatus(model.getIclubOccupiedStatus());
 				propertyBean.setIclubPropertyType(model.getIclubPropertyType());
 				propertyBean.setIclubWallType(model.getIclubWallType());
@@ -993,7 +993,7 @@ public class IclubPolicyController implements Serializable {
 					vehicleBean.setVVin(model.getVVin());
 					vehicleBean.setVNoclaimYrs(model.getVNoclaimYrs());
 					vehicleBean.setIclubVehicleMaster(model.getIclubVehicleMaster());
-					vehicleBean.setIclubPurposeType(model.getIclubPurposeType());
+					vehicleBean.setIclubVehUsageType(model.getIclubVehUsageType());
 					vehicleBean.setIclubSecurityMaster(model.getIclubSecurityMaster());
 					vehicleBean.setIclubPerson(model.getIclubPerson());
 					vehicleBean.setIclubDriver(model.getIclubDriver());

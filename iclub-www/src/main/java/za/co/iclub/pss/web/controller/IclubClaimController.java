@@ -34,7 +34,6 @@ import za.co.iclub.pss.web.bean.IclubInsuranceItemTypeBean;
 import za.co.iclub.pss.web.bean.IclubPolicyBean;
 import za.co.iclub.pss.web.bean.IclubPolicyStatusBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
-import za.co.iclub.pss.web.bean.IclubPurposeTypeBean;
 import za.co.iclub.pss.web.bean.IclubSupplMasterBean;
 import za.co.iclub.pss.web.bean.IclubVehicleBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
@@ -75,8 +74,6 @@ public class IclubClaimController implements Serializable {
 	private List<IclubInsuranceItemTypeBean> insuranceItemTypebeans;
 	
 	private List<IclubPolicyStatusBean> policyStatusBeans;
-	
-	private List<IclubPurposeTypeBean> purposeTypeBeans;
 	
 	private List<IclubPolicyBean> policyBeans;
 	
@@ -328,7 +325,7 @@ public class IclubClaimController implements Serializable {
 					vehicleBean.setVVin(model.getVVin());
 					vehicleBean.setVNoclaimYrs(model.getVNoclaimYrs());
 					vehicleBean.setIclubVehicleMaster(model.getIclubVehicleMaster());
-					vehicleBean.setIclubPurposeType(model.getIclubPurposeType());
+					vehicleBean.setIclubVehUsageType(model.getIclubVehUsageType());
 					vehicleBean.setIclubSecurityMaster(model.getIclubSecurityMaster());
 					vehicleBean.setIclubPerson(model.getIclubPerson());
 					vehicleBean.setIclubDriver(model.getIclubDriver());
@@ -413,7 +410,7 @@ public class IclubClaimController implements Serializable {
 				vehicleBean.setVVin(model.getVVin());
 				vehicleBean.setVNoclaimYrs(model.getVNoclaimYrs());
 				vehicleBean.setIclubVehicleMaster(model.getIclubVehicleMaster());
-				vehicleBean.setIclubPurposeType(model.getIclubPurposeType());
+				vehicleBean.setIclubVehUsageType(model.getIclubVehUsageType());
 				vehicleBean.setIclubSecurityMaster(model.getIclubSecurityMaster());
 				vehicleBean.setIclubPerson(model.getIclubPerson());
 				vehicleBean.setIclubDriver(model.getIclubDriver());
@@ -445,7 +442,7 @@ public class IclubClaimController implements Serializable {
 				propertyBean.setPAddress(model.getPAddress());
 				propertyBean.setPRegNum(model.getPRegNum());
 				propertyBean.setIclubCoverType(model.getIclubCoverType());
-				propertyBean.setIclubPurposeType(model.getIclubPurposeType());
+				propertyBean.setIclubPropUsageType(model.getIclubPropUsageType());
 				propertyBean.setIclubOccupiedStatus(model.getIclubOccupiedStatus());
 				propertyBean.setIclubPropertyType(model.getIclubPropertyType());
 				propertyBean.setIclubWallType(model.getIclubWallType());
@@ -1017,14 +1014,6 @@ public class IclubClaimController implements Serializable {
 	
 	public void setPolicyStatusBeans(List<IclubPolicyStatusBean> policyStatusBeans) {
 		this.policyStatusBeans = policyStatusBeans;
-	}
-	
-	public List<IclubPurposeTypeBean> getPurposeTypeBeans() {
-		return purposeTypeBeans;
-	}
-	
-	public void setPurposeTypeBeans(List<IclubPurposeTypeBean> purposeTypeBeans) {
-		this.purposeTypeBeans = purposeTypeBeans;
 	}
 	
 	public boolean isViewClaimFlag() {

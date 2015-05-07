@@ -232,9 +232,9 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Vehicle Usage Purpose :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubPurposeType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubVehUsageType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 				<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
-				<f:selectItems value="#{iclubVehicleController.purposeTypeBeans}" var="p" itemLabel="#{p.ptLongDesc}" itemValue="#{p.ptId}" />
+				<f:selectItems value="#{iclubVehicleController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vuLongDesc}" itemValue="#{p.vuId}" />
 			</p:selectOneMenu>
 		</div>
 	</div>
@@ -245,6 +245,6 @@
 		</div>
 		<div class="Container50 Responsive">
 			<p:commandButton id="btnVehicleCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlVehicleCont" value="Close" actionListener="#{iclubVehicleController.showView}" />
-		</div> 
+		</div>
 	</div>
 </ui:composition>

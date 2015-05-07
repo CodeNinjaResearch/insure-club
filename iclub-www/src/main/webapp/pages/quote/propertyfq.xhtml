@@ -171,9 +171,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Whatt is the property used for :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPurposeType}" widgetVar="mnuPurTyp" id="mnuPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropUsageType}" widgetVar="mnuPurTyp" id="mnuPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.pPurposeTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
+								<f:selectItems value="#{iclubFullQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.puId}" itemLabel="#{c.puLongDesc}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -392,9 +392,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Whatt is the property used for :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPurposeType}" widgetVar="mnuModPurTyp" id="mnuModPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropUsageType}" widgetVar="mnuModPurTyp" id="mnuModPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.pPurposeTypeBeans}" var="c" itemValue="#{c.ptId}" itemLabel="#{c.ptLongDesc}" />
+								<f:selectItems value="#{iclubFullQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.puId}" itemLabel="#{c.puLongDesc}" />
 							</p:selectOneMenu>
 						</div>
 					</div>

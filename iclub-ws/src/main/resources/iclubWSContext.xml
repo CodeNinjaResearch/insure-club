@@ -492,7 +492,20 @@
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubAssessmentTypeDAO" ref="IclubAssessmentTypeDAO" />
 	</bean>
-
+	<bean id="IclubVehUsageTypeService" class="za.co.iclub.pss.ws.service.IclubVehUsageTypeService">
+		<property name="iclubVehUsageTypeDAO" ref="IclubVehUsageTypeDAO" />
+		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+	</bean>
+	<bean id="IclubPropUsageTypeService" class="za.co.iclub.pss.ws.service.IclubPropUsageTypeService">
+		<property name="iclubPropUsageTypeDAO" ref="IclubPropUsageTypeDAO" />
+		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+	</bean>
 
 
 </beans>
