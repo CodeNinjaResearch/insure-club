@@ -68,7 +68,6 @@
 				<value>za.co.iclub.pss.orm.bean.IclubProductType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubProperty</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPropertyType</value>
-				<value>za.co.iclub.pss.orm.bean.IclubPurposeType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubQuote</value>
 				<value>za.co.iclub.pss.orm.bean.IclubQuoteStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubRateEngine</value>
@@ -100,7 +99,8 @@
 				<value>za.co.iclub.pss.orm.bean.IclubSupplItem</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPropUsageType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehUsageType</value>
-				<value>za.co.iclub.pss.orm.bean.IclubPropertyItem</value></list>
+				<value>za.co.iclub.pss.orm.bean.IclubPropertyItem</value>
+			</list>
 		</property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -357,11 +357,6 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="IclubPurposeTypeDAO" class="za.co.iclub.pss.orm.dao.IclubPurposeTypeDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
 	<bean id="IclubEventDAO" class="za.co.iclub.pss.orm.dao.IclubEventDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -506,4 +501,5 @@
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
-	</bean></beans>
+	</bean>
+</beans>

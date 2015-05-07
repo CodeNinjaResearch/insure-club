@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import za.co.iclub.pss.orm.bean.IclubCoverType;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
-import za.co.iclub.pss.orm.bean.IclubPurposeType;
 import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
 import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
@@ -167,16 +166,6 @@ public class IclubInsuranceItemTypeService {
 						}
 						model.setIclubSecurityDevices(iclubSecurityDevices);
 					}
-					if (iIit.getIclubPurposeTypes() != null && iIit.getIclubPurposeTypes().size() > 0) {
-						Long[] purposeTypes = new Long[iIit.getIclubPurposeTypes().size()];
-						int i = 0;
-						for (IclubPurposeType iclubPurposeType : iIit.getIclubPurposeTypes()) {
-							purposeTypes[i] = iclubPurposeType.getPtId();
-							i++;
-						}
-						model.setIclubPurposeTypes(purposeTypes);
-					}
-
 					if (iIit.getIclubInsuranceItems() != null && iIit.getIclubInsuranceItems().size() > 0) {
 						String[] insuranceItems = new String[iIit.getIclubInsuranceItems().size()];
 						int i = 0;
@@ -259,16 +248,6 @@ public class IclubInsuranceItemTypeService {
 				}
 				model.setIclubSecurityDevices(iclubSecurityDevices);
 			}
-			if (bean.getIclubPurposeTypes() != null && bean.getIclubPurposeTypes().size() > 0) {
-				Long[] purposeTypes = new Long[bean.getIclubPurposeTypes().size()];
-				int i = 0;
-				for (IclubPurposeType iclubPurposeType : bean.getIclubPurposeTypes()) {
-					purposeTypes[i] = iclubPurposeType.getPtId();
-					i++;
-				}
-				model.setIclubPurposeTypes(purposeTypes);
-			}
-
 			if (bean.getIclubInsuranceItems() != null && bean.getIclubInsuranceItems().size() > 0) {
 				String[] insuranceItems = new String[bean.getIclubInsuranceItems().size()];
 				int i = 0;

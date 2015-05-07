@@ -43,7 +43,6 @@ import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.bean.IclubProperty;
-import za.co.iclub.pss.orm.bean.IclubPurposeType;
 import za.co.iclub.pss.orm.bean.IclubQuote;
 import za.co.iclub.pss.orm.bean.IclubRateEngine;
 import za.co.iclub.pss.orm.bean.IclubRateType;
@@ -565,15 +564,6 @@ public class IclubPersonService {
 						}
 						model.setIclubDriversForDCrtdBy(iclubDriversForDCrtdBy);
 					}
-					if (iPerson.getIclubPurposeTypes() != null && iPerson.getIclubPurposeTypes().size() > 0) {
-						Long[] purposeTypes = new Long[iPerson.getIclubPurposeTypes().size()];
-						int i = 0;
-						for (IclubPurposeType iclubPurposeType : iPerson.getIclubPurposeTypes()) {
-							purposeTypes[i] = iclubPurposeType.getPtId();
-							i++;
-						}
-						model.setIclubPurposeTypes(purposeTypes);
-					}
 					if (iPerson.getIclubDriversForDPersonId() != null && iPerson.getIclubDriversForDPersonId().size() > 0) {
 						String[] driversForDPersonId = new String[iPerson.getIclubDriversForDPersonId().size()];
 						int i = 0;
@@ -1002,15 +992,6 @@ public class IclubPersonService {
 						}
 						model.setIclubDriversForDCrtdBy(iclubDriversForDCrtdBy);
 					}
-					if (iPerson.getIclubPurposeTypes() != null && iPerson.getIclubPurposeTypes().size() > 0) {
-						Long[] purposeTypes = new Long[iPerson.getIclubPurposeTypes().size()];
-						int i = 0;
-						for (IclubPurposeType iclubPurposeType : iPerson.getIclubPurposeTypes()) {
-							purposeTypes[i] = iclubPurposeType.getPtId();
-							i++;
-						}
-						model.setIclubPurposeTypes(purposeTypes);
-					}
 					if (iPerson.getIclubDriversForDPersonId() != null && iPerson.getIclubDriversForDPersonId().size() > 0) {
 						String[] driversForDPersonId = new String[iPerson.getIclubDriversForDPersonId().size()];
 						int i = 0;
@@ -1431,15 +1412,6 @@ public class IclubPersonService {
 					i++;
 				}
 				model.setIclubDriversForDCrtdBy(iclubDriversForDCrtdBy);
-			}
-			if (bean.getIclubPurposeTypes() != null && bean.getIclubPurposeTypes().size() > 0) {
-				Long[] purposeTypes = new Long[bean.getIclubPurposeTypes().size()];
-				int i = 0;
-				for (IclubPurposeType iclubPurposeType : bean.getIclubPurposeTypes()) {
-					purposeTypes[i] = iclubPurposeType.getPtId();
-					i++;
-				}
-				model.setIclubPurposeTypes(purposeTypes);
 			}
 			if (bean.getIclubDriversForDPersonId() != null && bean.getIclubDriversForDPersonId().size() > 0) {
 				String[] driversForDPersonId = new String[bean.getIclubDriversForDPersonId().size()];

@@ -54,7 +54,6 @@
 			<ref bean="IclubSupplierTypeService" />
 			<ref bean="IclubTrackerMasterService" />
 			<ref bean="IclubVehicleMasterService" />
-			<ref bean="IclubPurposeTypeService" />
 			<ref bean="IclubCoverTypeService" />
 			<ref bean="IclubEntityTypeService" />
 			<ref bean="IclubEventService" />

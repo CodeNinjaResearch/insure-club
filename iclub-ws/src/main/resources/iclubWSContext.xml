@@ -251,13 +251,6 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
-	<bean id="IclubPurposeTypeService" class="za.co.iclub.pss.ws.service.IclubPurposeTypeService">
-		<property name="iclubPurposeTypeDAO" ref="IclubPurposeTypeDAO" />
-		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
-		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
-		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
-		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
-	</bean>
 	<bean id="IclubEntityTypeService" class="za.co.iclub.pss.ws.service.IclubEntityTypeService">
 		<property name="iclubEntityTypeDAO" ref="IclubEntityTypeDAO" />
 		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
