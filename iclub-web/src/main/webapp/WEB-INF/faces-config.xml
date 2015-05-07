@@ -404,8 +404,15 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>iclubPurposeType</from-outcome>
-			<to-view-id>/pages/admin/purposetype/container.xhtml</to-view-id>
+			<from-outcome>iclubVehUsageType</from-outcome>
+			<to-view-id>/pages/admin/mdata/iclubVehUsageType.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubPropUsageType</from-outcome>
+			<to-view-id>/pages/admin/mdata/iclubPropUsageType.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -492,6 +499,13 @@
 			<from-outcome>claim</from-outcome>
 			<to-view-id>/pages/claim/container.xhtml</to-view-id>
 			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>iclubAssessmentType</from-outcome>
+			<to-view-id>/pages/admin/mdata/iclubAssessmentType.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

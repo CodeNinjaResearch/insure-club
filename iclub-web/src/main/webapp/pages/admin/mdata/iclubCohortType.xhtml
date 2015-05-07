@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlCohortTypeCont">
-				<p:dataTable id="dtCohortTypeCont" widgetVar="dtCohortTypeCont" value="#{iclubCohortTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohort Type Found" reflow="true">
+				<p:dataTable widgetVar="dtCohortTypeCont" value="#{iclubCohortTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohort Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnCohortTypeShowAdd" value="Add" actionListener="#{iclubCohortTypeController.showAddPanel}" update=":iclubFrm:pnlCohortTypeCont" />
 					</f:facet>

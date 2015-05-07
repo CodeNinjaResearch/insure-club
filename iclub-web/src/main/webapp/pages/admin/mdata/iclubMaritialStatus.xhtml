@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlMaritialStatusCont">
-				<p:dataTable id="dtMaritialStatusCont" widgetVar="dtMaritialStatusCont" value="#{iclubMaritialStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Maritial Status Found" reflow="true">
+				<p:dataTable widgetVar="dtMaritialStatusCont" value="#{iclubMaritialStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Maritial Status Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnMaritialStatusShowAdd" value="Add" actionListener="#{iclubMaritialStatusController.showAddPanel}" update=":iclubFrm:pnlMaritialStatusCont" />
 					</f:facet>

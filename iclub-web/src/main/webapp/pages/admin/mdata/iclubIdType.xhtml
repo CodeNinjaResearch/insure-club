@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlIdTypeCont">
-				<p:dataTable id="dtIdTypeCont" widgetVar="dtIdTypeCont" value="#{iclubIdTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No ID Type Found" reflow="true">
+				<p:dataTable widgetVar="dtIdTypeCont" value="#{iclubIdTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No ID Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnIdTypeShowAdd" value="Add" actionListener="#{iclubIdTypeController.showAddPanel}" update=":iclubFrm:pnlIdTypeCont" />
 					</f:facet>

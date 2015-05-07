@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlRoleTypeCont">
-				<p:dataTable id="dtRoleTypeCont" widgetVar="dtRoleTypeCont" value="#{iclubRoleTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Role Type Found" reflow="true">
+				<p:dataTable widgetVar="dtRoleTypeCont" value="#{iclubRoleTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Role Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnRoleTypeShowAdd" value="Add" actionListener="#{iclubRoleTypeController.showAddPanel}" update=":iclubFrm:pnlRoleTypeCont" />
 					</f:facet>

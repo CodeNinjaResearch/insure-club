@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	<div class="ContainerIndent">
 		<p:panel id="pnlPersonCont">
-			<p:dataTable id="dtPersonCont" widgetVar="dtPersonCont" value="#{iclubSupplMasterController.personBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Person Available">
+			<p:dataTable reflow="true" widgetVar="dtPersonCont" value="#{iclubSupplMasterController.personBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Person Available">
 				<f:facet name="footer">
 					<p:commandButton id="btnPersonShowAdd" value="Add" actionListener="#{iclubSupplMasterController.showPerAddPanel}" update=":iclubFrm:supMAddTabView:pnlPersonCont" />
 				</f:facet>

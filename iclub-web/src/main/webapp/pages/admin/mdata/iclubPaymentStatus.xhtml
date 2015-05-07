@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlPaymentStatusCont">
-				<p:dataTable id="dtPaymentStatusCont" widgetVar="dtPaymentStatusCont" value="#{iclubPaymentStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PaymentStatus Found" reflow="true">
+				<p:dataTable widgetVar="dtPaymentStatusCont" value="#{iclubPaymentStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PaymentStatus Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnPaymentStatusShowAdd" value="Add" actionListener="#{iclubPaymentStatusController.showAddPanel}" update=":iclubFrm:pnlPaymentStatusCont" />
 					</f:facet>

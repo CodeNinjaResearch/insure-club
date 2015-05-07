@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlProductTypeCont">
-				<p:dataTable id="dtProductTypeCont" widgetVar="dtProductTypeCont" value="#{iclubProductTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Product Type Found" reflow="true">
+				<p:dataTable widgetVar="dtProductTypeCont" value="#{iclubProductTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Product Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnProductTypeShowAdd" value="Add" actionListener="#{iclubProductTypeController.showAddPanel}" update=":iclubFrm:pnlProductTypeCont" />
 					</f:facet>

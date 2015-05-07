@@ -14,7 +14,7 @@
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlDriverCont">
-				<p:dataTable id="dtDriverCont" widgetVar="dtDriverCont" value="#{iclubDriverController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Drivers Found" reflow="true">
+				<p:dataTable widgetVar="dtDriverCont" value="#{iclubDriverController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Drivers Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnDriverShowAdd" value="Add" actionListener="#{iclubDriverController.showAddPanel}" update=":iclubFrm:pnlDriverCont" />
 					</f:facet>

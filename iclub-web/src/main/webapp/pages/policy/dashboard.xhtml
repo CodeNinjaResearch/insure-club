@@ -1,19 +1,19 @@
 <ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">Location Details</f:facet>
 			<p:panel>
 				<h3 style="margin-top: 0">Geocode</h3>
 				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
-					<p:outputLabel styleClass="TexAlCenter" for="perAddress" value="Address:" />
-					<p:inputText id="perAddress" />
-					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
+					<p:outputLabel styleClass="TexAlCenter" for="proAddress" value="Address:" />
+					<p:inputText id="proAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlPre" showDetail="true" />
-				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubPolicyController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubPolicyController.draggableModelPer}" style="width:400px;height:400px">
-					<p:ajax event="markerDrag" listener="#{iclubPolicyController.onMarkerDragPer}" update="growlPre" />
-					<p:ajax event="geocode" listener="#{iclubPolicyController.onGeocodePer}" update="@this" />
-					<p:ajax event="overlaySelect" listener="#{iclubPolicyController.onMarkerSelectPer}" update="growlPre" />
+				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubPolicyController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubPolicyController.draggableModelPro}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubPolicyController.onMarkerDragPro}" update="growlPre" />
+					<p:ajax event="geocode" listener="#{iclubPolicyController.onGeocodePro}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubPolicyController.onMarkerSelectPro}" update="growlPre" />
 				</p:gmap>
 			</p:panel>
 		</p:dialog>
@@ -35,7 +35,7 @@
 			</p:panel>
 		</p:dialog>
 		<p:panel id="qqPanel">
-			<p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 				<f:facet name="footer">
 				</f:facet>
 				<p:column headerText="Unique Id">
@@ -73,7 +73,7 @@
 				</p:column>
 			</p:dataTable>
 			<p:panel id="iiPanel" rendered="#{iclubPolicyController.iItemFalg}">
-				<p:dataTable id="dtIICont" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<f:facet name="footer">
 					</f:facet>
 					<p:column headerText="Unique Id">
@@ -110,7 +110,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:commandButton update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
+							<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -128,7 +128,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Whatt is the property used for :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubPurposeType}" />
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.iclubPropUsageType}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -513,7 +513,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Usage Purpose:" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.iclubPurposeType}" />
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.iclubVehUsageType}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />

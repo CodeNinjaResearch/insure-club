@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlAccessTypeCont">
-				<p:dataTable id="dtAccessTypeCont" widgetVar="dtAccessTypeCont" value="#{iclubAccessTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Access Type Found" reflow="true">
+				<p:dataTable widgetVar="dtAccessTypeCont" value="#{iclubAccessTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Access Type Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnAccessTypeShowAdd" value="Add" actionListener="#{iclubAccessTypeController.showAddPanel}" update=":iclubFrm:pnlAccessTypeCont" />
 					</f:facet>
@@ -59,7 +59,7 @@
 				<p:panel id="pnlMod" rendered="#{iclubAccessTypeController.showModPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:outputLabel  value="#{iclubAccessTypeController.bean.atId}" />
+							<p:outputLabel value="#{iclubAccessTypeController.bean.atId}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">

@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlClaimStatusCont">
-				<p:dataTable id="dtClaimStatusCont" widgetVar="dtClaimStatusCont" value="#{iclubClaimStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Claim Status Found" reflow="true">
+				<p:dataTable widgetVar="dtClaimStatusCont" value="#{iclubClaimStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Claim Status Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnClaimStatusShowAdd" value="Add" actionListener="#{iclubClaimStatusController.showAddPanel}" update=":iclubFrm:pnlClaimStatusCont" />
 					</f:facet>

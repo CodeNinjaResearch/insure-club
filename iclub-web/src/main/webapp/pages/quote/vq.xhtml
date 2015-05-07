@@ -2,7 +2,7 @@
 	<ui:define name="content">
 		<div class="ContainerIndent">
 			<p:panel id="qqPanel">
-				<p:dataTable id="dtQuoteCont" widgetVar="dtQuoteCont" value="#{iclubViewQuoteController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Quotes Available" reflow="true">
+				<p:dataTable widgetVar="dtQuoteCont" value="#{iclubViewQuoteController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Quotes Available" reflow="true">
 					<p:column headerText="Quote Number">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QNumber}" />
 					</p:column>

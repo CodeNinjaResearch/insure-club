@@ -2,7 +2,7 @@
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
 			<p:panel id="pnlNotificationTypeCont">
-				<p:dataTable id="dtNotificationTypeCont" widgetVar="dtNotificationTypeCont" value="#{iclubNotificationTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No NotificationType Found" reflow="true">
+				<p:dataTable widgetVar="dtNotificationTypeCont" value="#{iclubNotificationTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No NotificationType Found" reflow="true">
 					<f:facet name="footer">
 						<p:commandButton id="btnNotificationTypeShowAdd" value="Add" actionListener="#{iclubNotificationTypeController.showAddPanel}" update=":iclubFrm:pnlNotificationTypeCont" />
 					</f:facet>
