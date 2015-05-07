@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubPropUsageTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPropUsageTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropUsageTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPropUsageTypeDAO iclubPropUsageTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,16 +46,16 @@ public class IclubPropUsageTypeService {
 	public ResponseModel add(IclubPropUsageTypeModel model) {
 		try {
 			IclubPropUsageType iCPt = new IclubPropUsageType();
-			
+
 			iCPt.setPuId(iclubCommonDAO.getNextId(IclubPropUsageType.class));
 			iCPt.setPuLongDesc(model.getPuLongDesc());
 			iCPt.setPuShortDesc(model.getPuShortDesc());
 			iCPt.setPuStatus(model.getPuStatus());
-			
+
 			iclubPropUsageTypeDAO.save(iCPt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCPt.getPuId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -67,9 +67,9 @@ public class IclubPropUsageTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -78,16 +78,16 @@ public class IclubPropUsageTypeService {
 	public ResponseModel mod(IclubPropUsageTypeModel model) {
 		try {
 			IclubPropUsageType iCPt = new IclubPropUsageType();
-			
+
 			iCPt.setPuId(model.getPuId());
 			iCPt.setPuLongDesc(model.getPuLongDesc());
 			iCPt.setPuShortDesc(model.getPuShortDesc());
 			iCPt.setPuStatus(model.getPuStatus());
-			
+
 			iclubPropUsageTypeDAO.merge(iCPt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPuId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -99,9 +99,9 @@ public class IclubPropUsageTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -116,27 +116,27 @@ public class IclubPropUsageTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropUsageTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPropUsageTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPropUsageType iCPt = (IclubPropUsageType) object;
-					
+
 					IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-					
+
 					model.setPuId(iCPt.getPuId());
 					model.setPuLongDesc(iCPt.getPuLongDesc());
 					model.setPuShortDesc(iCPt.getPuShortDesc());
 					model.setPuStatus(iCPt.getPuStatus());
-					
+
 					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
 						String[] properties = new String[iCPt.getIclubProperties().size()];
 						int i = 0;
@@ -146,77 +146,37 @@ public class IclubPropUsageTypeService {
 						}
 						model.setIclubProperties(properties);
 					}
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
-	@GET
-	@Path("/list/status/{insurnceItemType}")
-	@Produces("application/json")
-	@Transactional(propagation = Propagation.REQUIRED)
-	public <T extends IclubPropUsageTypeModel> List<T> getByItemType(@PathParam("insurnceItemType") String insurnceItemType) {
-		List<T> ret = new ArrayList<T>();
-		
-		try {
-			List batmod = iclubNamedQueryDAO.findByInsuranceItemType(insurnceItemType);
-			if (batmod != null && batmod.size() > 0) {
-				for (Object object : batmod) {
-					IclubPropUsageType iCPt = (IclubPropUsageType) object;
-					
-					IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-					
-					model.setPuId(iCPt.getPuId());
-					model.setPuLongDesc(iCPt.getPuLongDesc());
-					model.setPuShortDesc(iCPt.getPuShortDesc());
-					model.setPuStatus(iCPt.getPuStatus());
-					
-					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-						String[] properties = new String[iCPt.getIclubProperties().size()];
-						int i = 0;
-						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-							properties[i] = iclubProperty.getPId();
-							i++;
-						}
-						model.setIclubProperties(properties);
-					}
-					
-					ret.add((T) model);
-				}
-			}
-		} catch (Exception e) {
-			LOGGER.error(e, e);
-		}
-		
-		return ret;
-	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropUsageTypeModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPropUsageType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPropUsageType iCPt = (IclubPropUsageType) object;
-					
+
 					IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-					
+
 					model.setPuId(iCPt.getPuId());
 					model.setPuLongDesc(iCPt.getPuLongDesc());
 					model.setPuShortDesc(iCPt.getPuShortDesc());
 					model.setPuStatus(iCPt.getPuStatus());
-					
+
 					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
 						String[] properties = new String[iCPt.getIclubProperties().size()];
 						int i = 0;
@@ -226,17 +186,17 @@ public class IclubPropUsageTypeService {
 						}
 						model.setIclubProperties(properties);
 					}
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -245,12 +205,12 @@ public class IclubPropUsageTypeService {
 		IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
 		try {
 			IclubPropUsageType bean = iclubPropUsageTypeDAO.findById(id);
-			
+
 			model.setPuId(bean.getPuId());
 			model.setPuLongDesc(bean.getPuLongDesc());
 			model.setPuShortDesc(bean.getPuShortDesc());
 			model.setPuStatus(bean.getPuStatus());
-			
+
 			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
 				String[] properties = new String[bean.getIclubProperties().size()];
 				int i = 0;
@@ -260,51 +220,51 @@ public class IclubPropUsageTypeService {
 				}
 				model.setIclubProperties(properties);
 			}
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubPropUsageTypeDAO getIclubPropUsageTypeDAO() {
 		return iclubPropUsageTypeDAO;
 	}
-	
+
 	public void setIclubPropUsageTypeDAO(IclubPropUsageTypeDAO iclubPropUsageTypeDAO) {
 		this.iclubPropUsageTypeDAO = iclubPropUsageTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }
