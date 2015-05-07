@@ -45,6 +45,7 @@ public class IclubVehicleDAO {
 	public static final String _VGEAR_LOCK_YN = "VGearLockYn";
 	public static final String _VOWNER = "VOwner";
 	public static final String _VNOCLAIM_YRS = "VNoclaimYrs";
+	public static final String _VCOMP_YRS = "VCompYrs";
 	public static final String _VVIN = "VVin";
 	public static final String _VENGINE_NR = "VEngineNr";
 	public static final String _VREG_NUM = "VRegNum";
@@ -179,6 +180,10 @@ public class IclubVehicleDAO {
 
 	public List<IclubVehicle> findByVNoclaimYrs(Object VNoclaimYrs) {
 		return findByProperty(_VNOCLAIM_YRS, VNoclaimYrs);
+	}
+
+	public List<IclubVehicle> findByVCompYrs(Object VCompYrs) {
+		return findByProperty(_VCOMP_YRS, VCompYrs);
 	}
 
 	public List<IclubVehicle> findByVVin(Object VVin) {

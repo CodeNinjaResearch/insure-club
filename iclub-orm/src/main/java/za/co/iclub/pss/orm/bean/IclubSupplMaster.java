@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  * IclubSupplMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_suppl_master", catalog = "iclubdb")
+@Table(name = "iclub_suppl_master")
 public class IclubSupplMaster implements java.io.Serializable {
 
 	// Fields

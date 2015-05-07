@@ -1,7 +1,6 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -812,7 +811,7 @@ public class IclubPolicyController implements Serializable {
 				IclubSupplItemModel model = new IclubSupplItemModel();
 				model.setSiId(UUID.randomUUID().toString());
 				model.setIclubPerson(getSessionUserId());
-				model.setSiCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setSiCrtdDt(new Date(System.currentTimeMillis()));
 				model.setSiAssessNumber(IclubWebHelper.getRandomNumber());
 				model.setIclubInsuranceItemType(1l);
 				model.setSiItemId(vehicleBean.getVId());
@@ -825,7 +824,7 @@ public class IclubPolicyController implements Serializable {
 					IclubPolicyModel pModel = client.accept(MediaType.APPLICATION_JSON).get(IclubPolicyModel.class);
 					client.close();
 					
-					pModel.setPCrtdDt(new Timestamp(System.currentTimeMillis()).toString());
+					pModel.setPCrtdDt(new Date(System.currentTimeMillis()).toString());
 					pModel.setIclubPolicyStatus(4l);
 					pModel.setIclubPerson(getSessionUserId());
 					client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "mod");

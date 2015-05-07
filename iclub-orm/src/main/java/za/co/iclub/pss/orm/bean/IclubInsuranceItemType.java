@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * IclubInsuranceItemType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_insurance_item_type", catalog = "iclubdb")
+@Table(name = "iclub_insurance_item_type")
 public class IclubInsuranceItemType implements java.io.Serializable {
 
 	// Fields

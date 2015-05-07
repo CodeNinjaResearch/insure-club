@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,10 +21,11 @@ public class IclubVehicle implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2857479614884547139L;
+	private static final long serialVersionUID = 5387782602473882125L;
 	private String VId;
-	private IclubPurposeType iclubPurposeType;
+	private IclubVehicleType iclubVehicleType;
 	private IclubSecurityMaster iclubSecurityMaster;
+	private IclubVehUsageType iclubVehUsageType;
 	private IclubAccessType iclubAccessTypeByVOnAccessTypeId;
 	private IclubAccessType iclubAccessTypeByVDdAccessTypeId;
 	private IclubSecurityDevice iclubSecurityDevice;
@@ -65,11 +65,11 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubPurposeType iclubPurposeType, IclubSecurityMaster iclubSecurityMaster, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue,
-			Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Date VCrtdDt) {
+	public IclubVehicle(String VId, IclubVehicleType iclubVehicleType, IclubSecurityMaster iclubSecurityMaster, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Date VCrtdDt) {
 		this.VId = VId;
-		this.iclubPurposeType = iclubPurposeType;
+		this.iclubVehicleType = iclubVehicleType;
 		this.iclubSecurityMaster = iclubSecurityMaster;
+		this.iclubVehUsageType = iclubVehUsageType;
 		this.iclubAccessTypeByVOnAccessTypeId = iclubAccessTypeByVOnAccessTypeId;
 		this.iclubAccessTypeByVDdAccessTypeId = iclubAccessTypeByVDdAccessTypeId;
 		this.iclubSecurityDevice = iclubSecurityDevice;
@@ -110,13 +110,13 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "v_purpose_type_id")
-	public IclubPurposeType getIclubPurposeType() {
-		return this.iclubPurposeType;
+	@JoinColumn(name = "v_type_id")
+	public IclubVehicleType getIclubVehicleType() {
+		return this.iclubVehicleType;
 	}
 
-	public void setIclubPurposeType(IclubPurposeType iclubPurposeType) {
-		this.iclubPurposeType = iclubPurposeType;
+	public void setIclubVehicleType(IclubVehicleType iclubVehicleType) {
+		this.iclubVehicleType = iclubVehicleType;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -127,6 +127,16 @@ public class IclubVehicle implements java.io.Serializable {
 
 	public void setIclubSecurityMaster(IclubSecurityMaster iclubSecurityMaster) {
 		this.iclubSecurityMaster = iclubSecurityMaster;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "v_purpose_type_id")
+	public IclubVehUsageType getIclubVehUsageType() {
+		return this.iclubVehUsageType;
+	}
+
+	public void setIclubVehUsageType(IclubVehUsageType iclubVehUsageType) {
+		this.iclubVehUsageType = iclubVehUsageType;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
