@@ -1,15 +1,21 @@
 package za.co.iclub.pss.orm.bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * IclubVehicleType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_vehicle_type")
+@Table(name = "iclub_vehicle_type", catalog = "iclubdb")
 public class IclubVehicleType implements java.io.Serializable {
 
 	// Fields
@@ -17,11 +23,12 @@ public class IclubVehicleType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6053822260895260708L;
+	private static final long serialVersionUID = -2504618251322597924L;
 	private Long vtId;
 	private String vtShortDesc;
 	private String vtLongDesc;
 	private String vtStatus;
+	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
 
@@ -35,11 +42,12 @@ public class IclubVehicleType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicleType(Long vtId, String vtShortDesc, String vtLongDesc, String vtStatus) {
+	public IclubVehicleType(Long vtId, String vtShortDesc, String vtLongDesc, String vtStatus, Set<IclubVehicle> iclubVehicles) {
 		this.vtId = vtId;
 		this.vtShortDesc = vtShortDesc;
 		this.vtLongDesc = vtLongDesc;
 		this.vtStatus = vtStatus;
+		this.iclubVehicles = iclubVehicles;
 	}
 
 	// Property accessors
@@ -78,6 +86,15 @@ public class IclubVehicleType implements java.io.Serializable {
 
 	public void setVtStatus(String vtStatus) {
 		this.vtStatus = vtStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubVehicleType")
+	public Set<IclubVehicle> getIclubVehicles() {
+		return this.iclubVehicles;
+	}
+
+	public void setIclubVehicles(Set<IclubVehicle> iclubVehicles) {
+		this.iclubVehicles = iclubVehicles;
 	}
 
 }

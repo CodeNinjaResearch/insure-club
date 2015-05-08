@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * IclubSecurityMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_security_master")
+@Table(name = "iclub_security_master", catalog = "iclubdb")
 public class IclubSecurityMaster implements java.io.Serializable {
 
 	// Fields
@@ -26,7 +26,7 @@ public class IclubSecurityMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8683722133865886245L;
+	private static final long serialVersionUID = 4589299100007577706L;
 	private String smId;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;

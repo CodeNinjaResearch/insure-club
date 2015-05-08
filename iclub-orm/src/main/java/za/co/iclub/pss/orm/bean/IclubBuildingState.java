@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * IclubBuildingState entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_building_state")
+@Table(name = "iclub_building_state", catalog = "iclubdb")
 public class IclubBuildingState implements java.io.Serializable {
 
 	// Fields

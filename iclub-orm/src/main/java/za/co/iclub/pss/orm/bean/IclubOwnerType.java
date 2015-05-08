@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * IclubOwnerType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_owner_type")
+@Table(name = "iclub_owner_type", catalog = "iclubdb")
 public class IclubOwnerType implements java.io.Serializable {
 
 	// Fields

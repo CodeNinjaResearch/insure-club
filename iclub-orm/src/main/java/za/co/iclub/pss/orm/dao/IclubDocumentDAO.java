@@ -34,6 +34,7 @@ public class IclubDocumentDAO {
 	public static final String _DMIME_TYPE = "DMimeType";
 	public static final String _DSIZE = "DSize";
 	public static final String _DENTITY_ID = "DEntityId";
+	public static final String _DBLOB = "DBlob";
 	public static final String _DCONTENT = "DContent";
 
 	private SessionFactory sessionFactory;
@@ -122,6 +123,10 @@ public class IclubDocumentDAO {
 
 	public List<IclubDocument> findByDEntityId(Object DEntityId) {
 		return findByProperty(_DENTITY_ID, DEntityId);
+	}
+
+	public List<IclubDocument> findByDBlob(Object DBlob) {
+		return findByProperty(_DBLOB, DBlob);
 	}
 
 	public List<IclubDocument> findByDContent(Object DContent) {

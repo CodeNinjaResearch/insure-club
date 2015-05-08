@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
  * IclubLicenseCode entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_license_code", uniqueConstraints = @UniqueConstraint(columnNames = "lc_category"))
+@Table(name = "iclub_license_code", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "lc_category"))
 public class IclubLicenseCode implements java.io.Serializable {
 
 	// Fields
@@ -27,7 +27,7 @@ public class IclubLicenseCode implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1090498428479785573L;
+	private static final long serialVersionUID = -3453309689516690165L;
 	private Long lcId;
 	private IclubPerson iclubPerson;
 	private String lcCategory;

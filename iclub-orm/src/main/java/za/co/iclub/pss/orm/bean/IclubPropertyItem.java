@@ -1,6 +1,7 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
  * IclubPropertyItem entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_property_item")
+@Table(name = "iclub_property_item", catalog = "iclubdb")
 public class IclubPropertyItem implements java.io.Serializable {
 
 	// Fields
@@ -21,7 +22,7 @@ public class IclubPropertyItem implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5890414974148337767L;
+	private static final long serialVersionUID = -4202833209134286409L;
 	private String piId;
 	private IclubProperty iclubProperty;
 	private IclubPerson iclubPerson;

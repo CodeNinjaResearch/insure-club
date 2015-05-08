@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * IclubDocument entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_document")
+@Table(name = "iclub_document", catalog = "iclubdb")
 public class IclubDocument implements java.io.Serializable {
 
 	// Fields
@@ -22,7 +22,7 @@ public class IclubDocument implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2606352964056689028L;
+	private static final long serialVersionUID = 7301305164188507356L;
 	private String DId;
 	private IclubDocumentType iclubDocumentType;
 	private IclubPerson iclubPerson;
@@ -31,9 +31,9 @@ public class IclubDocument implements java.io.Serializable {
 	private String DMimeType;
 	private Long DSize;
 	private String DEntityId;
-	private String DContent;
+	private String DBlob;
 	private Date DCrtdDt;
-	private byte[] DBlob;
+	private String DContent;
 
 	// Constructors
 
@@ -47,7 +47,7 @@ public class IclubDocument implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String DName, String DMimeType, Long DSize, String DEntityId, String DContent, Date DCrtdDt, byte[] DBlob) {
+	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String DName, String DMimeType, Long DSize, String DEntityId, String DBlob, Date DCrtdDt, String DContent) {
 		this.DId = DId;
 		this.iclubDocumentType = iclubDocumentType;
 		this.iclubPerson = iclubPerson;
@@ -56,9 +56,9 @@ public class IclubDocument implements java.io.Serializable {
 		this.DMimeType = DMimeType;
 		this.DSize = DSize;
 		this.DEntityId = DEntityId;
-		this.DContent = DContent;
-		this.DCrtdDt = DCrtdDt;
 		this.DBlob = DBlob;
+		this.DCrtdDt = DCrtdDt;
+		this.DContent = DContent;
 	}
 
 	// Property accessors
@@ -138,13 +138,13 @@ public class IclubDocument implements java.io.Serializable {
 		this.DEntityId = DEntityId;
 	}
 
-	@Column(name = "d_content")
-	public String getDContent() {
-		return this.DContent;
+	@Column(name = "d_blob")
+	public String getDBlob() {
+		return this.DBlob;
 	}
 
-	public void setDContent(String DContent) {
-		this.DContent = DContent;
+	public void setDBlob(String DBlob) {
+		this.DBlob = DBlob;
 	}
 
 	@Column(name = "d_crtd_dt", length = 19)
@@ -156,13 +156,13 @@ public class IclubDocument implements java.io.Serializable {
 		this.DCrtdDt = DCrtdDt;
 	}
 
-	@Column(name = "d_blob")
-	public byte[] getDBlob() {
-		return this.DBlob;
+	@Column(name = "d_content")
+	public String getDContent() {
+		return this.DContent;
 	}
 
-	public void setDBlob(byte[] DBlob) {
-		this.DBlob = DBlob;
+	public void setDContent(String DContent) {
+		this.DContent = DContent;
 	}
 
 }

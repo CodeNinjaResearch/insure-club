@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * IclubBankMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_bank_master")
+@Table(name = "iclub_bank_master", catalog = "iclubdb")
 public class IclubBankMaster implements java.io.Serializable {
 
 	// Fields
@@ -26,7 +26,7 @@ public class IclubBankMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -767683235432582948L;
+	private static final long serialVersionUID = 5712785136360334556L;
 	private Long bmId;
 	private IclubPerson iclubPerson;
 	private String bmBankName;

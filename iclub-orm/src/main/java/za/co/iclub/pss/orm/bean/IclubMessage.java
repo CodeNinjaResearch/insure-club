@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * IclubMessage entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_message")
+@Table(name = "iclub_message", catalog = "iclubdb")
 public class IclubMessage implements java.io.Serializable {
 
 	// Fields
@@ -22,7 +22,7 @@ public class IclubMessage implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1556044231597466645L;
+	private static final long serialVersionUID = 9098379729608602731L;
 	private String MId;
 	private IclubPerson iclubPerson;
 	private IclubSystemType iclubSystemTypeByMToSysId;

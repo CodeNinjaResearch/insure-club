@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubBuildingState;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubBuildingState
- * @author Venu Madhav Pattamatta
+ * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -167,5 +167,4 @@ public class IclubBuildingStateDAO {
 	public static IclubBuildingStateDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBuildingStateDAO) ctx.getBean("IclubBuildingStateDAO");
 	}
-
 }

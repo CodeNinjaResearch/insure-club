@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * IclubExtras entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_extras")
+@Table(name = "iclub_extras", catalog = "iclubdb")
 public class IclubExtras implements java.io.Serializable {
 
 	// Fields
@@ -22,7 +22,7 @@ public class IclubExtras implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6420984092141389393L;
+	private static final long serialVersionUID = -4961264413399472751L;
 	private Long EId;
 	private IclubPerson iclubPerson;
 	private String EDesc;

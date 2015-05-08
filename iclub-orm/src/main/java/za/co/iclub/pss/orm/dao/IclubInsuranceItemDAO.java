@@ -31,6 +31,8 @@ public class IclubInsuranceItemDAO {
 	private static final Logger log = Logger.getLogger(IclubInsuranceItemDAO.class);
 	// property constants
 	public static final String II_QUOTE_ID = "iiQuoteId";
+	public static final String II_INSURE_VALUE = "iiInsureValue";
+	public static final String II_ACTUAL_VALUE = "iiActualValue";
 	public static final String II_ITEM_ID = "iiItemId";
 
 	private SessionFactory sessionFactory;
@@ -107,6 +109,14 @@ public class IclubInsuranceItemDAO {
 
 	public List<IclubInsuranceItem> findByIiQuoteId(Object iiQuoteId) {
 		return findByProperty(II_QUOTE_ID, iiQuoteId);
+	}
+
+	public List<IclubInsuranceItem> findByIiInsureValue(Object iiInsureValue) {
+		return findByProperty(II_INSURE_VALUE, iiInsureValue);
+	}
+
+	public List<IclubInsuranceItem> findByIiActualValue(Object iiActualValue) {
+		return findByProperty(II_ACTUAL_VALUE, iiActualValue);
 	}
 
 	public List<IclubInsuranceItem> findByIiItemId(Object iiItemId) {

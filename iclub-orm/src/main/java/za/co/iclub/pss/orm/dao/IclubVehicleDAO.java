@@ -49,6 +49,7 @@ public class IclubVehicleDAO {
 	public static final String _VVIN = "VVin";
 	public static final String _VENGINE_NR = "VEngineNr";
 	public static final String _VREG_NUM = "VRegNum";
+	public static final String _VMODIFIED_YN = "VModifiedYn";
 
 	private SessionFactory sessionFactory;
 
@@ -196,6 +197,10 @@ public class IclubVehicleDAO {
 
 	public List<IclubVehicle> findByVRegNum(Object VRegNum) {
 		return findByProperty(_VREG_NUM, VRegNum);
+	}
+
+	public List<IclubVehicle> findByVModifiedYn(Object VModifiedYn) {
+		return findByProperty(_VMODIFIED_YN, VModifiedYn);
 	}
 
 	public List findAll() {

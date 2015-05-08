@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * IclubNotificationType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_notification_type")
+@Table(name = "iclub_notification_type", catalog = "iclubdb")
 public class IclubNotificationType implements java.io.Serializable {
 
 	// Fields
@@ -23,11 +23,12 @@ public class IclubNotificationType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4410660226310612623L;
+	private static final long serialVersionUID = 1284245551610280654L;
 	private Long ntId;
 	private String ntShortDesc;
 	private String ntLongDesc;
 	private String ntStatus;
+	private Set<IclubCohortInvite> iclubCohortInvites = new HashSet<IclubCohortInvite>(0);
 	private Set<IclubNotif> iclubNotifs = new HashSet<IclubNotif>(0);
 
 	// Constructors
@@ -42,11 +43,12 @@ public class IclubNotificationType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubNotificationType(Long ntId, String ntShortDesc, String ntLongDesc, String ntStatus, Set<IclubNotif> iclubNotifs) {
+	public IclubNotificationType(Long ntId, String ntShortDesc, String ntLongDesc, String ntStatus, Set<IclubCohortInvite> iclubCohortInvites, Set<IclubNotif> iclubNotifs) {
 		this.ntId = ntId;
 		this.ntShortDesc = ntShortDesc;
 		this.ntLongDesc = ntLongDesc;
 		this.ntStatus = ntStatus;
+		this.iclubCohortInvites = iclubCohortInvites;
 		this.iclubNotifs = iclubNotifs;
 	}
 
@@ -86,6 +88,15 @@ public class IclubNotificationType implements java.io.Serializable {
 
 	public void setNtStatus(String ntStatus) {
 		this.ntStatus = ntStatus;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubNotificationType")
+	public Set<IclubCohortInvite> getIclubCohortInvites() {
+		return this.iclubCohortInvites;
+	}
+
+	public void setIclubCohortInvites(Set<IclubCohortInvite> iclubCohortInvites) {
+		this.iclubCohortInvites = iclubCohortInvites;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubNotificationType")

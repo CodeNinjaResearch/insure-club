@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * IclubDriver entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_driver")
+@Table(name = "iclub_driver", catalog = "iclubdb")
 public class IclubDriver implements java.io.Serializable {
 
 	// Fields
@@ -26,17 +26,19 @@ public class IclubDriver implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5690473405219597608L;
+	private static final long serialVersionUID = -1288549868989901064L;
 	private String DId;
-	private IclubAccessType iclubAccessType;
+	private IclubAccessType iclubAccessTypeByDAccessStatusId;
 	private IclubLicenseCode iclubLicenseCode;
 	private IclubPerson iclubPersonByDCrtdBy;
+	private IclubAccessType iclubAccessTypeByDAccessTypeId;
 	private IclubMaritialStatus iclubMaritialStatus;
 	private IclubPerson iclubPersonByDPersonId;
 	private String DName;
 	private String DLicenseNum;
 	private Date DIssueDt;
 	private Date DDob;
+	private Integer DIssueYears;
 	private Date DCrtdDt;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
@@ -52,17 +54,19 @@ public class IclubDriver implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDriver(String DId, IclubAccessType iclubAccessType, IclubLicenseCode iclubLicenseCode, IclubPerson iclubPersonByDCrtdBy, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPersonByDPersonId, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Date DCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubDriver(String DId, IclubAccessType iclubAccessTypeByDAccessStatusId, IclubLicenseCode iclubLicenseCode, IclubPerson iclubPersonByDCrtdBy, IclubAccessType iclubAccessTypeByDAccessTypeId, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPersonByDPersonId, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Integer DIssueYears, Date DCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.DId = DId;
-		this.iclubAccessType = iclubAccessType;
+		this.iclubAccessTypeByDAccessStatusId = iclubAccessTypeByDAccessStatusId;
 		this.iclubLicenseCode = iclubLicenseCode;
 		this.iclubPersonByDCrtdBy = iclubPersonByDCrtdBy;
+		this.iclubAccessTypeByDAccessTypeId = iclubAccessTypeByDAccessTypeId;
 		this.iclubMaritialStatus = iclubMaritialStatus;
 		this.iclubPersonByDPersonId = iclubPersonByDPersonId;
 		this.DName = DName;
 		this.DLicenseNum = DLicenseNum;
 		this.DIssueDt = DIssueDt;
 		this.DDob = DDob;
+		this.DIssueYears = DIssueYears;
 		this.DCrtdDt = DCrtdDt;
 		this.iclubVehicles = iclubVehicles;
 	}
@@ -80,12 +84,12 @@ public class IclubDriver implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "d_access_status_id")
-	public IclubAccessType getIclubAccessType() {
-		return this.iclubAccessType;
+	public IclubAccessType getIclubAccessTypeByDAccessStatusId() {
+		return this.iclubAccessTypeByDAccessStatusId;
 	}
 
-	public void setIclubAccessType(IclubAccessType iclubAccessType) {
-		this.iclubAccessType = iclubAccessType;
+	public void setIclubAccessTypeByDAccessStatusId(IclubAccessType iclubAccessTypeByDAccessStatusId) {
+		this.iclubAccessTypeByDAccessStatusId = iclubAccessTypeByDAccessStatusId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -106,6 +110,16 @@ public class IclubDriver implements java.io.Serializable {
 
 	public void setIclubPersonByDCrtdBy(IclubPerson iclubPersonByDCrtdBy) {
 		this.iclubPersonByDCrtdBy = iclubPersonByDCrtdBy;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "d_access_type_id")
+	public IclubAccessType getIclubAccessTypeByDAccessTypeId() {
+		return this.iclubAccessTypeByDAccessTypeId;
+	}
+
+	public void setIclubAccessTypeByDAccessTypeId(IclubAccessType iclubAccessTypeByDAccessTypeId) {
+		this.iclubAccessTypeByDAccessTypeId = iclubAccessTypeByDAccessTypeId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -162,6 +176,15 @@ public class IclubDriver implements java.io.Serializable {
 
 	public void setDDob(Date DDob) {
 		this.DDob = DDob;
+	}
+
+	@Column(name = "d_issue_years")
+	public Integer getDIssueYears() {
+		return this.DIssueYears;
+	}
+
+	public void setDIssueYears(Integer DIssueYears) {
+		this.DIssueYears = DIssueYears;
 	}
 
 	@Column(name = "d_crtd_dt", length = 19)

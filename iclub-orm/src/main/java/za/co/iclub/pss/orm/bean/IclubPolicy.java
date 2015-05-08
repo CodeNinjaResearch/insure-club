@@ -18,7 +18,7 @@ import javax.persistence.UniqueConstraint;
  * IclubPolicy entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_policy", uniqueConstraints = @UniqueConstraint(columnNames = "p_number"))
+@Table(name = "iclub_policy", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "p_number"))
 public class IclubPolicy implements java.io.Serializable {
 
 	// Fields

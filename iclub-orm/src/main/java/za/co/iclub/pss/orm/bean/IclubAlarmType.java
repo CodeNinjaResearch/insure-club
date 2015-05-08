@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * IclubAlarmType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_alarm_type")
+@Table(name = "iclub_alarm_type", catalog = "iclubdb")
 public class IclubAlarmType implements java.io.Serializable {
 
 	// Fields
