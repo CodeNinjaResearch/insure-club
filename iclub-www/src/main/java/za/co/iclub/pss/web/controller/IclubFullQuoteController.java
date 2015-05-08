@@ -1394,7 +1394,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setDLicenseNum(bean.getDLicenseNum());
 		model.setDName(bean.getDName());
 		model.setDCrtdDt(new Date(System.currentTimeMillis()));
-		model.setIclubAccessType(bean.getIclubAccessType());
+		model.setIclubAccessTypeByDAccessTypeId(bean.getIclubAccessTypeByDAccessTypeId());
 		model.setIclubLicenseCode(bean.getIclubLicenseCode());
 		model.setIclubMaritialStatus(personModel.getIclubMaritialStatus());
 		model.setIclubPersonByDPersonId(personModel.getPId());
@@ -2030,7 +2030,7 @@ public class IclubFullQuoteController implements Serializable {
 		driverBean.setDLicenseNum(model.getDLicenseNum());
 		driverBean.setDName(model.getDName());
 		driverBean.setDCrtdDt(model.getDCrtdDt());
-		driverBean.setIclubAccessType(model.getIclubAccessType());
+		driverBean.setIclubAccessTypeByDAccessTypeId(model.getIclubAccessTypeByDAccessTypeId());
 		driverBean.setIclubLicenseCode(model.getIclubLicenseCode());
 		driverBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
 		driverBean.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId());
