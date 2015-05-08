@@ -765,7 +765,7 @@ public class IclubQuickQuoteController implements Serializable {
 			propertyBean.setPLat(markerPro.getLatlng().getLat());
 			propertyBean.setPLong(markerPro.getLatlng().getLng());
 		}
-		propertyBean.setPAddress(markerVeh.getTitle());
+		propertyBean.setPAddress(markerPro.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPro.getTitle()));
 	}
 	
