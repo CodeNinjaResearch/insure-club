@@ -35,25 +35,7 @@
     }
      
 
-    function getLatAndLong()
-    {
-    	 var address=document.getElementById('qqTabView:qqSubProDetView:address').value;//address which you want Longitude and Latitude
-    	 jQuery.ajax({
-    	     type: "GET",
-    	     dataType: "json",
-    	     url: "http://maps.googleapis.com/maps/api/geocode/json",
-    	     data: {'address': address,'sensor':false},
-    	     success: function(data){
-    	         if(data.results.length){
-    	        	 jQuery('#pLong').(data.results[0].geometry.location.lat);
-    	        	 jQuery('#pLat').(data.results[0].geometry.location.lng);
-    	         }else{
-    	        	 alert('invalid address');
-    	        	 alert('invalid address');
-    	        }
-    	     }
-    	 });
-        }
+     
 </script>
 	<h:outputText value="&lt;!--[if gte IE 9]&gt;" escape="false" />
 	<style type="text/css">
