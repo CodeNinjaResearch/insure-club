@@ -64,7 +64,7 @@ public class IclubDriverController implements Serializable {
 				model.setDLicenseNum(bean.getDLicenseNum());
 				model.setDName(bean.getDName());
 				model.setDCrtdDt(bean.getDCrtdDt());
-				model.setIclubAccessType(bean.getIclubAccessType());
+				model.setIclubAccessTypeByDAccessTypeId(bean.getIclubAccessTypeByDAccessTypeId());
 				model.setIclubLicenseCode(bean.getIclubLicenseCode());
 				model.setIclubMaritialStatus(bean.getIclubMaritialStatus());
 				model.setIclubPersonByDPersonId(bean.getIclubPersonByDPersonId());
@@ -97,7 +97,7 @@ public class IclubDriverController implements Serializable {
 				model.setDLicenseNum(bean.getDLicenseNum());
 				model.setDName(bean.getDName());
 				model.setDCrtdDt(bean.getDCrtdDt());
-				model.setIclubAccessType(bean.getIclubAccessType());
+				model.setIclubAccessTypeByDAccessTypeId(bean.getIclubAccessTypeByDAccessTypeId());
 				model.setIclubLicenseCode(bean.getIclubLicenseCode());
 				model.setIclubMaritialStatus(bean.getIclubMaritialStatus());
 				model.setIclubPersonByDPersonId(bean.getIclubPersonByDPersonId());
@@ -202,7 +202,7 @@ public class IclubDriverController implements Serializable {
 				bean.setDLicenseNum(model.getDLicenseNum());
 				bean.setDName(model.getDName());
 				bean.setDCrtdDt(model.getDCrtdDt());
-				bean.setIclubAccessType(model.getIclubAccessType());
+				bean.setIclubAccessTypeByDAccessTypeId(model.getIclubAccessTypeByDAccessTypeId());
 				bean.setIclubLicenseCode(model.getIclubLicenseCode());
 				bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
 				bean.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId());

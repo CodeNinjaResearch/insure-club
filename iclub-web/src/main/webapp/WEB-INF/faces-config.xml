@@ -483,12 +483,76 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>acdash</from-outcome>
+			<to-view-id>/pages/policy/acDashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>alldash</from-outcome>
+			<to-view-id>/pages/policy/allDashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>padash</from-outcome>
+			<to-view-id>/pages/policy/paDashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>asgPlcSupl</from-outcome>
+			<to-view-id>/pages/policy/assignSupplier.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>cdash</from-outcome>
 			<to-view-id>/pages/claim/dashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>acdash</from-outcome>
+			<to-view-id>/pages/claim/acDashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>alldash</from-outcome>
+			<to-view-id>/pages/claim/allDashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>padash</from-outcome>
+			<to-view-id>/pages/claim/paDashboard.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>asgClmSupl</from-outcome>
+			<to-view-id>/pages/claim/assignSupplier.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
