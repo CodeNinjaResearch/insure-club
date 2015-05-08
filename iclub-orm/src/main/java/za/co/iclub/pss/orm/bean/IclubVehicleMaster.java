@@ -15,13 +15,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 /**
  * IclubVehicleMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_vehicle_master", uniqueConstraints = @UniqueConstraint(columnNames = "vm_make"))
+@Table(name = "iclub_vehicle_master", catalog = "iclubdb")
 public class IclubVehicleMaster implements java.io.Serializable {
 
 	// Fields
@@ -29,7 +28,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6828650659263776074L;
+	private static final long serialVersionUID = -4659999932796595343L;
 	private Long vmId;
 	private IclubPerson iclubPerson;
 	private String vmMake;

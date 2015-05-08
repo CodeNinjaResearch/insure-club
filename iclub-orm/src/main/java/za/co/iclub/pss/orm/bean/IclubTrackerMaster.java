@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
  * IclubTrackerMaster entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_tracker_master", uniqueConstraints = @UniqueConstraint(columnNames = "tm_name"))
+@Table(name = "iclub_tracker_master", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "tm_name"))
 public class IclubTrackerMaster implements java.io.Serializable {
 
 	// Fields
@@ -27,7 +27,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1058814697847773963L;
+	private static final long serialVersionUID = -6613035215605375546L;
 	private Long tmId;
 	private IclubPerson iclubPerson;
 	private String tmName;

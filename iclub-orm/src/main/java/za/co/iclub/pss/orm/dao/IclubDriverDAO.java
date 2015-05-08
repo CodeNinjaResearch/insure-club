@@ -32,6 +32,7 @@ public class IclubDriverDAO {
 	// property constants
 	public static final String _DNAME = "DName";
 	public static final String _DLICENSE_NUM = "DLicenseNum";
+	public static final String _DISSUE_YEARS = "DIssueYears";
 
 	private SessionFactory sessionFactory;
 
@@ -111,6 +112,10 @@ public class IclubDriverDAO {
 
 	public List<IclubDriver> findByDLicenseNum(Object DLicenseNum) {
 		return findByProperty(_DLICENSE_NUM, DLicenseNum);
+	}
+
+	public List<IclubDriver> findByDIssueYears(Object DIssueYears) {
+		return findByProperty(_DISSUE_YEARS, DIssueYears);
 	}
 
 	public List findAll() {

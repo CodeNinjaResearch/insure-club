@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * IclubAccessType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_access_type")
+@Table(name = "iclub_access_type", catalog = "iclubdb")
 public class IclubAccessType implements java.io.Serializable {
 
 	// Fields
@@ -23,7 +23,7 @@ public class IclubAccessType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7466825663122589652L;
+	private static final long serialVersionUID = 752034910997465996L;
 	private Long atId;
 	private String atShortDesc;
 	private String atLongDesc;
@@ -31,7 +31,8 @@ public class IclubAccessType implements java.io.Serializable {
 	private Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId = new HashSet<IclubVehicle>(0);
 	private Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId = new HashSet<IclubVehicle>(0);
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
-	private Set<IclubDriver> iclubDrivers = new HashSet<IclubDriver>(0);
+	private Set<IclubDriver> iclubDriversForDAccessTypeId = new HashSet<IclubDriver>(0);
+	private Set<IclubDriver> iclubDriversForDAccessStatusId = new HashSet<IclubDriver>(0);
 
 	// Constructors
 
@@ -45,7 +46,7 @@ public class IclubAccessType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAccessType(Long atId, String atShortDesc, String atLongDesc, String atStatus, Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId, Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId, Set<IclubProperty> iclubProperties, Set<IclubDriver> iclubDrivers) {
+	public IclubAccessType(Long atId, String atShortDesc, String atLongDesc, String atStatus, Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId, Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId, Set<IclubProperty> iclubProperties, Set<IclubDriver> iclubDriversForDAccessTypeId, Set<IclubDriver> iclubDriversForDAccessStatusId) {
 		this.atId = atId;
 		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;
@@ -53,7 +54,8 @@ public class IclubAccessType implements java.io.Serializable {
 		this.iclubVehiclesForVOnAccessTypeId = iclubVehiclesForVOnAccessTypeId;
 		this.iclubVehiclesForVDdAccessTypeId = iclubVehiclesForVDdAccessTypeId;
 		this.iclubProperties = iclubProperties;
-		this.iclubDrivers = iclubDrivers;
+		this.iclubDriversForDAccessTypeId = iclubDriversForDAccessTypeId;
+		this.iclubDriversForDAccessStatusId = iclubDriversForDAccessStatusId;
 	}
 
 	// Property accessors
@@ -121,13 +123,22 @@ public class IclubAccessType implements java.io.Serializable {
 		this.iclubProperties = iclubProperties;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccessType")
-	public Set<IclubDriver> getIclubDrivers() {
-		return this.iclubDrivers;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccessTypeByDAccessTypeId")
+	public Set<IclubDriver> getIclubDriversForDAccessTypeId() {
+		return this.iclubDriversForDAccessTypeId;
 	}
 
-	public void setIclubDrivers(Set<IclubDriver> iclubDrivers) {
-		this.iclubDrivers = iclubDrivers;
+	public void setIclubDriversForDAccessTypeId(Set<IclubDriver> iclubDriversForDAccessTypeId) {
+		this.iclubDriversForDAccessTypeId = iclubDriversForDAccessTypeId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubAccessTypeByDAccessStatusId")
+	public Set<IclubDriver> getIclubDriversForDAccessStatusId() {
+		return this.iclubDriversForDAccessStatusId;
+	}
+
+	public void setIclubDriversForDAccessStatusId(Set<IclubDriver> iclubDriversForDAccessStatusId) {
+		this.iclubDriversForDAccessStatusId = iclubDriversForDAccessStatusId;
 	}
 
 }

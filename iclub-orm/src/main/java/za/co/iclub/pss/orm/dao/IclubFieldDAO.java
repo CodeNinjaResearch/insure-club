@@ -33,6 +33,8 @@ public class IclubFieldDAO {
 	public static final String _FNAME = "FName";
 	public static final String _FDESC = "FDesc";
 	public static final String _FTYPE = "FType";
+	public static final String _FLTBL_NAME = "FLTblName";
+	public static final String _FRATE = "FRate";
 	public static final String _FSTATUS = "FStatus";
 
 	private SessionFactory sessionFactory;
@@ -117,6 +119,14 @@ public class IclubFieldDAO {
 
 	public List<IclubField> findByFType(Object FType) {
 		return findByProperty(_FTYPE, FType);
+	}
+
+	public List<IclubField> findByFLTblName(Object FLTblName) {
+		return findByProperty(_FLTBL_NAME, FLTblName);
+	}
+
+	public List<IclubField> findByFRate(Object FRate) {
+		return findByProperty(_FRATE, FRate);
 	}
 
 	public List<IclubField> findByFStatus(Object FStatus) {

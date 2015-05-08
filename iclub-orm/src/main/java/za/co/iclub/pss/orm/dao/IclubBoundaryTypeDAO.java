@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubBoundaryType;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubBoundaryType
- * @author Venu Madhav Pattamatta
+ * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -167,5 +167,4 @@ public class IclubBoundaryTypeDAO {
 	public static IclubBoundaryTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBoundaryTypeDAO) ctx.getBean("IclubBoundaryTypeDAO");
 	}
-
 }

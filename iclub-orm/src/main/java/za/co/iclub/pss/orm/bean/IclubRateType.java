@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * IclubRateType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_rate_type")
+@Table(name = "iclub_rate_type", catalog = "iclubdb")
 public class IclubRateType implements java.io.Serializable {
 
 	// Fields
@@ -26,7 +26,7 @@ public class IclubRateType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4837928465894118192L;
+	private static final long serialVersionUID = 917699020055182155L;
 	private Long rtId;
 	private IclubField iclubField;
 	private IclubInsuranceItemType iclubInsuranceItemType;

@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
  * IclubCohortClaim entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_cohort_claim")
+@Table(name = "iclub_cohort_claim", catalog = "iclubdb")
 public class IclubCohortClaim implements java.io.Serializable {
 
 	// Fields

@@ -32,8 +32,9 @@ public class IclubRateTypeDAO {
 	// property constants
 	public static final String RT_SHORT_DESC = "rtShortDesc";
 	public static final String RT_LONG_DESC = "rtLongDesc";
-	public static final String RT_FIELD_NM = "rtFieldNm";
 	public static final String RT_STATUS = "rtStatus";
+	public static final String RT_TYPE = "rtType";
+	public static final String RT_QUOTE_TYPE = "rtQuoteType";
 
 	private SessionFactory sessionFactory;
 
@@ -115,12 +116,16 @@ public class IclubRateTypeDAO {
 		return findByProperty(RT_LONG_DESC, rtLongDesc);
 	}
 
-	public List<IclubRateType> findByRtFieldNm(Object rtFieldNm) {
-		return findByProperty(RT_FIELD_NM, rtFieldNm);
-	}
-
 	public List<IclubRateType> findByRtStatus(Object rtStatus) {
 		return findByProperty(RT_STATUS, rtStatus);
+	}
+
+	public List<IclubRateType> findByRtType(Object rtType) {
+		return findByProperty(RT_TYPE, rtType);
+	}
+
+	public List<IclubRateType> findByRtQuoteType(Object rtQuoteType) {
+		return findByProperty(RT_QUOTE_TYPE, rtQuoteType);
 	}
 
 	public List findAll() {

@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
  * IclubQuote entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_quote", uniqueConstraints = @UniqueConstraint(columnNames = "q_number"))
+@Table(name = "iclub_quote", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "q_number"))
 public class IclubQuote implements java.io.Serializable {
 
 	// Fields
@@ -27,7 +27,7 @@ public class IclubQuote implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3397078116894068765L;
+	private static final long serialVersionUID = -7468725703537241288L;
 	private String QId;
 	private IclubPerson iclubPersonByQCrtdBy;
 	private IclubPerson iclubPersonByQPersonId;
@@ -61,7 +61,7 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy, IclubPerson iclubPersonByQPersonId, IclubProductType iclubProductType, IclubInsurerMaster iclubInsurerMaster, IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus, Long QNumber, Date QGenDt, Integer QNumItems, Double QGenPremium, String QEmail, String QMobile, Date QValidUntil, Double QPrevPremium, String QIsMatched, Date QCrtdDt, Set<IclubPolicy> iclubPolicies) {
+	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy, IclubPerson iclubPersonByQPersonId, IclubProductType iclubProductType, IclubInsurerMaster iclubInsurerMaster, IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus, Long QNumber, Date QGenDt, Integer QNumItems, Double QGenPremium, String QEmail, String QMobile, Date QValidUntil, Double QPrevPremium, String QIsMatched, Date QCrtdDt, String QClaimYn, Set<IclubPolicy> iclubPolicies) {
 		this.QId = QId;
 		this.iclubPersonByQCrtdBy = iclubPersonByQCrtdBy;
 		this.iclubPersonByQPersonId = iclubPersonByQPersonId;
@@ -79,6 +79,7 @@ public class IclubQuote implements java.io.Serializable {
 		this.QPrevPremium = QPrevPremium;
 		this.QIsMatched = QIsMatched;
 		this.QCrtdDt = QCrtdDt;
+		this.QClaimYn = QClaimYn;
 		this.iclubPolicies = iclubPolicies;
 	}
 
@@ -243,6 +244,15 @@ public class IclubQuote implements java.io.Serializable {
 		this.QCrtdDt = QCrtdDt;
 	}
 
+	@Column(name = "q_claim_yn", length = 1)
+	public String getQClaimYn() {
+		return this.QClaimYn;
+	}
+
+	public void setQClaimYn(String QClaimYn) {
+		this.QClaimYn = QClaimYn;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubQuote")
 	public Set<IclubPolicy> getIclubPolicies() {
 		return this.iclubPolicies;
@@ -250,15 +260,6 @@ public class IclubQuote implements java.io.Serializable {
 
 	public void setIclubPolicies(Set<IclubPolicy> iclubPolicies) {
 		this.iclubPolicies = iclubPolicies;
-	}
-
-	@Column(name = "q_claim_yn", length = 1)
-	public String getQClaimYn() {
-		return QClaimYn;
-	}
-
-	public void setQClaimYn(String qClaimYn) {
-		QClaimYn = qClaimYn;
 	}
 
 }

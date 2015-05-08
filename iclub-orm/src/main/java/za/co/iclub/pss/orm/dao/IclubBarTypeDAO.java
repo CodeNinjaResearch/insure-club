@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubBarType;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubBarType
- * @author Venu Madhav Pattamatta
+ * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -167,5 +167,4 @@ public class IclubBarTypeDAO {
 	public static IclubBarTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBarTypeDAO) ctx.getBean("IclubBarTypeDAO");
 	}
-
 }

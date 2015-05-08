@@ -30,7 +30,6 @@ import za.co.iclub.pss.orm.bean.IclubRateEngine;
 public class IclubRateEngineDAO {
 	private static final Logger log = Logger.getLogger(IclubRateEngineDAO.class);
 	// property constants
-	public static final String RE_FIELD_NAME = "reFieldName";
 	public static final String RE_BASE_VALUE = "reBaseValue";
 	public static final String RE_MAX_VALUE = "reMaxValue";
 	public static final String RE_RATE = "reRate";
@@ -106,10 +105,6 @@ public class IclubRateEngineDAO {
 			log.error("find by property name failed", re);
 			throw re;
 		}
-	}
-
-	public List<IclubRateEngine> findByReFieldName(Object reFieldName) {
-		return findByProperty(RE_FIELD_NAME, reFieldName);
 	}
 
 	public List<IclubRateEngine> findByReBaseValue(Object reBaseValue) {

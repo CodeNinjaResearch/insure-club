@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  * IclubCohort entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_cohort")
+@Table(name = "iclub_cohort", catalog = "iclubdb")
 public class IclubCohort implements java.io.Serializable {
 
 	// Fields
@@ -28,7 +28,7 @@ public class IclubCohort implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7708433000368120916L;
+	private static final long serialVersionUID = -8430671233412422699L;
 	private String CId;
 	private IclubPerson iclubPersonByCPrimaryUserId;
 	private IclubPerson iclubPersonByCCrtdBy;
@@ -42,6 +42,7 @@ public class IclubCohort implements java.io.Serializable {
 	private Integer CCurMemberCnt;
 	private Date CCrtdDt;
 	private Set<IclubCohortClaim> iclubCohortClaims = new HashSet<IclubCohortClaim>(0);
+	private Set<IclubCohortInvite> iclubCohortInvites = new HashSet<IclubCohortInvite>(0);
 	private Set<IclubCohortPerson> iclubCohortPersons = new HashSet<IclubCohortPerson>(0);
 
 	// Constructors
@@ -56,7 +57,7 @@ public class IclubCohort implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubCohort(String CId, IclubPerson iclubPersonByCPrimaryUserId, IclubPerson iclubPersonByCCrtdBy, IclubCohortType iclubCohortType, String CName, String CEmail, Date CInitDt, Date CFinalizeDt, Double CTotalContrib, Double CCollectedContrib, Integer CCurMemberCnt, Date CCrtdDt, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubCohortPerson> iclubCohortPersons) {
+	public IclubCohort(String CId, IclubPerson iclubPersonByCPrimaryUserId, IclubPerson iclubPersonByCCrtdBy, IclubCohortType iclubCohortType, String CName, String CEmail, Date CInitDt, Date CFinalizeDt, Double CTotalContrib, Double CCollectedContrib, Integer CCurMemberCnt, Date CCrtdDt, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubCohortInvite> iclubCohortInvites, Set<IclubCohortPerson> iclubCohortPersons) {
 		this.CId = CId;
 		this.iclubPersonByCPrimaryUserId = iclubPersonByCPrimaryUserId;
 		this.iclubPersonByCCrtdBy = iclubPersonByCCrtdBy;
@@ -70,6 +71,7 @@ public class IclubCohort implements java.io.Serializable {
 		this.CCurMemberCnt = CCurMemberCnt;
 		this.CCrtdDt = CCrtdDt;
 		this.iclubCohortClaims = iclubCohortClaims;
+		this.iclubCohortInvites = iclubCohortInvites;
 		this.iclubCohortPersons = iclubCohortPersons;
 	}
 
@@ -196,6 +198,15 @@ public class IclubCohort implements java.io.Serializable {
 
 	public void setIclubCohortClaims(Set<IclubCohortClaim> iclubCohortClaims) {
 		this.iclubCohortClaims = iclubCohortClaims;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubCohort")
+	public Set<IclubCohortInvite> getIclubCohortInvites() {
+		return this.iclubCohortInvites;
+	}
+
+	public void setIclubCohortInvites(Set<IclubCohortInvite> iclubCohortInvites) {
+		this.iclubCohortInvites = iclubCohortInvites;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubCohort")

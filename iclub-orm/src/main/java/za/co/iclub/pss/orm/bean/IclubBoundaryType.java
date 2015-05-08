@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * IclubBoundaryType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_boundary_type")
+@Table(name = "iclub_boundary_type", catalog = "iclubdb")
 public class IclubBoundaryType implements java.io.Serializable {
 
 	// Fields

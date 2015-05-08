@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * IclubCohortType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_cohort_type")
+@Table(name = "iclub_cohort_type", catalog = "iclubdb")
 public class IclubCohortType implements java.io.Serializable {
 
 	// Fields

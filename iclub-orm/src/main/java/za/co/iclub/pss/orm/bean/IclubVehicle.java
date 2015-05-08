@@ -1,6 +1,7 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
  * IclubVehicle entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_vehicle")
+@Table(name = "iclub_vehicle", catalog = "iclubdb")
 public class IclubVehicle implements java.io.Serializable {
 
 	// Fields
@@ -21,7 +22,7 @@ public class IclubVehicle implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5387782602473882125L;
+	private static final long serialVersionUID = -143647424754386233L;
 	private String VId;
 	private IclubVehicleType iclubVehicleType;
 	private IclubSecurityMaster iclubSecurityMaster;
@@ -51,6 +52,7 @@ public class IclubVehicle implements java.io.Serializable {
 	private String VVin;
 	private String VEngineNr;
 	private String VRegNum;
+	private String VModifiedYn;
 	private Date VCrtdDt;
 
 	// Constructors
@@ -65,7 +67,7 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubVehicleType iclubVehicleType, IclubSecurityMaster iclubSecurityMaster, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, Date VCrtdDt) {
+	public IclubVehicle(String VId, IclubVehicleType iclubVehicleType, IclubSecurityMaster iclubSecurityMaster, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, String VModifiedYn, Date VCrtdDt) {
 		this.VId = VId;
 		this.iclubVehicleType = iclubVehicleType;
 		this.iclubSecurityMaster = iclubSecurityMaster;
@@ -95,6 +97,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VVin = VVin;
 		this.VEngineNr = VEngineNr;
 		this.VRegNum = VRegNum;
+		this.VModifiedYn = VModifiedYn;
 		this.VCrtdDt = VCrtdDt;
 	}
 
@@ -368,6 +371,15 @@ public class IclubVehicle implements java.io.Serializable {
 
 	public void setVRegNum(String VRegNum) {
 		this.VRegNum = VRegNum;
+	}
+
+	@Column(name = "v_modified_yn", length = 1)
+	public String getVModifiedYn() {
+		return this.VModifiedYn;
+	}
+
+	public void setVModifiedYn(String VModifiedYn) {
+		this.VModifiedYn = VModifiedYn;
 	}
 
 	@Column(name = "v_crtd_dt", length = 19)

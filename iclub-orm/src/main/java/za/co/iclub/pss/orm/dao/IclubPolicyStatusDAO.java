@@ -164,8 +164,6 @@ public class IclubPolicyStatusDAO {
 		}
 	}
 
-	
-
 	public static IclubPolicyStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPolicyStatusDAO) ctx.getBean("IclubPolicyStatusDAO");
 	}

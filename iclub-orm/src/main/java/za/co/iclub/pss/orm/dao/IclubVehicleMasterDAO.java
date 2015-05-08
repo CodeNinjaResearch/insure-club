@@ -35,6 +35,7 @@ public class IclubVehicleMasterDAO {
 	public static final String VM_ORIG_RATE = "vmOrigRate";
 	public static final String VM_MRKT_RATE = "vmMrktRate";
 	public static final String VM_RET_RATE = "vmRetRate";
+	public static final String VM_RATE_PRCT = "vmRatePrct";
 
 	private SessionFactory sessionFactory;
 
@@ -126,6 +127,10 @@ public class IclubVehicleMasterDAO {
 
 	public List<IclubVehicleMaster> findByVmRetRate(Object vmRetRate) {
 		return findByProperty(VM_RET_RATE, vmRetRate);
+	}
+
+	public List<IclubVehicleMaster> findByVmRatePrct(Object vmRatePrct) {
+		return findByProperty(VM_RATE_PRCT, vmRatePrct);
 	}
 
 	public List findAll() {

@@ -37,6 +37,7 @@ public class IclubQuoteDAO {
 	public static final String _QMOBILE = "QMobile";
 	public static final String _QPREV_PREMIUM = "QPrevPremium";
 	public static final String _QIS_MATCHED = "QIsMatched";
+	public static final String _QCLAIM_YN = "QClaimYn";
 
 	private SessionFactory sessionFactory;
 
@@ -136,6 +137,10 @@ public class IclubQuoteDAO {
 
 	public List<IclubQuote> findByQIsMatched(Object QIsMatched) {
 		return findByProperty(_QIS_MATCHED, QIsMatched);
+	}
+
+	public List<IclubQuote> findByQClaimYn(Object QClaimYn) {
+		return findByProperty(_QCLAIM_YN, QClaimYn);
 	}
 
 	public List findAll() {

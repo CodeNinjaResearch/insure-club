@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubAlarmType;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubAlarmType
- * @author Venu Madhav Pattamatta
+ * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -167,5 +167,4 @@ public class IclubAlarmTypeDAO {
 	public static IclubAlarmTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAlarmTypeDAO) ctx.getBean("IclubAlarmTypeDAO");
 	}
-
 }

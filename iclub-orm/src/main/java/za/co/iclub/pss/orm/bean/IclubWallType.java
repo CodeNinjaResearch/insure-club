@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * IclubWallType entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_wall_type")
+@Table(name = "iclub_wall_type", catalog = "iclubdb")
 public class IclubWallType implements java.io.Serializable {
 
 	// Fields

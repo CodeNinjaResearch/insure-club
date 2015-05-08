@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubAccessType;
  * to configure it for the desired type of transaction control.
  * 
  * @see za.co.iclub.pss.orm.bean.IclubAccessType
- * @author Venu Madhav Pattamatta
+ * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -167,6 +167,4 @@ public class IclubAccessTypeDAO {
 	public static IclubAccessTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAccessTypeDAO) ctx.getBean("IclubAccessTypeDAO");
 	}
-
-	
 }
