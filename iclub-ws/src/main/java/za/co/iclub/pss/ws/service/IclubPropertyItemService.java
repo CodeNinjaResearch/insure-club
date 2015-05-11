@@ -84,6 +84,8 @@ public class IclubPropertyItemService {
 			iTt.setPiCrtdDate(model.getPiCrtdDate());
 			iTt.setPiDescripton(model.getPiDescripton());
 			iTt.setPiValue(model.getPiValue());
+			iTt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			iTt.setIclubProperty(model.getIclubProperty() != null ? iclubPropertyDAO.findById(model.getIclubProperty()) : null);
 			
 			iclubPropertyItemDAO.merge(iTt);
 			
@@ -137,6 +139,8 @@ public class IclubPropertyItemService {
 					model.setPiCrtdDate(iTt.getPiCrtdDate());
 					model.setPiDescripton(iTt.getPiDescripton());
 					model.setPiValue(iTt.getPiValue());
+					model.setIclubPerson(iTt.getIclubPerson() != null ? iTt.getIclubPerson().getPId() : null);
+					model.setIclubProperty(iTt.getIclubProperty() != null ? iTt.getIclubProperty().getPId() : null);
 					
 					ret.add((T) model);
 				}
@@ -161,6 +165,8 @@ public class IclubPropertyItemService {
 			model.setPiCrtdDate(bean.getPiCrtdDate());
 			model.setPiDescripton(bean.getPiDescripton());
 			model.setPiValue(bean.getPiValue());
+			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+			model.setIclubProperty(bean.getIclubProperty() != null ? bean.getIclubProperty().getPId() : null);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

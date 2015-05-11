@@ -253,59 +253,6 @@
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>
-				<p:tab id="insuranceTab" title="Insurance Items">
-					<p:panel id="pnlPropertyItemCont">
-						<p:dataTable reflow="true" widgetVar="dtPropertyItemCont" value="#{iclubQuickQuoteController.propertyItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PropertyItem Available">
-							<f:facet name="footer">
-								<p:commandButton id="btnPropertyItemShowAdd" value="Add" actionListener="#{iclubQuickQuoteController.showProItemAddPanel}" update=":iclubFrm:qqTabView:pnlPropertyItemCont" />
-							</f:facet>
-							<p:column headerText="Unique Id">
-								<p:outputLabel styleClass="TexAlCenter" value="#{ bean.piId}" />
-							</p:column>
-							<p:column headerText="Registration Number">
-								<p:outputLabel styleClass="TexAlCenter" value="#{bean.piDescripton}" />
-							</p:column>
-							<p:column headerText="Estimatted Value">
-								<p:outputLabel styleClass="TexAlCenter" value="#{bean.piValue}" />
-							</p:column>
-							<p:column>
-								<p:commandButton id="btnPropertyItemEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubQuickQuoteController.delIclubPropertyItem}" update=":iclubFrm:grlMsg">
-									<f:setPropertyActionListener target="#{iclubQuickQuoteController.propertyItemBean}" value="#{bean}" />
-								</p:commandButton>
-							</p:column>
-						</p:dataTable>
-						<p:panel id="pnlProItemAdd" rendered="#{iclubQuickQuoteController.showProItemAddPanel}">
-							<div class="Container90 Fnone MarAuto TexAlCenter">
-								<div class="Container100 Responsive">
-									<div class="Container50 Responsive">
-										<p:outputLabel styleClass="TexAlCenter" value="Description :" />
-									</div>
-									<div class="Container50 Responsive">
-										<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubQuickQuoteController.propertyItemBean.piDescripton}" />
-									</div>
-								</div>
-								<div class="EmptyBox5" />
-								<div class="Container100 Responsive">
-									<div class="Container50 Responsive">
-										<p:outputLabel styleClass="TexAlCenter" value="Value :" />
-									</div>
-									<div class="Container50 Responsive">
-										<p:inputText styleClass="TexAlCenter" placeholder="Value" value="#{iclubQuickQuoteController.propertyItemBean.piValue}" />
-									</div>
-								</div>
-								<div class="EmptyBox5" />
-								<div class="Container100 Responsive">
-									<div class="Container50 Responsive">
-										<p:commandButton id="btnPropertyItemCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyItemCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubQuickQuoteController.addIclubPropertyItem}" />
-									</div>
-									<div class="Container50 Responsive">
-										<p:commandButton id="btnPropertyItemCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyItemCont" value="Close" actionListener="#{iclubQuickQuoteController.clearProItemForm}" />
-									</div>
-								</div>
-							</div>
-						</p:panel>
-					</p:panel>
-				</p:tab>
 			</p:tabView>
 			<p:panel styleClass="Fnone TexAlCenter">
 				<p:commandButton value="Generate Quote" styleClass="Fs16" action="#{iclubQuickQuoteController.saveQuickQuoteDetails}" ajax="false" />
