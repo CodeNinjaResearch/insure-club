@@ -256,7 +256,7 @@ public class IclubProfileController implements Serializable {
 		if (bean.getPDob() == null) {
 			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (IclubWebHelper.calculateMyAge(bean.getPDob().getTime()) <= 18) {
+		} else if (IclubWebHelper.calculateYearDiff(bean.getPDob().getTime()) <= 18) {
 			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}

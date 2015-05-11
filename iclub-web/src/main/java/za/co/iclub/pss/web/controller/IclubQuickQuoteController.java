@@ -1029,7 +1029,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setPFName(bean.getPFName());
 				model.setPIdNum(bean.getPIdNum());
 				model.setPLName(bean.getPLName());
-				model.setPAge(IclubWebHelper.calculateMyAge(bean.getPDob().getTime()));
+				model.setPAge(IclubWebHelper.calculateYearDiff(bean.getPDob().getTime()));
 				model.setPMobile(bean.getPMobile());
 				model.setPAddress(bean.getPAddress());
 				model.setPContactPref(bean.getPContactPref());
@@ -1241,7 +1241,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (bean.getPDob() == null) {
 			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (IclubWebHelper.calculateMyAge(bean.getPDob().getTime()) <= 18) {
+		} else if (IclubWebHelper.calculateYearDiff(bean.getPDob().getTime()) <= 18) {
 			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -1283,7 +1283,7 @@ public class IclubQuickQuoteController implements Serializable {
 		
 		IclubPersonModel model = new IclubPersonModel();
 		personBean.setPId(UUID.randomUUID().toString());
-		personBean.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
+		personBean.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
 		
 		model.setPId(personBean.getPId());
 		model.setPCrtdDt(personBean.getPCrtdDt());

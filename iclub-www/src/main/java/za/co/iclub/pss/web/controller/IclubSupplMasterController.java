@@ -497,7 +497,7 @@ public class IclubSupplMasterController implements Serializable {
 				
 				personBean.setPId(UUID.randomUUID().toString());
 				
-				personBean.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
+				personBean.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
 				personBean.setIclubPerson(getSessionUserId());
 				
 				getLoginBeans().put(personBean.getPId(), loginBean);
@@ -518,7 +518,7 @@ public class IclubSupplMasterController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				
-				personBean.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
+				personBean.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
 				personBean.setIclubPerson(getSessionUserId());
 				getLoginBeans().put(personBean.getPId(), loginBean);
 				clearPerForm();
@@ -546,7 +546,7 @@ public class IclubSupplMasterController implements Serializable {
 		model.setPId(personBean.getPId());
 		
 		model.setPDob(personBean.getPDob());
-		model.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
+		model.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
 		model.setPEmail(personBean.getPEmail());
 		model.setPFName(personBean.getPFName());
 		model.setPIdNum(personBean.getPIdNum());
@@ -804,7 +804,7 @@ public class IclubSupplMasterController implements Serializable {
 		if (personBean.getPDob() == null) {
 			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()) <= 18) {
+		} else if (IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) <= 18) {
 			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}

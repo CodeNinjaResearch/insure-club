@@ -169,7 +169,7 @@ public class IclubDriverController implements Serializable {
 		if (bean.getDDob() == null) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("DOB Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (IclubWebHelper.calculateMyAge(bean.getDDob().getTime()) <= 18) {
+		} else if (IclubWebHelper.calculateYearDiff(bean.getDDob().getTime()) <= 18) {
 			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}

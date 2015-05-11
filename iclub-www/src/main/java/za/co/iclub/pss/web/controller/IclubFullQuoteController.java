@@ -1122,7 +1122,7 @@ public class IclubFullQuoteController implements Serializable {
 		if (personBean.getPDob() == null) {
 			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()) <= 18) {
+		} else if (IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) <= 18) {
 			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -1275,7 +1275,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setPLName(personBean.getPLName());
 		model.setPMobile(personBean.getPMobile());
 		model.setPAddress(personBean.getPAddress());
-		model.setPAge(IclubWebHelper.calculateMyAge(personBean.getPDob().getTime()));
+		model.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
 		model.setPContactPref(personBean.getPContactPref());
 		model.setPGender(personBean.getPGender());
 		model.setPContactPref(personBean.getPContactPref());

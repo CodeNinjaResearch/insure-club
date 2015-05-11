@@ -44,7 +44,7 @@ public class IclubWebHelper {
 		return context.getExternalContext().getSessionMap().get(key);
 	}
 	
-	public static int calculateMyAge(Long timeStamp) {
+	public static int calculateYearDiff(Long timeStamp) {
 		
 		Calendar birthCal = Calendar.getInstance();
 		birthCal.setTimeInMillis(timeStamp);
