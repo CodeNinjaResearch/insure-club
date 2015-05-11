@@ -500,5 +500,13 @@
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
 
+	<bean id="IclubPropertyItemService" class="za.co.iclub.pss.ws.service.IclubPropertyItemService">
+		<property name="iclubPropertyItemDAO" ref="IclubPropertyItemDAO" />
+		<property name="iclubPropertyDAO" ref="IclubPropertyDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+	</bean>
+
 
 </beans>

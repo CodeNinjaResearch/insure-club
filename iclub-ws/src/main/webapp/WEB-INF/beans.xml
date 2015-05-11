@@ -93,7 +93,7 @@
 			<ref bean="IclubSupplItemService" />
 			<ref bean="IclubPropUsageTypeService" />
 			<ref bean="IclubVehUsageTypeService" />
-
+			<ref bean="IclubPropertyItemService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">

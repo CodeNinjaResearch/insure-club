@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +49,7 @@ import za.co.iclub.pss.web.bean.IclubOccupiedStatusBean;
 import za.co.iclub.pss.web.bean.IclubPersonBean;
 import za.co.iclub.pss.web.bean.IclubPropUsageTypeBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
+import za.co.iclub.pss.web.bean.IclubPropertyItemBean;
 import za.co.iclub.pss.web.bean.IclubPropertyTypeBean;
 import za.co.iclub.pss.web.bean.IclubQuoteBean;
 import za.co.iclub.pss.web.bean.IclubRateEngineBean;
@@ -79,6 +81,7 @@ import za.co.iclub.pss.ws.model.IclubOccupationModel;
 import za.co.iclub.pss.ws.model.IclubOccupiedStatusModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
+import za.co.iclub.pss.ws.model.IclubPropertyItemModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyTypeModel;
 import za.co.iclub.pss.ws.model.IclubQuoteModel;
@@ -114,6 +117,7 @@ public class IclubQuickQuoteController implements Serializable {
 	private static final String IT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubIdTypeService/";
 	private static final String QUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubQuoteService/";
 	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
+	private static final String PRO_ITM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyItemService/";
 	private static final String II_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubInsuranceItemService/";
 	private static final String RAT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRateTypeService/";
 	private static final String RE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRateEngineService/";
@@ -197,10 +201,13 @@ public class IclubQuickQuoteController implements Serializable {
 	private boolean showVehModPanel;
 	private boolean showProAddPanel;
 	private boolean showProModPanel;
+	private boolean showProItemAddPanel;
 	private List<IclubVehicleBean> vehicleBeans;
 	private List<IclubSecurityMasterBean> securityMasterBeans;
 	private List<IclubAccessTypeBean> accessTypeBeans;
 	private List<IclubVehUsageTypeBean> vehUsageTypeBeans;
+	private List<IclubPropertyItemBean> propertyItemBeans;
+	private IclubPropertyItemBean propertyItemBean;
 	
 	@PostConstruct
 	public void init() {
@@ -255,12 +262,22 @@ public class IclubQuickQuoteController implements Serializable {
 		propertyBean = new IclubPropertyBean();
 	}
 	
+	public void showProItemAddPanel() {
+		showProItemAddPanel = true;
+		propertyItemBean = new IclubPropertyItemBean();
+	}
+	
 	public void clearProForm() {
 		showProAddPanel = false;
 		showProModPanel = false;
 		proAddress = "";
 		draggableModelPro = new DefaultMapModel();
 		propertyBean = new IclubPropertyBean();
+	}
+	
+	public void clearProItemForm() {
+		showProItemAddPanel = false;
+		propertyItemBean = new IclubPropertyItemBean();
 	}
 	
 	public void showProModPanel() {
@@ -320,6 +337,38 @@ public class IclubQuickQuoteController implements Serializable {
 		}
 	}
 	
+	public void addIclubPropertyItem() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubPropertyItem");
+		try {
+			
+			if (validateProItemForm(true)) {
+				propertyItemBean.setPiId(UUID.randomUUID().toString());
+				
+				propertyItemBeans.add(propertyItemBean);
+				clearProItemForm();
+				IclubWebHelper.addMessage(getLabelBundle().getString("propertyitem") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+			}
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("propertyitem") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+	
+	public void delIclubPropertyItem() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubPropertyItem");
+		try {
+			
+			propertyItemBeans.remove(propertyItemBean);
+			clearProForm();
+			IclubWebHelper.addMessage(getLabelBundle().getString("propertyitem") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("propertyitem") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+	
 	public void modIclubProperty() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubProperty");
 		try {
@@ -376,6 +425,19 @@ public class IclubQuickQuoteController implements Serializable {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
+	}
+	
+	public boolean validateProItemForm(boolean flag) {
+		boolean ret = true;
+		if (propertyItemBean.getPiDescripton() == null || propertyItemBean.getPiDescripton().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Descripton Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (propertyItemBean.getPiValue() == null) {
+			IclubWebHelper.addMessage(("Descripton Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		return ret;
 	}
 	
 	public boolean validateProForm(boolean flag) {
@@ -2778,6 +2840,36 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void setProfileTabFlag(boolean profileTabFlag) {
 		this.profileTabFlag = profileTabFlag;
+	}
+	
+	public List<IclubPropertyItemBean> getPropertyItemBeans() {
+		if (propertyItemBeans == null) {
+			propertyItemBeans = new ArrayList<IclubPropertyItemBean>();
+		}
+		return propertyItemBeans;
+	}
+	
+	public void setPropertyItemBeans(List<IclubPropertyItemBean> propertyItemBeans) {
+		this.propertyItemBeans = propertyItemBeans;
+	}
+	
+	public IclubPropertyItemBean getPropertyItemBean() {
+		if (propertyItemBean == null) {
+			propertyItemBean = new IclubPropertyItemBean();
+		}
+		return propertyItemBean;
+	}
+	
+	public void setPropertyItemBean(IclubPropertyItemBean propertyItemBean) {
+		this.propertyItemBean = propertyItemBean;
+	}
+	
+	public boolean isShowProItemAddPanel() {
+		return showProItemAddPanel;
+	}
+	
+	public void setShowProItemAddPanel(boolean showProItemAddPanel) {
+		this.showProItemAddPanel = showProItemAddPanel;
 	}
 	
 }
