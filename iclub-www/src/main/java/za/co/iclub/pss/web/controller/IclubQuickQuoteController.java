@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,6 +22,8 @@ import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 import org.primefaces.event.map.GeocodeEvent;
@@ -1212,7 +1215,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setLCrtdDt(new Date(System.currentTimeMillis()));
 				model.setLLastDate(loginBean.getLLastDate());
 				model.setLName(loginBean.getLName());
-				model.setLPasswd((loginBean.getLPasswd()).toString());
+				model.setLPasswd(Base64.encodeBase64URLSafeString(DigestUtils.md5(loginBean.getLPasswd())));
 				model.setLSecAns(loginBean.getLSecAns());
 				model.setIclubPersonByLCrtdBy(bean.getPId());
 				model.setIclubPersonByLPersonId(bean.getPId());
@@ -1491,7 +1494,7 @@ public class IclubQuickQuoteController implements Serializable {
 				IclubPropertyItemModel model = new IclubPropertyItemModel();
 				WebClient client = IclubWebHelper.createCustomClient(PRO_ITM_BASE_URL + "add");
 				model.setPiId(bean.getPiId());
-				model.setPiCrtdDate(bean.getPiCrtdDate());
+				model.setPiCrtdDate(new Timestamp(System.currentTimeMillis()));
 				model.setPiDescripton(bean.getPiDescripton());
 				model.setPiValue(bean.getPiValue());
 				model.setIclubPerson(personBean.getPId());

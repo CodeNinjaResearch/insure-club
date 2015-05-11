@@ -22,54 +22,56 @@
 			</p:dataTable>
 			<p:tabView id="qqSubProDetView" rendered="#{iclubQuickQuoteController.showProAddPanel}">
 				<p:tab id="qqSubProLocDet" title="Location Details">
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+					<p:panel id="proLocationDet">
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+							</div>
 						</div>
-						<div class="Container50 Responsive">
-							<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuWTTd" id="mnuWTTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Access Type" itemDisabled="true" />
+									<f:selectItems value="#{iclubQuickQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Latitude :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText id="locLat" placeholder="Lat" value="#{iclubQuickQuoteController.propertyBean.PLat}" styleClass="TexAlCenter" />
+							</div>
 						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuWTTd" id="mnuWTTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Access Type" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
-							</p:selectOneMenu>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Longitude  :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="Long" value="#{iclubQuickQuoteController.propertyBean.PLong}" styleClass="TexAlCenter" />
+							</div>
 						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Latitude :" />
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Address :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText id="address" placeholder="Address" value="#{iclubQuickQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
+							</div>
 						</div>
-						<div class="Container50 Responsive">
-							<p:inputText id="locLat" placeholder="Lat" value="#{iclubQuickQuoteController.propertyBean.PLat}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Longitude  :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Long" value="#{iclubQuickQuoteController.propertyBean.PLong}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Address :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText id="address" placeholder="Address" value="#{iclubQuickQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
+						<div class="EmptyBox5" />
+					</p:panel>
 				</p:tab>
 				<p:tab id="qqSubProDetConstr" title="Construction Details">
 					<div class="Container100 Responsive">
@@ -314,36 +316,38 @@
 			</p:panel>
 			<p:tabView id="qqSubProDetViewMod" rendered="#{iclubQuickQuoteController.showProModPanel}">
 				<p:tab title="Location Details">
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+					<p:panel id="proLocationDetEdit">
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+							</div>
 						</div>
-						<div class="Container50 Responsive">
-							<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuModWTTd" id="mnuModWTTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Access Type" itemDisabled="true" />
+									<f:selectItems value="#{iclubQuickQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+								</p:selectOneMenu>
+							</div>
 						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Address :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="Address" value="#{iclubQuickQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
+							</div>
 						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubAccessType}" widgetVar="mnuModWTTd" id="mnuModWTTd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Access Type" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Address :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Address" value="#{iclubQuickQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
+						<div class="EmptyBox5" />
+					</p:panel>
 				</p:tab>
 				<p:tab id="qqSubProConstDetMod" title="Constuction Details">
 					<div class="Container100 Responsive">
