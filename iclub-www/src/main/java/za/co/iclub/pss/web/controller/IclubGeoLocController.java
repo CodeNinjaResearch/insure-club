@@ -25,7 +25,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.exolab.castor.types.Time;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.StreamedContent;
 
@@ -324,6 +323,7 @@ public class IclubGeoLocController implements Serializable {
 		return beans;
 	}
 	
+	@SuppressWarnings("resource")
 	public void handleFileUpload(FileUploadEvent fue) {
 		
 		try {
@@ -347,12 +347,10 @@ public class IclubGeoLocController implements Serializable {
 					int j = 0;
 					Iterator<Cell> cellIterator = row.cellIterator();
 					IclubGeoLocModel model = new IclubGeoLocModel();
-					boolean falg = true;
-					while (cellIterator.hasNext() || falg) {
-						Cell cell = null;
-						if (j != 5)
-							cell = cellIterator.next();
-						cell = row.getCell(j);
+					
+					while (cellIterator.hasNext()) {
+						Cell cell = cellIterator.next();
+						
 						if (j == 0 && cell != null && cell.getStringCellValue() != null && !cell.getStringCellValue().toString().equalsIgnoreCase("")) {
 							model.setGlId(new Long(cell.getStringCellValue()));
 						} else if (j == 1 && cell != null && cell.getStringCellValue() != null && !cell.getStringCellValue().toString().equalsIgnoreCase("")) {
@@ -386,8 +384,7 @@ public class IclubGeoLocController implements Serializable {
 						}
 						
 						j++;
-						if (j == 6)
-							falg = false;
+						
 					}
 					models.add(model);
 					
@@ -410,12 +407,12 @@ public class IclubGeoLocController implements Serializable {
 				model.setIclubPerson(getSessionUserId());
 				if (model.getGlId() != null) {
 					WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-					ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+					client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 					client.close();
 				} else {
 					WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 					
-					ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+					client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 					client.close();
 				}
 			}
