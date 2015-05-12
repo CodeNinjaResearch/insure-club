@@ -176,7 +176,7 @@ public class IclubRateTypeController implements Serializable {
 				model.setRtQuoteType(bean.getRtQuoteType());
 				model.setIclubEntityType(bean.getIclubEntityType());
 				model.setIclubField(bean.getIclubField());
-				model.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+				model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 				model.setIclubPerson(bean.getIclubPerson());
 				model.setRtCrtdDt(new Date(System.currentTimeMillis()));
 				model.setRtType(bean.getRtType());
