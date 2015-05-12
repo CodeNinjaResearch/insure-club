@@ -16,7 +16,7 @@
 			</p:selectOneMenu>
 		</p:column>
 		<p:column headerText="Field Id">
-			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubRateTypeController.bean.iclubField}">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubField}">
 				<f:selectItem itemLabel="Field Id" itemDisabled="true" />
 				<f:selectItems value="#{iclubRateTypeController.fieldBeans}" var="c" itemLabel="#{c.FName}" itemValue="#{c.FId}" />
 			</p:selectOneMenu>
@@ -24,9 +24,7 @@
 		<p:column headerText="Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.rtType}">
 				<f:selectItem itemLabel="Type" itemDisabled="true" />
-				<f:selectItem itemLabel="Lookup" itemValue="L" />
-				<f:selectItem itemLabel="Range" itemValue="R" />
-				<f:selectItem itemLabel="Value" itemValue="V" />
+				<f:selectItems value="#{iclubRateTypeController.rateType}" />
 			</p:selectOneMenu>
 		</p:column>
 		<p:column headerText="Status">

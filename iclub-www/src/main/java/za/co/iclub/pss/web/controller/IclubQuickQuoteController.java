@@ -2122,20 +2122,24 @@ public class IclubQuickQuoteController implements Serializable {
 				if (tableName != null) {
 					List<IclubRateTypeBean> rateTypeBeans = getRateTypeBeanByFieldId(fieldBean.getFId(), quoteType);
 					String fieldValue = null;
-					if (tableName.equalsIgnoreCase("iclub_vehicle")) {
+					if (tableName.equalsIgnoreCase("iclub_vehicle") && rateTypeBeans != null && rateTypeBeans.get(0).getRtType().equalsIgnoreCase("L")) {
 						
-						fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId());
+						fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), "G");
+						
+					} else if (tableName.equalsIgnoreCase("iclub_vehicle")) {
+						
+						fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), null);
 						
 					}
 					if (tableName.equalsIgnoreCase("iclub_property")) {
 						IclubInsuranceItemBean insuranceItemBean = setInsuranceItemDetails(quoteId, 2l);
 						IclubPropertyBean proeprtyBean = getPropertyDetails(insuranceItemBean.getIiItemId());
-						fieldValue = getFieldValueFromDB(fieldName, tableName, proeprtyBean.getPId());
+						fieldValue = getFieldValueFromDB(fieldName, tableName, proeprtyBean.getPId(), null);
 					}
 					if (tableName.equalsIgnoreCase("iclub_person")) {
 						IclubPersonBean personBean = getIclubPersonBean(quoteBean.getIclubPersonByQPersonId());
 						
-						fieldValue = getFieldValueFromDB(fieldName, tableName, personBean.getPId());
+						fieldValue = getFieldValueFromDB(fieldName, tableName, personBean.getPId(), null);
 						
 					}
 					
@@ -2153,6 +2157,11 @@ public class IclubQuickQuoteController implements Serializable {
 									if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
 										premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 									}
+								} else if (rateTypeBean.getRtType().equalsIgnoreCase("G")) {
+									String fieldValues[] = fieldValue.split("@");
+									IclubGeoLocBean geoLocBean = getGeoLocBean(new Double(fieldValues[0]), new Double(fieldValues[1]));
+									premium = premium + baseValue * (geoLocBean.getGlRate() / 100);
+									
 								}
 								
 							}
@@ -2215,11 +2224,17 @@ public class IclubQuickQuoteController implements Serializable {
 		return beans;
 	}
 	
-	public String getFieldValueFromDB(String fieldName, String tableName, String id) {
-		
-		WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/fieldValue/" + fieldName + "/" + tableName + "/" + id);
-		
-		String fieldValue = client.accept(MediaType.APPLICATION_JSON).get(String.class);
+	public String getFieldValueFromDB(String fieldName, String tableName, String id, String rateType) {
+		String fieldValue = null;
+		if (rateType != null && !rateType.trim().equalsIgnoreCase("") && rateType.trim().equalsIgnoreCase("G")) {
+			WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/fieldValues/" + fieldName + "/" + tableName + "/" + id);
+			
+			fieldValue = client.accept(MediaType.APPLICATION_JSON).get(String.class);
+		} else {
+			WebClient client = IclubWebHelper.createCustomClient(RE_BASE_URL + "get/fieldValue/" + fieldName + "/" + tableName + "/" + id);
+			
+			fieldValue = client.accept(MediaType.APPLICATION_JSON).get(String.class);
+		}
 		
 		return fieldValue;
 		

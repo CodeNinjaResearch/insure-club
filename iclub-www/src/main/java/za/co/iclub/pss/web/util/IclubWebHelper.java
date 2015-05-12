@@ -21,7 +21,6 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import za.co.iclub.pss.web.bean.GoogleResponse;
-import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.bean.Result;
 import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.util.CustomObjectMapper;
@@ -98,17 +97,27 @@ public class IclubWebHelper {
 	public static IclubGeoLocModel getLatAndLong(IclubGeoLocModel model) {
 		try {
 			if (model != null) {
-				GoogleResponse res = convertToLatLong((model.getGlAddress() != null ? model.getGlAddress() + " " : "") + (model.getGlProvince() != null ? model.getGlProvince() + " " : "") + (model.getGlSuburb() != null ? model.getGlSuburb() : ""));
-				if (res.getStatus().equals("OK")) {
-					for (Result result : res.getResults()) {
-						System.out.println("Lattitude of address is :" + result.getGeometry().getLocation().getLat());
-						System.out.println("Longitude of address is :" + result.getGeometry().getLocation().getLng());
-						System.out.println("Location is " + result.getGeometry().getLocation_type());
-						model.setGlLat(new Double(result.getGeometry().getLocation().getLat()));
-						model.setGlLong(new Double(result.getGeometry().getLocation().getLng()));
+				synchronized (model) {
+					GoogleResponse res = convertToLatLong((model.getGlAddress() != null ? model.getGlAddress() + " " : "") + (model.getGlProvince() != null ? model.getGlProvince() + " " : "") + (model.getGlSuburb() != null ? model.getGlSuburb() : ""));
+					if (res.getStatus().equals("OK")) {
+						for (Result result : res.getResults()) {
+							System.out.println("Lattitude of address is :" + result.getGeometry().getLocation().getLat());
+							System.out.println("Longitude of address is :" + result.getGeometry().getLocation().getLng());
+							System.out.println("Location is " + result.getGeometry().getLocation_type());
+							model.setGlLat(new Double(result.getGeometry().getLocation().getLat()));
+							model.setGlLong(new Double(result.getGeometry().getLocation().getLng()));
+						}
+						
+						try {
+							long time = 500;
+							Thread.sleep(time);
+						} catch (Exception e) {
+							System.out.println(e);
+						}
+						
+					} else {
+						System.out.println(res.getStatus());
 					}
-				} else {
-					System.out.println(res.getStatus());
 				}
 			}
 		} catch (Exception e) {

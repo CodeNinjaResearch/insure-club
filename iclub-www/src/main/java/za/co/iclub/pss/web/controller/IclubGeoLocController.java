@@ -384,6 +384,20 @@ public class IclubGeoLocController implements Serializable {
 							Double d = cell.getNumericCellValue();
 							if (d != null)
 								model.setGlLong(cell.getNumericCellValue());
+						} else if (j == 6 && cell != null) {
+							switch (cell.getCellType()) {
+							case Cell.CELL_TYPE_BOOLEAN:
+								Boolean bollean = cell.getBooleanCellValue();
+								model.setGlRate(new Double(bollean.toString()));
+								break;
+							case Cell.CELL_TYPE_NUMERIC:
+								Double doubl = cell.getNumericCellValue();
+								model.setGlRate(doubl);
+								break;
+							case Cell.CELL_TYPE_STRING:
+								model.setGlRate(new Double(cell.getStringCellValue()));
+								break;
+							}
 						}
 						j++;
 						
