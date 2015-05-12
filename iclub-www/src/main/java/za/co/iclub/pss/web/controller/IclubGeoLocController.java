@@ -349,7 +349,10 @@ public class IclubGeoLocController implements Serializable {
 					IclubGeoLocModel model = new IclubGeoLocModel();
 					
 					while (cellIterator.hasNext()) {
-						Cell cell = cellIterator.next();
+						Cell cell = row.getCell(j);
+						
+						if (cell != null)
+							cellIterator.next();
 						
 						if (j == 0 && cell != null && cell.getStringCellValue() != null && !cell.getStringCellValue().toString().equalsIgnoreCase("")) {
 							model.setGlId(new Long(cell.getStringCellValue()));
@@ -382,7 +385,6 @@ public class IclubGeoLocController implements Serializable {
 							if (d != null)
 								model.setGlLong(cell.getNumericCellValue());
 						}
-						
 						j++;
 						
 					}
@@ -405,6 +407,7 @@ public class IclubGeoLocController implements Serializable {
 			for (IclubGeoLocModel model : models) {
 				model.setGlCrtdDt(new Timestamp(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
+				model = IclubWebHelper.getLatAndLong(model);
 				if (model.getGlId() != null) {
 					WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 					client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
