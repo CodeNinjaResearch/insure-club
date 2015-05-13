@@ -213,6 +213,7 @@ public class IclubQuickQuoteController implements Serializable {
 	private List<IclubPropertyItemBean> propertyItemBeans;
 	private IclubPropertyItemBean propertyItemBean;
 	private Map<String, List<IclubPropertyItemBean>> propertyItemBeansMap;
+	private IclubQuoteBean quoteBean;
 	
 	@PostConstruct
 	public void init() {
@@ -1067,6 +1068,7 @@ public class IclubQuickQuoteController implements Serializable {
 		vehicleBean = new IclubVehicleBean();
 		driverBean = new IclubDriverBean();
 		personBean = new IclubPersonBean();
+		quoteBean = new IclubQuoteBean();
 		claimYN = "";
 		vehicleBeans = new ArrayList<IclubVehicleBean>();
 		propertyBeans = new ArrayList<IclubPropertyBean>();
@@ -1373,7 +1375,7 @@ public class IclubQuickQuoteController implements Serializable {
 		client.close();
 		
 		if (response.getStatusCode() == 0) {
-			addQuote(new IclubQuoteBean(), personBean);
+			addQuote(quoteBean, personBean);
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -1423,7 +1425,7 @@ public class IclubQuickQuoteController implements Serializable {
 				client.close();
 				if (response.getStatusCode() == 0) {
 					addInsuranceItem(model.getVId(), quoteModel.getQId(), 1l, getSessionUserId());
-					genPremium += getUpdatePremium(quoteModel.getQId(), "Q", bean, driverBean);
+					genPremium += getUpdatePremium(quoteModel.getQId(), "Q", bean, driverBean, null);
 					quoteId = quoteModel.getQId();
 					IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
 					
@@ -2115,7 +2117,7 @@ public class IclubQuickQuoteController implements Serializable {
 		this.countryCodeBeans = countryCodeBeans;
 	}
 	
-	public Double getUpdatePremium(String quoteId, String quoteType, IclubVehicleBean vehicleBean, IclubDriverBean driverBean) {
+	public Double getUpdatePremium(String quoteId, String quoteType, IclubVehicleBean vehicleBean, IclubDriverBean driverBean, IclubPropertyBean propertyBean) {
 		List<IclubFieldBean> fieldBeans = getIclubFieldBeans();
 		IclubQuoteBean quoteBean = getQuoteDetailsById(quoteId);
 		Double baseValue = getBasePremium();
@@ -2137,10 +2139,9 @@ public class IclubQuickQuoteController implements Serializable {
 						
 						fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), null);
 						
-					} else if (tableName.equalsIgnoreCase("iclub_property")) {
-						IclubInsuranceItemBean insuranceItemBean = setInsuranceItemDetails(quoteId, 2l);
-						IclubPropertyBean proeprtyBean = getPropertyDetails(insuranceItemBean.getIiItemId());
-						fieldValue = getFieldValueFromDB(fieldName, tableName, proeprtyBean.getPId(), null);
+					} else if (tableName.equalsIgnoreCase("iclub_property") && propertyBean != null && propertyBean.getPId() != null) {
+						
+						fieldValue = getFieldValueFromDB(fieldName, tableName, propertyBean.getPId(), null);
 					} else if (tableName.equalsIgnoreCase("iclub_person")) {
 						IclubPersonBean personBean = getIclubPersonBean(quoteBean.getIclubPersonByQPersonId());
 						
@@ -2930,6 +2931,17 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void setPropertyItemBeansMap(Map<String, List<IclubPropertyItemBean>> propertyItemBeansMap) {
 		this.propertyItemBeansMap = propertyItemBeansMap;
+	}
+	
+	public IclubQuoteBean getQuoteBean() {
+		if (quoteBean == null) {
+			quoteBean = new IclubQuoteBean();
+		}
+		return quoteBean;
+	}
+	
+	public void setQuoteBean(IclubQuoteBean quoteBean) {
+		this.quoteBean = quoteBean;
 	}
 	
 }

@@ -36,6 +36,8 @@ public class IclubVehicleModel {
 	private String VEngineNr;
 	private String VRegNum;
 	private Date VCrtdDt;
+	private String VModifiedYn;
+	
 	
 	public String getVId() {
 		return VId;
@@ -267,6 +269,14 @@ public class IclubVehicleModel {
 	
 	public void setVCrtdDt(Date vCrtdDt) {
 		VCrtdDt = vCrtdDt;
+	}
+
+	public String getVModifiedYn() {
+		return VModifiedYn;
+	}
+
+	public void setVModifiedYn(String vModifiedYn) {
+		VModifiedYn = vModifiedYn;
 	}
 	
 }
