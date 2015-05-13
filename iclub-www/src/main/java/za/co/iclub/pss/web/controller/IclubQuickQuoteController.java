@@ -2122,7 +2122,7 @@ public class IclubQuickQuoteController implements Serializable {
 				if (tableName != null) {
 					List<IclubRateTypeBean> rateTypeBeans = getRateTypeBeanByFieldId(fieldBean.getFId(), quoteType);
 					String fieldValue = null;
-					if (tableName.equalsIgnoreCase("iclub_vehicle") && rateTypeBeans != null && rateTypeBeans.get(0).getRtType().equalsIgnoreCase("L")) {
+					if (tableName.equalsIgnoreCase("iclub_vehicle") && rateTypeBeans != null && rateTypeBeans.size() > 0 && rateTypeBeans.get(0).getRtType().equalsIgnoreCase("L")) {
 						
 						fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), "G");
 						

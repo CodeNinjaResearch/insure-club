@@ -141,6 +141,9 @@ public class IclubCommonDAO {
 		for (int i = 1; i < tableName.split("_").length; i++) {
 			colShrtNm += tableName.split("_")[i].substring(0, 1);
 		}
+		if (tableName != null && tableName.trim().equalsIgnoreCase("iclub_veh_usage_type")) {
+			return "vu";
+		}
 		return colShrtNm;
 	}
 	
