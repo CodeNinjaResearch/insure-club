@@ -16,6 +16,8 @@ public class IclubDriverBean {
 	private Date DDob;
 	private Date DCrtdDt;
 	private String[] iclubVehicles;
+	private Long iclubAccessTypeByDAccessStatusId;
+	private Integer DIssueYears;
 	
 	public String getDId() {
 		return DId;
@@ -111,5 +113,21 @@ public class IclubDriverBean {
 	
 	public void setIclubAccessTypeByDAccessTypeId(Long iclubAccessTypeByDAccessTypeId) {
 		this.iclubAccessTypeByDAccessTypeId = iclubAccessTypeByDAccessTypeId;
+	}
+	
+	public Long getIclubAccessTypeByDAccessStatusId() {
+		return iclubAccessTypeByDAccessStatusId;
+	}
+	
+	public void setIclubAccessTypeByDAccessStatusId(Long iclubAccessTypeByDAccessStatusId) {
+		this.iclubAccessTypeByDAccessStatusId = iclubAccessTypeByDAccessStatusId;
+	}
+	
+	public Integer getDIssueYears() {
+		return DIssueYears;
+	}
+	
+	public void setDIssueYears(Integer dIssueYears) {
+		DIssueYears = dIssueYears;
 	}
 }

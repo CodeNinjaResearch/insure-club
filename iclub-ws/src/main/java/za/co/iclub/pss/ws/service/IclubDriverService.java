@@ -57,7 +57,9 @@ public class IclubDriverService {
 			iCt.setDLicenseNum(model.getDLicenseNum());
 			iCt.setDName(model.getDName());
 			iCt.setDCrtdDt(model.getDCrtdDt());
+			iCt.setDIssueYears(model.getDIssueYears());
 			iCt.setIclubAccessTypeByDAccessTypeId(model.getIclubAccessTypeByDAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByDAccessTypeId()) : null);
+			iCt.setIclubAccessTypeByDAccessStatusId(model.getIclubAccessTypeByDAccessStatusId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByDAccessStatusId()) : null);
 			iCt.setIclubLicenseCode(model.getIclubLicenseCode() != null ? iclubLicenseCodeDAO.findById(model.getIclubLicenseCode()) : null);
 			iCt.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
 			iCt.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId() != null && !model.getIclubPersonByDPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByDPersonId()) : null);
@@ -96,7 +98,9 @@ public class IclubDriverService {
 			iCt.setDLicenseNum(model.getDLicenseNum());
 			iCt.setDName(model.getDName());
 			iCt.setDCrtdDt(model.getDCrtdDt());
+			iCt.setDIssueYears(model.getDIssueYears());
 			iCt.setIclubAccessTypeByDAccessTypeId(model.getIclubAccessTypeByDAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByDAccessTypeId()) : null);
+			iCt.setIclubAccessTypeByDAccessStatusId(model.getIclubAccessTypeByDAccessStatusId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByDAccessStatusId()) : null);
 			iCt.setIclubLicenseCode(model.getIclubLicenseCode() != null ? iclubLicenseCodeDAO.findById(model.getIclubLicenseCode()) : null);
 			iCt.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
 			iCt.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId() != null && !model.getIclubPersonByDPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByDPersonId()) : null);
@@ -156,6 +160,8 @@ public class IclubDriverService {
 					model.setDLicenseNum(iCt.getDLicenseNum());
 					model.setDName(iCt.getDName());
 					model.setDCrtdDt(iCt.getDCrtdDt());
+					model.setDIssueYears(iCt.getDIssueYears());
+					model.setIclubAccessTypeByDAccessStatusId(iCt.getIclubAccessTypeByDAccessStatusId() != null ? iCt.getIclubAccessTypeByDAccessStatusId().getAtId() : null);
 					model.setIclubAccessTypeByDAccessTypeId(iCt.getIclubAccessTypeByDAccessTypeId() != null ? (iCt.getIclubAccessTypeByDAccessTypeId().getAtId()) : null);
 					model.setIclubLicenseCode(iCt.getIclubLicenseCode() != null ? (iCt.getIclubLicenseCode().getLcId()) : null);
 					model.setIclubMaritialStatus(iCt.getIclubMaritialStatus() != null ? (iCt.getIclubMaritialStatus().getMsId()) : null);
@@ -204,6 +210,8 @@ public class IclubDriverService {
 					model.setDLicenseNum(iCt.getDLicenseNum());
 					model.setDName(iCt.getDName());
 					model.setDCrtdDt(iCt.getDCrtdDt());
+					model.setDIssueYears(iCt.getDIssueYears());
+					model.setIclubAccessTypeByDAccessStatusId(iCt.getIclubAccessTypeByDAccessStatusId() != null ? iCt.getIclubAccessTypeByDAccessStatusId().getAtId() : null);
 					model.setIclubAccessTypeByDAccessTypeId(iCt.getIclubAccessTypeByDAccessTypeId() != null ? (iCt.getIclubAccessTypeByDAccessTypeId().getAtId()) : null);
 					model.setIclubLicenseCode(iCt.getIclubLicenseCode() != null ? (iCt.getIclubLicenseCode().getLcId()) : null);
 					model.setIclubMaritialStatus(iCt.getIclubMaritialStatus() != null ? (iCt.getIclubMaritialStatus().getMsId()) : null);
@@ -246,6 +254,8 @@ public class IclubDriverService {
 			model.setDLicenseNum(bean.getDLicenseNum());
 			model.setDName(bean.getDName());
 			model.setDCrtdDt(bean.getDCrtdDt());
+			model.setDIssueYears(bean.getDIssueYears());
+			model.setIclubAccessTypeByDAccessStatusId(bean.getIclubAccessTypeByDAccessStatusId() != null ? bean.getIclubAccessTypeByDAccessStatusId().getAtId() : null);
 			model.setIclubAccessTypeByDAccessTypeId(bean.getIclubAccessTypeByDAccessTypeId() != null ? (bean.getIclubAccessTypeByDAccessTypeId().getAtId()) : null);
 			model.setIclubLicenseCode(bean.getIclubLicenseCode() != null ? (bean.getIclubLicenseCode().getLcId()) : null);
 			model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
@@ -284,6 +294,8 @@ public class IclubDriverService {
 			model.setDLicenseNum(bean.getDLicenseNum());
 			model.setDName(bean.getDName());
 			model.setDCrtdDt(bean.getDCrtdDt());
+			model.setDIssueYears(bean.getDIssueYears());
+			model.setIclubAccessTypeByDAccessStatusId(bean.getIclubAccessTypeByDAccessStatusId() != null ? bean.getIclubAccessTypeByDAccessStatusId().getAtId() : null);
 			model.setIclubAccessTypeByDAccessTypeId(bean.getIclubAccessTypeByDAccessTypeId() != null ? (bean.getIclubAccessTypeByDAccessTypeId().getAtId()) : null);
 			model.setIclubLicenseCode(bean.getIclubLicenseCode() != null ? (bean.getIclubLicenseCode().getLcId()) : null);
 			model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
