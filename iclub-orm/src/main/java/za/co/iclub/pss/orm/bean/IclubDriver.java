@@ -26,7 +26,7 @@ public class IclubDriver implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1288549868989901064L;
+	private static final long serialVersionUID = -8007380585037397336L;
 	private String DId;
 	private IclubAccessType iclubAccessTypeByDAccessStatusId;
 	private IclubLicenseCode iclubLicenseCode;
@@ -39,6 +39,8 @@ public class IclubDriver implements java.io.Serializable {
 	private Date DIssueDt;
 	private Date DDob;
 	private Integer DIssueYears;
+	private Integer DLastClaimYear;
+	private Integer DLastClaimDiff;
 	private Date DCrtdDt;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
@@ -54,7 +56,7 @@ public class IclubDriver implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDriver(String DId, IclubAccessType iclubAccessTypeByDAccessStatusId, IclubLicenseCode iclubLicenseCode, IclubPerson iclubPersonByDCrtdBy, IclubAccessType iclubAccessTypeByDAccessTypeId, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPersonByDPersonId, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Integer DIssueYears, Date DCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubDriver(String DId, IclubAccessType iclubAccessTypeByDAccessStatusId, IclubLicenseCode iclubLicenseCode, IclubPerson iclubPersonByDCrtdBy, IclubAccessType iclubAccessTypeByDAccessTypeId, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPersonByDPersonId, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Integer DIssueYears, Integer DLastClaimYear, Integer DLastClaimDiff, Date DCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.DId = DId;
 		this.iclubAccessTypeByDAccessStatusId = iclubAccessTypeByDAccessStatusId;
 		this.iclubLicenseCode = iclubLicenseCode;
@@ -67,6 +69,8 @@ public class IclubDriver implements java.io.Serializable {
 		this.DIssueDt = DIssueDt;
 		this.DDob = DDob;
 		this.DIssueYears = DIssueYears;
+		this.DLastClaimYear = DLastClaimYear;
+		this.DLastClaimDiff = DLastClaimDiff;
 		this.DCrtdDt = DCrtdDt;
 		this.iclubVehicles = iclubVehicles;
 	}
@@ -185,6 +189,24 @@ public class IclubDriver implements java.io.Serializable {
 
 	public void setDIssueYears(Integer DIssueYears) {
 		this.DIssueYears = DIssueYears;
+	}
+
+	@Column(name = "d_last_claim_year")
+	public Integer getDLastClaimYear() {
+		return this.DLastClaimYear;
+	}
+
+	public void setDLastClaimYear(Integer DLastClaimYear) {
+		this.DLastClaimYear = DLastClaimYear;
+	}
+
+	@Column(name = "d_last_claim_diff")
+	public Integer getDLastClaimDiff() {
+		return this.DLastClaimDiff;
+	}
+
+	public void setDLastClaimDiff(Integer DLastClaimDiff) {
+		this.DLastClaimDiff = DLastClaimDiff;
 	}
 
 	@Column(name = "d_crtd_dt", length = 19)

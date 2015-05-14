@@ -12,26 +12,27 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
+import za.co.iclub.pss.orm.bean.IclubVehSecType;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * IclubSecurityMaster entities. Transaction control of the save(), update() and
+ * IclubVehSecType entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see za.co.iclub.pss.orm.bean.IclubSecurityMaster
+ * @see za.co.iclub.pss.orm.bean.IclubVehSecType
  * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class IclubSecurityMasterDAO {
-	private static final Logger log = Logger.getLogger(IclubSecurityMasterDAO.class);
+public class IclubVehSecTypeDAO {
+	private static final Logger log = Logger.getLogger(IclubVehSecTypeDAO.class);
 	// property constants
-	public static final String SM_DESC = "smDesc";
-	public static final String SM_STATUS = "smStatus";
+	public static final String VS_SHORT_DESC = "vsShortDesc";
+	public static final String VS_LONG_DESC = "vsLongDesc";
+	public static final String VS_STATUS = "vsStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -47,8 +48,8 @@ public class IclubSecurityMasterDAO {
 		// do nothing
 	}
 
-	public void save(IclubSecurityMaster transientInstance) {
-		log.debug("saving IclubSecurityMaster instance");
+	public void save(IclubVehSecType transientInstance) {
+		log.debug("saving IclubVehSecType instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -58,8 +59,8 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public void delete(IclubSecurityMaster persistentInstance) {
-		log.debug("deleting IclubSecurityMaster instance");
+	public void delete(IclubVehSecType persistentInstance) {
+		log.debug("deleting IclubVehSecType instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -69,10 +70,10 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public IclubSecurityMaster findById(java.lang.String id) {
-		log.debug("getting IclubSecurityMaster instance with id: " + id);
+	public IclubVehSecType findById(java.lang.Long id) {
+		log.debug("getting IclubVehSecType instance with id: " + id);
 		try {
-			IclubSecurityMaster instance = (IclubSecurityMaster) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSecurityMaster", id);
+			IclubVehSecType instance = (IclubVehSecType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubVehSecType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -80,10 +81,10 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public List<IclubSecurityMaster> findByExample(IclubSecurityMaster instance) {
-		log.debug("finding IclubSecurityMaster instance by example");
+	public List<IclubVehSecType> findByExample(IclubVehSecType instance) {
+		log.debug("finding IclubVehSecType instance by example");
 		try {
-			List<IclubSecurityMaster> results = (List<IclubSecurityMaster>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSecurityMaster").add(create(instance)).list();
+			List<IclubVehSecType> results = (List<IclubVehSecType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubVehSecType").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -93,9 +94,9 @@ public class IclubSecurityMasterDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSecurityMaster instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubVehSecType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSecurityMaster as model where model." + propertyName + "= ?";
+			String queryString = "from IclubVehSecType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -105,18 +106,22 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public List<IclubSecurityMaster> findBySmDesc(Object smDesc) {
-		return findByProperty(SM_DESC, smDesc);
+	public List<IclubVehSecType> findByVsShortDesc(Object vsShortDesc) {
+		return findByProperty(VS_SHORT_DESC, vsShortDesc);
 	}
 
-	public List<IclubSecurityMaster> findBySmStatus(Object smStatus) {
-		return findByProperty(SM_STATUS, smStatus);
+	public List<IclubVehSecType> findByVsLongDesc(Object vsLongDesc) {
+		return findByProperty(VS_LONG_DESC, vsLongDesc);
+	}
+
+	public List<IclubVehSecType> findByVsStatus(Object vsStatus) {
+		return findByProperty(VS_STATUS, vsStatus);
 	}
 
 	public List findAll() {
-		log.debug("finding all IclubSecurityMaster instances");
+		log.debug("finding all IclubVehSecType instances");
 		try {
-			String queryString = "from IclubSecurityMaster";
+			String queryString = "from IclubVehSecType";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -125,10 +130,10 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public IclubSecurityMaster merge(IclubSecurityMaster detachedInstance) {
-		log.debug("merging IclubSecurityMaster instance");
+	public IclubVehSecType merge(IclubVehSecType detachedInstance) {
+		log.debug("merging IclubVehSecType instance");
 		try {
-			IclubSecurityMaster result = (IclubSecurityMaster) getCurrentSession().merge(detachedInstance);
+			IclubVehSecType result = (IclubVehSecType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -137,8 +142,8 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public void attachDirty(IclubSecurityMaster instance) {
-		log.debug("attaching dirty IclubSecurityMaster instance");
+	public void attachDirty(IclubVehSecType instance) {
+		log.debug("attaching dirty IclubVehSecType instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -148,8 +153,8 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public void attachClean(IclubSecurityMaster instance) {
-		log.debug("attaching clean IclubSecurityMaster instance");
+	public void attachClean(IclubVehSecType instance) {
+		log.debug("attaching clean IclubVehSecType instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
@@ -159,7 +164,7 @@ public class IclubSecurityMasterDAO {
 		}
 	}
 
-	public static IclubSecurityMasterDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (IclubSecurityMasterDAO) ctx.getBean("IclubSecurityMasterDAO");
+	public static IclubVehSecTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (IclubVehSecTypeDAO) ctx.getBean("IclubVehSecTypeDAO");
 	}
 }

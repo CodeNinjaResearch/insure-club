@@ -26,7 +26,7 @@ public class IclubProperty implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 717471582973055177L;
+	private static final long serialVersionUID = -8549148100543972416L;
 	private String PId;
 	private IclubCoverType iclubCoverType;
 	private IclubOccupiedStatus iclubOccupiedStatus;
@@ -37,6 +37,7 @@ public class IclubProperty implements java.io.Serializable {
 	private IclubBarType iclubBarType;
 	private IclubThatchType iclubThatchType;
 	private IclubPropUsageType iclubPropUsageType;
+	private IclubPropSecType iclubPropSecType;
 	private IclubRoofType iclubRoofType;
 	private String PRegNum;
 	private String PAddress;
@@ -64,7 +65,7 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubPropUsageType iclubPropUsageType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Double PEstValue, Date PCrtdDt, Set<IclubPropertyItem> iclubPropertyItems) {
+	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubPropUsageType iclubPropUsageType, IclubPropSecType iclubPropSecType, IclubRoofType iclubRoofType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Double PEstValue, Date PCrtdDt, Set<IclubPropertyItem> iclubPropertyItems) {
 		this.PId = PId;
 		this.iclubCoverType = iclubCoverType;
 		this.iclubOccupiedStatus = iclubOccupiedStatus;
@@ -75,6 +76,7 @@ public class IclubProperty implements java.io.Serializable {
 		this.iclubBarType = iclubBarType;
 		this.iclubThatchType = iclubThatchType;
 		this.iclubPropUsageType = iclubPropUsageType;
+		this.iclubPropSecType = iclubPropSecType;
 		this.iclubRoofType = iclubRoofType;
 		this.PRegNum = PRegNum;
 		this.PAddress = PAddress;
@@ -190,6 +192,16 @@ public class IclubProperty implements java.io.Serializable {
 
 	public void setIclubPropUsageType(IclubPropUsageType iclubPropUsageType) {
 		this.iclubPropUsageType = iclubPropUsageType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "p_sec_mas_id")
+	public IclubPropSecType getIclubPropSecType() {
+		return this.iclubPropSecType;
+	}
+
+	public void setIclubPropSecType(IclubPropSecType iclubPropSecType) {
+		this.iclubPropSecType = iclubPropSecType;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -2,7 +2,6 @@ package za.co.iclub.pss.web.controller;
 
 import java.io.InputStream;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -419,7 +418,7 @@ public class IclubGeoLocController implements Serializable {
 	public void updateOrSaveGeoLoc(List<IclubGeoLocModel> models) {
 		if (models != null && models.size() > 0) {
 			for (IclubGeoLocModel model : models) {
-				model.setGlCrtdDt(new Timestamp(System.currentTimeMillis()));
+				model.setGlCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
 				model = IclubWebHelper.getLatAndLong(model);
 				if (model.getGlId() != null) {

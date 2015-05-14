@@ -12,29 +12,27 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubDriver;
+import za.co.iclub.pss.orm.bean.IclubPropSecType;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * IclubDriver entities. Transaction control of the save(), update() and
+ * IclubPropSecType entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see za.co.iclub.pss.orm.bean.IclubDriver
+ * @see za.co.iclub.pss.orm.bean.IclubPropSecType
  * @author MyEclipse Persistence Tools
  */
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class IclubDriverDAO {
-	private static final Logger log = Logger.getLogger(IclubDriverDAO.class);
+public class IclubPropSecTypeDAO {
+	private static final Logger log = Logger.getLogger(IclubPropSecTypeDAO.class);
 	// property constants
-	public static final String _DNAME = "DName";
-	public static final String _DLICENSE_NUM = "DLicenseNum";
-	public static final String _DISSUE_YEARS = "DIssueYears";
-	public static final String _DLAST_CLAIM_YEAR = "DLastClaimYear";
-	public static final String _DLAST_CLAIM_DIFF = "DLastClaimDiff";
+	public static final String PS_SHORT_DESC = "psShortDesc";
+	public static final String PS_LONG_DESC = "psLongDesc";
+	public static final String PS_STATUS = "psStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -50,8 +48,8 @@ public class IclubDriverDAO {
 		// do nothing
 	}
 
-	public void save(IclubDriver transientInstance) {
-		log.debug("saving IclubDriver instance");
+	public void save(IclubPropSecType transientInstance) {
+		log.debug("saving IclubPropSecType instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -61,8 +59,8 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public void delete(IclubDriver persistentInstance) {
-		log.debug("deleting IclubDriver instance");
+	public void delete(IclubPropSecType persistentInstance) {
+		log.debug("deleting IclubPropSecType instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -72,10 +70,10 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public IclubDriver findById(java.lang.String id) {
-		log.debug("getting IclubDriver instance with id: " + id);
+	public IclubPropSecType findById(java.lang.Long id) {
+		log.debug("getting IclubPropSecType instance with id: " + id);
 		try {
-			IclubDriver instance = (IclubDriver) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubDriver", id);
+			IclubPropSecType instance = (IclubPropSecType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPropSecType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -83,10 +81,10 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public List<IclubDriver> findByExample(IclubDriver instance) {
-		log.debug("finding IclubDriver instance by example");
+	public List<IclubPropSecType> findByExample(IclubPropSecType instance) {
+		log.debug("finding IclubPropSecType instance by example");
 		try {
-			List<IclubDriver> results = (List<IclubDriver>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubDriver").add(create(instance)).list();
+			List<IclubPropSecType> results = (List<IclubPropSecType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPropSecType").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -96,9 +94,9 @@ public class IclubDriverDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubDriver instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubPropSecType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubDriver as model where model." + propertyName + "= ?";
+			String queryString = "from IclubPropSecType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -108,30 +106,22 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public List<IclubDriver> findByDName(Object DName) {
-		return findByProperty(_DNAME, DName);
+	public List<IclubPropSecType> findByPsShortDesc(Object psShortDesc) {
+		return findByProperty(PS_SHORT_DESC, psShortDesc);
 	}
 
-	public List<IclubDriver> findByDLicenseNum(Object DLicenseNum) {
-		return findByProperty(_DLICENSE_NUM, DLicenseNum);
+	public List<IclubPropSecType> findByPsLongDesc(Object psLongDesc) {
+		return findByProperty(PS_LONG_DESC, psLongDesc);
 	}
 
-	public List<IclubDriver> findByDIssueYears(Object DIssueYears) {
-		return findByProperty(_DISSUE_YEARS, DIssueYears);
-	}
-
-	public List<IclubDriver> findByDLastClaimYear(Object DLastClaimYear) {
-		return findByProperty(_DLAST_CLAIM_YEAR, DLastClaimYear);
-	}
-
-	public List<IclubDriver> findByDLastClaimDiff(Object DLastClaimDiff) {
-		return findByProperty(_DLAST_CLAIM_DIFF, DLastClaimDiff);
+	public List<IclubPropSecType> findByPsStatus(Object psStatus) {
+		return findByProperty(PS_STATUS, psStatus);
 	}
 
 	public List findAll() {
-		log.debug("finding all IclubDriver instances");
+		log.debug("finding all IclubPropSecType instances");
 		try {
-			String queryString = "from IclubDriver";
+			String queryString = "from IclubPropSecType";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -140,10 +130,10 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public IclubDriver merge(IclubDriver detachedInstance) {
-		log.debug("merging IclubDriver instance");
+	public IclubPropSecType merge(IclubPropSecType detachedInstance) {
+		log.debug("merging IclubPropSecType instance");
 		try {
-			IclubDriver result = (IclubDriver) getCurrentSession().merge(detachedInstance);
+			IclubPropSecType result = (IclubPropSecType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -152,8 +142,8 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public void attachDirty(IclubDriver instance) {
-		log.debug("attaching dirty IclubDriver instance");
+	public void attachDirty(IclubPropSecType instance) {
+		log.debug("attaching dirty IclubPropSecType instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -163,8 +153,8 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public void attachClean(IclubDriver instance) {
-		log.debug("attaching clean IclubDriver instance");
+	public void attachClean(IclubPropSecType instance) {
+		log.debug("attaching clean IclubPropSecType instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
@@ -174,7 +164,7 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public static IclubDriverDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (IclubDriverDAO) ctx.getBean("IclubDriverDAO");
+	public static IclubPropSecTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (IclubPropSecTypeDAO) ctx.getBean("IclubPropSecTypeDAO");
 	}
 }

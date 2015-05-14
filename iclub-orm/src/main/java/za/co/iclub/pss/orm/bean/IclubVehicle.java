@@ -22,10 +22,9 @@ public class IclubVehicle implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -143647424754386233L;
+	private static final long serialVersionUID = -6350404797536783866L;
 	private String VId;
 	private IclubVehicleType iclubVehicleType;
-	private IclubSecurityMaster iclubSecurityMaster;
 	private IclubVehUsageType iclubVehUsageType;
 	private IclubAccessType iclubAccessTypeByVOnAccessTypeId;
 	private IclubAccessType iclubAccessTypeByVDdAccessTypeId;
@@ -33,6 +32,7 @@ public class IclubVehicle implements java.io.Serializable {
 	private IclubVehicleMaster iclubVehicleMaster;
 	private IclubPerson iclubPerson;
 	private IclubDriver iclubDriver;
+	private IclubVehSecType iclubVehSecType;
 	private Long VOdometer;
 	private String VOnArea;
 	private Double VOnLat;
@@ -67,10 +67,9 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubVehicleType iclubVehicleType, IclubSecurityMaster iclubSecurityMaster, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, String VModifiedYn, Date VCrtdDt) {
+	public IclubVehicle(String VId, IclubVehicleType iclubVehicleType, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, IclubVehSecType iclubVehSecType, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, String VModifiedYn, Date VCrtdDt) {
 		this.VId = VId;
 		this.iclubVehicleType = iclubVehicleType;
-		this.iclubSecurityMaster = iclubSecurityMaster;
 		this.iclubVehUsageType = iclubVehUsageType;
 		this.iclubAccessTypeByVOnAccessTypeId = iclubAccessTypeByVOnAccessTypeId;
 		this.iclubAccessTypeByVDdAccessTypeId = iclubAccessTypeByVDdAccessTypeId;
@@ -78,6 +77,7 @@ public class IclubVehicle implements java.io.Serializable {
 		this.iclubVehicleMaster = iclubVehicleMaster;
 		this.iclubPerson = iclubPerson;
 		this.iclubDriver = iclubDriver;
+		this.iclubVehSecType = iclubVehSecType;
 		this.VOdometer = VOdometer;
 		this.VOnArea = VOnArea;
 		this.VOnLat = VOnLat;
@@ -120,16 +120,6 @@ public class IclubVehicle implements java.io.Serializable {
 
 	public void setIclubVehicleType(IclubVehicleType iclubVehicleType) {
 		this.iclubVehicleType = iclubVehicleType;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "v_sec_mas_id")
-	public IclubSecurityMaster getIclubSecurityMaster() {
-		return this.iclubSecurityMaster;
-	}
-
-	public void setIclubSecurityMaster(IclubSecurityMaster iclubSecurityMaster) {
-		this.iclubSecurityMaster = iclubSecurityMaster;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -200,6 +190,16 @@ public class IclubVehicle implements java.io.Serializable {
 
 	public void setIclubDriver(IclubDriver iclubDriver) {
 		this.iclubDriver = iclubDriver;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "v_sec_mas_id")
+	public IclubVehSecType getIclubVehSecType() {
+		return this.iclubVehSecType;
+	}
+
+	public void setIclubVehSecType(IclubVehSecType iclubVehSecType) {
+		this.iclubVehSecType = iclubVehSecType;
 	}
 
 	@Column(name = "v_odometer")

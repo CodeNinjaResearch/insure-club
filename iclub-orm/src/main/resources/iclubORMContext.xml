@@ -75,7 +75,6 @@
 				<value>za.co.iclub.pss.orm.bean.IclubRoleType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubRoofType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSecurityDevice</value>
-				<value>za.co.iclub.pss.orm.bean.IclubSecurityMaster</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSecurityQuestion</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSupplierType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSupplMaster</value>
@@ -100,6 +99,8 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPropUsageType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehUsageType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPropertyItem</value>
+				<value>za.co.iclub.pss.orm.bean.IclubVehSecType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubPropSecType</value>
 			</list>
 		</property>
 	</bean>
@@ -283,11 +284,6 @@
 		</property>
 	</bean>
 	<bean id="IclubBankMasterDAO" class="za.co.iclub.pss.orm.dao.IclubBankMasterDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="IclubSecurityMasterDAO" class="za.co.iclub.pss.orm.dao.IclubSecurityMasterDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
@@ -498,6 +494,16 @@
 		</property>
 	</bean>
 	<bean id="IclubPropertyItemDAO" class="za.co.iclub.pss.orm.dao.IclubPropertyItemDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubVehSecTypeDAO" class="za.co.iclub.pss.orm.dao.IclubVehSecTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPropSecTypeDAO" class="za.co.iclub.pss.orm.dao.IclubPropSecTypeDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
