@@ -535,8 +535,6 @@
   PATH="/pages/admin/licensecode/container.xhtml" SHAPE="240,6417,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#admin#notif#container.xhtml"
   PATH="/pages/admin/notif/container.xhtml" SHAPE="240,6529,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#admin#purposetype#container.xhtml"
-  PATH="/pages/admin/purposetype/container.xhtml" SHAPE="240,6753,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#admin#occupation#container.xhtml"
   PATH="/pages/admin/occupation/container.xhtml" SHAPE="240,6641,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#admin#vehiclemaster#container.xhtml"
@@ -582,10 +580,10 @@
  <PROCESS-ITEM NAME="rules:*:54" PATH="*" SHAPE="32,7409,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:54" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="iclubPurposeType::#pages#admin#purposetype#container.xhtml"
-    NAME="output" PATH="/pages/admin/purposetype/container.xhtml"
-    TARGET="rules:#pages#admin#purposetype#container.xhtml"
-    TITLE="iclubPurposeType" model-entity="JSFProcessItemOutput"/>
+    ID="iclubVehUsageType::#pages#admin#mdata#iclubVehUsageType.xhtml"
+    NAME="output" PATH="/pages/admin/mdata/iclubVehUsageType.xhtml"
+    TARGET="rules:#pages#admin#mdata#iclubVehUsageType.xhtml"
+    TITLE="iclubVehUsageType" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#admin#rating#fixed.xhtml"
@@ -593,10 +591,10 @@
  <PROCESS-ITEM NAME="rules:*:55" PATH="*" SHAPE="32,7633,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:55" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="iclubRateType::#pages#admin#ratetype#container.xhtml"
-    NAME="output" PATH="/pages/admin/ratetype/container.xhtml"
-    TARGET="rules:#pages#admin#ratetype#container.xhtml"
-    TITLE="iclubRateType" model-entity="JSFProcessItemOutput"/>
+    ID="iclubPropUsageType::#pages#admin#mdata#iclubPropUsageType.xhtml"
+    NAME="output" PATH="/pages/admin/mdata/iclubPropUsageType.xhtml"
+    TARGET="rules:#pages#admin#mdata#iclubPropUsageType.xhtml"
+    TITLE="iclubPropUsageType" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#admin#rating#lookup.xhtml"
@@ -604,10 +602,10 @@
  <PROCESS-ITEM NAME="rules:*:56" PATH="*" SHAPE="32,7745,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:56" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="iclubSupplyMaster::#pages#admin#supplmaster#container.xhtml"
-    NAME="output" PATH="/pages/admin/supplmaster/container.xhtml"
-    TARGET="rules:#pages#admin#supplmaster#container.xhtml"
-    TITLE="iclubSupplyMaster" model-entity="JSFProcessItemOutput"/>
+    ID="iclubRateType::#pages#admin#ratetype#container.xhtml"
+    NAME="output" PATH="/pages/admin/ratetype/container.xhtml"
+    TARGET="rules:#pages#admin#ratetype#container.xhtml"
+    TITLE="iclubRateType" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#admin#rating#range.xhtml"
@@ -615,10 +613,10 @@
  <PROCESS-ITEM NAME="rules:*:57" PATH="*" SHAPE="32,7857,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:57" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="iclubTrackMaster::#pages#admin#trackermaster#container.xhtml"
-    NAME="output" PATH="/pages/admin/trackermaster/container.xhtml"
-    TARGET="rules:#pages#admin#trackermaster#container.xhtml"
-    TITLE="iclubTrackMaster" model-entity="JSFProcessItemOutput"/>
+    ID="iclubSupplyMaster::#pages#admin#supplmaster#container.xhtml"
+    NAME="output" PATH="/pages/admin/supplmaster/container.xhtml"
+    TARGET="rules:#pages#admin#supplmaster#container.xhtml"
+    TITLE="iclubSupplyMaster" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#admin#rating#container.xhtml"
@@ -626,79 +624,162 @@
  <PROCESS-ITEM NAME="rules:*:58" PATH="*" SHAPE="32,7969,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:58" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="iclubVehicleMaster::#pages#admin#vehiclemaster#container.xhtml"
-    NAME="output" PATH="/pages/admin/vehiclemaster/container.xhtml"
-    TARGET="rules:#pages#admin#vehiclemaster#container.xhtml"
-    TITLE="iclubVehicleMaster" model-entity="JSFProcessItemOutput"/>
+    ID="iclubTrackMaster::#pages#admin#trackermaster#container.xhtml"
+    NAME="output" PATH="/pages/admin/trackermaster/container.xhtml"
+    TARGET="rules:#pages#admin#trackermaster#container.xhtml"
+    TITLE="iclubTrackMaster" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#policy#dashboard.xhtml"
   PATH="/pages/policy/dashboard.xhtml" SHAPE="240,7985,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:59" PATH="*" SHAPE="32,8081,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:59" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="rating::#pages#admin#rating#container.xhtml"
-    NAME="output" PATH="/pages/admin/rating/container.xhtml"
-    TARGET="rules:#pages#admin#rating#container.xhtml" TITLE="rating" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="iclubVehicleMaster::#pages#admin#vehiclemaster#container.xhtml"
+    NAME="output" PATH="/pages/admin/vehiclemaster/container.xhtml"
+    TARGET="rules:#pages#admin#vehiclemaster#container.xhtml"
+    TITLE="iclubVehicleMaster" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#claim#container.xhtml"
   PATH="/pages/claim/container.xhtml" SHAPE="240,8097,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:60" PATH="*" SHAPE="32,8193,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:60" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="fixed::#pages#admin#rating#fixed.xhtml"
-    NAME="output" PATH="/pages/admin/rating/fixed.xhtml"
-    TARGET="rules:#pages#admin#rating#fixed.xhtml" TITLE="fixed" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="rating::#pages#admin#rating#container.xhtml"
+    NAME="output" PATH="/pages/admin/rating/container.xhtml"
+    TARGET="rules:#pages#admin#rating#container.xhtml" TITLE="rating" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#quote#qqs.xhtml"
   PATH="/pages/quote/qqs.xhtml" SHAPE="240,593,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:61" PATH="*" SHAPE="32,8305,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:61" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="lookup::#pages#admin#rating#lookup.xhtml"
-    NAME="output" PATH="/pages/admin/rating/lookup.xhtml"
-    TARGET="rules:#pages#admin#rating#lookup.xhtml" TITLE="lookup" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="fixed::#pages#admin#rating#fixed.xhtml"
+    NAME="output" PATH="/pages/admin/rating/fixed.xhtml"
+    TARGET="rules:#pages#admin#rating#fixed.xhtml" TITLE="fixed" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#user#profile.xhtml"
   PATH="/pages/user/profile.xhtml" SHAPE="240,705,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:62" PATH="*" SHAPE="32,8417,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:62" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="range::#pages#admin#rating#range.xhtml"
-    NAME="output" PATH="/pages/admin/rating/range.xhtml"
-    TARGET="rules:#pages#admin#rating#range.xhtml" TITLE="range" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="lookup::#pages#admin#rating#lookup.xhtml"
+    NAME="output" PATH="/pages/admin/rating/lookup.xhtml"
+    TARGET="rules:#pages#admin#rating#lookup.xhtml" TITLE="lookup" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#claim#dashboard.xhtml"
   PATH="/pages/claim/dashboard.xhtml" SHAPE="240,8545,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:63" PATH="*" SHAPE="32,8529,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:63" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="pdash::#pages#policy#dashboard.xhtml"
-    NAME="output" PATH="/pages/policy/dashboard.xhtml"
-    TARGET="rules:#pages#policy#dashboard.xhtml" TITLE="pdash" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="range::#pages#admin#rating#range.xhtml"
+    NAME="output" PATH="/pages/admin/rating/range.xhtml"
+    TARGET="rules:#pages#admin#rating#range.xhtml" TITLE="range" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#user#register.xhtml"
   PATH="/pages/user/register.xhtml" SHAPE="240,817,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:64" PATH="*" SHAPE="32,8641,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:64" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="cdash::#pages#claim#dashboard.xhtml"
-    NAME="output" PATH="/pages/claim/dashboard.xhtml"
-    TARGET="rules:#pages#claim#dashboard.xhtml" TITLE="cdash" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="pdash::#pages#policy#dashboard.xhtml"
+    NAME="output" PATH="/pages/policy/dashboard.xhtml"
+    TARGET="rules:#pages#policy#dashboard.xhtml" TITLE="pdash" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#quote#fqs.xhtml"
   PATH="/pages/quote/fqs.xhtml" SHAPE="240,705,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:65" PATH="*" SHAPE="32,8753,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:65" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="claim::#pages#claim#container.xhtml"
-    NAME="output" PATH="/pages/claim/container.xhtml"
-    TARGET="rules:#pages#claim#container.xhtml" TITLE="claim" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="acdash::#pages#policy#acDashboard.xhtml"
+    NAME="output" PATH="/pages/policy/acDashboard.xhtml"
+    TARGET="rules:#pages#policy#acDashboard.xhtml" TITLE="acdash" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubCohortType.xhtml"
   PATH="/pages/admin/mdata/iclubCohortType.xhtml" SHAPE="240,1377,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:*:66" PATH="*" SHAPE="32,4161,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:66" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="alldash::#pages#policy#allDashboard.xhtml"
+    NAME="output" PATH="/pages/policy/allDashboard.xhtml"
+    TARGET="rules:#pages#policy#allDashboard.xhtml" TITLE="alldash" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubAssessmentType.xhtml"
+  PATH="/pages/admin/mdata/iclubAssessmentType.xhtml"
+  SHAPE="240,4177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:67" PATH="*" SHAPE="32,4161,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:67" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="padash::#pages#policy#paDashboard.xhtml"
+    NAME="output" PATH="/pages/policy/paDashboard.xhtml"
+    TARGET="rules:#pages#policy#paDashboard.xhtml" TITLE="padash" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubPropUsageType.xhtml"
+  PATH="/pages/admin/mdata/iclubPropUsageType.xhtml"
+  SHAPE="240,8433,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubVehUsageType.xhtml"
+  PATH="/pages/admin/mdata/iclubVehUsageType.xhtml" SHAPE="240,8209,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:68" PATH="*" SHAPE="32,8977,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:68" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="asgPlcSupl::#pages#policy#assignSupplier.xhtml" NAME="output"
+    PATH="/pages/policy/assignSupplier.xhtml"
+    TARGET="rules:#pages#policy#assignSupplier.xhtml" TITLE="asgPlcSupl" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:69" PATH="*" SHAPE="32,8865,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:69" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="cdash::#pages#claim#dashboard.xhtml"
+    NAME="output" PATH="/pages/claim/dashboard.xhtml"
+    TARGET="rules:#pages#claim#dashboard.xhtml" TITLE="cdash" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:70" PATH="*" SHAPE="32,5617,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:70" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="acdash::#pages#claim#acDashboard.xhtml"
+    NAME="output" PATH="/pages/claim/acDashboard.xhtml"
+    TARGET="rules:#pages#claim#acDashboard.xhtml" TITLE="acdash" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#claim#acDashboard.xhtml"
+  PATH="/pages/claim/acDashboard.xhtml" SHAPE="240,4177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#claim#allDashboard.xhtml"
+  PATH="/pages/claim/allDashboard.xhtml" SHAPE="240,5745,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#claim#paDashboard.xhtml"
+  PATH="/pages/claim/paDashboard.xhtml" SHAPE="240,8993,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:71" PATH="*" SHAPE="32,5729,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:71" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="alldash::#pages#claim#allDashboard.xhtml"
+    NAME="output" PATH="/pages/claim/allDashboard.xhtml"
+    TARGET="rules:#pages#claim#allDashboard.xhtml" TITLE="alldash" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#claim#assignSupplier.xhtml"
+  PATH="/pages/claim/assignSupplier.xhtml" SHAPE="240,9105,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:72" PATH="*" SHAPE="32,9201,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:72" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="padash::#pages#claim#paDashboard.xhtml"
+    NAME="output" PATH="/pages/claim/paDashboard.xhtml"
+    TARGET="rules:#pages#claim#paDashboard.xhtml" TITLE="padash" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:73" PATH="*" SHAPE="32,9313,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:73" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="asgClmSupl::#pages#claim#assignSupplier.xhtml" NAME="output"
+    PATH="/pages/claim/assignSupplier.xhtml"
+    TARGET="rules:#pages#claim#assignSupplier.xhtml" TITLE="asgClmSupl" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:74" PATH="*" SHAPE="32,9089,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:74" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="claim::#pages#claim#container.xhtml"
+    NAME="output" PATH="/pages/claim/container.xhtml"
+    TARGET="rules:#pages#claim#container.xhtml" TITLE="claim" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:75" PATH="*" SHAPE="32,5841,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:75" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="iclubAssessmentType::#pages#admin#mdata#iclubAssessmentType.xhtml"
     NAME="output" PATH="/pages/admin/mdata/iclubAssessmentType.xhtml"
@@ -706,7 +787,12 @@
     TITLE="iclubAssessmentType" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubAssessmentType.xhtml"
-  PATH="/pages/admin/mdata/iclubAssessmentType.xhtml"
-  SHAPE="240,4177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#policy#assignSupplier.xhtml"
+  PATH="/pages/policy/assignSupplier.xhtml" SHAPE="240,9329,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#policy#paDashboard.xhtml"
+  PATH="/pages/policy/paDashboard.xhtml" SHAPE="240,5969,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#policy#allDashboard.xhtml"
+  PATH="/pages/policy/allDashboard.xhtml" SHAPE="240,4177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#policy#acDashboard.xhtml"
+  PATH="/pages/policy/acDashboard.xhtml" SHAPE="240,9217,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
