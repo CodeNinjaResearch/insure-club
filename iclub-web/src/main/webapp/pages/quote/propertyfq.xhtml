@@ -173,7 +173,7 @@
 						<div class="Container50 Responsive">
 							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropUsageType}" widgetVar="mnuPurTyp" id="mnuPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.puId}" itemLabel="#{c.puLongDesc}" />
+								<f:selectItems value="#{iclubFullQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.putId}" itemLabel="#{c.putLongDesc}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -259,7 +259,7 @@
 					</div>
 				</div>
 			</p:panel>
-			<p:tabView id="qqSubProDetViewMod">
+			<p:tabView id="qqSubProDetViewMod" rendered="#{iclubFullQuoteController.showProModPanel}">
 				<p:tab id="qqSubProLocDetMod" title="Location Details">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
@@ -394,7 +394,7 @@
 						<div class="Container50 Responsive">
 							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubPropUsageType}" widgetVar="mnuModPurTyp" id="mnuModPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.puId}" itemLabel="#{c.puLongDesc}" />
+								<f:selectItems value="#{iclubFullQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.putId}" itemLabel="#{c.putLongDesc}" />
 							</p:selectOneMenu>
 						</div>
 					</div>

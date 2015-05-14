@@ -32,9 +32,9 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubSecurityMaster}" widgetVar="mnuModSecVM" id="mnuModSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubVehSecType}" widgetVar="mnuModSecVM" id="mnuModSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 				<f:selectItem itemLabel="Security Master" itemDisabled="true" />
-				<f:selectItems value="#{iclubVehicleController.securityMasterBeans}" var="c" itemLabel="#{c.smDesc}" itemValue="#{c.smId}" />
+				<f:selectItems value="#{iclubVehicleController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
 			</p:selectOneMenu>
 		</div>
 	</div>
@@ -261,7 +261,7 @@
 		<div class="Container50 Responsive">
 			<p:selectOneMenu value="#{iclubVehicleController.bean.iclubVehUsageType}" widgetVar="mnuModPurT" id="mnuModPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 				<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
-				<f:selectItems value="#{iclubVehicleController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vuLongDesc}" itemValue="#{p.vuId}" />
+				<f:selectItems value="#{iclubVehicleController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
 			</p:selectOneMenu>
 		</div>
 	</div>

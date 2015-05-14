@@ -7,6 +7,11 @@
 					<p:commandLink value="View GeoLoc" actionListener="#{iclubGeoLocController.showView}" update="pnlGeoLocContDet" />
 				</p:panel>
 				<p:panel id="pnlGeoLocContDet">
+					<p:panel id="documentUploadPanel">
+						<div class="Fnone TexAlCenter">
+							<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadPanel,:iclubFrm:pnlGeoLocContView" fileUploadListener="#{iclubGeoLocController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(xls|xlsx)$/" value="#{labels['container.selectdocument']}" />
+						</div>
+					</p:panel>
 					<p:panel id="pnlGeoLocContView" rendered="#{iclubGeoLocController.showViewCont}">
 						<ui:include src="/pages/admin/geoloc/view.xhtml" />
 					</p:panel>

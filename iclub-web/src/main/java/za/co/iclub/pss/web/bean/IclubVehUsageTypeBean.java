@@ -2,42 +2,42 @@ package za.co.iclub.pss.web.bean;
 
 public class IclubVehUsageTypeBean {
 	
-	private Long vuId;
-	private String vuShortDesc;
-	private String vuLongDesc;
-	private String vuStatus;
+	private Long vutId;
+	private String vutLongDesc;
+	private String vutShortDesc;
+	private String vutStatus;
 	private String[] iclubVehicles;
 	
-	public Long getVuId() {
-		return vuId;
+	public Long getVutId() {
+		return vutId;
 	}
 	
-	public void setVuId(Long vuId) {
-		this.vuId = vuId;
+	public void setVutId(Long vutId) {
+		this.vutId = vutId;
 	}
 	
-	public String getVuShortDesc() {
-		return vuShortDesc;
+	public String getVutLongDesc() {
+		return vutLongDesc;
 	}
 	
-	public void setVuShortDesc(String vuShortDesc) {
-		this.vuShortDesc = vuShortDesc;
+	public void setVutLongDesc(String vutLongDesc) {
+		this.vutLongDesc = vutLongDesc;
 	}
 	
-	public String getVuLongDesc() {
-		return vuLongDesc;
+	public String getVutShortDesc() {
+		return vutShortDesc;
 	}
 	
-	public void setVuLongDesc(String vuLongDesc) {
-		this.vuLongDesc = vuLongDesc;
+	public void setVutShortDesc(String vutShortDesc) {
+		this.vutShortDesc = vutShortDesc;
 	}
 	
-	public String getVuStatus() {
-		return vuStatus;
+	public String getVutStatus() {
+		return vutStatus;
 	}
 	
-	public void setVuStatus(String vuStatus) {
-		this.vuStatus = vuStatus;
+	public void setVutStatus(String vutStatus) {
+		this.vutStatus = vutStatus;
 	}
 	
 	public String[] getIclubVehicles() {

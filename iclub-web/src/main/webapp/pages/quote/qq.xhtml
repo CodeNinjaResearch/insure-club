@@ -40,9 +40,9 @@
 				</h:panelGrid>
 				<p:growl id="growlPro" showDetail="true" />
 				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubQuickQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelPro}" style="width:400px;height:400px">
-					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragPro}" update=":iclubFrm:qqTabView:qqSubProDetView:qqSubProLocDet,growlPro" />
+					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragPro}" update=":iclubFrm:qqTabView:qqSubProDetView:proLocationDet,:iclubFrm:qqTabView:qqSubProDetViewMod:proLocationDetEdit,growlPro" />
 					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodePro}" update="@this" />
-					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectPro}" update=":iclubFrm:qqTabView:qqSubProDetView:qqSubProLocDet,growlPro" />
+					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectPro}" update=":iclubFrm:qqTabView:qqSubProDetView:proLocationDet,:iclubFrm:qqTabView:qqSubProDetViewMod:proLocationDetEdit,growlPro" />
 				</p:gmap>
 			</p:panel>
 		</p:dialog>
@@ -57,9 +57,9 @@
 				</h:panelGrid>
 				<p:growl id="growlVeh" showDetail="true" />
 				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubQuickQuoteController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelVeh}" style="width:400px;height:400px">
-					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,growlVeh" />
+					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,:iclubFrm:qqTabView:qqSubVehDetViewMod:onLocationDetEdit,growlVeh" />
 					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodeVeh}" update="@this" />
-					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,growlVeh" />
+					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,:iclubFrm:qqTabView:qqSubVehDetViewMod:onLocationDetEdit,growlVeh" />
 				</p:gmap>
 			</p:panel>
 		</p:dialog>
@@ -74,9 +74,9 @@
 				</h:panelGrid>
 				<p:growl id="growlVehDd" showDetail="true" />
 				<p:gmap id="geoGmapVehDd" widgetVar="geoMapVehDd" center="#{iclubQuickQuoteController.centerGeoMapVehDd}" zoom="13" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelVehDd}" style="width:400px;height:400px">
-					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragVehDd}" update=":iclubFrm:qqTabView:qqSubVehDetView:ddLocationDet,growlVehDd" />
+					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragVehDd}" update=":iclubFrm:qqTabView:qqSubVehDetView:ddLocationDet,:iclubFrm:qqTabView:qqSubVehDetViewMod:ddLocationDetEdit,growlVehDd" />
 					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodeVehDd}" update="@this" />
-					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectVehDd}" update=":iclubFrm:qqTabView:qqSubVehDetView:ddLocationDet,growlVehDd" />
+					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectVehDd}" update=":iclubFrm:qqTabView:qqSubVehDetView:ddLocationDet,:iclubFrm:qqTabView:qqSubVehDetViewMod:ddLocationDetEdit,growlVehDd" />
 				</p:gmap>
 			</p:panel>
 		</p:dialog>
@@ -248,6 +248,18 @@
 							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.driverBean.iclubLicenseCode}">
 								<f:selectItem itemLabel="License Code" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuCoverType" id="mnuCoverType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.quoteBean.iclubCoverType}">
+								<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubQuickQuoteController.coverTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>

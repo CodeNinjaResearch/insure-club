@@ -1,5 +1,10 @@
 package za.co.iclub.pss.web.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
@@ -13,10 +18,17 @@ import javax.faces.context.FacesContext;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.codehaus.jackson.map.ObjectMapper;
 
+import za.co.iclub.pss.web.bean.GoogleResponse;
+import za.co.iclub.pss.web.bean.Result;
+import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.util.CustomObjectMapper;
 
 public class IclubWebHelper {
+	
+	private static final String URL = "http://maps.googleapis.com/maps/api/geocode/json";
+	
 	public static WebClient createCustomClient(String url) {
 		WebClient client = WebClient.create(url, Collections.singletonList(new JacksonJsonProvider(new CustomObjectMapper())));
 		client.header("Content-Type", "application/json");
@@ -48,19 +60,14 @@ public class IclubWebHelper {
 		
 		Calendar birthCal = Calendar.getInstance();
 		birthCal.setTimeInMillis(timeStamp);
-		
 		Calendar nowCal = new GregorianCalendar();
-		
-		int age = nowCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
-		
+		int years = nowCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
 		boolean isMonthGreater = birthCal.get(Calendar.MONTH) > nowCal.get(Calendar.MONTH);
-		
 		boolean isMonthSameButDayGreater = birthCal.get(Calendar.MONTH) == nowCal.get(Calendar.MONTH) && birthCal.get(Calendar.DAY_OF_MONTH) > nowCal.get(Calendar.DAY_OF_MONTH);
-		
 		if (isMonthGreater || isMonthSameButDayGreater) {
-			age = age - 1;
+			years = years - 1;
 		}
-		return age;
+		return years;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -87,6 +94,39 @@ public class IclubWebHelper {
 		
 	}
 	
+	public static IclubGeoLocModel getLatAndLong(IclubGeoLocModel model) {
+		try {
+			if (model != null) {
+				synchronized (model) {
+					GoogleResponse res = convertToLatLong((model.getGlAddress() != null ? model.getGlAddress() + " " : "") + (model.getGlProvince() != null ? model.getGlProvince() + " " : "") + (model.getGlSuburb() != null ? model.getGlSuburb() : ""));
+					if (res.getStatus().equals("OK")) {
+						for (Result result : res.getResults()) {
+							System.out.println("Lattitude of address is :" + result.getGeometry().getLocation().getLat());
+							System.out.println("Longitude of address is :" + result.getGeometry().getLocation().getLng());
+							System.out.println("Location is " + result.getGeometry().getLocation_type());
+							model.setGlLat(new Double(result.getGeometry().getLocation().getLat()));
+							model.setGlLong(new Double(result.getGeometry().getLocation().getLng()));
+						}
+						
+						try {
+							long time = 500;
+							Thread.sleep(time);
+						} catch (Exception e) {
+							System.out.println(e);
+						}
+						
+					} else {
+						System.out.println(res.getStatus());
+					}
+				}
+			}
+		} catch (Exception e) {
+			
+		}
+		return model;
+		
+	}
+	
 	public static Long getRandomNumber() {
 		Random r = new Random();
 		int Low = 1000000;
@@ -97,4 +137,25 @@ public class IclubWebHelper {
 		
 	}
 	
+	public static GoogleResponse convertToLatLong(String fullAddress) throws IOException {
+		
+		URL url = new URL(URL + "?address=" + URLEncoder.encode(fullAddress, "UTF-8") + "&sensor=false");
+		URLConnection conn = url.openConnection();
+		
+		InputStream in = conn.getInputStream();
+		ObjectMapper mapper = new ObjectMapper();
+		GoogleResponse response = (GoogleResponse) mapper.readValue(in, GoogleResponse.class);
+		in.close();
+		return response;
+	}
+	
+	public static GoogleResponse convertFromLatLong(String latlongString) throws IOException {
+		URL url = new URL(URL + "?latlng=" + URLEncoder.encode(latlongString, "UTF-8") + "&sensor=false");
+		URLConnection conn = url.openConnection();
+		InputStream in = conn.getInputStream();
+		ObjectMapper mapper = new ObjectMapper();
+		GoogleResponse response = (GoogleResponse) mapper.readValue(in, GoogleResponse.class);
+		in.close();
+		return response;
+	}
 }
