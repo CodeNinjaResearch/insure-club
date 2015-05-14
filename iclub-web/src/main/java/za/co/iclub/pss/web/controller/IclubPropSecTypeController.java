@@ -16,35 +16,35 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubPropUsageTypeBean;
+import za.co.iclub.pss.web.bean.IclubPropSecTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
+import za.co.iclub.pss.ws.model.IclubPropSecTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@ManagedBean(name = "iclubPropUsageTypeController")
+@ManagedBean(name = "iclubPropSecTypeController")
 @SessionScoped
-public class IclubPropUsageController implements Serializable {
+public class IclubPropSecTypeController implements Serializable {
 	
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	private static final Logger LOGGER = Logger.getLogger(IclubPropUsageController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropUsageTypeService/";
-	private List<IclubPropUsageTypeBean> beans;
-	private IclubPropUsageTypeBean bean;
+	private static final Logger LOGGER = Logger.getLogger(IclubPropSecTypeController.class);
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropSecTypeService/";
+	private List<IclubPropSecTypeBean> beans;
+	private IclubPropSecTypeBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
 	
-	public void addIclubPropUsageType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubPropUsageType");
+	public void addIclubPropSecType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubPropSecType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
+				IclubPropSecTypeModel model = new IclubPropSecTypeModel();
 				
-				model.setPutLongDesc(bean.getPutLongDesc());
-				model.setPutShortDesc(bean.getPutShortDesc());
-				model.setPutStatus(bean.getPutStatus());
+				model.setPstLongDesc(bean.getPstLongDesc());
+				model.setPstShortDesc(bean.getPstShortDesc());
+				model.setPstStatus(bean.getPstStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -61,16 +61,16 @@ public class IclubPropUsageController implements Serializable {
 		}
 	}
 	
-	public void modIclubPropUsageType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubPropUsageType");
+	public void modIclubPropSecType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubPropSecType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-				model.setPutId(bean.getPutId());
-				model.setPutLongDesc(bean.getPutLongDesc());
-				model.setPutShortDesc(bean.getPutShortDesc());
-				model.setPutStatus(bean.getPutStatus());
+				IclubPropSecTypeModel model = new IclubPropSecTypeModel();
+				model.setPstId(bean.getPstId());
+				model.setPstLongDesc(bean.getPstLongDesc());
+				model.setPstShortDesc(bean.getPstShortDesc());
+				model.setPstStatus(bean.getPstStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -87,10 +87,10 @@ public class IclubPropUsageController implements Serializable {
 		}
 	}
 	
-	public void delIclubPropUsageType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubPropUsageType");
+	public void delIclubPropSecType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubPropSecType");
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getPutId());
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getPstId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
 				IclubWebHelper.addMessage(getLabelBundle().getString("propusage") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
@@ -107,13 +107,13 @@ public class IclubPropUsageController implements Serializable {
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
-		bean = new IclubPropUsageTypeBean();
+		bean = new IclubPropSecTypeBean();
 	}
 	
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
-		bean = new IclubPropUsageTypeBean();
+		bean = new IclubPropSecTypeBean();
 	}
 	
 	public void showModPanel() {
@@ -124,8 +124,8 @@ public class IclubPropUsageController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		
-		if (bean.getPutShortDesc() != null && !bean.getPutShortDesc().trim().equalsIgnoreCase("")) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getPutShortDesc().trim() + "/" + ((bean.getPutId() == null) ? -999l : bean.getPutId()));
+		if (bean.getPstShortDesc() != null && !bean.getPstShortDesc().trim().equalsIgnoreCase("")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getPstShortDesc().trim() + "/" + ((bean.getPstId() == null) ? -999l : bean.getPstId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
 			if (message.getStatusCode() != 0) {
@@ -137,12 +137,12 @@ public class IclubPropUsageController implements Serializable {
 			ret = ret && false;
 		}
 		
-		if (bean.getPutLongDesc() == null || bean.getPutLongDesc().trim().equalsIgnoreCase("")) {
+		if (bean.getPstLongDesc() == null || bean.getPstLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		
-		if (bean.getPutStatus() == null || bean.getPutStatus().trim().equalsIgnoreCase("")) {
+		if (bean.getPstStatus() == null || bean.getPstStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -150,35 +150,40 @@ public class IclubPropUsageController implements Serializable {
 		return ret;
 	}
 	
-	public List<IclubPropUsageTypeBean> getBeans() {
+	public List<IclubPropSecTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
-		Collection<? extends IclubPropUsageTypeModel> models = new ArrayList<IclubPropUsageTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropUsageTypeModel.class));
+		Collection<? extends IclubPropSecTypeModel> models = new ArrayList<IclubPropSecTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropSecTypeModel.class));
 		client.close();
-		beans = new ArrayList<IclubPropUsageTypeBean>();
+		beans = new ArrayList<IclubPropSecTypeBean>();
 		if (models != null && models.size() > 0) {
-			for (IclubPropUsageTypeModel model : models) {
-				IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
-				bean.setPutId(model.getPutId());
-				bean.setPutLongDesc(model.getPutLongDesc());
-				bean.setPutShortDesc(model.getPutShortDesc());
-				bean.setPutStatus(model.getPutStatus());
+			for (IclubPropSecTypeModel model : models) {
+				IclubPropSecTypeBean bean = new IclubPropSecTypeBean();
+				bean.setPstId(model.getPstId());
+				bean.setPstLongDesc(model.getPstLongDesc());
+				bean.setPstShortDesc(model.getPstShortDesc());
+				bean.setPstStatus(model.getPstStatus());
+				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
+					String[] properties = model.getIclubProperties();
+					bean.setIclubProperties(properties);
+					
+				}
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
 	
-	public void setBeans(List<IclubPropUsageTypeBean> beans) {
+	public void setBeans(List<IclubPropSecTypeBean> beans) {
 		this.beans = beans;
 	}
 	
-	public IclubPropUsageTypeBean getBean() {
+	public IclubPropSecTypeBean getBean() {
 		if (bean == null)
-			bean = new IclubPropUsageTypeBean();
+			bean = new IclubPropSecTypeBean();
 		return bean;
 	}
 	
-	public void setBean(IclubPropUsageTypeBean bean) {
+	public void setBean(IclubPropSecTypeBean bean) {
 		this.bean = bean;
 	}
 	

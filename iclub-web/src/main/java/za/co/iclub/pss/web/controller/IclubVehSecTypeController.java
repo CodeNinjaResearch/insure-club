@@ -16,35 +16,35 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubVehUsageTypeBean;
+import za.co.iclub.pss.web.bean.IclubVehSecTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubVehUsageTypeModel;
+import za.co.iclub.pss.ws.model.IclubVehSecTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@ManagedBean(name = "iclubVehUsageTypeController")
+@ManagedBean(name = "iclubVehSecTypeController")
 @SessionScoped
-public class IclubVehUsageController implements Serializable {
+public class IclubVehSecTypeController implements Serializable {
 	
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	private static final Logger LOGGER = Logger.getLogger(IclubVehUsageController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehUsageTypeService/";
-	private List<IclubVehUsageTypeBean> beans;
-	private IclubVehUsageTypeBean bean;
+	private static final Logger LOGGER = Logger.getLogger(IclubVehSecTypeController.class);
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehSecTypeService/";
+	private List<IclubVehSecTypeBean> beans;
+	private IclubVehSecTypeBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
 	
-	public void addIclubVehUsageType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubVehUsageType");
+	public void addIclubVehSecType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubVehSecType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
+				IclubVehSecTypeModel model = new IclubVehSecTypeModel();
 				
-				model.setVutLongDesc(bean.getVutLongDesc());
-				model.setVutShortDesc(bean.getVutShortDesc());
-				model.setVutStatus(bean.getVutStatus());
+				model.setVstLongDesc(bean.getVstLongDesc());
+				model.setVstShortDesc(bean.getVstShortDesc());
+				model.setVstStatus(bean.getVstStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -61,16 +61,16 @@ public class IclubVehUsageController implements Serializable {
 		}
 	}
 	
-	public void modIclubVehUsageType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubVehUsageType");
+	public void modIclubVehSecType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubVehSecType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-				model.setVutId(bean.getVutId());
-				model.setVutLongDesc(bean.getVutLongDesc());
-				model.setVutShortDesc(bean.getVutShortDesc());
-				model.setVutStatus(bean.getVutStatus());
+				IclubVehSecTypeModel model = new IclubVehSecTypeModel();
+				model.setVstId(bean.getVstId());
+				model.setVstLongDesc(bean.getVstLongDesc());
+				model.setVstShortDesc(bean.getVstShortDesc());
+				model.setVstStatus(bean.getVstStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -87,10 +87,10 @@ public class IclubVehUsageController implements Serializable {
 		}
 	}
 	
-	public void delIclubVehUsageType() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubVehUsageType");
+	public void delIclubVehSecType() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubVehSecType");
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getVutId());
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getVstId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
 				IclubWebHelper.addMessage(getLabelBundle().getString("vehusage") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
@@ -107,13 +107,13 @@ public class IclubVehUsageController implements Serializable {
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
-		bean = new IclubVehUsageTypeBean();
+		bean = new IclubVehSecTypeBean();
 	}
 	
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
-		bean = new IclubVehUsageTypeBean();
+		bean = new IclubVehSecTypeBean();
 	}
 	
 	public void showModPanel() {
@@ -124,8 +124,8 @@ public class IclubVehUsageController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		
-		if (bean.getVutShortDesc() != null && !bean.getVutShortDesc().trim().equalsIgnoreCase("")) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getVutShortDesc().trim() + "/" + ((bean.getVutId() == null) ? -999l : bean.getVutId()));
+		if (bean.getVstShortDesc() != null && !bean.getVstShortDesc().trim().equalsIgnoreCase("")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getVstShortDesc().trim() + "/" + ((bean.getVstId() == null) ? -999l : bean.getVstId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
 			if (message.getStatusCode() != 0) {
@@ -137,12 +137,12 @@ public class IclubVehUsageController implements Serializable {
 			ret = ret && false;
 		}
 		
-		if (bean.getVutLongDesc() == null || bean.getVutLongDesc().trim().equalsIgnoreCase("")) {
+		if (bean.getVstLongDesc() == null || bean.getVstLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		
-		if (bean.getVutStatus() == null || bean.getVutStatus().trim().equalsIgnoreCase("")) {
+		if (bean.getVstStatus() == null || bean.getVstStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -150,35 +150,39 @@ public class IclubVehUsageController implements Serializable {
 		return ret;
 	}
 	
-	public List<IclubVehUsageTypeBean> getBeans() {
+	public List<IclubVehSecTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
-		Collection<? extends IclubVehUsageTypeModel> models = new ArrayList<IclubVehUsageTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehUsageTypeModel.class));
+		Collection<? extends IclubVehSecTypeModel> models = new ArrayList<IclubVehSecTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehSecTypeModel.class));
 		client.close();
-		beans = new ArrayList<IclubVehUsageTypeBean>();
+		beans = new ArrayList<IclubVehSecTypeBean>();
 		if (models != null && models.size() > 0) {
-			for (IclubVehUsageTypeModel model : models) {
-				IclubVehUsageTypeBean bean = new IclubVehUsageTypeBean();
-				bean.setVutId(model.getVutId());
-				bean.setVutLongDesc(model.getVutLongDesc());
-				bean.setVutShortDesc(model.getVutShortDesc());
-				bean.setVutStatus(model.getVutStatus());
+			for (IclubVehSecTypeModel model : models) {
+				IclubVehSecTypeBean bean = new IclubVehSecTypeBean();
+				bean.setVstId(model.getVstId());
+				bean.setVstLongDesc(model.getVstLongDesc());
+				bean.setVstShortDesc(model.getVstShortDesc());
+				bean.setVstStatus(model.getVstStatus());
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = model.getIclubVehicles();
+					bean.setIclubVehicles(vehicles);
+				}
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
 	
-	public void setBeans(List<IclubVehUsageTypeBean> beans) {
+	public void setBeans(List<IclubVehSecTypeBean> beans) {
 		this.beans = beans;
 	}
 	
-	public IclubVehUsageTypeBean getBean() {
+	public IclubVehSecTypeBean getBean() {
 		if (bean == null)
-			bean = new IclubVehUsageTypeBean();
+			bean = new IclubVehSecTypeBean();
 		return bean;
 	}
 	
-	public void setBean(IclubVehUsageTypeBean bean) {
+	public void setBean(IclubVehSecTypeBean bean) {
 		this.bean = bean;
 	}
 	

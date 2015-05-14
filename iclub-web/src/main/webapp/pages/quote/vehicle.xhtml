@@ -84,6 +84,19 @@
 						</div>
 					</div>
 					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Modified :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuVehModModified" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuVehModModified.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.vehicleBean.VModifiedYn}">
+								<f:selectItem itemLabel="Modified" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="qqSubVehLocDet" title="Location details">
 					<p:panel id="onLocationDet">
@@ -193,9 +206,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubSecurityMaster}" widgetVar="mnuSecVM" id="mnuSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubVehSecType}" widgetVar="mnuSecVM" id="mnuSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Security Master" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.securityMasterBeans}" var="c" itemLabel="#{c.smDesc}" itemValue="#{c.smId}" />
+								<f:selectItems value="#{iclubQuickQuoteController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -290,7 +303,7 @@
 						<div class="Container50 Responsive">
 							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vuLongDesc}" itemValue="#{p.vuId}" />
+								<f:selectItems value="#{iclubQuickQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -318,7 +331,7 @@
 						</div>
 						<div class="Container50 Responsive">
 							<p:selectOneMenu widgetVar="mnuModVehMake" id="mnuModVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vmMake}">
-								<p:ajax update="mnuVehModel" process="@this" event="change" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
+								<p:ajax update="mnuModVehModel" process="@this" event="change" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
 								<f:selectItem itemLabel="Make" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
 							</p:selectOneMenu>
@@ -331,7 +344,7 @@
 						</div>
 						<div class="Container50 Responsive">
 							<p:selectOneMenu widgetVar="mnuModVehModel" id="mnuModVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubVehicleMaster}">
-								<p:ajax update="mnuYear" process="@this" event="change" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
+								<p:ajax update="mnuModYear" process="@this" event="change" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
 								<f:selectItem itemLabel="Model" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
 							</p:selectOneMenu>
@@ -357,7 +370,7 @@
 						<div class="Container50 Responsive">
 							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuModPurT" id="mnuModPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vuLongDesc}" itemValue="#{p.vuId}" />
+								<f:selectItems value="#{iclubQuickQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -380,9 +393,22 @@
 						</div>
 					</div>
 					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Modified :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuVehModified" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuVehModified.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.vehicleBean.VModifiedYn}">
+								<f:selectItem itemLabel="Modified" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="qqSubVehLocDetMod" title="Location Details">
-					<p:panel>
+					<p:panel id="onLocationDetEdit">
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="On Location :" />
@@ -432,7 +458,7 @@
 						</div>
 						<div class="EmptyBox5" />
 					</p:panel>
-					<p:panel>
+					<p:panel id="ddLocationDetEdit">
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="Dd Location :" />
@@ -489,9 +515,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubSecurityMaster}" widgetVar="mnuModSecVM" id="mnuModSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubVehSecType}" widgetVar="mnuModSecVM" id="mnuModSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Security Master" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.securityMasterBeans}" var="c" itemLabel="#{c.smDesc}" itemValue="#{c.smId}" />
+								<f:selectItems value="#{iclubQuickQuoteController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
