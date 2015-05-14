@@ -450,7 +450,7 @@ public class IclubRatingController implements Serializable {
 		if (!bulkSave && bean != null && (bean.getReBaseValue() == null || bean.getReBaseValue().trim().equalsIgnoreCase(""))) {
 			IclubWebHelper.addMessage(("Base Value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (rateTypeBean != null && rateTypeBean.getRtType().equalsIgnoreCase("L") && bean != null && !bean.getReBaseValue().trim().equalsIgnoreCase("") && rateEngineMap != null && rateEngineMap.get((bean.getReBaseValue())) != null) {
+		} else if (rateTypeBean != null && rateTypeBean.getRtType().equalsIgnoreCase("L") && bean != null && bean.getReBaseValue() != null && !bean.getReBaseValue().trim().equalsIgnoreCase("") && rateEngineMap != null && rateEngineMap.get((bean.getReBaseValue())) != null) {
 			IclubWebHelper.addMessage(("Duplicate Base Value"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
