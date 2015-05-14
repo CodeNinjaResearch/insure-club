@@ -6,7 +6,7 @@ public class IclubVehicleBean {
 	
 	private String VId;
 	private Long iclubVehUsageType;
-	private String iclubSecurityMaster;
+	private Long iclubVehSecType;
 	private Long iclubAccessTypeByVOnAccessTypeId;
 	private Long iclubAccessTypeByVDdAccessTypeId;
 	private String iclubSecurityDevice;
@@ -51,12 +51,12 @@ public class IclubVehicleBean {
 		this.iclubVehUsageType = iclubVehUsageType;
 	}
 	
-	public String getIclubSecurityMaster() {
-		return iclubSecurityMaster;
+	public Long getIclubVehSecType() {
+		return iclubVehSecType;
 	}
 	
-	public void setIclubSecurityMaster(String iclubSecurityMaster) {
-		this.iclubSecurityMaster = iclubSecurityMaster;
+	public void setIclubVehSecType(Long iclubVehSecType) {
+		this.iclubVehSecType = iclubVehSecType;
 	}
 	
 	public Long getIclubAccessTypeByVOnAccessTypeId() {

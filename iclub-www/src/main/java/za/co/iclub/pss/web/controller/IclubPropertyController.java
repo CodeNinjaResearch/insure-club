@@ -723,10 +723,10 @@ public class IclubPropertyController implements Serializable {
 			for (IclubPropUsageTypeModel model : models) {
 				IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
 				
-				bean.setPuId(model.getPuId());
-				bean.setPuLongDesc(model.getPuLongDesc());
-				bean.setPuShortDesc(model.getPuShortDesc());
-				bean.setPuStatus(model.getPuStatus());
+				bean.setPutId(model.getPutId());
+				bean.setPutLongDesc(model.getPutLongDesc());
+				bean.setPutShortDesc(model.getPutShortDesc());
+				bean.setPutStatus(model.getPutStatus());
 				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
 					String[] properties = new String[model.getIclubProperties().length];
 					int i = 0;

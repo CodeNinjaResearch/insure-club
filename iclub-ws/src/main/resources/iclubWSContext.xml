@@ -218,9 +218,16 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
-	<bean id="IclubSecurityMasterService" class="za.co.iclub.pss.ws.service.IclubSecurityMasterService">
+	<bean id="IclubVehSecTypeService" class="za.co.iclub.pss.ws.service.IclubVehSecTypeService">
 		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
-		<property name="iclubSecurityMasterDAO" ref="IclubSecurityMasterDAO" />
+		<property name="iclubVehSecTypeDAO" ref="IclubVehSecTypeDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+	</bean>
+	<bean id="IclubPropSecTypeService" class="za.co.iclub.pss.ws.service.IclubPropSecTypeService">
+		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
+		<property name="iclubPropSecTypeDAO" ref="IclubPropSecTypeDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
@@ -396,7 +403,7 @@
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubVehicleDAO" ref="IclubVehicleDAO" />
 		<property name="iclubVehUsageTypeDAO" ref="IclubVehUsageTypeDAO" />
-		<property name="iclubSecurityMasterDAO" ref="IclubSecurityMasterDAO" />
+		<property name="iclubVehSecTypeDAO" ref="IclubVehSecTypeDAO" />
 		<property name="iclubAccessTypeDAO" ref="IclubAccessTypeDAO" />
 		<property name="iclubSecurityDeviceDAO" ref="IclubSecurityDeviceDAO" />
 		<property name="iclubVehicleMasterDAO" ref="IclubVehicleMasterDAO" />

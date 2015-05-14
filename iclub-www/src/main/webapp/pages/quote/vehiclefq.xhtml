@@ -193,9 +193,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubSecurityMaster}" widgetVar="mnuSecVM" id="mnuSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubVehSecType}" widgetVar="mnuSecVM" id="mnuSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Security Master" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.securityMasterBeans}" var="c" itemLabel="#{c.smDesc}" itemValue="#{c.smId}" />
+								<f:selectItems value="#{iclubFullQuoteController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -290,7 +290,7 @@
 						<div class="Container50 Responsive">
 							<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vuLongDesc}" itemValue="#{p.vuId}" />
+								<f:selectItems value="#{iclubFullQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -357,7 +357,7 @@
 						<div class="Container50 Responsive">
 							<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuModPurT" id="mnuModPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vuLongDesc}" itemValue="#{p.vuId}" />
+								<f:selectItems value="#{iclubFullQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
@@ -489,9 +489,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubSecurityMaster}" widgetVar="mnuModSecVM" id="mnuModSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubVehSecType}" widgetVar="mnuModSecVM" id="mnuModSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Security Master" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.securityMasterBeans}" var="c" itemLabel="#{c.smDesc}" itemValue="#{c.smId}" />
+								<f:selectItems value="#{iclubFullQuoteController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>

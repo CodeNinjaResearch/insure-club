@@ -47,14 +47,14 @@ public class IclubPropUsageTypeService {
 		try {
 			IclubPropUsageType iCPt = new IclubPropUsageType();
 			
-			iCPt.setPuId(iclubCommonDAO.getNextId(IclubPropUsageType.class));
-			iCPt.setPuLongDesc(model.getPuLongDesc());
-			iCPt.setPuShortDesc(model.getPuShortDesc());
-			iCPt.setPuStatus(model.getPuStatus());
+			iCPt.setPutId(iclubCommonDAO.getNextId(IclubPropUsageType.class));
+			iCPt.setPutLongDesc(model.getPutLongDesc());
+			iCPt.setPutShortDesc(model.getPutShortDesc());
+			iCPt.setPutStatus(model.getPutStatus());
 			
 			iclubPropUsageTypeDAO.save(iCPt);
 			
-			LOGGER.info("Save Success with ID :: " + iCPt.getPuId());
+			LOGGER.info("Save Success with ID :: " + iCPt.getPutId());
 			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
@@ -79,14 +79,14 @@ public class IclubPropUsageTypeService {
 		try {
 			IclubPropUsageType iCPt = new IclubPropUsageType();
 			
-			iCPt.setPuId(model.getPuId());
-			iCPt.setPuLongDesc(model.getPuLongDesc());
-			iCPt.setPuShortDesc(model.getPuShortDesc());
-			iCPt.setPuStatus(model.getPuStatus());
+			iCPt.setPutId(model.getPutId());
+			iCPt.setPutLongDesc(model.getPutLongDesc());
+			iCPt.setPutShortDesc(model.getPutShortDesc());
+			iCPt.setPutStatus(model.getPutStatus());
 			
 			iclubPropUsageTypeDAO.merge(iCPt);
 			
-			LOGGER.info("Merge Success with ID :: " + model.getPuId());
+			LOGGER.info("Merge Success with ID :: " + model.getPutId());
 			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
@@ -132,10 +132,10 @@ public class IclubPropUsageTypeService {
 					
 					IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
 					
-					model.setPuId(iCPt.getPuId());
-					model.setPuLongDesc(iCPt.getPuLongDesc());
-					model.setPuShortDesc(iCPt.getPuShortDesc());
-					model.setPuStatus(iCPt.getPuStatus());
+					model.setPutId(iCPt.getPutId());
+					model.setPutLongDesc(iCPt.getPutLongDesc());
+					model.setPutShortDesc(iCPt.getPutShortDesc());
+					model.setPutStatus(iCPt.getPutStatus());
 					
 					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
 						String[] properties = new String[iCPt.getIclubProperties().size()];
@@ -172,10 +172,10 @@ public class IclubPropUsageTypeService {
 					
 					IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
 					
-					model.setPuId(iCPt.getPuId());
-					model.setPuLongDesc(iCPt.getPuLongDesc());
-					model.setPuShortDesc(iCPt.getPuShortDesc());
-					model.setPuStatus(iCPt.getPuStatus());
+					model.setPutId(iCPt.getPutId());
+					model.setPutLongDesc(iCPt.getPutLongDesc());
+					model.setPutShortDesc(iCPt.getPutShortDesc());
+					model.setPutStatus(iCPt.getPutStatus());
 					
 					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
 						String[] properties = new String[iCPt.getIclubProperties().size()];
@@ -206,10 +206,10 @@ public class IclubPropUsageTypeService {
 		try {
 			IclubPropUsageType bean = iclubPropUsageTypeDAO.findById(id);
 			
-			model.setPuId(bean.getPuId());
-			model.setPuLongDesc(bean.getPuLongDesc());
-			model.setPuShortDesc(bean.getPuShortDesc());
-			model.setPuStatus(bean.getPuStatus());
+			model.setPutId(bean.getPutId());
+			model.setPutLongDesc(bean.getPutLongDesc());
+			model.setPutShortDesc(bean.getPutShortDesc());
+			model.setPutStatus(bean.getPutStatus());
 			
 			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
 				String[] properties = new String[bean.getIclubProperties().size()];

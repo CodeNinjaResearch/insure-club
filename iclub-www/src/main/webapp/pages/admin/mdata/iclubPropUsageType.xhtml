@@ -7,16 +7,16 @@
 						<p:commandButton id="btnPropUsageTypeShowAdd" value="Add" actionListener="#{iclubPropUsageTypeController.showAddPanel}" update=":iclubFrm:pnlPropUsageTypeCont" />
 					</f:facet>
 					<p:column headerText="Unique Id">
-						<p:outputLabel value="#{bean.puId}" />
+						<p:outputLabel value="#{bean.putId}" />
 					</p:column>
 					<p:column headerText="Short Description">
-						<p:outputLabel value="#{bean.puShortDesc}" />
+						<p:outputLabel value="#{bean.putShortDesc}" />
 					</p:column>
 					<p:column headerText="Long Description">
-						<p:outputLabel value="#{bean.puLongDesc}" />
+						<p:outputLabel value="#{bean.putLongDesc}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.puStatus}" disabled="true">
+						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.putStatus}" disabled="true">
 							<f:selectItem itemLabel="Status" itemDisabled="true" />
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
@@ -31,15 +31,15 @@
 				<p:panel id="pnlAdd" rendered="#{iclubPropUsageTypeController.showAddPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubPropUsageTypeController.bean.puShortDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubPropUsageTypeController.bean.putShortDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubPropUsageTypeController.bean.puLongDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubPropUsageTypeController.bean.putLongDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubPropUsageTypeController.bean.puStatus}">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubPropUsageTypeController.bean.putStatus}">
 								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />
@@ -59,19 +59,19 @@
 				<p:panel id="pnlMod" rendered="#{iclubPropUsageTypeController.showModPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:outputLabel value="#{iclubPropUsageTypeController.bean.puId}" />
+							<p:outputLabel value="#{iclubPropUsageTypeController.bean.putId}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubPropUsageTypeController.bean.puShortDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubPropUsageTypeController.bean.putShortDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubPropUsageTypeController.bean.puLongDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubPropUsageTypeController.bean.putLongDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubPropUsageTypeController.bean.puStatus}">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubPropUsageTypeController.bean.putStatus}">
 								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />

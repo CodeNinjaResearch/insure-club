@@ -7,16 +7,16 @@
 						<p:commandButton id="btnVehUsageTypeShowAdd" value="Add" actionListener="#{iclubVehUsageTypeController.showAddPanel}" update=":iclubFrm:pnlVehUsageTypeCont" />
 					</f:facet>
 					<p:column headerText="Unique Id">
-						<p:outputLabel value="#{bean.vuId}" />
+						<p:outputLabel value="#{bean.vutId}" />
 					</p:column>
 					<p:column headerText="Short Description">
-						<p:outputLabel value="#{bean.vuShortDesc}" />
+						<p:outputLabel value="#{bean.vutShortDesc}" />
 					</p:column>
 					<p:column headerText="Long Description">
-						<p:outputLabel value="#{bean.vuLongDesc}" />
+						<p:outputLabel value="#{bean.vutLongDesc}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.vuStatus}" disabled="true">
+						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.vutStatus}" disabled="true">
 							<f:selectItem itemLabel="Status" itemDisabled="true" />
 							<f:selectItem itemLabel="Yes" itemValue="Y" />
 							<f:selectItem itemLabel="No" itemValue="N" />
@@ -31,15 +31,15 @@
 				<p:panel id="pnlAdd" rendered="#{iclubVehUsageTypeController.showAddPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubVehUsageTypeController.bean.vuShortDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubVehUsageTypeController.bean.vutShortDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubVehUsageTypeController.bean.vuLongDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubVehUsageTypeController.bean.vutLongDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehUsageTypeController.bean.vuStatus}">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehUsageTypeController.bean.vutStatus}">
 								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />
@@ -59,19 +59,19 @@
 				<p:panel id="pnlMod" rendered="#{iclubVehUsageTypeController.showModPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:outputLabel value="#{iclubVehUsageTypeController.bean.vuId}" />
+							<p:outputLabel value="#{iclubVehUsageTypeController.bean.vutId}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubVehUsageTypeController.bean.vuShortDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubVehUsageTypeController.bean.vutShortDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubVehUsageTypeController.bean.vuLongDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubVehUsageTypeController.bean.vutLongDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehUsageTypeController.bean.vuStatus}">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehUsageTypeController.bean.vutStatus}">
 								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />

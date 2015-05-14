@@ -198,7 +198,7 @@ public class IclubPropertyService {
 					model.setPAddress(iCP.getPAddress());
 					model.setPRegNum(iCP.getPRegNum());
 					model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
-					model.setIclubPropUsageType(iCP.getIclubPropUsageType() != null ? (iCP.getIclubPropUsageType().getPuId()) : null);
+					model.setIclubPropUsageType(iCP.getIclubPropUsageType() != null ? (iCP.getIclubPropUsageType().getPutId()) : null);
 					model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
 					model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
 					model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
@@ -247,7 +247,7 @@ public class IclubPropertyService {
 					model.setPAddress(iCP.getPAddress());
 					model.setPRegNum(iCP.getPRegNum());
 					model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
-					model.setIclubPropUsageType(iCP.getIclubPropUsageType() != null ? (iCP.getIclubPropUsageType().getPuId()) : null);
+					model.setIclubPropUsageType(iCP.getIclubPropUsageType() != null ? (iCP.getIclubPropUsageType().getPutId()) : null);
 					model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
 					model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
 					model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
@@ -290,7 +290,7 @@ public class IclubPropertyService {
 				model.setPAddress(bean.getPAddress());
 				model.setPRegNum(bean.getPRegNum());
 				model.setIclubCoverType(bean.getIclubCoverType() != null ? (bean.getIclubCoverType().getCtId()) : null);
-				model.setIclubPropUsageType(bean.getIclubPropUsageType() != null ? (bean.getIclubPropUsageType().getPuId()) : null);
+				model.setIclubPropUsageType(bean.getIclubPropUsageType() != null ? (bean.getIclubPropUsageType().getPutId()) : null);
 				model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus() != null ? (bean.getIclubOccupiedStatus().getOsId()) : null);
 				model.setIclubPropertyType(bean.getIclubPropertyType() != null ? (bean.getIclubPropertyType().getPtId()) : null);
 				model.setIclubWallType(bean.getIclubWallType() != null ? (bean.getIclubWallType().getWtId()) : null);

@@ -50,7 +50,8 @@
 			<ref bean="IclubGeoLocService" />
 			<ref bean="IclubInsurerMasterService" />
 			<ref bean="IclubNotifService" />
-			<ref bean="IclubSecurityMasterService" />
+			<ref bean="IclubVehSecTypeService" />
+			<ref bean="IclubPropSecTypeService" />
 			<ref bean="IclubSupplierTypeService" />
 			<ref bean="IclubTrackerMasterService" />
 			<ref bean="IclubVehicleMasterService" />

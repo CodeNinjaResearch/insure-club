@@ -22,7 +22,6 @@ import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
 import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
-import za.co.iclub.pss.orm.bean.IclubSecurityMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
@@ -32,12 +31,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubInsuranceItemTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubInsuranceItemTypeService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubInsuranceItemTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,16 +45,16 @@ public class IclubInsuranceItemTypeService {
 	public ResponseModel add(IclubInsuranceItemTypeModel model) {
 		try {
 			IclubInsuranceItemType iIit = new IclubInsuranceItemType();
-
+			
 			iIit.setIitId(iclubCommonDAO.getNextId(IclubInsuranceItemType.class));
 			iIit.setIitLongDesc(model.getIitLongDesc());
 			iIit.setIitShortDesc(model.getIitShortDesc());
 			iIit.setIitStatus(model.getIitStatus());
-
+			
 			iclubInsuranceItemTypeDAO.save(iIit);
-
+			
 			LOGGER.info("Save Success with ID :: " + iIit.getIitId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -67,9 +66,9 @@ public class IclubInsuranceItemTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -78,16 +77,16 @@ public class IclubInsuranceItemTypeService {
 	public ResponseModel mod(IclubInsuranceItemTypeModel model) {
 		try {
 			IclubInsuranceItemType iIit = new IclubInsuranceItemType();
-
+			
 			iIit.setIitId(model.getIitId());
 			iIit.setIitLongDesc(model.getIitLongDesc());
 			iIit.setIitShortDesc(model.getIitShortDesc());
 			iIit.setIitStatus(model.getIitStatus());
-
+			
 			iclubInsuranceItemTypeDAO.merge(iIit);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getIitId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -99,9 +98,9 @@ public class IclubInsuranceItemTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -116,37 +115,27 @@ public class IclubInsuranceItemTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubInsuranceItemTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubInsuranceItemTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubInsuranceItemType iIit = (IclubInsuranceItemType) object;
-
+					
 					IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
-
+					
 					model.setIitId(iIit.getIitId());
 					model.setIitLongDesc(iIit.getIitLongDesc());
 					model.setIitShortDesc(iIit.getIitShortDesc());
 					model.setIitStatus(iIit.getIitStatus());
-
-					if (iIit.getIclubSecurityMasters() != null && iIit.getIclubSecurityMasters().size() > 0) {
-						String[] iclubSecurityMasters = new String[iIit.getIclubSecurityMasters().size()];
-						int i = 0;
-						for (IclubSecurityMaster iclubSecurityMaster : iIit.getIclubSecurityMasters()) {
-							iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
-							i++;
-						}
-						model.setIclubSecurityMasters(iclubSecurityMasters);
-					}
-
+					
 					if (iIit.getIclubRateTypes() != null && iIit.getIclubRateTypes().size() > 0) {
 						Long[] iclubRateTypes = new Long[iIit.getIclubRateTypes().size()];
 						int i = 0;
@@ -156,7 +145,7 @@ public class IclubInsuranceItemTypeService {
 						}
 						model.setIclubRateTypes(iclubRateTypes);
 					}
-
+					
 					if (iIit.getIclubSecurityDevices() != null && iIit.getIclubSecurityDevices().size() > 0) {
 						String[] iclubSecurityDevices = new String[iIit.getIclubSecurityDevices().size()];
 						int i = 0;
@@ -184,7 +173,7 @@ public class IclubInsuranceItemTypeService {
 						}
 						model.setIclubInsuranceItems_1(insuranceItems);
 					}
-
+					
 					if (iIit.getIclubCoverTypes() != null && iIit.getIclubCoverTypes().size() > 0) {
 						Long[] iclubCoverTypes = new Long[iIit.getIclubCoverTypes().size()];
 						int i = 0;
@@ -194,17 +183,17 @@ public class IclubInsuranceItemTypeService {
 						}
 						model.setIclubCoverTypes(iclubCoverTypes);
 					}
-
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -213,22 +202,12 @@ public class IclubInsuranceItemTypeService {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
 		try {
 			IclubInsuranceItemType bean = iclubInsuranceItemTypeDAO.findById(id);
-
+			
 			model.setIitId(bean.getIitId());
 			model.setIitLongDesc(bean.getIitLongDesc());
 			model.setIitShortDesc(bean.getIitShortDesc());
 			model.setIitStatus(bean.getIitStatus());
-
-			if (bean.getIclubSecurityMasters() != null && bean.getIclubSecurityMasters().size() > 0) {
-				String[] iclubSecurityMasters = new String[bean.getIclubSecurityMasters().size()];
-				int i = 0;
-				for (IclubSecurityMaster iclubSecurityMaster : bean.getIclubSecurityMasters()) {
-					iclubSecurityMasters[i] = iclubSecurityMaster.getSmId();
-					i++;
-				}
-				model.setIclubSecurityMasters(iclubSecurityMasters);
-			}
-
+			
 			if (bean.getIclubRateTypes() != null && bean.getIclubRateTypes().size() > 0) {
 				Long[] iclubRateTypes = new Long[bean.getIclubRateTypes().size()];
 				int i = 0;
@@ -238,7 +217,7 @@ public class IclubInsuranceItemTypeService {
 				}
 				model.setIclubRateTypes(iclubRateTypes);
 			}
-
+			
 			if (bean.getIclubSecurityDevices() != null && bean.getIclubSecurityDevices().size() > 0) {
 				String[] iclubSecurityDevices = new String[bean.getIclubSecurityDevices().size()];
 				int i = 0;
@@ -266,7 +245,7 @@ public class IclubInsuranceItemTypeService {
 				}
 				model.setIclubInsuranceItems_1(insuranceItems);
 			}
-
+			
 			if (bean.getIclubCoverTypes() != null && bean.getIclubCoverTypes().size() > 0) {
 				Long[] iclubCoverTypes = new Long[bean.getIclubCoverTypes().size()];
 				int i = 0;
@@ -276,13 +255,13 @@ public class IclubInsuranceItemTypeService {
 				}
 				model.setIclubCoverTypes(iclubCoverTypes);
 			}
-
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -308,27 +287,27 @@ public class IclubInsuranceItemTypeService {
 			return message;
 		}
 	}
-
+	
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-
+	
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

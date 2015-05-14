@@ -42,9 +42,9 @@ public class IclubVehUsageController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
 				
-				model.setVuLongDesc(bean.getVuLongDesc());
-				model.setVuShortDesc(bean.getVuShortDesc());
-				model.setVuStatus(bean.getVuStatus());
+				model.setVutLongDesc(bean.getVutLongDesc());
+				model.setVutShortDesc(bean.getVutShortDesc());
+				model.setVutStatus(bean.getVutStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -67,10 +67,10 @@ public class IclubVehUsageController implements Serializable {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-				model.setVuId(bean.getVuId());
-				model.setVuLongDesc(bean.getVuLongDesc());
-				model.setVuShortDesc(bean.getVuShortDesc());
-				model.setVuStatus(bean.getVuStatus());
+				model.setVutId(bean.getVutId());
+				model.setVutLongDesc(bean.getVutLongDesc());
+				model.setVutShortDesc(bean.getVutShortDesc());
+				model.setVutStatus(bean.getVutStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -90,7 +90,7 @@ public class IclubVehUsageController implements Serializable {
 	public void delIclubVehUsageType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubVehUsageType");
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getVuId());
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getVutId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
 				IclubWebHelper.addMessage(getLabelBundle().getString("vehusage") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
@@ -124,8 +124,8 @@ public class IclubVehUsageController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		
-		if (bean.getVuShortDesc() != null && !bean.getVuShortDesc().trim().equalsIgnoreCase("")) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getVuShortDesc().trim() + "/" + ((bean.getVuId() == null) ? -999l : bean.getVuId()));
+		if (bean.getVutShortDesc() != null && !bean.getVutShortDesc().trim().equalsIgnoreCase("")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getVutShortDesc().trim() + "/" + ((bean.getVutId() == null) ? -999l : bean.getVutId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
 			if (message.getStatusCode() != 0) {
@@ -137,12 +137,12 @@ public class IclubVehUsageController implements Serializable {
 			ret = ret && false;
 		}
 		
-		if (bean.getVuLongDesc() == null || bean.getVuLongDesc().trim().equalsIgnoreCase("")) {
+		if (bean.getVutLongDesc() == null || bean.getVutLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		
-		if (bean.getVuStatus() == null || bean.getVuStatus().trim().equalsIgnoreCase("")) {
+		if (bean.getVutStatus() == null || bean.getVutStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -158,10 +158,10 @@ public class IclubVehUsageController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubVehUsageTypeModel model : models) {
 				IclubVehUsageTypeBean bean = new IclubVehUsageTypeBean();
-				bean.setVuId(model.getVuId());
-				bean.setVuLongDesc(model.getVuLongDesc());
-				bean.setVuShortDesc(model.getVuShortDesc());
-				bean.setVuStatus(model.getVuStatus());
+				bean.setVutId(model.getVutId());
+				bean.setVutLongDesc(model.getVutLongDesc());
+				bean.setVutShortDesc(model.getVutShortDesc());
+				bean.setVutStatus(model.getVutStatus());
 				beans.add(bean);
 			}
 		}

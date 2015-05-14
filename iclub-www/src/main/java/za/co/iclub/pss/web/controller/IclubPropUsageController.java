@@ -42,9 +42,9 @@ public class IclubPropUsageController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
 				
-				model.setPuLongDesc(bean.getPuLongDesc());
-				model.setPuShortDesc(bean.getPuShortDesc());
-				model.setPuStatus(bean.getPuStatus());
+				model.setPutLongDesc(bean.getPutLongDesc());
+				model.setPutShortDesc(bean.getPutShortDesc());
+				model.setPutStatus(bean.getPutStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -67,10 +67,10 @@ public class IclubPropUsageController implements Serializable {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-				model.setPuId(bean.getPuId());
-				model.setPuLongDesc(bean.getPuLongDesc());
-				model.setPuShortDesc(bean.getPuShortDesc());
-				model.setPuStatus(bean.getPuStatus());
+				model.setPutId(bean.getPutId());
+				model.setPutLongDesc(bean.getPutLongDesc());
+				model.setPutShortDesc(bean.getPutShortDesc());
+				model.setPutStatus(bean.getPutStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -90,7 +90,7 @@ public class IclubPropUsageController implements Serializable {
 	public void delIclubPropUsageType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubPropUsageType");
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getPuId());
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getPutId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
 				IclubWebHelper.addMessage(getLabelBundle().getString("propusage") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
@@ -124,8 +124,8 @@ public class IclubPropUsageController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		
-		if (bean.getPuShortDesc() != null && !bean.getPuShortDesc().trim().equalsIgnoreCase("")) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getPuShortDesc().trim() + "/" + ((bean.getPuId() == null) ? -999l : bean.getPuId()));
+		if (bean.getPutShortDesc() != null && !bean.getPutShortDesc().trim().equalsIgnoreCase("")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getPutShortDesc().trim() + "/" + ((bean.getPutId() == null) ? -999l : bean.getPutId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 			client.close();
 			if (message.getStatusCode() != 0) {
@@ -137,12 +137,12 @@ public class IclubPropUsageController implements Serializable {
 			ret = ret && false;
 		}
 		
-		if (bean.getPuLongDesc() == null || bean.getPuLongDesc().trim().equalsIgnoreCase("")) {
+		if (bean.getPutLongDesc() == null || bean.getPutLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		
-		if (bean.getPuStatus() == null || bean.getPuStatus().trim().equalsIgnoreCase("")) {
+		if (bean.getPutStatus() == null || bean.getPutStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
@@ -158,10 +158,10 @@ public class IclubPropUsageController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubPropUsageTypeModel model : models) {
 				IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
-				bean.setPuId(model.getPuId());
-				bean.setPuLongDesc(model.getPuLongDesc());
-				bean.setPuShortDesc(model.getPuShortDesc());
-				bean.setPuStatus(model.getPuStatus());
+				bean.setPutId(model.getPutId());
+				bean.setPutLongDesc(model.getPutLongDesc());
+				bean.setPutShortDesc(model.getPutShortDesc());
+				bean.setPutStatus(model.getPutStatus());
 				beans.add(bean);
 			}
 		}

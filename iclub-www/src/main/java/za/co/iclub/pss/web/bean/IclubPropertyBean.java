@@ -27,6 +27,8 @@ public class IclubPropertyBean {
 	private String PSecGatesYn;
 	private Double PEstValue;
 	private Date PCrtdDt;
+	private Long iclubPropSecType;
+	private String[] iclubPropertyItems;
 	
 	public String getPId() {
 		return PId;
@@ -210,6 +212,22 @@ public class IclubPropertyBean {
 	
 	public void setPCrtdDt(Date pCrtdDt) {
 		PCrtdDt = pCrtdDt;
+	}
+	
+	public Long getIclubPropSecType() {
+		return iclubPropSecType;
+	}
+	
+	public void setIclubPropSecType(Long iclubPropSecType) {
+		this.iclubPropSecType = iclubPropSecType;
+	}
+	
+	public String[] getIclubPropertyItems() {
+		return iclubPropertyItems;
+	}
+	
+	public void setIclubPropertyItems(String[] iclubPropertyItems) {
+		this.iclubPropertyItems = iclubPropertyItems;
 	}
 	
 }
