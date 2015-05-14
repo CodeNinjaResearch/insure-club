@@ -22,7 +22,7 @@ public class IclubPayment implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8605246571361196964L;
+	private static final long serialVersionUID = -2317371728221000984L;
 	private String PId;
 	private IclubPolicy iclubPolicy;
 	private IclubPerson iclubPerson;

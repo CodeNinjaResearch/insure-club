@@ -22,7 +22,7 @@ public class IclubRateEngine implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2108931839134152687L;
+	private static final long serialVersionUID = 8486951601059001041L;
 	private String reId;
 	private IclubPerson iclubPerson;
 	private IclubRateType iclubRateType;

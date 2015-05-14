@@ -27,7 +27,7 @@ public class IclubQuote implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7468725703537241288L;
+	private static final long serialVersionUID = 441370734242074488L;
 	private String QId;
 	private IclubPerson iclubPersonByQCrtdBy;
 	private IclubPerson iclubPersonByQPersonId;

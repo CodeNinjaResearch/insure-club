@@ -26,7 +26,7 @@ public class IclubRateType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 917699020055182155L;
+	private static final long serialVersionUID = 4837928465894118192L;
 	private Long rtId;
 	private IclubField iclubField;
 	private IclubInsuranceItemType iclubInsuranceItemType;

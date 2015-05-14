@@ -101,7 +101,8 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPropertyItem</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehSecType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPropSecType</value>
-			</list>
+				<value>za.co.iclub.pss.orm.bean.IclubPurposeType</value>
+				<value>za.co.iclub.pss.orm.bean.IclubPclaimStatus</value></list>
 		</property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -508,4 +509,13 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-</beans>
+	<bean id="IclubPurposeTypeDAO" class="za.co.iclub.pss.orm.dao.IclubPurposeTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubPclaimStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPclaimStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>

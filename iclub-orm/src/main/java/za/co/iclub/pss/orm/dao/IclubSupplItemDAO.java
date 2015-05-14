@@ -25,13 +25,12 @@ import za.co.iclub.pss.orm.bean.IclubSupplItem;
  * @see za.co.iclub.pss.orm.bean.IclubSupplItem
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubSupplItemDAO {
 	private static final Logger log = Logger.getLogger(IclubSupplItemDAO.class);
 	// property constants
-	public static final String SI_ITEM_ID = "siItemId";
 	public static final String SI_ASSESS_NUMBER = "siAssessNumber";
+	public static final String SI_ITEM_ID = "siItemId";
 
 	private SessionFactory sessionFactory;
 
@@ -105,12 +104,12 @@ public class IclubSupplItemDAO {
 		}
 	}
 
-	public List<IclubSupplItem> findBySiItemId(Object siItemId) {
-		return findByProperty(SI_ITEM_ID, siItemId);
-	}
-
 	public List<IclubSupplItem> findBySiAssessNumber(Object siAssessNumber) {
 		return findByProperty(SI_ASSESS_NUMBER, siAssessNumber);
+	}
+
+	public List<IclubSupplItem> findBySiItemId(Object siItemId) {
+		return findByProperty(SI_ITEM_ID, siItemId);
 	}
 
 	public List findAll() {

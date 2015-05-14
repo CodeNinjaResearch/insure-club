@@ -23,11 +23,11 @@ public class IclubVehSecType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1257326289662693934L;
-	private Long vsId;
-	private String vsShortDesc;
-	private String vsLongDesc;
-	private String vsStatus;
+	private static final long serialVersionUID = -4661676321734086985L;
+	private Long vstId;
+	private String vstShortDesc;
+	private String vstLongDesc;
+	private String vstStatus;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
@@ -37,55 +37,55 @@ public class IclubVehSecType implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public IclubVehSecType(Long vsId) {
-		this.vsId = vsId;
+	public IclubVehSecType(Long vstId) {
+		this.vstId = vstId;
 	}
 
 	/** full constructor */
-	public IclubVehSecType(Long vsId, String vsShortDesc, String vsLongDesc, String vsStatus, Set<IclubVehicle> iclubVehicles) {
-		this.vsId = vsId;
-		this.vsShortDesc = vsShortDesc;
-		this.vsLongDesc = vsLongDesc;
-		this.vsStatus = vsStatus;
+	public IclubVehSecType(Long vstId, String vstShortDesc, String vstLongDesc, String vstStatus, Set<IclubVehicle> iclubVehicles) {
+		this.vstId = vstId;
+		this.vstShortDesc = vstShortDesc;
+		this.vstLongDesc = vstLongDesc;
+		this.vstStatus = vstStatus;
 		this.iclubVehicles = iclubVehicles;
 	}
 
 	// Property accessors
 	@Id
-	@Column(name = "vs_id", unique = true, nullable = false)
-	public Long getVsId() {
-		return this.vsId;
+	@Column(name = "vst_id", unique = true, nullable = false)
+	public Long getVstId() {
+		return this.vstId;
 	}
 
-	public void setVsId(Long vsId) {
-		this.vsId = vsId;
+	public void setVstId(Long vstId) {
+		this.vstId = vstId;
 	}
 
-	@Column(name = "vs_short_desc", length = 4)
-	public String getVsShortDesc() {
-		return this.vsShortDesc;
+	@Column(name = "vst_short_desc", length = 4)
+	public String getVstShortDesc() {
+		return this.vstShortDesc;
 	}
 
-	public void setVsShortDesc(String vsShortDesc) {
-		this.vsShortDesc = vsShortDesc;
+	public void setVstShortDesc(String vstShortDesc) {
+		this.vstShortDesc = vstShortDesc;
 	}
 
-	@Column(name = "vs_long_desc", length = 500)
-	public String getVsLongDesc() {
-		return this.vsLongDesc;
+	@Column(name = "vst_long_desc", length = 500)
+	public String getVstLongDesc() {
+		return this.vstLongDesc;
 	}
 
-	public void setVsLongDesc(String vsLongDesc) {
-		this.vsLongDesc = vsLongDesc;
+	public void setVstLongDesc(String vstLongDesc) {
+		this.vstLongDesc = vstLongDesc;
 	}
 
-	@Column(name = "vs_status", length = 1)
-	public String getVsStatus() {
-		return this.vsStatus;
+	@Column(name = "vst_status", length = 1)
+	public String getVstStatus() {
+		return this.vstStatus;
 	}
 
-	public void setVsStatus(String vsStatus) {
-		this.vsStatus = vsStatus;
+	public void setVstStatus(String vstStatus) {
+		this.vstStatus = vstStatus;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubVehSecType")

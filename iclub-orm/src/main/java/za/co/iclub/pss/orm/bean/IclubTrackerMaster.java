@@ -27,7 +27,7 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6613035215605375546L;
+	private static final long serialVersionUID = -1058814697847773963L;
 	private Long tmId;
 	private IclubPerson iclubPerson;
 	private String tmName;

@@ -23,11 +23,11 @@ public class IclubPropSecType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8354669231402480814L;
-	private Long psId;
-	private String psShortDesc;
-	private String psLongDesc;
-	private String psStatus;
+	private static final long serialVersionUID = -24079831302171688L;
+	private Long pstId;
+	private String pstShortDesc;
+	private String pstLongDesc;
+	private String pstStatus;
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 
 	// Constructors
@@ -37,55 +37,55 @@ public class IclubPropSecType implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public IclubPropSecType(Long psId) {
-		this.psId = psId;
+	public IclubPropSecType(Long pstId) {
+		this.pstId = pstId;
 	}
 
 	/** full constructor */
-	public IclubPropSecType(Long psId, String psShortDesc, String psLongDesc, String psStatus, Set<IclubProperty> iclubProperties) {
-		this.psId = psId;
-		this.psShortDesc = psShortDesc;
-		this.psLongDesc = psLongDesc;
-		this.psStatus = psStatus;
+	public IclubPropSecType(Long pstId, String pstShortDesc, String pstLongDesc, String pstStatus, Set<IclubProperty> iclubProperties) {
+		this.pstId = pstId;
+		this.pstShortDesc = pstShortDesc;
+		this.pstLongDesc = pstLongDesc;
+		this.pstStatus = pstStatus;
 		this.iclubProperties = iclubProperties;
 	}
 
 	// Property accessors
 	@Id
-	@Column(name = "ps_id", unique = true, nullable = false)
-	public Long getPsId() {
-		return this.psId;
+	@Column(name = "pst_id", unique = true, nullable = false)
+	public Long getPstId() {
+		return this.pstId;
 	}
 
-	public void setPsId(Long psId) {
-		this.psId = psId;
+	public void setPstId(Long pstId) {
+		this.pstId = pstId;
 	}
 
-	@Column(name = "ps_short_desc", length = 4)
-	public String getPsShortDesc() {
-		return this.psShortDesc;
+	@Column(name = "pst_short_desc", length = 4)
+	public String getPstShortDesc() {
+		return this.pstShortDesc;
 	}
 
-	public void setPsShortDesc(String psShortDesc) {
-		this.psShortDesc = psShortDesc;
+	public void setPstShortDesc(String pstShortDesc) {
+		this.pstShortDesc = pstShortDesc;
 	}
 
-	@Column(name = "ps_long_desc", length = 500)
-	public String getPsLongDesc() {
-		return this.psLongDesc;
+	@Column(name = "pst_long_desc", length = 500)
+	public String getPstLongDesc() {
+		return this.pstLongDesc;
 	}
 
-	public void setPsLongDesc(String psLongDesc) {
-		this.psLongDesc = psLongDesc;
+	public void setPstLongDesc(String pstLongDesc) {
+		this.pstLongDesc = pstLongDesc;
 	}
 
-	@Column(name = "ps_status", length = 1)
-	public String getPsStatus() {
-		return this.psStatus;
+	@Column(name = "pst_status", length = 1)
+	public String getPstStatus() {
+		return this.pstStatus;
 	}
 
-	public void setPsStatus(String psStatus) {
-		this.psStatus = psStatus;
+	public void setPstStatus(String pstStatus) {
+		this.pstStatus = pstStatus;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPropSecType")

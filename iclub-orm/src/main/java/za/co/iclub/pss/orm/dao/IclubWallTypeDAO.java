@@ -25,8 +25,7 @@ import za.co.iclub.pss.orm.bean.IclubWallType;
  * @see za.co.iclub.pss.orm.bean.IclubWallType
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubWallTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubWallTypeDAO.class);
 	// property constants

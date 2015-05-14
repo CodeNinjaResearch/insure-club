@@ -25,13 +25,12 @@ import za.co.iclub.pss.orm.bean.IclubAssessmentType;
  * @see za.co.iclub.pss.orm.bean.IclubAssessmentType
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubAssessmentTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubAssessmentTypeDAO.class);
 	// property constants
-	public static final String AT_SHORT_DESC = "atShortDesc";
 	public static final String AT_LONG_DESC = "atLongDesc";
+	public static final String AT_SHORT_DESC = "atShortDesc";
 	public static final String AT_STATUS = "atStatus";
 
 	private SessionFactory sessionFactory;
@@ -106,12 +105,12 @@ public class IclubAssessmentTypeDAO {
 		}
 	}
 
-	public List<IclubAssessmentType> findByAtShortDesc(Object atShortDesc) {
-		return findByProperty(AT_SHORT_DESC, atShortDesc);
-	}
-
 	public List<IclubAssessmentType> findByAtLongDesc(Object atLongDesc) {
 		return findByProperty(AT_LONG_DESC, atLongDesc);
+	}
+
+	public List<IclubAssessmentType> findByAtShortDesc(Object atShortDesc) {
+		return findByProperty(AT_SHORT_DESC, atShortDesc);
 	}
 
 	public List<IclubAssessmentType> findByAtStatus(Object atStatus) {

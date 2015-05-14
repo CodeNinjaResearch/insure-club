@@ -23,7 +23,7 @@ public class IclubCountryCode implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5642403621323581443L;
+	private static final long serialVersionUID = 9122366570281322313L;
 	private Integer ccId;
 	private IclubPerson iclubPerson;
 	private String ccShortId;

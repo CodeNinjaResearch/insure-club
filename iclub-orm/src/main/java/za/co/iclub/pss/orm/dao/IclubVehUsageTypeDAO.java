@@ -25,14 +25,13 @@ import za.co.iclub.pss.orm.bean.IclubVehUsageType;
  * @see za.co.iclub.pss.orm.bean.IclubVehUsageType
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubVehUsageTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubVehUsageTypeDAO.class);
 	// property constants
-	public static final String VU_SHORT_DESC = "vuShortDesc";
-	public static final String VU_LONG_DESC = "vuLongDesc";
-	public static final String VU_STATUS = "vuStatus";
+	public static final String VUT_LONG_DESC = "vutLongDesc";
+	public static final String VUT_SHORT_DESC = "vutShortDesc";
+	public static final String VUT_STATUS = "vutStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -106,16 +105,16 @@ public class IclubVehUsageTypeDAO {
 		}
 	}
 
-	public List<IclubVehUsageType> findByVuShortDesc(Object vuShortDesc) {
-		return findByProperty(VU_SHORT_DESC, vuShortDesc);
+	public List<IclubVehUsageType> findByVutLongDesc(Object vutLongDesc) {
+		return findByProperty(VUT_LONG_DESC, vutLongDesc);
 	}
 
-	public List<IclubVehUsageType> findByVuLongDesc(Object vuLongDesc) {
-		return findByProperty(VU_LONG_DESC, vuLongDesc);
+	public List<IclubVehUsageType> findByVutShortDesc(Object vutShortDesc) {
+		return findByProperty(VUT_SHORT_DESC, vutShortDesc);
 	}
 
-	public List<IclubVehUsageType> findByVuStatus(Object vuStatus) {
-		return findByProperty(VU_STATUS, vuStatus);
+	public List<IclubVehUsageType> findByVutStatus(Object vutStatus) {
+		return findByProperty(VUT_STATUS, vutStatus);
 	}
 
 	public List findAll() {

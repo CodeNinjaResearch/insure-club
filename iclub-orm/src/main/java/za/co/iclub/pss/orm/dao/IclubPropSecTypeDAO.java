@@ -25,14 +25,13 @@ import za.co.iclub.pss.orm.bean.IclubPropSecType;
  * @see za.co.iclub.pss.orm.bean.IclubPropSecType
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubPropSecTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubPropSecTypeDAO.class);
 	// property constants
-	public static final String PS_SHORT_DESC = "psShortDesc";
-	public static final String PS_LONG_DESC = "psLongDesc";
-	public static final String PS_STATUS = "psStatus";
+	public static final String PST_SHORT_DESC = "pstShortDesc";
+	public static final String PST_LONG_DESC = "pstLongDesc";
+	public static final String PST_STATUS = "pstStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -106,16 +105,16 @@ public class IclubPropSecTypeDAO {
 		}
 	}
 
-	public List<IclubPropSecType> findByPsShortDesc(Object psShortDesc) {
-		return findByProperty(PS_SHORT_DESC, psShortDesc);
+	public List<IclubPropSecType> findByPstShortDesc(Object pstShortDesc) {
+		return findByProperty(PST_SHORT_DESC, pstShortDesc);
 	}
 
-	public List<IclubPropSecType> findByPsLongDesc(Object psLongDesc) {
-		return findByProperty(PS_LONG_DESC, psLongDesc);
+	public List<IclubPropSecType> findByPstLongDesc(Object pstLongDesc) {
+		return findByProperty(PST_LONG_DESC, pstLongDesc);
 	}
 
-	public List<IclubPropSecType> findByPsStatus(Object psStatus) {
-		return findByProperty(PS_STATUS, psStatus);
+	public List<IclubPropSecType> findByPstStatus(Object pstStatus) {
+		return findByProperty(PST_STATUS, pstStatus);
 	}
 
 	public List findAll() {

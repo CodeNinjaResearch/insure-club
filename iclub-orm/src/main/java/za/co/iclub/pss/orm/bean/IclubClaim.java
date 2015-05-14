@@ -26,7 +26,7 @@ public class IclubClaim implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2412417386210747312L;
+	private static final long serialVersionUID = -1890685393644135374L;
 	private String CId;
 	private IclubPerson iclubPerson;
 	private IclubClaimStatus iclubClaimStatus;

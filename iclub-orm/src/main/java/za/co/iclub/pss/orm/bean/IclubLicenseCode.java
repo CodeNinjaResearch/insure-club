@@ -27,7 +27,7 @@ public class IclubLicenseCode implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3453309689516690165L;
+	private static final long serialVersionUID = 1090498428479785573L;
 	private Long lcId;
 	private IclubPerson iclubPerson;
 	private String lcCategory;

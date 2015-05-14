@@ -26,7 +26,7 @@ public class IclubMessageBoard implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2771572034240238846L;
+	private static final long serialVersionUID = -5714208270155187591L;
 	private String mbId;
 	private IclubPerson iclubPerson;
 	private String mbTitle;

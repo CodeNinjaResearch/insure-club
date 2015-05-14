@@ -12,26 +12,26 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubOwnerType;
+import za.co.iclub.pss.orm.bean.IclubPclaimStatus;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * IclubOwnerType entities. Transaction control of the save(), update() and
+ * IclubPclaimStatus entities. Transaction control of the save(), update() and
  * delete() operations can directly support Spring container-managed
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see za.co.iclub.pss.orm.bean.IclubOwnerType
+ * @see za.co.iclub.pss.orm.bean.IclubPclaimStatus
  * @author MyEclipse Persistence Tools
  */
 @Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
-public class IclubOwnerTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubOwnerTypeDAO.class);
+public class IclubPclaimStatusDAO {
+	private static final Logger log = Logger.getLogger(IclubPclaimStatusDAO.class);
 	// property constants
-	public static final String OT_SHORT_DESC = "otShortDesc";
-	public static final String OT_LONG_DESC = "otLongDesc";
-	public static final String OT_STATUS = "otStatus";
+	public static final String PS_SHORT_DESC = "psShortDesc";
+	public static final String PS_LONG_DESC = "psLongDesc";
+	public static final String PS_STATUS = "psStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -47,8 +47,8 @@ public class IclubOwnerTypeDAO {
 		// do nothing
 	}
 
-	public void save(IclubOwnerType transientInstance) {
-		log.debug("saving IclubOwnerType instance");
+	public void save(IclubPclaimStatus transientInstance) {
+		log.debug("saving IclubPclaimStatus instance");
 		try {
 			getCurrentSession().save(transientInstance);
 			log.debug("save successful");
@@ -58,8 +58,8 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public void delete(IclubOwnerType persistentInstance) {
-		log.debug("deleting IclubOwnerType instance");
+	public void delete(IclubPclaimStatus persistentInstance) {
+		log.debug("deleting IclubPclaimStatus instance");
 		try {
 			getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -69,10 +69,10 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public IclubOwnerType findById(java.lang.Long id) {
-		log.debug("getting IclubOwnerType instance with id: " + id);
+	public IclubPclaimStatus findById(java.lang.Long id) {
+		log.debug("getting IclubPclaimStatus instance with id: " + id);
 		try {
-			IclubOwnerType instance = (IclubOwnerType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubOwnerType", id);
+			IclubPclaimStatus instance = (IclubPclaimStatus) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPclaimStatus", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -80,10 +80,10 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public List<IclubOwnerType> findByExample(IclubOwnerType instance) {
-		log.debug("finding IclubOwnerType instance by example");
+	public List<IclubPclaimStatus> findByExample(IclubPclaimStatus instance) {
+		log.debug("finding IclubPclaimStatus instance by example");
 		try {
-			List<IclubOwnerType> results = (List<IclubOwnerType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubOwnerType").add(create(instance)).list();
+			List<IclubPclaimStatus> results = (List<IclubPclaimStatus>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPclaimStatus").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -93,9 +93,9 @@ public class IclubOwnerTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubOwnerType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubPclaimStatus instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubOwnerType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubPclaimStatus as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -105,22 +105,22 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public List<IclubOwnerType> findByOtShortDesc(Object otShortDesc) {
-		return findByProperty(OT_SHORT_DESC, otShortDesc);
+	public List<IclubPclaimStatus> findByPsShortDesc(Object psShortDesc) {
+		return findByProperty(PS_SHORT_DESC, psShortDesc);
 	}
 
-	public List<IclubOwnerType> findByOtLongDesc(Object otLongDesc) {
-		return findByProperty(OT_LONG_DESC, otLongDesc);
+	public List<IclubPclaimStatus> findByPsLongDesc(Object psLongDesc) {
+		return findByProperty(PS_LONG_DESC, psLongDesc);
 	}
 
-	public List<IclubOwnerType> findByOtStatus(Object otStatus) {
-		return findByProperty(OT_STATUS, otStatus);
+	public List<IclubPclaimStatus> findByPsStatus(Object psStatus) {
+		return findByProperty(PS_STATUS, psStatus);
 	}
 
 	public List findAll() {
-		log.debug("finding all IclubOwnerType instances");
+		log.debug("finding all IclubPclaimStatus instances");
 		try {
-			String queryString = "from IclubOwnerType";
+			String queryString = "from IclubPclaimStatus";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -129,10 +129,10 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public IclubOwnerType merge(IclubOwnerType detachedInstance) {
-		log.debug("merging IclubOwnerType instance");
+	public IclubPclaimStatus merge(IclubPclaimStatus detachedInstance) {
+		log.debug("merging IclubPclaimStatus instance");
 		try {
-			IclubOwnerType result = (IclubOwnerType) getCurrentSession().merge(detachedInstance);
+			IclubPclaimStatus result = (IclubPclaimStatus) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -141,8 +141,8 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public void attachDirty(IclubOwnerType instance) {
-		log.debug("attaching dirty IclubOwnerType instance");
+	public void attachDirty(IclubPclaimStatus instance) {
+		log.debug("attaching dirty IclubPclaimStatus instance");
 		try {
 			getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -152,8 +152,8 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public void attachClean(IclubOwnerType instance) {
-		log.debug("attaching clean IclubOwnerType instance");
+	public void attachClean(IclubPclaimStatus instance) {
+		log.debug("attaching clean IclubPclaimStatus instance");
 		try {
 			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
@@ -163,7 +163,7 @@ public class IclubOwnerTypeDAO {
 		}
 	}
 
-	public static IclubOwnerTypeDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (IclubOwnerTypeDAO) ctx.getBean("IclubOwnerTypeDAO");
+	public static IclubPclaimStatusDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (IclubPclaimStatusDAO) ctx.getBean("IclubPclaimStatusDAO");
 	}
 }

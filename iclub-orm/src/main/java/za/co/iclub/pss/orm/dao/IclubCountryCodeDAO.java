@@ -25,8 +25,7 @@ import za.co.iclub.pss.orm.bean.IclubCountryCode;
  * @see za.co.iclub.pss.orm.bean.IclubCountryCode
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubCountryCodeDAO {
 	private static final Logger log = Logger.getLogger(IclubCountryCodeDAO.class);
 	// property constants

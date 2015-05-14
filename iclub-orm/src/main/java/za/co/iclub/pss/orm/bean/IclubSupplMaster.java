@@ -28,7 +28,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7288637358344690630L;
+	private static final long serialVersionUID = 8959518305553097512L;
 	private String smId;
 	private IclubPerson iclubPerson;
 	private IclubSupplierType iclubSupplierType;
@@ -42,8 +42,8 @@ public class IclubSupplMaster implements java.io.Serializable {
 	private Date srActionDt;
 	private Integer smRating;
 	private Date smCrtdDt;
-	private Set<IclubSupplItem> iclubSupplItems = new HashSet<IclubSupplItem>(0);
 	private Set<IclubClaimItem> iclubClaimItemsForCiAssesorId = new HashSet<IclubClaimItem>(0);
+	private Set<IclubSupplItem> iclubSupplItems = new HashSet<IclubSupplItem>(0);
 	private Set<IclubClaimItem> iclubClaimItemsForCiHandlerId = new HashSet<IclubClaimItem>(0);
 	private Set<IclubSupplPerson> iclubSupplPersons = new HashSet<IclubSupplPerson>(0);
 
@@ -59,7 +59,7 @@ public class IclubSupplMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Double smCrLimit, Date srActionDt, Integer smRating, Date smCrtdDt, Set<IclubSupplItem> iclubSupplItems, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId, Set<IclubSupplPerson> iclubSupplPersons) {
+	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Double smCrLimit, Date srActionDt, Integer smRating, Date smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubSupplItem> iclubSupplItems, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId, Set<IclubSupplPerson> iclubSupplPersons) {
 		this.smId = smId;
 		this.iclubPerson = iclubPerson;
 		this.iclubSupplierType = iclubSupplierType;
@@ -73,8 +73,8 @@ public class IclubSupplMaster implements java.io.Serializable {
 		this.srActionDt = srActionDt;
 		this.smRating = smRating;
 		this.smCrtdDt = smCrtdDt;
-		this.iclubSupplItems = iclubSupplItems;
 		this.iclubClaimItemsForCiAssesorId = iclubClaimItemsForCiAssesorId;
+		this.iclubSupplItems = iclubSupplItems;
 		this.iclubClaimItemsForCiHandlerId = iclubClaimItemsForCiHandlerId;
 		this.iclubSupplPersons = iclubSupplPersons;
 	}
@@ -201,15 +201,6 @@ public class IclubSupplMaster implements java.io.Serializable {
 		this.smCrtdDt = smCrtdDt;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubSupplMaster")
-	public Set<IclubSupplItem> getIclubSupplItems() {
-		return this.iclubSupplItems;
-	}
-
-	public void setIclubSupplItems(Set<IclubSupplItem> iclubSupplItems) {
-		this.iclubSupplItems = iclubSupplItems;
-	}
-
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubSupplMasterByCiAssesorId")
 	public Set<IclubClaimItem> getIclubClaimItemsForCiAssesorId() {
 		return this.iclubClaimItemsForCiAssesorId;
@@ -217,6 +208,15 @@ public class IclubSupplMaster implements java.io.Serializable {
 
 	public void setIclubClaimItemsForCiAssesorId(Set<IclubClaimItem> iclubClaimItemsForCiAssesorId) {
 		this.iclubClaimItemsForCiAssesorId = iclubClaimItemsForCiAssesorId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubSupplMaster")
+	public Set<IclubSupplItem> getIclubSupplItems() {
+		return this.iclubSupplItems;
+	}
+
+	public void setIclubSupplItems(Set<IclubSupplItem> iclubSupplItems) {
+		this.iclubSupplItems = iclubSupplItems;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubSupplMasterByCiHandlerId")

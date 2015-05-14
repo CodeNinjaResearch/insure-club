@@ -22,13 +22,13 @@ public class IclubPropertyItem implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4202833209134286409L;
+	private static final long serialVersionUID = -3185399206688535083L;
 	private String piId;
 	private IclubProperty iclubProperty;
 	private IclubPerson iclubPerson;
+	private Date piCrtdDate;
 	private String piDescripton;
 	private Double piValue;
-	private Date piCrtdDate;
 
 	// Constructors
 
@@ -42,13 +42,13 @@ public class IclubPropertyItem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPropertyItem(String piId, IclubProperty iclubProperty, IclubPerson iclubPerson, String piDescripton, Double piValue, Date piCrtdDate) {
+	public IclubPropertyItem(String piId, IclubProperty iclubProperty, IclubPerson iclubPerson, Date piCrtdDate, String piDescripton, Double piValue) {
 		this.piId = piId;
 		this.iclubProperty = iclubProperty;
 		this.iclubPerson = iclubPerson;
+		this.piCrtdDate = piCrtdDate;
 		this.piDescripton = piDescripton;
 		this.piValue = piValue;
-		this.piCrtdDate = piCrtdDate;
 	}
 
 	// Property accessors
@@ -82,7 +82,16 @@ public class IclubPropertyItem implements java.io.Serializable {
 		this.iclubPerson = iclubPerson;
 	}
 
-	@Column(name = "pi_descripton", length = 999)
+	@Column(name = "pi_crtd_date", length = 19)
+	public Date getPiCrtdDate() {
+		return this.piCrtdDate;
+	}
+
+	public void setPiCrtdDate(Date piCrtdDate) {
+		this.piCrtdDate = piCrtdDate;
+	}
+
+	@Column(name = "pi_descripton")
 	public String getPiDescripton() {
 		return this.piDescripton;
 	}
@@ -91,22 +100,13 @@ public class IclubPropertyItem implements java.io.Serializable {
 		this.piDescripton = piDescripton;
 	}
 
-	@Column(name = "pi_value", precision = 15, scale = 5)
+	@Column(name = "pi_value", precision = 22, scale = 0)
 	public Double getPiValue() {
 		return this.piValue;
 	}
 
 	public void setPiValue(Double piValue) {
 		this.piValue = piValue;
-	}
-
-	@Column(name = "pi_crtd_date", length = 19)
-	public Date getPiCrtdDate() {
-		return this.piCrtdDate;
-	}
-
-	public void setPiCrtdDate(Date piCrtdDate) {
-		this.piCrtdDate = piCrtdDate;
 	}
 
 }

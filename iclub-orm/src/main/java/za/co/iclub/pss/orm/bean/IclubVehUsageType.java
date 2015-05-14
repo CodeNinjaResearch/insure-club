@@ -23,11 +23,11 @@ public class IclubVehUsageType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7114046638385079241L;
-	private Long vuId;
-	private String vuShortDesc;
-	private String vuLongDesc;
-	private String vuStatus;
+	private static final long serialVersionUID = -3475933410814982974L;
+	private Long vutId;
+	private String vutLongDesc;
+	private String vutShortDesc;
+	private String vutStatus;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
@@ -37,55 +37,55 @@ public class IclubVehUsageType implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public IclubVehUsageType(Long vuId) {
-		this.vuId = vuId;
+	public IclubVehUsageType(Long vutId) {
+		this.vutId = vutId;
 	}
 
 	/** full constructor */
-	public IclubVehUsageType(Long vuId, String vuShortDesc, String vuLongDesc, String vuStatus, Set<IclubVehicle> iclubVehicles) {
-		this.vuId = vuId;
-		this.vuShortDesc = vuShortDesc;
-		this.vuLongDesc = vuLongDesc;
-		this.vuStatus = vuStatus;
+	public IclubVehUsageType(Long vutId, String vutLongDesc, String vutShortDesc, String vutStatus, Set<IclubVehicle> iclubVehicles) {
+		this.vutId = vutId;
+		this.vutLongDesc = vutLongDesc;
+		this.vutShortDesc = vutShortDesc;
+		this.vutStatus = vutStatus;
 		this.iclubVehicles = iclubVehicles;
 	}
 
 	// Property accessors
 	@Id
-	@Column(name = "vu_id", unique = true, nullable = false)
-	public Long getVuId() {
-		return this.vuId;
+	@Column(name = "vut_id", unique = true, nullable = false)
+	public Long getVutId() {
+		return this.vutId;
 	}
 
-	public void setVuId(Long vuId) {
-		this.vuId = vuId;
+	public void setVutId(Long vutId) {
+		this.vutId = vutId;
 	}
 
-	@Column(name = "vu_short_desc", length = 4)
-	public String getVuShortDesc() {
-		return this.vuShortDesc;
+	@Column(name = "vut_long_desc")
+	public String getVutLongDesc() {
+		return this.vutLongDesc;
 	}
 
-	public void setVuShortDesc(String vuShortDesc) {
-		this.vuShortDesc = vuShortDesc;
+	public void setVutLongDesc(String vutLongDesc) {
+		this.vutLongDesc = vutLongDesc;
 	}
 
-	@Column(name = "vu_long_desc", length = 500)
-	public String getVuLongDesc() {
-		return this.vuLongDesc;
+	@Column(name = "vut_short_desc", length = 4)
+	public String getVutShortDesc() {
+		return this.vutShortDesc;
 	}
 
-	public void setVuLongDesc(String vuLongDesc) {
-		this.vuLongDesc = vuLongDesc;
+	public void setVutShortDesc(String vutShortDesc) {
+		this.vutShortDesc = vutShortDesc;
 	}
 
-	@Column(name = "vu_status", length = 1)
-	public String getVuStatus() {
-		return this.vuStatus;
+	@Column(name = "vut_status", length = 1)
+	public String getVutStatus() {
+		return this.vutStatus;
 	}
 
-	public void setVuStatus(String vuStatus) {
-		this.vuStatus = vuStatus;
+	public void setVutStatus(String vutStatus) {
+		this.vutStatus = vutStatus;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubVehUsageType")

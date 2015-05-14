@@ -25,8 +25,7 @@ import za.co.iclub.pss.orm.bean.IclubThatchType;
  * @see za.co.iclub.pss.orm.bean.IclubThatchType
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubThatchTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubThatchTypeDAO.class);
 	// property constants

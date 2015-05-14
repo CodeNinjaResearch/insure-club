@@ -25,8 +25,7 @@ import za.co.iclub.pss.orm.bean.IclubDocument;
  * @see za.co.iclub.pss.orm.bean.IclubDocument
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubDocumentDAO {
 	private static final Logger log = Logger.getLogger(IclubDocumentDAO.class);
 	// property constants

@@ -25,8 +25,7 @@ import za.co.iclub.pss.orm.bean.IclubBoundaryType;
  * @see za.co.iclub.pss.orm.bean.IclubBoundaryType
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubBoundaryTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubBoundaryTypeDAO.class);
 	// property constants

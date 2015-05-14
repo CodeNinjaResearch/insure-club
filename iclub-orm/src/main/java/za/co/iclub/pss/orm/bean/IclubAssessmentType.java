@@ -25,8 +25,8 @@ public class IclubAssessmentType implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 9118731819873465781L;
 	private Long atId;
-	private String atShortDesc;
 	private String atLongDesc;
+	private String atShortDesc;
 	private String atStatus;
 	private Set<IclubSupplItem> iclubSupplItems = new HashSet<IclubSupplItem>(0);
 
@@ -42,10 +42,10 @@ public class IclubAssessmentType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAssessmentType(Long atId, String atShortDesc, String atLongDesc, String atStatus, Set<IclubSupplItem> iclubSupplItems) {
+	public IclubAssessmentType(Long atId, String atLongDesc, String atShortDesc, String atStatus, Set<IclubSupplItem> iclubSupplItems) {
 		this.atId = atId;
-		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;
+		this.atShortDesc = atShortDesc;
 		this.atStatus = atStatus;
 		this.iclubSupplItems = iclubSupplItems;
 	}
@@ -61,6 +61,15 @@ public class IclubAssessmentType implements java.io.Serializable {
 		this.atId = atId;
 	}
 
+	@Column(name = "at_long_desc")
+	public String getAtLongDesc() {
+		return this.atLongDesc;
+	}
+
+	public void setAtLongDesc(String atLongDesc) {
+		this.atLongDesc = atLongDesc;
+	}
+
 	@Column(name = "at_short_desc", length = 4)
 	public String getAtShortDesc() {
 		return this.atShortDesc;
@@ -68,15 +77,6 @@ public class IclubAssessmentType implements java.io.Serializable {
 
 	public void setAtShortDesc(String atShortDesc) {
 		this.atShortDesc = atShortDesc;
-	}
-
-	@Column(name = "at_long_desc", length = 500)
-	public String getAtLongDesc() {
-		return this.atLongDesc;
-	}
-
-	public void setAtLongDesc(String atLongDesc) {
-		this.atLongDesc = atLongDesc;
 	}
 
 	@Column(name = "at_status", length = 1)

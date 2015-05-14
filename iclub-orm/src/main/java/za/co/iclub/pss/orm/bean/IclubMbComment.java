@@ -22,7 +22,7 @@ public class IclubMbComment implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6170396868094203907L;
+	private static final long serialVersionUID = -1843535524700319345L;
 	private String mbcId;
 	private IclubPerson iclubPerson;
 	private IclubMessageBoard iclubMessageBoard;

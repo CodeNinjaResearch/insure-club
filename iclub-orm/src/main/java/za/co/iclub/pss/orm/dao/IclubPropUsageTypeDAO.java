@@ -25,14 +25,13 @@ import za.co.iclub.pss.orm.bean.IclubPropUsageType;
  * @see za.co.iclub.pss.orm.bean.IclubPropUsageType
  * @author MyEclipse Persistence Tools
  */
-@Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubPropUsageTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubPropUsageTypeDAO.class);
 	// property constants
-	public static final String PU_SHORT_DESC = "puShortDesc";
-	public static final String PU_LONG_DESC = "puLongDesc";
-	public static final String PU_STATUS = "puStatus";
+	public static final String PUT_LONG_DESC = "putLongDesc";
+	public static final String PUT_SHORT_DESC = "putShortDesc";
+	public static final String PUT_STATUS = "putStatus";
 
 	private SessionFactory sessionFactory;
 
@@ -106,16 +105,16 @@ public class IclubPropUsageTypeDAO {
 		}
 	}
 
-	public List<IclubPropUsageType> findByPuShortDesc(Object puShortDesc) {
-		return findByProperty(PU_SHORT_DESC, puShortDesc);
+	public List<IclubPropUsageType> findByPutLongDesc(Object putLongDesc) {
+		return findByProperty(PUT_LONG_DESC, putLongDesc);
 	}
 
-	public List<IclubPropUsageType> findByPuLongDesc(Object puLongDesc) {
-		return findByProperty(PU_LONG_DESC, puLongDesc);
+	public List<IclubPropUsageType> findByPutShortDesc(Object putShortDesc) {
+		return findByProperty(PUT_SHORT_DESC, putShortDesc);
 	}
 
-	public List<IclubPropUsageType> findByPuStatus(Object puStatus) {
-		return findByProperty(PU_STATUS, puStatus);
+	public List<IclubPropUsageType> findByPutStatus(Object putStatus) {
+		return findByProperty(PUT_STATUS, putStatus);
 	}
 
 	public List findAll() {

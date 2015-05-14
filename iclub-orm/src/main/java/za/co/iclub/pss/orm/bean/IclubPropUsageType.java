@@ -23,11 +23,11 @@ public class IclubPropUsageType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6404622528271045343L;
-	private Long puId;
-	private String puShortDesc;
-	private String puLongDesc;
-	private String puStatus;
+	private static final long serialVersionUID = -4468070018265244995L;
+	private Long putId;
+	private String putLongDesc;
+	private String putShortDesc;
+	private String putStatus;
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 
 	// Constructors
@@ -37,55 +37,55 @@ public class IclubPropUsageType implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public IclubPropUsageType(Long puId) {
-		this.puId = puId;
+	public IclubPropUsageType(Long putId) {
+		this.putId = putId;
 	}
 
 	/** full constructor */
-	public IclubPropUsageType(Long puId, String puShortDesc, String puLongDesc, String puStatus, Set<IclubProperty> iclubProperties) {
-		this.puId = puId;
-		this.puShortDesc = puShortDesc;
-		this.puLongDesc = puLongDesc;
-		this.puStatus = puStatus;
+	public IclubPropUsageType(Long putId, String putLongDesc, String putShortDesc, String putStatus, Set<IclubProperty> iclubProperties) {
+		this.putId = putId;
+		this.putLongDesc = putLongDesc;
+		this.putShortDesc = putShortDesc;
+		this.putStatus = putStatus;
 		this.iclubProperties = iclubProperties;
 	}
 
 	// Property accessors
 	@Id
-	@Column(name = "pu_id", unique = true, nullable = false)
-	public Long getPuId() {
-		return this.puId;
+	@Column(name = "put_id", unique = true, nullable = false)
+	public Long getPutId() {
+		return this.putId;
 	}
 
-	public void setPuId(Long puId) {
-		this.puId = puId;
+	public void setPutId(Long putId) {
+		this.putId = putId;
 	}
 
-	@Column(name = "pu_short_desc", length = 4)
-	public String getPuShortDesc() {
-		return this.puShortDesc;
+	@Column(name = "put_long_desc")
+	public String getPutLongDesc() {
+		return this.putLongDesc;
 	}
 
-	public void setPuShortDesc(String puShortDesc) {
-		this.puShortDesc = puShortDesc;
+	public void setPutLongDesc(String putLongDesc) {
+		this.putLongDesc = putLongDesc;
 	}
 
-	@Column(name = "pu_long_desc", length = 500)
-	public String getPuLongDesc() {
-		return this.puLongDesc;
+	@Column(name = "put_short_desc", length = 4)
+	public String getPutShortDesc() {
+		return this.putShortDesc;
 	}
 
-	public void setPuLongDesc(String puLongDesc) {
-		this.puLongDesc = puLongDesc;
+	public void setPutShortDesc(String putShortDesc) {
+		this.putShortDesc = putShortDesc;
 	}
 
-	@Column(name = "pu_status", length = 1)
-	public String getPuStatus() {
-		return this.puStatus;
+	@Column(name = "put_status", length = 1)
+	public String getPutStatus() {
+		return this.putStatus;
 	}
 
-	public void setPuStatus(String puStatus) {
-		this.puStatus = puStatus;
+	public void setPutStatus(String putStatus) {
+		this.putStatus = putStatus;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubPropUsageType")

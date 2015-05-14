@@ -22,15 +22,15 @@ public class IclubSupplItem implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6520082877520302243L;
+	private static final long serialVersionUID = -4973512019691770347L;
 	private String siId;
 	private IclubSupplMaster iclubSupplMaster;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;
 	private IclubAssessmentType iclubAssessmentType;
-	private String siItemId;
 	private Long siAssessNumber;
 	private Date siCrtdDt;
+	private String siItemId;
 
 	// Constructors
 
@@ -44,15 +44,15 @@ public class IclubSupplItem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSupplItem(String siId, IclubSupplMaster iclubSupplMaster, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubAssessmentType iclubAssessmentType, String siItemId, Long siAssessNumber, Date siCrtdDt) {
+	public IclubSupplItem(String siId, IclubSupplMaster iclubSupplMaster, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubAssessmentType iclubAssessmentType, Long siAssessNumber, Date siCrtdDt, String siItemId) {
 		this.siId = siId;
 		this.iclubSupplMaster = iclubSupplMaster;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
 		this.iclubAssessmentType = iclubAssessmentType;
-		this.siItemId = siItemId;
 		this.siAssessNumber = siAssessNumber;
 		this.siCrtdDt = siCrtdDt;
+		this.siItemId = siItemId;
 	}
 
 	// Property accessors
@@ -106,15 +106,6 @@ public class IclubSupplItem implements java.io.Serializable {
 		this.iclubAssessmentType = iclubAssessmentType;
 	}
 
-	@Column(name = "si_item_id", length = 36)
-	public String getSiItemId() {
-		return this.siItemId;
-	}
-
-	public void setSiItemId(String siItemId) {
-		this.siItemId = siItemId;
-	}
-
 	@Column(name = "si_assess_number")
 	public Long getSiAssessNumber() {
 		return this.siAssessNumber;
@@ -131,6 +122,15 @@ public class IclubSupplItem implements java.io.Serializable {
 
 	public void setSiCrtdDt(Date siCrtdDt) {
 		this.siCrtdDt = siCrtdDt;
+	}
+
+	@Column(name = "si_item_id", length = 36)
+	public String getSiItemId() {
+		return this.siItemId;
+	}
+
+	public void setSiItemId(String siItemId) {
+		this.siItemId = siItemId;
 	}
 
 }

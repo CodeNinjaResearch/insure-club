@@ -22,7 +22,7 @@ public class IclubOccupation implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7721726627358842743L;
+	private static final long serialVersionUID = 7363362949776623705L;
 	private Long OId;
 	private IclubPerson iclubPerson;
 	private String ODesc;
