@@ -26,7 +26,7 @@ public class IclubDriver implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5742740447808764053L;
+	private static final long serialVersionUID = -8007380585037397336L;
 	private String DId;
 	private IclubAccessType iclubAccessTypeByDAccessStatusId;
 	private IclubLicenseCode iclubLicenseCode;

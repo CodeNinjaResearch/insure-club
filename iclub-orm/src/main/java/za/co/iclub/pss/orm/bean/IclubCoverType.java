@@ -26,7 +26,7 @@ public class IclubCoverType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 596072198822224792L;
+	private static final long serialVersionUID = -7707226535184302700L;
 	private Long ctId;
 	private IclubPerson iclubPerson;
 	private IclubInsuranceItemType iclubInsuranceItemType;

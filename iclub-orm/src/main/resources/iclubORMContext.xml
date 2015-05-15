@@ -79,7 +79,6 @@
 				<value>za.co.iclub.pss.orm.bean.IclubSupplierType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSupplMaster</value>
 				<value>za.co.iclub.pss.orm.bean.IclubSystemType</value>
-				<value>za.co.iclub.pss.orm.bean.IclubThatchType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubTrackerMaster</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehicle</value>
 				<value>za.co.iclub.pss.orm.bean.IclubVehicleMaster</value>
@@ -102,7 +101,8 @@
 				<value>za.co.iclub.pss.orm.bean.IclubVehSecType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPropSecType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPurposeType</value>
-				<value>za.co.iclub.pss.orm.bean.IclubPclaimStatus</value></list>
+				<value>za.co.iclub.pss.orm.bean.IclubPclaimStatus</value>
+			</list>
 		</property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -185,11 +185,6 @@
 		</property>
 	</bean>
 	<bean id="IclubPaymentStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPaymentStatusDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
-	<bean id="IclubThatchTypeDAO" class="za.co.iclub.pss.orm.dao.IclubThatchTypeDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
@@ -518,4 +513,5 @@
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
-	</bean></beans>
+	</bean>
+</beans>

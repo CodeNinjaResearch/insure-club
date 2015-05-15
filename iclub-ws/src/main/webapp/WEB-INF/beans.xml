@@ -19,7 +19,6 @@
 			<ref bean="IclubAlarmTypeService" />
 			<ref bean="IclubBoundaryTypeService" />
 			<ref bean="IclubBarTypeService" />
-			<ref bean="IclubThatchTypeService" />
 			<ref bean="IclubMaritialStatusService" />
 			<ref bean="IclubInsuranceItemTypeService" />
 			<ref bean="IclubQuoteStatusService" />

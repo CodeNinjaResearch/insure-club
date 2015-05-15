@@ -23,7 +23,7 @@ public class IclubConfig implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7385655058179300040L;
+	private static final long serialVersionUID = -5809985454234777830L;
 	private Long CId;
 	private IclubPerson iclubPerson;
 	private String CKey;

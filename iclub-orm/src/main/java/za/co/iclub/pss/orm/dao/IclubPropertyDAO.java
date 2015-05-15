@@ -36,10 +36,13 @@ public class IclubPropertyDAO {
 	public static final String _PPOSTAL_CD = "PPostalCd";
 	public static final String _PNOCLAIM_YRS = "PNoclaimYrs";
 	public static final String _PRENT_FUR_YN = "PRentFurYn";
+	public static final String _PTHATCH_TYPE = "PThatchType";
 	public static final String _PCOMP_YN = "PCompYn";
 	public static final String _PNOROBBERY_YN = "PNorobberyYn";
 	public static final String _PSEC_GATES_YN = "PSecGatesYn";
 	public static final String _PEST_VALUE = "PEstValue";
+	public static final String _PREPLACEMENT_COST = "PReplacementCost";
+	public static final String _PCONTENT_COST = "PContentCost";
 
 	private SessionFactory sessionFactory;
 
@@ -141,6 +144,10 @@ public class IclubPropertyDAO {
 		return findByProperty(_PRENT_FUR_YN, PRentFurYn);
 	}
 
+	public List<IclubProperty> findByPThatchType(Object PThatchType) {
+		return findByProperty(_PTHATCH_TYPE, PThatchType);
+	}
+
 	public List<IclubProperty> findByPCompYn(Object PCompYn) {
 		return findByProperty(_PCOMP_YN, PCompYn);
 	}
@@ -155,6 +162,14 @@ public class IclubPropertyDAO {
 
 	public List<IclubProperty> findByPEstValue(Object PEstValue) {
 		return findByProperty(_PEST_VALUE, PEstValue);
+	}
+
+	public List<IclubProperty> findByPReplacementCost(Object PReplacementCost) {
+		return findByProperty(_PREPLACEMENT_COST, PReplacementCost);
+	}
+
+	public List<IclubProperty> findByPContentCost(Object PContentCost) {
+		return findByProperty(_PCONTENT_COST, PContentCost);
 	}
 
 	public List findAll() {

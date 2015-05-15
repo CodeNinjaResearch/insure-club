@@ -28,7 +28,7 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6828650659263776074L;
+	private static final long serialVersionUID = -4659999932796595343L;
 	private Long vmId;
 	private IclubPerson iclubPerson;
 	private String vmMake;

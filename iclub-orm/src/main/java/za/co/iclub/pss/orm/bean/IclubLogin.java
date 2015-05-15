@@ -23,7 +23,7 @@ public class IclubLogin implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6283011740585731902L;
+	private static final long serialVersionUID = -6939968824071584571L;
 	private String LId;
 	private IclubSecurityQuestion iclubSecurityQuestion;
 	private IclubPerson iclubPersonByLCrtdBy;

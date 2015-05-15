@@ -36,7 +36,6 @@ import za.co.iclub.pss.web.bean.IclubPropUsageTypeBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
 import za.co.iclub.pss.web.bean.IclubPropertyTypeBean;
 import za.co.iclub.pss.web.bean.IclubRoofTypeBean;
-import za.co.iclub.pss.web.bean.IclubThatchTypeBean;
 import za.co.iclub.pss.web.bean.IclubWallTypeBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubAccessTypeModel;
@@ -48,14 +47,13 @@ import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyTypeModel;
 import za.co.iclub.pss.ws.model.IclubRoofTypeModel;
-import za.co.iclub.pss.ws.model.IclubThatchTypeModel;
 import za.co.iclub.pss.ws.model.IclubWallTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubPropertyController")
 @SessionScoped
 public class IclubPropertyController implements Serializable {
-	
+
 	private static final long serialVersionUID = 1399848586779525616L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropertyController.class);
@@ -64,19 +62,17 @@ public class IclubPropertyController implements Serializable {
 	private static final String VEHU_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehUsageTypeService/";
 	private static final String BT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBarTypeService/";
 	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
-	private static final String TT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubThatchTypeService/";
 	private static final String ROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRoofTypeService/";
 	private static final String PROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyTypeService/";
 	private static final String WT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubWallTypeService/";
 	private static final String OCCS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOccupiedStatusService/";
 	private static final String CT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCoverTypeService/";
-	
+
 	private List<IclubPropertyBean> beans;
 	private List<IclubPropertyBean> dashBoardBeans;
 	private List<IclubAccessTypeBean> accessTypeBeans;
 	private List<IclubPropUsageTypeBean> pPropUsageTypeBeans;
 	private List<IclubBarTypeBean> barTypeBeans;
-	private List<IclubThatchTypeBean> thatchTypeBeans;
 	private List<IclubRoofTypeBean> roofTypeBeans;
 	private List<IclubPropertyTypeBean> propertyTypeBeans;
 	private List<IclubWallTypeBean> wallTypeBeans;
@@ -95,24 +91,24 @@ public class IclubPropertyController implements Serializable {
 	private MapModel draggableModelPro;
 	private Marker markerPro;
 	private String centerGeoMapPro = "36.890257,30.707417";
-	
+
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
-		
+
 		draggableModelPro = new DefaultMapModel();
-		
+
 		if (viewParam == null || viewParam.longValue() == 1)
 			showView();
 		else if (viewParam != null && viewParam.longValue() == 2)
 			showEdit();
-		
+
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		draggableModelPro = new DefaultMapModel();
 	}
-	
+
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -120,7 +116,7 @@ public class IclubPropertyController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubPropertyBean();
@@ -129,7 +125,7 @@ public class IclubPropertyController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
 		showCreateCont = false;
@@ -137,26 +133,26 @@ public class IclubPropertyController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-	
+
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubPropertyBean();
 	}
-	
+
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-	
+
 	public MapModel getDraggableModelPro() {
 		return draggableModelPro;
 	}
-	
+
 	public String getCenterGeoMapPro() {
 		return centerGeoMapPro;
 	}
-	
+
 	public void onMarkerDragPro(MarkerDragEvent event) {
 		markerPro = event.getMarker();
 		IclubGeoLocBean geoBean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
@@ -167,17 +163,17 @@ public class IclubPropertyController implements Serializable {
 			bean.setPLat(markerPro.getLatlng().getLat());
 			bean.setPLong(markerPro.getLatlng().getLng());
 		}
-		
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng()));
 	}
-	
+
 	public void onGeocodePro(GeocodeEvent event) {
 		List<GeocodeResult> results = event.getResults();
 		draggableModelPro = new DefaultMapModel();
 		if (results != null && !results.isEmpty()) {
 			LatLng center = results.get(0).getLatLng();
 			centerGeoMapPro = center.getLat() + "," + center.getLng();
-			
+
 			for (int i = 0; i < results.size(); i++) {
 				GeocodeResult result = results.get(i);
 				Marker marker = new Marker(result.getLatLng(), result.getAddress());
@@ -186,7 +182,7 @@ public class IclubPropertyController implements Serializable {
 			}
 		}
 	}
-	
+
 	public void onMarkerSelectPro(OverlaySelectEvent event) {
 		markerPro = (Marker) event.getOverlay();
 		IclubGeoLocBean geoBean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
@@ -200,7 +196,7 @@ public class IclubPropertyController implements Serializable {
 		bean.setPAddress(markerPro.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPro.getTitle()));
 	}
-	
+
 	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
 		WebClient client = IclubWebHelper.createCustomClient(GL_BASE_URL + "get/" + geoLat + "/" + geoLong);
 		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
@@ -218,9 +214,9 @@ public class IclubPropertyController implements Serializable {
 			bean.setGlCrtdDt(model.getGlCrtdDt());
 		}
 		return bean;
-		
+
 	}
-	
+
 	public List<IclubPropertyBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubPropertyModel> models = new ArrayList<IclubPropertyModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropertyModel.class));
@@ -229,7 +225,7 @@ public class IclubPropertyController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubPropertyModel model : models) {
 				IclubPropertyBean bean = new IclubPropertyBean();
-				
+
 				bean.setPId(model.getPId());
 				bean.setPCrtdDt(model.getPCrtdDt());
 				bean.setPEstValue(model.getPEstValue());
@@ -251,19 +247,19 @@ public class IclubPropertyController implements Serializable {
 				bean.setIclubAccessType(model.getIclubAccessType());
 				bean.setIclubPerson(model.getIclubPerson());
 				bean.setIclubBarType(model.getIclubBarType());
-				bean.setIclubThatchType(model.getIclubThatchType());
+				bean.setPThatchType(model.getPThatchType());
 				bean.setIclubRoofType(model.getIclubRoofType());
-				
+
 				dashBoardBeans.add(bean);
 			}
 		}
 		return dashBoardBeans;
 	}
-	
+
 	public void setDashBoardBeans(List<IclubPropertyBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
-	
+
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
@@ -271,14 +267,14 @@ public class IclubPropertyController implements Serializable {
 		showModPanel = false;
 		bean = new IclubPropertyBean();
 	}
-	
+
 	public void addIclubProperty() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubProperty");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubPropertyModel model = new IclubPropertyModel();
-				
+
 				bean.setPId(UUID.randomUUID().toString());
 				model.setPId(bean.getPId());
 				model.setPCrtdDt(new Date(System.currentTimeMillis()));
@@ -301,13 +297,13 @@ public class IclubPropertyController implements Serializable {
 				model.setIclubAccessType(bean.getIclubAccessType());
 				model.setIclubPerson(getSessionUserId());
 				model.setIclubBarType(bean.getIclubBarType());
-				model.setIclubThatchType(bean.getIclubThatchType());
+				model.setPThatchType(bean.getPThatchType());
 				model.setIclubRoofType(bean.getIclubRoofType());
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					
+
 					IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					beans.add(bean);
@@ -322,14 +318,14 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubProperty() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubProperty");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubPropertyModel model = new IclubPropertyModel();
-				
+
 				model.setPId(bean.getPId());
 				model.setPCrtdDt(new Date(System.currentTimeMillis()));
 				model.setPEstValue(bean.getPEstValue());
@@ -351,7 +347,7 @@ public class IclubPropertyController implements Serializable {
 				model.setIclubAccessType(bean.getIclubAccessType());
 				model.setIclubPerson(getSessionUserId());
 				model.setIclubBarType(bean.getIclubBarType());
-				model.setIclubThatchType(bean.getIclubThatchType());
+				model.setPThatchType(bean.getPThatchType());
 				model.setIclubRoofType(bean.getIclubRoofType());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -369,7 +365,7 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubProperty() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubProperty");
 		try {
@@ -387,7 +383,7 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		if (bean.getPRegNum() == null || bean.getPRegNum().trim().equalsIgnoreCase("")) {
@@ -402,7 +398,7 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage("Please Select Location", FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getPPostalCd() == null) {
 			IclubWebHelper.addMessage(("Postel Code Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
@@ -419,17 +415,13 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(("Noclaim Years Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getIclubWallType() == null) {
 			IclubWebHelper.addMessage(("Please Select WallType"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getIclubRoofType() == null) {
 			IclubWebHelper.addMessage(("Please Select Roof Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (bean.getIclubThatchType() == null) {
-			IclubWebHelper.addMessage(("Please Select Thatch Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getIclubBarType() == null) {
@@ -456,56 +448,56 @@ public class IclubPropertyController implements Serializable {
 			IclubWebHelper.addMessage(("Est value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getPNorobberyYn() == null || bean.getPNorobberyYn().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("No Robbery Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		return ret || true;
 	}
-	
+
 	public IclubPropertyBean getBean() {
 		if (bean == null)
 			bean = new IclubPropertyBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubPropertyBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowCreateCont() {
 		return showCreateCont;
 	}
-	
+
 	public void setShowCreateCont(boolean showCreateCont) {
 		this.showCreateCont = showCreateCont;
 	}
-	
+
 	public boolean isShowViewCont() {
 		return showViewCont;
 	}
-	
+
 	public void setShowViewCont(boolean showViewCont) {
 		this.showViewCont = showViewCont;
 	}
-	
+
 	public boolean isShowEditCont() {
 		return showEditCont;
 	}
-	
+
 	public void setShowEditCont(boolean showEditCont) {
 		this.showEditCont = showEditCont;
 	}
-	
+
 	public Long getViewParam() {
 		return viewParam;
 	}
-	
+
 	public void setViewParam(Long viewParam) {
 		this.viewParam = viewParam;
 	}
-	
+
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -514,46 +506,46 @@ public class IclubPropertyController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public String getUserName() {
 		userName = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.scname")).toString();
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
 		if (labelBundle == null) {
 			labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		}
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
-	
+
 	public List<IclubPropertyBean> getBeans() {
-		
+
 		if (beans == null) {
 			beans = new ArrayList<IclubPropertyBean>();
 		}
-		
+
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubPropertyBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public List<IclubAccessTypeBean> getAccessTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(AEST_BASE_URL + "list");
 		Collection<? extends IclubAccessTypeModel> models = new ArrayList<IclubAccessTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccessTypeModel.class));
 		client.close();
@@ -570,13 +562,13 @@ public class IclubPropertyController implements Serializable {
 		}
 		return accessTypeBeans;
 	}
-	
+
 	public void setAccessTypeBeans(List<IclubAccessTypeBean> accessTypeBeans) {
 		this.accessTypeBeans = accessTypeBeans;
 	}
-	
+
 	public List<IclubBarTypeBean> getBarTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(BT_BASE_URL + "list");
 		Collection<? extends IclubBarTypeModel> models = new ArrayList<IclubBarTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBarTypeModel.class));
 		client.close();
@@ -593,36 +585,13 @@ public class IclubPropertyController implements Serializable {
 		}
 		return barTypeBeans;
 	}
-	
+
 	public void setBarTypeBeans(List<IclubBarTypeBean> barTypeBeans) {
 		this.barTypeBeans = barTypeBeans;
 	}
-	
-	public List<IclubThatchTypeBean> getThatchTypeBeans() {
-		
-		WebClient client = IclubWebHelper.createCustomClient(TT_BASE_URL + "list");
-		Collection<? extends IclubThatchTypeModel> models = new ArrayList<IclubThatchTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubThatchTypeModel.class));
-		client.close();
-		thatchTypeBeans = new ArrayList<IclubThatchTypeBean>();
-		if (models != null && models.size() > 0) {
-			for (IclubThatchTypeModel model : models) {
-				IclubThatchTypeBean bean = new IclubThatchTypeBean();
-				bean.setTtId(model.getTtId());
-				bean.setTtLongDesc(model.getTtLongDesc());
-				bean.setTtShortDesc(model.getTtShortDesc());
-				bean.setTtStatus(model.getTtStatus());
-				thatchTypeBeans.add(bean);
-			}
-		}
-		return thatchTypeBeans;
-	}
-	
-	public void setThatchTypeBeans(List<IclubThatchTypeBean> thatchTypeBeans) {
-		this.thatchTypeBeans = thatchTypeBeans;
-	}
-	
+
 	public List<IclubRoofTypeBean> getRoofTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(ROT_BASE_URL + "list");
 		Collection<? extends IclubRoofTypeModel> models = new ArrayList<IclubRoofTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRoofTypeModel.class));
 		client.close();
@@ -639,13 +608,13 @@ public class IclubPropertyController implements Serializable {
 		}
 		return roofTypeBeans;
 	}
-	
+
 	public void setRoofTypeBeans(List<IclubRoofTypeBean> roofTypeBeans) {
 		this.roofTypeBeans = roofTypeBeans;
 	}
-	
+
 	public List<IclubWallTypeBean> getWallTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(WT_BASE_URL + "list");
 		Collection<? extends IclubWallTypeModel> models = new ArrayList<IclubWallTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubWallTypeModel.class));
 		client.close();
@@ -662,13 +631,13 @@ public class IclubPropertyController implements Serializable {
 		}
 		return wallTypeBeans;
 	}
-	
+
 	public void setWallTypeBeans(List<IclubWallTypeBean> wallTypeBeans) {
 		this.wallTypeBeans = wallTypeBeans;
 	}
-	
+
 	public List<IclubPropertyTypeBean> getPropertyTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PROT_BASE_URL + "list");
 		Collection<? extends IclubPropertyTypeModel> models = new ArrayList<IclubPropertyTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropertyTypeModel.class));
 		client.close();
@@ -680,19 +649,19 @@ public class IclubPropertyController implements Serializable {
 				bean.setPtLongDesc(model.getPtLongDesc());
 				bean.setPtShortDesc(model.getPtShortDesc());
 				bean.setPtStatus(model.getPtStatus());
-				
+
 				propertyTypeBeans.add(bean);
 			}
 		}
 		return propertyTypeBeans;
 	}
-	
+
 	public void setPropertyTypeBeans(List<IclubPropertyTypeBean> propertyTypeBeans) {
 		this.propertyTypeBeans = propertyTypeBeans;
 	}
-	
+
 	public List<IclubOccupiedStatusBean> getOccupiedStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(OCCS_BASE_URL + "list");
 		Collection<? extends IclubOccupiedStatusModel> models = new ArrayList<IclubOccupiedStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupiedStatusModel.class));
 		client.close();
@@ -709,11 +678,11 @@ public class IclubPropertyController implements Serializable {
 		}
 		return occupiedStatusBeans;
 	}
-	
+
 	public void setOccupiedStatusBeans(List<IclubOccupiedStatusBean> occupiedStatusBeans) {
 		this.occupiedStatusBeans = occupiedStatusBeans;
 	}
-	
+
 	public List<IclubPropUsageTypeBean> getpPropUsageTypeBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(VEHU_BASE_URL + "/list");
 		Collection<? extends IclubPropUsageTypeModel> models = new ArrayList<IclubPropUsageTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropUsageTypeModel.class));
@@ -722,7 +691,7 @@ public class IclubPropertyController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubPropUsageTypeModel model : models) {
 				IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
-				
+
 				bean.setPutId(model.getPutId());
 				bean.setPutLongDesc(model.getPutLongDesc());
 				bean.setPutShortDesc(model.getPutShortDesc());
@@ -736,28 +705,28 @@ public class IclubPropertyController implements Serializable {
 					}
 					bean.setIclubProperties(properties);
 				}
-				
+
 				pPropUsageTypeBeans.add(bean);
 			}
 		}
 		return pPropUsageTypeBeans;
 	}
-	
+
 	public void setpPropUsageTypeBeans(List<IclubPropUsageTypeBean> pPropUsageTypeBeans) {
 		this.pPropUsageTypeBeans = pPropUsageTypeBeans;
 	}
-	
+
 	public List<IclubCoverTypeBean> getCoverTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(CT_BASE_URL + "list");
 		Collection<? extends IclubCoverTypeModel> models = new ArrayList<IclubCoverTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCoverTypeModel.class));
 		client.close();
 		coverTypeBeans = new ArrayList<IclubCoverTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubCoverTypeModel model : models) {
-				
+
 				IclubCoverTypeBean bean = new IclubCoverTypeBean();
-				
+
 				bean.setCtId(model.getCtId());
 				bean.setCtLongDesc(model.getCtLongDesc());
 				bean.setCtShortDesc(model.getCtShortDesc());
@@ -788,25 +757,25 @@ public class IclubPropertyController implements Serializable {
 		}
 		return coverTypeBeans;
 	}
-	
+
 	public void setCoverTypeBeans(List<IclubCoverTypeBean> coverTypeBeans) {
 		this.coverTypeBeans = coverTypeBeans;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 }

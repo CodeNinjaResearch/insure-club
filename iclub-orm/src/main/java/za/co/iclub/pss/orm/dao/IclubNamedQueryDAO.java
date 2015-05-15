@@ -271,18 +271,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubClaim instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getClaimByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public IclubClaim findByPolicyId(String policyId) {
 		log.debug("finding all IclubClaim instances by user");
 		try {
@@ -359,45 +347,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubCountryCode instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getCountryCodeByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubCoverType instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getCoverTypeByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubDocument instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getDocumentByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List getDocumentTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Document Type by Query :: getDocumentTypeySD");
 		try {
@@ -411,18 +360,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubDriver instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getDriverByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public IclubDriver findByPersonId(String personId) {
 		log.debug("finding all IclubDriver instances by user");
@@ -450,18 +387,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubEvent instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getEventByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List getEventTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Event Type by Query :: getEventTypeBySD");
 		try {
@@ -475,18 +400,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubExtras instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getExtrasByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public List getFieldBySD(String sd, Long id) {
 		log.debug("Fetching all Field by Query :: getFieldBySD");
@@ -502,18 +415,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubGeoLoc instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getGeoLocByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List getIdTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Id Type by Query :: getIdTypeBySD");
 		try {
@@ -527,19 +428,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubInsuranceItem instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getInsuranceItemByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public IclubInsuranceItem findByQuoteIdAndItemTypeId(String quoteId, Long itemTypeId) {
 		log.debug("finding all IclubInsuranceItem instances by user");
@@ -609,32 +497,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubInsurerMaster instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getInsurerMasterByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubLicenseCode instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getLicenseCodeByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List verifyLogin(String name, String pwd) {
 		log.debug("Fetching Login Query :: verify Login");
 		try {
@@ -662,45 +524,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubMbComment instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getMbCommentByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubMessageBoard instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getMessageBoardByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubMessage instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getMessageByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public List getMessageTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Message Type by Query :: getMessageTypeBySD");
@@ -730,18 +553,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubNotif instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getNotifByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List getNotificationTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Notification Type by Query :: getNotificationTypeBySD");
 		try {
@@ -755,19 +566,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubOccupation instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getOccupationByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public List getOccupiedStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Occupied Status by Query :: getOccupiedStatusBySD");
@@ -797,19 +595,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubPayment instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getPaymentByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List getPaymentStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Payment Status by Query :: getPaymentStatusBySD");
 		try {
@@ -838,30 +623,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubPerson instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getPersonByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubPolicy instances by user");
-	// try {
-	// Query queryObject = getCurrentSession().getNamedQuery("getPolicyByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-	//
 	public IclubPolicy findPolicyByQuoteId(String quoteId) {
 		log.debug("finding   IclubPolicy instances by user");
 		try {
@@ -901,19 +662,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubProperty instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getPropertyByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public List getPropertyTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Property Type by Query :: getPropertyTypeBySD");
@@ -955,19 +703,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubRateEngine instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getRateEngineByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public List findByRateType(String rateType) {
 		log.debug("finding all IclubRateEngine instances by user");
@@ -1023,32 +758,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubSecurityDevice instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getSecurityDeviceByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubSecurityMaster instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getSecurityMasterByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List getSecurityQuestionBySD(String sd, Long id) {
 		log.debug("Fetching all Security Question by Query :: getSecurityQuestionBySD");
 		try {
@@ -1077,72 +786,6 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubSupplMaster instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getSupplMasterByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubSystemType instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getSystemTypeByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
-	public List getThatchTypeBySD(String sd, Long id) {
-		log.debug("Fetching all Thatch Type by Query :: getThatchTypeBySD");
-		try {
-			Query query = getCurrentSession().getNamedQuery("getThatchTypeBySD");
-			query.setString("sd", sd);
-			query.setLong("id", id);
-			List ret = query.list();
-			return ret;
-		} catch (RuntimeException re) {
-			log.error("Thatch Type", re);
-			throw re;
-		}
-	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubTrackerMaster instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getTrackerMasterByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-	//
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubVehicle instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getVehicleByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
-
 	public List findByDriverId(String driverId) {
 		log.debug("finding  IclubVehicle instance by getVehicleByDriverId");
 		try {
@@ -1155,19 +798,6 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-
-	// public List findByUser(String userId) {
-	// log.debug("finding all IclubVehicleMaster instances by user");
-	// try {
-	// Query queryObject =
-	// getCurrentSession().getNamedQuery("getVehicleMasterByUser");
-	// queryObject.setString("id", userId);
-	// return queryObject.list();
-	// } catch (RuntimeException re) {
-	// log.error("find all by user failed", re);
-	// throw re;
-	// }
-	// }
 
 	public List findAllByMake(String vmMake) {
 		log.debug("finding all IclubVehicleMaster instances by vmMake");

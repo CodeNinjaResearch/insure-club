@@ -26,7 +26,7 @@ public class IclubAccount implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 511675744089147971L;
+	private static final long serialVersionUID = -3406911225383084349L;
 	private String AId;
 	private IclubAccountType iclubAccountType;
 	private IclubBankMaster iclubBankMaster;

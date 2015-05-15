@@ -29,7 +29,6 @@ import za.co.iclub.pss.orm.dao.IclubPropUsageTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubRoofTypeDAO;
-import za.co.iclub.pss.orm.dao.IclubThatchTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -37,7 +36,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubPropertyService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPropertyService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropertyService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPropertyDAO iclubPropertyDAO;
@@ -49,10 +48,9 @@ public class IclubPropertyService {
 	private IclubWallTypeDAO iclubWallTypeDAO;
 	private IclubAccessTypeDAO iclubAccessTypeDAO;
 	private IclubBarTypeDAO iclubBarTypeDAO;
-	private IclubThatchTypeDAO iclubThatchTypeDAO;
 	private IclubRoofTypeDAO iclubRoofTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -61,7 +59,7 @@ public class IclubPropertyService {
 	public ResponseModel add(IclubPropertyModel model) {
 		try {
 			IclubProperty iCP = new IclubProperty();
-			
+
 			iCP.setPId(model.getPId());
 			iCP.setPCrtdDt(model.getPCrtdDt());
 			iCP.setPEstValue(model.getPEstValue());
@@ -76,7 +74,7 @@ public class IclubPropertyService {
 			iCP.setPAddress(model.getPAddress());
 			iCP.setPRegNum(model.getPRegNum());
 			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
-			iCP.setIclubThatchType(model.getIclubThatchType() != null ? iclubThatchTypeDAO.findById(model.getIclubThatchType()) : null);
+			iCP.setPThatchType(model.getPThatchType());
 			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
 			iCP.setIclubAccessType(model.getIclubAccessType() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessType()) : null);
 			iCP.setIclubWallType(model.getIclubWallType() != null ? iclubWallTypeDAO.findById(model.getIclubWallType()) : null);
@@ -86,9 +84,9 @@ public class IclubPropertyService {
 			iCP.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
 			iCP.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			iclubPropertyDAO.save(iCP);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCP.getPId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -100,9 +98,9 @@ public class IclubPropertyService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -111,7 +109,7 @@ public class IclubPropertyService {
 	public ResponseModel mod(IclubPropertyModel model) {
 		try {
 			IclubProperty iCP = new IclubProperty();
-			
+
 			iCP.setPId(model.getPId());
 			iCP.setPCrtdDt(model.getPCrtdDt());
 			iCP.setPEstValue(model.getPEstValue());
@@ -126,7 +124,7 @@ public class IclubPropertyService {
 			iCP.setPAddress(model.getPAddress());
 			iCP.setPRegNum(model.getPRegNum());
 			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
-			iCP.setIclubThatchType(model.getIclubThatchType() != null ? iclubThatchTypeDAO.findById(model.getIclubThatchType()) : null);
+			iCP.setPThatchType(model.getPThatchType());
 			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
 			iCP.setIclubAccessType(model.getIclubAccessType() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessType()) : null);
 			iCP.setIclubWallType(model.getIclubWallType() != null ? iclubWallTypeDAO.findById(model.getIclubWallType()) : null);
@@ -135,11 +133,11 @@ public class IclubPropertyService {
 			iCP.setIclubPropUsageType(model.getIclubPropUsageType() != null ? iclubPropUsageTypeDAO.findById(model.getIclubPropUsageType()) : null);
 			iCP.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
 			iCP.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			
+
 			iclubPropertyDAO.merge(iCP);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -151,9 +149,9 @@ public class IclubPropertyService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -168,22 +166,22 @@ public class IclubPropertyService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropertyModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPropertyDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubProperty iCP = (IclubProperty) object;
-					
+
 					IclubPropertyModel model = new IclubPropertyModel();
-					
+
 					model.setPId(iCP.getPId());
 					model.setPCrtdDt(iCP.getPCrtdDt());
 					model.setPEstValue(iCP.getPEstValue());
@@ -205,34 +203,34 @@ public class IclubPropertyService {
 					model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
 					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
 					model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
-					model.setIclubThatchType(iCP.getIclubThatchType() != null ? (iCP.getIclubThatchType().getTtId()) : null);
+					model.setPThatchType(iCP.getPThatchType());
 					model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropertyModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubProperty.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubProperty iCP = (IclubProperty) object;
-					
+
 					IclubPropertyModel model = new IclubPropertyModel();
-					
+
 					model.setPId(iCP.getPId());
 					model.setPCrtdDt(iCP.getPCrtdDt());
 					model.setPEstValue(iCP.getPEstValue());
@@ -254,19 +252,19 @@ public class IclubPropertyService {
 					model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
 					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
 					model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
-					model.setIclubThatchType(iCP.getIclubThatchType() != null ? (iCP.getIclubThatchType().getTtId()) : null);
+					model.setPThatchType(iCP.getPThatchType());
 					model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -297,118 +295,110 @@ public class IclubPropertyService {
 				model.setIclubAccessType(bean.getIclubAccessType() != null ? (bean.getIclubAccessType().getAtId()) : null);
 				model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 				model.setIclubBarType(bean.getIclubBarType() != null ? (bean.getIclubBarType().getBtId()) : null);
-				model.setIclubThatchType(bean.getIclubThatchType() != null ? (bean.getIclubThatchType().getTtId()) : null);
+				model.setPThatchType(bean.getPThatchType());
 				model.setIclubRoofType(bean.getIclubRoofType() != null ? (bean.getIclubRoofType().getRtId()) : null);
 			}
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubPropertyDAO getIclubPropertyDAO() {
 		return iclubPropertyDAO;
 	}
-	
+
 	public void setIclubPropertyDAO(IclubPropertyDAO iclubPropertyDAO) {
 		this.iclubPropertyDAO = iclubPropertyDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubCoverTypeDAO getIclubCoverTypeDAO() {
 		return iclubCoverTypeDAO;
 	}
-	
+
 	public void setIclubCoverTypeDAO(IclubCoverTypeDAO iclubCoverTypeDAO) {
 		this.iclubCoverTypeDAO = iclubCoverTypeDAO;
 	}
-	
+
 	public IclubPropUsageTypeDAO getIclubPropUsageTypeDAO() {
 		return iclubPropUsageTypeDAO;
 	}
-	
+
 	public void setIclubPropUsageTypeDAO(IclubPropUsageTypeDAO iclubPropUsageTypeDAO) {
 		this.iclubPropUsageTypeDAO = iclubPropUsageTypeDAO;
 	}
-	
+
 	public IclubOccupiedStatusDAO getIclubOccupiedStatusDAO() {
 		return iclubOccupiedStatusDAO;
 	}
-	
+
 	public void setIclubOccupiedStatusDAO(IclubOccupiedStatusDAO iclubOccupiedStatusDAO) {
 		this.iclubOccupiedStatusDAO = iclubOccupiedStatusDAO;
 	}
-	
+
 	public IclubPropertyTypeDAO getIclubPropertyTypeDAO() {
 		return iclubPropertyTypeDAO;
 	}
-	
+
 	public void setIclubPropertyTypeDAO(IclubPropertyTypeDAO iclubPropertyTypeDAO) {
 		this.iclubPropertyTypeDAO = iclubPropertyTypeDAO;
 	}
-	
+
 	public IclubWallTypeDAO getIclubWallTypeDAO() {
 		return iclubWallTypeDAO;
 	}
-	
+
 	public void setIclubWallTypeDAO(IclubWallTypeDAO iclubWallTypeDAO) {
 		this.iclubWallTypeDAO = iclubWallTypeDAO;
 	}
-	
+
 	public IclubAccessTypeDAO getIclubAccessTypeDAO() {
 		return iclubAccessTypeDAO;
 	}
-	
+
 	public void setIclubAccessTypeDAO(IclubAccessTypeDAO iclubAccessTypeDAO) {
 		this.iclubAccessTypeDAO = iclubAccessTypeDAO;
 	}
-	
+
 	public IclubBarTypeDAO getIclubBarTypeDAO() {
 		return iclubBarTypeDAO;
 	}
-	
+
 	public void setIclubBarTypeDAO(IclubBarTypeDAO iclubBarTypeDAO) {
 		this.iclubBarTypeDAO = iclubBarTypeDAO;
 	}
-	
-	public IclubThatchTypeDAO getIclubThatchTypeDAO() {
-		return iclubThatchTypeDAO;
-	}
-	
-	public void setIclubThatchTypeDAO(IclubThatchTypeDAO iclubThatchTypeDAO) {
-		this.iclubThatchTypeDAO = iclubThatchTypeDAO;
-	}
-	
+
 	public IclubRoofTypeDAO getIclubRoofTypeDAO() {
 		return iclubRoofTypeDAO;
 	}
-	
+
 	public void setIclubRoofTypeDAO(IclubRoofTypeDAO iclubRoofTypeDAO) {
 		this.iclubRoofTypeDAO = iclubRoofTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

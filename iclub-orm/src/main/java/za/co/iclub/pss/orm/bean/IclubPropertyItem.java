@@ -22,7 +22,7 @@ public class IclubPropertyItem implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3185399206688535083L;
+	private static final long serialVersionUID = 2975609040222174148L;
 	private String piId;
 	private IclubProperty iclubProperty;
 	private IclubPerson iclubPerson;

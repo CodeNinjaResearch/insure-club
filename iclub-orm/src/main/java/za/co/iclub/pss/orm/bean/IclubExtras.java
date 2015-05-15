@@ -22,7 +22,7 @@ public class IclubExtras implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6420984092141389393L;
+	private static final long serialVersionUID = -4961264413399472751L;
 	private Long EId;
 	private IclubPerson iclubPerson;
 	private String EDesc;

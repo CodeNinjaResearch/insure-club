@@ -559,7 +559,7 @@ public class IclubPolicyController implements Serializable {
 				propertyBean.setIclubAccessType(model.getIclubAccessType());
 				propertyBean.setIclubPerson(model.getIclubPerson());
 				propertyBean.setIclubBarType(model.getIclubBarType());
-				propertyBean.setIclubThatchType(model.getIclubThatchType());
+				propertyBean.setPThatchType(model.getPThatchType());
 				propertyBean.setIclubRoofType(model.getIclubRoofType());
 			}
 			client.close();

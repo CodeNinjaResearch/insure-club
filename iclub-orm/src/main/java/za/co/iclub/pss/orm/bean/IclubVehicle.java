@@ -22,7 +22,7 @@ public class IclubVehicle implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8453093109497904884L;
+	private static final long serialVersionUID = 5589854304614737861L;
 	private String VId;
 	private IclubVehSecType iclubVehSecType;
 	private IclubVehicleType iclubVehicleType;

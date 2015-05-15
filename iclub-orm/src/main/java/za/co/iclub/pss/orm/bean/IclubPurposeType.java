@@ -22,7 +22,7 @@ public class IclubPurposeType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 174942980029437864L;
+	private static final long serialVersionUID = -2641479011089197744L;
 	private Long ptId;
 	private IclubInsuranceItemType iclubInsuranceItemType;
 	private IclubPerson iclubPerson;

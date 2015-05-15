@@ -22,7 +22,7 @@ public class IclubGeoLoc implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7975855546692116552L;
+	private static final long serialVersionUID = -6312629549603530468L;
 	private Long glId;
 	private IclubPerson iclubPerson;
 	private String glProvince;

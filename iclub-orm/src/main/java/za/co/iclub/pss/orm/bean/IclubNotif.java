@@ -22,7 +22,7 @@ public class IclubNotif implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1315751866686368608L;
+	private static final long serialVersionUID = -20558746504083541L;
 	private String NId;
 	private IclubPerson iclubPerson;
 	private IclubNotificationType iclubNotificationType;

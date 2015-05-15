@@ -26,7 +26,7 @@ public class IclubProperty implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4246713602003841586L;
+	private static final long serialVersionUID = -2822875800529439035L;
 	private String PId;
 	private IclubCoverType iclubCoverType;
 	private IclubOccupiedStatus iclubOccupiedStatus;
@@ -36,7 +36,6 @@ public class IclubProperty implements java.io.Serializable {
 	private IclubAccessType iclubAccessType;
 	private IclubPerson iclubPerson;
 	private IclubBarType iclubBarType;
-	private IclubThatchType iclubThatchType;
 	private IclubRoofType iclubRoofType;
 	private IclubPropSecType iclubPropSecType;
 	private String PRegNum;
@@ -46,10 +45,13 @@ public class IclubProperty implements java.io.Serializable {
 	private Integer PPostalCd;
 	private Integer PNoclaimYrs;
 	private String PRentFurYn;
+	private String PThatchType;
 	private String PCompYn;
 	private String PNorobberyYn;
 	private String PSecGatesYn;
 	private Double PEstValue;
+	private Double PReplacementCost;
+	private Double PContentCost;
 	private Date PCrtdDt;
 	private Set<IclubPropertyItem> iclubPropertyItems = new HashSet<IclubPropertyItem>(0);
 
@@ -65,7 +67,7 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubPropUsageType iclubPropUsageType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubThatchType iclubThatchType, IclubRoofType iclubRoofType, IclubPropSecType iclubPropSecType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PCompYn, String PNorobberyYn, String PSecGatesYn, Double PEstValue, Date PCrtdDt, Set<IclubPropertyItem> iclubPropertyItems) {
+	public IclubProperty(String PId, IclubCoverType iclubCoverType, IclubOccupiedStatus iclubOccupiedStatus, IclubPropertyType iclubPropertyType, IclubPropUsageType iclubPropUsageType, IclubWallType iclubWallType, IclubAccessType iclubAccessType, IclubPerson iclubPerson, IclubBarType iclubBarType, IclubRoofType iclubRoofType, IclubPropSecType iclubPropSecType, String PRegNum, String PAddress, Double PLat, Double PLong, Integer PPostalCd, Integer PNoclaimYrs, String PRentFurYn, String PThatchType, String PCompYn, String PNorobberyYn, String PSecGatesYn, Double PEstValue, Double PReplacementCost, Double PContentCost, Date PCrtdDt, Set<IclubPropertyItem> iclubPropertyItems) {
 		this.PId = PId;
 		this.iclubCoverType = iclubCoverType;
 		this.iclubOccupiedStatus = iclubOccupiedStatus;
@@ -75,7 +77,6 @@ public class IclubProperty implements java.io.Serializable {
 		this.iclubAccessType = iclubAccessType;
 		this.iclubPerson = iclubPerson;
 		this.iclubBarType = iclubBarType;
-		this.iclubThatchType = iclubThatchType;
 		this.iclubRoofType = iclubRoofType;
 		this.iclubPropSecType = iclubPropSecType;
 		this.PRegNum = PRegNum;
@@ -85,10 +86,13 @@ public class IclubProperty implements java.io.Serializable {
 		this.PPostalCd = PPostalCd;
 		this.PNoclaimYrs = PNoclaimYrs;
 		this.PRentFurYn = PRentFurYn;
+		this.PThatchType = PThatchType;
 		this.PCompYn = PCompYn;
 		this.PNorobberyYn = PNorobberyYn;
 		this.PSecGatesYn = PSecGatesYn;
 		this.PEstValue = PEstValue;
+		this.PReplacementCost = PReplacementCost;
+		this.PContentCost = PContentCost;
 		this.PCrtdDt = PCrtdDt;
 		this.iclubPropertyItems = iclubPropertyItems;
 	}
@@ -185,16 +189,6 @@ public class IclubProperty implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "p_thatch_type_id")
-	public IclubThatchType getIclubThatchType() {
-		return this.iclubThatchType;
-	}
-
-	public void setIclubThatchType(IclubThatchType iclubThatchType) {
-		this.iclubThatchType = iclubThatchType;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "p_roof_type_id")
 	public IclubRoofType getIclubRoofType() {
 		return this.iclubRoofType;
@@ -277,6 +271,15 @@ public class IclubProperty implements java.io.Serializable {
 		this.PRentFurYn = PRentFurYn;
 	}
 
+	@Column(name = "p_thatch_type", length = 1)
+	public String getPThatchType() {
+		return this.PThatchType;
+	}
+
+	public void setPThatchType(String PThatchType) {
+		this.PThatchType = PThatchType;
+	}
+
 	@Column(name = "p_comp_yn", length = 1)
 	public String getPCompYn() {
 		return this.PCompYn;
@@ -311,6 +314,24 @@ public class IclubProperty implements java.io.Serializable {
 
 	public void setPEstValue(Double PEstValue) {
 		this.PEstValue = PEstValue;
+	}
+
+	@Column(name = "p_replacement_cost", precision = 15, scale = 5)
+	public Double getPReplacementCost() {
+		return this.PReplacementCost;
+	}
+
+	public void setPReplacementCost(Double PReplacementCost) {
+		this.PReplacementCost = PReplacementCost;
+	}
+
+	@Column(name = "p_content_cost", precision = 15, scale = 5)
+	public Double getPContentCost() {
+		return this.PContentCost;
+	}
+
+	public void setPContentCost(Double PContentCost) {
+		this.PContentCost = PContentCost;
 	}
 
 	@Column(name = "p_crtd_dt", length = 19)
