@@ -547,9 +547,9 @@
 				</p:tab>
 				<p:tab id="insuranceModTab" title="Insurance Items">
 					<p:panel id="pnlPropertyItemModCont">
-						<p:dataTable reflow="true" widgetVar="dtPropertyItemCont" value="#{iclubQuickQuoteController.propertyItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PropertyItem Available">
+						<p:dataTable reflow="true" widgetVar="dtPropertyItemContMod" value="#{iclubQuickQuoteController.propertyItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PropertyItem Available">
 							<f:facet name="footer">
-								<p:commandButton id="btnPropertyItemShowMod" value="Add" actionListener="#{iclubQuickQuoteController.showProItemAddPanel}" update=":iclubFrm:qqTabView:qqSubProDetView:pnlPropertyItemModCont" />
+								<p:commandButton id="btnPropertyItemShowMod" value="Add" actionListener="#{iclubQuickQuoteController.showProItemAddPanel}" update=":iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemModCont" />
 							</f:facet>
 							<p:column headerText="Unique Id">
 								<p:outputLabel styleClass="TexAlCenter" value="#{ bean.piId}" />
@@ -561,7 +561,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="#{bean.piValue}" />
 							</p:column>
 							<p:column>
-								<p:commandButton id="btnPropertyItemEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubQuickQuoteController.delIclubPropertyItem}" update=":iclubFrm:grlMsg">
+								<p:commandButton id="btnPropertyItemEditMod" icon="ui-icon-pencil" ajax="false" action="#{iclubQuickQuoteController.delIclubPropertyItem}" update=":iclubFrm:grlMsg">
 									<f:setPropertyActionListener target="#{iclubQuickQuoteController.propertyItemBean}" value="#{bean}" />
 								</p:commandButton>
 							</p:column>
@@ -588,10 +588,10 @@
 								<div class="EmptyBox5" />
 								<div class="Container100 Responsive">
 									<div class="Container50 Responsive">
-										<p:commandButton id="btnPropertyItemModSave" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:qqSubProDetView:pnlPropertyItemModCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubQuickQuoteController.addIclubPropertyItem}" />
+										<p:commandButton id="btnPropertyItemModSave" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemModCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubQuickQuoteController.addIclubPropertyItem}" />
 									</div>
 									<div class="Container50 Responsive">
-										<p:commandButton id="btnPropertyItemCloseMod" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:qqSubProDetView:pnlPropertyItemModCont" value="Close" actionListener="#{iclubQuickQuoteController.clearProItemForm}" />
+										<p:commandButton id="btnPropertyItemCloseMod" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemModCont" value="Close" actionListener="#{iclubQuickQuoteController.clearProItemForm}" />
 									</div>
 								</div>
 							</div>

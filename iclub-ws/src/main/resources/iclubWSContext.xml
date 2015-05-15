@@ -403,6 +403,7 @@
 		<property name="iclubVehicleMasterDAO" ref="IclubVehicleMasterDAO" />
 		<property name="iclubDriverDAO" ref="IclubDriverDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+		<property name="iclubCoverTypeDAO" ref="IclubCoverTypeDAO" />
 	</bean>
 	<bean id="IclubDocumentService" class="za.co.iclub.pss.ws.service.IclubDocumentService">
 		<property name="iclubDocumentTypeDAO" ref="IclubDocumentTypeDAO" />

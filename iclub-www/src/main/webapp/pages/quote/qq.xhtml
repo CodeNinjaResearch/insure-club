@@ -252,18 +252,6 @@
 						</div>
 					</div>
 					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuCoverType" id="mnuCoverType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.quoteBean.iclubCoverType}">
-								<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.coverTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
 				</p:tab>
 			</p:tabView>
 			<p:panel styleClass="Fnone TexAlCenter">

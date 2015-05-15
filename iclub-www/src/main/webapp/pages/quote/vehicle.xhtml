@@ -71,6 +71,18 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuModCoverType" id="mnuModCoverType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubCoverType}">
+								<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubQuickQuoteController.coverTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="OdoMeter :" />
 						</div>
 						<div class="Container50 Responsive">
@@ -371,6 +383,18 @@
 							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuModPurT" id="mnuModPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuCoverType" id="mnuCoverType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubCoverType}">
+								<f:selectItem itemLabel="Cover Type" itemDisabled="true" />
+								<f:selectItems value="#{iclubQuickQuoteController.coverTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>

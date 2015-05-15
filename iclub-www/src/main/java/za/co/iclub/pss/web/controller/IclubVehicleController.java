@@ -230,6 +230,7 @@ public class IclubVehicleController implements Serializable {
 				bean.setIclubVehUsageType(model.getIclubVehUsageType());
 				bean.setIclubVehSecType(model.getIclubVehSecType());
 				bean.setIclubDriver(model.getIclubDriver());
+				bean.setIclubCoverType(model.getIclubCoverType());
 				bean.setIclubSecurityDevice(model.getIclubSecurityDevice());
 				bean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
 				bean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
@@ -370,6 +371,7 @@ public class IclubVehicleController implements Serializable {
 				model.setIclubPerson(bean.getIclubPerson());
 				model.setIclubDriver(bean.getIclubDriver());
 				model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
+				model.setIclubCoverType(bean.getIclubCoverType());
 				model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
 				model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId());
 				
@@ -426,6 +428,7 @@ public class IclubVehicleController implements Serializable {
 				model.setIclubVehUsageType(bean.getIclubVehUsageType());
 				model.setIclubVehSecType(bean.getIclubVehSecType());
 				model.setIclubPerson(bean.getIclubPerson());
+				model.setIclubCoverType(bean.getIclubCoverType());
 				model.setIclubDriver(bean.getIclubDriver());
 				model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
 				model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());

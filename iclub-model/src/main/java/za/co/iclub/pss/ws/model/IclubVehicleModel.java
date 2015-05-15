@@ -37,6 +37,7 @@ public class IclubVehicleModel {
 	private String VRegNum;
 	private Date VCrtdDt;
 	private String VModifiedYn;
+	private Long iclubCoverType;
 	
 	public String getVId() {
 		return VId;
@@ -276,6 +277,14 @@ public class IclubVehicleModel {
 	
 	public void setVModifiedYn(String vModifiedYn) {
 		VModifiedYn = vModifiedYn;
+	}
+	
+	public Long getIclubCoverType() {
+		return iclubCoverType;
+	}
+	
+	public void setIclubCoverType(Long iclubCoverType) {
+		this.iclubCoverType = iclubCoverType;
 	}
 	
 }

@@ -490,10 +490,12 @@ public class IclubQuickQuoteController implements Serializable {
 			ret = ret && false;
 		}
 		
-		/*if (propertyBean.getPCompYn() == null || propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Comp Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}*/
+		/*
+		 * if (propertyBean.getPCompYn() == null ||
+		 * propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Comp Yn Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 */
 		
 		if (propertyBean.getPEstValue() == null) {
 			IclubWebHelper.addMessage(("Est value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
@@ -507,40 +509,10 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubVehicle");
 		try {
 			if (validateVehForm(true)) {
-				IclubVehicleModel model = new IclubVehicleModel();
 				
 				vehicleBean.setVId(UUID.randomUUID().toString());
 				vehicleBean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				vehicleBean.setIclubPerson(getSessionUserId());
-				model.setVId(vehicleBean.getVId());
-				model.setVOwner(vehicleBean.getVOwner());
-				model.setVGearLockYn(vehicleBean.getVGearLockYn());
-				model.setVImmYn(vehicleBean.getVImmYn());
-				model.setVConcessReason(vehicleBean.getVConcessReason());
-				model.setVConcessPrct(vehicleBean.getVConcessPrct());
-				model.setVInsuredValue(vehicleBean.getVInsuredValue());
-				model.setVYear(vehicleBean.getVYear());
-				model.setVDdLong(vehicleBean.getVDdLong());
-				model.setVDdLat(vehicleBean.getVDdLat());
-				model.setVDdArea(vehicleBean.getVDdArea());
-				model.setVOnLong(vehicleBean.getVOnLong());
-				model.setVOnLat(vehicleBean.getVOnLat());
-				model.setVOnArea(vehicleBean.getVOnArea());
-				model.setVCompYrs(vehicleBean.getVCompYrs());
-				model.setVOdometer(vehicleBean.getVOdometer());
-				model.setVCrtdDt(vehicleBean.getVCrtdDt());
-				model.setVRegNum(vehicleBean.getVRegNum());
-				model.setVEngineNr(vehicleBean.getVEngineNr());
-				model.setVVin(vehicleBean.getVVin());
-				model.setVNoclaimYrs(vehicleBean.getVNoclaimYrs());
-				model.setIclubVehicleMaster(vehicleBean.getIclubVehicleMaster());
-				model.setIclubVehUsageType(vehicleBean.getIclubVehUsageType());
-				model.setIclubVehSecType(vehicleBean.getIclubVehSecType());
-				model.setIclubPerson(vehicleBean.getIclubPerson());
-				model.setIclubDriver(vehicleBean.getIclubDriver());
-				model.setIclubSecurityDevice(vehicleBean.getIclubSecurityDevice());
-				model.setIclubAccessTypeByVDdAccessTypeId(vehicleBean.getIclubAccessTypeByVDdAccessTypeId());
-				model.setIclubAccessTypeByVOnAccessTypeId(vehicleBean.getIclubAccessTypeByVOnAccessTypeId());
 				
 				IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 				vehicleBeans.add(vehicleBean);
@@ -583,6 +555,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setVRegNum(vehicleBean.getVRegNum());
 				model.setVEngineNr(vehicleBean.getVEngineNr());
 				model.setVVin(vehicleBean.getVVin());
+				model.setIclubCoverType(vehicleBean.getIclubCoverType());
 				model.setVNoclaimYrs(vehicleBean.getVNoclaimYrs());
 				model.setIclubVehicleMaster(vehicleBean.getIclubVehicleMaster());
 				model.setIclubVehUsageType(vehicleBean.getIclubVehUsageType());
@@ -1372,7 +1345,7 @@ public class IclubQuickQuoteController implements Serializable {
 		client.close();
 		
 		if (response.getStatusCode() == 0) {
-			addQuote(quoteBean, personBean);
+			addQuote(new IclubQuoteBean(), personBean);
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -1413,6 +1386,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubVehUsageType(bean.getIclubVehUsageType());
 				model.setIclubVehSecType(bean.getIclubVehSecType());
 				model.setIclubPerson(bean.getIclubPerson());
+				model.setIclubCoverType(bean.getIclubCoverType());
 				model.setIclubDriver(driverBean.getDId());
 				model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
 				model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
@@ -2288,6 +2262,7 @@ public class IclubQuickQuoteController implements Serializable {
 			vehicleBean.setIclubVehSecType(model.getIclubVehSecType());
 			vehicleBean.setIclubPerson(model.getIclubPerson());
 			vehicleBean.setIclubDriver(model.getIclubDriver());
+			vehicleBean.setIclubCoverType(model.getIclubCoverType());
 			vehicleBean.setIclubSecurityDevice(model.getIclubSecurityDevice());
 			vehicleBean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
 			vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
