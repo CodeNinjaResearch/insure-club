@@ -59,6 +59,18 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Usage Purpose :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
+								<f:selectItems value="#{iclubQuickQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="OdoMeter :" />
 						</div>
 						<div class="Container50 Responsive">
@@ -200,7 +212,7 @@
 						<div class="EmptyBox5" />
 					</p:panel>
 				</p:tab>
-				<p:tab id="qqSubVehSecDet" title="Security Details">
+				<p:tab id="qqSubVehSecDet" title="Security Details" rendered="false">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
@@ -241,7 +253,7 @@
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>
-				<p:tab id="qqSubVehOthersDet" title="Others">
+				<p:tab id="qqSubVehOthersDet" rendered="false" title="Others">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Owner :" />
@@ -296,18 +308,6 @@
 						</div>
 					</div>
 					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Usage Purpose :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubQuickQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuPurT" id="mnuPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" /> 
 				</p:tab>
 			</p:tabView>
 			<p:panel id="pnlAdd" rendered="#{iclubQuickQuoteController.showVehAddPanel}">
@@ -509,7 +509,7 @@
 						<div class="EmptyBox5" />
 					</p:panel>
 				</p:tab>
-				<p:tab id="qqSubVehSecDetMod" title="Security Details">
+				<p:tab id="qqSubVehSecDetMod" rendered="false" title="Security Details">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
@@ -550,7 +550,7 @@
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>
-				<p:tab id="qqSubVehOthDetMod" title="Others">
+				<p:tab id="qqSubVehOthDetMod" rendered="false" title="Others">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
