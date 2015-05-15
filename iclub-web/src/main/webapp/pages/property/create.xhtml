@@ -26,9 +26,10 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Thatch Type :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:selectOneMenu value="#{iclubPropertyController.bean.iclubThatchType}" widgetVar="mnuThat" id="mnuThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+			<p:selectOneMenu value="#{iclubPropertyController.bean.PThatchType}" widgetVar="mnuThat" id="mnuThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 				<f:selectItem itemLabel="Thatch Type" itemDisabled="true" />
-				<f:selectItems value="#{iclubPropertyController.thatchTypeBeans}" var="c" itemValue="#{c.ttId}" itemLabel="#{c.ttLongDesc}" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
 			</p:selectOneMenu>
 		</div>
 	</div>
