@@ -25,7 +25,8 @@ import za.co.iclub.pss.orm.bean.IclubSupplPerson;
  * @see za.co.iclub.pss.orm.bean.IclubSupplPerson
  * @author MyEclipse Persistence Tools
  */
-@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubSupplPersonDAO {
 	private static final Logger log = Logger.getLogger(IclubSupplPersonDAO.class);
 	// property constants

@@ -25,7 +25,8 @@ import za.co.iclub.pss.orm.bean.IclubPropUsageType;
  * @see za.co.iclub.pss.orm.bean.IclubPropUsageType
  * @author MyEclipse Persistence Tools
  */
-@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubPropUsageTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubPropUsageTypeDAO.class);
 	// property constants

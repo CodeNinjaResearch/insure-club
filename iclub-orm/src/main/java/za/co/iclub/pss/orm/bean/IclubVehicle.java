@@ -22,10 +22,11 @@ public class IclubVehicle implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5589854304614737861L;
+	private static final long serialVersionUID = 8258849716619007796L;
 	private String VId;
 	private IclubVehSecType iclubVehSecType;
 	private IclubVehicleType iclubVehicleType;
+	private IclubCoverType iclubCoverType;
 	private IclubAccessType iclubAccessTypeByVOnAccessTypeId;
 	private IclubVehUsageType iclubVehUsageType;
 	private IclubAccessType iclubAccessTypeByVDdAccessTypeId;
@@ -67,10 +68,11 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubVehSecType iclubVehSecType, IclubVehicleType iclubVehicleType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, String VModifiedYn, Date VCrtdDt) {
+	public IclubVehicle(String VId, IclubVehSecType iclubVehSecType, IclubVehicleType iclubVehicleType, IclubCoverType iclubCoverType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, String VModifiedYn, Date VCrtdDt) {
 		this.VId = VId;
 		this.iclubVehSecType = iclubVehSecType;
 		this.iclubVehicleType = iclubVehicleType;
+		this.iclubCoverType = iclubCoverType;
 		this.iclubAccessTypeByVOnAccessTypeId = iclubAccessTypeByVOnAccessTypeId;
 		this.iclubVehUsageType = iclubVehUsageType;
 		this.iclubAccessTypeByVDdAccessTypeId = iclubAccessTypeByVDdAccessTypeId;
@@ -130,6 +132,16 @@ public class IclubVehicle implements java.io.Serializable {
 
 	public void setIclubVehicleType(IclubVehicleType iclubVehicleType) {
 		this.iclubVehicleType = iclubVehicleType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "v_cover_type_id")
+	public IclubCoverType getIclubCoverType() {
+		return this.iclubCoverType;
+	}
+
+	public void setIclubCoverType(IclubCoverType iclubCoverType) {
+		this.iclubCoverType = iclubCoverType;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

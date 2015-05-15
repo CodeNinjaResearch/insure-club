@@ -26,7 +26,7 @@ public class IclubCoverType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7707226535184302700L;
+	private static final long serialVersionUID = -77748403945093293L;
 	private Long ctId;
 	private IclubPerson iclubPerson;
 	private IclubInsuranceItemType iclubInsuranceItemType;
@@ -35,6 +35,7 @@ public class IclubCoverType implements java.io.Serializable {
 	private String ctStatus;
 	private Date ctCrtdDt;
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
+	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 	private Set<IclubQuote> iclubQuotes = new HashSet<IclubQuote>(0);
 
 	// Constructors
@@ -49,7 +50,7 @@ public class IclubCoverType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubCoverType(Long ctId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc, String ctLongDesc, String ctStatus, Date ctCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubQuote> iclubQuotes) {
+	public IclubCoverType(Long ctId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc, String ctLongDesc, String ctStatus, Date ctCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubVehicle> iclubVehicles, Set<IclubQuote> iclubQuotes) {
 		this.ctId = ctId;
 		this.iclubPerson = iclubPerson;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
@@ -58,6 +59,7 @@ public class IclubCoverType implements java.io.Serializable {
 		this.ctStatus = ctStatus;
 		this.ctCrtdDt = ctCrtdDt;
 		this.iclubProperties = iclubProperties;
+		this.iclubVehicles = iclubVehicles;
 		this.iclubQuotes = iclubQuotes;
 	}
 
@@ -135,6 +137,15 @@ public class IclubCoverType implements java.io.Serializable {
 
 	public void setIclubProperties(Set<IclubProperty> iclubProperties) {
 		this.iclubProperties = iclubProperties;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubCoverType")
+	public Set<IclubVehicle> getIclubVehicles() {
+		return this.iclubVehicles;
+	}
+
+	public void setIclubVehicles(Set<IclubVehicle> iclubVehicles) {
+		this.iclubVehicles = iclubVehicles;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubCoverType")

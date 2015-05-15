@@ -25,7 +25,8 @@ import za.co.iclub.pss.orm.bean.IclubGeoLoc;
  * @see za.co.iclub.pss.orm.bean.IclubGeoLoc
  * @author MyEclipse Persistence Tools
  */
-@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubGeoLocDAO {
 	private static final Logger log = Logger.getLogger(IclubGeoLocDAO.class);
 	// property constants

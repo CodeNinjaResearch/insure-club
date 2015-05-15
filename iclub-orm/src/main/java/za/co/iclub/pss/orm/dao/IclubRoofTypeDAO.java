@@ -25,7 +25,8 @@ import za.co.iclub.pss.orm.bean.IclubRoofType;
  * @see za.co.iclub.pss.orm.bean.IclubRoofType
  * @author MyEclipse Persistence Tools
  */
-@Transactional@SuppressWarnings({ "unchecked", "rawtypes" })
+@Transactional
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubRoofTypeDAO {
 	private static final Logger log = Logger.getLogger(IclubRoofTypeDAO.class);
 	// property constants
