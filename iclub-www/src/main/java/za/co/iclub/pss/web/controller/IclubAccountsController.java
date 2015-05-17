@@ -167,7 +167,6 @@ public class IclubAccountsController implements Serializable {
 			loadBankMasterBeans(bankName);
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 	}
