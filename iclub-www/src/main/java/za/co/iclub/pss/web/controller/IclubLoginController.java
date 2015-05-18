@@ -1,5 +1,6 @@
 package za.co.iclub.pss.web.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,7 +26,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubLoginController")
 @SessionScoped
 public class IclubLoginController implements Serializable {
-
+	
 	private static final long serialVersionUID = 8092436101540887282L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubLoginController.class);
@@ -35,7 +36,18 @@ public class IclubLoginController implements Serializable {
 	private IclubLoginBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
-
+	
+	public String googleAction() {
+		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 	public String doIclubLogin() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: doIclubLogin");
 		if (!validateLogin()) {
@@ -56,9 +68,9 @@ public class IclubLoginController implements Serializable {
 						personClient.close();
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
-
+						
 						return "home";
-
+						
 					} else {
 						IclubWebHelper.addMessage("Person Profile Fetch Error - Contact Admin", FacesMessage.SEVERITY_ERROR);
 						return "";
@@ -76,14 +88,14 @@ public class IclubLoginController implements Serializable {
 			return "";
 		}
 	}
-
+	
 	public void doIclubLogout() {
 		IclubWebHelper.invalidateSession();
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
 		navigationHandler.handleNavigation(context, null, "/templates/home.xhtml?faces-redirect=true");
 	}
-
+	
 	public boolean validateLogin() {
 		boolean ret = false;
 		if (bean.getLName() == null || bean.getLName().trim().length() == 0) {
@@ -96,39 +108,39 @@ public class IclubLoginController implements Serializable {
 		}
 		return ret;
 	}
-
+	
 	public List<IclubLoginBean> getBeans() {
 		return beans;
 	}
-
+	
 	public void setBeans(List<IclubLoginBean> beans) {
 		this.beans = beans;
 	}
-
+	
 	public IclubLoginBean getBean() {
 		if (bean == null)
 			bean = new IclubLoginBean();
 		return bean;
 	}
-
+	
 	public void setBean(IclubLoginBean bean) {
 		this.bean = bean;
 	}
-
+	
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-
+	
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-
+	
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-
+	
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-
+	
 }
