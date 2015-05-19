@@ -30,7 +30,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubLoginService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubLoginService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubLoginService.class);
 	private IclubLoginDAO iclubLoginDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
@@ -38,7 +38,7 @@ public class IclubLoginService {
 	private IclubSecurityQuestionDAO iclubSecurityQuestionDAO;
 	private IclubRoleTypeDAO iclubRoleTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -47,22 +47,22 @@ public class IclubLoginService {
 	public ResponseModel add(IclubLoginModel model) {
 		try {
 			IclubLogin login = new IclubLogin();
-
+			
 			login.setLId(model.getLId());
 			login.setLCrtdDt(model.getLCrtdDt());
 			login.setLLastDate(model.getLLastDate());
 			login.setLName(model.getLName());
 			login.setLPasswd(model.getLPasswd());
 			login.setLSecAns(model.getLSecAns());
-			login.setIclubPersonByLCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()));
-			login.setIclubPersonByLPersonId(iclubPersonDAO.findById(model.getIclubPersonByLPersonId()));
-			login.setIclubRoleType(iclubRoleTypeDAO.findById(model.getIclubRoleType()));
-			login.setIclubSecurityQuestion(iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()));
-
+			login.setIclubPersonByLCrtdBy(model.getIclubPersonByLCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()) : null);
+			login.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId() != null ? iclubPersonDAO.findById(model.getIclubPersonByLPersonId()) : null);
+			login.setIclubRoleType(model.getIclubRoleType() != null ? iclubRoleTypeDAO.findById(model.getIclubRoleType()) : null);
+			login.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
+			
 			iclubLoginDAO.save(login);
-
+			
 			LOGGER.info("Save Success with ID :: " + login.getLId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -74,9 +74,9 @@ public class IclubLoginService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -85,22 +85,22 @@ public class IclubLoginService {
 	public ResponseModel mod(IclubLoginModel model) {
 		try {
 			IclubLogin login = new IclubLogin();
-
+			
 			login.setLId(model.getLId());
 			login.setLCrtdDt(model.getLCrtdDt());
 			login.setLLastDate(model.getLLastDate());
 			login.setLName(model.getLName());
 			login.setLPasswd(model.getLPasswd());
 			login.setLSecAns(model.getLSecAns());
-			login.setIclubPersonByLCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()));
-			login.setIclubPersonByLPersonId(iclubPersonDAO.findById(model.getIclubPersonByLPersonId()));
-			login.setIclubRoleType(iclubRoleTypeDAO.findById(model.getIclubRoleType()));
-			login.setIclubSecurityQuestion(iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()));
-
+			login.setIclubPersonByLCrtdBy(model.getIclubPersonByLCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()) : null);
+			login.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId() != null ? iclubPersonDAO.findById(model.getIclubPersonByLPersonId()) : null);
+			login.setIclubRoleType(model.getIclubRoleType() != null ? iclubRoleTypeDAO.findById(model.getIclubRoleType()) : null);
+			login.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
+			
 			iclubLoginDAO.merge(login);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getLId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -112,9 +112,9 @@ public class IclubLoginService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -129,7 +129,7 @@ public class IclubLoginService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
@@ -142,7 +142,7 @@ public class IclubLoginService {
 				for (Object object : loginmod) {
 					IclubLogin iclubLogin = (IclubLogin) object;
 					IclubLoginModel ibm = new IclubLoginModel();
-
+					
 					ibm.setLId(iclubLogin.getLId());
 					ibm.setLCrtdDt(iclubLogin.getLCrtdDt());
 					ibm.setLLastDate(iclubLogin.getLLastDate());
@@ -153,7 +153,7 @@ public class IclubLoginService {
 					ibm.setIclubPersonByLPersonId(iclubLogin.getIclubPersonByLPersonId() != null ? iclubLogin.getIclubPersonByLPersonId().getPId() : null);
 					ibm.setIclubRoleType(iclubLogin.getIclubRoleType() != null ? iclubLogin.getIclubRoleType().getRtId() : null);
 					ibm.setIclubSecurityQuestion(iclubLogin.getIclubSecurityQuestion() != null ? iclubLogin.getIclubSecurityQuestion().getSqId() : null);
-
+					
 					ret.add((T) ibm);
 				}
 			}
@@ -162,7 +162,7 @@ public class IclubLoginService {
 		}
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/person/login/{name}/{pwd}")
 	@Produces("application/json")
@@ -193,7 +193,7 @@ public class IclubLoginService {
 			return message;
 		}
 	}
-
+	
 	@GET
 	@Path("/person/{name}")
 	@Produces("application/json")
@@ -204,7 +204,7 @@ public class IclubLoginService {
 			List logins = iclubLoginDAO.findByProperty("LName", name);
 			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
 				IclubLogin login = (IclubLogin) logins.get(0);
-
+				
 				message.setLId(login.getLId());
 				message.setLCrtdDt(login.getLCrtdDt());
 				message.setLLastDate(login.getLLastDate());
@@ -216,14 +216,14 @@ public class IclubLoginService {
 				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
 				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
 				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
-
+				
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return message;
 	}
-
+	
 	@GET
 	@Path("/personId/{id}")
 	@Produces("application/json")
@@ -234,7 +234,7 @@ public class IclubLoginService {
 			List logins = iclubNamedQueryDAO.getIclubLoginByPersonId(id);
 			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
 				IclubLogin login = (IclubLogin) logins.get(0);
-
+				
 				message.setLId(login.getLId());
 				message.setLCrtdDt(login.getLCrtdDt());
 				message.setLLastDate(login.getLLastDate());
@@ -246,60 +246,60 @@ public class IclubLoginService {
 				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
 				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
 				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
-
+				
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return message;
 	}
-
+	
 	public IclubLoginDAO getIclubLoginDAO() {
 		return iclubLoginDAO;
 	}
-
+	
 	public void setIclubLoginDAO(IclubLoginDAO iclubLoginDAO) {
 		this.iclubLoginDAO = iclubLoginDAO;
 	}
-
+	
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-
+	
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-
+	
 	public IclubSecurityQuestionDAO getIclubSecurityQuestionDAO() {
 		return iclubSecurityQuestionDAO;
 	}
-
+	
 	public void setIclubSecurityQuestionDAO(IclubSecurityQuestionDAO iclubSecurityQuestionDAO) {
 		this.iclubSecurityQuestionDAO = iclubSecurityQuestionDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubRoleTypeDAO getIclubRoleTypeDAO() {
 		return iclubRoleTypeDAO;
 	}
-
+	
 	public void setIclubRoleTypeDAO(IclubRoleTypeDAO iclubRoleTypeDAO) {
 		this.iclubRoleTypeDAO = iclubRoleTypeDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 }

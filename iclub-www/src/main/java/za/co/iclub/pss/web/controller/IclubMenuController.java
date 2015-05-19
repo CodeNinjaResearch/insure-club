@@ -101,7 +101,8 @@ public class IclubMenuController implements Serializable {
 			String code = request.getParameter("code");
 			// format parameters to post
 			if (code != null) {
-				String urlParameters = "code=" + code + "&client_id=386352872692-uknquacomkku9e75tn2jgpjh5h27ognc.apps.googleusercontent.com" + "&client_secret=X1xK4cHAU2ewqmYk67eGYL0s" + "&redirect_uri=http://localhost:8080/iclub-www/Oauth2callback" + "&grant_type=authorization_code";
+				 request.removeAttribute("code");
+				String urlParameters = "code=" + code + "&client_id=386352872692-uknquacomkku9e75tn2jgpjh5h27ognc.apps.googleusercontent.com" + "&client_secret=X1xK4cHAU2ewqmYk67eGYL0s" + "&redirect_uri=http://localhost:8080/iclub-www/templates/home.xhtml" + "&grant_type=authorization_code";
 				
 				// post parameters
 				URL url = new URL("https://accounts.google.com/o/oauth2/token");
@@ -159,7 +160,7 @@ public class IclubMenuController implements Serializable {
 						model.setPEmail(data.getEmail());
 						model.setPFName(data.getName());
 						model.setPLName(data.getFamily_name());
-						model.setPGender(data.getGender());
+						model.setPGender(data.getGender() != null ? data.getGender().substring(0, 1).toUpperCase() : null);
 						model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
 						model.setIclubPerson(1 + "");
 						WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
@@ -168,7 +169,7 @@ public class IclubMenuController implements Serializable {
 						client.close();
 						
 						if (response.getStatusCode() == 0) {
-							
+							updatePassword(model);
 						} else {
 							IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 						}
@@ -212,6 +213,10 @@ public class IclubMenuController implements Serializable {
 			
 			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 			if (response.getStatusCode() == 0) {
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getIclubPersonByLPersonId());
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), model.getLName());
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/templates/home.xhtml?faces-redirect=true");
 				IclubWebHelper.addMessage("Person Registered successfully", FacesMessage.SEVERITY_INFO);
