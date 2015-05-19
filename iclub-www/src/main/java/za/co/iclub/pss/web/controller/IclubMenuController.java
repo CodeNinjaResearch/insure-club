@@ -101,8 +101,8 @@ public class IclubMenuController implements Serializable {
 			String code = request.getParameter("code");
 			// format parameters to post
 			if (code != null) {
-				 request.removeAttribute("code");
-				String urlParameters = "code=" + code + "&client_id=386352872692-uknquacomkku9e75tn2jgpjh5h27ognc.apps.googleusercontent.com" + "&client_secret=X1xK4cHAU2ewqmYk67eGYL0s" + "&redirect_uri=http://localhost:8080/iclub-www/templates/home.xhtml" + "&grant_type=authorization_code";
+				request.removeAttribute("code");
+				String urlParameters = "code=" + code + "&client_id=" + BUNDLE.getString("client_id") + "&client_secret=" + BUNDLE.getString("client_secret") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&grant_type=" + BUNDLE.getString("grant_type");
 				
 				// post parameters
 				URL url = new URL("https://accounts.google.com/o/oauth2/token");
@@ -127,7 +127,7 @@ public class IclubMenuController implements Serializable {
 				
 				// get User Info
 				try {
-					String callUrl = "https://www.google.com/m8/feeds/contacts/default/full?max-results=8&access_token=" + access_token;
+					String callUrl = "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token;
 					url = new URL(callUrl);
 					urlConn = url.openConnection();
 					outputString = "";
