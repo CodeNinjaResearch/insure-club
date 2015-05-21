@@ -748,7 +748,7 @@ public class IclubQuickQuoteController implements Serializable {
 			personBean.setPLat(markerPer.getLatlng().getLat());
 			personBean.setPLong(markerPer.getLatlng().getLng());
 		}
-		propertyBean.setPAddress(markerVeh.getTitle());
+		personBean.setPAddress(markerPer.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPer.getTitle()));
 	}
 	
@@ -801,11 +801,13 @@ public class IclubQuickQuoteController implements Serializable {
 		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
 			vehicleBean.setVOnLat(geoBean.getGlLat());
 			vehicleBean.setVOnLong(geoBean.getGlLong());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + geoBean.getGlLat() + ", Lng:" + geoBean.getGlLong()));
 		} else {
 			vehicleBean.setVOnLat(markerVeh.getLatlng().getLat());
 			vehicleBean.setVOnLong(markerVeh.getLatlng().getLng());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
+		
 	}
 	
 	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
@@ -856,7 +858,6 @@ public class IclubQuickQuoteController implements Serializable {
 			vehicleBean.setVOnLong(markerVeh.getLatlng().getLng());
 		}
 		vehicleBean.setVOnArea(markerVeh.getTitle());
-		vehicleBean.setVOnArea(markerVeh.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerVeh.getTitle()));
 	}
 	
@@ -870,6 +871,7 @@ public class IclubQuickQuoteController implements Serializable {
 			vehicleBean.setVDdLat(markerVehDd.getLatlng().getLat());
 			vehicleBean.setVDdLong(markerVehDd.getLatlng().getLng());
 		}
+		vehicleBean.setVDdArea(markerVehDd.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
 	}
 	
@@ -1379,6 +1381,7 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setVOdometer(bean.getVOdometer());
 				model.setVCrtdDt(bean.getVCrtdDt());
 				model.setVRegNum(bean.getVRegNum());
+				model.setVCompYrs(bean.getVCompYrs());
 				model.setVEngineNr(bean.getVEngineNr());
 				model.setVVin(bean.getVVin());
 				model.setVNoclaimYrs(bean.getVNoclaimYrs());

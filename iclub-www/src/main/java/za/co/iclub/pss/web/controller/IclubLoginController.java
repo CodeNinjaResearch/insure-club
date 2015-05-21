@@ -48,6 +48,18 @@ public class IclubLoginController implements Serializable {
 		return "";
 	}
 	
+	public String hotmailAction() {
+		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.signin%20wl.basic" + "&redirect_uri=http://localhost:8080/iclub-www/Oauth2callback" + "&response_type=code&client_id=000000004C15240C";
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+		// client_id=CLIENT_ID&scope=SCOPES&response_type=RESPONSE_TYPE&redirect_uri=REDIRECT_URL
+	}
+	
 	public String doIclubLogin() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: doIclubLogin");
 		if (!validateLogin()) {
