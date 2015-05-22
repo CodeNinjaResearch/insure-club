@@ -31,7 +31,7 @@
 	</bean>
 	
 	<bean id="socialAuthWebController" class="org.brickred.socialauth.spring.controller.SocialAuthWebController">
-		<constructor-arg value="http://loclahost/iclub-wwww" />
+		<constructor-arg value="http://ec2-52-74-52-135.ap-southeast-1.compute.amazonaws.com/iclub-wwww" />
 		<constructor-arg value="authSuccess.do" />
 		<constructor-arg value="jsp/accessDenied.jsp" />
 	</bean>

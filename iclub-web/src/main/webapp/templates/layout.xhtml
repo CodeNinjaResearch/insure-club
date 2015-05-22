@@ -7,8 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 	</f:facet>
-	<title>Insurance Club</title>
-	<h:outputScript name="js/layout.js" library="sentinel-layout" />
+	<title>PrimeFaces Spark</title>
+	<h:outputScript name="js/layout.js" library="spark-layout" />
 	<script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
 	<script type="text/javascript">
 		function geocodePer() {
@@ -34,12 +34,8 @@
         	$("#addRateEngineRangeDailog_modal").hide(); 
         	$("#addRateEngineRangeDailog").hide()
         	$("#addRateEngineRangeDailog_modal").hide(); 
-        	
         	 }
     }
-     
-
-     
 </script>
 	<h:outputText value="&lt;!--[if gte IE 9]&gt;" escape="false" />
 	<style type="text/css">
@@ -54,14 +50,26 @@
 	<h:form prependId="false" id="iclubFrm">
 		<!-- <ui:include src="top.xhtml" /> -->
 		<p:growl id="grlMsg" showDetail="true" showSummary="false" />
-		<ui:include src="menu.xhtml" />
-		<div id="layout-portlets-cover" class="fontRegular">
+		<div id="menu-mask"></div>
+		<div class="EmptyBox30"></div>
+		<ui:include src="layoutmenu.xhtml" />
+		<div id="layout-portlets-cover">
 			<ui:insert name="content">
-			</ui:insert>
+                Template
+            </ui:insert>
 		</div>
 	</h:form>
-	<h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
-	<h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
-	<h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+	<p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+		<f:facet name="start">
+			<p:graphicImage name="images/preloader.gif" library="spark-layout" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+	<h:outputStylesheet name="css/core-layout.css" library="spark-layout" />
+	<h:outputStylesheet name="css/font-awesome.css" library="spark-layout" />
+	<h:outputStylesheet name="css/animate.css" library="spark-layout" />
+	<h:outputStylesheet name="css/spark-layout#{themeView.color}.css" library="spark-layout" />
 </h:body>
 </html>

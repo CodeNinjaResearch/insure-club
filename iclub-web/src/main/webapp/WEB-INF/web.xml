@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-	<display-name>iclub-www</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+	<display-name>iclub-web</display-name>
 	<welcome-file-list>
 		<welcome-file>/templates/home.xhtml</welcome-file>
 	</welcome-file-list>
+	<!-- <context-param> <param-name>primefaces.THEME</param-name> <param-value>sentinel</param-value> </context-param> -->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>sentinel</param-value>
+		<param-value>spark#{themeView.color}</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+		<param-value>/WEB-INF/primefaces-spark.taglib.xml</param-value>
 	</context-param>
 	<context-param>
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
@@ -27,6 +29,19 @@
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
 		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
 	</filter>
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>Character Encoding Filter</filter-name>
+		<filter-class>za.co.iclub.pss.web.util.CharacterEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Character Encoding Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+
+
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -49,44 +64,5 @@
 		<param-value>Production</param-value>
 	</context-param>
 
-	<mime-mapping>
-		<extension>ttf</extension>
-		<mime-type>application/font-sfnt</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>woff</extension>
-		<mime-type>application/font-woff</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>eot</extension>
-		<mime-type>application/vnd.ms-fontobject</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>eot?#iefix</extension>
-		<mime-type>application/vnd.ms-fontobject</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>svg</extension>
-		<mime-type>image/svg+xml</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>svg#exosemibold</extension>
-		<mime-type>image/svg+xml</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>svg#exobolditalic</extension>
-		<mime-type>image/svg+xml</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>svg#exomedium</extension>
-		<mime-type>image/svg+xml</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>svg#exoregular</extension>
-		<mime-type>image/svg+xml</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>svg#fontawesomeregular</extension>
-		<mime-type>image/svg+xml</mime-type>
-	</mime-mapping>
+
 </web-app>
