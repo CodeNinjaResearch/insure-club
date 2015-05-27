@@ -7,10 +7,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<faces.version>2.2.8</faces.version>
-		<org.springframework.version>4.1.0.RELEASE</org.springframework.version>
+
 		<org.apache.cxf.version>2.7.10</org.apache.cxf.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
@@ -185,33 +186,7 @@
 			<artifactId>cxf-rt-ws-policy</artifactId>
 			<version>${org.apache.cxf.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${org.springframework.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -237,6 +212,18 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.11-beta2</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.brickred</groupId>
+			<artifactId>socialauth-spring</artifactId>
+			<version>2.0</version>
+		</dependency>
+<dependency>
+	<groupId>org.brickred</groupId>
+	<artifactId>socialauth</artifactId>
+	<version>4.0</version>
+</dependency> 
+
 	</dependencies>
 	<build>
 		<finalName>iclub-www</finalName>

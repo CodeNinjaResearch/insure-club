@@ -189,10 +189,6 @@ public class IclubMenuController implements Serializable {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		// catch (ServiceException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 		System.out.println("leaving doGet");
 	}
 	
