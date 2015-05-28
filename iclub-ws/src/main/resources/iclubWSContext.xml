@@ -509,6 +509,13 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
-
+	<bean id="IclubCohortInviteService" class="za.co.iclub.pss.ws.service.IclubCohortInviteService">
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+		<property name="iclubCohortInviteDAO" ref="IclubCohortInviteDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubNotificationTypeDAO" ref="IclubNotificationTypeDAO" />
+		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+	</bean>
 
 </beans>

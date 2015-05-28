@@ -94,6 +94,7 @@
 			<ref bean="IclubPropUsageTypeService" />
 			<ref bean="IclubVehUsageTypeService" />
 			<ref bean="IclubPropertyItemService" />
+			<ref bean="IclubCohortInviteService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
