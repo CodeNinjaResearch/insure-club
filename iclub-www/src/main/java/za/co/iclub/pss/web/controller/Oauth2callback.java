@@ -224,7 +224,6 @@ public class Oauth2callback extends HttpServlet {
 		} catch (IOException e) {
 			System.out.println(e);
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("leaving doGet");
