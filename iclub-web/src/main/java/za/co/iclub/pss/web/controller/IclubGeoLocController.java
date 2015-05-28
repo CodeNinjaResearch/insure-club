@@ -322,6 +322,7 @@ public class IclubGeoLocController implements Serializable {
 		return beans;
 	}
 
+	@SuppressWarnings("resource")
 	public void handleFileUpload(FileUploadEvent fue) {
 
 		try {

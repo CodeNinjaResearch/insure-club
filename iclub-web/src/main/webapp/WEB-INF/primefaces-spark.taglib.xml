@@ -8,7 +8,6 @@
     
     <tag>
 		<tag-name>menu</tag-name>
-		<description><![CDATA[Menu is a navigation component for Spark Layout.]]></description>
 		<component>
 			<component-type>org.primefaces.component.SparkMenu</component-type>
 			<renderer-type>org.primefaces.component.SparkMenuRenderer</renderer-type>
