@@ -99,7 +99,6 @@ public class Oauth2callback extends HttpServlet {
 				System.out.println(outputString);
 				GooglePojo data = new Gson().fromJson(outputString, GooglePojo.class);
 				System.out.println(data);
-				writer.close();
 				reader.close();
 			} catch (Exception e) {
 				e.printStackTrace();

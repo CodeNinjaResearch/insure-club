@@ -49,7 +49,15 @@
 		<url-pattern>/Oauth2callback</url-pattern>
 	</servlet-mapping>
 
-
+	<servlet>
+		<servlet-name>Oauth2Yahoocallback</servlet-name>
+		<servlet-class>za.co.iclub.pss.web.controller.Oauth2Yahoocallback</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Oauth2Yahoocallback</servlet-name>
+		<url-pattern>/Oauth2Yahoocallback</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>

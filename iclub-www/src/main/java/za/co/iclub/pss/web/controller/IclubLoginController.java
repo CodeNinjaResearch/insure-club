@@ -29,6 +29,7 @@ public class IclubLoginController implements Serializable {
 	
 	private static final long serialVersionUID = 8092436101540887282L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
+	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubLoginController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubLoginService/";
 	private static final String U_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPersonService/";
@@ -39,6 +40,16 @@ public class IclubLoginController implements Serializable {
 	
 	public String googleAction() {
 		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	public String yahooAction() {
+		String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us";
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {

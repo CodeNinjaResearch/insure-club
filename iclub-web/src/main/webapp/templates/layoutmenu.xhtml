@@ -4,7 +4,7 @@
 			<p:commandButton type="button" icon="fa fa-search Fs18 white" styleClass="Fright" />
 			<p:inputText placeholder="Search" styleClass="Fright" />
 		</f:facet>
-		<p:menuitem icon="fa fa-paint-brush" id="sm_home" value="Home" containerStyleClass="layout-menubar-active" />
+		<p:menuitem icon="fa fa-paint-brush" id="sm_home" value="Home" outcome="home" containerStyleClass="layout-menubar-active" />
 		<p:separator />
 		<p:menuitem icon="fa fa-paint-brush" id="sm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
 		<p:separator rendered="#{!iclubMenuController.userMenu}" />

@@ -19,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubCohort;
 import za.co.iclub.pss.orm.bean.IclubCohortClaim;
+import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 import za.co.iclub.pss.orm.bean.IclubCohortPerson;
+import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
@@ -31,14 +33,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubCohortService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubCohortService {
-
+	
 	private static final Logger LOGGER = Logger.getLogger(IclubCohortService.class);
 	private IclubCohortDAO iclubCohortDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubCohortTypeDAO iclubCohortTypeDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,9 +48,9 @@ public class IclubCohortService {
 	@Transactional
 	public ResponseModel add(IclubCohortModel model) {
 		try {
-
+			
 			IclubCohort iCC = new IclubCohort();
-
+			
 			iCC.setCId(model.getCId());
 			iCC.setCName(model.getCName());
 			iCC.setCEmail(model.getCEmail());
@@ -61,16 +63,16 @@ public class IclubCohortService {
 			iCC.setCCrtdDt(model.getCCrtdDt());
 			iCC.setIclubPersonByCPrimaryUserId(iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()));
 			iCC.setIclubPersonByCCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()));
-
+			
 			iclubCohortDAO.save(iCC);
-
+			
 			LOGGER.info("Save Success with ID :: " + iCC.getCId());
-
+			
 			ResponseModel message = new ResponseModel();
-
+			
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-
+			
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -79,9 +81,9 @@ public class IclubCohortService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -90,7 +92,7 @@ public class IclubCohortService {
 	public ResponseModel mod(IclubCohortModel model) {
 		try {
 			IclubCohort iCC = new IclubCohort();
-
+			
 			iCC.setCId(model.getCId());
 			iCC.setCName(model.getCName());
 			iCC.setCEmail(model.getCEmail());
@@ -103,11 +105,11 @@ public class IclubCohortService {
 			iCC.setCCrtdDt(model.getCCrtdDt());
 			iCC.setIclubPersonByCPrimaryUserId(iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()));
 			iCC.setIclubPersonByCCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()));
-
+			
 			iclubCohortDAO.merge(iCC);
-
+			
 			LOGGER.info("Save Success with ID :: " + model.getCId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -119,9 +121,9 @@ public class IclubCohortService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -136,119 +138,161 @@ public class IclubCohortService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubCohortModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubCohortDAO.findAll();
-			if(batmod!=null&& batmod.size()>0){
-			for (Object object : batmod) {
-				IclubCohort iclubC = (IclubCohort) object;
-				IclubCohortModel iCC = new IclubCohortModel();
-
-				iCC.setCId(iclubC.getCId());
-				iCC.setCName(iclubC.getCName());
-				iCC.setCEmail(iclubC.getCEmail());
-				iCC.setCInitDt(iclubC.getCInitDt());
-				iCC.setCFinalizeDt(iclubC.getCFinalizeDt());
-				iCC.setCTotalContrib(iclubC.getCTotalContrib());
-				iCC.setCCollectedContrib(iclubC.getCCollectedContrib());
-				iCC.setCCurMemberCnt(iclubC.getCCurMemberCnt());
-				iCC.setCCrtdDt(iclubC.getCCrtdDt());
-				iCC.setIclubCohortType(iclubC.getIclubCohortType() != null ? (iclubC.getIclubCohortType()).getCtId() : null);
-				iCC.setCCrtdDt(iclubC.getCCrtdDt());
-				iCC.setIclubPersonByCPrimaryUserId(iclubC.getIclubPersonByCPrimaryUserId() != null ? (iclubC.getIclubPersonByCPrimaryUserId()).getPId() : null);
-				iCC.setIclubPersonByCCrtdBy(iclubC.getIclubPersonByCCrtdBy() != null ? (iclubC.getIclubPersonByCCrtdBy()).getPId() : null);
-
-				if (iclubC.getIclubCohortClaims() != null && iclubC.getIclubCohortClaims().size() > 0) {
-					String[] iclubCohortClaims = new String[iclubC.getIclubCohortClaims().size()];
-					int i = 0;
-					for (IclubCohortClaim iclubCohortClaim : iclubC.getIclubCohortClaims()) {
-						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
-						i++;
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubCohort iclubC = (IclubCohort) object;
+					IclubCohortModel iCC = new IclubCohortModel();
+					
+					iCC.setCId(iclubC.getCId());
+					iCC.setCName(iclubC.getCName());
+					iCC.setCEmail(iclubC.getCEmail());
+					iCC.setCInitDt(iclubC.getCInitDt());
+					iCC.setCFinalizeDt(iclubC.getCFinalizeDt());
+					iCC.setCTotalContrib(iclubC.getCTotalContrib());
+					iCC.setCCollectedContrib(iclubC.getCCollectedContrib());
+					iCC.setCCurMemberCnt(iclubC.getCCurMemberCnt());
+					iCC.setCCrtdDt(iclubC.getCCrtdDt());
+					iCC.setIclubCohortType(iclubC.getIclubCohortType() != null ? (iclubC.getIclubCohortType()).getCtId() : null);
+					iCC.setCCrtdDt(iclubC.getCCrtdDt());
+					iCC.setIclubPersonByCPrimaryUserId(iclubC.getIclubPersonByCPrimaryUserId() != null ? (iclubC.getIclubPersonByCPrimaryUserId()).getPId() : null);
+					iCC.setIclubPersonByCCrtdBy(iclubC.getIclubPersonByCCrtdBy() != null ? (iclubC.getIclubPersonByCCrtdBy()).getPId() : null);
+					
+					if (iclubC.getIclubCohortClaims() != null && iclubC.getIclubCohortClaims().size() > 0) {
+						String[] iclubCohortClaims = new String[iclubC.getIclubCohortClaims().size()];
+						int i = 0;
+						for (IclubCohortClaim iclubCohortClaim : iclubC.getIclubCohortClaims()) {
+							iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+							i++;
+						}
+						iCC.setIclubCohortClaims(iclubCohortClaims);
 					}
-					iCC.setIclubCohortClaims(iclubCohortClaims);
-				}
-
-				if (iclubC.getIclubCohortPersons() != null && iclubC.getIclubCohortPersons().size() > 0) {
-					String[] iclubCohortPersons = new String[iclubC.getIclubCohortPersons().size()];
-					int i = 0;
-					for (IclubCohortPerson iclubCohortPerson : iclubC.getIclubCohortPersons()) {
-						iclubCohortPersons[i] = iclubCohortPerson.getCpId();
-						i++;
+					
+					if (iclubC.getIclubCohortPersons() != null && iclubC.getIclubCohortPersons().size() > 0) {
+						String[] iclubCohortPersons = new String[iclubC.getIclubCohortPersons().size()];
+						int i = 0;
+						for (IclubCohortPerson iclubCohortPerson : iclubC.getIclubCohortPersons()) {
+							iclubCohortPersons[i] = iclubCohortPerson.getCpId();
+							i++;
+						}
+						iCC.setIclubCohortPersons(iclubCohortPersons);
 					}
-					iCC.setIclubCohortPersons(iclubCohortPersons);
+					
+					if (iclubC.getIclubPersons() != null && iclubC.getIclubPersons().size() > 0) {
+						String[] iclubPersons = new String[iclubC.getIclubPersons().size()];
+						int i = 0;
+						for (IclubPerson iclubPerson : iclubC.getIclubPersons()) {
+							iclubPersons[i] = iclubPerson.getPId();
+							i++;
+						}
+						iCC.setIclubPersons(iclubPersons);
+					}
+					
+					if (iclubC.getIclubCohortInvites() != null && iclubC.getIclubCohortInvites().size() > 0) {
+						String[] iclubCohortInvites = new String[iclubC.getIclubCohortInvites().size()];
+						int i = 0;
+						for (IclubCohortInvite iclubCohortInvite : iclubC.getIclubCohortInvites()) {
+							iclubCohortInvites[i] = iclubCohortInvite.getCiId();
+							i++;
+						}
+						iCC.setIclubCohortInvites(iclubCohortInvites);
+					}
+					
+					ret.add((T) iCC);
 				}
-
-				ret.add((T) iCC);
-			}}
+			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubCohortModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubCohort.class.getSimpleName());
-			if(batmod!=null&& batmod.size()>0){
-			for (Object object : batmod) {
-				IclubCohort iclubC = (IclubCohort) object;
-				IclubCohortModel iCC = new IclubCohortModel();
-
-				iCC.setCId(iclubC.getCId());
-				iCC.setCName(iclubC.getCName());
-				iCC.setCEmail(iclubC.getCEmail());
-				iCC.setCInitDt(iclubC.getCInitDt());
-				iCC.setCFinalizeDt(iclubC.getCFinalizeDt());
-				iCC.setCTotalContrib(iclubC.getCTotalContrib());
-				iCC.setCCollectedContrib(iclubC.getCCollectedContrib());
-				iCC.setCCurMemberCnt(iclubC.getCCurMemberCnt());
-				iCC.setIclubCohortType(iclubC.getIclubCohortType() != null ? (iclubC.getIclubCohortType()).getCtId() : null);
-				iCC.setCCrtdDt(iclubC.getCCrtdDt());
-				iCC.setIclubPersonByCPrimaryUserId(iclubC.getIclubPersonByCPrimaryUserId() != null ? (iclubC.getIclubPersonByCPrimaryUserId()).getPId() : null);
-				iCC.setIclubPersonByCCrtdBy(iclubC.getIclubPersonByCCrtdBy() != null ? (iclubC.getIclubPersonByCCrtdBy()).getPId() : null);
-
-				if (iclubC.getIclubCohortClaims() != null && iclubC.getIclubCohortClaims().size() > 0) {
-					String[] iclubCohortClaims = new String[iclubC.getIclubCohortClaims().size()];
-					int i = 0;
-					for (IclubCohortClaim iclubCohortClaim : iclubC.getIclubCohortClaims()) {
-						iclubCohortClaims[i] = iclubCohortClaim.getCcId();
-						i++;
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubCohort iclubC = (IclubCohort) object;
+					IclubCohortModel iCC = new IclubCohortModel();
+					
+					iCC.setCId(iclubC.getCId());
+					iCC.setCName(iclubC.getCName());
+					iCC.setCEmail(iclubC.getCEmail());
+					iCC.setCInitDt(iclubC.getCInitDt());
+					iCC.setCFinalizeDt(iclubC.getCFinalizeDt());
+					iCC.setCTotalContrib(iclubC.getCTotalContrib());
+					iCC.setCCollectedContrib(iclubC.getCCollectedContrib());
+					iCC.setCCurMemberCnt(iclubC.getCCurMemberCnt());
+					iCC.setIclubCohortType(iclubC.getIclubCohortType() != null ? (iclubC.getIclubCohortType()).getCtId() : null);
+					iCC.setCCrtdDt(iclubC.getCCrtdDt());
+					iCC.setIclubPersonByCPrimaryUserId(iclubC.getIclubPersonByCPrimaryUserId() != null ? (iclubC.getIclubPersonByCPrimaryUserId()).getPId() : null);
+					iCC.setIclubPersonByCCrtdBy(iclubC.getIclubPersonByCCrtdBy() != null ? (iclubC.getIclubPersonByCCrtdBy()).getPId() : null);
+					
+					if (iclubC.getIclubCohortClaims() != null && iclubC.getIclubCohortClaims().size() > 0) {
+						String[] iclubCohortClaims = new String[iclubC.getIclubCohortClaims().size()];
+						int i = 0;
+						for (IclubCohortClaim iclubCohortClaim : iclubC.getIclubCohortClaims()) {
+							iclubCohortClaims[i] = iclubCohortClaim.getCcId();
+							i++;
+						}
+						iCC.setIclubCohortClaims(iclubCohortClaims);
 					}
-					iCC.setIclubCohortClaims(iclubCohortClaims);
-				}
-
-				if (iclubC.getIclubCohortPersons() != null && iclubC.getIclubCohortPersons().size() > 0) {
-					String[] iclubCohortPersons = new String[iclubC.getIclubCohortPersons().size()];
-					int i = 0;
-					for (IclubCohortPerson iclubCohortPerson : iclubC.getIclubCohortPersons()) {
-						iclubCohortPersons[i] = iclubCohortPerson.getCpId();
-						i++;
+					
+					if (iclubC.getIclubCohortPersons() != null && iclubC.getIclubCohortPersons().size() > 0) {
+						String[] iclubCohortPersons = new String[iclubC.getIclubCohortPersons().size()];
+						int i = 0;
+						for (IclubCohortPerson iclubCohortPerson : iclubC.getIclubCohortPersons()) {
+							iclubCohortPersons[i] = iclubCohortPerson.getCpId();
+							i++;
+						}
+						iCC.setIclubCohortPersons(iclubCohortPersons);
 					}
-					iCC.setIclubCohortPersons(iclubCohortPersons);
+					
+					if (iclubC.getIclubPersons() != null && iclubC.getIclubPersons().size() > 0) {
+						String[] iclubPersons = new String[iclubC.getIclubPersons().size()];
+						int i = 0;
+						for (IclubPerson iclubPerson : iclubC.getIclubPersons()) {
+							iclubPersons[i] = iclubPerson.getPId();
+							i++;
+						}
+						iCC.setIclubPersons(iclubPersons);
+					}
+					
+					if (iclubC.getIclubCohortInvites() != null && iclubC.getIclubCohortInvites().size() > 0) {
+						String[] iclubCohortInvites = new String[iclubC.getIclubCohortInvites().size()];
+						int i = 0;
+						for (IclubCohortInvite iclubCohortInvite : iclubC.getIclubCohortInvites()) {
+							iclubCohortInvites[i] = iclubCohortInvite.getCiId();
+							i++;
+						}
+						iCC.setIclubCohortInvites(iclubCohortInvites);
+					}
+					
+					ret.add((T) iCC);
 				}
-
-				ret.add((T) iCC);
-			}}
+			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -257,7 +301,7 @@ public class IclubCohortService {
 		IclubCohortModel model = new IclubCohortModel();
 		try {
 			IclubCohort bean = iclubCohortDAO.findById(id);
-
+			
 			model.setCId(bean.getCId());
 			model.setCId(bean.getCId());
 			model.setCName(bean.getCName());
@@ -280,7 +324,7 @@ public class IclubCohortService {
 				}
 				model.setIclubCohortClaims(iclubCohortClaims);
 			}
-
+			
 			if (bean.getIclubCohortPersons() != null && bean.getIclubCohortPersons().size() > 0) {
 				String[] iclubCohortPersons = new String[bean.getIclubCohortPersons().size()];
 				int i = 0;
@@ -290,51 +334,71 @@ public class IclubCohortService {
 				}
 				model.setIclubCohortPersons(iclubCohortPersons);
 			}
-
+			
+			if (bean.getIclubPersons() != null && bean.getIclubPersons().size() > 0) {
+				String[] iclubPersons = new String[bean.getIclubPersons().size()];
+				int i = 0;
+				for (IclubPerson iclubPerson : bean.getIclubPersons()) {
+					iclubPersons[i] = iclubPerson.getPId();
+					i++;
+				}
+				model.setIclubPersons(iclubPersons);
+			}
+			
+			if (bean.getIclubCohortInvites() != null && bean.getIclubCohortInvites().size() > 0) {
+				String[] iclubCohortInvites = new String[bean.getIclubCohortInvites().size()];
+				int i = 0;
+				for (IclubCohortInvite iclubCohortInvite : bean.getIclubCohortInvites()) {
+					iclubCohortInvites[i] = iclubCohortInvite.getCiId();
+					i++;
+				}
+				model.setIclubCohortInvites(iclubCohortInvites);
+			}
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	public IclubCohortDAO getIclubCohortTypeDAO() {
 		return iclubCohortDAO;
 	}
-
+	
 	public void setIclubCohortDAO(IclubCohortDAO iclubCohortDAO) {
 		this.iclubCohortDAO = iclubCohortDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-
+	
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 	public IclubCohortTypeDAO getIclubCohortTypeTypeDAO() {
 		return iclubCohortTypeDAO;
 	}
-
+	
 	public void setIclubCohortTypeDAO(IclubCohortTypeDAO iclubCohortTypeDAO) {
 		this.iclubCohortTypeDAO = iclubCohortTypeDAO;
 	}
-
+	
 }
