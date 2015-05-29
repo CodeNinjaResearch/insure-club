@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable reflow="true" widgetVar="dtCohortCont" value="#{iclubCohortController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohortes Available">
+		<p:column headerText="Unique Id">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.CId}" />
+		</p:column>
+		<p:column headerText="Email">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.CEmail}" />
+		</p:column>
+		<p:column headerText="Name">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.CName}" />
+		</p:column>
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
+		</p:column>
+		<p:column headerText="Type">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubCohortType}">
+				<f:selectItem itemLabel="Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubCohortController.cohortTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
+			</p:selectOneMenu>
+		</p:column>
+		<p:column headerText="Created By">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPersonByCCrtdBy}" />
+		</p:column>
+		<p:column>
+			<p:commandButton id="btnCohortEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubCohortController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubCohortController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubCohortController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

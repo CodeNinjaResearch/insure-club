@@ -1,0 +1,25 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubCohortController.initializePage}" name="onload" autoRun="true" update="pnlCohortContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlCohortCont">
+				<p:panel id="pnlCohortContMenu">
+					<p:commandLink value="View Cohort" actionListener="#{iclubCohortController.showView}" update="pnlCohortContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create Cohort" actionListener="#{iclubCohortController.showCreate}" update="pnlCohortContDet" />
+				</p:panel>
+				<p:panel id="pnlCohortContDet">
+					<p:panel id="pnlCohortContView" rendered="#{iclubCohortController.showViewCont}">
+						<ui:include src="/pages/admin/cohorts/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlCohortContCreate" rendered="#{iclubCohortController.showCreateCont}">
+						<ui:include src="/pages/admin/cohorts/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlCohortContEdit" rendered="#{iclubCohortController.showEditCont}">
+						<ui:include src="/pages/admin/cohorts/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

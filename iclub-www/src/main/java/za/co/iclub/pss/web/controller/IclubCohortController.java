@@ -19,9 +19,11 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.web.bean.IclubCohortBean;
+import za.co.iclub.pss.web.bean.IclubCohortTypeBean;
 import za.co.iclub.pss.web.bean.IclubPersonBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubCohortModel;
+import za.co.iclub.pss.ws.model.IclubCohortTypeModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -33,10 +35,12 @@ public class IclubCohortController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubCohortController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCohortService/";
+	private static final String CHT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCohortTypeService/";
 	private static final String P_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPersonService/";
 	private List<IclubCohortBean> beans;
 	private List<IclubCohortBean> dashBoardBeans;
 	private List<IclubPersonBean> personBeans;
+	private List<IclubCohortTypeBean> cohortTypeBeans;
 	private IclubCohortBean bean;
 	private boolean showCreateCont;
 	private boolean showViewCont;
@@ -162,7 +166,7 @@ public class IclubCohortController implements Serializable {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubCohortModel model = new IclubCohortModel();
 				
-				model.setCId(UUID.randomUUID().toString());
+				bean.setCId(UUID.randomUUID().toString());
 				model.setCId(bean.getCId());
 				model.setCName(bean.getCName());
 				model.setCEmail(bean.getCEmail());
@@ -407,6 +411,32 @@ public class IclubCohortController implements Serializable {
 	
 	public void setPersonBeans(List<IclubPersonBean> personBeans) {
 		this.personBeans = personBeans;
+	}
+	
+	public List<IclubCohortTypeBean> getCohortTypeBeans() {
+		
+		WebClient client = IclubWebHelper.createCustomClient(CHT_BASE_URL + "list");
+		Collection<? extends IclubCohortTypeModel> models = new ArrayList<IclubCohortTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCohortTypeModel.class));
+		client.close();
+		cohortTypeBeans = new ArrayList<IclubCohortTypeBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubCohortTypeModel model : models) {
+				
+				IclubCohortTypeBean bean = new IclubCohortTypeBean();
+				
+				bean.setCtId(model.getCtId());
+				bean.setCtLongDesc(model.getCtLongDesc());
+				bean.setCtShortDesc(model.getCtShortDesc());
+				bean.setCtStatus(model.getCtStatus());
+				
+				cohortTypeBeans.add(bean);
+			}
+		}
+		return cohortTypeBeans;
+	}
+	
+	public void setCohortTypeBeans(List<IclubCohortTypeBean> cohortTypeBeans) {
+		this.cohortTypeBeans = cohortTypeBeans;
 	}
 	
 }

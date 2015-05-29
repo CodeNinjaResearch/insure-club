@@ -59,10 +59,10 @@ public class IclubCohortService {
 			iCC.setCTotalContrib(model.getCTotalContrib());
 			iCC.setCCollectedContrib(model.getCCollectedContrib());
 			iCC.setCCurMemberCnt(model.getCCurMemberCnt());
-			iCC.setIclubCohortType(iclubCohortTypeDAO.findById(model.getIclubCohortType()));
+			iCC.setIclubCohortType(model.getIclubCohortType() != null ? iclubCohortTypeDAO.findById(model.getIclubCohortType()) : null);
 			iCC.setCCrtdDt(model.getCCrtdDt());
-			iCC.setIclubPersonByCPrimaryUserId(iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()));
-			iCC.setIclubPersonByCCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()));
+			iCC.setIclubPersonByCPrimaryUserId(model.getIclubPersonByCPrimaryUserId() != null ? iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()) : null);
+			iCC.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()) : null);
 			
 			iclubCohortDAO.save(iCC);
 			
@@ -101,10 +101,10 @@ public class IclubCohortService {
 			iCC.setCTotalContrib(model.getCTotalContrib());
 			iCC.setCCollectedContrib(model.getCCollectedContrib());
 			iCC.setCCurMemberCnt(model.getCCurMemberCnt());
-			iCC.setIclubCohortType(iclubCohortTypeDAO.findById(model.getIclubCohortType()));
+			iCC.setIclubCohortType(model.getIclubCohortType() != null ? iclubCohortTypeDAO.findById(model.getIclubCohortType()) : null);
 			iCC.setCCrtdDt(model.getCCrtdDt());
-			iCC.setIclubPersonByCPrimaryUserId(iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()));
-			iCC.setIclubPersonByCCrtdBy(iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()));
+			iCC.setIclubPersonByCPrimaryUserId(model.getIclubPersonByCPrimaryUserId() != null ? iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()) : null);
+			iCC.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()) : null);
 			
 			iclubCohortDAO.merge(iCC);
 			
