@@ -1,6 +1,7 @@
 package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -67,6 +68,51 @@ public class IclubCohortService {
 			iclubCohortDAO.save(iCC);
 			
 			LOGGER.info("Save Success with ID :: " + iCC.getCId());
+			
+			ResponseModel message = new ResponseModel();
+			
+			message.setStatusCode(0);
+			message.setStatusDesc("Success");
+			
+			return message;
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			ResponseModel message = new ResponseModel();
+			message.setStatusCode(1);
+			message.setStatusDesc(e.getMessage());
+			return message;
+		}
+		
+	}
+	
+	@POST
+	@Path("/addList")
+	@Consumes("application/json")
+	@Produces("application/json")
+	@Transactional
+	public ResponseModel addList(Collection<? extends IclubCohortModel> models) {
+		try {
+			
+			for (IclubCohortModel model : models) {
+				IclubCohort iCC = new IclubCohort();
+				
+				iCC.setCId(model.getCId());
+				iCC.setCName(model.getCName());
+				iCC.setCEmail(model.getCEmail());
+				iCC.setCInitDt(model.getCInitDt());
+				iCC.setCFinalizeDt(model.getCFinalizeDt());
+				iCC.setCTotalContrib(model.getCTotalContrib());
+				iCC.setCCollectedContrib(model.getCCollectedContrib());
+				iCC.setCCurMemberCnt(model.getCCurMemberCnt());
+				iCC.setIclubCohortType(model.getIclubCohortType() != null ? iclubCohortTypeDAO.findById(model.getIclubCohortType()) : null);
+				iCC.setCCrtdDt(model.getCCrtdDt());
+				iCC.setIclubPersonByCPrimaryUserId(model.getIclubPersonByCPrimaryUserId() != null ? iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()) : null);
+				iCC.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()) : null);
+				
+				iclubCohortDAO.save(iCC);
+				
+				LOGGER.info("Save Success with ID :: " + iCC.getCId());
+			}
 			
 			ResponseModel message = new ResponseModel();
 			

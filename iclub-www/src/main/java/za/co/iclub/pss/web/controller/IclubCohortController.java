@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -12,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -27,6 +29,13 @@ import za.co.iclub.pss.ws.model.IclubCohortTypeModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
+import com.google.gdata.client.contacts.ContactsService;
+import com.google.gdata.data.contacts.ContactEntry;
+import com.google.gdata.data.contacts.ContactFeed;
+import com.google.gdata.data.extensions.Email;
+import com.google.gdata.data.extensions.Name;
+import com.google.gdata.data.extensions.PhoneNumber;
+
 @ManagedBean(name = "iclubCohortController")
 @SessionScoped
 public class IclubCohortController implements Serializable {
@@ -41,6 +50,8 @@ public class IclubCohortController implements Serializable {
 	private List<IclubCohortBean> dashBoardBeans;
 	private List<IclubPersonBean> personBeans;
 	private List<IclubCohortTypeBean> cohortTypeBeans;
+	private List<IclubCohortBean> selectedBeans;
+	private List<IclubCohortBean> cohortsBeans;
 	private IclubCohortBean bean;
 	private boolean showCreateCont;
 	private boolean showViewCont;
@@ -159,6 +170,56 @@ public class IclubCohortController implements Serializable {
 		bean = new IclubCohortBean();
 	}
 	
+	public void addIclubCohorts() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohort");
+		try {
+			if (validateForm(true)) {
+				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "addList");
+				List<IclubCohortModel> models = new ArrayList<IclubCohortModel>();
+				if (selectedBeans != null && selectedBeans.size() > 0)
+				
+				{
+					for (IclubCohortBean bean : selectedBeans) {
+						IclubCohortModel model = new IclubCohortModel();
+						
+						model.setCId(bean.getCId());
+						model.setCName(bean.getCName());
+						model.setCEmail(bean.getCEmail());
+						model.setCInitDt(bean.getCInitDt());
+						model.setCFinalizeDt(bean.getCFinalizeDt());
+						model.setCTotalContrib(bean.getCTotalContrib());
+						model.setCCollectedContrib(bean.getCCollectedContrib());
+						model.setCCurMemberCnt(bean.getCCurMemberCnt());
+						model.setIclubCohortType(bean.getIclubCohortType());
+						model.setIclubPersonByCPrimaryUserId(bean.getIclubPersonByCPrimaryUserId());
+						model.setIclubPersonByCCrtdBy(getSessionUserId());
+						model.setCCrtdDt(new Date(System.currentTimeMillis()));
+						models.add(model);
+					}
+				} else {
+					IclubWebHelper.addMessage("Select one Row", FacesMessage.SEVERITY_INFO);
+					return;
+				}
+				
+				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).postCollection(models, IclubCohortModel.class, ResponseModel.class);
+				client.close();
+				if (response.getStatusCode() == 0) {
+					for (IclubCohortBean bean : selectedBeans) {
+						cohortsBeans.remove(bean);
+					}
+					IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					viewParam = 1l;
+					showView();
+				} else {
+					IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+	
 	public void addIclubCohort() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohort");
 		try {
@@ -247,6 +308,52 @@ public class IclubCohortController implements Serializable {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+	
+	public void setIclubCohortInvite(String access_token) {
+		try {
+			
+			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
+			
+			ContactsService myService = new ContactsService("iclub");
+			URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
+			ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
+			// Print the results
+			
+			for (ContactEntry entry : resultFeed.getEntries()) {
+				IclubCohortBean bean = new IclubCohortBean();
+				bean.setCId(UUID.randomUUID().toString());
+				if (entry.hasName()) {
+					if (entry.hasPhoneNumbers()) {
+						for (PhoneNumber phnum : entry.getPhoneNumbers()) {
+							phnum.getPhoneNumber();
+						}
+					}
+					Name name = entry.getName();
+					if (name.hasFullName()) {
+						String fullNameToDisplay = name.getFullName().getValue();
+						if (name.getFullName().hasYomi()) {
+							fullNameToDisplay += " (" + name.getFullName().getYomi() + ")";
+						}
+						bean.setCName(fullNameToDisplay);
+					}
+				}
+				for (Email email : entry.getEmailAddresses()) {
+					System.out.print(" " + email.getAddress());
+					if (email.getAddress() != null) {
+						bean.setCEmail(email.getAddress());
+					}
+					if (email.getRel() == null && email.getLabel() != null) {
+						bean.setCEmail(email.getLabel());
+					}
+				}
+				
+				cohortsBeans.add(bean);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 	
@@ -437,6 +544,36 @@ public class IclubCohortController implements Serializable {
 	
 	public void setCohortTypeBeans(List<IclubCohortTypeBean> cohortTypeBeans) {
 		this.cohortTypeBeans = cohortTypeBeans;
+	}
+	
+	public List<IclubCohortBean> getSelectedBeans() {
+		if (selectedBeans == null) {
+			selectedBeans = new ArrayList<IclubCohortBean>();
+		}
+		return selectedBeans;
+	}
+	
+	public void setSelectedBeans(List<IclubCohortBean> selectedBeans) {
+		this.selectedBeans = selectedBeans;
+	}
+	
+	public List<IclubCohortBean> getCohortsBeans() {
+		if (cohortsBeans == null) {
+			cohortsBeans = new ArrayList<IclubCohortBean>();
+		}
+		
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		
+		if (request.getParameter("key") != null) {
+			String access_token = (String) request.getParameter("key");
+			request.removeAttribute("key");
+			setIclubCohortInvite(access_token);
+		}
+		return cohortsBeans;
+	}
+	
+	public void setCohortsBeans(List<IclubCohortBean> cohortsBeans) {
+		this.cohortsBeans = cohortsBeans;
 	}
 	
 }

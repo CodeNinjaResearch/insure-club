@@ -28,15 +28,15 @@ import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import za.co.iclub.pss.web.bean.GooglePojo;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubLoginModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 @ManagedBean(name = "iclubMenuController")
 @SessionScoped
@@ -111,14 +111,13 @@ public class IclubMenuController implements Serializable {
 				OutputStreamWriter writer = new OutputStreamWriter(urlConn.getOutputStream());
 				writer.write(urlParameters);
 				writer.flush();
-				
+				writer.close();
 				// get output in outputString
 				String line, outputString = "";
 				BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 				while ((line = reader.readLine()) != null) {
 					outputString += line;
 				}
-				System.out.println(outputString);
 				
 				// get Access Token
 				JsonObject json = (JsonObject) new JsonParser().parse(outputString);
@@ -149,9 +148,7 @@ public class IclubMenuController implements Serializable {
 					while ((line = reader.readLine()) != null) {
 						outputString += line;
 					}
-					System.out.println(outputString);
 					GooglePojo data = new Gson().fromJson(outputString, GooglePojo.class);
-					writer.close();
 					reader.close();
 					
 					if (data != null && data.getEmail() != null) {
@@ -169,7 +166,8 @@ public class IclubMenuController implements Serializable {
 						client.close();
 						
 						if (response.getStatusCode() == 0) {
-							updatePassword(model);
+							updatePassword(model, access_token);
+							
 						} else {
 							IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 						}
@@ -192,7 +190,7 @@ public class IclubMenuController implements Serializable {
 		System.out.println("leaving doGet");
 	}
 	
-	public ResponseModel updatePassword(IclubPersonModel personModel) {
+	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: updatePassword");
 		try {
 			
@@ -214,7 +212,7 @@ public class IclubMenuController implements Serializable {
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/templates/home.xhtml?faces-redirect=true");
+				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&key=" + access_token);
 				IclubWebHelper.addMessage("Person Registered successfully", FacesMessage.SEVERITY_INFO);
 			} else {
 				IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);

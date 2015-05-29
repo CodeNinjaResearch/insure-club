@@ -1,0 +1,23 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<p:panel id="qqPanel">
+			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedBeans}" rowKey="#{bean.CId}" value="#{iclubCohortController.cohortsBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<f:facet name="footer">
+				</f:facet>
+				<p:column selectionMode="multiple" style="width:16px;text-align:center" />
+				<p:column headerText="Unique Id">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.CId}" />
+				</p:column>
+				<p:column headerText="Email">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.CEmail}" />
+				</p:column>
+				<p:column headerText="Name">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.CName}" />
+				</p:column>
+				<f:facet name="footer">
+					<p:commandButton process="dtQuoteCont" update=":iclubFrm:grlMsg,:iclubFrm:qqPanel" ajax="false" action="#{iclubCohortController.addIclubCohorts}" icon="ui-icon-search" value="Save" />
+				</f:facet>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>
