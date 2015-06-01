@@ -89,10 +89,10 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Whatt is the property used for :" />
+							<p:outputLabel styleClass="TexAlCenter" rendered="false" value="Whatt is the property used for :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubPropUsageType}" widgetVar="mnuPurTyp" id="mnuPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu rendered="false" value="#{iclubQuickQuoteController.propertyBean.iclubPropUsageType}" widgetVar="mnuPurTyp" id="mnuPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.putId}" itemLabel="#{c.putLongDesc}" />
 							</p:selectOneMenu>
@@ -137,10 +137,10 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Occupied Status :" />
+							<p:outputLabel styleClass="TexAlCenter" rendered="false" value="Occupied Status :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubQuickQuoteController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuOCS" id="mnuOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu rendered="false" value="#{iclubQuickQuoteController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuOCS" id="mnuOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Ocupied Status" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.occupiedStatusBeans}" var="c" itemValue="#{c.osId}" itemLabel="#{c.osLongDesc}" />
 							</p:selectOneMenu>
@@ -149,10 +149,10 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Estimatted Value :" />
+							<p:outputLabel rendered="false" styleClass="TexAlCenter" value="Estimatted Value :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText placeholder="Estimatted Value" value="#{iclubQuickQuoteController.propertyBean.PEstValue}" styleClass="TexAlCenter" />
+							<p:inputText rendered="false" placeholder="Estimatted Value" value="#{iclubQuickQuoteController.propertyBean.PEstValue}" styleClass="TexAlCenter" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />

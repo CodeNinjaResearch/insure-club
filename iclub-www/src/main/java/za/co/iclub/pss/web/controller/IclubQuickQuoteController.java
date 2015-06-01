@@ -469,12 +469,11 @@ public class IclubQuickQuoteController implements Serializable {
 		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
 		 * (propertyBean.getIclubBarType() == null) {
 		 * IclubWebHelper.addMessage(("Please Select Bar Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }if
+		 * (propertyBean.getIclubPropUsageType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select PropUsage Type"),
 		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
 		 */
-		if (propertyBean.getIclubPropUsageType() == null) {
-			IclubWebHelper.addMessage(("Please Select PropUsage Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
 		
 		if (propertyBean.getIclubWallType() == null) {
 			IclubWebHelper.addMessage(("Please Select WallType"), FacesMessage.SEVERITY_ERROR);
@@ -494,13 +493,11 @@ public class IclubQuickQuoteController implements Serializable {
 		 * if (propertyBean.getPCompYn() == null ||
 		 * propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
 		 * IclubWebHelper.addMessage(("Comp Yn Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (propertyBean.getPEstValue() == null) {
+		 * IclubWebHelper.addMessage(("Est value Cannot be empty"),
 		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
 		 */
-		
-		if (propertyBean.getPEstValue() == null) {
-			IclubWebHelper.addMessage(("Est value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
 		
 		return ret;
 	}
@@ -602,10 +599,6 @@ public class IclubQuickQuoteController implements Serializable {
 			ret = ret && false;
 		}
 		
-		if (vehicleBean.getVOdometer() == null) {
-			IclubWebHelper.addMessage(("OdoMeter Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
 		if (vehicleBean.getVOnArea() == null || vehicleBean.getVOnArea().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("On Area Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
@@ -618,17 +611,24 @@ public class IclubQuickQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select On AccessType"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (vehicleBean.getIclubAccessTypeByVDdAccessTypeId() == null) {
-			IclubWebHelper.addMessage(("Please Select Dd AccessType"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
+		
 		if (vehicleBean.getVYear() == null) {
 			IclubWebHelper.addMessage(("Year Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		/*
-		 * if (bean.getIclubDriver() == null) {
+		 * if (vehicleBean.getIclubAccessTypeByVDdAccessTypeId() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Dd AccessType"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (vehicleBean.getVOdometer() == null) {
+		 * IclubWebHelper.addMessage(("OdoMeter Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (bean.getIclubDriver() == null) {
 		 * IclubWebHelper.addMessage(("Please Select Driver"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVNoclaimYrs() == null) {
+		 * IclubWebHelper.addMessage(("No Claim Years Cannot be empty"),
 		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
 		 */
 		
@@ -636,17 +636,12 @@ public class IclubQuickQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select VehUsage Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (vehicleBean.getVNoclaimYrs() == null) {
-			IclubWebHelper.addMessage(("No Claim Years Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
 		
-		if (vehicleBean.getVCompYrs() == null) {
-			IclubWebHelper.addMessage(("Comp Years Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
 		/*
-		 * if (vehicleBean.getVImmYn() == null ||
+		 * if (vehicleBean.getVCompYrs() == null) {
+		 * IclubWebHelper.addMessage(("Comp Years Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (vehicleBean.getVImmYn() == null ||
 		 * vehicleBean.getVImmYn().trim().equalsIgnoreCase("")) {
 		 * IclubWebHelper.addMessage(("Imn Yn Cannot be empty"),
 		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
@@ -1295,7 +1290,7 @@ public class IclubQuickQuoteController implements Serializable {
 					insertIntoPerson(personBean);
 				} else {
 					personBean = getIclubPersonBean(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-					addQuote(new IclubQuoteBean(), personBean);
+					addQuote(getQuoteBean(), personBean);
 				}
 				return "qqs.xhtml?faces-redirect=true";
 			}
@@ -1347,7 +1342,7 @@ public class IclubQuickQuoteController implements Serializable {
 		client.close();
 		
 		if (response.getStatusCode() == 0) {
-			addQuote(new IclubQuoteBean(), personBean);
+			addQuote(getQuoteBean(), personBean);
 		} else {
 			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -1529,14 +1524,14 @@ public class IclubQuickQuoteController implements Serializable {
 		model.setQId(UUID.randomUUID().toString());
 		model.setQCrtdDt(new Date(System.currentTimeMillis()));
 		model.setQIsMatched("N");
-		model.setQPrevPremium(0.0d);
+		model.setQPrevPremium(bean != null ? bean.getQPrevPremium() : 0.0d);
 		model.setQValidUntil(new Date(System.currentTimeMillis() + (3 * 24 * 3600)));
 		model.setQMobile(personBean.getPMobile());
 		model.setQEmail(personBean.getPEmail());
 		model.setQGenPremium(0.0d);
 		model.setQNumItems(1);
 		model.setQGenDt(new Date(System.currentTimeMillis()));
-		
+		model.setQClaimYn(bean.getQClaimYn());
 		model.setQNumber(getQnumber());
 		model.setIclubPersonByQCrtdBy(getSessionUserId());
 		model.setIclubProductType(1l);
@@ -2323,9 +2318,9 @@ public class IclubQuickQuoteController implements Serializable {
 		bean.setEtStatus(model.getEtStatus());
 		bean.setEtTblNm(model.getEtTblNm());
 		if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
-			String[] documents = new String[bean.getIclubDocuments().length];
+			String[] documents = new String[model.getIclubDocuments().length];
 			int i = 0;
-			for (String iclubDocument : bean.getIclubDocuments()) {
+			for (String iclubDocument : model.getIclubDocuments()) {
 				documents[i] = iclubDocument;
 				i++;
 			}
