@@ -1281,7 +1281,7 @@ public class IclubQuickQuoteController implements Serializable {
 		return ret;
 	}
 	
-	public String saveQuickQuoteDetails() { 
+	public String saveQuickQuoteDetails() {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
@@ -1292,6 +1292,7 @@ public class IclubQuickQuoteController implements Serializable {
 					personBean = getIclubPersonBean(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
 					addQuote(getQuoteBean(), personBean);
 				}
+				IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
 				return "qqs.xhtml?faces-redirect=true";
 			}
 		} catch (Exception e) {
@@ -1301,165 +1302,261 @@ public class IclubQuickQuoteController implements Serializable {
 		return null;
 	}
 	
-	public ResponseModel insertIntoPerson(IclubPersonBean personBean) {
+	public void insertIntoPerson(IclubPersonBean personBean) throws Exception {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: insertIntoPerson");
 		
-		WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "add");
-		
-		IclubPersonModel model = new IclubPersonModel();
-		personBean.setPId(UUID.randomUUID().toString());
-		personBean.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
-		
-		model.setPId(personBean.getPId());
-		model.setPCrtdDt(personBean.getPCrtdDt());
-		model.setPDob(personBean.getPDob());
-		model.setPAge(personBean.getPAge());
-		model.setPEmail(personBean.getPEmail());
-		model.setPFName(personBean.getPFName());
-		model.setPIdNum(personBean.getPIdNum());
-		model.setPLName(personBean.getPLName());
-		model.setPMobile(personBean.getPMobile());
-		model.setPAddress(personBean.getPAddress());
-		model.setPContactPref(personBean.getPContactPref());
-		model.setPGender(personBean.getPGender());
-		model.setPContactPref(personBean.getPContactPref());
-		model.setPIdExpiryDt(personBean.getPIdExpiryDt());
-		model.setPIdIssueDt(personBean.getPIdIssueDt());
-		model.setPInitials(personBean.getPInitials());
-		model.setPIsPensioner(personBean.getPIsPensioner());
-		model.setPIdIssueCntry(personBean.getPIdIssueCntry());
-		model.setPLat(personBean.getPLat());
-		model.setPLong(personBean.getPLong());
-		model.setPOccupation(personBean.getPOccupation());
-		model.setPTitle(personBean.getPTitle());
-		model.setPZipCd(personBean.getPZipCd());
-		model.setIclubIdType(personBean.getIclubIdType());
-		model.setIclubPerson(getSessionUserId());
-		model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
-		
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-		client.close();
-		
-		if (response.getStatusCode() == 0) {
-			addQuote(getQuoteBean(), personBean);
-		} else {
-			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "add");
+			
+			IclubPersonModel model = new IclubPersonModel();
+			personBean.setPId(UUID.randomUUID().toString());
+			personBean.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
+			
+			model.setPId(personBean.getPId());
+			model.setPCrtdDt(personBean.getPCrtdDt());
+			model.setPDob(personBean.getPDob());
+			model.setPAge(personBean.getPAge());
+			model.setPEmail(personBean.getPEmail());
+			model.setPFName(personBean.getPFName());
+			model.setPIdNum(personBean.getPIdNum());
+			model.setPLName(personBean.getPLName());
+			model.setPMobile(personBean.getPMobile());
+			model.setPAddress(personBean.getPAddress());
+			model.setPContactPref(personBean.getPContactPref());
+			model.setPGender(personBean.getPGender());
+			model.setPContactPref(personBean.getPContactPref());
+			model.setPIdExpiryDt(personBean.getPIdExpiryDt());
+			model.setPIdIssueDt(personBean.getPIdIssueDt());
+			model.setPInitials(personBean.getPInitials());
+			model.setPIsPensioner(personBean.getPIsPensioner());
+			model.setPIdIssueCntry(personBean.getPIdIssueCntry());
+			model.setPLat(personBean.getPLat());
+			model.setPLong(personBean.getPLong());
+			model.setPOccupation(personBean.getPOccupation());
+			model.setPTitle(personBean.getPTitle());
+			model.setPZipCd(personBean.getPZipCd());
+			model.setIclubIdType(personBean.getIclubIdType());
+			model.setIclubPerson(getSessionUserId());
+			model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
+			
+			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+			client.close();
+			
+			if (response.getStatusCode() == 0) {
+				addQuote(getQuoteBean(), personBean);
+			} else {
+				IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			deleteIclubPerson(personBean);
+			throw e;
 		}
 		
-		return response;
 	}
 	
-	public ResponseModel addVehicle(List<IclubVehicleBean> beans, IclubDriverBean driverBean, IclubQuoteModel quoteModel) {
-		
+	public void deleteIclubPerson(IclubPersonBean personBean) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubPerson");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "del/" + personBean.getPId());
+			client.accept(MediaType.APPLICATION_JSON).get();
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+	}
+	
+	public void deleteIclubQuote(IclubQuoteBean quoteBean) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubQuote");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "del/" + quoteBean.getQId());
+			client.accept(MediaType.APPLICATION_JSON).get();
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+	}
+	
+	public void deleteIclubDriver(IclubDriverBean driverBean) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubDriver");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "del/" + driverBean.getDId());
+			client.accept(MediaType.APPLICATION_JSON).get();
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+	}
+	
+	public void deleteIclubVehile(IclubVehicleBean vehicleBean) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubVehicle");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "del/" + vehicleBean.getVId());
+			client.accept(MediaType.APPLICATION_JSON).get();
+			deleteIclubInsuranceItemBean(vehicleBean.getVId());
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+	}
+	
+	public void deleteIclubProperty(IclubPropertyBean propertyBean) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: deleteIclubProperty");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "del/" + propertyBean.getPId());
+			client.accept(MediaType.APPLICATION_JSON).get();
+			deleteIclubPropertyItem(propertyBean.getPId());
+			deleteIclubInsuranceItemBean(propertyBean.getPId());
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+	}
+	
+	public void deleteIclubPropertyItem(String propertyBean) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: deleteIclubPropertyItem");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(PRO_ITM_BASE_URL + "delByProperty/" + propertyBean);
+			client.accept(MediaType.APPLICATION_JSON).get();
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+	}
+	
+	public void deleteIclubInsuranceItemBean(String iiItemId) {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubInsuranceItemBean");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "delByVehilce/" + iiItemId);
+			client.accept(MediaType.APPLICATION_JSON).get();
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+	}
+	
+	public void addVehicle(List<IclubVehicleBean> beans, IclubDriverBean driverBean, IclubQuoteModel quoteModel) throws Exception {
 		if (beans != null && beans.size() > 0) {
-			for (IclubVehicleBean bean : beans) {
+			try {
 				
-				WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "add");
-				
-				IclubVehicleModel model = new IclubVehicleModel();
-				
-				model.setVId(bean.getVId());
-				model.setVOwner(bean.getVOwner());
-				model.setVGearLockYn(bean.getVGearLockYn());
-				model.setVImmYn(bean.getVImmYn());
-				model.setVConcessReason(bean.getVConcessReason());
-				model.setVConcessPrct(bean.getVConcessPrct());
-				model.setVInsuredValue(bean.getVInsuredValue());
-				model.setVYear(bean.getVYear());
-				model.setVDdLong(bean.getVDdLong());
-				model.setVDdLat(bean.getVDdLat());
-				model.setVDdArea(bean.getVDdArea());
-				model.setVOnLong(bean.getVOnLong());
-				model.setVOnLat(bean.getVOnLat());
-				model.setVOnArea(bean.getVOnArea());
-				model.setVOdometer(bean.getVOdometer());
-				model.setVCrtdDt(bean.getVCrtdDt());
-				model.setVRegNum(bean.getVRegNum());
-				model.setVCompYrs(bean.getVCompYrs());
-				model.setVEngineNr(bean.getVEngineNr());
-				model.setVVin(bean.getVVin());
-				model.setVNoclaimYrs(bean.getVNoclaimYrs());
-				model.setIclubVehicleMaster(bean.getIclubVehicleMaster());
-				model.setIclubVehUsageType(bean.getIclubVehUsageType());
-				model.setIclubVehSecType(bean.getIclubVehSecType());
-				model.setIclubPerson(bean.getIclubPerson());
-				model.setIclubCoverType(bean.getIclubCoverType());
-				model.setIclubDriver(driverBean.getDId());
-				model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
-				model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
-				model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId());
-				
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-				client.close();
-				if (response.getStatusCode() == 0) {
-					addInsuranceItem(model.getVId(), quoteModel.getQId(), 1l, getSessionUserId());
-					genPremium += getUpdatePremium(quoteModel.getQId(), "Q", bean, driverBean, null);
-					quoteId = quoteModel.getQId();
-					IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
+				for (IclubVehicleBean bean : beans) {
+					WebClient client = IclubWebHelper.createCustomClient(V_BASE_URL + "add");
 					
-				} else {
-					IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubVehicleModel model = new IclubVehicleModel();
+					
+					model.setVId(bean.getVId());
+					model.setVOwner(bean.getVOwner());
+					model.setVGearLockYn(bean.getVGearLockYn());
+					model.setVImmYn(bean.getVImmYn());
+					model.setVConcessReason(bean.getVConcessReason());
+					model.setVConcessPrct(bean.getVConcessPrct());
+					model.setVInsuredValue(bean.getVInsuredValue());
+					model.setVYear(bean.getVYear());
+					model.setVDdLong(bean.getVDdLong());
+					model.setVDdLat(bean.getVDdLat());
+					model.setVDdArea(bean.getVDdArea());
+					model.setVOnLong(bean.getVOnLong());
+					model.setVOnLat(bean.getVOnLat());
+					model.setVOnArea(bean.getVOnArea());
+					model.setVOdometer(bean.getVOdometer());
+					model.setVCrtdDt(bean.getVCrtdDt());
+					model.setVRegNum(bean.getVRegNum());
+					model.setVCompYrs(bean.getVCompYrs());
+					model.setVEngineNr(bean.getVEngineNr());
+					model.setVVin(bean.getVVin());
+					model.setVNoclaimYrs(bean.getVNoclaimYrs());
+					model.setIclubVehicleMaster(bean.getIclubVehicleMaster());
+					model.setIclubVehUsageType(bean.getIclubVehUsageType());
+					model.setIclubVehSecType(bean.getIclubVehSecType());
+					model.setIclubPerson(bean.getIclubPerson());
+					model.setIclubCoverType(bean.getIclubCoverType());
+					model.setIclubDriver(driverBean.getDId());
+					model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
+					model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
+					model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId());
+					
+					ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+					client.close();
+					if (response.getStatusCode() == 0) {
+						addInsuranceItem(model.getVId(), quoteModel.getQId(), 1l, getSessionUserId());
+						genPremium += getUpdatePremium(quoteModel.getQId(), "Q", bean, driverBean, null);
+						quoteId = quoteModel.getQId();
+						
+					} else {
+						IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+						
+						throw new Exception();
+					}
+					
 				}
 				
+			} catch (Exception e) {
+				for (IclubVehicleBean bean : beans) {
+					deleteIclubVehile(bean);
+				}
+				throw e;
 			}
 			
 		}
 		
-		return new ResponseModel();
-		
 	}
 	
-	public ResponseModel addPropertiy(List<IclubPropertyBean> beans, IclubQuoteModel quoteModel) {
+	public void addPropertiy(List<IclubPropertyBean> beans, IclubQuoteModel quoteModel) throws Exception {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addPropertiy");
-		
 		if (beans != null && beans.size() > 0) {
-			for (IclubPropertyBean bean : beans) {
-				WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "add");
+			try {
 				
-				IclubPropertyModel model = new IclubPropertyModel();
-				
-				model.setPId(bean.getPId());
-				model.setPCrtdDt(bean.getPCrtdDt());
-				model.setPEstValue(bean.getPEstValue());
-				model.setPSecGatesYn(bean.getPSecGatesYn());
-				model.setPNorobberyYn(bean.getPNorobberyYn());
-				model.setPCompYn(bean.getPCompYn());
-				model.setPRentFurYn(bean.getPRentFurYn());
-				model.setPNoclaimYrs(bean.getPNoclaimYrs());
-				model.setPPostalCd(bean.getPPostalCd());
-				model.setPLong(bean.getPLong());
-				model.setPLat(bean.getPLat());
-				model.setPAddress(bean.getPAddress());
-				model.setPRegNum(bean.getPRegNum());
-				model.setPReplacementCost(bean.getPReplacementCost());
-				model.setPContentCost(bean.getPContentCost());
-				model.setIclubCoverType(bean.getIclubCoverType());
-				model.setIclubPropUsageType(bean.getIclubPropUsageType());
-				model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus());
-				model.setIclubPropertyType(bean.getIclubPropertyType());
-				model.setIclubWallType(bean.getIclubWallType());
-				model.setIclubAccessType(bean.getIclubAccessType());
-				model.setIclubPerson(getSessionUserId());
-				model.setIclubBarType(bean.getIclubBarType());
-				model.setPThatchType(bean.getPThatchType());
-				model.setIclubRoofType(bean.getIclubRoofType());
-				
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-				client.close();
-				
-				if (response.getStatusCode() == 0) {
-					List<IclubPropertyItemBean> propertyItemBeans = getPropertyItemBeansMap().get(model.getPId());
-					addPropertiyItem(propertyItemBeans, model);
-					addInsuranceItem(model.getPId(), quoteModel.getQId(), 2l, getSessionUserId());
-				} else {
-					IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				for (IclubPropertyBean bean : beans) {
+					WebClient client = IclubWebHelper.createCustomClient(PRO_BASE_URL + "add");
+					
+					IclubPropertyModel model = new IclubPropertyModel();
+					
+					model.setPId(bean.getPId());
+					model.setPCrtdDt(bean.getPCrtdDt());
+					model.setPEstValue(bean.getPEstValue());
+					model.setPSecGatesYn(bean.getPSecGatesYn());
+					model.setPNorobberyYn(bean.getPNorobberyYn());
+					model.setPCompYn(bean.getPCompYn());
+					model.setPRentFurYn(bean.getPRentFurYn());
+					model.setPNoclaimYrs(bean.getPNoclaimYrs());
+					model.setPPostalCd(bean.getPPostalCd());
+					model.setPLong(bean.getPLong());
+					model.setPLat(bean.getPLat());
+					model.setPAddress(bean.getPAddress());
+					model.setPRegNum(bean.getPRegNum());
+					model.setPReplacementCost(bean.getPReplacementCost());
+					model.setPContentCost(bean.getPContentCost());
+					model.setIclubCoverType(bean.getIclubCoverType());
+					model.setIclubPropUsageType(bean.getIclubPropUsageType());
+					model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus());
+					model.setIclubPropertyType(bean.getIclubPropertyType());
+					model.setIclubWallType(bean.getIclubWallType());
+					model.setIclubAccessType(bean.getIclubAccessType());
+					model.setIclubPerson(getSessionUserId());
+					model.setIclubBarType(bean.getIclubBarType());
+					model.setPThatchType(bean.getPThatchType());
+					model.setIclubRoofType(bean.getIclubRoofType());
+					
+					ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+					client.close();
+					
+					if (response.getStatusCode() == 0) {
+						List<IclubPropertyItemBean> propertyItemBeans = getPropertyItemBeansMap().get(model.getPId());
+						addPropertiyItem(propertyItemBeans, model);
+						addInsuranceItem(model.getPId(), quoteModel.getQId(), 2l, getSessionUserId());
+					} else {
+						IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+						throw new Exception();
+					}
 				}
+				
+			} catch (Exception e) {
+				for (IclubPropertyBean bean : beans) {
+					deleteIclubProperty(bean);
+				}
+				throw e;
 			}
+			
 		}
-		
-		return new ResponseModel();
 		
 	}
 	
@@ -1490,68 +1587,89 @@ public class IclubQuickQuoteController implements Serializable {
 		}
 	}
 	
-	public ResponseModel addInsuranceItem(String itemId, String quoteId, Long iItemType, String userId) {
+	public void addInsuranceItem(String itemId, String quoteId, Long iItemType, String userId) throws Exception {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addInsuranceItem");
 		
-		WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "add");
-		IclubInsuranceItemModel model = new IclubInsuranceItemModel();
-		model.setIiId(UUID.randomUUID().toString());
-		model.setIiItemId(itemId);
-		model.setIiQuoteId(quoteId);
-		model.setIiCrtdDt(new Date(System.currentTimeMillis()));
-		model.setIclubInsuranceItemType(iItemType);
-		model.setIclubPerson(userId);
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-		client.close();
-		
-		if (response.getStatusCode() == 0) {
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "add");
+			IclubInsuranceItemModel model = new IclubInsuranceItemModel();
+			model.setIiId(UUID.randomUUID().toString());
+			model.setIiItemId(itemId);
+			model.setIiQuoteId(quoteId);
+			model.setIiCrtdDt(new Date(System.currentTimeMillis()));
+			model.setIclubInsuranceItemType(iItemType);
+			model.setIclubPerson(userId);
+			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+			client.close();
 			
-		} else {
-			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+			if (response.getStatusCode() == 0) {
+				
+			} else {
+				IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				throw new Exception();
+				
+			}
+		} catch (Exception e) {
+			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			throw e;
 		}
-		
-		return response;
 		
 	}
 	
-	public ResponseModel addQuote(IclubQuoteBean bean, IclubPersonBean personBean) {
+	public void addQuote(IclubQuoteBean bean, IclubPersonBean personBean) throws Exception {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addQuote");
-		
-		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "add");
-		IclubQuoteModel model = new IclubQuoteModel();
-		model.setQId(UUID.randomUUID().toString());
-		model.setQCrtdDt(new Date(System.currentTimeMillis()));
-		model.setQIsMatched("N");
-		model.setQPrevPremium(bean != null ? bean.getQPrevPremium() : 0.0d);
-		model.setQValidUntil(new Date(System.currentTimeMillis() + (3 * 24 * 3600)));
-		model.setQMobile(personBean.getPMobile());
-		model.setQEmail(personBean.getPEmail());
-		model.setQGenPremium(0.0d);
-		model.setQNumItems(1);
-		model.setQGenDt(new Date(System.currentTimeMillis()));
-		model.setQClaimYn(bean.getQClaimYn());
-		model.setQNumber(getQnumber());
-		model.setIclubPersonByQCrtdBy(getSessionUserId());
-		model.setIclubProductType(1l);
-		model.setIclubInsurerMaster(bean.getIclubInsurerMaster());
-		model.setIclubCoverType(bean.getIclubCoverType());
-		model.setIclubQuoteStatus(1l);
-		model.setIclubPersonByQPersonId(personBean.getPId());
-		
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-		client.close();
-		if (response.getStatusCode() == 0) {
+		boolean driverOrProperty = false;
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "add");
+			IclubQuoteModel model = new IclubQuoteModel();
+			bean.setQId(UUID.randomUUID().toString());
+			model.setQId(bean.getQId());
+			model.setQCrtdDt(new Date(System.currentTimeMillis()));
+			model.setQIsMatched("N");
+			model.setQPrevPremium(bean != null ? bean.getQPrevPremium() : 0.0d);
+			model.setQValidUntil(new Date(System.currentTimeMillis() + (3 * 24 * 3600)));
+			model.setQMobile(personBean.getPMobile());
+			model.setQEmail(personBean.getPEmail());
+			model.setQGenPremium(0.0d);
+			model.setQNumItems(1);
+			model.setQGenDt(new Date(System.currentTimeMillis()));
+			model.setQClaimYn(bean.getQClaimYn());
+			model.setQNumber(getQnumber());
+			model.setIclubPersonByQCrtdBy(getSessionUserId());
+			model.setIclubProductType(1l);
+			model.setIclubInsurerMaster(bean.getIclubInsurerMaster());
+			model.setIclubCoverType(bean.getIclubCoverType());
+			model.setIclubQuoteStatus(1l);
+			model.setIclubPersonByQPersonId(personBean.getPId());
 			
-			addDriver(driverBean, personBean, model);
-			addPropertiy(propertyBeans, model);
-		} else {
-			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+			client.close();
+			if (response.getStatusCode() == 0) {
+				
+				addDriver(driverBean, personBean, model);
+				driverOrProperty = true;
+				addPropertiy(propertyBeans, model);
+			} else {
+				
+				IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				throw new Exception();
+			}
+			
+		} catch (Exception e) {
+			if (driverOrProperty) {
+				deleteIclubDriver(driverBean);
+				for (IclubVehicleBean vehicleBean : vehicleBeans) {
+					deleteIclubVehile(vehicleBean);
+				}
+				
+			}
+			
+			deleteIclubQuote(bean);
+			
+			throw e;
 		}
-		
-		return response;
-		
 	}
 	
 	public Long getQnumber() {
@@ -1564,39 +1682,43 @@ public class IclubQuickQuoteController implements Serializable {
 		
 	}
 	
-	public ResponseModel addDriver(IclubDriverBean bean, IclubPersonBean personBean, IclubQuoteModel quoteModel) {
+	public void addDriver(IclubDriverBean bean, IclubPersonBean personBean, IclubQuoteModel quoteModel) throws Exception {
 		
-		WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "add");
-		
-		IclubDriverModel model = new IclubDriverModel();
-		
-		bean.setDId(UUID.randomUUID().toString());
-		
-		model.setDId(bean.getDId());
-		model.setDDob(bean.getDDob());
-		model.setDIssueDt(new Date(bean.getDIssueDt().getTime()));
-		model.setDIssueYears(IclubWebHelper.calculateYearDiff(bean.getDIssueDt().getTime()));
-		model.setDLicenseNum(bean.getDLicenseNum());
-		model.setDName(bean.getDName());
-		model.setDCrtdDt(new Date(System.currentTimeMillis()));
-		model.setIclubAccessTypeByDAccessTypeId(bean.getIclubAccessTypeByDAccessTypeId());
-		model.setIclubLicenseCode(bean.getIclubLicenseCode());
-		model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
-		model.setIclubPersonByDPersonId(personBean.getPId());
-		model.setIclubPersonByDCrtdBy(getSessionUserId());
-		
-		ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-		client.close();
-		
-		if (response.getStatusCode() == 0) {
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "add");
 			
-			addVehicle(vehicleBeans, bean, quoteModel);
+			IclubDriverModel model = new IclubDriverModel();
 			
-		} else {
-			IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+			bean.setDId(UUID.randomUUID().toString());
+			
+			model.setDId(bean.getDId());
+			model.setDDob(bean.getDDob());
+			model.setDIssueDt(new Date(bean.getDIssueDt().getTime()));
+			model.setDIssueYears(IclubWebHelper.calculateYearDiff(bean.getDIssueDt().getTime()));
+			model.setDLicenseNum(bean.getDLicenseNum());
+			model.setDName(bean.getDName());
+			model.setDCrtdDt(new Date(System.currentTimeMillis()));
+			model.setIclubAccessTypeByDAccessTypeId(bean.getIclubAccessTypeByDAccessTypeId());
+			model.setIclubLicenseCode(bean.getIclubLicenseCode());
+			model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
+			model.setIclubPersonByDPersonId(personBean.getPId());
+			model.setIclubPersonByDCrtdBy(getSessionUserId());
+			
+			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+			client.close();
+			
+			if (response.getStatusCode() == 0) {
+				
+				addVehicle(vehicleBeans, bean, quoteModel);
+				
+			} else {
+				IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			deleteIclubDriver(bean);
+			throw e;
 		}
-		
-		return response;
 		
 	}
 	

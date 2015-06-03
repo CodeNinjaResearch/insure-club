@@ -121,6 +121,25 @@ public class IclubPropertyItemService {
 	}
 	
 	@GET
+	@Path("/delByProperty/{propertyId}")
+	@Consumes("application/json")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Response delByProperty(@PathParam("propertyId") String propertyId) {
+		try {
+			List batmod = iclubNamedQueryDAO.getPropertyItemByProperty(propertyId);
+			for (Object object : batmod) {
+				IclubPropertyItem iTt = (IclubPropertyItem) object;
+				iclubPropertyItemDAO.delete(iTt);
+			}
+			return Response.ok().build();
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
+	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
