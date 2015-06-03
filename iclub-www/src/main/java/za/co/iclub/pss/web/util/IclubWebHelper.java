@@ -98,7 +98,7 @@ public class IclubWebHelper {
 		try {
 			if (model != null) {
 				synchronized (model) {
-					GoogleResponse res = convertToLatLong((model.getGlAddress() != null ? model.getGlAddress() + " " : "") + (model.getGlProvince() != null ? model.getGlProvince() + " " : "") + (model.getGlSuburb() != null ? model.getGlSuburb() : ""));
+					GoogleResponse res = convertToLatLong((model.getGlAddress() != null ? model.getGlAddress() + "," : "") + (model.getGlSuburb() != null ? model.getGlSuburb() + "," : "") + (model.getGlProvince() != null ? model.getGlProvince() : ""));
 					if (res.getStatus().equals("OK")) {
 						for (Result result : res.getResults()) {
 							System.out.println("Lattitude of address is :" + result.getGeometry().getLocation().getLat());

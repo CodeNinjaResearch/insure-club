@@ -346,7 +346,6 @@ public class IclubGeoLocController implements Serializable {
 					int j = 0;
 					Iterator<Cell> cellIterator = row.cellIterator();
 					IclubGeoLocModel model = new IclubGeoLocModel();
-					
 					while (cellIterator.hasNext()) {
 						Cell cell = row.getCell(j);
 						
@@ -401,7 +400,8 @@ public class IclubGeoLocController implements Serializable {
 						j++;
 						
 					}
-					models.add(model);
+					if ((model.getGlAddress() != null && !model.getGlAddress().trim().equalsIgnoreCase("")) || (model.getGlProvince() != null && !model.getGlProvince().trim().equalsIgnoreCase("")) || (model.getGlSuburb() != null && !model.getGlSuburb().trim().equalsIgnoreCase("")))
+						models.add(model);
 					
 					System.out.println("");
 				}

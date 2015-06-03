@@ -39,7 +39,7 @@ public class AddressConverter {
 	
 	public static void main(String[] args) throws IOException {
 		
-		GoogleResponse res = new AddressConverter().convertToLatLong("Boschfontein HEIDELBURG Gauteng");
+		GoogleResponse res = new AddressConverter().convertToLatLong("Jordaan Park HEIDELBURG Gauteng");
 		if (res.getStatus().equals("OK")) {
 			for (Result result : res.getResults()) {
 				System.out.println("Lattitude of address is :" + result.getGeometry().getLocation().getLat());
@@ -51,7 +51,7 @@ public class AddressConverter {
 		}
 		
 		System.out.println("\n");
-		GoogleResponse res1 = new AddressConverter().convertFromLatLong("18.92038860,72.83013059999999");
+		GoogleResponse res1 = new AddressConverter().convertFromLatLong("52.3735557,4.8799584");
 		if (res1.getStatus().equals("OK")) {
 			for (Result result : res1.getResults()) {
 				System.out.println("address is :" + result.getFormatted_address());
