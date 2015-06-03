@@ -1281,7 +1281,7 @@ public class IclubQuickQuoteController implements Serializable {
 		return ret;
 	}
 	
-	public String saveQuickQuoteDetails() {
+	public String saveQuickQuoteDetails() { 
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
