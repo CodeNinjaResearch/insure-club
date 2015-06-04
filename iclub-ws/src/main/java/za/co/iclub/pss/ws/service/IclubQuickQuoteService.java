@@ -1,7 +1,9 @@
 package za.co.iclub.pss.ws.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,19 +19,44 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubConfig;
+import za.co.iclub.pss.orm.bean.IclubDriver;
+import za.co.iclub.pss.orm.bean.IclubEntityType;
+import za.co.iclub.pss.orm.bean.IclubField;
+import za.co.iclub.pss.orm.bean.IclubGeoLoc;
+import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
+import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
+import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubQuote;
+import za.co.iclub.pss.orm.bean.IclubRateEngine;
+import za.co.iclub.pss.orm.bean.IclubRateType;
+import za.co.iclub.pss.orm.bean.IclubVehicle;
+import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubDriverDAO;
+import za.co.iclub.pss.orm.dao.IclubGeoLocDAO;
+import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
+import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
+import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubProductTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubSecurityDeviceDAO;
+import za.co.iclub.pss.orm.dao.IclubVehSecTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubVehUsageTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO;
+import za.co.iclub.pss.ws.model.IclubDriverModel;
+import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.IclubQuickQuoteRequest;
 import za.co.iclub.pss.ws.model.IclubQuickQuoteResponse;
 import za.co.iclub.pss.ws.model.IclubQuoteModel;
+import za.co.iclub.pss.ws.model.IclubVehicleModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubQuickQuoteService")
@@ -45,6 +72,17 @@ public class IclubQuickQuoteService {
 	private IclubCoverTypeDAO iclubCoverTypeDAO;
 	private IclubQuoteStatusDAO iclubQuoteStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
+	private IclubIdTypeDAO iclubIdTypeDAO;
+	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubGeoLocDAO iclubGeoLocDAO;
+	private IclubLicenseCodeDAO iclubLicenseCodeDAO;
+	private IclubAccessTypeDAO iclubAccessTypeDAO;
+	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
+	private IclubDriverDAO iclubDriverDAO;
+	private IclubSecurityDeviceDAO iclubSecurityDeviceDAO;
+	private IclubVehicleMasterDAO iclubVehicleMasterDAO;
+	private IclubVehSecTypeDAO iclubVehSecTypeDAO;
+	private IclubVehUsageTypeDAO iclubVehUsageTypeDAO;
 	
 	@POST
 	@Path("/createQuote")
@@ -53,9 +91,151 @@ public class IclubQuickQuoteService {
 		
 		String quoteNumber = "";
 		Double generatedPremium = 0.0;
+		IclubPerson iclubPerson = getIclubPerson(iclubQuickQuoteRequest);
+		iclubPersonDAO.save(iclubPerson);
 		IclubQuote iclubQuote = getIclubQuote(iclubQuickQuoteRequest);
+		iclubQuoteDAO.save(iclubQuote);
 		
+		IclubDriverModel iclubDriverModel = iclubQuickQuoteRequest.getIclubDriverModel();
+		IclubDriver iclubDriver = getIclubDriver(iclubDriverModel);
+		List<IclubVehicleModel> vehicleModels = iclubQuickQuoteRequest.getIclubVehicleModels();
+		
+		List<IclubVehicle> iclubVehicles = getVehicleList(vehicleModels, iclubQuote);
+		
+		List<IclubProperty> iclubProperties = new ArrayList<IclubProperty>();
+		List<IclubInsuranceItem> insuranceItems = getIclubInsuranceItemList(iclubVehicles, iclubProperties, iclubQuote);
 		return new IclubQuickQuoteResponse();
+	}
+	
+	public IclubDriver getIclubDriver(IclubDriverModel model) {
+		IclubDriver iCt = new IclubDriver();
+		
+		iCt.setDId(model.getDId());
+		iCt.setDDob(model.getDDob());
+		iCt.setDIssueDt(model.getDIssueDt());
+		iCt.setDLicenseNum(model.getDLicenseNum());
+		iCt.setDName(model.getDName());
+		iCt.setDCrtdDt(model.getDCrtdDt());
+		iCt.setDIssueYears(model.getDIssueYears());
+		iCt.setIclubAccessTypeByDAccessTypeId(model.getIclubAccessTypeByDAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByDAccessTypeId()) : null);
+		iCt.setIclubAccessTypeByDAccessStatusId(model.getIclubAccessTypeByDAccessStatusId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByDAccessStatusId()) : null);
+		iCt.setIclubLicenseCode(model.getIclubLicenseCode() != null ? iclubLicenseCodeDAO.findById(model.getIclubLicenseCode()) : null);
+		iCt.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
+		iCt.setIclubPersonByDPersonId(model.getIclubPersonByDPersonId() != null && !model.getIclubPersonByDPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByDPersonId()) : null);
+		iCt.setIclubPersonByDCrtdBy(model.getIclubPersonByDCrtdBy() != null && !model.getIclubPersonByDCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByDCrtdBy()) : null);
+		return iCt;
+		
+	}
+	
+	public List<IclubVehicle> getVehicleList(List<IclubVehicleModel> models, IclubQuote iclubQuote) {
+		List<IclubVehicle> iclubVehicles = new ArrayList<IclubVehicle>();
+		
+		for (IclubVehicleModel model : models) {
+			IclubVehicle iCV = new IclubVehicle();
+			
+			iCV.setVId(model.getVId());
+			iCV.setVOwner(model.getVOwner());
+			iCV.setVGearLockYn(model.getVGearLockYn());
+			iCV.setVImmYn(model.getVImmYn());
+			iCV.setVConcessReason(model.getVConcessReason());
+			iCV.setVConcessPrct(model.getVConcessPrct());
+			iCV.setVInsuredValue(model.getVInsuredValue());
+			iCV.setVYear(model.getVYear());
+			iCV.setVDdLong(model.getVDdLong());
+			iCV.setVCompYrs(model.getVCompYrs());
+			iCV.setVDdLat(model.getVDdLat());
+			iCV.setVDdArea(model.getVDdArea());
+			iCV.setVOnLong(model.getVOnLong());
+			iCV.setVOnLat(model.getVOnLat());
+			iCV.setVOnArea(model.getVOnArea());
+			iCV.setVOdometer(model.getVOdometer());
+			iCV.setVCrtdDt(model.getVCrtdDt());
+			iCV.setVRegNum(model.getVRegNum());
+			iCV.setVEngineNr(model.getVEngineNr());
+			iCV.setVVin(model.getVVin());
+			iCV.setVNoclaimYrs(model.getVNoclaimYrs());
+			iCV.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
+			iCV.setIclubVehUsageType(model.getIclubVehUsageType() != null ? iclubVehUsageTypeDAO.findById(model.getIclubVehUsageType()) : null);
+			iCV.setIclubVehSecType(model.getIclubVehSecType() != null ? iclubVehSecTypeDAO.findById(model.getIclubVehSecType()) : null);
+			iCV.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			iCV.setIclubDriver(model.getIclubDriver() != null ? iclubDriverDAO.findById(model.getIclubDriver()) : null);
+			iCV.setIclubSecurityDevice(model.getIclubSecurityDevice() != null ? iclubSecurityDeviceDAO.findById(model.getIclubSecurityDevice()) : null);
+			iCV.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId()) : null);
+			iCV.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()) : null);
+			iCV.setIclubVehicleMaster(model.getIclubVehicleMaster() != null ? iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()) : null);
+			iclubVehicles.add(iCV);
+		}
+		return iclubVehicles;
+	}
+	
+	public List<IclubInsuranceItem> getIclubInsuranceItemList(List<IclubVehicle> iclubVehicles, List<IclubProperty> iclubProperties, IclubQuote iclubQuote) {
+		List<IclubInsuranceItem> iclubInsuranceItems = new ArrayList<IclubInsuranceItem>();
+		
+		if (iclubVehicles != null && iclubVehicles.size() > 0) {
+			for (IclubVehicle vehicle : iclubVehicles) {
+				IclubInsuranceItem iCTt = new IclubInsuranceItem();
+				
+				iCTt.setIiId(UUID.randomUUID().toString());
+				iCTt.setIiItemId(vehicle.getVId());
+				iCTt.setIiQuoteId(iclubQuote.getQId());
+				iCTt.setIiCrtdDt(new Timestamp(System.currentTimeMillis()));
+				iCTt.setIiInsureValue(vehicle.getVInsuredValue());
+				iCTt.setIclubInsuranceItemType(iclubInsuranceItemTypeDAO.findById(1l));
+				iCTt.setIclubPerson(vehicle.getIclubPerson() != null && !vehicle.getIclubPerson().getPId().equalsIgnoreCase("") ? iclubPersonDAO.findById(vehicle.getIclubPerson().getPId()) : null);
+				iclubInsuranceItems.add(iCTt);
+			}
+		}
+		if (iclubProperties != null && iclubProperties.size() > 0) {
+			for (IclubProperty property : iclubProperties) {
+				IclubInsuranceItem iCTt = new IclubInsuranceItem();
+				
+				iCTt.setIiId(UUID.randomUUID().toString());
+				iCTt.setIiItemId(property.getPId());
+				iCTt.setIiQuoteId(iclubQuote.getQId());
+				iCTt.setIiCrtdDt(new Timestamp(System.currentTimeMillis()));
+				iCTt.setIclubInsuranceItemType(iclubInsuranceItemTypeDAO.findById(1l));
+				iCTt.setIclubPerson(property.getIclubPerson() != null && !property.getIclubPerson().getPId().equalsIgnoreCase("") ? iclubPersonDAO.findById(property.getIclubPerson().getPId()) : null);
+				iclubInsuranceItems.add(iCTt);
+			}
+		}
+		
+		return iclubInsuranceItems;
+	}
+	
+	public IclubPerson getIclubPerson(IclubQuickQuoteRequest iclubQuickQuoteRequest) {
+		
+		IclubPerson person = new IclubPerson();
+		IclubPersonModel model = iclubQuickQuoteRequest.getIclubPersonModel();
+		person.setPId(model.getPId());
+		person.setPCrtdDt(model.getPCrtdDt());
+		person.setPDob(model.getPDob());
+		person.setPEmail(model.getPEmail());
+		person.setPFName(model.getPFName());
+		person.setPIdNum(model.getPIdNum());
+		person.setPLName(model.getPLName());
+		person.setPMobile(model.getPMobile());
+		person.setPAddress(model.getPAddress());
+		person.setPContactPref(model.getPContactPref());
+		person.setPGender(model.getPGender());
+		person.setPIdNum(model.getPIdNum());
+		person.setPContactPref(model.getPContactPref());
+		person.setPIdExpiryDt(model.getPIdExpiryDt());
+		person.setPIdIssueDt(model.getPIdIssueDt());
+		person.setPInitials(model.getPInitials());
+		person.setPIsPensioner(model.getPIsPensioner());
+		person.setPIdIssueCntry(model.getPIdIssueCntry());
+		person.setPLat(model.getPLat());
+		person.setPLong(model.getPLong());
+		person.setPOccupation(model.getPOccupation());
+		person.setPTitle(model.getPTitle());
+		person.setPAge(model.getPAge());
+		person.setPZipCd(model.getPZipCd());
+		person.setIclubIdType(model.getIclubIdType() != null ? iclubIdTypeDAO.findById(model.getIclubIdType()) : null);
+		person.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+		person.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
+		
+		return person;
+		
 	}
 	
 	public IclubQuote getIclubQuote(IclubQuickQuoteRequest iclubQuickQuoteRequest) {
@@ -82,6 +262,114 @@ public class IclubQuickQuoteService {
 		iCQ.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy() != null && !model.getIclubPersonByQCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByQCrtdBy()) : null);
 		
 		return iCQ;
+		
+	}
+	
+	public Double getUpdatePremium(IclubQuote quoteBean, String quoteType, List<IclubVehicle> vehicleBeans, IclubDriver driverBean, IclubProperty propertyBean, IclubPerson iclubPersonBean) {
+		List fieldBeans = iclubNamedQueryDAO.getIclubFieldByFieldStatus("Y");
+		IclubConfig configBean = iclubNamedQueryDAO.getIclubConfigByKey("base.premium");
+		Double baseValue = new Double(configBean.getCValue());
+		Double premium = baseValue;
+		if (vehicleBeans != null && vehicleBeans.size() > 0) {
+			for (IclubVehicle vehicleBean : vehicleBeans) {
+				for (Object obj : fieldBeans) {
+					IclubField fieldBean = (IclubField) obj;
+					if (fieldBean.getFRate() != null && fieldBean.getFStatus().equalsIgnoreCase("Y")) {
+						
+						IclubEntityType entityType = fieldBean.getIclubEntityType();
+						
+						String tableName = entityType.getEtTblNm();
+						String fieldName = fieldBean.getFName();
+						if (tableName != null) {
+							List rateTypeBeans = iclubNamedQueryDAO.findIclubRateTypeByQuoteTypeAndFieldId(fieldBean.getFId(), quoteType);
+							
+							String fieldValue = null;
+							if (tableName.equalsIgnoreCase("iclub_vehicle") && rateTypeBeans != null && rateTypeBeans.size() > 0 && ((IclubRateType) rateTypeBeans.get(0)).getRtType().equalsIgnoreCase("G")) {
+								
+								fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), "G");
+								
+							} else if (tableName.equalsIgnoreCase("iclub_vehicle")) {
+								
+								fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), null);
+								
+							} else if (tableName.equalsIgnoreCase("iclub_property") && propertyBean != null && propertyBean.getPId() != null) {
+								
+								fieldValue = getFieldValueFromDB(fieldName, tableName, propertyBean.getPId(), null);
+							} else if (tableName.equalsIgnoreCase("iclub_person")) {
+								
+								fieldValue = getFieldValueFromDB(fieldName, tableName, iclubPersonBean.getPId(), null);
+								
+							} else if (tableName.equalsIgnoreCase("iclub_driver")) {
+								
+								fieldValue = getFieldValueFromDB(fieldName, tableName, driverBean.getDId(), null);
+								
+							} else if (tableName.equalsIgnoreCase("iclub_quote")) {
+								
+								fieldValue = getFieldValueFromDB(fieldName, tableName, quoteBean.getQId(), null);
+								
+							}
+							
+							if (rateTypeBeans != null && rateTypeBeans.size() > 0) {
+								for (Object object : rateTypeBeans) {
+									IclubRateType rateTypeBean = (IclubRateType) object;
+									if (rateTypeBean.getRtType().equalsIgnoreCase("G")) {
+										String fieldValues[] = fieldValue.split("@");
+										Long glId = iclubNamedQueryDAO.getIclubGeoLocByLatAndLong(new Double(fieldValues[0].toString()), new Double(fieldValues[2].toString()));
+										IclubGeoLoc geoLocBean = iclubGeoLocDAO.findById(glId);
+										premium = premium + baseValue * (geoLocBean.getGlRate() / 100);
+										
+									} else {
+										
+										List rateEngineBeans = iclubNamedQueryDAO.findByRateType(rateTypeBean.getRtId().toString());
+										
+										for (Object reObj : rateEngineBeans) {
+											IclubRateEngine rateEngineBean = (IclubRateEngine) reObj;
+											
+											if (fieldValue != null) {
+												if ((rateTypeBean.getRtType().equalsIgnoreCase("F") && rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(fieldValue.toString()) || (rateTypeBean.getRtType().trim().equalsIgnoreCase("R") && (Double.parseDouble(rateEngineBean.getReBaseValue().trim()) <= Double.parseDouble(fieldValue.toString()) && Double.parseDouble(rateEngineBean.getReMaxValue().trim()) >= Double.parseDouble(fieldValue.toString()))))) {
+													
+													premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
+													
+												} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
+													String lookupDetails = iclubCommonDAO.findAllLookValuesByTabelName(tableName, fieldValue.toString());
+													if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
+														premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
+													}
+												}
+												
+											}
+										}
+									}
+									
+								}
+								
+							}
+						}
+					}
+				}
+			}
+		}
+		return premium;
+	}
+	
+	public String getFieldValueFromDB(String fieldName, String tableName, String fieldId, String rateType) {
+		String fieldValue = null;
+		if (rateType != null && !rateType.trim().equalsIgnoreCase("") && rateType.trim().equalsIgnoreCase("G")) {
+			Object[] batObj = iclubCommonDAO.getFieldValuesByFieldNameAndId(fieldName, tableName, fieldId);
+			
+			if (batObj != null) {
+				fieldValue = batObj[0].toString() + "@" + batObj[1].toString();
+			}
+		} else {
+			Object batObj = iclubCommonDAO.getFieldValueByFieldNameAndId(fieldName, tableName, fieldId);
+			
+			if (batObj != null) {
+				fieldValue = batObj.toString();
+			}
+			
+		}
+		
+		return fieldValue;
 		
 	}
 	
