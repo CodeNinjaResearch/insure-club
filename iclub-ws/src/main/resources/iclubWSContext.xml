@@ -517,5 +517,14 @@
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
-
+	<bean id="IclubQuickQuoteService" class="za.co.iclub.pss.ws.service.IclubQuickQuoteService">
+		<property name="iclubQuoteDAO" ref="IclubQuoteDAO" />
+		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubQuoteStatusDAO" ref="IclubQuoteStatusDAO" />
+		<property name="iclubCoverTypeDAO" ref="IclubCoverTypeDAO" />
+		<property name="iclubInsurerMasterDAO" ref="IclubInsurerMasterDAO" />
+		<property name="iclubProductTypeDAO" ref="IclubProductTypeDAO" />
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+	</bean>
 </beans>
