@@ -28,11 +28,13 @@ import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.bean.IclubProperty;
+import za.co.iclub.pss.orm.bean.IclubPropertyItem;
 import za.co.iclub.pss.orm.bean.IclubQuote;
 import za.co.iclub.pss.orm.bean.IclubRateEngine;
 import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
@@ -43,16 +45,24 @@ import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
+import za.co.iclub.pss.orm.dao.IclubOccupiedStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubProductTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubPropUsageTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubPropertyDAO;
+import za.co.iclub.pss.orm.dao.IclubPropertyTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubRoofTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityDeviceDAO;
 import za.co.iclub.pss.orm.dao.IclubVehSecTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubVehUsageTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO;
+import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
 import za.co.iclub.pss.ws.model.IclubDriverModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
+import za.co.iclub.pss.ws.model.IclubPropertyItemModel;
+import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubQuickQuoteRequest;
 import za.co.iclub.pss.ws.model.IclubQuickQuoteResponse;
 import za.co.iclub.pss.ws.model.IclubQuoteModel;
@@ -83,6 +93,13 @@ public class IclubQuickQuoteService {
 	private IclubVehicleMasterDAO iclubVehicleMasterDAO;
 	private IclubVehSecTypeDAO iclubVehSecTypeDAO;
 	private IclubVehUsageTypeDAO iclubVehUsageTypeDAO;
+	private IclubRoofTypeDAO iclubRoofTypeDAO;
+	private IclubBarTypeDAO iclubBarTypeDAO;
+	private IclubWallTypeDAO iclubWallTypeDAO;
+	private IclubPropertyTypeDAO iclubPropertyTypeDAO;
+	private IclubOccupiedStatusDAO iclubOccupiedStatusDAO;
+	private IclubPropUsageTypeDAO iclubPropUsageTypeDAO;
+	private IclubPropertyDAO iclubPropertyDAO;
 	
 	@POST
 	@Path("/createQuote")
@@ -101,10 +118,73 @@ public class IclubQuickQuoteService {
 		List<IclubVehicleModel> vehicleModels = iclubQuickQuoteRequest.getIclubVehicleModels();
 		
 		List<IclubVehicle> iclubVehicles = getVehicleList(vehicleModels, iclubQuote);
+		List<IclubPropertyModel> iclubPropertyModels = iclubQuickQuoteRequest.getIclubPropertyModels();
+		List<IclubProperty> iclubProperties = getIclubPropertis(iclubPropertyModels);
+		List<IclubPropertyItemModel> iclubPropertyItemModels = iclubQuickQuoteRequest.getIclubPropertyItemModels();
+		List<IclubPropertyItem> iclubPropertyItems = getIclubPropertyItems(iclubPropertyItemModels);
 		
-		List<IclubProperty> iclubProperties = new ArrayList<IclubProperty>();
 		List<IclubInsuranceItem> insuranceItems = getIclubInsuranceItemList(iclubVehicles, iclubProperties, iclubQuote);
 		return new IclubQuickQuoteResponse();
+	}
+	
+	public List<IclubProperty> getIclubPropertis(List<IclubPropertyModel> models) {
+		
+		List<IclubProperty> iclubProperties = new ArrayList<IclubProperty>();
+		if (models != null && models.size() > 0) {
+			
+			for (IclubPropertyModel model : models) {
+				IclubProperty iCP = new IclubProperty();
+				
+				iCP.setPId(model.getPId());
+				iCP.setPCrtdDt(model.getPCrtdDt());
+				iCP.setPEstValue(model.getPEstValue());
+				iCP.setPSecGatesYn(model.getPSecGatesYn());
+				iCP.setPNorobberyYn(model.getPNorobberyYn());
+				iCP.setPCompYn(model.getPCompYn());
+				iCP.setPRentFurYn(model.getPRentFurYn());
+				iCP.setPNoclaimYrs(model.getPNoclaimYrs());
+				iCP.setPPostalCd(model.getPPostalCd());
+				iCP.setPLong(model.getPLong());
+				iCP.setPLat(model.getPLat());
+				iCP.setPAddress(model.getPAddress());
+				iCP.setPRegNum(model.getPRegNum());
+				iCP.setPReplacementCost(model.getPReplacementCost());
+				iCP.setPContentCost(model.getPContentCost());
+				iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
+				iCP.setPThatchType(model.getPThatchType());
+				iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
+				iCP.setIclubAccessType(model.getIclubAccessType() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessType()) : null);
+				iCP.setIclubWallType(model.getIclubWallType() != null ? iclubWallTypeDAO.findById(model.getIclubWallType()) : null);
+				iCP.setIclubPropertyType(model.getIclubPropertyType() != null ? iclubPropertyTypeDAO.findById(model.getIclubPropertyType()) : null);
+				iCP.setIclubOccupiedStatus(model.getIclubOccupiedStatus() != null ? iclubOccupiedStatusDAO.findById(model.getIclubOccupiedStatus()) : null);
+				iCP.setIclubPropUsageType(model.getIclubPropUsageType() != null ? iclubPropUsageTypeDAO.findById(model.getIclubPropUsageType()) : null);
+				iCP.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
+				iCP.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+				iclubProperties.add(iCP);
+			}
+		}
+		
+		return iclubProperties;
+	}
+	
+	public List<IclubPropertyItem> getIclubPropertyItems(List<IclubPropertyItemModel> models) {
+		List<IclubPropertyItem> iclubProeprtyItems = new ArrayList<IclubPropertyItem>();
+		
+		if (models != null && models.size() > 0) {
+			for (IclubPropertyItemModel model : models) {
+				IclubPropertyItem iTt = new IclubPropertyItem();
+				
+				iTt.setPiId(model.getPiId());
+				iTt.setPiCrtdDate(model.getPiCrtdDate());
+				iTt.setPiDescripton(model.getPiDescripton());
+				iTt.setPiValue(model.getPiValue());
+				iTt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+				iTt.setIclubProperty(model.getIclubProperty() != null ? iclubPropertyDAO.findById(model.getIclubProperty()) : null);
+				iclubProeprtyItems.add(iTt);
+			}
+		}
+		
+		return iclubProeprtyItems;
 	}
 	
 	public IclubDriver getIclubDriver(IclubDriverModel model) {
