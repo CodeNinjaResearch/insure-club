@@ -1086,50 +1086,44 @@ public class IclubFullQuoteController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		
-		if (personBean.getPFName() == null || personBean.getPFName().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("First Name Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (personBean.getPLName() == null || personBean.getPLName().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Last Name Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (personBean.getPMobile() == null || personBean.getPMobile().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Mobile Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		
-		if (personBean.getPGender() == null || personBean.getPGender().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Gender Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		
-		if (personBean.getPIdNum() == null || personBean.getPIdNum().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Id Number Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (personBean.getIclubIdType() == null) {
-			IclubWebHelper.addMessage(("Please Select ID Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (personBean.getPIsPensioner() == null || personBean.getPIsPensioner().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Please Select Pensioner"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (personBean.getPDob() == null) {
-			IclubWebHelper.addMessage(("Please Select DOB"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		} else if (IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) <= 18) {
-			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (personBean.getPIdIssueDt() == null) {
-			IclubWebHelper.addMessage(("Please Select IssueDate"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		} else if (IclubWebHelper.isCurrentDate(personBean.getPIdIssueDt().getTime())) {
-			IclubWebHelper.addMessage(("Issue Date less than Current Date"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
+		/*
+		 * if (personBean.getPFName() == null ||
+		 * personBean.getPFName().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage
+		 * (getLabelBundle().getString("First Name Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (personBean.getPLName() == null ||
+		 * personBean.getPLName().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Last Name Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (personBean.getPMobile() == null ||
+		 * personBean.getPMobile().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Mobile Number Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (personBean.getPGender() == null ||
+		 * personBean.getPGender().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Gender Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * if (personBean.getPIdNum() == null ||
+		 * personBean.getPIdNum().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Id Number Cannot be empty"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (personBean.getIclubIdType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select ID Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (personBean.getPIsPensioner() == null ||
+		 * personBean.getPIsPensioner().trim().equalsIgnoreCase("")) {
+		 * IclubWebHelper.addMessage(("Please Select Pensioner"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
+		 * (personBean.getPDob() == null) {
+		 * IclubWebHelper.addMessage(("Please Select DOB"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } else if
+		 * (IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) <=
+		 * 18) { IclubWebHelper.addMessage(("You must be over 18 years"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 */
 		
 		/*
 		 * if (propertyBean.getPRegNum() == null ||
