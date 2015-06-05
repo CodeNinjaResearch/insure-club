@@ -13,6 +13,7 @@ public class IclubQuickQuoteRequest {
 	private List<IclubPropertyModel> iclubPropertyModels;
 	private List<IclubPropertyItemModel> iclubPropertyItemModels;
 	private IclubDriverModel iclubDriverModel;
+	private boolean loginFlag;
 	
 	public IclubQuoteModel getIclubQuoteModel() {
 		return iclubQuoteModel;
@@ -60,6 +61,14 @@ public class IclubQuickQuoteRequest {
 	
 	public void setIclubPersonModel(IclubPersonModel iclubPersonModel) {
 		this.iclubPersonModel = iclubPersonModel;
+	}
+	
+	public boolean isLoginFlag() {
+		return loginFlag;
+	}
+	
+	public void setLoginFlag(boolean loginFlag) {
+		this.loginFlag = loginFlag;
 	}
 	
 }

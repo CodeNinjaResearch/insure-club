@@ -1290,30 +1290,29 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
 			if (validateForm(true, IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null)) {
-				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null) {
+				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
 					
-					IclubQuickQuoteRequest request = new IclubQuickQuoteRequest();
-					IclubPersonModel personModel = insertIntoPerson(personBean);
-					
-					IclubQuoteModel quoteModel = addQuote(getQuoteBean(), personBean);
-					request.setIclubQuoteModel(quoteModel);
-					IclubDriverModel driverModel = addDriver(driverBean, personBean, quoteModel);
-					List<IclubVehicleModel> vehicleModels = addVehicle(vehicleBeans, driverBean, quoteModel);
-					
-					List<IclubPropertyModel> propertyModels = addPropertiy(propertyBeans, quoteModel);
-					request.setIclubDriverModel(driverModel);
-					request.setIclubVehicleModels(vehicleModels);
-					request.setIclubPersonModel(personModel);
-					request.setIclubPropertyModels(propertyModels);
-					WebClient client = IclubWebHelper.createCustomClient(QQUT_BASE_URL + "createQuote/");
-					
-					IclubQuickQuoteResponse response = client.accept(MediaType.APPLICATION_JSON).post(request, IclubQuickQuoteResponse.class);
-					System.out.println(response.getQuoteNumber() + "==========");
-					
-				} else {
 					personBean = getIclubPersonBean(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-					addQuote(getQuoteBean(), personBean);
 				}
+				IclubQuickQuoteRequest request = new IclubQuickQuoteRequest();
+				IclubPersonModel personModel = insertIntoPerson(personBean);
+				
+				IclubQuoteModel quoteModel = addQuote(getQuoteBean(), personBean);
+				request.setIclubQuoteModel(quoteModel);
+				IclubDriverModel driverModel = addDriver(driverBean, personBean, quoteModel);
+				List<IclubVehicleModel> vehicleModels = addVehicle(vehicleBeans, driverBean, quoteModel);
+				
+				List<IclubPropertyModel> propertyModels = addPropertiy(propertyBeans, quoteModel);
+				request.setIclubDriverModel(driverModel);
+				request.setIclubVehicleModels(vehicleModels);
+				request.setIclubPersonModel(personModel);
+				request.setIclubPropertyModels(propertyModels);
+				WebClient client = IclubWebHelper.createCustomClient(QQUT_BASE_URL + "createQuote/");
+				
+				IclubQuickQuoteResponse response = client.accept(MediaType.APPLICATION_JSON).post(request, IclubQuickQuoteResponse.class);
+				quoteId = response.getQuoteNumber();
+				genPremium = response.getGeneratedPremium();
+				
 				IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
 				return "qqs.xhtml?faces-redirect=true";
 			}

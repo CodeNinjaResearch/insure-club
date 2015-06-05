@@ -40,6 +40,7 @@ import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
 import za.co.iclub.pss.orm.dao.IclubGeoLocDAO;
 import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubInsuranceItemDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
@@ -50,6 +51,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubProductTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPropUsageTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyDAO;
+import za.co.iclub.pss.orm.dao.IclubPropertyItemDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteStatusDAO;
@@ -57,6 +59,7 @@ import za.co.iclub.pss.orm.dao.IclubRoofTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityDeviceDAO;
 import za.co.iclub.pss.orm.dao.IclubVehSecTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubVehUsageTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubVehicleDAO;
 import za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
 import za.co.iclub.pss.ws.model.IclubDriverModel;
@@ -100,31 +103,68 @@ public class IclubQuickQuoteService {
 	private IclubOccupiedStatusDAO iclubOccupiedStatusDAO;
 	private IclubPropUsageTypeDAO iclubPropUsageTypeDAO;
 	private IclubPropertyDAO iclubPropertyDAO;
+	private IclubVehicleDAO iclubVehicleDAO;
+	private IclubPropertyItemDAO iclubPropertyItemDAO;
+	private IclubInsuranceItemDAO iclubInsuranceItemDAO;
 	
 	@POST
 	@Path("/createQuote")
 	@Transactional
 	public IclubQuickQuoteResponse createQuote(IclubQuickQuoteRequest iclubQuickQuoteRequest) {
 		
-		String quoteNumber = "";
 		Double generatedPremium = 0.0;
-		IclubPerson iclubPerson = getIclubPerson(iclubQuickQuoteRequest);
-		iclubPersonDAO.save(iclubPerson);
+		IclubPerson iclubPerson = null;
+		if (iclubQuickQuoteRequest.isLoginFlag()) {
+			iclubPerson = getIclubPerson(iclubQuickQuoteRequest);
+			iclubPersonDAO.save(iclubPerson);
+		} else {
+			iclubPerson = iclubPersonDAO.findById(iclubQuickQuoteRequest.getIclubPersonModel().getPId());
+		}
+		
 		IclubQuote iclubQuote = getIclubQuote(iclubQuickQuoteRequest);
 		iclubQuoteDAO.save(iclubQuote);
-		
+		String quoteNumber = iclubQuote.getQId();
 		IclubDriverModel iclubDriverModel = iclubQuickQuoteRequest.getIclubDriverModel();
 		IclubDriver iclubDriver = getIclubDriver(iclubDriverModel);
+		iclubDriverDAO.save(iclubDriver);
 		List<IclubVehicleModel> vehicleModels = iclubQuickQuoteRequest.getIclubVehicleModels();
 		
 		List<IclubVehicle> iclubVehicles = getVehicleList(vehicleModels, iclubQuote);
+		
+		if (iclubVehicles.size() > 0) {
+			for (IclubVehicle iclubVehicle : iclubVehicles) {
+				iclubVehicleDAO.save(iclubVehicle);
+			}
+		}
+		
 		List<IclubPropertyModel> iclubPropertyModels = iclubQuickQuoteRequest.getIclubPropertyModels();
 		List<IclubProperty> iclubProperties = getIclubPropertis(iclubPropertyModels);
+		
+		if (iclubProperties != null && iclubProperties.size() > 0) {
+			for (IclubProperty iclubProperty : iclubProperties) {
+				iclubPropertyDAO.save(iclubProperty);
+			}
+		}
+		
 		List<IclubPropertyItemModel> iclubPropertyItemModels = iclubQuickQuoteRequest.getIclubPropertyItemModels();
 		List<IclubPropertyItem> iclubPropertyItems = getIclubPropertyItems(iclubPropertyItemModels);
-		
+		if (iclubPropertyItems != null && iclubPropertyItems.size() > 0) {
+			for (IclubPropertyItem iclubPropertyItem : iclubPropertyItems) {
+				iclubPropertyItemDAO.save(iclubPropertyItem);
+			}
+		}
 		List<IclubInsuranceItem> insuranceItems = getIclubInsuranceItemList(iclubVehicles, iclubProperties, iclubQuote);
-		return new IclubQuickQuoteResponse();
+		if (insuranceItems != null && insuranceItems.size() > 0) {
+			for (IclubInsuranceItem insuranceItem : insuranceItems) {
+				iclubInsuranceItemDAO.save(insuranceItem);
+			}
+		}
+		generatedPremium = getUpdatePremium(iclubQuote, "Q", iclubVehicles, iclubDriver, iclubProperties, iclubPerson);
+		IclubQuickQuoteResponse response = new IclubQuickQuoteResponse();
+		response.setGeneratedPremium(generatedPremium);
+		response.setQuoteNumber(quoteNumber);
+		
+		return response;
 	}
 	
 	public List<IclubProperty> getIclubPropertis(List<IclubPropertyModel> models) {
@@ -345,13 +385,22 @@ public class IclubQuickQuoteService {
 		
 	}
 	
-	public Double getUpdatePremium(IclubQuote quoteBean, String quoteType, List<IclubVehicle> vehicleBeans, IclubDriver driverBean, IclubProperty propertyBean, IclubPerson iclubPersonBean) {
+	public Double getUpdatePremium(IclubQuote quoteBean, String quoteType, List<IclubVehicle> vehicleBeans, IclubDriver driverBean, List<IclubProperty> propertyBeans, IclubPerson iclubPersonBean) {
 		List fieldBeans = iclubNamedQueryDAO.getIclubFieldByFieldStatus("Y");
 		IclubConfig configBean = iclubNamedQueryDAO.getIclubConfigByKey("base.premium");
 		Double baseValue = new Double(configBean.getCValue());
 		Double premium = baseValue;
+		List<String> ids = new ArrayList<String>();
+		
+		for (IclubVehicle daf : vehicleBeans) {
+			ids.add(daf.getVId());
+		}
+		// for (IclubProperty props : propertyBeans) {
+		// ids.add(props.getPId());
+		// }
+		//
 		if (vehicleBeans != null && vehicleBeans.size() > 0) {
-			for (IclubVehicle vehicleBean : vehicleBeans) {
+			for (String vehProId : ids) {
 				for (Object obj : fieldBeans) {
 					IclubField fieldBean = (IclubField) obj;
 					if (fieldBean.getFRate() != null && fieldBean.getFStatus().equalsIgnoreCase("Y")) {
@@ -366,15 +415,15 @@ public class IclubQuickQuoteService {
 							String fieldValue = null;
 							if (tableName.equalsIgnoreCase("iclub_vehicle") && rateTypeBeans != null && rateTypeBeans.size() > 0 && ((IclubRateType) rateTypeBeans.get(0)).getRtType().equalsIgnoreCase("G")) {
 								
-								fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), "G");
+								fieldValue = getFieldValueFromDB(fieldName, tableName, vehProId, "G");
 								
 							} else if (tableName.equalsIgnoreCase("iclub_vehicle")) {
 								
-								fieldValue = getFieldValueFromDB(fieldName, tableName, vehicleBean.getVId(), null);
+								fieldValue = getFieldValueFromDB(fieldName, tableName, vehProId, null);
 								
-							} else if (tableName.equalsIgnoreCase("iclub_property") && propertyBean != null && propertyBean.getPId() != null) {
+							} else if (tableName.equalsIgnoreCase("iclub_property") && vehProId != null) {
 								
-								fieldValue = getFieldValueFromDB(fieldName, tableName, propertyBean.getPId(), null);
+								fieldValue = getFieldValueFromDB(fieldName, tableName, vehProId, null);
 							} else if (tableName.equalsIgnoreCase("iclub_person")) {
 								
 								fieldValue = getFieldValueFromDB(fieldName, tableName, iclubPersonBean.getPId(), null);
@@ -394,7 +443,7 @@ public class IclubQuickQuoteService {
 									IclubRateType rateTypeBean = (IclubRateType) object;
 									if (rateTypeBean.getRtType().equalsIgnoreCase("G")) {
 										String fieldValues[] = fieldValue.split("@");
-										Long glId = iclubNamedQueryDAO.getIclubGeoLocByLatAndLong(new Double(fieldValues[0].toString()), new Double(fieldValues[2].toString()));
+										Long glId = iclubNamedQueryDAO.getIclubGeoLocByLatAndLong(new Double(fieldValues[0].toString()), new Double(fieldValues[1].toString()));
 										IclubGeoLoc geoLocBean = iclubGeoLocDAO.findById(glId);
 										premium = premium + baseValue * (geoLocBean.getGlRate() / 100);
 										
@@ -411,7 +460,7 @@ public class IclubQuickQuoteService {
 													premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 													
 												} else if (rateTypeBean.getRtType().equalsIgnoreCase("L")) {
-													String lookupDetails = iclubCommonDAO.findAllLookValuesByTabelName(tableName, fieldValue.toString());
+													String lookupDetails = iclubCommonDAO.findAllLookValuesByTabelName(fieldBean.getFLTblName(), fieldValue.toString());
 													if (rateEngineBean.getReBaseValue().trim().equalsIgnoreCase(lookupDetails)) {
 														premium = premium + baseValue * (rateEngineBean.getReRate() / 100);
 													}
@@ -821,6 +870,174 @@ public class IclubQuickQuoteService {
 	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+	
+	public IclubIdTypeDAO getIclubIdTypeDAO() {
+		return iclubIdTypeDAO;
+	}
+	
+	public void setIclubIdTypeDAO(IclubIdTypeDAO iclubIdTypeDAO) {
+		this.iclubIdTypeDAO = iclubIdTypeDAO;
+	}
+	
+	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
+		return iclubMaritialStatusDAO;
+	}
+	
+	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
+		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
+	}
+	
+	public IclubGeoLocDAO getIclubGeoLocDAO() {
+		return iclubGeoLocDAO;
+	}
+	
+	public void setIclubGeoLocDAO(IclubGeoLocDAO iclubGeoLocDAO) {
+		this.iclubGeoLocDAO = iclubGeoLocDAO;
+	}
+	
+	public IclubLicenseCodeDAO getIclubLicenseCodeDAO() {
+		return iclubLicenseCodeDAO;
+	}
+	
+	public void setIclubLicenseCodeDAO(IclubLicenseCodeDAO iclubLicenseCodeDAO) {
+		this.iclubLicenseCodeDAO = iclubLicenseCodeDAO;
+	}
+	
+	public IclubAccessTypeDAO getIclubAccessTypeDAO() {
+		return iclubAccessTypeDAO;
+	}
+	
+	public void setIclubAccessTypeDAO(IclubAccessTypeDAO iclubAccessTypeDAO) {
+		this.iclubAccessTypeDAO = iclubAccessTypeDAO;
+	}
+	
+	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
+		return iclubInsuranceItemTypeDAO;
+	}
+	
+	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
+		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
+	}
+	
+	public IclubDriverDAO getIclubDriverDAO() {
+		return iclubDriverDAO;
+	}
+	
+	public void setIclubDriverDAO(IclubDriverDAO iclubDriverDAO) {
+		this.iclubDriverDAO = iclubDriverDAO;
+	}
+	
+	public IclubSecurityDeviceDAO getIclubSecurityDeviceDAO() {
+		return iclubSecurityDeviceDAO;
+	}
+	
+	public void setIclubSecurityDeviceDAO(IclubSecurityDeviceDAO iclubSecurityDeviceDAO) {
+		this.iclubSecurityDeviceDAO = iclubSecurityDeviceDAO;
+	}
+	
+	public IclubVehicleMasterDAO getIclubVehicleMasterDAO() {
+		return iclubVehicleMasterDAO;
+	}
+	
+	public void setIclubVehicleMasterDAO(IclubVehicleMasterDAO iclubVehicleMasterDAO) {
+		this.iclubVehicleMasterDAO = iclubVehicleMasterDAO;
+	}
+	
+	public IclubVehSecTypeDAO getIclubVehSecTypeDAO() {
+		return iclubVehSecTypeDAO;
+	}
+	
+	public void setIclubVehSecTypeDAO(IclubVehSecTypeDAO iclubVehSecTypeDAO) {
+		this.iclubVehSecTypeDAO = iclubVehSecTypeDAO;
+	}
+	
+	public IclubVehUsageTypeDAO getIclubVehUsageTypeDAO() {
+		return iclubVehUsageTypeDAO;
+	}
+	
+	public void setIclubVehUsageTypeDAO(IclubVehUsageTypeDAO iclubVehUsageTypeDAO) {
+		this.iclubVehUsageTypeDAO = iclubVehUsageTypeDAO;
+	}
+	
+	public IclubRoofTypeDAO getIclubRoofTypeDAO() {
+		return iclubRoofTypeDAO;
+	}
+	
+	public void setIclubRoofTypeDAO(IclubRoofTypeDAO iclubRoofTypeDAO) {
+		this.iclubRoofTypeDAO = iclubRoofTypeDAO;
+	}
+	
+	public IclubBarTypeDAO getIclubBarTypeDAO() {
+		return iclubBarTypeDAO;
+	}
+	
+	public void setIclubBarTypeDAO(IclubBarTypeDAO iclubBarTypeDAO) {
+		this.iclubBarTypeDAO = iclubBarTypeDAO;
+	}
+	
+	public IclubWallTypeDAO getIclubWallTypeDAO() {
+		return iclubWallTypeDAO;
+	}
+	
+	public void setIclubWallTypeDAO(IclubWallTypeDAO iclubWallTypeDAO) {
+		this.iclubWallTypeDAO = iclubWallTypeDAO;
+	}
+	
+	public IclubPropertyTypeDAO getIclubPropertyTypeDAO() {
+		return iclubPropertyTypeDAO;
+	}
+	
+	public void setIclubPropertyTypeDAO(IclubPropertyTypeDAO iclubPropertyTypeDAO) {
+		this.iclubPropertyTypeDAO = iclubPropertyTypeDAO;
+	}
+	
+	public IclubOccupiedStatusDAO getIclubOccupiedStatusDAO() {
+		return iclubOccupiedStatusDAO;
+	}
+	
+	public void setIclubOccupiedStatusDAO(IclubOccupiedStatusDAO iclubOccupiedStatusDAO) {
+		this.iclubOccupiedStatusDAO = iclubOccupiedStatusDAO;
+	}
+	
+	public IclubPropUsageTypeDAO getIclubPropUsageTypeDAO() {
+		return iclubPropUsageTypeDAO;
+	}
+	
+	public void setIclubPropUsageTypeDAO(IclubPropUsageTypeDAO iclubPropUsageTypeDAO) {
+		this.iclubPropUsageTypeDAO = iclubPropUsageTypeDAO;
+	}
+	
+	public IclubPropertyDAO getIclubPropertyDAO() {
+		return iclubPropertyDAO;
+	}
+	
+	public void setIclubPropertyDAO(IclubPropertyDAO iclubPropertyDAO) {
+		this.iclubPropertyDAO = iclubPropertyDAO;
+	}
+	
+	public IclubVehicleDAO getIclubVehicleDAO() {
+		return iclubVehicleDAO;
+	}
+	
+	public void setIclubVehicleDAO(IclubVehicleDAO iclubVehicleDAO) {
+		this.iclubVehicleDAO = iclubVehicleDAO;
+	}
+	
+	public IclubPropertyItemDAO getIclubPropertyItemDAO() {
+		return iclubPropertyItemDAO;
+	}
+	
+	public void setIclubPropertyItemDAO(IclubPropertyItemDAO iclubPropertyItemDAO) {
+		this.iclubPropertyItemDAO = iclubPropertyItemDAO;
+	}
+	
+	public IclubInsuranceItemDAO getIclubInsuranceItemDAO() {
+		return iclubInsuranceItemDAO;
+	}
+	
+	public void setIclubInsuranceItemDAO(IclubInsuranceItemDAO iclubInsuranceItemDAO) {
+		this.iclubInsuranceItemDAO = iclubInsuranceItemDAO;
 	}
 	
 }
