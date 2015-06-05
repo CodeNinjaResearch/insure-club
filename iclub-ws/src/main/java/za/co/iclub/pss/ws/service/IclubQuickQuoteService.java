@@ -313,7 +313,7 @@ public class IclubQuickQuoteService {
 				iCTt.setIiItemId(property.getPId());
 				iCTt.setIiQuoteId(iclubQuote.getQId());
 				iCTt.setIiCrtdDt(new Timestamp(System.currentTimeMillis()));
-				iCTt.setIclubInsuranceItemType(iclubInsuranceItemTypeDAO.findById(1l));
+				iCTt.setIclubInsuranceItemType(iclubInsuranceItemTypeDAO.findById(2l));
 				iCTt.setIclubPerson(property.getIclubPerson() != null && !property.getIclubPerson().getPId().equalsIgnoreCase("") ? iclubPersonDAO.findById(property.getIclubPerson().getPId()) : null);
 				iclubInsuranceItems.add(iCTt);
 			}
