@@ -1289,24 +1289,29 @@ public class IclubQuickQuoteController implements Serializable {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
+			IclubQuickQuoteRequest request = new IclubQuickQuoteRequest();
 			if (validateForm(true, IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null)) {
 				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
 					
 					personBean = getIclubPersonBean(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+					request.setLoginFlag(true);
 				}
-				IclubQuickQuoteRequest request = new IclubQuickQuoteRequest();
+				
 				IclubPersonModel personModel = insertIntoPerson(personBean);
 				
 				IclubQuoteModel quoteModel = addQuote(getQuoteBean(), personBean);
 				request.setIclubQuoteModel(quoteModel);
+				
 				IclubDriverModel driverModel = addDriver(driverBean, personBean, quoteModel);
 				List<IclubVehicleModel> vehicleModels = addVehicle(vehicleBeans, driverBean, quoteModel);
 				
 				List<IclubPropertyModel> propertyModels = addPropertiy(propertyBeans, quoteModel);
+				List<IclubPropertyItemModel> propertyItemModels = getPropertyItemModels(propertyItemBeansMap);
 				request.setIclubDriverModel(driverModel);
 				request.setIclubVehicleModels(vehicleModels);
 				request.setIclubPersonModel(personModel);
 				request.setIclubPropertyModels(propertyModels);
+				request.setIclubPropertyItemModels(propertyItemModels);
 				WebClient client = IclubWebHelper.createCustomClient(QQUT_BASE_URL + "createQuote/");
 				
 				IclubQuickQuoteResponse response = client.accept(MediaType.APPLICATION_JSON).post(request, IclubQuickQuoteResponse.class);
@@ -1329,9 +1334,9 @@ public class IclubQuickQuoteController implements Serializable {
 		IclubPersonModel model = new IclubPersonModel();
 		
 		try {
+			personBean.setPAge(personBean.getPId() == null ? IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) : personBean.getPAge());
+			personBean.setPId(personBean.getPId() != null ? personBean.getPId() : UUID.randomUUID().toString());
 			
-			personBean.setPId(UUID.randomUUID().toString());
-			personBean.setPAge(IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()));
 			model.setPId(personBean.getPId());
 			model.setPCrtdDt(personBean.getPCrtdDt());
 			model.setPDob(personBean.getPDob());
@@ -1501,6 +1506,27 @@ public class IclubQuickQuoteController implements Serializable {
 		
 	}
 	
+	public List<IclubPropertyItemModel> getPropertyItemModels(Map<String, List<IclubPropertyItemBean>> propertyItemModelMap) {
+		List<IclubPropertyItemModel> propertyItemModels = new ArrayList<IclubPropertyItemModel>();
+		
+		if (propertyItemModelMap != null && propertyItemModelMap.size() > 0) {
+			for (String propId : propertyItemModelMap.keySet()) {
+				
+				for (IclubPropertyItemBean bean : propertyItemModelMap.get(propId)) {
+					IclubPropertyItemModel model = new IclubPropertyItemModel();
+					model.setIclubProperty(propId);
+					model.setPiId(bean.getPiId());
+					model.setPiValue(bean.getPiValue());
+					model.setPiDescripton(bean.getPiDescripton());
+					propertyItemModels.add(model);
+				}
+			}
+		}
+		
+		return propertyItemModels;
+		
+	}
+	
 	public List<IclubPropertyModel> addPropertiy(List<IclubPropertyBean> beans, IclubQuoteModel quoteModel) throws Exception {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addPropertiy");
@@ -1634,8 +1660,6 @@ public class IclubQuickQuoteController implements Serializable {
 			model.setIclubCoverType(bean.getIclubCoverType());
 			model.setIclubQuoteStatus(1l);
 			model.setIclubPersonByQPersonId(personBean.getPId());
-			
-			addPropertiy(propertyBeans, model);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -2457,6 +2481,7 @@ public class IclubQuickQuoteController implements Serializable {
 		IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
 		IclubPersonBean personBean = new IclubPersonBean();
 		personBean.setPId(model.getPId());
+		personBean.setPAge(model.getPAge());
 		personBean.setPCrtdDt(model.getPCrtdDt());
 		personBean.setPDob(model.getPDob());
 		personBean.setPEmail(model.getPEmail());

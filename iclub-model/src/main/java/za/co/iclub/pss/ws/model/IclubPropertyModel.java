@@ -34,6 +34,7 @@ public class IclubPropertyModel {
 	private Double PReplacementCost;
 	private Double PContentCost;
 	private String[] iclubPropertyItems;
+	private boolean updateFlag;
 	
 	public String getPId() {
 		return PId;
@@ -249,6 +250,14 @@ public class IclubPropertyModel {
 	
 	public void setPContentCost(Double pContentCost) {
 		PContentCost = pContentCost;
+	}
+	
+	public boolean isUpdateFlag() {
+		return updateFlag;
+	}
+	
+	public void setUpdateFlag(boolean updateFlag) {
+		this.updateFlag = updateFlag;
 	}
 	
 }

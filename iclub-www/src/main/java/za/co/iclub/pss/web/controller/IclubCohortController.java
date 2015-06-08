@@ -170,7 +170,7 @@ public class IclubCohortController implements Serializable {
 		bean = new IclubCohortBean();
 	}
 	
-	public void addIclubCohorts() {
+	public String addIclubCohorts() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohort");
 		try {
 			if (validateForm(true)) {
@@ -198,7 +198,7 @@ public class IclubCohortController implements Serializable {
 					}
 				} else {
 					IclubWebHelper.addMessage("Select one Row", FacesMessage.SEVERITY_INFO);
-					return;
+					return "";
 				}
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).postCollection(models, IclubCohortModel.class, ResponseModel.class);
@@ -210,6 +210,7 @@ public class IclubCohortController implements Serializable {
 					IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
+					return "qq";
 				} else {
 					IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
@@ -218,6 +219,7 @@ public class IclubCohortController implements Serializable {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
+		return "";
 	}
 	
 	public void addIclubCohort() {

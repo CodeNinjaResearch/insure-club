@@ -3,7 +3,7 @@
 		<p:panel id="pnlPropertyCont">
 			<p:dataTable reflow="true" widgetVar="dtPropertyCont" value="#{iclubFullQuoteController.propertyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Property Available">
 				<f:facet name="footer">
-					<p:commandButton id="btnPropertyShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showProAddPanel}" update=":iclubFrm:qqTabView:pnlPropertyCont" />
+					<!-- <p:commandButton id="btnPropertyShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showProAddPanel}" update=":iclubFrm:qqTabView:pnlPropertyCont" /> -->
 				</f:facet>
 				<p:column headerText="Unique Id">
 					<p:outputLabel styleClass="TexAlCenter" value="#{ bean.PId}" />
@@ -365,6 +365,59 @@
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>
+				<p:tab id="insuranceTab" title="Insurance Items">
+					<p:panel id="pnlPropertyItemCont">
+						<p:dataTable reflow="true" widgetVar="dtPropertyItemCont" value="#{iclubFullQuoteController.propertyItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PropertyItem Available">
+							<f:facet name="footer">
+								<p:commandButton id="btnPropertyItemShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showProItemAddPanel}" update=":iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemCont" />
+							</f:facet>
+							<p:column headerText="Unique Id">
+								<p:outputLabel styleClass="TexAlCenter" value="#{ bean.piId}" />
+							</p:column>
+							<p:column headerText="Registration Number">
+								<p:outputLabel styleClass="TexAlCenter" value="#{bean.piDescripton}" />
+							</p:column>
+							<p:column headerText="Estimatted Value">
+								<p:outputLabel styleClass="TexAlCenter" value="#{bean.piValue}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btnPropertyItemEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubFullQuoteController.delIclubPropertyItem}" update=":iclubFrm:grlMsg">
+									<f:setPropertyActionListener target="#{iclubFullQuoteController.propertyItemBean}" value="#{bean}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+						<p:panel id="pnlProItemAdd" rendered="#{iclubFullQuoteController.showProItemAddPanel}">
+							<div class="Container90 Fnone MarAuto TexAlCenter">
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Description :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubFullQuoteController.propertyItemBean.piDescripton}" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Value :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:inputText styleClass="TexAlCenter" placeholder="Value" value="#{iclubFullQuoteController.propertyItemBean.piValue}" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:commandButton id="btnPropertyItemCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubFullQuoteController.addIclubPropertyItem}" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:commandButton id="btnPropertyItemCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemCont" value="Close" actionListener="#{iclubFullQuoteController.clearProItemForm}" />
+									</div>
+								</div>
+							</div>
+						</p:panel>
+					</p:panel>
+				</p:tab>
 				<p:tab id="qqSubProSecDetMod" title="Security Details">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
@@ -436,7 +489,11 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Is it Rent Furnished :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText placeholder="Is it Rent Furnished" value="#{iclubFullQuoteController.propertyBean.PRentFurYn}" styleClass="TexAlCenter" />
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.PRentFurYn}" widgetVar="mnuRentMod" id="mnuRentMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Is it Rent Furnished" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -445,7 +502,11 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Is it Compleed :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText placeholder="Is it Compleed" value="#{iclubFullQuoteController.propertyBean.PCompYn}" styleClass="TexAlCenter" />
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.PCompYn}" widgetVar="mnuComptMod" id="mnuComptMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Is it Compleed" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -454,7 +515,11 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Robbery Free Years :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText placeholder="Robbery Free Years" value="#{iclubFullQuoteController.propertyBean.PNorobberyYn}" styleClass="TexAlCenter" />
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.PNorobberyYn}" widgetVar="mnuRonFrMod" id="mnuRonFrMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Robbery Free Years" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -463,7 +528,11 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Is the premises secured with gates :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText placeholder="Is the premises secured with gates" value="#{iclubFullQuoteController.propertyBean.PSecGatesYn}" styleClass="TexAlCenter" />
+							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.PSecGatesYn}" widgetVar="mnuGateMod" id="mnuGateMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Is the premises secured with gates" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -473,13 +542,10 @@
 				<div class="Container90 Fnone MarAuto TexAlCenter">
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
-						<div class="Container33 Responsive">
+						<div class="Container50 Responsive">
 							<p:commandButton id="btnPropertyEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Update" actionListener="#{iclubFullQuoteController.modIclubProperty}" />
 						</div>
-						<div class="Container33 Responsive">
-							<p:commandButton id="btnPropertyDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Delete" actionListener="#{iclubFullQuoteController.delIclubProperty}" />
-						</div>
-						<div class="Container33 Responsive">
+						<div class="Container50 Responsive">
 							<p:commandButton id="btnPropertyCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlPropertyCont" value="Close" actionListener="#{iclubFullQuoteController.clearProForm}" />
 						</div>
 					</div>

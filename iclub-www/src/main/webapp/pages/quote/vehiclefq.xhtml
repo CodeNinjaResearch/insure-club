@@ -3,7 +3,7 @@
 		<p:panel id="pnlVehicleCont">
 			<p:dataTable reflow="true" widgetVar="dtVehicleCont" value="#{iclubFullQuoteController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
 				<f:facet name="footer">
-					<p:commandButton id="btnVehicleShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showVehAddPanel}" update=":iclubFrm:qqTabView:pnlVehicleCont" />
+					<!-- <p:commandButton id="btnVehicleShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showVehAddPanel}" update=":iclubFrm:qqTabView:pnlVehicleCont" /> -->
 				</f:facet>
 				<p:column headerText="Unique Id">
 					<p:outputLabel styleClass="TexAlCenter" value="#{ bean.VId}" />
@@ -649,13 +649,10 @@
 				<div class="Container90 Fnone MarAuto TexAlCenter">
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
-						<div class="Container33 Responsive">
+						<div class="Container50 Responsive">
 							<p:commandButton id="btnVehicleEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlVehicleCont" value="Update" actionListener="#{iclubFullQuoteController.modIclubVehicle}" />
 						</div>
-						<div class="Container33 Responsive">
-							<p:commandButton id="btnVehicleDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlVehicleCont" value="Delete" actionListener="#{iclubFullQuoteController.delIclubVehicle}" />
-						</div>
-						<div class="Container33 Responsive">
+						<div class="Container50 Responsive">
 							<p:commandButton id="btnVehicleCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:qqTabView:pnlVehicleCont" value="Close" actionListener="#{iclubFullQuoteController.clearVehForm}" />
 						</div>
 					</div>

@@ -96,6 +96,8 @@
 			<ref bean="IclubPropertyItemService" />
 			<ref bean="IclubCohortInviteService" />
 			<ref bean="IclubQuickQuoteService" />
+			<ref bean="IclubFullQuoteService" />
+
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">

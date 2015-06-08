@@ -13,6 +13,7 @@ public class IclubPropertyItemModel {
 	private String piDescripton;
 	private Double piValue;
 	private Date piCrtdDate;
+	private boolean modFlag;
 	
 	public String getPiId() {
 		return piId;
@@ -60,6 +61,14 @@ public class IclubPropertyItemModel {
 	
 	public void setPiCrtdDate(Date piCrtdDate) {
 		this.piCrtdDate = piCrtdDate;
+	}
+	
+	public boolean isModFlag() {
+		return modFlag;
+	}
+	
+	public void setModFlag(boolean modFlag) {
+		this.modFlag = modFlag;
 	}
 	
 }

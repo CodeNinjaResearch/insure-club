@@ -38,7 +38,6 @@ public class IclubVehicleModel {
 	private Date VCrtdDt;
 	private String VModifiedYn;
 	private Long iclubCoverType;
-	private boolean modFlag;
 	
 	public String getVId() {
 		return VId;
@@ -286,14 +285,6 @@ public class IclubVehicleModel {
 	
 	public void setIclubCoverType(Long iclubCoverType) {
 		this.iclubCoverType = iclubCoverType;
-	}
-	
-	public boolean isModFlag() {
-		return modFlag;
-	}
-	
-	public void setModFlag(boolean modFlag) {
-		this.modFlag = modFlag;
 	}
 	
 }

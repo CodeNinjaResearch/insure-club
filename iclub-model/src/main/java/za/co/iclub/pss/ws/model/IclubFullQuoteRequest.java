@@ -13,6 +13,9 @@ public class IclubFullQuoteRequest {
 	private List<IclubPropertyModel> iclubPropertyModels;
 	private List<IclubPropertyItemModel> iclubPropertyItemModels;
 	private IclubDriverModel iclubDriverModel;
+	private IclubAccountModel iclubAccountModel;
+	private IclubPolicyModel iclubPolicyModel;
+	private IclubClaimModel iclubClaimModel;
 	
 	public IclubQuoteModel getIclubQuoteModel() {
 		return iclubQuoteModel;
@@ -60,5 +63,29 @@ public class IclubFullQuoteRequest {
 	
 	public void setIclubPropertyItemModels(List<IclubPropertyItemModel> iclubPropertyItemModels) {
 		this.iclubPropertyItemModels = iclubPropertyItemModels;
+	}
+	
+	public IclubAccountModel getIclubAccountModel() {
+		return iclubAccountModel;
+	}
+	
+	public void setIclubAccountModel(IclubAccountModel iclubAccountModel) {
+		this.iclubAccountModel = iclubAccountModel;
+	}
+	
+	public IclubPolicyModel getIclubPolicyModel() {
+		return iclubPolicyModel;
+	}
+	
+	public void setIclubPolicyModel(IclubPolicyModel iclubPolicyModel) {
+		this.iclubPolicyModel = iclubPolicyModel;
+	}
+	
+	public IclubClaimModel getIclubClaimModel() {
+		return iclubClaimModel;
+	}
+	
+	public void setIclubClaimModel(IclubClaimModel iclubClaimModel) {
+		this.iclubClaimModel = iclubClaimModel;
 	}
 }

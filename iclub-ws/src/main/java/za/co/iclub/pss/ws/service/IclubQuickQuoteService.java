@@ -114,11 +114,12 @@ public class IclubQuickQuoteService {
 		
 		Double generatedPremium = 0.0;
 		IclubPerson iclubPerson = null;
-		if (iclubQuickQuoteRequest.isLoginFlag()) {
+		if (!iclubQuickQuoteRequest.isLoginFlag()) {
 			iclubPerson = getIclubPerson(iclubQuickQuoteRequest);
 			iclubPersonDAO.save(iclubPerson);
 		} else {
-			iclubPerson = iclubPersonDAO.findById(iclubQuickQuoteRequest.getIclubPersonModel().getPId());
+			iclubPerson = getIclubPerson(iclubQuickQuoteRequest.getIclubPersonModel());
+			iclubPersonDAO.merge(iclubPerson);
 		}
 		
 		IclubQuote iclubQuote = getIclubQuote(iclubQuickQuoteRequest);
@@ -479,6 +480,38 @@ public class IclubQuickQuoteService {
 			}
 		}
 		return premium;
+	}
+	
+	public IclubPerson getIclubPerson(IclubPersonModel model) {
+		IclubPerson person = new IclubPerson();
+		person.setPId(model.getPId());
+		person.setPCrtdDt(model.getPCrtdDt());
+		person.setPDob(model.getPDob());
+		person.setPEmail(model.getPEmail());
+		person.setPFName(model.getPFName());
+		person.setPIdNum(model.getPIdNum());
+		person.setPLName(model.getPLName());
+		person.setPMobile(model.getPMobile());
+		person.setPAddress(model.getPAddress());
+		person.setPContactPref(model.getPContactPref());
+		person.setPGender(model.getPGender());
+		person.setPIdNum(model.getPIdNum());
+		person.setPIdIssueDt(model.getPIdIssueDt());
+		person.setPAge(model.getPAge());
+		person.setPContactPref(model.getPContactPref());
+		person.setPIdExpiryDt(model.getPIdExpiryDt());
+		person.setPInitials(model.getPInitials());
+		person.setPIsPensioner(model.getPIsPensioner());
+		person.setPIdIssueCntry(model.getPIdIssueCntry());
+		person.setPLat(model.getPLat());
+		person.setPLong(model.getPLong());
+		person.setPOccupation(model.getPOccupation());
+		person.setPTitle(model.getPTitle());
+		person.setPZipCd(model.getPZipCd());
+		person.setIclubIdType(model.getIclubIdType() != null ? iclubIdTypeDAO.findById(model.getIclubIdType()) : null);
+		person.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+		person.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
+		return person;
 	}
 	
 	public String getFieldValueFromDB(String fieldName, String tableName, String fieldId, String rateType) {
