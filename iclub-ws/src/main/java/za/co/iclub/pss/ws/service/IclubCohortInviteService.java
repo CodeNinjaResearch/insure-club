@@ -90,10 +90,10 @@ public class IclubCohortInviteService {
 				IclubCohortInvite iCC = new IclubCohortInvite();
 				
 				iCC.setCiId(model.getCiId());
-				iCC.setIclubCohort(iclubCohortDAO.findById(model.getIclubCohort()));
-				iCC.setIclubNotificationType(iclubNotificationTypeDAO.findById(model.getIclubNotificationType()));
+				iCC.setIclubCohort(model.getIclubCohort() != null ? iclubCohortDAO.findById(model.getIclubCohort()) : null);
+				iCC.setIclubNotificationType(model.getIclubNotificationType() != null ? iclubNotificationTypeDAO.findById(model.getIclubNotificationType()) : null);
 				iCC.setCiCrtdDt(model.getCiCrtdDt());
-				iCC.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+				iCC.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 				iCC.setCiInviteAcceptYn(model.getCiInviteAcceptYn());
 				iCC.setCiInviteUri(model.getCiInviteUri());
 				IclubCohortInviteDAO.save(iCC);
