@@ -707,7 +707,7 @@ public class IclubCohortController implements Serializable {
 			setIclubCohortInvite(key);
 			
 		}
-		return key;
+		return key; 
 	}
 	
 	public void setKey(String key) {
