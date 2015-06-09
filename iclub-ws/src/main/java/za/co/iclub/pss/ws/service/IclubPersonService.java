@@ -1,6 +1,7 @@
 package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -56,6 +57,7 @@ import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
+import za.co.iclub.pss.ws.model.IclubCohortInviteModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -1438,6 +1440,28 @@ public class IclubPersonService {
 			LOGGER.error(e, e);
 		}
 		return model;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@POST
+	@Path("/getMNumberList")
+	@Produces("application/json")
+	@Transactional
+	public <T extends String> List<T> listAllMake(Collection<? extends String> models) {
+		List<T> ret = new ArrayList<T>();
+		try {
+			
+			List batmod = iclubNamedQueryDAO.getIclubPersonNumbersList(models);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					String reDetails = (String) object;
+					ret.add((T) reDetails);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
 	}
 	
 	public IclubPersonDAO getIclubPersonDAO() {

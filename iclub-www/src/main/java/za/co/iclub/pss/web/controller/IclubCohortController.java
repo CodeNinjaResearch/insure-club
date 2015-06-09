@@ -2,6 +2,7 @@ package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -21,11 +22,15 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.web.bean.IclubCohortBean;
+import za.co.iclub.pss.web.bean.IclubCohortInviteBean;
 import za.co.iclub.pss.web.bean.IclubCohortTypeBean;
+import za.co.iclub.pss.web.bean.IclubNotificationTypeBean;
 import za.co.iclub.pss.web.bean.IclubPersonBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
+import za.co.iclub.pss.ws.model.IclubCohortInviteModel;
 import za.co.iclub.pss.ws.model.IclubCohortModel;
 import za.co.iclub.pss.ws.model.IclubCohortTypeModel;
+import za.co.iclub.pss.ws.model.IclubNotificationTypeModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -33,7 +38,6 @@ import com.google.gdata.client.contacts.ContactsService;
 import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.ContactFeed;
 import com.google.gdata.data.extensions.Email;
-import com.google.gdata.data.extensions.Name;
 import com.google.gdata.data.extensions.PhoneNumber;
 
 @ManagedBean(name = "iclubCohortController")
@@ -44,6 +48,8 @@ public class IclubCohortController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubCohortController.class);
 	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCohortService/";
+	private static final String NFT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubNotificationTypeService/";
+	private static final String CI_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCohortInviteService/";
 	private static final String CHT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCohortTypeService/";
 	private static final String P_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPersonService/";
 	private List<IclubCohortBean> beans;
@@ -51,7 +57,10 @@ public class IclubCohortController implements Serializable {
 	private List<IclubPersonBean> personBeans;
 	private List<IclubCohortTypeBean> cohortTypeBeans;
 	private List<IclubCohortBean> selectedBeans;
-	private List<IclubCohortBean> cohortsBeans;
+	private List<IclubCohortInviteBean> selectedInviteBeans;
+	private List<IclubCohortInviteBean> cohortsInviteBeans;
+	private List<IclubNotificationTypeBean> iclubNotificationTypeBeans;
+	
 	private IclubCohortBean bean;
 	private boolean showCreateCont;
 	private boolean showViewCont;
@@ -61,6 +70,7 @@ public class IclubCohortController implements Serializable {
 	private String sessionUserId;
 	private String userName;
 	private ResourceBundle labelBundle;
+	private String key;
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -80,6 +90,7 @@ public class IclubCohortController implements Serializable {
 		showEditCont = false;
 		showSummaryCont = false;
 		viewParam = 1l;
+		selectedBeans = new ArrayList<IclubCohortBean>();
 	}
 	
 	public void showCreate() {
@@ -90,6 +101,7 @@ public class IclubCohortController implements Serializable {
 		showEditCont = false;
 		showSummaryCont = false;
 		viewParam = 1l;
+		selectedBeans = new ArrayList<IclubCohortBean>();
 	}
 	
 	public void showEdit() {
@@ -174,50 +186,122 @@ public class IclubCohortController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohort");
 		try {
 			if (validateForm(true)) {
-				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "addList");
-				List<IclubCohortModel> models = new ArrayList<IclubCohortModel>();
-				if (selectedBeans != null && selectedBeans.size() > 0)
 				
-				{
+				List<IclubCohortModel> models = new ArrayList<IclubCohortModel>();
+				if (selectedBeans != null && selectedBeans.size() == 1 && !showCreateCont) {
 					for (IclubCohortBean bean : selectedBeans) {
-						IclubCohortModel model = new IclubCohortModel();
+						WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + getSessionUserId());
 						
-						model.setCId(bean.getCId());
-						model.setCName(bean.getCName());
-						model.setCEmail(bean.getCEmail());
-						model.setCInitDt(bean.getCInitDt());
-						model.setCFinalizeDt(bean.getCFinalizeDt());
-						model.setCTotalContrib(bean.getCTotalContrib());
-						model.setCCollectedContrib(bean.getCCollectedContrib());
-						model.setCCurMemberCnt(bean.getCCurMemberCnt());
-						model.setIclubCohortType(bean.getIclubCohortType());
-						model.setIclubPersonByCPrimaryUserId(bean.getIclubPersonByCPrimaryUserId());
-						model.setIclubPersonByCCrtdBy(getSessionUserId());
-						model.setCCrtdDt(new Date(System.currentTimeMillis()));
+						IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+						
+						client = IclubWebHelper.createCustomClient(P_BASE_URL + "mod");
+						model.setIclubCohort(bean.getCId());
+						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+						client.close();
+						if (response.getStatusCode() == 0) {
+							IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+							viewParam = 1l;
+							showView();
+							
+							return "cohortInvites.xhtml?faces-redirect=true";
+						} else {
+							IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+						}
+					}
+				} else if (showCreateCont) {
+					WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
+					IclubCohortModel model = new IclubCohortModel();
+					
+					model.setCId(UUID.randomUUID().toString());
+					model.setCName(bean.getCName());
+					model.setCEmail(bean.getCEmail());
+					model.setCInitDt(bean.getCInitDt());
+					model.setCFinalizeDt(bean.getCFinalizeDt());
+					model.setCTotalContrib(bean.getCTotalContrib());
+					model.setCCollectedContrib(bean.getCCollectedContrib());
+					model.setCCurMemberCnt(bean.getCCurMemberCnt());
+					model.setIclubCohortType(bean.getIclubCohortType());
+					model.setIclubPersonByCPrimaryUserId(getSessionUserId());
+					model.setIclubPersonByCCrtdBy(getSessionUserId());
+					model.setCCrtdDt(new Date(System.currentTimeMillis()));
+					models.add(model);
+					
+					ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+					client.close();
+					if (response.getStatusCode() == 0) {
+						
+						client = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + getSessionUserId());
+						
+						IclubPersonModel person = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+						
+						client = IclubWebHelper.createCustomClient(P_BASE_URL + "mod");
+						person.setIclubCohort(bean.getCId());
+						response = client.accept(MediaType.APPLICATION_JSON).put(person, ResponseModel.class);
+						
+						IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+						viewParam = 1l;
+						showView();
+						
+						return "cohortInvites.xhtml?face-redirect=true";
+					} else {
+						IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					}
+				}
+				
+				else {
+					IclubWebHelper.addMessage("Select one Row", FacesMessage.SEVERITY_INFO);
+					return "";
+				}
+				
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		return "";
+	}
+	
+	public String addIclubCohortsInvites() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohort");
+		try {
+			if (validateForm(true)) {
+				
+				List<IclubCohortInviteModel> models = new ArrayList<IclubCohortInviteModel>();
+				if (selectedInviteBeans != null && selectedInviteBeans.size() > 0) {
+					WebClient client = IclubWebHelper.createCustomClient(CI_BASE_URL + "addList");
+					for (IclubCohortInviteBean bean : selectedInviteBeans) {
+						
+						IclubCohortInviteModel model = new IclubCohortInviteModel();
+						
+						model.setCiId(bean.getCiId());
+						model.setIclubCohort(bean.getIclubCohort());
+						model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
+						model.setIclubNotificationType(bean.getIclubNotificationType());
+						model.setCiInviteAcceptYn(bean.getCiInviteAcceptYn());
+						model.setCiInviteUri(bean.getCiInviteUri());
+						model.setIclubPerson(getSessionUserId());
 						models.add(model);
+						
+					}
+					ResponseModel response = client.accept(MediaType.APPLICATION_JSON).postCollection(models, IclubCohortInviteModel.class, ResponseModel.class);
+					client.close();
+					if (response.getStatusCode() == 0) {
+						IclubWebHelper.addMessage(getLabelBundle().getString("cohortinvite") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+						viewParam = 1l;
+						showView();
+						return "qq";
+					} else {
+						IclubWebHelper.addMessage(getLabelBundle().getString("cohortinvite") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 					}
 				} else {
 					IclubWebHelper.addMessage("Select one Row", FacesMessage.SEVERITY_INFO);
 					return "";
 				}
 				
-				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).postCollection(models, IclubCohortModel.class, ResponseModel.class);
-				client.close();
-				if (response.getStatusCode() == 0) {
-					for (IclubCohortBean bean : selectedBeans) {
-						cohortsBeans.remove(bean);
-					}
-					IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
-					viewParam = 1l;
-					showView();
-					return "qq";
-				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
-				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("cohortinvite") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 		return "";
 	}
@@ -324,34 +408,42 @@ public class IclubCohortController implements Serializable {
 			// Print the results
 			
 			for (ContactEntry entry : resultFeed.getEntries()) {
-				IclubCohortBean bean = new IclubCohortBean();
-				bean.setCId(UUID.randomUUID().toString());
-				if (entry.hasName()) {
-					if (entry.hasPhoneNumbers()) {
-						for (PhoneNumber phnum : entry.getPhoneNumbers()) {
-							phnum.getPhoneNumber();
-						}
-					}
-					Name name = entry.getName();
-					if (name.hasFullName()) {
-						String fullNameToDisplay = name.getFullName().getValue();
-						if (name.getFullName().hasYomi()) {
-							fullNameToDisplay += " (" + name.getFullName().getYomi() + ")";
-						}
-						bean.setCName(fullNameToDisplay);
-					}
-				}
+				IclubCohortInviteBean bean = new IclubCohortInviteBean();
+				bean.setCiId(UUID.randomUUID().toString());
+				
 				for (Email email : entry.getEmailAddresses()) {
 					System.out.print(" " + email.getAddress());
 					if (email.getAddress() != null) {
-						bean.setCEmail(email.getAddress());
-					}
-					if (email.getRel() == null && email.getLabel() != null) {
-						bean.setCEmail(email.getLabel());
+						bean.setCiInviteUri(email.getAddress());
+						break;
 					}
 				}
 				
-				cohortsBeans.add(bean);
+				if (bean.getCiInviteUri() == null || bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+					if (entry.hasName()) {
+						if (entry.hasPhoneNumbers()) {
+							for (PhoneNumber phnum : entry.getPhoneNumbers()) {
+								bean.setCiInviteUri(phnum.getPhoneNumber());
+								break;
+							}
+						}
+						
+					}
+				}
+				if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+					cohortsInviteBeans.add(bean);
+				}
+			}
+			
+			if (cohortsInviteBeans != null && cohortsInviteBeans.size() > 0) {
+				List<String> emailAndNumbers = new ArrayList<String>();
+				for (IclubCohortInviteBean bean : cohortsInviteBeans) {
+					emailAndNumbers.add(bean.getCiInviteUri());
+				}
+				WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "getMNumberList");
+				
+				Collection<? extends String> models = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(emailAndNumbers, String.class, String.class);
+				client.close();
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -483,6 +575,7 @@ public class IclubCohortController implements Serializable {
 					bean.setIclubCohortInvites(iclubCohortInvites);
 				}
 				beans.add(bean);
+				
 			}
 		}
 		return beans;
@@ -559,23 +652,66 @@ public class IclubCohortController implements Serializable {
 		this.selectedBeans = selectedBeans;
 	}
 	
-	public List<IclubCohortBean> getCohortsBeans() {
-		if (cohortsBeans == null) {
-			cohortsBeans = new ArrayList<IclubCohortBean>();
+	public List<IclubCohortInviteBean> getCohortsInviteBeans() {
+		if (cohortsInviteBeans == null) {
+			cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>();
 		}
 		
+		return cohortsInviteBeans;
+	}
+	
+	public void setCohortsInviteBeans(List<IclubCohortInviteBean> cohortsInviteBeans) {
+		this.cohortsInviteBeans = cohortsInviteBeans;
+	}
+	
+	public List<IclubCohortInviteBean> getSelectedInviteBeans() {
+		if (selectedInviteBeans == null) {
+			selectedInviteBeans = new ArrayList<IclubCohortInviteBean>();
+		}
+		return selectedInviteBeans;
+	}
+	
+	public void setSelectedInviteBeans(List<IclubCohortInviteBean> selectedInviteBeans) {
+		this.selectedInviteBeans = selectedInviteBeans;
+	}
+	
+	public List<IclubNotificationTypeBean> getIclubNotificationTypeBeans() {
+		WebClient client = IclubWebHelper.createCustomClient(NFT_BASE_URL + "list");
+		Collection<? extends IclubNotificationTypeModel> models = new ArrayList<IclubNotificationTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubNotificationTypeModel.class));
+		client.close();
+		iclubNotificationTypeBeans = new ArrayList<IclubNotificationTypeBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubNotificationTypeModel model : models) {
+				IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
+				model.setNtId(bean.getNtId());
+				model.setNtLongDesc(bean.getNtLongDesc());
+				model.setNtShortDesc(bean.getNtShortDesc());
+				model.setNtStatus(bean.getNtStatus());
+				bean.setIclubNotifs(model.getIclubNotifs());
+				iclubNotificationTypeBeans.add(bean);
+			}
+		}
+		return iclubNotificationTypeBeans;
+	}
+	
+	public void setIclubNotificationTypeBeans(List<IclubNotificationTypeBean> iclubNotificationTypeBeans) {
+		this.iclubNotificationTypeBeans = iclubNotificationTypeBeans;
+	}
+	
+	public String getKey() {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		
 		if (request.getParameter("key") != null) {
-			String access_token = (String) request.getParameter("key");
+			key = (String) request.getParameter("key");
 			request.removeAttribute("key");
-			setIclubCohortInvite(access_token);
+			setIclubCohortInvite(key);
+			
 		}
-		return cohortsBeans;
+		return key;
 	}
 	
-	public void setCohortsBeans(List<IclubCohortBean> cohortsBeans) {
-		this.cohortsBeans = cohortsBeans;
+	public void setKey(String key) {
+		this.key = key;
 	}
 	
 }

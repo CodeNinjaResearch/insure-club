@@ -1,6 +1,7 @@
 package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -18,11 +19,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubCohortInvite;
-import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
-import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
+import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
+import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubCohortInviteModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -59,6 +60,46 @@ public class IclubCohortInviteService {
 			IclubCohortInviteDAO.save(iCC);
 			
 			LOGGER.info("Save Success with ID :: " + iCC.getCiId());
+			
+			ResponseModel message = new ResponseModel();
+			
+			message.setStatusCode(0);
+			message.setStatusDesc("Success");
+			
+			return message;
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			ResponseModel message = new ResponseModel();
+			message.setStatusCode(1);
+			message.setStatusDesc(e.getMessage());
+			return message;
+		}
+		
+	}
+	
+	@POST
+	@Path("/addList")
+	@Consumes("application/json")
+	@Produces("application/json")
+	@Transactional
+	public ResponseModel addList(Collection<? extends IclubCohortInviteModel> models) {
+		try {
+			
+			for (IclubCohortInviteModel model : models) {
+				
+				IclubCohortInvite iCC = new IclubCohortInvite();
+				
+				iCC.setCiId(model.getCiId());
+				iCC.setIclubCohort(iclubCohortDAO.findById(model.getIclubCohort()));
+				iCC.setIclubNotificationType(iclubNotificationTypeDAO.findById(model.getIclubNotificationType()));
+				iCC.setCiCrtdDt(model.getCiCrtdDt());
+				iCC.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+				iCC.setCiInviteAcceptYn(model.getCiInviteAcceptYn());
+				iCC.setCiInviteUri(model.getCiInviteUri());
+				IclubCohortInviteDAO.save(iCC);
+				
+				LOGGER.info("Save Success with ID :: " + iCC.getCiId());
+			}
 			
 			ResponseModel message = new ResponseModel();
 			

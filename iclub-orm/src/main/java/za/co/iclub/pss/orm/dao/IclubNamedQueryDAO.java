@@ -1,18 +1,23 @@
 package za.co.iclub.pss.orm.dao;
 
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubClaim;
 import za.co.iclub.pss.orm.bean.IclubConfig;
 import za.co.iclub.pss.orm.bean.IclubDriver;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
+import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
 
 @Transactional
@@ -963,4 +968,33 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
+	public List getIclubPersonNumbersList(Collection<? extends String> numbers) {
+		log.debug("finding IclubPerson  instances by getIclubPersonNumbersList");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubPerson.class);
+			criteria.add(Restrictions.in("PMobile", numbers));
+			criteria.setProjection(Projections.property("PMobile"));
+			List personNames = criteria.list();
+			return personNames;
+		} catch (RuntimeException re) {
+			log.error("get IclubPersonList failed", re);
+			throw re;
+		}
+		
+	}
+	
+	public List getIclubPersonEmailsList(List<String> emails) {
+		log.debug("finding IclubPerson  instances by getIclubPersonEmailsList");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubPerson.class);
+			criteria.add(Restrictions.in("PEmail", emails));
+			criteria.setProjection(Projections.property("PEmail"));
+			List personNames = criteria.list();
+			return personNames;
+		} catch (RuntimeException re) {
+			log.error("get IclubPersonList failed", re);
+			throw re;
+		}
+		
+	}
 }
