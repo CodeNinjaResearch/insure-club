@@ -1442,16 +1442,38 @@ public class IclubPersonService {
 		return model;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@POST
 	@Path("/getMNumberList")
 	@Produces("application/json")
 	@Transactional
-	public <T extends String> List<T> listAllMake(Collection<? extends String> models) {
+	public <T extends String> List<T> getAllExistingMobileNmbers(Collection<? extends String> models) {
 		List<T> ret = new ArrayList<T>();
 		try {
 			
 			List batmod = iclubNamedQueryDAO.getIclubPersonNumbersList(models);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					String reDetails = (String) object;
+					ret.add((T) reDetails);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@POST
+	@Path("/getEmailsList")
+	@Produces("application/json")
+	@Transactional
+	public <T extends String> List<T> getAllEmails(Collection<? extends String> models) {
+		List<T> ret = new ArrayList<T>();
+		try {
+			
+			List batmod = iclubNamedQueryDAO.getIclubPersonEmailsList(models);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					String reDetails = (String) object;

@@ -6,7 +6,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -401,7 +403,7 @@ public class IclubCohortController implements Serializable {
 		try {
 			
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
-			
+			Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
 			ContactsService myService = new ContactsService("iclub");
 			URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
 			ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
@@ -431,19 +433,38 @@ public class IclubCohortController implements Serializable {
 					}
 				}
 				if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
-					cohortsInviteBeans.add(bean);
+					cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
 				}
 			}
 			
-			if (cohortsInviteBeans != null && cohortsInviteBeans.size() > 0) {
-				List<String> emailAndNumbers = new ArrayList<String>();
-				for (IclubCohortInviteBean bean : cohortsInviteBeans) {
-					emailAndNumbers.add(bean.getCiInviteUri());
-				}
+			if (cohortsInviteBeanMap != null && cohortsInviteBeanMap.size() > 0) {
+				
 				WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "getMNumberList");
 				
-				Collection<? extends String> models = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(emailAndNumbers, String.class, String.class);
+				Collection<? extends String> existingNumbers = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
 				client.close();
+				
+				if (existingNumbers != null && existingNumbers.size() > 0) {
+					for (String number : existingNumbers) {
+						cohortsInviteBeanMap.remove(number);
+					}
+				}
+				
+				client = IclubWebHelper.createCustomClient(P_BASE_URL + "getEmailsList");
+				
+				Collection<? extends String> existingEmials = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
+				client.close();
+				if (existingEmials != null && existingEmials.size() > 0) {
+					for (String email : existingEmials) {
+						cohortsInviteBeanMap.remove(email);
+					}
+				}
+				if (cohortsInviteBeanMap.size() > 0) {
+					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>(cohortsInviteBeanMap.values());
+				} else {
+					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>();
+				}
+				
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -707,7 +728,7 @@ public class IclubCohortController implements Serializable {
 			setIclubCohortInvite(key);
 			
 		}
-		return key; 
+		return key;
 	}
 	
 	public void setKey(String key) {

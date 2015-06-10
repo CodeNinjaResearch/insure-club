@@ -983,7 +983,7 @@ public class IclubNamedQueryDAO {
 		
 	}
 	
-	public List getIclubPersonEmailsList(List<String> emails) {
+	public List getIclubPersonEmailsList(Collection<? extends String> emails) {
 		log.debug("finding IclubPerson  instances by getIclubPersonEmailsList");
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubPerson.class);
