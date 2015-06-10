@@ -10,6 +10,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -151,6 +153,14 @@ public class IclubMenuController implements Serializable {
 					GooglePojo data = new Gson().fromJson(outputString, GooglePojo.class);
 					reader.close();
 					
+					callUrl1 = "https://www.googleapis.com/plus/v1/people/" + data.getId() + "?fields=birthday&access_token=" + access_token;
+					url = new URL(callUrl1);
+					urlConn = url.openConnection();
+					outputString = "";
+					reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+					while ((line = reader.readLine()) != null) {
+						outputString += line;
+					}
 					if (data != null && data.getEmail() != null) {
 						IclubPersonModel model = new IclubPersonModel();
 						model.setPId(UUID.randomUUID().toString());
@@ -160,6 +170,15 @@ public class IclubMenuController implements Serializable {
 						model.setPGender(data.getGender() != null ? data.getGender().substring(0, 1).toUpperCase() : null);
 						model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
 						model.setIclubPerson(1 + "");
+						
+						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+						try {
+							JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
+							Date date = formatter.parse(jsonGet.get("birthday").toString().replace("\"", ""));
+							model.setPDob(new Timestamp(date.getTime()));
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
 						WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
 						
 						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
