@@ -212,6 +212,7 @@ public class IclubQuickQuoteController implements Serializable {
 	private IclubPropertyItemBean propertyItemBean;
 	private Map<String, List<IclubPropertyItemBean>> propertyItemBeansMap;
 	private IclubQuoteBean quoteBean;
+	private List<IclubVehicleMasterBean> vehicleMasters;
 	
 	@PostConstruct
 	public void init() {
@@ -1115,6 +1116,8 @@ public class IclubQuickQuoteController implements Serializable {
 							doIclubLogin(loginBean, bean);
 						}
 						bean = new IclubPersonBean();
+						
+						IclubWebHelper.addObjectIntoSession("googlelogin", null);
 						return "vq";
 					} else {
 						IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -3004,6 +3007,48 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void setQuoteBean(IclubQuoteBean quoteBean) {
 		this.quoteBean = quoteBean;
+	}
+	
+	public List<IclubVehicleMasterBean> getVehicleMasters() {
+		
+		WebClient client = IclubWebHelper.createCustomClient(VM_BASE_URL + "list");
+		Collection<? extends IclubVehicleMasterModel> models = new ArrayList<IclubVehicleMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleMasterModel.class));
+		client.close();
+		vehicleMasters = new ArrayList<IclubVehicleMasterBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubVehicleMasterModel model : models) {
+				IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
+				
+				bean.setVmId(model.getVmId());
+				
+				bean.setVmMake(model.getVmMake());
+				bean.setVmModel(model.getVmModel());
+				bean.setVmMrktRate(model.getVmMrktRate());
+				bean.setVmOrigRate(model.getVmOrigRate());
+				bean.setVmRetRate(model.getVmRetRate());
+				bean.setVmProdDt(model.getVmProdDt());
+				bean.setVmCrtdDt(model.getVmCrtdDt());
+				bean.setIclubPerson(model.getIclubPerson());
+				bean.setVmRatePrct(model.getVmRatePrct());
+				
+				if (model.getIclubVehicles() != null && model.getIclubVehicles().length > 0) {
+					String[] vehicles = new String[model.getIclubVehicles().length];
+					int i = 0;
+					for (String vehicle : model.getIclubVehicles()) {
+						vehicles[i] = vehicle;
+						i++;
+					}
+					bean.setIclubVehicles(vehicles);
+				}
+				vehicleMasters.add(bean);
+			}
+		}
+		
+		return vehicleMasters;
+	}
+	
+	public void setVehicleMasters(List<IclubVehicleMasterBean> vehicleMasters) {
+		this.vehicleMasters = vehicleMasters;
 	}
 	
 }

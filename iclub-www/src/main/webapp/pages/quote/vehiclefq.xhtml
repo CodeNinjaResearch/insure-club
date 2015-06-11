@@ -5,11 +5,20 @@
 				<f:facet name="footer">
 					<!-- <p:commandButton id="btnVehicleShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showVehAddPanel}" update=":iclubFrm:qqTabView:pnlVehicleCont" /> -->
 				</f:facet>
-				<p:column headerText="Unique Id">
-					<p:outputLabel styleClass="TexAlCenter" value="#{ bean.VId}" />
+				<p:column headerText="Make">
+					<p:selectOneMenu disabled="true" widgetVar="mnuVehViewmake" id="mnuVehViewmake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubVehicleMaster}">
+						<f:selectItem itemLabel="Make" itemDisabled="true" />
+						<f:selectItems value="#{iclubFullQuoteController.vehicleMasters}" var="c" itemLabel="#{c.vmMake}" itemValue="#{c.vmId}" />
+					</p:selectOneMenu>
 				</p:column>
-				<p:column headerText="Registration Number">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.VRegNum}" />
+				<p:column headerText="Model">
+					<p:selectOneMenu disabled="true" widgetVar="mnuVehViewModel" id="mnuVehViewModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubVehicleMaster}">
+						<f:selectItem itemLabel="Model" itemDisabled="true" />
+						<f:selectItems value="#{iclubFullQuoteController.vehicleMasters}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column headerText="Year">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.VYear}" />
 				</p:column>
 				<p:column>
 					<p:commandButton id="btnVehicleEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubFullQuoteController.showVehModPanel}" update=":iclubFrm:grlMsg">
