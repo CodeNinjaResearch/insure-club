@@ -12,9 +12,6 @@
 						<p:commandButton id="btnRateEngineSave" rendered="#{iclubRatingController.lookupSaveFlag}" value="Save" actionListener="#{iclubRatingController.addIclubRateEngines}" update=":iclubFrm:pnlRateEngineCont,:iclubFrm:grlMsg" />
 					</f:facet>
 					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
-					<p:column headerText="Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reId}" />
-					</p:column>
 					<p:column headerText="Rate">
 						<p:cellEditor>
 							<f:facet name="output">

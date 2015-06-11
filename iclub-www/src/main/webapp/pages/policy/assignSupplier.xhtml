@@ -6,9 +6,6 @@
 					<p:outputLabel value="Close To Work"></p:outputLabel>
 				</f:facet>
 				<p:dataTable reflow="true" widgetVar="dtDdSulCont" value="#{iclubPolicyController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
-					</p:column>
 					<p:column headerText="Name">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smName}" />
 					</p:column>
@@ -41,9 +38,6 @@
 					</p:column>
 					<p:column headerText="Rating">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smRating}" />
-					</p:column>
-					<p:column headerText="Creted By">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 					</p:column>
 					<p:column headerText="Creted Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
@@ -60,9 +54,6 @@
 					<p:outputLabel value="Close To Home"></p:outputLabel>
 				</f:facet>
 				<p:dataTable reflow="true" widgetVar="dtOnSulCont" value="#{iclubPolicyController.dDSupplMasterBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Supplier Available">
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smId}" />
-					</p:column>
 					<p:column headerText="Name">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smName}" />
 					</p:column>
@@ -95,9 +86,6 @@
 					</p:column>
 					<p:column headerText="Rating">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smRating}" />
-					</p:column>
-					<p:column headerText="Creted By">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 					</p:column>
 					<p:column headerText="Creted Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />

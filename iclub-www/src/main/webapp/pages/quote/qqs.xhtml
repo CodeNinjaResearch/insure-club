@@ -35,11 +35,20 @@
 					<f:facet name="header">
 						<p:outputLabel id="btnVehicleShowAdd" value="Vehicle Details" />
 					</f:facet>
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{ bean.VId}" />
+					<p:column headerText="Make">
+						<p:selectOneMenu disabled="true" widgetVar="mnuVehViewmake" id="mnuVehViewmake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubVehicleMaster}">
+							<f:selectItem itemLabel="Make" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.vehicleMasters}" var="c" itemLabel="#{c.vmMake}" itemValue="#{c.vmId}" />
+						</p:selectOneMenu>
 					</p:column>
-					<p:column headerText="Registration Number">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VRegNum}" />
+					<p:column headerText="Model">
+						<p:selectOneMenu disabled="true" widgetVar="mnuVehViewModel" id="mnuVehViewModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubVehicleMaster}">
+							<f:selectItem itemLabel="Model" itemDisabled="true" />
+							<f:selectItems value="#{iclubQuickQuoteController.vehicleMasters}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column headerText="Year">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VYear}" />
 					</p:column>
 				</p:dataTable>
 				<div class="EmptyBox5" />

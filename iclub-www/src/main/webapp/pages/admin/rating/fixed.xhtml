@@ -35,9 +35,6 @@
 					<f:facet name="footer">
 					</f:facet>
 					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reId}" />
-					</p:column>
 					<p:column headerText="Rate">
 						<p:cellEditor>
 							<f:facet name="output">

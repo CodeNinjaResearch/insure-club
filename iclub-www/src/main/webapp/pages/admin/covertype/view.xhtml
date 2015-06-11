@@ -1,8 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable reflow="true" widgetVar="dtCoverTypeCont" value="#{iclubCoverTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No CoverTypees Available">
-		<p:column headerText="Unique Id">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctId}" />
-		</p:column>
 		<p:column headerText="Item Type">
 			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
 				<f:selectItem itemLabel="Item Type" itemDisabled="true" />
@@ -20,9 +17,6 @@
 		</p:column>
 		<p:column headerText="Created Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctCrtdDt}" />
-		</p:column>
-		<p:column headerText="Created By">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnCoverTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubCoverTypeController.showEdit}" update=":iclubFrm:grlMsg">

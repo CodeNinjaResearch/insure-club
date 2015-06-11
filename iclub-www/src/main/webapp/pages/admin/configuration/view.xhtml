@@ -1,8 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:dataTable reflow="true" widgetVar="dtConfigCont" value="#{iclubConfigController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Configes Available">
-		<p:column headerText="Unique Id">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.CId}" />
-		</p:column>
 		<p:column headerText="Configuration Key">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.CKey}" />
 		</p:column>
@@ -14,9 +11,6 @@
 		</p:column>
 		<p:column headerText="Created Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
-		</p:column>
-		<p:column headerText="Created By">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 		</p:column>
 		<p:column>
 			<p:commandButton id="btnConfigEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubConfigController.showEdit}" update=":iclubFrm:grlMsg">

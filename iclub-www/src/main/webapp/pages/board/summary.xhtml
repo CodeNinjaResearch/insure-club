@@ -53,17 +53,11 @@
 						<f:facet name="footer">
 							<p:commandButton id="btnMbCommentShowAdd" value="Add Comment" actionListener="#{iclubMbCommentController.showAddPanel}" update=":iclubFrm:pnlMbCont" />
 						</f:facet>
-						<p:column headerText="Unique Id">
-							<p:outputLabel value="#{bean.mbcId}" />
-						</p:column>
 						<p:column headerText="Description">
 							<p:outputLabel value="#{bean.mbcDesc}" />
 						</p:column>
 						<p:column headerText="Created Date">
 							<p:outputLabel value="#{bean.mbcCrtdDt}" />
-						</p:column>
-						<p:column headerText="Created By">
-							<p:outputLabel value="#{bean.iclubPerson}" />
 						</p:column>
 					</p:dataTable>
 				</p:panel>

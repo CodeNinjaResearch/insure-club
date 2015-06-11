@@ -4,9 +4,6 @@
 			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 				<f:facet name="footer">
 				</f:facet>
-				<p:column headerText="Unique Id">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PId}" />
-				</p:column>
 				<p:column headerText="Number">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
 				</p:column>
@@ -21,9 +18,6 @@
 				</p:column>
 				<p:column headerText="Quote Id">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubQuote}" />
-				</p:column>
-				<p:column headerText="Created By">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 				</p:column>
 				<p:column headerText="Created Date">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PCrtdDt}" />

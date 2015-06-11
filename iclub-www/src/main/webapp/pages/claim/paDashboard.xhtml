@@ -20,9 +20,6 @@
 				<p:dataTable reflow="true" widgetVar="dtClmCont" value="#{iclubClaimController.paBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<f:facet name="footer">
 					</f:facet>
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CId}" />
-					</p:column>
 					<p:column headerText="Claim Number">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumber}" />
 					</p:column>
@@ -31,9 +28,6 @@
 					</p:column>
 					<p:column headerText="Claim Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}" />
-					</p:column>
-					<p:column headerText="Created By">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 					</p:column>
 					<p:column headerText="Claim Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
@@ -58,9 +52,6 @@
 						<p:outputLabel value="Vehicle Details"></p:outputLabel>
 					</f:facet>
 					<p:dataTable reflow="true" widgetVar="dtVehicleCont" value="#{iclubClaimController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
-						<p:column headerText="Unique Id">
-							<p:outputLabel styleClass="TexAlCenter" value="#{ bean.VId}" />
-						</p:column>
 						<p:column headerText="Registration Number">
 							<p:outputLabel styleClass="TexAlCenter" value="#{bean.VRegNum}" />
 						</p:column>

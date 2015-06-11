@@ -6,9 +6,6 @@
 				<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedBeans}" rowKey="#{bean.CId}" value="#{iclubCohortController.beans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<p:column rendered="#{!iclubCohortController.showCreateCont}" selectionMode="multiple" style="width:16px;text-align:center">
 					</p:column>
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CId}" />
-					</p:column>
 					<p:column headerText="Email">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CEmail}" />
 					</p:column>
@@ -23,9 +20,6 @@
 							<f:selectItem itemLabel="Type" itemDisabled="true" />
 							<f:selectItems value="#{iclubCohortController.cohortTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
 						</p:selectOneMenu>
-					</p:column>
-					<p:column headerText="Created By">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPersonByCCrtdBy}" />
 					</p:column>
 					<f:facet name="footer">
 						<p:panel rendered="#{!iclubCohortController.showCreateCont}">

@@ -5,9 +5,6 @@
 				<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<p:column selectionMode="multiple" style="width:16px;text-align:center">
 					</p:column>
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciId}" />
-					</p:column>
 					<p:column headerText="Invite Uri">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteUri}" />
 					</p:column>

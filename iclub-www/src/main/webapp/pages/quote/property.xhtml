@@ -5,9 +5,6 @@
 				<f:facet name="footer">
 					<p:commandButton id="btnPropertyShowAdd" value="Add" actionListener="#{iclubQuickQuoteController.showProAddPanel}" update=":iclubFrm:qqTabView:pnlPropertyCont" />
 				</f:facet>
-				<p:column headerText="Unique Id">
-					<p:outputLabel styleClass="TexAlCenter" value="#{ bean.PId}" />
-				</p:column>
 				<p:column headerText="Registration Number">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PRegNum}" />
 				</p:column>
@@ -254,9 +251,6 @@
 							<f:facet name="footer">
 								<p:commandButton id="btnPropertyItemShowAdd" value="Add" actionListener="#{iclubQuickQuoteController.showProItemAddPanel}" update=":iclubFrm:qqTabView:qqSubProDetView:pnlPropertyItemCont" />
 							</f:facet>
-							<p:column headerText="Unique Id">
-								<p:outputLabel styleClass="TexAlCenter" value="#{ bean.piId}" />
-							</p:column>
 							<p:column headerText="Registration Number">
 								<p:outputLabel styleClass="TexAlCenter" value="#{bean.piDescripton}" />
 							</p:column>
@@ -569,9 +563,6 @@
 							<f:facet name="footer">
 								<p:commandButton id="btnPropertyItemShowMod" value="Add" actionListener="#{iclubQuickQuoteController.showProItemAddPanel}" update=":iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemModCont" />
 							</f:facet>
-							<p:column headerText="Unique Id">
-								<p:outputLabel styleClass="TexAlCenter" value="#{ bean.piId}" />
-							</p:column>
 							<p:column headerText="Registration Number">
 								<p:outputLabel styleClass="TexAlCenter" value="#{bean.piDescripton}" />
 							</p:column>

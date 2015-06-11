@@ -17,9 +17,6 @@
 				<p:dataTable reflow="true" id="dtIICont" widgetVar="dtQuoteCont" value="#{iclubClaimController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<f:facet name="footer">
 					</f:facet>
-					<p:column headerText="Unique Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiId}" />
-					</p:column>
 					<p:column headerText="Quote Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
 					</p:column>
@@ -28,9 +25,6 @@
 					</p:column>
 					<p:column headerText="Actual Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}" />
-					</p:column>
-					<p:column headerText="Created By">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
 					</p:column>
 					<p:column headerText="Created Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiCrtdDt}" />
