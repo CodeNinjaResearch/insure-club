@@ -997,4 +997,16 @@ public class IclubNamedQueryDAO {
 		}
 		
 	}
+	
+	public List getIclubPropertyItemByProperty(String propertyId) {
+		log.debug("finding IclubPropertyItem  instance by ProeprtyItemStatus");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPropertyItemByProperty");
+			queryObject.setString("id", propertyId);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("get IclubPropertyItem failed", re);
+			throw re;
+		}
+	}
 }

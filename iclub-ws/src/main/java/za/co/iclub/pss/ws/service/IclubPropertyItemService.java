@@ -172,6 +172,38 @@ public class IclubPropertyItemService {
 	}
 	
 	@GET
+	@Path("/listByProperty/{propertyId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubPropertyItemModel> List<T> listByProperty(@PathParam("propertyId") String propertyId) {
+		List<T> ret = new ArrayList<T>();
+		
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubPropertyItemByProperty(propertyId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPropertyItem iTt = (IclubPropertyItem) object;
+					
+					IclubPropertyItemModel model = new IclubPropertyItemModel();
+					
+					model.setPiId(iTt.getPiId());
+					model.setPiCrtdDate(iTt.getPiCrtdDate());
+					model.setPiDescripton(iTt.getPiDescripton());
+					model.setPiValue(iTt.getPiValue());
+					model.setIclubPerson(iTt.getIclubPerson() != null ? iTt.getIclubPerson().getPId() : null);
+					model.setIclubProperty(iTt.getIclubProperty() != null ? iTt.getIclubProperty().getPId() : null);
+					
+					ret.add((T) model);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		
+		return ret;
+	}
+	
+	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)

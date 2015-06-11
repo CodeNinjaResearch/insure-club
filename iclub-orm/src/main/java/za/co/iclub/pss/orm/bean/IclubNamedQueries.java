@@ -31,22 +31,23 @@ import javax.persistence.Table;
 		@NamedNativeQuery(query = "select * from iclub_policy where p_status_id=:policyStatus order by p_crtd_dt asc", name = "getIclubPolicyByPolicyStatus", resultClass = IclubPolicy.class), @NamedNativeQuery(query = "select * from iclub_policy order by p_crtd_dt desc", name = "getIclubPolicies", resultClass = IclubPolicy.class), @NamedNativeQuery(query = "select * from iclub_claim order by c_crtd_dt desc", name = "getIclubClaimByCrtDt", resultClass = IclubClaim.class), @NamedNativeQuery(query = "select * from iclub_claim order where c_status_id=:claimStatus order by c_crtd_dt asc", name = "getIclubCalimByClaimStatus", resultClass = IclubClaim.class),
 		@NamedNativeQuery(query = "select * from iclub_rate_engine where ((cast(re_base_value as decimal(15,5))<=:baseValue and :baseValue<=cast(re_max_value as decimal(15,5))) or (cast(re_base_value as decimal(15,5))<=:maxValue and :maxValue<=cast(re_max_value as decimal(15,5)))) and re_id <> :reId and re_type_id=:rateTypeId", name = "getIclubRateEngineByBaseMaxValueAndRateTypeId", resultClass = IclubRateEngine.class), @NamedNativeQuery(name = "getIclubAssessmentTypeBySD", query = "select * from iclub_assessment_type where lower(at_short_desc) = lower(:sd) and at_id <> :id", resultClass = IclubAssessmentType.class),
 		@NamedNativeQuery(name = "getIclubGeoLocByLatAndLong", query = "SELECT gl_id, ( 3959 * acos( cos( radians(:gLat) ) * cos( radians( gl_lat ) ) * cos( radians( gl_long ) - radians(:gLong) ) + sin( radians(:gLat) ) * sin( radians( gl_lat ) ) ) ) AS distance FROM iclub_geo_loc  where gl_lat is not null and gl_long is not null ORDER BY distance LIMIT 0 , 1;"), @NamedNativeQuery(name = "getIclubSupplMasterByLatAndLong", query = "SELECT sm_id, ( 3959 * acos( cos( radians(:smLat) ) * cos( radians( sm_lat ) ) * cos( radians( sm_long ) - radians(:smLong) ) + sin( radians(:smLat) ) * sin( radians( sm_lat ) ) ) ) AS distance FROM iclub_suppl_master ORDER BY distance LIMIT 0 , 3;"),
-		@NamedNativeQuery(name = "getIclubVehUsageTypeBySD", query = "select * from iclub_veh_usage_type where lower(vu_short_desc) = lower(:sd) and vu_id <> :id", resultClass = IclubVehUsageType.class), @NamedNativeQuery(name = "getIclubPropUsageTypeBySD", query = "select * from iclub_prop_usage_type where lower(pu_short_desc) = lower(:sd) and pu_id <> :id", resultClass = IclubPropUsageType.class), @NamedNativeQuery(name = "getIclubVehSecTypeBySD", query = "select * from iclub_veh_sec_type where lower(vst_short_desc) = lower(:sd) and vst_id <> :id", resultClass = IclubVehSecType.class), @NamedNativeQuery(name = "getIclubPropSecTypeBySD", query = "select * from iclub_prop_sec_type where lower(pst_short_desc) = lower(:sd) and pst_id <> :id", resultClass = IclubPropSecType.class) })
+		@NamedNativeQuery(name = "getIclubVehUsageTypeBySD", query = "select * from iclub_veh_usage_type where lower(vu_short_desc) = lower(:sd) and vu_id <> :id", resultClass = IclubVehUsageType.class), @NamedNativeQuery(name = "getIclubPropUsageTypeBySD", query = "select * from iclub_prop_usage_type where lower(pu_short_desc) = lower(:sd) and pu_id <> :id", resultClass = IclubPropUsageType.class), @NamedNativeQuery(name = "getIclubVehSecTypeBySD", query = "select * from iclub_veh_sec_type where lower(vst_short_desc) = lower(:sd) and vst_id <> :id", resultClass = IclubVehSecType.class), @NamedNativeQuery(name = "getIclubPropSecTypeBySD", query = "select * from iclub_prop_sec_type where lower(pst_short_desc) = lower(:sd) and pst_id <> :id", resultClass = IclubPropSecType.class),
+		@NamedNativeQuery(query = "select * from iclub_property_item where pi_property_id=:id", name = "getIclubPropertyItemByProperty", resultClass = IclubPropertyItem.class) })
 @Table(name = "iclub_account_type")
 public class IclubNamedQueries implements java.io.Serializable {
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7107040889492342220L;
 	private Long atId;
-
+	
 	@Id
 	@Column(name = "at_id", unique = true, nullable = false)
 	public Long getAtId() {
 		return this.atId;
 	}
-
+	
 	public void setAtId(Long atId) {
 		this.atId = atId;
 	}

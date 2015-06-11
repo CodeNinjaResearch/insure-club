@@ -86,6 +86,7 @@ import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
 import za.co.iclub.pss.ws.model.IclubExtrasModel;
 import za.co.iclub.pss.ws.model.IclubFieldModel;
 import za.co.iclub.pss.ws.model.IclubFullQuoteRequest;
+import za.co.iclub.pss.ws.model.IclubFullQuoteResponse;
 import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
@@ -100,7 +101,6 @@ import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
 import za.co.iclub.pss.ws.model.IclubPropertyItemModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
 import za.co.iclub.pss.ws.model.IclubPropertyTypeModel;
-import za.co.iclub.pss.ws.model.IclubFullQuoteResponse;
 import za.co.iclub.pss.ws.model.IclubQuoteModel;
 import za.co.iclub.pss.ws.model.IclubRateEngineModel;
 import za.co.iclub.pss.ws.model.IclubRateTypeModel;
@@ -141,6 +141,7 @@ public class IclubFullQuoteController implements Serializable {
 	private static final String PROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyTypeService/";
 	private static final String OCCS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOccupiedStatusService/";
 	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyService/";
+	private static final String PROI_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyItemService/";
 	private static final String CT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubCoverTypeService/";
 	private static final String CS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubClaimStatusService/";
 	private static final String CLM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubClaimService/";
@@ -184,9 +185,9 @@ public class IclubFullQuoteController implements Serializable {
 	
 	private List<String> bankNames;
 	
-	private List<String> debitDates;
+	private Map<String, String> debitDates;
 	
-	private List<String> debitMonths;
+	private Map<String, String> debitMonths;
 	
 	private String vehCoverType;
 	
@@ -291,24 +292,6 @@ public class IclubFullQuoteController implements Serializable {
 		draggableModelPer = new DefaultMapModel();
 		draggableModelPro = new DefaultMapModel();
 		draggableModelVeh = new DefaultMapModel();
-		
-		debitDates = new ArrayList<String>();
-		debitMonths = new ArrayList<String>();
-		for (int i = 1; i <= 31; i++) {
-			
-			if (i < 10) {
-				debitDates.add("0" + i);
-			} else {
-				debitDates.add("" + i);
-			}
-		}
-		for (int i = 1; i <= 12; i++) {
-			if (i < 10) {
-				debitMonths.add("0" + i);
-			} else {
-				debitMonths.add("" + i);
-			}
-		}
 		
 	}
 	
@@ -1784,13 +1767,35 @@ public class IclubFullQuoteController implements Serializable {
 					propertyBean.setIclubBarType(model.getIclubBarType());
 					propertyBean.setPThatchType(model.getPThatchType());
 					propertyBean.setIclubRoofType(model.getIclubRoofType());
-					
+					setIclubPropertyItems(model.getPId());
 					propertyBeans.add(propertyBean);
 					
 				}
 				
 			}
 		}
+	}
+	
+	public void setIclubPropertyItems(String propertyId) {
+		
+		WebClient client = IclubWebHelper.createCustomClient(PROI_BASE_URL + "listByProperty/" + propertyId);
+		
+		Collection<? extends IclubPropertyItemModel> models = new ArrayList<IclubPropertyItemModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropertyItemModel.class));
+		client.close();
+		propertyItemBeans = new ArrayList<IclubPropertyItemBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubPropertyItemModel model : models) {
+				IclubPropertyItemBean bean = new IclubPropertyItemBean();
+				bean.setIclubProperty(model.getIclubProperty());
+				bean.setPiId(model.getPiId());
+				bean.setPiValue(model.getPiValue());
+				bean.setPiDescripton(model.getPiDescripton());
+				bean.setPiCrtdDate(model.getPiCrtdDate());
+				propertyItemBeans.add(bean);
+			}
+			getPropertyItemBeansMap().put(propertyId, propertyItemBeans);
+		}
+		
 	}
 	
 	public void setPolicyDetails() {
@@ -3153,22 +3158,6 @@ public class IclubFullQuoteController implements Serializable {
 		this.termsAndConditionFlag = termsAndConditionFlag;
 	}
 	
-	public List<String> getDebitDates() {
-		return debitDates;
-	}
-	
-	public void setDebitDates(List<String> debitDates) {
-		this.debitDates = debitDates;
-	}
-	
-	public List<String> getDebitMonths() {
-		return debitMonths;
-	}
-	
-	public void setDebitMonths(List<String> debitMonths) {
-		this.debitMonths = debitMonths;
-	}
-	
 	public String getVehCoverType() {
 		return vehCoverType;
 	}
@@ -3341,5 +3330,51 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void setShowProItemAddPanel(boolean showProItemAddPanel) {
 		this.showProItemAddPanel = showProItemAddPanel;
+	}
+	
+	public Map<String, String> getDebitDates() {
+		if (debitDates == null) {
+			debitDates = new HashMap<String, String>();
+			
+			for (int i = 1; i <= 31; i++) {
+				
+				if (i < 10) {
+					debitDates.put("0" + i, "0" + i);
+				} else {
+					debitDates.put("" + i, "" + i);
+				}
+			}
+			
+		}
+		
+		return debitDates;
+	}
+	
+	public void setDebitDates(Map<String, String> debitDates) {
+		this.debitDates = debitDates;
+	}
+	
+	public Map<String, String> getDebitMonths() {
+		if (debitMonths == null) {
+			debitMonths = new HashMap<String, String>();
+			debitMonths.put("Jan", "01");
+			debitMonths.put("Feb", "02");
+			debitMonths.put("Mar", "03");
+			debitMonths.put("Apr", "04");
+			debitMonths.put("May", "05");
+			debitMonths.put("Jun", "06");
+			debitMonths.put("Jul", "07");
+			debitMonths.put("Aug", "08");
+			debitMonths.put("Sep", "09");
+			debitMonths.put("Oct", "10");
+			debitMonths.put("Nov", "11");
+			debitMonths.put("Dec", "12");
+			
+		}
+		return debitMonths;
+	}
+	
+	public void setDebitMonths(Map<String, String> debitMonths) {
+		this.debitMonths = debitMonths;
 	}
 }
