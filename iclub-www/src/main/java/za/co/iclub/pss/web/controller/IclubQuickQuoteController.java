@@ -989,7 +989,7 @@ public class IclubQuickQuoteController implements Serializable {
 			
 			{
 				loadPersonBean(model.getIclubPersonByQPersonId());
-				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null) {
+				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null || IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
 					clearForm();
 					clearVehForm();
 					clearProForm();
@@ -1111,7 +1111,9 @@ public class IclubQuickQuoteController implements Serializable {
 					if (response != null && response.getStatusCode() == 0) {
 						
 						IclubWebHelper.addMessage("Updated Successfully", FacesMessage.SEVERITY_INFO);
-						doIclubLogin(loginBean, bean);
+						if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null) {
+							doIclubLogin(loginBean, bean);
+						}
 						bean = new IclubPersonBean();
 						return "vq";
 					} else {
@@ -1183,7 +1185,7 @@ public class IclubQuickQuoteController implements Serializable {
 				WebClient client = null;
 				
 				if (loginBean.getLId() != null) {
-					client = IclubWebHelper.createCustomClient(PER_BASE_URL + "mod");
+					client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "mod");
 					model.setLId(loginBean.getLId());
 					
 				} else {
@@ -1290,10 +1292,12 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: saveQuickQuoteDetails");
 		try {
 			IclubQuickQuoteRequest request = new IclubQuickQuoteRequest();
-			if (validateForm(true, IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null)) {
-				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
+			if (validateForm(true, IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null && IclubWebHelper.getObjectIntoSession("googlelogin") == null)) {
+				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && IclubWebHelper.getObjectIntoSession("googlelogin") == null) {
 					
 					personBean = getIclubPersonBean(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+					request.setLoginFlag(true);
+				} else if (IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
 					request.setLoginFlag(true);
 				}
 				
@@ -1334,7 +1338,7 @@ public class IclubQuickQuoteController implements Serializable {
 		IclubPersonModel model = new IclubPersonModel();
 		
 		try {
-			personBean.setPAge(personBean.getPId() == null ? IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) : personBean.getPAge());
+			personBean.setPAge(personBean.getPDob() != null ? IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) : null);
 			personBean.setPId(personBean.getPId() != null ? personBean.getPId() : UUID.randomUUID().toString());
 			
 			model.setPId(personBean.getPId());
@@ -2085,7 +2089,7 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 	
 	public void loadLoginBean() {
-		WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "person/" + bean.getPFName());
+		WebClient client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "personId/" + bean.getPId());
 		
 		IclubLoginModel model = (IclubLoginModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class));
 		if (model != null && model.getLId() != null) {
@@ -2136,6 +2140,7 @@ public class IclubQuickQuoteController implements Serializable {
 		bean.setIclubIdType(model.getIclubIdType());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+		loadLoginBean();
 		
 	}
 	
@@ -2937,7 +2942,7 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public boolean isProfileTabFlag() {
 		
-		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
+		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && IclubWebHelper.getObjectIntoSession("googlelogin") == null) {
 			profileTabFlag = false;
 		} else {
 			profileTabFlag = true;

@@ -1123,6 +1123,7 @@ public class IclubFullQuoteController implements Serializable {
 			IclubFullQuoteResponse response = client.accept(MediaType.APPLICATION_JSON).post(request, IclubFullQuoteResponse.class);
 			genPremium = response.getGeneratedPremium();
 			IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
+			clearForm();
 			return "pdash";
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -1139,6 +1140,8 @@ public class IclubFullQuoteController implements Serializable {
 		propertyBean = new IclubPropertyBean();
 		accountBean = new IclubAccountBean();
 		driverBean = new IclubDriverBean();
+		debitDate = "";
+		debitMonth = "";
 	}
 	
 	public boolean validateForm(boolean flag) {

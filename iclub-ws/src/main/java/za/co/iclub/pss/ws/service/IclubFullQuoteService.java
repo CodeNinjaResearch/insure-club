@@ -163,7 +163,7 @@ public class IclubFullQuoteService {
 				iTt.setPiValue(model.getPiValue());
 				iTt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 				iTt.setIclubProperty(model.getIclubProperty() != null ? iclubPropertyDAO.findById(model.getIclubProperty()) : null);
-				if (!model.isModFlag()) {
+				if (model.isModFlag()) {
 					iclubPropertyItemDAO.save(iTt);
 				} else {
 					iclubPropertyItemDAO.merge(iTt);

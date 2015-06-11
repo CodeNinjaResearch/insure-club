@@ -230,6 +230,7 @@ public class IclubMenuController implements Serializable {
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), model.getLName());
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
+				IclubWebHelper.addObjectIntoSession("googlelogin", true);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&key=" + access_token);
 				IclubWebHelper.addMessage("Person Registered successfully", FacesMessage.SEVERITY_INFO);
