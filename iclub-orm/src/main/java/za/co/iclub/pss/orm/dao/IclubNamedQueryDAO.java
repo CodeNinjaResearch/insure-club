@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import za.co.iclub.pss.orm.bean.IclubClaim;
 import za.co.iclub.pss.orm.bean.IclubConfig;
 import za.co.iclub.pss.orm.bean.IclubDriver;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
+import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.bean.IclubPolicy;
 
@@ -993,6 +995,74 @@ public class IclubNamedQueryDAO {
 			return personNames;
 		} catch (RuntimeException re) {
 			log.error("get IclubPersonList failed", re);
+			throw re;
+		}
+		
+	}
+	
+	public List getIclubPaymentsByCohortId(String cohortId, String userId) {
+		log.debug("finding IclubPayment  instances by getIclubPaymentsByCohortId");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubPayment.class);
+			// To Restrict the data for two columns
+			// ProjectionList p1 = Projections.projectionList();
+			// p1.add(Projections.property("PValue"));
+			// p1.add(Projections.property("PCrtdDt"));
+			// criteria.setProjection(p1);
+			criteria.createAlias("iclubPerson", "person");
+			criteria.createAlias("person.iclubCohort", "cohort");
+			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
+				criteria.add(Restrictions.eq("cohort.CId", cohortId).ignoreCase());
+			}
+			if (userId != null && !userId.trim().equalsIgnoreCase("")) {
+				criteria.add(Restrictions.eq("person.PId", userId).ignoreCase());
+			}
+			List paymentList = criteria.list();
+			return paymentList;
+		} catch (RuntimeException re) {
+			log.error("get IclubPayment failed", re);
+			throw re;
+		}
+		
+	}
+	
+	public List getIclubPoliciesByCohortId(String cohortId, String userId) {
+		log.debug("finding IclubPolicy  instances by getIclubPoliciesByCohortId");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubPolicy.class);
+			criteria.createAlias("iclubPerson", "person");
+			criteria.createAlias("person.iclubCohort", "cohort");
+			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
+				criteria.add(Restrictions.eq("cohort.CId", cohortId).ignoreCase());
+			}
+			if (userId != null && !userId.trim().equalsIgnoreCase("")) {
+				criteria.add(Restrictions.eq("person.PId", userId).ignoreCase());
+			}
+			List paymentList = criteria.list();
+			return paymentList;
+		} catch (RuntimeException re) {
+			log.error("get IclubPolicy failed", re);
+			throw re;
+		}
+		
+	}
+	
+	public List getIclubClaimsByCohortId(String cohortId, String userId) {
+		log.debug("finding IclubClaim  instances by getIclubClaimsByCohortId");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubClaim.class);
+			criteria.createAlias("iclubPerson", "person");
+			criteria.createAlias("person.iclubCohort", "cohort");
+			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
+				criteria.add(Restrictions.eq("cohort.CId", cohortId).ignoreCase());
+			}
+			if (userId != null && !userId.trim().equalsIgnoreCase("")) {
+				criteria.add(Restrictions.eq("person.PId", userId).ignoreCase());
+			}
+			List paymentList = criteria.list();
+			return paymentList;
+		} catch (RuntimeException re) {
+			log.error("get IclubClaim failed", re);
 			throw re;
 		}
 		

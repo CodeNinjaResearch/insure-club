@@ -1,0 +1,117 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlCohortContDet">
+				<p:panel id="pnlCohortSumContDet">
+					<div class="Container100 Responsive">
+						<div class="Container33 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Cohort Id :" />
+						</div>
+						<div class="Container33 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Cohort Id " value="#{iclubCohortController.cohortId}" />
+						</div>
+						<div class="Container33 Responsive">
+							<p:commandButton update=":iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" ajax="false" action="#{iclubCohortController.cohortSummaryAction}" value="Submit" />
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlCohortSumIdContDet" rendered="#{iclubCohortController.cohortSummaryFlag}">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Claims Since Begining:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryBean.claimSinceI}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Claims In Year:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryBean.claimsInYear}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Premium Paid Since Begining:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryBean.primumSinceI}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Premium Paid In Year:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryBean.premiumPaidInYear}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Current Year Total Premium:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryBean.premiumForYear}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:panel>
+				<p:panel id="pnlCohortSumUserContDet" rendered="#{iclubCohortController.cohortSummaryFlag}">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Claims Since Begining:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryUserBean.claimSinceI}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Claims In Year:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryUserBean.claimsInYear}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Premium Paid Since Begining:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryUserBean.primumSinceI}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Premium Paid In Year:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryUserBean.premiumPaidInYear}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Current Year Total Premium:" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryUserBean.premiumForYear}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

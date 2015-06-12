@@ -2,6 +2,7 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -18,21 +19,25 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.orm.bean.IclubClaim;
 import za.co.iclub.pss.orm.bean.IclubCohort;
 import za.co.iclub.pss.orm.bean.IclubCohortClaim;
 import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 import za.co.iclub.pss.orm.bean.IclubCohortPerson;
+import za.co.iclub.pss.orm.bean.IclubPayment;
 import za.co.iclub.pss.orm.bean.IclubPerson;
+import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.ws.model.IclubCohortModel;
+import za.co.iclub.pss.ws.model.IclubCohortSummaryModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubCohortService")
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 public class IclubCohortService {
 	
 	private static final Logger LOGGER = Logger.getLogger(IclubCohortService.class);
@@ -405,6 +410,145 @@ public class IclubCohortService {
 			LOGGER.error(e, e);
 		}
 		return model;
+	}
+	
+	@GET
+	@Path("/getCohortSummaryById/{id}")
+	@Produces("application/json")
+	@Transactional
+	public IclubCohortSummaryModel getCohortSummaryById(@PathParam("id") String id) {
+		
+		IclubCohortSummaryModel cSModel = new IclubCohortSummaryModel();
+		
+		List batmod = iclubNamedQueryDAO.getIclubPaymentsByCohortId(id, null);
+		Date startDate = new Date();
+		startDate.setDate(01);
+		startDate.setMonth(00);
+		startDate.setMinutes(00);
+		startDate.setSeconds(00);
+		startDate.setHours(0);
+		// Calendar cal = Calendar.getInstance();
+		// cal.setTime(startDate);
+		// cal.add(Calendar.YEAR, 1);
+		// cal.add(Calendar.DATE, -1);
+		// Date endDate = cal.getTime();
+		if (batmod != null && batmod.size() > 0) {
+			Double primumSinceI = 0.0;
+			Double premiumPaidInYear = 0.0;
+			
+			for (Object object : batmod) {
+				IclubPayment payment = (IclubPayment) object;
+				if (payment != null && payment.getPValue() > 0) {
+					primumSinceI = +payment.getPValue();
+					if (payment.getPCrtdDt().compareTo(startDate) >= 0) {
+						premiumPaidInYear = +payment.getPValue();
+					}
+				}
+				
+			}
+			cSModel.setPremiumPaidInYear(premiumPaidInYear);
+			cSModel.setPrimumSinceI(primumSinceI);
+		}
+		
+		Double premiumForYear = 0.0;
+		List batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(id, null);
+		if (batmod != null && batmod.size() > 0) {
+			
+			for (Object object : batPmod) {
+				IclubPolicy policy = (IclubPolicy) object;
+				if (policy.getPPremium() != null && policy.getPPremium() > 0) {
+					premiumForYear = +(policy.getPPremium() * 12);
+				}
+			}
+			cSModel.setPremiumForYear(premiumForYear);
+		}
+		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(id, null);
+		if (batCmod != null && batCmod.size() > 0) {
+			Double claimSinceI = 0.0;
+			Double claimsInYear = 0.0;
+			for (Object object : batCmod) {
+				IclubClaim claim = (IclubClaim) object;
+				if (claim != null && claim.getCValue() > 0) {
+					claimSinceI = +claim.getCValue();
+					if (claim.getCCrtdDt().compareTo(startDate) >= 0) {
+						claimsInYear = +claim.getCValue();
+					}
+				}
+				cSModel.setClaimSinceI(claimSinceI);
+				cSModel.setClaimsInYear(claimsInYear);
+			}
+		}
+		return cSModel;
+	}
+	
+	@GET
+	@Path("/getCohortSummaryByUserId/{userId}")
+	@Produces("application/json")
+	@Transactional
+	public IclubCohortSummaryModel getCohortSummaryByUserId(@PathParam("userId") String userId) {
+		
+		IclubCohortSummaryModel cSModel = new IclubCohortSummaryModel();
+		
+		List batmod = iclubNamedQueryDAO.getIclubPaymentsByCohortId(null, userId);
+		Date startDate = new Date();
+		startDate.setDate(01);
+		startDate.setMonth(00);
+		startDate.setMinutes(00);
+		startDate.setSeconds(00);
+		startDate.setHours(0);
+		// Calendar cal = Calendar.getInstance();
+		// cal.setTime(startDate);
+		// cal.add(Calendar.YEAR, 1);
+		// cal.add(Calendar.DATE, -1);
+		// Date endDate = cal.getTime();
+		if (batmod != null && batmod.size() > 0) {
+			Double primumSinceI = 0.0;
+			Double premiumPaidInYear = 0.0;
+			
+			for (Object object : batmod) {
+				IclubPayment payment = (IclubPayment) object;
+				if (payment != null && payment.getPValue() > 0) {
+					primumSinceI = +payment.getPValue();
+					if (payment.getPCrtdDt().compareTo(startDate) >= 0) {
+						premiumPaidInYear = +payment.getPValue();
+					}
+				}
+				
+			}
+			cSModel.setPremiumPaidInYear(premiumPaidInYear);
+			cSModel.setPrimumSinceI(primumSinceI);
+		}
+		
+		Double premiumForYear = 0.0;
+		List batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(null, userId);
+		if (batmod != null && batmod.size() > 0) {
+			
+			for (Object object : batPmod) {
+				IclubPolicy policy = (IclubPolicy) object;
+				if (policy.getPPremium() != null && policy.getPPremium() > 0) {
+					premiumForYear = +(policy.getPPremium() * 12);
+				}
+			}
+			cSModel.setPremiumForYear(premiumForYear);
+		}
+		
+		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(null, userId);
+		if (batCmod != null && batCmod.size() > 0) {
+			Double claimSinceI = 0.0;
+			Double claimsInYear = 0.0;
+			for (Object object : batCmod) {
+				IclubClaim claim = (IclubClaim) object;
+				if (claim != null && claim.getCValue() > 0) {
+					claimSinceI = +claim.getCValue();
+					if (claim.getCCrtdDt().compareTo(startDate) >= 0) {
+						claimsInYear = +claim.getCValue();
+					}
+				}
+				cSModel.setClaimSinceI(claimSinceI);
+				cSModel.setClaimsInYear(claimsInYear);
+			}
+		}
+		return cSModel;
 	}
 	
 	public IclubCohortDAO getIclubCohortTypeDAO() {

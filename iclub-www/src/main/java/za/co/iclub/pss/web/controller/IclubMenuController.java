@@ -12,7 +12,9 @@ import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -23,6 +25,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
@@ -259,4 +262,17 @@ public class IclubMenuController implements Serializable {
 		this.selPage = selPage;
 	}
 	
+	public static void main(String[] args) {
+		List<SelectItem> list = new ArrayList<SelectItem>();
+		SelectItem itema = new SelectItem("aaa", "aaa");
+		SelectItem itemb = new SelectItem("bbb", "bbb");
+		list.add(itemb);
+		list.add(itema);
+		
+		List<SelectItem> list2 = new ArrayList<SelectItem>();
+		list2.add(itemb);
+		list.removeAll(list2);
+		System.out.println(list);
+		
+	}
 }

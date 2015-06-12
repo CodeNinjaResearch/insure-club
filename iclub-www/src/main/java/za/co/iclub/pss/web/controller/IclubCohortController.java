@@ -25,13 +25,16 @@ import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.web.bean.IclubCohortBean;
 import za.co.iclub.pss.web.bean.IclubCohortInviteBean;
+import za.co.iclub.pss.web.bean.IclubCohortSummaryBean;
 import za.co.iclub.pss.web.bean.IclubCohortTypeBean;
 import za.co.iclub.pss.web.bean.IclubNotificationTypeBean;
 import za.co.iclub.pss.web.bean.IclubPersonBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubCohortInviteModel;
 import za.co.iclub.pss.ws.model.IclubCohortModel;
+import za.co.iclub.pss.ws.model.IclubCohortSummaryModel;
 import za.co.iclub.pss.ws.model.IclubCohortTypeModel;
+import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubNotificationTypeModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -64,6 +67,8 @@ public class IclubCohortController implements Serializable {
 	private List<IclubNotificationTypeBean> iclubNotificationTypeBeans;
 	
 	private IclubCohortBean bean;
+	private IclubCohortSummaryBean cohortSummaryBean;
+	private IclubCohortSummaryBean cohortSummaryUserBean;
 	private boolean showCreateCont;
 	private boolean showViewCont;
 	private boolean showEditCont;
@@ -73,6 +78,8 @@ public class IclubCohortController implements Serializable {
 	private String userName;
 	private ResourceBundle labelBundle;
 	private String key;
+	private String cohortId;
+	private boolean cohortSummaryFlag;
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -122,6 +129,39 @@ public class IclubCohortController implements Serializable {
 		showEditCont = false;
 		showSummaryCont = true;
 		viewParam = 3l;
+	}
+	
+	public String cohortSummaryAction() {
+		cohortSummaryFlag = false;
+		if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
+			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "getCohortSummaryById/" + cohortId);
+			IclubCohortSummaryModel model = (IclubCohortSummaryModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
+			client.close();
+			WebClient userClient = IclubWebHelper.createCustomClient(BASE_URL + "getCohortSummaryById/" + getSessionUserId());
+			IclubCohortSummaryModel userModel = (IclubCohortSummaryModel) (userClient.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
+			cohortSummaryBean = new IclubCohortSummaryBean();
+			cohortSummaryUserBean = new IclubCohortSummaryBean();
+			if (model != null) {
+				cohortSummaryFlag = true;
+				cohortSummaryBean.setClaimSinceI(model.getClaimSinceI());
+				cohortSummaryBean.setClaimsInYear(model.getClaimsInYear());
+				cohortSummaryBean.setPremiumForYear(model.getPremiumForYear());
+				cohortSummaryBean.setPremiumPaidInYear(model.getPremiumPaidInYear());
+				cohortSummaryBean.setPrimumSinceI(model.getPrimumSinceI());
+			}
+			if (userModel != null) {
+				cohortSummaryFlag = true;
+				cohortSummaryUserBean.setClaimSinceI(model.getClaimSinceI());
+				cohortSummaryUserBean.setClaimsInYear(model.getClaimsInYear());
+				cohortSummaryUserBean.setPremiumForYear(model.getPremiumForYear());
+				cohortSummaryUserBean.setPremiumPaidInYear(model.getPremiumPaidInYear());
+				cohortSummaryUserBean.setPrimumSinceI(model.getPrimumSinceI());
+			}
+			
+		} else {
+			IclubWebHelper.addMessage("Please Enter Cohort Id", FacesMessage.SEVERITY_INFO);
+		}
+		return null;
 	}
 	
 	public List<IclubCohortBean> getDashBoardBeans() {
@@ -733,6 +773,45 @@ public class IclubCohortController implements Serializable {
 	
 	public void setKey(String key) {
 		this.key = key;
+	}
+	
+	public IclubCohortSummaryBean getCohortSummaryBean() {
+		if (cohortSummaryBean == null) {
+			cohortSummaryBean = new IclubCohortSummaryBean();
+		}
+		
+		return cohortSummaryBean;
+	}
+	
+	public void setCohortSummaryBean(IclubCohortSummaryBean cohortSummaryBean) {
+		this.cohortSummaryBean = cohortSummaryBean;
+	}
+	
+	public String getCohortId() {
+		return cohortId;
+	}
+	
+	public void setCohortId(String cohortId) {
+		this.cohortId = cohortId;
+	}
+	
+	public IclubCohortSummaryBean getCohortSummaryUserBean() {
+		if (cohortSummaryUserBean == null) {
+			cohortSummaryUserBean = new IclubCohortSummaryBean();
+		}
+		return cohortSummaryUserBean;
+	}
+	
+	public void setCohortSummaryUserBean(IclubCohortSummaryBean cohortSummaryUserBean) {
+		this.cohortSummaryUserBean = cohortSummaryUserBean;
+	}
+	
+	public boolean isCohortSummaryFlag() {
+		return cohortSummaryFlag;
+	}
+	
+	public void setCohortSummaryFlag(boolean cohortSummaryFlag) {
+		this.cohortSummaryFlag = cohortSummaryFlag;
 	}
 	
 }
