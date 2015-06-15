@@ -48,6 +48,17 @@ public class IclubLoginController implements Serializable {
 		return "";
 	}
 	
+	public String getLoginRedirectURL() {
+		
+		String redirectUrl = "https://graph.facebook.com/oauth/authorize?client_id=" + BUNDLE.getString("fb.client_id") + "&display=page&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&scope=" + BUNDLE.getString("fb.perms2");
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 	public String yahooAction() {
 		String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us";
 		try {

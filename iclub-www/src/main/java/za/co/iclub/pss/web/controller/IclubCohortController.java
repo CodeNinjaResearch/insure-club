@@ -34,7 +34,6 @@ import za.co.iclub.pss.ws.model.IclubCohortInviteModel;
 import za.co.iclub.pss.ws.model.IclubCohortModel;
 import za.co.iclub.pss.ws.model.IclubCohortSummaryModel;
 import za.co.iclub.pss.ws.model.IclubCohortTypeModel;
-import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubNotificationTypeModel;
 import za.co.iclub.pss.ws.model.IclubPersonModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -141,21 +140,22 @@ public class IclubCohortController implements Serializable {
 			IclubCohortSummaryModel userModel = (IclubCohortSummaryModel) (userClient.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
 			cohortSummaryBean = new IclubCohortSummaryBean();
 			cohortSummaryUserBean = new IclubCohortSummaryBean();
+			
 			if (model != null) {
 				cohortSummaryFlag = true;
-				cohortSummaryBean.setClaimSinceI(model.getClaimSinceI());
-				cohortSummaryBean.setClaimsInYear(model.getClaimsInYear());
-				cohortSummaryBean.setPremiumForYear(model.getPremiumForYear());
-				cohortSummaryBean.setPremiumPaidInYear(model.getPremiumPaidInYear());
-				cohortSummaryBean.setPrimumSinceI(model.getPrimumSinceI());
+				cohortSummaryBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
+				cohortSummaryBean.setClaimsInYear(model.getClaimsInYear() != null ? model.getClaimsInYear() : 0.0);
+				cohortSummaryBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
+				cohortSummaryBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
+				cohortSummaryBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
 			}
 			if (userModel != null) {
 				cohortSummaryFlag = true;
-				cohortSummaryUserBean.setClaimSinceI(model.getClaimSinceI());
-				cohortSummaryUserBean.setClaimsInYear(model.getClaimsInYear());
-				cohortSummaryUserBean.setPremiumForYear(model.getPremiumForYear());
-				cohortSummaryUserBean.setPremiumPaidInYear(model.getPremiumPaidInYear());
-				cohortSummaryUserBean.setPrimumSinceI(model.getPrimumSinceI());
+				cohortSummaryUserBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
+				cohortSummaryUserBean.setClaimsInYear(model.getClaimsInYear() != null ? model.getClaimsInYear() : 0.0);
+				cohortSummaryUserBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
+				cohortSummaryUserBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
+				cohortSummaryUserBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
 			}
 			
 		} else {

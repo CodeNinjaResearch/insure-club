@@ -1,7 +1,9 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -97,15 +99,66 @@ public class IclubMenuController implements Serializable {
 		return userMenu;
 	}
 	
+	public static String getAuthURL(String authCode) {
+		return "https://graph.facebook.com/oauth/access_token?client_id=" + BUNDLE.getString("fb.client_id") + "&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&client_secret=" + BUNDLE.getString("fb.secret") + "&code=" + authCode;
+	}
+	
+	private String readURL(URL url) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		InputStream is = url.openStream();
+		int r;
+		while ((r = is.read()) != -1) {
+			baos.write(r);
+		}
+		return new String(baos.toByteArray());
+	}
+	
 	public void googleLogin() {
 		
 		System.out.println("entering doGet");
 		try {
+			
 			// get code
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String code = request.getParameter("code");
+			String from = request.getParameter("from");
 			// format parameters to post
-			if (code != null) {
+			if (code != null && from != null && !from.trim().equalsIgnoreCase("")) {
+				String access_token = null;
+				String authURL = getAuthURL(code);
+				URL url = new URL(authURL);
+				try {
+					String result = readURL(url);
+					Integer expires = null;
+					String[] pairs = result.split("&");
+					for (String pair : pairs) {
+						String[] kv = pair.split("=");
+						if (kv.length != 2) {
+							throw new RuntimeException("Unexpected auth response");
+						} else {
+							if (kv[0].equals("access_token")) {
+								access_token = kv[1];
+							}
+							if (kv[0].equals("expires")) {
+								expires = Integer.valueOf(kv[1]);
+							}
+						}
+					}
+					if (access_token != null && expires != null) {
+						
+						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&key=" + access_token);
+						IclubWebHelper.addMessage("Person Registered successfully", FacesMessage.SEVERITY_INFO);
+						// UserService us = UserService.get();
+						// us.authFacebookLogin(accessToken, expires);
+						// res.sendRedirect("http://www.onmydoorstep.com.au/");
+					} else {
+						throw new RuntimeException("Access token and expires not found");
+					}
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			} else if (code != null) {
 				request.removeAttribute("code");
 				String urlParameters = "code=" + code + "&client_id=" + BUNDLE.getString("client_id") + "&client_secret=" + BUNDLE.getString("client_secret") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&grant_type=" + BUNDLE.getString("grant_type");
 				
