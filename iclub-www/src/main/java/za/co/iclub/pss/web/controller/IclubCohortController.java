@@ -1,7 +1,10 @@
 package za.co.iclub.pss.web.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +25,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.json.JSONObject;
 
 import za.co.iclub.pss.web.bean.IclubCohortBean;
 import za.co.iclub.pss.web.bean.IclubCohortInviteBean;
@@ -77,6 +81,7 @@ public class IclubCohortController implements Serializable {
 	private String userName;
 	private ResourceBundle labelBundle;
 	private String key;
+	private String fromSocial;
 	private String cohortId;
 	private boolean cohortSummaryFlag;
 	
@@ -439,72 +444,127 @@ public class IclubCohortController implements Serializable {
 		}
 	}
 	
-	public void setIclubCohortInvite(String access_token) {
+	public void setIclubCohortInvite(String access_token, String fromSocial) {
 		try {
 			
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
-			Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
-			ContactsService myService = new ContactsService("iclub");
-			URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
-			ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
-			// Print the results
-			
-			for (ContactEntry entry : resultFeed.getEntries()) {
-				IclubCohortInviteBean bean = new IclubCohortInviteBean();
-				bean.setCiId(UUID.randomUUID().toString());
-				
-				for (Email email : entry.getEmailAddresses()) {
-					System.out.print(" " + email.getAddress());
-					if (email.getAddress() != null) {
-						bean.setCiInviteUri(email.getAddress());
-						break;
-					}
-				}
-				
-				if (bean.getCiInviteUri() == null || bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
-					if (entry.hasName()) {
-						if (entry.hasPhoneNumbers()) {
-							for (PhoneNumber phnum : entry.getPhoneNumbers()) {
-								bean.setCiInviteUri(phnum.getPhoneNumber());
-								break;
-							}
-						}
+			if (fromSocial != null && fromSocial.equalsIgnoreCase("FB")) {
+				String g = "https://graph.facebook.com/me/friends?access_token=" + access_token;
+				URL u = new URL(g);
+				URLConnection c = u.openConnection();
+				BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
+				String inputLine;
+				StringBuffer b = new StringBuffer();
+				while ((inputLine = in.readLine()) != null)
+					b.append(inputLine + "\n");
+				in.close();
+				String graph = b.toString();
+				JSONObject json = new JSONObject(graph);
+				String data = json.getString("data").replace("[", "").replace("]", "");
+				String summary = json.getString("summary").replace("[", "").replace("]", "");
+				String paging = json.getString("paging");
+				JSONObject fbBean = new JSONObject(data);
+				JSONObject fbSumBean = new JSONObject(summary);
+				JSONObject fbPagBean = new JSONObject(paging);
+				System.out.println("Js-----------" + json);
+				// "paging":{"next":"
+				if (fbBean != null && fbBean.has("id")) {
+					g = "https://graph.facebook.com/" + fbBean.getString("id") + "?access_token=" + access_token;
+					u = new URL(g);
+					c = u.openConnection();
+					in = new BufferedReader(new InputStreamReader(c.getInputStream()));
+					
+					b = new StringBuffer();
+					while ((inputLine = in.readLine()) != null)
+						b.append(inputLine + "\n");
+					in.close();
+					graph = b.toString();
+					if (fbSumBean != null && fbSumBean.has("total_count")) {
 						
+						Integer totalCount = new Integer(fbSumBean.getString("total_count"));
+						for (int i = 1; i < totalCount; i++) {
+							g = fbPagBean.getString("next");
+							u = new URL(g);
+							c = u.openConnection();
+							in = new BufferedReader(new InputStreamReader(c.getInputStream()));
+							
+							b = new StringBuffer();
+							while ((inputLine = in.readLine()) != null)
+								b.append(inputLine + "\n");
+							in.close();
+							graph = b.toString();
+							json = new JSONObject(graph);
+							data = json.getString("data").replace("[", "").replace("]", "");
+							fbBean = new JSONObject(data);
+							fbPagBean = new JSONObject(paging);
+							System.out.println(i + "--I-----------" + graph);
+						}
 					}
 				}
-				if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
-					cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
-				}
-			}
-			
-			if (cohortsInviteBeanMap != null && cohortsInviteBeanMap.size() > 0) {
+			} else {
+				Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
+				ContactsService myService = new ContactsService("iclub");
+				URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
+				ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
+				// Print the results
 				
-				WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "getMNumberList");
-				
-				Collection<? extends String> existingNumbers = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
-				client.close();
-				
-				if (existingNumbers != null && existingNumbers.size() > 0) {
-					for (String number : existingNumbers) {
-						cohortsInviteBeanMap.remove(number);
+				for (ContactEntry entry : resultFeed.getEntries()) {
+					IclubCohortInviteBean bean = new IclubCohortInviteBean();
+					bean.setCiId(UUID.randomUUID().toString());
+					
+					for (Email email : entry.getEmailAddresses()) {
+						System.out.print(" " + email.getAddress());
+						if (email.getAddress() != null) {
+							bean.setCiInviteUri(email.getAddress());
+							break;
+						}
+					}
+					
+					if (bean.getCiInviteUri() == null || bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+						if (entry.hasName()) {
+							if (entry.hasPhoneNumbers()) {
+								for (PhoneNumber phnum : entry.getPhoneNumbers()) {
+									bean.setCiInviteUri(phnum.getPhoneNumber());
+									break;
+								}
+							}
+							
+						}
+					}
+					if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+						cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
 					}
 				}
 				
-				client = IclubWebHelper.createCustomClient(P_BASE_URL + "getEmailsList");
-				
-				Collection<? extends String> existingEmials = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
-				client.close();
-				if (existingEmials != null && existingEmials.size() > 0) {
-					for (String email : existingEmials) {
-						cohortsInviteBeanMap.remove(email);
+				if (cohortsInviteBeanMap != null && cohortsInviteBeanMap.size() > 0) {
+					
+					WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "getMNumberList");
+					
+					Collection<? extends String> existingNumbers = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
+					client.close();
+					
+					if (existingNumbers != null && existingNumbers.size() > 0) {
+						for (String number : existingNumbers) {
+							cohortsInviteBeanMap.remove(number);
+						}
 					}
+					
+					client = IclubWebHelper.createCustomClient(P_BASE_URL + "getEmailsList");
+					
+					Collection<? extends String> existingEmials = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
+					client.close();
+					if (existingEmials != null && existingEmials.size() > 0) {
+						for (String email : existingEmials) {
+							cohortsInviteBeanMap.remove(email);
+						}
+					}
+					if (cohortsInviteBeanMap.size() > 0) {
+						cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>(cohortsInviteBeanMap.values());
+					} else {
+						cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>();
+					}
+					
 				}
-				if (cohortsInviteBeanMap.size() > 0) {
-					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>(cohortsInviteBeanMap.values());
-				} else {
-					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>();
-				}
-				
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -764,8 +824,10 @@ public class IclubCohortController implements Serializable {
 		
 		if (request.getParameter("key") != null) {
 			key = (String) request.getParameter("key");
+			fromSocial = (String) request.getParameter("from");
 			request.removeAttribute("key");
-			setIclubCohortInvite(key);
+			request.removeAttribute("from");
+			setIclubCohortInvite(key, fromSocial);
 			
 		}
 		return key;
@@ -812,6 +874,14 @@ public class IclubCohortController implements Serializable {
 	
 	public void setCohortSummaryFlag(boolean cohortSummaryFlag) {
 		this.cohortSummaryFlag = cohortSummaryFlag;
+	}
+	
+	public String getFromSocial() {
+		return fromSocial;
+	}
+	
+	public void setFromSocial(String fromSocial) {
+		this.fromSocial = fromSocial;
 	}
 	
 }

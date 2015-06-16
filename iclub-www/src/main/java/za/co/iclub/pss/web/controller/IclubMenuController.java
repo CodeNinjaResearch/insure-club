@@ -34,6 +34,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.json.JSONObject;
 
 import za.co.iclub.pss.web.bean.GooglePojo;
 import za.co.iclub.pss.web.util.IclubWebHelper;
@@ -57,6 +58,7 @@ public class IclubMenuController implements Serializable {
 	private String language;
 	private boolean userMenu;
 	private String selPage;
+	String preCode = "";
 	
 	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: languageValueChangeListener");
@@ -121,9 +123,12 @@ public class IclubMenuController implements Serializable {
 			// get code
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String code = request.getParameter("code");
+			
 			String from = request.getParameter("from");
 			// format parameters to post
-			if (code != null && from != null && !from.trim().equalsIgnoreCase("")) {
+			request.removeAttribute("code");
+			if (code != null && (preCode == null || !preCode.equalsIgnoreCase(code)) && from != null && !from.trim().equalsIgnoreCase("")) {
+				preCode = code;
 				String access_token = null;
 				String authURL = getAuthURL(code);
 				URL url = new URL(authURL);
@@ -146,12 +151,59 @@ public class IclubMenuController implements Serializable {
 					}
 					if (access_token != null && expires != null) {
 						
-						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&key=" + access_token);
-						IclubWebHelper.addMessage("Person Registered successfully", FacesMessage.SEVERITY_INFO);
-						// UserService us = UserService.get();
-						// us.authFacebookLogin(accessToken, expires);
-						// res.sendRedirect("http://www.onmydoorstep.com.au/");
+						String graph = null;
+						try {
+							
+							String g = "https://graph.facebook.com/me?access_token=" + access_token;
+							URL u = new URL(g);
+							URLConnection c = u.openConnection();
+							BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
+							String inputLine;
+							StringBuffer b = new StringBuffer();
+							while ((inputLine = in.readLine()) != null)
+								b.append(inputLine + "\n");
+							in.close();
+							graph = b.toString();
+							JSONObject json = new JSONObject(graph);
+							json.getString("id");
+							IclubPersonModel model = new IclubPersonModel();
+							model.setPId(UUID.randomUUID().toString());
+							if (json.has("email")) {
+								model.setPEmail(json.getString("email"));
+							}
+							model.setPFName(json.getString("first_name"));
+							model.setPLName(json.getString("last_name"));
+							if (json.has("gender"))
+								model.setPGender(json.getString("gender") != null ? json.getString("gender").substring(0, 1).toUpperCase() : null);
+							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setIclubPerson(1 + "");
+							
+							SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+							try {
+								if (json.has("birthday")) {
+									
+									Date date = formatter.parse(json.get("birthday").toString().replace("\"", ""));
+									model.setPDob(new Timestamp(date.getTime()));
+								}
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
+							
+							WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+							
+							ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+							client.close();
+							if (response.getStatusCode() == 0) {
+								updatePassword(model, access_token, "FB");
+								
+							} else {
+								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							throw new RuntimeException("ERROR in getting FB graph data. " + e);
+						}
+						
 					} else {
 						throw new RuntimeException("Access token and expires not found");
 					}
@@ -241,7 +293,7 @@ public class IclubMenuController implements Serializable {
 						client.close();
 						
 						if (response.getStatusCode() == 0) {
-							updatePassword(model, access_token);
+							updatePassword(model, access_token, "google");
 							
 						} else {
 							IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -265,7 +317,7 @@ public class IclubMenuController implements Serializable {
 		System.out.println("leaving doGet");
 	}
 	
-	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token) {
+	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token, String from) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: updatePassword");
 		try {
 			
@@ -288,7 +340,7 @@ public class IclubMenuController implements Serializable {
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
 				IclubWebHelper.addObjectIntoSession("googlelogin", true);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&key=" + access_token);
+				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
 				IclubWebHelper.addMessage("Person Registered successfully", FacesMessage.SEVERITY_INFO);
 			} else {
 				IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
