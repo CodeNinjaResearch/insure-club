@@ -28,6 +28,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
@@ -36,6 +37,11 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 import org.primefaces.json.JSONObject;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.User;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
 import za.co.iclub.pss.web.bean.GooglePojo;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubLoginModel;
@@ -59,6 +65,7 @@ public class IclubMenuController implements Serializable {
 	private boolean userMenu;
 	private String selPage;
 	String preCode = "";
+	String preVerifier = "";
 	
 	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: languageValueChangeListener");
@@ -117,7 +124,6 @@ public class IclubMenuController implements Serializable {
 	
 	public void googleLogin() {
 		
-		System.out.println("entering doGet");
 		try {
 			
 			// get code
@@ -127,6 +133,39 @@ public class IclubMenuController implements Serializable {
 			String from = request.getParameter("from");
 			// format parameters to post
 			request.removeAttribute("code");
+			
+			String verifier = request.getParameter("oauth_verifier");
+			
+			if (verifier != null && !verifier.trim().equalsIgnoreCase("") && (preVerifier == null || !preVerifier.equalsIgnoreCase(verifier))) {
+				preVerifier = verifier;
+				Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
+				System.out.println("TwitterCallbackServlet:requestToken");
+				RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
+				System.out.println("TwitterCallbackServlet:requestToken:" + requestToken);
+				
+				System.out.println("verifier :" + verifier);
+				try {
+					AccessToken access_token = twitter.getOAuthAccessToken(requestToken, verifier);
+					System.out.println("++++++" + access_token);
+					String screenName = twitter.getScreenName();
+					request.getSession().removeAttribute("requestToken");
+					System.out.println(access_token.getScreenName() + "__________" + screenName);
+					
+					User user = twitter.showUser(screenName);
+					if (user != null) {
+						System.out.println(user.getName() + " :========Name");
+						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
+						System.out.println(twitter.getFriendsIDs(screenName, 50) + " :========Name");
+						System.out.println(" :========Name");
+						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
+						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
+						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
 			if (code != null && (preCode == null || !preCode.equalsIgnoreCase(code)) && from != null && !from.trim().equalsIgnoreCase("")) {
 				preCode = code;
 				String access_token = null;
@@ -314,7 +353,6 @@ public class IclubMenuController implements Serializable {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		System.out.println("leaving doGet");
 	}
 	
 	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token, String from) {

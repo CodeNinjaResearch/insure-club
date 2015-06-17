@@ -1,7 +1,14 @@
 package za.co.iclub.pss.web.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -10,6 +17,9 @@ import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.codec.binary.Base64;
@@ -17,6 +27,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.RequestToken;
+import twitter4j.conf.ConfigurationBuilder;
 import za.co.iclub.pss.web.bean.IclubLoginBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubLoginModel;
@@ -39,10 +54,25 @@ public class IclubLoginController implements Serializable {
 	private boolean showModPanel;
 	
 	public String googleAction() {
-		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		
+		cb.setDebugEnabled(true).setOAuthConsumerKey("oINoOag2pIh1G7di2CIButdAR").setOAuthConsumerSecret("bKu1INz6edjn2l4YxN0zK12tuiHEnzuLklobhaQ32gAa4zQ3N1").setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		Twitter twitter = tf.getInstance();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		request.getSession().setAttribute("twitter", twitter);
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
-		} catch (IOException e) {
+			RequestToken requestToken = twitter.getOAuthRequestToken(BUNDLE.getString("twt.redirect_uri"));
+			request.getSession().setAttribute("requestToken", requestToken);
+			System.out.println("requestToken.getAuthenticationURL():" + requestToken.getAuthenticationURL());
+			try {
+				response.sendRedirect(requestToken.getAuthenticationURL());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
 		return "";
@@ -79,6 +109,123 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 		// client_id=CLIENT_ID&scope=SCOPES&response_type=RESPONSE_TYPE&redirect_uri=REDIRECT_URL
+	}
+	
+	public String twitterLogin() {
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		
+		cb.setDebugEnabled(true).setOAuthConsumerKey("oINoOag2pIh1G7di2CIButdAR").setOAuthConsumerSecret("bKu1INz6edjn2l4YxN0zK12tuiHEnzuLklobhaQ32gAa4zQ3N1").setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		Twitter twitter = tf.getInstance();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		request.getSession().setAttribute("twitter", twitter);
+		try {
+			StringBuffer callbackURL = request.getRequestURL();
+			System.out.println("TwitterLoginServlet:callbackURL:" + callbackURL);
+			int index = callbackURL.lastIndexOf("/");
+			callbackURL.replace(index, callbackURL.length(), "").append("/TwitterCallback");
+			
+			RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
+			request.getSession().setAttribute("requestToken", requestToken);
+			System.out.println("requestToken.getAuthenticationURL():" + requestToken.getAuthenticationURL());
+			try {
+				response.sendRedirect(requestToken.getAuthenticationURL());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	public String encodeKeys(String consumerKey, String consumerSecret) {
+		
+		try {
+			
+			String encodedConsumerKey = URLEncoder.encode(consumerKey, "UTF-8");
+			
+			String encodedConsumerSecret = URLEncoder.encode(consumerSecret, "UTF-8");
+			
+			String fullKey = encodedConsumerKey + ":" + encodedConsumerSecret;
+			
+			byte[] encodedBytes = Base64.encodeBase64(fullKey.getBytes());
+			
+			return new String(encodedBytes);
+			
+		}
+		
+		catch (UnsupportedEncodingException e) {
+			return new String();
+			
+		}
+		
+	}
+	
+	public String requestBearerToken() throws IOException {
+		HttpsURLConnection connection = null;
+		String encodedCredentials = encodeKeys(BUNDLE.getString("client_id"), BUNDLE.getString("secret"));
+		String endPointUrl = "https://api.twitter.com/oauth/request_token";
+		try {
+			HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+			response.setHeader("Host", "api.twitter.com");
+			response.setHeader("User-Agent", "Iclub");
+			response.setHeader("Authorization", "Basic " + encodedCredentials);
+			response.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+			response.setHeader("Content-Length", "29");
+			response.sendRedirect(endPointUrl);
+			// FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+			/*
+			 * writeRequest(connection, "grant_type=client_credentials");
+			 * 
+			 * // Parse the JSON response into a JSON mapped object to fetch
+			 * fields // from. JSONObject obj = new
+			 * JSONObject(readResponse(connection));
+			 * 
+			 * if (obj != null) { String tokenType = (String)
+			 * obj.get("token_type"); String token = (String)
+			 * obj.get("access_token");
+			 * 
+			 * return ((tokenType.equals("bearer")) && (token != null)) ? token
+			 * : ""; }
+			 */
+			return new String();
+		} catch (MalformedURLException e) {
+			throw new IOException("Invalid endpoint URL specified.", e);
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
+		}
+	}
+	
+	public boolean writeRequest(HttpsURLConnection connection, String textBody) {
+		
+		try {
+			BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+			wr.write(textBody);
+			wr.flush();
+			wr.close();
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
+	}
+	
+	public String readResponse(HttpsURLConnection connection) {
+		try {
+			StringBuilder str = new StringBuilder();
+			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String line = "";
+			while ((line = br.readLine()) != null) {
+				str.append(line + System.getProperty("line.separator"));
+			}
+			return str.toString();
+		} catch (IOException e) {
+			return new String();
+		}
 	}
 	
 	public String doIclubLogin() {

@@ -1,10 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +22,6 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
-import org.primefaces.json.JSONObject;
 
 import za.co.iclub.pss.web.bean.IclubCohortBean;
 import za.co.iclub.pss.web.bean.IclubCohortInviteBean;
@@ -47,6 +43,11 @@ import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.ContactFeed;
 import com.google.gdata.data.extensions.Email;
 import com.google.gdata.data.extensions.PhoneNumber;
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Version;
+import com.restfb.types.User;
 
 @ManagedBean(name = "iclubCohortController")
 @SessionScoped
@@ -449,58 +450,55 @@ public class IclubCohortController implements Serializable {
 			
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
 			if (fromSocial != null && fromSocial.equalsIgnoreCase("FB")) {
-				String g = "https://graph.facebook.com/me/friends?access_token=" + access_token;
-				URL u = new URL(g);
-				URLConnection c = u.openConnection();
-				BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
-				String inputLine;
-				StringBuffer b = new StringBuffer();
-				while ((inputLine = in.readLine()) != null)
-					b.append(inputLine + "\n");
-				in.close();
-				String graph = b.toString();
-				JSONObject json = new JSONObject(graph);
-				String data = json.getString("data").replace("[", "").replace("]", "");
-				String summary = json.getString("summary").replace("[", "").replace("]", "");
-				String paging = json.getString("paging");
-				JSONObject fbBean = new JSONObject(data);
-				JSONObject fbSumBean = new JSONObject(summary);
-				JSONObject fbPagBean = new JSONObject(paging);
-				System.out.println("Js-----------" + json);
-				// "paging":{"next":"
-				if (fbBean != null && fbBean.has("id")) {
-					g = "https://graph.facebook.com/" + fbBean.getString("id") + "?access_token=" + access_token;
-					u = new URL(g);
-					c = u.openConnection();
-					in = new BufferedReader(new InputStreamReader(c.getInputStream()));
-					
-					b = new StringBuffer();
-					while ((inputLine = in.readLine()) != null)
-						b.append(inputLine + "\n");
-					in.close();
-					graph = b.toString();
-					if (fbSumBean != null && fbSumBean.has("total_count")) {
-						
-						Integer totalCount = new Integer(fbSumBean.getString("total_count"));
-						for (int i = 1; i < totalCount; i++) {
-							g = fbPagBean.getString("next");
-							u = new URL(g);
-							c = u.openConnection();
-							in = new BufferedReader(new InputStreamReader(c.getInputStream()));
-							
-							b = new StringBuffer();
-							while ((inputLine = in.readLine()) != null)
-								b.append(inputLine + "\n");
-							in.close();
-							graph = b.toString();
-							json = new JSONObject(graph);
-							data = json.getString("data").replace("[", "").replace("]", "");
-							fbBean = new JSONObject(data);
-							fbPagBean = new JSONObject(paging);
-							System.out.println(i + "--I-----------" + graph);
-						}
-					}
+				
+				FacebookClient facebookClient = new DefaultFacebookClient(access_token, Version.VERSION_2_3);
+				Connection<User> myFriends = facebookClient.fetchConnection("me/friends", User.class);
+				if (myFriends != null && myFriends.getData() != null) {
+					User daf = myFriends.getData().get(0);
+					System.out.println(daf);
 				}
+				
+				/*
+				 * String g =
+				 * "https://graph.facebook.com/me/friends?access_token=" +
+				 * access_token; URL u = new URL(g); URLConnection c =
+				 * u.openConnection(); BufferedReader in = new
+				 * BufferedReader(new InputStreamReader(c.getInputStream()));
+				 * String inputLine; StringBuffer b = new StringBuffer(); while
+				 * ((inputLine = in.readLine()) != null) b.append(inputLine +
+				 * "\n"); in.close(); String graph = b.toString(); JSONObject
+				 * json = new JSONObject(graph); String data =
+				 * json.getString("data").replace("[", "").replace("]", "");
+				 * String summary = json.getString("summary").replace("[",
+				 * "").replace("]", ""); String paging =
+				 * json.getString("paging"); JSONObject fbBean = new
+				 * JSONObject(data); JSONObject fbSumBean = new
+				 * JSONObject(summary); JSONObject fbPagBean = new
+				 * JSONObject(paging); System.out.println("Js-----------" +
+				 * json); // "paging":{"next":" if (fbBean != null &&
+				 * fbBean.has("id")) { // g = "https://graph.facebook.com/" + //
+				 * fbBean.getString("id") + "?access_token=" + access_token; //
+				 * u = new URL(g); // c = u.openConnection(); // in = new
+				 * BufferedReader(new // InputStreamReader(c.getInputStream()));
+				 * // // b = new StringBuffer(); // while ((inputLine =
+				 * in.readLine()) != null) // b.append(inputLine + "\n"); //
+				 * in.close(); // graph = b.toString(); if (fbSumBean != null &&
+				 * fbSumBean.has("total_count")) {
+				 * 
+				 * Integer totalCount = new
+				 * Integer(fbSumBean.getString("total_count")); for (int i = 1;
+				 * i < totalCount; i++) { g = fbPagBean.getString("next"); u =
+				 * new URL(g); c = u.openConnection(); in = new
+				 * BufferedReader(new InputStreamReader(c.getInputStream()));
+				 * 
+				 * b = new StringBuffer(); while ((inputLine = in.readLine()) !=
+				 * null) b.append(inputLine + "\n"); in.close(); graph =
+				 * b.toString(); json = new JSONObject(graph); data =
+				 * json.getString("data").replace("[", "").replace("]", ""); if
+				 * (data != null) fbBean = new JSONObject(data); paging =
+				 * json.getString("paging"); fbPagBean = new JSONObject(paging);
+				 * System.out.println(i + "--I-----------" + graph); } } }
+				 */
 			} else {
 				Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
 				ContactsService myService = new ContactsService("iclub");
