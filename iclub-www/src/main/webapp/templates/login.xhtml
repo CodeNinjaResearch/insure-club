@@ -14,9 +14,19 @@
 					<p:password value="#{iclubLoginController.bean.LPasswd}" placeholder="Password" styleClass="Container80 Fnone MarAuto Fs18" feedback="false" />
 					<div class="EmptyBox50"></div>
 					<p:commandButton value="Log In" styleClass="Fs16" action="#{iclubLoginController.doIclubLogin}" ajax="false" />
-					<p:commandButton value="Google Log In" styleClass="Fs16" action="#{iclubLoginController.googleAction}" ajax="false" />
-					<p:commandButton value="Facebook Log In" styleClass="Fs16" action="#{iclubLoginController.getLoginRedirectURL}" ajax="false" />
-					<p:commandButton value="Yahoo Login" styleClass="Fs16" action="#{iclubLoginController.yahooAction}" ajax="false" />
+					<div class="EmptyBox50"></div>
+					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.googleAction}" ajax="false">
+						<h:graphicImage value="/images/gmail-icon.jpg" />
+					</p:commandLink>
+					<p:commandLink action="#{iclubLoginController.twitterLogin}" ajax="false">
+						<h:graphicImage value="/images/twitter_icon.png" />
+					</p:commandLink>
+					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.getFaceBookLogin}" ajax="false">
+						<h:graphicImage value="/images/facebook_icon.png" />
+					</p:commandLink>
+					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.yahooAction}" ajax="false">
+						<h:graphicImage value="/images/yahoomail_icon.jpg" />
+					</p:commandLink>
 					<div class="EmptyBox50"></div>
 				</div>
 			</div>

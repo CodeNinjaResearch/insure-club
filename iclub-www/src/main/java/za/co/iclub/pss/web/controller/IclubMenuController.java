@@ -28,7 +28,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
@@ -38,7 +37,6 @@ import org.apache.log4j.Logger;
 import org.primefaces.json.JSONObject;
 
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
@@ -155,10 +153,10 @@ public class IclubMenuController implements Serializable {
 					if (user != null) {
 						System.out.println(user.getName() + " :========Name");
 						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
-						System.out.println(twitter.getFriendsIDs(screenName, 50) + " :========Name");
-						System.out.println(" :========Name");
-						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
-						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
+						System.out.println(twitter.getFriendsList(screenName, -1L) + " :========Name");
+						System.out.println(twitter.getFollowersIDs(-1L) + " :========Name");
+						System.out.println(twitter.getFollowersIDs(screenName, 50) + " :========Name");
+						System.out.println(user.getFollowersCount() + " :========Name");
 						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
 					}
 				} catch (Exception e) {

@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,6 +19,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
@@ -26,6 +29,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -54,31 +58,16 @@ public class IclubLoginController implements Serializable {
 	private boolean showModPanel;
 	
 	public String googleAction() {
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		
-		cb.setDebugEnabled(true).setOAuthConsumerKey("oINoOag2pIh1G7di2CIButdAR").setOAuthConsumerSecret("bKu1INz6edjn2l4YxN0zK12tuiHEnzuLklobhaQ32gAa4zQ3N1").setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		Twitter twitter = tf.getInstance();
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		request.getSession().setAttribute("twitter", twitter);
+		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
 		try {
-			RequestToken requestToken = twitter.getOAuthRequestToken(BUNDLE.getString("twt.redirect_uri"));
-			request.getSession().setAttribute("requestToken", requestToken);
-			System.out.println("requestToken.getAuthenticationURL():" + requestToken.getAuthenticationURL());
-			try {
-				response.sendRedirect(requestToken.getAuthenticationURL());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		} catch (TwitterException e) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return "";
 	}
 	
-	public String getLoginRedirectURL() {
+	public String getFaceBookLogin() {
 		
 		String redirectUrl = "https://graph.facebook.com/oauth/authorize?client_id=" + BUNDLE.getString("fb.client_id") + "&display=page&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&scope=" + BUNDLE.getString("fb.perms2");
 		try {
@@ -114,19 +103,14 @@ public class IclubLoginController implements Serializable {
 	public String twitterLogin() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		
-		cb.setDebugEnabled(true).setOAuthConsumerKey("oINoOag2pIh1G7di2CIButdAR").setOAuthConsumerSecret("bKu1INz6edjn2l4YxN0zK12tuiHEnzuLklobhaQ32gAa4zQ3N1").setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
+		cb.setDebugEnabled(true).setOAuthConsumerKey(BUNDLE.getString("twt.client_id")).setOAuthConsumerSecret(BUNDLE.getString("twt.secret")).setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		Twitter twitter = tf.getInstance();
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		request.getSession().setAttribute("twitter", twitter);
 		try {
-			StringBuffer callbackURL = request.getRequestURL();
-			System.out.println("TwitterLoginServlet:callbackURL:" + callbackURL);
-			int index = callbackURL.lastIndexOf("/");
-			callbackURL.replace(index, callbackURL.length(), "").append("/TwitterCallback");
-			
-			RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
+			RequestToken requestToken = twitter.getOAuthRequestToken(BUNDLE.getString("twt.redirect_uri"));
 			request.getSession().setAttribute("requestToken", requestToken);
 			System.out.println("requestToken.getAuthenticationURL():" + requestToken.getAuthenticationURL());
 			try {
@@ -166,8 +150,8 @@ public class IclubLoginController implements Serializable {
 	
 	public String requestBearerToken() throws IOException {
 		HttpsURLConnection connection = null;
-		String encodedCredentials = encodeKeys(BUNDLE.getString("client_id"), BUNDLE.getString("secret"));
-		String endPointUrl = "https://api.twitter.com/oauth/request_token";
+		String encodedCredentials = encodeKeys(BUNDLE.getString("twt.client_id"), BUNDLE.getString("twt.secret"));
+		String endPointUrl = "https://api.twitter.com/oauth2/token";
 		try {
 			HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 			response.setHeader("Host", "api.twitter.com");
@@ -175,6 +159,9 @@ public class IclubLoginController implements Serializable {
 			response.setHeader("Authorization", "Basic " + encodedCredentials);
 			response.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 			response.setHeader("Content-Length", "29");
+			ServletOutputStream fdsaf = response.getOutputStream();
+			fdsaf.write("grant_type=client_credentials".getBytes());
+			fdsaf.close();
 			response.sendRedirect(endPointUrl);
 			// FacesContext.getCurrentInstance().getExternalContext().redirect(url);
 			/*
@@ -184,7 +171,7 @@ public class IclubLoginController implements Serializable {
 			 * fields // from. JSONObject obj = new
 			 * JSONObject(readResponse(connection));
 			 * 
-			 * if (obj != null) { String tokenType = (String)
+			 * if (obj != null) { String tokenType = (String)twt.redirect_uri
 			 * obj.get("token_type"); String token = (String)
 			 * obj.get("access_token");
 			 * 
