@@ -21,7 +21,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.type.TypeFactory;
 
 import za.co.iclub.pss.web.bean.IclubCohortBean;
 import za.co.iclub.pss.web.bean.IclubCohortInviteBean;
@@ -29,6 +36,8 @@ import za.co.iclub.pss.web.bean.IclubCohortSummaryBean;
 import za.co.iclub.pss.web.bean.IclubCohortTypeBean;
 import za.co.iclub.pss.web.bean.IclubNotificationTypeBean;
 import za.co.iclub.pss.web.bean.IclubPersonBean;
+import za.co.iclub.pss.web.bean.yahoo.YahooContactBean;
+import za.co.iclub.pss.web.bean.yahoo.YahooFieldBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubCohortInviteModel;
 import za.co.iclub.pss.ws.model.IclubCohortModel;
@@ -43,6 +52,8 @@ import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.ContactFeed;
 import com.google.gdata.data.extensions.Email;
 import com.google.gdata.data.extensions.PhoneNumber;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -83,6 +94,7 @@ public class IclubCohortController implements Serializable {
 	private ResourceBundle labelBundle;
 	private String key;
 	private String fromSocial;
+	private String guid;
 	private String cohortId;
 	private boolean cohortSummaryFlag;
 	
@@ -445,17 +457,17 @@ public class IclubCohortController implements Serializable {
 		}
 	}
 	
-	public void setIclubCohortInvite(String access_token, String fromSocial) {
+	public void setIclubCohortInvite(String access_token, String fromSocial, String guid) {
 		try {
-			
+			Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
 			if (fromSocial != null && fromSocial.equalsIgnoreCase("FB")) {
 				
 				FacebookClient facebookClient = new DefaultFacebookClient(access_token, Version.VERSION_2_3);
 				Connection<User> myFriends = facebookClient.fetchConnection("me/friends", User.class);
 				if (myFriends != null && myFriends.getData() != null) {
-					User daf = myFriends.getData().get(0);
-					System.out.println(daf);
+					User user = myFriends.getData().get(0);
+					System.out.println(user);
 				}
 				
 				/*
@@ -499,8 +511,44 @@ public class IclubCohortController implements Serializable {
 				 * json.getString("paging"); fbPagBean = new JSONObject(paging);
 				 * System.out.println(i + "--I-----------" + graph); } } }
 				 */
+			} else if (fromSocial != null && fromSocial.equalsIgnoreCase("yahoo")) {
+				HttpClient client = new DefaultHttpClient();
+				String callUrl1 = "https://social.yahooapis.com/v1/user/" + guid + "/contacts?format=json";
+				HttpGet httpGet = new HttpGet(callUrl1);
+				httpGet.setHeader("Authorization", "Bearer " + access_token);
+				httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
+				HttpResponse response2 = client.execute(httpGet);
+				String outputString = EntityUtils.toString(response2.getEntity());
+				JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
+				jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("contacts").toString());
+				System.out.println(jsonGet);
+				ObjectMapper mapper = new ObjectMapper();
+				List<YahooContactBean> contactBeans = mapper.readValue(jsonGet.get("contact").toString(), TypeFactory.collectionType(List.class, YahooContactBean.class));
+				
+				if (contactBeans != null && contactBeans.size() > 0) {
+					for (YahooContactBean contactBean : contactBeans) {
+						IclubCohortInviteBean bean = new IclubCohortInviteBean();
+						bean.setCiId(UUID.randomUUID().toString());
+						if (contactBean.getFields() != null && contactBean.getFields().size() > 0) {
+							for (YahooFieldBean fBean : contactBean.getFields()) {
+								if (fBean.getType() != null && fBean.getType().equalsIgnoreCase("email")) {
+									bean.setCiInviteUri(fBean.getValue().toString());
+									break;
+								} else if (fBean.getType() != null && fBean.getType().equalsIgnoreCase("phone")) {
+									bean.setCiInviteUri(fBean.getValue().toString());
+								}
+							}
+						}
+						if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+							cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
+						}
+					}
+					
+				}
+				
+				System.out.println(contactBeans + "------outputString   :\n");
 			} else {
-				Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
+				
 				ContactsService myService = new ContactsService("iclub");
 				URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
 				ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
@@ -534,37 +582,38 @@ public class IclubCohortController implements Serializable {
 					}
 				}
 				
-				if (cohortsInviteBeanMap != null && cohortsInviteBeanMap.size() > 0) {
-					
-					WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "getMNumberList");
-					
-					Collection<? extends String> existingNumbers = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
-					client.close();
-					
-					if (existingNumbers != null && existingNumbers.size() > 0) {
-						for (String number : existingNumbers) {
-							cohortsInviteBeanMap.remove(number);
-						}
+			}
+			if (cohortsInviteBeanMap != null && cohortsInviteBeanMap.size() > 0) {
+				
+				WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "getMNumberList");
+				
+				Collection<? extends String> existingNumbers = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
+				client.close();
+				
+				if (existingNumbers != null && existingNumbers.size() > 0) {
+					for (String number : existingNumbers) {
+						cohortsInviteBeanMap.remove(number);
 					}
-					
-					client = IclubWebHelper.createCustomClient(P_BASE_URL + "getEmailsList");
-					
-					Collection<? extends String> existingEmials = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
-					client.close();
-					if (existingEmials != null && existingEmials.size() > 0) {
-						for (String email : existingEmials) {
-							cohortsInviteBeanMap.remove(email);
-						}
-					}
-					if (cohortsInviteBeanMap.size() > 0) {
-						cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>(cohortsInviteBeanMap.values());
-					} else {
-						cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>();
-					}
-					
 				}
+				
+				client = IclubWebHelper.createCustomClient(P_BASE_URL + "getEmailsList");
+				
+				Collection<? extends String> existingEmials = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
+				client.close();
+				if (existingEmials != null && existingEmials.size() > 0) {
+					for (String email : existingEmials) {
+						cohortsInviteBeanMap.remove(email);
+					}
+				}
+				if (cohortsInviteBeanMap.size() > 0) {
+					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>(cohortsInviteBeanMap.values());
+				} else {
+					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>();
+				}
+				
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -823,9 +872,11 @@ public class IclubCohortController implements Serializable {
 		if (request.getParameter("key") != null) {
 			key = (String) request.getParameter("key");
 			fromSocial = (String) request.getParameter("from");
+			guid = (String) request.getParameter("guid");
 			request.removeAttribute("key");
+			request.removeAttribute("guid");
 			request.removeAttribute("from");
-			setIclubCohortInvite(key, fromSocial);
+			setIclubCohortInvite(key, fromSocial, guid);
 			
 		}
 		return key;
@@ -880,6 +931,14 @@ public class IclubCohortController implements Serializable {
 	
 	public void setFromSocial(String fromSocial) {
 		this.fromSocial = fromSocial;
+	}
+	
+	public String getGuid() {
+		return guid;
+	}
+	
+	public void setGuid(String guid) {
+		this.guid = guid;
 	}
 	
 }

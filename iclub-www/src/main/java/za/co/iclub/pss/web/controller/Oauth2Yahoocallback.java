@@ -22,6 +22,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.type.TypeFactory;
+
+import za.co.iclub.pss.web.bean.IclubPersonBean;
+import za.co.iclub.pss.web.bean.YahooMailsBean;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -72,7 +77,9 @@ public class Oauth2Yahoocallback extends HttpServlet {
 				post.setEntity(new UrlEncodedFormEntity(arguments));
 				HttpResponse response1 = client.execute(post);
 				String outputString = EntityUtils.toString(response1.getEntity());
+				System.out.println(outputString);
 				JsonObject json = (JsonObject) new JsonParser().parse(outputString);
+				System.out.println(json);
 				String access_token = json.get("access_token").getAsString();
 				String xoauth_yahoo_guid = json.get("xoauth_yahoo_guid").toString();
 				
@@ -87,8 +94,13 @@ public class Oauth2Yahoocallback extends HttpServlet {
 					HttpResponse response2 = client.execute(httpGet);
 					outputString = EntityUtils.toString(response2.getEntity());
 					JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
-					
-					System.out.println(outputString + "------outputString   :\n" + jsonGet);
+					System.out.println(outputString + "------outputString   :\n");
+					jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
+					IclubPersonBean bean = new IclubPersonBean();
+					String emails = jsonGet.get("emails").toString();
+					ObjectMapper mapper = new ObjectMapper();
+					List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
+					System.out.println(mailsList);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
