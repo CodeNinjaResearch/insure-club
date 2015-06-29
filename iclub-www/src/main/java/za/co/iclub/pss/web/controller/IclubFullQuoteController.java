@@ -1103,6 +1103,7 @@ public class IclubFullQuoteController implements Serializable {
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
+			e.printStackTrace();
 			IclubWebHelper.addMessage("Fail :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 		return null;
@@ -1355,7 +1356,7 @@ public class IclubFullQuoteController implements Serializable {
 		model.setPIdExpiryDt(personBean.getPIdExpiryDt());
 		model.setPInitials(personBean.getPInitials());
 		model.setPIsPensioner(personBean.getPIsPensioner());
-		model.setPIdIssueCntry(personBean.getPIdIssueCntry().longValue());
+		model.setPIdIssueCntry(personBean.getPIdIssueCntry() != null ? personBean.getPIdIssueCntry().longValue() : null);
 		model.setPLat(personBean.getPLat());
 		model.setPLong(personBean.getPLong());
 		model.setPOccupation(personBean.getPOccupation());

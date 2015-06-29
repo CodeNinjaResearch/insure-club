@@ -1833,12 +1833,12 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public IclubPersonBean getPersonBean() {
 		
-		if (personBean == null)
-			personBean = new IclubPersonBean();
-		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
+		if (personBean == null && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
 			
 			personBean = getIclubPersonBean(IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
 		}
+		if (personBean == null)
+			personBean = new IclubPersonBean();
 		return personBean;
 	}
 	
