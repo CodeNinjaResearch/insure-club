@@ -1,7 +1,11 @@
 package za.co.iclub.pss.web.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +33,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
+import org.json.JSONObject;
 
 import za.co.iclub.pss.web.bean.IclubCohortBean;
 import za.co.iclub.pss.web.bean.IclubCohortInviteBean;
@@ -54,11 +59,6 @@ import com.google.gdata.data.extensions.Email;
 import com.google.gdata.data.extensions.PhoneNumber;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.restfb.Connection;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.Version;
-import com.restfb.types.User;
 
 @ManagedBean(name = "iclubCohortController")
 @SessionScoped
@@ -97,6 +97,7 @@ public class IclubCohortController implements Serializable {
 	private String guid;
 	private String cohortId;
 	private boolean cohortSummaryFlag;
+	private boolean inviteFromFbApp;
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -250,6 +251,7 @@ public class IclubCohortController implements Serializable {
 				List<IclubCohortModel> models = new ArrayList<IclubCohortModel>();
 				if (selectedBeans != null && selectedBeans.size() == 1 && !showCreateCont) {
 					for (IclubCohortBean bean : selectedBeans) {
+						this.bean = bean;
 						WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + getSessionUserId());
 						
 						IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
@@ -334,7 +336,7 @@ public class IclubCohortController implements Serializable {
 						IclubCohortInviteModel model = new IclubCohortInviteModel();
 						
 						model.setCiId(bean.getCiId());
-						model.setIclubCohort(bean.getIclubCohort());
+						model.setIclubCohort(this.bean.getCId());
 						model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
 						model.setIclubNotificationType(bean.getIclubNotificationType());
 						model.setCiInviteAcceptYn(bean.getCiInviteAcceptYn());
@@ -463,54 +465,64 @@ public class IclubCohortController implements Serializable {
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
 			if (fromSocial != null && fromSocial.equalsIgnoreCase("FB")) {
 				
-				FacebookClient facebookClient = new DefaultFacebookClient(access_token, Version.VERSION_2_3);
-				Connection<User> myFriends = facebookClient.fetchConnection("me/friends", User.class);
-				if (myFriends != null && myFriends.getData() != null) {
-					User user = myFriends.getData().get(0);
-					System.out.println(user);
+				/*
+				 * FacebookClient facebookClient = new
+				 * DefaultFacebookClient(access_token, Version.VERSION_2_3);
+				 * Connection<User> myFriends =
+				 * facebookClient.fetchConnection("me/friends", User.class); if
+				 * (myFriends != null && myFriends.getData() != null) { User
+				 * user = myFriends.getData().get(0); System.out.println(user);
+				 * }
+				 */
+				
+				String redirectUrl = "https://www.facebook.com/dialog/apprequests?app_id=" + BUNDLE.getString("fb.client_id") + "&redirect_uri=" + BUNDLE.getString("fb.app_redirect_uri") + "&message=" + BUNDLE.getString("fb.message");
+				try {
+					IclubWebHelper.addObjectIntoSession("access_token", access_token);
+					IclubWebHelper.addObjectIntoSession("fromSocial", fromSocial);
+					IclubWebHelper.addObjectIntoSession("guid", guid);
+					FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 				
-				/*
-				 * String g =
-				 * "https://graph.facebook.com/me/friends?access_token=" +
-				 * access_token; URL u = new URL(g); URLConnection c =
-				 * u.openConnection(); BufferedReader in = new
-				 * BufferedReader(new InputStreamReader(c.getInputStream()));
-				 * String inputLine; StringBuffer b = new StringBuffer(); while
-				 * ((inputLine = in.readLine()) != null) b.append(inputLine +
-				 * "\n"); in.close(); String graph = b.toString(); JSONObject
-				 * json = new JSONObject(graph); String data =
-				 * json.getString("data").replace("[", "").replace("]", "");
-				 * String summary = json.getString("summary").replace("[",
-				 * "").replace("]", ""); String paging =
-				 * json.getString("paging"); JSONObject fbBean = new
-				 * JSONObject(data); JSONObject fbSumBean = new
-				 * JSONObject(summary); JSONObject fbPagBean = new
-				 * JSONObject(paging); System.out.println("Js-----------" +
-				 * json); // "paging":{"next":" if (fbBean != null &&
-				 * fbBean.has("id")) { // g = "https://graph.facebook.com/" + //
-				 * fbBean.getString("id") + "?access_token=" + access_token; //
-				 * u = new URL(g); // c = u.openConnection(); // in = new
-				 * BufferedReader(new // InputStreamReader(c.getInputStream()));
-				 * // // b = new StringBuffer(); // while ((inputLine =
-				 * in.readLine()) != null) // b.append(inputLine + "\n"); //
-				 * in.close(); // graph = b.toString(); if (fbSumBean != null &&
-				 * fbSumBean.has("total_count")) {
-				 * 
-				 * Integer totalCount = new
-				 * Integer(fbSumBean.getString("total_count")); for (int i = 1;
-				 * i < totalCount; i++) { g = fbPagBean.getString("next"); u =
-				 * new URL(g); c = u.openConnection(); in = new
-				 * BufferedReader(new InputStreamReader(c.getInputStream()));
-				 * 
-				 * b = new StringBuffer(); while ((inputLine = in.readLine()) !=
-				 * null) b.append(inputLine + "\n"); in.close(); graph =
-				 * b.toString(); json = new JSONObject(graph); data =
-				 * json.getString("data").replace("[", "").replace("]", ""); if
-				 * (data != null) fbBean = new JSONObject(data); paging =
-				 * json.getString("paging"); fbPagBean = new JSONObject(paging);
-				 * System.out.println(i + "--I-----------" + graph); } } }
-				 */
+			} else if (fromSocial != null && fromSocial.equalsIgnoreCase("fbapp")) {
+				boolean flag = true;
+				int i = 0;
+				while (flag) {
+					HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+					
+					String userId = request.getParameter("to[" + i + "]");
+					System.out.println(userId + "========");
+					if (userId != null && !userId.trim().equalsIgnoreCase("")) {
+						String profileUrl = "https://graph.facebook.com/" + userId + "?access_token=" + access_token;
+						URL u = new URL(profileUrl);
+						URLConnection c = u.openConnection();
+						BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
+						String inputLine;
+						StringBuffer b = new StringBuffer();
+						while ((inputLine = in.readLine()) != null)
+							b.append(inputLine + "\n");
+						in.close();
+						String graph = b.toString();
+						JSONObject json = new JSONObject(graph);
+						
+						IclubCohortInviteBean bean = new IclubCohortInviteBean();
+						bean.setCiId(UUID.randomUUID().toString());
+						bean.setCiInviteFName(json.getString("first_name"));
+						bean.setCiInviteLName(json.getString("last_name"));
+						bean.setCiInviteAcceptYn("Y");
+						bean.setIclubNotificationType(3l);
+						bean.setCiInviteUri(userId);
+						if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+							cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
+						}
+						System.out.println(json.getString("first_name") + "------Json------" + json);
+					} else {
+						flag = false;
+					}
+					i++;
+					
+				}
 			} else if (fromSocial != null && fromSocial.equalsIgnoreCase("yahoo")) {
 				HttpClient client = new DefaultHttpClient();
 				String callUrl1 = "https://social.yahooapis.com/v1/user/" + guid + "/contacts?format=json";
@@ -523,6 +535,7 @@ public class IclubCohortController implements Serializable {
 				jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("contacts").toString());
 				System.out.println(jsonGet);
 				ObjectMapper mapper = new ObjectMapper();
+				@SuppressWarnings("deprecation")
 				List<YahooContactBean> contactBeans = mapper.readValue(jsonGet.get("contact").toString(), TypeFactory.collectionType(List.class, YahooContactBean.class));
 				
 				if (contactBeans != null && contactBeans.size() > 0) {
@@ -607,7 +620,33 @@ public class IclubCohortController implements Serializable {
 				}
 				if (cohortsInviteBeanMap.size() > 0) {
 					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>(cohortsInviteBeanMap.values());
+					
+					if (fromSocial != null && fromSocial.equalsIgnoreCase("fbapp")) {
+						inviteFromFbApp = true;
+						List<IclubCohortInviteModel> models = new ArrayList<IclubCohortInviteModel>();
+						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "addList");
+						for (IclubCohortInviteBean bean : cohortsInviteBeans) {
+							
+							IclubCohortInviteModel model = new IclubCohortInviteModel();
+							
+							model.setCiId(bean.getCiId());
+							model.setIclubCohort(this.bean.getCId());
+							model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setIclubNotificationType(bean.getIclubNotificationType());
+							model.setCiInviteAcceptYn(bean.getCiInviteAcceptYn());
+							model.setCiInviteUri(bean.getCiInviteUri());
+							model.setIclubPerson(getSessionUserId());
+							model.setCiInviteFName(bean.getCiInviteFName());
+							model.setCiInviteLName(bean.getCiInviteLName());
+							models.add(model);
+							
+						}
+						client.accept(MediaType.APPLICATION_JSON).postCollection(models, IclubCohortInviteModel.class, ResponseModel.class);
+						client.close();
+					}
+					
 				} else {
+					inviteFromFbApp = true;
 					cohortsInviteBeans = new ArrayList<IclubCohortInviteBean>();
 				}
 				
@@ -878,6 +917,10 @@ public class IclubCohortController implements Serializable {
 			request.removeAttribute("from");
 			setIclubCohortInvite(key, fromSocial, guid);
 			
+		} else if (request.getParameter("from") != null && request.getParameter("from").toString().equalsIgnoreCase("fbapp")) {
+			String access_token = IclubWebHelper.getObjectIntoSession("access_token") != null ? IclubWebHelper.getObjectIntoSession("access_token").toString() : null;
+			String guid = IclubWebHelper.getObjectIntoSession("guid") != null ? IclubWebHelper.getObjectIntoSession("guid").toString() : null;
+			setIclubCohortInvite(access_token, "fbapp", guid);
 		}
 		return key;
 	}
@@ -939,6 +982,14 @@ public class IclubCohortController implements Serializable {
 	
 	public void setGuid(String guid) {
 		this.guid = guid;
+	}
+	
+	public boolean isInviteFromFbApp() {
+		return inviteFromFbApp;
+	}
+	
+	public void setInviteFromFbApp(boolean inviteFromFbApp) {
+		this.inviteFromFbApp = inviteFromFbApp;
 	}
 	
 }

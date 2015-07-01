@@ -135,7 +135,6 @@ public class IclubMenuController implements Serializable {
 		return new String(baos.toByteArray());
 	}
 	
-	@SuppressWarnings("unused")
 	public void googleLogin() {
 		
 		try {
@@ -207,8 +206,8 @@ public class IclubMenuController implements Serializable {
 						String graph = null;
 						try {
 							
-							String g = "https://graph.facebook.com/me?access_token=" + access_token;
-							URL u = new URL(g);
+							String profileUrl = "https://graph.facebook.com/me?access_token=" + access_token;
+							URL u = new URL(profileUrl);
 							URLConnection c = u.openConnection();
 							BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
 							String inputLine;
@@ -307,6 +306,7 @@ public class IclubMenuController implements Serializable {
 						jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
 						String emails = jsonGet.get("emails").toString();
 						ObjectMapper mapper = new ObjectMapper();
+						@SuppressWarnings("deprecation")
 						List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 						IclubPersonModel model = new IclubPersonModel();
 						

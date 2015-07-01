@@ -57,6 +57,8 @@ public class IclubCohortInviteService {
 			iCC.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 			iCC.setCiInviteAcceptYn(model.getCiInviteAcceptYn());
 			iCC.setCiInviteUri(model.getCiInviteUri());
+			iCC.setCiInviteFName(model.getCiInviteFName());
+			iCC.setCiInviteLName(model.getCiInviteLName());
 			IclubCohortInviteDAO.save(iCC);
 			
 			LOGGER.info("Save Success with ID :: " + iCC.getCiId());
@@ -96,6 +98,8 @@ public class IclubCohortInviteService {
 				iCC.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 				iCC.setCiInviteAcceptYn(model.getCiInviteAcceptYn());
 				iCC.setCiInviteUri(model.getCiInviteUri());
+				iCC.setCiInviteFName(model.getCiInviteFName());
+				iCC.setCiInviteLName(model.getCiInviteLName());
 				IclubCohortInviteDAO.save(iCC);
 				
 				LOGGER.info("Save Success with ID :: " + iCC.getCiId());
@@ -133,6 +137,8 @@ public class IclubCohortInviteService {
 			iCC.setCiInviteUri(model.getCiInviteUri());
 			iCC.setIclubNotificationType(iclubNotificationTypeDAO.findById(model.getIclubNotificationType()));
 			iCC.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			iCC.setCiInviteFName(model.getCiInviteFName());
+			iCC.setCiInviteLName(model.getCiInviteLName());
 			
 			IclubCohortInviteDAO.merge(iCC);
 			
@@ -188,7 +194,8 @@ public class IclubCohortInviteService {
 					iCC.setCiInviteAcceptYn(iclubC.getCiInviteAcceptYn());
 					iCC.setCiInviteUri(iclubC.getCiInviteUri());
 					iCC.setIclubPerson(iclubC.getIclubPerson() != null ? (iclubC.getIclubPerson()).getPId() : null);
-					
+					iCC.setCiInviteFName(iclubC.getCiInviteFName());
+					iCC.setCiInviteLName(iclubC.getCiInviteLName());
 					ret.add((T) iCC);
 				}
 			}
@@ -220,7 +227,8 @@ public class IclubCohortInviteService {
 					iCC.setCiInviteAcceptYn(iclubC.getCiInviteAcceptYn());
 					iCC.setCiInviteUri(iclubC.getCiInviteUri());
 					iCC.setIclubPerson(iclubC.getIclubPerson() != null ? (iclubC.getIclubPerson()).getPId() : null);
-					
+					iCC.setCiInviteFName(iclubC.getCiInviteFName());
+					iCC.setCiInviteLName(iclubC.getCiInviteLName());
 					ret.add((T) iCC);
 				}
 			}
@@ -246,6 +254,8 @@ public class IclubCohortInviteService {
 			model.setCiInviteAcceptYn(bean.getCiInviteAcceptYn());
 			model.setCiInviteUri(bean.getCiInviteUri());
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson()).getPId() : null);
+			model.setCiInviteFName(bean.getCiInviteFName());
+			model.setCiInviteLName(bean.getCiInviteLName());
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
