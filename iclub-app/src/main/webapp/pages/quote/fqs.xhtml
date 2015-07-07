@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<p:dialog id="vehLocationDetailsDialog" widgetVar="vehLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehAddress" value="Address:" />
+					<p:inputText id="vehAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVeh" showDetail="true" />
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubFullQuoteController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelVeh}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragVeh}" update="growlVeh" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodeVeh}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectVeh}" update="growlVeh" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlViewVehCont">
+				<p:dataTable reflow="true" widgetVar="dtVehicleCont" value="#{iclubFullQuoteController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
+					<f:facet name="header">
+						<p:outputLabel id="btnVehicleShowAdd" value="Vehicle Details" />
+					</f:facet>
+					<p:column headerText="Make">
+						<p:selectOneMenu disabled="true" widgetVar="mnuVehViewmake" id="mnuVehViewmake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubVehicleMaster}">
+							<f:selectItem itemLabel="Make" itemDisabled="true" />
+							<f:selectItems value="#{iclubFullQuoteController.vehicleMasters}" var="c" itemLabel="#{c.vmMake}" itemValue="#{c.vmId}" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column headerText="Model">
+						<p:selectOneMenu disabled="true" widgetVar="mnuVehViewModel" id="mnuVehViewModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubVehicleMaster}">
+							<f:selectItem itemLabel="Model" itemDisabled="true" />
+							<f:selectItems value="#{iclubFullQuoteController.vehicleMasters}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column headerText="Year">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VYear}" />
+					</p:column>
+				</p:dataTable>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Generated Premium :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:outputLabel id="genPremiumValue" value="#{iclubFullQuoteController.genPremium}" />
+					</div>
+				</div>
+				<div class="Container100 Responsive">
+					<p:selectBooleanCheckbox value="#{iclubFullQuoteController.termsAndConditionFlag}">
+						<p:ajax update=":iclubFrm:pnlViewVehCont"></p:ajax>
+					</p:selectBooleanCheckbox>
+					I Agree With Terms &amp; Conditions
+				</div>
+				<div class="Container100 Responsive">
+					<p:commandButton value="Accept" disabled="#{!iclubFullQuoteController.termsAndConditionFlag}" styleClass="Fs16" action="#{iclubFullQuoteController.registerActionListener}" ajax="false" />
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

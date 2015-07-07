@@ -1,0 +1,46 @@
+package za.co.iclub.pss.trans;
+
+import za.co.iclub.pss.model.ui.IclubPropUsageTypeBean;
+import za.co.iclub.pss.model.ws.IclubPropUsageTypeModel;
+import za.co.iclub.pss.orm.bean.IclubPropUsageType;
+
+public class IclubPropUsageTypeTrans {
+	
+	public IclubPropUsageTypeBean fromWStoUI(IclubPropUsageTypeModel model) {
+		IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
+		bean.setPutId(model.getPutId().longValue());
+		bean.setPutLongDesc(model.getPutLongDesc());
+		bean.setPutShortDesc(model.getPutShortDesc());
+		bean.setPutStatus(model.getPutStatus());
+		return bean;
+	}
+	
+	public IclubPropUsageTypeModel fromUItoWS(IclubPropUsageTypeBean bean) {
+		IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
+		model.setPutId(bean.getPutId().longValue());
+		model.setPutLongDesc(bean.getPutLongDesc());
+		model.setPutShortDesc(bean.getPutShortDesc());
+		model.setPutStatus(bean.getPutStatus());
+		return model;
+	}
+	
+	public IclubPropUsageTypeModel fromORMtoWS(IclubPropUsageType bean) {
+		IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
+		model.setPutId(bean.getPutId().longValue());
+		model.setPutLongDesc(bean.getPutLongDesc());
+		model.setPutShortDesc(bean.getPutShortDesc());
+		model.setPutStatus(bean.getPutStatus());
+		return model;
+	}
+	
+	public IclubPropUsageType fromWStoORM(IclubPropUsageTypeModel model) {
+		IclubPropUsageType acctype = new IclubPropUsageType();
+		
+		acctype.setPutId(model.getPutId());
+		acctype.setPutLongDesc(model.getPutLongDesc());
+		acctype.setPutShortDesc(model.getPutShortDesc());
+		acctype.setPutStatus(model.getPutStatus());
+		
+		return acctype;
+	}
+}

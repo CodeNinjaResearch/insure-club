@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NId}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Creadted By" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.iclubPerson}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Type" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.iclubNotificationType}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Title" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NTitle}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Body" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NBody}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="From" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NFromAddr}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="To List" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NToList}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Status" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NStatus}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Crated Date" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubNotifController.bean.NCrtdDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div style="align: center !important">
+		<p:commandButton id="btnNotifCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlNotifCont" value="Close" actionListener="#{iclubNotifController.showView}" />
+	</div>
+</ui:composition>

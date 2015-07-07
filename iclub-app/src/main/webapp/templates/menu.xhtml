@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ps="http://primefaces.org/sentinel" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<div id="layout-menubar" class="Unselectable fontRegular">
+		<div class="layout-menubarinner-box" id="buttonArea">
+			<a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize"><i class="icon-th-list-2"></i></a> <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
+		</div>
+		<div class="layout-menubarinner-box" id="searchArea"></div>
+		<ps:menu id="sm_leftmenu">
+			<p:menuitem id="sm_home" value="Home" icon="icon-home-outline" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="sm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
+			<p:menuitem id="sm_logout" value="Logout" ajax="false" action="#{iclubLoginController.doIclubLogout}" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
+			<p:submenu id="sm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
+				<p:menuitem id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_pdash" outcome="pdash" value="View Policies" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_cdash" outcome="cdash" value="View Claims" containerStyleClass="layout-menubar-active" />
+				<p:submenu id="sm_admin" label="Admin Screens">
+					<p:menuitem id="sm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
+					<p:menuitem id="sm_master" value="Master Data" outcome="master" containerStyleClass="layout-menubar-active" />
+					<p:menuitem id="sm_rating" value="Rating" outcome="rating" containerStyleClass="layout-menubar-active" />
+				</p:submenu>
+				<p:submenu id="sm_policy" label="Policy Dashboards">
+					<p:menuitem id="sm_mypcy" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
+					<p:menuitem id="sm_pendass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
+					<p:menuitem id="sm_allpcy" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
+				</p:submenu>
+				<p:submenu id="sm_claim" label="Claim Dashboards">
+					<p:menuitem id="sm_myclm" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
+					<p:menuitem id="sm_pendclmass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
+					<p:menuitem id="sm_allclm" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
+				</p:submenu>
+			</p:submenu>
+			<p:menuitem id="sm_faq" value="FAQ" containerStyleClass="layout-menubar-active" />
+			<p:submenu id="sm_hitw" label="How It Works">
+				<p:menuitem id="sm_transparency" value="Transparency" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_privacy" value="Privacy" containerStyleClass="layout-menubar-active" />
+			</p:submenu>
+			<p:submenu id="sm_aboutus" label="About Us">
+				<p:menuitem id="sm_leadership" value="Leadership" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_board" value="Board" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_execmem" value="Executive Management" containerStyleClass="layout-menubar-active" />
+				<p:menuitem id="sm_senmem" value="Senior Management" containerStyleClass="layout-menubar-active" />
+			</p:submenu>
+			<p:menuitem id="sm_qq" value="Quick Quote" outcome="qq" containerStyleClass="layout-menubar-active" />
+		</ps:menu>
+	</div>
+</ui:composition>

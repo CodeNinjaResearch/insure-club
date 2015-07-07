@@ -1,0 +1,35 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<p:panel id="pnlCohortContDet">
+			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<p:column rendered="#{!iclubCohortController.inviteFromFbApp}" selectionMode="multiple" style="width:16px;text-align:center">
+				</p:column>
+				<p:column headerText="Invite Uri">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteUri}" />
+				</p:column>
+				<p:column rendered="#{iclubCohortController.inviteFromFbApp}" headerText="First Name">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteFName}" />
+				</p:column>
+				<p:column rendered="#{iclubCohortController.inviteFromFbApp}" headerText="Last Name">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteLName}" />
+				</p:column>
+				<!-- <p:column headerText="Notificatuin Type">
+					<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubNotificationType}">
+						<f:selectItem itemLabel="Type" itemDisabled="true" />
+						<f:selectItems value="#{iclubCohortController.iclubNotificationTypeBeans}" var="c" itemLabel="#{c.ntLongDesc}" itemValue="#{c.ntId}" />
+					</p:selectOneMenu>
+				</p:column> -->
+				<p:column headerText="Invite Accept">
+					<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.ciInviteAcceptYn}">
+						<f:selectItem itemLabel="Type" itemDisabled="true" />
+						<f:selectItem itemLabel="Yes" itemValue="Y" />
+						<f:selectItem itemLabel="No" itemValue="N" />
+					</p:selectOneMenu>
+				</p:column>
+				<f:facet name="footer">
+					<p:commandButton rendered="#{!iclubCohortController.inviteFromFbApp}" process="dtQuoteCont" update=":iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" ajax="false" action="#{iclubCohortController.addIclubCohortsInvites}" icon="ui-icon-search" value="Save" />
+				</f:facet>
+			</p:dataTable>
+		</p:panel>
+	</ui:define>
+</ui:composition>

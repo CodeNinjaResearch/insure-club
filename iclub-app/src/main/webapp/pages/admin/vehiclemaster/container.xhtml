@@ -1,0 +1,20 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubVehicleMasterController.initializePage}" name="onload" autoRun="true" update="pnlVehicleMasterContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlVehicleMasterCont">
+				<p:panel id="pnlVehicleMasterContMenu">
+					<p:commandLink value="View VehicleMaster" actionListener="#{iclubVehicleMasterController.showView}" update="pnlVehicleMasterContDet" />
+				</p:panel>
+				<p:panel id="pnlVehicleMasterContDet">
+					<p:panel id="pnlVehicleMasterContView" styleClass="BordNone" rendered="#{iclubVehicleMasterController.showViewCont}">
+						<ui:include src="/pages/admin/vehiclemaster/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlVehicleMasterContSummary" styleClass="BordNone" rendered="#{iclubVehicleMasterController.showSummaryCont}">
+						<ui:include src="/pages/admin/vehiclemaster/summary.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

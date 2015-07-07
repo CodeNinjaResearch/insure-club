@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:menuButton id="mnuMasterSel" value="Select Entity" styleClass="TexAlCenter Fnone">
+				<p:menuitem id="mnuMasterSel_Secmas" value="Security Master" outcome="iclubSecurityMaster" />
+				<p:menuitem id="mnuMasterSel_Banmas" value="Bank Master" outcome="iclubBankMaster" />
+				<p:menuitem id="mnuMasterSel_Config" value="Configuration" outcome="iclubConfig" />
+				<p:menuitem id="mnuMasterSel_entType" value="Entity Type" outcome="iclubEntityType" />
+				<p:menuitem id="mnuMasterSel_Occ" value="Occupation" outcome="iclubOccupation" />
+				<p:menuitem id="mnuMasterSel_Notif" value="Notifaction" outcome="iclubNotif" />
+				<p:menuitem id="mnuMasterSel_RatTyp" value="Rate Type" outcome="iclubRateType" />
+				<p:menuitem id="mnuMasterSel_SupMas" value="Supply Master" outcome="iclubSupplyMaster" />
+				<p:menuitem id="mnuMasterSel_Mes" value="Message" outcome="iclubMessage" />
+				<p:menuitem id="mnuMasterSel_Trac" value="Track Master" outcome="iclubTrackMaster" />
+				<p:menuitem id="mnuMasterSel_LicCod" value="License Code" outcome="iclubLicenseCode" />
+				<p:menuitem id="mnuMasterSel_GeoLoc" value="Geo Loc" outcome="iclubGeoLoc" />
+				<p:menuitem id="mnuMasterSel_CovTyp" value="Cover Type" outcome="iclubCoverType" />
+				<p:menuitem id="mnuMasterSel_Evn" value="Event" outcome="iclubEvent" />
+				<p:menuitem id="mnuMasterSel_Ext" value="Extras" outcome="iclubExtras" />
+				<p:menuitem id="mnuMasterSel_Fie" value="Field" outcome="iclubField" />
+			</p:menuButton>
+		</div>
+		<ui:insert name="master">
+		</ui:insert>
+	</ui:define>
+</ui:composition>

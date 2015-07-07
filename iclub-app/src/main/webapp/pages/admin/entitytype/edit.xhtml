@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubEntityTypeController.bean.etId}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Short Description :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Shor Description" value="#{iclubEntityTypeController.bean.etShortDesc}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Long Description :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubEntityTypeController.bean.etLongDesc}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Table Name :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Table Name" value="#{iclubEntityTypeController.bean.etTblNm}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubEntityTypeController.bean.etStatus}">
+				<f:selectItem itemLabel="Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnEntityTypeEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="Update" actionListener="#{iclubEntityTypeController.modIclubEntityType}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnEntityTypeDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="Delete" actionListener="#{iclubEntityTypeController.delIclubEntityType}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnEntityTypeCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlEntityTypeCont" value="Close" actionListener="#{iclubEntityTypeController.showView}" />
+		</div>
+	</div>
+</ui:composition>

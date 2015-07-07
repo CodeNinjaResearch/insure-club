@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:commandButton id="dynaButton" value="Select Entity" type="button" icon="ui-icon-extlink" styleClass="TexAlCenter Fnone" />
+			<p:tieredMenu id="mnuPageSel" styleClass="TexAlCenter Fnone" overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+				<p:submenu label="Screen Lists">
+					<p:submenu label="Person Lists">
+						<p:menuitem id="mnuPageSel_IdTyp" value="Id Type" outcome="iclubIdType" />
+						<p:menuitem id="mnuPageSel_MarSta" value="Maritial Status" outcome="iclubMaritialStatus" />
+						<p:menuitem id="mnuPageSel_SecQue" value="Security Question" outcome="IclubSecurityQuestion" />
+					</p:submenu>
+					<p:submenu label="Common Lists">
+						<p:menuitem id="mnuPageSel_AccTyp" value="Access Type" outcome="iclubAccessType" />
+						<p:menuitem id="mnuPageSel_AccountTyp" value="Account Type" outcome="iclubAccountType" />
+						<p:menuitem id="mnuPageSel_AlaTyp" value="Alarm Type" outcome="iclubAlarmType" />
+						<p:menuitem id="mnuPageSel_BarTyp" value="Bar Type" outcome="iclubBarType" />
+						<p:menuitem id="mnuPageSel_BouTyp" value="Boundary Type" outcome="iclubBoundaryType" />
+						<p:menuitem id="mnuPageSel_BuiSta" value="Building State" outcome="iclubBuildingState" />
+						<p:menuitem id="mnuPageSel_ClaSta" value="Claim Status" outcome="iclubClaimStatus" />
+						<p:menuitem id="mnuPageSel_InsIte" value="Insurance Item Type" outcome="iclubInsuranceItemType" />
+						<p:menuitem id="mnuPageSel_OccSta" value="Occupied Status" outcome="iclubOccupiedStatus" />
+						<p:menuitem id="mnuPageSel_OwnTyp" value="Owner Type" outcome="iclubOwnerType" />
+						<p:menuitem id="mnuPageSel_PaySta" value="Payment Status" outcome="iclubPaymentStatus" />
+						<p:menuitem id="mnuPageSel_PayTyp" value="Payment Type" outcome="iclubPaymentType" />
+						<p:menuitem id="mnuPageSel_PolSta" value="Policy Status" outcome="iclubPolicyStatus" />
+						<p:menuitem id="mnuPageSel_ProductTyp" value="Property Type" outcome="iclubPropertyType" />
+						<p:menuitem id="mnuPageSel_QuoSta" value="Quote Status" outcome="iclubQuoteStatus" />
+						<p:menuitem id="mnuPageSel_RooTyp" value="Roof Type" outcome="iclubRoofType" />
+						<p:menuitem id="mnuPageSel_SupTyp" value="Supplier Type" outcome="iclubSupplierType" />
+						<p:menuitem id="mnuPageSel_VehTyp" value="Vehicle Type" outcome="iclubVehicleType" />
+						<p:menuitem id="mnuPageSel_WalTyp" value="Wall Type" outcome="iclubWallType" />
+					</p:submenu>
+				</p:submenu>
+				<p:submenu label="Internal Lists">
+					<p:menuitem id="mnuPageSel_DocTyp" value="Document Type" outcome="iclubDocumentType" />
+					<p:menuitem id="mnuPageSel_EveTyp" value="Event Type" outcome="iclubEventType" />
+					<p:menuitem id="mnuPageSel_MesTyp" value="Message Type" outcome="iclubMessageType" />
+					<p:menuitem id="mnuPageSel_NotTyp" value="Notification Type" outcome="iclubNotificationType" />
+					<p:menuitem id="mnuPageSel_ProTyp" value="Product Type" outcome="iclubProductType" />
+					<p:menuitem id="mnuPageSel_RolTyp" value="Role Type" outcome="iclubRoleType" />
+					<p:menuitem id="mnuPageSel_AssTyp" value="Assessment Type" outcome="iclubAssessmentType" />
+				</p:submenu>
+			</p:tieredMenu>
+		</div>
+		<ui:insert name="mdata">
+		</ui:insert>
+	</ui:define>
+</ui:composition>

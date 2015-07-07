@@ -1,0 +1,20 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubEventController.initializePage}" name="onload" autoRun="true" update="pnlEventContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlEventCont">
+				<p:panel id="pnlEventContMenu">
+					<p:commandLink value="View Event" actionListener="#{iclubEventController.showView}" update="pnlEventContDet" />
+				</p:panel>
+				<p:panel id="pnlEventContDet">
+					<p:panel id="pnlEventContView" rendered="#{iclubEventController.showViewCont}">
+						<ui:include src="/pages/admin/event/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlEventContSummary" rendered="#{iclubEventController.showSummaryCont}">
+						<ui:include src="/pages/admin/event/summary.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

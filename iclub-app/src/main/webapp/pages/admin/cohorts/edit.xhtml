@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubCohortController.bean.CId}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Name :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.bean.CName}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Email :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Email" value="#{iclubCohortController.bean.CEmail}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Collected Contribution :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Collected Contribution" value="#{iclubCohortController.bean.CCollectedContrib}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Finalize Date :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:calendar styleClass="TexAlCenter" placeholder="Finalized Date" value="#{iclubCohortController.bean.CFinalizeDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Member Contribution :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Member Contribution" value="#{iclubCohortController.bean.CCurMemberCnt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Init Date :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:calendar styleClass="TexAlCenter" placeholder="Member Contribution" value="#{iclubCohortController.bean.CInitDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Type :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.bean.iclubCohortType}">
+				<f:selectItem itemLabel="Type" itemDisabled="true" />
+				<f:selectItems value="#{iclubCohortController.cohortTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnCohortEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlCohortCont" value="Update" actionListener="#{iclubCohortController.modIclubCohort}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnCohortDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlCohortCont" value="Delete" actionListener="#{iclubCohortController.delIclubCohort}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnCohortCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlCohortCont" value="Close" actionListener="#{iclubCohortController.showView}" />
+		</div>
+	</div>
+</ui:composition>

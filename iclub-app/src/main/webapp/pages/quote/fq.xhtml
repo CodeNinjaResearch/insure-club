@@ -1,0 +1,446 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="perAddress" value="Address:" />
+					<p:inputText id="perAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPre" showDetail="true" />
+				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubFullQuoteController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPer}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPer}" update="growlPre" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePer}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPer}" update="growlPre" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="proAddress" value="Address:" />
+					<p:inputText id="proAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlPro" showDetail="true" />
+				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubFullQuoteController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelPro}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragPro}" update=":iclubFrm:qqTabView:qqSubProDetView:qqSubProLocDet,:iclubFrm:qqTabView:qqSubProDetViewMod:qqSubProLocDetMod,growlPro" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodePro}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectPro}" update=":iclubFrm:qqTabView:qqSubProDetView:qqSubProLocDet,:iclubFrm:qqTabView:qqSubProDetViewMod:qqSubProLocDetMod,growlPro" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<p:dialog id="vehLocationDetailsDialog" widgetVar="vehLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehAddress" value="Address:" />
+					<p:inputText id="vehAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVeh" showDetail="true" />
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubFullQuoteController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelVeh}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,growlVeh :iclubFrm:qqTabView:qqSubVehDetViewMod:onLocationDetMod" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodeVeh}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectVeh}" update=":iclubFrm:qqTabView:qqSubVehDetView:onLocationDet,growlVeh" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<p:dialog id="vehDdLocationDetailsDialog" widgetVar="vehDdLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Location Details</f:facet>
+			<p:panel>
+				<h3 style="margin-top: 0">Geocode</h3>
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="vehDdAddress" value="Address:" />
+					<p:inputText id="vehDdAddress" />
+					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVehDd()" type="button" />
+				</h:panelGrid>
+				<p:growl id="growlVehDd" showDetail="true" />
+				<p:gmap id="geoGmapVehDd" widgetVar="geoMapVehDd" center="#{iclubFullQuoteController.centerGeoMapVehDd}" zoom="13" type="HYBRID" model="#{iclubFullQuoteController.draggableModelVehDd}" style="width:400px;height:400px">
+					<p:ajax event="markerDrag" listener="#{iclubFullQuoteController.onMarkerDragVehDd}" update=":iclubFrm:qqTabView:qqSubVehDetView:ddLocationDet,growlVehDd, :iclubFrm:qqTabView:qqSubVehDetViewMod:ddLocationDetMod" />
+					<p:ajax event="geocode" listener="#{iclubFullQuoteController.onGeocodeVehDd}" update="@this" />
+					<p:ajax event="overlaySelect" listener="#{iclubFullQuoteController.onMarkerSelectVehDd}" update=":iclubFrm:qqTabView:qqSubVehDetView:ddLocationDet,growlVehDd :iclubFrm:qqTabView:qqSubVehDetViewMod:ddLocationDetMod" />
+				</p:gmap>
+			</p:panel>
+		</p:dialog>
+		<div class="ContainerIndent TexAlCenter">
+			<p:tabView id="qqTabView">
+				<p:tab id="fqPerDet" title="Person details">
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Title :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Title" value="#{iclubFullQuoteController.personBean.PTitle}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Initials :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Initials" value="#{iclubFullQuoteController.personBean.PInitials}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="First Name :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="First Name" value="#{iclubFullQuoteController.personBean.PFName}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Last Name :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Last Name" value="#{iclubFullQuoteController.personBean.PLName}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Mobile :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Mobile" value="#{iclubFullQuoteController.personBean.PMobile}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Email :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Email" value="#{iclubFullQuoteController.personBean.PEmail}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Contact Reference" value="#{iclubFullQuoteController.personBean.PContactPref}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Gender :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu disabled="true" widgetVar="mnuGender" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuGender.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.PGender}">
+								<f:selectItem itemLabel="Gender" itemDisabled="true" />
+								<f:selectItem itemLabel="Male" itemValue="M" />
+								<f:selectItem itemLabel="Female" itemValue="F" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Maritial Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuMarS" disabled="true" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.iclubMaritialStatus}">
+								<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msId}" value="#{iclubFullQuoteController.maritialStatusBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Id Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuIdType" disabled="true" id="mnuIdType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.iclubIdType}">
+								<f:selectItem itemLabel="Id Type" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.itLongDesc}" itemValue="#{c.itId}" value="#{iclubFullQuoteController.idTypeBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Id Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="true" placeholder="Id Number" value="#{iclubFullQuoteController.personBean.PIdNum}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Issuer Country :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuIdIss" disabled="true" id="mnuIdIss" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.PIdIssueCntry}">
+								<f:selectItem itemLabel="Issuer Country" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel value="Issue Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar disabled="true" placeholder="Issue Date" value="#{iclubFullQuoteController.personBean.PIdIssueDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel value="Expiry Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar disabled="true" placeholder="Expiry Date" value="#{iclubFullQuoteController.personBean.PIdExpiryDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Occupation :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu disabled="true" widgetVar="mnuOcc" id="mnuOcc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.POccupation}">
+								<f:selectItem itemLabel="Occupation" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.occupationBeans}" var="c" itemLabel="#{c.ODesc}" itemValue="#{c.OId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar disabled="true" placeholder="Date Of Birth" value="#{iclubFullQuoteController.personBean.PDob}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Is Pensioner :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu disabled="true" widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.personBean.PIsPensioner}">
+								<f:selectItem itemLabel="Is Pensioner" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton disabled="true" update=":iclubFrm:perLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('perLocationDetailsDialog').show();" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:tab>
+				<p:tab id="qqVehDet" title="Vehicle Details">
+					<ui:include src="/pages/quote/vehiclefq.xhtml" />
+				</p:tab>
+				<p:tab id="qqDriverDet" title="Driver Details">
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubFullQuoteController.driverBean.DName}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="License Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="License Number" value="#{iclubFullQuoteController.driverBean.DLicenseNum}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubFullQuoteController.driverBean.DIssueDt}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:calendar styleClass="TexAlCenter" placeholder="Date Of Birth" value="#{iclubFullQuoteController.driverBean.DDob}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="License Code :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.driverBean.iclubLicenseCode}">
+								<f:selectItem itemLabel="License Code" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:tab>
+				<p:tab id="fqExtDet" title="Extras">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Description :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Description" value="#{iclubFullQuoteController.extrasBean.EDesc}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.extrasBean.EStatus}" widgetVar="mnuStu" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:tab>
+				<p:tab title="Property details">
+					<ui:include src="/pages/quote/propertyfq.xhtml" />
+				</p:tab>
+				<p:tab id="fqAccDet" title="Account Details">
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Account Number" value="#{iclubFullQuoteController.accountBean.AAccNum}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.AStatus}" widgetVar="mnuAStat" id="mnuAStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Bank :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuBankName" id="mnuBankName" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.bankName}">
+								<p:ajax update="mnuBM" process="@this" event="change" listener="#{iclubFullQuoteController.bankNameValueChangeListener}" />
+								<f:selectItem itemLabel="Bank" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.bankNames}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Branch :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Branch" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.bmBranchName}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Owner Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubOwnerType}" widgetVar="mnuOT" id="mnuOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubFullQuoteController.ownerTypeBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Type :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubAccountType}" widgetVar="mnuAcType" id="mnuAcType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Type" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" value="#{iclubFullQuoteController.accountTypeBeans}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Debit Date :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubFullQuoteController.debitDate}" widgetVar="mnuDbtDt" id="mnuDbtDt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Debit Date" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.debitDates}" />
+							</p:selectOneMenu>
+							<p:selectOneMenu value="#{iclubFullQuoteController.debitMonth}" widgetVar="mnuDbtMt" id="mnuDbtMt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Debit Month" itemDisabled="true" />
+								<f:selectItems value="#{iclubFullQuoteController.debitMonths}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+				</p:tab>
+			</p:tabView>
+			<div class="EmptyBox20" />
+			<p:panel styleClass="Fnone TexAlCenter">
+				<p:commandButton update=":iclubFrm:grlMsg" value="Generate Quote" styleClass="Fs16" action="#{iclubFullQuoteController.saveFullQuoteDetails}" ajax="false" />
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

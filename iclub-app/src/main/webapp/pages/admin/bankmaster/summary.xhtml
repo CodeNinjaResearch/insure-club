@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmId}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Created By" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.iclubPerson}" />
+		</div>
+	</div>
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Bank Name" />
+		</div>
+		<div class="Container80 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBankName}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Bank Code" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBankCode}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Branch name" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBranchName}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Branch Code" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBranchCode}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Branch Address" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBranchAddress}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Zip Code" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBranchZip}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Latitude" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBranchLat}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Logitude" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmBranchLong}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Created Date" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubBankMasterController.bean.bmCrtdDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<p:commandButton id="btnBankMasterCloseSummary" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlBankMasterCont" value="Close" actionListener="#{iclubBankMasterController.showView}" />
+	</div>
+</ui:composition>

@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.tmId}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Created By :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.iclubPerson}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Created Date :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubTrackerMasterController.bean.tmCrtdDt}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Name :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubTrackerMasterController.bean.tmName}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Trade Name :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Trade Name" value="#{iclubTrackerMasterController.bean.tmTradeName}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Location" value="#{iclubTrackerMasterController.bean.tmLocation}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Latitude :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Latitude" value="#{iclubTrackerMasterController.bean.tmLat}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Longitude :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Longitude" value="#{iclubTrackerMasterController.bean.tmLong}" />
+		</div>
+		<div class="EmptyBox5" />
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Registration Number" value="#{iclubTrackerMasterController.bean.tmRegNum}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnTrackerMasterEditSave" icon="ui-icon-disk" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="Update" actionListener="#{iclubTrackerMasterController.modIclubTrackerMaster}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnTrackerMasterDelSave" icon="ui-icon-circle-close" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="Delete" actionListener="#{iclubTrackerMasterController.delIclubTrackerMaster}" />
+		</div>
+		<div class="Container33 Responsive">
+			<p:commandButton id="btnTrackerMasterCloseEdit" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlTrackerMasterCont" value="Close" actionListener="#{iclubTrackerMasterController.showView}" />
+		</div>
+	</div>
+</ui:composition>

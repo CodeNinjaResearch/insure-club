@@ -1,0 +1,25 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubTrackerMasterController.initializePage}" name="onload" autoRun="true" update="pnlTrackerMasterContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlTrackerMasterCont">
+				<p:panel id="pnlTrackerMasterContMenu">
+					<p:commandLink value="View TrackerMaster" actionListener="#{iclubTrackerMasterController.showView}" update="pnlTrackerMasterContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create TrackerMaster" actionListener="#{iclubTrackerMasterController.showCreate}" update="pnlTrackerMasterContDet" />
+				</p:panel>
+				<p:panel id="pnlTrackerMasterContDet">
+					<p:panel id="pnlTrackerMasterContView" rendered="#{iclubTrackerMasterController.showViewCont}">
+						<ui:include src="/pages/admin/trackermaster/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlTrackerMasterContCreate" rendered="#{iclubTrackerMasterController.showCreateCont}">
+						<ui:include src="/pages/admin/trackermaster/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlTrackerMasterContEdit" rendered="#{iclubTrackerMasterController.showEditCont}">
+						<ui:include src="/pages/admin/trackermaster/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/mdata/container.xhtml">
+	<ui:define name="mdata">
+		<div class="ContainerIndent">
+			<p:panel id="pnlVehSecTypeCont">
+				<p:dataTable widgetVar="dtVehSecTypeCont" value="#{iclubVehSecTypeController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Usage Found" reflow="true">
+					<f:facet name="footer">
+						<p:commandButton id="btnVehSecTypeShowAdd" value="Add" actionListener="#{iclubVehSecTypeController.showAddPanel}" update=":iclubFrm:pnlVehSecTypeCont" />
+					</f:facet>
+					<p:column headerText="Unique Id">
+						<p:outputLabel value="#{bean.vstId}" />
+					</p:column>
+					<p:column headerText="Short Description">
+						<p:outputLabel value="#{bean.vstShortDesc}" />
+					</p:column>
+					<p:column headerText="Long Description">
+						<p:outputLabel value="#{bean.vstLongDesc}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.vstStatus}" disabled="true">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnVehSecTypeEdit" icon="ui-icon-pencil" actionListener="#{iclubVehSecTypeController.showModPanel}" update=":iclubFrm:pnlVehSecTypeCont">
+							<f:setPropertyActionListener target="#{iclubVehSecTypeController.bean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:panel id="pnlAdd" rendered="#{iclubVehSecTypeController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubVehSecTypeController.bean.vstShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubVehSecTypeController.bean.vstLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehSecTypeController.bean.vstStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container50">
+								<p:commandButton id="btnVehSecTypeAddSave" value="Save" actionListener="#{iclubVehSecTypeController.addIclubVehSecType}" update="iclubFrm:grlMsg,:iclubFrm:pnlVehSecTypeCont" />
+							</div>
+							<div class="Container50">
+								<p:commandButton id="btnVehSecTypeAddClose" value="Close" actionListener="#{iclubVehSecTypeController.clearForm}" update=":iclubFrm:pnlVehSecTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlMod" rendered="#{iclubVehSecTypeController.showModPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container80 Responsive">
+							<p:outputLabel value="#{iclubVehSecTypeController.bean.vstId}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubVehSecTypeController.bean.vstShortDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubVehSecTypeController.bean.vstLongDesc}" />
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container80 Responsive">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubVehSecTypeController.bean.vstStatus}">
+								<f:selectItem itemLabel="Status" itemDisabled="true" />
+								<f:selectItem itemLabel="Yes" itemValue="Y" />
+								<f:selectItem itemLabel="No" itemValue="N" />
+							</p:selectOneMenu>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100">
+							<div class="Container33">
+								<p:commandButton id="btnVehSecTypeModSave" value="Save" actionListener="#{iclubVehSecTypeController.modIclubVehSecType}" update="iclubFrm:grlMsg,:iclubFrm:pnlVehSecTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnVehSecTypeModDelete" value="Delete" actionListener="#{iclubVehSecTypeController.delIclubVehSecType}" update="iclubFrm:grlMsg,:iclubFrm:pnlVehSecTypeCont" />
+							</div>
+							<div class="Container33">
+								<p:commandButton id="btnVehSecTypeModClose" value="Close" actionListener="#{iclubVehSecTypeController.clearForm}" update=":iclubFrm:pnlVehSecTypeCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

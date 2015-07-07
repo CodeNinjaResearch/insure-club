@@ -1,0 +1,67 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<p:panel id="qqPanel">
+			<f:facet name="header">
+				<p:outputLabel value="Claim Details"></p:outputLabel>
+			</f:facet>
+			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.paDashboardBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<p:column headerText="Number">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
+				</p:column>
+				<p:column headerText="Premium">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}" />
+				</p:column>
+				<p:column headerText="Pro-rata Premium">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PProrataPrm}" />
+				</p:column>
+				<p:column headerText="Debit Date">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PDebitDt}" />
+				</p:column>
+				<p:column headerText="Quote Id">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubQuote}" />
+				</p:column>
+				<p:column headerText="Created Date">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PCrtdDt}" />
+				</p:column>
+				<p:column headerText="View">
+					<p:commandButton value="View" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" action="#{iclubPolicyController.viewVehicleAction}">
+						<f:setPropertyActionListener target="#{iclubPolicyController.bean}" value="#{bean}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:panel id="pnlVehicleCont" rendered="#{iclubPolicyController.paVehicleFlag}">
+				<f:facet name="header">
+					<p:outputLabel value="Vehicle Details"></p:outputLabel>
+				</f:facet>
+				<p:dataTable reflow="true" widgetVar="dtVehicleCont" value="#{iclubPolicyController.vehicleBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Vehicle Available">
+					<p:column headerText="Registration Number">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VRegNum}" />
+					</p:column>
+					<p:column headerText="Dd Address">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VDdArea}" />
+					</p:column>
+					<p:column headerText="Dd Long">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VDdLong}" />
+					</p:column>
+					<p:column headerText="Dd Lat">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VDdLat}" />
+					</p:column>
+					<p:column headerText="On Address">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VOnArea}" />
+					</p:column>
+					<p:column headerText="On Long">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VOnLong}" />
+					</p:column>
+					<p:column headerText="On Lat">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.VOnLat}" />
+					</p:column>
+					<p:column>
+						<p:commandButton id="btnVehicleEdit" value="Assign" action="#{iclubPolicyController.assignAction}" update=":iclubFrm:grlMsg">
+							<f:setPropertyActionListener target="#{iclubPolicyController.vehicleBean}" value="#{bean}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</p:panel>
+	</ui:define>
+</ui:composition>

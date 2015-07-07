@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Configuration Key :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Configuration Key" value="#{iclubConfigController.bean.CKey}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Configuration Value :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:inputText styleClass="TexAlCenter" placeholder="Configuration Value" value="#{iclubConfigController.bean.CValue}" />
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:outputLabel styleClass="TexAlCenter" value="Status :" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubConfigController.bean.CStatus}">
+				<f:selectItem itemLabel="Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</div>
+	</div>
+	<div class="EmptyBox5" />
+	<div class="Container100 Responsive">
+		<div class="Container50 Responsive">
+			<p:commandButton id="btnConfigCreateSave" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" icon="ui-icon-disk" value="Save" actionListener="#{iclubConfigController.addIclubConfig}" />
+		</div>
+		<div class="Container50 Responsive">
+			<p:commandButton id="btnConfigCloseCreate" icon="ui-icon-arrowreturnthick-1-w" update=":iclubFrm:grlMsg, :iclubFrm:pnlConfigCont" value="Close" actionListener="#{iclubConfigController.showView}" />
+		</div>
+	</div>
+</ui:composition>

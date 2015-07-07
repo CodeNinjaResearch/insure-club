@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable reflow="true" widgetVar="dtFieldCont" value="#{iclubFieldController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Field Available">
+		<p:column headerText="Description">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.FDesc}" />
+		</p:column>
+		<p:column headerText="Name">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.FName}" />
+		</p:column>
+		<p:column headerText="Table Name">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.FLTblName}" />
+		</p:column>
+		<p:column headerText="Rate">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.FRate}">
+				<f:selectItem itemLabel="Rate" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</p:column>
+		<p:column headerText="Entity Id">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubEntityType}">
+				<f:selectItem itemLabel="Entity Id" itemDisabled="true" />
+				<f:selectItems value="#{iclubFieldController.entityTypeBeans}" var="c" itemLabel="#{c.etLongDesc}" itemValue="#{c.etId}" />
+			</p:selectOneMenu>
+		</p:column>
+		<p:column headerText="Status">
+			<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.FStatus}">
+				<f:selectItem itemLabel="Status" itemDisabled="true" />
+				<f:selectItem itemLabel="Yes" itemValue="Y" />
+				<f:selectItem itemLabel="No" itemValue="N" />
+			</p:selectOneMenu>
+		</p:column>
+		<p:column>
+			<p:commandButton id="btnFieldEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubFieldController.showEdit}" update=":iclubFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubFieldController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubFieldController.viewParam}" value="2" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>

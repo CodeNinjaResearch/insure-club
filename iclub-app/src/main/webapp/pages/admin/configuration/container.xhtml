@@ -1,0 +1,25 @@
+<ui:composition template="/pages/admin/master.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="master">
+		<p:remoteCommand actionListener="#{iclubConfigController.initializePage}" name="onload" autoRun="true" update="pnlConfigContDet" />
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlConfigCont">
+				<p:panel id="pnlConfigContMenu">
+					<p:commandLink value="View Config" actionListener="#{iclubConfigController.showView}" update="pnlConfigContDet" />
+					<p:graphicImage name="separator.png" library="images" />
+					<p:commandLink value="Create Config" actionListener="#{iclubConfigController.showCreate}" update="pnlConfigContDet" />
+				</p:panel>
+				<p:panel id="pnlConfigContDet">
+					<p:panel id="pnlConfigContView" styleClass="BordNone" rendered="#{iclubConfigController.showViewCont}">
+						<ui:include src="/pages/admin/configuration/view.xhtml" />
+					</p:panel>
+					<p:panel id="pnlConfigContCreate" styleClass="BordNone" rendered="#{iclubConfigController.showCreateCont}">
+						<ui:include src="/pages/admin/configuration/create.xhtml" />
+					</p:panel>
+					<p:panel id="pnlConfigContEdit" styleClass="BordNone" rendered="#{iclubConfigController.showEditCont}">
+						<ui:include src="/pages/admin/configuration/edit.xhtml" />
+					</p:panel>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

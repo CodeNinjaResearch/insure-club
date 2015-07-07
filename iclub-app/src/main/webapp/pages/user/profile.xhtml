@@ -1,0 +1,280 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<p:dialog id="documentUploadDialog" widgetVar="documentUploadDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Document Management</f:facet>
+			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubProfileController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubProfileController.docs.size() > 0}">
+				<p:panel style="text-align:center" header="#{bean.DName}">
+					<f:facet name="actions">
+						<p:commandButton ajax="false" actionListener="#{iclubProfileController.downloadDocument(bean.DId)}" icon="ui-icon-arrowthick-1-s">
+							<p:fileDownload value="#{iclubProfileController.file}" />
+						</p:commandButton>
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" actionListener="#{iclubProfileController.deleteDocument(bean.DId)}" icon="ui-icon-circle-close" />
+					</f:facet>
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentid']}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documenttype']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DContent}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentsizeinbytes']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DSize}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentcreatedDate']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DCrtdDt}" />
+						</p:column>
+					</p:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+			<p:panel id="documentUploadPanel">
+				<div class="Fnone TexAlCenter">
+					<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" fileUploadListener="#{iclubProfileController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(pdf|doc|docx|xls|xlsx|jpe?g)$/" value="#{labels['container.selectdocument']}" />
+				</div>
+			</p:panel>
+		</p:dialog>
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlProfileCont">
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Title :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubProfileController.bean.PTitle}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Initials :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Initials" value="#{iclubProfileController.bean.PInitials}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="First Name :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="First Name" value="#{iclubProfileController.bean.PFName}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Last Name  :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Last Name" value="#{iclubProfileController.bean.PLName}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Mobile :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Mobile" value="#{iclubProfileController.bean.PMobile}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Email :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Email" value="#{iclubProfileController.bean.PEmail}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Contact Reference" value="#{iclubProfileController.bean.PContactPref}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Gender :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuGender" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuGender.jq.removeClass('with-placeholder')" value="#{iclubProfileController.bean.PGender}">
+							<f:selectItem itemLabel="Gender" itemDisabled="true" />
+							<f:selectItem itemLabel="Male" itemValue="M" />
+							<f:selectItem itemLabel="Female" itemValue="F" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Maritial Stauts :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuMarS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubProfileController.bean.iclubMaritialStatus}">
+							<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msId}" value="#{iclubProfileController.maritialStatusBeans}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Id Type :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuIdType" id="mnuIdType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.bean.iclubIdType}">
+							<f:selectItem itemLabel="Id Type" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.itLongDesc}" itemValue="#{c.itId}" value="#{iclubProfileController.idTypeBeans}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Id Number :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Id Number" value="#{iclubProfileController.bean.PIdNum}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Issuer Country :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuIdIss" id="mnuIdIss" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.bean.PIdIssueCntry}">
+							<f:selectItem itemLabel="Issuer Country" itemDisabled="true" />
+							<f:selectItems value="#{iclubProfileController.countryCodeBeans}" var="c" itemLabel="#{c.ccName}" itemValue="#{c.ccId}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel value="Issue Date :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:calendar placeholder="Issue Date" value="#{iclubProfileController.bean.PIdIssueDt}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel value="Expiry Date :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:calendar placeholder="Expiry Date" value="#{iclubProfileController.bean.PIdExpiryDt}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Occupation :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuOcc" id="mnuOcc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.bean.POccupation}">
+							<f:selectItem itemLabel="Occupation" itemDisabled="true" />
+							<f:selectItems value="#{iclubProfileController.occupationBeans}" var="c" itemLabel="#{c.ODesc}" itemValue="#{c.OId}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:calendar placeholder="Date Of Birth" value="#{iclubProfileController.bean.PDob}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Pensioner :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuPen" id="mnuPen" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.bean.PIsPensioner}">
+							<f:selectItem itemLabel="Is Pensioner" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<p:panel id="pnlUpdatePwdCont">
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Password :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Password" value="#{iclubProfileController.loginBean.LPasswd}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Security Question :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu widgetVar="mnuSec" id="mnuSec" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubProfileController.loginBean.iclubSecurityQuestion}">
+								<f:selectItem itemLabel="Security Question" itemDisabled="true" />
+								<f:selectItems value="#{iclubProfileController.securityQuestionBeans}" var="c" itemLabel="#{c.sqLongDesc}" itemValue="#{c.sqId}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Security Answer :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Security Answer" value="#{iclubProfileController.loginBean.LSecAns}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<p:commandButton update=":iclubFrm:grlMsg,:iclubFrm:pnlProfileCont" styleClass="Fs16" value="Update Login" ajax="false" actionListener="#{iclubProfileController.updatePassword}" />
+					</div>
+				</p:panel>
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:commandButton update=":iclubFrm:pnlProfileCont,:iclubFrm:grlMsg" styleClass="Fs16" value="Update" ajax="false" action="#{iclubProfileController.updatedPerson}" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:commandButton id="btnPrfViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="View Docs" actionListener="#{iclubProfileController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+					</div>
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlMbCont">
+				<p:panel id="pnlAdd">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Title :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Title" value="#{iclubMessageBoardController.summeryBean.mbTitle}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Content :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Content" value="#{iclubMessageBoardController.summeryBean.mbContent}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Tags :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText styleClass="TexAlCenter" placeholder="Tags" value="#{iclubMessageBoardController.summeryBean.mbTag}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<p:commandButton id="btnMbAddSave" value="Add Comment" actionListener="#{iclubMessageBoardController.addIclubMessageBoard}" update=":iclubFrm:pnlMbCont" />
+						</div>
+					</div>
+				</p:panel>
+				<p:panel id="pnlViewMbCmt">
+					<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubMbCommentController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+						<f:facet name="footer">
+							<p:commandButton id="btnMbCommentShowAdd" value="Add Comment" actionListener="#{iclubMbCommentController.showAddPanel}" update=":iclubFrm:pnlMbCont" />
+						</f:facet>
+						<p:column headerText="Description">
+							<p:outputLabel value="#{bean.mbcDesc}" />
+						</p:column>
+						<p:column headerText="Created Date">
+							<p:outputLabel value="#{bean.mbcCrtdDt}" />
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+				<p:panel id="pnlAddMbc" rendered="#{iclubMbCommentController.showAddPanel}">
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Description :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="MbComment Desc" value="#{iclubMbCommentController.bean.mbcDesc}" styleClass="TexAlCenter" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:commandButton id="btnMbCommentAddSave" value="Save" actionListener="#{iclubMbCommentController.addIclubMbComment}" update=":iclubFrm:pnlMbCont,iclubFrm:grlMsg" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:commandButton id="btnMbCommentAddClose" value="Close" actionListener="#{iclubMbCommentController.clearForm}" update=":iclubFrm:pnlMbCont" />
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

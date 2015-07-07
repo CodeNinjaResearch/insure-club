@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:panel id="qqPanel">
+				<p:dataTable widgetVar="dtQuoteCont" value="#{iclubViewQuoteController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Quotes Available" reflow="true">
+					<p:column headerText="Quote Number">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QNumber}" />
+					</p:column>
+					<p:column headerText="Generation Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenDt}" />
+					</p:column>
+					<p:column headerText=" Prev Premium">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QPrevPremium}" />
+					</p:column>
+					<p:column headerText="ValidUntil">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QValidUntil}" />
+					</p:column>
+					<p:column headerText="Generated Premium">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenPremium}" />
+					</p:column>
+					<p:column headerText="Previous Premium">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QPrevPremium}" />
+					</p:column>
+					<p:column headerText="Previous Insurer">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubInsurerMaster}" />
+					</p:column>
+					<p:column headerText="Email">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QEmail}" />
+					</p:column>
+					<p:column headerText="Mobile">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QMobile}" />
+					</p:column>
+					<p:column headerText="Created Date">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QCrtdDt}" />
+					</p:column>
+					<p:column headerText="Status">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubQuoteStatus}" />
+					</p:column>
+					<p:column headerText="Full Quote">
+						<p:commandButton id="btnQuoteEdit" icon="ui-icon-pencil" action="#{iclubViewQuoteController.quoteActionListener(bean)}" />
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

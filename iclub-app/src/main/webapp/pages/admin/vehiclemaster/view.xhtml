@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:dataTable reflow="true" widgetVar="dtVehicleMasterCont" value="#{iclubVehicleMasterController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No VehicleMasteres Available">
+		<p:column headerText="Make">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMake}" />
+		</p:column>
+		<p:column headerText="Model">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmModel}" />
+		</p:column>
+		<p:column headerText="Orginal Rate">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmOrigRate}" />
+		</p:column>
+		<p:column headerText="Market Rate">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMrktRate}" />
+		</p:column>
+		<p:column headerText="Retail Rate">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRetRate}" />
+		</p:column>
+		<p:column headerText="Production Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmProdDt}" />
+		</p:column>
+		<p:column headerText="Rate Percentage">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRatePrct}" />
+		</p:column>
+		<p:column headerText="Created Date">
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmCrtdDt}" />
+		</p:column>
+		<p:column>
+			<p:commandButton id="btnVehicleMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubVehicleMasterController.showSummary}" update=":vehiclemasterFrm:grlMsg">
+				<f:setPropertyActionListener target="#{iclubVehicleMasterController.bean}" value="#{bean}" />
+				<f:setPropertyActionListener target="#{iclubVehicleMasterController.viewParam}" value="3" />
+			</p:commandButton>
+		</p:column>
+	</p:dataTable>
+</ui:composition>
