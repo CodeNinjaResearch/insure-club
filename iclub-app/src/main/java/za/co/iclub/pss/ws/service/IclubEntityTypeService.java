@@ -17,14 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubDocument;
+import za.co.iclub.pss.model.ws.IclubEntityTypeModel;
 import za.co.iclub.pss.orm.bean.IclubEntityType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
-import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
+import za.co.iclub.pss.trans.IclubEntityTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubEntityTypeService")
@@ -45,13 +45,10 @@ public class IclubEntityTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubEntityTypeModel model) {
 		try {
-			IclubEntityType iCEt = new IclubEntityType();
+			IclubEntityType iCEt = IclubEntityTypeTrans.fromWStoORM(model);
 			
 			iCEt.setEtId(iclubCommonDAO.getNextId(IclubEntityType.class));
-			iCEt.setEtLongDesc(model.getEtLongDesc());
-			iCEt.setEtShortDesc(model.getEtShortDesc());
-			iCEt.setEtStatus(model.getEtStatus());
-			iCEt.setEtTblNm(model.getEtTblNm());
+			
 			iclubEntityTypeDAO.save(iCEt);
 			
 			LOGGER.info("Save Success with ID :: " + iCEt.getEtId());
@@ -77,13 +74,7 @@ public class IclubEntityTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubEntityTypeModel model) {
 		try {
-			IclubEntityType iCEt = new IclubEntityType();
-			
-			iCEt.setEtId(model.getEtId());
-			iCEt.setEtLongDesc(model.getEtLongDesc());
-			iCEt.setEtShortDesc(model.getEtShortDesc());
-			iCEt.setEtStatus(model.getEtStatus());
-			iCEt.setEtTblNm(model.getEtTblNm());
+			IclubEntityType iCEt = IclubEntityTypeTrans.fromWStoORM(model);
 			
 			iclubEntityTypeDAO.merge(iCEt);
 			
@@ -129,25 +120,9 @@ public class IclubEntityTypeService {
 			List batmod = iclubEntityTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubEntityType iCEt = (IclubEntityType) object;
+					IclubEntityType bean = (IclubEntityType) object;
 					
-					IclubEntityTypeModel model = new IclubEntityTypeModel();
-					
-					model.setEtId(iCEt.getEtId());
-					model.setEtLongDesc(iCEt.getEtLongDesc());
-					model.setEtShortDesc(iCEt.getEtShortDesc());
-					model.setEtStatus(iCEt.getEtStatus());
-					model.setEtTblNm(iCEt.getEtTblNm());
-					
-					if (iCEt.getIclubDocuments() != null && iCEt.getIclubDocuments().size() > 0) {
-						String[] documents = new String[iCEt.getIclubDocuments().size()];
-						int i = 0;
-						for (IclubDocument iclubDocument : iCEt.getIclubDocuments()) {
-							documents[i] = iclubDocument.getDId();
-							i++;
-						}
-						model.setIclubDocuments(documents);
-					}
+					IclubEntityTypeModel model = IclubEntityTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -194,21 +169,7 @@ public class IclubEntityTypeService {
 		try {
 			IclubEntityType bean = iclubEntityTypeDAO.findById(id);
 			
-			model.setEtId(bean.getEtId());
-			model.setEtLongDesc(bean.getEtLongDesc());
-			model.setEtShortDesc(bean.getEtShortDesc());
-			model.setEtStatus(bean.getEtStatus());
-			model.setEtTblNm(bean.getEtTblNm());
-			
-			if (bean.getIclubDocuments() != null && bean.getIclubDocuments().size() > 0) {
-				String[] documents = new String[bean.getIclubDocuments().size()];
-				int i = 0;
-				for (IclubDocument iclubDocument : bean.getIclubDocuments()) {
-					documents[i] = iclubDocument.getDId();
-					i++;
-				}
-				model.setIclubDocuments(documents);
-			}
+			model = IclubEntityTypeTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

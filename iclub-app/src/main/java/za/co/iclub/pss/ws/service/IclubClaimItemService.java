@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubClaimItemModel;
 import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.dao.IclubClaimDAO;
 import za.co.iclub.pss.orm.dao.IclubClaimItemDAO;
@@ -25,7 +26,7 @@ import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
-import za.co.iclub.pss.ws.model.IclubClaimItemModel;
+import za.co.iclub.pss.trans.IclubClaimItemTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubClaimItemService")
@@ -48,17 +49,7 @@ public class IclubClaimItemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubClaimItemModel model) {
 		try {
-			IclubClaimItem iCCI = new IclubClaimItem();
-			
-			iCCI.setCiId(model.getCiId());
-			iCCI.setCiCrtdBy(model.getCiCrtdBy());
-			iCCI.setCiCrtdDt(model.getCiCrtdDt());
-			iCCI.setCiValue(model.getCiValue());
-			iCCI.setIclubSupplMasterByCiHandlerId(model.getIclubSupplMasterByCiHandlerId() != null && !model.getIclubSupplMasterByCiHandlerId().trim().equalsIgnoreCase("") ? iclubSupplMasterDAO.findById(model.getIclubSupplMasterByCiHandlerId()) : null);
-			iCCI.setIclubInsuranceItem(model.getIclubInsuranceItem() != null && !model.getIclubInsuranceItem().trim().equalsIgnoreCase("") ? iclubInsuranceItemDAO.findById(model.getIclubInsuranceItem()) : null);
-			iCCI.setIclubSupplMasterByCiAssesorId(model.getIclubSupplMasterByCiAssesorId() != null && !model.getIclubSupplMasterByCiAssesorId().trim().equalsIgnoreCase("") ? iclubSupplMasterDAO.findById(model.getIclubSupplMasterByCiAssesorId()) : null);
-			iCCI.setIclubClaim(model.getIclubClaim() != null && !model.getIclubClaim().trim().equalsIgnoreCase("") ? iclubClaimDAO.findById(model.getIclubClaim()) : null);
-			iCCI.setIclubClaimStatus(model.getIclubClaimStatus() != null ? iclubClaimStatusDAO.findById(model.getIclubClaimStatus()) : null);
+			IclubClaimItem iCCI = IclubClaimItemTrans.fromWStoORM(model, iclubClaimStatusDAO, iclubClaimDAO, iclubInsuranceItemDAO, iclubSupplMasterDAO);
 			
 			iclubClaimItemDAO.save(iCCI);
 			
@@ -85,18 +76,7 @@ public class IclubClaimItemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubClaimItemModel model) {
 		try {
-			IclubClaimItem iCCI = new IclubClaimItem();
-			
-			iCCI.setCiId(model.getCiId());
-			iCCI.setCiCrtdBy(model.getCiCrtdBy());
-			iCCI.setCiCrtdDt(model.getCiCrtdDt());
-			iCCI.setCiValue(model.getCiValue());
-			iCCI.setIclubSupplMasterByCiHandlerId(model.getIclubSupplMasterByCiHandlerId() != null && !model.getIclubSupplMasterByCiHandlerId().trim().equalsIgnoreCase("") ? iclubSupplMasterDAO.findById(model.getIclubSupplMasterByCiHandlerId()) : null);
-			iCCI.setIclubInsuranceItem(model.getIclubInsuranceItem() != null && !model.getIclubInsuranceItem().trim().equalsIgnoreCase("") ? iclubInsuranceItemDAO.findById(model.getIclubInsuranceItem()) : null);
-			iCCI.setIclubSupplMasterByCiAssesorId(model.getIclubSupplMasterByCiAssesorId() != null && !model.getIclubSupplMasterByCiAssesorId().trim().equalsIgnoreCase("") ? iclubSupplMasterDAO.findById(model.getIclubSupplMasterByCiAssesorId()) : null);
-			iCCI.setIclubClaim(model.getIclubClaim() != null && !model.getIclubClaim().trim().equalsIgnoreCase("") ? iclubClaimDAO.findById(model.getIclubClaim()) : null);
-			iCCI.setIclubClaimStatus(model.getIclubClaimStatus() != null ? iclubClaimStatusDAO.findById(model.getIclubClaimStatus()) : null);
-			
+			IclubClaimItem iCCI = IclubClaimItemTrans.fromWStoORM(model, iclubClaimStatusDAO, iclubClaimDAO, iclubInsuranceItemDAO, iclubSupplMasterDAO);
 			iclubClaimItemDAO.merge(iCCI);
 			
 			LOGGER.info("Merge Success with ID :: " + model.getCiId());
@@ -141,20 +121,9 @@ public class IclubClaimItemService {
 			List batmod = iclubClaimItemDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubClaimItem iCCI = (IclubClaimItem) object;
+					IclubClaimItem bean = (IclubClaimItem) object;
 					
-					IclubClaimItemModel model = new IclubClaimItemModel();
-					
-					model.setCiId(iCCI.getCiId());
-					model.setCiCrtdBy(iCCI.getCiCrtdBy());
-					model.setCiCrtdDt(iCCI.getCiCrtdDt());
-					model.setCiValue(iCCI.getCiValue());
-					model.setIclubClaimStatus(iCCI.getIclubClaimStatus() != null ? (iCCI.getIclubClaimStatus().getCsId()) : null);
-					model.setIclubClaim(iCCI.getIclubClaim() != null ? (iCCI.getIclubClaim().getCId()) : null);
-					model.setIclubSupplMasterByCiAssesorId(iCCI.getIclubSupplMasterByCiAssesorId() != null ? (iCCI.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
-					model.setIclubInsuranceItem(iCCI.getIclubInsuranceItem() != null ? (iCCI.getIclubInsuranceItem().getIiId()) : null);
-					model.setIclubSupplMasterByCiHandlerId(iCCI.getIclubSupplMasterByCiHandlerId() != null ? (iCCI.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
-					
+					IclubClaimItemModel model = IclubClaimItemTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
 			}
@@ -176,19 +145,9 @@ public class IclubClaimItemService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubClaimItem.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubClaimItem iCCI = (IclubClaimItem) object;
+					IclubClaimItem bean = (IclubClaimItem) object;
 					
-					IclubClaimItemModel model = new IclubClaimItemModel();
-					
-					model.setCiId(iCCI.getCiId());
-					model.setCiCrtdBy(iCCI.getCiCrtdBy());
-					model.setCiCrtdDt(iCCI.getCiCrtdDt());
-					model.setCiValue(iCCI.getCiValue());
-					model.setIclubClaimStatus(iCCI.getIclubClaimStatus() != null ? (iCCI.getIclubClaimStatus().getCsId()) : null);
-					model.setIclubClaim(iCCI.getIclubClaim() != null ? (iCCI.getIclubClaim().getCId()) : null);
-					model.setIclubSupplMasterByCiAssesorId(iCCI.getIclubSupplMasterByCiAssesorId() != null ? (iCCI.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
-					model.setIclubInsuranceItem(iCCI.getIclubInsuranceItem() != null ? (iCCI.getIclubInsuranceItem().getIiId()) : null);
-					model.setIclubSupplMasterByCiHandlerId(iCCI.getIclubSupplMasterByCiHandlerId() != null ? (iCCI.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
+					IclubClaimItemModel model = IclubClaimItemTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -209,15 +168,7 @@ public class IclubClaimItemService {
 		try {
 			IclubClaimItem bean = iclubClaimItemDAO.findById(id);
 			
-			model.setCiId(bean.getCiId());
-			model.setCiCrtdBy(bean.getCiCrtdBy());
-			model.setCiCrtdDt(bean.getCiCrtdDt());
-			model.setCiValue(bean.getCiValue());
-			model.setIclubClaimStatus(bean.getIclubClaimStatus() != null ? (bean.getIclubClaimStatus().getCsId()) : null);
-			model.setIclubClaim(bean.getIclubClaim() != null ? (bean.getIclubClaim().getCId()) : null);
-			model.setIclubSupplMasterByCiAssesorId(bean.getIclubSupplMasterByCiAssesorId() != null ? (bean.getIclubSupplMasterByCiAssesorId().getSmId()) : null);
-			model.setIclubInsuranceItem(bean.getIclubInsuranceItem() != null ? (bean.getIclubInsuranceItem().getIiId()) : null);
-			model.setIclubSupplMasterByCiHandlerId(bean.getIclubSupplMasterByCiHandlerId() != null ? (bean.getIclubSupplMasterByCiHandlerId().getSmId()) : null);
+			model = IclubClaimItemTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

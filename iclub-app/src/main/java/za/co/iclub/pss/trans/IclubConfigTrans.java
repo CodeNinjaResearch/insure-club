@@ -1,7 +1,5 @@
 package za.co.iclub.pss.trans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import za.co.iclub.pss.model.ui.IclubConfigBean;
 import za.co.iclub.pss.model.ws.IclubConfigModel;
 import za.co.iclub.pss.orm.bean.IclubConfig;

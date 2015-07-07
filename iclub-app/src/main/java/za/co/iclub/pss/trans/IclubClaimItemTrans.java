@@ -6,7 +6,6 @@ import za.co.iclub.pss.orm.bean.IclubClaimItem;
 import za.co.iclub.pss.orm.dao.IclubClaimDAO;
 import za.co.iclub.pss.orm.dao.IclubClaimStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemDAO;
-import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 
 public class IclubClaimItemTrans {
@@ -77,7 +76,7 @@ public class IclubClaimItemTrans {
 		return model;
 	}
 	
-	public static IclubClaimItem fromWStoORM(IclubClaimItemModel model, IclubPersonDAO iclubPersonDAO, IclubClaimStatusDAO iclubClaimStatusDAO, IclubClaimDAO iclubClaimDAO, IclubInsuranceItemDAO iclubInsuranceItemDAO, IclubSupplMasterDAO iclubSupplMasterDAO) {
+	public static IclubClaimItem fromWStoORM(IclubClaimItemModel model, IclubClaimStatusDAO iclubClaimStatusDAO, IclubClaimDAO iclubClaimDAO, IclubInsuranceItemDAO iclubInsuranceItemDAO, IclubSupplMasterDAO iclubSupplMasterDAO) {
 		
 		IclubClaimItem bean = new IclubClaimItem();
 		bean.setCiId(model.getCiId());

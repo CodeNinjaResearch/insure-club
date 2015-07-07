@@ -16,22 +16,23 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubBoundaryTypeModel;
 import za.co.iclub.pss.orm.bean.IclubBoundaryType;
 import za.co.iclub.pss.orm.dao.IclubBoundaryTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
-import za.co.iclub.pss.ws.model.IclubBoundaryTypeModel;
+import za.co.iclub.pss.trans.IclubBoundaryTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubBoundaryTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubBoundaryTypeService {
-
+	
 	private static final Logger LOGGER = Logger.getLogger(IclubBoundaryTypeService.class);
 	private IclubBoundaryTypeDAO iclubBoundaryTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -39,23 +40,20 @@ public class IclubBoundaryTypeService {
 	@Transactional
 	public ResponseModel add(IclubBoundaryTypeModel model) {
 		try {
-
-			IclubBoundaryType bouType = new IclubBoundaryType();
-
+			
+			IclubBoundaryType bouType = IclubBoundaryTypeTrans.fromWStoORM(model);
+			
 			bouType.setBtId(iclubCommonDAO.getNextId(IclubBoundaryType.class));
-			bouType.setBtLongDesc(model.getBtLongDesc());
-			bouType.setBtShortDesc(model.getBtShortDesc());
-			bouType.setBtStatus(model.getBtStatus());
-
+			
 			iclubBoundaryTypeDAO.save(bouType);
-
+			
 			LOGGER.info("Save Success with ID :: " + bouType.getBtId().longValue());
-
+			
 			ResponseModel message = new ResponseModel();
-
+			
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-
+			
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -64,9 +62,9 @@ public class IclubBoundaryTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -74,17 +72,12 @@ public class IclubBoundaryTypeService {
 	@Transactional
 	public ResponseModel mod(IclubBoundaryTypeModel model) {
 		try {
-			IclubBoundaryType bouType = new IclubBoundaryType();
-
-			bouType.setBtId(model.getBtId());
-			bouType.setBtLongDesc(model.getBtLongDesc());
-			bouType.setBtShortDesc(model.getBtShortDesc());
-			bouType.setBtStatus(model.getBtStatus());
-
+			IclubBoundaryType bouType = IclubBoundaryTypeTrans.fromWStoORM(model);
+			
 			iclubBoundaryTypeDAO.merge(bouType);
-
+			
 			LOGGER.info("Save Success with ID :: " + model.getBtId().longValue());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -96,9 +89,9 @@ public class IclubBoundaryTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -113,7 +106,7 @@ public class IclubBoundaryTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes("application/json")
@@ -121,7 +114,7 @@ public class IclubBoundaryTypeService {
 	@Transactional
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-
+			
 			List data = iclubNamedQueryDAO.getBySD(val, id, IclubBoundaryType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if (data != null && data.size() > 0) {
@@ -139,38 +132,33 @@ public class IclubBoundaryTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubBoundaryTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubBoundaryTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubBoundaryType iclubBoutype = (IclubBoundaryType) object;
-					IclubBoundaryTypeModel iCB = new IclubBoundaryTypeModel();
-
-					iCB.setBtId(iclubBoutype.getBtId().longValue());
-					iCB.setBtLongDesc(iclubBoutype.getBtLongDesc());
-					iCB.setBtShortDesc(iclubBoutype.getBtShortDesc());
-					iCB.setBtStatus(iclubBoutype.getBtStatus());
-
+					IclubBoundaryType bean = (IclubBoundaryType) object;
+					IclubBoundaryTypeModel iCB = IclubBoundaryTypeTrans.fromORMtoWS(bean);
+					
 					ret.add((T) iCB);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -179,40 +167,37 @@ public class IclubBoundaryTypeService {
 		IclubBoundaryTypeModel model = new IclubBoundaryTypeModel();
 		try {
 			IclubBoundaryType bean = iclubBoundaryTypeDAO.findById(id);
-
-			model.setBtId(bean.getBtId().longValue());
-			model.setBtLongDesc(bean.getBtLongDesc());
-			model.setBtShortDesc(bean.getBtShortDesc());
-			model.setBtStatus(bean.getBtStatus());
-
+			
+			model = IclubBoundaryTypeTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	public IclubBoundaryTypeDAO getIclubBoundaryTypeDAO() {
 		return iclubBoundaryTypeDAO;
 	}
-
+	
 	public void setIclubBoundaryTypeDAO(IclubBoundaryTypeDAO iclubBoundaryTypeDAO) {
 		this.iclubBoundaryTypeDAO = iclubBoundaryTypeDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 }

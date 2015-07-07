@@ -18,11 +18,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.model.ws.IclubBankMasterModel;
-import za.co.iclub.pss.orm.bean.IclubAccount;
 import za.co.iclub.pss.orm.bean.IclubBankMaster;
 import za.co.iclub.pss.orm.dao.IclubBankMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
+import za.co.iclub.pss.orm.dao.IclubPersonDAO;
+import za.co.iclub.pss.trans.IclubBankMasterTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubBankMasterService")
@@ -33,6 +34,7 @@ public class IclubBankMasterService {
 	private IclubBankMasterDAO iclubBankMasterDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
+	private IclubPersonDAO iclubPersonDAO;
 	
 	@POST
 	@Path("/add")
@@ -42,18 +44,9 @@ public class IclubBankMasterService {
 	public ResponseModel add(IclubBankMasterModel model) {
 		try {
 			
-			IclubBankMaster iCBm = new IclubBankMaster();
+			IclubBankMaster iCBm = IclubBankMasterTrans.fromWStoORM(model, iclubPersonDAO);
 			
 			iCBm.setBmId(iclubCommonDAO.getNextId(IclubBankMaster.class));
-			iCBm.setBmBankName(model.getBmBankName());
-			iCBm.setBmBankCode(model.getBmBankCode());
-			iCBm.setBmBranchName(model.getBmBranchName());
-			iCBm.setBmBranchCode(model.getBmBranchCode());
-			iCBm.setBmBranchAddress(model.getBmBranchAddress());
-			iCBm.setBmBranchLat(model.getBmBranchLat());
-			iCBm.setBmBranchLong(model.getBmBranchLong());
-			iCBm.setBmCrtdDt(model.getBmCrtdDt());
-			iCBm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 			
 			iclubBankMasterDAO.save(iCBm);
 			
@@ -82,18 +75,7 @@ public class IclubBankMasterService {
 	@Transactional
 	public ResponseModel mod(IclubBankMasterModel model) {
 		try {
-			IclubBankMaster iCBm = new IclubBankMaster();
-			
-			iCBm.setBmId(model.getBmId());
-			iCBm.setBmBankName(model.getBmBankName());
-			iCBm.setBmBankCode(model.getBmBankCode());
-			iCBm.setBmBranchName(model.getBmBranchName());
-			iCBm.setBmBranchCode(model.getBmBranchCode());
-			iCBm.setBmBranchAddress(model.getBmBranchAddress());
-			iCBm.setBmBranchLat(model.getBmBranchLat());
-			iCBm.setBmBranchLong(model.getBmBranchLong());
-			iCBm.setBmCrtdDt(model.getBmCrtdDt());
-			iCBm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			IclubBankMaster iCBm = IclubBankMasterTrans.fromWStoORM(model, iclubPersonDAO);
 			
 			iclubBankMasterDAO.merge(iCBm);
 			
@@ -139,29 +121,8 @@ public class IclubBankMasterService {
 			List batmod = iclubBankMasterDAO.findAll();
 			
 			for (Object object : batmod) {
-				IclubBankMaster iclubBMaster = (IclubBankMaster) object;
-				IclubBankMasterModel iCBm = new IclubBankMasterModel();
-				
-				iCBm.setBmId(iclubBMaster.getBmId());
-				iCBm.setBmBankName(iclubBMaster.getBmBankName());
-				iCBm.setBmBankCode(iclubBMaster.getBmBankCode());
-				iCBm.setBmBranchName(iclubBMaster.getBmBranchName());
-				iCBm.setBmBranchCode(iclubBMaster.getBmBranchCode());
-				iCBm.setBmBranchAddress(iclubBMaster.getBmBranchAddress());
-				iCBm.setBmBranchLat(iclubBMaster.getBmBranchLat());
-				iCBm.setBmBranchLong(iclubBMaster.getBmBranchLong());
-				iCBm.setBmCrtdDt(iclubBMaster.getBmCrtdDt());
-				iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
-				if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
-					
-					String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
-					
-					int i = 0;
-					for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
-						accounts[i] = account.getAId();
-					}
-					iCBm.setIclubAccounts(accounts);
-				}
+				IclubBankMaster bean = (IclubBankMaster) object;
+				IclubBankMasterModel iCBm = IclubBankMasterTrans.fromORMtoWS(bean);
 				
 				ret.add((T) iCBm);
 			}
@@ -203,29 +164,8 @@ public class IclubBankMasterService {
 			List batmod = iclubNamedQueryDAO.getIclubBankMastersByBankName(bankName);
 			
 			for (Object object : batmod) {
-				IclubBankMaster iclubBMaster = (IclubBankMaster) object;
-				IclubBankMasterModel iCBm = new IclubBankMasterModel();
-				
-				iCBm.setBmId(iclubBMaster.getBmId());
-				iCBm.setBmBankName(iclubBMaster.getBmBankName());
-				iCBm.setBmBankCode(iclubBMaster.getBmBankCode());
-				iCBm.setBmBranchName(iclubBMaster.getBmBranchName());
-				iCBm.setBmBranchCode(iclubBMaster.getBmBranchCode());
-				iCBm.setBmBranchAddress(iclubBMaster.getBmBranchAddress());
-				iCBm.setBmBranchLat(iclubBMaster.getBmBranchLat());
-				iCBm.setBmBranchLong(iclubBMaster.getBmBranchLong());
-				iCBm.setBmCrtdDt(iclubBMaster.getBmCrtdDt());
-				iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
-				if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
-					
-					String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
-					
-					int i = 0;
-					for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
-						accounts[i] = account.getAId();
-					}
-					iCBm.setIclubAccounts(accounts);
-				}
+				IclubBankMaster bean = (IclubBankMaster) object;
+				IclubBankMasterModel iCBm = IclubBankMasterTrans.fromORMtoWS(bean);
 				
 				ret.add((T) iCBm);
 			}
@@ -246,29 +186,8 @@ public class IclubBankMasterService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubBankMaster.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubBankMaster iclubBMaster = (IclubBankMaster) object;
-					IclubBankMasterModel iCBm = new IclubBankMasterModel();
-					
-					iCBm.setBmId(iclubBMaster.getBmId());
-					iCBm.setBmBankName(iclubBMaster.getBmBankName());
-					iCBm.setBmBankCode(iclubBMaster.getBmBankCode());
-					iCBm.setBmBranchName(iclubBMaster.getBmBranchName());
-					iCBm.setBmBranchCode(iclubBMaster.getBmBranchCode());
-					iCBm.setBmBranchAddress(iclubBMaster.getBmBranchAddress());
-					iCBm.setBmBranchLat(iclubBMaster.getBmBranchLat());
-					iCBm.setBmBranchLong(iclubBMaster.getBmBranchLong());
-					iCBm.setBmCrtdDt(iclubBMaster.getBmCrtdDt());
-					iCBm.setIclubPerson(iclubBMaster.getIclubPerson() != null ? iclubBMaster.getIclubPerson().getPId() : null);
-					if (iclubBMaster.getIclubAccounts() != null && iclubBMaster.getIclubAccounts().size() > 0) {
-						
-						String[] accounts = new String[iclubBMaster.getIclubAccounts().size()];
-						
-						int i = 0;
-						for (IclubAccount account : iclubBMaster.getIclubAccounts()) {
-							accounts[i] = account.getAId();
-						}
-						iCBm.setIclubAccounts(accounts);
-					}
+					IclubBankMaster bean = (IclubBankMaster) object;
+					IclubBankMasterModel iCBm = IclubBankMasterTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCBm);
 				}
@@ -288,26 +207,7 @@ public class IclubBankMasterService {
 		try {
 			IclubBankMaster bean = iclubBankMasterDAO.findById(id);
 			
-			model.setBmId(bean.getBmId());
-			model.setBmBankName(bean.getBmBankName());
-			model.setBmBankCode(bean.getBmBankCode());
-			model.setBmBranchName(bean.getBmBranchName());
-			model.setBmBranchCode(bean.getBmBranchCode());
-			model.setBmBranchAddress(bean.getBmBranchAddress());
-			model.setBmBranchLat(bean.getBmBranchLat());
-			model.setBmBranchLong(bean.getBmBranchLong());
-			model.setBmCrtdDt(bean.getBmCrtdDt());
-			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			if (bean.getIclubAccounts() != null && bean.getIclubAccounts().size() > 0) {
-				
-				String[] accounts = new String[bean.getIclubAccounts().size()];
-				
-				int i = 0;
-				for (IclubAccount account : bean.getIclubAccounts()) {
-					accounts[i] = account.getAId();
-				}
-				model.setIclubAccounts(accounts);
-			}
+			model = IclubBankMasterTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -337,6 +237,14 @@ public class IclubBankMasterService {
 	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+	
+	public IclubPersonDAO getIclubPersonDAO() {
+		return iclubPersonDAO;
+	}
+	
+	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
+		this.iclubPersonDAO = iclubPersonDAO;
 	}
 	
 }

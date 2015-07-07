@@ -18,12 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.model.ws.IclubAccessTypeModel;
 import za.co.iclub.pss.orm.bean.IclubAccessType;
-import za.co.iclub.pss.orm.bean.IclubDriver;
-import za.co.iclub.pss.orm.bean.IclubProperty;
-import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
+import za.co.iclub.pss.trans.IclubAccessTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubAccessTypeService")
@@ -43,12 +41,9 @@ public class IclubAccessTypeService {
 	public ResponseModel add(IclubAccessTypeModel model) {
 		try {
 			
-			IclubAccessType acctype = new IclubAccessType();
+			IclubAccessType acctype = IclubAccessTypeTrans.fromWStoORM(model);
 			
 			acctype.setAtId(iclubCommonDAO.getNextId(IclubAccessType.class));
-			acctype.setAtLongDesc(model.getAtLongDesc());
-			acctype.setAtShortDesc(model.getAtShortDesc());
-			acctype.setAtStatus(model.getAtStatus());
 			
 			iclubAccessTypeDAO.save(acctype);
 			
@@ -77,12 +72,7 @@ public class IclubAccessTypeService {
 	@Transactional
 	public ResponseModel mod(IclubAccessTypeModel model) {
 		try {
-			IclubAccessType acctype = new IclubAccessType();
-			
-			acctype.setAtId(model.getAtId());
-			acctype.setAtLongDesc(model.getAtLongDesc());
-			acctype.setAtShortDesc(model.getAtShortDesc());
-			acctype.setAtStatus(model.getAtStatus());
+			IclubAccessType acctype = IclubAccessTypeTrans.fromWStoORM(model);
 			
 			iclubAccessTypeDAO.merge(acctype);
 			
@@ -156,62 +146,8 @@ public class IclubAccessTypeService {
 			
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubAccessType iclubAtype = (IclubAccessType) object;
-					IclubAccessTypeModel iCB = new IclubAccessTypeModel();
-					
-					iCB.setAtId(iclubAtype.getAtId().longValue());
-					iCB.setAtLongDesc(iclubAtype.getAtLongDesc());
-					iCB.setAtShortDesc(iclubAtype.getAtShortDesc());
-					iCB.setAtStatus(iclubAtype.getAtStatus());
-					
-					if (iclubAtype.getIclubVehiclesForVOnAccessTypeId() != null && iclubAtype.getIclubVehiclesForVOnAccessTypeId().size() > 0) {
-						String[] vehiclesForVOnAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVOnAccessTypeId().size()];
-						int i = 0;
-						for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVOnAccessTypeId()) {
-							vehiclesForVOnAccessTypeIds[i] = vehicle.getVId();
-							i++;
-						}
-						iCB.setIclubVehiclesForVOnAccessTypeId(vehiclesForVOnAccessTypeIds);
-					}
-					
-					if (iclubAtype.getIclubVehiclesForVDdAccessTypeId() != null && iclubAtype.getIclubVehiclesForVDdAccessTypeId().size() > 0) {
-						String[] vehiclesForVDdAccessTypeIds = new String[iclubAtype.getIclubVehiclesForVDdAccessTypeId().size()];
-						int i = 0;
-						for (IclubVehicle vehicle : iclubAtype.getIclubVehiclesForVDdAccessTypeId()) {
-							vehiclesForVDdAccessTypeIds[i] = vehicle.getVId();
-							i++;
-						}
-						iCB.setIclubVehiclesForVDdAccessTypeId(vehiclesForVDdAccessTypeIds);
-					}
-					
-					if (iclubAtype.getIclubDriversForDAccessStatusId() != null && iclubAtype.getIclubDriversForDAccessStatusId().size() > 0) {
-						String[] drivers = new String[iclubAtype.getIclubDriversForDAccessStatusId().size()];
-						int i = 0;
-						for (IclubDriver driver : iclubAtype.getIclubDriversForDAccessStatusId()) {
-							drivers[i] = driver.getDId();
-							i++;
-						}
-						iCB.setIclubDriversForDAccessStatusId(drivers);
-					}
-					if (iclubAtype.getIclubDriversForDAccessTypeId() != null && iclubAtype.getIclubDriversForDAccessTypeId().size() > 0) {
-						String[] drivers = new String[iclubAtype.getIclubDriversForDAccessTypeId().size()];
-						int i = 0;
-						for (IclubDriver driver : iclubAtype.getIclubDriversForDAccessTypeId()) {
-							drivers[i] = driver.getDId();
-							i++;
-						}
-						iCB.setIclubDriversForDAccessTypeId(drivers);
-					}
-					
-					if (iclubAtype.getIclubProperties() != null && iclubAtype.getIclubProperties().size() > 0) {
-						String[] properties = new String[iclubAtype.getIclubProperties().size()];
-						int i = 0;
-						for (IclubProperty property : iclubAtype.getIclubProperties()) {
-							properties[i] = property.getPId();
-							i++;
-						}
-						iCB.setIclubProperties(properties);
-					}
+					IclubAccessType bean = (IclubAccessType) object;
+					IclubAccessTypeModel iCB = IclubAccessTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCB);
 				}
@@ -232,59 +168,7 @@ public class IclubAccessTypeService {
 		try {
 			IclubAccessType bean = iclubAccessTypeDAO.findById(id);
 			
-			model.setAtId(bean.getAtId().longValue());
-			model.setAtLongDesc(bean.getAtLongDesc());
-			model.setAtShortDesc(bean.getAtShortDesc());
-			model.setAtStatus(bean.getAtStatus());
-			
-			if (bean.getIclubVehiclesForVOnAccessTypeId() != null && bean.getIclubVehiclesForVOnAccessTypeId().size() > 0) {
-				String[] vehiclesForVOnAccessTypeIds = new String[bean.getIclubVehiclesForVOnAccessTypeId().size()];
-				int i = 0;
-				for (IclubVehicle vehicle : bean.getIclubVehiclesForVOnAccessTypeId()) {
-					vehiclesForVOnAccessTypeIds[i] = vehicle.getVId();
-					i++;
-				}
-				model.setIclubVehiclesForVOnAccessTypeId(vehiclesForVOnAccessTypeIds);
-			}
-			
-			if (bean.getIclubVehiclesForVDdAccessTypeId() != null && bean.getIclubVehiclesForVDdAccessTypeId().size() > 0) {
-				String[] vehiclesForVDdAccessTypeIds = new String[bean.getIclubVehiclesForVDdAccessTypeId().size()];
-				int i = 0;
-				for (IclubVehicle vehicle : bean.getIclubVehiclesForVDdAccessTypeId()) {
-					vehiclesForVDdAccessTypeIds[i] = vehicle.getVId();
-					i++;
-				}
-				model.setIclubVehiclesForVDdAccessTypeId(vehiclesForVDdAccessTypeIds);
-			}
-			
-			if (bean.getIclubDriversForDAccessStatusId() != null && bean.getIclubDriversForDAccessStatusId().size() > 0) {
-				String[] drivers = new String[bean.getIclubDriversForDAccessStatusId().size()];
-				int i = 0;
-				for (IclubDriver driver : bean.getIclubDriversForDAccessStatusId()) {
-					drivers[i] = driver.getDId();
-					i++;
-				}
-				model.setIclubDriversForDAccessStatusId(drivers);
-			}
-			if (bean.getIclubDriversForDAccessTypeId() != null && bean.getIclubDriversForDAccessTypeId().size() > 0) {
-				String[] drivers = new String[bean.getIclubDriversForDAccessTypeId().size()];
-				int i = 0;
-				for (IclubDriver driver : bean.getIclubDriversForDAccessTypeId()) {
-					drivers[i] = driver.getDId();
-					i++;
-				}
-				model.setIclubDriversForDAccessTypeId(drivers);
-			}
-			
-			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
-				String[] properties = new String[bean.getIclubProperties().size()];
-				int i = 0;
-				for (IclubProperty property : bean.getIclubProperties()) {
-					properties[i] = property.getPId();
-					i++;
-				}
-				model.setIclubProperties(properties);
-			}
+			model = IclubAccessTypeTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

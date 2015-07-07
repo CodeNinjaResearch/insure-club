@@ -17,24 +17,25 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubExtrasModel;
 import za.co.iclub.pss.orm.bean.IclubExtras;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubExtrasDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
-import za.co.iclub.pss.ws.model.IclubExtrasModel;
+import za.co.iclub.pss.trans.IclubExtrasTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubExtrasService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubExtrasService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubExtrasService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubExtrasDAO iclubExtrasDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,18 +43,14 @@ public class IclubExtrasService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubExtrasModel model) {
 		try {
-			IclubExtras iCt = new IclubExtras();
-
+			IclubExtras iCt = IclubExtrasTrans.fromWStoORM(model, iclubPersonDAO);
+			
 			iCt.setEId(iclubCommonDAO.getNextId(IclubExtras.class));
-			iCt.setEDesc(model.getEDesc());
-			iCt.setECrtdDt(model.getECrtdDt());
-			iCt.setEStatus(model.getEStatus());
-			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-
+			
 			iclubExtrasDAO.save(iCt);
-
+			
 			LOGGER.info("Save Success with ID :: " + iCt.getEId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -65,9 +62,9 @@ public class IclubExtrasService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -75,18 +72,11 @@ public class IclubExtrasService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubExtrasModel model) {
 		try {
-			IclubExtras iCt = new IclubExtras();
-
-			iCt.setEId(model.getEId());
-			iCt.setEDesc(model.getEDesc());
-			iCt.setECrtdDt(model.getECrtdDt());
-			iCt.setEStatus(model.getEStatus());
-			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-
+			IclubExtras iCt = IclubExtrasTrans.fromWStoORM(model, iclubPersonDAO);
 			iclubExtrasDAO.merge(iCt);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getEId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -98,9 +88,9 @@ public class IclubExtrasService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -115,69 +105,57 @@ public class IclubExtrasService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubExtrasModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubExtrasDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubExtras iCt = (IclubExtras) object;
-
-					IclubExtrasModel model = new IclubExtrasModel();
-
-					model.setEId(iCt.getEId());
-					model.setECrtdDt(iCt.getECrtdDt());
-					model.setEDesc(iCt.getEDesc());
-					model.setEStatus(iCt.getEStatus());
-					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
+					IclubExtras bean = (IclubExtras) object;
+					
+					IclubExtrasModel model = IclubExtrasTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubExtrasModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubExtras.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubExtras iCt = (IclubExtras) object;
-
-					IclubExtrasModel model = new IclubExtrasModel();
-
-					model.setEId(iCt.getEId());
-					model.setECrtdDt(iCt.getECrtdDt());
-					model.setEDesc(iCt.getEDesc());
-					model.setEStatus(iCt.getEStatus());
-					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
-
+					IclubExtras bean = (IclubExtras) object;
+					
+					IclubExtrasModel model = IclubExtrasTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -186,49 +164,45 @@ public class IclubExtrasService {
 		IclubExtrasModel model = new IclubExtrasModel();
 		try {
 			IclubExtras bean = iclubExtrasDAO.findById(id);
-
-			model.setEId(bean.getEId());
-			model.setECrtdDt(bean.getECrtdDt());
-			model.setEDesc(bean.getEDesc());
-			model.setEStatus(bean.getEStatus());
-			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
-
+			
+			model = IclubExtrasTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	public IclubExtrasDAO getIclubExtrasDAO() {
 		return iclubExtrasDAO;
 	}
-
+	
 	public void setIclubExtrasDAO(IclubExtrasDAO iclubExtrasDAO) {
 		this.iclubExtrasDAO = iclubExtrasDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-
+	
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 }

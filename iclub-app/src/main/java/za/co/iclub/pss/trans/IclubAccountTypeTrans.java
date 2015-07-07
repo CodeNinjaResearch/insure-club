@@ -1,13 +1,13 @@
 package za.co.iclub.pss.trans;
 
-import za.co.iclub.pss.model.ui.IclubAccessTypeBean;
-import za.co.iclub.pss.model.ws.IclubAccessTypeModel;
-import za.co.iclub.pss.orm.bean.IclubAccessType;
+import za.co.iclub.pss.model.ui.IclubAccountTypeBean;
+import za.co.iclub.pss.model.ws.IclubAccountTypeModel;
+import za.co.iclub.pss.orm.bean.IclubAccountType;
 
 public class IclubAccountTypeTrans {
 	
-	public static IclubAccessTypeBean fromWStoUI(IclubAccessTypeModel model) {
-		IclubAccessTypeBean bean = new IclubAccessTypeBean();
+	public static IclubAccountTypeBean fromWStoUI(IclubAccountTypeModel model) {
+		IclubAccountTypeBean bean = new IclubAccountTypeBean();
 		bean.setAtId(model.getAtId().longValue());
 		bean.setAtLongDesc(model.getAtLongDesc());
 		bean.setAtShortDesc(model.getAtShortDesc());
@@ -15,8 +15,8 @@ public class IclubAccountTypeTrans {
 		return bean;
 	}
 	
-	public static IclubAccessTypeModel fromUItoWS(IclubAccessTypeBean bean) {
-		IclubAccessTypeModel model = new IclubAccessTypeModel();
+	public static IclubAccountTypeModel fromUItoWS(IclubAccountTypeBean bean) {
+		IclubAccountTypeModel model = new IclubAccountTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
@@ -24,8 +24,8 @@ public class IclubAccountTypeTrans {
 		return model;
 	}
 	
-	public static IclubAccessTypeModel fromORMtoWS(IclubAccessType bean) {
-		IclubAccessTypeModel model = new IclubAccessTypeModel();
+	public static IclubAccountTypeModel fromORMtoWS(IclubAccountType bean) {
+		IclubAccountTypeModel model = new IclubAccountTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
@@ -33,8 +33,8 @@ public class IclubAccountTypeTrans {
 		return model;
 	}
 	
-	public static IclubAccessType fromWStoORM(IclubAccessTypeModel model) {
-		IclubAccessType acctype = new IclubAccessType();
+	public static IclubAccountType fromWStoORM(IclubAccountTypeModel model) {
+		IclubAccountType acctype = new IclubAccountType();
 		
 		acctype.setAtId(model.getAtId());
 		acctype.setAtLongDesc(model.getAtLongDesc());

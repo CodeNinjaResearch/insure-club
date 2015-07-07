@@ -8,10 +8,13 @@ public class IclubDriverBean {
 	private Long iclubAccessTypeAByDAccessTypeId;
 	private String atALongDesc;
 	private Long iclubLicenseCode;
-	private String iclubPersonByDCrtdBy;
+	private String lcDesc;
+	private String iclubPersonAByDCrtdBy;
+	private String PAFNameAndLName;
 	private Long iclubMaritialStatus;
 	private String msLongDesc;
-	private String iclubPersonByDPersonId;
+	private String iclubPersonBByDPersonId;
+	private String PBFNameAndLName;
 	private String DName;
 	private String DLicenseNum;
 	private Date DIssueDt;
@@ -29,6 +32,22 @@ public class IclubDriverBean {
 		DId = dId;
 	}
 	
+	public Long getIclubAccessTypeAByDAccessTypeId() {
+		return iclubAccessTypeAByDAccessTypeId;
+	}
+	
+	public void setIclubAccessTypeAByDAccessTypeId(Long iclubAccessTypeAByDAccessTypeId) {
+		this.iclubAccessTypeAByDAccessTypeId = iclubAccessTypeAByDAccessTypeId;
+	}
+	
+	public String getAtALongDesc() {
+		return atALongDesc;
+	}
+	
+	public void setAtALongDesc(String atALongDesc) {
+		this.atALongDesc = atALongDesc;
+	}
+	
 	public Long getIclubLicenseCode() {
 		return iclubLicenseCode;
 	}
@@ -37,12 +56,28 @@ public class IclubDriverBean {
 		this.iclubLicenseCode = iclubLicenseCode;
 	}
 	
-	public String getIclubPersonByDCrtdBy() {
-		return iclubPersonByDCrtdBy;
+	public String getLcDesc() {
+		return lcDesc;
 	}
 	
-	public void setIclubPersonByDCrtdBy(String iclubPersonByDCrtdBy) {
-		this.iclubPersonByDCrtdBy = iclubPersonByDCrtdBy;
+	public void setLcDesc(String lcDesc) {
+		this.lcDesc = lcDesc;
+	}
+	
+	public String getIclubPersonAByDCrtdBy() {
+		return iclubPersonAByDCrtdBy;
+	}
+	
+	public void setIclubPersonAByDCrtdBy(String iclubPersonAByDCrtdBy) {
+		this.iclubPersonAByDCrtdBy = iclubPersonAByDCrtdBy;
+	}
+	
+	public String getPAFNameAndLName() {
+		return PAFNameAndLName;
+	}
+	
+	public void setPAFNameAndLName(String pAFNameAndLName) {
+		PAFNameAndLName = pAFNameAndLName;
 	}
 	
 	public Long getIclubMaritialStatus() {
@@ -53,12 +88,28 @@ public class IclubDriverBean {
 		this.iclubMaritialStatus = iclubMaritialStatus;
 	}
 	
-	public String getIclubPersonByDPersonId() {
-		return iclubPersonByDPersonId;
+	public String getMsLongDesc() {
+		return msLongDesc;
 	}
 	
-	public void setIclubPersonByDPersonId(String iclubPersonByDPersonId) {
-		this.iclubPersonByDPersonId = iclubPersonByDPersonId;
+	public void setMsLongDesc(String msLongDesc) {
+		this.msLongDesc = msLongDesc;
+	}
+	
+	public String getIclubPersonBByDPersonId() {
+		return iclubPersonBByDPersonId;
+	}
+	
+	public void setIclubPersonBByDPersonId(String iclubPersonBByDPersonId) {
+		this.iclubPersonBByDPersonId = iclubPersonBByDPersonId;
+	}
+	
+	public String getPBFNameAndLName() {
+		return PBFNameAndLName;
+	}
+	
+	public void setPBFNameAndLName(String pBFNameAndLName) {
+		PBFNameAndLName = pBFNameAndLName;
 	}
 	
 	public String getDName() {
@@ -101,28 +152,12 @@ public class IclubDriverBean {
 		DCrtdDt = dCrtdDt;
 	}
 	
-	public Integer getDIssueYears() {
-		return DIssueYears;
+	public Long getIclubAccessTypeBByDAccessStatusId() {
+		return iclubAccessTypeBByDAccessStatusId;
 	}
 	
-	public void setDIssueYears(Integer dIssueYears) {
-		DIssueYears = dIssueYears;
-	}
-	
-	public String getMsLongDesc() {
-		return msLongDesc;
-	}
-	
-	public void setMsLongDesc(String msLongDesc) {
-		this.msLongDesc = msLongDesc;
-	}
-	
-	public String getAtALongDesc() {
-		return atALongDesc;
-	}
-	
-	public void setAtALongDesc(String atALongDesc) {
-		this.atALongDesc = atALongDesc;
+	public void setIclubAccessTypeBByDAccessStatusId(Long iclubAccessTypeBByDAccessStatusId) {
+		this.iclubAccessTypeBByDAccessStatusId = iclubAccessTypeBByDAccessStatusId;
 	}
 	
 	public String getAtBLongDesc() {
@@ -133,19 +168,12 @@ public class IclubDriverBean {
 		this.atBLongDesc = atBLongDesc;
 	}
 	
-	public Long getIclubAccessTypeAByDAccessTypeId() {
-		return iclubAccessTypeAByDAccessTypeId;
+	public Integer getDIssueYears() {
+		return DIssueYears;
 	}
 	
-	public void setIclubAccessTypeAByDAccessTypeId(Long iclubAccessTypeAByDAccessTypeId) {
-		this.iclubAccessTypeAByDAccessTypeId = iclubAccessTypeAByDAccessTypeId;
+	public void setDIssueYears(Integer dIssueYears) {
+		DIssueYears = dIssueYears;
 	}
 	
-	public Long getIclubAccessTypeBByDAccessStatusId() {
-		return iclubAccessTypeBByDAccessStatusId;
-	}
-	
-	public void setIclubAccessTypeBByDAccessStatusId(Long iclubAccessTypeBByDAccessStatusId) {
-		this.iclubAccessTypeBByDAccessStatusId = iclubAccessTypeBByDAccessStatusId;
-	}
 }
