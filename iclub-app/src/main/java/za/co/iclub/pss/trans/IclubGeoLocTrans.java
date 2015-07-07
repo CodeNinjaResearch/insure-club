@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubGeoLocTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubGeoLocBean fromWStoUI(IclubGeoLocModel model) {
+	public static IclubGeoLocBean fromWStoUI(IclubGeoLocModel model) {
 		IclubGeoLocBean bean = new IclubGeoLocBean();
 		
 		bean.setGlProvince(model.getGlProvince());
@@ -26,7 +24,7 @@ public class IclubGeoLocTrans {
 		return bean;
 	}
 	
-	public IclubGeoLocModel fromUItoWS(IclubGeoLocBean bean) {
+	public static IclubGeoLocModel fromUItoWS(IclubGeoLocBean bean) {
 		
 		IclubGeoLocModel model = new IclubGeoLocModel();
 		
@@ -44,7 +42,7 @@ public class IclubGeoLocTrans {
 		return model;
 	}
 	
-	public IclubGeoLocModel fromORMtoWS(IclubGeoLoc bean) {
+	public static IclubGeoLocModel fromORMtoWS(IclubGeoLoc bean) {
 		
 		IclubGeoLocModel model = new IclubGeoLocModel();
 		
@@ -62,7 +60,7 @@ public class IclubGeoLocTrans {
 		return model;
 	}
 	
-	public IclubGeoLoc fromWStoORM(IclubGeoLocModel model) {
+	public static IclubGeoLoc fromWStoORM(IclubGeoLocModel model, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubGeoLoc bean = new IclubGeoLoc();
 		
@@ -79,11 +77,4 @@ public class IclubGeoLocTrans {
 		return bean;
 	}
 	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
 
 public class IclubFieldTrans {
 	
-	private IclubEntityTypeDAO iclubEntityTypeDAO;
-	
-	public IclubFieldBean fromWStoUI(IclubFieldModel model) {
+	public static IclubFieldBean fromWStoUI(IclubFieldModel model) {
 		
 		IclubFieldBean bean = new IclubFieldBean();
 		
@@ -25,7 +23,7 @@ public class IclubFieldTrans {
 		return bean;
 	}
 	
-	public IclubFieldModel fromUItoWS(IclubFieldBean bean) {
+	public static IclubFieldModel fromUItoWS(IclubFieldBean bean) {
 		
 		IclubFieldModel model = new IclubFieldModel();
 		
@@ -41,7 +39,7 @@ public class IclubFieldTrans {
 		return model;
 	}
 	
-	public IclubFieldModel fromORMtoWS(IclubField bean) {
+	public static IclubFieldModel fromORMtoWS(IclubField bean) {
 		
 		IclubFieldModel model = new IclubFieldModel();
 		
@@ -57,7 +55,7 @@ public class IclubFieldTrans {
 		return model;
 	}
 	
-	public IclubField fromWStoORM(IclubFieldModel model) {
+	public static IclubField fromWStoORM(IclubFieldModel model, IclubEntityTypeDAO iclubEntityTypeDAO) {
 		
 		IclubField bean = new IclubField();
 		

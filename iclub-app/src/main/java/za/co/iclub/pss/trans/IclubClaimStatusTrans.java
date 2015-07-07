@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubClaimStatusModel;
 import za.co.iclub.pss.orm.bean.IclubClaimStatus;
 
 public class IclubClaimStatusTrans {
-	public IclubClaimStatusBean fromWStoUI(IclubClaimStatusModel model) {
+	public static IclubClaimStatusBean fromWStoUI(IclubClaimStatusModel model) {
 		IclubClaimStatusBean bean = new IclubClaimStatusBean();
 		bean.setCsId(model.getCsId().longValue());
 		bean.setCsLongDesc(model.getCsLongDesc());
@@ -14,7 +14,7 @@ public class IclubClaimStatusTrans {
 		return bean;
 	}
 	
-	public IclubClaimStatusModel fromUItoWS(IclubClaimStatusBean bean) {
+	public static IclubClaimStatusModel fromUItoWS(IclubClaimStatusBean bean) {
 		IclubClaimStatusModel model = new IclubClaimStatusModel();
 		model.setCsId(bean.getCsId().longValue());
 		model.setCsLongDesc(bean.getCsLongDesc());
@@ -23,7 +23,7 @@ public class IclubClaimStatusTrans {
 		return model;
 	}
 	
-	public IclubClaimStatusModel fromORMtoWS(IclubClaimStatus bean) {
+	public static IclubClaimStatusModel fromORMtoWS(IclubClaimStatus bean) {
 		IclubClaimStatusModel model = new IclubClaimStatusModel();
 		model.setCsId(bean.getCsId().longValue());
 		model.setCsLongDesc(bean.getCsLongDesc());
@@ -32,7 +32,7 @@ public class IclubClaimStatusTrans {
 		return model;
 	}
 	
-	public IclubClaimStatus fromWStoORM(IclubClaimStatusModel model) {
+	public static IclubClaimStatus fromWStoORM(IclubClaimStatusModel model) {
 		IclubClaimStatus acctype = new IclubClaimStatus();
 		
 		acctype.setCsId(model.getCsId());

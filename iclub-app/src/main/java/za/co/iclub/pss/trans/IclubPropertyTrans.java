@@ -15,17 +15,7 @@ import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
 
 public class IclubPropertyTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubCoverTypeDAO iclubCoverTypeDAO;
-	private IclubPropUsageTypeDAO iclubPropUsageTypeDAO;
-	private IclubOccupiedStatusDAO iclubOccupiedStatusDAO;
-	private IclubPropertyTypeDAO iclubPropertyTypeDAO;
-	private IclubWallTypeDAO iclubWallTypeDAO;
-	private IclubAccessTypeDAO iclubAccessTypeDAO;
-	private IclubBarTypeDAO iclubBarTypeDAO;
-	private IclubRoofTypeDAO iclubRoofTypeDAO;
-	
-	public IclubPropertyBean fromWStoUI(IclubPropertyModel model) {
+	public static IclubPropertyBean fromWStoUI(IclubPropertyModel model) {
 		
 		IclubPropertyBean bean = new IclubPropertyBean();
 		
@@ -67,7 +57,7 @@ public class IclubPropertyTrans {
 		return bean;
 	}
 	
-	public IclubPropertyModel fromUItoWS(IclubPropertyBean bean) {
+	public static IclubPropertyModel fromUItoWS(IclubPropertyBean bean) {
 		
 		IclubPropertyModel model = new IclubPropertyModel();
 		
@@ -109,7 +99,7 @@ public class IclubPropertyTrans {
 		return model;
 	}
 	
-	public IclubPropertyModel fromORMtoWS(IclubProperty bean) {
+	public static IclubPropertyModel fromORMtoWS(IclubProperty bean) {
 		
 		IclubPropertyModel model = new IclubPropertyModel();
 		
@@ -150,7 +140,7 @@ public class IclubPropertyTrans {
 		return model;
 	}
 	
-	public IclubProperty fromWStoORM(IclubPropertyModel model) {
+	public static IclubProperty fromWStoORM(IclubPropertyModel model, IclubPersonDAO iclubPersonDAO, IclubCoverTypeDAO iclubCoverTypeDAO, IclubPropUsageTypeDAO iclubPropUsageTypeDAO, IclubOccupiedStatusDAO iclubOccupiedStatusDAO, IclubPropertyTypeDAO iclubPropertyTypeDAO, IclubWallTypeDAO iclubWallTypeDAO, IclubAccessTypeDAO iclubAccessTypeDAO, IclubBarTypeDAO iclubBarTypeDAO, IclubRoofTypeDAO iclubRoofTypeDAO) {
 		
 		IclubProperty bean = new IclubProperty();
 		

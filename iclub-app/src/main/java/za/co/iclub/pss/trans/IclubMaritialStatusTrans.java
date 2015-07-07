@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubMaritialStatus;
 
 public class IclubMaritialStatusTrans {
 	
-	public IclubMaritialStatusBean fromWStoUI(IclubMaritialStatusModel model) {
+	public static IclubMaritialStatusBean fromWStoUI(IclubMaritialStatusModel model) {
 		IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
 		bean.setMsId(model.getMsId().longValue());
 		bean.setMsLongDesc(model.getMsLongDesc());
@@ -15,7 +15,7 @@ public class IclubMaritialStatusTrans {
 		return bean;
 	}
 	
-	public IclubMaritialStatusModel fromUItoWS(IclubMaritialStatusBean bean) {
+	public static IclubMaritialStatusModel fromUItoWS(IclubMaritialStatusBean bean) {
 		IclubMaritialStatusModel model = new IclubMaritialStatusModel();
 		model.setMsId(bean.getMsId().longValue());
 		model.setMsLongDesc(bean.getMsLongDesc());
@@ -24,7 +24,7 @@ public class IclubMaritialStatusTrans {
 		return model;
 	}
 	
-	public IclubMaritialStatusModel fromORMtoWS(IclubMaritialStatus bean) {
+	public static IclubMaritialStatusModel fromORMtoWS(IclubMaritialStatus bean) {
 		IclubMaritialStatusModel model = new IclubMaritialStatusModel();
 		model.setMsId(bean.getMsId().longValue());
 		model.setMsLongDesc(bean.getMsLongDesc());
@@ -33,7 +33,7 @@ public class IclubMaritialStatusTrans {
 		return model;
 	}
 	
-	public IclubMaritialStatus fromWStoORM(IclubMaritialStatusModel model) {
+	public static IclubMaritialStatus fromWStoORM(IclubMaritialStatusModel model) {
 		IclubMaritialStatus acctype = new IclubMaritialStatus();
 		
 		acctype.setMsId(model.getMsId());

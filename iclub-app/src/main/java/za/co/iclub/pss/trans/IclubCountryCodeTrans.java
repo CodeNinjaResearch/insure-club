@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubCountryCodeTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubCountryCodeBean fromWStoUI(IclubCountryCodeModel model) {
+	public static IclubCountryCodeBean fromWStoUI(IclubCountryCodeModel model) {
 		
 		IclubCountryCodeBean bean = new IclubCountryCodeBean();
 		
@@ -24,7 +22,7 @@ public class IclubCountryCodeTrans {
 		return bean;
 	}
 	
-	public IclubCountryCodeModel fromUItoWS(IclubCountryCodeBean bean) {
+	public static IclubCountryCodeModel fromUItoWS(IclubCountryCodeBean bean) {
 		
 		IclubCountryCodeModel model = new IclubCountryCodeModel();
 		
@@ -39,7 +37,7 @@ public class IclubCountryCodeTrans {
 		return model;
 	}
 	
-	public IclubCountryCodeModel fromORMtoWS(IclubCountryCode bean) {
+	public static IclubCountryCodeModel fromORMtoWS(IclubCountryCode bean) {
 		
 		IclubCountryCodeModel model = new IclubCountryCodeModel();
 		
@@ -54,7 +52,8 @@ public class IclubCountryCodeTrans {
 		return model;
 	}
 	
-	public IclubCountryCode fromWStoORM(IclubCountryCodeModel model) {
+	public static IclubCountryCode fromWStoORM(IclubCountryCodeModel model, IclubPersonDAO iclubPersonDAO) {
+		
 		IclubCountryCode bean = new IclubCountryCode();
 		
 		bean.setCcId(model.getCcId());
@@ -66,14 +65,6 @@ public class IclubCountryCodeTrans {
 		bean.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 		
 		return bean;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
 	}
 	
 }

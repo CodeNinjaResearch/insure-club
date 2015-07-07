@@ -9,11 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubRateTypeDAO;
 
 public class IclubRateEngineTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
-	private IclubRateTypeDAO iclubRateTypeDAO;
-	
-	public IclubRateEngineBean fromWStoUI(IclubRateEngineModel model) {
+	public static IclubRateEngineBean fromWStoUI(IclubRateEngineModel model) {
 		
 		IclubRateEngineBean bean = new IclubRateEngineBean();
 		
@@ -31,7 +27,7 @@ public class IclubRateEngineTrans {
 		return bean;
 	}
 	
-	public IclubRateEngineModel fromUItoWS(IclubRateEngineBean bean) {
+	public static IclubRateEngineModel fromUItoWS(IclubRateEngineBean bean) {
 		
 		IclubRateEngineModel model = new IclubRateEngineModel();
 		
@@ -49,7 +45,7 @@ public class IclubRateEngineTrans {
 		return model;
 	}
 	
-	public IclubRateEngineModel fromORMtoWS(IclubRateEngine bean) {
+	public static IclubRateEngineModel fromORMtoWS(IclubRateEngine bean) {
 		
 		IclubRateEngineModel model = new IclubRateEngineModel();
 		
@@ -59,7 +55,7 @@ public class IclubRateEngineTrans {
 		return model;
 	}
 	
-	public IclubRateEngine fromWStoORM(IclubRateEngineModel model) {
+	public static IclubRateEngine fromWStoORM(IclubRateEngineModel model, IclubRateTypeDAO iclubRateTypeDAO, IclubPersonDAO iclubPersonDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		
 		IclubRateEngine bean = new IclubRateEngine();
 		
@@ -73,29 +69,5 @@ public class IclubRateEngineTrans {
 		bean.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		
 		return bean;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
-		return iclubInsuranceItemTypeDAO;
-	}
-	
-	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
-	}
-	
-	public IclubRateTypeDAO getIclubRateTypeDAO() {
-		return iclubRateTypeDAO;
-	}
-	
-	public void setIclubRateTypeDAO(IclubRateTypeDAO iclubRateTypeDAO) {
-		this.iclubRateTypeDAO = iclubRateTypeDAO;
 	}
 }

@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubRoleType;
 
 public class IclubRoleTypeTrans {
 	
-	public IclubRoleTypeBean fromWStoUI(IclubRoleTypeModel model) {
+	public static IclubRoleTypeBean fromWStoUI(IclubRoleTypeModel model) {
 		IclubRoleTypeBean bean = new IclubRoleTypeBean();
 		bean.setRtId(model.getRtId().longValue());
 		bean.setRtLongDesc(model.getRtLongDesc());
@@ -15,7 +15,7 @@ public class IclubRoleTypeTrans {
 		return bean;
 	}
 	
-	public IclubRoleTypeModel fromUItoWS(IclubRoleTypeBean bean) {
+	public static IclubRoleTypeModel fromUItoWS(IclubRoleTypeBean bean) {
 		IclubRoleTypeModel model = new IclubRoleTypeModel();
 		model.setRtId(bean.getRtId().longValue());
 		model.setRtLongDesc(bean.getRtLongDesc());
@@ -24,7 +24,7 @@ public class IclubRoleTypeTrans {
 		return model;
 	}
 	
-	public IclubRoleTypeModel fromORMtoWS(IclubRoleType bean) {
+	public static IclubRoleTypeModel fromORMtoWS(IclubRoleType bean) {
 		IclubRoleTypeModel model = new IclubRoleTypeModel();
 		model.setRtId(bean.getRtId().longValue());
 		model.setRtLongDesc(bean.getRtLongDesc());
@@ -33,7 +33,7 @@ public class IclubRoleTypeTrans {
 		return model;
 	}
 	
-	public IclubRoleType fromWStoORM(IclubRoleTypeModel model) {
+	public static IclubRoleType fromWStoORM(IclubRoleTypeModel model) {
 		IclubRoleType acctype = new IclubRoleType();
 		
 		acctype.setRtId(model.getRtId());

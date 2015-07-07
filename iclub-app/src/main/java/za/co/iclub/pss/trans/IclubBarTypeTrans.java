@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubBarType;
 
 public class IclubBarTypeTrans {
 	
-	public IclubBarTypeBean fromWStoUI(IclubBarTypeModel model) {
+	public static IclubBarTypeBean fromWStoUI(IclubBarTypeModel model) {
 		IclubBarTypeBean bean = new IclubBarTypeBean();
 		bean.setBtId(model.getBtId().longValue());
 		bean.setBtLongDesc(model.getBtLongDesc());
@@ -15,7 +15,7 @@ public class IclubBarTypeTrans {
 		return bean;
 	}
 	
-	public IclubBarTypeModel fromUItoWS(IclubBarTypeBean bean) {
+	public static IclubBarTypeModel fromUItoWS(IclubBarTypeBean bean) {
 		IclubBarTypeModel model = new IclubBarTypeModel();
 		model.setBtId(bean.getBtId().longValue());
 		model.setBtLongDesc(bean.getBtLongDesc());
@@ -24,7 +24,7 @@ public class IclubBarTypeTrans {
 		return model;
 	}
 	
-	public IclubBarTypeModel fromORMtoWS(IclubBarType bean) {
+	public static IclubBarTypeModel fromORMtoWS(IclubBarType bean) {
 		IclubBarTypeModel model = new IclubBarTypeModel();
 		model.setBtId(bean.getBtId().longValue());
 		model.setBtLongDesc(bean.getBtLongDesc());
@@ -33,7 +33,7 @@ public class IclubBarTypeTrans {
 		return model;
 	}
 	
-	public IclubBarType fromWStoORM(IclubBarTypeModel model) {
+	public static IclubBarType fromWStoORM(IclubBarTypeModel model) {
 		IclubBarType acctype = new IclubBarType();
 		
 		acctype.setBtId(model.getBtId());

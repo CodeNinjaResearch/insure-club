@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubTrackerMasterTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubTrackerMasterBean fromWStoUI(IclubTrackerMasterModel model) {
+	public static IclubTrackerMasterBean fromWStoUI(IclubTrackerMasterModel model) {
 		IclubTrackerMasterBean bean = new IclubTrackerMasterBean();
 		
 		bean.setTmId(model.getTmId());
@@ -26,7 +24,7 @@ public class IclubTrackerMasterTrans {
 		return bean;
 	}
 	
-	public IclubTrackerMasterModel fromUItoWS(IclubTrackerMasterBean bean) {
+	public static IclubTrackerMasterModel fromUItoWS(IclubTrackerMasterBean bean) {
 		IclubTrackerMasterModel model = new IclubTrackerMasterModel();
 		
 		model.setTmId(bean.getTmId());
@@ -42,7 +40,7 @@ public class IclubTrackerMasterTrans {
 		return model;
 	}
 	
-	public IclubTrackerMasterModel fromORMtoWS(IclubTrackerMaster bean) {
+	public static IclubTrackerMasterModel fromORMtoWS(IclubTrackerMaster bean) {
 		
 		IclubTrackerMasterModel model = new IclubTrackerMasterModel();
 		
@@ -59,7 +57,7 @@ public class IclubTrackerMasterTrans {
 		return model;
 	}
 	
-	public IclubTrackerMaster fromWStoORM(IclubTrackerMasterModel model) {
+	public static IclubTrackerMaster fromWStoORM(IclubTrackerMasterModel model, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubTrackerMaster bean = new IclubTrackerMaster();
 		
@@ -76,11 +74,4 @@ public class IclubTrackerMasterTrans {
 		return bean;
 	}
 	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

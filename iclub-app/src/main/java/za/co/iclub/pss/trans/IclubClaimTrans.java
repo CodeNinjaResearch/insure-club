@@ -1,7 +1,5 @@
 package za.co.iclub.pss.trans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import za.co.iclub.pss.model.ui.IclubClaimBean;
 import za.co.iclub.pss.model.ws.IclubClaimModel;
 import za.co.iclub.pss.orm.bean.IclubClaim;
@@ -11,14 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubPolicyDAO;
 
 public class IclubClaimTrans {
 	
-	@Autowired
-	private IclubPersonDAO iclubPersonDAO;
-	@Autowired
-	private IclubPolicyDAO iclubPolicyDAO;
-	@Autowired
-	private IclubClaimStatusDAO iclubClaimStatusDAO;
-	
-	public IclubClaimBean fromWStoUI(IclubClaimModel model) {
+	public static IclubClaimBean fromWStoUI(IclubClaimModel model) {
 		IclubClaimBean bean = new IclubClaimBean();
 		bean.setCId(model.getCId());
 		bean.setCCrtdDt(model.getCCrtdDt());
@@ -35,7 +26,7 @@ public class IclubClaimTrans {
 		return bean;
 	}
 	
-	public IclubClaimModel fromUItoWS(IclubClaimBean bean) {
+	public static IclubClaimModel fromUItoWS(IclubClaimBean bean) {
 		IclubClaimModel model = new IclubClaimModel();
 		model.setCId(bean.getCId());
 		model.setCCrtdDt(bean.getCCrtdDt());
@@ -52,7 +43,7 @@ public class IclubClaimTrans {
 		return model;
 	}
 	
-	public IclubClaimModel fromORMtoWS(IclubClaim bean) {
+	public static IclubClaimModel fromORMtoWS(IclubClaim bean) {
 		IclubClaimModel model = new IclubClaimModel();
 		
 		model.setCId(bean.getCId());
@@ -70,7 +61,8 @@ public class IclubClaimTrans {
 		return model;
 	}
 	
-	public IclubClaim fromWStoORM(IclubClaimModel model) {
+	public static IclubClaim fromWStoORM(IclubClaimModel model, IclubClaimStatusDAO iclubClaimStatusDAO, IclubPolicyDAO iclubPolicyDAO, IclubPersonDAO iclubPersonDAO) {
+		
 		IclubClaim bean = new IclubClaim();
 		bean.setCId(model.getCId());
 		bean.setCCrtdDt(model.getCCrtdDt());

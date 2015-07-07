@@ -11,13 +11,7 @@ import za.co.iclub.pss.orm.dao.IclubPolicyDAO;
 
 public class IclubPaymentTrans {
 	
-	private IclubPolicyDAO iclubPolicyDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubClaimDAO iclubClaimDAO;
-	private IclubAccountDAO iclubAccountDAO;
-	private IclubPaymentStatusDAO iclubPaymentStatusDAO;
-	
-	public IclubPaymentBean fromWStoUI(IclubPaymentModel model) {
+	public static IclubPaymentBean fromWStoUI(IclubPaymentModel model) {
 		
 		IclubPaymentBean bean = new IclubPaymentBean();
 		
@@ -41,7 +35,7 @@ public class IclubPaymentTrans {
 		return bean;
 	}
 	
-	public IclubPaymentModel fromUItoWS(IclubPaymentBean bean) {
+	public static IclubPaymentModel fromUItoWS(IclubPaymentBean bean) {
 		
 		IclubPaymentModel model = new IclubPaymentModel();
 		
@@ -65,7 +59,7 @@ public class IclubPaymentTrans {
 		return model;
 	}
 	
-	public IclubPaymentModel fromORMtoWS(IclubPayment bean) {
+	public static IclubPaymentModel fromORMtoWS(IclubPayment bean) {
 		
 		IclubPaymentModel model = new IclubPaymentModel();
 		
@@ -89,7 +83,7 @@ public class IclubPaymentTrans {
 		return model;
 	}
 	
-	public IclubPayment fromWStoORM(IclubPaymentModel model) {
+	public static IclubPayment fromWStoORM(IclubPaymentModel model, IclubPolicyDAO iclubPolicyDAO, IclubPersonDAO iclubPersonDAO, IclubClaimDAO iclubClaimDAO, IclubAccountDAO iclubAccountDAO, IclubPaymentStatusDAO iclubPaymentStatusDAO) {
 		
 		IclubPayment bean = new IclubPayment();
 		
@@ -107,43 +101,4 @@ public class IclubPaymentTrans {
 		return bean;
 	}
 	
-	public IclubPolicyDAO getIclubPolicyDAO() {
-		return iclubPolicyDAO;
-	}
-	
-	public void setIclubPolicyDAO(IclubPolicyDAO iclubPolicyDAO) {
-		this.iclubPolicyDAO = iclubPolicyDAO;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubClaimDAO getIclubClaimDAO() {
-		return iclubClaimDAO;
-	}
-	
-	public void setIclubClaimDAO(IclubClaimDAO iclubClaimDAO) {
-		this.iclubClaimDAO = iclubClaimDAO;
-	}
-	
-	public IclubAccountDAO getIclubAccountDAO() {
-		return iclubAccountDAO;
-	}
-	
-	public void setIclubAccountDAO(IclubAccountDAO iclubAccountDAO) {
-		this.iclubAccountDAO = iclubAccountDAO;
-	}
-	
-	public IclubPaymentStatusDAO getIclubPaymentStatusDAO() {
-		return iclubPaymentStatusDAO;
-	}
-	
-	public void setIclubPaymentStatusDAO(IclubPaymentStatusDAO iclubPaymentStatusDAO) {
-		this.iclubPaymentStatusDAO = iclubPaymentStatusDAO;
-	}
 }

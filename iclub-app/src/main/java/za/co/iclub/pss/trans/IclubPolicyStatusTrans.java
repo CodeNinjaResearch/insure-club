@@ -8,7 +8,7 @@ import za.co.iclub.pss.orm.bean.IclubPolicyStatus;
 
 @XmlRootElement(name = "IclubPolicyStatusModel")
 public class IclubPolicyStatusTrans {
-	public IclubPolicyStatusBean fromWStoUI(IclubPolicyStatusModel model) {
+	public static IclubPolicyStatusBean fromWStoUI(IclubPolicyStatusModel model) {
 		IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
 		bean.setPsId(model.getPsId().longValue());
 		bean.setPsLongDesc(model.getPsLongDesc());
@@ -17,7 +17,7 @@ public class IclubPolicyStatusTrans {
 		return bean;
 	}
 	
-	public IclubPolicyStatusModel fromUItoWS(IclubPolicyStatusBean bean) {
+	public static IclubPolicyStatusModel fromUItoWS(IclubPolicyStatusBean bean) {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
 		model.setPsId(bean.getPsId().longValue());
 		model.setPsLongDesc(bean.getPsLongDesc());
@@ -26,7 +26,7 @@ public class IclubPolicyStatusTrans {
 		return model;
 	}
 	
-	public IclubPolicyStatusModel fromORMtoWS(IclubPolicyStatus bean) {
+	public static IclubPolicyStatusModel fromORMtoWS(IclubPolicyStatus bean) {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
 		model.setPsId(bean.getPsId().longValue());
 		model.setPsLongDesc(bean.getPsLongDesc());
@@ -35,7 +35,7 @@ public class IclubPolicyStatusTrans {
 		return model;
 	}
 	
-	public IclubPolicyStatus fromWStoORM(IclubPolicyStatusModel model) {
+	public static IclubPolicyStatus fromWStoORM(IclubPolicyStatusModel model) {
 		IclubPolicyStatus acctype = new IclubPolicyStatus();
 		
 		acctype.setPsId(model.getPsId());

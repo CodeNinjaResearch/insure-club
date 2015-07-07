@@ -8,10 +8,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubEventTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubEventTypeDAO iclubEventTypeDAO;
-	
-	public IclubEventBean fromWStoUI(IclubEventModel model) {
+	public static IclubEventBean fromWStoUI(IclubEventModel model) {
 		
 		IclubEventBean bean = new IclubEventBean();
 		
@@ -25,7 +22,7 @@ public class IclubEventTrans {
 		return bean;
 	}
 	
-	public IclubEventModel fromUItoWS(IclubEventBean bean) {
+	public static IclubEventModel fromUItoWS(IclubEventBean bean) {
 		
 		IclubEventModel model = new IclubEventModel();
 		
@@ -40,7 +37,7 @@ public class IclubEventTrans {
 		return model;
 	}
 	
-	public IclubEventModel fromORMtoWS(IclubEvent bean) {
+	public static IclubEventModel fromORMtoWS(IclubEvent bean) {
 		
 		IclubEventModel model = new IclubEventModel();
 		
@@ -55,7 +52,7 @@ public class IclubEventTrans {
 		return model;
 	}
 	
-	public IclubEvent fromWStoORM(IclubEventModel model) {
+	public static IclubEvent fromWStoORM(IclubEventModel model, IclubPersonDAO iclubPersonDAO, IclubEventTypeDAO iclubEventTypeDAO) {
 		
 		IclubEvent bean = new IclubEvent();
 		
@@ -66,22 +63,6 @@ public class IclubEventTrans {
 		bean.setIclubEventType(model.getIclubEventType() != null ? iclubEventTypeDAO.findById(model.getIclubEventType()) : null);
 		
 		return bean;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubEventTypeDAO getIclubEventTypeDAO() {
-		return iclubEventTypeDAO;
-	}
-	
-	public void setIclubEventTypeDAO(IclubEventTypeDAO iclubEventTypeDAO) {
-		this.iclubEventTypeDAO = iclubEventTypeDAO;
 	}
 	
 }

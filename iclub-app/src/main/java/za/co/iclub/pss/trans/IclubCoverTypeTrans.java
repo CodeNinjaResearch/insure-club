@@ -2,8 +2,6 @@ package za.co.iclub.pss.trans;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 public class IclubCoverTypeTrans {
 	
 	private Long ctId;

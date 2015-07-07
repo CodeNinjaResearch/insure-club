@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubVehSecType;
 
 public class IclubVehSecTypeTrans {
 	
-	public IclubVehSecTypeBean fromWStoUI(IclubVehSecTypeModel model) {
+	public static IclubVehSecTypeBean fromWStoUI(IclubVehSecTypeModel model) {
 		IclubVehSecTypeBean bean = new IclubVehSecTypeBean();
 		bean.setVstId(model.getVstId().longValue());
 		bean.setVstLongDesc(model.getVstLongDesc());
@@ -15,7 +15,7 @@ public class IclubVehSecTypeTrans {
 		return bean;
 	}
 	
-	public IclubVehSecTypeModel fromUItoWS(IclubVehSecTypeBean bean) {
+	public static IclubVehSecTypeModel fromUItoWS(IclubVehSecTypeBean bean) {
 		IclubVehSecTypeModel model = new IclubVehSecTypeModel();
 		model.setVstId(bean.getVstId().longValue());
 		model.setVstLongDesc(bean.getVstLongDesc());
@@ -24,7 +24,7 @@ public class IclubVehSecTypeTrans {
 		return model;
 	}
 	
-	public IclubVehSecTypeModel fromORMtoWS(IclubVehSecType bean) {
+	public static IclubVehSecTypeModel fromORMtoWS(IclubVehSecType bean) {
 		IclubVehSecTypeModel model = new IclubVehSecTypeModel();
 		model.setVstId(bean.getVstId().longValue());
 		model.setVstLongDesc(bean.getVstLongDesc());
@@ -33,7 +33,7 @@ public class IclubVehSecTypeTrans {
 		return model;
 	}
 	
-	public IclubVehSecType fromWStoORM(IclubVehSecTypeModel model) {
+	public static IclubVehSecType fromWStoORM(IclubVehSecTypeModel model) {
 		IclubVehSecType acctype = new IclubVehSecType();
 		
 		acctype.setVstId(model.getVstId());

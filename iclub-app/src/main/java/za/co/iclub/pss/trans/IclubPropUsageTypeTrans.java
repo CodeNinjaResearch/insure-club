@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubPropUsageType;
 
 public class IclubPropUsageTypeTrans {
 	
-	public IclubPropUsageTypeBean fromWStoUI(IclubPropUsageTypeModel model) {
+	public static IclubPropUsageTypeBean fromWStoUI(IclubPropUsageTypeModel model) {
 		IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
 		bean.setPutId(model.getPutId().longValue());
 		bean.setPutLongDesc(model.getPutLongDesc());
@@ -15,7 +15,7 @@ public class IclubPropUsageTypeTrans {
 		return bean;
 	}
 	
-	public IclubPropUsageTypeModel fromUItoWS(IclubPropUsageTypeBean bean) {
+	public static IclubPropUsageTypeModel fromUItoWS(IclubPropUsageTypeBean bean) {
 		IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
 		model.setPutId(bean.getPutId().longValue());
 		model.setPutLongDesc(bean.getPutLongDesc());
@@ -24,7 +24,7 @@ public class IclubPropUsageTypeTrans {
 		return model;
 	}
 	
-	public IclubPropUsageTypeModel fromORMtoWS(IclubPropUsageType bean) {
+	public static IclubPropUsageTypeModel fromORMtoWS(IclubPropUsageType bean) {
 		IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
 		model.setPutId(bean.getPutId().longValue());
 		model.setPutLongDesc(bean.getPutLongDesc());
@@ -33,7 +33,7 @@ public class IclubPropUsageTypeTrans {
 		return model;
 	}
 	
-	public IclubPropUsageType fromWStoORM(IclubPropUsageTypeModel model) {
+	public static IclubPropUsageType fromWStoORM(IclubPropUsageTypeModel model) {
 		IclubPropUsageType acctype = new IclubPropUsageType();
 		
 		acctype.setPutId(model.getPutId());

@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubRoofType;
 
 public class IclubRoofTypeTrans {
 	
-	public IclubRoofTypeBean fromWStoUI(IclubRoofTypeModel model) {
+	public static IclubRoofTypeBean fromWStoUI(IclubRoofTypeModel model) {
 		IclubRoofTypeBean bean = new IclubRoofTypeBean();
 		bean.setRtId(model.getRtId().longValue());
 		bean.setRtLongDesc(model.getRtLongDesc());
@@ -15,7 +15,7 @@ public class IclubRoofTypeTrans {
 		return bean;
 	}
 	
-	public IclubRoofTypeModel fromUItoWS(IclubRoofTypeBean bean) {
+	public static IclubRoofTypeModel fromUItoWS(IclubRoofTypeBean bean) {
 		IclubRoofTypeModel model = new IclubRoofTypeModel();
 		model.setRtId(bean.getRtId().longValue());
 		model.setRtLongDesc(bean.getRtLongDesc());
@@ -24,7 +24,7 @@ public class IclubRoofTypeTrans {
 		return model;
 	}
 	
-	public IclubRoofTypeModel fromORMtoWS(IclubRoofType bean) {
+	public static IclubRoofTypeModel fromORMtoWS(IclubRoofType bean) {
 		IclubRoofTypeModel model = new IclubRoofTypeModel();
 		model.setRtId(bean.getRtId().longValue());
 		model.setRtLongDesc(bean.getRtLongDesc());
@@ -33,7 +33,7 @@ public class IclubRoofTypeTrans {
 		return model;
 	}
 	
-	public IclubRoofType fromWStoORM(IclubRoofTypeModel model) {
+	public static IclubRoofType fromWStoORM(IclubRoofTypeModel model) {
 		IclubRoofType acctype = new IclubRoofType();
 		
 		acctype.setRtId(model.getRtId());

@@ -10,12 +10,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubRateTypeTrans {
 	
-	private IclubEntityTypeDAO iclubEntityTypeDAO;
-	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubFieldDAO iclubFieldDAO;
-	
-	public IclubRateTypeBean fromWStoUI(IclubRateTypeModel model) {
+	public static IclubRateTypeBean fromWStoUI(IclubRateTypeModel model) {
 		
 		IclubRateTypeBean bean = new IclubRateTypeBean();
 		
@@ -38,7 +33,7 @@ public class IclubRateTypeTrans {
 		return bean;
 	}
 	
-	public IclubRateTypeModel fromUItoWS(IclubRateTypeBean bean) {
+	public static IclubRateTypeModel fromUItoWS(IclubRateTypeBean bean) {
 		
 		IclubRateTypeModel model = new IclubRateTypeModel();
 		
@@ -61,7 +56,7 @@ public class IclubRateTypeTrans {
 		return model;
 	}
 	
-	public IclubRateTypeModel fromORMtoWS(IclubRateType bean) {
+	public static IclubRateTypeModel fromORMtoWS(IclubRateType bean) {
 		
 		IclubRateTypeModel model = new IclubRateTypeModel();
 		
@@ -84,7 +79,7 @@ public class IclubRateTypeTrans {
 		return model;
 	}
 	
-	public IclubRateType fromWStoORM(IclubRateTypeModel model) {
+	public static IclubRateType fromWStoORM(IclubRateTypeModel model, IclubFieldDAO iclubFieldDAO, IclubPersonDAO iclubPersonDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO, IclubEntityTypeDAO iclubEntityTypeDAO) {
 		
 		IclubRateType bean = new IclubRateType();
 		
@@ -103,35 +98,4 @@ public class IclubRateTypeTrans {
 		return bean;
 	}
 	
-	public IclubEntityTypeDAO getIclubEntityTypeDAO() {
-		return iclubEntityTypeDAO;
-	}
-	
-	public void setIclubEntityTypeDAO(IclubEntityTypeDAO iclubEntityTypeDAO) {
-		this.iclubEntityTypeDAO = iclubEntityTypeDAO;
-	}
-	
-	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
-		return iclubInsuranceItemTypeDAO;
-	}
-	
-	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubFieldDAO getIclubFieldDAO() {
-		return iclubFieldDAO;
-	}
-	
-	public void setIclubFieldDAO(IclubFieldDAO iclubFieldDAO) {
-		this.iclubFieldDAO = iclubFieldDAO;
-	}
 }

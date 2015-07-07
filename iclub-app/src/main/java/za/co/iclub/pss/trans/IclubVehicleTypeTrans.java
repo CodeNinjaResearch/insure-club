@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubVehicleType;
 
 public class IclubVehicleTypeTrans {
 	
-	public IclubVehicleTypeBean fromWStoUI(IclubVehicleTypeModel model) {
+	public static IclubVehicleTypeBean fromWStoUI(IclubVehicleTypeModel model) {
 		IclubVehicleTypeBean bean = new IclubVehicleTypeBean();
 		bean.setVtId(model.getVtId().longValue());
 		bean.setVtLongDesc(model.getVtLongDesc());
@@ -15,7 +15,7 @@ public class IclubVehicleTypeTrans {
 		return bean;
 	}
 	
-	public IclubVehicleTypeModel fromUItoWS(IclubVehicleTypeBean bean) {
+	public static IclubVehicleTypeModel fromUItoWS(IclubVehicleTypeBean bean) {
 		IclubVehicleTypeModel model = new IclubVehicleTypeModel();
 		model.setVtId(bean.getVtId().longValue());
 		model.setVtLongDesc(bean.getVtLongDesc());
@@ -24,7 +24,7 @@ public class IclubVehicleTypeTrans {
 		return model;
 	}
 	
-	public IclubVehicleTypeModel fromORMtoWS(IclubVehicleType bean) {
+	public static IclubVehicleTypeModel fromORMtoWS(IclubVehicleType bean) {
 		IclubVehicleTypeModel model = new IclubVehicleTypeModel();
 		model.setVtId(bean.getVtId().longValue());
 		model.setVtLongDesc(bean.getVtLongDesc());
@@ -33,7 +33,7 @@ public class IclubVehicleTypeTrans {
 		return model;
 	}
 	
-	public IclubVehicleType fromWStoORM(IclubVehicleTypeModel model) {
+	public static IclubVehicleType fromWStoORM(IclubVehicleTypeModel model) {
 		IclubVehicleType acctype = new IclubVehicleType();
 		
 		acctype.setVtId(model.getVtId());

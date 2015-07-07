@@ -1,7 +1,5 @@
 package za.co.iclub.pss.trans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import za.co.iclub.pss.model.ui.IclubCohortClaimBean;
 import za.co.iclub.pss.model.ws.IclubCohortClaimModel;
 import za.co.iclub.pss.orm.bean.IclubCohortClaim;
@@ -11,14 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubCohortClaimTrans {
 	
-	@Autowired
-	private IclubPersonDAO iclubPersonDAO;
-	@Autowired
-	private IclubCohortDAO iclubCohortDAO;
-	@Autowired
-	private IclubClaimDAO iclubClaimDAO;
-	
-	public IclubCohortClaimBean fromWStoUI(IclubCohortClaimModel model) {
+	public static IclubCohortClaimBean fromWStoUI(IclubCohortClaimModel model) {
 		IclubCohortClaimBean bean = new IclubCohortClaimBean();
 		
 		model.setCcId(model.getCcId());
@@ -35,7 +26,7 @@ public class IclubCohortClaimTrans {
 		return bean;
 	}
 	
-	public IclubCohortClaimModel fromUItoWS(IclubCohortClaimBean bean) {
+	public static IclubCohortClaimModel fromUItoWS(IclubCohortClaimBean bean) {
 		IclubCohortClaimModel model = new IclubCohortClaimModel();
 		
 		model.setIclubPerson(bean.getIclubPerson());
@@ -43,7 +34,7 @@ public class IclubCohortClaimTrans {
 		return model;
 	}
 	
-	public IclubCohortClaimModel fromORMtoWS(IclubCohortClaim bean) {
+	public static IclubCohortClaimModel fromORMtoWS(IclubCohortClaim bean) {
 		
 		IclubCohortClaimModel model = new IclubCohortClaimModel();
 		
@@ -61,7 +52,7 @@ public class IclubCohortClaimTrans {
 		return model;
 	}
 	
-	public IclubCohortClaim fromWStoORM(IclubCohortClaimModel model) {
+	public static IclubCohortClaim fromWStoORM(IclubCohortClaimModel model, IclubClaimDAO iclubClaimDAO, IclubCohortDAO iclubCohortDAO, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubCohortClaim bean = new IclubCohortClaim();
 		
@@ -74,5 +65,4 @@ public class IclubCohortClaimTrans {
 		
 		return bean;
 	}
-	
 }

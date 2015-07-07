@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubMessageType;
 
 public class IclubMessageTypeTrans {
 	
-	public IclubMessageTypeBean fromWStoUI(IclubMessageTypeModel model) {
+	public static IclubMessageTypeBean fromWStoUI(IclubMessageTypeModel model) {
 		IclubMessageTypeBean bean = new IclubMessageTypeBean();
 		bean.setMtId(model.getMtId().longValue());
 		bean.setMtLongDesc(model.getMtLongDesc());
@@ -15,7 +15,7 @@ public class IclubMessageTypeTrans {
 		return bean;
 	}
 	
-	public IclubMessageTypeModel fromUItoWS(IclubMessageTypeBean bean) {
+	public static IclubMessageTypeModel fromUItoWS(IclubMessageTypeBean bean) {
 		IclubMessageTypeModel model = new IclubMessageTypeModel();
 		model.setMtId(bean.getMtId().longValue());
 		model.setMtLongDesc(bean.getMtLongDesc());
@@ -24,7 +24,7 @@ public class IclubMessageTypeTrans {
 		return model;
 	}
 	
-	public IclubMessageTypeModel fromORMtoWS(IclubMessageType bean) {
+	public static IclubMessageTypeModel fromORMtoWS(IclubMessageType bean) {
 		IclubMessageTypeModel model = new IclubMessageTypeModel();
 		model.setMtId(bean.getMtId().longValue());
 		model.setMtLongDesc(bean.getMtLongDesc());
@@ -33,7 +33,7 @@ public class IclubMessageTypeTrans {
 		return model;
 	}
 	
-	public IclubMessageType fromWStoORM(IclubMessageTypeModel model) {
+	public static IclubMessageType fromWStoORM(IclubMessageTypeModel model) {
 		IclubMessageType acctype = new IclubMessageType();
 		
 		acctype.setMtId(model.getMtId());

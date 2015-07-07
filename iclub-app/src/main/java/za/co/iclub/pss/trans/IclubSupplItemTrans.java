@@ -10,12 +10,7 @@ import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 
 public class IclubSupplItemTrans {
 	
-	private IclubSupplMasterDAO iclubSupplMasterDAO;
-	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubAssessmentTypeDAO iclubAssessmentTypeDAO;
-	
-	public IclubSupplItemBean fromWStoUI(IclubSupplItemModel model) {
+	public static IclubSupplItemBean fromWStoUI(IclubSupplItemModel model) {
 		
 		IclubSupplItemBean bean = new IclubSupplItemBean();
 		
@@ -35,7 +30,7 @@ public class IclubSupplItemTrans {
 		return bean;
 	}
 	
-	public IclubSupplItemModel fromUItoWS(IclubSupplItemBean bean) {
+	public static IclubSupplItemModel fromUItoWS(IclubSupplItemBean bean) {
 		
 		IclubSupplItemModel model = new IclubSupplItemModel();
 		
@@ -55,7 +50,7 @@ public class IclubSupplItemTrans {
 		return model;
 	}
 	
-	public IclubSupplItemModel fromORMtoWS(IclubSupplItem bean) {
+	public static IclubSupplItemModel fromORMtoWS(IclubSupplItem bean) {
 		
 		IclubSupplItemModel model = new IclubSupplItemModel();
 		
@@ -75,7 +70,7 @@ public class IclubSupplItemTrans {
 		return model;
 	}
 	
-	public IclubSupplItem fromWStoORM(IclubSupplItemModel model) {
+	public static IclubSupplItem fromWStoORM(IclubSupplItemModel model, IclubAssessmentTypeDAO iclubAssessmentTypeDAO, IclubPersonDAO iclubPersonDAO, IclubSupplMasterDAO iclubSupplMasterDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		
 		IclubSupplItem bean = new IclubSupplItem();
 		
@@ -89,37 +84,5 @@ public class IclubSupplItemTrans {
 		bean.setSiItemId(model.getSiItemId());
 		
 		return bean;
-	}
-	
-	public IclubSupplMasterDAO getIclubSupplMasterDAO() {
-		return iclubSupplMasterDAO;
-	}
-	
-	public void setIclubSupplMasterDAO(IclubSupplMasterDAO iclubSupplMasterDAO) {
-		this.iclubSupplMasterDAO = iclubSupplMasterDAO;
-	}
-	
-	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
-		return iclubInsuranceItemTypeDAO;
-	}
-	
-	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubAssessmentTypeDAO getIclubAssessmentTypeDAO() {
-		return iclubAssessmentTypeDAO;
-	}
-	
-	public void setIclubAssessmentTypeDAO(IclubAssessmentTypeDAO iclubAssessmentTypeDAO) {
-		this.iclubAssessmentTypeDAO = iclubAssessmentTypeDAO;
 	}
 }

@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubCohortType;
 
 public class IclubCohortTypeTrans {
 	
-	public IclubCohortTypeBean fromWStoUI(IclubCohortTypeModel model) {
+	public static IclubCohortTypeBean fromWStoUI(IclubCohortTypeModel model) {
 		IclubCohortTypeBean bean = new IclubCohortTypeBean();
 		bean.setCtId(model.getCtId().longValue());
 		bean.setCtLongDesc(model.getCtLongDesc());
@@ -15,7 +15,7 @@ public class IclubCohortTypeTrans {
 		return bean;
 	}
 	
-	public IclubCohortTypeModel fromUItoWS(IclubCohortTypeBean bean) {
+	public static IclubCohortTypeModel fromUItoWS(IclubCohortTypeBean bean) {
 		IclubCohortTypeModel model = new IclubCohortTypeModel();
 		model.setCtId(bean.getCtId().longValue());
 		model.setCtLongDesc(bean.getCtLongDesc());
@@ -24,7 +24,7 @@ public class IclubCohortTypeTrans {
 		return model;
 	}
 	
-	public IclubCohortTypeModel fromORMtoWS(IclubCohortType bean) {
+	public static IclubCohortTypeModel fromORMtoWS(IclubCohortType bean) {
 		IclubCohortTypeModel model = new IclubCohortTypeModel();
 		model.setCtId(bean.getCtId().longValue());
 		model.setCtLongDesc(bean.getCtLongDesc());
@@ -33,7 +33,7 @@ public class IclubCohortTypeTrans {
 		return model;
 	}
 	
-	public IclubCohortType fromWStoORM(IclubCohortTypeModel model) {
+	public static IclubCohortType fromWStoORM(IclubCohortTypeModel model) {
 		IclubCohortType acctype = new IclubCohortType();
 		
 		acctype.setCtId(model.getCtId());

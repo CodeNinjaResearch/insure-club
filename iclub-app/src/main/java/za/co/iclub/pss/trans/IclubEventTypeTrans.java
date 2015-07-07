@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubEventType;
 
 public class IclubEventTypeTrans {
 	
-	public IclubEventTypeBean fromWStoUI(IclubEventTypeModel model) {
+	public static IclubEventTypeBean fromWStoUI(IclubEventTypeModel model) {
 		IclubEventTypeBean bean = new IclubEventTypeBean();
 		bean.setEtId(model.getEtId().longValue());
 		bean.setEtLongDesc(model.getEtLongDesc());
@@ -15,7 +15,7 @@ public class IclubEventTypeTrans {
 		return bean;
 	}
 	
-	public IclubEventTypeModel fromUItoWS(IclubEventTypeBean bean) {
+	public static IclubEventTypeModel fromUItoWS(IclubEventTypeBean bean) {
 		IclubEventTypeModel model = new IclubEventTypeModel();
 		model.setEtId(bean.getEtId().longValue());
 		model.setEtLongDesc(bean.getEtLongDesc());
@@ -24,7 +24,7 @@ public class IclubEventTypeTrans {
 		return model;
 	}
 	
-	public IclubEventTypeModel fromORMtoWS(IclubEventType bean) {
+	public static IclubEventTypeModel fromORMtoWS(IclubEventType bean) {
 		IclubEventTypeModel model = new IclubEventTypeModel();
 		model.setEtId(bean.getEtId().longValue());
 		model.setEtLongDesc(bean.getEtLongDesc());
@@ -33,7 +33,7 @@ public class IclubEventTypeTrans {
 		return model;
 	}
 	
-	public IclubEventType fromWStoORM(IclubEventTypeModel model) {
+	public static IclubEventType fromWStoORM(IclubEventTypeModel model) {
 		IclubEventType acctype = new IclubEventType();
 		
 		acctype.setEtId(model.getEtId());

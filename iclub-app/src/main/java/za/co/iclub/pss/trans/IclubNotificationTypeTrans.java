@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubNotificationType;
 
 public class IclubNotificationTypeTrans {
 	
-	public IclubNotificationTypeBean fromWStoUI(IclubNotificationTypeModel model) {
+	public static IclubNotificationTypeBean fromWStoUI(IclubNotificationTypeModel model) {
 		IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
 		bean.setNtId(model.getNtId().longValue());
 		bean.setNtLongDesc(model.getNtLongDesc());
@@ -15,7 +15,7 @@ public class IclubNotificationTypeTrans {
 		return bean;
 	}
 	
-	public IclubNotificationTypeModel fromUItoWS(IclubNotificationTypeBean bean) {
+	public static IclubNotificationTypeModel fromUItoWS(IclubNotificationTypeBean bean) {
 		IclubNotificationTypeModel model = new IclubNotificationTypeModel();
 		model.setNtId(bean.getNtId().longValue());
 		model.setNtLongDesc(bean.getNtLongDesc());
@@ -24,7 +24,7 @@ public class IclubNotificationTypeTrans {
 		return model;
 	}
 	
-	public IclubNotificationTypeModel fromORMtoWS(IclubNotificationType bean) {
+	public static IclubNotificationTypeModel fromORMtoWS(IclubNotificationType bean) {
 		IclubNotificationTypeModel model = new IclubNotificationTypeModel();
 		model.setNtId(bean.getNtId().longValue());
 		model.setNtLongDesc(bean.getNtLongDesc());
@@ -33,7 +33,7 @@ public class IclubNotificationTypeTrans {
 		return model;
 	}
 	
-	public IclubNotificationType fromWStoORM(IclubNotificationTypeModel model) {
+	public static IclubNotificationType fromWStoORM(IclubNotificationTypeModel model) {
 		IclubNotificationType acctype = new IclubNotificationType();
 		
 		acctype.setNtId(model.getNtId());

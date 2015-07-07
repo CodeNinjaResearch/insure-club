@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubSecurityQuestionModel;
 import za.co.iclub.pss.orm.bean.IclubSecurityQuestion;
 
 public class IclubSecurityQuestionTrans {
-	public IclubSecurityQuestionBean fromWStoUI(IclubSecurityQuestionModel model) {
+	public static IclubSecurityQuestionBean fromWStoUI(IclubSecurityQuestionModel model) {
 		IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
 		bean.setSqId(model.getSqId().longValue());
 		bean.setSqLongDesc(model.getSqLongDesc());
@@ -14,7 +14,7 @@ public class IclubSecurityQuestionTrans {
 		return bean;
 	}
 	
-	public IclubSecurityQuestionModel fromUItoWS(IclubSecurityQuestionBean bean) {
+	public static IclubSecurityQuestionModel fromUItoWS(IclubSecurityQuestionBean bean) {
 		IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
 		model.setSqId(bean.getSqId().longValue());
 		model.setSqLongDesc(bean.getSqLongDesc());
@@ -23,7 +23,7 @@ public class IclubSecurityQuestionTrans {
 		return model;
 	}
 	
-	public IclubSecurityQuestionModel fromORMtoWS(IclubSecurityQuestion bean) {
+	public static IclubSecurityQuestionModel fromORMtoWS(IclubSecurityQuestion bean) {
 		IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
 		model.setSqId(bean.getSqId().longValue());
 		model.setSqLongDesc(bean.getSqLongDesc());
@@ -32,7 +32,7 @@ public class IclubSecurityQuestionTrans {
 		return model;
 	}
 	
-	public IclubSecurityQuestion fromWStoORM(IclubSecurityQuestionModel model) {
+	public static IclubSecurityQuestion fromWStoORM(IclubSecurityQuestionModel model) {
 		IclubSecurityQuestion acctype = new IclubSecurityQuestion();
 		
 		acctype.setSqId(model.getSqId());

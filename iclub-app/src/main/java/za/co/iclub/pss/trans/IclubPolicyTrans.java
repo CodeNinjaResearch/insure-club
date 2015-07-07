@@ -10,12 +10,7 @@ import za.co.iclub.pss.orm.dao.IclubQuoteDAO;
 
 public class IclubPolicyTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubPolicyStatusDAO iclubPolicyStatusDAO;
-	private IclubQuoteDAO iclubQuoteDAO;
-	private IclubAccountDAO iclubAccountDAO;
-	
-	public IclubPolicyBean fromWStoUI(IclubPolicyModel model) {
+	public static IclubPolicyBean fromWStoUI(IclubPolicyModel model) {
 		
 		IclubPolicyBean bean = new IclubPolicyBean();
 		
@@ -37,7 +32,7 @@ public class IclubPolicyTrans {
 		return bean;
 	}
 	
-	public IclubPolicyModel fromUItoWS(IclubPolicyBean bean) {
+	public static IclubPolicyModel fromUItoWS(IclubPolicyBean bean) {
 		
 		IclubPolicyModel model = new IclubPolicyModel();
 		
@@ -59,7 +54,7 @@ public class IclubPolicyTrans {
 		return model;
 	}
 	
-	public IclubPolicyModel fromORMtoWS(IclubPolicy bean) {
+	public static IclubPolicyModel fromORMtoWS(IclubPolicy bean) {
 		
 		IclubPolicyModel model = new IclubPolicyModel();
 		
@@ -81,7 +76,7 @@ public class IclubPolicyTrans {
 		return model;
 	}
 	
-	public IclubPolicy fromWStoORM(IclubPolicyModel model) {
+	public static IclubPolicy fromWStoORM(IclubPolicyModel model, IclubPersonDAO iclubPersonDAO, IclubPolicyStatusDAO iclubPolicyStatusDAO, IclubQuoteDAO iclubQuoteDAO, IclubAccountDAO iclubAccountDAO) {
 		
 		IclubPolicy bean = new IclubPolicy();
 		
@@ -98,38 +93,6 @@ public class IclubPolicyTrans {
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		
 		return bean;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubPolicyStatusDAO getIclubPolicyStatusDAO() {
-		return iclubPolicyStatusDAO;
-	}
-	
-	public void setIclubPolicyStatusDAO(IclubPolicyStatusDAO iclubPolicyStatusDAO) {
-		this.iclubPolicyStatusDAO = iclubPolicyStatusDAO;
-	}
-	
-	public IclubQuoteDAO getIclubQuoteDAO() {
-		return iclubQuoteDAO;
-	}
-	
-	public void setIclubQuoteDAO(IclubQuoteDAO iclubQuoteDAO) {
-		this.iclubQuoteDAO = iclubQuoteDAO;
-	}
-	
-	public IclubAccountDAO getIclubAccountDAO() {
-		return iclubAccountDAO;
-	}
-	
-	public void setIclubAccountDAO(IclubAccountDAO iclubAccountDAO) {
-		this.iclubAccountDAO = iclubAccountDAO;
 	}
 	
 }

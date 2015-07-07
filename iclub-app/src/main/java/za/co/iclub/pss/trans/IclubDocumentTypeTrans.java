@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubDocumentType;
 
 public class IclubDocumentTypeTrans {
 	
-	public IclubDocumentTypeBean fromWStoUI(IclubDocumentTypeModel model) {
+	public static IclubDocumentTypeBean fromWStoUI(IclubDocumentTypeModel model) {
 		IclubDocumentTypeBean bean = new IclubDocumentTypeBean();
 		bean.setDtId(model.getDtId().longValue());
 		bean.setDtLongDesc(model.getDtLongDesc());
@@ -15,7 +15,7 @@ public class IclubDocumentTypeTrans {
 		return bean;
 	}
 	
-	public IclubDocumentTypeModel fromUItoWS(IclubDocumentTypeBean bean) {
+	public static IclubDocumentTypeModel fromUItoWS(IclubDocumentTypeBean bean) {
 		IclubDocumentTypeModel model = new IclubDocumentTypeModel();
 		model.setDtId(bean.getDtId().longValue());
 		model.setDtLongDesc(bean.getDtLongDesc());
@@ -24,7 +24,7 @@ public class IclubDocumentTypeTrans {
 		return model;
 	}
 	
-	public IclubDocumentTypeModel fromORMtoWS(IclubDocumentType bean) {
+	public static IclubDocumentTypeModel fromORMtoWS(IclubDocumentType bean) {
 		IclubDocumentTypeModel model = new IclubDocumentTypeModel();
 		model.setDtId(bean.getDtId().longValue());
 		model.setDtLongDesc(bean.getDtLongDesc());
@@ -33,7 +33,7 @@ public class IclubDocumentTypeTrans {
 		return model;
 	}
 	
-	public IclubDocumentType fromWStoORM(IclubDocumentTypeModel model) {
+	public static IclubDocumentType fromWStoORM(IclubDocumentTypeModel model) {
 		IclubDocumentType acctype = new IclubDocumentType();
 		
 		acctype.setDtId(model.getDtId());

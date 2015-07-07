@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubAlarmType;
 
 public class IclubAlarmTypeTrans {
 	
-	public IclubAlarmTypeBean fromWStoUI(IclubAlarmTypeModel model) {
+	public static IclubAlarmTypeBean fromWStoUI(IclubAlarmTypeModel model) {
 		IclubAlarmTypeBean bean = new IclubAlarmTypeBean();
 		bean.setAtId(model.getAtId().longValue());
 		bean.setAtLongDesc(model.getAtLongDesc());
@@ -15,7 +15,7 @@ public class IclubAlarmTypeTrans {
 		return bean;
 	}
 	
-	public IclubAlarmTypeModel fromUItoWS(IclubAlarmTypeBean bean) {
+	public static IclubAlarmTypeModel fromUItoWS(IclubAlarmTypeBean bean) {
 		IclubAlarmTypeModel model = new IclubAlarmTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
@@ -24,7 +24,7 @@ public class IclubAlarmTypeTrans {
 		return model;
 	}
 	
-	public IclubAlarmTypeModel fromORMtoWS(IclubAlarmType bean) {
+	public static IclubAlarmTypeModel fromORMtoWS(IclubAlarmType bean) {
 		IclubAlarmTypeModel model = new IclubAlarmTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
@@ -33,7 +33,7 @@ public class IclubAlarmTypeTrans {
 		return model;
 	}
 	
-	public IclubAlarmType fromWStoORM(IclubAlarmTypeModel model) {
+	public static IclubAlarmType fromWStoORM(IclubAlarmTypeModel model) {
 		IclubAlarmType acctype = new IclubAlarmType();
 		
 		acctype.setAtId(model.getAtId());

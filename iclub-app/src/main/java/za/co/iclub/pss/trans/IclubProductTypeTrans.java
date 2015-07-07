@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubProductType;
 
 public class IclubProductTypeTrans {
 	
-	public IclubProductTypeBean fromWStoUI(IclubProductTypeModel model) {
+	public static IclubProductTypeBean fromWStoUI(IclubProductTypeModel model) {
 		IclubProductTypeBean bean = new IclubProductTypeBean();
 		bean.setPtId(model.getPtId().longValue());
 		bean.setPtLongDesc(model.getPtLongDesc());
@@ -15,7 +15,7 @@ public class IclubProductTypeTrans {
 		return bean;
 	}
 	
-	public IclubProductTypeModel fromUItoWS(IclubProductTypeBean bean) {
+	public static IclubProductTypeModel fromUItoWS(IclubProductTypeBean bean) {
 		IclubProductTypeModel model = new IclubProductTypeModel();
 		model.setPtId(bean.getPtId().longValue());
 		model.setPtLongDesc(bean.getPtLongDesc());
@@ -24,7 +24,7 @@ public class IclubProductTypeTrans {
 		return model;
 	}
 	
-	public IclubProductTypeModel fromORMtoWS(IclubProductType bean) {
+	public static IclubProductTypeModel fromORMtoWS(IclubProductType bean) {
 		IclubProductTypeModel model = new IclubProductTypeModel();
 		model.setPtId(bean.getPtId().longValue());
 		model.setPtLongDesc(bean.getPtLongDesc());
@@ -33,7 +33,7 @@ public class IclubProductTypeTrans {
 		return model;
 	}
 	
-	public IclubProductType fromWStoORM(IclubProductTypeModel model) {
+	public static IclubProductType fromWStoORM(IclubProductTypeModel model) {
 		IclubProductType acctype = new IclubProductType();
 		
 		acctype.setPtId(model.getPtId());

@@ -9,10 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubConfigTrans {
 	
-	@Autowired
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubConfigBean fromWStoUI(IclubConfigModel model) {
+	public static IclubConfigBean fromWStoUI(IclubConfigModel model) {
 		
 		IclubConfigBean bean = new IclubConfigBean();
 		
@@ -27,7 +24,7 @@ public class IclubConfigTrans {
 		return bean;
 	}
 	
-	public IclubConfigModel fromUItoWS(IclubConfigBean bean) {
+	public static IclubConfigModel fromUItoWS(IclubConfigBean bean) {
 		
 		IclubConfigModel model = new IclubConfigModel();
 		
@@ -42,7 +39,7 @@ public class IclubConfigTrans {
 		return model;
 	}
 	
-	public IclubConfigModel fromORMtoWS(IclubConfig bean) {
+	public static IclubConfigModel fromORMtoWS(IclubConfig bean) {
 		
 		IclubConfigModel model = new IclubConfigModel();
 		
@@ -57,7 +54,7 @@ public class IclubConfigTrans {
 		return model;
 	}
 	
-	public IclubConfig fromWStoORM(IclubConfigModel model) {
+	public static IclubConfig fromWStoORM(IclubConfigModel model, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubConfig bean = new IclubConfig();
 		bean.setCId(model.getCId());
@@ -69,11 +66,4 @@ public class IclubConfigTrans {
 		return bean;
 	}
 	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubAccessType;
 
 public class IclubAccountTypeTrans {
 	
-	public IclubAccessTypeBean fromWStoUI(IclubAccessTypeModel model) {
+	public static IclubAccessTypeBean fromWStoUI(IclubAccessTypeModel model) {
 		IclubAccessTypeBean bean = new IclubAccessTypeBean();
 		bean.setAtId(model.getAtId().longValue());
 		bean.setAtLongDesc(model.getAtLongDesc());
@@ -15,7 +15,7 @@ public class IclubAccountTypeTrans {
 		return bean;
 	}
 	
-	public IclubAccessTypeModel fromUItoWS(IclubAccessTypeBean bean) {
+	public static IclubAccessTypeModel fromUItoWS(IclubAccessTypeBean bean) {
 		IclubAccessTypeModel model = new IclubAccessTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
@@ -24,7 +24,7 @@ public class IclubAccountTypeTrans {
 		return model;
 	}
 	
-	public IclubAccessTypeModel fromORMtoWS(IclubAccessType bean) {
+	public static IclubAccessTypeModel fromORMtoWS(IclubAccessType bean) {
 		IclubAccessTypeModel model = new IclubAccessTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
@@ -33,7 +33,7 @@ public class IclubAccountTypeTrans {
 		return model;
 	}
 	
-	public IclubAccessType fromWStoORM(IclubAccessTypeModel model) {
+	public static IclubAccessType fromWStoORM(IclubAccessTypeModel model) {
 		IclubAccessType acctype = new IclubAccessType();
 		
 		acctype.setAtId(model.getAtId());

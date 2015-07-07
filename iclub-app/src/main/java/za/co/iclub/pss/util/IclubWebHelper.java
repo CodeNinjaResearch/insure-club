@@ -20,10 +20,9 @@ import org.apache.cxf.jaxrs.client.WebClient;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import za.co.iclub.pss.web.bean.GoogleResponse;
-import za.co.iclub.pss.web.bean.Result;
-import za.co.iclub.pss.ws.model.IclubGeoLocModel;
-import za.co.iclub.pss.ws.util.CustomObjectMapper;
+import za.co.iclub.pss.model.ui.GoogleResponse;
+import za.co.iclub.pss.model.ui.Result;
+import za.co.iclub.pss.model.ws.IclubGeoLocModel;
 
 public class IclubWebHelper {
 	

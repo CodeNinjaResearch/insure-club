@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubExtrasTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubExtrasBean fromWStoUI(IclubExtrasModel model) {
+	public static IclubExtrasBean fromWStoUI(IclubExtrasModel model) {
 		IclubExtrasBean bean = new IclubExtrasBean();
 		bean.setEId(model.getEId().longValue());
 		bean.setEDesc(model.getEDesc());
@@ -20,7 +18,7 @@ public class IclubExtrasTrans {
 		return bean;
 	}
 	
-	public IclubExtrasModel fromUItoWS(IclubExtrasBean bean) {
+	public static IclubExtrasModel fromUItoWS(IclubExtrasBean bean) {
 		IclubExtrasModel model = new IclubExtrasModel();
 		model.setEId(bean.getEId().longValue());
 		model.setEDesc(bean.getEDesc());
@@ -31,7 +29,7 @@ public class IclubExtrasTrans {
 		return model;
 	}
 	
-	public IclubExtrasModel fromORMtoWS(IclubExtras bean) {
+	public static IclubExtrasModel fromORMtoWS(IclubExtras bean) {
 		IclubExtrasModel model = new IclubExtrasModel();
 		model.setEId(bean.getEId().longValue());
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
@@ -42,8 +40,10 @@ public class IclubExtrasTrans {
 		return model;
 	}
 	
-	public IclubExtras fromWStoORM(IclubExtrasModel model) {
+	public static IclubExtras fromWStoORM(IclubExtrasModel model, IclubPersonDAO iclubPersonDAO) {
+		
 		IclubExtras acctype = new IclubExtras();
+		
 		acctype.setEId(model.getEId());
 		acctype.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		acctype.setEDesc(model.getEDesc());

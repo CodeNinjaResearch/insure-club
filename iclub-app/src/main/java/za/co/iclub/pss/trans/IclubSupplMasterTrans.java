@@ -8,10 +8,7 @@ import za.co.iclub.pss.orm.dao.IclubSupplierTypeDAO;
 
 public class IclubSupplMasterTrans {
 	
-	private IclubSupplierTypeDAO iclubSupplierTypeDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubSupplMasterBean fromWStoUI(IclubSupplMasterModel model) {
+	public static IclubSupplMasterBean fromWStoUI(IclubSupplMasterModel model) {
 		
 		IclubSupplMasterBean bean = new IclubSupplMasterBean();
 		
@@ -33,7 +30,7 @@ public class IclubSupplMasterTrans {
 		return bean;
 	}
 	
-	public IclubSupplMasterModel fromUItoWS(IclubSupplMasterBean bean) {
+	public static IclubSupplMasterModel fromUItoWS(IclubSupplMasterBean bean) {
 		
 		IclubSupplMasterModel model = new IclubSupplMasterModel();
 		
@@ -56,7 +53,7 @@ public class IclubSupplMasterTrans {
 		return model;
 	}
 	
-	public IclubSupplMasterModel fromORMtoWS(IclubSupplMaster bean) {
+	public static IclubSupplMasterModel fromORMtoWS(IclubSupplMaster bean) {
 		
 		IclubSupplMasterModel model = new IclubSupplMasterModel();
 		
@@ -79,7 +76,7 @@ public class IclubSupplMasterTrans {
 		return model;
 	}
 	
-	public IclubSupplMaster fromWStoORM(IclubSupplMasterModel model) {
+	public static IclubSupplMaster fromWStoORM(IclubSupplMasterModel model, IclubPersonDAO iclubPersonDAO, IclubSupplierTypeDAO iclubSupplierTypeDAO) {
 		
 		IclubSupplMaster bean = new IclubSupplMaster();
 		

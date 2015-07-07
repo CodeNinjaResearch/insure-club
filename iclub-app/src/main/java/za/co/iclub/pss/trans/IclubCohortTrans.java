@@ -1,7 +1,5 @@
 package za.co.iclub.pss.trans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import za.co.iclub.pss.model.ui.IclubCohortBean;
 import za.co.iclub.pss.model.ws.IclubCohortModel;
 import za.co.iclub.pss.orm.bean.IclubCohort;
@@ -10,12 +8,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubCohortTrans {
 	
-	@Autowired
-	private IclubPersonDAO iclubPersonDAO;
-	@Autowired
-	private IclubCohortTypeDAO iclubCohortTypeDAO;
-	
-	public IclubCohortBean fromWStoUI(IclubCohortModel model) {
+	public static IclubCohortBean fromWStoUI(IclubCohortModel model) {
 		IclubCohortBean bean = new IclubCohortBean();
 		
 		bean.setCId(model.getCId());
@@ -37,7 +30,7 @@ public class IclubCohortTrans {
 		return bean;
 	}
 	
-	public IclubCohortModel fromUItoWS(IclubCohortBean bean) {
+	public static IclubCohortModel fromUItoWS(IclubCohortBean bean) {
 		IclubCohortModel model = new IclubCohortModel();
 		
 		model.setCId(bean.getCId());
@@ -59,7 +52,7 @@ public class IclubCohortTrans {
 		return model;
 	}
 	
-	public IclubCohortModel fromORMtoWS(IclubCohort bean) {
+	public static IclubCohortModel fromORMtoWS(IclubCohort bean) {
 		IclubCohortModel model = new IclubCohortModel();
 		
 		model.setCId(bean.getCId());
@@ -81,7 +74,7 @@ public class IclubCohortTrans {
 		return model;
 	}
 	
-	public IclubCohort fromWStoORM(IclubCohortModel model) {
+	public static IclubCohort fromWStoORM(IclubCohortModel model, IclubPersonDAO iclubPersonDAO, IclubCohortTypeDAO iclubCohortTypeDAO) {
 		
 		IclubCohort bean = new IclubCohort();
 		
@@ -100,5 +93,4 @@ public class IclubCohortTrans {
 		
 		return bean;
 	}
-	
 }

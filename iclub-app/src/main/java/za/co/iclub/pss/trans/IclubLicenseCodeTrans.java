@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubLicenseCodeTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubLicenseCodeBean fromWStoUI(IclubLicenseCodeModel model) {
+	public static IclubLicenseCodeBean fromWStoUI(IclubLicenseCodeModel model) {
 		
 		IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
 		
@@ -24,7 +22,7 @@ public class IclubLicenseCodeTrans {
 		return bean;
 	}
 	
-	public IclubLicenseCodeModel fromUItoWS(IclubLicenseCodeBean bean) {
+	public static IclubLicenseCodeModel fromUItoWS(IclubLicenseCodeBean bean) {
 		
 		IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 		
@@ -39,7 +37,7 @@ public class IclubLicenseCodeTrans {
 		return model;
 	}
 	
-	public IclubLicenseCodeModel fromORMtoWS(IclubLicenseCode bean) {
+	public static IclubLicenseCodeModel fromORMtoWS(IclubLicenseCode bean) {
 		
 		IclubLicenseCodeModel model = new IclubLicenseCodeModel();
 		
@@ -54,7 +52,7 @@ public class IclubLicenseCodeTrans {
 		return model;
 	}
 	
-	public IclubLicenseCode fromWStoORM(IclubLicenseCodeModel model) {
+	public static IclubLicenseCode fromWStoORM(IclubLicenseCodeModel model, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubLicenseCode bean = new IclubLicenseCode();
 		
@@ -68,11 +66,4 @@ public class IclubLicenseCodeTrans {
 		return bean;
 	}
 	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubCohortSummaryModel;
 
 public class IclubCohortSummaryTrans {
 	
-	public IclubCohortSummaryBean fromWStoUI(IclubCohortSummaryModel model) {
+	public static IclubCohortSummaryBean fromWStoUI(IclubCohortSummaryModel model) {
 		
 		IclubCohortSummaryBean bean = new IclubCohortSummaryBean();
 		
@@ -18,7 +18,7 @@ public class IclubCohortSummaryTrans {
 		return bean;
 	}
 	
-	public IclubCohortSummaryModel fromUItoWS(IclubCohortSummaryBean bean) {
+	public static IclubCohortSummaryModel fromUItoWS(IclubCohortSummaryBean bean) {
 		
 		IclubCohortSummaryModel model = new IclubCohortSummaryModel();
 		

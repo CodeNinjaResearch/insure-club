@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubSupplierType;
 
 public class IclubSupplierTypeTrans {
 	
-	public IclubSupplierTypeBean fromWStoUI(IclubSupplierTypeModel model) {
+	public static IclubSupplierTypeBean fromWStoUI(IclubSupplierTypeModel model) {
 		IclubSupplierTypeBean bean = new IclubSupplierTypeBean();
 		bean.setStId(model.getStId().longValue());
 		bean.setStLongDesc(model.getStLongDesc());
@@ -15,7 +15,7 @@ public class IclubSupplierTypeTrans {
 		return bean;
 	}
 	
-	public IclubSupplierTypeModel fromUItoWS(IclubSupplierTypeBean bean) {
+	public static IclubSupplierTypeModel fromUItoWS(IclubSupplierTypeBean bean) {
 		IclubSupplierTypeModel model = new IclubSupplierTypeModel();
 		model.setStId(bean.getStId().longValue());
 		model.setStLongDesc(bean.getStLongDesc());
@@ -24,7 +24,7 @@ public class IclubSupplierTypeTrans {
 		return model;
 	}
 	
-	public IclubSupplierTypeModel fromORMtoWS(IclubSupplierType bean) {
+	public static IclubSupplierTypeModel fromORMtoWS(IclubSupplierType bean) {
 		IclubSupplierTypeModel model = new IclubSupplierTypeModel();
 		model.setStId(bean.getStId().longValue());
 		model.setStLongDesc(bean.getStLongDesc());
@@ -33,7 +33,7 @@ public class IclubSupplierTypeTrans {
 		return model;
 	}
 	
-	public IclubSupplierType fromWStoORM(IclubSupplierTypeModel model) {
+	public static IclubSupplierType fromWStoORM(IclubSupplierTypeModel model) {
 		IclubSupplierType acctype = new IclubSupplierType();
 		
 		acctype.setStId(model.getStId());

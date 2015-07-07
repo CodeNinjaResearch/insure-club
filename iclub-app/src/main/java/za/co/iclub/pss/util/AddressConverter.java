@@ -8,8 +8,8 @@ import java.net.URLEncoder;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import za.co.iclub.pss.web.bean.GoogleResponse;
-import za.co.iclub.pss.web.bean.Result;
+import za.co.iclub.pss.model.ui.GoogleResponse;
+import za.co.iclub.pss.model.ui.Result;
 
 public class AddressConverter {
 	

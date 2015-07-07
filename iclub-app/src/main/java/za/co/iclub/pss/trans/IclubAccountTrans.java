@@ -10,12 +10,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubAccountTrans {
 	
-	private IclubBankMasterDAO iclubBankMasterDAO;
-	private IclubAccountTypeDAO iclubAccountTypeDAO;
-	private IclubOwnerTypeDAO iclubOwnerTypeDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubAccountBean fromWStoUI(IclubAccountModel model) {
+	public static IclubAccountBean fromWStoUI(IclubAccountModel model) {
 		IclubAccountBean bean = new IclubAccountBean();
 		bean.setAId(model.getAId());
 		bean.setAAccNum(model.getAAccNum());
@@ -34,7 +29,7 @@ public class IclubAccountTrans {
 		return bean;
 	}
 	
-	public IclubAccountModel fromUItoWS(IclubAccountBean bean) {
+	public static IclubAccountModel fromUItoWS(IclubAccountBean bean) {
 		IclubAccountModel model = new IclubAccountModel();
 		model.setAId(model.getAId());
 		model.setAAccNum(model.getAAccNum());
@@ -53,7 +48,7 @@ public class IclubAccountTrans {
 		return model;
 	}
 	
-	public IclubAccountModel fromORMtoWS(IclubAccount bean) {
+	public static IclubAccountModel fromORMtoWS(IclubAccount bean) {
 		IclubAccountModel model = new IclubAccountModel();
 		model.setAId(model.getAId());
 		model.setAAccNum(model.getAAccNum());
@@ -71,7 +66,7 @@ public class IclubAccountTrans {
 		return model;
 	}
 	
-	public IclubAccount fromWStoORM(IclubAccountModel model) {
+	public static IclubAccount fromWStoORM(IclubAccountModel model, IclubBankMasterDAO iclubBankMasterDAO, IclubAccountTypeDAO iclubAccountTypeDAO, IclubOwnerTypeDAO iclubOwnerTypeDAO, IclubPersonDAO iclubPersonDAO) {
 		IclubAccount bean = new IclubAccount();
 		bean.setAId(model.getAId());
 		bean.setAAccNum(model.getAAccNum());

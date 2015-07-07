@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
 
 public class IclubInsuranceItemTypeTrans {
 	
-	public IclubInsuranceItemTypeBean fromWStoUI(IclubInsuranceItemTypeModel model) {
+	public static IclubInsuranceItemTypeBean fromWStoUI(IclubInsuranceItemTypeModel model) {
 		IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
 		bean.setIitId(model.getIitId().longValue());
 		bean.setIitLongDesc(model.getIitLongDesc());
@@ -15,7 +15,7 @@ public class IclubInsuranceItemTypeTrans {
 		return bean;
 	}
 	
-	public IclubInsuranceItemTypeModel fromUItoWS(IclubInsuranceItemTypeBean bean) {
+	public static IclubInsuranceItemTypeModel fromUItoWS(IclubInsuranceItemTypeBean bean) {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
 		model.setIitId(bean.getIitId().longValue());
 		model.setIitLongDesc(bean.getIitLongDesc());
@@ -24,7 +24,7 @@ public class IclubInsuranceItemTypeTrans {
 		return model;
 	}
 	
-	public IclubInsuranceItemTypeModel fromORMtoWS(IclubInsuranceItemType bean) {
+	public static IclubInsuranceItemTypeModel fromORMtoWS(IclubInsuranceItemType bean) {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
 		model.setIitId(bean.getIitId().longValue());
 		model.setIitLongDesc(bean.getIitLongDesc());
@@ -33,7 +33,7 @@ public class IclubInsuranceItemTypeTrans {
 		return model;
 	}
 	
-	public IclubInsuranceItemType fromWStoORM(IclubInsuranceItemTypeModel model) {
+	public static IclubInsuranceItemType fromWStoORM(IclubInsuranceItemTypeModel model) {
 		IclubInsuranceItemType acctype = new IclubInsuranceItemType();
 		
 		acctype.setIitId(model.getIitId());

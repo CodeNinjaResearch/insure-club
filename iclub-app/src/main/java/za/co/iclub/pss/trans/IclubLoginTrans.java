@@ -9,11 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubSecurityQuestionDAO;
 
 public class IclubLoginTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubSecurityQuestionDAO iclubSecurityQuestionDAO;
-	private IclubRoleTypeDAO iclubRoleTypeDAO;
-	
-	public IclubLoginBean fromWStoUI(IclubLoginModel model) {
+	public static IclubLoginBean fromWStoUI(IclubLoginModel model) {
 		IclubLoginBean bean = new IclubLoginBean();
 		
 		bean.setLId(model.getLId());
@@ -33,7 +29,7 @@ public class IclubLoginTrans {
 		return bean;
 	}
 	
-	public IclubLoginModel fromUItoWS(IclubLoginBean bean) {
+	public static IclubLoginModel fromUItoWS(IclubLoginBean bean) {
 		IclubLoginModel model = new IclubLoginModel();
 		
 		model.setLId(bean.getLId());
@@ -53,7 +49,7 @@ public class IclubLoginTrans {
 		return model;
 	}
 	
-	public IclubLoginModel fromORMtoWS(IclubLogin bean) {
+	public static IclubLoginModel fromORMtoWS(IclubLogin bean) {
 		IclubLoginModel model = new IclubLoginModel();
 		
 		model.setLId(bean.getLId());
@@ -73,7 +69,7 @@ public class IclubLoginTrans {
 		return model;
 	}
 	
-	public IclubLogin fromWStoORM(IclubLoginModel model) {
+	public static IclubLogin fromWStoORM(IclubLoginModel model, IclubPersonDAO iclubPersonDAO, IclubSecurityQuestionDAO iclubSecurityQuestionDAO, IclubRoleTypeDAO iclubRoleTypeDAO) {
 		
 		IclubLogin bean = new IclubLogin();
 		

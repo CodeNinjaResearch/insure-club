@@ -1,7 +1,5 @@
 package za.co.iclub.pss.trans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import za.co.iclub.pss.model.ui.IclubBankMasterBean;
 import za.co.iclub.pss.model.ws.IclubBankMasterModel;
 import za.co.iclub.pss.orm.bean.IclubBankMaster;
@@ -9,10 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubBankMasterTrans {
 	
-	@Autowired
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubBankMasterBean fromWStoUI(IclubBankMasterModel model) {
+	public static IclubBankMasterBean fromWStoUI(IclubBankMasterModel model) {
 		IclubBankMasterBean bean = new IclubBankMasterBean();
 		bean.setBmId(model.getBmId());
 		bean.setBmBankName(model.getBmBankName());
@@ -28,7 +23,7 @@ public class IclubBankMasterTrans {
 		return bean;
 	}
 	
-	public IclubBankMasterModel fromUItoWS(IclubBankMasterBean bean) {
+	public static IclubBankMasterModel fromUItoWS(IclubBankMasterBean bean) {
 		IclubBankMasterModel model = new IclubBankMasterModel();
 		model.setBmId(bean.getBmId());
 		model.setBmBankName(bean.getBmBankName());
@@ -44,7 +39,7 @@ public class IclubBankMasterTrans {
 		return model;
 	}
 	
-	public IclubBankMasterModel fromORMtoWS(IclubBankMaster bean) {
+	public static IclubBankMasterModel fromORMtoWS(IclubBankMaster bean) {
 		IclubBankMasterModel model = new IclubBankMasterModel();
 		model.setBmId(bean.getBmId());
 		model.setBmBankName(bean.getBmBankName());
@@ -60,7 +55,7 @@ public class IclubBankMasterTrans {
 		return model;
 	}
 	
-	public IclubBankMaster fromWStoORM(IclubBankMasterModel model) {
+	public static IclubBankMaster fromWStoORM(IclubBankMasterModel model, IclubPersonDAO iclubPersonDAO) {
 		IclubBankMaster bean = new IclubBankMaster();
 		bean.setBmId(model.getBmId());
 		bean.setBmBankName(model.getBmBankName());

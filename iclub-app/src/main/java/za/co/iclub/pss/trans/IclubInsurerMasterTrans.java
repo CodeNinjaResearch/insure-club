@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubInsurerMasterTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubInsurerMasterBean fromWStoUI(IclubInsurerMasterModel model) {
+	public static IclubInsurerMasterBean fromWStoUI(IclubInsurerMasterModel model) {
 		
 		IclubInsurerMasterBean bean = new IclubInsurerMasterBean();
 		
@@ -27,7 +25,7 @@ public class IclubInsurerMasterTrans {
 		return bean;
 	}
 	
-	public IclubInsurerMasterModel fromUItoWS(IclubInsurerMasterBean bean) {
+	public static IclubInsurerMasterModel fromUItoWS(IclubInsurerMasterBean bean) {
 		
 		IclubInsurerMasterModel model = new IclubInsurerMasterModel();
 		
@@ -45,7 +43,7 @@ public class IclubInsurerMasterTrans {
 		return model;
 	}
 	
-	public IclubInsurerMasterModel fromORMtoWS(IclubInsurerMaster bean) {
+	public static IclubInsurerMasterModel fromORMtoWS(IclubInsurerMaster bean) {
 		
 		IclubInsurerMasterModel model = new IclubInsurerMasterModel();
 		
@@ -64,7 +62,7 @@ public class IclubInsurerMasterTrans {
 		return model;
 	}
 	
-	public IclubInsurerMaster fromWStoORM(IclubInsurerMasterModel model) {
+	public static IclubInsurerMaster fromWStoORM(IclubInsurerMasterModel model, IclubPersonDAO iclubPersonDAO) {
 		IclubInsurerMaster bean = new IclubInsurerMaster();
 		
 		bean.setImId(model.getImId());
@@ -80,11 +78,4 @@ public class IclubInsurerMasterTrans {
 		return bean;
 	}
 	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

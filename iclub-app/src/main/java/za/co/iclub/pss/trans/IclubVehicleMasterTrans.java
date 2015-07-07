@@ -7,9 +7,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubVehicleMasterTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubVehicleMasterBean fromWStoUI(IclubVehicleMasterModel model) {
+	public static IclubVehicleMasterBean fromWStoUI(IclubVehicleMasterModel model) {
 		
 		IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
 		
@@ -26,7 +24,7 @@ public class IclubVehicleMasterTrans {
 		return bean;
 	}
 	
-	public IclubVehicleMasterModel fromUItoWS(IclubVehicleMasterBean bean) {
+	public static IclubVehicleMasterModel fromUItoWS(IclubVehicleMasterBean bean) {
 		
 		IclubVehicleMasterModel model = new IclubVehicleMasterModel();
 		
@@ -44,7 +42,7 @@ public class IclubVehicleMasterTrans {
 		return model;
 	}
 	
-	public IclubVehicleMasterModel fromORMtoWS(IclubVehicleMaster bean) {
+	public static IclubVehicleMasterModel fromORMtoWS(IclubVehicleMaster bean) {
 		IclubVehicleMasterModel model = new IclubVehicleMasterModel();
 		
 		model.setVmId(bean.getVmId());
@@ -60,7 +58,7 @@ public class IclubVehicleMasterTrans {
 		return model;
 	}
 	
-	public IclubVehicleMaster fromWStoORM(IclubVehicleMasterModel model) {
+	public static IclubVehicleMaster fromWStoORM(IclubVehicleMasterModel model, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubVehicleMaster bean = new IclubVehicleMaster();
 		
@@ -78,11 +76,4 @@ public class IclubVehicleMasterTrans {
 		return bean;
 	}
 	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

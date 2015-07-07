@@ -9,11 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubDocumentTrans {
 	
-	private IclubDocumentTypeDAO iclubDocumentTypeDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubEntityTypeDAO iclubEntityTypeDAO;
-	
-	public IclubDocumentBean fromWStoUI(IclubDocumentModel model) {
+	public static IclubDocumentBean fromWStoUI(IclubDocumentModel model) {
 		
 		IclubDocumentBean bean = new IclubDocumentBean();
 		
@@ -34,7 +30,7 @@ public class IclubDocumentTrans {
 		return bean;
 	}
 	
-	public IclubDocumentModel fromUItoWS(IclubDocumentBean bean) {
+	public static IclubDocumentModel fromUItoWS(IclubDocumentBean bean) {
 		
 		IclubDocumentModel model = new IclubDocumentModel();
 		
@@ -55,7 +51,7 @@ public class IclubDocumentTrans {
 		return model;
 	}
 	
-	public IclubDocumentModel fromORMtoWS(IclubDocument bean) {
+	public static IclubDocumentModel fromORMtoWS(IclubDocument bean) {
 		
 		IclubDocumentModel model = new IclubDocumentModel();
 		
@@ -76,7 +72,7 @@ public class IclubDocumentTrans {
 		return model;
 	}
 	
-	public IclubDocument fromWStoORM(IclubDocumentModel model) {
+	public static IclubDocument fromWStoORM(IclubDocumentModel model, IclubEntityTypeDAO iclubEntityTypeDAO, IclubPersonDAO iclubPersonDAO, IclubDocumentTypeDAO iclubDocumentTypeDAO) {
 		
 		IclubDocument bean = new IclubDocument();
 		
@@ -93,5 +89,4 @@ public class IclubDocumentTrans {
 		
 		return bean;
 	}
-	
 }

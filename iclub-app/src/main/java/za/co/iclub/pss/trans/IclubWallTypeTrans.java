@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubWallType;
 
 public class IclubWallTypeTrans {
 	
-	public IclubWallTypeBean fromWStoUI(IclubWallTypeModel model) {
+	public static IclubWallTypeBean fromWStoUI(IclubWallTypeModel model) {
 		IclubWallTypeBean bean = new IclubWallTypeBean();
 		bean.setWtId(model.getWtId().longValue());
 		bean.setWtLongDesc(model.getWtLongDesc());
@@ -15,7 +15,7 @@ public class IclubWallTypeTrans {
 		return bean;
 	}
 	
-	public IclubWallTypeModel fromUItoWS(IclubWallTypeBean bean) {
+	public static IclubWallTypeModel fromUItoWS(IclubWallTypeBean bean) {
 		IclubWallTypeModel model = new IclubWallTypeModel();
 		model.setWtId(bean.getWtId().longValue());
 		model.setWtLongDesc(bean.getWtLongDesc());
@@ -24,7 +24,7 @@ public class IclubWallTypeTrans {
 		return model;
 	}
 	
-	public IclubWallTypeModel fromORMtoWS(IclubWallType bean) {
+	public static IclubWallTypeModel fromORMtoWS(IclubWallType bean) {
 		IclubWallTypeModel model = new IclubWallTypeModel();
 		model.setWtId(bean.getWtId().longValue());
 		model.setWtLongDesc(bean.getWtLongDesc());
@@ -33,7 +33,7 @@ public class IclubWallTypeTrans {
 		return model;
 	}
 	
-	public IclubWallType fromWStoORM(IclubWallTypeModel model) {
+	public static IclubWallType fromWStoORM(IclubWallTypeModel model) {
 		IclubWallType acctype = new IclubWallType();
 		
 		acctype.setWtId(model.getWtId());

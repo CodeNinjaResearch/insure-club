@@ -8,10 +8,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubInsuranceItemTrans {
 	
-	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubInsuranceItemBean fromWStoUI(IclubInsuranceItemModel model) {
+	public static IclubInsuranceItemBean fromWStoUI(IclubInsuranceItemModel model) {
 		
 		IclubInsuranceItemBean bean = new IclubInsuranceItemBean();
 		
@@ -29,7 +26,7 @@ public class IclubInsuranceItemTrans {
 		return bean;
 	}
 	
-	public IclubInsuranceItemModel fromUItoWS(IclubInsuranceItemBean bean) {
+	public static IclubInsuranceItemModel fromUItoWS(IclubInsuranceItemBean bean) {
 		
 		IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 		
@@ -47,7 +44,7 @@ public class IclubInsuranceItemTrans {
 		return model;
 	}
 	
-	public IclubInsuranceItemModel fromORMtoWS(IclubInsuranceItem bean) {
+	public static IclubInsuranceItemModel fromORMtoWS(IclubInsuranceItem bean) {
 		IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 		
 		model.setIiId(bean.getIiId());
@@ -64,7 +61,7 @@ public class IclubInsuranceItemTrans {
 		return model;
 	}
 	
-	public IclubInsuranceItem fromWStoORM(IclubInsuranceItemModel model) {
+	public static IclubInsuranceItem fromWStoORM(IclubInsuranceItemModel model, IclubPersonDAO iclubPersonDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		IclubInsuranceItem bean = new IclubInsuranceItem();
 		
 		bean.setIiId(model.getIiId());
@@ -79,19 +76,4 @@ public class IclubInsuranceItemTrans {
 		return bean;
 	}
 	
-	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
-		return iclubInsuranceItemTypeDAO;
-	}
-	
-	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

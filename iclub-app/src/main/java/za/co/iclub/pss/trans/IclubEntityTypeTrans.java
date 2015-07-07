@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubEntityType;
 
 public class IclubEntityTypeTrans {
 	
-	public IclubEntityTypeBean fromWStoUI(IclubEntityTypeModel model) {
+	public static IclubEntityTypeBean fromWStoUI(IclubEntityTypeModel model) {
 		IclubEntityTypeBean bean = new IclubEntityTypeBean();
 		bean.setEtId(model.getEtId().longValue());
 		bean.setEtLongDesc(model.getEtLongDesc());
@@ -16,7 +16,7 @@ public class IclubEntityTypeTrans {
 		return bean;
 	}
 	
-	public IclubEntityTypeModel fromUItoWS(IclubEntityTypeBean bean) {
+	public static IclubEntityTypeModel fromUItoWS(IclubEntityTypeBean bean) {
 		IclubEntityTypeModel model = new IclubEntityTypeModel();
 		model.setEtId(bean.getEtId().longValue());
 		model.setEtLongDesc(bean.getEtLongDesc());
@@ -26,7 +26,7 @@ public class IclubEntityTypeTrans {
 		return model;
 	}
 	
-	public IclubEntityTypeModel fromORMtoWS(IclubEntityType bean) {
+	public static IclubEntityTypeModel fromORMtoWS(IclubEntityType bean) {
 		IclubEntityTypeModel model = new IclubEntityTypeModel();
 		model.setEtId(bean.getEtId().longValue());
 		model.setEtLongDesc(bean.getEtLongDesc());
@@ -36,7 +36,7 @@ public class IclubEntityTypeTrans {
 		return model;
 	}
 	
-	public IclubEntityType fromWStoORM(IclubEntityTypeModel model) {
+	public static IclubEntityType fromWStoORM(IclubEntityTypeModel model) {
 		IclubEntityType bean = new IclubEntityType();
 		
 		bean.setEtId(model.getEtId());

@@ -9,11 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubPersonTrans {
 	
-	private IclubIdTypeDAO iclubIdTypeDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
-	
-	public IclubPersonBean fromWStoUI(IclubPersonModel model) {
+	public static IclubPersonBean fromWStoUI(IclubPersonModel model) {
 		
 		IclubPersonBean bean = new IclubPersonBean();
 		
@@ -50,7 +46,7 @@ public class IclubPersonTrans {
 		return bean;
 	}
 	
-	public IclubPersonModel fromUItoWS(IclubPersonBean bean) {
+	public static IclubPersonModel fromUItoWS(IclubPersonBean bean) {
 		
 		IclubPersonModel model = new IclubPersonModel();
 		
@@ -87,7 +83,7 @@ public class IclubPersonTrans {
 		return model;
 	}
 	
-	public IclubPersonModel fromORMtoWS(IclubPerson bean) {
+	public static IclubPersonModel fromORMtoWS(IclubPerson bean) {
 		
 		IclubPersonModel model = new IclubPersonModel();
 		
@@ -124,7 +120,7 @@ public class IclubPersonTrans {
 		return model;
 	}
 	
-	public IclubPerson fromWStoORM(IclubPersonModel model) {
+	public static IclubPerson fromWStoORM(IclubPersonModel model, IclubIdTypeDAO iclubIdTypeDAO, IclubPersonDAO iclubPersonDAO, IclubMaritialStatusDAO iclubMaritialStatusDAO) {
 		
 		IclubPerson bean = new IclubPerson();
 		
@@ -160,27 +156,4 @@ public class IclubPersonTrans {
 		return bean;
 	}
 	
-	public IclubIdTypeDAO getIclubIdTypeDAO() {
-		return iclubIdTypeDAO;
-	}
-	
-	public void setIclubIdTypeDAO(IclubIdTypeDAO iclubIdTypeDAO) {
-		this.iclubIdTypeDAO = iclubIdTypeDAO;
-	}
-	
-	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
-		return iclubMaritialStatusDAO;
-	}
-	
-	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
-		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
 }

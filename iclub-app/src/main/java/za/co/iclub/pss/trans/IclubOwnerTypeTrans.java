@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubOwnerType;
 
 public class IclubOwnerTypeTrans {
 	
-	public IclubOwnerTypeBean fromWStoUI(IclubOwnerTypeModel model) {
+	public static IclubOwnerTypeBean fromWStoUI(IclubOwnerTypeModel model) {
 		IclubOwnerTypeBean bean = new IclubOwnerTypeBean();
 		bean.setOtId(model.getOtId().longValue());
 		bean.setOtLongDesc(model.getOtLongDesc());
@@ -15,7 +15,7 @@ public class IclubOwnerTypeTrans {
 		return bean;
 	}
 	
-	public IclubOwnerTypeModel fromUItoWS(IclubOwnerTypeBean bean) {
+	public static IclubOwnerTypeModel fromUItoWS(IclubOwnerTypeBean bean) {
 		IclubOwnerTypeModel model = new IclubOwnerTypeModel();
 		model.setOtId(bean.getOtId().longValue());
 		model.setOtLongDesc(bean.getOtLongDesc());
@@ -24,7 +24,7 @@ public class IclubOwnerTypeTrans {
 		return model;
 	}
 	
-	public IclubOwnerTypeModel fromORMtoWS(IclubOwnerType bean) {
+	public static IclubOwnerTypeModel fromORMtoWS(IclubOwnerType bean) {
 		IclubOwnerTypeModel model = new IclubOwnerTypeModel();
 		model.setOtId(bean.getOtId().longValue());
 		model.setOtLongDesc(bean.getOtLongDesc());
@@ -33,7 +33,7 @@ public class IclubOwnerTypeTrans {
 		return model;
 	}
 	
-	public IclubOwnerType fromWStoORM(IclubOwnerTypeModel model) {
+	public static IclubOwnerType fromWStoORM(IclubOwnerTypeModel model) {
 		IclubOwnerType acctype = new IclubOwnerType();
 		
 		acctype.setOtId(model.getOtId());

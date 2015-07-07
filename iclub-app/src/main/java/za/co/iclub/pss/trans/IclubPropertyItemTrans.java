@@ -8,10 +8,7 @@ import za.co.iclub.pss.orm.dao.IclubPropertyDAO;
 
 public class IclubPropertyItemTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubPropertyDAO iclubPropertyDAO;
-	
-	public IclubPropertyItemBean fromWStoUI(IclubPropertyItemModel model) {
+	public static IclubPropertyItemBean fromWStoUI(IclubPropertyItemModel model) {
 		
 		IclubPropertyItemBean bean = new IclubPropertyItemBean();
 		
@@ -27,7 +24,7 @@ public class IclubPropertyItemTrans {
 		return bean;
 	}
 	
-	public IclubPropertyItemModel fromUItoWS(IclubPropertyItemBean bean) {
+	public static IclubPropertyItemModel fromUItoWS(IclubPropertyItemBean bean) {
 		
 		IclubPropertyItemModel model = new IclubPropertyItemModel();
 		
@@ -43,7 +40,7 @@ public class IclubPropertyItemTrans {
 		return model;
 	}
 	
-	public IclubPropertyItemModel fromORMtoWS(IclubPropertyItem bean) {
+	public static IclubPropertyItemModel fromORMtoWS(IclubPropertyItem bean) {
 		
 		IclubPropertyItemModel model = new IclubPropertyItemModel();
 		
@@ -59,7 +56,7 @@ public class IclubPropertyItemTrans {
 		return model;
 	}
 	
-	public IclubPropertyItem fromWStoORM(IclubPropertyItemModel model) {
+	public static IclubPropertyItem fromWStoORM(IclubPropertyItemModel model, IclubPersonDAO iclubPersonDAO, IclubPropertyDAO iclubPropertyDAO) {
 		
 		IclubPropertyItem bean = new IclubPropertyItem();
 		

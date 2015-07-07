@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubBoundaryType;
 
 public class IclubBoundaryTypeTrans {
 	
-	public IclubBoundaryTypeBean fromWStoUI(IclubBoundaryTypeModel model) {
+	public static IclubBoundaryTypeBean fromWStoUI(IclubBoundaryTypeModel model) {
 		IclubBoundaryTypeBean bean = new IclubBoundaryTypeBean();
 		bean.setBtId(model.getBtId().longValue());
 		bean.setBtLongDesc(model.getBtLongDesc());
@@ -15,7 +15,7 @@ public class IclubBoundaryTypeTrans {
 		return bean;
 	}
 	
-	public IclubBoundaryTypeModel fromUItoWS(IclubBoundaryTypeBean bean) {
+	public static IclubBoundaryTypeModel fromUItoWS(IclubBoundaryTypeBean bean) {
 		IclubBoundaryTypeModel model = new IclubBoundaryTypeModel();
 		model.setBtId(bean.getBtId().longValue());
 		model.setBtLongDesc(bean.getBtLongDesc());
@@ -24,7 +24,7 @@ public class IclubBoundaryTypeTrans {
 		return model;
 	}
 	
-	public IclubBoundaryTypeModel fromORMtoWS(IclubBoundaryType bean) {
+	public static IclubBoundaryTypeModel fromORMtoWS(IclubBoundaryType bean) {
 		IclubBoundaryTypeModel model = new IclubBoundaryTypeModel();
 		model.setBtId(bean.getBtId().longValue());
 		model.setBtLongDesc(bean.getBtLongDesc());
@@ -33,7 +33,7 @@ public class IclubBoundaryTypeTrans {
 		return model;
 	}
 	
-	public IclubBoundaryType fromWStoORM(IclubBoundaryTypeModel model) {
+	public static IclubBoundaryType fromWStoORM(IclubBoundaryTypeModel model) {
 		IclubBoundaryType acctype = new IclubBoundaryType();
 		
 		acctype.setBtId(model.getBtId());

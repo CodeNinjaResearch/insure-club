@@ -9,11 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubTrackerMasterDAO;
 
 public class IclubSecurityDeviceTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
-	private IclubTrackerMasterDAO iclubTrackerMasterDAO;
-	
-	public IclubSecurityDeviceBean fromWStoUI(IclubSecurityDeviceModel model) {
+	public static IclubSecurityDeviceBean fromWStoUI(IclubSecurityDeviceModel model) {
 		
 		IclubSecurityDeviceBean bean = new IclubSecurityDeviceBean();
 		
@@ -32,7 +28,7 @@ public class IclubSecurityDeviceTrans {
 		return bean;
 	}
 	
-	public IclubSecurityDeviceModel fromUItoWS(IclubSecurityDeviceBean bean) {
+	public static IclubSecurityDeviceModel fromUItoWS(IclubSecurityDeviceBean bean) {
 		
 		IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
 		
@@ -51,7 +47,7 @@ public class IclubSecurityDeviceTrans {
 		return model;
 	}
 	
-	public IclubSecurityDeviceModel fromORMtoWS(IclubSecurityDevice bean) {
+	public static IclubSecurityDeviceModel fromORMtoWS(IclubSecurityDevice bean) {
 		
 		IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
 		
@@ -70,7 +66,7 @@ public class IclubSecurityDeviceTrans {
 		return model;
 	}
 	
-	public IclubSecurityDevice fromWStoORM(IclubSecurityDeviceModel model) {
+	public static IclubSecurityDevice fromWStoORM(IclubSecurityDeviceModel model, IclubTrackerMasterDAO iclubTrackerMasterDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubSecurityDevice bean = new IclubSecurityDevice();
 		
@@ -85,29 +81,5 @@ public class IclubSecurityDeviceTrans {
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		
 		return bean;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
-		return iclubInsuranceItemTypeDAO;
-	}
-	
-	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
-	}
-	
-	public IclubTrackerMasterDAO getIclubTrackerMasterDAO() {
-		return iclubTrackerMasterDAO;
-	}
-	
-	public void setIclubTrackerMasterDAO(IclubTrackerMasterDAO iclubTrackerMasterDAO) {
-		this.iclubTrackerMasterDAO = iclubTrackerMasterDAO;
 	}
 }

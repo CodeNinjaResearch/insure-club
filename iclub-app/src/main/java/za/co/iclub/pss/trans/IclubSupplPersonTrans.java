@@ -8,10 +8,7 @@ import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 
 public class IclubSupplPersonTrans {
 	
-	private IclubSupplMasterDAO iclubSupplMasterDAO;
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubSupplPersonBean fromWStoUI(IclubSupplPersonModel model) {
+	public static IclubSupplPersonBean fromWStoUI(IclubSupplPersonModel model) {
 		
 		IclubSupplPersonBean bean = new IclubSupplPersonBean();
 		
@@ -27,7 +24,7 @@ public class IclubSupplPersonTrans {
 		return bean;
 	}
 	
-	public IclubSupplPersonModel fromUItoWS(IclubSupplPersonBean bean) {
+	public static IclubSupplPersonModel fromUItoWS(IclubSupplPersonBean bean) {
 		IclubSupplPersonModel model = new IclubSupplPersonModel();
 		
 		model.setSpId(bean.getSpId());
@@ -42,7 +39,7 @@ public class IclubSupplPersonTrans {
 		return model;
 	}
 	
-	public IclubSupplPersonModel fromORMtoWS(IclubSupplPerson bean) {
+	public static IclubSupplPersonModel fromORMtoWS(IclubSupplPerson bean) {
 		
 		IclubSupplPersonModel model = new IclubSupplPersonModel();
 		
@@ -58,7 +55,7 @@ public class IclubSupplPersonTrans {
 		return model;
 	}
 	
-	public IclubSupplPerson fromWStoORM(IclubSupplPersonModel model) {
+	public static IclubSupplPerson fromWStoORM(IclubSupplPersonModel model, IclubPersonDAO iclubPersonDAO, IclubSupplMasterDAO iclubSupplMasterDAO) {
 		
 		IclubSupplPerson bean = new IclubSupplPerson();
 		
@@ -70,21 +67,4 @@ public class IclubSupplPersonTrans {
 		
 		return bean;
 	}
-	
-	public IclubSupplMasterDAO getIclubSupplMasterDAO() {
-		return iclubSupplMasterDAO;
-	}
-	
-	public void setIclubSupplMasterDAO(IclubSupplMasterDAO iclubSupplMasterDAO) {
-		this.iclubSupplMasterDAO = iclubSupplMasterDAO;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
 }

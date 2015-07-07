@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubOccupiedStatus;
 
 public class IclubOccupiedStatusTrans {
 	
-	public IclubOccupiedStatusBean fromWStoUI(IclubOccupiedStatusModel model) {
+	public static IclubOccupiedStatusBean fromWStoUI(IclubOccupiedStatusModel model) {
 		IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
 		bean.setOsId(model.getOsId().longValue());
 		bean.setOsLongDesc(model.getOsLongDesc());
@@ -15,7 +15,7 @@ public class IclubOccupiedStatusTrans {
 		return bean;
 	}
 	
-	public IclubOccupiedStatusModel fromUItoWS(IclubOccupiedStatusBean bean) {
+	public static IclubOccupiedStatusModel fromUItoWS(IclubOccupiedStatusBean bean) {
 		IclubOccupiedStatusModel model = new IclubOccupiedStatusModel();
 		model.setOsId(bean.getOsId().longValue());
 		model.setOsLongDesc(bean.getOsLongDesc());
@@ -24,7 +24,7 @@ public class IclubOccupiedStatusTrans {
 		return model;
 	}
 	
-	public IclubOccupiedStatusModel fromORMtoWS(IclubOccupiedStatus bean) {
+	public static IclubOccupiedStatusModel fromORMtoWS(IclubOccupiedStatus bean) {
 		IclubOccupiedStatusModel model = new IclubOccupiedStatusModel();
 		model.setOsId(bean.getOsId().longValue());
 		model.setOsLongDesc(bean.getOsLongDesc());
@@ -33,7 +33,7 @@ public class IclubOccupiedStatusTrans {
 		return model;
 	}
 	
-	public IclubOccupiedStatus fromWStoORM(IclubOccupiedStatusModel model) {
+	public static IclubOccupiedStatus fromWStoORM(IclubOccupiedStatusModel model) {
 		IclubOccupiedStatus acctype = new IclubOccupiedStatus();
 		
 		acctype.setOsId(model.getOsId());

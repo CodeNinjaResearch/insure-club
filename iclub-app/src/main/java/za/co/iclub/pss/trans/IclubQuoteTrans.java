@@ -11,13 +11,7 @@ import za.co.iclub.pss.orm.dao.IclubQuoteStatusDAO;
 
 public class IclubQuoteTrans {
 	
-	private IclubPersonDAO iclubPersonDAO;
-	private IclubProductTypeDAO iclubProductTypeDAO;
-	private IclubInsurerMasterDAO iclubInsurerMasterDAO;
-	private IclubCoverTypeDAO iclubCoverTypeDAO;
-	private IclubQuoteStatusDAO iclubQuoteStatusDAO;
-	
-	public IclubQuoteBean fromWStoUI(IclubQuoteModel model) {
+	public static IclubQuoteBean fromWStoUI(IclubQuoteModel model) {
 		
 		IclubQuoteBean bean = new IclubQuoteBean();
 		
@@ -48,7 +42,7 @@ public class IclubQuoteTrans {
 		return bean;
 	}
 	
-	public IclubQuoteModel fromUItoWS(IclubQuoteBean bean) {
+	public static IclubQuoteModel fromUItoWS(IclubQuoteBean bean) {
 		
 		IclubQuoteModel model = new IclubQuoteModel();
 		
@@ -79,7 +73,7 @@ public class IclubQuoteTrans {
 		return model;
 	}
 	
-	public IclubQuoteModel fromORMtoWS(IclubQuote bean) {
+	public static IclubQuoteModel fromORMtoWS(IclubQuote bean) {
 		
 		IclubQuoteModel model = new IclubQuoteModel();
 		
@@ -107,7 +101,7 @@ public class IclubQuoteTrans {
 		return model;
 	}
 	
-	public IclubQuote fromWStoORM(IclubQuoteModel model) {
+	public static IclubQuote fromWStoORM(IclubQuoteModel model, IclubQuoteStatusDAO iclubQuoteStatusDAO, IclubCoverTypeDAO iclubCoverTypeDAO, IclubInsurerMasterDAO iclubInsurerMasterDAO, IclubProductTypeDAO iclubProductTypeDAO, IclubPersonDAO iclubPersonDAO) {
 		
 		IclubQuote bean = new IclubQuote();
 		
@@ -130,45 +124,5 @@ public class IclubQuoteTrans {
 		bean.setIclubPersonByQCrtdBy(model.getIclubPersonAByQCrtdBy() != null && !model.getIclubPersonAByQCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonAByQCrtdBy()) : null);
 		
 		return bean;
-	}
-	
-	public IclubPersonDAO getIclubPersonDAO() {
-		return iclubPersonDAO;
-	}
-	
-	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
-		this.iclubPersonDAO = iclubPersonDAO;
-	}
-	
-	public IclubProductTypeDAO getIclubProductTypeDAO() {
-		return iclubProductTypeDAO;
-	}
-	
-	public void setIclubProductTypeDAO(IclubProductTypeDAO iclubProductTypeDAO) {
-		this.iclubProductTypeDAO = iclubProductTypeDAO;
-	}
-	
-	public IclubInsurerMasterDAO getIclubInsurerMasterDAO() {
-		return iclubInsurerMasterDAO;
-	}
-	
-	public void setIclubInsurerMasterDAO(IclubInsurerMasterDAO iclubInsurerMasterDAO) {
-		this.iclubInsurerMasterDAO = iclubInsurerMasterDAO;
-	}
-	
-	public IclubCoverTypeDAO getIclubCoverTypeDAO() {
-		return iclubCoverTypeDAO;
-	}
-	
-	public void setIclubCoverTypeDAO(IclubCoverTypeDAO iclubCoverTypeDAO) {
-		this.iclubCoverTypeDAO = iclubCoverTypeDAO;
-	}
-	
-	public IclubQuoteStatusDAO getIclubQuoteStatusDAO() {
-		return iclubQuoteStatusDAO;
-	}
-	
-	public void setIclubQuoteStatusDAO(IclubQuoteStatusDAO iclubQuoteStatusDAO) {
-		this.iclubQuoteStatusDAO = iclubQuoteStatusDAO;
 	}
 }

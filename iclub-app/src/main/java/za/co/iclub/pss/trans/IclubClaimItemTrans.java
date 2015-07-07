@@ -1,7 +1,5 @@
 package za.co.iclub.pss.trans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import za.co.iclub.pss.model.ui.IclubClaimItemBean;
 import za.co.iclub.pss.model.ws.IclubClaimItemModel;
 import za.co.iclub.pss.orm.bean.IclubClaimItem;
@@ -13,18 +11,7 @@ import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 
 public class IclubClaimItemTrans {
 	
-	@Autowired
-	private IclubSupplMasterDAO iclubSupplMasterDAO;
-	@Autowired
-	private IclubInsuranceItemDAO iclubInsuranceItemDAO;
-	@Autowired
-	private IclubClaimDAO iclubClaimDAO;
-	@Autowired
-	private IclubClaimStatusDAO iclubClaimStatusDAO;
-	@Autowired
-	private IclubPersonDAO iclubPersonDAO;
-	
-	public IclubClaimItemBean fromWStoUI(IclubClaimItemModel model) {
+	public static IclubClaimItemBean fromWStoUI(IclubClaimItemModel model) {
 		IclubClaimItemBean bean = new IclubClaimItemBean();
 		bean.setCiId(model.getCiId());
 		bean.setCiCrtdBy(model.getCiCrtdBy());
@@ -46,7 +33,7 @@ public class IclubClaimItemTrans {
 		return bean;
 	}
 	
-	public IclubClaimItemModel fromUItoWS(IclubClaimItemBean bean) {
+	public static IclubClaimItemModel fromUItoWS(IclubClaimItemBean bean) {
 		IclubClaimItemModel model = new IclubClaimItemModel();
 		model.setCiId(bean.getCiId());
 		model.setCiCrtdBy(bean.getCiCrtdBy());
@@ -67,7 +54,7 @@ public class IclubClaimItemTrans {
 		return model;
 	}
 	
-	public IclubClaimItemModel fromORMtoWS(IclubClaimItem bean) {
+	public static IclubClaimItemModel fromORMtoWS(IclubClaimItem bean) {
 		IclubClaimItemModel model = new IclubClaimItemModel();
 		
 		model.setCiId(bean.getCiId());
@@ -90,7 +77,7 @@ public class IclubClaimItemTrans {
 		return model;
 	}
 	
-	public IclubClaimItem fromWStoORM(IclubClaimItemModel model) {
+	public static IclubClaimItem fromWStoORM(IclubClaimItemModel model, IclubPersonDAO iclubPersonDAO, IclubClaimStatusDAO iclubClaimStatusDAO, IclubClaimDAO iclubClaimDAO, IclubInsuranceItemDAO iclubInsuranceItemDAO, IclubSupplMasterDAO iclubSupplMasterDAO) {
 		
 		IclubClaimItem bean = new IclubClaimItem();
 		bean.setCiId(model.getCiId());

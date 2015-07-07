@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubAssessmentType;
 
 public class IclubAssessmentTypeTrans {
 	
-	public IclubAssessmentTypeBean fromWStoUI(IclubAssessmentTypeModel model) {
+	public static IclubAssessmentTypeBean fromWStoUI(IclubAssessmentTypeModel model) {
 		IclubAssessmentTypeBean bean = new IclubAssessmentTypeBean();
 		bean.setAtId(model.getAtId().longValue());
 		bean.setAtLongDesc(model.getAtLongDesc());
@@ -15,7 +15,7 @@ public class IclubAssessmentTypeTrans {
 		return bean;
 	}
 	
-	public IclubAssessmentTypeModel fromUItoWS(IclubAssessmentTypeBean bean) {
+	public static IclubAssessmentTypeModel fromUItoWS(IclubAssessmentTypeBean bean) {
 		IclubAssessmentTypeModel model = new IclubAssessmentTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
@@ -24,7 +24,7 @@ public class IclubAssessmentTypeTrans {
 		return model;
 	}
 	
-	public IclubAssessmentTypeModel fromORMtoWS(IclubAssessmentType bean) {
+	public static IclubAssessmentTypeModel fromORMtoWS(IclubAssessmentType bean) {
 		IclubAssessmentTypeModel model = new IclubAssessmentTypeModel();
 		model.setAtId(bean.getAtId().longValue());
 		model.setAtLongDesc(bean.getAtLongDesc());
@@ -33,7 +33,7 @@ public class IclubAssessmentTypeTrans {
 		return model;
 	}
 	
-	public IclubAssessmentType fromWStoORM(IclubAssessmentTypeModel model) {
+	public static IclubAssessmentType fromWStoORM(IclubAssessmentTypeModel model) {
 		IclubAssessmentType acctype = new IclubAssessmentType();
 		
 		acctype.setAtId(model.getAtId());
