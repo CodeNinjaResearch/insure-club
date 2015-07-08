@@ -58,7 +58,8 @@ public class IclubLoginService {
 			login.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId() != null ? iclubPersonDAO.findById(model.getIclubPersonByLPersonId()) : null);
 			login.setIclubRoleType(model.getIclubRoleType() != null ? iclubRoleTypeDAO.findById(model.getIclubRoleType()) : null);
 			login.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
-			
+			login.setLProviderCd(model.getLProviderCd());
+			login.setLProviderId(model.getLProviderId());
 			iclubLoginDAO.save(login);
 			
 			LOGGER.info("Save Success with ID :: " + login.getLId());
@@ -96,6 +97,8 @@ public class IclubLoginService {
 			login.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId() != null ? iclubPersonDAO.findById(model.getIclubPersonByLPersonId()) : null);
 			login.setIclubRoleType(model.getIclubRoleType() != null ? iclubRoleTypeDAO.findById(model.getIclubRoleType()) : null);
 			login.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
+			login.setLProviderCd(model.getLProviderCd());
+			login.setLProviderId(model.getLProviderId());
 			
 			iclubLoginDAO.merge(login);
 			
@@ -153,6 +156,8 @@ public class IclubLoginService {
 					ibm.setIclubPersonByLPersonId(iclubLogin.getIclubPersonByLPersonId() != null ? iclubLogin.getIclubPersonByLPersonId().getPId() : null);
 					ibm.setIclubRoleType(iclubLogin.getIclubRoleType() != null ? iclubLogin.getIclubRoleType().getRtId() : null);
 					ibm.setIclubSecurityQuestion(iclubLogin.getIclubSecurityQuestion() != null ? iclubLogin.getIclubSecurityQuestion().getSqId() : null);
+					ibm.setLProviderCd(iclubLogin.getLProviderCd());
+					ibm.setLProviderId(iclubLogin.getLProviderId());
 					
 					ret.add((T) ibm);
 				}
@@ -216,12 +221,45 @@ public class IclubLoginService {
 				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
 				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
 				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
+				message.setLProviderCd(login.getLProviderCd());
+				message.setLProviderId(login.getLProviderId());
 				
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return message;
+	}
+	
+	@GET
+	@Path("/socailLogin/{userName}/{providerId}/{providerCd}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public IclubLoginModel getByLoginIdAndProviderId(@PathParam("userName") String name, @PathParam("providerId") String providerId, @PathParam("providerCd") String providerCd) {
+		IclubLoginModel bean = new IclubLoginModel();
+		try {
+			List logins = iclubNamedQueryDAO.getIclubLoginByIdAndProviderId(name, providerId, providerCd);
+			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
+				IclubLogin login = (IclubLogin) logins.get(0);
+				
+				bean.setLId(login.getLId());
+				bean.setLCrtdDt(login.getLCrtdDt());
+				bean.setLLastDate(login.getLLastDate());
+				bean.setLName(login.getLName());
+				bean.setLPasswd(login.getLPasswd());
+				bean.setLSecAns(login.getLSecAns());
+				bean.setLSecAns(login.getLSecAns());
+				bean.setIclubPersonByLCrtdBy(login.getIclubPersonByLCrtdBy() != null ? login.getIclubPersonByLCrtdBy().getPId() : null);
+				bean.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
+				bean.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
+				bean.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
+				bean.setLProviderCd(login.getLProviderCd());
+				bean.setLProviderId(login.getLProviderId());
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return bean;
 	}
 	
 	@GET
@@ -246,6 +284,8 @@ public class IclubLoginService {
 				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
 				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
 				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
+				message.setLProviderCd(login.getLProviderCd());
+				message.setLProviderId(login.getLProviderId());
 				
 			}
 		} catch (Exception e) {

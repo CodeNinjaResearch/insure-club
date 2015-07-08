@@ -1204,6 +1204,8 @@ public class IclubQuickQuoteController implements Serializable {
 				model.setIclubPersonByLPersonId(bean.getPId());
 				model.setIclubRoleType(2l);
 				model.setIclubSecurityQuestion(loginBean.getIclubSecurityQuestion());
+				model.setLProviderCd(loginBean.getLProviderCd());
+				model.setLProviderId(loginBean.getLProviderId());
 				
 				ResponseModel response = null;
 				if (updateLogin) {
@@ -2109,6 +2111,9 @@ public class IclubQuickQuoteController implements Serializable {
 			loginBean.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId());
 			loginBean.setIclubRoleType(model.getIclubRoleType());
 			loginBean.setIclubSecurityQuestion(model.getIclubSecurityQuestion());
+			loginBean.setLProviderCd(model.getLProviderCd());
+			loginBean.setLProviderId(model.getLProviderId());
+			
 		} else {
 			loginBean = new IclubLoginBean();
 		}
