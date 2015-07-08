@@ -25,7 +25,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Claims Since Begining:" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryBean.claimSinceI}" />
+							<p:outputLabel styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.cohortSummaryBean.claimSinceI}">
+								<f:convertNumber pattern="#0.00" />
+							</p:outputLabel>
 						</div>
 					</div>
 					<div class="EmptyBox5" />

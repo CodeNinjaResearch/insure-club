@@ -8,10 +8,14 @@
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
 				</p:column>
 				<p:column headerText="Premium">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}" />
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}">
+						<f:convertNumber pattern="#0.00" />
+					</p:outputLabel>
 				</p:column>
 				<p:column headerText="Pro-rata Premium">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PProrataPrm}" />
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PProrataPrm}">
+						<f:convertNumber pattern="#0.00" />
+					</p:outputLabel>
 				</p:column>
 				<p:column headerText="Debit Date">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PDebitDt}" />

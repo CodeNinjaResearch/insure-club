@@ -31,7 +31,9 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smLong}" />
 					</p:column>
 					<p:column headerText="Credit Limit">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrLimit}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrLimit}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Action Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.srActionDt}" />
@@ -79,7 +81,9 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smLong}" />
 					</p:column>
 					<p:column headerText="Credit Limit">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrLimit}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrLimit}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Action Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.srActionDt}" />

@@ -97,7 +97,9 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Creidt Limit :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Creidt Limit" value="#{iclubSupplMasterController.bean.smCrLimit}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Creidt Limit" value="#{iclubSupplMasterController.bean.smCrLimit}">
+							<f:convertNumber pattern="#0.00" />
+						</p:inputText>
 					</div>
 					<div class="EmptyBox5" />
 				</div>
