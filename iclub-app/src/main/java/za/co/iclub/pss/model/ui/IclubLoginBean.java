@@ -18,6 +18,8 @@ public class IclubLoginBean {
 	private Date LLastDate;
 	private String LSecAns;
 	private Date LCrtdDt;
+	private String LProviderCd;
+	private String LProviderId;
 	
 	public String getLId() {
 		return LId;
@@ -129,6 +131,22 @@ public class IclubLoginBean {
 	
 	public void setRtLongDesc(String rtLongDesc) {
 		this.rtLongDesc = rtLongDesc;
+	}
+	
+	public String getLProviderCd() {
+		return LProviderCd;
+	}
+	
+	public void setLProviderCd(String lProviderCd) {
+		LProviderCd = lProviderCd;
+	}
+	
+	public String getLProviderId() {
+		return LProviderId;
+	}
+	
+	public void setLProviderId(String lProviderId) {
+		LProviderId = lProviderId;
 	}
 	
 }

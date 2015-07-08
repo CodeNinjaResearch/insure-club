@@ -17,23 +17,23 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubPolicy;
+import za.co.iclub.pss.model.ws.IclubPolicyStatusModel;
 import za.co.iclub.pss.orm.bean.IclubPolicyStatus;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPolicyStatusDAO;
-import za.co.iclub.pss.ws.model.IclubPolicyStatusModel;
+import za.co.iclub.pss.trans.IclubPolicyStatusTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubPolicyStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPolicyStatusService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubPolicyStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPolicyStatusDAO iclubPolicyStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -41,17 +41,14 @@ public class IclubPolicyStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPolicyStatusModel model) {
 		try {
-			IclubPolicyStatus iPs = new IclubPolicyStatus();
-
+			IclubPolicyStatus iPs = IclubPolicyStatusTrans.fromWStoORM(model);
+			
 			iPs.setPsId(iclubCommonDAO.getNextId(IclubPolicyStatus.class));
-			iPs.setPsLongDesc(model.getPsLongDesc());
-			iPs.setPsShortDesc(model.getPsShortDesc());
-			iPs.setPsStatus(model.getPsStatus());
-
+			
 			iclubPolicyStatusDAO.save(iPs);
-
+			
 			LOGGER.info("Save Success with ID :: " + iPs.getPsId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -63,9 +60,9 @@ public class IclubPolicyStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -73,17 +70,12 @@ public class IclubPolicyStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPolicyStatusModel model) {
 		try {
-			IclubPolicyStatus iPs = new IclubPolicyStatus();
-
-			iPs.setPsId(model.getPsId());
-			iPs.setPsLongDesc(model.getPsLongDesc());
-			iPs.setPsShortDesc(model.getPsShortDesc());
-			iPs.setPsStatus(model.getPsStatus());
-
+			IclubPolicyStatus iPs = IclubPolicyStatusTrans.fromWStoORM(model);
+			
 			iclubPolicyStatusDAO.merge(iPs);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getPsId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -95,9 +87,9 @@ public class IclubPolicyStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -112,47 +104,32 @@ public class IclubPolicyStatusService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPolicyStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubPolicyStatusDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubPolicyStatus iPs = (IclubPolicyStatus) object;
-
-					IclubPolicyStatusModel model = new IclubPolicyStatusModel();
-
-					model.setPsId(iPs.getPsId());
-					model.setPsLongDesc(iPs.getPsLongDesc());
-					model.setPsShortDesc(iPs.getPsShortDesc());
-					model.setPsStatus(iPs.getPsStatus());
-
-					if (iPs.getIclubPolicies() != null && iPs.getIclubPolicies().size() > 0) {
-						String[] iclubPolicies = new String[iPs.getIclubPolicies().size()];
-						int i = 0;
-						for (IclubPolicy iclubPolicy : iPs.getIclubPolicies()) {
-							iclubPolicies[i] = iclubPolicy.getPId();
-							i++;
-						}
-						model.setIclubPolicies(iclubPolicies);
-					}
-
+					IclubPolicyStatus bean = (IclubPolicyStatus) object;
+					
+					IclubPolicyStatusModel model = IclubPolicyStatusTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -161,28 +138,15 @@ public class IclubPolicyStatusService {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
 		try {
 			IclubPolicyStatus bean = iclubPolicyStatusDAO.findById(id);
-
-			model.setPsId(bean.getPsId());
-			model.setPsLongDesc(bean.getPsLongDesc());
-			model.setPsShortDesc(bean.getPsShortDesc());
-			model.setPsStatus(bean.getPsStatus());
-
-			if (bean.getIclubPolicies() != null && bean.getIclubPolicies().size() > 0) {
-				String[] iclubPolicies = new String[bean.getIclubPolicies().size()];
-				int i = 0;
-				for (IclubPolicy iclubPolicy : bean.getIclubPolicies()) {
-					iclubPolicies[i] = iclubPolicy.getPId();
-					i++;
-				}
-				model.setIclubPolicies(iclubPolicies);
-			}
-
+			
+			model = IclubPolicyStatusTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -208,29 +172,29 @@ public class IclubPolicyStatusService {
 			return message;
 		}
 	}
-
+	
 	public IclubPolicyStatusDAO getIclubPolicyStatusDAO() {
 		return iclubPolicyStatusDAO;
 	}
-
+	
 	public void setIclubPolicyStatusDAO(IclubPolicyStatusDAO iclubPolicyStatusDAO) {
 		this.iclubPolicyStatusDAO = iclubPolicyStatusDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 }

@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubRateEngineModel;
 import za.co.iclub.pss.orm.bean.IclubRateEngine;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
@@ -24,7 +25,7 @@ import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubRateEngineDAO;
 import za.co.iclub.pss.orm.dao.IclubRateTypeDAO;
-import za.co.iclub.pss.ws.model.IclubRateEngineModel;
+import za.co.iclub.pss.trans.IclubRateEngineTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubRateEngineService")
@@ -46,16 +47,7 @@ public class IclubRateEngineService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubRateEngineModel model) {
 		try {
-			IclubRateEngine iCt = new IclubRateEngine();
-			
-			iCt.setReId(model.getReId());
-			iCt.setReRate(model.getReRate());
-			iCt.setReCrtdDt(model.getReCrtdDt());
-			iCt.setReStatus(model.getReStatus());
-			iCt.setReMaxValue(model.getReMaxValue());
-			iCt.setReBaseValue(model.getReBaseValue());
-			iCt.setIclubRateType(model.getIclubRateType() != null ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
-			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			IclubRateEngine iCt = IclubRateEngineTrans.fromWStoORM(model, iclubRateTypeDAO, iclubPersonDAO, iclubInsuranceItemTypeDAO);
 			
 			iclubRateEngineDAO.save(iCt);
 			
@@ -82,17 +74,7 @@ public class IclubRateEngineService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubRateEngineModel model) {
 		try {
-			IclubRateEngine iCt = new IclubRateEngine();
-			
-			iCt.setReId(model.getReId());
-			iCt.setReRate(model.getReRate());
-			iCt.setReCrtdDt(model.getReCrtdDt());
-			iCt.setReStatus(model.getReStatus());
-			iCt.setReMaxValue(model.getReMaxValue());
-			iCt.setReBaseValue(model.getReBaseValue());
-			iCt.setIclubRateType(model.getIclubRateType() != null ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
-			iCt.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			
+			IclubRateEngine iCt = IclubRateEngineTrans.fromWStoORM(model, iclubRateTypeDAO, iclubPersonDAO, iclubInsuranceItemTypeDAO);
 			iclubRateEngineDAO.merge(iCt);
 			
 			LOGGER.info("Merge Success with ID :: " + model.getReId());
@@ -137,18 +119,9 @@ public class IclubRateEngineService {
 			List batmod = iclubRateEngineDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubRateEngine iCt = (IclubRateEngine) object;
+					IclubRateEngine bean = (IclubRateEngine) object;
 					
-					IclubRateEngineModel model = new IclubRateEngineModel();
-					
-					model.setReId(iCt.getReId());
-					model.setReRate(iCt.getReRate());
-					model.setReCrtdDt(iCt.getReCrtdDt());
-					model.setReStatus(iCt.getReStatus());
-					model.setReMaxValue(iCt.getReMaxValue());
-					model.setReBaseValue(iCt.getReBaseValue());
-					model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
-					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
+					IclubRateEngineModel model = IclubRateEngineTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -171,18 +144,9 @@ public class IclubRateEngineService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubRateEngine.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubRateEngine iCt = (IclubRateEngine) object;
+					IclubRateEngine bean = (IclubRateEngine) object;
 					
-					IclubRateEngineModel model = new IclubRateEngineModel();
-					
-					model.setReId(iCt.getReId());
-					model.setReRate(iCt.getReRate());
-					model.setReCrtdDt(iCt.getReCrtdDt());
-					model.setReStatus(iCt.getReStatus());
-					model.setReMaxValue(iCt.getReMaxValue());
-					model.setReBaseValue(iCt.getReBaseValue());
-					model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
-					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
+					IclubRateEngineModel model = IclubRateEngineTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -205,18 +169,9 @@ public class IclubRateEngineService {
 			List batmod = iclubNamedQueryDAO.findByRateType(rateType);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubRateEngine iCt = (IclubRateEngine) object;
+					IclubRateEngine bean = (IclubRateEngine) object;
 					
-					IclubRateEngineModel model = new IclubRateEngineModel();
-					
-					model.setReId(iCt.getReId());
-					model.setReRate(iCt.getReRate());
-					model.setReCrtdDt(iCt.getReCrtdDt());
-					model.setReStatus(iCt.getReStatus());
-					model.setReMaxValue(iCt.getReMaxValue());
-					model.setReBaseValue(iCt.getReBaseValue());
-					model.setIclubRateType(iCt.getIclubRateType() != null ? (iCt.getIclubRateType().getRtId()) : null);
-					model.setIclubPerson(iCt.getIclubPerson() != null ? (iCt.getIclubPerson().getPId()) : null);
+					IclubRateEngineModel model = IclubRateEngineTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -237,15 +192,7 @@ public class IclubRateEngineService {
 		try {
 			IclubRateEngine bean = iclubRateEngineDAO.findById(id);
 			
-			model.setReId(bean.getReId());
-			model.setReRate(bean.getReRate());
-			model.setReCrtdDt(bean.getReCrtdDt());
-			model.setReStatus(bean.getReStatus());
-			model.setReMaxValue(bean.getReMaxValue());
-			model.setReBaseValue(bean.getReBaseValue());
-			model.setIclubRateType(bean.getIclubRateType() != null ? (bean.getIclubRateType().getRtId()) : null);
-			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
-			
+			model = IclubRateEngineTrans.fromORMtoWS(bean);
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

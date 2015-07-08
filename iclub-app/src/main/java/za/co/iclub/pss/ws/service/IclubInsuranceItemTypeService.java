@@ -17,15 +17,12 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubCoverType;
-import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
+import za.co.iclub.pss.model.ws.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
-import za.co.iclub.pss.orm.bean.IclubRateType;
-import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
-import za.co.iclub.pss.ws.model.IclubInsuranceItemTypeModel;
+import za.co.iclub.pss.trans.IclubInsuranceItemTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubInsuranceItemTypeService")
@@ -44,12 +41,9 @@ public class IclubInsuranceItemTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubInsuranceItemTypeModel model) {
 		try {
-			IclubInsuranceItemType iIit = new IclubInsuranceItemType();
+			IclubInsuranceItemType iIit = IclubInsuranceItemTypeTrans.fromWStoORM(model);
 			
 			iIit.setIitId(iclubCommonDAO.getNextId(IclubInsuranceItemType.class));
-			iIit.setIitLongDesc(model.getIitLongDesc());
-			iIit.setIitShortDesc(model.getIitShortDesc());
-			iIit.setIitStatus(model.getIitStatus());
 			
 			iclubInsuranceItemTypeDAO.save(iIit);
 			
@@ -76,12 +70,7 @@ public class IclubInsuranceItemTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubInsuranceItemTypeModel model) {
 		try {
-			IclubInsuranceItemType iIit = new IclubInsuranceItemType();
-			
-			iIit.setIitId(model.getIitId());
-			iIit.setIitLongDesc(model.getIitLongDesc());
-			iIit.setIitShortDesc(model.getIitShortDesc());
-			iIit.setIitStatus(model.getIitStatus());
+			IclubInsuranceItemType iIit = IclubInsuranceItemTypeTrans.fromWStoORM(model);
 			
 			iclubInsuranceItemTypeDAO.merge(iIit);
 			
@@ -127,62 +116,9 @@ public class IclubInsuranceItemTypeService {
 			List batmod = iclubInsuranceItemTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubInsuranceItemType iIit = (IclubInsuranceItemType) object;
+					IclubInsuranceItemType bean = (IclubInsuranceItemType) object;
 					
-					IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
-					
-					model.setIitId(iIit.getIitId());
-					model.setIitLongDesc(iIit.getIitLongDesc());
-					model.setIitShortDesc(iIit.getIitShortDesc());
-					model.setIitStatus(iIit.getIitStatus());
-					
-					if (iIit.getIclubRateTypes() != null && iIit.getIclubRateTypes().size() > 0) {
-						Long[] iclubRateTypes = new Long[iIit.getIclubRateTypes().size()];
-						int i = 0;
-						for (IclubRateType iclubRateType : iIit.getIclubRateTypes()) {
-							iclubRateTypes[i] = iclubRateType.getRtId();
-							i++;
-						}
-						model.setIclubRateTypes(iclubRateTypes);
-					}
-					
-					if (iIit.getIclubSecurityDevices() != null && iIit.getIclubSecurityDevices().size() > 0) {
-						String[] iclubSecurityDevices = new String[iIit.getIclubSecurityDevices().size()];
-						int i = 0;
-						for (IclubSecurityDevice iclubSecurityDevice : iIit.getIclubSecurityDevices()) {
-							iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
-							i++;
-						}
-						model.setIclubSecurityDevices(iclubSecurityDevices);
-					}
-					if (iIit.getIclubInsuranceItems() != null && iIit.getIclubInsuranceItems().size() > 0) {
-						String[] insuranceItems = new String[iIit.getIclubInsuranceItems().size()];
-						int i = 0;
-						for (IclubInsuranceItem iclubInsuranceItem : iIit.getIclubInsuranceItems()) {
-							insuranceItems[i] = iclubInsuranceItem.getIiId();
-							i++;
-						}
-						model.setIclubInsuranceItems(insuranceItems);
-					}
-					if (iIit.getIclubInsuranceItems_1() != null && iIit.getIclubInsuranceItems_1().size() > 0) {
-						String[] insuranceItems = new String[iIit.getIclubInsuranceItems_1().size()];
-						int i = 0;
-						for (IclubInsuranceItem iclubInsuranceItem : iIit.getIclubInsuranceItems_1()) {
-							insuranceItems[i] = iclubInsuranceItem.getIiId();
-							i++;
-						}
-						model.setIclubInsuranceItems_1(insuranceItems);
-					}
-					
-					if (iIit.getIclubCoverTypes() != null && iIit.getIclubCoverTypes().size() > 0) {
-						Long[] iclubCoverTypes = new Long[iIit.getIclubCoverTypes().size()];
-						int i = 0;
-						for (IclubCoverType iclubCoverType : iIit.getIclubCoverTypes()) {
-							iclubCoverTypes[i] = iclubCoverType.getCtId();
-							i++;
-						}
-						model.setIclubCoverTypes(iclubCoverTypes);
-					}
+					IclubInsuranceItemTypeModel model = IclubInsuranceItemTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -203,58 +139,7 @@ public class IclubInsuranceItemTypeService {
 		try {
 			IclubInsuranceItemType bean = iclubInsuranceItemTypeDAO.findById(id);
 			
-			model.setIitId(bean.getIitId());
-			model.setIitLongDesc(bean.getIitLongDesc());
-			model.setIitShortDesc(bean.getIitShortDesc());
-			model.setIitStatus(bean.getIitStatus());
-			
-			if (bean.getIclubRateTypes() != null && bean.getIclubRateTypes().size() > 0) {
-				Long[] iclubRateTypes = new Long[bean.getIclubRateTypes().size()];
-				int i = 0;
-				for (IclubRateType iclubRateType : bean.getIclubRateTypes()) {
-					iclubRateTypes[i] = iclubRateType.getRtId();
-					i++;
-				}
-				model.setIclubRateTypes(iclubRateTypes);
-			}
-			
-			if (bean.getIclubSecurityDevices() != null && bean.getIclubSecurityDevices().size() > 0) {
-				String[] iclubSecurityDevices = new String[bean.getIclubSecurityDevices().size()];
-				int i = 0;
-				for (IclubSecurityDevice iclubSecurityDevice : bean.getIclubSecurityDevices()) {
-					iclubSecurityDevices[i] = iclubSecurityDevice.getSdId();
-					i++;
-				}
-				model.setIclubSecurityDevices(iclubSecurityDevices);
-			}
-			if (bean.getIclubInsuranceItems() != null && bean.getIclubInsuranceItems().size() > 0) {
-				String[] insuranceItems = new String[bean.getIclubInsuranceItems().size()];
-				int i = 0;
-				for (IclubInsuranceItem iclubInsuranceItem : bean.getIclubInsuranceItems()) {
-					insuranceItems[i] = iclubInsuranceItem.getIiId();
-					i++;
-				}
-				model.setIclubInsuranceItems(insuranceItems);
-			}
-			if (bean.getIclubInsuranceItems_1() != null && bean.getIclubInsuranceItems_1().size() > 0) {
-				String[] insuranceItems = new String[bean.getIclubInsuranceItems_1().size()];
-				int i = 0;
-				for (IclubInsuranceItem iclubInsuranceItem : bean.getIclubInsuranceItems_1()) {
-					insuranceItems[i] = iclubInsuranceItem.getIiId();
-					i++;
-				}
-				model.setIclubInsuranceItems_1(insuranceItems);
-			}
-			
-			if (bean.getIclubCoverTypes() != null && bean.getIclubCoverTypes().size() > 0) {
-				Long[] iclubCoverTypes = new Long[bean.getIclubCoverTypes().size()];
-				int i = 0;
-				for (IclubCoverType iclubCoverType : bean.getIclubCoverTypes()) {
-					iclubCoverTypes[i] = iclubCoverType.getCtId();
-					i++;
-				}
-				model.setIclubCoverTypes(iclubCoverTypes);
-			}
+			model = IclubInsuranceItemTypeTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

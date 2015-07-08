@@ -17,13 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubPropertyItemModel;
 import za.co.iclub.pss.orm.bean.IclubPropertyItem;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyItemDAO;
-import za.co.iclub.pss.ws.model.IclubPropertyItemModel;
+import za.co.iclub.pss.trans.IclubPropertyItemTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubPropertyItemService")
@@ -44,14 +45,7 @@ public class IclubPropertyItemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPropertyItemModel model) {
 		try {
-			IclubPropertyItem iTt = new IclubPropertyItem();
-			
-			iTt.setPiId(model.getPiId());
-			iTt.setPiCrtdDate(model.getPiCrtdDate());
-			iTt.setPiDescripton(model.getPiDescripton());
-			iTt.setPiValue(model.getPiValue());
-			iTt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			iTt.setIclubProperty(model.getIclubProperty() != null ? iclubPropertyDAO.findById(model.getIclubProperty()) : null);
+			IclubPropertyItem iTt = IclubPropertyItemTrans.fromWStoORM(model, iclubPersonDAO, iclubPropertyDAO);
 			
 			iclubPropertyItemDAO.save(iTt);
 			
@@ -78,14 +72,7 @@ public class IclubPropertyItemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPropertyItemModel model) {
 		try {
-			IclubPropertyItem iTt = new IclubPropertyItem();
-			
-			iTt.setPiId(model.getPiId());
-			iTt.setPiCrtdDate(model.getPiCrtdDate());
-			iTt.setPiDescripton(model.getPiDescripton());
-			iTt.setPiValue(model.getPiValue());
-			iTt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			iTt.setIclubProperty(model.getIclubProperty() != null ? iclubPropertyDAO.findById(model.getIclubProperty()) : null);
+			IclubPropertyItem iTt = IclubPropertyItemTrans.fromWStoORM(model, iclubPersonDAO, iclubPropertyDAO);
 			
 			iclubPropertyItemDAO.merge(iTt);
 			
@@ -150,16 +137,9 @@ public class IclubPropertyItemService {
 			List batmod = iclubPropertyItemDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubPropertyItem iTt = (IclubPropertyItem) object;
+					IclubPropertyItem bean = (IclubPropertyItem) object;
 					
-					IclubPropertyItemModel model = new IclubPropertyItemModel();
-					
-					model.setPiId(iTt.getPiId());
-					model.setPiCrtdDate(iTt.getPiCrtdDate());
-					model.setPiDescripton(iTt.getPiDescripton());
-					model.setPiValue(iTt.getPiValue());
-					model.setIclubPerson(iTt.getIclubPerson() != null ? iTt.getIclubPerson().getPId() : null);
-					model.setIclubProperty(iTt.getIclubProperty() != null ? iTt.getIclubProperty().getPId() : null);
+					IclubPropertyItemModel model = IclubPropertyItemTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -182,16 +162,9 @@ public class IclubPropertyItemService {
 			List batmod = iclubNamedQueryDAO.getIclubPropertyItemByProperty(propertyId);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubPropertyItem iTt = (IclubPropertyItem) object;
+					IclubPropertyItem bean = (IclubPropertyItem) object;
 					
-					IclubPropertyItemModel model = new IclubPropertyItemModel();
-					
-					model.setPiId(iTt.getPiId());
-					model.setPiCrtdDate(iTt.getPiCrtdDate());
-					model.setPiDescripton(iTt.getPiDescripton());
-					model.setPiValue(iTt.getPiValue());
-					model.setIclubPerson(iTt.getIclubPerson() != null ? iTt.getIclubPerson().getPId() : null);
-					model.setIclubProperty(iTt.getIclubProperty() != null ? iTt.getIclubProperty().getPId() : null);
+					IclubPropertyItemModel model = IclubPropertyItemTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -212,12 +185,7 @@ public class IclubPropertyItemService {
 		try {
 			IclubPropertyItem bean = iclubPropertyItemDAO.findById(id);
 			
-			model.setPiId(bean.getPiId());
-			model.setPiCrtdDate(bean.getPiCrtdDate());
-			model.setPiDescripton(bean.getPiDescripton());
-			model.setPiValue(bean.getPiValue());
-			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			model.setIclubProperty(bean.getIclubProperty() != null ? bean.getIclubProperty().getPId() : null);
+			model = IclubPropertyItemTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

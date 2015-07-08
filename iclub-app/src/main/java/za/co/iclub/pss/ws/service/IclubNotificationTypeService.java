@@ -17,23 +17,23 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubNotif;
+import za.co.iclub.pss.model.ws.IclubNotificationTypeModel;
 import za.co.iclub.pss.orm.bean.IclubNotificationType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
-import za.co.iclub.pss.ws.model.IclubNotificationTypeModel;
+import za.co.iclub.pss.trans.IclubNotificationTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubNotificationTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubNotificationTypeService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubNotificationTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNotificationTypeDAO iclubNotificationTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -41,17 +41,14 @@ public class IclubNotificationTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubNotificationTypeModel model) {
 		try {
-			IclubNotificationType iNt = new IclubNotificationType();
-
+			IclubNotificationType iNt = IclubNotificationTypeTrans.fromWStoORM(model);
+			
 			iNt.setNtId(iclubCommonDAO.getNextId(IclubNotificationType.class));
-			iNt.setNtLongDesc(model.getNtLongDesc());
-			iNt.setNtShortDesc(model.getNtShortDesc());
-			iNt.setNtStatus(model.getNtStatus());
-
+			
 			iclubNotificationTypeDAO.save(iNt);
-
+			
 			LOGGER.info("Save Success with ID :: " + iNt.getNtId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -63,9 +60,9 @@ public class IclubNotificationTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -73,17 +70,12 @@ public class IclubNotificationTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubNotificationTypeModel model) {
 		try {
-			IclubNotificationType iNt = new IclubNotificationType();
-
-			iNt.setNtId(model.getNtId());
-			iNt.setNtLongDesc(model.getNtLongDesc());
-			iNt.setNtShortDesc(model.getNtShortDesc());
-			iNt.setNtStatus(model.getNtStatus());
-
+			IclubNotificationType iNt = IclubNotificationTypeTrans.fromWStoORM(model);
+			
 			iclubNotificationTypeDAO.merge(iNt);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getNtId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -95,9 +87,9 @@ public class IclubNotificationTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -112,47 +104,32 @@ public class IclubNotificationTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubNotificationTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubNotificationTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubNotificationType iNt = (IclubNotificationType) object;
-
-					IclubNotificationTypeModel model = new IclubNotificationTypeModel();
-
-					model.setNtId(iNt.getNtId());
-					model.setNtLongDesc(iNt.getNtLongDesc());
-					model.setNtShortDesc(iNt.getNtShortDesc());
-					model.setNtStatus(iNt.getNtStatus());
-
-					if (iNt.getIclubNotifs() != null && iNt.getIclubNotifs().size() > 0) {
-						String[] iclubNotifs = new String[iNt.getIclubNotifs().size()];
-						int i = 0;
-						for (IclubNotif iclubNotif : iNt.getIclubNotifs()) {
-							iclubNotifs[i] = iclubNotif.getNId();
-							i++;
-						}
-						model.setIclubNotifs(iclubNotifs);
-					}
-
+					IclubNotificationType bean = (IclubNotificationType) object;
+					
+					IclubNotificationTypeModel model = IclubNotificationTypeTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -161,28 +138,15 @@ public class IclubNotificationTypeService {
 		IclubNotificationTypeModel model = new IclubNotificationTypeModel();
 		try {
 			IclubNotificationType bean = iclubNotificationTypeDAO.findById(id);
-
-			model.setNtId(bean.getNtId());
-			model.setNtLongDesc(bean.getNtLongDesc());
-			model.setNtShortDesc(bean.getNtShortDesc());
-			model.setNtStatus(bean.getNtStatus());
-
-			if (bean.getIclubNotifs() != null && bean.getIclubNotifs().size() > 0) {
-				String[] iclubNotifs = new String[bean.getIclubNotifs().size()];
-				int i = 0;
-				for (IclubNotif iclubNotif : bean.getIclubNotifs()) {
-					iclubNotifs[i] = iclubNotif.getNId();
-					i++;
-				}
-				model.setIclubNotifs(iclubNotifs);
-			}
-
+			
+			model = IclubNotificationTypeTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -208,29 +172,29 @@ public class IclubNotificationTypeService {
 			return message;
 		}
 	}
-
+	
 	public IclubNotificationTypeDAO getIclubNotificationTypeDAO() {
 		return iclubNotificationTypeDAO;
 	}
-
+	
 	public void setIclubNotificationTypeDAO(IclubNotificationTypeDAO iclubNotificationTypeDAO) {
 		this.iclubNotificationTypeDAO = iclubNotificationTypeDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 }

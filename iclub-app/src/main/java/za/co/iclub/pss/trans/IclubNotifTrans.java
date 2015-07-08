@@ -1,107 +1,85 @@
 package za.co.iclub.pss.trans;
 
-import java.util.Date;
+import za.co.iclub.pss.model.ui.IclubNotifBean;
+import za.co.iclub.pss.model.ws.IclubNotifModel;
+import za.co.iclub.pss.orm.bean.IclubNotif;
+import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubNotifTrans {
 	
-	private String NId;
-	private String iclubPerson;
-	private String PFNameAndLName;
-	private Long iclubNotificationType;
-	private String ntLongDesc;
-	private String NTitle;
-	private String NBody;
-	private String NFromAddr;
-	private String NToList;
-	private String NStatus;
-	private Date NCrtdDt;
-	
-	public String getNId() {
-		return NId;
+	public static IclubNotifBean fromWStoUI(IclubNotifModel model) {
+		
+		IclubNotifBean bean = new IclubNotifBean();
+		
+		bean.setNId(model.getNId());
+		bean.setNTitle(model.getNTitle());
+		bean.setNBody(model.getNBody());
+		bean.setNFromAddr(model.getNFromAddr());
+		bean.setNToList(model.getNToList());
+		bean.setNCrtdDt(model.getNCrtdDt());
+		bean.setNtLongDesc(model.getNtLongDesc());
+		bean.setIclubNotificationType(model.getIclubNotificationType());
+		bean.setNStatus(model.getNStatus());
+		bean.setIclubPerson(model.getIclubPerson());
+		bean.setPFNameAndLName(model.getPFNameAndLName());
+		
+		return bean;
 	}
 	
-	public void setNId(String nId) {
-		NId = nId;
+	public static IclubNotifModel fromUItoWS(IclubNotifBean bean) {
+		
+		IclubNotifModel model = new IclubNotifModel();
+		
+		model.setNId(bean.getNId());
+		model.setNTitle(bean.getNTitle());
+		model.setNBody(bean.getNBody());
+		model.setNFromAddr(bean.getNFromAddr());
+		model.setNToList(bean.getNToList());
+		model.setNCrtdDt(bean.getNCrtdDt());
+		model.setNtLongDesc(bean.getNtLongDesc());
+		model.setIclubNotificationType(bean.getIclubNotificationType());
+		model.setNStatus(bean.getNStatus());
+		model.setIclubPerson(bean.getIclubPerson());
+		model.setPFNameAndLName(bean.getPFNameAndLName());
+		
+		return model;
 	}
 	
-	public String getIclubPerson() {
-		return iclubPerson;
+	public static IclubNotifModel fromORMtoWS(IclubNotif bean) {
+		
+		IclubNotifModel model = new IclubNotifModel();
+		
+		model.setNId(bean.getNId());
+		model.setNTitle(bean.getNTitle());
+		model.setNBody(bean.getNBody());
+		model.setNFromAddr(bean.getNFromAddr());
+		model.setNToList(bean.getNToList());
+		model.setNCrtdDt(bean.getNCrtdDt());
+		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+		model.setIclubNotificationType(bean.getIclubNotificationType() != null ? bean.getIclubNotificationType().getNtId() : null);
+		model.setNtLongDesc(bean.getIclubNotificationType() != null ? bean.getIclubNotificationType().getNtLongDesc() : null);
+		model.setNStatus(bean.getNStatus());
+		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
+		
+		return model;
 	}
 	
-	public void setIclubPerson(String iclubPerson) {
-		this.iclubPerson = iclubPerson;
+	public static IclubNotif fromWStoORM(IclubNotifModel model, IclubPersonDAO iclubPersonDAO, IclubNotificationTypeDAO iclubNotificationTypeDAO) {
+		
+		IclubNotif bean = new IclubNotif();
+		
+		bean.setNId(model.getNId());
+		bean.setNTitle(model.getNTitle());
+		bean.setNBody(model.getNBody());
+		bean.setNFromAddr(model.getNFromAddr());
+		bean.setNToList(model.getNToList());
+		bean.setNCrtdDt(model.getNCrtdDt());
+		bean.setIclubNotificationType(iclubNotificationTypeDAO.findById(model.getIclubNotificationType()));
+		bean.setNStatus(model.getNStatus());
+		bean.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+		
+		return bean;
 	}
-	
-	public Long getIclubNotificationType() {
-		return iclubNotificationType;
-	}
-	
-	public void setIclubNotificationType(Long iclubNotificationType) {
-		this.iclubNotificationType = iclubNotificationType;
-	}
-	
-	public String getNTitle() {
-		return NTitle;
-	}
-	
-	public void setNTitle(String nTitle) {
-		NTitle = nTitle;
-	}
-	
-	public String getNBody() {
-		return NBody;
-	}
-	
-	public void setNBody(String nBody) {
-		NBody = nBody;
-	}
-	
-	public String getNFromAddr() {
-		return NFromAddr;
-	}
-	
-	public void setNFromAddr(String nFromAddr) {
-		NFromAddr = nFromAddr;
-	}
-	
-	public String getNToList() {
-		return NToList;
-	}
-	
-	public void setNToList(String nToList) {
-		NToList = nToList;
-	}
-	
-	public String getNStatus() {
-		return NStatus;
-	}
-	
-	public void setNStatus(String nStatus) {
-		NStatus = nStatus;
-	}
-	
-	public Date getNCrtdDt() {
-		return NCrtdDt;
-	}
-	
-	public void setNCrtdDt(Date nCrtdDt) {
-		NCrtdDt = nCrtdDt;
-	}
-	
-	public String getPFNameAndLName() {
-		return PFNameAndLName;
-	}
-	
-	public void setPFNameAndLName(String pFNameAndLName) {
-		PFNameAndLName = pFNameAndLName;
-	}
-	
-	public String getNtLongDesc() {
-		return ntLongDesc;
-	}
-	
-	public void setNtLongDesc(String ntLongDesc) {
-		this.ntLongDesc = ntLongDesc;
-	}
-	
 }

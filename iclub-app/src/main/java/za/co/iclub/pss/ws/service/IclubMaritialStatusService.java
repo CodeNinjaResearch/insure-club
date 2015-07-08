@@ -17,23 +17,23 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubMaritialStatusModel;
 import za.co.iclub.pss.orm.bean.IclubMaritialStatus;
-import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
-import za.co.iclub.pss.ws.model.IclubMaritialStatusModel;
+import za.co.iclub.pss.trans.IclubMaritialStatusTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubMaritialStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubMaritialStatusService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubMaritialStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -41,17 +41,14 @@ public class IclubMaritialStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubMaritialStatusModel model) {
 		try {
-			IclubMaritialStatus iMs = new IclubMaritialStatus();
-
+			IclubMaritialStatus iMs = IclubMaritialStatusTrans.fromWStoORM(model);
+			
 			iMs.setMsId(iclubCommonDAO.getNextId(IclubMaritialStatus.class));
-			iMs.setMsLongDesc(model.getMsLongDesc());
-			iMs.setMsShortDesc(model.getMsShortDesc());
-			iMs.setMsStatus(model.getMsStatus());
-
+			
 			iclubMaritialStatusDAO.save(iMs);
-
+			
 			LOGGER.info("Save Success with ID :: " + iMs.getMsId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -63,9 +60,9 @@ public class IclubMaritialStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -73,17 +70,12 @@ public class IclubMaritialStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubMaritialStatusModel model) {
 		try {
-			IclubMaritialStatus iMs = new IclubMaritialStatus();
-
-			iMs.setMsId(model.getMsId());
-			iMs.setMsLongDesc(model.getMsLongDesc());
-			iMs.setMsShortDesc(model.getMsShortDesc());
-			iMs.setMsStatus(model.getMsStatus());
-
+			IclubMaritialStatus iMs = IclubMaritialStatusTrans.fromWStoORM(model);
+			
 			iclubMaritialStatusDAO.merge(iMs);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getMsId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -95,9 +87,9 @@ public class IclubMaritialStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -112,46 +104,32 @@ public class IclubMaritialStatusService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubMaritialStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubMaritialStatusDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubMaritialStatus iMs = (IclubMaritialStatus) object;
-
-					IclubMaritialStatusModel model = new IclubMaritialStatusModel();
-
-					model.setMsId(iMs.getMsId());
-					model.setMsLongDesc(iMs.getMsLongDesc());
-					model.setMsShortDesc(iMs.getMsShortDesc());
-					model.setMsStatus(iMs.getMsStatus());
-
-					if (iMs.getIclubPersons() != null && iMs.getIclubPersons().size() > 0) {
-						String[] iclubPersons = new String[iMs.getIclubPersons().size()];
-						int i = 0;
-						for (IclubPerson iclubPerson : iMs.getIclubPersons()) {
-							iclubPersons[i] = iclubPerson.getPId();
-							i++;
-						}
-						model.setIclubPersons(iclubPersons);
-					}
+					IclubMaritialStatus bean = (IclubMaritialStatus) object;
+					
+					IclubMaritialStatusModel model = IclubMaritialStatusTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -160,28 +138,15 @@ public class IclubMaritialStatusService {
 		IclubMaritialStatusModel model = new IclubMaritialStatusModel();
 		try {
 			IclubMaritialStatus bean = iclubMaritialStatusDAO.findById(id);
-
-			model.setMsId(bean.getMsId());
-			model.setMsLongDesc(bean.getMsLongDesc());
-			model.setMsShortDesc(bean.getMsShortDesc());
-			model.setMsStatus(bean.getMsStatus());
-
-			if (bean.getIclubPersons() != null && bean.getIclubPersons().size() > 0) {
-				String[] iclubPersons = new String[bean.getIclubPersons().size()];
-				int i = 0;
-				for (IclubPerson iclubPerson : bean.getIclubPersons()) {
-					iclubPersons[i] = iclubPerson.getPId();
-					i++;
-				}
-				model.setIclubPersons(iclubPersons);
-			}
-
+			
+			model = IclubMaritialStatusTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -207,29 +172,29 @@ public class IclubMaritialStatusService {
 			return message;
 		}
 	}
-
+	
 	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
 		return iclubMaritialStatusDAO;
 	}
-
+	
 	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
 		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 }

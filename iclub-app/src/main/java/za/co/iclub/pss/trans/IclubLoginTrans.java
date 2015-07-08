@@ -25,6 +25,8 @@ public class IclubLoginTrans {
 		bean.setPAFNameAndLName(model.getPAFNameAndLName());
 		bean.setIclubPersonBByLPersonId(model.getIclubPersonBByLPersonId());
 		bean.setPBFNameAndLName(model.getPBFNameAndLName());
+		bean.setLProviderCd(model.getLProviderCd());
+		bean.setLProviderId(model.getLProviderId());
 		
 		return bean;
 	}
@@ -45,6 +47,8 @@ public class IclubLoginTrans {
 		model.setPAFNameAndLName(bean.getPAFNameAndLName());
 		model.setIclubPersonBByLPersonId(bean.getIclubPersonBByLPersonId());
 		model.setPBFNameAndLName(bean.getPBFNameAndLName());
+		model.setLProviderCd(bean.getLProviderCd());
+		model.setLProviderId(bean.getLProviderId());
 		
 		return model;
 	}
@@ -65,6 +69,8 @@ public class IclubLoginTrans {
 		model.setPAFNameAndLName(bean.getIclubPersonByLCrtdBy() != null ? bean.getIclubPersonByLCrtdBy().getPFName() + " " + bean.getIclubPersonByLCrtdBy().getPLName() != null ? bean.getIclubPersonByLCrtdBy().getPLName() : "" : "");
 		model.setIclubPersonBByLPersonId(bean.getIclubPersonByLPersonId() != null ? bean.getIclubPersonByLPersonId().getPId() : null);
 		model.setPBFNameAndLName(bean.getIclubPersonByLPersonId() != null ? bean.getIclubPersonByLPersonId().getPFName() + " " + bean.getIclubPersonByLPersonId().getPLName() != null ? bean.getIclubPersonByLPersonId().getPLName() : "" : "");
+		model.setLProviderCd(bean.getLProviderCd());
+		model.setLProviderId(bean.getLProviderId());
 		
 		return model;
 	}
@@ -83,6 +89,8 @@ public class IclubLoginTrans {
 		bean.setIclubPersonByLPersonId(model.getIclubPersonBByLPersonId() != null ? iclubPersonDAO.findById(model.getIclubPersonBByLPersonId()) : null);
 		bean.setIclubRoleType(model.getIclubRoleType() != null ? iclubRoleTypeDAO.findById(model.getIclubRoleType()) : null);
 		bean.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
+		bean.setLProviderCd(model.getLProviderCd());
+		bean.setLProviderId(model.getLProviderId());
 		
 		return bean;
 	}

@@ -14,6 +14,7 @@ public class IclubVehicleBean {
 	private Long iclubAccessTypeByVDdAccessTypeId;
 	private String atDdLongDesc;
 	private String iclubSecurityDevice;
+	private String sdSerNum;
 	private Long iclubVehicleMaster;
 	private String vmLongDesc;
 	private String iclubPerson;
@@ -42,6 +43,7 @@ public class IclubVehicleBean {
 	private Date VCrtdDt;
 	private String VModifiedYn;
 	private Long iclubCoverType;
+	private String ctLongDesc;
 	
 	public String getVId() {
 		return VId;
@@ -345,6 +347,22 @@ public class IclubVehicleBean {
 	
 	public void setIclubCoverType(Long iclubCoverType) {
 		this.iclubCoverType = iclubCoverType;
+	}
+	
+	public String getCtLongDesc() {
+		return ctLongDesc;
+	}
+	
+	public void setCtLongDesc(String ctLongDesc) {
+		this.ctLongDesc = ctLongDesc;
+	}
+	
+	public String getSdSerNum() {
+		return sdSerNum;
+	}
+	
+	public void setSdSerNum(String sdSerNum) {
+		this.sdSerNum = sdSerNum;
 	}
 	
 }

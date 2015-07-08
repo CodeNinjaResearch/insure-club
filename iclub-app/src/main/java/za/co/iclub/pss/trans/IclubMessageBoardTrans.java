@@ -1,71 +1,72 @@
 package za.co.iclub.pss.trans;
 
-import java.util.Date;
+import za.co.iclub.pss.model.ui.IclubMessageBoardBean;
+import za.co.iclub.pss.model.ws.IclubMessageBoardModel;
+import za.co.iclub.pss.orm.bean.IclubMessageBoard;
+import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubMessageBoardTrans {
 	
-	private String mbId;
-	private String iclubPerson;
-	private String PFNameAndLName;
-	private String mbTitle;
-	private String mbContent;
-	private String mbTag;
-	private Date mbCrtdDt;
-	
-	public String getMbId() {
-		return mbId;
+	public static IclubMessageBoardBean fromWStoUI(IclubMessageBoardModel model) {
+		
+		IclubMessageBoardBean bean = new IclubMessageBoardBean();
+		
+		model.setMbId(bean.getMbId());
+		model.setMbContent(bean.getMbContent());
+		model.setMbContent(bean.getMbContent());
+		model.setMbTag(bean.getMbTag());
+		model.setMbTitle(bean.getMbTitle());
+		model.setMbCrtdDt(bean.getMbCrtdDt());
+		bean.setIclubPerson(model.getIclubPerson());
+		bean.setPFNameAndLName(model.getPFNameAndLName());
+		
+		return bean;
 	}
 	
-	public void setMbId(String mbId) {
-		this.mbId = mbId;
+	public static IclubMessageBoardModel fromUItoWS(IclubMessageBoardBean bean) {
+		
+		IclubMessageBoardModel model = new IclubMessageBoardModel();
+		
+		model.setMbId(bean.getMbId());
+		model.setMbContent(bean.getMbContent());
+		model.setMbContent(bean.getMbContent());
+		model.setMbTag(bean.getMbTag());
+		model.setMbTitle(bean.getMbTitle());
+		model.setMbCrtdDt(bean.getMbCrtdDt());
+		model.setIclubPerson(bean.getIclubPerson());
+		model.setPFNameAndLName(bean.getPFNameAndLName());
+		
+		return model;
 	}
 	
-	public String getIclubPerson() {
-		return iclubPerson;
+	public static IclubMessageBoardModel fromORMtoWS(IclubMessageBoard bean) {
+		
+		IclubMessageBoardModel model = new IclubMessageBoardModel();
+		
+		model.setMbId(bean.getMbId());
+		model.setMbContent(bean.getMbContent());
+		model.setMbContent(bean.getMbContent());
+		model.setMbTag(bean.getMbTag());
+		model.setMbTitle(bean.getMbTitle());
+		model.setMbCrtdDt(bean.getMbCrtdDt());
+		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
+		
+		return model;
 	}
 	
-	public void setIclubPerson(String iclubPerson) {
-		this.iclubPerson = iclubPerson;
+	public static IclubMessageBoard fromWStoORM(IclubMessageBoardModel model, IclubPersonDAO iclubPersonDAO) {
+		
+		IclubMessageBoard bean = new IclubMessageBoard();
+		
+		bean.setMbId(model.getMbId());
+		bean.setMbContent(model.getMbContent());
+		bean.setMbContent(model.getMbContent());
+		bean.setMbTag(model.getMbTag());
+		bean.setMbTitle(model.getMbTitle());
+		bean.setMbCrtdDt(model.getMbCrtdDt());
+		bean.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+		
+		return bean;
 	}
-	
-	public String getMbTitle() {
-		return mbTitle;
-	}
-	
-	public void setMbTitle(String mbTitle) {
-		this.mbTitle = mbTitle;
-	}
-	
-	public String getMbContent() {
-		return mbContent;
-	}
-	
-	public void setMbContent(String mbContent) {
-		this.mbContent = mbContent;
-	}
-	
-	public String getMbTag() {
-		return mbTag;
-	}
-	
-	public void setMbTag(String mbTag) {
-		this.mbTag = mbTag;
-	}
-	
-	public Date getMbCrtdDt() {
-		return mbCrtdDt;
-	}
-	
-	public void setMbCrtdDt(Date mbCrtdDt) {
-		this.mbCrtdDt = mbCrtdDt;
-	}
-	
-	public String getPFNameAndLName() {
-		return PFNameAndLName;
-	}
-	
-	public void setPFNameAndLName(String pFNameAndLName) {
-		PFNameAndLName = pFNameAndLName;
-	}
-	
 }

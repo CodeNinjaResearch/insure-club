@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubLoginModel;
 import za.co.iclub.pss.orm.bean.IclubLogin;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubLoginDAO;
@@ -24,7 +25,7 @@ import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubRoleTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityQuestionDAO;
-import za.co.iclub.pss.ws.model.IclubLoginModel;
+import za.co.iclub.pss.trans.IclubLoginTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubLoginService")
@@ -46,18 +47,7 @@ public class IclubLoginService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubLoginModel model) {
 		try {
-			IclubLogin login = new IclubLogin();
-			
-			login.setLId(model.getLId());
-			login.setLCrtdDt(model.getLCrtdDt());
-			login.setLLastDate(model.getLLastDate());
-			login.setLName(model.getLName());
-			login.setLPasswd(model.getLPasswd());
-			login.setLSecAns(model.getLSecAns());
-			login.setIclubPersonByLCrtdBy(model.getIclubPersonByLCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()) : null);
-			login.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId() != null ? iclubPersonDAO.findById(model.getIclubPersonByLPersonId()) : null);
-			login.setIclubRoleType(model.getIclubRoleType() != null ? iclubRoleTypeDAO.findById(model.getIclubRoleType()) : null);
-			login.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
+			IclubLogin login = IclubLoginTrans.fromWStoORM(model, iclubPersonDAO, iclubSecurityQuestionDAO, iclubRoleTypeDAO);
 			
 			iclubLoginDAO.save(login);
 			
@@ -84,18 +74,7 @@ public class IclubLoginService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubLoginModel model) {
 		try {
-			IclubLogin login = new IclubLogin();
-			
-			login.setLId(model.getLId());
-			login.setLCrtdDt(model.getLCrtdDt());
-			login.setLLastDate(model.getLLastDate());
-			login.setLName(model.getLName());
-			login.setLPasswd(model.getLPasswd());
-			login.setLSecAns(model.getLSecAns());
-			login.setIclubPersonByLCrtdBy(model.getIclubPersonByLCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByLCrtdBy()) : null);
-			login.setIclubPersonByLPersonId(model.getIclubPersonByLPersonId() != null ? iclubPersonDAO.findById(model.getIclubPersonByLPersonId()) : null);
-			login.setIclubRoleType(model.getIclubRoleType() != null ? iclubRoleTypeDAO.findById(model.getIclubRoleType()) : null);
-			login.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
+			IclubLogin login = IclubLoginTrans.fromWStoORM(model, iclubPersonDAO, iclubSecurityQuestionDAO, iclubRoleTypeDAO);
 			
 			iclubLoginDAO.merge(login);
 			
@@ -140,19 +119,8 @@ public class IclubLoginService {
 			List loginmod = iclubLoginDAO.findAll();
 			if (loginmod != null && loginmod.size() > 0) {
 				for (Object object : loginmod) {
-					IclubLogin iclubLogin = (IclubLogin) object;
-					IclubLoginModel ibm = new IclubLoginModel();
-					
-					ibm.setLId(iclubLogin.getLId());
-					ibm.setLCrtdDt(iclubLogin.getLCrtdDt());
-					ibm.setLLastDate(iclubLogin.getLLastDate());
-					ibm.setLName(iclubLogin.getLName());
-					ibm.setLPasswd(iclubLogin.getLPasswd());
-					ibm.setLSecAns(iclubLogin.getLSecAns());
-					ibm.setIclubPersonByLCrtdBy(iclubLogin.getIclubPersonByLCrtdBy() != null ? iclubLogin.getIclubPersonByLCrtdBy().getPId() : null);
-					ibm.setIclubPersonByLPersonId(iclubLogin.getIclubPersonByLPersonId() != null ? iclubLogin.getIclubPersonByLPersonId().getPId() : null);
-					ibm.setIclubRoleType(iclubLogin.getIclubRoleType() != null ? iclubLogin.getIclubRoleType().getRtId() : null);
-					ibm.setIclubSecurityQuestion(iclubLogin.getIclubSecurityQuestion() != null ? iclubLogin.getIclubSecurityQuestion().getSqId() : null);
+					IclubLogin bean = (IclubLogin) object;
+					IclubLoginModel ibm = IclubLoginTrans.fromORMtoWS(bean);
 					
 					ret.add((T) ibm);
 				}
@@ -199,29 +167,38 @@ public class IclubLoginService {
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public IclubLoginModel getByPersonName(@PathParam("name") String name) {
-		IclubLoginModel message = new IclubLoginModel();
+		IclubLoginModel model = new IclubLoginModel();
 		try {
 			List logins = iclubLoginDAO.findByProperty("LName", name);
 			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
-				IclubLogin login = (IclubLogin) logins.get(0);
+				IclubLogin bean = (IclubLogin) logins.get(0);
 				
-				message.setLId(login.getLId());
-				message.setLCrtdDt(login.getLCrtdDt());
-				message.setLLastDate(login.getLLastDate());
-				message.setLName(login.getLName());
-				message.setLPasswd(login.getLPasswd());
-				message.setLSecAns(login.getLSecAns());
-				message.setLSecAns(login.getLSecAns());
-				message.setIclubPersonByLCrtdBy(login.getIclubPersonByLCrtdBy() != null ? login.getIclubPersonByLCrtdBy().getPId() : null);
-				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
-				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
-				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
+				model = IclubLoginTrans.fromORMtoWS(bean);
 				
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		return message;
+		return model;
+	}
+	
+	@GET
+	@Path("/socailLogin/{userName}/{providerId}/{providerCd}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public IclubLoginModel getByLoginIdAndProviderId(@PathParam("userName") String name, @PathParam("providerId") String providerId, @PathParam("providerCd") String providerCd) {
+		IclubLoginModel model = new IclubLoginModel();
+		try {
+			List logins = iclubNamedQueryDAO.getIclubLoginByIdAndProviderId(name, providerId, providerCd);
+			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
+				IclubLogin bean = (IclubLogin) logins.get(0);
+				
+				model = IclubLoginTrans.fromORMtoWS(bean);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return model;
 	}
 	
 	@GET
@@ -229,29 +206,18 @@ public class IclubLoginService {
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public IclubLoginModel getByPersonId(@PathParam("id") String id) {
-		IclubLoginModel message = new IclubLoginModel();
+		IclubLoginModel model = new IclubLoginModel();
 		try {
 			List logins = iclubNamedQueryDAO.getIclubLoginByPersonId(id);
 			if (logins != null && logins.size() > 0 && logins.get(0) != null) {
-				IclubLogin login = (IclubLogin) logins.get(0);
-				
-				message.setLId(login.getLId());
-				message.setLCrtdDt(login.getLCrtdDt());
-				message.setLLastDate(login.getLLastDate());
-				message.setLName(login.getLName());
-				message.setLPasswd(login.getLPasswd());
-				message.setLSecAns(login.getLSecAns());
-				message.setLSecAns(login.getLSecAns());
-				message.setIclubPersonByLCrtdBy(login.getIclubPersonByLCrtdBy() != null ? login.getIclubPersonByLCrtdBy().getPId() : null);
-				message.setIclubPersonByLPersonId(login.getIclubPersonByLPersonId() != null ? login.getIclubPersonByLPersonId().getPId() : null);
-				message.setIclubRoleType(login.getIclubRoleType() != null ? login.getIclubRoleType().getRtId() : null);
-				message.setIclubSecurityQuestion(login.getIclubSecurityQuestion() != null ? login.getIclubSecurityQuestion().getSqId() : null);
+				IclubLogin bean = (IclubLogin) logins.get(0);
+				model = IclubLoginTrans.fromORMtoWS(bean);
 				
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		return message;
+		return model;
 	}
 	
 	public IclubLoginDAO getIclubLoginDAO() {

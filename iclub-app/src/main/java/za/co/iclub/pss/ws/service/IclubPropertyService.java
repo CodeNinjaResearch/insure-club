@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubPropertyModel;
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
@@ -30,7 +31,7 @@ import za.co.iclub.pss.orm.dao.IclubPropertyDAO;
 import za.co.iclub.pss.orm.dao.IclubPropertyTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubRoofTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
-import za.co.iclub.pss.ws.model.IclubPropertyModel;
+import za.co.iclub.pss.trans.IclubPropertyTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubPropertyService")
@@ -58,33 +59,8 @@ public class IclubPropertyService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPropertyModel model) {
 		try {
-			IclubProperty iCP = new IclubProperty();
+			IclubProperty iCP = IclubPropertyTrans.fromWStoORM(model, iclubPersonDAO, iclubCoverTypeDAO, iclubPropUsageTypeDAO, iclubOccupiedStatusDAO, iclubPropertyTypeDAO, iclubWallTypeDAO, iclubAccessTypeDAO, iclubBarTypeDAO, iclubRoofTypeDAO);
 			
-			iCP.setPId(model.getPId());
-			iCP.setPCrtdDt(model.getPCrtdDt());
-			iCP.setPEstValue(model.getPEstValue());
-			iCP.setPSecGatesYn(model.getPSecGatesYn());
-			iCP.setPNorobberyYn(model.getPNorobberyYn());
-			iCP.setPCompYn(model.getPCompYn());
-			iCP.setPRentFurYn(model.getPRentFurYn());
-			iCP.setPNoclaimYrs(model.getPNoclaimYrs());
-			iCP.setPPostalCd(model.getPPostalCd());
-			iCP.setPLong(model.getPLong());
-			iCP.setPLat(model.getPLat());
-			iCP.setPAddress(model.getPAddress());
-			iCP.setPRegNum(model.getPRegNum());
-			iCP.setPReplacementCost(model.getPReplacementCost());
-			iCP.setPContentCost(model.getPContentCost());
-			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
-			iCP.setPThatchType(model.getPThatchType());
-			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
-			iCP.setIclubAccessType(model.getIclubAccessType() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessType()) : null);
-			iCP.setIclubWallType(model.getIclubWallType() != null ? iclubWallTypeDAO.findById(model.getIclubWallType()) : null);
-			iCP.setIclubPropertyType(model.getIclubPropertyType() != null ? iclubPropertyTypeDAO.findById(model.getIclubPropertyType()) : null);
-			iCP.setIclubOccupiedStatus(model.getIclubOccupiedStatus() != null ? iclubOccupiedStatusDAO.findById(model.getIclubOccupiedStatus()) : null);
-			iCP.setIclubPropUsageType(model.getIclubPropUsageType() != null ? iclubPropUsageTypeDAO.findById(model.getIclubPropUsageType()) : null);
-			iCP.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
-			iCP.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			iclubPropertyDAO.save(iCP);
 			
 			LOGGER.info("Save Success with ID :: " + iCP.getPId());
@@ -110,33 +86,7 @@ public class IclubPropertyService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPropertyModel model) {
 		try {
-			IclubProperty iCP = new IclubProperty();
-			
-			iCP.setPId(model.getPId());
-			iCP.setPCrtdDt(model.getPCrtdDt());
-			iCP.setPEstValue(model.getPEstValue());
-			iCP.setPSecGatesYn(model.getPSecGatesYn());
-			iCP.setPNorobberyYn(model.getPNorobberyYn());
-			iCP.setPCompYn(model.getPCompYn());
-			iCP.setPRentFurYn(model.getPRentFurYn());
-			iCP.setPNoclaimYrs(model.getPNoclaimYrs());
-			iCP.setPPostalCd(model.getPPostalCd());
-			iCP.setPLong(model.getPLong());
-			iCP.setPLat(model.getPLat());
-			iCP.setPAddress(model.getPAddress());
-			iCP.setPRegNum(model.getPRegNum());
-			iCP.setPReplacementCost(model.getPReplacementCost());
-			iCP.setPContentCost(model.getPContentCost());
-			iCP.setIclubRoofType(model.getIclubRoofType() != null ? iclubRoofTypeDAO.findById(model.getIclubRoofType()) : null);
-			iCP.setPThatchType(model.getPThatchType());
-			iCP.setIclubBarType(model.getIclubBarType() != null ? iclubBarTypeDAO.findById(model.getIclubBarType()) : null);
-			iCP.setIclubAccessType(model.getIclubAccessType() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessType()) : null);
-			iCP.setIclubWallType(model.getIclubWallType() != null ? iclubWallTypeDAO.findById(model.getIclubWallType()) : null);
-			iCP.setIclubPropertyType(model.getIclubPropertyType() != null ? iclubPropertyTypeDAO.findById(model.getIclubPropertyType()) : null);
-			iCP.setIclubOccupiedStatus(model.getIclubOccupiedStatus() != null ? iclubOccupiedStatusDAO.findById(model.getIclubOccupiedStatus()) : null);
-			iCP.setIclubPropUsageType(model.getIclubPropUsageType() != null ? iclubPropUsageTypeDAO.findById(model.getIclubPropUsageType()) : null);
-			iCP.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
-			iCP.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+			IclubProperty iCP = IclubPropertyTrans.fromWStoORM(model, iclubPersonDAO, iclubCoverTypeDAO, iclubPropUsageTypeDAO, iclubOccupiedStatusDAO, iclubPropertyTypeDAO, iclubWallTypeDAO, iclubAccessTypeDAO, iclubBarTypeDAO, iclubRoofTypeDAO);
 			
 			iclubPropertyDAO.merge(iCP);
 			
@@ -182,35 +132,9 @@ public class IclubPropertyService {
 			List batmod = iclubPropertyDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubProperty iCP = (IclubProperty) object;
+					IclubProperty bean = (IclubProperty) object;
 					
-					IclubPropertyModel model = new IclubPropertyModel();
-					
-					model.setPId(iCP.getPId());
-					model.setPCrtdDt(iCP.getPCrtdDt());
-					model.setPEstValue(iCP.getPEstValue());
-					model.setPSecGatesYn(iCP.getPSecGatesYn());
-					model.setPNorobberyYn(iCP.getPNorobberyYn());
-					model.setPCompYn(iCP.getPCompYn());
-					model.setPRentFurYn(iCP.getPRentFurYn());
-					model.setPNoclaimYrs(iCP.getPNoclaimYrs());
-					model.setPPostalCd(iCP.getPPostalCd());
-					model.setPLong(iCP.getPLong());
-					model.setPLat(iCP.getPLat());
-					model.setPAddress(iCP.getPAddress());
-					model.setPRegNum(iCP.getPRegNum());
-					model.setPReplacementCost(iCP.getPReplacementCost());
-					model.setPContentCost(iCP.getPContentCost());
-					model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
-					model.setIclubPropUsageType(iCP.getIclubPropUsageType() != null ? (iCP.getIclubPropUsageType().getPutId()) : null);
-					model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
-					model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
-					model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
-					model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
-					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
-					model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
-					model.setPThatchType(iCP.getPThatchType());
-					model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
+					IclubPropertyModel model = IclubPropertyTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -233,35 +157,9 @@ public class IclubPropertyService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubProperty.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubProperty iCP = (IclubProperty) object;
+					IclubProperty bean = (IclubProperty) object;
 					
-					IclubPropertyModel model = new IclubPropertyModel();
-					
-					model.setPId(iCP.getPId());
-					model.setPCrtdDt(iCP.getPCrtdDt());
-					model.setPEstValue(iCP.getPEstValue());
-					model.setPSecGatesYn(iCP.getPSecGatesYn());
-					model.setPNorobberyYn(iCP.getPNorobberyYn());
-					model.setPCompYn(iCP.getPCompYn());
-					model.setPRentFurYn(iCP.getPRentFurYn());
-					model.setPNoclaimYrs(iCP.getPNoclaimYrs());
-					model.setPPostalCd(iCP.getPPostalCd());
-					model.setPLong(iCP.getPLong());
-					model.setPLat(iCP.getPLat());
-					model.setPAddress(iCP.getPAddress());
-					model.setPRegNum(iCP.getPRegNum());
-					model.setPReplacementCost(iCP.getPReplacementCost());
-					model.setPContentCost(iCP.getPContentCost());
-					model.setIclubCoverType(iCP.getIclubCoverType() != null ? (iCP.getIclubCoverType().getCtId()) : null);
-					model.setIclubPropUsageType(iCP.getIclubPropUsageType() != null ? (iCP.getIclubPropUsageType().getPutId()) : null);
-					model.setIclubOccupiedStatus(iCP.getIclubOccupiedStatus() != null ? (iCP.getIclubOccupiedStatus().getOsId()) : null);
-					model.setIclubPropertyType(iCP.getIclubPropertyType() != null ? (iCP.getIclubPropertyType().getPtId()) : null);
-					model.setIclubWallType(iCP.getIclubWallType() != null ? (iCP.getIclubWallType().getWtId()) : null);
-					model.setIclubAccessType(iCP.getIclubAccessType() != null ? (iCP.getIclubAccessType().getAtId()) : null);
-					model.setIclubPerson(iCP.getIclubPerson() != null ? (iCP.getIclubPerson().getPId()) : null);
-					model.setIclubBarType(iCP.getIclubBarType() != null ? (iCP.getIclubBarType().getBtId()) : null);
-					model.setPThatchType(iCP.getPThatchType());
-					model.setIclubRoofType(iCP.getIclubRoofType() != null ? (iCP.getIclubRoofType().getRtId()) : null);
+					IclubPropertyModel model = IclubPropertyTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -282,31 +180,7 @@ public class IclubPropertyService {
 		try {
 			IclubProperty bean = iclubPropertyDAO.findById(id);
 			if (bean != null) {
-				model.setPId(bean.getPId());
-				model.setPCrtdDt(bean.getPCrtdDt());
-				model.setPEstValue(bean.getPEstValue());
-				model.setPSecGatesYn(bean.getPSecGatesYn());
-				model.setPNorobberyYn(bean.getPNorobberyYn());
-				model.setPCompYn(bean.getPCompYn());
-				model.setPRentFurYn(bean.getPRentFurYn());
-				model.setPNoclaimYrs(bean.getPNoclaimYrs());
-				model.setPPostalCd(bean.getPPostalCd());
-				model.setPLong(bean.getPLong());
-				model.setPLat(bean.getPLat());
-				model.setPAddress(bean.getPAddress());
-				model.setPRegNum(bean.getPRegNum());
-				model.setPReplacementCost(bean.getPReplacementCost());
-				model.setPContentCost(bean.getPContentCost());
-				model.setIclubCoverType(bean.getIclubCoverType() != null ? (bean.getIclubCoverType().getCtId()) : null);
-				model.setIclubPropUsageType(bean.getIclubPropUsageType() != null ? (bean.getIclubPropUsageType().getPutId()) : null);
-				model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus() != null ? (bean.getIclubOccupiedStatus().getOsId()) : null);
-				model.setIclubPropertyType(bean.getIclubPropertyType() != null ? (bean.getIclubPropertyType().getPtId()) : null);
-				model.setIclubWallType(bean.getIclubWallType() != null ? (bean.getIclubWallType().getWtId()) : null);
-				model.setIclubAccessType(bean.getIclubAccessType() != null ? (bean.getIclubAccessType().getAtId()) : null);
-				model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
-				model.setIclubBarType(bean.getIclubBarType() != null ? (bean.getIclubBarType().getBtId()) : null);
-				model.setPThatchType(bean.getPThatchType());
-				model.setIclubRoofType(bean.getIclubRoofType() != null ? (bean.getIclubRoofType().getRtId()) : null);
+				model = IclubPropertyTrans.fromORMtoWS(bean);
 			}
 			
 		} catch (Exception e) {

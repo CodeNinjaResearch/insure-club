@@ -17,12 +17,13 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubGeoLocModel;
 import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubGeoLocDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
-import za.co.iclub.pss.ws.model.IclubGeoLocModel;
+import za.co.iclub.pss.trans.IclubGeoLocTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubGeoLocService")
@@ -43,17 +44,9 @@ public class IclubGeoLocService {
 	public ResponseModel add(IclubGeoLocModel model) {
 		try {
 			
-			IclubGeoLoc iCGl = new IclubGeoLoc();
+			IclubGeoLoc iCGl = IclubGeoLocTrans.fromWStoORM(model, iclubPersonDAO);
 			
 			iCGl.setGlId(iclubCommonDAO.getNextId(IclubGeoLoc.class));
-			iCGl.setGlAddress(model.getGlAddress());
-			iCGl.setGlProvince(model.getGlProvince());
-			iCGl.setGlSuburb(model.getGlSuburb());
-			iCGl.setGlLat(model.getGlLat());
-			iCGl.setGlLong(model.getGlLong());
-			iCGl.setGlRate(model.getGlRate());
-			iCGl.setGlCrtdDt(model.getGlCrtdDt());
-			iCGl.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 			
 			iclubGeoLocDAO.save(iCGl);
 			
@@ -82,18 +75,7 @@ public class IclubGeoLocService {
 	@Transactional
 	public ResponseModel mod(IclubGeoLocModel model) {
 		try {
-			IclubGeoLoc iCGl = new IclubGeoLoc();
-			
-			iCGl.setGlId(model.getGlId());
-			iCGl.setGlProvince(model.getGlProvince());
-			iCGl.setGlSuburb(model.getGlSuburb());
-			iCGl.setGlAddress(model.getGlAddress());
-			iCGl.setGlLat(model.getGlLat());
-			iCGl.setGlLong(model.getGlLong());
-			iCGl.setGlRate(model.getGlRate());
-			iCGl.setGlCrtdDt(model.getGlCrtdDt());
-			;
-			iCGl.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			IclubGeoLoc iCGl = IclubGeoLocTrans.fromWStoORM(model, iclubPersonDAO);
 			
 			iclubGeoLocDAO.merge(iCGl);
 			
@@ -139,19 +121,8 @@ public class IclubGeoLocService {
 			List batmod = iclubGeoLocDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
-					IclubGeoLocModel iCGl = new IclubGeoLocModel();
-					
-					iCGl.setGlId(iclubGLoc.getGlId());
-					iCGl.setGlAddress(iclubGLoc.getGlAddress());
-					iCGl.setGlProvince(iclubGLoc.getGlProvince());
-					iCGl.setGlSuburb(iclubGLoc.getGlSuburb());
-					iCGl.setGlLat(iclubGLoc.getGlLat());
-					iCGl.setGlLong(iclubGLoc.getGlLong());
-					iCGl.setIclubPerson(iclubGLoc.getIclubPerson() != null ? iclubGLoc.getIclubPerson().getPId() : null);
-					iCGl.setGlRate(iclubGLoc.getGlRate());
-					iCGl.setGlCrtdDt(iclubGLoc.getGlCrtdDt());
-					;
+					IclubGeoLoc bean = (IclubGeoLoc) object;
+					IclubGeoLocModel iCGl = IclubGeoLocTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCGl);
 				}
@@ -174,19 +145,8 @@ public class IclubGeoLocService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubGeoLoc.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubGeoLoc iclubGLoc = (IclubGeoLoc) object;
-					IclubGeoLocModel iCGl = new IclubGeoLocModel();
-					
-					iCGl.setGlProvince(iclubGLoc.getGlProvince());
-					iCGl.setGlSuburb(iclubGLoc.getGlSuburb());
-					iCGl.setGlId(iclubGLoc.getGlId());
-					iCGl.setGlAddress(iclubGLoc.getGlAddress());
-					iCGl.setGlLat(iclubGLoc.getGlLat());
-					iCGl.setGlLong(iclubGLoc.getGlLong());
-					iCGl.setIclubPerson(iclubGLoc.getIclubPerson() != null ? iclubGLoc.getIclubPerson().getPId() : null);
-					iCGl.setGlRate(iclubGLoc.getGlRate());
-					iCGl.setGlCrtdDt(iclubGLoc.getGlCrtdDt());
-					;
+					IclubGeoLoc bean = (IclubGeoLoc) object;
+					IclubGeoLocModel iCGl = IclubGeoLocTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCGl);
 				}
@@ -206,15 +166,7 @@ public class IclubGeoLocService {
 		try {
 			IclubGeoLoc bean = iclubGeoLocDAO.findById(id);
 			
-			model.setGlProvince(bean.getGlProvince());
-			model.setGlSuburb(bean.getGlSuburb());
-			model.setGlId(bean.getGlId());
-			model.setGlAddress(bean.getGlAddress());
-			model.setGlLat(bean.getGlLat());
-			model.setGlLong(bean.getGlLong());
-			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			model.setGlRate(bean.getGlRate());
-			model.setGlCrtdDt(bean.getGlCrtdDt());
+			model = IclubGeoLocTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -232,15 +184,7 @@ public class IclubGeoLocService {
 			Long glId = iclubNamedQueryDAO.getIclubGeoLocByLatAndLong(geoLong, geoLat);
 			IclubGeoLoc bean = iclubGeoLocDAO.findById(glId);
 			if (bean != null) {
-				model.setGlProvince(bean.getGlProvince());
-				model.setGlSuburb(bean.getGlSuburb());
-				model.setGlId(bean.getGlId());
-				model.setGlAddress(bean.getGlAddress());
-				model.setGlLat(bean.getGlLat());
-				model.setGlLong(bean.getGlLong());
-				model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-				model.setGlRate(bean.getGlRate());
-				model.setGlCrtdDt(bean.getGlCrtdDt());
+				model = IclubGeoLocTrans.fromORMtoWS(bean);
 			}
 			
 		} catch (Exception e) {

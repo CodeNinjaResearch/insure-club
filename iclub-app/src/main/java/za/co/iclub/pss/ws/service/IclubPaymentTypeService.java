@@ -17,22 +17,23 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubPaymentTypeModel;
 import za.co.iclub.pss.orm.bean.IclubPaymentType;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPaymentTypeDAO;
-import za.co.iclub.pss.ws.model.IclubPaymentTypeModel;
+import za.co.iclub.pss.trans.IclubPaymentTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubPaymentTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPaymentTypeService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubPaymentTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPaymentTypeDAO iclubPaymentTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -40,17 +41,14 @@ public class IclubPaymentTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPaymentTypeModel model) {
 		try {
-			IclubPaymentType iPt = new IclubPaymentType();
-
+			IclubPaymentType iPt = IclubPaymentTypeTrans.fromWStoORM(model);
+			
 			iPt.setPtId(iclubCommonDAO.getNextId(IclubPaymentType.class));
-			iPt.setPtLongDesc(model.getPtLongDesc());
-			iPt.setPtShortDesc(model.getPtShortDesc());
-			iPt.setPtStatus(model.getPtStatus());
-
+			
 			iclubPaymentTypeDAO.save(iPt);
-
+			
 			LOGGER.info("Save Success with ID :: " + iPt.getPtId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -62,9 +60,9 @@ public class IclubPaymentTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -72,17 +70,12 @@ public class IclubPaymentTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPaymentTypeModel model) {
 		try {
-			IclubPaymentType iPt = new IclubPaymentType();
-
-			iPt.setPtId(model.getPtId());
-			iPt.setPtLongDesc(model.getPtLongDesc());
-			iPt.setPtShortDesc(model.getPtShortDesc());
-			iPt.setPtStatus(model.getPtStatus());
-
+			IclubPaymentType iPt = IclubPaymentTypeTrans.fromWStoORM(model);
+			
 			iclubPaymentTypeDAO.merge(iPt);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getPtId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -94,9 +87,9 @@ public class IclubPaymentTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -111,37 +104,32 @@ public class IclubPaymentTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPaymentTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubPaymentTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubPaymentType iPt = (IclubPaymentType) object;
-
-					IclubPaymentTypeModel model = new IclubPaymentTypeModel();
-
-					model.setPtId(iPt.getPtId());
-					model.setPtLongDesc(iPt.getPtLongDesc());
-					model.setPtShortDesc(iPt.getPtShortDesc());
-					model.setPtStatus(iPt.getPtStatus());
-
+					IclubPaymentType bean = (IclubPaymentType) object;
+					
+					IclubPaymentTypeModel model = IclubPaymentTypeTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -150,18 +138,15 @@ public class IclubPaymentTypeService {
 		IclubPaymentTypeModel model = new IclubPaymentTypeModel();
 		try {
 			IclubPaymentType bean = iclubPaymentTypeDAO.findById(id);
-
-			model.setPtId(bean.getPtId());
-			model.setPtLongDesc(bean.getPtLongDesc());
-			model.setPtShortDesc(bean.getPtShortDesc());
-			model.setPtStatus(bean.getPtStatus());
-
+			
+			model = IclubPaymentTypeTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -187,27 +172,27 @@ public class IclubPaymentTypeService {
 			return message;
 		}
 	}
-
+	
 	public IclubPaymentTypeDAO getIclubPaymentTypeDAO() {
 		return iclubPaymentTypeDAO;
 	}
-
+	
 	public void setIclubPaymentTypeDAO(IclubPaymentTypeDAO iclubPaymentTypeDAO) {
 		this.iclubPaymentTypeDAO = iclubPaymentTypeDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
