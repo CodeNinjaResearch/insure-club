@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubSupplItemModel;
 import za.co.iclub.pss.orm.bean.IclubSupplItem;
 import za.co.iclub.pss.orm.dao.IclubAssessmentTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
@@ -25,13 +26,13 @@ import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplItemDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
-import za.co.iclub.pss.ws.model.IclubSupplItemModel;
+import za.co.iclub.pss.trans.IclubSupplItemTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubSupplItemService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubSupplItemService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubSupplItemService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubSupplItemDAO iclubSupplItemDAO;
@@ -40,7 +41,7 @@ public class IclubSupplItemService {
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubAssessmentTypeDAO iclubAssessmentTypeDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -48,21 +49,12 @@ public class IclubSupplItemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubSupplItemModel model) {
 		try {
-			IclubSupplItem iSt = new IclubSupplItem();
-
-			iSt.setSiId(model.getSiId());
-			iSt.setIclubAssessmentType(model.getIclubAssessmentType() != null ? iclubAssessmentTypeDAO.findById(model.getIclubAssessmentType()) : null);
-			iSt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
-			iSt.setIclubSupplMaster(model.getIclubSupplMaster() != null ? iclubSupplMasterDAO.findById(model.getIclubSupplMaster()) : null);
-			iSt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			iSt.setSiCrtdDt(model.getSiCrtdDt());
-			iSt.setSiAssessNumber(model.getSiAssessNumber());
-			iSt.setSiItemId(model.getSiItemId());
-
-			iclubSupplItemDAO.save(iSt);
-
-			LOGGER.info("Save Success with ID :: " + iSt.getSiId());
-
+			IclubSupplItem bean = IclubSupplItemTrans.fromWStoORM(model, iclubAssessmentTypeDAO, iclubPersonDAO, iclubSupplMasterDAO, iclubInsuranceItemTypeDAO);
+			
+			iclubSupplItemDAO.save(bean);
+			
+			LOGGER.info("Save Success with ID :: " + bean.getSiId());
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -74,9 +66,9 @@ public class IclubSupplItemService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -84,20 +76,12 @@ public class IclubSupplItemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubSupplItemModel model) {
 		try {
-			IclubSupplItem iSt = new IclubSupplItem();
-
-			iSt.setSiId(model.getSiId());
-			iSt.setIclubAssessmentType(model.getIclubAssessmentType() != null ? iclubAssessmentTypeDAO.findById(model.getIclubAssessmentType()) : null);
-			iSt.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
-			iSt.setIclubSupplMaster(model.getIclubSupplMaster() != null ? iclubSupplMasterDAO.findById(model.getIclubSupplMaster()) : null);
-			iSt.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-			iSt.setSiCrtdDt(model.getSiCrtdDt());
-			iSt.setSiAssessNumber(model.getSiAssessNumber());
-			iSt.setSiItemId(model.getSiItemId());
+			IclubSupplItem iSt = IclubSupplItemTrans.fromWStoORM(model, iclubAssessmentTypeDAO, iclubPersonDAO, iclubSupplMasterDAO, iclubInsuranceItemTypeDAO);
+			
 			iclubSupplItemDAO.merge(iSt);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getSiId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -109,9 +93,9 @@ public class IclubSupplItemService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -126,41 +110,32 @@ public class IclubSupplItemService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubSupplItemModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubSupplItemDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubSupplItem iSt = (IclubSupplItem) object;
-
-					IclubSupplItemModel model = new IclubSupplItemModel();
-
-					model.setSiId(iSt.getSiId());
-					model.setIclubAssessmentType(iSt.getIclubAssessmentType() != null ? iSt.getIclubAssessmentType().getAtId() : null);
-					model.setIclubInsuranceItemType(iSt.getIclubInsuranceItemType() != null ? iSt.getIclubInsuranceItemType().getIitId() : null);
-					model.setIclubSupplMaster(iSt.getIclubSupplMaster() != null ? iSt.getIclubSupplMaster().getSmId() : null);
-					model.setIclubPerson(iSt.getIclubPerson() != null ? iSt.getIclubPerson().getPId() : null);
-					model.setSiCrtdDt(iSt.getSiCrtdDt());
-					model.setSiAssessNumber(iSt.getSiAssessNumber());
-					model.setSiItemId(iSt.getSiItemId());
-
+					IclubSupplItem bean = (IclubSupplItem) object;
+					
+					IclubSupplItemModel model = IclubSupplItemTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -169,22 +144,15 @@ public class IclubSupplItemService {
 		IclubSupplItemModel model = new IclubSupplItemModel();
 		try {
 			IclubSupplItem bean = iclubSupplItemDAO.findById(id);
-
-			model.setSiId(bean.getSiId());
-			model.setIclubAssessmentType(bean.getIclubAssessmentType() != null ? bean.getIclubAssessmentType().getAtId() : null);
-			model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
-			model.setIclubSupplMaster(bean.getIclubSupplMaster() != null ? bean.getIclubSupplMaster().getSmId() : null);
-			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			model.setSiCrtdDt(bean.getSiCrtdDt());
-			model.setSiAssessNumber(bean.getSiAssessNumber());
-			model.setSiItemId(bean.getSiItemId());
-
+			
+			model = IclubSupplItemTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -210,59 +178,59 @@ public class IclubSupplItemService {
 			return message;
 		}
 	}
-
+	
 	public IclubSupplItemDAO getIclubSupplItemDAO() {
 		return iclubSupplItemDAO;
 	}
-
+	
 	public void setIclubSupplItemDAO(IclubSupplItemDAO iclubSupplItemDAO) {
 		this.iclubSupplItemDAO = iclubSupplItemDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 	public IclubSupplMasterDAO getIclubSupplMasterDAO() {
 		return iclubSupplMasterDAO;
 	}
-
+	
 	public void setIclubSupplMasterDAO(IclubSupplMasterDAO iclubSupplMasterDAO) {
 		this.iclubSupplMasterDAO = iclubSupplMasterDAO;
 	}
-
+	
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-
+	
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-
+	
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-
+	
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-
+	
 	public IclubAssessmentTypeDAO getIclubAssessmentTypeDAO() {
 		return iclubAssessmentTypeDAO;
 	}
-
+	
 	public void setIclubAssessmentTypeDAO(IclubAssessmentTypeDAO iclubAssessmentTypeDAO) {
 		this.iclubAssessmentTypeDAO = iclubAssessmentTypeDAO;
 	}

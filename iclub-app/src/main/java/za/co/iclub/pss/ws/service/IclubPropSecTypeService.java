@@ -17,14 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubPropSecTypeModel;
 import za.co.iclub.pss.orm.bean.IclubPropSecType;
-import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubPropSecTypeDAO;
-import za.co.iclub.pss.ws.model.IclubPropSecTypeModel;
+import za.co.iclub.pss.trans.IclubPropSecTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubPropSecTypeService")
@@ -45,12 +45,9 @@ public class IclubPropSecTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPropSecTypeModel model) {
 		try {
-			IclubPropSecType iCPt = new IclubPropSecType();
+			IclubPropSecType iCPt = IclubPropSecTypeTrans.fromWStoORM(model);
 			
 			iCPt.setPstId(iclubCommonDAO.getNextId(IclubPropSecType.class));
-			iCPt.setPstLongDesc(model.getPstLongDesc());
-			iCPt.setPstShortDesc(model.getPstShortDesc());
-			iCPt.setPstStatus(model.getPstStatus());
 			
 			iclubPropSecTypeDAO.save(iCPt);
 			
@@ -77,12 +74,7 @@ public class IclubPropSecTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPropSecTypeModel model) {
 		try {
-			IclubPropSecType iCPt = new IclubPropSecType();
-			
-			iCPt.setPstId(model.getPstId());
-			iCPt.setPstLongDesc(model.getPstLongDesc());
-			iCPt.setPstShortDesc(model.getPstShortDesc());
-			iCPt.setPstStatus(model.getPstStatus());
+			IclubPropSecType iCPt = IclubPropSecTypeTrans.fromWStoORM(model);
 			
 			iclubPropSecTypeDAO.merge(iCPt);
 			
@@ -137,16 +129,6 @@ public class IclubPropSecTypeService {
 					model.setPstShortDesc(iCPt.getPstShortDesc());
 					model.setPstStatus(iCPt.getPstStatus());
 					
-					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-						String[] properties = new String[iCPt.getIclubProperties().size()];
-						int i = 0;
-						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-							properties[i] = iclubProperty.getPId();
-							i++;
-						}
-						model.setIclubProperties(properties);
-					}
-					
 					ret.add((T) model);
 				}
 			}
@@ -168,24 +150,9 @@ public class IclubPropSecTypeService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPropSecType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubPropSecType iCPt = (IclubPropSecType) object;
+					IclubPropSecType bean = (IclubPropSecType) object;
 					
-					IclubPropSecTypeModel model = new IclubPropSecTypeModel();
-					
-					model.setPstId(iCPt.getPstId());
-					model.setPstLongDesc(iCPt.getPstLongDesc());
-					model.setPstShortDesc(iCPt.getPstShortDesc());
-					model.setPstStatus(iCPt.getPstStatus());
-					
-					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-						String[] properties = new String[iCPt.getIclubProperties().size()];
-						int i = 0;
-						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-							properties[i] = iclubProperty.getPId();
-							i++;
-						}
-						model.setIclubProperties(properties);
-					}
+					IclubPropSecTypeModel model = IclubPropSecTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -206,20 +173,7 @@ public class IclubPropSecTypeService {
 		try {
 			IclubPropSecType bean = iclubPropSecTypeDAO.findById(id);
 			
-			model.setPstId(bean.getPstId());
-			model.setPstLongDesc(bean.getPstLongDesc());
-			model.setPstShortDesc(bean.getPstShortDesc());
-			model.setPstStatus(bean.getPstStatus());
-			
-			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
-				String[] properties = new String[bean.getIclubProperties().size()];
-				int i = 0;
-				for (IclubProperty iclubProperty : bean.getIclubProperties()) {
-					properties[i] = iclubProperty.getPId();
-					i++;
-				}
-				model.setIclubProperties(properties);
-			}
+			model = IclubPropSecTypeTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

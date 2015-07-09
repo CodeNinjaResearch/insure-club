@@ -17,14 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubClaimItem;
+import za.co.iclub.pss.model.ws.IclubSupplMasterModel;
 import za.co.iclub.pss.orm.bean.IclubSupplMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplierTypeDAO;
-import za.co.iclub.pss.ws.model.IclubSupplMasterModel;
+import za.co.iclub.pss.trans.IclubSupplMasterTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubSupplMasterService")
@@ -46,21 +46,7 @@ public class IclubSupplMasterService {
 	public ResponseModel add(IclubSupplMasterModel model) {
 		try {
 			
-			IclubSupplMaster iCSm = new IclubSupplMaster();
-			
-			iCSm.setSmId(model.getSmId());
-			iCSm.setSmCrtdDt(model.getSmCrtdDt());
-			iCSm.setSmRating(model.getSmRating());
-			iCSm.setSrActionDt(model.getSrActionDt());
-			iCSm.setSmLong(model.getSmLong());
-			iCSm.setSmCrLimit(model.getSmCrLimit());
-			iCSm.setSmAddress(model.getSmAddress());
-			iCSm.setSmRegNum(model.getSmRegNum());
-			iCSm.setSmTradeName(model.getSmTradeName());
-			iCSm.setSmLat(model.getSmLat());
-			iCSm.setSmName(model.getSmName());
-			iCSm.setIclubSupplierType(iclubSupplierTypeDAO.findById(model.getIclubSupplierType()));
-			iCSm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			IclubSupplMaster iCSm = IclubSupplMasterTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplierTypeDAO);
 			
 			iclubSupplMasterDAO.save(iCSm);
 			
@@ -89,21 +75,7 @@ public class IclubSupplMasterService {
 	@Transactional
 	public ResponseModel mod(IclubSupplMasterModel model) {
 		try {
-			IclubSupplMaster iCSm = new IclubSupplMaster();
-			
-			iCSm.setSmId(model.getSmId());
-			iCSm.setSmCrtdDt(model.getSmCrtdDt());
-			iCSm.setSmRating(model.getSmRating());
-			iCSm.setSrActionDt(model.getSrActionDt());
-			iCSm.setSmLong(model.getSmLong());
-			iCSm.setSmCrLimit(model.getSmCrLimit());
-			iCSm.setSmAddress(model.getSmAddress());
-			iCSm.setSmRegNum(model.getSmRegNum());
-			iCSm.setSmTradeName(model.getSmTradeName());
-			iCSm.setSmLat(model.getSmLat());
-			iCSm.setSmName(model.getSmName());
-			iCSm.setIclubSupplierType(iclubSupplierTypeDAO.findById(model.getIclubSupplierType()));
-			iCSm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			IclubSupplMaster iCSm = IclubSupplMasterTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplierTypeDAO);
 			
 			iclubSupplMasterDAO.merge(iCSm);
 			
@@ -149,42 +121,8 @@ public class IclubSupplMasterService {
 			List batmod = iclubSupplMasterDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
-					IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
-					
-					iCSm.setSmId(iclubSMaster.getSmId());
-					iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
-					iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
-					iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
-					iCSm.setSmRating(iclubSMaster.getSmRating());
-					iCSm.setSrActionDt(iclubSMaster.getSrActionDt());
-					iCSm.setSmLong(iclubSMaster.getSmLong());
-					iCSm.setSmCrLimit(iclubSMaster.getSmCrLimit());
-					iCSm.setSmAddress(iclubSMaster.getSmAddress());
-					iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
-					iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
-					iCSm.setSmLat(iclubSMaster.getSmLat());
-					iCSm.setSmName(iclubSMaster.getSmName());
-					
-					if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
-						String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
-						int i = 0;
-						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
-							claimItemsForCiAssesorIds[i] = claimItem.getCiId();
-							i++;
-						}
-						iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
-					}
-					
-					if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
-						String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
-						int i = 0;
-						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
-							claimItemsForCiHandlerIds[i] = claimItem.getCiId();
-							i++;
-						}
-						iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
-					}
+					IclubSupplMaster bean = (IclubSupplMaster) object;
+					IclubSupplMasterModel iCSm = IclubSupplMasterTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCSm);
 				}
@@ -210,42 +148,7 @@ public class IclubSupplMasterService {
 					
 					IclubSupplMaster bean = iclubSupplMasterDAO.findById(smId);
 					
-					IclubSupplMasterModel model = new IclubSupplMasterModel();
-					
-					model.setSmId(bean.getSmId());
-					model.setSmCrtdDt(bean.getSmCrtdDt());
-					model.setIclubSupplierType(bean.getIclubSupplierType() != null ? bean.getIclubSupplierType().getStId() : null);
-					model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-					model.setSmRating(bean.getSmRating());
-					model.setSrActionDt(bean.getSrActionDt());
-					model.setSmLong(bean.getSmLong());
-					model.setSmCrLimit(bean.getSmCrLimit());
-					model.setSmAddress(bean.getSmAddress());
-					model.setSmRegNum(bean.getSmRegNum());
-					model.setSmTradeName(bean.getSmTradeName());
-					
-					model.setSmLat(bean.getSmLat());
-					model.setSmName(bean.getSmName());
-					
-					if (bean.getIclubClaimItemsForCiAssesorId() != null && bean.getIclubClaimItemsForCiAssesorId().size() > 0) {
-						String[] claimItemsForCiAssesorIds = new String[bean.getIclubClaimItemsForCiAssesorId().size()];
-						int i = 0;
-						for (IclubClaimItem claimItem : bean.getIclubClaimItemsForCiAssesorId()) {
-							claimItemsForCiAssesorIds[i] = claimItem.getCiId();
-							i++;
-						}
-						model.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
-					}
-					
-					if (bean.getIclubClaimItemsForCiHandlerId() != null && bean.getIclubClaimItemsForCiHandlerId().size() > 0) {
-						String[] claimItemsForCiHandlerIds = new String[bean.getIclubClaimItemsForCiHandlerId().size()];
-						int i = 0;
-						for (IclubClaimItem claimItem : bean.getIclubClaimItemsForCiHandlerId()) {
-							claimItemsForCiHandlerIds[i] = claimItem.getCiId();
-							i++;
-						}
-						model.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
-					}
+					IclubSupplMasterModel model = IclubSupplMasterTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
 			}
@@ -267,43 +170,8 @@ public class IclubSupplMasterService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSupplMaster.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubSupplMaster iclubSMaster = (IclubSupplMaster) object;
-					IclubSupplMasterModel iCSm = new IclubSupplMasterModel();
-					
-					iCSm.setSmId(iclubSMaster.getSmId());
-					iCSm.setSmCrtdDt(iclubSMaster.getSmCrtdDt());
-					iCSm.setIclubSupplierType(iclubSMaster.getIclubSupplierType() != null ? iclubSMaster.getIclubSupplierType().getStId() : null);
-					iCSm.setIclubPerson(iclubSMaster.getIclubPerson() != null ? iclubSMaster.getIclubPerson().getPId() : null);
-					iCSm.setSmRating(iclubSMaster.getSmRating());
-					iCSm.setSrActionDt(iclubSMaster.getSrActionDt());
-					iCSm.setSmLong(iclubSMaster.getSmLong());
-					iCSm.setSmCrLimit(iclubSMaster.getSmCrLimit());
-					iCSm.setSmAddress(iclubSMaster.getSmAddress());
-					iCSm.setSmRegNum(iclubSMaster.getSmRegNum());
-					iCSm.setSmTradeName(iclubSMaster.getSmTradeName());
-					
-					iCSm.setSmLat(iclubSMaster.getSmLat());
-					iCSm.setSmName(iclubSMaster.getSmName());
-					
-					if (iclubSMaster.getIclubClaimItemsForCiAssesorId() != null && iclubSMaster.getIclubClaimItemsForCiAssesorId().size() > 0) {
-						String[] claimItemsForCiAssesorIds = new String[iclubSMaster.getIclubClaimItemsForCiAssesorId().size()];
-						int i = 0;
-						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiAssesorId()) {
-							claimItemsForCiAssesorIds[i] = claimItem.getCiId();
-							i++;
-						}
-						iCSm.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
-					}
-					
-					if (iclubSMaster.getIclubClaimItemsForCiHandlerId() != null && iclubSMaster.getIclubClaimItemsForCiHandlerId().size() > 0) {
-						String[] claimItemsForCiHandlerIds = new String[iclubSMaster.getIclubClaimItemsForCiHandlerId().size()];
-						int i = 0;
-						for (IclubClaimItem claimItem : iclubSMaster.getIclubClaimItemsForCiHandlerId()) {
-							claimItemsForCiHandlerIds[i] = claimItem.getCiId();
-							i++;
-						}
-						iCSm.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
-					}
+					IclubSupplMaster bean = (IclubSupplMaster) object;
+					IclubSupplMasterModel iCSm = IclubSupplMasterTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCSm);
 				}
@@ -323,40 +191,7 @@ public class IclubSupplMasterService {
 		try {
 			IclubSupplMaster bean = iclubSupplMasterDAO.findById(id);
 			
-			model.setSmId(bean.getSmId());
-			model.setSmCrtdDt(bean.getSmCrtdDt());
-			model.setIclubSupplierType(bean.getIclubSupplierType() != null ? bean.getIclubSupplierType().getStId() : null);
-			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			model.setSmRating(bean.getSmRating());
-			model.setSrActionDt(bean.getSrActionDt());
-			model.setSmLong(bean.getSmLong());
-			model.setSmCrLimit(bean.getSmCrLimit());
-			model.setSmAddress(bean.getSmAddress());
-			model.setSmRegNum(bean.getSmRegNum());
-			model.setSmTradeName(bean.getSmTradeName());
-			
-			model.setSmLat(bean.getSmLat());
-			model.setSmName(bean.getSmName());
-			
-			if (bean.getIclubClaimItemsForCiAssesorId() != null && bean.getIclubClaimItemsForCiAssesorId().size() > 0) {
-				String[] claimItemsForCiAssesorIds = new String[bean.getIclubClaimItemsForCiAssesorId().size()];
-				int i = 0;
-				for (IclubClaimItem claimItem : bean.getIclubClaimItemsForCiAssesorId()) {
-					claimItemsForCiAssesorIds[i] = claimItem.getCiId();
-					i++;
-				}
-				model.setIclubClaimItemsForCiAssesorId(claimItemsForCiAssesorIds);
-			}
-			
-			if (bean.getIclubClaimItemsForCiHandlerId() != null && bean.getIclubClaimItemsForCiHandlerId().size() > 0) {
-				String[] claimItemsForCiHandlerIds = new String[bean.getIclubClaimItemsForCiHandlerId().size()];
-				int i = 0;
-				for (IclubClaimItem claimItem : bean.getIclubClaimItemsForCiHandlerId()) {
-					claimItemsForCiHandlerIds[i] = claimItem.getCiId();
-					i++;
-				}
-				model.setIclubClaimItemsForCiHandlerId(claimItemsForCiHandlerIds);
-			}
+			model = IclubSupplMasterTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -2,7 +2,6 @@ package za.co.iclub.pss.ws.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,23 +17,23 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubLogin;
+import za.co.iclub.pss.model.ws.IclubSecurityQuestionModel;
 import za.co.iclub.pss.orm.bean.IclubSecurityQuestion;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityQuestionDAO;
-import za.co.iclub.pss.ws.model.IclubSecurityQuestionModel;
+import za.co.iclub.pss.trans.IclubSecurityQuestionTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubSecurityQuestionService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubSecurityQuestionService {
-
+	
 	protected static final Logger LOGGER = Logger.getLogger(IclubSecurityQuestionService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubSecurityQuestionDAO iclubSecurityQuestionDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-
+	
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,17 +41,14 @@ public class IclubSecurityQuestionService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubSecurityQuestionModel model) {
 		try {
-			IclubSecurityQuestion iSq = new IclubSecurityQuestion();
-
+			IclubSecurityQuestion iSq = IclubSecurityQuestionTrans.fromWStoORM(model);
+			
 			iSq.setSqId(iclubCommonDAO.getNextId(IclubSecurityQuestion.class));
-			iSq.setSqLongDesc(model.getSqLongDesc());
-			iSq.setSqShortDesc(model.getSqShortDesc());
-			iSq.setSqStatus(model.getSqStatus());
-
+			
 			iclubSecurityQuestionDAO.save(iSq);
-
+			
 			LOGGER.info("Save Success with ID :: " + iSq.getSqId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -64,9 +60,9 @@ public class IclubSecurityQuestionService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -74,17 +70,12 @@ public class IclubSecurityQuestionService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubSecurityQuestionModel model) {
 		try {
-			IclubSecurityQuestion iSq = new IclubSecurityQuestion();
-
-			iSq.setSqId(model.getSqId());
-			iSq.setSqLongDesc(model.getSqLongDesc());
-			iSq.setSqShortDesc(model.getSqShortDesc());
-			iSq.setSqStatus(model.getSqStatus());
-
+			IclubSecurityQuestion iSq = IclubSecurityQuestionTrans.fromWStoORM(model);
+			
 			iclubSecurityQuestionDAO.merge(iSq);
-
+			
 			LOGGER.info("Merge Success with ID :: " + model.getSqId());
-
+			
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -96,9 +87,9 @@ public class IclubSecurityQuestionService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-
+		
 	}
-
+	
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -113,49 +104,32 @@ public class IclubSecurityQuestionService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
+	
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubSecurityQuestionModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-
+		
 		try {
 			List batmod = iclubSecurityQuestionDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubSecurityQuestion iSq = (IclubSecurityQuestion) object;
-
-					IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
-
-					model.setSqId(iSq.getSqId());
-					model.setSqLongDesc(iSq.getSqLongDesc());
-					model.setSqShortDesc(iSq.getSqShortDesc());
-					model.setSqStatus(iSq.getSqStatus());
-
-					if (iSq.getIclubLogins() != null && iSq.getIclubLogins().size() > 0) {
-						Set<IclubLogin> iLog = iSq.getIclubLogins();
-						String[] iclubLogins = new String[iLog.size()];
-
-						int i = 0;
-						for (IclubLogin iL : iLog) {
-							iclubLogins[i] = iL.getLId();
-							i++;
-						}
-						model.setIclubLogins(iclubLogins);
-					}
-
+					IclubSecurityQuestion bean = (IclubSecurityQuestion) object;
+					
+					IclubSecurityQuestionModel model = IclubSecurityQuestionTrans.fromORMtoWS(bean);
+					
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-
+		
 		return ret;
 	}
-
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -164,30 +138,15 @@ public class IclubSecurityQuestionService {
 		IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
 		try {
 			IclubSecurityQuestion bean = iclubSecurityQuestionDAO.findById(id);
-
-			model.setSqId(bean.getSqId());
-			model.setSqLongDesc(bean.getSqLongDesc());
-			model.setSqShortDesc(bean.getSqShortDesc());
-			model.setSqStatus(bean.getSqStatus());
-
-			if (bean.getIclubLogins() != null && bean.getIclubLogins().size() > 0) {
-				Set<IclubLogin> iLog = bean.getIclubLogins();
-				String[] iclubLogins = new String[iLog.size()];
-
-				int i = 0;
-				for (IclubLogin iL : iLog) {
-					iclubLogins[i] = iL.getLId();
-					i++;
-				}
-				model.setIclubLogins(iclubLogins);
-			}
-
+			
+			model = IclubSecurityQuestionTrans.fromORMtoWS(bean);
+			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-
+	
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -213,29 +172,29 @@ public class IclubSecurityQuestionService {
 			return message;
 		}
 	}
-
+	
 	public IclubSecurityQuestionDAO getIclubSecurityQuestionDAO() {
 		return iclubSecurityQuestionDAO;
 	}
-
+	
 	public void setIclubSecurityQuestionDAO(IclubSecurityQuestionDAO iclubSecurityQuestionDAO) {
 		this.iclubSecurityQuestionDAO = iclubSecurityQuestionDAO;
 	}
-
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-
+	
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-
+	
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-
+	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-
+	
 }

@@ -17,13 +17,13 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.orm.bean.IclubVehicle;
+import za.co.iclub.pss.model.ws.IclubVehicleMasterModel;
 import za.co.iclub.pss.orm.bean.IclubVehicleMaster;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO;
-import za.co.iclub.pss.ws.model.IclubVehicleMasterModel;
+import za.co.iclub.pss.trans.IclubVehicleMasterTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubVehicleMasterService")
@@ -44,18 +44,9 @@ public class IclubVehicleMasterService {
 	public ResponseModel add(IclubVehicleMasterModel model) {
 		try {
 			
-			IclubVehicleMaster iCVm = new IclubVehicleMaster();
+			IclubVehicleMaster iCVm = IclubVehicleMasterTrans.fromWStoORM(model, iclubPersonDAO);
 			
 			iCVm.setVmId(iclubCommonDAO.getNextId(IclubVehicleMaster.class));
-			iCVm.setVmMake(model.getVmMake());
-			iCVm.setVmModel(model.getVmModel());
-			iCVm.setVmMrktRate(model.getVmMrktRate());
-			iCVm.setVmOrigRate(model.getVmOrigRate());
-			iCVm.setVmRetRate(model.getVmRetRate());
-			iCVm.setVmProdDt(model.getVmProdDt());
-			iCVm.setVmCrtdDt(model.getVmCrtdDt());
-			iCVm.setVmRatePrct(model.getVmRatePrct());
-			iCVm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 			
 			iclubVehicleMasterDAO.save(iCVm);
 			
@@ -84,18 +75,7 @@ public class IclubVehicleMasterService {
 	@Transactional
 	public ResponseModel mod(IclubVehicleMasterModel model) {
 		try {
-			IclubVehicleMaster iCVm = new IclubVehicleMaster();
-			
-			iCVm.setVmId(model.getVmId());
-			iCVm.setVmMake(model.getVmMake());
-			iCVm.setVmModel(model.getVmModel());
-			iCVm.setVmMrktRate(model.getVmMrktRate());
-			iCVm.setVmOrigRate(model.getVmOrigRate());
-			iCVm.setVmRetRate(model.getVmRetRate());
-			iCVm.setVmProdDt(model.getVmProdDt());
-			iCVm.setVmCrtdDt(model.getVmCrtdDt());
-			iCVm.setVmRatePrct(model.getVmRatePrct());
-			iCVm.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+			IclubVehicleMaster iCVm = IclubVehicleMasterTrans.fromWStoORM(model, iclubPersonDAO);
 			
 			iclubVehicleMasterDAO.merge(iCVm);
 			
@@ -141,28 +121,8 @@ public class IclubVehicleMasterService {
 			List batmod = iclubVehicleMasterDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
-					IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
-					
-					iCVm.setVmId(iclubVMaster.getVmId());
-					iCVm.setVmMake(iclubVMaster.getVmMake());
-					iCVm.setVmModel(iclubVMaster.getVmModel());
-					iCVm.setVmMrktRate(iclubVMaster.getVmMrktRate());
-					iCVm.setVmOrigRate(iclubVMaster.getVmOrigRate());
-					iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
-					iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
-					iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
-					iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
-					iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
-					
-					if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
-						String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
-						int i = 0;
-						for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
-							vehicles[i] = vehicle.getVId();
-							i++;
-						}
-					}
+					IclubVehicleMaster bean = (IclubVehicleMaster) object;
+					IclubVehicleMasterModel iCVm = IclubVehicleMasterTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCVm);
 				}
@@ -205,29 +165,8 @@ public class IclubVehicleMasterService {
 			List batmod = iclubVehicleMasterDAO.findByVmMake(vmMake);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
-					IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
-					
-					iCVm.setVmId(iclubVMaster.getVmId());
-					iCVm.setVmMake(iclubVMaster.getVmMake());
-					iCVm.setVmModel(iclubVMaster.getVmModel());
-					iCVm.setVmMrktRate(iclubVMaster.getVmMrktRate());
-					iCVm.setVmOrigRate(iclubVMaster.getVmOrigRate());
-					iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
-					iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
-					iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
-					iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
-					iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
-					
-					if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
-						String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
-						int i = 0;
-						for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
-							vehicles[i] = vehicle.getVId();
-							i++;
-						}
-						iCVm.setIclubVehicles(vehicles);
-					}
+					IclubVehicleMaster bean = (IclubVehicleMaster) object;
+					IclubVehicleMasterModel iCVm = IclubVehicleMasterTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCVm);
 				}
@@ -249,30 +188,8 @@ public class IclubVehicleMasterService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehicleMaster.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubVehicleMaster iclubVMaster = (IclubVehicleMaster) object;
-					IclubVehicleMasterModel iCVm = new IclubVehicleMasterModel();
-					
-					iCVm.setVmId(iclubVMaster.getVmId());
-					iCVm.setVmMake(iclubVMaster.getVmMake());
-					iCVm.setVmModel(iclubVMaster.getVmModel());
-					iCVm.setVmMrktRate(iclubVMaster.getVmMrktRate());
-					iCVm.setVmOrigRate(iclubVMaster.getVmOrigRate());
-					iCVm.setVmRetRate(iclubVMaster.getVmRetRate());
-					iCVm.setVmProdDt(iclubVMaster.getVmProdDt());
-					iCVm.setVmCrtdDt(iclubVMaster.getVmCrtdDt());
-					iCVm.setVmRatePrct(iclubVMaster.getVmRatePrct());
-					iCVm.setIclubPerson(iclubVMaster.getIclubPerson() != null ? iclubVMaster.getIclubPerson().getPId() : null);
-					
-					if (iclubVMaster.getIclubVehicles() != null && iclubVMaster.getIclubVehicles().size() > 0) {
-						String[] vehicles = new String[iclubVMaster.getIclubVehicles().size()];
-						int i = 0;
-						for (IclubVehicle vehicle : iclubVMaster.getIclubVehicles()) {
-							vehicles[i] = vehicle.getVId();
-							i++;
-						}
-						iCVm.setIclubVehicles(vehicles);
-					}
-					
+					IclubVehicleMaster bean = (IclubVehicleMaster) object;
+					IclubVehicleMasterModel iCVm = IclubVehicleMasterTrans.fromORMtoWS(bean);
 					ret.add((T) iCVm);
 				}
 			}
@@ -291,26 +208,7 @@ public class IclubVehicleMasterService {
 		try {
 			IclubVehicleMaster bean = iclubVehicleMasterDAO.findById(id);
 			
-			model.setVmId(bean.getVmId());
-			model.setVmMake(bean.getVmMake());
-			model.setVmModel(bean.getVmModel());
-			model.setVmMrktRate(bean.getVmMrktRate());
-			model.setVmOrigRate(bean.getVmOrigRate());
-			model.setVmRetRate(bean.getVmRetRate());
-			model.setVmProdDt(bean.getVmProdDt());
-			model.setVmCrtdDt(bean.getVmCrtdDt());
-			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
-			
-			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
-				String[] vehicles = new String[bean.getIclubVehicles().size()];
-				int i = 0;
-				for (IclubVehicle vehicle : bean.getIclubVehicles()) {
-					vehicles[i] = vehicle.getVId();
-					i++;
-				}
-				model.setIclubVehicles(vehicles);
-			}
-			
+			model = IclubVehicleMasterTrans.fromORMtoWS(bean);
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

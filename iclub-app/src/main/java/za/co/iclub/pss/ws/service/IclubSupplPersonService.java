@@ -17,13 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubSupplPersonModel;
 import za.co.iclub.pss.orm.bean.IclubSupplPerson;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplPersonDAO;
-import za.co.iclub.pss.ws.model.IclubSupplPersonModel;
+import za.co.iclub.pss.trans.IclubSupplPersonTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubSupplPersonService")
@@ -45,16 +46,11 @@ public class IclubSupplPersonService {
 	public ResponseModel add(IclubSupplPersonModel model) {
 		try {
 			
-			IclubSupplPerson iCSp = new IclubSupplPerson();
+			IclubSupplPerson bean = IclubSupplPersonTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplMasterDAO);
 			
-			iCSp.setSpId(model.getSpId());
-			iCSp.setIclubSupplMaster(iclubSupplMasterDAO.findById(model.getIclubSupplMaster()));
-			iCSp.setIclubPersonBySpCrtdBy(iclubPersonDAO.findById(model.getIclubPersonBySpCrtdBy()));
-			iCSp.setIclubPersonBySpPersonId(iclubPersonDAO.findById(model.getIclubPersonBySpPersonId()));
+			iclubSupplPersonDAO.save(bean);
 			
-			iclubSupplPersonDAO.save(iCSp);
-			
-			LOGGER.info("Save Success with ID :: " + iCSp.getSpId());
+			LOGGER.info("Save Success with ID :: " + bean.getSpId());
 			
 			ResponseModel message = new ResponseModel();
 			
@@ -79,12 +75,7 @@ public class IclubSupplPersonService {
 	@Transactional
 	public ResponseModel mod(IclubSupplPersonModel model) {
 		try {
-			IclubSupplPerson iCSp = new IclubSupplPerson();
-			
-			iCSp.setSpId(model.getSpId());
-			iCSp.setIclubSupplMaster(iclubSupplMasterDAO.findById(model.getSpId()));
-			iCSp.setIclubPersonBySpCrtdBy(iclubPersonDAO.findById(model.getIclubPersonBySpCrtdBy()));
-			iCSp.setIclubPersonBySpPersonId(iclubPersonDAO.findById(model.getIclubPersonBySpPersonId()));
+			IclubSupplPerson iCSp = IclubSupplPersonTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplMasterDAO);
 			
 			iclubSupplPersonDAO.merge(iCSp);
 			
@@ -130,13 +121,8 @@ public class IclubSupplPersonService {
 			List batmod = iclubSupplPersonDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
-					IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
-					
-					iCSp.setSpId(iclubSMaster.getSpId());
-					iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
-					iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
-					iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
+					IclubSupplPerson bean = (IclubSupplPerson) object;
+					IclubSupplPersonModel iCSp = IclubSupplPersonTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCSp);
 				}
@@ -159,13 +145,8 @@ public class IclubSupplPersonService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSupplPerson.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
-					IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
-					
-					iCSp.setSpId(iclubSMaster.getSpId());
-					iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
-					iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
-					iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
+					IclubSupplPerson bean = (IclubSupplPerson) object;
+					IclubSupplPersonModel iCSp = IclubSupplPersonTrans.fromORMtoWS(bean);
 					
 					ret.add((T) iCSp);
 				}
@@ -185,11 +166,7 @@ public class IclubSupplPersonService {
 		try {
 			IclubSupplPerson bean = iclubSupplPersonDAO.findById(id);
 			
-			model.setSpId(bean.getSpId());
-			model.setSpCrtdDt(bean.getSpCrtdDt());
-			model.setIclubPersonBySpCrtdBy(bean.getIclubPersonBySpCrtdBy() != null ? bean.getIclubPersonBySpCrtdBy().getPId() : null);
-			model.setIclubPersonBySpPersonId(bean.getIclubPersonBySpPersonId() != null ? bean.getIclubPersonBySpPersonId().getPId() : null);
-			
+			model = IclubSupplPersonTrans.fromORMtoWS(bean);
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
@@ -207,14 +184,8 @@ public class IclubSupplPersonService {
 			List batmod = iclubNamedQueryDAO.findIclubSupplPersonBySmId(smId);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubSupplPerson iclubSMaster = (IclubSupplPerson) object;
-					IclubSupplPersonModel iCSp = new IclubSupplPersonModel();
-					
-					iCSp.setSpId(iclubSMaster.getSpId());
-					iCSp.setIclubSupplMaster(iclubSMaster.getSpId());
-					iCSp.setIclubPersonBySpCrtdBy(iclubSMaster.getIclubPersonBySpCrtdBy() != null ? iclubSMaster.getIclubPersonBySpCrtdBy().getPId() : null);
-					iCSp.setIclubPersonBySpPersonId(iclubSMaster.getIclubPersonBySpPersonId() != null ? iclubSMaster.getIclubPersonBySpPersonId().getPId() : null);
-					
+					IclubSupplPerson bean = (IclubSupplPerson) object;
+					IclubSupplPersonModel iCSp = IclubSupplPersonTrans.fromORMtoWS(bean);
 					ret.add((T) iCSp);
 				}
 			}

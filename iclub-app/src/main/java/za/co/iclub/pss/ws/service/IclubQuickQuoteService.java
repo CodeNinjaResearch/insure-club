@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.model.ws.IclubDriverModel;
-import za.co.iclub.pss.model.ws.IclubPersonModel;
 import za.co.iclub.pss.model.ws.IclubPropertyItemModel;
 import za.co.iclub.pss.model.ws.IclubPropertyModel;
 import za.co.iclub.pss.model.ws.IclubQuickQuoteRequest;
@@ -34,7 +33,6 @@ import za.co.iclub.pss.orm.bean.IclubField;
 import za.co.iclub.pss.orm.bean.IclubGeoLoc;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
 import za.co.iclub.pss.orm.bean.IclubPerson;
-import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.bean.IclubPropertyItem;
 import za.co.iclub.pss.orm.bean.IclubQuote;
@@ -208,7 +206,7 @@ public class IclubQuickQuoteService {
 		List<IclubVehicle> iclubVehicles = new ArrayList<IclubVehicle>();
 		
 		for (IclubVehicleModel model : models) {
-			IclubVehicle iCV =   IclubVehicleTrans.
+			IclubVehicle iCV = IclubVehicleTrans.fromWStoORM(model, iclubVehicleMasterDAO, iclubAccessTypeDAO, iclubDriverDAO, iclubSecurityDeviceDAO, iclubVehSecTypeDAO, iclubPersonDAO, iclubCoverTypeDAO, iclubVehUsageTypeDAO);
 			
 			iclubVehicles.add(iCV);
 		}
@@ -247,42 +245,6 @@ public class IclubQuickQuoteService {
 		}
 		
 		return iclubInsuranceItems;
-	}
-	
-	public IclubPerson getIclubPerson(IclubQuickQuoteRequest iclubQuickQuoteRequest) {
-		
-		IclubPerson person = new IclubPerson();
-		IclubPersonModel model = iclubQuickQuoteRequest.getIclubPersonModel();
-		person.setPId(model.getPId());
-		person.setPCrtdDt(model.getPCrtdDt());
-		person.setPDob(model.getPDob());
-		person.setPEmail(model.getPEmail());
-		person.setPFName(model.getPFName());
-		person.setPIdNum(model.getPIdNum());
-		person.setPLName(model.getPLName());
-		person.setPMobile(model.getPMobile());
-		person.setPAddress(model.getPAddress());
-		person.setPContactPref(model.getPContactPref());
-		person.setPGender(model.getPGender());
-		person.setPIdNum(model.getPIdNum());
-		person.setPContactPref(model.getPContactPref());
-		person.setPIdExpiryDt(model.getPIdExpiryDt());
-		person.setPIdIssueDt(model.getPIdIssueDt());
-		person.setPInitials(model.getPInitials());
-		person.setPIsPensioner(model.getPIsPensioner());
-		person.setPIdIssueCntry(model.getPIdIssueCntry());
-		person.setPLat(model.getPLat());
-		person.setPLong(model.getPLong());
-		person.setPOccupation(model.getPOccupation());
-		person.setPTitle(model.getPTitle());
-		person.setPAge(model.getPAge());
-		person.setPZipCd(model.getPZipCd());
-		person.setIclubIdType(model.getIclubIdType() != null ? iclubIdTypeDAO.findById(model.getIclubIdType()) : null);
-		person.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		person.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
-		
-		return person;
-		
 	}
 	
 	public Double getUpdatePremium(IclubQuote quoteBean, String quoteType, List<IclubVehicle> vehicleBeans, IclubDriver driverBean, List<IclubProperty> propertyBeans, IclubPerson iclubPersonBean) {
@@ -409,25 +371,7 @@ public class IclubQuickQuoteService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubQuoteModel model) {
 		try {
-			IclubQuote iCQ = new IclubQuote();
-			
-			iCQ.setQId(model.getQId());
-			iCQ.setQCrtdDt(model.getQCrtdDt());
-			iCQ.setQIsMatched(model.getQIsMatched());
-			iCQ.setQPrevPremium(model.getQPrevPremium());
-			iCQ.setQValidUntil(model.getQValidUntil());
-			iCQ.setQMobile(model.getQMobile());
-			iCQ.setQEmail(model.getQEmail());
-			iCQ.setQGenPremium(model.getQGenPremium());
-			iCQ.setQNumItems(model.getQNumItems());
-			iCQ.setQGenDt(model.getQGenDt());
-			iCQ.setQNumber(model.getQNumber());
-			iCQ.setIclubInsurerMaster(model.getIclubInsurerMaster() != null ? iclubInsurerMasterDAO.findById(model.getIclubInsurerMaster()) : null);
-			iCQ.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
-			iCQ.setIclubQuoteStatus(model.getIclubQuoteStatus() != null ? iclubQuoteStatusDAO.findById(model.getIclubQuoteStatus()) : null);
-			iCQ.setIclubProductType(model.getIclubProductType() != null ? iclubProductTypeDAO.findById(model.getIclubProductType()) : null);
-			iCQ.setIclubPersonByQPersonId(model.getIclubPersonByQPersonId() != null && !model.getIclubPersonByQPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByQPersonId()) : null);
-			iCQ.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy() != null && !model.getIclubPersonByQCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByQCrtdBy()) : null);
+			IclubQuote iCQ = IclubQuoteTrans.fromWStoORM(model, iclubQuoteStatusDAO, iclubCoverTypeDAO, iclubInsurerMasterDAO, iclubProductTypeDAO, iclubPersonDAO);
 			
 			iclubQuoteDAO.save(iCQ);
 			
@@ -454,25 +398,7 @@ public class IclubQuickQuoteService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubQuoteModel model) {
 		try {
-			IclubQuote iCQ = new IclubQuote();
-			
-			iCQ.setQId(model.getQId());
-			iCQ.setQCrtdDt(model.getQCrtdDt());
-			iCQ.setQIsMatched(model.getQIsMatched());
-			iCQ.setQPrevPremium(model.getQPrevPremium());
-			iCQ.setQValidUntil(model.getQValidUntil());
-			iCQ.setQMobile(model.getQMobile());
-			iCQ.setQEmail(model.getQEmail());
-			iCQ.setQGenPremium(model.getQGenPremium());
-			iCQ.setQNumItems(model.getQNumItems());
-			iCQ.setQGenDt(model.getQGenDt());
-			iCQ.setQNumber(model.getQNumber());
-			iCQ.setIclubInsurerMaster(model.getIclubInsurerMaster() != null ? iclubInsurerMasterDAO.findById(model.getIclubInsurerMaster()) : null);
-			iCQ.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
-			iCQ.setIclubQuoteStatus(model.getIclubQuoteStatus() != null ? iclubQuoteStatusDAO.findById(model.getIclubQuoteStatus()) : null);
-			iCQ.setIclubProductType(model.getIclubProductType() != null ? iclubProductTypeDAO.findById(model.getIclubProductType()) : null);
-			iCQ.setIclubPersonByQPersonId(model.getIclubPersonByQPersonId() != null && !model.getIclubPersonByQPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByQPersonId()) : null);
-			iCQ.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy() != null && !model.getIclubPersonByQCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonByQCrtdBy()) : null);
+			IclubQuote iCQ = IclubQuoteTrans.fromWStoORM(model, iclubQuoteStatusDAO, iclubCoverTypeDAO, iclubInsurerMasterDAO, iclubProductTypeDAO, iclubPersonDAO);
 			
 			iclubQuoteDAO.merge(iCQ);
 			
@@ -518,36 +444,9 @@ public class IclubQuickQuoteService {
 			List batmod = iclubQuoteDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubQuote iCQ = (IclubQuote) object;
+					IclubQuote bean = (IclubQuote) object;
 					
-					IclubQuoteModel model = new IclubQuoteModel();
-					
-					model.setQId(iCQ.getQId());
-					model.setQCrtdDt(iCQ.getQCrtdDt());
-					model.setQIsMatched(iCQ.getQIsMatched());
-					model.setQPrevPremium(iCQ.getQPrevPremium());
-					model.setQValidUntil(iCQ.getQValidUntil());
-					model.setQMobile(iCQ.getQMobile());
-					model.setQEmail(iCQ.getQEmail());
-					model.setQGenPremium(iCQ.getQGenPremium());
-					model.setQNumItems(iCQ.getQNumItems());
-					model.setQGenDt(iCQ.getQGenDt());
-					model.setQNumber(iCQ.getQNumber());
-					model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
-					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-					model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
-					model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
-					model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
-					model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
-					
-					if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
-						String[] policies = new String[iCQ.getIclubPolicies().size()];
-						int i = 0;
-						for (IclubPolicy policy : iCQ.getIclubPolicies()) {
-							policies[i] = policy.getPId();
-							i++;
-						}
-					}
+					IclubQuoteModel model = IclubQuoteTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -570,37 +469,9 @@ public class IclubQuickQuoteService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubQuote.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubQuote iCQ = (IclubQuote) object;
+					IclubQuote bean = (IclubQuote) object;
 					
-					IclubQuoteModel model = new IclubQuoteModel();
-					
-					model.setQId(iCQ.getQId());
-					model.setQCrtdDt(iCQ.getQCrtdDt());
-					model.setQIsMatched(iCQ.getQIsMatched());
-					model.setQPrevPremium(iCQ.getQPrevPremium());
-					model.setQValidUntil(iCQ.getQValidUntil());
-					model.setQMobile(iCQ.getQMobile());
-					model.setQEmail(iCQ.getQEmail());
-					model.setQGenPremium(iCQ.getQGenPremium());
-					model.setQNumItems(iCQ.getQNumItems());
-					model.setQGenDt(iCQ.getQGenDt());
-					model.setQNumber(iCQ.getQNumber());
-					model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
-					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-					model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
-					model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
-					model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
-					model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
-					
-					if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
-						String[] policies = new String[iCQ.getIclubPolicies().size()];
-						int i = 0;
-						for (IclubPolicy policy : iCQ.getIclubPolicies()) {
-							policies[i] = policy.getPId();
-							i++;
-						}
-					}
+					IclubQuoteModel model = IclubQuoteTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -623,37 +494,9 @@ public class IclubQuickQuoteService {
 			List batmod = iclubNamedQueryDAO.findIclubQuotesByUserAndStatusId(user, statusId);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubQuote iCQ = (IclubQuote) object;
+					IclubQuote bean = (IclubQuote) object;
 					
-					IclubQuoteModel model = new IclubQuoteModel();
-					
-					model.setQId(iCQ.getQId());
-					model.setQCrtdDt(iCQ.getQCrtdDt());
-					model.setQIsMatched(iCQ.getQIsMatched());
-					model.setQPrevPremium(iCQ.getQPrevPremium());
-					model.setQValidUntil(iCQ.getQValidUntil());
-					model.setQMobile(iCQ.getQMobile());
-					model.setQEmail(iCQ.getQEmail());
-					model.setQGenPremium(iCQ.getQGenPremium());
-					model.setQNumItems(iCQ.getQNumItems());
-					model.setQGenDt(iCQ.getQGenDt());
-					model.setQNumber(iCQ.getQNumber());
-					model.setIclubPersonByQCrtdBy(iCQ.getIclubPersonByQCrtdBy() != null ? (iCQ.getIclubPersonByQCrtdBy().getPId()) : null);
-					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-					model.setIclubProductType(iCQ.getIclubProductType() != null ? (iCQ.getIclubProductType().getPtId()) : null);
-					model.setIclubInsurerMaster(iCQ.getIclubInsurerMaster() != null ? (iCQ.getIclubInsurerMaster().getImId()) : null);
-					model.setIclubCoverType(iCQ.getIclubCoverType() != null ? (iCQ.getIclubCoverType().getCtId()) : null);
-					model.setIclubQuoteStatus(iCQ.getIclubQuoteStatus() != null ? (iCQ.getIclubQuoteStatus().getQsId()) : null);
-					model.setIclubPersonByQPersonId(iCQ.getIclubPersonByQPersonId() != null ? (iCQ.getIclubPersonByQPersonId().getPId()) : null);
-					
-					if (iCQ.getIclubPolicies() != null && iCQ.getIclubPolicies().size() > 0) {
-						String[] policies = new String[iCQ.getIclubPolicies().size()];
-						int i = 0;
-						for (IclubPolicy policy : iCQ.getIclubPolicies()) {
-							policies[i] = policy.getPId();
-							i++;
-						}
-					}
+					IclubQuoteModel model = IclubQuoteTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -674,33 +517,7 @@ public class IclubQuickQuoteService {
 		try {
 			IclubQuote bean = iclubQuoteDAO.findById(id);
 			
-			model.setQId(bean.getQId());
-			model.setQCrtdDt(bean.getQCrtdDt());
-			model.setQIsMatched(bean.getQIsMatched());
-			model.setQPrevPremium(bean.getQPrevPremium());
-			model.setQValidUntil(bean.getQValidUntil());
-			model.setQMobile(bean.getQMobile());
-			model.setQEmail(bean.getQEmail());
-			model.setQGenPremium(bean.getQGenPremium());
-			model.setQNumItems(bean.getQNumItems());
-			model.setQGenDt(bean.getQGenDt());
-			model.setQNumber(bean.getQNumber());
-			model.setIclubPersonByQCrtdBy(bean.getIclubPersonByQCrtdBy() != null ? (bean.getIclubPersonByQCrtdBy().getPId()) : null);
-			model.setIclubProductType(bean.getIclubProductType() != null ? (bean.getIclubProductType().getPtId()) : null);
-			model.setIclubProductType(bean.getIclubProductType() != null ? (bean.getIclubProductType().getPtId()) : null);
-			model.setIclubInsurerMaster(bean.getIclubInsurerMaster() != null ? (bean.getIclubInsurerMaster().getImId()) : null);
-			model.setIclubCoverType(bean.getIclubCoverType() != null ? (bean.getIclubCoverType().getCtId()) : null);
-			model.setIclubQuoteStatus(bean.getIclubQuoteStatus() != null ? (bean.getIclubQuoteStatus().getQsId()) : null);
-			model.setIclubPersonByQPersonId(bean.getIclubPersonByQPersonId() != null ? (bean.getIclubPersonByQPersonId().getPId()) : null);
-			
-			if (bean.getIclubPolicies() != null && bean.getIclubPolicies().size() > 0) {
-				String[] policies = new String[bean.getIclubPolicies().size()];
-				int i = 0;
-				for (IclubPolicy policy : bean.getIclubPolicies()) {
-					policies[i] = policy.getPId();
-					i++;
-				}
-			}
+			model = IclubQuoteTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

@@ -17,14 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubPropUsageTypeModel;
 import za.co.iclub.pss.orm.bean.IclubPropUsageType;
-import za.co.iclub.pss.orm.bean.IclubProperty;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubPropUsageTypeDAO;
-import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
+import za.co.iclub.pss.trans.IclubPropUsageTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubPropUsageTypeService")
@@ -45,12 +45,9 @@ public class IclubPropUsageTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPropUsageTypeModel model) {
 		try {
-			IclubPropUsageType iCPt = new IclubPropUsageType();
+			IclubPropUsageType iCPt = IclubPropUsageTypeTrans.fromWStoORM(model);
 			
 			iCPt.setPutId(iclubCommonDAO.getNextId(IclubPropUsageType.class));
-			iCPt.setPutLongDesc(model.getPutLongDesc());
-			iCPt.setPutShortDesc(model.getPutShortDesc());
-			iCPt.setPutStatus(model.getPutStatus());
 			
 			iclubPropUsageTypeDAO.save(iCPt);
 			
@@ -77,12 +74,7 @@ public class IclubPropUsageTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPropUsageTypeModel model) {
 		try {
-			IclubPropUsageType iCPt = new IclubPropUsageType();
-			
-			iCPt.setPutId(model.getPutId());
-			iCPt.setPutLongDesc(model.getPutLongDesc());
-			iCPt.setPutShortDesc(model.getPutShortDesc());
-			iCPt.setPutStatus(model.getPutStatus());
+			IclubPropUsageType iCPt = IclubPropUsageTypeTrans.fromWStoORM(model);
 			
 			iclubPropUsageTypeDAO.merge(iCPt);
 			
@@ -128,24 +120,9 @@ public class IclubPropUsageTypeService {
 			List batmod = iclubPropUsageTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubPropUsageType iCPt = (IclubPropUsageType) object;
+					IclubPropUsageType bean = (IclubPropUsageType) object;
 					
-					IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-					
-					model.setPutId(iCPt.getPutId());
-					model.setPutLongDesc(iCPt.getPutLongDesc());
-					model.setPutShortDesc(iCPt.getPutShortDesc());
-					model.setPutStatus(iCPt.getPutStatus());
-					
-					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-						String[] properties = new String[iCPt.getIclubProperties().size()];
-						int i = 0;
-						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-							properties[i] = iclubProperty.getPId();
-							i++;
-						}
-						model.setIclubProperties(properties);
-					}
+					IclubPropUsageTypeModel model = IclubPropUsageTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -168,24 +145,9 @@ public class IclubPropUsageTypeService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPropUsageType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubPropUsageType iCPt = (IclubPropUsageType) object;
+					IclubPropUsageType bean = (IclubPropUsageType) object;
 					
-					IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-					
-					model.setPutId(iCPt.getPutId());
-					model.setPutLongDesc(iCPt.getPutLongDesc());
-					model.setPutShortDesc(iCPt.getPutShortDesc());
-					model.setPutStatus(iCPt.getPutStatus());
-					
-					if (iCPt.getIclubProperties() != null && iCPt.getIclubProperties().size() > 0) {
-						String[] properties = new String[iCPt.getIclubProperties().size()];
-						int i = 0;
-						for (IclubProperty iclubProperty : iCPt.getIclubProperties()) {
-							properties[i] = iclubProperty.getPId();
-							i++;
-						}
-						model.setIclubProperties(properties);
-					}
+					IclubPropUsageTypeModel model = IclubPropUsageTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -206,20 +168,7 @@ public class IclubPropUsageTypeService {
 		try {
 			IclubPropUsageType bean = iclubPropUsageTypeDAO.findById(id);
 			
-			model.setPutId(bean.getPutId());
-			model.setPutLongDesc(bean.getPutLongDesc());
-			model.setPutShortDesc(bean.getPutShortDesc());
-			model.setPutStatus(bean.getPutStatus());
-			
-			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
-				String[] properties = new String[bean.getIclubProperties().size()];
-				int i = 0;
-				for (IclubProperty iclubProperty : bean.getIclubProperties()) {
-					properties[i] = iclubProperty.getPId();
-					i++;
-				}
-				model.setIclubProperties(properties);
-			}
+			model = IclubPropUsageTypeTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

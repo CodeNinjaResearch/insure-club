@@ -13,8 +13,7 @@ import za.co.iclub.pss.orm.dao.IclubVehUsageTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO;
 
 public class IclubVehicleTrans {
-	public IclubVehicleBean fromWStoUI(IclubVehicleModel model) {
-		;
+	public static IclubVehicleBean fromWStoUI(IclubVehicleModel model) {
 		
 		IclubVehicleBean bean = new IclubVehicleBean();
 		
@@ -61,7 +60,7 @@ public class IclubVehicleTrans {
 		return bean;
 	}
 	
-	public IclubVehicleModel fromUItoWS(IclubVehicleBean bean) {
+	public static IclubVehicleModel fromUItoWS(IclubVehicleBean bean) {
 		
 		IclubVehicleModel model = new IclubVehicleModel();
 		
@@ -106,7 +105,7 @@ public class IclubVehicleTrans {
 		return model;
 	}
 	
-	public IclubVehicleModel fromORMtoWS(IclubVehicle bean) {
+	public static IclubVehicleModel fromORMtoWS(IclubVehicle bean) {
 		
 		IclubVehicleModel model = new IclubVehicleModel();
 		
@@ -151,7 +150,7 @@ public class IclubVehicleTrans {
 		return model;
 	}
 	
-	public IclubVehicle fromWStoORM(IclubVehicleModel model, IclubVehicleMasterDAO iclubVehicleMasterDAO, IclubAccessTypeDAO iclubAccessTypeDAO, IclubDriverDAO iclubDriverDAO, IclubSecurityDeviceDAO iclubSecurityDeviceDAO, IclubVehSecTypeDAO iclubVehSecTypeDAO, IclubPersonDAO iclubPersonDAO, IclubCoverTypeDAO iclubCoverTypeDAO, IclubVehUsageTypeDAO iclubVehUsageTypeDAO) {
+	public static IclubVehicle fromWStoORM(IclubVehicleModel model, IclubVehicleMasterDAO iclubVehicleMasterDAO, IclubAccessTypeDAO iclubAccessTypeDAO, IclubDriverDAO iclubDriverDAO, IclubSecurityDeviceDAO iclubSecurityDeviceDAO, IclubVehSecTypeDAO iclubVehSecTypeDAO, IclubPersonDAO iclubPersonDAO, IclubCoverTypeDAO iclubCoverTypeDAO, IclubVehUsageTypeDAO iclubVehUsageTypeDAO) {
 		
 		IclubVehicle bean = new IclubVehicle();
 		

@@ -17,14 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubVehSecTypeModel;
 import za.co.iclub.pss.orm.bean.IclubVehSecType;
-import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubVehSecTypeDAO;
-import za.co.iclub.pss.ws.model.IclubVehSecTypeModel;
+import za.co.iclub.pss.trans.IclubVehSecTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubVehSecTypeService")
@@ -45,12 +45,9 @@ public class IclubVehSecTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubVehSecTypeModel model) {
 		try {
-			IclubVehSecType iCPt = new IclubVehSecType();
+			IclubVehSecType iCPt = IclubVehSecTypeTrans.fromWStoORM(model);
 			
 			iCPt.setVstId(iclubCommonDAO.getNextId(IclubVehSecType.class));
-			iCPt.setVstLongDesc(model.getVstLongDesc());
-			iCPt.setVstShortDesc(model.getVstShortDesc());
-			iCPt.setVstStatus(model.getVstStatus());
 			
 			iclubVehSecTypeDAO.save(iCPt);
 			
@@ -77,12 +74,7 @@ public class IclubVehSecTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubVehSecTypeModel model) {
 		try {
-			IclubVehSecType iCPt = new IclubVehSecType();
-			
-			iCPt.setVstId(model.getVstId());
-			iCPt.setVstLongDesc(model.getVstLongDesc());
-			iCPt.setVstShortDesc(model.getVstShortDesc());
-			iCPt.setVstStatus(model.getVstStatus());
+			IclubVehSecType iCPt = IclubVehSecTypeTrans.fromWStoORM(model);
 			
 			iclubVehSecTypeDAO.merge(iCPt);
 			
@@ -128,24 +120,9 @@ public class IclubVehSecTypeService {
 			List batmod = iclubVehSecTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubVehSecType iCPt = (IclubVehSecType) object;
+					IclubVehSecType bean = (IclubVehSecType) object;
 					
-					IclubVehSecTypeModel model = new IclubVehSecTypeModel();
-					
-					model.setVstId(iCPt.getVstId());
-					model.setVstLongDesc(iCPt.getVstLongDesc());
-					model.setVstShortDesc(iCPt.getVstShortDesc());
-					model.setVstStatus(iCPt.getVstStatus());
-					
-					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
-						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
-						int i = 0;
-						for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
-							vehicles[i] = iclubVehicle.getVId();
-							i++;
-						}
-						model.setIclubVehicles(vehicles);
-					}
+					IclubVehSecTypeModel model = IclubVehSecTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -168,24 +145,9 @@ public class IclubVehSecTypeService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehSecType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubVehSecType iCPt = (IclubVehSecType) object;
+					IclubVehSecType bean = (IclubVehSecType) object;
 					
-					IclubVehSecTypeModel model = new IclubVehSecTypeModel();
-					
-					model.setVstId(iCPt.getVstId());
-					model.setVstLongDesc(iCPt.getVstLongDesc());
-					model.setVstShortDesc(iCPt.getVstShortDesc());
-					model.setVstStatus(iCPt.getVstStatus());
-					
-					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
-						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
-						int i = 0;
-						for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
-							vehicles[i] = iclubVehicle.getVId();
-							i++;
-						}
-						model.setIclubVehicles(vehicles);
-					}
+					IclubVehSecTypeModel model = IclubVehSecTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -206,20 +168,7 @@ public class IclubVehSecTypeService {
 		try {
 			IclubVehSecType bean = iclubVehSecTypeDAO.findById(id);
 			
-			model.setVstId(bean.getVstId());
-			model.setVstLongDesc(bean.getVstLongDesc());
-			model.setVstShortDesc(bean.getVstShortDesc());
-			model.setVstStatus(bean.getVstStatus());
-			
-			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
-				String[] vehicles = new String[bean.getIclubVehicles().size()];
-				int i = 0;
-				for (IclubVehicle iclubVehicle : bean.getIclubVehicles()) {
-					vehicles[i] = iclubVehicle.getVId();
-					i++;
-				}
-				model.setIclubVehicles(vehicles);
-			}
+			model = IclubVehSecTypeTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);

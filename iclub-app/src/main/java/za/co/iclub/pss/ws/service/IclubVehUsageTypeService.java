@@ -17,14 +17,14 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import za.co.iclub.pss.model.ws.IclubVehUsageTypeModel;
 import za.co.iclub.pss.orm.bean.IclubVehUsageType;
-import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubVehUsageTypeDAO;
-import za.co.iclub.pss.ws.model.IclubVehUsageTypeModel;
+import za.co.iclub.pss.trans.IclubVehUsageTypeTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path(value = "/IclubVehUsageTypeService")
@@ -45,12 +45,9 @@ public class IclubVehUsageTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubVehUsageTypeModel model) {
 		try {
-			IclubVehUsageType iCPt = new IclubVehUsageType();
+			IclubVehUsageType iCPt = IclubVehUsageTypeTrans.fromWStoORM(model);
 			
 			iCPt.setVutId(iclubCommonDAO.getNextId(IclubVehUsageType.class));
-			iCPt.setVutLongDesc(model.getVutLongDesc());
-			iCPt.setVutShortDesc(model.getVutShortDesc());
-			iCPt.setVutStatus(model.getVutStatus());
 			
 			iclubVehUsageTypeDAO.save(iCPt);
 			
@@ -77,12 +74,7 @@ public class IclubVehUsageTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubVehUsageTypeModel model) {
 		try {
-			IclubVehUsageType iCPt = new IclubVehUsageType();
-			
-			iCPt.setVutId(model.getVutId());
-			iCPt.setVutLongDesc(model.getVutLongDesc());
-			iCPt.setVutShortDesc(model.getVutShortDesc());
-			iCPt.setVutStatus(model.getVutStatus());
+			IclubVehUsageType iCPt = IclubVehUsageTypeTrans.fromWStoORM(model);
 			
 			iclubVehUsageTypeDAO.merge(iCPt);
 			
@@ -128,24 +120,9 @@ public class IclubVehUsageTypeService {
 			List batmod = iclubVehUsageTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubVehUsageType iCPt = (IclubVehUsageType) object;
+					IclubVehUsageType bean = (IclubVehUsageType) object;
 					
-					IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-					
-					model.setVutId(iCPt.getVutId());
-					model.setVutLongDesc(iCPt.getVutLongDesc());
-					model.setVutShortDesc(iCPt.getVutShortDesc());
-					model.setVutStatus(iCPt.getVutStatus());
-					
-					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
-						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
-						int i = 0;
-						for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
-							vehicles[i] = iclubVehicle.getVId();
-							i++;
-						}
-						model.setIclubVehicles(vehicles);
-					}
+					IclubVehUsageTypeModel model = IclubVehUsageTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -168,24 +145,9 @@ public class IclubVehUsageTypeService {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehUsageType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubVehUsageType iCPt = (IclubVehUsageType) object;
+					IclubVehUsageType bean = (IclubVehUsageType) object;
 					
-					IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-					
-					model.setVutId(iCPt.getVutId());
-					model.setVutLongDesc(iCPt.getVutLongDesc());
-					model.setVutShortDesc(iCPt.getVutShortDesc());
-					model.setVutStatus(iCPt.getVutStatus());
-					
-					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
-						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
-						int i = 0;
-						for (IclubVehicle iclubVehicle : iCPt.getIclubVehicles()) {
-							vehicles[i] = iclubVehicle.getVId();
-							i++;
-						}
-						model.setIclubVehicles(vehicles);
-					}
+					IclubVehUsageTypeModel model = IclubVehUsageTypeTrans.fromORMtoWS(bean);
 					
 					ret.add((T) model);
 				}
@@ -206,20 +168,7 @@ public class IclubVehUsageTypeService {
 		try {
 			IclubVehUsageType bean = iclubVehUsageTypeDAO.findById(id);
 			
-			model.setVutId(bean.getVutId());
-			model.setVutLongDesc(bean.getVutLongDesc());
-			model.setVutShortDesc(bean.getVutShortDesc());
-			model.setVutStatus(bean.getVutStatus());
-			
-			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
-				String[] vehicles = new String[bean.getIclubVehicles().size()];
-				int i = 0;
-				for (IclubVehicle iclubVehicle : bean.getIclubVehicles()) {
-					vehicles[i] = iclubVehicle.getVId();
-					i++;
-				}
-				model.setIclubVehicles(vehicles);
-			}
+			model = IclubVehUsageTypeTrans.fromORMtoWS(bean);
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
