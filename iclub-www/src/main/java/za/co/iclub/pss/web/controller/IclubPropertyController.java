@@ -30,7 +30,6 @@ import org.primefaces.model.map.Marker;
 import za.co.iclub.pss.web.bean.IclubAccessTypeBean;
 import za.co.iclub.pss.web.bean.IclubBarTypeBean;
 import za.co.iclub.pss.web.bean.IclubCoverTypeBean;
-import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.bean.IclubOccupiedStatusBean;
 import za.co.iclub.pss.web.bean.IclubPropUsageTypeBean;
 import za.co.iclub.pss.web.bean.IclubPropertyBean;
@@ -41,7 +40,6 @@ import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubAccessTypeModel;
 import za.co.iclub.pss.ws.model.IclubBarTypeModel;
 import za.co.iclub.pss.ws.model.IclubCoverTypeModel;
-import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubOccupiedStatusModel;
 import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
 import za.co.iclub.pss.ws.model.IclubPropertyModel;
@@ -61,7 +59,6 @@ public class IclubPropertyController implements Serializable {
 	private static final String AEST_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubAccessTypeService/";
 	private static final String VEHU_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehUsageTypeService/";
 	private static final String BT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBarTypeService/";
-	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
 	private static final String ROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubRoofTypeService/";
 	private static final String PROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyTypeService/";
 	private static final String WT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubWallTypeService/";
@@ -155,14 +152,8 @@ public class IclubPropertyController implements Serializable {
 	
 	public void onMarkerDragPro(MarkerDragEvent event) {
 		markerPro = event.getMarker();
-		IclubGeoLocBean geoBean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
-		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
-			bean.setPLat(geoBean.getGlLat());
-			bean.setPLong(geoBean.getGlLong());
-		} else {
-			bean.setPLat(markerPro.getLatlng().getLat());
-			bean.setPLong(markerPro.getLatlng().getLng());
-		}
+		bean.setPLat(markerPro.getLatlng().getLat());
+		bean.setPLong(markerPro.getLatlng().getLng());
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng()));
 	}
@@ -185,36 +176,11 @@ public class IclubPropertyController implements Serializable {
 	
 	public void onMarkerSelectPro(OverlaySelectEvent event) {
 		markerPro = (Marker) event.getOverlay();
-		IclubGeoLocBean geoBean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
-		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
-			bean.setPLat(geoBean.getGlLat());
-			bean.setPLong(geoBean.getGlLong());
-		} else {
-			bean.setPLat(markerPro.getLatlng().getLat());
-			bean.setPLong(markerPro.getLatlng().getLng());
-		}
+		
+		bean.setPLat(markerPro.getLatlng().getLat());
+		bean.setPLong(markerPro.getLatlng().getLng());
 		bean.setPAddress(markerPro.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerPro.getTitle()));
-	}
-	
-	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
-		WebClient client = IclubWebHelper.createCustomClient(GL_BASE_URL + "get/" + geoLat + "/" + geoLong);
-		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
-		client.close();
-		IclubGeoLocBean bean = new IclubGeoLocBean();
-		if (model != null) {
-			bean.setGlProvince(model.getGlProvince());
-			bean.setGlSuburb(model.getGlSuburb());
-			bean.setGlId(model.getGlId());
-			bean.setGlAddress(model.getGlAddress());
-			bean.setGlLat(model.getGlLat());
-			bean.setGlLong(model.getGlLong());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setGlRate(model.getGlRate());
-			bean.setGlCrtdDt(model.getGlCrtdDt());
-		}
-		return bean;
-		
 	}
 	
 	public List<IclubPropertyBean> getDashBoardBeans() {

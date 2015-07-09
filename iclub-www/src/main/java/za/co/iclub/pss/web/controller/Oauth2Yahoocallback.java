@@ -30,6 +30,7 @@ import za.co.iclub.pss.web.bean.YahooMailsBean;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+@SuppressWarnings("deprecation")
 public class Oauth2Yahoocallback extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
@@ -97,7 +98,7 @@ public class Oauth2Yahoocallback extends HttpServlet {
 					jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
 					String emails = jsonGet.get("emails").toString();
 					ObjectMapper mapper = new ObjectMapper();
-					@SuppressWarnings("deprecation")
+					
 					List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 					System.out.println(mailsList);
 				} catch (Exception e) {

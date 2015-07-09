@@ -73,7 +73,6 @@ import za.co.iclub.pss.ws.model.IclubCoverTypeModel;
 import za.co.iclub.pss.ws.model.IclubDriverModel;
 import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
 import za.co.iclub.pss.ws.model.IclubFieldModel;
-import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubIdTypeModel;
 import za.co.iclub.pss.ws.model.IclubInsuranceItemModel;
 import za.co.iclub.pss.ws.model.IclubLicenseCodeModel;
@@ -134,7 +133,6 @@ public class IclubQuickQuoteController implements Serializable {
 	private static final String ET_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubEntityTypeService/";
 	private static final String SM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehSecTypeService/";
 	private static final String AEST_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubAccessTypeService/";
-	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
 	private static final String BT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubBarTypeService/";
 	private static final String PROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyTypeService/";
 	private static final String OCCS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubOccupiedStatusService/";
@@ -336,7 +334,7 @@ public class IclubQuickQuoteController implements Serializable {
 			
 			if (validateProItemForm(true)) {
 				propertyItemBean.setPiId(UUID.randomUUID().toString());
-				
+				propertyBean.setPContentCost(propertyBean.getPContentCost() != null ? propertyBean.getPContentCost() + propertyItemBean.getPiValue() : propertyItemBean.getPiValue() != null ? propertyItemBean.getPiValue() : 0.0);
 				propertyItemBeans.add(propertyItemBean);
 				
 				clearProItemForm();
@@ -352,8 +350,9 @@ public class IclubQuickQuoteController implements Serializable {
 	public void delIclubPropertyItem() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubPropertyItem");
 		try {
-			
+			propertyBean.setPContentCost(propertyBean.getPContentCost() != null ? propertyBean.getPContentCost() - propertyItemBean.getPiValue() : propertyItemBean.getPiValue() != null ? -propertyItemBean.getPiValue() : 0.0);
 			propertyItemBeans.remove(propertyItemBean);
+			
 			clearProItemForm();
 			IclubWebHelper.addMessage(getLabelBundle().getString("propertyitem") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
 			
@@ -489,12 +488,12 @@ public class IclubQuickQuoteController implements Serializable {
 			ret = ret && false;
 		}
 		
-		if (propertyBean.getIclubAccessType() == null) {
-			IclubWebHelper.addMessage(("Please Select Access Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		
 		/*
+		 * if (propertyBean.getIclubAccessType() == null) {
+		 * IclubWebHelper.addMessage(("Please Select Access Type"),
+		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
+		 * 
+		 * 
 		 * if (propertyBean.getPCompYn() == null ||
 		 * propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
 		 * IclubWebHelper.addMessage(("Comp Yn Cannot be empty"),
@@ -811,21 +810,9 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 	
 	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
-		WebClient client = IclubWebHelper.createCustomClient(GL_BASE_URL + "get/" + geoLat + "/" + geoLong);
-		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
-		client.close();
+		
 		IclubGeoLocBean bean = new IclubGeoLocBean();
-		if (model != null) {
-			bean.setGlProvince(model.getGlProvince());
-			bean.setGlSuburb(model.getGlSuburb());
-			bean.setGlId(model.getGlId());
-			bean.setGlAddress(model.getGlAddress());
-			bean.setGlLat(model.getGlLat());
-			bean.setGlLong(model.getGlLong());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setGlRate(model.getGlRate());
-			bean.setGlCrtdDt(model.getGlCrtdDt());
-		}
+		
 		return bean;
 		
 	}

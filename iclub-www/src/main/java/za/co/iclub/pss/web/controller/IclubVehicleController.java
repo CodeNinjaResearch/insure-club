@@ -29,14 +29,12 @@ import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 import za.co.iclub.pss.web.bean.IclubAccessTypeBean;
-import za.co.iclub.pss.web.bean.IclubGeoLocBean;
 import za.co.iclub.pss.web.bean.IclubVehSecTypeBean;
 import za.co.iclub.pss.web.bean.IclubVehUsageTypeBean;
 import za.co.iclub.pss.web.bean.IclubVehicleBean;
 import za.co.iclub.pss.web.bean.IclubVehicleMasterBean;
 import za.co.iclub.pss.web.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.IclubAccessTypeModel;
-import za.co.iclub.pss.ws.model.IclubGeoLocModel;
 import za.co.iclub.pss.ws.model.IclubVehSecTypeModel;
 import za.co.iclub.pss.ws.model.IclubVehUsageTypeModel;
 import za.co.iclub.pss.ws.model.IclubVehicleMasterModel;
@@ -55,7 +53,6 @@ public class IclubVehicleController implements Serializable {
 	private static final String AEST_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubAccessTypeService/";
 	private static final String VM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehicleMasterService/";
 	private static final String VEHU_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehUsageTypeService/";
-	private static final String GL_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubGeoLocService/";
 	
 	private List<IclubVehicleBean> beans;
 	private List<IclubVehicleBean> dashBoardBeans;
@@ -145,9 +142,8 @@ public class IclubVehicleController implements Serializable {
 	
 	public void onMarkerDragVeh(MarkerDragEvent event) {
 		markerVeh = event.getMarker();
-		IclubGeoLocBean geoBean = getGeoLocBean(markerVeh.getLatlng().getLat(), markerVeh.getLatlng().getLng());
-		bean.setVDdLat(geoBean.getGlLat());
-		bean.setVDdLong(geoBean.getGlLong());
+		bean.setVDdLat(markerVeh.getLatlng().getLat());
+		bean.setVDdLong(markerVeh.getLatlng().getLng());
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng()));
 	}
@@ -170,31 +166,10 @@ public class IclubVehicleController implements Serializable {
 	
 	public void onMarkerSelectVeh(OverlaySelectEvent event) {
 		markerVeh = (Marker) event.getOverlay();
-		IclubGeoLocBean geoBean = getGeoLocBean(markerVeh.getLatlng().getLat(), markerVeh.getLatlng().getLng());
-		bean.setVDdLat(geoBean.getGlLat());
-		bean.setVDdLong(geoBean.getGlLong());
+		bean.setVDdLat(markerVeh.getLatlng().getLat());
+		bean.setVDdLong(markerVeh.getLatlng().getLng());
 		bean.setVDdArea(markerVeh.getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", markerVeh.getTitle()));
-	}
-	
-	public IclubGeoLocBean getGeoLocBean(Double geoLong, Double geoLat) {
-		WebClient client = IclubWebHelper.createCustomClient(GL_BASE_URL + "get/" + geoLat + "/" + geoLong);
-		IclubGeoLocModel model = (IclubGeoLocModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubGeoLocModel.class));
-		client.close();
-		IclubGeoLocBean bean = new IclubGeoLocBean();
-		if (model != null) {
-			bean.setGlId(model.getGlId());
-			bean.setGlProvince(model.getGlProvince());
-			bean.setGlSuburb(model.getGlSuburb());
-			bean.setGlAddress(model.getGlAddress());
-			bean.setGlLat(model.getGlLat());
-			bean.setGlLong(model.getGlLong());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setGlRate(model.getGlRate());
-			bean.setGlCrtdDt(model.getGlCrtdDt());
-		}
-		return bean;
-		
 	}
 	
 	public List<IclubVehicleBean> getDashBoardBeans() {
