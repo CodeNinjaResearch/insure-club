@@ -1,7 +1,10 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlCohortContDet">
+				<f:facet name="header">
+					<p:outputLabel value="Cohort Summary"></p:outputLabel>
+				</f:facet>
 				<p:panel id="pnlCohortSumContDet">
 					<div class="Container100 Responsive">
 						<div class="Container33 Responsive">

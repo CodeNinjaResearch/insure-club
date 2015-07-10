@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<div class="ContainerIndent">
+		<p:panel id="qqPanel">
+			<f:facet name="Quote Details"></f:facet>
+			<p:dataTable widgetVar="dtQuoteCont" value="#{iclubViewQuoteController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Quotes Available" reflow="true">
+				<f:facet name="header">
+					<p:outputLabel value="Quote Details"></p:outputLabel>
+				</f:facet>
+				<f:facet name="footer">
+					<p:commandButton id="viewQuoteBut" value="View Quotes" ajax="false" action="#{iclubUserDashBoardController.viewQuotes}" />
+				</f:facet>
+				<p:column headerText="Quote Number">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.QNumber}" />
+				</p:column>
+				<p:column headerText="Generation Date">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenDt}" />
+				</p:column>
+				<p:column headerText="Generated Premium">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenPremium}">
+						<f:convertNumber pattern="#0.00" />
+					</p:outputLabel>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</div>
+</ui:composition>
