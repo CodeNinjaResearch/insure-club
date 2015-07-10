@@ -558,15 +558,6 @@
 				</p:tab>
 				<p:tab id="contentsModTab" title="Contents and Building">
 					<p:panel id="pnlPropertyItemModCont">
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Building Replacement Cost :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:inputText placeholder="Building Replacement Cost" value="#{iclubQuickQuoteController.propertyBean.PReplacementCost}" styleClass="TexAlCenter" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
 						<p:dataTable reflow="true" widgetVar="dtPropertyItemContMod" value="#{iclubQuickQuoteController.propertyItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PropertyItem Available">
 							<f:facet name="footer">
 								<p:commandButton id="btnPropertyItemShowMod" value="Add" actionListener="#{iclubQuickQuoteController.showProItemAddPanel}" update=":iclubFrm:qqTabView:qqSubProDetViewMod:pnlPropertyItemModCont" />
@@ -613,6 +604,15 @@
 								</div>
 							</div>
 						</p:panel>
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Building Replacement Cost :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:inputText placeholder="Building Replacement Cost" value="#{iclubQuickQuoteController.propertyBean.PReplacementCost}" styleClass="TexAlCenter" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">

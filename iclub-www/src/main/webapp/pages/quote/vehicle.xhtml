@@ -109,7 +109,6 @@
 							<p:inputText rendered="false" placeholder="Vo Do Meter" value="#{iclubQuickQuoteController.vehicleBean.VOdometer}" styleClass="TexAlCenter" />
 						</div>
 					</div>
-					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Claim Free years :" rendered="false" />
@@ -118,7 +117,6 @@
 							<p:inputText rendered="false" placeholder="No Claims Years" value="#{iclubQuickQuoteController.vehicleBean.VNoclaimYrs}" styleClass="TexAlCenter" />
 						</div>
 					</div>
-					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" rendered="false" value="Years of Comprehensive Insurance :" />
@@ -127,7 +125,6 @@
 							<p:inputText rendered="false" placeholder="Years of Comprehensive Insurance" value="#{iclubQuickQuoteController.vehicleBean.VCompYrs}" styleClass="TexAlCenter" />
 						</div>
 					</div>
-					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel rendered="false" styleClass="TexAlCenter" value="Modified :" />
@@ -138,6 +135,32 @@
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />
 							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Vin :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Vin" value="#{iclubQuickQuoteController.vehicleBean.VVin}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Engine Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Engine Number" value="#{iclubQuickQuoteController.vehicleBean.VEngineNr}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Registration Number" value="#{iclubQuickQuoteController.vehicleBean.VRegNum}" styleClass="TexAlCenter" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -254,33 +277,6 @@
 								<f:selectItem itemLabel="Security Master" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
 							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Vin :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Vin" value="#{iclubQuickQuoteController.vehicleBean.VVin}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Engine Number :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Engine Number" value="#{iclubQuickQuoteController.vehicleBean.VEngineNr}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Registration Number" value="#{iclubQuickQuoteController.vehicleBean.VRegNum}" styleClass="TexAlCenter" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -441,6 +437,33 @@
 						</div>
 					</div>
 					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Engine Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Engine Number" value="#{iclubQuickQuoteController.vehicleBean.VEngineNr}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Registration Number" value="#{iclubQuickQuoteController.vehicleBean.VRegNum}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Vin :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText placeholder="Vin" value="#{iclubQuickQuoteController.vehicleBean.VVin}" styleClass="TexAlCenter" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
 				</p:tab>
 				<p:tab id="qqSubVehLocDetMod" title="Location Details">
 					<p:panel id="onLocationDetEdit">
@@ -554,33 +577,6 @@
 								<f:selectItem itemLabel="Security Master" itemDisabled="true" />
 								<f:selectItems value="#{iclubQuickQuoteController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
 							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Engine Number :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Engine Number" value="#{iclubQuickQuoteController.vehicleBean.VEngineNr}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Registration Number" value="#{iclubQuickQuoteController.vehicleBean.VRegNum}" styleClass="TexAlCenter" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Vin :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:inputText placeholder="Vin" value="#{iclubQuickQuoteController.vehicleBean.VVin}" styleClass="TexAlCenter" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />

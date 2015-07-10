@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -364,9 +365,13 @@ public class IclubFullQuoteController implements Serializable {
 		propertyItemBeans = new ArrayList<IclubPropertyItemBean>();
 		try {
 			propertyItemBeans = getPropertyItemBeansMap().get(propertyBean.getPId());
-			for (IclubPropertyItemBean propertyItemBean : propertyItemBeans) {
-				propertyBean.setPContentCost(propertyBean.getPContentCost() != null ? propertyBean.getPContentCost() + propertyItemBean.getPiValue() : propertyItemBean.getPiValue() != null ? propertyItemBean.getPiValue() : 0.0);
-			}
+			// for (IclubPropertyItemBean propertyItemBean : propertyItemBeans)
+			// {
+			// propertyBean.setPContentCost(propertyBean.getPContentCost() !=
+			// null ? propertyBean.getPContentCost() +
+			// propertyItemBean.getPiValue() : propertyItemBean.getPiValue() !=
+			// null ? propertyItemBean.getPiValue() : 0.0);
+			// }
 		} catch (Exception e) {
 			
 		}
@@ -1746,6 +1751,8 @@ public class IclubFullQuoteController implements Serializable {
 					propertyBean.setIclubBarType(model.getIclubBarType());
 					propertyBean.setPThatchType(model.getPThatchType());
 					propertyBean.setIclubRoofType(model.getIclubRoofType());
+					propertyBean.setPReplacementCost(model.getPReplacementCost());
+					propertyBean.setPContentCost(model.getPContentCost());
 					setIclubPropertyItems(model.getPId());
 					propertyBeans.add(propertyBean);
 					
@@ -3318,7 +3325,7 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public Map<String, String> getDebitDates() {
 		if (debitDates == null) {
-			debitDates = new HashMap<String, String>();
+			debitDates = new LinkedHashMap<String, String>();
 			
 			for (int i = 1; i <= 31; i++) {
 				
