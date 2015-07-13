@@ -35,21 +35,26 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 import org.json.JSONObject;
 
-import za.co.iclub.pss.web.bean.IclubCohortBean;
-import za.co.iclub.pss.web.bean.IclubCohortInviteBean;
-import za.co.iclub.pss.web.bean.IclubCohortSummaryBean;
-import za.co.iclub.pss.web.bean.IclubCohortTypeBean;
-import za.co.iclub.pss.web.bean.IclubNotificationTypeBean;
-import za.co.iclub.pss.web.bean.IclubPersonBean;
-import za.co.iclub.pss.web.bean.yahoo.YahooContactBean;
-import za.co.iclub.pss.web.bean.yahoo.YahooFieldBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubCohortInviteModel;
-import za.co.iclub.pss.ws.model.IclubCohortModel;
-import za.co.iclub.pss.ws.model.IclubCohortSummaryModel;
-import za.co.iclub.pss.ws.model.IclubCohortTypeModel;
-import za.co.iclub.pss.ws.model.IclubNotificationTypeModel;
-import za.co.iclub.pss.ws.model.IclubPersonModel;
+import za.co.iclub.pss.model.ui.IclubCohortBean;
+import za.co.iclub.pss.model.ui.IclubCohortInviteBean;
+import za.co.iclub.pss.model.ui.IclubCohortSummaryBean;
+import za.co.iclub.pss.model.ui.IclubCohortTypeBean;
+import za.co.iclub.pss.model.ui.IclubNotificationTypeBean;
+import za.co.iclub.pss.model.ui.IclubPersonBean;
+import za.co.iclub.pss.model.ui.yahoo.YahooContactBean;
+import za.co.iclub.pss.model.ui.yahoo.YahooFieldBean;
+import za.co.iclub.pss.model.ws.IclubCohortInviteModel;
+import za.co.iclub.pss.model.ws.IclubCohortModel;
+import za.co.iclub.pss.model.ws.IclubCohortSummaryModel;
+import za.co.iclub.pss.model.ws.IclubCohortTypeModel;
+import za.co.iclub.pss.model.ws.IclubNotificationTypeModel;
+import za.co.iclub.pss.model.ws.IclubPersonModel;
+import za.co.iclub.pss.trans.IclubCohortInviteTrans;
+import za.co.iclub.pss.trans.IclubCohortTrans;
+import za.co.iclub.pss.trans.IclubCohortTypeTrans;
+import za.co.iclub.pss.trans.IclubNotificationTypeTrans;
+import za.co.iclub.pss.trans.IclubPersonTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 import com.google.gdata.client.contacts.ContactsService;
@@ -190,43 +195,8 @@ public class IclubCohortController implements Serializable {
 		dashBoardBeans = new ArrayList<IclubCohortBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubCohortModel model : models) {
-				IclubCohortBean bean = new IclubCohortBean();
+				IclubCohortBean bean = IclubCohortTrans.fromWStoUI(model);
 				
-				model.setCId(bean.getCId());
-				model.setCId(bean.getCId());
-				model.setCName(bean.getCName());
-				model.setCEmail(bean.getCEmail());
-				model.setCInitDt(bean.getCInitDt());
-				model.setCFinalizeDt(bean.getCFinalizeDt());
-				model.setCTotalContrib(bean.getCTotalContrib());
-				model.setCCollectedContrib(bean.getCCollectedContrib());
-				model.setCCurMemberCnt(bean.getCCurMemberCnt());
-				model.setIclubCohortType(bean.getIclubCohortType());
-				model.setCCrtdDt(bean.getCCrtdDt());
-				model.setIclubPersonByCPrimaryUserId(bean.getIclubPersonByCPrimaryUserId());
-				model.setIclubPersonByCCrtdBy(bean.getIclubPersonByCCrtdBy());
-				if (bean.getIclubCohortClaims() != null && bean.getIclubCohortClaims().length > 0) {
-					String[] iclubCohortClaims = bean.getIclubCohortClaims();
-					model.setIclubCohortClaims(iclubCohortClaims);
-				}
-				
-				if (bean.getIclubCohortPersons() != null && bean.getIclubCohortPersons().length > 0) {
-					String[] iclubCohortPersons = bean.getIclubCohortPersons();
-					
-					model.setIclubCohortPersons(iclubCohortPersons);
-				}
-				
-				if (bean.getIclubPersons() != null && bean.getIclubPersons().length > 0) {
-					String[] iclubPersons = bean.getIclubPersons();
-					
-					model.setIclubPersons(iclubPersons);
-				}
-				
-				if (bean.getIclubCohortInvites() != null && bean.getIclubCohortInvites().length > 0) {
-					String[] iclubCohortInvites = bean.getIclubCohortInvites();
-					
-					model.setIclubCohortInvites(iclubCohortInvites);
-				}
 				dashBoardBeans.add(bean);
 			}
 		}
@@ -272,17 +242,9 @@ public class IclubCohortController implements Serializable {
 					}
 				} else if (showCreateCont) {
 					WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-					IclubCohortModel model = new IclubCohortModel();
+					IclubCohortModel model = IclubCohortTrans.fromUItoWS(bean);
 					
 					model.setCId(UUID.randomUUID().toString());
-					model.setCName(bean.getCName());
-					model.setCEmail(bean.getCEmail());
-					model.setCInitDt(bean.getCInitDt());
-					model.setCFinalizeDt(bean.getCFinalizeDt());
-					model.setCTotalContrib(bean.getCTotalContrib());
-					model.setCCollectedContrib(bean.getCCollectedContrib());
-					model.setCCurMemberCnt(bean.getCCurMemberCnt());
-					model.setIclubCohortType(bean.getIclubCohortType());
 					model.setIclubPersonByCPrimaryUserId(getSessionUserId());
 					model.setIclubPersonByCCrtdBy(getSessionUserId());
 					model.setCCrtdDt(new Date(System.currentTimeMillis()));
@@ -333,14 +295,10 @@ public class IclubCohortController implements Serializable {
 					WebClient client = IclubWebHelper.createCustomClient(CI_BASE_URL + "addList");
 					for (IclubCohortInviteBean bean : selectedInviteBeans) {
 						
-						IclubCohortInviteModel model = new IclubCohortInviteModel();
+						IclubCohortInviteModel model = IclubCohortInviteTrans.fromUItoWS(bean);
 						
-						model.setCiId(bean.getCiId());
 						model.setIclubCohort(this.bean.getCId());
 						model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
-						model.setIclubNotificationType(bean.getIclubNotificationType());
-						model.setCiInviteAcceptYn(bean.getCiInviteAcceptYn());
-						model.setCiInviteUri(bean.getCiInviteUri());
 						model.setIclubPerson(getSessionUserId());
 						models.add(model);
 						
@@ -373,19 +331,9 @@ public class IclubCohortController implements Serializable {
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubCohortModel model = new IclubCohortModel();
-				
 				bean.setCId(UUID.randomUUID().toString());
-				model.setCId(bean.getCId());
-				model.setCName(bean.getCName());
-				model.setCEmail(bean.getCEmail());
-				model.setCInitDt(bean.getCInitDt());
-				model.setCFinalizeDt(bean.getCFinalizeDt());
-				model.setCTotalContrib(bean.getCTotalContrib());
-				model.setCCollectedContrib(bean.getCCollectedContrib());
-				model.setCCurMemberCnt(bean.getCCurMemberCnt());
-				model.setIclubCohortType(bean.getIclubCohortType());
-				model.setIclubPersonByCPrimaryUserId(bean.getIclubPersonByCPrimaryUserId());
+				IclubCohortModel model = IclubCohortTrans.fromUItoWS(bean);
+				
 				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -410,19 +358,8 @@ public class IclubCohortController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubCohortModel model = new IclubCohortModel();
+				IclubCohortModel model = IclubCohortTrans.fromUItoWS(bean);
 				
-				model.setCId(bean.getCId());
-				model.setCId(bean.getCId());
-				model.setCName(bean.getCName());
-				model.setCEmail(bean.getCEmail());
-				model.setCInitDt(bean.getCInitDt());
-				model.setCFinalizeDt(bean.getCFinalizeDt());
-				model.setCTotalContrib(bean.getCTotalContrib());
-				model.setCCollectedContrib(bean.getCCollectedContrib());
-				model.setCCurMemberCnt(bean.getCCurMemberCnt());
-				model.setIclubCohortType(bean.getIclubCohortType());
-				model.setIclubPersonByCPrimaryUserId(bean.getIclubPersonByCPrimaryUserId());
 				model.setCCrtdDt(new Date(System.currentTimeMillis()));
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
@@ -627,17 +564,10 @@ public class IclubCohortController implements Serializable {
 						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "addList");
 						for (IclubCohortInviteBean bean : cohortsInviteBeans) {
 							
-							IclubCohortInviteModel model = new IclubCohortInviteModel();
+							IclubCohortInviteModel model = IclubCohortInviteTrans.fromUItoWS(bean);
 							
-							model.setCiId(bean.getCiId());
 							model.setIclubCohort(this.bean.getCId());
 							model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
-							model.setIclubNotificationType(bean.getIclubNotificationType());
-							model.setCiInviteAcceptYn(bean.getCiInviteAcceptYn());
-							model.setCiInviteUri(bean.getCiInviteUri());
-							model.setIclubPerson(getSessionUserId());
-							model.setCiInviteFName(bean.getCiInviteFName());
-							model.setCiInviteLName(bean.getCiInviteLName());
 							models.add(model);
 							
 						}
@@ -748,39 +678,8 @@ public class IclubCohortController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubCohortModel model : models) {
 				
-				IclubCohortBean bean = new IclubCohortBean();
+				IclubCohortBean bean = IclubCohortTrans.fromWStoUI(model);
 				
-				bean.setCId(model.getCId());
-				bean.setCName(model.getCName());
-				bean.setCEmail(model.getCEmail());
-				bean.setCInitDt(model.getCInitDt());
-				bean.setCFinalizeDt(model.getCFinalizeDt());
-				bean.setCTotalContrib(model.getCTotalContrib());
-				bean.setCCollectedContrib(model.getCCollectedContrib());
-				bean.setCCurMemberCnt(model.getCCurMemberCnt());
-				bean.setIclubCohortType(model.getIclubCohortType());
-				bean.setCCrtdDt(model.getCCrtdDt());
-				bean.setIclubPersonByCPrimaryUserId(model.getIclubPersonByCPrimaryUserId());
-				bean.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy());
-				if (model.getIclubCohortClaims() != null && model.getIclubCohortClaims().length > 0) {
-					String[] iclubCohortClaims = model.getIclubCohortClaims();
-					bean.setIclubCohortClaims(iclubCohortClaims);
-				}
-				
-				if (model.getIclubCohortPersons() != null && model.getIclubCohortPersons().length > 0) {
-					String[] iclubCohortPersons = model.getIclubCohortPersons();
-					bean.setIclubCohortPersons(iclubCohortPersons);
-				}
-				
-				if (model.getIclubPersons() != null && model.getIclubPersons().length > 0) {
-					String[] iclubPersons = model.getIclubPersons();
-					bean.setIclubPersons(iclubPersons);
-				}
-				
-				if (model.getIclubCohortInvites() != null && model.getIclubCohortInvites().length > 0) {
-					String[] iclubCohortInvites = model.getIclubCohortInvites();
-					bean.setIclubCohortInvites(iclubCohortInvites);
-				}
 				beans.add(bean);
 				
 			}
@@ -808,10 +707,7 @@ public class IclubCohortController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubPersonModel model : models) {
 				
-				IclubPersonBean bean = new IclubPersonBean();
-				bean.setPId(model.getPId());
-				bean.setPFName(model.getPFName());
-				bean.setPLName(model.getPLName());
+				IclubPersonBean bean = IclubPersonTrans.fromWStoUI(model);
 				personBeans.add(bean);
 			}
 		}
@@ -831,12 +727,7 @@ public class IclubCohortController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubCohortTypeModel model : models) {
 				
-				IclubCohortTypeBean bean = new IclubCohortTypeBean();
-				
-				bean.setCtId(model.getCtId());
-				bean.setCtLongDesc(model.getCtLongDesc());
-				bean.setCtShortDesc(model.getCtShortDesc());
-				bean.setCtStatus(model.getCtStatus());
+				IclubCohortTypeBean bean = IclubCohortTypeTrans.fromWStoUI(model);
 				
 				cohortTypeBeans.add(bean);
 			}
@@ -889,12 +780,9 @@ public class IclubCohortController implements Serializable {
 		iclubNotificationTypeBeans = new ArrayList<IclubNotificationTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubNotificationTypeModel model : models) {
-				IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
-				model.setNtId(bean.getNtId());
-				model.setNtLongDesc(bean.getNtLongDesc());
-				model.setNtShortDesc(bean.getNtShortDesc());
-				model.setNtStatus(bean.getNtStatus());
-				bean.setIclubNotifs(model.getIclubNotifs());
+				
+				IclubNotificationTypeBean bean = IclubNotificationTypeTrans.fromWStoUI(model);
+				
 				iclubNotificationTypeBeans.add(bean);
 			}
 		}

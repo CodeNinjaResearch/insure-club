@@ -16,15 +16,16 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubRoleTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubRoleTypeModel;
+import za.co.iclub.pss.model.ui.IclubRoleTypeBean;
+import za.co.iclub.pss.model.ws.IclubRoleTypeModel;
+import za.co.iclub.pss.trans.IclubRoleTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubRoleTypeController")
 @SessionScoped
 public class IclubRoleTypeController implements Serializable {
-
+	
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubRoleTypeController.class);
@@ -34,18 +35,14 @@ public class IclubRoleTypeController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-
+	
 	public void addIclubRoleType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubRoleType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubRoleTypeModel model = new IclubRoleTypeModel();
-
-				model.setRtLongDesc(bean.getRtLongDesc());
-				model.setRtShortDesc(bean.getRtShortDesc());
-				model.setRtStatus(bean.getRtStatus());
-
+				IclubRoleTypeModel model = IclubRoleTypeTrans.fromUItoWS(bean);
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -60,18 +57,14 @@ public class IclubRoleTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("roletype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void modIclubRoleType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubRoleType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubRoleTypeModel model = new IclubRoleTypeModel();
-				model.setRtId(bean.getRtId());
-				model.setRtLongDesc(bean.getRtLongDesc());
-				model.setRtShortDesc(bean.getRtShortDesc());
-				model.setRtStatus(bean.getRtStatus());
-
+				IclubRoleTypeModel model = IclubRoleTypeTrans.fromUItoWS(bean);
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -86,7 +79,7 @@ public class IclubRoleTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("roletype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void delIclubRoleType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubRoleType");
 		try {
@@ -103,27 +96,27 @@ public class IclubRoleTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("roletype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubRoleTypeBean();
 	}
-
+	
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubRoleTypeBean();
 	}
-
+	
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-
+	
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		
 		if (bean.getRtShortDesc() != null && !bean.getRtShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getRtShortDesc().trim() + "/" + ((bean.getRtId() == null) ? -999l : bean.getRtId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -133,25 +126,25 @@ public class IclubRoleTypeController implements Serializable {
 				ret = ret && false;
 			}
 		}
-
+		
 		else {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		if (bean.getRtLongDesc() == null || bean.getRtLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		if (bean.getRtStatus() == null || bean.getRtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		return ret;
 	}
-
+	
 	public List<IclubRoleTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubRoleTypeModel> models = new ArrayList<IclubRoleTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRoleTypeModel.class));
@@ -159,60 +152,50 @@ public class IclubRoleTypeController implements Serializable {
 		beans = new ArrayList<IclubRoleTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubRoleTypeModel model : models) {
-				IclubRoleTypeBean bean = new IclubRoleTypeBean();
-				bean.setRtId(model.getRtId());
-				bean.setRtLongDesc(model.getRtLongDesc());
-				bean.setRtShortDesc(model.getRtShortDesc());
-				bean.setRtStatus(model.getRtStatus());
-
-				// need to verify is required or not
-				if (model.getIclubLogins() != null && model.getIclubLogins().length > 0) {
-
-					bean.setIclubLogins(model.getIclubLogins());
-				}
-
+				IclubRoleTypeBean bean = IclubRoleTypeTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-
+	
 	public void setBeans(List<IclubRoleTypeBean> beans) {
 		this.beans = beans;
 	}
-
+	
 	public IclubRoleTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubRoleTypeBean();
 		return bean;
 	}
-
+	
 	public void setBean(IclubRoleTypeBean bean) {
 		this.bean = bean;
 	}
-
+	
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-
+	
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-
+	
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-
+	
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-
+	
 	public ResourceBundle getLabelBundle() {
-
+		
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-
+	
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

@@ -3,7 +3,7 @@ package za.co.iclub.pss.web.controller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import za.co.iclub.pss.web.util.IclubWebHelper;
+import za.co.iclub.pss.util.IclubWebHelper;
 
 @ManagedBean(name = "iclubHomeController")
 @SessionScoped

@@ -17,15 +17,16 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubOccupationBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubOccupationModel;
+import za.co.iclub.pss.model.ui.IclubOccupationBean;
+import za.co.iclub.pss.model.ws.IclubOccupationModel;
+import za.co.iclub.pss.trans.IclubOccupationTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubOccupationController")
 @SessionScoped
 public class IclubOccupationController implements Serializable {
-
+	
 	private static final long serialVersionUID = 8245517153102756484L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubOccupationController.class);
@@ -40,16 +41,16 @@ public class IclubOccupationController implements Serializable {
 	private String sessionUserId;
 	private String userName;
 	private ResourceBundle labelBundle;
-
+	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
 		if (viewParam == null || viewParam.longValue() == 1)
 			showView();
 		else if (viewParam != null && viewParam.longValue() == 2)
 			showEdit();
-
+		
 	}
-
+	
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -57,7 +58,7 @@ public class IclubOccupationController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-
+	
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubOccupationBean();
@@ -66,7 +67,7 @@ public class IclubOccupationController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-
+	
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
 		showCreateCont = false;
@@ -74,7 +75,7 @@ public class IclubOccupationController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-
+	
 	public List<IclubOccupationBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
@@ -82,46 +83,38 @@ public class IclubOccupationController implements Serializable {
 		dashBoardBeans = new ArrayList<IclubOccupationBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubOccupationModel model : models) {
-				IclubOccupationBean bean = new IclubOccupationBean();
-
-				bean.setOId(model.getOId());
-				bean.setODesc(model.getODesc());
-				bean.setOCrtdDt(model.getOCrtdDt());
-				bean.setOStatus(model.getOStatus());
-				bean.setIclubPerson(model.getIclubPerson());
-
+				IclubOccupationBean bean = IclubOccupationTrans.fromWStoUI(model);
+				
 				dashBoardBeans.add(bean);
 			}
 		}
 		return dashBoardBeans;
 	}
-
+	
 	public void setDashBoardBeans(List<IclubOccupationBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
-
+	
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
 		bean = new IclubOccupationBean();
 	}
-
+	
 	public void addIclubOccupation() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubOccupation");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubOccupationModel model = new IclubOccupationModel();
-
-				model.setODesc(bean.getODesc());
+				IclubOccupationModel model = IclubOccupationTrans.fromUItoWS(bean);
+				
 				model.setOCrtdDt(new Date(System.currentTimeMillis()));
-				model.setOStatus(bean.getOStatus());
 				model.setIclubPerson(getSessionUserId());
-
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-
+					
 					IclubWebHelper.addMessage(getLabelBundle().getString("occupation") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -134,20 +127,16 @@ public class IclubOccupationController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("occupation") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void modIclubOccupation() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubOccupation");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubOccupationModel model = new IclubOccupationModel();
-
-				model.setOId(bean.getOId());
-				model.setODesc(bean.getODesc());
-				model.setOCrtdDt(new Date(System.currentTimeMillis()));
-				model.setOStatus(bean.getOStatus());
-				model.setIclubPerson(bean.getIclubPerson());
-
+				IclubOccupationModel model = IclubOccupationTrans.fromUItoWS(bean);
+				
+				model.setIclubPerson(getSessionUserId());
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -163,7 +152,7 @@ public class IclubOccupationController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("occupation") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void delIclubOccupation() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubOccupation");
 		try {
@@ -181,55 +170,55 @@ public class IclubOccupationController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("occupation") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		
 		return ret;
 	}
-
+	
 	public IclubOccupationBean getBean() {
 		if (bean == null)
 			bean = new IclubOccupationBean();
 		return bean;
 	}
-
+	
 	public void setBean(IclubOccupationBean bean) {
 		this.bean = bean;
 	}
-
+	
 	public boolean isShowCreateCont() {
 		return showCreateCont;
 	}
-
+	
 	public void setShowCreateCont(boolean showCreateCont) {
 		this.showCreateCont = showCreateCont;
 	}
-
+	
 	public boolean isShowViewCont() {
 		return showViewCont;
 	}
-
+	
 	public void setShowViewCont(boolean showViewCont) {
 		this.showViewCont = showViewCont;
 	}
-
+	
 	public boolean isShowEditCont() {
 		return showEditCont;
 	}
-
+	
 	public void setShowEditCont(boolean showEditCont) {
 		this.showEditCont = showEditCont;
 	}
-
+	
 	public Long getViewParam() {
 		return viewParam;
 	}
-
+	
 	public void setViewParam(Long viewParam) {
 		this.viewParam = viewParam;
 	}
-
+	
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -238,56 +227,50 @@ public class IclubOccupationController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-
+	
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-
+	
 	public String getUserName() {
 		userName = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.scname")).toString();
 		return userName;
 	}
-
+	
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	
 	public ResourceBundle getLabelBundle() {
 		if (labelBundle == null) {
 			labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		}
 		return labelBundle;
 	}
-
+	
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
-
+	
 	public List<IclubOccupationBean> getBeans() {
-
+		
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubOccupationModel> models = new ArrayList<IclubOccupationModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupationModel.class));
 		client.close();
 		beans = new ArrayList<IclubOccupationBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubOccupationModel model : models) {
-
-				IclubOccupationBean bean = new IclubOccupationBean();
-
-				bean.setOId(model.getOId());
-				bean.setODesc(model.getODesc());
-				bean.setOCrtdDt(model.getOCrtdDt());
-				bean.setOStatus(model.getOStatus());
-				bean.setIclubPerson(model.getIclubPerson());
-
+				
+				IclubOccupationBean bean = IclubOccupationTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-
+	
 	public void setBeans(List<IclubOccupationBean> beans) {
 		this.beans = beans;
 	}
-
+	
 }

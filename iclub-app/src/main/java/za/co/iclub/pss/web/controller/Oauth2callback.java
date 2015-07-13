@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import za.co.iclub.pss.web.bean.GooglePojo;
+import za.co.iclub.pss.model.ui.GooglePojo;
 
 import com.google.gdata.client.contacts.ContactsService;
 import com.google.gdata.data.Link;

@@ -13,21 +13,27 @@ import javax.ws.rs.core.MediaType;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubClaimBean;
-import za.co.iclub.pss.web.bean.IclubClaimStatusBean;
-import za.co.iclub.pss.web.bean.IclubPaymentBean;
-import za.co.iclub.pss.web.bean.IclubPaymentStatusBean;
-import za.co.iclub.pss.web.bean.IclubPolicyBean;
-import za.co.iclub.pss.web.bean.IclubPolicyStatusBean;
-import za.co.iclub.pss.web.bean.IclubQuoteBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubClaimModel;
-import za.co.iclub.pss.ws.model.IclubClaimStatusModel;
-import za.co.iclub.pss.ws.model.IclubPaymentModel;
-import za.co.iclub.pss.ws.model.IclubPaymentStatusModel;
-import za.co.iclub.pss.ws.model.IclubPolicyModel;
-import za.co.iclub.pss.ws.model.IclubPolicyStatusModel;
-import za.co.iclub.pss.ws.model.IclubQuoteModel;
+import za.co.iclub.pss.model.ui.IclubClaimBean;
+import za.co.iclub.pss.model.ui.IclubClaimStatusBean;
+import za.co.iclub.pss.model.ui.IclubPaymentBean;
+import za.co.iclub.pss.model.ui.IclubPaymentStatusBean;
+import za.co.iclub.pss.model.ui.IclubPolicyBean;
+import za.co.iclub.pss.model.ui.IclubPolicyStatusBean;
+import za.co.iclub.pss.model.ui.IclubQuoteBean;
+import za.co.iclub.pss.model.ws.IclubClaimModel;
+import za.co.iclub.pss.model.ws.IclubClaimStatusModel;
+import za.co.iclub.pss.model.ws.IclubPaymentModel;
+import za.co.iclub.pss.model.ws.IclubPaymentStatusModel;
+import za.co.iclub.pss.model.ws.IclubPolicyModel;
+import za.co.iclub.pss.model.ws.IclubPolicyStatusModel;
+import za.co.iclub.pss.model.ws.IclubQuoteModel;
+import za.co.iclub.pss.trans.IclubClaimStatusTrans;
+import za.co.iclub.pss.trans.IclubClaimTrans;
+import za.co.iclub.pss.trans.IclubPaymentStatusTrans;
+import za.co.iclub.pss.trans.IclubPaymentTrans;
+import za.co.iclub.pss.trans.IclubPolicyTrans;
+import za.co.iclub.pss.trans.IclubQuoteTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 
 @SuppressWarnings("unchecked")
 @ManagedBean(name = "iclubUserDashBoardController")
@@ -127,35 +133,8 @@ public class IclubUserDashBoardController implements Serializable {
 		quoteBeans = new ArrayList<IclubQuoteBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubQuoteModel model : models) {
-				IclubQuoteBean bean = new IclubQuoteBean();
+				IclubQuoteBean bean = IclubQuoteTrans.fromWStoUI(model);
 				
-				bean.setQId(model.getQId());
-				bean.setQCrtdDt(model.getQCrtdDt());
-				bean.setQIsMatched(model.getQIsMatched());
-				bean.setQPrevPremium(model.getQPrevPremium());
-				bean.setQValidUntil(model.getQValidUntil());
-				bean.setQMobile(model.getQMobile());
-				bean.setQEmail(model.getQEmail());
-				bean.setQGenPremium(model.getQGenPremium());
-				bean.setQNumItems(model.getQNumItems());
-				bean.setQGenDt(model.getQGenDt());
-				bean.setQNumber(model.getQNumber());
-				bean.setIclubPersonByQCrtdBy(model.getIclubPersonByQCrtdBy());
-				bean.setIclubProductType(model.getIclubProductType());
-				bean.setIclubProductType(model.getIclubProductType());
-				bean.setIclubInsurerMaster(model.getIclubInsurerMaster());
-				bean.setIclubCoverType(model.getIclubCoverType());
-				bean.setIclubQuoteStatus(model.getIclubQuoteStatus());
-				bean.setIclubPersonByQPersonId(model.getIclubPersonByQPersonId());
-				
-				if (model.getIclubPolicies() != null && model.getIclubPolicies().length > 0) {
-					String[] policies = new String[model.getIclubPolicies().length];
-					int i = 0;
-					for (String policy : model.getIclubPolicies()) {
-						policies[i] = policy;
-						i++;
-					}
-				}
 				quoteBeans.add(bean);
 			}
 		}
@@ -177,18 +156,7 @@ public class IclubUserDashBoardController implements Serializable {
 			for (IclubPolicyModel model : models) {
 				if (model != null && model.getPId() != null) {
 					
-					IclubPolicyBean bean = new IclubPolicyBean();
-					bean.setPId(model.getPId());
-					bean.setPProrataPrm(model.getPProrataPrm());
-					bean.setPPremium(model.getPPremium());
-					bean.setPNumber(model.getPNumber());
-					bean.setPDebitDt(model.getPDebitDt());
-					bean.setPCrtdDt(model.getPCrtdDt());
-					bean.setIclubAccount(model.getIclubAccount());
-					bean.setIclubQuote(model.getIclubQuote());
-					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
-					bean.setIclubPerson(model.getIclubPerson());
-					bean.setIclubPolicyStatus(model.getIclubPolicyStatus());
+					IclubPolicyBean bean = IclubPolicyTrans.fromWStoUI(model);
 					i++;
 					if (i == 6)
 						break;
@@ -213,15 +181,7 @@ public class IclubUserDashBoardController implements Serializable {
 		if (models != null && models.size() > 0) {
 			int i = 0;
 			for (IclubClaimModel model : models) {
-				IclubClaimBean bean = new IclubClaimBean();
-				bean.setCId(model.getCId());
-				bean.setCCrtdDt(model.getCCrtdDt());
-				bean.setCValue(model.getCValue());
-				bean.setCNumItems(model.getCNumItems());
-				bean.setCNumber(model.getCNumber());
-				bean.setIclubPolicy(model.getIclubPolicy());
-				bean.setIclubClaimStatus(model.getIclubClaimStatus());
-				bean.setIclubPerson(model.getIclubPerson());
+				IclubClaimBean bean = IclubClaimTrans.fromWStoUI(model);
 				i++;
 				if (i == 6)
 					break;
@@ -244,19 +204,7 @@ public class IclubUserDashBoardController implements Serializable {
 		if (models != null && models.size() > 0) {
 			int i = 0;
 			for (IclubPaymentModel model : models) {
-				IclubPaymentBean bean = new IclubPaymentBean();
-				model.setPId(bean.getPId());
-				model.setPCrtdDt(bean.getPCrtdDt());
-				model.setPGenDt(bean.getPGenDt());
-				model.setPDrCrInd(bean.getPDrCrInd());
-				model.setPValue(bean.getPValue());
-				
-				model.setIclubPolicy(bean.getIclubPolicy());
-				model.setIclubPaymentStatus(bean.getIclubPaymentStatus());
-				model.setIclubAccount(bean.getIclubAccount());
-				model.setIclubClaim(bean.getIclubClaim());
-				model.setIclubPerson(bean.getIclubPerson());
-				model.setIclubPolicy(bean.getIclubPolicy());
+				IclubPaymentBean bean = IclubPaymentTrans.fromWStoUI(model);
 				i++;
 				if (i == 6)
 					break;
@@ -278,11 +226,8 @@ public class IclubUserDashBoardController implements Serializable {
 		claimStatusBeans = new ArrayList<IclubClaimStatusBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubClaimStatusModel model : models) {
-				IclubClaimStatusBean bean = new IclubClaimStatusBean();
-				bean.setCsId(model.getCsId());
-				bean.setCsLongDesc(model.getCsLongDesc());
-				bean.setCsShortDesc(model.getCsShortDesc());
-				bean.setCsStatus(model.getCsStatus());
+				IclubClaimStatusBean bean = IclubClaimStatusTrans.fromWStoUI(model);
+				
 				claimStatusBeans.add(bean);
 			}
 		}
@@ -302,19 +247,7 @@ public class IclubUserDashBoardController implements Serializable {
 		if (models != null && models.size() > 0) {
 			int i = 0;
 			for (IclubPaymentModel model : models) {
-				IclubPaymentBean bean = new IclubPaymentBean();
-				model.setPId(bean.getPId());
-				model.setPCrtdDt(bean.getPCrtdDt());
-				model.setPGenDt(bean.getPGenDt());
-				model.setPDrCrInd(bean.getPDrCrInd());
-				model.setPValue(bean.getPValue());
-				
-				model.setIclubPolicy(bean.getIclubPolicy());
-				model.setIclubPaymentStatus(bean.getIclubPaymentStatus());
-				model.setIclubAccount(bean.getIclubAccount());
-				model.setIclubClaim(bean.getIclubClaim());
-				model.setIclubPerson(bean.getIclubPerson());
-				model.setIclubPolicy(bean.getIclubPolicy());
+				IclubPaymentBean bean = IclubPaymentTrans.fromWStoUI(model);
 				i++;
 				if (i == 6)
 					break;
@@ -339,12 +272,7 @@ public class IclubUserDashBoardController implements Serializable {
 			for (IclubPaymentStatusModel model : models) {
 				if (model != null && model.getPsId() != null) {
 					
-					IclubPaymentStatusBean bean = new IclubPaymentStatusBean();
-					
-					bean.setPsId(model.getPsId());
-					bean.setPsLongDesc(model.getPsLongDesc());
-					bean.setPsShortDesc(model.getPsShortDesc());
-					bean.setPsStatus(model.getPsStatus());
+					IclubPaymentStatusBean bean = IclubPaymentStatusTrans.fromWStoUI(model);
 					
 					paymentStatusBeans.add(bean);
 				}

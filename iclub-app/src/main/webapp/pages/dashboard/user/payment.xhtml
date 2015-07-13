@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<div class="ContainerIndent Fnone TexAlCenter">
+		<p:panel id="pnlPmtCont">
+			<p:dataTable reflow="true" widgetVar="dtPcyPmtCont" value="#{iclubUserDashBoardController.paymentBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Policy Payments Available">
+				<f:facet name="header">
+					<p:outputLabel value="Policy Payment Details" />
+				</f:facet>
+				<p:column headerText="Genrated Date">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PGenDt}" />
+				</p:column>
+				<p:column headerText="Value">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PValue}">
+						<f:convertNumber pattern="#0.00" />
+					</p:outputLabel>
+				</p:column>
+				<p:column headerText="Status">
+					<p:selectOneMenu disabled="true" styleClass="TexAlCenter" value="#{bean.iclubPaymentStatus}">
+						<f:selectItems value="#{iclubUserDashBoardController.paymentStatusBeans}" var="c" itemLabel="#{c.psLongDesc}" itemValue="#{c.psId}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		<p:panel id="pnlPmtClaimCont">
+			<p:dataTable reflow="true" widgetVar="dtClmPmtCont" value="#{iclubUserDashBoardController.claimPaymentBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Claim Payments Available">
+				<f:facet name="header">
+					<p:outputLabel value="Calim Payment Details" />
+				</f:facet>
+				<p:column headerText="Genrated Date">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PGenDt}" />
+				</p:column>
+				<p:column headerText="Value">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PValue}">
+						<f:convertNumber pattern="#0.00" />
+					</p:outputLabel>
+				</p:column>
+				<p:column headerText="Status">
+					<p:selectOneMenu disabled="true" styleClass="TexAlCenter" value="#{bean.iclubPaymentStatus}">
+						<f:selectItems value="#{iclubUserDashBoardController.paymentStatusBeans}" var="c" itemLabel="#{c.psLongDesc}" itemValue="#{c.psId}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</div>
+</ui:composition>

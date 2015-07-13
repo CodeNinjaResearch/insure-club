@@ -16,9 +16,10 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubEntityTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubEntityTypeModel;
+import za.co.iclub.pss.model.ui.IclubEntityTypeBean;
+import za.co.iclub.pss.model.ws.IclubEntityTypeModel;
+import za.co.iclub.pss.trans.IclubEntityTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubEntityTypeController")
@@ -81,23 +82,8 @@ public class IclubEntityTypeController implements Serializable {
 		dashBoardBeans = new ArrayList<IclubEntityTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubEntityTypeModel model : models) {
-				IclubEntityTypeBean bean = new IclubEntityTypeBean();
 				
-				bean.setEtId(model.getEtId());
-				bean.setEtLongDesc(model.getEtLongDesc());
-				bean.setEtShortDesc(model.getEtShortDesc());
-				bean.setEtStatus(model.getEtStatus());
-				bean.setEtTblNm(model.getEtTblNm());
-				
-				if (model.getIclubDocuments() != null && model.getIclubDocuments().length > 0) {
-					String[] documents = new String[model.getIclubDocuments().length];
-					int i = 0;
-					for (String iclubDocument : model.getIclubDocuments()) {
-						documents[i] = iclubDocument;
-						i++;
-					}
-					bean.setIclubDocuments(documents);
-				}
+				IclubEntityTypeBean bean = IclubEntityTypeTrans.fromWStoUI(model);
 				
 				dashBoardBeans.add(bean);
 			}
@@ -120,12 +106,8 @@ public class IclubEntityTypeController implements Serializable {
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubEntityTypeModel model = new IclubEntityTypeModel();
+				IclubEntityTypeModel model = IclubEntityTypeTrans.fromUItoWS(bean);
 				
-				model.setEtLongDesc(bean.getEtLongDesc());
-				model.setEtShortDesc(bean.getEtShortDesc());
-				model.setEtStatus(bean.getEtStatus());
-				model.setEtTblNm(bean.getEtTblNm());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -148,13 +130,7 @@ public class IclubEntityTypeController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubEntityTypeModel model = new IclubEntityTypeModel();
-				
-				model.setEtId(bean.getEtId());
-				model.setEtLongDesc(bean.getEtLongDesc());
-				model.setEtShortDesc(bean.getEtShortDesc());
-				model.setEtStatus(bean.getEtStatus());
-				model.setEtTblNm(bean.getEtTblNm());
+				IclubEntityTypeModel model = IclubEntityTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -280,13 +256,7 @@ public class IclubEntityTypeController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubEntityTypeModel model : models) {
 				
-				IclubEntityTypeBean bean = new IclubEntityTypeBean();
-				
-				bean.setEtId(model.getEtId());
-				bean.setEtLongDesc(model.getEtLongDesc());
-				bean.setEtShortDesc(model.getEtShortDesc());
-				bean.setEtStatus(model.getEtStatus());
-				bean.setEtTblNm(model.getEtTblNm());
+				IclubEntityTypeBean bean = IclubEntityTypeTrans.fromWStoUI(model);
 				
 				beans.add(bean);
 			}

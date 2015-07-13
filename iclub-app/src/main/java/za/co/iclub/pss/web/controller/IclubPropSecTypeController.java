@@ -16,9 +16,10 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubPropSecTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubPropSecTypeModel;
+import za.co.iclub.pss.model.ui.IclubPropSecTypeBean;
+import za.co.iclub.pss.model.ws.IclubPropSecTypeModel;
+import za.co.iclub.pss.trans.IclubPropSecTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubPropSecTypeController")
@@ -40,11 +41,7 @@ public class IclubPropSecTypeController implements Serializable {
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubPropSecTypeModel model = new IclubPropSecTypeModel();
-				
-				model.setPstLongDesc(bean.getPstLongDesc());
-				model.setPstShortDesc(bean.getPstShortDesc());
-				model.setPstStatus(bean.getPstStatus());
+				IclubPropSecTypeModel model = IclubPropSecTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -66,11 +63,7 @@ public class IclubPropSecTypeController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubPropSecTypeModel model = new IclubPropSecTypeModel();
-				model.setPstId(bean.getPstId());
-				model.setPstLongDesc(bean.getPstLongDesc());
-				model.setPstShortDesc(bean.getPstShortDesc());
-				model.setPstStatus(bean.getPstStatus());
+				IclubPropSecTypeModel model = IclubPropSecTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -157,16 +150,8 @@ public class IclubPropSecTypeController implements Serializable {
 		beans = new ArrayList<IclubPropSecTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubPropSecTypeModel model : models) {
-				IclubPropSecTypeBean bean = new IclubPropSecTypeBean();
-				bean.setPstId(model.getPstId());
-				bean.setPstLongDesc(model.getPstLongDesc());
-				bean.setPstShortDesc(model.getPstShortDesc());
-				bean.setPstStatus(model.getPstStatus());
-				if (model.getIclubProperties() != null && model.getIclubProperties().length > 0) {
-					String[] properties = model.getIclubProperties();
-					bean.setIclubProperties(properties);
-					
-				}
+				IclubPropSecTypeBean bean = IclubPropSecTypeTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}

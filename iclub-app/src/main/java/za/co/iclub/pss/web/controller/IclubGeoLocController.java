@@ -27,9 +27,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.StreamedContent;
 
-import za.co.iclub.pss.web.bean.IclubGeoLocBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubGeoLocModel;
+import za.co.iclub.pss.model.ui.IclubGeoLocBean;
+import za.co.iclub.pss.model.ws.IclubGeoLocModel;
+import za.co.iclub.pss.trans.IclubGeoLocTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubGeoLocController")
@@ -105,17 +106,7 @@ public class IclubGeoLocController implements Serializable {
 		dashBoardBeans = new ArrayList<IclubGeoLocBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubGeoLocModel model : models) {
-				IclubGeoLocBean bean = new IclubGeoLocBean();
-				bean.setGlProvince(model.getGlProvince());
-				bean.setGlSuburb(model.getGlSuburb());
-				bean.setGlId(model.getGlId());
-				bean.setGlAddress(model.getGlAddress());
-				bean.setGlLat(model.getGlLat());
-				bean.setGlLong(model.getGlLong());
-				bean.setIclubPerson(model.getIclubPerson());
-				bean.setGlRate(model.getGlRate());
-				bean.setGlCrtdDt(model.getGlCrtdDt());
-				
+				IclubGeoLocBean bean = IclubGeoLocTrans.fromWStoUI(model);
 				dashBoardBeans.add(bean);
 			}
 		}
@@ -137,15 +128,9 @@ public class IclubGeoLocController implements Serializable {
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubGeoLocModel model = new IclubGeoLocModel();
-				model.setGlProvince(bean.getGlProvince());
-				model.setGlSuburb(bean.getGlSuburb());
-				model.setGlAddress(bean.getGlAddress());
-				model.setGlLat(bean.getGlLat());
-				model.setGlLong(bean.getGlLong());
-				model.setGlRate(bean.getGlRate());
-				model.setGlCrtdDt(new Date(System.currentTimeMillis()));
-				model.setIclubPerson(getSessionUserId());
+				bean.setGlCrtdDt(new Date(System.currentTimeMillis()));
+				bean.setIclubPerson(getSessionUserId());
+				IclubGeoLocModel model = IclubGeoLocTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -169,17 +154,10 @@ public class IclubGeoLocController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubGeoLocModel model = new IclubGeoLocModel();
-				model.setGlProvince(bean.getGlProvince());
-				model.setGlSuburb(bean.getGlSuburb());
+				bean.setGlCrtdDt(new Date(System.currentTimeMillis()));
+				bean.setIclubPerson(getSessionUserId());
+				IclubGeoLocModel model = IclubGeoLocTrans.fromUItoWS(bean);
 				
-				model.setGlId(bean.getGlId());
-				model.setGlAddress(bean.getGlAddress());
-				model.setGlLat(bean.getGlLat());
-				model.setGlLong(bean.getGlLong());
-				model.setGlRate(bean.getGlRate());
-				model.setGlCrtdDt(new Date(System.currentTimeMillis()));
-				model.setIclubPerson(getSessionUserId());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -304,17 +282,7 @@ public class IclubGeoLocController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubGeoLocModel model : models) {
 				
-				IclubGeoLocBean bean = new IclubGeoLocBean();
-				bean.setGlProvince(model.getGlProvince());
-				bean.setGlSuburb(model.getGlSuburb());
-				
-				bean.setGlId(model.getGlId());
-				bean.setGlAddress(model.getGlAddress());
-				bean.setGlLat(model.getGlLat());
-				bean.setGlLong(model.getGlLong());
-				bean.setIclubPerson(model.getIclubPerson());
-				bean.setGlRate(model.getGlRate());
-				bean.setGlCrtdDt(model.getGlCrtdDt());
+				IclubGeoLocBean bean = IclubGeoLocTrans.fromWStoUI(model);
 				
 				beans.add(bean);
 			}

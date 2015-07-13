@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 
-import za.co.iclub.pss.web.bean.YahooMailsBean;
+import za.co.iclub.pss.model.ui.YahooMailsBean;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

@@ -16,9 +16,10 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubPropUsageTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubPropUsageTypeModel;
+import za.co.iclub.pss.model.ui.IclubPropUsageTypeBean;
+import za.co.iclub.pss.model.ws.IclubPropUsageTypeModel;
+import za.co.iclub.pss.trans.IclubPropUsageTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubPropUsageTypeController")
@@ -40,11 +41,7 @@ public class IclubPropUsageController implements Serializable {
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-				
-				model.setPutLongDesc(bean.getPutLongDesc());
-				model.setPutShortDesc(bean.getPutShortDesc());
-				model.setPutStatus(bean.getPutStatus());
+				IclubPropUsageTypeModel model = IclubPropUsageTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -66,11 +63,7 @@ public class IclubPropUsageController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-				model.setPutId(bean.getPutId());
-				model.setPutLongDesc(bean.getPutLongDesc());
-				model.setPutShortDesc(bean.getPutShortDesc());
-				model.setPutStatus(bean.getPutStatus());
+				IclubPropUsageTypeModel model = IclubPropUsageTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -157,11 +150,7 @@ public class IclubPropUsageController implements Serializable {
 		beans = new ArrayList<IclubPropUsageTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubPropUsageTypeModel model : models) {
-				IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
-				bean.setPutId(model.getPutId());
-				bean.setPutLongDesc(model.getPutLongDesc());
-				bean.setPutShortDesc(model.getPutShortDesc());
-				bean.setPutStatus(model.getPutStatus());
+				IclubPropUsageTypeBean bean = IclubPropUsageTypeTrans.fromWStoUI(model);
 				beans.add(bean);
 			}
 		}

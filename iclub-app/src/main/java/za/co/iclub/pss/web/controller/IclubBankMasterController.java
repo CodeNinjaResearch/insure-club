@@ -17,17 +17,19 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubBankMasterBean;
-import za.co.iclub.pss.web.bean.IclubPersonBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubBankMasterModel;
-import za.co.iclub.pss.ws.model.IclubPersonModel;
+import za.co.iclub.pss.model.ui.IclubBankMasterBean;
+import za.co.iclub.pss.model.ui.IclubPersonBean;
+import za.co.iclub.pss.model.ws.IclubBankMasterModel;
+import za.co.iclub.pss.model.ws.IclubPersonModel;
+import za.co.iclub.pss.trans.IclubBankMasterTrans;
+import za.co.iclub.pss.trans.IclubPersonTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubBankMasterController")
 @SessionScoped
 public class IclubBankMasterController implements Serializable {
-
+	
 	private static final long serialVersionUID = 8245517153102756484L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubBankMasterController.class);
@@ -45,7 +47,7 @@ public class IclubBankMasterController implements Serializable {
 	private String sessionUserId;
 	private String userName;
 	private ResourceBundle labelBundle;
-
+	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
 		if (viewParam == null || viewParam.longValue() == 1)
@@ -54,9 +56,9 @@ public class IclubBankMasterController implements Serializable {
 			showEdit();
 		else if (viewParam != null && viewParam.longValue() == 3)
 			showSummary();
-
+		
 	}
-
+	
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -65,7 +67,7 @@ public class IclubBankMasterController implements Serializable {
 		showSummaryCont = false;
 		viewParam = 1l;
 	}
-
+	
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubBankMasterBean();
@@ -75,7 +77,7 @@ public class IclubBankMasterController implements Serializable {
 		showSummaryCont = false;
 		viewParam = 1l;
 	}
-
+	
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
 		showCreateCont = false;
@@ -84,7 +86,7 @@ public class IclubBankMasterController implements Serializable {
 		showSummaryCont = false;
 		viewParam = 2l;
 	}
-
+	
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -93,7 +95,7 @@ public class IclubBankMasterController implements Serializable {
 		showSummaryCont = true;
 		viewParam = 3l;
 	}
-
+	
 	public List<IclubBankMasterBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubBankMasterModel> models = new ArrayList<IclubBankMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
@@ -101,66 +103,38 @@ public class IclubBankMasterController implements Serializable {
 		dashBoardBeans = new ArrayList<IclubBankMasterBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubBankMasterModel model : models) {
-				IclubBankMasterBean bean = new IclubBankMasterBean();
-
-				bean.setBmId(model.getBmId());
-				bean.setBmBankName(model.getBmBankName());
-				bean.setBmBankCode(model.getBmBankCode());
-				bean.setBmBranchName(model.getBmBranchName());
-				bean.setBmBranchCode(model.getBmBranchCode());
-				bean.setBmBranchAddress(model.getBmBranchAddress());
-				bean.setBmBranchLat(model.getBmBranchLat());
-				bean.setBmBranchLong(model.getBmBranchLong());
-				bean.setBmCrtdDt(model.getBmCrtdDt());
-				bean.setIclubPerson(model.getIclubPerson());
-				if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
-
-					String[] accounts = new String[model.getIclubAccounts().length];
-
-					int i = 0;
-					for (String account : model.getIclubAccounts()) {
-						accounts[i] = account;
-					}
-					bean.setIclubAccounts(accounts);
-				}
-
+				IclubBankMasterBean bean = IclubBankMasterTrans.fromWStoUI(model);
+				
 				dashBoardBeans.add(bean);
 			}
 		}
 		return dashBoardBeans;
 	}
-
+	
 	public void setDashBoardBeans(List<IclubBankMasterBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
-
+	
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
 		bean = new IclubBankMasterBean();
 	}
-
+	
 	public void addIclubBankMaster() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubBankMaster");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubBankMasterModel model = new IclubBankMasterModel();
-
-				model.setBmBankName(bean.getBmBankName());
-				model.setBmBankCode(bean.getBmBankCode());
-				model.setBmBranchName(bean.getBmBranchName());
-				model.setBmBranchCode(bean.getBmBranchCode());
-				model.setBmBranchAddress(bean.getBmBranchAddress());
-				model.setBmBranchLat(bean.getBmBranchLat());
-				model.setBmBranchLong(bean.getBmBranchLong());
+				IclubBankMasterModel model = IclubBankMasterTrans.fromUItoWS(bean);
+				
 				model.setBmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
-
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-
+					
 					IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -173,25 +147,17 @@ public class IclubBankMasterController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void modIclubBankMaster() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubBankMaster");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubBankMasterModel model = new IclubBankMasterModel();
-
-				model.setBmId(bean.getBmId());
-				model.setBmBankName(bean.getBmBankName());
-				model.setBmBankCode(bean.getBmBankCode());
-				model.setBmBranchName(bean.getBmBranchName());
-				model.setBmBranchCode(bean.getBmBranchCode());
-				model.setBmBranchAddress(bean.getBmBranchAddress());
-				model.setBmBranchLat(bean.getBmBranchLat());
-				model.setBmBranchLong(bean.getBmBranchLong());
+				IclubBankMasterModel model = IclubBankMasterTrans.fromUItoWS(bean);
+				
 				model.setBmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
-
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -207,7 +173,7 @@ public class IclubBankMasterController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void delIclubBankMaster() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubBankMaster");
 		try {
@@ -225,55 +191,55 @@ public class IclubBankMasterController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		
 		return ret;
 	}
-
+	
 	public IclubBankMasterBean getBean() {
 		if (bean == null)
 			bean = new IclubBankMasterBean();
 		return bean;
 	}
-
+	
 	public void setBean(IclubBankMasterBean bean) {
 		this.bean = bean;
 	}
-
+	
 	public boolean isShowCreateCont() {
 		return showCreateCont;
 	}
-
+	
 	public void setShowCreateCont(boolean showCreateCont) {
 		this.showCreateCont = showCreateCont;
 	}
-
+	
 	public boolean isShowViewCont() {
 		return showViewCont;
 	}
-
+	
 	public void setShowViewCont(boolean showViewCont) {
 		this.showViewCont = showViewCont;
 	}
-
+	
 	public boolean isShowEditCont() {
 		return showEditCont;
 	}
-
+	
 	public void setShowEditCont(boolean showEditCont) {
 		this.showEditCont = showEditCont;
 	}
-
+	
 	public Long getViewParam() {
 		return viewParam;
 	}
-
+	
 	public void setViewParam(Long viewParam) {
 		this.viewParam = viewParam;
 	}
-
+	
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -282,81 +248,60 @@ public class IclubBankMasterController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-
+	
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-
+	
 	public String getUserName() {
 		userName = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.scname")).toString();
 		return userName;
 	}
-
+	
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	
 	public ResourceBundle getLabelBundle() {
 		if (labelBundle == null) {
 			labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		}
 		return labelBundle;
 	}
-
+	
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
-
+	
 	public List<IclubBankMasterBean> getBeans() {
-
+		
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubBankMasterModel> models = new ArrayList<IclubBankMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubBankMasterModel.class));
 		client.close();
 		beans = new ArrayList<IclubBankMasterBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubBankMasterModel model : models) {
-
-				IclubBankMasterBean bean = new IclubBankMasterBean();
-
-				bean.setBmId(model.getBmId());
-				bean.setBmBankName(model.getBmBankName());
-				bean.setBmBankCode(model.getBmBankCode());
-				bean.setBmBranchName(model.getBmBranchName());
-				bean.setBmBranchCode(model.getBmBranchCode());
-				bean.setBmBranchAddress(model.getBmBranchAddress());
-				bean.setBmBranchLat(model.getBmBranchLat());
-				bean.setBmBranchLong(model.getBmBranchLong());
-				bean.setBmCrtdDt(model.getBmCrtdDt());
-				bean.setIclubPerson(model.getIclubPerson());
-				if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
-
-					String[] accounts = new String[model.getIclubAccounts().length];
-
-					int i = 0;
-					for (String account : model.getIclubAccounts()) {
-						accounts[i] = account;
-					}
-					bean.setIclubAccounts(accounts);
-				}
-
+				
+				IclubBankMasterBean bean = IclubBankMasterTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-
+	
 	public void setBeans(List<IclubBankMasterBean> beans) {
 		this.beans = beans;
 	}
-
+	
 	public boolean isShowSummaryCont() {
 		return showSummaryCont;
 	}
-
+	
 	public void setShowSummaryCont(boolean showSummaryCont) {
 		this.showSummaryCont = showSummaryCont;
 	}
-
+	
 	public List<IclubPersonBean> getPersonBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "list");
 		Collection<? extends IclubPersonModel> models = new ArrayList<IclubPersonModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPersonModel.class));
@@ -364,19 +309,17 @@ public class IclubBankMasterController implements Serializable {
 		personBeans = new ArrayList<IclubPersonBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubPersonModel model : models) {
-
-				IclubPersonBean bean = new IclubPersonBean();
-				bean.setPId(model.getPId());
-				bean.setPFName(model.getPFName());
-				bean.setPLName(model.getPLName());
+				
+				IclubPersonBean bean = IclubPersonTrans.fromWStoUI(model);
+				 
 				personBeans.add(bean);
 			}
 		}
 		return personBeans;
 	}
-
+	
 	public void setPersonBeans(List<IclubPersonBean> personBeans) {
 		this.personBeans = personBeans;
 	}
-
+	
 }

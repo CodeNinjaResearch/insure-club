@@ -16,9 +16,10 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubAssessmentTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubAssessmentTypeModel;
+import za.co.iclub.pss.model.ui.IclubAssessmentTypeBean;
+import za.co.iclub.pss.model.ws.IclubAssessmentTypeModel;
+import za.co.iclub.pss.trans.IclubAssessmentTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubAssessmentTypeController")
@@ -40,11 +41,7 @@ public class IclubAssessmentTypeController implements Serializable {
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubAssessmentTypeModel model = new IclubAssessmentTypeModel();
-				
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
+				IclubAssessmentTypeModel model = IclubAssessmentTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -66,11 +63,7 @@ public class IclubAssessmentTypeController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubAssessmentTypeModel model = new IclubAssessmentTypeModel();
-				model.setAtId(bean.getAtId());
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
+				IclubAssessmentTypeModel model = IclubAssessmentTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -159,11 +152,7 @@ public class IclubAssessmentTypeController implements Serializable {
 		beans = new ArrayList<IclubAssessmentTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubAssessmentTypeModel model : models) {
-				IclubAssessmentTypeBean bean = new IclubAssessmentTypeBean();
-				bean.setAtId(model.getAtId());
-				bean.setAtLongDesc(model.getAtLongDesc());
-				bean.setAtShortDesc(model.getAtShortDesc());
-				bean.setAtStatus(model.getAtStatus());
+				IclubAssessmentTypeBean bean = IclubAssessmentTypeTrans.fromWStoUI(model);
 				
 				beans.add(bean);
 			}

@@ -22,13 +22,16 @@ import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 
-import za.co.iclub.pss.web.bean.IclubFieldBean;
-import za.co.iclub.pss.web.bean.IclubRateEngineBean;
-import za.co.iclub.pss.web.bean.IclubRateTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubFieldModel;
-import za.co.iclub.pss.ws.model.IclubRateEngineModel;
-import za.co.iclub.pss.ws.model.IclubRateTypeModel;
+import za.co.iclub.pss.model.ui.IclubFieldBean;
+import za.co.iclub.pss.model.ui.IclubRateEngineBean;
+import za.co.iclub.pss.model.ui.IclubRateTypeBean;
+import za.co.iclub.pss.model.ws.IclubFieldModel;
+import za.co.iclub.pss.model.ws.IclubRateEngineModel;
+import za.co.iclub.pss.model.ws.IclubRateTypeModel;
+import za.co.iclub.pss.trans.IclubFieldTrans;
+import za.co.iclub.pss.trans.IclubRateEngineTrans;
+import za.co.iclub.pss.trans.IclubRateTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubRatingController")
@@ -96,28 +99,8 @@ public class IclubRatingController implements Serializable {
 		IclubRateTypeBean bean = null;
 		if (model != null) {
 			
-			bean = new IclubRateTypeBean();
-			bean.setRtId(model.getRtId());
-			bean.setRtLongDesc(model.getRtLongDesc());
-			bean.setRtShortDesc(model.getRtShortDesc());
-			bean.setRtStatus(model.getRtStatus());
-			bean.setRtQuoteType(model.getRtQuoteType());
-			bean.setIclubEntityType(model.getIclubEntityType());
-			bean.setIclubField(model.getIclubField());
-			bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-			bean.setIclubPerson(model.getIclubPerson());
-			bean.setRtCrtdDt(model.getRtCrtdDt());
-			bean.setRtType(model.getRtType());
-			if (model.getIclubRateEngines() != null && model.getIclubRateEngines().length > 0) {
-				String[] rateEngines = new String[model.getIclubRateEngines().length];
-				int i = 0;
-				for (String rateEngine : model.getIclubRateEngines()) {
-					rateEngines[i] = rateEngine;
-					i++;
-				}
-				
-				bean.setIclubRateEngines(rateEngines);
-			}
+			bean = IclubRateTypeTrans.fromWStoUI(model);
+			
 		}
 		
 		return bean;
@@ -141,15 +124,8 @@ public class IclubRatingController implements Serializable {
 			if (models != null && models.size() > 0) {
 				for (IclubRateEngineModel model : models) {
 					
-					IclubRateEngineBean bean = new IclubRateEngineBean();
-					bean.setReId(model.getReId());
-					bean.setReRate(model.getReRate());
-					bean.setReCrtdDt(model.getReCrtdDt());
-					bean.setReStatus(model.getReStatus());
-					bean.setReMaxValue(model.getReMaxValue());
-					bean.setReBaseValue(model.getReBaseValue());
-					bean.setIclubRateType(model.getIclubRateType());
-					bean.setIclubPerson(model.getIclubPerson());
+					IclubRateEngineBean bean = IclubRateEngineTrans.fromWStoUI(model);
+					
 					rateEngineMap.put(bean.getReBaseValue(), bean);
 					beans.add(bean);
 				}
@@ -188,15 +164,7 @@ public class IclubRatingController implements Serializable {
 				lookupSaveFlag = false;
 				for (IclubRateEngineModel model : models) {
 					
-					IclubRateEngineBean bean = new IclubRateEngineBean();
-					bean.setReId(model.getReId());
-					bean.setReRate(model.getReRate());
-					bean.setReCrtdDt(model.getReCrtdDt());
-					bean.setReStatus(model.getReStatus());
-					bean.setReMaxValue(model.getReMaxValue());
-					bean.setReBaseValue(model.getReBaseValue());
-					bean.setIclubRateType(model.getIclubRateType());
-					bean.setIclubPerson(model.getIclubPerson());
+					IclubRateEngineBean bean = IclubRateEngineTrans.fromWStoUI(model);
 					
 					rateEngineMap.put(bean.getReBaseValue(), bean);
 					beans.add(bean);
@@ -222,24 +190,8 @@ public class IclubRatingController implements Serializable {
 		IclubFieldBean bean = null;
 		if (model != null) {
 			
-			bean = new IclubFieldBean();
-			bean.setFId(model.getFId());
-			bean.setFName(model.getFName());
-			bean.setFDesc(model.getFDesc());
-			bean.setFStatus(model.getFStatus());
-			bean.setFLTblName(model.getFLTblName());
-			bean.setFRate(model.getFRate());
-			bean.setIclubEntityType(model.getIclubEntityType() != null ? model.getIclubEntityType() : null);
-			if (model.getIclubRateTypes() != null && model.getIclubRateTypes().length > 0) {
-				Long[] rateTypes = new Long[model.getIclubRateTypes().length];
-				int i = 0;
-				for (Long rateType : model.getIclubRateTypes()) {
-					rateTypes[i] = rateType;
-					i++;
-				}
-				
-				bean.setIclubRateTypes(rateTypes);
-			}
+			bean = IclubFieldTrans.fromWStoUI(model);
+			
 		}
 		
 		return bean;
@@ -300,14 +252,12 @@ public class IclubRatingController implements Serializable {
 		try {
 			if (validateForm(true, false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubRateEngineModel model = new IclubRateEngineModel();
+				IclubRateEngineModel model = IclubRateEngineTrans.fromUItoWS(bean);
 				
 				model.setReId(UUID.randomUUID().toString());
-				model.setReRate(bean.getReRate());
+				
 				model.setReCrtdDt(new Date(System.currentTimeMillis()));
-				model.setReStatus(bean.getReStatus());
-				model.setReMaxValue(bean.getReMaxValue());
-				model.setReBaseValue(bean.getReBaseValue());
+				
 				model.setIclubRateType(selRateType);
 				model.setIclubPerson(getSessionUserId());
 				
@@ -334,19 +284,13 @@ public class IclubRatingController implements Serializable {
 				ResponseModel response = null;
 				WebClient client = null;
 				for (IclubRateEngineBean bean : beans) {
-					IclubRateEngineModel model = new IclubRateEngineModel();
+					IclubRateEngineModel model = IclubRateEngineTrans.fromUItoWS(bean);
 					if (bean.getReCrtdDt() == null) {
 						client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 					} else {
 						client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 					}
-					model.setReId(bean.getReId());
-					model.setReRate(bean.getReRate());
 					model.setReCrtdDt(new Date(System.currentTimeMillis()));
-					model.setReStatus(bean.getReStatus());
-					model.setReMaxValue(bean.getReMaxValue());
-					model.setReBaseValue(bean.getReBaseValue());
-					model.setIclubRateType(bean.getIclubRateType());
 					model.setIclubPerson(getSessionUserId());
 					if (bean.getReCrtdDt() == null) {
 						response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -377,13 +321,7 @@ public class IclubRatingController implements Serializable {
 		try {
 			if (validateForm(false, false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubRateEngineModel model = new IclubRateEngineModel();
-				model.setReId(bean.getReId());
-				model.setReRate(bean.getReRate());
-				model.setReCrtdDt(new Date(System.currentTimeMillis()));
-				model.setReStatus(bean.getReStatus());
-				model.setReMaxValue(bean.getReMaxValue());
-				model.setReBaseValue(bean.getReBaseValue());
+				IclubRateEngineModel model = IclubRateEngineTrans.fromUItoWS(bean);
 				model.setIclubRateType(selRateType);
 				model.setIclubPerson(getSessionUserId());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);

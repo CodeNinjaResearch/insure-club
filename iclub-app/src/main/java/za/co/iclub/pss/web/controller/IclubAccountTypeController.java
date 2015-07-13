@@ -16,15 +16,16 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubAccountTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubAccountTypeModel;
+import za.co.iclub.pss.model.ui.IclubAccountTypeBean;
+import za.co.iclub.pss.model.ws.IclubAccountTypeModel;
+import za.co.iclub.pss.trans.IclubAccountTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubAccountTypeController")
 @SessionScoped
 public class IclubAccountTypeController implements Serializable {
-
+	
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubAccountTypeController.class);
@@ -34,18 +35,14 @@ public class IclubAccountTypeController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-
+	
 	public void addIclubAccountType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubAccountType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubAccountTypeModel model = new IclubAccountTypeModel();
-
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
-
+				IclubAccountTypeModel model = IclubAccountTypeTrans.fromUItoWS(bean);
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -60,18 +57,14 @@ public class IclubAccountTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("accounttype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void modIclubAccountType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubAccountType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubAccountTypeModel model = new IclubAccountTypeModel();
-				model.setAtId(bean.getAtId());
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
-
+				IclubAccountTypeModel model = IclubAccountTypeTrans.fromUItoWS(bean);
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -86,7 +79,7 @@ public class IclubAccountTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("accounttype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void delIclubAccountType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubAccountType");
 		try {
@@ -103,27 +96,27 @@ public class IclubAccountTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("accounttype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubAccountTypeBean();
 	}
-
+	
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubAccountTypeBean();
 	}
-
+	
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-
+	
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		
 		if (bean.getAtShortDesc() != null && !bean.getAtShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getAtShortDesc().trim() + "/" + ((bean.getAtId() == null) ? -999l : bean.getAtId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -133,25 +126,25 @@ public class IclubAccountTypeController implements Serializable {
 				ret = ret && false;
 			}
 		}
-
+		
 		else {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		if (bean.getAtLongDesc() == null || bean.getAtLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		if (bean.getAtStatus() == null || bean.getAtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		return ret;
 	}
-
+	
 	public List<IclubAccountTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubAccountTypeModel> models = new ArrayList<IclubAccountTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccountTypeModel.class));
@@ -159,59 +152,50 @@ public class IclubAccountTypeController implements Serializable {
 		beans = new ArrayList<IclubAccountTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubAccountTypeModel model : models) {
-				IclubAccountTypeBean bean = new IclubAccountTypeBean();
-				bean.setAtId(model.getAtId());
-				bean.setAtLongDesc(model.getAtLongDesc());
-				bean.setAtShortDesc(model.getAtShortDesc());
-				bean.setAtStatus(model.getAtStatus());
-
-				if (model.getIclubAccounts() != null && model.getIclubAccounts().length > 0) {
-
-					bean.setIclubAccounts(model.getIclubAccounts());
-				}
-
+				IclubAccountTypeBean bean = IclubAccountTypeTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-
+	
 	public void setBeans(List<IclubAccountTypeBean> beans) {
 		this.beans = beans;
 	}
-
+	
 	public IclubAccountTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubAccountTypeBean();
 		return bean;
 	}
-
+	
 	public void setBean(IclubAccountTypeBean bean) {
 		this.bean = bean;
 	}
-
+	
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-
+	
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-
+	
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-
+	
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-
+	
 	public ResourceBundle getLabelBundle() {
-
+		
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-
+	
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

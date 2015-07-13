@@ -16,9 +16,10 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.web.bean.IclubVehUsageTypeBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubVehUsageTypeModel;
+import za.co.iclub.pss.model.ui.IclubVehUsageTypeBean;
+import za.co.iclub.pss.model.ws.IclubVehUsageTypeModel;
+import za.co.iclub.pss.trans.IclubVehUsageTypeTrans;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubVehUsageTypeController")
@@ -40,11 +41,7 @@ public class IclubVehUsageController implements Serializable {
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-				
-				model.setVutLongDesc(bean.getVutLongDesc());
-				model.setVutShortDesc(bean.getVutShortDesc());
-				model.setVutStatus(bean.getVutStatus());
+				IclubVehUsageTypeModel model = IclubVehUsageTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
@@ -66,11 +63,7 @@ public class IclubVehUsageController implements Serializable {
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-				model.setVutId(bean.getVutId());
-				model.setVutLongDesc(bean.getVutLongDesc());
-				model.setVutShortDesc(bean.getVutShortDesc());
-				model.setVutStatus(bean.getVutStatus());
+				IclubVehUsageTypeModel model = IclubVehUsageTypeTrans.fromUItoWS(bean);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -157,11 +150,8 @@ public class IclubVehUsageController implements Serializable {
 		beans = new ArrayList<IclubVehUsageTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubVehUsageTypeModel model : models) {
-				IclubVehUsageTypeBean bean = new IclubVehUsageTypeBean();
-				bean.setVutId(model.getVutId());
-				bean.setVutLongDesc(model.getVutLongDesc());
-				bean.setVutShortDesc(model.getVutShortDesc());
-				bean.setVutStatus(model.getVutStatus());
+				IclubVehUsageTypeBean bean = IclubVehUsageTypeTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}

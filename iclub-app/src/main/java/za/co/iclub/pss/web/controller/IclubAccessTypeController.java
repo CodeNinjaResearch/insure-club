@@ -18,13 +18,14 @@ import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.model.ui.IclubAccessTypeBean;
 import za.co.iclub.pss.model.ws.IclubAccessTypeModel;
+import za.co.iclub.pss.trans.IclubAccessTypeTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubAccessTypeController")
 @SessionScoped
 public class IclubAccessTypeController implements Serializable {
-
+	
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubAccessTypeController.class);
@@ -34,18 +35,14 @@ public class IclubAccessTypeController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-
+	
 	public void addIclubAccessType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubAccessType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubAccessTypeModel model = new IclubAccessTypeModel();
-
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
-
+				IclubAccessTypeModel model = IclubAccessTypeTrans.fromUItoWS(bean);
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -60,18 +57,14 @@ public class IclubAccessTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("accesstype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void modIclubAccessType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubAccessType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubAccessTypeModel model = new IclubAccessTypeModel();
-				model.setAtId(bean.getAtId());
-				model.setAtLongDesc(bean.getAtLongDesc());
-				model.setAtShortDesc(bean.getAtShortDesc());
-				model.setAtStatus(bean.getAtStatus());
-
+				IclubAccessTypeModel model = IclubAccessTypeTrans.fromUItoWS(bean);
+				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -86,7 +79,7 @@ public class IclubAccessTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("accesstype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void delIclubAccessType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubAccessType");
 		try {
@@ -103,27 +96,27 @@ public class IclubAccessTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("accesstype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-
+	
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubAccessTypeBean();
 	}
-
+	
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubAccessTypeBean();
 	}
-
+	
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-
+	
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-
+		
 		if (bean.getAtShortDesc() != null && !bean.getAtShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getAtShortDesc().trim() + "/" + ((bean.getAtId() == null) ? -999l : bean.getAtId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -136,20 +129,20 @@ public class IclubAccessTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		if (bean.getAtLongDesc() == null || bean.getAtLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		if (bean.getAtStatus() == null || bean.getAtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-
+		
 		return ret;
 	}
-
+	
 	public List<IclubAccessTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubAccessTypeModel> models = new ArrayList<IclubAccessTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubAccessTypeModel.class));
@@ -157,53 +150,50 @@ public class IclubAccessTypeController implements Serializable {
 		beans = new ArrayList<IclubAccessTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubAccessTypeModel model : models) {
-				IclubAccessTypeBean bean = new IclubAccessTypeBean();
-				bean.setAtId(model.getAtId());
-				bean.setAtLongDesc(model.getAtLongDesc());
-				bean.setAtShortDesc(model.getAtShortDesc());
-				bean.setAtStatus(model.getAtStatus());
+				IclubAccessTypeBean bean = IclubAccessTypeTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-
+	
 	public void setBeans(List<IclubAccessTypeBean> beans) {
 		this.beans = beans;
 	}
-
+	
 	public IclubAccessTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubAccessTypeBean();
 		return bean;
 	}
-
+	
 	public void setBean(IclubAccessTypeBean bean) {
 		this.bean = bean;
 	}
-
+	
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-
+	
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-
+	
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-
+	
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-
+	
 	public ResourceBundle getLabelBundle() {
-
+		
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-
+	
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

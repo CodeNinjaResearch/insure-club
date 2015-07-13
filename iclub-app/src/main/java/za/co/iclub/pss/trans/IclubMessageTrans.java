@@ -1,125 +1,89 @@
 package za.co.iclub.pss.trans;
 
-import java.util.Date;
+import za.co.iclub.pss.model.ui.IclubMessageBean;
+import za.co.iclub.pss.model.ws.IclubMessageModel;
+import za.co.iclub.pss.orm.bean.IclubMessage;
+import za.co.iclub.pss.orm.dao.IclubMessageTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubPersonDAO;
+import za.co.iclub.pss.orm.dao.IclubSystemTypeDAO;
 
 public class IclubMessageTrans {
 	
-	private String MId;
-	private String iclubPerson;
-	private String PFNameAndLName;
-	private Long iclubSystemTypeByMToSysId;
-	private String toStLongDesc;
-	private Long iclubMessageType;
-	private String mtLongDesc;
-	private Long iclubSystemTypeByMFromSysId;
-	private String fromStLongDesc;
-	private Date MSentDt;
-	private String MTranId;
-	private String MContent;
-	private Date MCrtdDt;
-	
-	public String getMId() {
-		return MId;
+	public static IclubMessageBean fromWStoUI(IclubMessageModel model) {
+		IclubMessageBean bean = new IclubMessageBean();
+		
+		bean.setMId(model.getMId());
+		bean.setMContent(model.getMContent());
+		bean.setMTranId(model.getMTranId());
+		bean.setMCrtdDt(model.getMCrtdDt());
+		bean.setMSentDt(model.getMSentDt());
+		bean.setIclubPerson(model.getIclubPerson());
+		bean.setIclubMessageType(model.getIclubMessageType());
+		bean.setMtLongDesc(model.getMtLongDesc());
+		bean.setPFNameAndLName(model.getPFNameAndLName());
+		bean.setFromStLongDesc(model.getFromStLongDesc());
+		bean.setToStLongDesc(model.getToStLongDesc());
+		bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId());
+		bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId());
+		
+		return bean;
 	}
 	
-	public void setMId(String mId) {
-		MId = mId;
+	public static IclubMessageModel fromUItoWS(IclubMessageBean bean) {
+		
+		IclubMessageModel model = new IclubMessageModel();
+		
+		model.setMId(bean.getMId());
+		model.setMContent(bean.getMContent());
+		model.setMTranId(bean.getMTranId());
+		model.setMCrtdDt(bean.getMCrtdDt());
+		model.setMSentDt(bean.getMSentDt());
+		model.setIclubPerson(bean.getIclubPerson());
+		model.setPFNameAndLName(bean.getPFNameAndLName());
+		model.setIclubMessageType(bean.getIclubMessageType());
+		model.setMtLongDesc(bean.getMtLongDesc());
+		model.setFromStLongDesc(bean.getFromStLongDesc());
+		model.setToStLongDesc(bean.getToStLongDesc());
+		model.setIclubSystemTypeByMFromSysId(bean.getIclubSystemTypeByMFromSysId());
+		model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId());
+		
+		return model;
 	}
 	
-	public String getIclubPerson() {
-		return iclubPerson;
+	public static IclubMessageModel fromORMtoWS(IclubMessage bean) {
+		IclubMessageModel model = new IclubMessageModel();
+		
+		model.setMId(bean.getMId());
+		model.setMContent(bean.getMContent());
+		model.setMTranId(bean.getMTranId());
+		model.setMCrtdDt(bean.getMCrtdDt());
+		model.setMSentDt(bean.getMSentDt());
+		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() : null);
+		model.setMtLongDesc(bean.getIclubMessageType() != null ? bean.getIclubMessageType().getMtLongDesc() : null);
+		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
+		model.setIclubMessageType(bean.getIclubMessageType() != null ? bean.getIclubMessageType().getMtId() : null);
+		model.setIclubSystemTypeByMFromSysId(bean.getIclubSystemTypeByMFromSysId() != null ? bean.getIclubSystemTypeByMFromSysId().getStId() : null);
+		model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId() != null ? bean.getIclubSystemTypeByMToSysId().getStId() : null);
+		model.setFromStLongDesc(bean.getIclubSystemTypeByMToSysId() != null ? bean.getIclubSystemTypeByMToSysId().getStLongDesc() : null);
+		model.setToStLongDesc(bean.getIclubSystemTypeByMToSysId() != null ? bean.getIclubSystemTypeByMToSysId().getStLongDesc() : null);
+		
+		return model;
 	}
 	
-	public void setIclubPerson(String iclubPerson) {
-		this.iclubPerson = iclubPerson;
+	public static IclubMessage fromWStoORM(IclubMessageModel model, IclubPersonDAO iclubPersonDAO, IclubMessageTypeDAO iclubMessageTypeDAO, IclubSystemTypeDAO iclubSystemTypeDAO) {
+		
+		IclubMessage bean = new IclubMessage();
+		
+		bean.setMId(model.getMId());
+		bean.setMContent(model.getMContent());
+		bean.setMTranId(model.getMTranId());
+		bean.setMCrtdDt(model.getMCrtdDt());
+		bean.setMSentDt(model.getMSentDt());
+		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
+		bean.setIclubMessageType(model.getIclubMessageType() != null ? iclubMessageTypeDAO.findById(model.getIclubMessageType()) : null);
+		bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId() != null ? iclubSystemTypeDAO.findById(model.getIclubSystemTypeByMFromSysId()) : null);
+		bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId() != null ? iclubSystemTypeDAO.findById(model.getIclubSystemTypeByMToSysId()) : null);
+		
+		return bean;
 	}
-	
-	public Long getIclubSystemTypeByMToSysId() {
-		return iclubSystemTypeByMToSysId;
-	}
-	
-	public void setIclubSystemTypeByMToSysId(Long iclubSystemTypeByMToSysId) {
-		this.iclubSystemTypeByMToSysId = iclubSystemTypeByMToSysId;
-	}
-	
-	public Long getIclubMessageType() {
-		return iclubMessageType;
-	}
-	
-	public void setIclubMessageType(Long iclubMessageType) {
-		this.iclubMessageType = iclubMessageType;
-	}
-	
-	public Long getIclubSystemTypeByMFromSysId() {
-		return iclubSystemTypeByMFromSysId;
-	}
-	
-	public void setIclubSystemTypeByMFromSysId(Long iclubSystemTypeByMFromSysId) {
-		this.iclubSystemTypeByMFromSysId = iclubSystemTypeByMFromSysId;
-	}
-	
-	public Date getMSentDt() {
-		return MSentDt;
-	}
-	
-	public void setMSentDt(Date mSentDt) {
-		MSentDt = mSentDt;
-	}
-	
-	public String getMTranId() {
-		return MTranId;
-	}
-	
-	public void setMTranId(String mTranId) {
-		MTranId = mTranId;
-	}
-	
-	public String getMContent() {
-		return MContent;
-	}
-	
-	public void setMContent(String mContent) {
-		MContent = mContent;
-	}
-	
-	public Date getMCrtdDt() {
-		return MCrtdDt;
-	}
-	
-	public void setMCrtdDt(Date mCrtdDt) {
-		MCrtdDt = mCrtdDt;
-	}
-	
-	public String getPFNameAndLName() {
-		return PFNameAndLName;
-	}
-	
-	public void setPFNameAndLName(String pFNameAndLName) {
-		PFNameAndLName = pFNameAndLName;
-	}
-	
-	public String getToStLongDesc() {
-		return toStLongDesc;
-	}
-	
-	public void setToStLongDesc(String toStLongDesc) {
-		this.toStLongDesc = toStLongDesc;
-	}
-	
-	public String getMtLongDesc() {
-		return mtLongDesc;
-	}
-	
-	public void setMtLongDesc(String mtLongDesc) {
-		this.mtLongDesc = mtLongDesc;
-	}
-	
-	public String getFromStLongDesc() {
-		return fromStLongDesc;
-	}
-	
-	public void setFromStLongDesc(String fromStLongDesc) {
-		this.fromStLongDesc = fromStLongDesc;
-	}
-	
 }

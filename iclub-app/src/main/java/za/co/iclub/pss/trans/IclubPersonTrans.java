@@ -29,7 +29,7 @@ public class IclubPersonTrans {
 		bean.setPIdExpiryDt(model.getPIdExpiryDt());
 		bean.setPInitials(model.getPInitials());
 		bean.setPIsPensioner(model.getPIsPensioner());
-		bean.setPIdIssueCntry(model.getPIdIssueCntry());
+		bean.setPIdIssueCntry(model.getPIdIssueCntry() != null ? model.getPIdIssueCntry().longValue() : null);
 		bean.setPIdIssueDt(model.getPIdIssueDt());
 		bean.setPLat(model.getPLat());
 		bean.setPLong(model.getPLong());
@@ -66,7 +66,7 @@ public class IclubPersonTrans {
 		model.setPIdExpiryDt(bean.getPIdExpiryDt());
 		model.setPInitials(bean.getPInitials());
 		model.setPIsPensioner(bean.getPIsPensioner());
-		model.setPIdIssueCntry(bean.getPIdIssueCntry());
+		model.setPIdIssueCntry(bean.getPIdIssueCntry() != null ? bean.getPIdIssueCntry().longValue() : null);
 		model.setPIdIssueDt(bean.getPIdIssueDt());
 		model.setPLat(bean.getPLat());
 		model.setPLong(bean.getPLong());

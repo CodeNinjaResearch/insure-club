@@ -52,11 +52,11 @@ import twitter4j.Twitter;
 import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import za.co.iclub.pss.web.bean.GooglePojo;
-import za.co.iclub.pss.web.bean.YahooMailsBean;
-import za.co.iclub.pss.web.util.IclubWebHelper;
-import za.co.iclub.pss.ws.model.IclubLoginModel;
-import za.co.iclub.pss.ws.model.IclubPersonModel;
+import za.co.iclub.pss.model.ui.GooglePojo;
+import za.co.iclub.pss.model.ui.YahooMailsBean;
+import za.co.iclub.pss.model.ws.IclubLoginModel;
+import za.co.iclub.pss.model.ws.IclubPersonModel;
+import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 import com.google.gson.Gson;
@@ -469,15 +469,15 @@ public class IclubMenuController implements Serializable {
 			model.setLCrtdDt(new Date(System.currentTimeMillis()));
 			model.setLLastDate(new Date(System.currentTimeMillis()));
 			model.setLName(personModel.getPEmail());
-			model.setIclubPersonByLCrtdBy(personModel.getPId());
-			model.setIclubPersonByLPersonId(personModel.getPId());
+			model.setIclubPersonAByLCrtdBy(personModel.getPId());
+			model.setIclubPersonBByLPersonId(personModel.getPId());
 			model.setIclubRoleType(2l);
 			model.setLProviderId(guid);
 			model.setLProviderCd(from);
 			
 			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 			if (response.getStatusCode() == 0) {
-				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getIclubPersonByLPersonId());
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getIclubPersonBByLPersonId());
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), model.getLName());
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
@@ -516,7 +516,7 @@ public class IclubMenuController implements Serializable {
 		
 		if (loginModel != null && loginModel.getLId() != null) {
 			
-			client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + loginModel.getIclubPersonByLPersonId());
+			client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + loginModel.getIclubPersonBByLPersonId());
 			model = client.get(IclubPersonModel.class);
 			
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getPId());
