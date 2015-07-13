@@ -16,9 +16,9 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.model.ui.IclubAssessmentTypeBean;
-import za.co.iclub.pss.model.ws.IclubAssessmentTypeModel;
-import za.co.iclub.pss.util.IclubWebHelper;
+import za.co.iclub.pss.web.bean.IclubAssessmentTypeBean;
+import za.co.iclub.pss.web.util.IclubWebHelper;
+import za.co.iclub.pss.ws.model.IclubAssessmentTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubAssessmentTypeController")

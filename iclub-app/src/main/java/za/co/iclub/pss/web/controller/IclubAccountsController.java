@@ -17,15 +17,15 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.model.ui.IclubAccountBean;
-import za.co.iclub.pss.model.ui.IclubAccountTypeBean;
-import za.co.iclub.pss.model.ui.IclubBankMasterBean;
-import za.co.iclub.pss.model.ui.IclubOwnerTypeBean;
-import za.co.iclub.pss.model.ws.IclubAccountModel;
-import za.co.iclub.pss.model.ws.IclubAccountTypeModel;
-import za.co.iclub.pss.model.ws.IclubBankMasterModel;
-import za.co.iclub.pss.model.ws.IclubOwnerTypeModel;
-import za.co.iclub.pss.util.IclubWebHelper;
+import za.co.iclub.pss.web.bean.IclubAccountBean;
+import za.co.iclub.pss.web.bean.IclubAccountTypeBean;
+import za.co.iclub.pss.web.bean.IclubBankMasterBean;
+import za.co.iclub.pss.web.bean.IclubOwnerTypeBean;
+import za.co.iclub.pss.web.util.IclubWebHelper;
+import za.co.iclub.pss.ws.model.IclubAccountModel;
+import za.co.iclub.pss.ws.model.IclubAccountTypeModel;
+import za.co.iclub.pss.ws.model.IclubBankMasterModel;
+import za.co.iclub.pss.ws.model.IclubOwnerTypeModel;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubAccountController")

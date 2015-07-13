@@ -29,7 +29,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
@@ -217,8 +216,9 @@ public class IclubMenuController implements Serializable {
 							in.close();
 							graph = b.toString();
 							JSONObject json = new JSONObject(graph);
-							json.getString("id");
+							
 							IclubPersonModel model = new IclubPersonModel();
+							String providerId = json.getString("id");
 							model.setPId(UUID.randomUUID().toString());
 							if (json.has("email")) {
 								model.setPEmail(json.getString("email"));
@@ -240,17 +240,19 @@ public class IclubMenuController implements Serializable {
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
-							
-							WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
-							
-							ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-							client.close();
-							if (response.getStatusCode() == 0) {
-								updatePassword(model, access_token, "FB", null);
+							if (checkExistingUserorNot(model, providerId, "FB")) {
+								WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
 								
-							} else {
-								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+								ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+								client.close();
+								if (response.getStatusCode() == 0) {
+									updatePassword(model, access_token, "FB", providerId);
+									
+								} else {
+									IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+								}
 							}
+							
 						} catch (Exception e) {
 							e.printStackTrace();
 							throw new RuntimeException("ERROR in getting FB graph data. " + e);
@@ -326,16 +328,18 @@ public class IclubMenuController implements Serializable {
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
-						WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
-						
-						ResponseModel response = webClient.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-						webClient.close();
-						
-						if (response.getStatusCode() == 0) {
-							updatePassword(model, access_token, "yahoo", xoauth_yahoo_guid.replace("\"", ""));
+						if (checkExistingUserorNot(model, xoauth_yahoo_guid.replace("\"", ""), "YAHOO")) {
+							WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
 							
-						} else {
-							IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+							ResponseModel response = webClient.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+							webClient.close();
+							
+							if (response.getStatusCode() == 0) {
+								updatePassword(model, access_token, "YAHOO", xoauth_yahoo_guid.replace("\"", ""));
+								
+							} else {
+								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+							}
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -423,16 +427,18 @@ public class IclubMenuController implements Serializable {
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}
-						WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
-						
-						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-						client.close();
-						
-						if (response.getStatusCode() == 0) {
-							updatePassword(model, access_token, "google", null);
+						if (checkExistingUserorNot(model, data.getId(), "GOOGLE")) {
+							WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
 							
-						} else {
-							IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+							ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+							client.close();
+							
+							if (response.getStatusCode() == 0) {
+								updatePassword(model, access_token, "GOOGLE", data.getId());
+								
+							} else {
+								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+							}
 						}
 						
 					}
@@ -466,13 +472,15 @@ public class IclubMenuController implements Serializable {
 			model.setIclubPersonByLCrtdBy(personModel.getPId());
 			model.setIclubPersonByLPersonId(personModel.getPId());
 			model.setIclubRoleType(2l);
+			model.setLProviderId(guid);
+			model.setLProviderCd(from);
 			
 			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 			if (response.getStatusCode() == 0) {
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getIclubPersonByLPersonId());
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), model.getLName());
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
-				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
 				IclubWebHelper.addObjectIntoSession("googlelogin", true);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 				
@@ -495,6 +503,37 @@ public class IclubMenuController implements Serializable {
 		return new ResponseModel();
 	}
 	
+	public boolean checkExistingUserorNot(IclubPersonModel model, String providerId, String providerCd) {
+		WebClient client = null;
+		IclubLoginModel loginModel = null;
+		try {
+			
+			client = IclubWebHelper.createCustomClient(BASE_URL + "/socailLogin/" + model.getPEmail() + "/" + providerId + "/" + providerCd);
+			loginModel = client.get(IclubLoginModel.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (loginModel != null && loginModel.getLId() != null) {
+			
+			client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + loginModel.getIclubPersonByLPersonId());
+			model = client.get(IclubPersonModel.class);
+			
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getPId());
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), loginModel.getLName());
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), model.getPFName() + (model.getPLName() == null ? "" : model.getPLName() + " "));
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), loginModel.getIclubRoleType());
+			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+			
+			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/quote/vq.xhtml?faces-redirect=true");
+			
+			return false;
+			
+		} else {
+			return true;
+		}
+	}
+	
 	public void setUserMenu(boolean userMenu) {
 		this.userMenu = userMenu;
 	}
@@ -507,17 +546,4 @@ public class IclubMenuController implements Serializable {
 		this.selPage = selPage;
 	}
 	
-	public static void main(String[] args) {
-		List<SelectItem> list = new ArrayList<SelectItem>();
-		SelectItem itema = new SelectItem("aaa", "aaa");
-		SelectItem itemb = new SelectItem("bbb", "bbb");
-		list.add(itemb);
-		list.add(itema);
-		
-		List<SelectItem> list2 = new ArrayList<SelectItem>();
-		list2.add(itemb);
-		list.removeAll(list2);
-		System.out.println(list);
-		
-	}
 }
