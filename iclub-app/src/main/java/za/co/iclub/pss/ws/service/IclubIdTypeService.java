@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.model.ws.IclubIdTypeModel;
 import za.co.iclub.pss.orm.bean.IclubIdType;
-import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;

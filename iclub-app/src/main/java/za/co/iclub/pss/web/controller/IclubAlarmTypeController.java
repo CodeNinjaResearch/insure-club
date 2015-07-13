@@ -19,7 +19,6 @@ import org.apache.log4j.Logger;
 import za.co.iclub.pss.model.ui.IclubAlarmTypeBean;
 import za.co.iclub.pss.model.ws.IclubAlarmTypeModel;
 import za.co.iclub.pss.trans.IclubAlarmTypeTrans;
-import za.co.iclub.pss.trans.IclubBarTypeTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 

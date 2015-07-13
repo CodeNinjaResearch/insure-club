@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.model.ws.IclubCohortTypeModel;
-import za.co.iclub.pss.orm.bean.IclubCohort;
 import za.co.iclub.pss.orm.bean.IclubCohortType;
 import za.co.iclub.pss.orm.dao.IclubCohortTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
