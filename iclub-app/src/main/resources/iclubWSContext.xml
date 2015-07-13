@@ -191,7 +191,6 @@
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubBankMasterDAO" ref="IclubBankMasterDAO" />
-		<property name="iclubAccountDAO" ref="IclubAccountDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
 	<bean id="IclubVehicleMasterService" class="za.co.iclub.pss.ws.service.IclubVehicleMasterService">

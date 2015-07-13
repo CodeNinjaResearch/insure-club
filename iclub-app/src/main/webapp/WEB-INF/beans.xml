@@ -10,7 +10,7 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	<import resource="classpath:iclubWSContext.xml" />
-	<bean id="jacksonMapper" class="za.co.iclub.pss.ws.util.CustomObjectMapper" />
+	<bean id="jacksonMapper" class="za.co.iclub.pss.util.CustomObjectMapper" />
 	<http-conf:conduit name="*.http-conduit">
 		<http-conf:client Connection="close" AllowChunking="false" />
 	</http-conf:conduit>
