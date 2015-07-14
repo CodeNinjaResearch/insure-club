@@ -2,6 +2,7 @@
 	<ui:define name="content">
 		<div class="ContainerIndent">
 			<p:panel id="qqPanel">
+				<f:facet name="header">Quote Details</f:facet>
 				<p:dataTable widgetVar="dtQuoteCont" value="#{iclubViewQuoteController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Quotes Available" reflow="true">
 					<p:column headerText="Quote Number">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QNumber}" />
@@ -18,7 +19,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QValidUntil}" />
 					</p:column>
 					<p:column headerText="Generated Premium">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenPremium}" >
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenPremium}">
 							<f:convertNumber pattern="#0.00" />
 						</p:outputLabel>
 					</p:column>

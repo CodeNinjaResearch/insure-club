@@ -300,6 +300,7 @@ public class IclubCohortController implements Serializable {
 						model.setIclubCohort(this.bean.getCId());
 						model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
 						model.setIclubPerson(getSessionUserId());
+						model.setCiInviteAcceptYn("Y");
 						models.add(model);
 						
 					}

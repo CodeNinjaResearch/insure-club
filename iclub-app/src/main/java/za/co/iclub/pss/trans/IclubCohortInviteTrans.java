@@ -78,15 +78,14 @@ public class IclubCohortInviteTrans {
 		IclubCohortInvite bean = new IclubCohortInvite();
 		
 		bean.setCiId(model.getCiId());
-		bean.setIclubCohort(iclubCohortDAO.findById(model.getIclubCohort()));
-		bean.setIclubNotificationType(iclubNotificationTypeDAO.findById(model.getIclubNotificationType()));
+		bean.setIclubCohort(model.getIclubCohort() != null ? iclubCohortDAO.findById(model.getIclubCohort()) : null);
+		bean.setIclubNotificationType(model.getIclubNotificationType() != null ? iclubNotificationTypeDAO.findById(model.getIclubNotificationType()) : null);
 		bean.setCiCrtdDt(model.getCiCrtdDt());
-		bean.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
+		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		bean.setCiInviteAcceptYn(model.getCiInviteAcceptYn());
 		bean.setCiInviteUri(model.getCiInviteUri());
 		bean.setCiInviteFName(model.getCiInviteFName());
 		bean.setCiInviteLName(model.getCiInviteLName());
-		bean.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 		
 		return bean;
 	}

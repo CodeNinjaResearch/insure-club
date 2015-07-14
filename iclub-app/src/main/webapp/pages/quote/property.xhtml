@@ -8,8 +8,11 @@
 				<p:column headerText="Registration Number">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PRegNum}" />
 				</p:column>
-				<p:column headerText="Estimatted Value">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PEstValue}" />
+				<p:column headerText="Building Replacement Cost">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PReplacementCost}" />
+				</p:column>
+				<p:column headerText="Content Replacement Cost">
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PContentCost}" />
 				</p:column>
 				<p:column>
 					<p:commandButton id="btnPropertyEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubQuickQuoteController.showProModPanel}" update=":iclubFrm:grlMsg">

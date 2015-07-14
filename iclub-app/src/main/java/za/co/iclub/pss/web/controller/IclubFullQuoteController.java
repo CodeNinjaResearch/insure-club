@@ -399,13 +399,7 @@ public class IclubFullQuoteController implements Serializable {
 		propertyItemBeans = new ArrayList<IclubPropertyItemBean>();
 		try {
 			propertyItemBeans = getPropertyItemBeansMap().get(propertyBean.getPId());
-			// for (IclubPropertyItemBean propertyItemBean : propertyItemBeans)
-			// {
-			// propertyBean.setPContentCost(propertyBean.getPContentCost() !=
-			// null ? propertyBean.getPContentCost() +
-			// propertyItemBean.getPiValue() : propertyItemBean.getPiValue() !=
-			// null ? propertyItemBean.getPiValue() : 0.0);
-			// }
+			
 		} catch (Exception e) {
 			
 		}
@@ -526,14 +520,6 @@ public class IclubFullQuoteController implements Serializable {
 			ret = ret && false;
 		}
 		
-		if (propertyBean.getPPostalCd() == null) {
-			IclubWebHelper.addMessage(("Postel Code Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getIclubCoverType() == null) {
-			IclubWebHelper.addMessage(("Please Select Cover Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
 		if (propertyBean.getIclubPropUsageType() == null) {
 			IclubWebHelper.addMessage(("Please Select PropUsage Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
@@ -555,10 +541,7 @@ public class IclubFullQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select Bar Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (propertyBean.getIclubAccessType() == null) {
-			IclubWebHelper.addMessage(("Please Select Access Type"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
+		
 		if (propertyBean.getPRentFurYn() == null || propertyBean.getPRentFurYn().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("RentFur Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
@@ -569,10 +552,6 @@ public class IclubFullQuoteController implements Serializable {
 		}
 		if (propertyBean.getPSecGatesYn() == null || propertyBean.getPSecGatesYn().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("Sec Gates Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
-			ret = ret && false;
-		}
-		if (propertyBean.getPEstValue() == null) {
-			IclubWebHelper.addMessage(("Est value Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		
@@ -1507,7 +1486,7 @@ public class IclubFullQuoteController implements Serializable {
 				client.close();
 				if (model != null && model.getPId() != null) {
 					IclubPropertyBean propertyBean = IclubPropertyTrans.fromWStoUI(model);
-					
+					setIclubPropertyItems(model.getPId());
 					propertyBeans.add(propertyBean);
 					
 				}

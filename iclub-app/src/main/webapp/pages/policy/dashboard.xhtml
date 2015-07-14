@@ -35,9 +35,12 @@
 			</p:panel>
 		</p:dialog>
 		<p:panel id="qqPanel">
+			<f:facet name="header">
+				<div class="Container100 Responsive">
+					<p:outputLabel styleClass="TexAlCenter" value="Vehicle Details" />
+				</div>
+			</f:facet>
 			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
-				<f:facet name="footer">
-				</f:facet>
 				<p:column headerText="Number">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
 				</p:column>
@@ -71,6 +74,11 @@
 				</p:column>
 			</p:dataTable>
 			<p:panel id="iiPanel" rendered="#{iclubPolicyController.iItemFalg}">
+				<f:facet name="header">
+					<div class="Container100 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Insurance Items" />
+					</div>
+				</f:facet>
 				<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
 					<p:column headerText="Quote Id">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
@@ -98,6 +106,11 @@
 				</p:dataTable>
 			</p:panel>
 			<p:panel id="temp1" rendered="#{iclubPolicyController.propertyFlag}">
+				<f:facet name="header">
+					<div class="Container100 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Property Details" />
+					</div>
+				</f:facet>
 				<div class="Container90 Fnone MarAuto TexAlCenter">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
@@ -276,6 +289,11 @@
 				</div>
 			</p:panel>
 			<p:panel id="temp2" rendered="#{iclubPolicyController.vehhicleFlag}">
+				<f:facet name="header">
+					<div class="Container100 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Vehicle Details" />
+					</div>
+				</f:facet>
 				<div class="Container90 Fnone MarAuto TexAlCenter">
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">

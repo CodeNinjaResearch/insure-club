@@ -11,13 +11,13 @@ public class IclubCountryCodeTrans {
 		
 		IclubCountryCodeBean bean = new IclubCountryCodeBean();
 		
-		bean.setCcId(bean.getCcId());
-		bean.setCcIsoId(bean.getCcIsoId());
-		bean.setCcShortId(bean.getCcShortId());
-		bean.setCcCrtdDt(bean.getCcCrtdDt());
-		bean.setCcName(bean.getCcName());
-		bean.setIclubPerson(bean.getIclubPerson());
-		bean.setPFNameAndLName(bean.getPFNameAndLName());
+		bean.setCcId(model.getCcId() != null ? model.getCcId().intValue() : null);
+		bean.setCcIsoId(model.getCcIsoId());
+		bean.setCcShortId(model.getCcShortId());
+		bean.setCcCrtdDt(model.getCcCrtdDt());
+		bean.setCcName(model.getCcName());
+		bean.setIclubPerson(model.getIclubPerson());
+		bean.setPFNameAndLName(model.getPFNameAndLName());
 		
 		return bean;
 	}
@@ -26,7 +26,7 @@ public class IclubCountryCodeTrans {
 		
 		IclubCountryCodeModel model = new IclubCountryCodeModel();
 		
-		model.setCcId(bean.getCcId());
+		model.setCcId(bean.getCcId() != null ? bean.getCcId().intValue() : null);
 		model.setCcIsoId(bean.getCcIsoId());
 		model.setCcShortId(bean.getCcShortId());
 		model.setCcCrtdDt(bean.getCcCrtdDt());
@@ -41,7 +41,7 @@ public class IclubCountryCodeTrans {
 		
 		IclubCountryCodeModel model = new IclubCountryCodeModel();
 		
-		model.setCcId(bean.getCcId());
+		model.setCcId(bean.getCcId() != null ? bean.getCcId().intValue() : null);
 		model.setCcIsoId(bean.getCcIsoId());
 		model.setCcShortId(bean.getCcShortId());
 		model.setCcCrtdDt(bean.getCcCrtdDt());

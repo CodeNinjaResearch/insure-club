@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import za.co.iclub.pss.model.ui.IclubClaimBean;
 import za.co.iclub.pss.model.ui.IclubClaimStatusBean;
+import za.co.iclub.pss.model.ui.IclubCohortSummaryBean;
 import za.co.iclub.pss.model.ui.IclubPaymentBean;
 import za.co.iclub.pss.model.ui.IclubPaymentStatusBean;
 import za.co.iclub.pss.model.ui.IclubPolicyBean;
@@ -62,6 +63,8 @@ public class IclubUserDashBoardController implements Serializable {
 	private List<IclubPaymentBean> claimPaymentBeans;
 	private String sessionUserId;
 	private List<IclubClaimStatusBean> claimStatusBeans;
+	private IclubCohortSummaryBean cohortSummaryBean;
+	private IclubCohortSummaryBean cohortSummaryUserBean;
 	
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));

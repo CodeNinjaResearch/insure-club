@@ -8,7 +8,7 @@ public class IclubMaritialStatusTrans {
 	
 	public static IclubMaritialStatusBean fromWStoUI(IclubMaritialStatusModel model) {
 		IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
-		bean.setMsId(model.getMsId());
+		bean.setMsId(model.getMsId() != null ? model.getMsId().longValue() : null);
 		bean.setMsLongDesc(model.getMsLongDesc());
 		bean.setMsShortDesc(model.getMsShortDesc());
 		bean.setMsStatus(model.getMsStatus());
@@ -17,7 +17,7 @@ public class IclubMaritialStatusTrans {
 	
 	public static IclubMaritialStatusModel fromUItoWS(IclubMaritialStatusBean bean) {
 		IclubMaritialStatusModel model = new IclubMaritialStatusModel();
-		model.setMsId(bean.getMsId());
+		model.setMsId(bean.getMsId() != null ? bean.getMsId().longValue() : null);
 		model.setMsLongDesc(bean.getMsLongDesc());
 		model.setMsShortDesc(bean.getMsShortDesc());
 		model.setMsStatus(bean.getMsStatus());
@@ -26,7 +26,7 @@ public class IclubMaritialStatusTrans {
 	
 	public static IclubMaritialStatusModel fromORMtoWS(IclubMaritialStatus bean) {
 		IclubMaritialStatusModel model = new IclubMaritialStatusModel();
-		model.setMsId(bean.getMsId());
+		model.setMsId(bean.getMsId() != null ? bean.getMsId().longValue() : null);
 		model.setMsLongDesc(bean.getMsLongDesc());
 		model.setMsShortDesc(bean.getMsShortDesc());
 		model.setMsStatus(bean.getMsStatus());
