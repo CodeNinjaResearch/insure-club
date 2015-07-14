@@ -23,8 +23,10 @@ import za.co.iclub.pss.model.ui.IclubPolicyStatusBean;
 import za.co.iclub.pss.model.ui.IclubQuoteBean;
 import za.co.iclub.pss.model.ws.IclubClaimModel;
 import za.co.iclub.pss.model.ws.IclubClaimStatusModel;
+import za.co.iclub.pss.model.ws.IclubCohortSummaryModel;
 import za.co.iclub.pss.model.ws.IclubPaymentModel;
 import za.co.iclub.pss.model.ws.IclubPaymentStatusModel;
+import za.co.iclub.pss.model.ws.IclubPersonModel;
 import za.co.iclub.pss.model.ws.IclubPolicyModel;
 import za.co.iclub.pss.model.ws.IclubPolicyStatusModel;
 import za.co.iclub.pss.model.ws.IclubQuoteModel;
@@ -54,6 +56,8 @@ public class IclubUserDashBoardController implements Serializable {
 	private static final String QUT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubQuoteService/";
 	private static final String CLM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubClaimService/";
 	private static final String CS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubClaimStatusService/";
+	private static final String CH_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortService/";
+	private static final String P_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
 	private List<IclubQuoteBean> quoteBeans;
 	private List<IclubPolicyBean> policyBeans;
 	private List<IclubPolicyStatusBean> policyStatusBeans;
@@ -65,6 +69,7 @@ public class IclubUserDashBoardController implements Serializable {
 	private List<IclubClaimStatusBean> claimStatusBeans;
 	private IclubCohortSummaryBean cohortSummaryBean;
 	private IclubCohortSummaryBean cohortSummaryUserBean;
+	private boolean cohortSummaryFlag;
 	
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
@@ -287,6 +292,68 @@ public class IclubUserDashBoardController implements Serializable {
 	
 	public void setPaymentStatusBeans(List<IclubPaymentStatusBean> paymentStatusBeans) {
 		this.paymentStatusBeans = paymentStatusBeans;
+	}
+	
+	public IclubCohortSummaryBean getCohortSummaryBean() {
+		if (cohortSummaryBean == null) {
+			cohortSummaryBean = new IclubCohortSummaryBean();
+		}
+		return cohortSummaryBean;
+	}
+	
+	public void setCohortSummaryBean(IclubCohortSummaryBean cohortSummaryBean) {
+		this.cohortSummaryBean = cohortSummaryBean;
+	}
+	
+	public IclubCohortSummaryBean getCohortSummaryUserBean() {
+		if (cohortSummaryUserBean == null) {
+			cohortSummaryUserBean = new IclubCohortSummaryBean();
+			
+		}
+		cohortSummaryFlag = false;
+		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && !IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString().trim().equalsIgnoreCase("")) {
+			String personId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+			WebClient personClient = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + personId);
+			IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
+			WebClient client = IclubWebHelper.createCustomClient(CH_BASE_URL + "getCohortSummaryById/" + personModel.getIclubCohort());
+			IclubCohortSummaryModel model = (IclubCohortSummaryModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
+			client.close();
+			WebClient userClient = IclubWebHelper.createCustomClient(CH_BASE_URL + "getCohortSummaryById/" + getSessionUserId());
+			IclubCohortSummaryModel userModel = (IclubCohortSummaryModel) (userClient.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
+			cohortSummaryBean = new IclubCohortSummaryBean();
+			cohortSummaryUserBean = new IclubCohortSummaryBean();
+			
+			if (model != null) {
+				cohortSummaryFlag = true;
+				cohortSummaryBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
+				cohortSummaryBean.setClaimsInYear(model.getClaimsInYear() != null ? model.getClaimsInYear() : 0.0);
+				cohortSummaryBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
+				cohortSummaryBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
+				cohortSummaryBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
+			}
+			if (userModel != null) {
+				cohortSummaryFlag = true;
+				cohortSummaryUserBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
+				cohortSummaryUserBean.setClaimsInYear(model.getClaimsInYear() != null ? model.getClaimsInYear() : 0.0);
+				cohortSummaryUserBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
+				cohortSummaryUserBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
+				cohortSummaryUserBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
+			}
+			
+		}
+		return cohortSummaryUserBean;
+	}
+	
+	public void setCohortSummaryUserBean(IclubCohortSummaryBean cohortSummaryUserBean) {
+		this.cohortSummaryUserBean = cohortSummaryUserBean;
+	}
+	
+	public boolean isCohortSummaryFlag() {
+		return cohortSummaryFlag;
+	}
+	
+	public void setCohortSummaryFlag(boolean cohortSummaryFlag) {
+		this.cohortSummaryFlag = cohortSummaryFlag;
 	}
 	
 }

@@ -14,27 +14,34 @@
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<div class="Container90 Responsive">
-			<div class="Container40 Responsive">
-				<p:scrollPanel mode="native">
-					<ui:include src="/pages/dashboard/user/quotes.xhtml" />
-				</p:scrollPanel>
+				<div class="Container40 Responsive">
+					<p:scrollPanel mode="native">
+						<ui:include src="/pages/dashboard/user/quotes.xhtml" />
+					</p:scrollPanel>
 				</div>
-				<p:scrollPanel mode="native">
-					<ui:include src="/pages/dashboard/user/policy.xhtml" />
-				</p:scrollPanel>
+				<div class="Container40 Responsive">
+					<p:scrollPanel mode="native">
+						<ui:include src="/pages/dashboard/user/policy.xhtml" />
+					</p:scrollPanel>
+				</div>
 			</div>
 			<div class="EmptyBox5" />
 			<div class="EmptyBox5" />
-			<p:scrollPanel mode="native" style="width:40%;">
-				<ui:include src="/pages/dashboard/user/claim.xhtml" />
-			</p:scrollPanel>
-			<div class="EmptyBox5" />
-			<p:scrollPanel mode="native" style="width:40%;">
-				<ui:include src="/pages/dashboard/user/payment.xhtml" />
-			</p:scrollPanel>
+			<div class="Container90 Responsive">
+				<div class="Container50 Responsive">
+					<p:scrollPanel mode="native" style="width:90%;">
+						<ui:include src="/pages/dashboard/user/claim.xhtml" />
+					</p:scrollPanel>
+				</div>
+				<div class="Container50 Responsive">
+					<p:scrollPanel mode="native" style="width:90%;">
+						<ui:include src="/pages/dashboard/user/payment.xhtml" />
+					</p:scrollPanel>
+				</div>
+			</div>
 			<div class="EmptyBox5" />
 			<div class="Container90 Responsive">
-				<ui:include src="/pages/admin/cohorts/iclubCohortSummary.xhtml" />
+				<ui:include src="/pages/dashboard/user/iclubCohortSummary.xhtml" />
 			</div>
 			<div class="EmptyBox5" />
 		</div>

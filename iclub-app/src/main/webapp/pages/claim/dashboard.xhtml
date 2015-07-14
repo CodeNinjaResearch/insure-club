@@ -35,7 +35,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
 					</p:column>
 					<p:column headerText="Policy Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPolicy}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
 					</p:column>
 					<p:column headerText="Status">
 						<p:selectOneMenu value="#{bean.iclubClaimStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
@@ -43,7 +43,7 @@
 							<f:selectItems var="c" itemLabel="#{c.csLongDesc}" itemValue="#{c.csId}" value="#{iclubClaimController.claimStatusBeans}" />
 						</p:selectOneMenu>
 					</p:column>
-					<p:column headerText="Policy">
+					<p:column>
 						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:pnlClaimCont" id="btnPolicyEdit" icon="ui-icon-pencil" action="#{iclubClaimController.claimToPolicyListener(bean)}">
 						</p:commandButton>
 					</p:column>
@@ -63,16 +63,8 @@
 								<f:convertNumber pattern="#0.00" />
 							</p:outputLabel>
 						</p:column>
-						<p:column headerText="Pro-rata Premium">
-							<p:outputLabel value="#{bean.PProrataPrm}">
-								<f:convertNumber pattern="#0.00" />
-							</p:outputLabel>
-						</p:column>
 						<p:column headerText="Quote Id">
 							<p:outputLabel value="#{bean.iclubQuote}" />
-						</p:column>
-						<p:column headerText="Pro-rata Premium">
-							<p:outputLabel value="#{bean.PProrataPrm}" />
 						</p:column>
 						<p:column headerText="Status">
 							<p:selectOneMenu value="#{bean.iclubPolicyStatus}" widgetVar="mnuCStat" id="mnuCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
@@ -96,21 +88,8 @@
 						<p:column headerText="Quote Id">
 							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
 						</p:column>
-						<p:column headerText="Insured Value">
-							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}">
-								<f:convertNumber pattern="#0.00" />
-							</p:outputLabel>
-						</p:column>
-						<p:column headerText="Actual Value">
-							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}">
-								<f:convertNumber pattern="#0.00" />
-							</p:outputLabel>
-						</p:column>
 						<p:column headerText="Created Date">
 							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiCrtdDt}" />
-						</p:column>
-						<p:column headerText="Item Id">
-							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiItemId}" />
 						</p:column>
 						<p:column headerText="Type">
 							<p:selectOneMenu value="#{bean.iclubInsuranceItemType}" widgetVar="mnuIiType" id="mnuIiType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
