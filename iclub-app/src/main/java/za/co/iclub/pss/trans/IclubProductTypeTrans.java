@@ -8,7 +8,7 @@ public class IclubProductTypeTrans {
 	
 	public static IclubProductTypeBean fromWStoUI(IclubProductTypeModel model) {
 		IclubProductTypeBean bean = new IclubProductTypeBean();
-		bean.setPtId(model.getPtId().longValue());
+		bean.setPtId(model.getPtId());
 		bean.setPtLongDesc(model.getPtLongDesc());
 		bean.setPtShortDesc(model.getPtShortDesc());
 		bean.setPtStatus(model.getPtStatus());
@@ -17,7 +17,7 @@ public class IclubProductTypeTrans {
 	
 	public static IclubProductTypeModel fromUItoWS(IclubProductTypeBean bean) {
 		IclubProductTypeModel model = new IclubProductTypeModel();
-		model.setPtId(bean.getPtId().longValue());
+		model.setPtId(bean.getPtId());
 		model.setPtLongDesc(bean.getPtLongDesc());
 		model.setPtShortDesc(bean.getPtShortDesc());
 		model.setPtStatus(bean.getPtStatus());
@@ -26,7 +26,7 @@ public class IclubProductTypeTrans {
 	
 	public static IclubProductTypeModel fromORMtoWS(IclubProductType bean) {
 		IclubProductTypeModel model = new IclubProductTypeModel();
-		model.setPtId(bean.getPtId().longValue());
+		model.setPtId(bean.getPtId());
 		model.setPtLongDesc(bean.getPtLongDesc());
 		model.setPtShortDesc(bean.getPtShortDesc());
 		model.setPtStatus(bean.getPtStatus());

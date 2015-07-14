@@ -8,7 +8,7 @@ public class IclubRoleTypeTrans {
 	
 	public static IclubRoleTypeBean fromWStoUI(IclubRoleTypeModel model) {
 		IclubRoleTypeBean bean = new IclubRoleTypeBean();
-		bean.setRtId(model.getRtId().longValue());
+		bean.setRtId(model.getRtId());
 		bean.setRtLongDesc(model.getRtLongDesc());
 		bean.setRtShortDesc(model.getRtShortDesc());
 		bean.setRtStatus(model.getRtStatus());
@@ -17,7 +17,7 @@ public class IclubRoleTypeTrans {
 	
 	public static IclubRoleTypeModel fromUItoWS(IclubRoleTypeBean bean) {
 		IclubRoleTypeModel model = new IclubRoleTypeModel();
-		model.setRtId(bean.getRtId().longValue());
+		model.setRtId(bean.getRtId());
 		model.setRtLongDesc(bean.getRtLongDesc());
 		model.setRtShortDesc(bean.getRtShortDesc());
 		model.setRtStatus(bean.getRtStatus());
@@ -26,7 +26,7 @@ public class IclubRoleTypeTrans {
 	
 	public static IclubRoleTypeModel fromORMtoWS(IclubRoleType bean) {
 		IclubRoleTypeModel model = new IclubRoleTypeModel();
-		model.setRtId(bean.getRtId().longValue());
+		model.setRtId(bean.getRtId());
 		model.setRtLongDesc(bean.getRtLongDesc());
 		model.setRtShortDesc(bean.getRtShortDesc());
 		model.setRtStatus(bean.getRtStatus());

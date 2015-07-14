@@ -8,7 +8,7 @@ public class IclubSystemTypeTrans {
 	
 	public static IclubSystemTypeBean fromWStoUI(IclubSystemTypeModel model) {
 		IclubSystemTypeBean bean = new IclubSystemTypeBean();
-		bean.setStId(model.getStId().longValue());
+		bean.setStId(model.getStId());
 		bean.setStLongDesc(model.getStLongDesc());
 		bean.setStShortDesc(model.getStShortDesc());
 		bean.setStStatus(model.getStStatus());
@@ -17,7 +17,7 @@ public class IclubSystemTypeTrans {
 	
 	public static IclubSystemTypeModel fromUItoWS(IclubSystemTypeBean bean) {
 		IclubSystemTypeModel model = new IclubSystemTypeModel();
-		model.setStId(bean.getStId().longValue());
+		model.setStId(bean.getStId());
 		model.setStLongDesc(bean.getStLongDesc());
 		model.setStShortDesc(bean.getStShortDesc());
 		model.setStStatus(bean.getStStatus());
@@ -26,7 +26,7 @@ public class IclubSystemTypeTrans {
 	
 	public static IclubSystemTypeModel fromORMtoWS(IclubSystemType bean) {
 		IclubSystemTypeModel model = new IclubSystemTypeModel();
-		model.setStId(bean.getStId().longValue());
+		model.setStId(bean.getStId());
 		model.setStLongDesc(bean.getStLongDesc());
 		model.setStShortDesc(bean.getStShortDesc());
 		model.setStStatus(bean.getStStatus());

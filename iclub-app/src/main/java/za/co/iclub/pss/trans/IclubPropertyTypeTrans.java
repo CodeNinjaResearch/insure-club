@@ -8,7 +8,7 @@ public class IclubPropertyTypeTrans {
 	
 	public static IclubPropertyTypeBean fromWStoUI(IclubPropertyTypeModel model) {
 		IclubPropertyTypeBean bean = new IclubPropertyTypeBean();
-		bean.setPtId(model.getPtId().longValue());
+		bean.setPtId(model.getPtId());
 		bean.setPtLongDesc(model.getPtLongDesc());
 		bean.setPtShortDesc(model.getPtShortDesc());
 		bean.setPtStatus(model.getPtStatus());
@@ -17,7 +17,7 @@ public class IclubPropertyTypeTrans {
 	
 	public static IclubPropertyTypeModel fromUItoWS(IclubPropertyTypeBean bean) {
 		IclubPropertyTypeModel model = new IclubPropertyTypeModel();
-		model.setPtId(bean.getPtId().longValue());
+		model.setPtId(bean.getPtId());
 		model.setPtLongDesc(bean.getPtLongDesc());
 		model.setPtShortDesc(bean.getPtShortDesc());
 		model.setPtStatus(bean.getPtStatus());
@@ -26,7 +26,7 @@ public class IclubPropertyTypeTrans {
 	
 	public static IclubPropertyTypeModel fromORMtoWS(IclubPropertyType bean) {
 		IclubPropertyTypeModel model = new IclubPropertyTypeModel();
-		model.setPtId(bean.getPtId().longValue());
+		model.setPtId(bean.getPtId());
 		model.setPtLongDesc(bean.getPtLongDesc());
 		model.setPtShortDesc(bean.getPtShortDesc());
 		model.setPtStatus(bean.getPtStatus());

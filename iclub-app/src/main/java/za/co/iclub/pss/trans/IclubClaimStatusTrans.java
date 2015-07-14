@@ -7,7 +7,7 @@ import za.co.iclub.pss.orm.bean.IclubClaimStatus;
 public class IclubClaimStatusTrans {
 	public static IclubClaimStatusBean fromWStoUI(IclubClaimStatusModel model) {
 		IclubClaimStatusBean bean = new IclubClaimStatusBean();
-		bean.setCsId(model.getCsId().longValue());
+		bean.setCsId(model.getCsId());
 		bean.setCsLongDesc(model.getCsLongDesc());
 		bean.setCsShortDesc(model.getCsShortDesc());
 		bean.setCsStatus(model.getCsStatus());
@@ -16,7 +16,7 @@ public class IclubClaimStatusTrans {
 	
 	public static IclubClaimStatusModel fromUItoWS(IclubClaimStatusBean bean) {
 		IclubClaimStatusModel model = new IclubClaimStatusModel();
-		model.setCsId(bean.getCsId().longValue());
+		model.setCsId(bean.getCsId());
 		model.setCsLongDesc(bean.getCsLongDesc());
 		model.setCsShortDesc(bean.getCsShortDesc());
 		model.setCsStatus(bean.getCsStatus());
@@ -25,7 +25,7 @@ public class IclubClaimStatusTrans {
 	
 	public static IclubClaimStatusModel fromORMtoWS(IclubClaimStatus bean) {
 		IclubClaimStatusModel model = new IclubClaimStatusModel();
-		model.setCsId(bean.getCsId().longValue());
+		model.setCsId(bean.getCsId());
 		model.setCsLongDesc(bean.getCsLongDesc());
 		model.setCsShortDesc(bean.getCsShortDesc());
 		model.setCsStatus(bean.getCsStatus());

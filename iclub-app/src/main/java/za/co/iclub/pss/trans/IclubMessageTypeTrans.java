@@ -8,7 +8,7 @@ public class IclubMessageTypeTrans {
 	
 	public static IclubMessageTypeBean fromWStoUI(IclubMessageTypeModel model) {
 		IclubMessageTypeBean bean = new IclubMessageTypeBean();
-		bean.setMtId(model.getMtId().longValue());
+		bean.setMtId(model.getMtId());
 		bean.setMtLongDesc(model.getMtLongDesc());
 		bean.setMtShortDesc(model.getMtShortDesc());
 		bean.setMtStatus(model.getMtStatus());
@@ -17,7 +17,7 @@ public class IclubMessageTypeTrans {
 	
 	public static IclubMessageTypeModel fromUItoWS(IclubMessageTypeBean bean) {
 		IclubMessageTypeModel model = new IclubMessageTypeModel();
-		model.setMtId(bean.getMtId().longValue());
+		model.setMtId(bean.getMtId());
 		model.setMtLongDesc(bean.getMtLongDesc());
 		model.setMtShortDesc(bean.getMtShortDesc());
 		model.setMtStatus(bean.getMtStatus());
@@ -26,7 +26,7 @@ public class IclubMessageTypeTrans {
 	
 	public static IclubMessageTypeModel fromORMtoWS(IclubMessageType bean) {
 		IclubMessageTypeModel model = new IclubMessageTypeModel();
-		model.setMtId(bean.getMtId().longValue());
+		model.setMtId(bean.getMtId());
 		model.setMtLongDesc(bean.getMtLongDesc());
 		model.setMtShortDesc(bean.getMtShortDesc());
 		model.setMtStatus(bean.getMtStatus());

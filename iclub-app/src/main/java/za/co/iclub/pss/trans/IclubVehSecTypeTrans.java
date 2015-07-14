@@ -8,7 +8,7 @@ public class IclubVehSecTypeTrans {
 	
 	public static IclubVehSecTypeBean fromWStoUI(IclubVehSecTypeModel model) {
 		IclubVehSecTypeBean bean = new IclubVehSecTypeBean();
-		bean.setVstId(model.getVstId().longValue());
+		bean.setVstId(model.getVstId());
 		bean.setVstLongDesc(model.getVstLongDesc());
 		bean.setVstShortDesc(model.getVstShortDesc());
 		bean.setVstStatus(model.getVstStatus());
@@ -17,7 +17,7 @@ public class IclubVehSecTypeTrans {
 	
 	public static IclubVehSecTypeModel fromUItoWS(IclubVehSecTypeBean bean) {
 		IclubVehSecTypeModel model = new IclubVehSecTypeModel();
-		model.setVstId(bean.getVstId().longValue());
+		model.setVstId(bean.getVstId());
 		model.setVstLongDesc(bean.getVstLongDesc());
 		model.setVstShortDesc(bean.getVstShortDesc());
 		model.setVstStatus(bean.getVstStatus());
@@ -26,7 +26,7 @@ public class IclubVehSecTypeTrans {
 	
 	public static IclubVehSecTypeModel fromORMtoWS(IclubVehSecType bean) {
 		IclubVehSecTypeModel model = new IclubVehSecTypeModel();
-		model.setVstId(bean.getVstId().longValue());
+		model.setVstId(bean.getVstId());
 		model.setVstLongDesc(bean.getVstLongDesc());
 		model.setVstShortDesc(bean.getVstShortDesc());
 		model.setVstStatus(bean.getVstStatus());

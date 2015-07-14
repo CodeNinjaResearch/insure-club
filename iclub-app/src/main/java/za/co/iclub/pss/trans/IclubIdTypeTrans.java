@@ -8,7 +8,7 @@ public class IclubIdTypeTrans {
 	
 	public static IclubIdTypeBean fromWStoUI(IclubIdTypeModel model) {
 		IclubIdTypeBean bean = new IclubIdTypeBean();
-		bean.setItId(model.getItId().longValue());
+		bean.setItId(model.getItId());
 		bean.setItLongDesc(model.getItLongDesc());
 		bean.setItShortDesc(model.getItShortDesc());
 		bean.setItStatus(model.getItStatus());
@@ -17,7 +17,7 @@ public class IclubIdTypeTrans {
 	
 	public static IclubIdTypeModel fromUItoWS(IclubIdTypeBean bean) {
 		IclubIdTypeModel model = new IclubIdTypeModel();
-		model.setItId(bean.getItId().longValue());
+		model.setItId(bean.getItId());
 		model.setItLongDesc(bean.getItLongDesc());
 		model.setItShortDesc(bean.getItShortDesc());
 		model.setItStatus(bean.getItStatus());
@@ -26,7 +26,7 @@ public class IclubIdTypeTrans {
 	
 	public static IclubIdTypeModel fromORMtoWS(IclubIdType bean) {
 		IclubIdTypeModel model = new IclubIdTypeModel();
-		model.setItId(bean.getItId().longValue());
+		model.setItId(bean.getItId());
 		model.setItLongDesc(bean.getItLongDesc());
 		model.setItShortDesc(bean.getItShortDesc());
 		model.setItStatus(bean.getItStatus());

@@ -8,7 +8,7 @@ public class IclubPaymentTypeTrans {
 	
 	public static IclubPaymentTypeBean fromWStoUI(IclubPaymentTypeModel model) {
 		IclubPaymentTypeBean bean = new IclubPaymentTypeBean();
-		bean.setPtId(model.getPtId().longValue());
+		bean.setPtId(model.getPtId());
 		bean.setPtLongDesc(model.getPtLongDesc());
 		bean.setPtShortDesc(model.getPtShortDesc());
 		bean.setPtStatus(model.getPtStatus());
@@ -17,7 +17,7 @@ public class IclubPaymentTypeTrans {
 	
 	public static IclubPaymentTypeModel fromUItoWS(IclubPaymentTypeBean bean) {
 		IclubPaymentTypeModel model = new IclubPaymentTypeModel();
-		model.setPtId(bean.getPtId().longValue());
+		model.setPtId(bean.getPtId());
 		model.setPtLongDesc(bean.getPtLongDesc());
 		model.setPtShortDesc(bean.getPtShortDesc());
 		model.setPtStatus(bean.getPtStatus());
@@ -26,7 +26,7 @@ public class IclubPaymentTypeTrans {
 	
 	public static IclubPaymentTypeModel fromORMtoWS(IclubPaymentType bean) {
 		IclubPaymentTypeModel model = new IclubPaymentTypeModel();
-		model.setPtId(bean.getPtId().longValue());
+		model.setPtId(bean.getPtId());
 		model.setPtLongDesc(bean.getPtLongDesc());
 		model.setPtShortDesc(bean.getPtShortDesc());
 		model.setPtStatus(bean.getPtStatus());

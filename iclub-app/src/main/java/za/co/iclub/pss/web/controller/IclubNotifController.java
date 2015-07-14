@@ -31,7 +31,7 @@ public class IclubNotifController implements Serializable {
 	private static final long serialVersionUID = 8245517153102756484L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubNotifController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubNotifService/";
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubNotifService/";
 	private List<IclubNotifBean> beans;
 	private List<IclubNotifBean> dashBoardBeans;
 	private IclubNotifBean bean;

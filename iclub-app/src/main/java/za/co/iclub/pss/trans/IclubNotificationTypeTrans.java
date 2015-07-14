@@ -8,7 +8,7 @@ public class IclubNotificationTypeTrans {
 	
 	public static IclubNotificationTypeBean fromWStoUI(IclubNotificationTypeModel model) {
 		IclubNotificationTypeBean bean = new IclubNotificationTypeBean();
-		bean.setNtId(model.getNtId().longValue());
+		bean.setNtId(model.getNtId());
 		bean.setNtLongDesc(model.getNtLongDesc());
 		bean.setNtShortDesc(model.getNtShortDesc());
 		bean.setNtStatus(model.getNtStatus());
@@ -17,7 +17,7 @@ public class IclubNotificationTypeTrans {
 	
 	public static IclubNotificationTypeModel fromUItoWS(IclubNotificationTypeBean bean) {
 		IclubNotificationTypeModel model = new IclubNotificationTypeModel();
-		model.setNtId(bean.getNtId().longValue());
+		model.setNtId(bean.getNtId());
 		model.setNtLongDesc(bean.getNtLongDesc());
 		model.setNtShortDesc(bean.getNtShortDesc());
 		model.setNtStatus(bean.getNtStatus());
@@ -26,7 +26,7 @@ public class IclubNotificationTypeTrans {
 	
 	public static IclubNotificationTypeModel fromORMtoWS(IclubNotificationType bean) {
 		IclubNotificationTypeModel model = new IclubNotificationTypeModel();
-		model.setNtId(bean.getNtId().longValue());
+		model.setNtId(bean.getNtId());
 		model.setNtLongDesc(bean.getNtLongDesc());
 		model.setNtShortDesc(bean.getNtShortDesc());
 		model.setNtStatus(bean.getNtStatus());

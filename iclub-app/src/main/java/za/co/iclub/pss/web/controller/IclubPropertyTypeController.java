@@ -29,7 +29,7 @@ public class IclubPropertyTypeController implements Serializable {
 	private static final long serialVersionUID = 1396262439966457238L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubPropertyTypeController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPropertyTypeService/";
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPropertyTypeService/";
 	private List<IclubPropertyTypeBean> beans;
 	private IclubPropertyTypeBean bean;
 	private boolean showAddPanel;

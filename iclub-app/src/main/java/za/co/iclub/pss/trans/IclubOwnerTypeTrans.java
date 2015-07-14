@@ -8,7 +8,7 @@ public class IclubOwnerTypeTrans {
 	
 	public static IclubOwnerTypeBean fromWStoUI(IclubOwnerTypeModel model) {
 		IclubOwnerTypeBean bean = new IclubOwnerTypeBean();
-		bean.setOtId(model.getOtId().longValue());
+		bean.setOtId(model.getOtId());
 		bean.setOtLongDesc(model.getOtLongDesc());
 		bean.setOtShortDesc(model.getOtShortDesc());
 		bean.setOtStatus(model.getOtStatus());
@@ -17,7 +17,7 @@ public class IclubOwnerTypeTrans {
 	
 	public static IclubOwnerTypeModel fromUItoWS(IclubOwnerTypeBean bean) {
 		IclubOwnerTypeModel model = new IclubOwnerTypeModel();
-		model.setOtId(bean.getOtId().longValue());
+		model.setOtId(bean.getOtId());
 		model.setOtLongDesc(bean.getOtLongDesc());
 		model.setOtShortDesc(bean.getOtShortDesc());
 		model.setOtStatus(bean.getOtStatus());
@@ -26,7 +26,7 @@ public class IclubOwnerTypeTrans {
 	
 	public static IclubOwnerTypeModel fromORMtoWS(IclubOwnerType bean) {
 		IclubOwnerTypeModel model = new IclubOwnerTypeModel();
-		model.setOtId(bean.getOtId().longValue());
+		model.setOtId(bean.getOtId());
 		model.setOtLongDesc(bean.getOtLongDesc());
 		model.setOtShortDesc(bean.getOtShortDesc());
 		model.setOtStatus(bean.getOtStatus());

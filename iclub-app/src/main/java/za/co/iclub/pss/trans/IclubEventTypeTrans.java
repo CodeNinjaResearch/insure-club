@@ -8,7 +8,7 @@ public class IclubEventTypeTrans {
 	
 	public static IclubEventTypeBean fromWStoUI(IclubEventTypeModel model) {
 		IclubEventTypeBean bean = new IclubEventTypeBean();
-		bean.setEtId(model.getEtId().longValue());
+		bean.setEtId(model.getEtId());
 		bean.setEtLongDesc(model.getEtLongDesc());
 		bean.setEtShortDesc(model.getEtShortDesc());
 		bean.setEtStatus(model.getEtStatus());
@@ -17,7 +17,7 @@ public class IclubEventTypeTrans {
 	
 	public static IclubEventTypeModel fromUItoWS(IclubEventTypeBean bean) {
 		IclubEventTypeModel model = new IclubEventTypeModel();
-		model.setEtId(bean.getEtId().longValue());
+		model.setEtId(bean.getEtId());
 		model.setEtLongDesc(bean.getEtLongDesc());
 		model.setEtShortDesc(bean.getEtShortDesc());
 		model.setEtStatus(bean.getEtStatus());
@@ -26,7 +26,7 @@ public class IclubEventTypeTrans {
 	
 	public static IclubEventTypeModel fromORMtoWS(IclubEventType bean) {
 		IclubEventTypeModel model = new IclubEventTypeModel();
-		model.setEtId(bean.getEtId().longValue());
+		model.setEtId(bean.getEtId());
 		model.setEtLongDesc(bean.getEtLongDesc());
 		model.setEtShortDesc(bean.getEtShortDesc());
 		model.setEtStatus(bean.getEtStatus());

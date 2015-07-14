@@ -47,8 +47,8 @@ public class IclubLoginController implements Serializable {
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubLoginController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubLoginService/";
-	private static final String U_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubPersonService/";
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubLoginService/";
+	private static final String U_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPersonService/";
 	private List<IclubLoginBean> beans;
 	private IclubLoginBean bean;
 	private boolean showAddPanel;

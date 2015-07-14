@@ -29,7 +29,7 @@ public class IclubClaimStatusController implements Serializable {
 	private static final long serialVersionUID = -1661645192121524984L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubClaimStatusController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubClaimStatusService/";
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubClaimStatusService/";
 	private List<IclubClaimStatusBean> beans;
 	private IclubClaimStatusBean bean;
 	private boolean showAddPanel;

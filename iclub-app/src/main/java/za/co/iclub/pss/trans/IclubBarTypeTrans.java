@@ -8,7 +8,7 @@ public class IclubBarTypeTrans {
 	
 	public static IclubBarTypeBean fromWStoUI(IclubBarTypeModel model) {
 		IclubBarTypeBean bean = new IclubBarTypeBean();
-		bean.setBtId(model.getBtId().longValue());
+		bean.setBtId(model.getBtId());
 		bean.setBtLongDesc(model.getBtLongDesc());
 		bean.setBtShortDesc(model.getBtShortDesc());
 		bean.setBtStatus(model.getBtStatus());
@@ -17,7 +17,7 @@ public class IclubBarTypeTrans {
 	
 	public static IclubBarTypeModel fromUItoWS(IclubBarTypeBean bean) {
 		IclubBarTypeModel model = new IclubBarTypeModel();
-		model.setBtId(bean.getBtId().longValue());
+		model.setBtId(bean.getBtId());
 		model.setBtLongDesc(bean.getBtLongDesc());
 		model.setBtShortDesc(bean.getBtShortDesc());
 		model.setBtStatus(bean.getBtStatus());
@@ -26,7 +26,7 @@ public class IclubBarTypeTrans {
 	
 	public static IclubBarTypeModel fromORMtoWS(IclubBarType bean) {
 		IclubBarTypeModel model = new IclubBarTypeModel();
-		model.setBtId(bean.getBtId().longValue());
+		model.setBtId(bean.getBtId());
 		model.setBtLongDesc(bean.getBtLongDesc());
 		model.setBtShortDesc(bean.getBtShortDesc());
 		model.setBtStatus(bean.getBtStatus());

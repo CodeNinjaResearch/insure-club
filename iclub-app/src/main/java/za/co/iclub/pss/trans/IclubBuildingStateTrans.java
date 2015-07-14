@@ -8,7 +8,7 @@ public class IclubBuildingStateTrans {
 	
 	public static IclubBuildingStateBean fromWStoUI(IclubBuildingStateModel model) {
 		IclubBuildingStateBean bean = new IclubBuildingStateBean();
-		bean.setBsId(model.getBsId().longValue());
+		bean.setBsId(model.getBsId());
 		bean.setBsLongDesc(model.getBsLongDesc());
 		bean.setBsShortDesc(model.getBsShortDesc());
 		bean.setBsStatus(model.getBsStatus());
@@ -17,7 +17,7 @@ public class IclubBuildingStateTrans {
 	
 	public static IclubBuildingStateModel fromUItoWS(IclubBuildingStateBean bean) {
 		IclubBuildingStateModel model = new IclubBuildingStateModel();
-		model.setBsId(bean.getBsId().longValue());
+		model.setBsId(bean.getBsId());
 		model.setBsLongDesc(bean.getBsLongDesc());
 		model.setBsShortDesc(bean.getBsShortDesc());
 		model.setBsStatus(bean.getBsStatus());
@@ -26,7 +26,7 @@ public class IclubBuildingStateTrans {
 	
 	public static IclubBuildingStateModel fromORMtoWS(IclubBuildingState bean) {
 		IclubBuildingStateModel model = new IclubBuildingStateModel();
-		model.setBsId(bean.getBsId().longValue());
+		model.setBsId(bean.getBsId());
 		model.setBsLongDesc(bean.getBsLongDesc());
 		model.setBsShortDesc(bean.getBsShortDesc());
 		model.setBsStatus(bean.getBsStatus());

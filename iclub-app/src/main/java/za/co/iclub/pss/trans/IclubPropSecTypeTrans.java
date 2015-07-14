@@ -8,7 +8,7 @@ public class IclubPropSecTypeTrans {
 	
 	public static IclubPropSecTypeBean fromWStoUI(IclubPropSecTypeModel model) {
 		IclubPropSecTypeBean bean = new IclubPropSecTypeBean();
-		bean.setPstId(model.getPstId().longValue());
+		bean.setPstId(model.getPstId());
 		bean.setPstLongDesc(model.getPstLongDesc());
 		bean.setPstShortDesc(model.getPstShortDesc());
 		bean.setPstStatus(model.getPstStatus());
@@ -17,7 +17,7 @@ public class IclubPropSecTypeTrans {
 	
 	public static IclubPropSecTypeModel fromUItoWS(IclubPropSecTypeBean bean) {
 		IclubPropSecTypeModel model = new IclubPropSecTypeModel();
-		model.setPstId(bean.getPstId().longValue());
+		model.setPstId(bean.getPstId());
 		model.setPstLongDesc(bean.getPstLongDesc());
 		model.setPstShortDesc(bean.getPstShortDesc());
 		model.setPstStatus(bean.getPstStatus());
@@ -26,7 +26,7 @@ public class IclubPropSecTypeTrans {
 	
 	public static IclubPropSecTypeModel fromORMtoWS(IclubPropSecType bean) {
 		IclubPropSecTypeModel model = new IclubPropSecTypeModel();
-		model.setPstId(bean.getPstId().longValue());
+		model.setPstId(bean.getPstId());
 		model.setPstLongDesc(bean.getPstLongDesc());
 		model.setPstShortDesc(bean.getPstShortDesc());
 		model.setPstStatus(bean.getPstStatus());

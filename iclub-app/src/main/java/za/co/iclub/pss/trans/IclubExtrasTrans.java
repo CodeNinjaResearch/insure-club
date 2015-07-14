@@ -9,7 +9,7 @@ public class IclubExtrasTrans {
 	
 	public static IclubExtrasBean fromWStoUI(IclubExtrasModel model) {
 		IclubExtrasBean bean = new IclubExtrasBean();
-		bean.setEId(model.getEId().longValue());
+		bean.setEId(model.getEId());
 		bean.setEDesc(model.getEDesc());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
@@ -20,7 +20,7 @@ public class IclubExtrasTrans {
 	
 	public static IclubExtrasModel fromUItoWS(IclubExtrasBean bean) {
 		IclubExtrasModel model = new IclubExtrasModel();
-		model.setEId(bean.getEId().longValue());
+		model.setEId(bean.getEId());
 		model.setEDesc(bean.getEDesc());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
@@ -31,7 +31,7 @@ public class IclubExtrasTrans {
 	
 	public static IclubExtrasModel fromORMtoWS(IclubExtras bean) {
 		IclubExtrasModel model = new IclubExtrasModel();
-		model.setEId(bean.getEId().longValue());
+		model.setEId(bean.getEId());
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() : null);
 		model.setEDesc(bean.getEDesc());

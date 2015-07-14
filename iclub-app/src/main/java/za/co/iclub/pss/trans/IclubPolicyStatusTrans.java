@@ -10,7 +10,7 @@ import za.co.iclub.pss.orm.bean.IclubPolicyStatus;
 public class IclubPolicyStatusTrans {
 	public static IclubPolicyStatusBean fromWStoUI(IclubPolicyStatusModel model) {
 		IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
-		bean.setPsId(model.getPsId().longValue());
+		bean.setPsId(model.getPsId());
 		bean.setPsLongDesc(model.getPsLongDesc());
 		bean.setPsShortDesc(model.getPsShortDesc());
 		bean.setPsStatus(model.getPsStatus());
@@ -19,7 +19,7 @@ public class IclubPolicyStatusTrans {
 	
 	public static IclubPolicyStatusModel fromUItoWS(IclubPolicyStatusBean bean) {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
-		model.setPsId(bean.getPsId().longValue());
+		model.setPsId(bean.getPsId());
 		model.setPsLongDesc(bean.getPsLongDesc());
 		model.setPsShortDesc(bean.getPsShortDesc());
 		model.setPsStatus(bean.getPsStatus());
@@ -28,7 +28,7 @@ public class IclubPolicyStatusTrans {
 	
 	public static IclubPolicyStatusModel fromORMtoWS(IclubPolicyStatus bean) {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
-		model.setPsId(bean.getPsId().longValue());
+		model.setPsId(bean.getPsId());
 		model.setPsLongDesc(bean.getPsLongDesc());
 		model.setPsShortDesc(bean.getPsShortDesc());
 		model.setPsStatus(bean.getPsStatus());

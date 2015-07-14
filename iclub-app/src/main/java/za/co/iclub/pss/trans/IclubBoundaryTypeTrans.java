@@ -8,7 +8,7 @@ public class IclubBoundaryTypeTrans {
 	
 	public static IclubBoundaryTypeBean fromWStoUI(IclubBoundaryTypeModel model) {
 		IclubBoundaryTypeBean bean = new IclubBoundaryTypeBean();
-		bean.setBtId(model.getBtId().longValue());
+		bean.setBtId(model.getBtId());
 		bean.setBtLongDesc(model.getBtLongDesc());
 		bean.setBtShortDesc(model.getBtShortDesc());
 		bean.setBtStatus(model.getBtStatus());
@@ -17,7 +17,7 @@ public class IclubBoundaryTypeTrans {
 	
 	public static IclubBoundaryTypeModel fromUItoWS(IclubBoundaryTypeBean bean) {
 		IclubBoundaryTypeModel model = new IclubBoundaryTypeModel();
-		model.setBtId(bean.getBtId().longValue());
+		model.setBtId(bean.getBtId());
 		model.setBtLongDesc(bean.getBtLongDesc());
 		model.setBtShortDesc(bean.getBtShortDesc());
 		model.setBtStatus(bean.getBtStatus());
@@ -26,7 +26,7 @@ public class IclubBoundaryTypeTrans {
 	
 	public static IclubBoundaryTypeModel fromORMtoWS(IclubBoundaryType bean) {
 		IclubBoundaryTypeModel model = new IclubBoundaryTypeModel();
-		model.setBtId(bean.getBtId().longValue());
+		model.setBtId(bean.getBtId());
 		model.setBtLongDesc(bean.getBtLongDesc());
 		model.setBtShortDesc(bean.getBtShortDesc());
 		model.setBtStatus(bean.getBtStatus());

@@ -8,7 +8,7 @@ public class IclubWallTypeTrans {
 	
 	public static IclubWallTypeBean fromWStoUI(IclubWallTypeModel model) {
 		IclubWallTypeBean bean = new IclubWallTypeBean();
-		bean.setWtId(model.getWtId().longValue());
+		bean.setWtId(model.getWtId());
 		bean.setWtLongDesc(model.getWtLongDesc());
 		bean.setWtShortDesc(model.getWtShortDesc());
 		bean.setWtStatus(model.getWtStatus());
@@ -17,7 +17,7 @@ public class IclubWallTypeTrans {
 	
 	public static IclubWallTypeModel fromUItoWS(IclubWallTypeBean bean) {
 		IclubWallTypeModel model = new IclubWallTypeModel();
-		model.setWtId(bean.getWtId().longValue());
+		model.setWtId(bean.getWtId());
 		model.setWtLongDesc(bean.getWtLongDesc());
 		model.setWtShortDesc(bean.getWtShortDesc());
 		model.setWtStatus(bean.getWtStatus());
@@ -26,7 +26,7 @@ public class IclubWallTypeTrans {
 	
 	public static IclubWallTypeModel fromORMtoWS(IclubWallType bean) {
 		IclubWallTypeModel model = new IclubWallTypeModel();
-		model.setWtId(bean.getWtId().longValue());
+		model.setWtId(bean.getWtId());
 		model.setWtLongDesc(bean.getWtLongDesc());
 		model.setWtShortDesc(bean.getWtShortDesc());
 		model.setWtStatus(bean.getWtStatus());

@@ -8,7 +8,7 @@ public class IclubAccessTypeTrans {
 	
 	public static IclubAccessTypeBean fromWStoUI(IclubAccessTypeModel model) {
 		IclubAccessTypeBean bean = new IclubAccessTypeBean();
-		bean.setAtId(model.getAtId().longValue());
+		bean.setAtId(model.getAtId());
 		bean.setAtLongDesc(model.getAtLongDesc());
 		bean.setAtShortDesc(model.getAtShortDesc());
 		bean.setAtStatus(model.getAtStatus());
@@ -17,7 +17,7 @@ public class IclubAccessTypeTrans {
 	
 	public static IclubAccessTypeModel fromUItoWS(IclubAccessTypeBean bean) {
 		IclubAccessTypeModel model = new IclubAccessTypeModel();
-		model.setAtId(bean.getAtId().longValue());
+		model.setAtId(bean.getAtId());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
 		model.setAtStatus(bean.getAtStatus());
@@ -26,7 +26,7 @@ public class IclubAccessTypeTrans {
 	
 	public static IclubAccessTypeModel fromORMtoWS(IclubAccessType bean) {
 		IclubAccessTypeModel model = new IclubAccessTypeModel();
-		model.setAtId(bean.getAtId().longValue());
+		model.setAtId(bean.getAtId());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
 		model.setAtStatus(bean.getAtStatus());

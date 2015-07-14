@@ -8,7 +8,7 @@ public class IclubCohortTypeTrans {
 	
 	public static IclubCohortTypeBean fromWStoUI(IclubCohortTypeModel model) {
 		IclubCohortTypeBean bean = new IclubCohortTypeBean();
-		bean.setCtId(model.getCtId().longValue());
+		bean.setCtId(model.getCtId());
 		bean.setCtLongDesc(model.getCtLongDesc());
 		bean.setCtShortDesc(model.getCtShortDesc());
 		bean.setCtStatus(model.getCtStatus());
@@ -17,7 +17,7 @@ public class IclubCohortTypeTrans {
 	
 	public static IclubCohortTypeModel fromUItoWS(IclubCohortTypeBean bean) {
 		IclubCohortTypeModel model = new IclubCohortTypeModel();
-		model.setCtId(bean.getCtId().longValue());
+		model.setCtId(bean.getCtId());
 		model.setCtLongDesc(bean.getCtLongDesc());
 		model.setCtShortDesc(bean.getCtShortDesc());
 		model.setCtStatus(bean.getCtStatus());
@@ -26,7 +26,7 @@ public class IclubCohortTypeTrans {
 	
 	public static IclubCohortTypeModel fromORMtoWS(IclubCohortType bean) {
 		IclubCohortTypeModel model = new IclubCohortTypeModel();
-		model.setCtId(bean.getCtId().longValue());
+		model.setCtId(bean.getCtId());
 		model.setCtLongDesc(bean.getCtLongDesc());
 		model.setCtShortDesc(bean.getCtShortDesc());
 		model.setCtStatus(bean.getCtStatus());

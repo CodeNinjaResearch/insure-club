@@ -8,7 +8,7 @@ public class IclubEntityTypeTrans {
 	
 	public static IclubEntityTypeBean fromWStoUI(IclubEntityTypeModel model) {
 		IclubEntityTypeBean bean = new IclubEntityTypeBean();
-		bean.setEtId(model.getEtId().longValue());
+		bean.setEtId(model.getEtId());
 		bean.setEtLongDesc(model.getEtLongDesc());
 		bean.setEtShortDesc(model.getEtShortDesc());
 		bean.setEtStatus(model.getEtStatus());
@@ -18,7 +18,7 @@ public class IclubEntityTypeTrans {
 	
 	public static IclubEntityTypeModel fromUItoWS(IclubEntityTypeBean bean) {
 		IclubEntityTypeModel model = new IclubEntityTypeModel();
-		model.setEtId(bean.getEtId().longValue());
+		model.setEtId(bean.getEtId());
 		model.setEtLongDesc(bean.getEtLongDesc());
 		model.setEtShortDesc(bean.getEtShortDesc());
 		model.setEtStatus(bean.getEtStatus());
@@ -28,7 +28,7 @@ public class IclubEntityTypeTrans {
 	
 	public static IclubEntityTypeModel fromORMtoWS(IclubEntityType bean) {
 		IclubEntityTypeModel model = new IclubEntityTypeModel();
-		model.setEtId(bean.getEtId().longValue());
+		model.setEtId(bean.getEtId());
 		model.setEtLongDesc(bean.getEtLongDesc());
 		model.setEtShortDesc(bean.getEtShortDesc());
 		model.setEtStatus(bean.getEtStatus());

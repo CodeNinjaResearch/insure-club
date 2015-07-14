@@ -30,7 +30,7 @@ public class IclubVehicleMasterController implements Serializable {
 	private static final long serialVersionUID = 8245517153102756484L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubVehicleMasterController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubVehicleMasterService/";
+	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubVehicleMasterService/";
 	private List<IclubVehicleMasterBean> beans;
 	private List<IclubVehicleMasterBean> dashBoardBeans;
 	private IclubVehicleMasterBean bean;

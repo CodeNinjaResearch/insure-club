@@ -8,7 +8,7 @@ public class IclubAssessmentTypeTrans {
 	
 	public static IclubAssessmentTypeBean fromWStoUI(IclubAssessmentTypeModel model) {
 		IclubAssessmentTypeBean bean = new IclubAssessmentTypeBean();
-		bean.setAtId(model.getAtId().longValue());
+		bean.setAtId(model.getAtId());
 		bean.setAtLongDesc(model.getAtLongDesc());
 		bean.setAtShortDesc(model.getAtShortDesc());
 		bean.setAtStatus(model.getAtStatus());
@@ -17,7 +17,7 @@ public class IclubAssessmentTypeTrans {
 	
 	public static IclubAssessmentTypeModel fromUItoWS(IclubAssessmentTypeBean bean) {
 		IclubAssessmentTypeModel model = new IclubAssessmentTypeModel();
-		model.setAtId(bean.getAtId().longValue());
+		model.setAtId(bean.getAtId());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
 		model.setAtStatus(bean.getAtStatus());
@@ -26,7 +26,7 @@ public class IclubAssessmentTypeTrans {
 	
 	public static IclubAssessmentTypeModel fromORMtoWS(IclubAssessmentType bean) {
 		IclubAssessmentTypeModel model = new IclubAssessmentTypeModel();
-		model.setAtId(bean.getAtId().longValue());
+		model.setAtId(bean.getAtId());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
 		model.setAtStatus(bean.getAtStatus());

@@ -8,7 +8,7 @@ public class IclubRoofTypeTrans {
 	
 	public static IclubRoofTypeBean fromWStoUI(IclubRoofTypeModel model) {
 		IclubRoofTypeBean bean = new IclubRoofTypeBean();
-		bean.setRtId(model.getRtId().longValue());
+		bean.setRtId(model.getRtId());
 		bean.setRtLongDesc(model.getRtLongDesc());
 		bean.setRtShortDesc(model.getRtShortDesc());
 		bean.setRtStatus(model.getRtStatus());
@@ -17,7 +17,7 @@ public class IclubRoofTypeTrans {
 	
 	public static IclubRoofTypeModel fromUItoWS(IclubRoofTypeBean bean) {
 		IclubRoofTypeModel model = new IclubRoofTypeModel();
-		model.setRtId(bean.getRtId().longValue());
+		model.setRtId(bean.getRtId());
 		model.setRtLongDesc(bean.getRtLongDesc());
 		model.setRtShortDesc(bean.getRtShortDesc());
 		model.setRtStatus(bean.getRtStatus());
@@ -26,7 +26,7 @@ public class IclubRoofTypeTrans {
 	
 	public static IclubRoofTypeModel fromORMtoWS(IclubRoofType bean) {
 		IclubRoofTypeModel model = new IclubRoofTypeModel();
-		model.setRtId(bean.getRtId().longValue());
+		model.setRtId(bean.getRtId());
 		model.setRtLongDesc(bean.getRtLongDesc());
 		model.setRtShortDesc(bean.getRtShortDesc());
 		model.setRtStatus(bean.getRtStatus());

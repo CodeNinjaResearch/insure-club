@@ -8,7 +8,7 @@ public class IclubDocumentTypeTrans {
 	
 	public static IclubDocumentTypeBean fromWStoUI(IclubDocumentTypeModel model) {
 		IclubDocumentTypeBean bean = new IclubDocumentTypeBean();
-		bean.setDtId(model.getDtId().longValue());
+		bean.setDtId(model.getDtId());
 		bean.setDtLongDesc(model.getDtLongDesc());
 		bean.setDtShortDesc(model.getDtShortDesc());
 		bean.setDtStatus(model.getDtStatus());
@@ -17,7 +17,7 @@ public class IclubDocumentTypeTrans {
 	
 	public static IclubDocumentTypeModel fromUItoWS(IclubDocumentTypeBean bean) {
 		IclubDocumentTypeModel model = new IclubDocumentTypeModel();
-		model.setDtId(bean.getDtId().longValue());
+		model.setDtId(bean.getDtId());
 		model.setDtLongDesc(bean.getDtLongDesc());
 		model.setDtShortDesc(bean.getDtShortDesc());
 		model.setDtStatus(bean.getDtStatus());
@@ -26,7 +26,7 @@ public class IclubDocumentTypeTrans {
 	
 	public static IclubDocumentTypeModel fromORMtoWS(IclubDocumentType bean) {
 		IclubDocumentTypeModel model = new IclubDocumentTypeModel();
-		model.setDtId(bean.getDtId().longValue());
+		model.setDtId(bean.getDtId());
 		model.setDtLongDesc(bean.getDtLongDesc());
 		model.setDtShortDesc(bean.getDtShortDesc());
 		model.setDtStatus(bean.getDtStatus());

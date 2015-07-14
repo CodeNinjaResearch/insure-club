@@ -7,7 +7,7 @@ import za.co.iclub.pss.orm.bean.IclubSecurityQuestion;
 public class IclubSecurityQuestionTrans {
 	public static IclubSecurityQuestionBean fromWStoUI(IclubSecurityQuestionModel model) {
 		IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
-		bean.setSqId(model.getSqId().longValue());
+		bean.setSqId(model.getSqId());
 		bean.setSqLongDesc(model.getSqLongDesc());
 		bean.setSqShortDesc(model.getSqShortDesc());
 		bean.setSqStatus(model.getSqStatus());
@@ -16,7 +16,7 @@ public class IclubSecurityQuestionTrans {
 	
 	public static IclubSecurityQuestionModel fromUItoWS(IclubSecurityQuestionBean bean) {
 		IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
-		model.setSqId(bean.getSqId().longValue());
+		model.setSqId(bean.getSqId());
 		model.setSqLongDesc(bean.getSqLongDesc());
 		model.setSqShortDesc(bean.getSqShortDesc());
 		model.setSqStatus(bean.getSqStatus());
@@ -25,7 +25,7 @@ public class IclubSecurityQuestionTrans {
 	
 	public static IclubSecurityQuestionModel fromORMtoWS(IclubSecurityQuestion bean) {
 		IclubSecurityQuestionModel model = new IclubSecurityQuestionModel();
-		model.setSqId(bean.getSqId().longValue());
+		model.setSqId(bean.getSqId());
 		model.setSqLongDesc(bean.getSqLongDesc());
 		model.setSqShortDesc(bean.getSqShortDesc());
 		model.setSqStatus(bean.getSqStatus());

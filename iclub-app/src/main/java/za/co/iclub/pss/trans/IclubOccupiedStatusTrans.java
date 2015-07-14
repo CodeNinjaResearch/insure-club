@@ -8,7 +8,7 @@ public class IclubOccupiedStatusTrans {
 	
 	public static IclubOccupiedStatusBean fromWStoUI(IclubOccupiedStatusModel model) {
 		IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
-		bean.setOsId(model.getOsId().longValue());
+		bean.setOsId(model.getOsId());
 		bean.setOsLongDesc(model.getOsLongDesc());
 		bean.setOsShortDesc(model.getOsShortDesc());
 		bean.setOsStatus(model.getOsStatus());
@@ -17,7 +17,7 @@ public class IclubOccupiedStatusTrans {
 	
 	public static IclubOccupiedStatusModel fromUItoWS(IclubOccupiedStatusBean bean) {
 		IclubOccupiedStatusModel model = new IclubOccupiedStatusModel();
-		model.setOsId(bean.getOsId().longValue());
+		model.setOsId(bean.getOsId());
 		model.setOsLongDesc(bean.getOsLongDesc());
 		model.setOsShortDesc(bean.getOsShortDesc());
 		model.setOsStatus(bean.getOsStatus());
@@ -26,7 +26,7 @@ public class IclubOccupiedStatusTrans {
 	
 	public static IclubOccupiedStatusModel fromORMtoWS(IclubOccupiedStatus bean) {
 		IclubOccupiedStatusModel model = new IclubOccupiedStatusModel();
-		model.setOsId(bean.getOsId().longValue());
+		model.setOsId(bean.getOsId());
 		model.setOsLongDesc(bean.getOsLongDesc());
 		model.setOsShortDesc(bean.getOsShortDesc());
 		model.setOsStatus(bean.getOsStatus());

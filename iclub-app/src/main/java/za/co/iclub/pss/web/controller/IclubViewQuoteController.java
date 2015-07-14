@@ -25,7 +25,7 @@ public class IclubViewQuoteController implements Serializable {
 	private static final long serialVersionUID = -6405843984156478759L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubViewQuoteController.class);
-	private static final String QUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-ws/iclub/IclubQuoteService/";
+	private static final String QUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubQuoteService/";
 	private List<IclubQuoteBean> beans;
 	private String sessionUserId;
 	

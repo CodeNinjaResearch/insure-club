@@ -8,7 +8,7 @@ public class IclubInsuranceItemTypeTrans {
 	
 	public static IclubInsuranceItemTypeBean fromWStoUI(IclubInsuranceItemTypeModel model) {
 		IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
-		bean.setIitId(model.getIitId().longValue());
+		bean.setIitId(model.getIitId());
 		bean.setIitLongDesc(model.getIitLongDesc());
 		bean.setIitShortDesc(model.getIitShortDesc());
 		bean.setIitStatus(model.getIitStatus());
@@ -17,7 +17,7 @@ public class IclubInsuranceItemTypeTrans {
 	
 	public static IclubInsuranceItemTypeModel fromUItoWS(IclubInsuranceItemTypeBean bean) {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
-		model.setIitId(bean.getIitId().longValue());
+		model.setIitId(bean.getIitId());
 		model.setIitLongDesc(bean.getIitLongDesc());
 		model.setIitShortDesc(bean.getIitShortDesc());
 		model.setIitStatus(bean.getIitStatus());
@@ -26,7 +26,7 @@ public class IclubInsuranceItemTypeTrans {
 	
 	public static IclubInsuranceItemTypeModel fromORMtoWS(IclubInsuranceItemType bean) {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
-		model.setIitId(bean.getIitId().longValue());
+		model.setIitId(bean.getIitId());
 		model.setIitLongDesc(bean.getIitLongDesc());
 		model.setIitShortDesc(bean.getIitShortDesc());
 		model.setIitStatus(bean.getIitStatus());

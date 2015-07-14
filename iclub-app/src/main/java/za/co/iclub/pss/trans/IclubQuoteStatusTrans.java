@@ -8,7 +8,7 @@ public class IclubQuoteStatusTrans {
 	
 	public static IclubQuoteStatusBean fromWStoUI(IclubQuoteStatusModel model) {
 		IclubQuoteStatusBean bean = new IclubQuoteStatusBean();
-		bean.setQsId(model.getQsId().longValue());
+		bean.setQsId(model.getQsId());
 		bean.setQsLongDesc(model.getQsLongDesc());
 		bean.setQsShortDesc(model.getQsShortDesc());
 		bean.setQsStatus(model.getQsStatus());
@@ -17,7 +17,7 @@ public class IclubQuoteStatusTrans {
 	
 	public static IclubQuoteStatusModel fromUItoWS(IclubQuoteStatusBean bean) {
 		IclubQuoteStatusModel model = new IclubQuoteStatusModel();
-		model.setQsId(bean.getQsId().longValue());
+		model.setQsId(bean.getQsId());
 		model.setQsLongDesc(bean.getQsLongDesc());
 		model.setQsShortDesc(bean.getQsShortDesc());
 		model.setQsStatus(bean.getQsStatus());
@@ -26,7 +26,7 @@ public class IclubQuoteStatusTrans {
 	
 	public static IclubQuoteStatusModel fromORMtoWS(IclubQuoteStatus bean) {
 		IclubQuoteStatusModel model = new IclubQuoteStatusModel();
-		model.setQsId(bean.getQsId().longValue());
+		model.setQsId(bean.getQsId());
 		model.setQsLongDesc(bean.getQsLongDesc());
 		model.setQsShortDesc(bean.getQsShortDesc());
 		model.setQsStatus(bean.getQsStatus());

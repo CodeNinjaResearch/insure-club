@@ -7,7 +7,7 @@ import za.co.iclub.pss.orm.bean.IclubVehUsageType;
 public class IclubVehUsageTypeTrans {
 	public static IclubVehUsageTypeBean fromWStoUI(IclubVehUsageTypeModel model) {
 		IclubVehUsageTypeBean bean = new IclubVehUsageTypeBean();
-		bean.setVutId(model.getVutId().longValue());
+		bean.setVutId(model.getVutId());
 		bean.setVutLongDesc(model.getVutLongDesc());
 		bean.setVutShortDesc(model.getVutShortDesc());
 		bean.setVutStatus(model.getVutStatus());
@@ -16,7 +16,7 @@ public class IclubVehUsageTypeTrans {
 	
 	public static IclubVehUsageTypeModel fromUItoWS(IclubVehUsageTypeBean bean) {
 		IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-		model.setVutId(bean.getVutId().longValue());
+		model.setVutId(bean.getVutId());
 		model.setVutLongDesc(bean.getVutLongDesc());
 		model.setVutShortDesc(bean.getVutShortDesc());
 		model.setVutStatus(bean.getVutStatus());
@@ -25,7 +25,7 @@ public class IclubVehUsageTypeTrans {
 	
 	public static IclubVehUsageTypeModel fromORMtoWS(IclubVehUsageType bean) {
 		IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-		model.setVutId(bean.getVutId().longValue());
+		model.setVutId(bean.getVutId());
 		model.setVutLongDesc(bean.getVutLongDesc());
 		model.setVutShortDesc(bean.getVutShortDesc());
 		model.setVutStatus(bean.getVutStatus());

@@ -8,7 +8,7 @@ public class IclubPropUsageTypeTrans {
 	
 	public static IclubPropUsageTypeBean fromWStoUI(IclubPropUsageTypeModel model) {
 		IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
-		bean.setPutId(model.getPutId().longValue());
+		bean.setPutId(model.getPutId());
 		bean.setPutLongDesc(model.getPutLongDesc());
 		bean.setPutShortDesc(model.getPutShortDesc());
 		bean.setPutStatus(model.getPutStatus());
@@ -17,7 +17,7 @@ public class IclubPropUsageTypeTrans {
 	
 	public static IclubPropUsageTypeModel fromUItoWS(IclubPropUsageTypeBean bean) {
 		IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-		model.setPutId(bean.getPutId().longValue());
+		model.setPutId(bean.getPutId());
 		model.setPutLongDesc(bean.getPutLongDesc());
 		model.setPutShortDesc(bean.getPutShortDesc());
 		model.setPutStatus(bean.getPutStatus());
@@ -26,7 +26,7 @@ public class IclubPropUsageTypeTrans {
 	
 	public static IclubPropUsageTypeModel fromORMtoWS(IclubPropUsageType bean) {
 		IclubPropUsageTypeModel model = new IclubPropUsageTypeModel();
-		model.setPutId(bean.getPutId().longValue());
+		model.setPutId(bean.getPutId());
 		model.setPutLongDesc(bean.getPutLongDesc());
 		model.setPutShortDesc(bean.getPutShortDesc());
 		model.setPutStatus(bean.getPutStatus());

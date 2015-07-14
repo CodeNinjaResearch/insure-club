@@ -8,7 +8,7 @@ public class IclubVehicleTypeTrans {
 	
 	public static IclubVehicleTypeBean fromWStoUI(IclubVehicleTypeModel model) {
 		IclubVehicleTypeBean bean = new IclubVehicleTypeBean();
-		bean.setVtId(model.getVtId().longValue());
+		bean.setVtId(model.getVtId());
 		bean.setVtLongDesc(model.getVtLongDesc());
 		bean.setVtShortDesc(model.getVtShortDesc());
 		bean.setVtStatus(model.getVtStatus());
@@ -17,7 +17,7 @@ public class IclubVehicleTypeTrans {
 	
 	public static IclubVehicleTypeModel fromUItoWS(IclubVehicleTypeBean bean) {
 		IclubVehicleTypeModel model = new IclubVehicleTypeModel();
-		model.setVtId(bean.getVtId().longValue());
+		model.setVtId(bean.getVtId());
 		model.setVtLongDesc(bean.getVtLongDesc());
 		model.setVtShortDesc(bean.getVtShortDesc());
 		model.setVtStatus(bean.getVtStatus());
@@ -26,7 +26,7 @@ public class IclubVehicleTypeTrans {
 	
 	public static IclubVehicleTypeModel fromORMtoWS(IclubVehicleType bean) {
 		IclubVehicleTypeModel model = new IclubVehicleTypeModel();
-		model.setVtId(bean.getVtId().longValue());
+		model.setVtId(bean.getVtId());
 		model.setVtLongDesc(bean.getVtLongDesc());
 		model.setVtShortDesc(bean.getVtShortDesc());
 		model.setVtStatus(bean.getVtStatus());

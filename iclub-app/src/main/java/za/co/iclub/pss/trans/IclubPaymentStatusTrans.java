@@ -8,7 +8,7 @@ public class IclubPaymentStatusTrans {
 	
 	public static IclubPaymentStatusBean fromWStoUI(IclubPaymentStatusModel model) {
 		IclubPaymentStatusBean bean = new IclubPaymentStatusBean();
-		bean.setPsId(model.getPsId().longValue());
+		bean.setPsId(model.getPsId());
 		bean.setPsLongDesc(model.getPsLongDesc());
 		bean.setPsShortDesc(model.getPsShortDesc());
 		bean.setPsStatus(model.getPsStatus());
@@ -17,7 +17,7 @@ public class IclubPaymentStatusTrans {
 	
 	public static IclubPaymentStatusModel fromUItoWS(IclubPaymentStatusBean bean) {
 		IclubPaymentStatusModel model = new IclubPaymentStatusModel();
-		model.setPsId(bean.getPsId().longValue());
+		model.setPsId(bean.getPsId());
 		model.setPsLongDesc(bean.getPsLongDesc());
 		model.setPsShortDesc(bean.getPsShortDesc());
 		model.setPsStatus(bean.getPsStatus());
@@ -26,7 +26,7 @@ public class IclubPaymentStatusTrans {
 	
 	public static IclubPaymentStatusModel fromORMtoWS(IclubPaymentStatus bean) {
 		IclubPaymentStatusModel model = new IclubPaymentStatusModel();
-		model.setPsId(bean.getPsId().longValue());
+		model.setPsId(bean.getPsId());
 		model.setPsLongDesc(bean.getPsLongDesc());
 		model.setPsShortDesc(bean.getPsShortDesc());
 		model.setPsStatus(bean.getPsStatus());

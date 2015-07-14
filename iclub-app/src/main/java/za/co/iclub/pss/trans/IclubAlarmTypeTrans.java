@@ -8,7 +8,7 @@ public class IclubAlarmTypeTrans {
 	
 	public static IclubAlarmTypeBean fromWStoUI(IclubAlarmTypeModel model) {
 		IclubAlarmTypeBean bean = new IclubAlarmTypeBean();
-		bean.setAtId(model.getAtId().longValue());
+		bean.setAtId(model.getAtId());
 		bean.setAtLongDesc(model.getAtLongDesc());
 		bean.setAtShortDesc(model.getAtShortDesc());
 		bean.setAtStatus(model.getAtStatus());
@@ -17,7 +17,7 @@ public class IclubAlarmTypeTrans {
 	
 	public static IclubAlarmTypeModel fromUItoWS(IclubAlarmTypeBean bean) {
 		IclubAlarmTypeModel model = new IclubAlarmTypeModel();
-		model.setAtId(bean.getAtId().longValue());
+		model.setAtId(bean.getAtId());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
 		model.setAtStatus(bean.getAtStatus());
@@ -26,7 +26,7 @@ public class IclubAlarmTypeTrans {
 	
 	public static IclubAlarmTypeModel fromORMtoWS(IclubAlarmType bean) {
 		IclubAlarmTypeModel model = new IclubAlarmTypeModel();
-		model.setAtId(bean.getAtId().longValue());
+		model.setAtId(bean.getAtId());
 		model.setAtLongDesc(bean.getAtLongDesc());
 		model.setAtShortDesc(bean.getAtShortDesc());
 		model.setAtStatus(bean.getAtStatus());
