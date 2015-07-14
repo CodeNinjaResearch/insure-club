@@ -319,7 +319,7 @@
 					</div>
 					<div class="EmptyBox5" />
 				</p:tab>
-				<p:tab id="fqExtDet" title="Extras">
+				<p:tab rendered="false" id="fqExtDet" title="Extras">
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
@@ -359,19 +359,6 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.AStatus}" widgetVar="mnuAStat" id="mnuAStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Status" itemDisabled="true" />
-								<f:selectItem itemLabel="Yes" itemValue="Y" />
-								<f:selectItem itemLabel="No" itemValue="N" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Bank :" />
 						</div>
 						<div class="Container50 Responsive">
@@ -397,10 +384,10 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Owner Type :" />
+							<p:outputLabel rendered="false" styleClass="TexAlCenter" value="Owner Type :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubOwnerType}" widgetVar="mnuOT" id="mnuOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu rendered="false" value="#{iclubFullQuoteController.accountBean.iclubOwnerType}" widgetVar="mnuOT" id="mnuOT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Owner Type" itemDisabled="true" />
 								<f:selectItems var="c" itemLabel="#{c.otLongDesc}" itemValue="#{c.otId}" value="#{iclubFullQuoteController.ownerTypeBeans}" />
 							</p:selectOneMenu>
@@ -427,10 +414,6 @@
 							<p:selectOneMenu value="#{iclubFullQuoteController.debitDate}" widgetVar="mnuDbtDt" id="mnuDbtDt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Debit Date" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.debitDates}" />
-							</p:selectOneMenu>
-							<p:selectOneMenu value="#{iclubFullQuoteController.debitMonth}" widgetVar="mnuDbtMt" id="mnuDbtMt" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-								<f:selectItem itemLabel="Debit Month" itemDisabled="true" />
-								<f:selectItems value="#{iclubFullQuoteController.debitMonths}" />
 							</p:selectOneMenu>
 						</div>
 					</div>

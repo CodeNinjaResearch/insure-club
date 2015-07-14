@@ -41,7 +41,9 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Orginal Rate" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmOrigRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmOrigRate}">
+				<f:convertNumber pattern="#0.00" />
+			</p:outputLabel>
 		</div>
 	</div>
 	<div class="EmptyBox5" />
@@ -59,7 +61,9 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Retail Rate" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmRetRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{iclubVehicleMasterController.bean.vmRetRate}">
+				<f:convertNumber pattern="#0.00" />
+			</p:outputLabel>
 		</div>
 	</div>
 	<div class="EmptyBox5" />

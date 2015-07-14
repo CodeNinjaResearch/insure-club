@@ -27,7 +27,9 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumItems}" />
 					</p:column>
 					<p:column headerText="Claim Value">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Claim Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />

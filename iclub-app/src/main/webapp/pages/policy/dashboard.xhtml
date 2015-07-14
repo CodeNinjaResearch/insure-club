@@ -42,10 +42,14 @@
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
 				</p:column>
 				<p:column headerText="Premium">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}" />
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}">
+						<f:convertNumber pattern="#0.00" />
+					</p:outputLabel>
 				</p:column>
 				<p:column headerText="Pro-rata Premium">
-					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PProrataPrm}" />
+					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PProrataPrm}">
+						<f:convertNumber pattern="#0.00" />
+					</p:outputLabel>
 				</p:column>
 				<p:column headerText="Debit Date">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PDebitDt}" />
@@ -72,10 +76,14 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
 					</p:column>
 					<p:column headerText="Insured Value">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Actual Value">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Created Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiCrtdDt}" />
@@ -263,15 +271,6 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Estimatted Value" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.propertyBean.PEstValue}" />
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
 						<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubPolicyController.claimAction}" ajax="false" />
 					</div>
 				</div>
@@ -373,7 +372,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Insured Value" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VInsuredValue}" />
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VInsuredValue}">
+								<f:convertNumber pattern="#0.00" />
+							</p:outputLabel>
 						</div>
 					</div>
 					<div class="EmptyBox5" />

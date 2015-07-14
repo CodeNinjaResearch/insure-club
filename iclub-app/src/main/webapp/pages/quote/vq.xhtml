@@ -10,16 +10,22 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenDt}" />
 					</p:column>
 					<p:column headerText=" Prev Premium">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QPrevPremium}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QPrevPremium}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="ValidUntil">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QValidUntil}" />
 					</p:column>
 					<p:column headerText="Generated Premium">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenPremium}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenPremium}" >
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Previous Premium">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QPrevPremium}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QPrevPremium}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Previous Insurer">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubInsurerMaster}" />

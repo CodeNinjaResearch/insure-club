@@ -106,7 +106,9 @@
 									<p:outputLabel styleClass="TexAlCenter" value="Premium :" />
 								</div>
 								<div class="Container50 Responsive">
-									<p:inputText styleClass="TexAlCenter" placeholder="Premium" value="#{iclubPolicyController.bean.PPremium}" />
+									<p:inputText styleClass="TexAlCenter" placeholder="Premium" value="#{iclubPolicyController.bean.PPremium}">
+										<f:convertNumber pattern="#0.00" />
+									</p:inputText>
 								</div>
 							</div>
 						</div>
@@ -116,7 +118,9 @@
 									<p:outputLabel styleClass="TexAlCenter" value="Pro-rata Premium :" />
 								</div>
 								<div class="Container50 Responsive">
-									<p:inputText styleClass="TexAlCenter" placeholder="Prorata Premium" value="#{iclubPolicyController.bean.PProrataPrm}" />
+									<p:inputText styleClass="TexAlCenter" placeholder="Prorata Premium" value="#{iclubPolicyController.bean.PProrataPrm}">
+										<f:convertNumber pattern="#0.00" />
+									</p:inputText>
 								</div>
 							</div>
 						</div>

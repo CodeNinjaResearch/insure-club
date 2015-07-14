@@ -24,7 +24,9 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumItems}" />
 					</p:column>
 					<p:column headerText="Claim Value">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CValue}">
+							<f:convertNumber pattern="#0.00" />
+						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Claim Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
@@ -51,10 +53,14 @@
 							<p:outputLabel value="#{bean.PNumber}" />
 						</p:column>
 						<p:column headerText="Premium">
-							<p:outputLabel value="#{bean.PPremium}" />
+							<p:outputLabel value="#{bean.PPremium}">
+								<f:convertNumber pattern="#0.00" />
+							</p:outputLabel>
 						</p:column>
 						<p:column headerText="Pro-rata Premium">
-							<p:outputLabel value="#{bean.PProrataPrm}" />
+							<p:outputLabel value="#{bean.PProrataPrm}">
+								<f:convertNumber pattern="#0.00" />
+							</p:outputLabel>
 						</p:column>
 						<p:column headerText="Quote Id">
 							<p:outputLabel value="#{bean.iclubQuote}" />
@@ -82,10 +88,14 @@
 							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
 						</p:column>
 						<p:column headerText="Insured Value">
-							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}" />
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}">
+								<f:convertNumber pattern="#0.00" />
+							</p:outputLabel>
 						</p:column>
 						<p:column headerText="Actual Value">
-							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}" />
+							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiActualValue}">
+								<f:convertNumber pattern="#0.00" />
+							</p:outputLabel>
 						</p:column>
 						<p:column headerText="Created Date">
 							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiCrtdDt}" />
@@ -388,7 +398,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Insured Value" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VInsuredValue}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VInsuredValue}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -397,7 +409,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Concess Prct" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VConcessPrct}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VConcessPrct}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />

@@ -7,13 +7,19 @@
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmModel}" />
 		</p:column>
 		<p:column headerText="Orginal Rate">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmOrigRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmOrigRate}">
+				<f:convertNumber pattern="#0.00" />
+			</p:outputLabel>
 		</p:column>
 		<p:column headerText="Market Rate">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMrktRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmMrktRate}">
+				<f:convertNumber pattern="#0.00" />
+			</p:outputLabel>
 		</p:column>
 		<p:column headerText="Retail Rate">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRetRate}" />
+			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRetRate}">
+				<f:convertNumber pattern="#0.00" />
+			</p:outputLabel>
 		</p:column>
 		<p:column headerText="Production Date">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmProdDt}" />
