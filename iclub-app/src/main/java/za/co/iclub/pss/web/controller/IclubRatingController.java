@@ -41,9 +41,9 @@ public class IclubRatingController implements Serializable {
 	private static final long serialVersionUID = 8194018639763193542L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubRateTypeController.class);
-	private static final String RT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubRateTypeService/";
-	private static final String FLD_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubFieldService/";
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubRateEngineService/";
+	private static final String RT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubRateTypeService/";
+	private static final String FLD_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubFieldService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubRateEngineService/";
 	private List<IclubRateEngineBean> beans;
 	private boolean lookupSaveFlag;
 	private Long selRateType;

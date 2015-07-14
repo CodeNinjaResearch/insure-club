@@ -96,6 +96,35 @@ import za.co.iclub.pss.model.ws.IclubVehUsageTypeModel;
 import za.co.iclub.pss.model.ws.IclubVehicleMasterModel;
 import za.co.iclub.pss.model.ws.IclubVehicleModel;
 import za.co.iclub.pss.model.ws.IclubWallTypeModel;
+import za.co.iclub.pss.trans.IclubAccessTypeTrans;
+import za.co.iclub.pss.trans.IclubBarTypeTrans;
+import za.co.iclub.pss.trans.IclubCountryCodeTrans;
+import za.co.iclub.pss.trans.IclubCoverTypeTrans;
+import za.co.iclub.pss.trans.IclubDriverTrans;
+import za.co.iclub.pss.trans.IclubEntityTypeTrans;
+import za.co.iclub.pss.trans.IclubFieldTrans;
+import za.co.iclub.pss.trans.IclubIdTypeTrans;
+import za.co.iclub.pss.trans.IclubInsuranceItemTrans;
+import za.co.iclub.pss.trans.IclubLicenseCodeTrans;
+import za.co.iclub.pss.trans.IclubLoginTrans;
+import za.co.iclub.pss.trans.IclubMaritialStatusTrans;
+import za.co.iclub.pss.trans.IclubOccupationTrans;
+import za.co.iclub.pss.trans.IclubOccupiedStatusTrans;
+import za.co.iclub.pss.trans.IclubPersonTrans;
+import za.co.iclub.pss.trans.IclubPropUsageTypeTrans;
+import za.co.iclub.pss.trans.IclubPropertyItemTrans;
+import za.co.iclub.pss.trans.IclubPropertyTrans;
+import za.co.iclub.pss.trans.IclubPropertyTypeTrans;
+import za.co.iclub.pss.trans.IclubQuoteTrans;
+import za.co.iclub.pss.trans.IclubRateEngineTrans;
+import za.co.iclub.pss.trans.IclubRateTypeTrans;
+import za.co.iclub.pss.trans.IclubRoofTypeTrans;
+import za.co.iclub.pss.trans.IclubSecurityQuestionTrans;
+import za.co.iclub.pss.trans.IclubVehSecTypeTrans;
+import za.co.iclub.pss.trans.IclubVehUsageTypeTrans;
+import za.co.iclub.pss.trans.IclubVehicleMasterTrans;
+import za.co.iclub.pss.trans.IclubVehicleTrans;
+import za.co.iclub.pss.trans.IclubWallTypeTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -106,37 +135,37 @@ public class IclubQuickQuoteController implements Serializable {
 	private static final long serialVersionUID = -6405843984156478759L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubQuickQuoteController.class);
-	private static final String PUR_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPropUsageTypeService/";
-	private static final String VEHU_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubVehUsageTypeService/";
-	private static final String PER_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPersonService/";
-	private static final String VM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubVehicleMasterService/";
-	private static final String V_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubVehicleService/";
-	private static final String D_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubDriverService/";
-	private static final String LIC_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubLicenseCodeService/";
-	private static final String WT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubWallTypeService/";
-	private static final String RT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubRoofTypeService/";
-	private static final String MS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubMaritialStatusService/";
-	private static final String IT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubIdTypeService/";
-	private static final String QUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubQuoteService/";
-	private static final String QQUT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubQuickQuoteService/";
-	private static final String PRO_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPropertyService/";
-	private static final String PRO_ITM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPropertyItemService/";
-	private static final String II_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubInsuranceItemService/";
-	private static final String RAT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubRateTypeService/";
-	private static final String RE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubRateEngineService/";
-	private static final String FD_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubFieldService/";
-	private static final String CONF_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubConfigService/";
-	private static final String OCN_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubOccupationService/";
-	private static final String CCDE_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubCountryCodeService/";
-	private static final String LOG_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubLoginService/";
-	private static final String SECQ_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubSecurityQuestionService/";
-	private static final String ET_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubEntityTypeService/";
-	private static final String SM_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubVehSecTypeService/";
-	private static final String AEST_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubAccessTypeService/";
-	private static final String BT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubBarTypeService/";
-	private static final String PROT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPropertyTypeService/";
-	private static final String OCCS_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubOccupiedStatusService/";
-	private static final String CT_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubCoverTypeService/";
+	private static final String PUR_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropUsageTypeService/";
+	private static final String VEHU_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubVehUsageTypeService/";
+	private static final String PER_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
+	private static final String VM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubVehicleMasterService/";
+	private static final String V_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubVehicleService/";
+	private static final String D_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubDriverService/";
+	private static final String LIC_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubLicenseCodeService/";
+	private static final String WT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubWallTypeService/";
+	private static final String RT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubRoofTypeService/";
+	private static final String MS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritialStatusService/";
+	private static final String IT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubIdTypeService/";
+	private static final String QUT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubQuoteService/";
+	private static final String QQUT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubQuickQuoteService/";
+	private static final String PRO_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropertyService/";
+	private static final String PRO_ITM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropertyItemService/";
+	private static final String II_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsuranceItemService/";
+	private static final String RAT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubRateTypeService/";
+	private static final String RE_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubRateEngineService/";
+	private static final String FD_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubFieldService/";
+	private static final String CONF_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubConfigService/";
+	private static final String OCN_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubOccupationService/";
+	private static final String CCDE_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCountryCodeService/";
+	private static final String LOG_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubLoginService/";
+	private static final String SECQ_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubSecurityQuestionService/";
+	private static final String ET_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubEntityTypeService/";
+	private static final String SM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubVehSecTypeService/";
+	private static final String AEST_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubAccessTypeService/";
+	private static final String BT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubBarTypeService/";
+	private static final String PROT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropertyTypeService/";
+	private static final String OCCS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubOccupiedStatusService/";
+	private static final String CT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCoverTypeService/";
 	
 	private List<String> vmMakes;
 	private IclubVehicleMasterBean vehicleMasterBean;
@@ -366,31 +395,6 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubProperty");
 		try {
 			if (validateProForm(false)) {
-				IclubPropertyModel model = new IclubPropertyModel();
-				
-				model.setPId(propertyBean.getPId());
-				model.setPCrtdDt(new Date(System.currentTimeMillis()));
-				model.setPEstValue(propertyBean.getPEstValue());
-				model.setPSecGatesYn(propertyBean.getPSecGatesYn());
-				model.setPNorobberyYn(propertyBean.getPNorobberyYn());
-				model.setPCompYn(propertyBean.getPCompYn());
-				model.setPRentFurYn(propertyBean.getPRentFurYn());
-				model.setPNoclaimYrs(propertyBean.getPNoclaimYrs());
-				model.setPPostalCd(propertyBean.getPPostalCd());
-				model.setPLong(propertyBean.getPLong());
-				model.setPLat(propertyBean.getPLat());
-				model.setPAddress(propertyBean.getPAddress());
-				model.setPRegNum(propertyBean.getPRegNum());
-				model.setIclubCoverType(propertyBean.getIclubCoverType());
-				model.setIclubPropUsageType(propertyBean.getIclubPropUsageType());
-				model.setIclubOccupiedStatus(propertyBean.getIclubOccupiedStatus());
-				model.setIclubPropertyType(propertyBean.getIclubPropertyType());
-				model.setIclubWallType(propertyBean.getIclubWallType());
-				model.setIclubAccessType(propertyBean.getIclubAccessType());
-				model.setIclubPerson(getSessionUserId());
-				model.setIclubBarType(propertyBean.getIclubBarType());
-				model.setPThatchType(propertyBean.getPThatchType());
-				model.setIclubRoofType(propertyBean.getIclubRoofType());
 				
 				IclubWebHelper.addMessage(getLabelBundle().getString("property") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 				clearProForm();
@@ -532,40 +536,8 @@ public class IclubQuickQuoteController implements Serializable {
 		try {
 			if (validateVehForm(false)) {
 				
-				IclubVehicleModel model = new IclubVehicleModel();
-				
-				model.setVId(vehicleBean.getVId());
 				vehicleBean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				vehicleBean.setIclubPerson(getSessionUserId());
-				model.setVOwner(vehicleBean.getVOwner());
-				model.setVGearLockYn(vehicleBean.getVGearLockYn());
-				model.setVImmYn(vehicleBean.getVImmYn());
-				model.setVConcessReason(vehicleBean.getVConcessReason());
-				model.setVConcessPrct(vehicleBean.getVConcessPrct());
-				model.setVInsuredValue(vehicleBean.getVInsuredValue());
-				model.setVYear(vehicleBean.getVYear());
-				model.setVDdLong(vehicleBean.getVDdLong());
-				model.setVDdLat(vehicleBean.getVDdLat());
-				model.setVDdArea(vehicleBean.getVDdArea());
-				model.setVOnLong(vehicleBean.getVOnLong());
-				model.setVOnLat(vehicleBean.getVOnLat());
-				model.setVOnArea(vehicleBean.getVOnArea());
-				model.setVCompYrs(vehicleBean.getVCompYrs());
-				model.setVOdometer(vehicleBean.getVOdometer());
-				model.setVCrtdDt(vehicleBean.getVCrtdDt());
-				model.setVRegNum(vehicleBean.getVRegNum());
-				model.setVEngineNr(vehicleBean.getVEngineNr());
-				model.setVVin(vehicleBean.getVVin());
-				model.setIclubCoverType(vehicleBean.getIclubCoverType());
-				model.setVNoclaimYrs(vehicleBean.getVNoclaimYrs());
-				model.setIclubVehicleMaster(vehicleBean.getIclubVehicleMaster());
-				model.setIclubVehUsageType(vehicleBean.getIclubVehUsageType());
-				model.setIclubVehSecType(vehicleBean.getIclubVehSecType());
-				model.setIclubPerson(vehicleBean.getIclubPerson());
-				model.setIclubDriver(vehicleBean.getIclubDriver());
-				model.setIclubSecurityDevice(vehicleBean.getIclubSecurityDevice());
-				model.setIclubAccessTypeByVDdAccessTypeId(vehicleBean.getIclubAccessTypeByVDdAccessTypeId());
-				model.setIclubAccessTypeByVOnAccessTypeId(vehicleBean.getIclubAccessTypeByVOnAccessTypeId());
 				
 				IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 				clearVehForm();
@@ -905,19 +877,8 @@ public class IclubQuickQuoteController implements Serializable {
 			vBeans = new ArrayList<IclubVehicleMasterBean>();
 			if (models != null && models.size() > 0) {
 				for (IclubVehicleMasterModel model : models) {
-					IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
 					
-					bean.setVmId(model.getVmId());
-					
-					bean.setVmMake(model.getVmMake());
-					bean.setVmModel(model.getVmModel());
-					bean.setVmMrktRate(model.getVmMrktRate());
-					bean.setVmOrigRate(model.getVmOrigRate());
-					bean.setVmRetRate(model.getVmRetRate());
-					bean.setVmProdDt(model.getVmProdDt());
-					bean.setVmCrtdDt(model.getVmCrtdDt());
-					bean.setIclubPerson(model.getIclubPerson());
-					bean.setVmRatePrct(model.getVmRatePrct());
+					IclubVehicleMasterBean bean = IclubVehicleMasterTrans.fromWStoUI(model);
 					
 					vBeans.add(bean);
 				}
@@ -1030,33 +991,9 @@ public class IclubQuickQuoteController implements Serializable {
 			if (validatePersonForm(!true) && validateLoginForm(!updateLogin)) {
 				WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "mod");
 				
-				IclubPersonModel model = new IclubPersonModel();
-				model.setPId(bean.getPId());
-				model.setPCrtdDt(bean.getPCrtdDt());
-				model.setPDob(bean.getPDob());
-				model.setPEmail(bean.getPEmail());
-				model.setPFName(bean.getPFName());
-				model.setPIdNum(bean.getPIdNum());
-				model.setPLName(bean.getPLName());
+				IclubPersonModel model = IclubPersonTrans.fromUItoWS(bean);
+				
 				model.setPAge(IclubWebHelper.calculateYearDiff(bean.getPDob().getTime()));
-				model.setPMobile(bean.getPMobile());
-				model.setPAddress(bean.getPAddress());
-				model.setPContactPref(bean.getPContactPref());
-				model.setPGender(bean.getPGender());
-				model.setPContactPref(bean.getPContactPref());
-				model.setPIdExpiryDt(bean.getPIdExpiryDt());
-				model.setPInitials(bean.getPInitials());
-				model.setPIsPensioner(bean.getPIsPensioner());
-				model.setPIdIssueCntry(bean.getPIdIssueCntry() != null ? bean.getPIdIssueCntry().longValue() : null);
-				model.setPIdIssueDt(bean.getPIdIssueDt());
-				model.setPLat(bean.getPLat());
-				model.setPLong(bean.getPLong());
-				model.setPOccupation(bean.getPOccupation());
-				model.setPTitle(bean.getPTitle());
-				model.setPZipCd(bean.getPZipCd());
-				model.setIclubIdType(bean.getIclubIdType());
-				model.setIclubPerson(getSessionUserId());
-				model.setIclubMaritialStatus(bean.getIclubMaritialStatus());
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -1162,7 +1099,7 @@ public class IclubQuickQuoteController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: updatePassword");
 		try {
 			if (validateLoginForm(!updateLogin)) {
-				IclubLoginModel model = new IclubLoginModel();
+				IclubLoginModel model = IclubLoginTrans.fromUItoWS(loginBean);
 				WebClient client = null;
 				
 				if (loginBean.getLId() != null) {
@@ -1174,16 +1111,10 @@ public class IclubQuickQuoteController implements Serializable {
 					model.setLId(UUID.randomUUID().toString());
 				}
 				model.setLCrtdDt(new Date(System.currentTimeMillis()));
-				model.setLLastDate(loginBean.getLLastDate());
-				model.setLName(loginBean.getLName());
 				model.setLPasswd(Base64.encodeBase64URLSafeString(DigestUtils.md5(loginBean.getLPasswd())));
-				model.setLSecAns(loginBean.getLSecAns());
 				model.setIclubPersonAByLCrtdBy(bean.getPId());
 				model.setIclubPersonBByLPersonId(bean.getPId());
 				model.setIclubRoleType(2l);
-				model.setIclubSecurityQuestion(loginBean.getIclubSecurityQuestion());
-				model.setLProviderCd(loginBean.getLProviderCd());
-				model.setLProviderId(loginBean.getLProviderId());
 				
 				ResponseModel response = null;
 				if (updateLogin) {
@@ -1318,44 +1249,18 @@ public class IclubQuickQuoteController implements Serializable {
 	public IclubPersonModel insertIntoPerson(IclubPersonBean personBean) throws Exception {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: insertIntoPerson");
-		IclubPersonModel model = new IclubPersonModel();
 		
 		try {
+			IclubPersonModel model = IclubPersonTrans.fromUItoWS(personBean);
+			
 			personBean.setPAge(personBean.getPDob() != null ? IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) : null);
 			personBean.setPId(personBean.getPId() != null ? personBean.getPId() : UUID.randomUUID().toString());
 			
-			model.setPId(personBean.getPId());
-			model.setPCrtdDt(personBean.getPCrtdDt());
-			model.setPDob(personBean.getPDob());
-			model.setPAge(personBean.getPAge());
-			model.setPEmail(personBean.getPEmail());
-			model.setPFName(personBean.getPFName());
-			model.setPIdNum(personBean.getPIdNum());
-			model.setPLName(personBean.getPLName());
-			model.setPMobile(personBean.getPMobile());
-			model.setPAddress(personBean.getPAddress());
-			model.setPContactPref(personBean.getPContactPref());
-			model.setPGender(personBean.getPGender());
-			model.setPContactPref(personBean.getPContactPref());
-			model.setPIdExpiryDt(personBean.getPIdExpiryDt());
-			model.setPIdIssueDt(personBean.getPIdIssueDt());
-			model.setPInitials(personBean.getPInitials());
-			model.setPIsPensioner(personBean.getPIsPensioner());
-			model.setPIdIssueCntry(personBean.getPIdIssueCntry());
-			model.setPLat(personBean.getPLat());
-			model.setPLong(personBean.getPLong());
-			model.setPOccupation(personBean.getPOccupation());
-			model.setPTitle(personBean.getPTitle());
-			model.setPZipCd(personBean.getPZipCd());
-			model.setIclubIdType(personBean.getIclubIdType());
-			model.setIclubPerson(getSessionUserId());
-			model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
-			
+			return model;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			throw e;
 		}
-		return model;
 		
 	}
 	
@@ -1444,38 +1349,9 @@ public class IclubQuickQuoteController implements Serializable {
 				
 				for (IclubVehicleBean bean : beans) {
 					
-					IclubVehicleModel model = new IclubVehicleModel();
+					IclubVehicleModel model = IclubVehicleTrans.fromUItoWS(bean);
 					
-					model.setVId(bean.getVId());
-					model.setVOwner(bean.getVOwner());
-					model.setVGearLockYn(bean.getVGearLockYn());
-					model.setVImmYn(bean.getVImmYn());
-					model.setVConcessReason(bean.getVConcessReason());
-					model.setVConcessPrct(bean.getVConcessPrct());
-					model.setVInsuredValue(bean.getVInsuredValue());
-					model.setVYear(bean.getVYear());
-					model.setVDdLong(bean.getVDdLong());
-					model.setVDdLat(bean.getVDdLat());
-					model.setVDdArea(bean.getVDdArea());
-					model.setVOnLong(bean.getVOnLong());
-					model.setVOnLat(bean.getVOnLat());
-					model.setVOnArea(bean.getVOnArea());
-					model.setVOdometer(bean.getVOdometer());
-					model.setVCrtdDt(bean.getVCrtdDt());
-					model.setVRegNum(bean.getVRegNum());
-					model.setVCompYrs(bean.getVCompYrs());
-					model.setVEngineNr(bean.getVEngineNr());
-					model.setVVin(bean.getVVin());
-					model.setVNoclaimYrs(bean.getVNoclaimYrs());
-					model.setIclubVehicleMaster(bean.getIclubVehicleMaster());
-					model.setIclubVehUsageType(bean.getIclubVehUsageType());
-					model.setIclubVehSecType(bean.getIclubVehSecType());
-					model.setIclubPerson(bean.getIclubPerson());
-					model.setIclubCoverType(bean.getIclubCoverType());
 					model.setIclubDriver(driverBean.getDId());
-					model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
-					model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
-					model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId());
 					
 					models.add(model);
 				}
@@ -1500,11 +1376,8 @@ public class IclubQuickQuoteController implements Serializable {
 			for (String propId : propertyItemModelMap.keySet()) {
 				
 				for (IclubPropertyItemBean bean : propertyItemModelMap.get(propId)) {
-					IclubPropertyItemModel model = new IclubPropertyItemModel();
+					IclubPropertyItemModel model = IclubPropertyItemTrans.fromUItoWS(bean);
 					model.setIclubProperty(propId);
-					model.setPiId(bean.getPiId());
-					model.setPiValue(bean.getPiValue());
-					model.setPiDescripton(bean.getPiDescripton());
 					propertyItemModels.add(model);
 				}
 			}
@@ -1523,33 +1396,7 @@ public class IclubQuickQuoteController implements Serializable {
 				
 				for (IclubPropertyBean bean : beans) {
 					
-					IclubPropertyModel model = new IclubPropertyModel();
-					
-					model.setPId(bean.getPId());
-					model.setPCrtdDt(bean.getPCrtdDt());
-					model.setPEstValue(bean.getPEstValue());
-					model.setPSecGatesYn(bean.getPSecGatesYn());
-					model.setPNorobberyYn(bean.getPNorobberyYn());
-					model.setPCompYn(bean.getPCompYn());
-					model.setPRentFurYn(bean.getPRentFurYn());
-					model.setPNoclaimYrs(bean.getPNoclaimYrs());
-					model.setPPostalCd(bean.getPPostalCd());
-					model.setPLong(bean.getPLong());
-					model.setPLat(bean.getPLat());
-					model.setPAddress(bean.getPAddress());
-					model.setPRegNum(bean.getPRegNum());
-					model.setPReplacementCost(bean.getPReplacementCost());
-					model.setPContentCost(bean.getPContentCost());
-					model.setIclubCoverType(bean.getIclubCoverType());
-					model.setIclubPropUsageType(bean.getIclubPropUsageType());
-					model.setIclubOccupiedStatus(bean.getIclubOccupiedStatus());
-					model.setIclubPropertyType(bean.getIclubPropertyType());
-					model.setIclubWallType(bean.getIclubWallType());
-					model.setIclubAccessType(bean.getIclubAccessType());
-					model.setIclubPerson(getSessionUserId());
-					model.setIclubBarType(bean.getIclubBarType());
-					model.setPThatchType(bean.getPThatchType());
-					model.setIclubRoofType(bean.getIclubRoofType());
+					IclubPropertyModel model = IclubPropertyTrans.fromUItoWS(bean);
 					
 					models.add(model);
 				}
@@ -1571,12 +1418,9 @@ public class IclubQuickQuoteController implements Serializable {
 		
 		if (beans != null && beans.size() > 0) {
 			for (IclubPropertyItemBean bean : beans) {
-				IclubPropertyItemModel model = new IclubPropertyItemModel();
+				IclubPropertyItemModel model = IclubPropertyItemTrans.fromUItoWS(bean);
 				WebClient client = IclubWebHelper.createCustomClient(PRO_ITM_BASE_URL + "add");
-				model.setPiId(bean.getPiId());
 				model.setPiCrtdDate(new Date(System.currentTimeMillis()));
-				model.setPiDescripton(bean.getPiDescripton());
-				model.setPiValue(bean.getPiValue());
 				model.setIclubPerson(personBean.getPId());
 				model.setIclubProperty(propertyModel.getPId());
 				
@@ -1625,10 +1469,11 @@ public class IclubQuickQuoteController implements Serializable {
 	public IclubQuoteModel addQuote(IclubQuoteBean bean, IclubPersonBean personBean) throws Exception {
 		
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addQuote");
-		IclubQuoteModel model = new IclubQuoteModel();
+		
 		try {
 			
 			bean.setQId(UUID.randomUUID().toString());
+			IclubQuoteModel model = IclubQuoteTrans.fromUItoWS(bean);
 			model.setQId(bean.getQId());
 			model.setQCrtdDt(new Date(System.currentTimeMillis()));
 			model.setQIsMatched("N");
@@ -1639,21 +1484,17 @@ public class IclubQuickQuoteController implements Serializable {
 			model.setQGenPremium(0.0d);
 			model.setQNumItems(1);
 			model.setQGenDt(new Date(System.currentTimeMillis()));
-			model.setQClaimYn(bean.getQClaimYn());
 			model.setQNumber(getQnumber());
 			model.setIclubPersonAByQCrtdBy(getSessionUserId());
 			model.setIclubProductType(1l);
-			model.setIclubInsurerMaster(bean.getIclubInsurerMaster());
-			model.setIclubCoverType(bean.getIclubCoverType());
 			model.setIclubQuoteStatus(1l);
 			model.setIclubPersonBByQPersonId(personBean.getPId());
-			
+			return model;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			throw e;
 		}
 		
-		return model;
 	}
 	
 	public Long getQnumber() {
@@ -1667,29 +1508,25 @@ public class IclubQuickQuoteController implements Serializable {
 	}
 	
 	public IclubDriverModel addDriver(IclubDriverBean bean, IclubPersonBean personBean, IclubQuoteModel quoteModel) throws Exception {
-		IclubDriverModel model = new IclubDriverModel();
+		
 		try {
 			
 			bean.setDId(UUID.randomUUID().toString());
 			
-			model.setDId(bean.getDId());
-			model.setDDob(bean.getDDob());
-			model.setDIssueDt(new Date(bean.getDIssueDt().getTime()));
+			IclubDriverModel model = IclubDriverTrans.fromUItoWS(bean);
+			
 			model.setDIssueYears(IclubWebHelper.calculateYearDiff(bean.getDIssueDt().getTime()));
-			model.setDLicenseNum(bean.getDLicenseNum());
-			model.setDName(bean.getDName());
 			model.setDCrtdDt(new Date(System.currentTimeMillis()));
-			model.setIclubAccessTypeAByDAccessTypeId(bean.getIclubAccessTypeAByDAccessTypeId());
-			model.setIclubLicenseCode(bean.getIclubLicenseCode());
 			model.setIclubMaritialStatus(personBean.getIclubMaritialStatus());
 			model.setIclubPersonBByDPersonId(personBean.getPId());
 			model.setIclubPersonAByDCrtdBy(getSessionUserId());
 			
+			return model;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			throw e;
 		}
-		return model;
+		
 	}
 	
 	public boolean validateForm(boolean flag, boolean loginFlag) {
@@ -1784,12 +1621,7 @@ public class IclubQuickQuoteController implements Serializable {
 		vehUsageTypeBeans = new ArrayList<IclubVehUsageTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubVehUsageTypeModel model : models) {
-				IclubVehUsageTypeBean bean = new IclubVehUsageTypeBean();
-				
-				bean.setVutId(model.getVutId());
-				bean.setVutLongDesc(model.getVutLongDesc());
-				bean.setVutShortDesc(model.getVutShortDesc());
-				bean.setVutStatus(model.getVutStatus());
+				IclubVehUsageTypeBean bean = IclubVehUsageTypeTrans.fromWStoUI(model);
 				
 				pBeans.add(bean);
 				
@@ -1850,14 +1682,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubLicenseCodeModel model : models) {
 				
-				IclubLicenseCodeBean bean = new IclubLicenseCodeBean();
-				
-				bean.setLcId(model.getLcId());
-				bean.setLcCrtdDt(model.getLcCrtdDt());
-				bean.setLcDesc(model.getLcDesc());
-				bean.setLcStatus(model.getLcStatus());
-				bean.setIclubPerson(model.getIclubPerson());
-				bean.setLcCategory(model.getLcCategory());
+				IclubLicenseCodeBean bean = IclubLicenseCodeTrans.fromWStoUI(model);
 				
 				licenseCodeBeans.add(bean);
 			}
@@ -1878,11 +1703,9 @@ public class IclubQuickQuoteController implements Serializable {
 		wallTypeBeans = new ArrayList<IclubWallTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubWallTypeModel model : models) {
-				IclubWallTypeBean bean = new IclubWallTypeBean();
-				bean.setWtId(model.getWtId());
-				bean.setWtLongDesc(model.getWtLongDesc());
-				bean.setWtShortDesc(model.getWtShortDesc());
-				bean.setWtStatus(model.getWtStatus());
+				
+				IclubWallTypeBean bean = IclubWallTypeTrans.fromWStoUI(model);
+				
 				wallTypeBeans.add(bean);
 			}
 		}
@@ -1901,11 +1724,8 @@ public class IclubQuickQuoteController implements Serializable {
 		roofTypeBeans = new ArrayList<IclubRoofTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubRoofTypeModel model : models) {
-				IclubRoofTypeBean bean = new IclubRoofTypeBean();
-				bean.setRtId(model.getRtId());
-				bean.setRtLongDesc(model.getRtLongDesc());
-				bean.setRtShortDesc(model.getRtShortDesc());
-				bean.setRtStatus(model.getRtStatus());
+				IclubRoofTypeBean bean = IclubRoofTypeTrans.fromWStoUI(model);
+				
 				roofTypeBeans.add(bean);
 			}
 		}
@@ -1935,11 +1755,8 @@ public class IclubQuickQuoteController implements Serializable {
 		maritialStatusBeans = new ArrayList<IclubMaritialStatusBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubMaritialStatusModel model : models) {
-				IclubMaritialStatusBean bean = new IclubMaritialStatusBean();
-				bean.setMsId(model.getMsId());
-				bean.setMsLongDesc(model.getMsLongDesc());
-				bean.setMsShortDesc(model.getMsShortDesc());
-				bean.setMsStatus(model.getMsStatus());
+				IclubMaritialStatusBean bean = IclubMaritialStatusTrans.fromWStoUI(model);
+				
 				maritialStatusBeans.add(bean);
 			}
 		}
@@ -1958,11 +1775,8 @@ public class IclubQuickQuoteController implements Serializable {
 		idTypeBeans = new ArrayList<IclubIdTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubIdTypeModel model : models) {
-				IclubIdTypeBean bean = new IclubIdTypeBean();
-				bean.setItId(model.getItId());
-				bean.setItLongDesc(model.getItLongDesc());
-				bean.setItShortDesc(model.getItShortDesc());
-				bean.setItStatus(model.getItStatus());
+				IclubIdTypeBean bean = IclubIdTypeTrans.fromWStoUI(model);
+				
 				idTypeBeans.add(bean);
 			}
 		}
@@ -2037,11 +1851,7 @@ public class IclubQuickQuoteController implements Serializable {
 		securityQuestionBeans = new ArrayList<IclubSecurityQuestionBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubSecurityQuestionModel model : models) {
-				IclubSecurityQuestionBean bean = new IclubSecurityQuestionBean();
-				bean.setSqId(model.getSqId());
-				bean.setSqLongDesc(model.getSqLongDesc());
-				bean.setSqShortDesc(model.getSqShortDesc());
-				bean.setSqStatus(model.getSqStatus());
+				IclubSecurityQuestionBean bean = IclubSecurityQuestionTrans.fromWStoUI(model);
 				
 				securityQuestionBeans.add(bean);
 			}
@@ -2059,20 +1869,7 @@ public class IclubQuickQuoteController implements Serializable {
 		IclubLoginModel model = (IclubLoginModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class));
 		if (model != null && model.getLId() != null) {
 			updateLogin = true;
-			loginBean = new IclubLoginBean();
-			loginBean.setLId(model.getLId());
-			loginBean.setLCrtdDt(model.getLCrtdDt());
-			loginBean.setLLastDate(model.getLLastDate());
-			loginBean.setLName(model.getLName());
-			// loginBean.setLPasswd(model.getLPasswd());
-			loginBean.setLSecAns(model.getLSecAns());
-			loginBean.setLSecAns(model.getLSecAns());
-			loginBean.setIclubPersonAByLCrtdBy(model.getIclubPersonAByLCrtdBy());
-			loginBean.setIclubPersonBByLPersonId(model.getIclubPersonBByLPersonId());
-			loginBean.setIclubRoleType(model.getIclubRoleType());
-			loginBean.setIclubSecurityQuestion(model.getIclubSecurityQuestion());
-			loginBean.setLProviderCd(model.getLProviderCd());
-			loginBean.setLProviderId(model.getLProviderId());
+			loginBean = IclubLoginTrans.fromWStoUI(model);
 			
 		} else {
 			loginBean = new IclubLoginBean();
@@ -2083,31 +1880,8 @@ public class IclubQuickQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "get/" + userId);
 		
 		IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
-		bean = new IclubPersonBean();
-		bean.setPId(model.getPId());
-		bean.setPCrtdDt(model.getPCrtdDt());
-		bean.setPDob(model.getPDob());
-		bean.setPEmail(model.getPEmail());
-		bean.setPFName(model.getPFName());
-		bean.setPIdNum(model.getPIdNum());
-		bean.setPLName(model.getPLName());
-		bean.setPMobile(model.getPMobile());
-		bean.setPAddress(model.getPAddress());
-		bean.setPContactPref(model.getPContactPref());
-		bean.setPGender(model.getPGender());
-		bean.setPContactPref(model.getPContactPref());
-		bean.setPIdExpiryDt(model.getPIdExpiryDt());
-		bean.setPInitials(model.getPInitials());
-		bean.setPIsPensioner(model.getPIsPensioner());
-		bean.setPIdIssueCntry(model.getPIdIssueCntry());
-		bean.setPLat(model.getPLat());
-		bean.setPLong(model.getPLong());
-		bean.setPOccupation(model.getPOccupation());
-		bean.setPTitle(model.getPTitle());
-		bean.setPZipCd(model.getPZipCd());
-		bean.setIclubIdType(model.getIclubIdType());
-		bean.setIclubPerson(model.getIclubPerson());
-		bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+		bean = IclubPersonTrans.fromWStoUI(model);
+		
 		loadLoginBean();
 		
 	}
@@ -2124,13 +1898,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubOccupationModel model : models) {
 				
-				IclubOccupationBean bean = new IclubOccupationBean();
-				
-				bean.setOId(model.getOId());
-				bean.setODesc(model.getODesc());
-				bean.setOCrtdDt(model.getOCrtdDt());
-				bean.setOStatus(model.getOStatus());
-				bean.setIclubPerson(model.getIclubPerson());
+				IclubOccupationBean bean = IclubOccupationTrans.fromWStoUI(model);
 				
 				occupationBeans.add(bean);
 			}
@@ -2149,13 +1917,9 @@ public class IclubQuickQuoteController implements Serializable {
 		countryCodeBeans = new ArrayList<IclubCountryCodeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubCountryCodeModel model : models) {
-				IclubCountryCodeBean bean = new IclubCountryCodeBean();
-				bean.setCcId(model.getCcId().intValue());
-				bean.setCcIsoId(model.getCcIsoId());
-				bean.setCcShortId(model.getCcShortId());
-				bean.setCcCrtdDt(model.getCcCrtdDt());
-				bean.setCcName(model.getCcName());
-				bean.setIclubPerson(model.getIclubPerson());
+				
+				IclubCountryCodeBean bean = IclubCountryCodeTrans.fromWStoUI(model);
+				
 				countryCodeBeans.add(bean);
 			}
 		}
@@ -2244,13 +2008,7 @@ public class IclubQuickQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "getByQuoteIdAndItemTypeId/" + quoteId + "/" + itemTypeId);
 		
 		IclubInsuranceItemModel model = (IclubInsuranceItemModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubInsuranceItemModel.class));
-		IclubInsuranceItemBean bean = new IclubInsuranceItemBean();
-		bean.setIiId(model.getIiId());
-		bean.setIiItemId(model.getIiItemId());
-		bean.setIiQuoteId(model.getIiQuoteId());
-		bean.setIiCrtdDt(model.getIiCrtdDt());
-		bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-		bean.setIclubPerson(model.getIclubPerson());
+		IclubInsuranceItemBean bean = IclubInsuranceItemTrans.fromWStoUI(model);
 		
 		client.close();
 		return bean;
@@ -2265,15 +2023,8 @@ public class IclubQuickQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubRateEngineModel model : models) {
 				
-				IclubRateEngineBean bean = new IclubRateEngineBean();
-				bean.setReId(model.getReId());
-				bean.setReRate(model.getReRate());
-				bean.setReCrtdDt(model.getReCrtdDt());
-				bean.setReStatus(model.getReStatus());
-				bean.setReMaxValue(model.getReMaxValue());
-				bean.setReBaseValue(model.getReBaseValue());
-				bean.setIclubRateType(model.getIclubRateType());
-				bean.setIclubPerson(model.getIclubPerson());
+				IclubRateEngineBean bean = IclubRateEngineTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}
@@ -2302,37 +2053,7 @@ public class IclubQuickQuoteController implements Serializable {
 		IclubVehicleModel model = (IclubVehicleModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubVehicleModel.class));
 		IclubVehicleBean vehicleBean = new IclubVehicleBean();
 		if (model != null && model.getVId() != null) {
-			vehicleBean = new IclubVehicleBean();
-			
-			vehicleBean.setVId(model.getVId());
-			vehicleBean.setVOwner(model.getVOwner());
-			vehicleBean.setVGearLockYn(model.getVGearLockYn());
-			vehicleBean.setVImmYn(model.getVImmYn());
-			vehicleBean.setVConcessReason(model.getVConcessReason());
-			vehicleBean.setVConcessPrct(model.getVConcessPrct());
-			vehicleBean.setVInsuredValue(model.getVInsuredValue());
-			vehicleBean.setVYear(model.getVYear());
-			vehicleBean.setVDdLong(model.getVDdLong());
-			vehicleBean.setVDdLat(model.getVDdLat());
-			vehicleBean.setVDdArea(model.getVDdArea());
-			vehicleBean.setVOnLong(model.getVOnLong());
-			vehicleBean.setVOnLat(model.getVOnLat());
-			vehicleBean.setVOnArea(model.getVOnArea());
-			vehicleBean.setVOdometer(model.getVOdometer());
-			vehicleBean.setVCrtdDt(model.getVCrtdDt());
-			vehicleBean.setVRegNum(model.getVRegNum());
-			vehicleBean.setVEngineNr(model.getVEngineNr());
-			vehicleBean.setVVin(model.getVVin());
-			vehicleBean.setVNoclaimYrs(model.getVNoclaimYrs());
-			vehicleBean.setIclubVehicleMaster(model.getIclubVehicleMaster());
-			vehicleBean.setIclubVehUsageType(model.getIclubVehUsageType());
-			vehicleBean.setIclubVehSecType(model.getIclubVehSecType());
-			vehicleBean.setIclubPerson(model.getIclubPerson());
-			vehicleBean.setIclubDriver(model.getIclubDriver());
-			vehicleBean.setIclubCoverType(model.getIclubCoverType());
-			vehicleBean.setIclubSecurityDevice(model.getIclubSecurityDevice());
-			vehicleBean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
-			vehicleBean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
+			vehicleBean = IclubVehicleTrans.fromWStoUI(model);
 			
 		}
 		
@@ -2345,30 +2066,7 @@ public class IclubQuickQuoteController implements Serializable {
 		IclubPropertyModel model = (IclubPropertyModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPropertyModel.class));
 		IclubPropertyBean propertyBean = new IclubPropertyBean();
 		if (model != null && model.getPId() != null) {
-			propertyBean = new IclubPropertyBean();
-			propertyBean.setPId(model.getPId());
-			propertyBean.setPCrtdDt(model.getPCrtdDt());
-			propertyBean.setPEstValue(model.getPEstValue());
-			propertyBean.setPSecGatesYn(model.getPSecGatesYn());
-			propertyBean.setPNorobberyYn(model.getPNorobberyYn());
-			propertyBean.setPCompYn(model.getPCompYn());
-			propertyBean.setPRentFurYn(model.getPRentFurYn());
-			propertyBean.setPNoclaimYrs(model.getPNoclaimYrs());
-			propertyBean.setPPostalCd(model.getPPostalCd());
-			propertyBean.setPLong(model.getPLong());
-			propertyBean.setPLat(model.getPLat());
-			propertyBean.setPAddress(model.getPAddress());
-			propertyBean.setPRegNum(model.getPRegNum());
-			propertyBean.setIclubCoverType(model.getIclubCoverType());
-			propertyBean.setIclubPropUsageType(model.getIclubPropUsageType());
-			propertyBean.setIclubOccupiedStatus(model.getIclubOccupiedStatus());
-			propertyBean.setIclubPropertyType(model.getIclubPropertyType());
-			propertyBean.setIclubWallType(model.getIclubWallType());
-			propertyBean.setIclubAccessType(model.getIclubAccessType());
-			propertyBean.setIclubPerson(model.getIclubPerson());
-			propertyBean.setIclubBarType(model.getIclubBarType());
-			propertyBean.setPThatchType(model.getPThatchType());
-			propertyBean.setIclubRoofType(model.getIclubRoofType());
+			propertyBean = IclubPropertyTrans.fromWStoUI(model);
 			
 		}
 		client.close();
@@ -2380,12 +2078,7 @@ public class IclubQuickQuoteController implements Serializable {
 		IclubEntityTypeModel model = (IclubEntityTypeModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubEntityTypeModel.class));
 		client.close();
 		
-		IclubEntityTypeBean bean = new IclubEntityTypeBean();
-		bean.setEtId(model.getEtId());
-		bean.setEtLongDesc(model.getEtLongDesc());
-		bean.setEtShortDesc(model.getEtShortDesc());
-		bean.setEtStatus(model.getEtStatus());
-		bean.setEtTblNm(model.getEtTblNm());
+		IclubEntityTypeBean bean = IclubEntityTypeTrans.fromWStoUI(model);
 		
 		return bean;
 		
@@ -2395,26 +2088,7 @@ public class IclubQuickQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/" + quoteId);
 		IclubQuoteModel model = (IclubQuoteModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubQuoteModel.class));
 		
-		IclubQuoteBean bean = new IclubQuoteBean();
-		
-		bean.setQId(model.getQId());
-		bean.setQCrtdDt(model.getQCrtdDt());
-		bean.setQIsMatched(model.getQIsMatched());
-		bean.setQPrevPremium(model.getQPrevPremium());
-		bean.setQValidUntil(model.getQValidUntil());
-		bean.setQMobile(model.getQMobile());
-		bean.setQEmail(model.getQEmail());
-		bean.setQGenPremium(model.getQGenPremium());
-		bean.setQNumItems(model.getQNumItems());
-		bean.setQGenDt(model.getQGenDt());
-		bean.setQNumber(model.getQNumber());
-		bean.setIclubPersonAByQCrtdBy(model.getIclubPersonAByQCrtdBy());
-		bean.setIclubProductType(model.getIclubProductType());
-		bean.setIclubProductType(model.getIclubProductType());
-		bean.setIclubInsurerMaster(model.getIclubInsurerMaster());
-		bean.setIclubCoverType(model.getIclubCoverType());
-		bean.setIclubQuoteStatus(model.getIclubQuoteStatus());
-		bean.setIclubPersonBByQPersonId(model.getIclubPersonBByQPersonId());
+		IclubQuoteBean bean = IclubQuoteTrans.fromWStoUI(model);
 		
 		client.close();
 		
@@ -2427,32 +2101,8 @@ public class IclubQuickQuoteController implements Serializable {
 		WebClient client = IclubWebHelper.createCustomClient(PER_BASE_URL + "get/" + personId);
 		
 		IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
-		IclubPersonBean personBean = new IclubPersonBean();
-		personBean.setPId(model.getPId());
-		personBean.setPAge(model.getPAge());
-		personBean.setPCrtdDt(model.getPCrtdDt());
-		personBean.setPDob(model.getPDob());
-		personBean.setPEmail(model.getPEmail());
-		personBean.setPFName(model.getPFName());
-		personBean.setPIdNum(model.getPIdNum());
-		personBean.setPLName(model.getPLName());
-		personBean.setPMobile(model.getPMobile());
-		personBean.setPAddress(model.getPAddress());
-		personBean.setPContactPref(model.getPContactPref());
-		personBean.setPGender(model.getPGender());
-		personBean.setPContactPref(model.getPContactPref());
-		personBean.setPIdExpiryDt(model.getPIdExpiryDt());
-		personBean.setPInitials(model.getPInitials());
-		personBean.setPIsPensioner(model.getPIsPensioner());
-		personBean.setPIdIssueCntry(model.getPIdIssueCntry());
-		personBean.setPLat(model.getPLat());
-		personBean.setPLong(model.getPLong());
-		personBean.setPOccupation(model.getPOccupation());
-		personBean.setPTitle(model.getPTitle());
-		personBean.setPZipCd(model.getPZipCd());
-		personBean.setIclubIdType(model.getIclubIdType());
-		personBean.setIclubPerson(model.getIclubPerson());
-		personBean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+		IclubPersonBean personBean = IclubPersonTrans.fromWStoUI(model);
+		
 		client.close();
 		return personBean;
 	}
@@ -2466,18 +2116,8 @@ public class IclubQuickQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubRateTypeModel model : models) {
 				
-				IclubRateTypeBean bean = new IclubRateTypeBean();
-				bean.setRtId(model.getRtId());
-				bean.setRtLongDesc(model.getRtLongDesc());
-				bean.setRtShortDesc(model.getRtShortDesc());
-				bean.setRtStatus(model.getRtStatus());
-				bean.setRtQuoteType(model.getRtQuoteType());
-				bean.setIclubField(model.getIclubField());
-				bean.setIclubEntityType(model.getIclubEntityType());
-				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-				bean.setIclubPerson(model.getIclubPerson());
-				bean.setRtCrtdDt(model.getRtCrtdDt());
-				bean.setRtType(model.getRtType());
+				IclubRateTypeBean bean = IclubRateTypeTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 		}
@@ -2494,14 +2134,8 @@ public class IclubQuickQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubFieldModel model : models) {
 				
-				IclubFieldBean bean = new IclubFieldBean();
-				bean.setFId(model.getFId());
-				bean.setFName(model.getFName());
-				bean.setFDesc(model.getFDesc());
-				bean.setFStatus(model.getFStatus());
-				bean.setFLTblName(model.getFLTblName());
-				bean.setFRate(model.getFRate());
-				bean.setIclubEntityType(model.getIclubEntityType());
+				IclubFieldBean bean = IclubFieldTrans.fromWStoUI(model);
+				
 				beans.add(bean);
 			}
 			
@@ -2586,12 +2220,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubVehSecTypeModel model : models) {
 				
-				IclubVehSecTypeBean bean = new IclubVehSecTypeBean();
-				
-				bean.setVstId(model.getVstId());
-				bean.setVstLongDesc(model.getVstLongDesc());
-				bean.setVstShortDesc(model.getVstShortDesc());
-				bean.setVstStatus(model.getVstStatus());
+				IclubVehSecTypeBean bean = IclubVehSecTypeTrans.fromWStoUI(model);
 				
 				vehSecTypeBeans.add(bean);
 			}
@@ -2611,12 +2240,7 @@ public class IclubQuickQuoteController implements Serializable {
 		vehUsageTypeBeans = new ArrayList<IclubVehUsageTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubVehUsageTypeModel model : models) {
-				IclubVehUsageTypeBean bean = new IclubVehUsageTypeBean();
-				
-				bean.setVutId(model.getVutId());
-				bean.setVutLongDesc(model.getVutLongDesc());
-				bean.setVutShortDesc(model.getVutShortDesc());
-				bean.setVutStatus(model.getVutStatus());
+				IclubVehUsageTypeBean bean = IclubVehUsageTypeTrans.fromWStoUI(model);
 				
 				vehUsageTypeBeans.add(bean);
 			}
@@ -2636,11 +2260,8 @@ public class IclubQuickQuoteController implements Serializable {
 		accessTypeBeans = new ArrayList<IclubAccessTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubAccessTypeModel model : models) {
-				IclubAccessTypeBean bean = new IclubAccessTypeBean();
-				bean.setAtId(model.getAtId());
-				bean.setAtLongDesc(model.getAtLongDesc());
-				bean.setAtShortDesc(model.getAtShortDesc());
-				bean.setAtStatus(model.getAtStatus());
+				IclubAccessTypeBean bean = IclubAccessTypeTrans.fromWStoUI(model);
+				
 				accessTypeBeans.add(bean);
 			}
 		}
@@ -2659,11 +2280,8 @@ public class IclubQuickQuoteController implements Serializable {
 		barTypeBeans = new ArrayList<IclubBarTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubBarTypeModel model : models) {
-				IclubBarTypeBean bean = new IclubBarTypeBean();
-				bean.setBtId(model.getBtId());
-				bean.setBtLongDesc(model.getBtLongDesc());
-				bean.setBtShortDesc(model.getBtShortDesc());
-				bean.setBtStatus(model.getBtStatus());
+				IclubBarTypeBean bean = IclubBarTypeTrans.fromWStoUI(model);
+				
 				barTypeBeans.add(bean);
 			}
 		}
@@ -2682,11 +2300,7 @@ public class IclubQuickQuoteController implements Serializable {
 		propertyTypeBeans = new ArrayList<IclubPropertyTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubPropertyTypeModel model : models) {
-				IclubPropertyTypeBean bean = new IclubPropertyTypeBean();
-				bean.setPtId(model.getPtId());
-				bean.setPtLongDesc(model.getPtLongDesc());
-				bean.setPtShortDesc(model.getPtShortDesc());
-				bean.setPtStatus(model.getPtStatus());
+				IclubPropertyTypeBean bean = IclubPropertyTypeTrans.fromWStoUI(model);
 				
 				propertyTypeBeans.add(bean);
 			}
@@ -2706,11 +2320,8 @@ public class IclubQuickQuoteController implements Serializable {
 		occupiedStatusBeans = new ArrayList<IclubOccupiedStatusBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubOccupiedStatusModel model : models) {
-				IclubOccupiedStatusBean bean = new IclubOccupiedStatusBean();
-				bean.setOsId(model.getOsId());
-				bean.setOsLongDesc(model.getOsLongDesc());
-				bean.setOsShortDesc(model.getOsShortDesc());
-				bean.setOsStatus(model.getOsStatus());
+				IclubOccupiedStatusBean bean = IclubOccupiedStatusTrans.fromWStoUI(model);
+				
 				occupiedStatusBeans.add(bean);
 			}
 		}
@@ -2728,12 +2339,7 @@ public class IclubQuickQuoteController implements Serializable {
 		pPropUsageTypeBeans = new ArrayList<IclubPropUsageTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubPropUsageTypeModel model : models) {
-				IclubPropUsageTypeBean bean = new IclubPropUsageTypeBean();
-				
-				bean.setPutId(model.getPutId());
-				bean.setPutLongDesc(model.getPutLongDesc());
-				bean.setPutShortDesc(model.getPutShortDesc());
-				bean.setPutStatus(model.getPutStatus());
+				IclubPropUsageTypeBean bean = IclubPropUsageTypeTrans.fromWStoUI(model);
 				
 				pPropUsageTypeBeans.add(bean);
 			}
@@ -2754,15 +2360,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubCoverTypeModel model : models) {
 				
-				IclubCoverTypeBean bean = new IclubCoverTypeBean();
-				
-				bean.setCtId(model.getCtId());
-				bean.setCtLongDesc(model.getCtLongDesc());
-				bean.setCtShortDesc(model.getCtShortDesc());
-				bean.setCtStatus(model.getCtStatus());
-				bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
-				bean.setIclubPerson(model.getIclubPerson());
-				bean.setCtCrtdDt(model.getCtCrtdDt());
+				IclubCoverTypeBean bean = IclubCoverTypeTrans.fromWStoUI(model);
 				
 				coverTypeBeans.add(bean);
 			}
@@ -2907,19 +2505,7 @@ public class IclubQuickQuoteController implements Serializable {
 		vehicleMasters = new ArrayList<IclubVehicleMasterBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubVehicleMasterModel model : models) {
-				IclubVehicleMasterBean bean = new IclubVehicleMasterBean();
-				
-				bean.setVmId(model.getVmId());
-				
-				bean.setVmMake(model.getVmMake());
-				bean.setVmModel(model.getVmModel());
-				bean.setVmMrktRate(model.getVmMrktRate());
-				bean.setVmOrigRate(model.getVmOrigRate());
-				bean.setVmRetRate(model.getVmRetRate());
-				bean.setVmProdDt(model.getVmProdDt());
-				bean.setVmCrtdDt(model.getVmCrtdDt());
-				bean.setIclubPerson(model.getIclubPerson());
-				bean.setVmRatePrct(model.getVmRatePrct());
+				IclubVehicleMasterBean bean = IclubVehicleMasterTrans.fromWStoUI(model);
 				
 				vehicleMasters.add(bean);
 			}

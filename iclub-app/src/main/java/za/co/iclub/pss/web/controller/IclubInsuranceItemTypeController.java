@@ -29,7 +29,7 @@ public class IclubInsuranceItemTypeController implements Serializable {
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubInsuranceItemTypeController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubInsuranceItemTypeService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsuranceItemTypeService/";
 	private List<IclubInsuranceItemTypeBean> beans;
 	private IclubInsuranceItemTypeBean bean;
 	private boolean showAddPanel;

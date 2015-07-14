@@ -70,8 +70,8 @@ public class IclubMenuController implements Serializable {
 	private static final long serialVersionUID = -5155234741934732730L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubMenuController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubLoginService/";
-	private static final String U_BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubPersonService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubLoginService/";
+	private static final String U_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	private String language;
 	private boolean userMenu;

@@ -31,7 +31,7 @@ public class IclubEventController implements Serializable {
 	private static final long serialVersionUID = 8245517153102756484L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubEventController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubEventService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubEventService/";
 	private List<IclubEventBean> beans;
 	private List<IclubEventBean> dashBoardBeans;
 	private IclubEventBean bean;

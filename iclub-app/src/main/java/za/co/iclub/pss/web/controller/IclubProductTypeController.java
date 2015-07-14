@@ -29,7 +29,7 @@ public class IclubProductTypeController implements Serializable {
 	private static final long serialVersionUID = 1939823976633251535L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubProductTypeController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubProductTypeService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubProductTypeService/";
 	private List<IclubProductTypeBean> beans;
 	private IclubProductTypeBean bean;
 	private boolean showAddPanel;

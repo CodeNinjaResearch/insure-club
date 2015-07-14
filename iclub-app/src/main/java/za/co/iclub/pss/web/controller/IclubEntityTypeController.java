@@ -29,7 +29,7 @@ public class IclubEntityTypeController implements Serializable {
 	private static final long serialVersionUID = -8915296782572192096L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubEntityTypeController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubEntityTypeService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubEntityTypeService/";
 	private List<IclubEntityTypeBean> beans;
 	private List<IclubEntityTypeBean> dashBoardBeans;
 	private IclubEntityTypeBean bean;

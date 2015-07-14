@@ -30,7 +30,7 @@ public class IclubConfigController implements Serializable {
 	private static final long serialVersionUID = -7437744045926990807L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubConfigController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubConfigService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubConfigService/";
 	private List<IclubConfigBean> beans;
 	private List<IclubConfigBean> dashBoardBeans;
 	private IclubConfigBean bean;

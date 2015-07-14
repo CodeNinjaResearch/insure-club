@@ -30,7 +30,7 @@ public class IclubTrackerMasterController implements Serializable {
 	private static final long serialVersionUID = 1399848586779525616L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubTrackerMasterController.class);
-	private static final String BASE_URL = "http://" + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + "/iclub-app/services/iclub/IclubTrackerMasterService/";
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubTrackerMasterService/";
 	private List<IclubTrackerMasterBean> beans;
 	private List<IclubTrackerMasterBean> dashBoardBeans;
 	private IclubTrackerMasterBean bean;
