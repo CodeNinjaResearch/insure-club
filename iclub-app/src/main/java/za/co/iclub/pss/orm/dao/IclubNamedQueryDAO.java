@@ -1093,4 +1093,147 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
+	public List getQuoteDetailsByUserId(String userId, Long quoteStatus) {
+		log.debug("finding IclubQuote instance by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteCntByUserId");
+			
+			queryObject.setString("userId", userId);
+			queryObject.setLong("quoteStatus", quoteStatus);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubQuote failed", re);
+			throw re;
+		}
+	}
+	
+	public List getQuoteDetailsIdByUserId(String userId, Long quoteStatus) {
+		log.debug("finding IclubQuote IDs instance by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteIdByUserId");
+			
+			queryObject.setString("userId", userId);
+			queryObject.setLong("quoteStatus", quoteStatus);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubQuote Ids failed", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubQuoteIdByUserId(String quoteIds) {
+		log.debug("finding IclubInsuranceItem fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteIdByUserId");
+			
+			queryObject.setString("quoteIds", quoteIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubPolicIdsByQuotes(String quoteIds) {
+		log.debug("finding IclubPolicy fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicIdsByQuotes");
+			
+			queryObject.setString("quoteIds", quoteIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubClaimValueByPolicyIds(String policyIds) {
+		log.debug("finding IclubPolicy fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubClaimValueByPolicyIds");
+			
+			queryObject.setString("policyIds", policyIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubPaymentByPolicyIds(String policyIds) {
+		log.debug("finding IclubPolicy fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPaymentByPolicyIds");
+			
+			queryObject.setString("policyIds", policyIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubPaymentsByClaimIds(String claimIds) {
+		log.debug("finding IclubPolicy fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPaymentsByClaimIds");
+			
+			queryObject.setString("claimIds", claimIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubVehicleIValueByVIds(String vehicleIds) {
+		log.debug("finding IclubInsuranceItem fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubVehicleIValueByVIdsd");
+			
+			queryObject.setString("vehicleIds", vehicleIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubPropertyIValueByPIds(String propertyIds) {
+		log.debug("finding IclubInsuranceItem fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPropertyIValueByPIds");
+			
+			queryObject.setString("propertyIds", propertyIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
+	public Object getQuoteDetailsValDateByUserId(String userId, Long quoteStatus) {
+		log.debug("finding IclubQuote instance by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteValDtByUserId");
+			
+			queryObject.setString("userId", userId);
+			queryObject.setLong("quoteStatus", quoteStatus);
+			Object object = queryObject.uniqueResult();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubQuote failed", re);
+			throw re;
+		}
+	}
+	
 }

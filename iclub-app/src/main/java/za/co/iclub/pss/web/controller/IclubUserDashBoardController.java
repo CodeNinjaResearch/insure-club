@@ -21,6 +21,7 @@ import za.co.iclub.pss.model.ui.IclubPaymentStatusBean;
 import za.co.iclub.pss.model.ui.IclubPolicyBean;
 import za.co.iclub.pss.model.ui.IclubPolicyStatusBean;
 import za.co.iclub.pss.model.ui.IclubQuoteBean;
+import za.co.iclub.pss.model.ui.IclubUserDashboardBean;
 import za.co.iclub.pss.model.ws.IclubClaimModel;
 import za.co.iclub.pss.model.ws.IclubClaimStatusModel;
 import za.co.iclub.pss.model.ws.IclubCohortSummaryModel;
@@ -58,6 +59,7 @@ public class IclubUserDashBoardController implements Serializable {
 	private static final String CS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubClaimStatusService/";
 	private static final String CH_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortService/";
 	private static final String P_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
+	private static final String U_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubUserDashboardService/";
 	private List<IclubQuoteBean> quoteBeans;
 	private List<IclubPolicyBean> policyBeans;
 	private List<IclubPolicyStatusBean> policyStatusBeans;
@@ -70,6 +72,7 @@ public class IclubUserDashBoardController implements Serializable {
 	private IclubCohortSummaryBean cohortSummaryBean;
 	private IclubCohortSummaryBean cohortSummaryUserBean;
 	private boolean cohortSummaryFlag;
+	private IclubUserDashboardBean userDashboardBean;
 	
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
@@ -354,6 +357,24 @@ public class IclubUserDashBoardController implements Serializable {
 	
 	public void setCohortSummaryFlag(boolean cohortSummaryFlag) {
 		this.cohortSummaryFlag = cohortSummaryFlag;
+	}
+	
+	public IclubUserDashboardBean getUserDashboardBean() {
+		
+		if (userDashboardBean == null) {
+			userDashboardBean = new IclubUserDashboardBean();
+		}
+		
+		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && !IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString().trim().equalsIgnoreCase("")) {
+			String personId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+			WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + personId);
+			client.accept(MediaType.APPLICATION_JSON).get();
+		}
+		return userDashboardBean;
+	}
+	
+	public void setUserDashboardBean(IclubUserDashboardBean userDashboardBean) {
+		this.userDashboardBean = userDashboardBean;
 	}
 	
 }

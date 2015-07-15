@@ -516,6 +516,9 @@
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 	</bean>
+	<bean id="IclubUserDashboardService" class="za.co.iclub.pss.ws.service.IclubUserDashboardService">
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+	</bean>
 	<bean id="IclubQuickQuoteService" class="za.co.iclub.pss.ws.service.IclubQuickQuoteService">
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubQuoteDAO" ref="IclubQuoteDAO" />

@@ -15,35 +15,184 @@
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<div class="Container90 Responsive">
 				<div class="Container40 Responsive">
-					<p:scrollPanel mode="native">
-						<ui:include src="/pages/dashboard/user/quotes.xhtml" />
-					</p:scrollPanel>
+					<p:panel>
+						<f:facet name="header">
+							<div class="Container100 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Quotes" />
+							</div>
+						</f:facet>
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="No Of Quotes :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQuoteCnt}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Total Premium :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQPremium}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Total Estimated Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQEstValue}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Erliest Expiry :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.earliestQExpiry}" />
+							</div>
+						</div>
+					</p:panel>
 				</div>
 				<div class="Container40 Responsive">
-					<p:scrollPanel mode="native">
-						<ui:include src="/pages/dashboard/user/policy.xhtml" />
-					</p:scrollPanel>
+					<p:panel>
+						<f:facet name="header">
+							<div class="Container100 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Policies" />
+							</div>
+						</f:facet>
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="No Of Policies :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPolicyCnt}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Total Premium :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPPremium}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="No Of Vehicles :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.noOfVehicles}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="No Of Properties :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.noOfProperties}" />
+							</div>
+						</div>
+					</p:panel>
 				</div>
 			</div>
-			<div class="EmptyBox5" />
-			<div class="EmptyBox5" />
 			<div class="Container90 Responsive">
-				<div class="Container50 Responsive">
-					<p:scrollPanel mode="native" style="width:90%;">
-						<ui:include src="/pages/dashboard/user/claim.xhtml" />
-					</p:scrollPanel>
+				<div class="Container40 Responsive">
+					<p:panel>
+						<f:facet name="header">
+							<div class="Container100 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Claims" />
+							</div>
+						</f:facet>
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="No Of Claims :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalClaimCnt}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Total Claim Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalClaimValue}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Total Rejected Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.rejectedClaimValue}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Approved Claim Value :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.approvedClaimValue}" />
+							</div>
+						</div>
+					</p:panel>
 				</div>
-				<div class="Container50 Responsive">
-					<p:scrollPanel mode="native" style="width:90%;">
-						<ui:include src="/pages/dashboard/user/payment.xhtml" />
-					</p:scrollPanel>
+				<div class="Container40 Responsive">
+					<p:panel>
+						<f:facet name="header">
+							<div class="Container100 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Payments" />
+							</div>
+						</f:facet>
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="No Of Payments :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPaymentsCnt}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Last 6 months Premium Paid :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPyPremium}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Last 6 months Claim Paid :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalCPremium}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Next Earlies Premium Payment Date :" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.nextPremiumDate}" />
+							</div>
+						</div>
+					</p:panel>
 				</div>
 			</div>
-			<div class="EmptyBox5" />
-			<div class="Container90 Responsive">
-				<ui:include src="/pages/dashboard/user/iclubCohortSummary.xhtml" />
-			</div>
-			<div class="EmptyBox5" />
 		</div>
 	</ui:define>
 </ui:composition>

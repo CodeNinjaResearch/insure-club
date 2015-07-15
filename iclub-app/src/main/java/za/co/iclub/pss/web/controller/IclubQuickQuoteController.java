@@ -1478,7 +1478,7 @@ public class IclubQuickQuoteController implements Serializable {
 			model.setQCrtdDt(new Date(System.currentTimeMillis()));
 			model.setQIsMatched("N");
 			model.setQPrevPremium(bean != null ? bean.getQPrevPremium() : 0.0d);
-			model.setQValidUntil(new Date(System.currentTimeMillis() + (3 * 24 * 3600)));
+			model.setQValidUntil(new Date(System.currentTimeMillis() + (31 * 24 * 3600)));
 			model.setQMobile(personBean.getPMobile());
 			model.setQEmail(personBean.getPEmail());
 			model.setQGenPremium(0.0d);
