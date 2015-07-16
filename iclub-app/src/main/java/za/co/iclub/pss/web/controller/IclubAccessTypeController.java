@@ -23,7 +23,7 @@ import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @ManagedBean(name = "iclubAccessTypeController")
-@SessionScoped
+@SessionScoped 
 public class IclubAccessTypeController implements Serializable {
 	
 	private static final long serialVersionUID = 6271776777151313314L;

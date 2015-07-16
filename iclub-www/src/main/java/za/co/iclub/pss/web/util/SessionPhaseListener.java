@@ -2,7 +2,6 @@ package za.co.iclub.pss.web.util;
 
 import java.util.ResourceBundle;
 
-import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
