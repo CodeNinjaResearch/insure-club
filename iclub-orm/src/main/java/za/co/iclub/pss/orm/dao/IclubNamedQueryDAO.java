@@ -9,7 +9,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
@@ -1079,4 +1078,19 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
+	
+	public List getIclubLoginByIdAndProviderId(String loginId, String providerId, String providerCd) {
+		log.debug("finding IclubLogin instance by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubLoginByIdOrProviderId");
+			queryObject.setString("lpId", providerId);
+			queryObject.setString("lpCd", providerCd);
+			queryObject.setString("lId", loginId);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("get IclubLogin failed", re);
+			throw re;
+		}
+	}
+	
 }

@@ -14,6 +14,8 @@ public class IclubCohortInviteModel {
 	private String ciInviteUri;
 	private String ciInviteAcceptYn;
 	private Date ciCrtdDt;
+	private String ciInviteFName;
+	private String ciInviteLName;
 	
 	public String getCiId() {
 		return ciId;
@@ -69,5 +71,21 @@ public class IclubCohortInviteModel {
 	
 	public void setCiCrtdDt(Date ciCrtdDt) {
 		this.ciCrtdDt = ciCrtdDt;
+	}
+	
+	public String getCiInviteFName() {
+		return ciInviteFName;
+	}
+	
+	public void setCiInviteFName(String ciInviteFName) {
+		this.ciInviteFName = ciInviteFName;
+	}
+	
+	public String getCiInviteLName() {
+		return ciInviteLName;
+	}
+	
+	public void setCiInviteLName(String ciInviteLName) {
+		this.ciInviteLName = ciInviteLName;
 	}
 }

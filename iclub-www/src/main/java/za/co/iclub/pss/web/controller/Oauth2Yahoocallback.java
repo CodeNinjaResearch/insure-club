@@ -25,12 +25,12 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.TypeFactory;
 
-import za.co.iclub.pss.web.bean.IclubPersonBean;
 import za.co.iclub.pss.web.bean.YahooMailsBean;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+@SuppressWarnings("deprecation")
 public class Oauth2Yahoocallback extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
@@ -96,9 +96,9 @@ public class Oauth2Yahoocallback extends HttpServlet {
 					JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
 					System.out.println(outputString + "------outputString   :\n");
 					jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
-					IclubPersonBean bean = new IclubPersonBean();
 					String emails = jsonGet.get("emails").toString();
 					ObjectMapper mapper = new ObjectMapper();
+					
 					List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 					System.out.println(mailsList);
 				} catch (Exception e) {

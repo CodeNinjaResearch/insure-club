@@ -101,7 +101,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Cliam Value :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText styleClass="TexAlCenter" placeholder="Cliam Value" value="#{iclubClaimController.bean.CValue}" />
+								<p:inputText styleClass="TexAlCenter" placeholder="Cliam Value" value="#{iclubClaimController.bean.CValue}">
+									<f:convertNumber pattern="#0.00" />
+								</p:inputText>
 							</div>
 						</div>
 						<div class="EmptyBox5" />

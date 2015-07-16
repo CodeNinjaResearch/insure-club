@@ -167,7 +167,9 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Insured Value :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:inputText placeholder="Insured Value" value="#{iclubVehicleController.bean.VInsuredValue}" styleClass="TexAlCenter" />
+			<p:inputText placeholder="Insured Value" value="#{iclubVehicleController.bean.VInsuredValue}" styleClass="TexAlCenter">
+				<f:convertNumber pattern="#0.00" />
+			</p:inputText>
 		</div>
 	</div>
 	<div class="EmptyBox5" />

@@ -1,0 +1,40 @@
+<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<div class="Container90 Responsive">
+				<p:scrollPanel mode="native" style="width:40%;">
+					<ui:include src="/pages/dashboard/user/quotes.xhtml" />
+				</p:scrollPanel>
+				<p:scrollPanel mode="native" style="width:40%;">
+					<ui:include src="/pages/dashboard/user/policy.xhtml" />
+				</p:scrollPanel>
+			</div>
+			<div class="EmptyBox5" />
+			<div class="EmptyBox5" />
+			<p:scrollPanel mode="native" style="width:40%;">
+				<ui:include src="/pages/dashboard/user/claim.xhtml" />
+			</p:scrollPanel>
+			<div class="EmptyBox5" />
+			<p:scrollPanel mode="native" style="width:40%;">
+				<ui:include src="/pages/dashboard/user/payment.xhtml" />
+			</p:scrollPanel>
+			<div class="EmptyBox5" />
+			<div class="Container90 Responsive">
+				<ui:include src="/pages/admin/cohorts/iclubCohortSummary.xhtml" />
+			</div>
+			<div class="EmptyBox5" />
+		</div>
+	</ui:define>
+</ui:composition>

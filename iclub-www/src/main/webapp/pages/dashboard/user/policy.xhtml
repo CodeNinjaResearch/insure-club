@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<p:panel id="qqPcyPanel">
+		<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubUserDashBoardController.policyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+			<f:facet name="header">
+				<p:outputLabel value="Policy Details"></p:outputLabel>
+			</f:facet>
+			<f:facet name="footer">
+				<p:commandButton id="viewPolicyBut" value="View Policies" ajax="false" action="#{iclubUserDashBoardController.viewPolicies}" />
+			</f:facet>
+			<p:column headerText="Number">
+				<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
+			</p:column>
+			<p:column headerText="Premium">
+				<p:outputLabel styleClass="TexAlCenter" value="#{bean.PPremium}">
+					<f:convertNumber pattern="#0.00" />
+				</p:outputLabel>
+			</p:column>
+			<p:column headerText="Status">
+				<p:selectOneMenu disabled="true" styleClass="TexAlCenter" value="#{bean.iclubPolicyStatus}">
+					<f:selectItems value="#{iclubUserDashBoardController.policyStatusBeans}" var="c" itemLabel="#{c.psLongDesc}" itemValue="#{c.psId}" />
+				</p:selectOneMenu>
+			</p:column>
+			<p:column headerText="Genrated Date">
+				<p:outputLabel styleClass="TexAlCenter" value="#{bean.PCrtdDt}" />
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+</ui:composition>

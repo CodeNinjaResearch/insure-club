@@ -301,7 +301,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Current Premium :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Current Premium" value="#{iclubQuickQuoteController.quoteBean.QPrevPremium}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Current Premium" value="#{iclubQuickQuoteController.quoteBean.QPrevPremium}">
+								<f:convertNumber pattern="#0.00" />
+							</p:inputText>
 						</div>
 					</div>
 					<div class="EmptyBox5" />
