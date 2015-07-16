@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -983,6 +984,8 @@ public class IclubQuickQuoteController implements Serializable {
 		claimYN = "";
 		vehicleBeans = new ArrayList<IclubVehicleBean>();
 		propertyBeans = new ArrayList<IclubPropertyBean>();
+		propertyItemBeans = new ArrayList<IclubPropertyItemBean>();
+		propertyItemBeansMap = new HashMap<String, List<IclubPropertyItemBean>>();
 	}
 	
 	public String updatedPerson() {

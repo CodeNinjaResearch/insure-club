@@ -371,22 +371,22 @@ public class IclubUserDashBoardController implements Serializable {
 			WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + personId);
 			IclubUserDashboardModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubUserDashboardModel.class);
 			
-			userDashboardBean.setApprovedClaimValue(model.getApprovedClaimValue());
-			userDashboardBean.setEarliestQExpiry(model.getEarliestQExpiry());
-			userDashboardBean.setNextPremiumDate(model.getNextPremiumDate());
-			userDashboardBean.setNoOfProperties(model.getNoOfProperties());
-			userDashboardBean.setNoOfVehicles(model.getNoOfVehicles());
-			userDashboardBean.setRejectedClaimValue(model.getRejectedClaimValue());
-			userDashboardBean.setTotalClaimCnt(model.getTotalClaimCnt());
-			userDashboardBean.setTotalCPremium(model.getTotalCPremium());
-			userDashboardBean.setTotalPolicyCnt(model.getTotalPolicyCnt());
-			userDashboardBean.setTotalPyPremium(model.getTotalPyPremium());
-			userDashboardBean.setTotalQEstValue(model.getTotalQEstValue());
-			userDashboardBean.setTotalQPremium(model.getTotalQPremium());
-			userDashboardBean.setTotalQuoteCnt(model.getTotalQuoteCnt());
-			userDashboardBean.setTotalClaimValue(model.getTotalClaimValue());
-			userDashboardBean.setTotalPaymentsCnt(model.getTotalPaymentsCnt());
-			userDashboardBean.setTotalPPremium(model.getTotalPPremium());
+			userDashboardBean.setApprovedClaimValue(model.getApprovedClaimValue() != null ? model.getApprovedClaimValue() : 0);
+			userDashboardBean.setEarliestQExpiry(model.getEarliestQExpiry() != null ? model.getEarliestQExpiry() + "" : "--");
+			userDashboardBean.setNextPremiumDate(model.getNextPremiumDate() != null ? model.getNextPremiumDate() + "" : "--");
+			userDashboardBean.setNoOfProperties(model.getNoOfProperties() != null ? model.getNoOfProperties() : 0);
+			userDashboardBean.setNoOfVehicles(model.getNoOfVehicles() != null ? model.getNoOfVehicles() : 0);
+			userDashboardBean.setRejectedClaimValue(model.getRejectedClaimValue() != null ? model.getRejectedClaimValue() : 0.0);
+			userDashboardBean.setTotalClaimCnt(model.getTotalClaimCnt() != null ? model.getTotalClaimCnt() : 0);
+			userDashboardBean.setTotalCPremium(model.getTotalCPremium() != null ? model.getTotalCPremium() : 0.0);
+			userDashboardBean.setTotalPolicyCnt(model.getTotalPolicyCnt() != null ? model.getTotalPolicyCnt() : 0);
+			userDashboardBean.setTotalPyPremium(model.getTotalPyPremium() != null ? model.getTotalPyPremium() : 0.0);
+			userDashboardBean.setTotalQEstValue(model.getTotalQEstValue() != null ? model.getTotalQEstValue() : 0.0);
+			userDashboardBean.setTotalQPremium(model.getTotalQPremium() != null ? model.getTotalQPremium() : 0.0);
+			userDashboardBean.setTotalQuoteCnt(model.getTotalQuoteCnt() != null ? model.getTotalQuoteCnt() : 0);
+			userDashboardBean.setTotalClaimValue(model.getTotalClaimValue() != null ? model.getTotalClaimValue() : 0.0);
+			userDashboardBean.setTotalPaymentsCnt(model.getTotalPaymentsCnt() != null ? model.getTotalPaymentsCnt() : 0);
+			userDashboardBean.setTotalPPremium(model.getTotalPPremium() != null ? model.getTotalPPremium() : 0.0);
 			
 		}
 		return userDashboardBean;

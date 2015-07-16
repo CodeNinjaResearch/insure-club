@@ -37,10 +37,10 @@
 		<p:panel id="qqPanel">
 			<f:facet name="header">
 				<div class="Container100 Responsive">
-					<p:outputLabel styleClass="TexAlCenter" value="Vehicle Details" />
+					<p:outputLabel styleClass="TexAlCenter" value="Policy Details" />
 				</div>
 			</f:facet>
-			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Policies Available ">
 				<p:column headerText="Number">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PNumber}" />
 				</p:column>
@@ -80,9 +80,6 @@
 					</div>
 				</f:facet>
 				<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
-					<p:column headerText="Quote Id">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
-					</p:column>
 					<p:column headerText="Insured Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}">
 							<f:convertNumber pattern="#0.00" />

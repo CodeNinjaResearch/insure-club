@@ -275,7 +275,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="#{iclubFullQuoteController.driverBean.DName}" />
+							<p:outputLabel styleClass="TexAlCenter Container90" value="#{iclubFullQuoteController.driverBean.DName}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -284,7 +284,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="License Number :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="License Number" value="#{iclubFullQuoteController.driverBean.DLicenseNum}" />
+							<p:inputText styleClass="TexAlCenter Container90" placeholder="License Number" value="#{iclubFullQuoteController.driverBean.DLicenseNum}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -293,7 +293,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubFullQuoteController.driverBean.DIssueDt}" />
+							<p:calendar styleClass="TexAlCenter Container90" placeholder="Issue Date" value="#{iclubFullQuoteController.driverBean.DIssueDt}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -302,7 +302,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar styleClass="TexAlCenter" placeholder="Date Of Birth" value="#{iclubFullQuoteController.driverBean.DDob}" />
+							<p:calendar styleClass="TexAlCenter Container90" placeholder="Date Of Birth" value="#{iclubFullQuoteController.driverBean.DDob}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -311,7 +311,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="License Code :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.driverBean.iclubLicenseCode}">
+							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter Container90" panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.driverBean.iclubLicenseCode}">
 								<f:selectItem itemLabel="License Code" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
 							</p:selectOneMenu>

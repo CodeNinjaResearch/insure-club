@@ -7,12 +7,12 @@ public class IclubUserDashboardBean {
 	private Long totalQuoteCnt;
 	private Double totalQPremium;
 	private Double totalQEstValue;
-	private Date earliestQExpiry;
+	private String earliestQExpiry;
 	
 	private Long totalPaymentsCnt;
 	private Double totalPyPremium;
 	private Double totalCPremium;
-	private Long nextPremiumDate;
+	private String nextPremiumDate;
 	
 	private Long totalPolicyCnt;
 	private Double totalPPremium;
@@ -48,11 +48,11 @@ public class IclubUserDashboardBean {
 		this.totalQEstValue = totalQEstValue;
 	}
 	
-	public Date getEarliestQExpiry() {
+	public String getEarliestQExpiry() {
 		return earliestQExpiry;
 	}
 	
-	public void setEarliestQExpiry(Date earliestQExpiry) {
+	public void setEarliestQExpiry(String earliestQExpiry) {
 		this.earliestQExpiry = earliestQExpiry;
 	}
 	
@@ -80,11 +80,11 @@ public class IclubUserDashboardBean {
 		this.totalCPremium = totalCPremium;
 	}
 	
-	public Long getNextPremiumDate() {
+	public String getNextPremiumDate() {
 		return nextPremiumDate;
 	}
 	
-	public void setNextPremiumDate(Long nextPremiumDate) {
+	public void setNextPremiumDate(String nextPremiumDate) {
 		this.nextPremiumDate = nextPremiumDate;
 	}
 	

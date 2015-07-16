@@ -61,24 +61,17 @@ public class IclubUserDashboardService {
 					String vehicleIds = "";
 					String propertyIds = "";
 					
-					int noOfVehicles = 0;
-					int noOfProperties = 0;
-					
 					if (data != null && data.size() > 0) {
 						for (int i = 0; i < data.size(); i++) {
 							Object[] object = (Object[]) data.get(i);
 							
 							if (object[0] != null && object[0].toString().equalsIgnoreCase("1")) {
 								vehicleIds = vehicleIds.trim().equalsIgnoreCase("") ? object[1].toString() + "" : vehicleIds + "," + object[1].toString() + "";
-								noOfVehicles++;
 							} else if (object[0] != null && object[0].toString().equalsIgnoreCase("2")) {
 								propertyIds = propertyIds.trim().equalsIgnoreCase("") ? object[1].toString() + "" : propertyIds + "," + object[1].toString() + "";
-								noOfProperties++;
 							}
 							
 						}
-						model.setNoOfProperties(new Long(noOfProperties));
-						model.setNoOfVehicles(new Long(noOfVehicles));
 						
 						data = iclubNamedQueryDAO.getIclubPropertyIValueByPIds(propertyIds);
 						if (data != null && data.size() > 0) {

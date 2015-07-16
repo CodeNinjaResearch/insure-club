@@ -317,7 +317,7 @@ public class IclubMenuController implements Serializable {
 						model.setPEmail(mailsList.get(0).getPrimary() != null && mailsList.get(0).getPrimary().equalsIgnoreCase("true") ? mailsList.get(0).getHandle() : mailsList.get(1).getHandle());
 						model.setPFName(jsonGet.get("givenName").toString().replace("\"", ""));
 						model.setPLName(jsonGet.get("familyName").toString().replace("\"", ""));
-						model.setPGender(jsonGet.get("gender").toString().replace("\"", ""));
+						model.setPGender(jsonGet.get("gender") != null ? jsonGet.get("gender").toString().replace("\"", "") : "");
 						model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
 						model.setIclubPerson(1 + "");
 						
