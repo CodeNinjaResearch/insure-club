@@ -21,12 +21,16 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Quotes" />
 							</div>
 						</f:facet>
+						<f:facet name="footer">
+							<p:commandButton id="viewQuoteBut" value="View Quotes" ajax="false" action="#{iclubUserDashBoardController.viewQuotes}" />
+						</f:facet>
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="No Of Quotes :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQuoteCnt}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQuoteCnt}">
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -35,7 +39,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Total Premium :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQPremium}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQPremium}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -44,7 +50,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Total Estimated Value :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQEstValue}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalQEstValue}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -60,6 +68,9 @@
 				</div>
 				<div class="Container40 Responsive">
 					<p:panel>
+						<f:facet name="footer">
+							<p:commandButton id="viewPolicyBut" value="View Policies" ajax="false" action="#{iclubUserDashBoardController.viewPolicies}" />
+						</f:facet>
 						<f:facet name="header">
 							<div class="Container100 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="Policies" />
@@ -70,7 +81,8 @@
 								<p:outputLabel styleClass="TexAlCenter" value="No Of Policies :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPolicyCnt}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPolicyCnt}">
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -79,7 +91,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Total Premium :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPPremium}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPPremium}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -88,7 +102,8 @@
 								<p:outputLabel styleClass="TexAlCenter" value="No Of Vehicles :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.noOfVehicles}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.noOfVehicles}">
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -97,12 +112,15 @@
 								<p:outputLabel styleClass="TexAlCenter" value="No Of Properties :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.noOfProperties}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.noOfProperties}">
+								</p:outputLabel>
 							</div>
 						</div>
 					</p:panel>
 				</div>
 			</div>
+			<div class="EmptyBox5" />
+			<div class="EmptyBox5" />
 			<div class="Container90 Responsive">
 				<div class="Container40 Responsive">
 					<p:panel>
@@ -111,12 +129,16 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Claims" />
 							</div>
 						</f:facet>
+						<f:facet name="footer">
+							<p:commandButton id="viewClaimBut" value="View Claim" ajax="false" action="#{iclubUserDashBoardController.viewClaims}" />
+						</f:facet>
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
 								<p:outputLabel styleClass="TexAlCenter" value="No Of Claims :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalClaimCnt}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalClaimCnt}">
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -125,7 +147,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Total Claim Value :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalClaimValue}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalClaimValue}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -134,7 +158,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Total Rejected Value :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.rejectedClaimValue}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.rejectedClaimValue}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -143,7 +169,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Approved Claim Value :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.approvedClaimValue}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.approvedClaimValue}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 					</p:panel>
@@ -160,7 +188,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="No Of Payments :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPaymentsCnt}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPaymentsCnt}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -169,7 +199,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Last 6 months Premium Paid :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPyPremium}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalPyPremium}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -178,7 +210,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Last 6 months Claim Paid :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalCPremium}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.totalCPremium}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
 							</div>
 						</div>
 						<div class="EmptyBox5" />

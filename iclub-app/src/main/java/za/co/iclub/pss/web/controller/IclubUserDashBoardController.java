@@ -31,6 +31,7 @@ import za.co.iclub.pss.model.ws.IclubPersonModel;
 import za.co.iclub.pss.model.ws.IclubPolicyModel;
 import za.co.iclub.pss.model.ws.IclubPolicyStatusModel;
 import za.co.iclub.pss.model.ws.IclubQuoteModel;
+import za.co.iclub.pss.model.ws.IclubUserDashboardModel;
 import za.co.iclub.pss.trans.IclubClaimStatusTrans;
 import za.co.iclub.pss.trans.IclubClaimTrans;
 import za.co.iclub.pss.trans.IclubPaymentStatusTrans;
@@ -115,19 +116,19 @@ public class IclubUserDashBoardController implements Serializable {
 	
 	public String viewPolicies() {
 		
-		return "/pages/policy/dashboard.xhtml?face-redirect=true";
+		return "/pages/policy/dashboard.xhtml?faces-redirect=true";
 		
 	}
 	
 	public String viewClaims() {
 		
-		return "/pages/claim/allDashboard.xhtml?face-redirect=true";
+		return "/pages/claim/dashboard.xhtml?faces-redirect=true";
 		
 	}
 	
 	public String viewQuotes() {
 		
-		return "/pages/quote/vq.xhtml?face-redirect=true";
+		return "/pages/quote/vq.xhtml?faces-redirect=true";
 		
 	}
 	
@@ -368,7 +369,25 @@ public class IclubUserDashBoardController implements Serializable {
 		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && !IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString().trim().equalsIgnoreCase("")) {
 			String personId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
 			WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + personId);
-			client.accept(MediaType.APPLICATION_JSON).get();
+			IclubUserDashboardModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubUserDashboardModel.class);
+			
+			userDashboardBean.setApprovedClaimValue(model.getApprovedClaimValue());
+			userDashboardBean.setEarliestQExpiry(model.getEarliestQExpiry());
+			userDashboardBean.setNextPremiumDate(model.getNextPremiumDate());
+			userDashboardBean.setNoOfProperties(model.getNoOfProperties());
+			userDashboardBean.setNoOfVehicles(model.getNoOfVehicles());
+			userDashboardBean.setRejectedClaimValue(model.getRejectedClaimValue());
+			userDashboardBean.setTotalClaimCnt(model.getTotalClaimCnt());
+			userDashboardBean.setTotalCPremium(model.getTotalCPremium());
+			userDashboardBean.setTotalPolicyCnt(model.getTotalPolicyCnt());
+			userDashboardBean.setTotalPyPremium(model.getTotalPyPremium());
+			userDashboardBean.setTotalQEstValue(model.getTotalQEstValue());
+			userDashboardBean.setTotalQPremium(model.getTotalQPremium());
+			userDashboardBean.setTotalQuoteCnt(model.getTotalQuoteCnt());
+			userDashboardBean.setTotalClaimValue(model.getTotalClaimValue());
+			userDashboardBean.setTotalPaymentsCnt(model.getTotalPaymentsCnt());
+			userDashboardBean.setTotalPPremium(model.getTotalPPremium());
+			
 		}
 		return userDashboardBean;
 	}

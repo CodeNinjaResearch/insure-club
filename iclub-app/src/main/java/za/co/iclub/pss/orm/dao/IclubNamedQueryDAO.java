@@ -1126,7 +1126,7 @@ public class IclubNamedQueryDAO {
 	public List getIclubQuoteIdByUserId(String quoteIds) {
 		log.debug("finding IclubInsuranceItem fields  by PersonId");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteIdByUserId");
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubItemIdsByUserId");
 			
 			queryObject.setString("quoteIds", quoteIds);
 			List object = queryObject.list();
@@ -1137,12 +1137,12 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
-	public List getIclubPolicIdsByQuotes(String quoteIds) {
+	public List getIclubPolicIdsByQuotes(String userIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicIdsByQuotes");
 			
-			queryObject.setString("quoteIds", quoteIds);
+			queryObject.setString("userIds", userIds);
 			List object = queryObject.list();
 			return object;
 		} catch (RuntimeException re) {
@@ -1179,6 +1179,20 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
+	public List getIclubPaymentLeastDbDtByPolicyIds(String policyIds) {
+		log.debug("finding IclubPolicy fields  by PersonId");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPaymentByPolicyIds");
+			
+			queryObject.setString("policyIds", policyIds);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubInsuranceItem failed", re);
+			throw re;
+		}
+	}
+	
 	public List getIclubPaymentsByClaimIds(String claimIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
@@ -1196,7 +1210,7 @@ public class IclubNamedQueryDAO {
 	public List getIclubVehicleIValueByVIds(String vehicleIds) {
 		log.debug("finding IclubInsuranceItem fields  by PersonId");
 		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getIclubVehicleIValueByVIdsd");
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubVehicleIValueByVIds");
 			
 			queryObject.setString("vehicleIds", vehicleIds);
 			List object = queryObject.list();

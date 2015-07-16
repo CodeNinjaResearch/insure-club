@@ -1,5 +1,6 @@
 package za.co.iclub.pss.ws.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class IclubUserDashboardService {
 				if (data != null && data.size() > 0) {
 					Object[] objects = (Object[]) data.get(0);
 					model.setTotalQuoteCnt(objects[0] != null ? new Long(objects[0].toString()) : 0);
-					model.setTotalQPremium(objects[1] != null ? new Double(objects[0].toString()) : 0);
+					model.setTotalQPremium(objects[1] != null ? new Double(objects[1].toString()) : 0);
 				}
 			} catch (Exception e) {
 				LOGGER.error(e, e);
@@ -52,7 +53,7 @@ public class IclubUserDashboardService {
 				if (data != null && data.size() > 0) {
 					
 					for (int i = 0; i < data.size(); i++) {
-						quoteIds = quoteIds.trim().equalsIgnoreCase("") ? "'" + data.get(i).toString() + "'" : quoteIds + ",'" + data.get(i).toString() + "'";
+						quoteIds = quoteIds.trim().equalsIgnoreCase("") ? data.get(i).toString() : quoteIds + "," + data.get(i).toString();
 					}
 					
 					data = iclubNamedQueryDAO.getIclubQuoteIdByUserId(quoteIds);
@@ -68,10 +69,10 @@ public class IclubUserDashboardService {
 							Object[] object = (Object[]) data.get(i);
 							
 							if (object[0] != null && object[0].toString().equalsIgnoreCase("1")) {
-								vehicleIds = vehicleIds.trim().equalsIgnoreCase("") ? "'" + object[1].toString() + "'" : vehicleIds + ",'" + object[1].toString() + "'";
+								vehicleIds = vehicleIds.trim().equalsIgnoreCase("") ? object[1].toString() + "" : vehicleIds + "," + object[1].toString() + "";
 								noOfVehicles++;
 							} else if (object[0] != null && object[0].toString().equalsIgnoreCase("2")) {
-								propertyIds = propertyIds.trim().equalsIgnoreCase("") ? "'" + object[1].toString() + "'" : propertyIds + ",'" + object[1].toString() + "'";
+								propertyIds = propertyIds.trim().equalsIgnoreCase("") ? object[1].toString() + "" : propertyIds + "," + object[1].toString() + "";
 								noOfProperties++;
 							}
 							
@@ -88,8 +89,7 @@ public class IclubUserDashboardService {
 						
 						data = iclubNamedQueryDAO.getIclubVehicleIValueByVIds(vehicleIds);
 						if (data != null && data.size() > 0) {
-							Object[] object = (Object[]) data.get(0);
-							insuredValue = object[0] != null ? insuredValue + ((Double) object[0]) : insuredValue;
+							insuredValue = data.get(0) != null ? insuredValue + ((BigDecimal) data.get(0)).doubleValue() : insuredValue;
 						}
 						model.setTotalQEstValue(insuredValue);
 					}
@@ -118,19 +118,54 @@ public class IclubUserDashboardService {
 				LOGGER.error(e, e);
 			}
 			try {
-				List data = iclubNamedQueryDAO.getIclubPolicIdsByQuotes(quoteIds);
+				List data = iclubNamedQueryDAO.getIclubPolicIdsByQuotes(userId);
 				
 				if (data != null && data.size() > 0) {
-					
-					Double prorataPremium = insuredValue;
+					quoteIds = "";
+					Double prorataPremium = 0.0;
+					insuredValue = 0.0;
 					for (int i = 0; i < data.size(); i++) {
 						Object[] object = (Object[]) data.get(i);
-						policyIds = policyIds.trim().equalsIgnoreCase("") ? "'" + object[0].toString().toString() + "'" : policyIds + ",'" + object[0].toString().toString() + "'";
+						
+						if (model.getNextPremiumDate() == null && object[3] != null) {
+							model.setNextPremiumDate(new Long(object[3].toString()));
+						} else if (model.getNextPremiumDate() != null && object[3] != null && model.getNextPremiumDate().intValue() < new Integer(object[3].toString())) {
+							model.setNextPremiumDate(new Long(object[3].toString()));
+						}
+						
+						quoteIds = quoteIds.trim().equalsIgnoreCase("") ? object[2].toString().toString() + "" : quoteIds + "," + object[2].toString().toString() + "";
+						policyIds = policyIds.trim().equalsIgnoreCase("") ? object[0].toString().toString() + "" : policyIds + "," + object[0].toString().toString() + "";
 						prorataPremium = object != null && object[1] != null ? new Double(object[1].toString()) + prorataPremium : prorataPremium;
+						insuredValue = object != null && object[4] != null ? new Double(object[4].toString()) + insuredValue : insuredValue;
+					}
+					model.setTotalPolicyCnt(new Long(data.size()));
+					
+					data = iclubNamedQueryDAO.getIclubQuoteIdByUserId(quoteIds);
+					String vehicleIds = "";
+					String propertyIds = "";
+					insuredValue = prorataPremium + insuredValue;
+					int noOfVehicles = 0;
+					int noOfProperties = 0;
+					
+					if (data != null && data.size() > 0) {
+						for (int i = 0; i < data.size(); i++) {
+							Object[] object = (Object[]) data.get(i);
+							
+							if (object[0] != null && object[0].toString().equalsIgnoreCase("1")) {
+								vehicleIds = vehicleIds.trim().equalsIgnoreCase("") ? object[1].toString() + "" : vehicleIds + "," + object[1].toString() + "";
+								noOfVehicles++;
+							} else if (object[0] != null && object[0].toString().equalsIgnoreCase("2")) {
+								propertyIds = propertyIds.trim().equalsIgnoreCase("") ? object[1].toString() + "" : propertyIds + "," + object[1].toString() + "";
+								noOfProperties++;
+							}
+							
+						}
+						model.setNoOfProperties(new Long(noOfProperties));
+						model.setNoOfVehicles(new Long(noOfVehicles));
+						
+						model.setTotalPPremium(insuredValue);
 					}
 					
-					model.setTotalPolicyCnt(new Long(data.size()));
-					model.setTotalPPremium(prorataPremium);
 				}
 			} catch (Exception e) {
 				LOGGER.error(e, e);
@@ -144,9 +179,11 @@ public class IclubUserDashboardService {
 					Double claimValue = 0.0;
 					Double rejectedClaimValue = 0.0;
 					Double approvedClaimValue = 0.0;
+					int claimCount = 0;
 					for (int i = 0; i < data.size(); i++) {
 						Object[] object = (Object[]) data.get(i);
-						cliamIds = cliamIds.trim().equalsIgnoreCase("") ? "'" + object[0].toString().toString() + "'" : cliamIds + ",'" + object[0].toString().toString() + "'";
+						claimCount++;
+						cliamIds = cliamIds.trim().equalsIgnoreCase("") ? object[0].toString().toString() + "" : cliamIds + "," + object[0].toString().toString() + "";
 						claimValue = object != null && object[1] != null ? new Double(object[1].toString()) + claimValue : claimValue;
 						
 						if (object[2] != null && object[2].toString().equalsIgnoreCase("5")) {
@@ -157,6 +194,7 @@ public class IclubUserDashboardService {
 						}
 					}
 					
+					model.setTotalClaimCnt(new Long(claimCount));
 					model.setApprovedClaimValue(approvedClaimValue);
 					model.setRejectedClaimValue(rejectedClaimValue);
 					model.setTotalClaimValue(claimValue);

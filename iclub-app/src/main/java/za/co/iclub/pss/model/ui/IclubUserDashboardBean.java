@@ -12,7 +12,7 @@ public class IclubUserDashboardBean {
 	private Long totalPaymentsCnt;
 	private Double totalPyPremium;
 	private Double totalCPremium;
-	private Date nextPremiumDate;
+	private Long nextPremiumDate;
 	
 	private Long totalPolicyCnt;
 	private Double totalPPremium;
@@ -80,11 +80,11 @@ public class IclubUserDashboardBean {
 		this.totalCPremium = totalCPremium;
 	}
 	
-	public Date getNextPremiumDate() {
+	public Long getNextPremiumDate() {
 		return nextPremiumDate;
 	}
 	
-	public void setNextPremiumDate(Date nextPremiumDate) {
+	public void setNextPremiumDate(Long nextPremiumDate) {
 		this.nextPremiumDate = nextPremiumDate;
 	}
 	
