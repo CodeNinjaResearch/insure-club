@@ -70,10 +70,14 @@
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
-						<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
+						<p:outputLabel styleClass="TexAlCenter" value="Contact Preference :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Contact Reference" value="#{iclubQuickQuoteController.bean.PContactPref}" />
+						<p:selectOneMenu widgetVar="mnuPre" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuPre.jq.removeClass('with-placeholder')" value="#{iclubQuickQuoteController.bean.PContactPref}">
+							<f:selectItem itemLabel="Contact Preference" itemDisabled="true" />
+							<f:selectItem itemLabel="Mobile" itemValue="M" />
+							<f:selectItem itemLabel="Email" itemValue="E" />
+						</p:selectOneMenu>
 					</div>
 				</div>
 				<div class="EmptyBox5" />
