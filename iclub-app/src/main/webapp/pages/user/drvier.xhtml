@@ -5,8 +5,7 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
-	{
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
 	display: none;
 }
 </style>
@@ -25,7 +24,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.DName}" />
 					</p:column>
 					<p:column headerText="Created By">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPersonByDPersonId}" />
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.PBFNameAndLName}" />
 					</p:column>
 					<p:column headerText="Created Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.DCrtdDt}" />
@@ -107,7 +106,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Created By :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubDriverController.bean.iclubPersonByDCrtdBy}" />
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubDriverController.bean.PAFNameAndLName}" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />
