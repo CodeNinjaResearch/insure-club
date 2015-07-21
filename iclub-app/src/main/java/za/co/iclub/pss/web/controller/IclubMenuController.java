@@ -81,12 +81,12 @@ public class IclubMenuController implements Serializable {
 	
 	public void initializePage() {
 		
-		/*if (IclubWebHelper.getObjectIntoSession("social_update_profile") != null) {
+		if (IclubWebHelper.getObjectIntoSession("social_update_profile") != null && !FacesContext.getCurrentInstance().getViewRoot().getViewId().equalsIgnoreCase("/pages/user/profile.xhtml")) {
 			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
 			System.out.println(FacesContext.getCurrentInstance().getViewRoot().getViewId());
 			FacesContext.getCurrentInstance().responseComplete();
-		}*/
+		} 
 	}
 	
 	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
