@@ -132,6 +132,23 @@ public class IclubLoginService {
 	}
 	
 	@GET
+	@Path("/get/{id}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public IclubLoginModel getById(@PathParam("id") String id) {
+		IclubLoginModel model = new IclubLoginModel();
+		try {
+			IclubLogin bean = iclubLoginDAO.findById(id);
+			
+			model = IclubLoginTrans.fromORMtoWS(bean);
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return model;
+	}
+	
+	@GET
 	@Path("/person/login/{name}/{pwd}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)

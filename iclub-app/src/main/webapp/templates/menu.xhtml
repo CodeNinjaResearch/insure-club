@@ -4,6 +4,7 @@
 			<a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize"><i class="icon-th-list-2"></i></a> <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
 		</div>
 		<div class="layout-menubarinner-box" id="searchArea"></div>
+		<p:remoteCommand actionListener="#{iclubMenuController.initializePage}" name="onload" autoRun="true" />
 		<ps:menu id="sm_leftmenu">
 			<p:menuitem id="sm_home" value="Home" outcome="userDashboard" icon="icon-home-outline" rendered="#{iclubMenuController.userMenu}" containerStyleClass="layout-menubar-active" />
 			<p:menuitem id="sm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />

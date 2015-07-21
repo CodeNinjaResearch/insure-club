@@ -19,7 +19,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Claim Details" />
 					</div>
 				</f:facet>
-				<p:dataTable reflow="true" widgetVar="dtClmCont" value="#{iclubClaimController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<p:dataTable reflow="true" widgetVar="dtClmCont" value="#{iclubClaimController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Calims Available">
 					<p:column headerText="Claim Number">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CNumber}" />
 					</p:column>

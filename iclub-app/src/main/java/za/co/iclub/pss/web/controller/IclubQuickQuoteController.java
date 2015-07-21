@@ -16,6 +16,7 @@ import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -867,6 +868,12 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void initializePage() {
 		IclubWebHelper.addObjectIntoSession("page_key", "/pages/quote/qq.xhtml");
+		
+		if (IclubWebHelper.getObjectIntoSession("social_update_profile") != null) {
+			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
+			FacesContext.getCurrentInstance().responseComplete();
+		}
 	}
 	
 	public void vmMakeValueChangeListener() {
@@ -2493,6 +2500,7 @@ public class IclubQuickQuoteController implements Serializable {
 		if (quoteBean == null) {
 			quoteBean = new IclubQuoteBean();
 		}
+		
 		return quoteBean;
 	}
 	

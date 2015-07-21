@@ -79,6 +79,16 @@ public class IclubMenuController implements Serializable {
 	String preCode = "";
 	String preVerifier = "";
 	
+	public void initializePage() {
+		
+		/*if (IclubWebHelper.getObjectIntoSession("social_update_profile") != null) {
+			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
+			System.out.println(FacesContext.getCurrentInstance().getViewRoot().getViewId());
+			FacesContext.getCurrentInstance().responseComplete();
+		}*/
+	}
+	
 	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: languageValueChangeListener");
 		if (valueChangeEvent != null && valueChangeEvent.getNewValue() != null && !valueChangeEvent.getNewValue().toString().trim().equalsIgnoreCase("")) {
@@ -520,15 +530,18 @@ public class IclubMenuController implements Serializable {
 			model = client.get(IclubPersonModel.class);
 			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getPId());
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.login.id"), loginModel.getLId());
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), loginModel.getLName());
-			/*if (loginModel.getLPasswd() == null || loginModel.getLPasswd().trim().equalsIgnoreCase("")) {
-				IclubWebHelper.addObjectIntoSession("social_update_profile", true);
-				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/register.xhtml?faces-redirect=true");
-			}*/
+			
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), model.getPFName() + (model.getPLName() == null ? "" : model.getPLName() + " "));
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), loginModel.getIclubRoleType());
-			
-			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/dashboard/user/main.xhtml?faces-redirect=true");
+			if (loginModel.getLPasswd() == null || loginModel.getLPasswd().trim().equalsIgnoreCase("")) {
+				IclubWebHelper.addObjectIntoSession("social_update_profile", true);
+				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
+				
+			} else {
+				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/dashboard/user/main.xhtml?faces-redirect=true");
+			}
 			
 			return false;
 			

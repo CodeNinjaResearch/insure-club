@@ -120,7 +120,11 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Contact Reference :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Contact Reference" value="#{iclubProfileController.bean.PContactPref}" />
+						<p:selectOneMenu widgetVar="mnuPre" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuPre.jq.removeClass('with-placeholder')" value="#{iclubProfileController.bean.PContactPref}">
+							<f:selectItem itemLabel="Contact Preference" itemDisabled="true" />
+							<f:selectItem itemLabel="Mobile" itemValue="M" />
+							<f:selectItem itemLabel="Email" itemValue="E" />
+						</p:selectOneMenu>
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -239,10 +243,19 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="User Name :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" disabled="#{iclubProfileController.updateLogin}" placeholder="User Name" value="#{iclubProfileController.loginBean.LName}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Password :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Password" value="#{iclubProfileController.loginBean.LPasswd}" />
+							<p:password styleClass="TexAlCenter" placeholder="Password" value="#{iclubProfileController.loginBean.LPasswd}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -268,15 +281,15 @@
 					</div>
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
-						<p:commandButton update=":iclubFrm:grlMsg,:iclubFrm:pnlProfileCont" styleClass="Fs16" value="Update Login" ajax="false" actionListener="#{iclubProfileController.updatePassword}" />
+						<p:commandButton rendered="false" update=":iclubFrm:grlMsg,:iclubFrm:pnlProfileCont" styleClass="Fs16" value="Update Login" ajax="false" actionListener="#{iclubProfileController.updatePassword}" />
 					</div>
 				</p:panel>
 				<div class="Container100 Responsive">
-					<div class="Container50 Responsive">
-						<p:commandButton update=":iclubFrm:pnlProfileCont,:iclubFrm:grlMsg" styleClass="Fs16" value="Update" ajax="false" action="#{iclubProfileController.updatedPerson}" />
+					<div class="Container100 Responsive">
+						<p:commandButton update=":iclubFrm:pnlProfileCont,:iclubFrm:grlMsg" styleClass="Fs16" value="Update" ajax="false" action="#{iclubProfileController.updatedUser}" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:commandButton id="btnPrfViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="View Docs" actionListener="#{iclubProfileController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+						<p:commandButton rendered="false" id="btnPrfViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="View Docs" actionListener="#{iclubProfileController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 					</div>
 				</div>
 			</p:panel>
