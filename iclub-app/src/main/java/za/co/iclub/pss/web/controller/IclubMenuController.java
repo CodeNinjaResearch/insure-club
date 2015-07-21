@@ -518,14 +518,17 @@ public class IclubMenuController implements Serializable {
 			
 			client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + loginModel.getIclubPersonBByLPersonId());
 			model = client.get(IclubPersonModel.class);
-			
+			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getPId());
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), loginModel.getLName());
+			/*if (loginModel.getLPasswd() == null || loginModel.getLPasswd().trim().equalsIgnoreCase("")) {
+				IclubWebHelper.addObjectIntoSession("social_update_profile", true);
+				navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/register.xhtml?faces-redirect=true");
+			}*/
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), model.getPFName() + (model.getPLName() == null ? "" : model.getPLName() + " "));
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), loginModel.getIclubRoleType());
-			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 			
-			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/quote/vq.xhtml?faces-redirect=true");
+			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/dashboard/user/main.xhtml?faces-redirect=true");
 			
 			return false;
 			

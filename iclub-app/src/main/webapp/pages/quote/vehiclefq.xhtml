@@ -342,7 +342,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Make :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuModVehMake" id="mnuModVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.vmMake}">
+							<p:selectOneMenu disabled="true" widgetVar="mnuModVehMake" id="mnuModVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.vmMake}">
 								<p:ajax update="mnuModVehModel" process="@this" event="change" listener="#{iclubFullQuoteController.vmMakeValueChangeListener}" />
 								<f:selectItem itemLabel="Make" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.vmMakes}" />
@@ -355,7 +355,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Model :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuModVehModel" id="mnuModVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.vehicleBean.iclubVehicleMaster}">
+							<p:selectOneMenu disabled="true" widgetVar="mnuModVehModel" id="mnuModVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubFullQuoteController.vehicleBean.iclubVehicleMaster}">
 								<p:ajax update="mnuModYear" process="@this" event="change" listener="#{iclubFullQuoteController.vmModelValueChangeListener}" />
 								<f:selectItem itemLabel="Model" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
@@ -368,7 +368,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Year :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuModYear" id="mnuModYear" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuYear.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.vehicleBean.VYear}">
+							<p:selectOneMenu disabled="true" widgetVar="mnuModYear" id="mnuModYear" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuYear.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.vehicleBean.VYear}">
 								<f:selectItem itemLabel="Year" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.years}" />
 							</p:selectOneMenu>
@@ -380,7 +380,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Usage Purpose :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuModPurT" id="mnuModPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu disabled="true" value="#{iclubFullQuoteController.vehicleBean.iclubVehUsageType}" widgetVar="mnuModPurT" id="mnuModPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
 							</p:selectOneMenu>
@@ -455,7 +455,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="On Location :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:commandButton update=":iclubFrm:vehLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('vehLocationDetailsDialog').show();" />
+								<p:commandButton disabled="true" update=":iclubFrm:vehLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('vehLocationDetailsDialog').show();" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -464,7 +464,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Access Type Over Night :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:selectOneMenu value="#{iclubFullQuoteController.vehicleBean.iclubAccessTypeByVOnAccessTypeId}" widgetVar="mnuModAccTV" id="mnuModAccTV" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<p:selectOneMenu disabled="true" value="#{iclubFullQuoteController.vehicleBean.iclubAccessTypeByVOnAccessTypeId}" widgetVar="mnuModAccTV" id="mnuModAccTV" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 									<f:selectItem itemLabel="Access Type VOn" itemDisabled="true" />
 									<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
 								</p:selectOneMenu>
@@ -476,7 +476,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Location Overnight :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText placeholder="On Area" value="#{iclubFullQuoteController.vehicleBean.VOnArea}" styleClass="TexAlCenter" />
+								<p:inputText disabled="true" placeholder="On Area" value="#{iclubFullQuoteController.vehicleBean.VOnArea}" styleClass="TexAlCenter" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -485,7 +485,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="On Latitude :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText placeholder="On Lat" value="#{iclubFullQuoteController.vehicleBean.VOnLat}" styleClass="TexAlCenter" />
+								<p:inputText disabled="true" placeholder="On Lat" value="#{iclubFullQuoteController.vehicleBean.VOnLat}" styleClass="TexAlCenter" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />
@@ -494,7 +494,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="On Longitude  :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText placeholder="On Long" value="#{iclubFullQuoteController.vehicleBean.VOnLong}" styleClass="TexAlCenter" />
+								<p:inputText disabled="true" placeholder="On Long" value="#{iclubFullQuoteController.vehicleBean.VOnLong}" styleClass="TexAlCenter" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />

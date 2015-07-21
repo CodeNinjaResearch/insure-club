@@ -50,6 +50,7 @@ public class IclubVehicleTrans {
 		bean.setIclubSecurityDevice(model.getIclubSecurityDevice());
 		bean.setSdSerNum(model.getSdSerNum());
 		bean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId());
+		bean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId());
 		bean.setAtDdLongDesc(model.getAtDdLongDesc());
 		bean.setAtOnLongDesc(model.getAtOnLongDesc());
 		bean.setIclubPerson(model.getIclubPerson());
@@ -97,6 +98,7 @@ public class IclubVehicleTrans {
 		model.setIclubSecurityDevice(bean.getIclubSecurityDevice());
 		model.setSdSerNum(bean.getSdSerNum());
 		model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId());
+		model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId());
 		model.setAtDdLongDesc(bean.getAtDdLongDesc());
 		model.setAtOnLongDesc(bean.getAtOnLongDesc());
 		model.setIclubPerson(bean.getIclubPerson());
@@ -142,6 +144,7 @@ public class IclubVehicleTrans {
 		model.setIclubSecurityDevice(bean.getIclubSecurityDevice() != null ? (bean.getIclubSecurityDevice().getSdId()) : null);
 		model.setSdSerNum(bean.getIclubSecurityDevice() != null ? (bean.getIclubSecurityDevice().getSdSerNum()) : null);
 		model.setIclubAccessTypeByVDdAccessTypeId(bean.getIclubAccessTypeByVDdAccessTypeId() != null ? (bean.getIclubAccessTypeByVDdAccessTypeId().getAtId()) : null);
+		model.setIclubAccessTypeByVOnAccessTypeId(bean.getIclubAccessTypeByVOnAccessTypeId() != null ? (bean.getIclubAccessTypeByVOnAccessTypeId().getAtId()) : null);
 		model.setAtDdLongDesc(bean.getIclubAccessTypeByVDdAccessTypeId() != null ? (bean.getIclubAccessTypeByVDdAccessTypeId().getAtLongDesc()) : null);
 		model.setAtOnLongDesc(bean.getIclubAccessTypeByVOnAccessTypeId() != null ? (bean.getIclubAccessTypeByVOnAccessTypeId().getAtLongDesc()) : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);

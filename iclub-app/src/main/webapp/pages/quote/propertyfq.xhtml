@@ -267,7 +267,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Location :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:commandButton update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
+							<p:commandButton disabled="true" update=":iclubFrm:proLocationDetailsDialog" icon="ui-icon-document" value="Location Details" oncomplete="PF('proLocationDetailsDialog').show();" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -288,7 +288,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Address :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:inputText placeholder="Address" value="#{iclubFullQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
+							<p:inputText disabled="true" placeholder="Address" value="#{iclubFullQuoteController.propertyBean.PAddress}" styleClass="TexAlCenter" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -299,7 +299,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Thatch Type :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.PThatchType}" widgetVar="mnuModThat" id="mnuModThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu disabled="true" value="#{iclubFullQuoteController.propertyBean.PThatchType}" widgetVar="mnuModThat" id="mnuModThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Thatch Type" itemDisabled="true" />
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />
@@ -312,7 +312,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Type of Roof :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubRoofType}" widgetVar="mnuModRoofT" id="mnuModRoofT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu disabled="true" value="#{iclubFullQuoteController.propertyBean.iclubRoofType}" widgetVar="mnuModRoofT" id="mnuModRoofT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Type of Roof" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
 							</p:selectOneMenu>
@@ -324,7 +324,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Type of Walls :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.propertyBean.iclubWallType}" widgetVar="mnuModWT" id="mnuModWT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu disabled="true" value="#{iclubFullQuoteController.propertyBean.iclubWallType}" widgetVar="mnuModWT" id="mnuModWT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Type of Walls" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
 							</p:selectOneMenu>
@@ -515,7 +515,7 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Building Replacement Cost :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:inputText placeholder="Building Replacement Cost" value="#{iclubFullQuoteController.propertyBean.PReplacementCost}" styleClass="TexAlCenter" />
+								<p:inputText disabled="true" placeholder="Building Replacement Cost" value="#{iclubFullQuoteController.propertyBean.PReplacementCost}" styleClass="TexAlCenter" />
 							</div>
 						</div>
 						<div class="EmptyBox5" />

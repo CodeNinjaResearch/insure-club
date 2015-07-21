@@ -233,7 +233,7 @@ public class IclubLoginController implements Serializable {
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
 						
-						return "home";
+						return "userDashboard";
 						
 					} else {
 						IclubWebHelper.addMessage("Person Profile Fetch Error - Contact Admin", FacesMessage.SEVERITY_ERROR);
@@ -257,7 +257,7 @@ public class IclubLoginController implements Serializable {
 		IclubWebHelper.invalidateSession();
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
-		navigationHandler.handleNavigation(context, null, "/templates/home.xhtml?faces-redirect=true");
+		navigationHandler.handleNavigation(context, null, "/templates/login.xhtml?faces-redirect=true");
 	}
 	
 	public boolean validateLogin() {
