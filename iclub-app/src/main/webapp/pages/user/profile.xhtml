@@ -61,6 +61,7 @@
 				<f:facet name="header">
 					<p:outputLabel styleClass="TexAlCenter" value="Personal Detials" />
 				</f:facet>
+				<p:remoteCommand actionListener="#{iclubProfileController.initializePage}" name="onload" autoRun="true" />
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Title :" />

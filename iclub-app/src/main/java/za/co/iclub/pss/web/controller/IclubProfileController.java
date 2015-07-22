@@ -95,6 +95,12 @@ public class IclubProfileController implements Serializable {
 	
 	private boolean updateLogin;
 	
+	private boolean loadBean;
+	
+	public void initializePage() {
+		loadBean = true;
+	}
+	
 	public String updatedPerson() {
 		
 		try {
@@ -202,6 +208,7 @@ public class IclubProfileController implements Serializable {
 				if (response.getStatusCode() == 0) {
 					IclubWebHelper.addObjectIntoSession("social_update_profile", null);
 					IclubWebHelper.addMessage("Personal Details Updated Successfully", FacesMessage.SEVERITY_INFO);
+					loadBean = false;
 					return "userDashboard";
 				} else {
 					IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -382,30 +389,31 @@ public class IclubProfileController implements Serializable {
 			bean = new IclubPersonBean();
 			
 		}
-		if (!FacesContext.getCurrentInstance().getRenderResponse()) {
-			return bean;
-		} else if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
-			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + getSessionUserId());
-			
-			IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
-			client.close();
-			bean = IclubPersonTrans.fromWStoUI(model);
-			
-			if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.login.id")) != null) {
-				client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.login.id")).toString());
-			} else {
-				client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "person/" + bean.getPFName());
-			}
-			
-			IclubLoginModel loginModel = (IclubLoginModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class));
-			if (loginModel != null && loginModel.getLId() != null) {
-				updateLogin = true;
-				loginBean = IclubLoginTrans.fromWStoUI(loginModel);
-			} else {
-				updateLogin = false;
-				loginBean = new IclubLoginBean();
+		if (!loadBean) {
+			if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
+				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + getSessionUserId());
+				
+				IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+				client.close();
+				bean = IclubPersonTrans.fromWStoUI(model);
+				
+				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.login.id")) != null) {
+					client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.login.id")).toString());
+				} else {
+					client = IclubWebHelper.createCustomClient(LOG_BASE_URL + "person/" + bean.getPFName());
+				}
+				
+				IclubLoginModel loginModel = (IclubLoginModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class));
+				if (loginModel != null && loginModel.getLId() != null) {
+					updateLogin = true;
+					loginBean = IclubLoginTrans.fromWStoUI(loginModel);
+				} else {
+					updateLogin = false;
+					loginBean = new IclubLoginBean();
+				}
 			}
 		}
+		
 		return bean;
 	}
 	
@@ -619,5 +627,13 @@ public class IclubProfileController implements Serializable {
 	
 	public void setUpdateLogin(boolean updateLogin) {
 		this.updateLogin = updateLogin;
+	}
+	
+	public boolean isLoadBean() {
+		return loadBean;
+	}
+	
+	public void setLoadBean(boolean loadBean) {
+		this.loadBean = loadBean;
 	}
 }
