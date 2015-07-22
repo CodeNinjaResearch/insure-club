@@ -82,13 +82,6 @@
 			<artifactId>google-api-client-xml</artifactId>
 			<version>1.20.0</version>
 		</dependency>
-
-
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>1.9.20</version>
-		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
@@ -355,6 +348,12 @@
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>iclub-app</finalName>

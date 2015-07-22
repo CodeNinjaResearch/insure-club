@@ -86,7 +86,7 @@ public class IclubMenuController implements Serializable {
 			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
 			System.out.println(FacesContext.getCurrentInstance().getViewRoot().getViewId());
 			FacesContext.getCurrentInstance().responseComplete();
-		} 
+		}
 	}
 	
 	public void languageValueChangeListener(ValueChangeEvent valueChangeEvent) {
@@ -434,7 +434,7 @@ public class IclubMenuController implements Serializable {
 							JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
 							Date date = formatter.parse(jsonGet.get("birthday").toString().replace("\"", ""));
 							model.setPDob(new Timestamp(date.getTime()));
-						} catch (ParseException e) {
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
 						if (checkExistingUserorNot(model, data.getId(), "GOOGLE")) {

@@ -1,9 +1,12 @@
 package za.co.iclub.pss.scheduler;
 
+import java.util.List;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 
@@ -13,10 +16,20 @@ public class ScheduledJob extends QuartzJobBean {
 	
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
+		
 		System.out.println("--------Inside Scheduler-----");
-		iclubCohortInviteDAO.findAll();
+		try {
+			List<IclubCohortInvite> cohorsInviteList = iclubCohortInviteDAO.findAll();
+			
+			MailSender.sendMail(cohorsInviteList);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public IclubCohortInviteDAO getIclubCohortInviteDAO() {
