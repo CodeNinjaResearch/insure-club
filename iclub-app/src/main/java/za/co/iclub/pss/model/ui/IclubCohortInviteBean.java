@@ -16,7 +16,7 @@ public class IclubCohortInviteBean {
 	private Date ciCrtdDt;
 	private String ciInviteFName;
 	private String ciInviteLName;
-	private String ciInviteSendStatus;
+	private String ciInviteSentStatus;
 	
 	public String getCiId() {
 		return ciId;
@@ -114,11 +114,11 @@ public class IclubCohortInviteBean {
 		this.ntLongDesc = ntLongDesc;
 	}
 	
-	public String getCiInviteSendStatus() {
-		return ciInviteSendStatus;
+	public String getCiInviteSentStatus() {
+		return ciInviteSentStatus;
 	}
 	
-	public void setCiInviteSendStatus(String ciInviteSendStatus) {
-		this.ciInviteSendStatus = ciInviteSendStatus;
+	public void setCiInviteSentStatus(String ciInviteSentStatus) {
+		this.ciInviteSentStatus = ciInviteSentStatus;
 	}
 }

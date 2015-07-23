@@ -61,7 +61,7 @@ public class MailSender implements Serializable {
 					
 					Transport.send(message);
 					
-					bean.setCiInviteSendStatus("Y");
+					bean.setCiInviteSentStatus("Y");
 					
 					System.out.println(bean.getCiInviteUri() + " : Email Sent Successfully");
 				}
