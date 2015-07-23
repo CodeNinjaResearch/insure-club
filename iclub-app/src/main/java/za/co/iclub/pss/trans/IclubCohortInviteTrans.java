@@ -27,6 +27,7 @@ public class IclubCohortInviteTrans {
 		bean.setPFNameAndLName(model.getPFNameAndLName());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
+		bean.setCiInviteSendStatus(model.getCiInviteSendStatus());
 		
 		return bean;
 	}
@@ -49,6 +50,7 @@ public class IclubCohortInviteTrans {
 		model.setPFNameAndLName(bean.getPFNameAndLName());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
+		model.setCiInviteSendStatus(bean.getCiInviteSendStatus());
 		
 		return model;
 	}
@@ -69,6 +71,7 @@ public class IclubCohortInviteTrans {
 		model.setCiInviteLName(bean.getCiInviteLName());
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
+		model.setCiInviteSendStatus(bean.getCiInviteSendStatus());
 		
 		return model;
 	}
@@ -86,6 +89,7 @@ public class IclubCohortInviteTrans {
 		bean.setCiInviteUri(model.getCiInviteUri());
 		bean.setCiInviteFName(model.getCiInviteFName());
 		bean.setCiInviteLName(model.getCiInviteLName());
+		bean.setCiInviteSendStatus(model.getCiInviteSendStatus());
 		
 		return bean;
 	}

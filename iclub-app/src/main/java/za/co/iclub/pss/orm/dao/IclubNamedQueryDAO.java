@@ -1250,4 +1250,17 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
+	public List getIclubCohortInvitesByNotSentStatus() {
+		log.debug("finding IclubCohortInvite   by Not  Sent Status");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubCohortInviteByNotSentStatus");
+			
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubCohortInvite  ", re);
+			throw re;
+		}
+	}
+	
 }

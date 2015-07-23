@@ -517,6 +517,7 @@ public class IclubCohortController implements Serializable {
 						}
 					}
 					
+					bean.setCiInviteFName(entry.getName() != null ? entry.getName().getFullName() != null ? entry.getName().getFullName().getValue() : null : null);
 					if (bean.getCiInviteUri() == null || bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
 						if (entry.hasName()) {
 							if (entry.hasPhoneNumbers()) {

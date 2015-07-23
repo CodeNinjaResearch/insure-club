@@ -31,7 +31,7 @@ public class MailSender implements Serializable {
 		props.put("mail.smtp.port", "587");
 	}
 	
-	public static void sendMail(List<IclubCohortInvite> cohorsInviteList) {
+	public static List<IclubCohortInvite> sendMail(List<IclubCohortInvite> cohorsInviteList) {
 		
 		try {
 			
@@ -61,6 +61,8 @@ public class MailSender implements Serializable {
 					
 					Transport.send(message);
 					
+					bean.setCiInviteSendStatus("Y");
+					
 					System.out.println(bean.getCiInviteUri() + " : Email Sent Successfully");
 				}
 			}
@@ -68,5 +70,6 @@ public class MailSender implements Serializable {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+		return cohorsInviteList;
 	}
 }

@@ -22,10 +22,18 @@ public class ScheduledJob extends QuartzJobBean {
 		
 		System.out.println("--------Inside Scheduler-----");
 		try {
-			List<IclubCohortInvite> cohorsInviteList = iclubCohortInviteDAO.findAll();
-			
-			MailSender.sendMail(cohorsInviteList);
-			
+			synchronized (this) {
+				List<IclubCohortInvite> cohorsInviteList = iclubNamedQueryDAO.getIclubCohortInvitesByNotSentStatus();
+				
+				if (cohorsInviteList != null && cohorsInviteList.size() > 0) {
+					cohorsInviteList = MailSender.sendMail(cohorsInviteList);
+					
+					for (IclubCohortInvite inviteBean : cohorsInviteList) {
+						iclubCohortInviteDAO.merge(inviteBean);
+					}
+				}
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

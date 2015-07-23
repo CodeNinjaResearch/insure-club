@@ -34,6 +34,7 @@ public class IclubCohortInvite implements java.io.Serializable {
 	private Date ciCrtdDt;
 	private String ciInviteFName;
 	private String ciInviteLName;
+	private String ciInviteSendStatus;
 	
 	// Constructors
 	
@@ -142,6 +143,15 @@ public class IclubCohortInvite implements java.io.Serializable {
 	
 	public void setCiInviteLName(String ciInviteLName) {
 		this.ciInviteLName = ciInviteLName;
+	}
+	
+	@Column(name = "ci_invite_send_status")
+	public String getCiInviteSendStatus() {
+		return ciInviteSendStatus;
+	}
+	
+	public void setCiInviteSendStatus(String ciInviteSendStatus) {
+		this.ciInviteSendStatus = ciInviteSendStatus;
 	}
 	
 }
