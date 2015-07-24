@@ -36,28 +36,28 @@ public class Oauth2Yahoocallback extends HttpServlet {
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	protected static final Logger LOGGER = Logger.getLogger(Oauth2Yahoocallback.class);
 	private static String encodedValue = "";
-	
+
 	public Oauth2Yahoocallback() {
 		super();
-		
+
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		System.err.println("entering doGet");
-		
+
 		LOGGER.info("==========hello:");
 		try {
 			// get code
 			String code = request.getParameter("code");
-			
+
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost("https://api.login.yahoo.com/oauth2/get_token");
-			
+
 			List<NameValuePair> arguments = new ArrayList<>(3);
 			arguments.add(new BasicNameValuePair("grant_type", Y_BUNDLE.getString("grant_type")));
 			arguments.add(new BasicNameValuePair("redirect_uri", Y_BUNDLE.getString("redirect_uri")));
@@ -82,7 +82,7 @@ public class Oauth2Yahoocallback extends HttpServlet {
 				System.out.println(json);
 				String access_token = json.get("access_token").getAsString();
 				String xoauth_yahoo_guid = json.get("xoauth_yahoo_guid").toString();
-				
+
 				try {
 					// https://social.yahooapis.com/v1/user/3344/profile?format=json
 					// https://social.yahooapis.com/v1/user/6677/contacts
@@ -98,17 +98,17 @@ public class Oauth2Yahoocallback extends HttpServlet {
 					jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
 					String emails = jsonGet.get("emails").toString();
 					ObjectMapper mapper = new ObjectMapper();
-					
+
 					List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 					System.out.println(mailsList);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

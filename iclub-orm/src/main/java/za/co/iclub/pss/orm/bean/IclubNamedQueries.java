@@ -35,19 +35,19 @@ import javax.persistence.Table;
 		@NamedNativeQuery(query = "select * from iclub_property_item where pi_property_id=:id", name = "getIclubPropertyItemByProperty", resultClass = IclubPropertyItem.class), @NamedNativeQuery(query = "SELECT * FROM iclubdb.iclub_login  where ( l_name like :lId or (l_provider_id like :lpId and l_provider_cd like :lpCd))", name = "getIclubLoginByIdOrProviderId", resultClass = IclubLogin.class) })
 @Table(name = "iclub_account_type")
 public class IclubNamedQueries implements java.io.Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7107040889492342220L;
 	private Long atId;
-	
+
 	@Id
 	@Column(name = "at_id", unique = true, nullable = false)
 	public Long getAtId() {
 		return this.atId;
 	}
-	
+
 	public void setAtId(Long atId) {
 		this.atId = atId;
 	}

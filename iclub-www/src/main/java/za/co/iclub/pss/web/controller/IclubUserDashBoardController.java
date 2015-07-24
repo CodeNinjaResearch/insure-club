@@ -33,7 +33,7 @@ import za.co.iclub.pss.ws.model.IclubQuoteModel;
 @ManagedBean(name = "iclubUserDashBoardController")
 @SessionScoped
 public class IclubUserDashBoardController implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -56,7 +56,7 @@ public class IclubUserDashBoardController implements Serializable {
 	private List<IclubPaymentBean> claimPaymentBeans;
 	private String sessionUserId;
 	private List<IclubClaimStatusBean> claimStatusBeans;
-	
+
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -65,70 +65,70 @@ public class IclubUserDashBoardController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public List<IclubPolicyStatusBean> getPolicyStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PCY_STS_BASE_URL + "list");
-		
+
 		List<IclubPolicyStatusModel> models = (ArrayList<IclubPolicyStatusModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyStatusModel.class));
-		
+
 		if (models != null && models.size() > 0) {
 			policyStatusBeans = new ArrayList<IclubPolicyStatusBean>();
 			for (IclubPolicyStatusModel model : models) {
 				if (model != null && model.getPsId() != null) {
-					
+
 					IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
-					
+
 					bean.setPsId(model.getPsId());
 					bean.setPsLongDesc(model.getPsLongDesc());
 					bean.setPsShortDesc(model.getPsShortDesc());
 					bean.setPsStatus(model.getPsStatus());
-					
+
 					policyStatusBeans.add(bean);
 				}
-				
+
 			}
 		}
 		return policyStatusBeans;
 	}
-	
+
 	public String viewPolicies() {
-		
+
 		return "/pages/policy/dashboard.xhtml?face-redirect=true";
-		
+
 	}
-	
+
 	public String viewClaims() {
-		
+
 		return "/pages/claim/allDashboard.xhtml?face-redirect=true";
-		
+
 	}
-	
+
 	public String viewQuotes() {
-		
+
 		return "/pages/quote/vq.xhtml?face-redirect=true";
-		
+
 	}
-	
+
 	public void setPolicyStatusBeans(List<IclubPolicyStatusBean> policyStatusBeans) {
 		this.policyStatusBeans = policyStatusBeans;
 	}
-	
+
 	public List<IclubQuoteBean> getQuoteBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/userstatusId/" + getSessionUserId() + "/1");
 		Collection<? extends IclubQuoteModel> models = new ArrayList<IclubQuoteModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteModel.class));
 		client.close();
-		
+
 		quoteBeans = new ArrayList<IclubQuoteBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubQuoteModel model : models) {
 				IclubQuoteBean bean = new IclubQuoteBean();
-				
+
 				bean.setQId(model.getQId());
 				bean.setQCrtdDt(model.getQCrtdDt());
 				bean.setQIsMatched(model.getQIsMatched());
@@ -147,7 +147,7 @@ public class IclubUserDashBoardController implements Serializable {
 				bean.setIclubCoverType(model.getIclubCoverType());
 				bean.setIclubQuoteStatus(model.getIclubQuoteStatus());
 				bean.setIclubPersonByQPersonId(model.getIclubPersonByQPersonId());
-				
+
 				if (model.getIclubPolicies() != null && model.getIclubPolicies().length > 0) {
 					String[] policies = new String[model.getIclubPolicies().length];
 					int i = 0;
@@ -161,22 +161,22 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return quoteBeans;
 	}
-	
+
 	public void setQuoteBeans(List<IclubQuoteBean> quoteBeans) {
 		this.quoteBeans = quoteBeans;
 	}
-	
+
 	public List<IclubPolicyBean> getPolicyBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/user/" + getSessionUserId());
-		
+
 		List<IclubPolicyModel> models = (ArrayList<IclubPolicyModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyModel.class));
-		
+
 		if (models != null && models.size() > 0) {
 			policyBeans = new ArrayList<IclubPolicyBean>();
 			int i = 0;
 			for (IclubPolicyModel model : models) {
 				if (model != null && model.getPId() != null) {
-					
+
 					IclubPolicyBean bean = new IclubPolicyBean();
 					bean.setPId(model.getPId());
 					bean.setPProrataPrm(model.getPProrataPrm());
@@ -194,18 +194,18 @@ public class IclubUserDashBoardController implements Serializable {
 						break;
 					policyBeans.add(bean);
 				}
-				
+
 			}
 		}
 		return policyBeans;
 	}
-	
+
 	public void setPolicyBeans(List<IclubPolicyBean> policyBeans) {
 		this.policyBeans = policyBeans;
 	}
-	
+
 	public List<IclubClaimBean> getClaimBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(CLM_BASE_URL + "listOrderByCrtDt");
 		Collection<? extends IclubClaimModel> models = new ArrayList<IclubClaimModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimModel.class));
 		client.close();
@@ -230,13 +230,13 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return claimBeans;
 	}
-	
+
 	public void setClaimBeans(List<IclubClaimBean> claimBeans) {
 		this.claimBeans = claimBeans;
 	}
-	
+
 	public List<IclubPaymentBean> getPaymentBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "list");
 		Collection<? extends IclubPaymentModel> models = new ArrayList<IclubPaymentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentModel.class));
 		client.close();
@@ -250,7 +250,7 @@ public class IclubUserDashBoardController implements Serializable {
 				model.setPGenDt(bean.getPGenDt());
 				model.setPDrCrInd(bean.getPDrCrInd());
 				model.setPValue(bean.getPValue());
-				
+
 				model.setIclubPolicy(bean.getIclubPolicy());
 				model.setIclubPaymentStatus(bean.getIclubPaymentStatus());
 				model.setIclubAccount(bean.getIclubAccount());
@@ -265,13 +265,13 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return paymentBeans;
 	}
-	
+
 	public void setPaymentBeans(List<IclubPaymentBean> paymentBeans) {
 		this.paymentBeans = paymentBeans;
 	}
-	
+
 	public List<IclubClaimStatusBean> getClaimStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(CS_BASE_URL + "list");
 		Collection<? extends IclubClaimStatusModel> models = new ArrayList<IclubClaimStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimStatusModel.class));
 		client.close();
@@ -288,13 +288,13 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return claimStatusBeans;
 	}
-	
+
 	public void setClaimStatusBeans(List<IclubClaimStatusBean> claimStatusBeans) {
 		this.claimStatusBeans = claimStatusBeans;
 	}
-	
+
 	public List<IclubPaymentBean> getClaimPaymentBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "list");
 		Collection<? extends IclubPaymentModel> models = new ArrayList<IclubPaymentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentModel.class));
 		client.close();
@@ -308,7 +308,7 @@ public class IclubUserDashBoardController implements Serializable {
 				model.setPGenDt(bean.getPGenDt());
 				model.setPDrCrInd(bean.getPDrCrInd());
 				model.setPValue(bean.getPValue());
-				
+
 				model.setIclubPolicy(bean.getIclubPolicy());
 				model.setIclubPaymentStatus(bean.getIclubPaymentStatus());
 				model.setIclubAccount(bean.getIclubAccount());
@@ -323,39 +323,39 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return claimPaymentBeans;
 	}
-	
+
 	public void setClaimPaymentBeans(List<IclubPaymentBean> claimPaymentBeans) {
 		this.claimPaymentBeans = claimPaymentBeans;
 	}
-	
+
 	public List<IclubPaymentStatusBean> getPaymentStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PMT_STS_BASE_URL + "list");
-		
+
 		List<IclubPaymentStatusModel> models = (ArrayList<IclubPaymentStatusModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentStatusModel.class));
-		
+
 		if (models != null && models.size() > 0) {
 			paymentStatusBeans = new ArrayList<IclubPaymentStatusBean>();
 			for (IclubPaymentStatusModel model : models) {
 				if (model != null && model.getPsId() != null) {
-					
+
 					IclubPaymentStatusBean bean = new IclubPaymentStatusBean();
-					
+
 					bean.setPsId(model.getPsId());
 					bean.setPsLongDesc(model.getPsLongDesc());
 					bean.setPsShortDesc(model.getPsShortDesc());
 					bean.setPsStatus(model.getPsStatus());
-					
+
 					paymentStatusBeans.add(bean);
 				}
-				
+
 			}
 		}
 		return paymentStatusBeans;
 	}
-	
+
 	public void setPaymentStatusBeans(List<IclubPaymentStatusBean> paymentStatusBeans) {
 		this.paymentStatusBeans = paymentStatusBeans;
 	}
-	
+
 }

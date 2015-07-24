@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubVehSecTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubVehSecTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubVehSecTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubVehSecTypeDAO iclubVehSecTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,16 +46,16 @@ public class IclubVehSecTypeService {
 	public ResponseModel add(IclubVehSecTypeModel model) {
 		try {
 			IclubVehSecType iCPt = new IclubVehSecType();
-			
+
 			iCPt.setVstId(iclubCommonDAO.getNextId(IclubVehSecType.class));
 			iCPt.setVstLongDesc(model.getVstLongDesc());
 			iCPt.setVstShortDesc(model.getVstShortDesc());
 			iCPt.setVstStatus(model.getVstStatus());
-			
+
 			iclubVehSecTypeDAO.save(iCPt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCPt.getVstId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -67,9 +67,9 @@ public class IclubVehSecTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -78,16 +78,16 @@ public class IclubVehSecTypeService {
 	public ResponseModel mod(IclubVehSecTypeModel model) {
 		try {
 			IclubVehSecType iCPt = new IclubVehSecType();
-			
+
 			iCPt.setVstId(model.getVstId());
 			iCPt.setVstLongDesc(model.getVstLongDesc());
 			iCPt.setVstShortDesc(model.getVstShortDesc());
 			iCPt.setVstStatus(model.getVstStatus());
-			
+
 			iclubVehSecTypeDAO.merge(iCPt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getVstId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -99,9 +99,9 @@ public class IclubVehSecTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -116,27 +116,27 @@ public class IclubVehSecTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubVehSecTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubVehSecTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubVehSecType iCPt = (IclubVehSecType) object;
-					
+
 					IclubVehSecTypeModel model = new IclubVehSecTypeModel();
-					
+
 					model.setVstId(iCPt.getVstId());
 					model.setVstLongDesc(iCPt.getVstLongDesc());
 					model.setVstShortDesc(iCPt.getVstShortDesc());
 					model.setVstStatus(iCPt.getVstStatus());
-					
+
 					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
 						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
 						int i = 0;
@@ -146,37 +146,37 @@ public class IclubVehSecTypeService {
 						}
 						model.setIclubVehicles(vehicles);
 					}
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubVehSecTypeModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubVehSecType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubVehSecType iCPt = (IclubVehSecType) object;
-					
+
 					IclubVehSecTypeModel model = new IclubVehSecTypeModel();
-					
+
 					model.setVstId(iCPt.getVstId());
 					model.setVstLongDesc(iCPt.getVstLongDesc());
 					model.setVstShortDesc(iCPt.getVstShortDesc());
 					model.setVstStatus(iCPt.getVstStatus());
-					
+
 					if (iCPt.getIclubVehicles() != null && iCPt.getIclubVehicles().size() > 0) {
 						String[] vehicles = new String[iCPt.getIclubVehicles().size()];
 						int i = 0;
@@ -186,17 +186,17 @@ public class IclubVehSecTypeService {
 						}
 						model.setIclubVehicles(vehicles);
 					}
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -205,12 +205,12 @@ public class IclubVehSecTypeService {
 		IclubVehSecTypeModel model = new IclubVehSecTypeModel();
 		try {
 			IclubVehSecType bean = iclubVehSecTypeDAO.findById(id);
-			
+
 			model.setVstId(bean.getVstId());
 			model.setVstLongDesc(bean.getVstLongDesc());
 			model.setVstShortDesc(bean.getVstShortDesc());
 			model.setVstStatus(bean.getVstStatus());
-			
+
 			if (bean.getIclubVehicles() != null && bean.getIclubVehicles().size() > 0) {
 				String[] vehicles = new String[bean.getIclubVehicles().size()];
 				int i = 0;
@@ -220,13 +220,13 @@ public class IclubVehSecTypeService {
 				}
 				model.setIclubVehicles(vehicles);
 			}
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -252,45 +252,45 @@ public class IclubVehSecTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubVehSecTypeDAO getIclubVehSecTypeDAO() {
 		return iclubVehSecTypeDAO;
 	}
-	
+
 	public void setIclubVehSecTypeDAO(IclubVehSecTypeDAO iclubVehSecTypeDAO) {
 		this.iclubVehSecTypeDAO = iclubVehSecTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

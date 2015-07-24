@@ -1,6 +1,5 @@
 package za.co.iclub.pss.web.bean;
 
-
 public class IclubVehicleTypeBean {
 
 	private Long vtId;

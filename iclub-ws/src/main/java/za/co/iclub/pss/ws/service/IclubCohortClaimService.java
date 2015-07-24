@@ -165,20 +165,21 @@ public class IclubCohortClaimService {
 
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubCohortClaim.class.getSimpleName());
-			if(batmod!=null&& batmod.size()>0){
-			for (Object object : batmod) {
-				IclubCohortClaim iclubC = (IclubCohortClaim) object;
-				IclubCohortClaimModel iCC = new IclubCohortClaimModel();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubCohortClaim iclubC = (IclubCohortClaim) object;
+					IclubCohortClaimModel iCC = new IclubCohortClaimModel();
 
-				iCC.setCcId(iclubC.getCcId());
-				iCC.setIclubCohort(iclubC.getIclubCohort() != null ? (iclubC.getIclubCohort()).getCId() : null);
-				iCC.setCcCrtdDt(iclubC.getCcCrtdDt());
-				iCC.setIclubClaim((iclubC.getIclubClaim()) != null ? iclubC.getIclubClaim().getCId() : null);
-				iCC.setCcClaimAmt(iclubC.getCcClaimAmt());
-				iCC.setIclubPerson(iclubC.getIclubPerson() != null ? (iclubC.getIclubPerson()).getPId() : null);
+					iCC.setCcId(iclubC.getCcId());
+					iCC.setIclubCohort(iclubC.getIclubCohort() != null ? (iclubC.getIclubCohort()).getCId() : null);
+					iCC.setCcCrtdDt(iclubC.getCcCrtdDt());
+					iCC.setIclubClaim((iclubC.getIclubClaim()) != null ? iclubC.getIclubClaim().getCId() : null);
+					iCC.setCcClaimAmt(iclubC.getCcClaimAmt());
+					iCC.setIclubPerson(iclubC.getIclubPerson() != null ? (iclubC.getIclubPerson()).getPId() : null);
 
-				ret.add((T) iCC);
-			}}
+					ret.add((T) iCC);
+				}
+			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}

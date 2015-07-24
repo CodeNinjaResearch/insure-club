@@ -42,7 +42,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubLoginController")
 @SessionScoped
 public class IclubLoginController implements Serializable {
-	
+
 	private static final long serialVersionUID = 8092436101540887282L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
@@ -53,7 +53,7 @@ public class IclubLoginController implements Serializable {
 	private IclubLoginBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
-	
+
 	public String googleAction() {
 		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
 		try {
@@ -63,9 +63,9 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 	}
-	
+
 	public String getFaceBookLogin() {
-		
+
 		String redirectUrl = "https://graph.facebook.com/oauth/authorize?client_id=" + BUNDLE.getString("fb.client_id") + "&display=page&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&scope=" + BUNDLE.getString("fb.perms2");
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
@@ -74,7 +74,7 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 	}
-	
+
 	public String yahooAction() {
 		String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us";
 		try {
@@ -84,22 +84,21 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 	}
-	
+
 	public String hotmailAction() {
 		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.signin%20wl.basic" + "&redirect_uri=http://localhost:8080/iclub-www/Oauth2callback" + "&response_type=token&client_id=000000004C15240C";
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";
 		// client_id=CLIENT_ID&scope=SCOPES&response_type=RESPONSE_TYPE&redirect_uri=REDIRECT_URL
 	}
-	
+
 	public String twitterLogin() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		
+
 		cb.setDebugEnabled(true).setOAuthConsumerKey(BUNDLE.getString("twt.client_id")).setOAuthConsumerSecret(BUNDLE.getString("twt.secret")).setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		Twitter twitter = tf.getInstance();
@@ -115,36 +114,36 @@ public class IclubLoginController implements Serializable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
 		return "";
 	}
-	
+
 	public String encodeKeys(String consumerKey, String consumerSecret) {
-		
+
 		try {
-			
+
 			String encodedConsumerKey = URLEncoder.encode(consumerKey, "UTF-8");
-			
+
 			String encodedConsumerSecret = URLEncoder.encode(consumerSecret, "UTF-8");
-			
+
 			String fullKey = encodedConsumerKey + ":" + encodedConsumerSecret;
-			
+
 			byte[] encodedBytes = Base64.encodeBase64(fullKey.getBytes());
-			
+
 			return new String(encodedBytes);
-			
+
 		}
-		
+
 		catch (UnsupportedEncodingException e) {
 			return new String();
-			
+
 		}
-		
+
 	}
-	
+
 	public String requestBearerToken() throws IOException {
 		HttpsURLConnection connection = null;
 		String encodedCredentials = encodeKeys(BUNDLE.getString("twt.client_id"), BUNDLE.getString("twt.secret"));
@@ -184,9 +183,9 @@ public class IclubLoginController implements Serializable {
 			}
 		}
 	}
-	
+
 	public boolean writeRequest(HttpsURLConnection connection, String textBody) {
-		
+
 		try {
 			BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
 			wr.write(textBody);
@@ -197,7 +196,7 @@ public class IclubLoginController implements Serializable {
 			return false;
 		}
 	}
-	
+
 	public String readResponse(HttpsURLConnection connection) {
 		try {
 			StringBuilder str = new StringBuilder();
@@ -211,7 +210,7 @@ public class IclubLoginController implements Serializable {
 			return new String();
 		}
 	}
-	
+
 	public String doIclubLogin() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: doIclubLogin");
 		if (!validateLogin()) {
@@ -232,9 +231,9 @@ public class IclubLoginController implements Serializable {
 						personClient.close();
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
-						
+
 						return "home";
-						
+
 					} else {
 						IclubWebHelper.addMessage("Person Profile Fetch Error - Contact Admin", FacesMessage.SEVERITY_ERROR);
 						return "";
@@ -252,14 +251,14 @@ public class IclubLoginController implements Serializable {
 			return "";
 		}
 	}
-	
+
 	public void doIclubLogout() {
 		IclubWebHelper.invalidateSession();
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
 		navigationHandler.handleNavigation(context, null, "/templates/home.xhtml?faces-redirect=true");
 	}
-	
+
 	public boolean validateLogin() {
 		boolean ret = false;
 		if (bean.getLName() == null || bean.getLName().trim().length() == 0) {
@@ -272,39 +271,39 @@ public class IclubLoginController implements Serializable {
 		}
 		return ret;
 	}
-	
+
 	public List<IclubLoginBean> getBeans() {
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubLoginBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubLoginBean getBean() {
 		if (bean == null)
 			bean = new IclubLoginBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubLoginBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 }
