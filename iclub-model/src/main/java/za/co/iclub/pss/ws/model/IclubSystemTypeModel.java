@@ -2,7 +2,7 @@ package za.co.iclub.pss.ws.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="IclubSystemTypeModel")
+@XmlRootElement(name = "IclubSystemTypeModel")
 public class IclubSystemTypeModel {
 
 	private Long stId;

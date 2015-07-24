@@ -24,7 +24,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubVehUsageTypeController")
 @SessionScoped
 public class IclubVehUsageController implements Serializable {
-	
+
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubVehUsageController.class);
@@ -34,18 +34,18 @@ public class IclubVehUsageController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-	
+
 	public void addIclubVehUsageType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubVehUsageType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
-				
+
 				model.setVutLongDesc(bean.getVutLongDesc());
 				model.setVutShortDesc(bean.getVutShortDesc());
 				model.setVutStatus(bean.getVutStatus());
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -60,7 +60,7 @@ public class IclubVehUsageController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("vehusage") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubVehUsageType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubVehUsageType");
 		try {
@@ -71,7 +71,7 @@ public class IclubVehUsageController implements Serializable {
 				model.setVutLongDesc(bean.getVutLongDesc());
 				model.setVutShortDesc(bean.getVutShortDesc());
 				model.setVutStatus(bean.getVutStatus());
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -86,7 +86,7 @@ public class IclubVehUsageController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("vehusage") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubVehUsageType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubVehUsageType");
 		try {
@@ -103,27 +103,27 @@ public class IclubVehUsageController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("vehusage") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubVehUsageTypeBean();
 	}
-	
+
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubVehUsageTypeBean();
 	}
-	
+
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		if (bean.getVutShortDesc() != null && !bean.getVutShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getVutShortDesc().trim() + "/" + ((bean.getVutId() == null) ? -999l : bean.getVutId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -136,20 +136,20 @@ public class IclubVehUsageController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getVutLongDesc() == null || bean.getVutLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getVutStatus() == null || bean.getVutStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public List<IclubVehUsageTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubVehUsageTypeModel> models = new ArrayList<IclubVehUsageTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehUsageTypeModel.class));
@@ -167,43 +167,43 @@ public class IclubVehUsageController implements Serializable {
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubVehUsageTypeBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubVehUsageTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubVehUsageTypeBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubVehUsageTypeBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
-		
+
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

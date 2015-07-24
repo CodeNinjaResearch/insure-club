@@ -9,20 +9,20 @@ import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletResponse;
 
 public class SessionPhaseListener implements PhaseListener {
-	
+
 	private static final long serialVersionUID = 5667405053728834122L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	
+
 	@Override
 	public void afterPhase(PhaseEvent pe) {
 	}
-	
+
 	@Override
 	public void beforePhase(PhaseEvent pe) {
 		FacesContext context = pe.getFacesContext();
 		ResourceBundle bundle = ResourceBundle.getBundle("iclub-web");
 		boolean bypassAuth = Boolean.valueOf(bundle.getString("bypass.auth"));
-		
+
 		String userSessionId = (String) IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		boolean updateProfile = false;
 		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.profile.update")) != null) {
@@ -41,16 +41,16 @@ public class SessionPhaseListener implements PhaseListener {
 						FacesContext.getCurrentInstance().responseComplete();
 					}
 				} catch (Throwable t) {
-					
+
 				}
-				
+
 			}
 		}
 	}
-	
+
 	@Override
 	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
 	}
-	
+
 }

@@ -2,8 +2,6 @@ package za.co.iclub.pss.web.bean;
 
 import java.util.Date;
 
-
-
 public class IclubCoverTypeBean {
 
 	private Long ctId;

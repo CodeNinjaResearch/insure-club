@@ -31,7 +31,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubCohortInviteService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubCohortInviteService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubCohortInviteService.class);
 	private IclubCohortInviteDAO IclubCohortInviteDAO;
 	private IclubCommonDAO iclubCommonDAO;
@@ -39,7 +39,7 @@ public class IclubCohortInviteService {
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubCohortDAO iclubCohortDAO;
 	private IclubNotificationTypeDAO iclubNotificationTypeDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -47,9 +47,9 @@ public class IclubCohortInviteService {
 	@Transactional
 	public ResponseModel add(IclubCohortInviteModel model) {
 		try {
-			
+
 			IclubCohortInvite iCC = new IclubCohortInvite();
-			
+
 			iCC.setCiId(model.getCiId());
 			iCC.setIclubCohort(iclubCohortDAO.findById(model.getIclubCohort()));
 			iCC.setIclubNotificationType(iclubNotificationTypeDAO.findById(model.getIclubNotificationType()));
@@ -60,14 +60,14 @@ public class IclubCohortInviteService {
 			iCC.setCiInviteFName(model.getCiInviteFName());
 			iCC.setCiInviteLName(model.getCiInviteLName());
 			IclubCohortInviteDAO.save(iCC);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCC.getCiId());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -76,9 +76,9 @@ public class IclubCohortInviteService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@POST
 	@Path("/addList")
 	@Consumes("application/json")
@@ -86,11 +86,11 @@ public class IclubCohortInviteService {
 	@Transactional
 	public ResponseModel addList(Collection<? extends IclubCohortInviteModel> models) {
 		try {
-			
+
 			for (IclubCohortInviteModel model : models) {
-				
+
 				IclubCohortInvite iCC = new IclubCohortInvite();
-				
+
 				iCC.setCiId(model.getCiId());
 				iCC.setIclubCohort(model.getIclubCohort() != null ? iclubCohortDAO.findById(model.getIclubCohort()) : null);
 				iCC.setIclubNotificationType(model.getIclubNotificationType() != null ? iclubNotificationTypeDAO.findById(model.getIclubNotificationType()) : null);
@@ -101,15 +101,15 @@ public class IclubCohortInviteService {
 				iCC.setCiInviteFName(model.getCiInviteFName());
 				iCC.setCiInviteLName(model.getCiInviteLName());
 				IclubCohortInviteDAO.save(iCC);
-				
+
 				LOGGER.info("Save Success with ID :: " + iCC.getCiId());
 			}
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -118,9 +118,9 @@ public class IclubCohortInviteService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -129,7 +129,7 @@ public class IclubCohortInviteService {
 	public ResponseModel mod(IclubCohortInviteModel model) {
 		try {
 			IclubCohortInvite iCC = new IclubCohortInvite();
-			
+
 			iCC.setCiId(model.getCiId());
 			iCC.setIclubCohort(iclubCohortDAO.findById(model.getIclubCohort()));
 			iCC.setCiCrtdDt(model.getCiCrtdDt());
@@ -139,11 +139,11 @@ public class IclubCohortInviteService {
 			iCC.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 			iCC.setCiInviteFName(model.getCiInviteFName());
 			iCC.setCiInviteLName(model.getCiInviteLName());
-			
+
 			IclubCohortInviteDAO.merge(iCC);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getCiId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -155,9 +155,9 @@ public class IclubCohortInviteService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -172,21 +172,21 @@ public class IclubCohortInviteService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubCohortInviteModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = IclubCohortInviteDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubCohortInvite iclubC = (IclubCohortInvite) object;
 					IclubCohortInviteModel iCC = new IclubCohortInviteModel();
-					
+
 					iCC.setCiId(iclubC.getCiId());
 					iCC.setIclubCohort(iclubC.getIclubCohort() != null ? (iclubC.getIclubCohort()).getCId() : null);
 					iCC.setCiCrtdDt(iclubC.getCiCrtdDt());
@@ -202,24 +202,24 @@ public class IclubCohortInviteService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubCohortInviteModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubCohortInvite.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubCohortInvite iclubC = (IclubCohortInvite) object;
 					IclubCohortInviteModel iCC = new IclubCohortInviteModel();
-					
+
 					iCC.setCiId(iclubC.getCiId());
 					iCC.setIclubCohort(iclubC.getIclubCohort() != null ? (iclubC.getIclubCohort()).getCId() : null);
 					iCC.setCiCrtdDt(iclubC.getCiCrtdDt());
@@ -237,7 +237,7 @@ public class IclubCohortInviteService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -246,7 +246,7 @@ public class IclubCohortInviteService {
 		IclubCohortInviteModel model = new IclubCohortInviteModel();
 		try {
 			IclubCohortInvite bean = IclubCohortInviteDAO.findById(id);
-			
+
 			model.setCiId(bean.getCiId());
 			model.setIclubCohort(bean.getIclubCohort() != null ? (bean.getIclubCohort()).getCId() : null);
 			model.setCiCrtdDt(bean.getCiCrtdDt());
@@ -256,59 +256,59 @@ public class IclubCohortInviteService {
 			model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson()).getPId() : null);
 			model.setCiInviteFName(bean.getCiInviteFName());
 			model.setCiInviteLName(bean.getCiInviteLName());
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubCohortInviteDAO getIclubCohortInviteDAO() {
 		return IclubCohortInviteDAO;
 	}
-	
+
 	public void setIclubCohortInviteDAO(IclubCohortInviteDAO IclubCohortInviteDAO) {
 		this.IclubCohortInviteDAO = IclubCohortInviteDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 	public IclubCohortDAO getIclubCohortDAO() {
 		return iclubCohortDAO;
 	}
-	
+
 	public void setIclubCohortDAO(IclubCohortDAO iclubCohortDAO) {
 		this.iclubCohortDAO = iclubCohortDAO;
 	}
-	
+
 	public IclubNotificationTypeDAO getIclubNotificationTypeDAO() {
 		return iclubNotificationTypeDAO;
 	}
-	
+
 	public void setIclubNotificationTypeDAO(IclubNotificationTypeDAO iclubNotificationTypeDAO) {
 		this.iclubNotificationTypeDAO = iclubNotificationTypeDAO;
 	}
-	
+
 }

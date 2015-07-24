@@ -33,12 +33,11 @@ public class CharacterEncodingFilter implements Filter {
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		
-	}
-	
-	public void destroy() {
-		
+
 	}
 
+	public void destroy() {
+
+	}
 
 }

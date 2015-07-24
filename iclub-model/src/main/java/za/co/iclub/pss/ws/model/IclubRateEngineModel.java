@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="IclubRateEngineModel")
+@XmlRootElement(name = "IclubRateEngineModel")
 public class IclubRateEngineModel {
 
 	private String reId;

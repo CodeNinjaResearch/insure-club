@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubEntityTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubEntityTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubEntityTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubEntityTypeDAO iclubEntityTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,16 +46,16 @@ public class IclubEntityTypeService {
 	public ResponseModel add(IclubEntityTypeModel model) {
 		try {
 			IclubEntityType iCEt = new IclubEntityType();
-			
+
 			iCEt.setEtId(iclubCommonDAO.getNextId(IclubEntityType.class));
 			iCEt.setEtLongDesc(model.getEtLongDesc());
 			iCEt.setEtShortDesc(model.getEtShortDesc());
 			iCEt.setEtStatus(model.getEtStatus());
 			iCEt.setEtTblNm(model.getEtTblNm());
 			iclubEntityTypeDAO.save(iCEt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCEt.getEtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -67,9 +67,9 @@ public class IclubEntityTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -78,17 +78,17 @@ public class IclubEntityTypeService {
 	public ResponseModel mod(IclubEntityTypeModel model) {
 		try {
 			IclubEntityType iCEt = new IclubEntityType();
-			
+
 			iCEt.setEtId(model.getEtId());
 			iCEt.setEtLongDesc(model.getEtLongDesc());
 			iCEt.setEtShortDesc(model.getEtShortDesc());
 			iCEt.setEtStatus(model.getEtStatus());
 			iCEt.setEtTblNm(model.getEtTblNm());
-			
+
 			iclubEntityTypeDAO.merge(iCEt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getEtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -100,9 +100,9 @@ public class IclubEntityTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -117,28 +117,28 @@ public class IclubEntityTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubEntityTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubEntityTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubEntityType iCEt = (IclubEntityType) object;
-					
+
 					IclubEntityTypeModel model = new IclubEntityTypeModel();
-					
+
 					model.setEtId(iCEt.getEtId());
 					model.setEtLongDesc(iCEt.getEtLongDesc());
 					model.setEtShortDesc(iCEt.getEtShortDesc());
 					model.setEtStatus(iCEt.getEtStatus());
 					model.setEtTblNm(iCEt.getEtTblNm());
-					
+
 					if (iCEt.getIclubDocuments() != null && iCEt.getIclubDocuments().size() > 0) {
 						String[] documents = new String[iCEt.getIclubDocuments().size()];
 						int i = 0;
@@ -148,17 +148,17 @@ public class IclubEntityTypeService {
 						}
 						model.setIclubDocuments(documents);
 					}
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -184,7 +184,7 @@ public class IclubEntityTypeService {
 			return message;
 		}
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -193,13 +193,13 @@ public class IclubEntityTypeService {
 		IclubEntityTypeModel model = new IclubEntityTypeModel();
 		try {
 			IclubEntityType bean = iclubEntityTypeDAO.findById(id);
-			
+
 			model.setEtId(bean.getEtId());
 			model.setEtLongDesc(bean.getEtLongDesc());
 			model.setEtShortDesc(bean.getEtShortDesc());
 			model.setEtStatus(bean.getEtStatus());
 			model.setEtTblNm(bean.getEtTblNm());
-			
+
 			if (bean.getIclubDocuments() != null && bean.getIclubDocuments().size() > 0) {
 				String[] documents = new String[bean.getIclubDocuments().size()];
 				int i = 0;
@@ -209,51 +209,51 @@ public class IclubEntityTypeService {
 				}
 				model.setIclubDocuments(documents);
 			}
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubEntityTypeDAO getIclubEntityTypeDAO() {
 		return iclubEntityTypeDAO;
 	}
-	
+
 	public void setIclubEntityTypeDAO(IclubEntityTypeDAO iclubEntityTypeDAO) {
 		this.iclubEntityTypeDAO = iclubEntityTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

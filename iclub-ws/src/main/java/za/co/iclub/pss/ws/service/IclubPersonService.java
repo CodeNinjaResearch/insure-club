@@ -68,7 +68,7 @@ public class IclubPersonService {
 	private IclubIdTypeDAO iclubIdTypeDAO;
 	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes({ "application/json" })
@@ -77,7 +77,7 @@ public class IclubPersonService {
 	public ResponseModel add(IclubPersonModel model) {
 		try {
 			IclubPerson person = new IclubPerson();
-			
+
 			person.setPId(model.getPId());
 			person.setPCrtdDt(model.getPCrtdDt());
 			person.setPDob(model.getPDob());
@@ -106,9 +106,9 @@ public class IclubPersonService {
 			person.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			person.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
 			iclubPersonDAO.save(person);
-			
+
 			LOGGER.info("Save Success with ID :: " + person.getPId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(Integer.valueOf(0));
 			message.setStatusDesc("Success");
@@ -121,7 +121,7 @@ public class IclubPersonService {
 			return message;
 		}
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes({ "application/json" })
@@ -130,7 +130,7 @@ public class IclubPersonService {
 	public ResponseModel mod(IclubPersonModel model) {
 		try {
 			IclubPerson person = new IclubPerson();
-			
+
 			person.setPId(model.getPId());
 			person.setPCrtdDt(model.getPCrtdDt());
 			person.setPDob(model.getPDob());
@@ -158,11 +158,11 @@ public class IclubPersonService {
 			person.setIclubIdType(model.getIclubIdType() != null ? iclubIdTypeDAO.findById(model.getIclubIdType()) : null);
 			person.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 			person.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
-			
+
 			iclubPersonDAO.merge(person);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(Integer.valueOf(0));
 			message.setStatusDesc("Success");
@@ -175,7 +175,7 @@ public class IclubPersonService {
 			return message;
 		}
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes({ "application/json" })
@@ -190,7 +190,7 @@ public class IclubPersonService {
 		}
 		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
@@ -198,13 +198,13 @@ public class IclubPersonService {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T extends IclubPersonModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPersonDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPerson iPerson = (IclubPerson) object;
-					
+
 					IclubPersonModel model = new IclubPersonModel();
 					model.setPId(iPerson.getPId());
 					model.setPCrtdDt(iPerson.getPCrtdDt());
@@ -233,7 +233,7 @@ public class IclubPersonService {
 					model.setIclubIdType(iPerson.getIclubIdType() != null ? (iPerson.getIclubIdType().getItId()) : null);
 					model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
 					model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
-					
+
 					if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
 						String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
 						int i = 0;
@@ -252,7 +252,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
 					}
-					
+
 					if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
 						String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
 						int i = 0;
@@ -262,7 +262,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortClaims(iclubCohortClaims);
 					}
-					
+
 					if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
 						String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
 						int i = 0;
@@ -272,7 +272,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
 					}
-					
+
 					if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
 						String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
 						int i = 0;
@@ -282,7 +282,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
 					}
-					
+
 					if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
 						String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
 						int i = 0;
@@ -310,7 +310,7 @@ public class IclubPersonService {
 						}
 						model.setIclubExtrases(iclubExtrases);
 					}
-					
+
 					if (iPerson.getIclubProperties() != null && iPerson.getIclubProperties().size() > 0) {
 						String[] iclubProperties = new String[iPerson.getIclubProperties().size()];
 						int i = 0;
@@ -455,7 +455,7 @@ public class IclubPersonService {
 						}
 						model.setIclubQuotesForQCrtdBy(iclubQuotesForQCrtdBy);
 					}
-					
+
 					if (iPerson.getIclubDocuments() != null && iPerson.getIclubDocuments().size() > 0) {
 						String[] iclubDocuments = new String[iPerson.getIclubDocuments().size()];
 						int i = 0;
@@ -528,7 +528,7 @@ public class IclubPersonService {
 						}
 						model.setIclubBankMasters(iclubBankMasters);
 					}
-					
+
 					if (iPerson.getIclubNotifs() != null && iPerson.getIclubNotifs().size() > 0) {
 						String[] iclubNotifs = new String[iPerson.getIclubNotifs().size()];
 						int i = 0;
@@ -607,10 +607,10 @@ public class IclubPersonService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
@@ -618,13 +618,13 @@ public class IclubPersonService {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T extends IclubPersonModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPerson.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPerson iPerson = (IclubPerson) object;
-					
+
 					IclubPersonModel model = new IclubPersonModel();
 					model.setPId(iPerson.getPId());
 					model.setPCrtdDt(iPerson.getPCrtdDt());
@@ -653,7 +653,7 @@ public class IclubPersonService {
 					model.setIclubIdType(iPerson.getIclubIdType() != null ? (iPerson.getIclubIdType().getItId()) : null);
 					model.setIclubPerson(iPerson.getIclubPerson() != null ? iPerson.getIclubPerson().getPId() : null);
 					model.setIclubMaritialStatus(iPerson.getIclubMaritialStatus() != null ? (iPerson.getIclubMaritialStatus().getMsId()) : null);
-					
+
 					if (iPerson.getIclubCohortPersonsForCpPersonId() != null && iPerson.getIclubCohortPersonsForCpPersonId().size() > 0) {
 						String[] iclubCohortPersonsForCpPersonIds = new String[iPerson.getIclubCohortPersonsForCpPersonId().size()];
 						int i = 0;
@@ -672,7 +672,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
 					}
-					
+
 					if (iPerson.getIclubCohortClaims() != null && iPerson.getIclubCohortClaims().size() > 0) {
 						String[] iclubCohortClaims = new String[iPerson.getIclubCohortClaims().size()];
 						int i = 0;
@@ -682,7 +682,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortClaims(iclubCohortClaims);
 					}
-					
+
 					if (iPerson.getIclubCohortPersonsForCpCrtdBy() != null && iPerson.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
 						String[] iclubCohortPersonsForCpCrtdBys = new String[iPerson.getIclubCohortPersonsForCpCrtdBy().size()];
 						int i = 0;
@@ -692,7 +692,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
 					}
-					
+
 					if (iPerson.getIclubCohortsForCCrtdBy() != null && iPerson.getIclubCohortsForCCrtdBy().size() > 0) {
 						String[] iclubCohortsForCCrtdBys = new String[iPerson.getIclubCohortsForCCrtdBy().size()];
 						int i = 0;
@@ -702,7 +702,7 @@ public class IclubPersonService {
 						}
 						model.setIclubCohortsForCCrtdBy(iclubCohortsForCCrtdBys);
 					}
-					
+
 					if (iPerson.getIclubMessageBoards() != null && iPerson.getIclubMessageBoards().size() > 0) {
 						String[] iclubMessageBoards = new String[iPerson.getIclubMessageBoards().size()];
 						int i = 0;
@@ -730,7 +730,7 @@ public class IclubPersonService {
 						}
 						model.setIclubExtrases(iclubExtrases);
 					}
-					
+
 					if (iPerson.getIclubProperties() != null && iPerson.getIclubProperties().size() > 0) {
 						String[] iclubProperties = new String[iPerson.getIclubProperties().size()];
 						int i = 0;
@@ -875,7 +875,7 @@ public class IclubPersonService {
 						}
 						model.setIclubQuotesForQCrtdBy(iclubQuotesForQCrtdBy);
 					}
-					
+
 					if (iPerson.getIclubDocuments() != null && iPerson.getIclubDocuments().size() > 0) {
 						String[] iclubDocuments = new String[iPerson.getIclubDocuments().size()];
 						int i = 0;
@@ -948,7 +948,7 @@ public class IclubPersonService {
 						}
 						model.setIclubBankMasters(iclubBankMasters);
 					}
-					
+
 					if (iPerson.getIclubNotifs() != null && iPerson.getIclubNotifs().size() > 0) {
 						String[] iclubNotifs = new String[iPerson.getIclubNotifs().size()];
 						int i = 0;
@@ -1021,17 +1021,17 @@ public class IclubPersonService {
 						}
 						model.setIclubMessages(messages);
 					}
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces({ "application/json" })
@@ -1040,7 +1040,7 @@ public class IclubPersonService {
 		IclubPersonModel model = new IclubPersonModel();
 		try {
 			IclubPerson bean = iclubPersonDAO.findById(id);
-			
+
 			model.setPId(bean.getPId());
 			model.setPCrtdDt(bean.getPCrtdDt());
 			model.setPDob(bean.getPDob());
@@ -1067,7 +1067,7 @@ public class IclubPersonService {
 			model.setIclubIdType(bean.getIclubIdType() != null ? (bean.getIclubIdType().getItId()) : null);
 			model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 			model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
-			
+
 			if (bean.getIclubCohortPersonsForCpPersonId() != null && bean.getIclubCohortPersonsForCpPersonId().size() > 0) {
 				String[] iclubCohortPersonsForCpPersonIds = new String[bean.getIclubCohortPersonsForCpPersonId().size()];
 				int i = 0;
@@ -1086,7 +1086,7 @@ public class IclubPersonService {
 				}
 				model.setIclubCohortsForCPrimaryUserId(iclubCohortsForCPrimaryUserIds);
 			}
-			
+
 			if (bean.getIclubCohortClaims() != null && bean.getIclubCohortClaims().size() > 0) {
 				String[] iclubCohortClaims = new String[bean.getIclubCohortClaims().size()];
 				int i = 0;
@@ -1096,7 +1096,7 @@ public class IclubPersonService {
 				}
 				model.setIclubCohortClaims(iclubCohortClaims);
 			}
-			
+
 			if (bean.getIclubCohortPersonsForCpCrtdBy() != null && bean.getIclubCohortPersonsForCpCrtdBy().size() > 0) {
 				String[] iclubCohortPersonsForCpCrtdBys = new String[bean.getIclubCohortPersonsForCpCrtdBy().size()];
 				int i = 0;
@@ -1106,7 +1106,7 @@ public class IclubPersonService {
 				}
 				model.setIclubCohortPersonsForCpCrtdBy(iclubCohortPersonsForCpCrtdBys);
 			}
-			
+
 			if (bean.getIclubCohortsForCCrtdBy() != null && bean.getIclubCohortsForCCrtdBy().size() > 0) {
 				String[] iclubCohortsForCCrtdBys = new String[bean.getIclubCohortsForCCrtdBy().size()];
 				int i = 0;
@@ -1143,7 +1143,7 @@ public class IclubPersonService {
 				}
 				model.setIclubExtrases(iclubExtrases);
 			}
-			
+
 			if (bean.getIclubProperties() != null && bean.getIclubProperties().size() > 0) {
 				String[] iclubProperties = new String[bean.getIclubProperties().size()];
 				int i = 0;
@@ -1288,7 +1288,7 @@ public class IclubPersonService {
 				}
 				model.setIclubQuotesForQCrtdBy(iclubQuotesForQCrtdBy);
 			}
-			
+
 			if (bean.getIclubDocuments() != null && bean.getIclubDocuments().size() > 0) {
 				String[] iclubDocuments = new String[bean.getIclubDocuments().size()];
 				int i = 0;
@@ -1361,7 +1361,7 @@ public class IclubPersonService {
 				}
 				model.setIclubBankMasters(iclubBankMasters);
 			}
-			
+
 			if (bean.getIclubNotifs() != null && bean.getIclubNotifs().size() > 0) {
 				String[] iclubNotifs = new String[bean.getIclubNotifs().size()];
 				int i = 0;
@@ -1434,13 +1434,13 @@ public class IclubPersonService {
 				}
 				model.setIclubMessages(messages);
 			}
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@POST
 	@Path("/getMNumberList")
@@ -1449,7 +1449,7 @@ public class IclubPersonService {
 	public <T extends String> List<T> getAllExistingMobileNmbers(Collection<? extends String> models) {
 		List<T> ret = new ArrayList<T>();
 		try {
-			
+
 			List batmod = iclubNamedQueryDAO.getIclubPersonNumbersList(models);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
@@ -1462,7 +1462,7 @@ public class IclubPersonService {
 		}
 		return ret;
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@POST
 	@Path("/getEmailsList")
@@ -1471,7 +1471,7 @@ public class IclubPersonService {
 	public <T extends String> List<T> getAllEmails(Collection<? extends String> models) {
 		List<T> ret = new ArrayList<T>();
 		try {
-			
+
 			List batmod = iclubNamedQueryDAO.getIclubPersonEmailsList(models);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
@@ -1484,45 +1484,45 @@ public class IclubPersonService {
 		}
 		return ret;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubIdTypeDAO getIclubIdTypeDAO() {
 		return iclubIdTypeDAO;
 	}
-	
+
 	public void setIclubIdTypeDAO(IclubIdTypeDAO iclubIdTypeDAO) {
 		this.iclubIdTypeDAO = iclubIdTypeDAO;
 	}
-	
+
 	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
 		return iclubMaritialStatusDAO;
 	}
-	
+
 	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
 		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

@@ -14,7 +14,8 @@ public class IclubDocumentBean {
 	private String DEntityId;
 	private String DContent;
 	private Date DCrtdDt;
-//	private byte[] DBlob;
+
+	// private byte[] DBlob;
 
 	public String getDId() {
 		return DId;
