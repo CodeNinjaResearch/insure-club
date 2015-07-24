@@ -608,7 +608,7 @@
 
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="complexJobDetail" />
-		<property name="cronExpression" value="* 5 * ? * 1-7" />
+		<property name="cronExpression" value="0 0/5 * ? * 1-7" />
 	</bean>
 
 

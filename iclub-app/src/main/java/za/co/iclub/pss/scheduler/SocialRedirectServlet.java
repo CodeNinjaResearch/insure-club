@@ -33,13 +33,18 @@ public class SocialRedirectServlet extends HttpServlet {
 		
 		try {
 			String from = request.getParameter("from");
-			if (from != null && from.equalsIgnoreCase("google")) {
-				String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
-				try {
-					response.sendRedirect(redirectUrl);
-				} catch (IOException e) {
-					e.printStackTrace();
+			if (from != null) {
+				if (from.equalsIgnoreCase("google")) {
+					String cohortInviteId = request.getParameter("cohortInvId");
+					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + (cohortInviteId != null ? "&cohortInviteId=" + cohortInviteId : "") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+					try {
+						response.sendRedirect(redirectUrl);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+			} else {
+				response.sendRedirect(BUNDLE.getString("login_uri"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

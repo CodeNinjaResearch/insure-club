@@ -335,7 +335,7 @@ public class IclubMenuController implements Serializable {
 						try {
 							Date date = formatter.parse(jsonGet.get("birthYear").toString().replace("\"", "") + "/" + jsonGet.get("birthdate").toString().replace("\"", ""));
 							model.setPDob(new Timestamp(date.getTime()));
-						} catch (ParseException e) {
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
 						if (checkExistingUserorNot(model, xoauth_yahoo_guid.replace("\"", ""), "YAHOO")) {

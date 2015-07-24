@@ -55,7 +55,7 @@ public class MailSender implements Serializable {
 					mailstring.append("<table>");
 					mailstring.append("<tr><td><font face='verdana' size=2>Dear <b> Guest" + "," + "</b></font></td></tr>");
 					mailstring.append("<tr><td><font face='verdana' size=2><br />Please click bealow link to register</b></font></td></tr>");
-					mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "google >www.insuranceclub.co.za</a></b></font></td></tr>");
+					mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "google&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
 					mailstring.append("</table>");
 					message.setContent(mailstring.toString(), "text/html; charset=utf-8");
 					
