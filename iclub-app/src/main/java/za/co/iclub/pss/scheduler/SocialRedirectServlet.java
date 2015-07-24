@@ -17,7 +17,7 @@ public class SocialRedirectServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	
+	 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
