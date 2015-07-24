@@ -90,7 +90,6 @@ public class IclubLoginController implements Serializable {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";
