@@ -151,6 +151,7 @@ public class IclubMenuController implements Serializable {
 			// get code
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String code = request.getParameter("code");
+			String cohortInviteId = request.getParameter("code");
 			
 			String from = request.getParameter("from");
 			// format parameters to post
@@ -256,7 +257,7 @@ public class IclubMenuController implements Serializable {
 								ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 								client.close();
 								if (response.getStatusCode() == 0) {
-									updatePassword(model, access_token, "FB", providerId);
+									updatePassword(model, access_token, "FB", providerId, cohortInviteId);
 									
 								} else {
 									IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -299,6 +300,7 @@ public class IclubMenuController implements Serializable {
 					post.setEntity(new UrlEncodedFormEntity(arguments));
 					HttpResponse response1 = client.execute(post);
 					String outputString = EntityUtils.toString(response1.getEntity());
+					System.out.println(outputString);
 					JsonObject json = (JsonObject) new JsonParser().parse(outputString);
 					String access_token = json.get("access_token").getAsString();
 					String xoauth_yahoo_guid = json.get("xoauth_yahoo_guid").toString();
@@ -324,7 +326,7 @@ public class IclubMenuController implements Serializable {
 						
 						model.setPId(UUID.randomUUID().toString());
 						System.out.println(mailsList.get(0).getPrimary());
-						model.setPEmail(mailsList.get(0).getPrimary() != null && mailsList.get(0).getPrimary().equalsIgnoreCase("true") ? mailsList.get(0).getHandle() : mailsList.get(1).getHandle());
+						model.setPEmail(mailsList.get(0).getPrimary() != null && (mailsList.get(0).getPrimary().equalsIgnoreCase("true") || mailsList.size() == 1) ? mailsList.get(0).getHandle() : mailsList.get(1).getHandle());
 						model.setPFName(jsonGet.get("givenName").toString().replace("\"", ""));
 						model.setPLName(jsonGet.get("familyName").toString().replace("\"", ""));
 						model.setPGender(jsonGet.get("gender") != null ? jsonGet.get("gender").toString().replace("\"", "") : "");
@@ -345,7 +347,7 @@ public class IclubMenuController implements Serializable {
 							webClient.close();
 							
 							if (response.getStatusCode() == 0) {
-								updatePassword(model, access_token, "YAHOO", xoauth_yahoo_guid.replace("\"", ""));
+								updatePassword(model, access_token, "YAHOO", xoauth_yahoo_guid.replace("\"", ""), cohortInviteId);
 								
 							} else {
 								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -444,7 +446,7 @@ public class IclubMenuController implements Serializable {
 							client.close();
 							
 							if (response.getStatusCode() == 0) {
-								updatePassword(model, access_token, "GOOGLE", data.getId());
+								updatePassword(model, access_token, "GOOGLE", data.getId(), cohortInviteId);
 								
 							} else {
 								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
@@ -468,7 +470,7 @@ public class IclubMenuController implements Serializable {
 		}
 	}
 	
-	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token, String from, String guid) {
+	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token, String from, String guid, String cohortInviteId) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: updatePassword");
 		try {
 			
@@ -492,6 +494,7 @@ public class IclubMenuController implements Serializable {
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
 				IclubWebHelper.addObjectIntoSession("googlelogin", true);
+				IclubWebHelper.addObjectIntoSession("cohortInviteId", cohortInviteId);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 				
 				if (guid != null) {

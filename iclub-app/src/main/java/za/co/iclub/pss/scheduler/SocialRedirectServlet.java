@@ -17,7 +17,8 @@ public class SocialRedirectServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	 
+	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -36,7 +37,15 @@ public class SocialRedirectServlet extends HttpServlet {
 			if (from != null) {
 				if (from.equalsIgnoreCase("google")) {
 					String cohortInviteId = request.getParameter("cohortInvId");
-					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + (cohortInviteId != null ? "&cohortInviteId=" + cohortInviteId : "") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + (cohortInviteId != null ? "?cohortInviteId=" + cohortInviteId : "") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+					try {
+						response.sendRedirect(redirectUrl);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else if (from.equalsIgnoreCase("yahoo")) {
+					String cohortInviteId = request.getParameter("cohortInvId");
+					String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + (cohortInviteId != null ? "&cohortInviteId=" + cohortInviteId : "") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us";
 					try {
 						response.sendRedirect(redirectUrl);
 					} catch (IOException e) {

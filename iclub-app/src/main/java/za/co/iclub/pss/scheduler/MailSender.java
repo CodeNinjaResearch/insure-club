@@ -19,6 +19,7 @@ public class MailSender implements Serializable {
 	
 	private static final long serialVersionUID = -4232011314128276763L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
+//	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	private static final String username = BUNDLE.getString("mail.google.username");
 	private static final String password = BUNDLE.getString("mail.google.password");
 	private static Properties props;
@@ -55,7 +56,12 @@ public class MailSender implements Serializable {
 					mailstring.append("<table>");
 					mailstring.append("<tr><td><font face='verdana' size=2>Dear <b> Guest" + "," + "</b></font></td></tr>");
 					mailstring.append("<tr><td><font face='verdana' size=2><br />Please click bealow link to register</b></font></td></tr>");
-					mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "google&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
+					
+					if (bean.getCiInviteUri().split("@")[1].toString().contains("gmail")) {
+						mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "google&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
+					} else if (bean.getCiInviteUri().split("@")[1].toString().contains("yahoo")) {
+						mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "yahoo&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
+					}
 					mailstring.append("</table>");
 					message.setContent(mailstring.toString(), "text/html; charset=utf-8");
 					

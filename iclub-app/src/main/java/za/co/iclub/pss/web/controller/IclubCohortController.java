@@ -807,6 +807,29 @@ public class IclubCohortController implements Serializable {
 			request.removeAttribute("from");
 			setIclubCohortInvite(key, fromSocial, guid);
 			
+			if (IclubWebHelper.getObjectIntoSession("cohortInviteId") != null) {
+				/*		try {
+				
+					WebClient client = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession("cohortInviteId").toString());
+					IclubCohortInviteModel inviteModel = client.get(IclubCohortInviteModel.class);
+					inviteModel.setCiInviteAcceptYn("Y");
+					client = IclubWebHelper.createCustomClient(CI_BASE_URL + "mod");
+					ResponseModel responseModels = client.accept(MediaType.APPLICATION_JSON).put(inviteModel, ResponseModel.class);
+					
+					if (responseModels != null && responseModels.getStatusCode() == 0) {
+						client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + inviteModel.getIclubCohort());
+						IclubCohortModel model = client.get(IclubCohortModel.class);
+						IclubCohortBean bean = IclubCohortTrans.fromWStoUI(model);
+						selectedBeans.add(bean);
+						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/" + addIclubCohorts());
+					}
+				} catch (Exception e) {
+					
+				}*/
+				
+			}
+			
 		} else if (request.getParameter("from") != null && request.getParameter("from").toString().equalsIgnoreCase("fbapp")) {
 			String access_token = IclubWebHelper.getObjectIntoSession("access_token") != null ? IclubWebHelper.getObjectIntoSession("access_token").toString() : null;
 			String guid = IclubWebHelper.getObjectIntoSession("guid") != null ? IclubWebHelper.getObjectIntoSession("guid").toString() : null;
