@@ -1263,4 +1263,32 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
+	public List getIclubClaimPaymentsByUserId(String userId, Long claimStausId) {
+		log.debug("finding IclubPayment   by Not  Sent Status");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubClaimPaymentsByUserId");
+			queryObject.setString("userId", userId);
+			queryObject.setLong("claimStausId", claimStausId);
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubPayment  ", re);
+			throw re;
+		}
+	}
+	
+	public List getIclubPolicyPaymentsByUserId(String userId) {
+		log.debug("finding IclubPayment   by Not  Sent Status");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicyPaymentsByUserId");
+			queryObject.setString("userId", userId);
+			
+			List object = queryObject.list();
+			return object;
+		} catch (RuntimeException re) {
+			log.error("get IclubPayment  ", re);
+			throw re;
+		}
+	}
+	
 }

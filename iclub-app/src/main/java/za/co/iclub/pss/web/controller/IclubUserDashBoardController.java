@@ -132,6 +132,12 @@ public class IclubUserDashBoardController implements Serializable {
 		
 	}
 	
+	public String viewPayments() {
+		
+		return "/pages/dashboard/user/payment.xhtml?faces-redirect=true";
+		
+	}
+	
 	public void setPolicyStatusBeans(List<IclubPolicyStatusBean> policyStatusBeans) {
 		this.policyStatusBeans = policyStatusBeans;
 	}
@@ -209,17 +215,14 @@ public class IclubUserDashBoardController implements Serializable {
 	
 	public List<IclubPaymentBean> getPaymentBeans() {
 		
-		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "list");
+		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "policyPayments/" + getSessionUserId());
 		Collection<? extends IclubPaymentModel> models = new ArrayList<IclubPaymentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentModel.class));
 		client.close();
 		paymentBeans = new ArrayList<IclubPaymentBean>();
 		if (models != null && models.size() > 0) {
-			int i = 0;
+			
 			for (IclubPaymentModel model : models) {
 				IclubPaymentBean bean = IclubPaymentTrans.fromWStoUI(model);
-				i++;
-				if (i == 6)
-					break;
 				paymentBeans.add(bean);
 			}
 		}
@@ -252,17 +255,14 @@ public class IclubUserDashBoardController implements Serializable {
 	
 	public List<IclubPaymentBean> getClaimPaymentBeans() {
 		
-		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "list");
+		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "claimPayments/" + getSessionUserId());
 		Collection<? extends IclubPaymentModel> models = new ArrayList<IclubPaymentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentModel.class));
 		client.close();
 		claimPaymentBeans = new ArrayList<IclubPaymentBean>();
 		if (models != null && models.size() > 0) {
-			int i = 0;
 			for (IclubPaymentModel model : models) {
 				IclubPaymentBean bean = IclubPaymentTrans.fromWStoUI(model);
-				i++;
-				if (i == 6)
-					break;
+				
 				claimPaymentBeans.add(bean);
 			}
 		}

@@ -224,6 +224,9 @@
 								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.userDashboardBean.nextPremiumDate}" />
 							</div>
 						</div>
+						<f:facet name="footer">
+							<p:commandButton id="viewPayments" value="View Payments" ajax="false" action="#{iclubUserDashBoardController.viewPayments}" />
+						</f:facet>
 					</p:panel>
 				</div>
 			</div>

@@ -181,6 +181,56 @@ public class IclubPaymentService {
 		return model;
 	}
 	
+	@GET
+	@Path("/claimPayments/{userId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubPaymentModel> List<T> getClaimPayments(@PathParam("userId") String userId) {
+		List<T> ret = new ArrayList<T>();
+		
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubClaimPaymentsByUserId(userId, 4l);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPayment bean = (IclubPayment) object;
+					
+					IclubPaymentModel model = IclubPaymentTrans.fromORMtoWS(bean);
+					
+					ret.add((T) model);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		
+		return ret;
+	}
+	
+	@GET
+	@Path("/policyPayments/{userId}")
+	@Produces("application/json")
+	@Transactional(propagation = Propagation.REQUIRED)
+	public <T extends IclubPaymentModel> List<T> getIclubPolicyPaymentsByUserId(@PathParam("userId") String userId) {
+		List<T> ret = new ArrayList<T>();
+		
+		try {
+			List batmod = iclubNamedQueryDAO.getIclubPolicyPaymentsByUserId(userId);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubPayment bean = (IclubPayment) object;
+					
+					IclubPaymentModel model = IclubPaymentTrans.fromORMtoWS(bean);
+					
+					ret.add((T) model);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		
+		return ret;
+	}
+	
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
