@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.model.ws.IclubPersonModel;
 import za.co.iclub.pss.orm.bean.IclubPerson;
+import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
@@ -35,6 +36,7 @@ public class IclubPersonService {
 	private IclubIdTypeDAO iclubIdTypeDAO;
 	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
+	private IclubCohortDAO iclubCohortDAO;
 	
 	@POST
 	@Path("/add")
@@ -43,7 +45,7 @@ public class IclubPersonService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPersonModel model) {
 		try {
-			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO);
+			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO);
 			
 			iclubPersonDAO.save(person);
 			
@@ -69,7 +71,7 @@ public class IclubPersonService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPersonModel model) {
 		try {
-			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO);
+			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO);
 			iclubPersonDAO.merge(person);
 			
 			LOGGER.info("Merge Success with ID :: " + model.getPId());
@@ -253,6 +255,14 @@ public class IclubPersonService {
 	
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
+	}
+	
+	public IclubCohortDAO getIclubCohortDAO() {
+		return iclubCohortDAO;
+	}
+	
+	public void setIclubCohortDAO(IclubCohortDAO iclubCohortDAO) {
+		this.iclubCohortDAO = iclubCohortDAO;
 	}
 	
 }

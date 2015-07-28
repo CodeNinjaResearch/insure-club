@@ -1,6 +1,5 @@
 package za.co.iclub.pss.model.ui;
 
-import java.util.Date;
 
 public class IclubUserDashboardBean {
 	

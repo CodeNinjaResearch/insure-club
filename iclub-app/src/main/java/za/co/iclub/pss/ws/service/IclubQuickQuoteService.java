@@ -41,6 +41,7 @@ import za.co.iclub.pss.orm.bean.IclubRateType;
 import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
@@ -110,6 +111,7 @@ public class IclubQuickQuoteService {
 	private IclubVehicleDAO iclubVehicleDAO;
 	private IclubPropertyItemDAO iclubPropertyItemDAO;
 	private IclubInsuranceItemDAO iclubInsuranceItemDAO;
+	private IclubCohortDAO iclubCohortDAO;
 	
 	@POST
 	@Path("/createQuote")
@@ -119,10 +121,10 @@ public class IclubQuickQuoteService {
 		Double generatedPremium = 0.0;
 		IclubPerson iclubPerson = null;
 		if (!iclubQuickQuoteRequest.isLoginFlag()) {
-			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO);
+			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO);
 			iclubPersonDAO.save(iclubPerson);
 		} else {
-			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO);
+			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO);
 			iclubPersonDAO.merge(iclubPerson);
 		}
 		
@@ -755,6 +757,14 @@ public class IclubQuickQuoteService {
 	
 	public void setIclubInsuranceItemDAO(IclubInsuranceItemDAO iclubInsuranceItemDAO) {
 		this.iclubInsuranceItemDAO = iclubInsuranceItemDAO;
+	}
+	
+	public IclubCohortDAO getIclubCohortDAO() {
+		return iclubCohortDAO;
+	}
+	
+	public void setIclubCohortDAO(IclubCohortDAO iclubCohortDAO) {
+		this.iclubCohortDAO = iclubCohortDAO;
 	}
 	
 }

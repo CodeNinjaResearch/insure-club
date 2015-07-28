@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
+
 /**
  * Servlet implementation class SocialRedirectServlet
  */
@@ -37,7 +39,11 @@ public class SocialRedirectServlet extends HttpServlet {
 			if (from != null) {
 				if (from.equalsIgnoreCase("google")) {
 					String cohortInviteId = request.getParameter("cohortInvId");
-					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + (cohortInviteId != null ? "?cohortInviteId=" + cohortInviteId : "") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+					String state = "";
+					if (cohortInviteId != null && !cohortInviteId.trim().equalsIgnoreCase(""))
+						state = Base64.encodeBase64URLSafeString(("{cohortInviteId :" + cohortInviteId + "}").getBytes());
+					System.out.println("-------" + state);
+					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force&state=" + state;
 					try {
 						response.sendRedirect(redirectUrl);
 					} catch (IOException e) {

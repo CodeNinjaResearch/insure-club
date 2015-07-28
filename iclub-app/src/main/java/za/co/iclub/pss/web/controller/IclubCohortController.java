@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -808,8 +810,8 @@ public class IclubCohortController implements Serializable {
 			setIclubCohortInvite(key, fromSocial, guid);
 			
 			if (IclubWebHelper.getObjectIntoSession("cohortInviteId") != null) {
-				/*		try {
-				
+				try {
+					
 					WebClient client = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession("cohortInviteId").toString());
 					IclubCohortInviteModel inviteModel = client.get(IclubCohortInviteModel.class);
 					inviteModel.setCiInviteAcceptYn("Y");
@@ -820,13 +822,14 @@ public class IclubCohortController implements Serializable {
 						client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + inviteModel.getIclubCohort());
 						IclubCohortModel model = client.get(IclubCohortModel.class);
 						IclubCohortBean bean = IclubCohortTrans.fromWStoUI(model);
+						selectedBeans = new ArrayList<IclubCohortBean>();
 						selectedBeans.add(bean);
 						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/" + addIclubCohorts());
 					}
 				} catch (Exception e) {
 					
-				}*/
+				}
 				
 			}
 			
@@ -905,4 +908,14 @@ public class IclubCohortController implements Serializable {
 		this.inviteFromFbApp = inviteFromFbApp;
 	}
 	
+	public static void main(String[] args) {
+		try {
+			byte[] decodedURLAsBytes = Base64.decodeBase64("4/TwNdmUPUA06tKvZqrfAWhyMphhr-MvGXoiWoha8Aen0");
+			
+			String cohortInviteId = new String(decodedURLAsBytes, "utf-8");
+			System.out.println(cohortInviteId);
+		} catch (Exception e) {
+		}
+		
+	}
 }

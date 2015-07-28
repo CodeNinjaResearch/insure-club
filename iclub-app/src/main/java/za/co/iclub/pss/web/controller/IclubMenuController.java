@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -151,7 +151,7 @@ public class IclubMenuController implements Serializable {
 			// get code
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String code = request.getParameter("code");
-			String cohortInviteId = request.getParameter("code");
+			String cohortInviteId = request.getParameter("cohortInviteId");
 			
 			String from = request.getParameter("from");
 			// format parameters to post
@@ -288,7 +288,7 @@ public class IclubMenuController implements Serializable {
 				arguments.add(new BasicNameValuePair("client_id", Y_BUNDLE.getString("client_id")));
 				arguments.add(new BasicNameValuePair("code", code));
 				try {
-					Base64.Encoder encoder = Base64.getEncoder();
+					java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
 					String normalString = Y_BUNDLE.getString("client_id") + ":" + Y_BUNDLE.getString("client_secret");
 					encodedValue = encoder.encodeToString(normalString.getBytes(StandardCharsets.UTF_8));
 					post.setHeader("Authorization", "Basic " + encodedValue);
@@ -446,6 +446,19 @@ public class IclubMenuController implements Serializable {
 							client.close();
 							
 							if (response.getStatusCode() == 0) {
+								
+								try {
+									cohortInviteId = request.getParameter("state");
+									
+									byte[] decodedURLAsBytes = Base64.decodeBase64(cohortInviteId);
+									cohortInviteId = new String(decodedURLAsBytes, "utf-8");
+									JsonObject jsonGet = (JsonObject) new JsonParser().parse(cohortInviteId);
+									cohortInviteId = jsonGet.get("cohortInviteId").toString();
+									cohortInviteId = cohortInviteId.replace("\"", "");
+								} catch (Exception e) {
+									
+								}
+								
 								updatePassword(model, access_token, "GOOGLE", data.getId(), cohortInviteId);
 								
 							} else {
