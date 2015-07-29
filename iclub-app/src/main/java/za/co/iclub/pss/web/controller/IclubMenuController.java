@@ -53,6 +53,8 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import za.co.iclub.pss.model.ui.GooglePojo;
+import za.co.iclub.pss.model.ui.OutLookUserProfileBean;
+import za.co.iclub.pss.model.ui.SocialAuthResponse;
 import za.co.iclub.pss.model.ui.YahooMailsBean;
 import za.co.iclub.pss.model.ws.IclubLoginModel;
 import za.co.iclub.pss.model.ws.IclubPersonModel;
@@ -152,10 +154,36 @@ public class IclubMenuController implements Serializable {
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String code = request.getParameter("code");
 			String cohortInviteId = request.getParameter("cohortInviteId");
+			String state = request.getParameter("state");
 			
 			String from = request.getParameter("from");
 			// format parameters to post
 			request.removeAttribute("code");
+			
+			System.out.println(state + "-------state--" + state);
+			
+			if ((from == null || from.trim().equalsIgnoreCase("")) && state != null && !state.trim().equalsIgnoreCase("")) {
+				try {
+					
+					LOGGER.info("Class :: " + this.getClass() + " :: state try block");
+					System.out.println(state + "-------state");
+					byte[] decodedURLAsBytes = Base64.decodeBase64(state);
+					state = new String(decodedURLAsBytes, "utf-8");
+					JsonObject jsonGet = (JsonObject) new JsonParser().parse(state);
+					System.out.println(jsonGet + "-------State jsonGet");
+					if (jsonGet.has("cohortInviteId")) {
+						cohortInviteId = jsonGet.get("cohortInviteId").toString();
+						cohortInviteId = cohortInviteId.replace("\"", "");
+					}
+					if (jsonGet.has("from")) {
+						from = jsonGet.get("from").toString();
+						from = from.replace("\"", "");
+					}
+				} catch (Exception e) {
+					LOGGER.error(e, e);
+					e.printStackTrace();
+				}
+			}
 			
 			String verifier = request.getParameter("oauth_verifier");
 			
@@ -188,8 +216,77 @@ public class IclubMenuController implements Serializable {
 					e.printStackTrace();
 				}
 			}
-			
-			if (code != null && (preCode == null || !preCode.equalsIgnoreCase(code)) && from != null && from.trim().equalsIgnoreCase("fb")) {
+			if (code != null && (preCode == null || !preCode.equalsIgnoreCase(code)) && from != null && from.trim().equalsIgnoreCase("outlook")) {
+				preCode = code;
+				HttpPost post = new HttpPost("https://login.live.com/oauth20_token.srf");
+				
+				List<NameValuePair> arguments = new ArrayList<>(3);
+				arguments.add(new BasicNameValuePair("grant_type", BUNDLE.getString("htm.grant_type")));
+				arguments.add(new BasicNameValuePair("redirect_uri", BUNDLE.getString("htm.redirect_uri")));
+				arguments.add(new BasicNameValuePair("client_secret", BUNDLE.getString("htm.client_secret")));
+				arguments.add(new BasicNameValuePair("client_id", BUNDLE.getString("htm.client_id")));
+				arguments.add(new BasicNameValuePair("code", code));
+				try {
+					java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+					String normalString = BUNDLE.getString("htm.client_id") + ":" + BUNDLE.getString("htm.client_secret");
+					String encodedValue = encoder.encodeToString(normalString.getBytes(StandardCharsets.UTF_8));
+					post.setHeader("Authorization", "Basic " + encodedValue);
+					post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					HttpClient httpsClient = new DefaultHttpClient();
+					post.setEntity(new UrlEncodedFormEntity(arguments));
+					HttpResponse outlookResponse = httpsClient.execute(post);
+					String outputString = EntityUtils.toString(outlookResponse.getEntity());
+					System.out.println(outputString);
+					SocialAuthResponse socialAuthResponse = new Gson().fromJson(outputString, SocialAuthResponse.class);
+					
+					if (socialAuthResponse != null) {
+						HttpClient client = new DefaultHttpClient();
+						HttpGet outlookRequest = new HttpGet("https://apis.live.net/v5.0/me?access_token=" + socialAuthResponse.getAccess_token());
+						HttpResponse response = client.execute(outlookRequest);
+						outputString = EntityUtils.toString(response.getEntity());
+						
+						OutLookUserProfileBean data = new Gson().fromJson(outputString, OutLookUserProfileBean.class);
+						
+						if (data != null) {
+							IclubPersonModel model = new IclubPersonModel();
+							
+							model.setPId(UUID.randomUUID().toString());
+							model.setPEmail(data.getEmails().getPreferred());
+							model.setPFName(data.getFirst_name());
+							model.setPLName(data.getLast_name());
+							model.setPGender(data.getGender());
+							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setIclubPerson(1 + "");
+							
+							SimpleDateFormat formatter = new SimpleDateFormat("yyyy/dd/MM");
+							
+							if (checkExistingUserorNot(model, data.getId().replace("\"", ""), "OUTLOOK")) {
+								WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+								
+								ResponseModel outLookResponse = webClient.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+								webClient.close();
+								
+								if (outLookResponse.getStatusCode() == 0) {
+									updatePassword(model, socialAuthResponse.getAccess_token(), "OUTLOOK", data.getId().replace("\"", ""), cohortInviteId);
+									
+								} else {
+									IclubWebHelper.addMessage("Fail :: " + outLookResponse.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+								}
+								
+							}
+							
+						}
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			} else if (code != null && (preCode == null || !preCode.equalsIgnoreCase(code)) && from != null && from.trim().equalsIgnoreCase("fb")) {
 				preCode = code;
 				String access_token = null;
 				String authURL = getAuthURL(code);
@@ -447,18 +544,6 @@ public class IclubMenuController implements Serializable {
 							
 							if (response.getStatusCode() == 0) {
 								
-								try {
-									cohortInviteId = request.getParameter("state");
-									
-									byte[] decodedURLAsBytes = Base64.decodeBase64(cohortInviteId);
-									cohortInviteId = new String(decodedURLAsBytes, "utf-8");
-									JsonObject jsonGet = (JsonObject) new JsonParser().parse(cohortInviteId);
-									cohortInviteId = jsonGet.get("cohortInviteId").toString();
-									cohortInviteId = cohortInviteId.replace("\"", "");
-								} catch (Exception e) {
-									
-								}
-								
 								updatePassword(model, access_token, "GOOGLE", data.getId(), cohortInviteId);
 								
 							} else {
@@ -577,5 +662,13 @@ public class IclubMenuController implements Serializable {
 	public void setSelPage(String selPage) {
 		this.selPage = selPage;
 	}
+	
+	// {"id":"e66589bd7f132ba3",
+	// "name":"sairam dikondawar"
+	// "first_name":"sairam"
+	// "last_name":"dikondawar"
+	// "link":"https://profile.live.com/"
+	// "gender":null
+	// "locale":"en_US","updated_time":"2015-06-03T18:48:25+0000"}
 	
 }

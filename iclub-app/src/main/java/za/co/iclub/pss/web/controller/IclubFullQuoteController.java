@@ -1347,7 +1347,7 @@ public class IclubFullQuoteController implements Serializable {
 		bean.setQCrtdDt(new Date(System.currentTimeMillis()));
 		bean.setQIsMatched("N");
 		bean.setQPrevPremium(0.0d);
-		bean.setQValidUntil(new Date(System.currentTimeMillis() + (3 * 24 * 3600)));
+		bean.setQValidUntil(new Date(System.currentTimeMillis() + (31 * 24 * 3600)));
 		bean.setQMobile(personModel.getPMobile());
 		bean.setQEmail(personModel.getPEmail());
 		bean.setQGenPremium(getGenPremium());
