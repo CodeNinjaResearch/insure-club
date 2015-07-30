@@ -49,7 +49,7 @@
 					</div>
 				</p:panel>
 				<p:panel id="pnlViewMbCmt">
-					<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubMbCommentController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+					<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubMbCommentController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No MB Comments Available">
 						<f:facet name="footer">
 							<p:commandButton id="btnMbCommentShowAdd" value="Add Comment" actionListener="#{iclubMbCommentController.showAddPanel}" update=":iclubFrm:pnlMbCont" />
 						</f:facet>

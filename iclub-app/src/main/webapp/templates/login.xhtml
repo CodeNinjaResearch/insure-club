@@ -18,7 +18,7 @@
 					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.googleAction}" ajax="false">
 						<h:graphicImage value="/images/gmail-icon.jpg" />
 					</p:commandLink>
-					<p:commandLink action="#{iclubLoginController.twitterLogin}" ajax="false">
+					<p:commandLink rendered="false" action="#{iclubLoginController.twitterLogin}" ajax="false">
 						<h:graphicImage value="/images/twitter_icon.png" />
 					</p:commandLink>
 					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.getFaceBookLogin}" ajax="false">

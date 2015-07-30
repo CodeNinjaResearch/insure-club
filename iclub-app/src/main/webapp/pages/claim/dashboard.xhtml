@@ -54,7 +54,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Policy Details" />
 						</div>
 					</f:facet>
-					<p:dataTable reflow="true" widgetVar="dtPlcCont" value="#{iclubClaimController.policyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+					<p:dataTable reflow="true" widgetVar="dtPlcCont" value="#{iclubClaimController.policyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Policies Available">
 						<p:column headerText="Number">
 							<p:outputLabel value="#{bean.PNumber}" />
 						</p:column>
@@ -84,7 +84,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Insurance Items" />
 						</div>
 					</f:facet>
-					<p:dataTable reflow="true" widgetVar="dtIICont" value="#{iclubClaimController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+					<p:dataTable reflow="true" widgetVar="dtIICont" value="#{iclubClaimController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Insurance Items Available">
 						<p:column headerText="Quote Id">
 							<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiQuoteId}" />
 						</p:column>

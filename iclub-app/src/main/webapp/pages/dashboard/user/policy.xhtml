@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<p:panel id="qqPcyPanel">
-		<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubUserDashBoardController.policyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+		<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubUserDashBoardController.policyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Policies Available">
 			<f:facet name="header">
 				<p:outputLabel value="Policy Details"></p:outputLabel>
 			</f:facet>

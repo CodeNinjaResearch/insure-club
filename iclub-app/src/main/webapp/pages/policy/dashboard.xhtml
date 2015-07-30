@@ -79,7 +79,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Insurance Items" />
 					</div>
 				</f:facet>
-				<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+				<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.iItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Insurance Items Available">
 					<p:column headerText="Insured Value">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiInsureValue}">
 							<f:convertNumber pattern="#0.00" />
