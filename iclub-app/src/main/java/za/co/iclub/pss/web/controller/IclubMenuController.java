@@ -150,27 +150,20 @@ public class IclubMenuController implements Serializable {
 		
 		try {
 			
-			// get code
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String code = request.getParameter("code");
 			String cohortInviteId = request.getParameter("cohortInviteId");
 			String state = request.getParameter("state");
-			
 			String from = request.getParameter("from");
-			// format parameters to post
 			request.removeAttribute("code");
-			
-			System.out.println(state + "-------state--" + state);
-			
+			String verifier = request.getParameter("oauth_verifier");
 			if ((from == null || from.trim().equalsIgnoreCase("")) && state != null && !state.trim().equalsIgnoreCase("")) {
 				try {
 					
 					LOGGER.info("Class :: " + this.getClass() + " :: state try block");
-					System.out.println(state + "-------state");
 					byte[] decodedURLAsBytes = Base64.decodeBase64(state);
 					state = new String(decodedURLAsBytes, "utf-8");
 					JsonObject jsonGet = (JsonObject) new JsonParser().parse(state);
-					System.out.println(jsonGet + "-------State jsonGet");
 					if (jsonGet.has("cohortInviteId")) {
 						cohortInviteId = jsonGet.get("cohortInviteId").toString();
 						cohortInviteId = cohortInviteId.replace("\"", "");
@@ -184,8 +177,6 @@ public class IclubMenuController implements Serializable {
 					e.printStackTrace();
 				}
 			}
-			
-			String verifier = request.getParameter("oauth_verifier");
 			
 			if (verifier != null && !verifier.trim().equalsIgnoreCase("") && (preVerifier == null || !preVerifier.equalsIgnoreCase(verifier))) {
 				preVerifier = verifier;
@@ -261,8 +252,6 @@ public class IclubMenuController implements Serializable {
 							model.setPGender(data.getGender());
 							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
 							model.setIclubPerson(1 + "");
-							
-							SimpleDateFormat formatter = new SimpleDateFormat("yyyy/dd/MM");
 							
 							if (checkExistingUserorNot(model, data.getId().replace("\"", ""), "OUTLOOK")) {
 								WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
@@ -413,7 +402,6 @@ public class IclubMenuController implements Serializable {
 						HttpResponse response2 = client.execute(httpGet);
 						outputString = EntityUtils.toString(response2.getEntity());
 						JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
-						System.out.println(outputString + "------outputString   :\n");
 						jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
 						String emails = jsonGet.get("emails").toString();
 						ObjectMapper mapper = new ObjectMapper();
@@ -422,7 +410,6 @@ public class IclubMenuController implements Serializable {
 						IclubPersonModel model = new IclubPersonModel();
 						
 						model.setPId(UUID.randomUUID().toString());
-						System.out.println(mailsList.get(0).getPrimary());
 						model.setPEmail(mailsList.get(0).getPrimary() != null && (mailsList.get(0).getPrimary().equalsIgnoreCase("true") || mailsList.size() == 1) ? mailsList.get(0).getHandle() : mailsList.get(1).getHandle());
 						model.setPFName(jsonGet.get("givenName").toString().replace("\"", ""));
 						model.setPLName(jsonGet.get("familyName").toString().replace("\"", ""));
@@ -592,6 +579,7 @@ public class IclubMenuController implements Serializable {
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
 				IclubWebHelper.addObjectIntoSession("googlelogin", true);
+				IclubWebHelper.addObjectIntoSession("key", access_token);
 				IclubWebHelper.addObjectIntoSession("cohortInviteId", cohortInviteId);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 				
@@ -662,13 +650,5 @@ public class IclubMenuController implements Serializable {
 	public void setSelPage(String selPage) {
 		this.selPage = selPage;
 	}
-	
-	// {"id":"e66589bd7f132ba3",
-	// "name":"sairam dikondawar"
-	// "first_name":"sairam"
-	// "last_name":"dikondawar"
-	// "link":"https://profile.live.com/"
-	// "gender":null
-	// "locale":"en_US","updated_time":"2015-06-03T18:48:25+0000"}
 	
 }

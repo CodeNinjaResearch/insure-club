@@ -22,10 +22,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -43,6 +43,8 @@ import za.co.iclub.pss.model.ui.IclubCohortSummaryBean;
 import za.co.iclub.pss.model.ui.IclubCohortTypeBean;
 import za.co.iclub.pss.model.ui.IclubNotificationTypeBean;
 import za.co.iclub.pss.model.ui.IclubPersonBean;
+import za.co.iclub.pss.model.ui.OutLookContactsBean;
+import za.co.iclub.pss.model.ui.OutlookContactDataBean;
 import za.co.iclub.pss.model.ui.yahoo.YahooContactBean;
 import za.co.iclub.pss.model.ui.yahoo.YahooFieldBean;
 import za.co.iclub.pss.model.ws.IclubCohortInviteModel;
@@ -64,6 +66,7 @@ import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.ContactFeed;
 import com.google.gdata.data.extensions.Email;
 import com.google.gdata.data.extensions.PhoneNumber;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -302,7 +305,7 @@ public class IclubCohortController implements Serializable {
 						model.setIclubCohort(this.bean.getCId());
 						model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
 						model.setIclubPerson(getSessionUserId());
-						model.setCiInviteAcceptYn("Y");
+						model.setCiInviteAcceptYn("N");
 						models.add(model);
 						
 					}
@@ -403,17 +406,33 @@ public class IclubCohortController implements Serializable {
 		try {
 			Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
-			if (fromSocial != null && fromSocial.equalsIgnoreCase("FB")) {
+			if (fromSocial != null && fromSocial.equalsIgnoreCase("OUTLOOK")) {
+				HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+				access_token = session.getAttribute("key").toString();
+				HttpClient client = new DefaultHttpClient();
+				HttpGet outlookRequest = new HttpGet("https://apis.live.net/v5.0/me/contacts?access_token=" + access_token);
+				HttpResponse response = client.execute(outlookRequest);
+				String outputString = EntityUtils.toString(response.getEntity());
 				
-				/*
-				 * FacebookClient facebookClient = new
-				 * DefaultFacebookClient(access_token, Version.VERSION_2_3);
-				 * Connection<User> myFriends =
-				 * facebookClient.fetchConnection("me/friends", User.class); if
-				 * (myFriends != null && myFriends.getData() != null) { User
-				 * user = myFriends.getData().get(0); System.out.println(user);
-				 * }
-				 */
+				OutlookContactDataBean data = new Gson().fromJson(outputString, OutlookContactDataBean.class);
+				
+				if (data != null && data.getData() != null && data.getData().size() > 0) {
+					
+					for (OutLookContactsBean contact : data.getData()) {
+						IclubCohortInviteBean bean = new IclubCohortInviteBean();
+						bean.setCiId(UUID.randomUUID().toString());
+						bean.setCiInviteFName(contact.getFirst_name());
+						bean.setCiInviteLName(contact.getLast_name());
+						bean.setCiInviteAcceptYn("N");
+						bean.setIclubNotificationType(3l);
+						bean.setCiInviteUri(contact.getEmails() != null ? contact.getEmails().getPreferred() : contact.getPhones() != null ? contact.getPhones().getPreferred() : null);
+						if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+							cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
+						}
+					}
+					
+				}
+			} else if (fromSocial != null && fromSocial.equalsIgnoreCase("FB")) {
 				
 				String redirectUrl = "https://www.facebook.com/dialog/apprequests?app_id=" + BUNDLE.getString("fb.client_id") + "&redirect_uri=" + BUNDLE.getString("fb.app_redirect_uri") + "&message=" + BUNDLE.getString("fb.message");
 				try {
@@ -450,7 +469,7 @@ public class IclubCohortController implements Serializable {
 						bean.setCiId(UUID.randomUUID().toString());
 						bean.setCiInviteFName(json.getString("first_name"));
 						bean.setCiInviteLName(json.getString("last_name"));
-						bean.setCiInviteAcceptYn("Y");
+						bean.setCiInviteAcceptYn("N");
 						bean.setIclubNotificationType(3l);
 						bean.setCiInviteUri(userId);
 						if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
@@ -473,7 +492,6 @@ public class IclubCohortController implements Serializable {
 				String outputString = EntityUtils.toString(response2.getEntity());
 				JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
 				jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("contacts").toString());
-				System.out.println(jsonGet);
 				ObjectMapper mapper = new ObjectMapper();
 				@SuppressWarnings("deprecation")
 				List<YahooContactBean> contactBeans = mapper.readValue(jsonGet.get("contact").toString(), TypeFactory.collectionType(List.class, YahooContactBean.class));
@@ -481,6 +499,8 @@ public class IclubCohortController implements Serializable {
 				if (contactBeans != null && contactBeans.size() > 0) {
 					for (YahooContactBean contactBean : contactBeans) {
 						IclubCohortInviteBean bean = new IclubCohortInviteBean();
+						bean.setCiInviteAcceptYn("N");
+						bean.setIclubNotificationType(3l);
 						bean.setCiId(UUID.randomUUID().toString());
 						if (contactBean.getFields() != null && contactBean.getFields().size() > 0) {
 							for (YahooFieldBean fBean : contactBean.getFields()) {
@@ -499,7 +519,6 @@ public class IclubCohortController implements Serializable {
 					
 				}
 				
-				System.out.println(contactBeans + "------outputString   :\n");
 			} else {
 				
 				ContactsService myService = new ContactsService("iclub");
@@ -512,13 +531,13 @@ public class IclubCohortController implements Serializable {
 					bean.setCiId(UUID.randomUUID().toString());
 					
 					for (Email email : entry.getEmailAddresses()) {
-						System.out.print(" " + email.getAddress());
 						if (email.getAddress() != null) {
 							bean.setCiInviteUri(email.getAddress());
 							break;
 						}
 					}
-					
+					bean.setIclubNotificationType(3l);
+					bean.setCiInviteAcceptYn("N");
 					bean.setCiInviteFName(entry.getName() != null ? entry.getName().getFullName() != null ? entry.getName().getFullName().getValue() : null : null);
 					if (bean.getCiInviteUri() == null || bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
 						if (entry.hasName()) {
@@ -908,14 +927,4 @@ public class IclubCohortController implements Serializable {
 		this.inviteFromFbApp = inviteFromFbApp;
 	}
 	
-	public static void main(String[] args) {
-		try {
-			byte[] decodedURLAsBytes = Base64.decodeBase64("4/TwNdmUPUA06tKvZqrfAWhyMphhr-MvGXoiWoha8Aen0");
-			
-			String cohortInviteId = new String(decodedURLAsBytes, "utf-8");
-			System.out.println(cohortInviteId);
-		} catch (Exception e) {
-		}
-		
-	}
 }

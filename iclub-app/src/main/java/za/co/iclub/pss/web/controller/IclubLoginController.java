@@ -88,7 +88,7 @@ public class IclubLoginController implements Serializable {
 	public String hotmailAction() {
 		
 		String state = Base64.encodeBase64URLSafeString(("{from : outlook }").getBytes());
-		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.contacts_birthday wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + state;
+		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + state;
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
