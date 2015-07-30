@@ -190,6 +190,27 @@ public class IclubCohortInviteService {
 		return ret;
 	}
 	
+	@POST
+	@Path("/getInvitiesList")
+	@Produces("application/json")
+	@Transactional
+	public <T extends String> List<T> getIclubCohoretInvitesEmailsList(Collection<? extends String> models) {
+		List<T> ret = new ArrayList<T>();
+		try {
+			
+			List batmod = iclubNamedQueryDAO.getIclubCohoretInvitesEmailsList(models);
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					String reDetails = (String) object;
+					ret.add((T) reDetails);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		return ret;
+	}
+	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")

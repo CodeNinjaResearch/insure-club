@@ -1,7 +1,7 @@
 <ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<p:panel id="pnlCohortContDet">
-			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="#{labels['table.emptymessage']}">
+			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Invites Available">
 				<p:column rendered="#{!iclubCohortController.inviteFromFbApp}" selectionMode="multiple" style="width:16px;text-align:center">
 				</p:column>
 				<p:column headerText="Invite Uri">

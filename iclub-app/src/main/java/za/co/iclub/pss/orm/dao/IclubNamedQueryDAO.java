@@ -14,6 +14,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 import za.co.iclub.pss.orm.bean.IclubClaim;
+import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 import za.co.iclub.pss.orm.bean.IclubConfig;
 import za.co.iclub.pss.orm.bean.IclubDriver;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
@@ -990,6 +991,21 @@ public class IclubNamedQueryDAO {
 			Criteria criteria = getCurrentSession().createCriteria(IclubPerson.class);
 			criteria.add(Restrictions.in("PEmail", emails));
 			criteria.setProjection(Projections.property("PEmail"));
+			List personNames = criteria.list();
+			return personNames;
+		} catch (RuntimeException re) {
+			log.error("get IclubPersonList failed", re);
+			throw re;
+		}
+		
+	}
+	
+	public List getIclubCohoretInvitesEmailsList(Collection<? extends String> emails) {
+		log.debug("finding IclubCohortInvite  instances by getIclubPersonEmailsList");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubCohortInvite.class);
+			criteria.add(Restrictions.not(Restrictions.in("ciInviteUri", emails)));
+			criteria.setProjection(Projections.property("ciInviteUri"));
 			List personNames = criteria.list();
 			return personNames;
 		} catch (RuntimeException re) {

@@ -89,6 +89,7 @@ public class IclubCohortController implements Serializable {
 	private List<IclubCohortBean> selectedBeans;
 	private List<IclubCohortInviteBean> selectedInviteBeans;
 	private List<IclubCohortInviteBean> cohortsInviteBeans;
+	private List<IclubCohortInviteBean> newCohortsInviteBeans;
 	private List<IclubNotificationTypeBean> iclubNotificationTypeBeans;
 	
 	private IclubCohortBean bean;
@@ -108,6 +109,7 @@ public class IclubCohortController implements Serializable {
 	private String cohortId;
 	private boolean cohortSummaryFlag;
 	private boolean inviteFromFbApp;
+	private boolean newInvites;
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -157,6 +159,10 @@ public class IclubCohortController implements Serializable {
 		showEditCont = false;
 		showSummaryCont = true;
 		viewParam = 3l;
+	}
+	
+	public String newInvitesAction() {
+		return "/pages/admin/cohorts/newCohortInvites.xhtml?faces-redirect=true";
 	}
 	
 	public String cohortSummaryAction() {
@@ -315,7 +321,12 @@ public class IclubCohortController implements Serializable {
 						IclubWebHelper.addMessage(getLabelBundle().getString("cohortinvite") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 						viewParam = 1l;
 						showView();
-						return "qq";
+						if (newInvites) {
+							return "home";
+						} else {
+							return "qq";
+						}
+						
 					} else {
 						IclubWebHelper.addMessage(getLabelBundle().getString("cohortinvite") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 					}
@@ -576,6 +587,23 @@ public class IclubCohortController implements Serializable {
 				if (existingEmials != null && existingEmials.size() > 0) {
 					for (String email : existingEmials) {
 						cohortsInviteBeanMap.remove(email);
+					}
+				}
+				
+				if (newInvites) {
+					client = IclubWebHelper.createCustomClient(CI_BASE_URL + "getInvitiesList");
+					
+					Collection<? extends String> notInvitedEmials = client.accept(MediaType.APPLICATION_JSON).postAndGetCollection(cohortsInviteBeanMap.keySet(), String.class, String.class);
+					client.close();
+					if (notInvitedEmials != null && notInvitedEmials.size() > 0) {
+						for (String email : notInvitedEmials) {
+							cohortsInviteBeanMap.remove(email);
+						}
+					}
+					if (existingEmials != null && existingEmials.size() > 0) {
+						for (String number : existingEmials) {
+							cohortsInviteBeanMap.remove(number);
+						}
 					}
 				}
 				if (cohortsInviteBeanMap.size() > 0) {
@@ -925,6 +953,22 @@ public class IclubCohortController implements Serializable {
 	
 	public void setInviteFromFbApp(boolean inviteFromFbApp) {
 		this.inviteFromFbApp = inviteFromFbApp;
+	}
+	
+	public List<IclubCohortInviteBean> getNewCohortsInviteBeans() {
+		return newCohortsInviteBeans;
+	}
+	
+	public void setNewCohortsInviteBeans(List<IclubCohortInviteBean> newCohortsInviteBeans) {
+		this.newCohortsInviteBeans = newCohortsInviteBeans;
+	}
+	
+	public boolean isNewInvites() {
+		return newInvites;
+	}
+	
+	public void setNewInvites(boolean newInvites) {
+		this.newInvites = newInvites;
 	}
 	
 }
