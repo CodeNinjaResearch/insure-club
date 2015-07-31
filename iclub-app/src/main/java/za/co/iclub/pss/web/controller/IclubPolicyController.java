@@ -2,9 +2,12 @@ package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -37,20 +40,26 @@ import za.co.iclub.pss.model.ui.IclubDocumentBean;
 import za.co.iclub.pss.model.ui.IclubInsuranceItemBean;
 import za.co.iclub.pss.model.ui.IclubPolicyBean;
 import za.co.iclub.pss.model.ui.IclubPropertyBean;
+import za.co.iclub.pss.model.ui.IclubPropertyItemBean;
 import za.co.iclub.pss.model.ui.IclubSupplMasterBean;
 import za.co.iclub.pss.model.ui.IclubVehicleBean;
+import za.co.iclub.pss.model.ui.IclubVehicleMasterBean;
 import za.co.iclub.pss.model.ws.IclubDocumentModel;
 import za.co.iclub.pss.model.ws.IclubInsuranceItemModel;
 import za.co.iclub.pss.model.ws.IclubPolicyModel;
+import za.co.iclub.pss.model.ws.IclubPropertyItemModel;
 import za.co.iclub.pss.model.ws.IclubPropertyModel;
 import za.co.iclub.pss.model.ws.IclubSupplItemModel;
 import za.co.iclub.pss.model.ws.IclubSupplMasterModel;
+import za.co.iclub.pss.model.ws.IclubVehicleMasterModel;
 import za.co.iclub.pss.model.ws.IclubVehicleModel;
 import za.co.iclub.pss.trans.IclubDocumentTrans;
 import za.co.iclub.pss.trans.IclubInsuranceItemTrans;
 import za.co.iclub.pss.trans.IclubPolicyTrans;
+import za.co.iclub.pss.trans.IclubPropertyItemTrans;
 import za.co.iclub.pss.trans.IclubPropertyTrans;
 import za.co.iclub.pss.trans.IclubSupplMasterTrans;
+import za.co.iclub.pss.trans.IclubVehicleMasterTrans;
 import za.co.iclub.pss.trans.IclubVehicleTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
@@ -70,7 +79,9 @@ public class IclubPolicyController implements Serializable {
 	private static final String PCY_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPolicyService/";
 	private static final String II_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsuranceItemService/";
 	private static final String V_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubVehicleService/";
+	private static final String VM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubVehicleMasterService/";
 	private static final String PRO_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropertyService/";
+	private static final String PROI_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropertyItemService/";
 	private static final String D_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubDocumentService/";
 	private boolean viewPolicy;
 	
@@ -111,6 +122,10 @@ public class IclubPolicyController implements Serializable {
 	
 	private StreamedContent file;
 	
+	private List<IclubVehicleMasterBean> vBeans;
+	
+	private Map<String, String> years;
+	
 	private MapModel draggableModelPer;
 	private Marker markerPer;
 	private String centerGeoMapPer = "36.890257,30.707417";
@@ -122,6 +137,7 @@ public class IclubPolicyController implements Serializable {
 	private MapModel draggableModelVeh;
 	private Marker markerVeh;
 	private String centerGeoMapVeh = "36.890257,30.707417";
+	private ArrayList<IclubPropertyItemBean> propertyItemBeans;
 	
 	@PostConstruct
 	public void init() {
@@ -423,7 +439,7 @@ public class IclubPolicyController implements Serializable {
 			
 			if (model != null && model.getPId() != null) {
 				propertyBean = IclubPropertyTrans.fromWStoUI(model);
-				
+				setIclubPropertyItems(propertyBean.getPId());
 			}
 			client.close();
 		} else {
@@ -431,6 +447,25 @@ public class IclubPolicyController implements Serializable {
 			propertyFlag = false;
 			
 		}
+	}
+	
+	public void setIclubPropertyItems(String propertyId) {
+		
+		WebClient client = IclubWebHelper.createCustomClient(PROI_BASE_URL + "listByProperty/" + propertyId);
+		
+		Collection<? extends IclubPropertyItemModel> models = new ArrayList<IclubPropertyItemModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPropertyItemModel.class));
+		client.close();
+		propertyItemBeans = new ArrayList<IclubPropertyItemBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubPropertyItemModel model : models) {
+				
+				IclubPropertyItemBean bean = IclubPropertyItemTrans.fromWStoUI(model);
+				
+				propertyItemBeans.add(bean);
+			}
+			
+		}
+		
 	}
 	
 	public String getSessionUserId() {
@@ -920,6 +955,55 @@ public class IclubPolicyController implements Serializable {
 	
 	public void setSupplMasterBean(IclubSupplMasterBean supplMasterBean) {
 		this.supplMasterBean = supplMasterBean;
+	}
+	
+	public List<IclubVehicleMasterBean> getvBeans() {
+		
+		WebClient client = IclubWebHelper.createCustomClient(VM_BASE_URL + "list");
+		Collection<? extends IclubVehicleMasterModel> models = new ArrayList<IclubVehicleMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubVehicleMasterModel.class));
+		client.close();
+		vBeans = new ArrayList<IclubVehicleMasterBean>();
+		years = new HashMap<String, String>();
+		if (models != null && models.size() > 0) {
+			
+			for (IclubVehicleMasterModel model : models) {
+				
+				IclubVehicleMasterBean bean = IclubVehicleMasterTrans.fromWStoUI(model);
+				
+				if (model != null && model.getVmId() != null && model.getVmId().toString().equalsIgnoreCase(vehicleBean.getIclubVehicleMaster().toString())) {
+					Calendar now = Calendar.getInstance();
+					int currentYear = now.get(Calendar.YEAR);
+					now.setTimeInMillis(model.getVmProdDt().getTime());
+					int prodYear = now.get(Calendar.YEAR);
+					for (int i = prodYear; i <= currentYear; i++) {
+						years.put(i + "", model.getVmId().toString());
+					}
+					
+				}
+				vBeans.add(bean);
+			}
+		}
+		return vBeans;
+	}
+	
+	public void setvBeans(List<IclubVehicleMasterBean> vBeans) {
+		this.vBeans = vBeans;
+	}
+	
+	public Map<String, String> getYears() {
+		return years;
+	}
+	
+	public void setYears(HashMap<String, String> years) {
+		this.years = years;
+	}
+	
+	public ArrayList<IclubPropertyItemBean> getPropertyItemBeans() {
+		return propertyItemBeans;
+	}
+	
+	public void setPropertyItemBeans(ArrayList<IclubPropertyItemBean> propertyItemBeans) {
+		this.propertyItemBeans = propertyItemBeans;
 	}
 	
 }
