@@ -22,7 +22,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -159,10 +158,6 @@ public class IclubCohortController implements Serializable {
 		showEditCont = false;
 		showSummaryCont = true;
 		viewParam = 3l;
-	}
-	
-	public String newInvitesAction() {
-		return "/pages/admin/cohorts/newCohortInvites.xhtml?faces-redirect=true";
 	}
 	
 	public String cohortSummaryAction() {
@@ -418,8 +413,7 @@ public class IclubCohortController implements Serializable {
 			Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
 			if (fromSocial != null && fromSocial.equalsIgnoreCase("OUTLOOK")) {
-				HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-				access_token = session.getAttribute("key").toString();
+				access_token = IclubWebHelper.getObjectIntoSession("key").toString();
 				HttpClient client = new DefaultHttpClient();
 				HttpGet outlookRequest = new HttpGet("https://apis.live.net/v5.0/me/contacts?access_token=" + access_token);
 				HttpResponse response = client.execute(outlookRequest);
@@ -851,22 +845,35 @@ public class IclubCohortController implements Serializable {
 			key = (String) request.getParameter("key");
 			fromSocial = (String) request.getParameter("from");
 			guid = (String) request.getParameter("guid");
+			if (IclubWebHelper.getObjectIntoSession("newInvites") != null) {
+				newInvites = new Boolean(IclubWebHelper.getObjectIntoSession("newInvites").toString());
+			}
+			
 			request.removeAttribute("key");
 			request.removeAttribute("guid");
 			request.removeAttribute("from");
 			setIclubCohortInvite(key, fromSocial, guid);
 			
-			if (IclubWebHelper.getObjectIntoSession("cohortInviteId") != null) {
+			if (IclubWebHelper.getObjectIntoSession("cohortInviteId") != null || IclubWebHelper.getObjectIntoSession("cohortId") != null) {
 				try {
 					
-					WebClient client = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession("cohortInviteId").toString());
-					IclubCohortInviteModel inviteModel = client.get(IclubCohortInviteModel.class);
-					inviteModel.setCiInviteAcceptYn("Y");
-					client = IclubWebHelper.createCustomClient(CI_BASE_URL + "mod");
-					ResponseModel responseModels = client.accept(MediaType.APPLICATION_JSON).put(inviteModel, ResponseModel.class);
+					WebClient client = null;
+					ResponseModel responseModels = null;
+					String cohortId = null;
+					if (IclubWebHelper.getObjectIntoSession("cohortId") != null) {
+						cohortId = IclubWebHelper.getObjectIntoSession("cohortId").toString();
+					}
+					if (cohortId == null || cohortId.trim().equalsIgnoreCase("")) {
+						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession("cohortInviteId").toString());
+						IclubCohortInviteModel inviteModel = client.get(IclubCohortInviteModel.class);
+						inviteModel.setCiInviteAcceptYn("Y");
+						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "mod");
+						responseModels = client.accept(MediaType.APPLICATION_JSON).put(inviteModel, ResponseModel.class);
+						cohortId = inviteModel.getIclubCohort();
+					}
 					
-					if (responseModels != null && responseModels.getStatusCode() == 0) {
-						client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + inviteModel.getIclubCohort());
+					if ((responseModels != null && responseModels.getStatusCode() == 0) || (cohortId != null && !cohortId.trim().equalsIgnoreCase(""))) {
+						client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + cohortId);
 						IclubCohortModel model = client.get(IclubCohortModel.class);
 						IclubCohortBean bean = IclubCohortTrans.fromWStoUI(model);
 						selectedBeans = new ArrayList<IclubCohortBean>();

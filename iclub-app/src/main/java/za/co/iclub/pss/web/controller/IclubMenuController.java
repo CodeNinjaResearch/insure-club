@@ -153,6 +153,7 @@ public class IclubMenuController implements Serializable {
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 			String code = request.getParameter("code");
 			String cohortInviteId = request.getParameter("cohortInviteId");
+			String redirect = null;
 			String state = request.getParameter("state");
 			String from = request.getParameter("from");
 			request.removeAttribute("code");
@@ -167,6 +168,12 @@ public class IclubMenuController implements Serializable {
 					if (jsonGet.has("cohortInviteId")) {
 						cohortInviteId = jsonGet.get("cohortInviteId").toString();
 						cohortInviteId = cohortInviteId.replace("\"", "");
+					}
+					
+					if (jsonGet.has("redirect")) {
+						redirect = jsonGet.get("redirect").toString();
+						redirect = redirect.replace("\"", "");
+						from = redirect;
 					}
 					if (jsonGet.has("from")) {
 						from = jsonGet.get("from").toString();
@@ -234,7 +241,7 @@ public class IclubMenuController implements Serializable {
 					System.out.println(outputString);
 					SocialAuthResponse socialAuthResponse = new Gson().fromJson(outputString, SocialAuthResponse.class);
 					
-					if (socialAuthResponse != null) {
+					if (socialAuthResponse != null && (redirect == null || redirect.trim().equalsIgnoreCase(""))) {
 						HttpClient client = new DefaultHttpClient();
 						HttpGet outlookRequest = new HttpGet("https://apis.live.net/v5.0/me?access_token=" + socialAuthResponse.getAccess_token());
 						HttpResponse response = client.execute(outlookRequest);
@@ -253,7 +260,7 @@ public class IclubMenuController implements Serializable {
 							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
 							model.setIclubPerson(1 + "");
 							
-							if (checkExistingUserorNot(model, data.getId().replace("\"", ""), "OUTLOOK")) {
+							if (checkExistingUserorNot(model, data.getId().replace("\"", ""), "OUTLOOK", socialAuthResponse.getAccess_token())) {
 								WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
 								
 								ResponseModel outLookResponse = webClient.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
@@ -269,6 +276,8 @@ public class IclubMenuController implements Serializable {
 							}
 							
 						}
+					} else if ((redirect != null && !redirect.trim().equalsIgnoreCase(""))) {
+						newInviteRedirect(socialAuthResponse.getAccess_token(), redirect);
 					}
 					
 				} catch (Exception e) {
@@ -316,38 +325,42 @@ public class IclubMenuController implements Serializable {
 							
 							IclubPersonModel model = new IclubPersonModel();
 							String providerId = json.getString("id");
-							model.setPId(UUID.randomUUID().toString());
-							if (json.has("email")) {
-								model.setPEmail(json.getString("email"));
-							}
-							model.setPFName(json.getString("first_name"));
-							model.setPLName(json.getString("last_name"));
-							if (json.has("gender"))
-								model.setPGender(json.getString("gender") != null ? json.getString("gender").substring(0, 1).toUpperCase() : null);
-							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
-							model.setIclubPerson(1 + "");
-							
-							SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-							try {
-								if (json.has("birthday")) {
-									
-									Date date = formatter.parse(json.get("birthday").toString().replace("\"", ""));
-									model.setPDob(new Timestamp(date.getTime()));
+							if ((redirect == null || redirect.trim().equalsIgnoreCase(""))) {
+								model.setPId(UUID.randomUUID().toString());
+								if (json.has("email")) {
+									model.setPEmail(json.getString("email"));
 								}
-							} catch (ParseException e) {
-								e.printStackTrace();
-							}
-							if (checkExistingUserorNot(model, providerId, "FB")) {
-								WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+								model.setPFName(json.getString("first_name"));
+								model.setPLName(json.getString("last_name"));
+								if (json.has("gender"))
+									model.setPGender(json.getString("gender") != null ? json.getString("gender").substring(0, 1).toUpperCase() : null);
+								model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+								model.setIclubPerson(1 + "");
 								
-								ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-								client.close();
-								if (response.getStatusCode() == 0) {
-									updatePassword(model, access_token, "FB", providerId, cohortInviteId);
-									
-								} else {
-									IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+								SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+								try {
+									if (json.has("birthday")) {
+										
+										Date date = formatter.parse(json.get("birthday").toString().replace("\"", ""));
+										model.setPDob(new Timestamp(date.getTime()));
+									}
+								} catch (ParseException e) {
+									e.printStackTrace();
 								}
+								if (checkExistingUserorNot(model, providerId, "FB", access_token)) {
+									WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+									
+									ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+									client.close();
+									if (response.getStatusCode() == 0) {
+										updatePassword(model, access_token, "FB", providerId, cohortInviteId);
+										
+									} else {
+										IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+									}
+								}
+							} else if ((redirect != null && !redirect.trim().equalsIgnoreCase(""))) {
+								newInviteRedirect(access_token, redirect);
 							}
 							
 						} catch (Exception e) {
@@ -355,7 +368,9 @@ public class IclubMenuController implements Serializable {
 							throw new RuntimeException("ERROR in getting FB graph data. " + e);
 						}
 						
-					} else {
+					}
+					
+					else {
 						throw new RuntimeException("Access token and expires not found");
 					}
 				} catch (IOException e) {
@@ -395,47 +410,51 @@ public class IclubMenuController implements Serializable {
 						// https://social.yahooapis.com/v1/user/3344/profile?format=json
 						// https://social.yahooapis.com/v1/user/6677/contacts
 						// SELECT * FROM social.contacts WHERE guid='6677'
-						String callUrl1 = "https://social.yahooapis.com/v1/user/" + xoauth_yahoo_guid.replace("\"", "") + "/profile?format=json";
-						HttpGet httpGet = new HttpGet(callUrl1);
-						httpGet.setHeader("Authorization", "Bearer " + access_token);
-						httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
-						HttpResponse response2 = client.execute(httpGet);
-						outputString = EntityUtils.toString(response2.getEntity());
-						JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
-						jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
-						String emails = jsonGet.get("emails").toString();
-						ObjectMapper mapper = new ObjectMapper();
-						@SuppressWarnings("deprecation")
-						List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
-						IclubPersonModel model = new IclubPersonModel();
-						
-						model.setPId(UUID.randomUUID().toString());
-						model.setPEmail(mailsList.get(0).getPrimary() != null && (mailsList.get(0).getPrimary().equalsIgnoreCase("true") || mailsList.size() == 1) ? mailsList.get(0).getHandle() : mailsList.get(1).getHandle());
-						model.setPFName(jsonGet.get("givenName").toString().replace("\"", ""));
-						model.setPLName(jsonGet.get("familyName").toString().replace("\"", ""));
-						model.setPGender(jsonGet.get("gender") != null ? jsonGet.get("gender").toString().replace("\"", "") : "");
-						model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
-						model.setIclubPerson(1 + "");
-						
-						SimpleDateFormat formatter = new SimpleDateFormat("yyyy/dd/MM");
-						try {
-							Date date = formatter.parse(jsonGet.get("birthYear").toString().replace("\"", "") + "/" + jsonGet.get("birthdate").toString().replace("\"", ""));
-							model.setPDob(new Timestamp(date.getTime()));
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						if (checkExistingUserorNot(model, xoauth_yahoo_guid.replace("\"", ""), "YAHOO")) {
-							WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+						if ((redirect == null || redirect.trim().equalsIgnoreCase(""))) {
+							String callUrl1 = "https://social.yahooapis.com/v1/user/" + xoauth_yahoo_guid.replace("\"", "") + "/profile?format=json";
+							HttpGet httpGet = new HttpGet(callUrl1);
+							httpGet.setHeader("Authorization", "Bearer " + access_token);
+							httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
+							HttpResponse response2 = client.execute(httpGet);
+							outputString = EntityUtils.toString(response2.getEntity());
+							JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
+							jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
+							String emails = jsonGet.get("emails").toString();
+							ObjectMapper mapper = new ObjectMapper();
+							@SuppressWarnings("deprecation")
+							List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
+							IclubPersonModel model = new IclubPersonModel();
 							
-							ResponseModel response = webClient.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-							webClient.close();
+							model.setPId(UUID.randomUUID().toString());
+							model.setPEmail(mailsList.get(0).getPrimary() != null && (mailsList.get(0).getPrimary().equalsIgnoreCase("true") || mailsList.size() == 1) ? mailsList.get(0).getHandle() : mailsList.get(1).getHandle());
+							model.setPFName(jsonGet.get("givenName").toString().replace("\"", ""));
+							model.setPLName(jsonGet.get("familyName").toString().replace("\"", ""));
+							model.setPGender(jsonGet.get("gender") != null ? jsonGet.get("gender").toString().replace("\"", "") : "");
+							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setIclubPerson(1 + "");
 							
-							if (response.getStatusCode() == 0) {
-								updatePassword(model, access_token, "YAHOO", xoauth_yahoo_guid.replace("\"", ""), cohortInviteId);
-								
-							} else {
-								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+							SimpleDateFormat formatter = new SimpleDateFormat("yyyy/dd/MM");
+							try {
+								Date date = formatter.parse(jsonGet.get("birthYear").toString().replace("\"", "") + "/" + jsonGet.get("birthdate").toString().replace("\"", ""));
+								model.setPDob(new Timestamp(date.getTime()));
+							} catch (Exception e) {
+								e.printStackTrace();
 							}
+							if (checkExistingUserorNot(model, xoauth_yahoo_guid.replace("\"", ""), "YAHOO", access_token)) {
+								WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+								
+								ResponseModel response = webClient.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+								webClient.close();
+								
+								if (response.getStatusCode() == 0) {
+									updatePassword(model, access_token, "YAHOO", xoauth_yahoo_guid.replace("\"", ""), cohortInviteId);
+									
+								} else {
+									IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+								}
+							}
+						} else {
+							newInviteRedirect(access_token, redirect);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -458,93 +477,94 @@ public class IclubMenuController implements Serializable {
 				writer.write(urlParameters);
 				writer.flush();
 				writer.close();
-				// get output in outputString
+				
 				String line, outputString = "";
 				BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 				while ((line = reader.readLine()) != null) {
 					outputString += line;
 				}
 				
-				// get Access Token
 				JsonObject json = (JsonObject) new JsonParser().parse(outputString);
 				String access_token = json.get("access_token").getAsString();
-				System.out.println(access_token);
-				
-				// get User Info
-				try {
-					String callUrl = "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token;
-					url = new URL(callUrl);
-					urlConn = url.openConnection();
-					outputString = "";
-					reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-					while ((line = reader.readLine()) != null) {
-						outputString += line;
-					}
-					System.out.println(outputString);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				// get User Info
-				try {
-					String callUrl1 = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + access_token;
-					url = new URL(callUrl1);
-					urlConn = url.openConnection();
-					outputString = "";
-					reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-					while ((line = reader.readLine()) != null) {
-						outputString += line;
-					}
-					GooglePojo data = new Gson().fromJson(outputString, GooglePojo.class);
-					reader.close();
+				if ((redirect == null || redirect.trim().equalsIgnoreCase(""))) {
 					
-					callUrl1 = "https://www.googleapis.com/plus/v1/people/" + data.getId() + "?fields=birthday&access_token=" + access_token;
-					url = new URL(callUrl1);
-					urlConn = url.openConnection();
-					outputString = "";
-					reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-					while ((line = reader.readLine()) != null) {
-						outputString += line;
-					}
-					if (data != null && data.getEmail() != null) {
-						IclubPersonModel model = new IclubPersonModel();
-						model.setPId(UUID.randomUUID().toString());
-						model.setPEmail(data.getEmail());
-						model.setPFName(data.getName());
-						model.setPLName(data.getFamily_name());
-						model.setPGender(data.getGender() != null ? data.getGender().substring(0, 1).toUpperCase() : null);
-						model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
-						model.setIclubPerson(1 + "");
-						
-						SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-						try {
-							JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
-							Date date = formatter.parse(jsonGet.get("birthday").toString().replace("\"", ""));
-							model.setPDob(new Timestamp(date.getTime()));
-						} catch (Exception e) {
-							e.printStackTrace();
+					try {
+						String callUrl = "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token;
+						url = new URL(callUrl);
+						urlConn = url.openConnection();
+						outputString = "";
+						reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+						while ((line = reader.readLine()) != null) {
+							outputString += line;
 						}
-						if (checkExistingUserorNot(model, data.getId(), "GOOGLE")) {
-							WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					try {
+						
+						String callUrl1 = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + access_token;
+						url = new URL(callUrl1);
+						urlConn = url.openConnection();
+						outputString = "";
+						reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+						while ((line = reader.readLine()) != null) {
+							outputString += line;
+						}
+						GooglePojo data = new Gson().fromJson(outputString, GooglePojo.class);
+						reader.close();
+						
+						callUrl1 = "https://www.googleapis.com/plus/v1/people/" + data.getId() + "?fields=birthday&access_token=" + access_token;
+						url = new URL(callUrl1);
+						urlConn = url.openConnection();
+						outputString = "";
+						
+						reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+						while ((line = reader.readLine()) != null) {
+							outputString += line;
+						}
+						if (data != null && data.getEmail() != null) {
+							IclubPersonModel model = new IclubPersonModel();
+							model.setPId(UUID.randomUUID().toString());
+							model.setPEmail(data.getEmail());
+							model.setPFName(data.getName());
+							model.setPLName(data.getFamily_name());
+							model.setPGender(data.getGender() != null ? data.getGender().substring(0, 1).toUpperCase() : null);
+							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setIclubPerson(1 + "");
 							
-							ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
-							client.close();
-							
-							if (response.getStatusCode() == 0) {
-								
-								updatePassword(model, access_token, "GOOGLE", data.getId(), cohortInviteId);
-								
-							} else {
-								IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+							SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+							try {
+								JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
+								Date date = formatter.parse(jsonGet.get("birthday").toString().replace("\"", ""));
+								model.setPDob(new Timestamp(date.getTime()));
+							} catch (Exception e) {
+								e.printStackTrace();
 							}
+							if (checkExistingUserorNot(model, data.getId(), "GOOGLE", access_token)) {
+								WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
+								
+								ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
+								client.close();
+								
+								if (response.getStatusCode() == 0) {
+									
+									updatePassword(model, access_token, "GOOGLE", data.getId(), cohortInviteId);
+									
+								} else {
+									IclubWebHelper.addMessage("Fail :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+								}
+							}
+							
 						}
-						
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
+					
+				} else {
+					newInviteRedirect(access_token, redirect);
 				}
-				
 			}
-			// Convert JSON response into Pojo class
 			
 		} catch (MalformedURLException e) {
 			System.out.println(e);
@@ -553,6 +573,25 @@ public class IclubMenuController implements Serializable {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+	}
+	
+	public void newInviteRedirect(String access_token, String from) {
+		IclubWebHelper.addObjectIntoSession("key", access_token);
+		IclubWebHelper.addObjectIntoSession("newInvites", "true");
+		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
+			String userId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+			WebClient personClient = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + userId);
+			IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
+			personClient.close();
+			IclubWebHelper.addObjectIntoSession("cohortId", personModel.getIclubCohort());
+		}
+		
+		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token.expires"), new Timestamp(System.currentTimeMillis() + 55 * 60 * 1000));
+		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token"), access_token);
+		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.provider"), from);
+		
+		NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+		navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
 	}
 	
 	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token, String from, String guid, String cohortInviteId) {
@@ -581,6 +620,9 @@ public class IclubMenuController implements Serializable {
 				IclubWebHelper.addObjectIntoSession("googlelogin", true);
 				IclubWebHelper.addObjectIntoSession("key", access_token);
 				IclubWebHelper.addObjectIntoSession("cohortInviteId", cohortInviteId);
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token.expires"), new Timestamp(System.currentTimeMillis() + 55 * 60 * 1000));
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token"), access_token);
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.provider"), from);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 				
 				if (guid != null) {
@@ -602,7 +644,7 @@ public class IclubMenuController implements Serializable {
 		return new ResponseModel();
 	}
 	
-	public boolean checkExistingUserorNot(IclubPersonModel model, String providerId, String providerCd) {
+	public boolean checkExistingUserorNot(IclubPersonModel model, String providerId, String providerCd, String access_toke) {
 		WebClient client = null;
 		IclubLoginModel loginModel = null;
 		try {
@@ -621,7 +663,8 @@ public class IclubMenuController implements Serializable {
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.id"), model.getPId());
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.login.id"), loginModel.getLId());
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.scname"), loginModel.getLName());
-			
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token"), access_toke);
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.provider"), providerCd);
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), model.getPFName() + (model.getPLName() == null ? "" : model.getPLName() + " "));
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), loginModel.getIclubRoleType());
 			if (loginModel.getLPasswd() == null || loginModel.getLPasswd().trim().equalsIgnoreCase("")) {

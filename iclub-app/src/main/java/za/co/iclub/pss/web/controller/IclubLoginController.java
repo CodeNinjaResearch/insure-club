@@ -54,8 +54,30 @@ public class IclubLoginController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	
+	public String getState(String from) {
+		String state = "{from:" + from + "}";
+		try {
+			if (IclubWebHelper.getObjectIntoSession("newInvite") != null) {
+				state = "{from:" + from + ",redirect:newInvite}";
+			}
+			
+			state = Base64.encodeBase64URLSafeString(state.getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return state;
+	}
+	
+	public String newCohortInviteAction() {
+		
+		IclubWebHelper.addObjectIntoSession("newInvite", "true");
+		return "/pages/admin/cohorts/newInvitelogin.xhtml?faces-redirect=true";
+	}
+	
 	public String googleAction() {
-		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force";
+		
+		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force&state=" + getState("GOOGLE");
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
@@ -66,7 +88,7 @@ public class IclubLoginController implements Serializable {
 	
 	public String getFaceBookLogin() {
 		
-		String redirectUrl = "https://graph.facebook.com/oauth/authorize?client_id=" + BUNDLE.getString("fb.client_id") + "&display=page&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&scope=" + BUNDLE.getString("fb.perms2");
+		String redirectUrl = "https://graph.facebook.com/oauth/authorize?client_id=" + BUNDLE.getString("fb.client_id") + "&display=page&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&scope=" + BUNDLE.getString("fb.perms2") + "&state=" + getState("fb");
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
@@ -76,7 +98,7 @@ public class IclubLoginController implements Serializable {
 	}
 	
 	public String yahooAction() {
-		String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us";
+		String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us&state=" + getState("YAHOO");
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
@@ -87,16 +109,13 @@ public class IclubLoginController implements Serializable {
 	
 	public String hotmailAction() {
 		
-		String state = Base64.encodeBase64URLSafeString(("{from : outlook }").getBytes());
-		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + state;
+		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + getState("OUTLOOK");
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";
-		// client_id=CLIENT_ID&scope=SCOPES&response_type=RESPONSE_TYPE&redirect_uri=REDIRECT_URL
 	}
 	
 	public String twitterLogin() {

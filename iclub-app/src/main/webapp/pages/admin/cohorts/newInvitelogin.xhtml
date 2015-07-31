@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout.xhtml">
+	<ui:define name="content">
+		<div class="Container80 MaxWid500 white-back Fnone MarAuto BordRad10" id="login-box">
+			<div class="Container100">
+				<div class="Container100 TexAlCenter Animated05 BoxSizeBorder TabBtn left TabBtnActiveLeft" role="1">
+					<div class="Container80 Fnone MarAuto FontBold">
+						<i class="icon-lock"></i> Login
+					</div>
+				</div>
+				<div class="Container90 Fnone MarAuto TexAlCenter TabContent" id="TAB1">
+					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.googleAction}" ajax="false">
+						<h:graphicImage value="/images/gmail-icon.jpg" />
+					</p:commandLink>
+					<p:commandLink rendered="false" action="#{iclubLoginController.twitterLogin}" ajax="false">
+						<h:graphicImage value="/images/twitter_icon.png" />
+					</p:commandLink>
+					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.getFaceBookLogin}" ajax="false">
+						<h:graphicImage value="/images/facebook_icon.png" />
+					</p:commandLink>
+					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.yahooAction}" ajax="false">
+						<h:graphicImage value="/images/yahoomail_icon.jpg" />
+					</p:commandLink>
+					<p:commandLink styleClass="Fs16" action="#{iclubLoginController.hotmailAction}" ajax="false">
+						<h:graphicImage value="/images/hotmail.jpeg" />
+					</p:commandLink>
+					<div class="EmptyBox50"></div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

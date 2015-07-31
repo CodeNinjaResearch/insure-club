@@ -1004,7 +1004,7 @@ public class IclubNamedQueryDAO {
 		log.debug("finding IclubCohortInvite  instances by getIclubPersonEmailsList");
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubCohortInvite.class);
-			criteria.add(Restrictions.not(Restrictions.in("ciInviteUri", emails)));
+			criteria.add(Restrictions.in("ciInviteUri", emails));
 			criteria.setProjection(Projections.property("ciInviteUri"));
 			List personNames = criteria.list();
 			return personNames;
