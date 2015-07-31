@@ -83,7 +83,7 @@ public class IclubWebHelper {
 				issueDate.setMinutes(0);
 				issueDate.setSeconds(0);
 				
-				return issueDate.compareTo(currentDate) < 0;
+				return issueDate.compareTo(currentDate) > 0;
 			}
 		} catch (Exception e) {
 			

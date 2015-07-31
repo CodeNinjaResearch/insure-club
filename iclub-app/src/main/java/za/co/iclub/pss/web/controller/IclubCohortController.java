@@ -60,6 +60,7 @@ import za.co.iclub.pss.trans.IclubPersonTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
+import com.google.gdata.client.Query;
 import com.google.gdata.client.contacts.ContactsService;
 import com.google.gdata.data.contacts.ContactEntry;
 import com.google.gdata.data.contacts.ContactFeed;
@@ -527,10 +528,13 @@ public class IclubCohortController implements Serializable {
 			} else {
 				
 				ContactsService myService = new ContactsService("iclub");
+				myService.setHeader("Authorization", "Bearer " + access_token);
 				URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
-				ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
+				Query myQuery = new Query(feedUrl);
+				myQuery.setStartIndex(1);
+				myQuery.setMaxResults(500);
+				ContactFeed resultFeed = myService.query(myQuery, ContactFeed.class);
 				// Print the results
-				
 				for (ContactEntry entry : resultFeed.getEntries()) {
 					IclubCohortInviteBean bean = new IclubCohortInviteBean();
 					bean.setCiId(UUID.randomUUID().toString());

@@ -4,7 +4,7 @@
 			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Invites Available">
 				<p:column rendered="#{!iclubCohortController.inviteFromFbApp}" selectionMode="multiple" style="width:16px;text-align:center">
 				</p:column>
-				<p:column headerText="Invite Uri">
+				<p:column filterBy="#{bean.ciInviteUri}" filterMatchMode="contains" headerText="Invite Uri">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteUri}" />
 				</p:column>
 				<p:column rendered="#{iclubCohortController.inviteFromFbApp}" headerText="First Name">

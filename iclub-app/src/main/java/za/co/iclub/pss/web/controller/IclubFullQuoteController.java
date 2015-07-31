@@ -650,7 +650,7 @@ public class IclubFullQuoteController implements Serializable {
 		}
 		
 		if (vehicleBean.getVImmYn() == null || vehicleBean.getVImmYn().trim().equalsIgnoreCase("")) {
-			IclubWebHelper.addMessage(("Imn Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Is the vehicle equipped with immobiliser Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (vehicleBean.getVGearLockYn() == null || vehicleBean.getVGearLockYn().trim().equalsIgnoreCase("")) {
