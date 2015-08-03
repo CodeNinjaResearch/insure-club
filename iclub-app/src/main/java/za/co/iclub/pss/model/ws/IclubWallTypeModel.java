@@ -51,7 +51,6 @@ public class IclubWallTypeModel {
 			try {
 				f.renameTo(f2);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			System.out.println(f);

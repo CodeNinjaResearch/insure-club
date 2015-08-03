@@ -5,8 +5,7 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
-	{
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
 	display: none;
 }
 </style>
@@ -209,7 +208,7 @@
 							<p:outputLabel value="Issue Date :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar disabled="true" placeholder="Issue Date" value="#{iclubFullQuoteController.personBean.PIdIssueDt}" />
+							<p:calendar disabled="true" placeholder="Issue Date" value="#{iclubFullQuoteController.personBean.PIdIssueDt}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -218,7 +217,7 @@
 							<p:outputLabel value="Expiry Date :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar disabled="true" placeholder="Expiry Date" value="#{iclubFullQuoteController.personBean.PIdExpiryDt}" />
+							<p:calendar disabled="true" placeholder="Expiry Date" value="#{iclubFullQuoteController.personBean.PIdExpiryDt}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -239,7 +238,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar disabled="true" placeholder="Date Of Birth" value="#{iclubFullQuoteController.personBean.PDob}" />
+							<p:calendar disabled="true" placeholder="Date Of Birth" value="#{iclubFullQuoteController.personBean.PDob}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -293,7 +292,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar styleClass="TexAlCenter " placeholder="Issue Date" value="#{iclubFullQuoteController.driverBean.DIssueDt}" />
+							<p:calendar styleClass="TexAlCenter " placeholder="Issue Date" value="#{iclubFullQuoteController.driverBean.DIssueDt}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -302,7 +301,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar styleClass="TexAlCenter " placeholder="Date Of Birth" value="#{iclubFullQuoteController.driverBean.DDob}" />
+							<p:calendar styleClass="TexAlCenter " placeholder="Date Of Birth" value="#{iclubFullQuoteController.driverBean.DDob}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />

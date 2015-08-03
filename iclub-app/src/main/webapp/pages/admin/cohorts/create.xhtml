@@ -32,7 +32,7 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Finalize Date :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:calendar styleClass="TexAlCenter" placeholder="Finalized Date" value="#{iclubCohortController.bean.CFinalizeDt}" />
+			<p:calendar styleClass="TexAlCenter" placeholder="Finalized Date" value="#{iclubCohortController.bean.CFinalizeDt}"  navigator="true" yearRange="c-100:c" showOn="button" />
 		</div>
 	</div>
 	<div class="EmptyBox5" />
@@ -50,7 +50,7 @@
 			<p:outputLabel styleClass="TexAlCenter" value="Init Date :" />
 		</div>
 		<div class="Container50 Responsive">
-			<p:calendar styleClass="TexAlCenter" placeholder="Member Contribution" value="#{iclubCohortController.bean.CInitDt}" />
+			<p:calendar styleClass="TexAlCenter" placeholder="Member Contribution" value="#{iclubCohortController.bean.CInitDt}"  navigator="true" yearRange="c-100:c" showOn="button" />
 		</div>
 	</div>
 	<div class="EmptyBox5" />

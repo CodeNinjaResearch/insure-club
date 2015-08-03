@@ -5,8 +5,7 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
-	{
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
 	display: none;
 }
 </style>
@@ -167,7 +166,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar placeholder="Date Of Birth" value="#{iclubQuickQuoteController.personBean.PDob}" navigator="true" yearRange="1915:2015" showOn="button" />
+							<p:calendar placeholder="Date Of Birth" value="#{iclubQuickQuoteController.personBean.PDob}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -266,7 +265,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubQuickQuoteController.driverBean.DIssueDt}" />
+							<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubQuickQuoteController.driverBean.DIssueDt}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
