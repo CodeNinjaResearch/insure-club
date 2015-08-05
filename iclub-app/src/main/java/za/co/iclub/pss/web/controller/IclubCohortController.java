@@ -413,8 +413,12 @@ public class IclubCohortController implements Serializable {
 		try {
 			Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
-			if (fromSocial != null && fromSocial.equalsIgnoreCase("OUTLOOK")) {
+			System.out.println(fromSocial + "=====FromSocial====");
+			if (newInvites) {
 				access_token = IclubWebHelper.getObjectIntoSession("key").toString();
+			}
+			if (fromSocial != null && fromSocial.equalsIgnoreCase("OUTLOOK")) {
+				
 				HttpClient client = new DefaultHttpClient();
 				HttpGet outlookRequest = new HttpGet("https://apis.live.net/v5.0/me/contacts?access_token=" + access_token);
 				HttpResponse response = client.execute(outlookRequest);
@@ -490,39 +494,41 @@ public class IclubCohortController implements Serializable {
 				}
 			} else if (fromSocial != null && fromSocial.equalsIgnoreCase("yahoo")) {
 				HttpClient client = new DefaultHttpClient();
-				String callUrl1 = "https://social.yahooapis.com/v1/user/" + guid + "/contacts?format=json";
+				String callUrl1 = "https://social.yahooapis.com/v1/user/me" + "/contacts?format=json";
 				HttpGet httpGet = new HttpGet(callUrl1);
 				httpGet.setHeader("Authorization", "Bearer " + access_token);
 				httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
 				HttpResponse response2 = client.execute(httpGet);
 				String outputString = EntityUtils.toString(response2.getEntity());
 				JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
-				jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("contacts").toString());
-				ObjectMapper mapper = new ObjectMapper();
-				@SuppressWarnings("deprecation")
-				List<YahooContactBean> contactBeans = mapper.readValue(jsonGet.get("contact").toString(), TypeFactory.collectionType(List.class, YahooContactBean.class));
-				
-				if (contactBeans != null && contactBeans.size() > 0) {
-					for (YahooContactBean contactBean : contactBeans) {
-						IclubCohortInviteBean bean = new IclubCohortInviteBean();
-						bean.setCiInviteAcceptYn("N");
-						bean.setIclubNotificationType(3l);
-						bean.setCiId(UUID.randomUUID().toString());
-						if (contactBean.getFields() != null && contactBean.getFields().size() > 0) {
-							for (YahooFieldBean fBean : contactBean.getFields()) {
-								if (fBean.getType() != null && fBean.getType().equalsIgnoreCase("email")) {
-									bean.setCiInviteUri(fBean.getValue().toString());
-									break;
-								} else if (fBean.getType() != null && fBean.getType().equalsIgnoreCase("phone")) {
-									bean.setCiInviteUri(fBean.getValue().toString());
+				if (jsonGet.has("contacts")) {
+					jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("contacts").toString());
+					ObjectMapper mapper = new ObjectMapper();
+					@SuppressWarnings("deprecation")
+					List<YahooContactBean> contactBeans = mapper.readValue(jsonGet.get("contact").toString(), TypeFactory.collectionType(List.class, YahooContactBean.class));
+					
+					if (contactBeans != null && contactBeans.size() > 0) {
+						for (YahooContactBean contactBean : contactBeans) {
+							IclubCohortInviteBean bean = new IclubCohortInviteBean();
+							bean.setCiInviteAcceptYn("N");
+							bean.setIclubNotificationType(3l);
+							bean.setCiId(UUID.randomUUID().toString());
+							if (contactBean.getFields() != null && contactBean.getFields().size() > 0) {
+								for (YahooFieldBean fBean : contactBean.getFields()) {
+									if (fBean.getType() != null && fBean.getType().equalsIgnoreCase("email")) {
+										bean.setCiInviteUri(fBean.getValue().toString());
+										break;
+									} else if (fBean.getType() != null && fBean.getType().equalsIgnoreCase("phone")) {
+										bean.setCiInviteUri(fBean.getValue().toString());
+									}
 								}
 							}
+							if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
+								cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
+							}
 						}
-						if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
-							cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
-						}
+						
 					}
-					
 				}
 				
 			} else {

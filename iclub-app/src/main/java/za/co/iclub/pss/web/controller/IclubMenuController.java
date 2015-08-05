@@ -86,7 +86,6 @@ public class IclubMenuController implements Serializable {
 		if (IclubWebHelper.getObjectIntoSession("social_update_profile") != null && !FacesContext.getCurrentInstance().getViewRoot().getViewId().equalsIgnoreCase("/pages/user/profile.xhtml")) {
 			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
-			System.out.println(FacesContext.getCurrentInstance().getViewRoot().getViewId());
 			FacesContext.getCurrentInstance().responseComplete();
 		}
 	}
@@ -158,7 +157,7 @@ public class IclubMenuController implements Serializable {
 			String from = request.getParameter("from");
 			request.removeAttribute("code");
 			String verifier = request.getParameter("oauth_verifier");
-			if ((from == null || from.trim().equalsIgnoreCase("")) && state != null && !state.trim().equalsIgnoreCase("")) {
+			if (state != null && !state.trim().equalsIgnoreCase("")) {
 				try {
 					
 					LOGGER.info("Class :: " + this.getClass() + " :: state try block");
@@ -173,7 +172,6 @@ public class IclubMenuController implements Serializable {
 					if (jsonGet.has("redirect")) {
 						redirect = jsonGet.get("redirect").toString();
 						redirect = redirect.replace("\"", "");
-						from = redirect;
 					}
 					if (jsonGet.has("from")) {
 						from = jsonGet.get("from").toString();
@@ -195,7 +193,6 @@ public class IclubMenuController implements Serializable {
 				System.out.println("verifier :" + verifier);
 				try {
 					AccessToken access_token = twitter.getOAuthAccessToken(requestToken, verifier);
-					System.out.println("++++++" + access_token);
 					String screenName = twitter.getScreenName();
 					request.getSession().removeAttribute("requestToken");
 					System.out.println(access_token.getScreenName() + "__________" + screenName);
@@ -238,7 +235,6 @@ public class IclubMenuController implements Serializable {
 					post.setEntity(new UrlEncodedFormEntity(arguments));
 					HttpResponse outlookResponse = httpsClient.execute(post);
 					String outputString = EntityUtils.toString(outlookResponse.getEntity());
-					System.out.println(outputString);
 					SocialAuthResponse socialAuthResponse = new Gson().fromJson(outputString, SocialAuthResponse.class);
 					
 					if (socialAuthResponse != null && (redirect == null || redirect.trim().equalsIgnoreCase(""))) {
@@ -277,7 +273,7 @@ public class IclubMenuController implements Serializable {
 							
 						}
 					} else if ((redirect != null && !redirect.trim().equalsIgnoreCase(""))) {
-						newInviteRedirect(socialAuthResponse.getAccess_token(), redirect);
+						newInviteRedirect(socialAuthResponse.getAccess_token(), from);
 					}
 					
 				} catch (Exception e) {
@@ -360,7 +356,7 @@ public class IclubMenuController implements Serializable {
 									}
 								}
 							} else if ((redirect != null && !redirect.trim().equalsIgnoreCase(""))) {
-								newInviteRedirect(access_token, redirect);
+								newInviteRedirect(access_token, from);
 							}
 							
 						} catch (Exception e) {
@@ -401,7 +397,6 @@ public class IclubMenuController implements Serializable {
 					post.setEntity(new UrlEncodedFormEntity(arguments));
 					HttpResponse response1 = client.execute(post);
 					String outputString = EntityUtils.toString(response1.getEntity());
-					System.out.println(outputString);
 					JsonObject json = (JsonObject) new JsonParser().parse(outputString);
 					String access_token = json.get("access_token").getAsString();
 					String xoauth_yahoo_guid = json.get("xoauth_yahoo_guid").toString();
@@ -410,19 +405,20 @@ public class IclubMenuController implements Serializable {
 						// https://social.yahooapis.com/v1/user/3344/profile?format=json
 						// https://social.yahooapis.com/v1/user/6677/contacts
 						// SELECT * FROM social.contacts WHERE guid='6677'
+						
+						String callUrl1 = "https://social.yahooapis.com/v1/user/" + xoauth_yahoo_guid.replace("\"", "") + "/profile?format=json";
+						HttpGet httpGet = new HttpGet(callUrl1);
+						httpGet.setHeader("Authorization", "Bearer " + access_token);
+						httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
+						HttpResponse response2 = client.execute(httpGet);
+						outputString = EntityUtils.toString(response2.getEntity());
+						JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
+						jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
+						String emails = jsonGet.get("emails").toString();
+						ObjectMapper mapper = new ObjectMapper();
+						@SuppressWarnings("deprecation")
+						List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 						if ((redirect == null || redirect.trim().equalsIgnoreCase(""))) {
-							String callUrl1 = "https://social.yahooapis.com/v1/user/" + xoauth_yahoo_guid.replace("\"", "") + "/profile?format=json";
-							HttpGet httpGet = new HttpGet(callUrl1);
-							httpGet.setHeader("Authorization", "Bearer " + access_token);
-							httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
-							HttpResponse response2 = client.execute(httpGet);
-							outputString = EntityUtils.toString(response2.getEntity());
-							JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
-							jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
-							String emails = jsonGet.get("emails").toString();
-							ObjectMapper mapper = new ObjectMapper();
-							@SuppressWarnings("deprecation")
-							List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 							IclubPersonModel model = new IclubPersonModel();
 							
 							model.setPId(UUID.randomUUID().toString());
@@ -438,7 +434,7 @@ public class IclubMenuController implements Serializable {
 								Date date = formatter.parse(jsonGet.get("birthYear").toString().replace("\"", "") + "/" + jsonGet.get("birthdate").toString().replace("\"", ""));
 								model.setPDob(new Timestamp(date.getTime()));
 							} catch (Exception e) {
-								e.printStackTrace();
+								
 							}
 							if (checkExistingUserorNot(model, xoauth_yahoo_guid.replace("\"", ""), "YAHOO", access_token)) {
 								WebClient webClient = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
@@ -454,7 +450,7 @@ public class IclubMenuController implements Serializable {
 								}
 							}
 						} else {
-							newInviteRedirect(access_token, redirect);
+							newInviteRedirect(access_token, from);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -465,7 +461,7 @@ public class IclubMenuController implements Serializable {
 				}
 			}
 			
-			else if (code != null) {
+			else if (code != null && (preCode == null || !preCode.equalsIgnoreCase(code)) && from != null && from.trim().equalsIgnoreCase("GOOGLE")) {
 				request.removeAttribute("code");
 				String urlParameters = "code=" + code + "&client_id=" + BUNDLE.getString("client_id") + "&client_secret=" + BUNDLE.getString("client_secret") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&grant_type=" + BUNDLE.getString("grant_type");
 				
@@ -562,7 +558,7 @@ public class IclubMenuController implements Serializable {
 					}
 					
 				} else {
-					newInviteRedirect(access_token, redirect);
+					newInviteRedirect(access_token, from);
 				}
 			}
 			
