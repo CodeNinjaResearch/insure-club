@@ -86,7 +86,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubClaimController.policyBean.iclubPolicyStatus}" widgetVar="mnuViewCStat" id="mnuViewCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu disabled="true" value="#{iclubClaimController.policyBean.iclubPolicyStatus}" widgetVar="mnuViewCStat" id="mnuViewCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItems var="c" itemLabel="#{c.psLongDesc}" itemValue="#{c.psId}" value="#{iclubClaimController.policyStatusBeans}" />
 							</p:selectOneMenu>
@@ -115,7 +115,7 @@
 						</div>
 					</div>
 					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
+					<!-- <div class="Container100 Responsive">
 						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="Status :" />
 						</div>
@@ -126,7 +126,7 @@
 							</p:selectOneMenu>
 						</div>
 					</div>
-					<div class="EmptyBox5" />
+					<div class="EmptyBox5" /> -->
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">

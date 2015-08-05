@@ -94,7 +94,10 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iiCrtdDt}" />
 					</p:column>
 					<p:column headerText="Type">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubInsuranceItemType}" />
+						<p:selectOneMenu widgetVar="mnuIdType" disabled="true" id="mnuIdType" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.iclubInsuranceItemType}">
+							<f:selectItem itemLabel="Id Type" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" value="#{iclubPolicyController.insuranceItemTypeBeans}" />
+						</p:selectOneMenu>
 					</p:column>
 					<p:column>
 						<p:commandButton icon="ui-icon-pencil" update=":iclubFrm:grlMsg, :iclubFrm:qqPanel" action="#{iclubPolicyController.iItemListener(bean)}">

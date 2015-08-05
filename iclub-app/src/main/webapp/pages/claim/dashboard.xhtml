@@ -143,7 +143,10 @@
 								<p:outputLabel styleClass="TexAlCenter" value="Ocupied Status :" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.iclubOccupiedStatus}" />
+								<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuModOCS" id="mnuModOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+									<f:selectItem itemLabel="Ocupied Status" itemDisabled="true" />
+									<f:selectItems value="#{iclubFullQuoteController.occupiedStatusBeans}" var="c" itemValue="#{c.osId}" itemLabel="#{c.osLongDesc}" />
+								</p:selectOneMenu>
 							</div>
 						</div>
 						<div class="EmptyBox5" />

@@ -29,7 +29,10 @@
 						</p:outputLabel>
 					</p:column>
 					<p:column headerText="Previous Insurer">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubInsurerMaster}" />
+						<p:selectOneMenu disabled="true" value="#{bean.iclubInsurerMaster}" widgetVar="mnuViewIM" id="mnuViewIm" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.imName}" itemValue="#{c.imId}" value="#{iclubViewQuoteController.insurerMasterBeans}" />
+						</p:selectOneMenu>
 					</p:column>
 					<p:column headerText="Email">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QEmail}" />
@@ -41,7 +44,10 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QCrtdDt}" />
 					</p:column>
 					<p:column headerText="Status">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubQuoteStatus}" />
+						<p:selectOneMenu disabled="true" value="#{bean.iclubQuoteStatus}" widgetVar="mnuViewCStat" id="mnuViewCStat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<f:selectItem itemLabel="Status" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.qsLongDesc}" itemValue="#{c.qsId}" value="#{iclubViewQuoteController.quoteStatusBeans}" />
+						</p:selectOneMenu>
 					</p:column>
 					<p:column headerText="Full Quote">
 						<p:commandButton id="btnQuoteEdit" icon="ui-icon-pencil" action="#{iclubViewQuoteController.quoteActionListener(bean)}" />

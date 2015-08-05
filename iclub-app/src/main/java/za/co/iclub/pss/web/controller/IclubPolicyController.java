@@ -38,6 +38,7 @@ import org.primefaces.model.map.Marker;
 
 import za.co.iclub.pss.model.ui.IclubDocumentBean;
 import za.co.iclub.pss.model.ui.IclubInsuranceItemBean;
+import za.co.iclub.pss.model.ui.IclubInsuranceItemTypeBean;
 import za.co.iclub.pss.model.ui.IclubPolicyBean;
 import za.co.iclub.pss.model.ui.IclubPropertyBean;
 import za.co.iclub.pss.model.ui.IclubPropertyItemBean;
@@ -46,6 +47,7 @@ import za.co.iclub.pss.model.ui.IclubVehicleBean;
 import za.co.iclub.pss.model.ui.IclubVehicleMasterBean;
 import za.co.iclub.pss.model.ws.IclubDocumentModel;
 import za.co.iclub.pss.model.ws.IclubInsuranceItemModel;
+import za.co.iclub.pss.model.ws.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.model.ws.IclubPolicyModel;
 import za.co.iclub.pss.model.ws.IclubPropertyItemModel;
 import za.co.iclub.pss.model.ws.IclubPropertyModel;
@@ -55,6 +57,7 @@ import za.co.iclub.pss.model.ws.IclubVehicleMasterModel;
 import za.co.iclub.pss.model.ws.IclubVehicleModel;
 import za.co.iclub.pss.trans.IclubDocumentTrans;
 import za.co.iclub.pss.trans.IclubInsuranceItemTrans;
+import za.co.iclub.pss.trans.IclubInsuranceItemTypeTrans;
 import za.co.iclub.pss.trans.IclubPolicyTrans;
 import za.co.iclub.pss.trans.IclubPropertyItemTrans;
 import za.co.iclub.pss.trans.IclubPropertyTrans;
@@ -83,6 +86,7 @@ public class IclubPolicyController implements Serializable {
 	private static final String PRO_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropertyService/";
 	private static final String PROI_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPropertyItemService/";
 	private static final String D_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubDocumentService/";
+	private static final String IIT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsuranceItemTypeService/";
 	private boolean viewPolicy;
 	
 	private List<IclubPolicyBean> beans;
@@ -93,6 +97,7 @@ public class IclubPolicyController implements Serializable {
 	private List<IclubSupplMasterBean> dDSupplMasterBeans;
 	private List<IclubSupplMasterBean> oNSupplMasterBeans;
 	private List<IclubVehicleBean> vehicleBeans;
+	private List<IclubInsuranceItemTypeBean> insuranceItemTypeBeans;
 	
 	private ResourceBundle labelBundle;
 	
@@ -1004,6 +1009,26 @@ public class IclubPolicyController implements Serializable {
 	
 	public void setPropertyItemBeans(ArrayList<IclubPropertyItemBean> propertyItemBeans) {
 		this.propertyItemBeans = propertyItemBeans;
+	}
+	
+	public List<IclubInsuranceItemTypeBean> getInsuranceItemTypeBeans() {
+		
+		WebClient client = IclubWebHelper.createCustomClient(IIT_BASE_URL + "list");
+		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
+		client.close();
+		insuranceItemTypeBeans = new ArrayList<IclubInsuranceItemTypeBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubInsuranceItemTypeModel model : models) {
+				IclubInsuranceItemTypeBean bean = IclubInsuranceItemTypeTrans.fromWStoUI(model);
+				
+				insuranceItemTypeBeans.add(bean);
+			}
+		}
+		return insuranceItemTypeBeans;
+	}
+	
+	public void setInsuranceItemTypeBeans(List<IclubInsuranceItemTypeBean> insuranceItemTypeBeans) {
+		this.insuranceItemTypeBeans = insuranceItemTypeBeans;
 	}
 	
 }
