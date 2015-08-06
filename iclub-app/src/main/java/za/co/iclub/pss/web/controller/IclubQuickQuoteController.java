@@ -1205,9 +1205,16 @@ public class IclubQuickQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select IssueDate"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		} else if (IclubWebHelper.isCurrentDate(bean.getPIdIssueDt().getTime())) {
-			IclubWebHelper.addMessage(("Issue Date less than Current Date"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Issue Date Should be less than Current Date"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
+		String idValidate = IclubWebHelper.validateId(bean.getPIdNum(), bean.getPGender());
+		if (idValidate != null && !idValidate.trim().equalsIgnoreCase("")) {
+			
+			IclubWebHelper.addMessage(idValidate, FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		
 		return ret;
 	}
 	

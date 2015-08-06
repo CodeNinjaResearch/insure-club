@@ -157,4 +157,102 @@ public class IclubWebHelper {
 		in.close();
 		return response;
 	}
+	
+	public static void main(String[] args) {
+		String id = "8001015009087";
+		System.out.println(validateId(id, "M"));
+	}
+	
+	public static String validateId(String id, String gender) {
+		
+		if (id != null && !id.trim().equalsIgnoreCase("")) {
+			if (id.length() == 13) {
+				String dob = id.substring(0, 6);
+				SimpleDateFormat format = new SimpleDateFormat("yyMMdd");
+				try {
+					Date dateOfBirth = format.parse(dob);
+					if (!isCurrentDate(dateOfBirth.getTime())) {
+						
+						String SeqNum = id.substring(6, 10);
+						int sqNum = Integer.parseInt(SeqNum);
+						if (gender.trim().equalsIgnoreCase("m") || gender.trim().equalsIgnoreCase("f")) {
+							if (gender.trim().equalsIgnoreCase("m") && !(sqNum >= 5000 && sqNum <= 9999)) {
+								return "Invalid Id";
+							}
+							if (gender.trim().equalsIgnoreCase("f") && !(sqNum >= 0000 && sqNum <= 4999)) {
+								return "Invalid Id";
+							}
+						} else {
+							return "Please select Gender";
+						}
+					}
+					
+					String citizenship = id.substring(10, 11);
+					
+					if (Integer.parseInt(citizenship) == 0 || Integer.parseInt(citizenship) == 1) {
+						System.out.println("citizenship------:" + citizenship);
+					}
+					
+					String holdersrace = id.substring(11, 12);
+					
+					if (Integer.parseInt(holdersrace) == 8 || Integer.parseInt(holdersrace) == 9) {
+						System.out.println("holdersrace------:" + holdersrace);
+					}
+					
+					String checkSum = id.substring(12, 13);
+					
+					System.out.println("checkSum------:" + checkSum);
+					if (getCheckSum(id.substring(0, 12), Integer.parseInt(checkSum))) {
+						return "";
+					}
+					return "Invalid Id";
+				} catch (Exception e) {
+					
+					return "Invalid Id";
+				}
+				
+			}
+			return "Id Length Should be 13 Charecters";
+		}
+		
+		return "Id Cann't Be Empty";
+	}
+	
+	public static boolean getCheckSum(String id, int checksum) {
+		
+		System.out.println("id==========:" + id);
+		
+		char[] idArrya = id.toCharArray();
+		int a = 0;
+		String b = "";
+		int c = 0;
+		int d = 0;
+		for (int i = 0; i < 12; i++) {
+			
+			if (((i + 1) % 2) == 1) {
+				
+				String as = idArrya[i] + "";
+				a += Integer.parseInt(as);
+				
+			} else {
+				b += idArrya[i];
+			}
+			
+		}
+		System.out.println("a====" + a);
+		b = (Integer.parseInt(b) * 2) + "";
+		System.out.println("b====" + b);
+		for (int i = 0; i < b.length(); i++) {
+			
+			String bs = b.toCharArray()[i] + "";
+			c += Integer.parseInt(bs);
+		}
+		System.out.println("====C======:" + c);
+		d = a + c;
+		System.out.println("====D======:" + d);
+		int z = 10 - (d % 10);
+		System.out.println("Z========" + z);
+		
+		return z == checksum;
+	}
 }

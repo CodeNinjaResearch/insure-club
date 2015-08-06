@@ -5,6 +5,18 @@
 	color: #ccc;
 }
 
+.Container49 {
+	width: 49%;
+	overflow: hidden;
+	float: left;
+}
+
+.Container2 {
+	width: 2%;
+	overflow: hidden;
+	float: left;
+}
+
 .ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
 	{
 	display: none;
@@ -13,8 +25,8 @@
 	</ui:define>
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
-			<div class="Container90 Responsive">
-				<div class="Container40 Responsive">
+			<div class="Container100 Responsive">
+				<div class="Container49 Responsive">
 					<p:panel>
 						<f:facet name="header">
 							<div class="Container100 Responsive">
@@ -66,7 +78,10 @@
 						</div>
 					</p:panel>
 				</div>
-				<div class="Container40 Responsive">
+				<div class="Container2 Responsive">
+					<div class="EmptyBox5" />
+				</div>
+				<div class="Container49 Responsive">
 					<p:panel>
 						<f:facet name="footer">
 							<p:commandButton id="viewPolicyBut" value="View Policies" ajax="false" action="#{iclubUserDashBoardController.viewPolicies}" />
@@ -121,8 +136,8 @@
 			</div>
 			<div class="EmptyBox5" />
 			<div class="EmptyBox5" />
-			<div class="Container90 Responsive">
-				<div class="Container40 Responsive">
+			<div class="Container100 Responsive">
+				<div class="Container49 Responsive">
 					<p:panel>
 						<f:facet name="header">
 							<div class="Container100 Responsive">
@@ -176,7 +191,10 @@
 						</div>
 					</p:panel>
 				</div>
-				<div class="Container40 Responsive">
+				<div class="Container2 Responsive">
+					<div class="EmptyBox5" />
+				</div>
+				<div class="Container49 Responsive">
 					<p:panel>
 						<f:facet name="header">
 							<div class="Container100 Responsive">
@@ -229,10 +247,121 @@
 						</f:facet>
 					</p:panel>
 				</div>
+				<div class="EmptyBox5" />
+				<div class="EmptyBox5" />
+				<div class="Container49 Responsive">
+					<p:panel id="pnlCohortSumIdContDet">
+						<f:facet name="header">
+							<p:outputLabel value="Cohort Payment Details"></p:outputLabel>
+						</f:facet>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Claims Since Begining:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryBean.claimSinceI}">
+									<f:convertNumber pattern="#0.00" />
+								</p:outputLabel>
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Claims In Year:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryBean.claimsInYear}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Premium Paid Since Begining:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryBean.primumSinceI}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Premium Paid In Year:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryBean.premiumPaidInYear}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Current Year Total Premium:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryBean.premiumForYear}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+					</p:panel>
+				</div>
+				<div class="Container2 Responsive">
+					<div class="EmptyBox5" />
+				</div>
+				<div class="Container49 Responsive">
+					<p:panel id="pnlCohortSumUserContDet">
+						<f:facet name="header">
+							<p:outputLabel value="User Payment Detials"></p:outputLabel>
+						</f:facet>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Claims Since Begining:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryUserBean.claimSinceI}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Claims In Year:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryUserBean.claimsInYear}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Premium Paid Since Begining:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryUserBean.primumSinceI}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Premium Paid In Year:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryUserBean.premiumPaidInYear}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+						<div class="Container100 Responsive">
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="Current Year Total Premium:" />
+							</div>
+							<div class="Container50 Responsive">
+								<p:outputLabel styleClass="TexAlCenter" value="#{iclubUserDashBoardController.cohortSummaryUserBean.premiumForYear}" />
+							</div>
+						</div>
+						<div class="EmptyBox5" />
+					</p:panel>
+				</div>
+				<div class="EmptyBox5" />
 			</div>
 		</div>
-		<p:panel id="pnlCohrtSummery" styleClass="BordNone">
-			<ui:include src="/pages/dashboard/user/iclubCohortSummary.xhtml" />
-		</p:panel>
 	</ui:define>
 </ui:composition>
