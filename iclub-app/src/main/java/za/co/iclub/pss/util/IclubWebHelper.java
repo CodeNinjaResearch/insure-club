@@ -175,7 +175,7 @@ public class IclubWebHelper {
 						
 						String SeqNum = id.substring(6, 10);
 						int sqNum = Integer.parseInt(SeqNum);
-						if (gender.trim().equalsIgnoreCase("m") || gender.trim().equalsIgnoreCase("f")) {
+						if (gender != null && (gender.trim().equalsIgnoreCase("m") || gender.trim().equalsIgnoreCase("f"))) {
 							if (gender.trim().equalsIgnoreCase("m") && !(sqNum >= 5000 && sqNum <= 9999)) {
 								return "Invalid Id";
 							}

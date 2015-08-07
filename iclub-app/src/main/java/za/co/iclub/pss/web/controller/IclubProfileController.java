@@ -331,6 +331,12 @@ public class IclubProfileController implements Serializable {
 			IclubWebHelper.addMessage(("Issue Date less than Current Date"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
+		String idValidate = IclubWebHelper.validateId(bean.getPIdNum(), bean.getPGender());
+		if (idValidate != null && !idValidate.trim().equalsIgnoreCase("")) {
+			
+			IclubWebHelper.addMessage(idValidate, FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		return ret;
 	}
 	
