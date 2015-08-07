@@ -80,7 +80,7 @@ public class IclubVehicleController implements Serializable {
 	private ResourceBundle labelBundle;
 	private MapModel draggableModelVeh;
 	private Marker markerVeh;
-	private String centerGeoMapVeh = "36.890257,30.707417";
+	private String centerGeoMapVeh = "-28.4792905,24.6722915";
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");

@@ -11,7 +11,7 @@
 					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePro()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlPro" showDetail="true" />
-				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubPropertyController.centerGeoMapPro}" zoom="13" type="HYBRID" model="#{iclubPropertyController.draggableModelPro}" style="width:400px;height:400px">
+				<p:gmap id="geoGmapPro" widgetVar="geoMapPro" center="#{iclubPropertyController.centerGeoMapPro}" zoom="5" type="HYBRID" model="#{iclubPropertyController.draggableModelPro}" style="width:400px;height:400px">
 					<p:ajax event="markerDrag" listener="#{iclubPropertyController.onMarkerDragPro}" update="growlPro" />
 					<p:ajax event="geocode" listener="#{iclubPropertyController.onGeocodePro}" update="@this" />
 					<p:ajax event="overlaySelect" listener="#{iclubPropertyController.onMarkerSelectPro}" update="growlPro" />

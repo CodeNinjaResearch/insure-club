@@ -10,7 +10,7 @@
 					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodePer()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlPre" showDetail="true" />
-				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubSupplMasterController.centerGeoMapPer}" zoom="13" type="HYBRID" model="#{iclubSupplMasterController.draggableModelPer}" style="width:400px;height:400px">
+				<p:gmap id="geoGmapPer" widgetVar="geoMapPer" center="#{iclubSupplMasterController.centerGeoMapPer}" zoom="5" type="HYBRID" model="#{iclubSupplMasterController.draggableModelPer}" style="width:400px;height:400px">
 					<p:ajax event="markerDrag" listener="#{iclubSupplMasterController.onMarkerDragPer}" update=":iclubFrm:pnlSupplMasterContDet,growlPre" />
 					<p:ajax event="geocode" listener="#{iclubSupplMasterController.onGeocodePer}" update="@this" />
 					<p:ajax event="overlaySelect" listener="#{iclubSupplMasterController.onMarkerSelectPer}" update=":iclubFrm:pnlSupplMasterContDet,growlPre" />

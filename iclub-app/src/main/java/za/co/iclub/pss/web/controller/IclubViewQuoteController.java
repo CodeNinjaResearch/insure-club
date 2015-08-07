@@ -33,7 +33,7 @@ public class IclubViewQuoteController implements Serializable {
 	protected static final Logger LOGGER = Logger.getLogger(IclubViewQuoteController.class);
 	private static final String QUT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubQuoteService/";
 	private static final String QUTS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubQuoteStatusService/";
-	private static final String IM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsurarMasterService/";
+	private static final String IM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsurerMasterService/";
 	private List<IclubQuoteBean> beans;
 	private List<IclubQuoteStatusBean> quoteStatusBeans;
 	private List<IclubInsurerMasterBean> insurerMasterBeans;

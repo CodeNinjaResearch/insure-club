@@ -90,7 +90,7 @@ public class IclubSupplMasterController implements Serializable {
 	
 	private MapModel draggableModelPer;
 	private Marker markerPer;
-	private String centerGeoMapPer = "36.890257,30.707417";
+	private String centerGeoMapPer = "-28.4792905,24.6722915";
 	private IclubLoginBean loginBean;
 	private IclubPersonBean personBean;
 	private List<IclubMaritialStatusBean> maritialStatusBeans;
@@ -214,7 +214,7 @@ public class IclubSupplMasterController implements Serializable {
 			
 		} else {
 			draggableModelPer = new DefaultMapModel();
-			centerGeoMapPer = "36.890257,30.707417";
+			centerGeoMapPer = "-28.4792905,24.6722915";
 		}
 		viewParam = 2l;
 	}

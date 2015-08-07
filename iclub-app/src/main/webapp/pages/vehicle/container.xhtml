@@ -11,7 +11,7 @@
 					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlVeh" showDetail="true" />
-				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubVehicleController.centerGeoMapVeh}" zoom="13" type="HYBRID" model="#{iclubVehicleController.draggableModelVeh}" style="width:400px;height:400px">
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubVehicleController.centerGeoMapVeh}" zoom="5" type="HYBRID" model="#{iclubVehicleController.draggableModelVeh}" style="width:400px;height:400px">
 					<p:ajax event="markerDrag" listener="#{iclubVehicleController.onMarkerDragVeh}" update="growlVeh" />
 					<p:ajax event="geocode" listener="#{iclubVehicleController.onGeocodeVeh}" update="@this" />
 					<p:ajax event="overlaySelect" listener="#{iclubVehicleController.onMarkerSelectVeh}" update="growlVeh" />

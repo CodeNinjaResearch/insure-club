@@ -133,15 +133,15 @@ public class IclubPolicyController implements Serializable {
 	
 	private MapModel draggableModelPer;
 	private Marker markerPer;
-	private String centerGeoMapPer = "36.890257,30.707417";
+	private String centerGeoMapPer = "-28.4792905,24.6722915";
 	
 	private MapModel draggableModelPro;
 	private Marker markerPro;
-	private String centerGeoMapPro = "36.890257,30.707417";
+	private String centerGeoMapPro = "-28.4792905,24.6722915";
 	
 	private MapModel draggableModelVeh;
 	private Marker markerVeh;
-	private String centerGeoMapVeh = "36.890257,30.707417";
+	private String centerGeoMapVeh = "-28.4792905,24.6722915";
 	private ArrayList<IclubPropertyItemBean> propertyItemBeans;
 	
 	@PostConstruct

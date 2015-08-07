@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -113,5 +114,9 @@ public class Oauth2Yahoocallback extends HttpServlet {
 			e.printStackTrace();
 		}
 		System.out.println("leaving doGet");
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(DigestUtils.md5Hex("TestUserT3stus3rP@ssw0rd1427109538"));
 	}
 }

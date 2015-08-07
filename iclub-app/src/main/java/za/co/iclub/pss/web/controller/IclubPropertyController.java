@@ -96,7 +96,7 @@ public class IclubPropertyController implements Serializable {
 	private ResourceBundle labelBundle;
 	private MapModel draggableModelPro;
 	private Marker markerPro;
-	private String centerGeoMapPro = "36.890257,30.707417";
+	private String centerGeoMapPro = "-28.4792905,24.6722915";
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
