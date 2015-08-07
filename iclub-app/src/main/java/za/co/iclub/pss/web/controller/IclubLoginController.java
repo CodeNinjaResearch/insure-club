@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -18,6 +21,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +32,15 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import twitter4j.Twitter;
@@ -49,6 +64,8 @@ public class IclubLoginController implements Serializable {
 	protected static final Logger LOGGER = Logger.getLogger(IclubLoginController.class);
 	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubLoginService/";
 	private static final String U_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
+	public static final String FRAUD_CHECK_USERID = "4050";
+	public static final String FRAUD_CHECK_PWD = "AeB7uvv5mO+dt7YH6OBal+JHESTppNG0GowXD/IJhT4=";
 	private List<IclubLoginBean> beans;
 	private IclubLoginBean bean;
 	private boolean showAddPanel;
@@ -279,6 +296,63 @@ public class IclubLoginController implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
 		navigationHandler.handleNavigation(context, null, "/templates/login.xhtml?faces-redirect=true");
+		
+		String url = "https://testclientapi.fraudcheck.co.za/api/authenticate/test";
+		String currentTimeStamp = System.currentTimeMillis() + "";
+		
+		String fcHash = DigestUtils.md5Hex(FRAUD_CHECK_USERID + FRAUD_CHECK_PWD + currentTimeStamp);
+		
+		HttpClient client = getHttpClient();
+		
+		try {
+			HttpPost post = new HttpPost(url);
+			post.setHeader("Content-Type", "application/json");
+			post.setHeader("FcAccId", FRAUD_CHECK_USERID);
+			post.setHeader("FcHash", fcHash);
+			post.setHeader("FcTimestamp", currentTimeStamp);
+			
+			List<NameValuePair> arguments = new ArrayList<>(3);
+			arguments.add(new BasicNameValuePair("data", "test"));
+			post.setEntity(new UrlEncodedFormEntity(arguments));
+			HttpResponse response1 = client.execute(post);
+			String outputString = EntityUtils.toString(response1.getEntity());
+			System.out.println(outputString);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private static HttpClient getHttpClient() {
+		
+		try {
+			SSLContext sslContext = SSLContext.getInstance("SSL");
+			
+			sslContext.init(null, new TrustManager[] { new X509TrustManager() {
+				public X509Certificate[] getAcceptedIssuers() {
+					
+					return null;
+				}
+				
+				public void checkClientTrusted(X509Certificate[] certs, String authType) {
+					
+				}
+				
+				public void checkServerTrusted(X509Certificate[] certs, String authType) {
+					
+				}
+			} }, new SecureRandom());
+			
+			SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			
+			HttpClient httpClient = HttpClientBuilder.create().setSSLSocketFactory(socketFactory).build();
+			
+			return httpClient;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return HttpClientBuilder.create().build();
+		}
 	}
 	
 	public boolean validateLogin() {
