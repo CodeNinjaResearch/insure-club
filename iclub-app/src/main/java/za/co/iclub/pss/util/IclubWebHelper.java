@@ -255,4 +255,22 @@ public class IclubWebHelper {
 		
 		return z == checksum;
 	}
+	
+	public static boolean validateCountry(String latLongString) {
+		
+		try {
+			
+			GoogleResponse response = convertFromLatLong(latLongString);
+			if (response != null && response.getStatus().equals("OK")) {
+				for (Result result : response.getResults()) {
+					if (result.getFormatted_address() != null && result.getFormatted_address().trim().replace(" ", "").toLowerCase().contains("southafrica")) {
+						return true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			
+		}
+		return false;
+	}
 }

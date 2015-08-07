@@ -713,6 +713,10 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void onMarkerSelectPer(OverlaySelectEvent event) {
 		markerPer = (Marker) event.getOverlay();
+		if (!IclubWebHelper.validateCountry(markerPer.getLatlng().getLat() + "," + markerPer.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		IclubGeoLocBean geoBean = getGeoLocBean(markerPer.getLatlng().getLat(), markerPer.getLatlng().getLng());
 		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
 			personBean.setPLat(geoBean.getGlLat());
@@ -756,6 +760,11 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void onMarkerSelectPro(OverlaySelectEvent event) {
 		markerPro = (Marker) event.getOverlay();
+		
+		if (!IclubWebHelper.validateCountry(markerPro.getLatlng().getLat() + "," + markerPro.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		IclubGeoLocBean geoBean = getGeoLocBean(markerPro.getLatlng().getLat(), markerPro.getLatlng().getLng());
 		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
 			propertyBean.setPLat(geoBean.getGlLat());
@@ -809,6 +818,10 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void onMarkerSelectVeh(OverlaySelectEvent event) {
 		markerVeh = (Marker) event.getOverlay();
+		if (!IclubWebHelper.validateCountry(markerVeh.getLatlng().getLat() + "," + markerVeh.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		IclubGeoLocBean geoBean = getGeoLocBean(markerVeh.getLatlng().getLat(), markerVeh.getLatlng().getLng());
 		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
 			vehicleBean.setVOnLat(geoBean.getGlLat());
@@ -854,6 +867,10 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void onMarkerSelectVehDd(OverlaySelectEvent event) {
 		markerVeh = (Marker) event.getOverlay();
+		if (!IclubWebHelper.validateCountry(markerVeh.getLatlng().getLat() + "," + markerVeh.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		IclubGeoLocBean geoBean = getGeoLocBean(markerVeh.getLatlng().getLat(), markerVeh.getLatlng().getLng());
 		if (geoBean.getGlLat() != null && geoBean.getGlLong() != null) {
 			vehicleBean.setVDdLat(geoBean.getGlLat());

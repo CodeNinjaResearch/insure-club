@@ -724,6 +724,11 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerDragPer(MarkerDragEvent event) {
 		markerPer = event.getMarker();
+		if (!IclubWebHelper.validateCountry(markerPer.getLatlng().getLat() + "," + markerPer.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Dragged", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng() + " is not in range"));
+			return;
+		}
+		
 		personBean.setPLat(markerPer.getLatlng().getLat());
 		personBean.setPLong(markerPer.getLatlng().getLng());
 		personBean.setPAddress(markerPer.getTitle());
@@ -748,6 +753,10 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerSelectPer(OverlaySelectEvent event) {
 		markerPer = (Marker) event.getOverlay();
+		if (!IclubWebHelper.validateCountry(markerPer.getLatlng().getLat() + "," + markerPer.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerPer.getLatlng().getLat() + ", Lng:" + markerPer.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		personBean.setPLat(markerPer.getLatlng().getLat());
 		personBean.setPLong(markerPer.getLatlng().getLng());
 		personBean.setPAddress(markerPer.getTitle());
@@ -756,6 +765,10 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerDragPro(MarkerDragEvent event) {
 		markerPro = event.getMarker();
+		if (!IclubWebHelper.validateCountry(markerPro.getLatlng().getLat() + "," + markerPro.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		propertyBean.setPLat(markerPro.getLatlng().getLat());
 		propertyBean.setPLong(markerPro.getLatlng().getLng());
 		propertyBean.setPAddress(markerPro.getTitle());
@@ -781,6 +794,10 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerSelectPro(OverlaySelectEvent event) {
 		markerPro = (Marker) event.getOverlay();
+		if (!IclubWebHelper.validateCountry(markerPro.getLatlng().getLat() + "," + markerPro.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerPro.getLatlng().getLat() + ", Lng:" + markerPro.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		propertyBean.setPLat(markerPro.getLatlng().getLat());
 		propertyBean.setPLong(markerPro.getLatlng().getLng());
 		propertyBean.setPAddress(markerPro.getTitle());
@@ -789,6 +806,10 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerDragVeh(MarkerDragEvent event) {
 		markerVeh = event.getMarker();
+		if (!IclubWebHelper.validateCountry(markerVeh.getLatlng().getLat() + "," + markerVeh.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		vehicleBean.setVOnLat(markerVeh.getLatlng().getLat());
 		vehicleBean.setVOnLong(markerVeh.getLatlng().getLng());
 		
@@ -813,6 +834,10 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerSelectVeh(OverlaySelectEvent event) {
 		markerVeh = (Marker) event.getOverlay();
+		if (!IclubWebHelper.validateCountry(markerVeh.getLatlng().getLat() + "," + markerVeh.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerVeh.getLatlng().getLat() + ", Lng:" + markerVeh.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		vehicleBean.setVOnLat(markerVeh.getLatlng().getLat());
 		vehicleBean.setVOnLong(markerVeh.getLatlng().getLng());
 		vehicleBean.setVOnArea(markerVeh.getTitle());
@@ -821,6 +846,10 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerDragVehDd(MarkerDragEvent event) {
 		markerVehDd = event.getMarker();
+		if (!IclubWebHelper.validateCountry(markerVehDd.getLatlng().getLat() + "," + markerVehDd.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerVehDd.getLatlng().getLat() + ", Lng:" + markerVehDd.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		vehicleBean.setVDdLat(markerVehDd.getLatlng().getLat());
 		vehicleBean.setVDdLong(markerVehDd.getLatlng().getLng());
 		vehicleBean.setVDdArea(markerVehDd.getTitle());
@@ -845,6 +874,10 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void onMarkerSelectVehDd(OverlaySelectEvent event) {
 		markerVehDd = (Marker) event.getOverlay();
+		if (!IclubWebHelper.validateCountry(markerVehDd.getLatlng().getLat() + "," + markerVehDd.getLatlng().getLng())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", "Lat:" + markerVehDd.getLatlng().getLat() + ", Lng:" + markerVehDd.getLatlng().getLng() + " is not in range"));
+			return;
+		}
 		vehicleBean.setVDdLat(markerVehDd.getLatlng().getLat());
 		vehicleBean.setVDdLong(markerVehDd.getLatlng().getLng());
 		vehicleBean.setVDdArea(markerVehDd.getTitle());

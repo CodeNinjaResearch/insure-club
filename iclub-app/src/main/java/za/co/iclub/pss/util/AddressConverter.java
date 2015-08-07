@@ -42,7 +42,7 @@ public class AddressConverter {
 		GoogleResponse res = new AddressConverter().convertToLatLong("Jordaan Park HEIDELBURG Gauteng");
 		if (res.getStatus().equals("OK")) {
 			for (Result result : res.getResults()) {
-				System.out.println("Lattitude of address is :" + result.getGeometry().getLocation().getLat());
+				System.out.println("Lattitude of address is :" + result.getFormatted_address());
 				System.out.println("Longitude of address is :" + result.getGeometry().getLocation().getLng());
 				System.out.println("Location is " + result.getGeometry().getLocation_type());
 			}
@@ -51,7 +51,7 @@ public class AddressConverter {
 		}
 		
 		System.out.println("\n");
-		GoogleResponse res1 = new AddressConverter().convertFromLatLong("52.3735557,4.8799584");
+		GoogleResponse res1 = new AddressConverter().convertFromLatLong("-28.4792905,24.6722914");
 		if (res1.getStatus().equals("OK")) {
 			for (Result result : res1.getResults()) {
 				System.out.println("address is :" + result.getFormatted_address());
