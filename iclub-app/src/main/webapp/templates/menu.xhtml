@@ -40,6 +40,10 @@
 				<p:menuitem id="sm_execmem" value="Executive Management" containerStyleClass="layout-menubar-active" />
 				<p:menuitem id="sm_senmem" value="Senior Management" containerStyleClass="layout-menubar-active" />
 			</p:submenu>
+			<p:submenu id="sm_theme" label="Theme">
+				<p:menuitem id="sm_spark" value="Spark Theme" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('spark')}" />
+				<p:menuitem id="sm_sentinel" value="Sentinel" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('sentinel')}" />
+			</p:submenu>
 			<p:menuitem id="sm_qq" value="Quick Quote" outcome="qq" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
 			<p:menuitem id="sm_nci" value="Invite New Cohorts" containerStyleClass="layout-menubar-active" action="#{iclubLoginController.newCohortInviteAction}" rendered="#{iclubMenuController.userMenu}" />
 		</ps:menu>

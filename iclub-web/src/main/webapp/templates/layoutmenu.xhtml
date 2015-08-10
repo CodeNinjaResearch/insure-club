@@ -4,47 +4,47 @@
 			<p:commandButton type="button" icon="fa fa-search Fs18 white" styleClass="Fright" />
 			<p:inputText placeholder="Search" styleClass="Fright" />
 		</f:facet>
-		<p:menuitem icon="fa fa-paint-brush" id="sm_home" value="Home" outcome="home" containerStyleClass="layout-menubar-active" />
+		<p:menuitem icon="fa fa-paint-brush" id="spm_home" value="Home" outcome="home" containerStyleClass="layout-menubar-active" />
 		<p:separator />
-		<p:menuitem icon="fa fa-paint-brush" id="sm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
+		<p:menuitem icon="fa fa-paint-brush" id="spm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
 		<p:separator rendered="#{!iclubMenuController.userMenu}" />
-		<p:menuitem icon="fa fa-paint-brush" id="sm_logout" value="Logout" ajax="false" action="#{iclubLoginController.doIclubLogout}" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
+		<p:menuitem icon="fa fa-paint-brush" id="spm_logout" value="Logout" ajax="false" action="#{iclubLoginController.doIclubLogout}" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
 		<p:separator rendered="#{iclubMenuController.userMenu}" />
-		<p:submenu icon="fa fa-rocket" id="sm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
-			<p:menuitem icon="fa fa-paint-brush" id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
-			<p:menuitem icon="fa fa-paint-brush" id="sm_pdash" outcome="pdash" value="View Policies" containerStyleClass="layout-menubar-active" />
-			<p:menuitem icon="fa fa-paint-brush" id="sm_cdash" outcome="cdash" value="View Claims" containerStyleClass="layout-menubar-active" />
-			<p:submenu icon="fa fa-rocket" id="sm_admin" label="Admin Screens">
-				<p:menuitem icon="fa fa-paint-brush" id="sm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
-				<p:menuitem icon="fa fa-paint-brush" id="sm_master" value="Master Data" outcome="master" containerStyleClass="layout-menubar-active" />
-				<p:menuitem icon="fa fa-paint-brush" id="sm_rating" value="Rating" outcome="rating" containerStyleClass="layout-menubar-active" />
+		<p:submenu icon="fa fa-rocket" id="spm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
+			<p:menuitem icon="fa fa-paint-brush" id="spm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
+			<p:menuitem icon="fa fa-paint-brush" id="spm_pdash" outcome="pdash" value="View Policies" containerStyleClass="layout-menubar-active" />
+			<p:menuitem icon="fa fa-paint-brush" id="spm_cdash" outcome="cdash" value="View Claims" containerStyleClass="layout-menubar-active" />
+			<p:submenu icon="fa fa-rocket" id="spm_admin" label="Admin Screens">
+				<p:menuitem icon="fa fa-paint-brush" id="spm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="spm_master" value="Master Data" outcome="master" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="spm_rating" value="Rating" outcome="rating" containerStyleClass="layout-menubar-active" />
 			</p:submenu>
-			<p:submenu icon="fa fa-rocket" id="sm_policy" label="Policy Dashboards">
-				<p:menuitem icon="fa fa-paint-brush" id="sm_mypcy" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
-				<p:menuitem icon="fa fa-paint-brush" id="sm_pendass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
-				<p:menuitem icon="fa fa-paint-brush" id="sm_allpcy" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
+			<p:submenu icon="fa fa-rocket" id="spm_policy" label="Policy Dashboards">
+				<p:menuitem icon="fa fa-paint-brush" id="spm_mypcy" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="spm_pendass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="spm_allpcy" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
 			</p:submenu>
-			<p:submenu icon="fa fa-rocket" id="sm_claim" label="Claim Dashboards">
-				<p:menuitem icon="fa fa-paint-brush" id="sm_myclm" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
-				<p:menuitem icon="fa fa-paint-brush" id="sm_pendclmass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
-				<p:menuitem icon="fa fa-paint-brush" id="sm_allclm" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
+			<p:submenu icon="fa fa-rocket" id="spm_claim" label="Claim Dashboards">
+				<p:menuitem icon="fa fa-paint-brush" id="spm_myclm" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="spm_pendclmass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="spm_allclm" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
 			</p:submenu>
 		</p:submenu>
 		<p:separator rendered="#{iclubMenuController.userMenu}" />
-		<p:menuitem id="sm_faq" icon="fa fa-paint-brush" value="FAQ" containerStyleClass="layout-menubar-active" />
+		<p:menuitem id="spm_faq" icon="fa fa-paint-brush" value="FAQ" containerStyleClass="layout-menubar-active" />
 		<p:separator />
-		<p:submenu id="sm_hitw" icon="fa fa-rocket" label="How It Works">
-			<p:menuitem id="sm_transparency" icon="fa fa-paint-brush" value="Transparency" containerStyleClass="layout-menubar-active" />
-			<p:menuitem id="sm_privacy" icon="fa fa-paint-brush" value="Privacy" containerStyleClass="layout-menubar-active" />
+		<p:submenu id="spm_hitw" icon="fa fa-rocket" label="How It Works">
+			<p:menuitem id="spm_transparency" icon="fa fa-paint-brush" value="Transparency" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="spm_privacy" icon="fa fa-paint-brush" value="Privacy" containerStyleClass="layout-menubar-active" />
 		</p:submenu>
 		<p:separator />
-		<p:submenu id="sm_aboutus" label="About Us" icon="fa fa-rocket">
-			<p:menuitem id="sm_leadership" icon="fa fa-paint-brush" value="Leadership" containerStyleClass="layout-menubar-active" />
-			<p:menuitem id="sm_board" icon="fa fa-paint-brush" value="Board" containerStyleClass="layout-menubar-active" />
-			<p:menuitem id="sm_execmem" icon="fa fa-paint-brush" value="Executive Management" containerStyleClass="layout-menubar-active" />
-			<p:menuitem id="sm_senmem" icon="fa fa-paint-brush" value="Senior Management" containerStyleClass="layout-menubar-active" />
+		<p:submenu id="spm_aboutus" label="About Us" icon="fa fa-rocket">
+			<p:menuitem id="spm_leadership" icon="fa fa-paint-brush" value="Leadership" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="spm_board" icon="fa fa-paint-brush" value="Board" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="spm_execmem" icon="fa fa-paint-brush" value="Executive Management" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="spm_senmem" icon="fa fa-paint-brush" value="Senior Management" containerStyleClass="layout-menubar-active" />
 		</p:submenu>
 		<p:separator />
-		<p:menuitem id="sm_qq" value="Quick Quote" icon="fa fa-paint-brush" outcome="qq" containerStyleClass="layout-menubar-active" />
+		<p:menuitem id="spm_qq" value="Quick Quote" icon="fa fa-paint-brush" outcome="qq" containerStyleClass="layout-menubar-active" />
 	</ps:menu>
 </ui:composition>

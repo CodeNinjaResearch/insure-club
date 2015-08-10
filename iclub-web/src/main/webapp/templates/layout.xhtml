@@ -7,7 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 	</f:facet>
-	<title>PrimeFaces Spark</title>
+	<title>Insurance Club</title>
+	<h:outputScript rendered="false" name="js/layout.js" library="sentinel-layout" />
 	<h:outputScript name="js/layout.js" library="spark-layout" />
 	<script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -23,9 +24,7 @@
 		function geocodeVehDd() {
 			PF('geoMapVehDd').geocode(document.getElementById('vehDdAddress').value);
 		}
-		 
-	</script>
-	<script type="text/javascript">
+	
     function hideDialog(xhr, status, args) {
         if(args.saved){ 
         	$("#addRateEngineDailog").hide(); 
@@ -34,6 +33,7 @@
         	$("#addRateEngineRangeDailog_modal").hide(); 
         	$("#addRateEngineRangeDailog").hide()
         	$("#addRateEngineRangeDailog_modal").hide(); 
+        	
         	 }
     }
 </script>
@@ -50,15 +50,17 @@
 	<h:form prependId="false" id="iclubFrm">
 		<!-- <ui:include src="top.xhtml" /> -->
 		<p:growl id="grlMsg" showDetail="true" showSummary="false" />
-		<div id="menu-mask"></div>
+		<ui:include src="menu.xhtml" />
 		<div class="EmptyBox30"></div>
 		<ui:include src="layoutmenu.xhtml" />
-		<div id="layout-portlets-cover">
+		<div id="layout-portlets-cover" class="fontRegular">
 			<ui:insert name="content">
-                Template
-            </ui:insert>
+			</ui:insert>
 		</div>
 	</h:form>
+	<h:outputStylesheet rendered="false" name="css/font-icon-layout.css" library="sentinel-layout" />
+	<h:outputStylesheet rendered="false" name="css/sentinel-layout.css" library="sentinel-layout" />
+	<h:outputStylesheet rendered="false" name="css/core-layout.css" library="sentinel-layout" />
 	<p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
 		<f:facet name="start">
 			<p:graphicImage name="images/preloader.gif" library="spark-layout" />

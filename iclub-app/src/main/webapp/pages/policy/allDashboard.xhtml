@@ -1,4 +1,4 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/layout#{themeView.theme}.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<p:panel id="qqPanel">
 			<p:dataTable reflow="true" widgetVar="dtQuoteCont" value="#{iclubPolicyController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Policies Available">

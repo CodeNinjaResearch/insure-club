@@ -1,4 +1,4 @@
-<ui:composition template="/templates/layout.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/layout#{themeView.theme}.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<p:panel id="pnlCohortContDet">
 			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="20" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Invites Available">

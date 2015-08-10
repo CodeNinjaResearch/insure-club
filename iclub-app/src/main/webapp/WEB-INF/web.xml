@@ -6,7 +6,11 @@
 	</welcome-file-list>
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>sentinel</param-value>
+		<param-value>#{themeView.webTheme}</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+		<param-value>/WEB-INF/primefaces-spark.taglib.xml</param-value>
 	</context-param>
 	<context-param>
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
