@@ -22,7 +22,7 @@
 					<p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocodeVeh()" type="button" />
 				</h:panelGrid>
 				<p:growl id="growlVeh" showDetail="true" />
-				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubQuickQuoteController.centerGeoMapVeh}" zoom="5" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelVeh}" style="width:400px;height:400px">
+				<p:gmap id="geoGmapVeh" widgetVar="geoMapVeh" center="#{iclubQuickQuoteController.centerGeoMapVeh}" zoom="9" type="HYBRID" model="#{iclubQuickQuoteController.draggableModelVeh}" style="width:400px;height:400px">
 					<p:ajax event="markerDrag" listener="#{iclubQuickQuoteController.onMarkerDragVeh}" update="growlVeh" />
 					<p:ajax event="geocode" listener="#{iclubQuickQuoteController.onGeocodeVeh}" update="@this" />
 					<p:ajax event="overlaySelect" listener="#{iclubQuickQuoteController.onMarkerSelectVeh}" update="growlVeh" />
