@@ -1,16 +1,12 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ps="http://primefaces.org/spark" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 	<ps:menu>
-		<f:facet name="options">
-			<p:commandButton type="button" icon="fa fa-search Fs18 white" styleClass="Fright" />
-			<p:inputText placeholder="Search" styleClass="Fright" />
-		</f:facet>
 		<p:menuitem icon="fa fa-paint-brush" id="sm_home" value="Home" outcome="userDashboard" containerStyleClass="layout-menubar-active" />
 		<p:separator />
-		<p:menuitem icon="fa fa-paint-brush" id="sm_login" value="Login" outcome="login" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
+		<p:menuitem icon="fa fa-paint-brush" id="sm_login" value="Login" outcome="login-spark" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
 		<p:separator rendered="#{!iclubMenuController.userMenu}" />
 		<p:menuitem icon="fa fa-paint-brush" id="sm_logout" value="Logout" ajax="false" action="#{iclubLoginController.doIclubLogout}" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
-		<p:separator rendered="#{iclubMenuController.userMenu}" />
-		<p:submenu icon="fa fa-rocket" id="sm_screens" label="Screens" rendered="#{iclubMenuController.userMenu}">
+		<p:separator rendered="false" />
+		<p:submenu icon="fa fa-rocket" id="sm_screens" label="Screens" rendered="false">
 			<p:menuitem icon="fa fa-paint-brush" id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
 			<p:menuitem icon="fa fa-paint-brush" id="sm_pdash" outcome="pdash" value="View Policies" containerStyleClass="layout-menubar-active" />
 			<p:menuitem icon="fa fa-paint-brush" id="sm_cdash" outcome="cdash" value="View Claims" containerStyleClass="layout-menubar-active" />
@@ -49,7 +45,9 @@
 			<p:menuitem id="sm_spark" value="Spark Theme" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('spark')}" />
 			<p:menuitem id="sm_sentinel" value="Sentinel" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('sentinel')}" />
 		</p:submenu>
-		<p:separator />
-		<p:menuitem id="sm_qq" value="Quick Quote" icon="fa fa-paint-brush" outcome="qq" containerStyleClass="layout-menubar-active" />
+		<p:separator rendered="#{iclubMenuController.userMenu}" />
+		<p:menuitem id="sm_qq" value="Quick Quote" icon="fa fa-paint-brush" outcome="qq" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
+		<p:separator rendered="#{iclubMenuController.userMenu}" />
+		<p:menuitem id="sm_nci" value="Invite New Cohorts" containerStyleClass="layout-menubar-active" icon="fa fa-paint-brush" action="#{iclubLoginController.newCohortInviteAction}" rendered="#{iclubMenuController.userMenu}" />
 	</ps:menu>
 </ui:composition>

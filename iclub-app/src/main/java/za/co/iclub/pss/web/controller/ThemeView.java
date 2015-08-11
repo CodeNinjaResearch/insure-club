@@ -1,14 +1,19 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import za.co.iclub.pss.util.IclubWebHelper;
 
 @ManagedBean
 @SessionScoped
 @SuppressWarnings("serial")
 public class ThemeView implements Serializable {
+	
+	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	
 	private String color;
 	
@@ -68,9 +73,12 @@ public class ThemeView implements Serializable {
 				this.theme = "";
 			}
 			
+			if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null) {
+				return "login" + this.theme;
+			}
+			
 		}
-		return "";
+		return "userDashboard";
 		
 	}
-	
 }

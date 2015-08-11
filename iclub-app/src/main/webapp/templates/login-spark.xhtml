@@ -19,8 +19,23 @@
 					<div class="EmptyBox10"></div>
 					<div class="Seperator"></div>
 					<div class="EmptyBox10"></div>
-					<p:button value="Forgot Password ?" styleClass="Fs16 RedButton" href="dashboard.xhtml"></p:button>
-					<p:button value="Contact Admin ?" styleClass="Fs16 OrangeButton" href="dashboard.xhtml"></p:button>
+					<div class="Container90 Fnone MarAuto TexAlCenter">
+						<div class="Container30 TexAlCenter">
+							<p:commandLink styleClass="Fs16" action="#{iclubLoginController.googleAction}" ajax="false">
+								<h:graphicImage value="/images/gmail-icon.jpg" />
+							</p:commandLink>
+						</div>
+						<div class="Container30 TexAlCenter">
+							<p:commandLink styleClass="Fs16" action="#{iclubLoginController.yahooAction}" ajax="false">
+								<h:graphicImage value="/images/yahoomail_icon.jpg" />
+							</p:commandLink>
+						</div>
+						<div class="Container30 TexAlCenter">
+							<p:commandLink styleClass="Fs16" action="#{iclubLoginController.hotmailAction}" ajax="false">
+								<h:graphicImage value="/images/hotmail.jpeg" />
+							</p:commandLink>
+						</div>
+					</div>
 					<div class="EmptyBox50"></div>
 				</div>
 			</div>
