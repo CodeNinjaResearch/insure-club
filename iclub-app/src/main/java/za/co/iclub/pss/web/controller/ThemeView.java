@@ -75,6 +75,8 @@ public class ThemeView implements Serializable {
 			
 			if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null) {
 				return "login" + this.theme;
+			} else {
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), this.theme);
 			}
 			
 		}

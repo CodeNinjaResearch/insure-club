@@ -86,10 +86,10 @@ public class IclubLoginController implements Serializable {
 		return state;
 	}
 	
-	public String newCohortInviteAction() {
+	public void newCohortInviteAction() {
 		
 		IclubWebHelper.addObjectIntoSession("newInvite", "true");
-		return "/pages/admin/cohorts/newInvitelogin.xhtml?faces-redirect=true";
+		
 	}
 	
 	public String googleAction() {
@@ -292,10 +292,16 @@ public class IclubLoginController implements Serializable {
 	}
 	
 	public void doIclubLogout() {
+		
+		String theme = "";
+		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.theme")) != null) {
+			theme = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.theme")).toString();
+		}
 		IclubWebHelper.invalidateSession();
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
-		navigationHandler.handleNavigation(context, null, "/templates/login.xhtml?faces-redirect=true");
+		
+		navigationHandler.handleNavigation(context, null, "/templates/login" + theme + ".xhtml?faces-redirect=true");
 		
 		String url = "https://testclientapi.fraudcheck.co.za/api/authenticate/test";
 		String currentTimeStamp = System.currentTimeMillis() + "";
