@@ -87,7 +87,7 @@ public class IclubLoginController implements Serializable {
 	}
 	
 	public void newCohortInviteAction() {
-		
+		setTheme();
 		IclubWebHelper.addObjectIntoSession("newInvite", "true");
 		
 	}
@@ -96,6 +96,7 @@ public class IclubLoginController implements Serializable {
 		
 		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force&state=" + getState("GOOGLE");
 		try {
+			setTheme();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -107,6 +108,7 @@ public class IclubLoginController implements Serializable {
 		
 		String redirectUrl = "https://graph.facebook.com/oauth/authorize?client_id=" + BUNDLE.getString("fb.client_id") + "&display=page&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&scope=" + BUNDLE.getString("fb.perms2") + "&state=" + getState("fb");
 		try {
+			setTheme();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -117,6 +119,7 @@ public class IclubLoginController implements Serializable {
 	public String yahooAction() {
 		String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us&state=" + getState("YAHOO");
 		try {
+			setTheme();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -128,6 +131,7 @@ public class IclubLoginController implements Serializable {
 		
 		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + getState("OUTLOOK");
 		try {
+			setTheme();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -250,6 +254,21 @@ public class IclubLoginController implements Serializable {
 		}
 	}
 	
+	public static void setTheme() {
+		String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+		
+		if (viewId != null && viewId.contains("spark")) {
+			
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), "-spark");
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), "spark");
+			
+		} else {
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), "");
+			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), "sentinel");
+		}
+		
+	}
+	
 	public String doIclubLogin() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: doIclubLogin");
 		if (!validateLogin()) {
@@ -258,6 +277,7 @@ public class IclubLoginController implements Serializable {
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
+					setTheme();
 					IclubWebHelper.addMessage("Person Logged-In successfully", FacesMessage.SEVERITY_INFO);
 					WebClient loginClient = IclubWebHelper.createCustomClient(BASE_URL + "person/" + bean.getLName());
 					IclubLoginModel model = loginClient.accept(MediaType.APPLICATION_JSON).get(IclubLoginModel.class);
@@ -294,10 +314,16 @@ public class IclubLoginController implements Serializable {
 	public void doIclubLogout() {
 		
 		String theme = "";
+		String webTheme = "";
 		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.theme")) != null) {
 			theme = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.theme")).toString();
 		}
+		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme")) != null) {
+			webTheme = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme")).toString();
+		}
 		IclubWebHelper.invalidateSession();
+		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), theme);
+		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), webTheme);
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
 		

@@ -48,6 +48,6 @@
 		<p:separator rendered="#{iclubMenuController.userMenu}" />
 		<p:menuitem id="sm_qq" value="Quick Quote" icon="fa fa-paint-brush" outcome="qq" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
 		<p:separator rendered="#{iclubMenuController.userMenu}" />
-		<p:menuitem id="sm_nci" value="Invite New Cohorts" containerStyleClass="layout-menubar-active" oncomplete="PF('perLocationDetailsDialog').show();" icon="fa fa-paint-brush" action="#{iclubLoginController.newCohortInviteAction}" rendered="#{iclubMenuController.userMenu}" />
+		<p:menuitem id="sm_nci" value="Invite New Cohorts" containerStyleClass="layout-menubar-active" oncomplete="PF('newInviteDialog').show();" icon="fa fa-paint-brush" action="#{iclubLoginController.newCohortInviteAction}" rendered="#{iclubMenuController.userMenu}" />
 	</ps:menu>
 </ui:composition>

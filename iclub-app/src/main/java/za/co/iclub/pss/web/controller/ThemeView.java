@@ -38,6 +38,16 @@ public class ThemeView implements Serializable {
 	
 	public String getTheme() {
 		
+		try {
+			if (theme == null && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.theme")) != null) {
+				theme = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.theme")).toString();
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), null);
+			}
+			
+		} catch (Exception e) {
+			
+		}
+		
 		if (theme == null || theme.trim().equalsIgnoreCase("")) {
 			theme = "";
 		}
@@ -50,6 +60,16 @@ public class ThemeView implements Serializable {
 	}
 	
 	public String getWebTheme() {
+		
+		try {
+			
+			if (webTheme == null && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme")) != null) {
+				webTheme = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme")).toString();
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), null);
+			}
+		} catch (Exception e) {
+			
+		}
 		if (webTheme == null || webTheme.trim().equalsIgnoreCase("")) {
 			webTheme = "sentinel";
 		}
@@ -77,6 +97,7 @@ public class ThemeView implements Serializable {
 				return "login" + this.theme;
 			} else {
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), this.theme);
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), webTheme);
 			}
 			
 		}
