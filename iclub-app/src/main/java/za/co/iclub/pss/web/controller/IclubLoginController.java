@@ -350,7 +350,7 @@ public class IclubLoginController implements Serializable {
 			String outputString = EntityUtils.toString(response1.getEntity());
 			System.out.println(outputString);
 		} catch (Exception e) {
-			e.printStackTrace();
+			 
 		}
 		
 	}
