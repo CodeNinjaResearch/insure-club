@@ -4,6 +4,7 @@ import za.co.iclub.pss.model.ui.IclubCohortBean;
 import za.co.iclub.pss.model.ws.IclubCohortModel;
 import za.co.iclub.pss.orm.bean.IclubCohort;
 import za.co.iclub.pss.orm.dao.IclubCohortTypeDAO;
+import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubCohortTrans {
@@ -26,6 +27,8 @@ public class IclubCohortTrans {
 		bean.setPAFNameAndLName(model.getPAFNameAndLName());
 		bean.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy());
 		bean.setPBFNameAndLName(model.getPBFNameAndLName());
+		bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
+		bean.setIitLongDesc(model.getIitLongDesc());
 		
 		return bean;
 	}
@@ -48,6 +51,8 @@ public class IclubCohortTrans {
 		model.setPAFNameAndLName(bean.getPAFNameAndLName());
 		model.setIclubPersonByCCrtdBy(bean.getIclubPersonByCCrtdBy());
 		model.setPBFNameAndLName(bean.getPBFNameAndLName());
+		model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
+		model.setIitLongDesc(bean.getIitLongDesc());
 		
 		return model;
 	}
@@ -70,11 +75,13 @@ public class IclubCohortTrans {
 		model.setPAFNameAndLName(bean.getIclubPersonByCPrimaryUserId() != null ? (bean.getIclubPersonByCPrimaryUserId()).getPFName() + " " + bean.getIclubPersonByCPrimaryUserId().getPLName() : null);
 		model.setIclubPersonByCCrtdBy(bean.getIclubPersonByCCrtdBy() != null ? (bean.getIclubPersonByCCrtdBy()).getPId() : null);
 		model.setPBFNameAndLName(bean.getIclubPersonByCCrtdBy() != null ? (bean.getIclubPersonByCCrtdBy()).getPFName() + " " + bean.getIclubPersonByCCrtdBy().getPLName() : null);
+		model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
+		model.setIitLongDesc(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitLongDesc() : null);
 		
 		return model;
 	}
 	
-	public static IclubCohort fromWStoORM(IclubCohortModel model, IclubPersonDAO iclubPersonDAO, IclubCohortTypeDAO iclubCohortTypeDAO) {
+	public static IclubCohort fromWStoORM(IclubCohortModel model, IclubPersonDAO iclubPersonDAO, IclubCohortTypeDAO iclubCohortTypeDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		
 		IclubCohort bean = new IclubCohort();
 		
@@ -87,6 +94,7 @@ public class IclubCohortTrans {
 		bean.setCCollectedContrib(model.getCCollectedContrib());
 		bean.setCCurMemberCnt(model.getCCurMemberCnt());
 		bean.setIclubCohortType(model.getIclubCohortType() != null ? iclubCohortTypeDAO.findById(model.getIclubCohortType()) : null);
+		bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
 		bean.setCCrtdDt(model.getCCrtdDt());
 		bean.setIclubPersonByCPrimaryUserId(model.getIclubPersonByCPrimaryUserId() != null ? iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()) : null);
 		bean.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()) : null);

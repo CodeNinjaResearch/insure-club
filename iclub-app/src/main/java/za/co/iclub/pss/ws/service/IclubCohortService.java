@@ -28,6 +28,7 @@ import za.co.iclub.pss.orm.bean.IclubPolicy;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.trans.IclubCohortTrans;
@@ -43,6 +44,7 @@ public class IclubCohortService {
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubCohortTypeDAO iclubCohortTypeDAO;
+	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	
 	@POST
 	@Path("/add")
@@ -52,7 +54,7 @@ public class IclubCohortService {
 	public ResponseModel add(IclubCohortModel model) {
 		try {
 			
-			IclubCohort iCC = IclubCohortTrans.fromWStoORM(model, iclubPersonDAO, iclubCohortTypeDAO);
+			IclubCohort iCC = IclubCohortTrans.fromWStoORM(model, iclubPersonDAO, iclubCohortTypeDAO, iclubInsuranceItemTypeDAO);
 			
 			iclubCohortDAO.save(iCC);
 			
@@ -83,7 +85,7 @@ public class IclubCohortService {
 		try {
 			
 			for (IclubCohortModel model : models) {
-				IclubCohort iCC = IclubCohortTrans.fromWStoORM(model, iclubPersonDAO, iclubCohortTypeDAO);
+				IclubCohort iCC = IclubCohortTrans.fromWStoORM(model, iclubPersonDAO, iclubCohortTypeDAO, iclubInsuranceItemTypeDAO);
 				iclubCohortDAO.save(iCC);
 				
 				LOGGER.info("Save Success with ID :: " + iCC.getCId());
@@ -112,7 +114,7 @@ public class IclubCohortService {
 	@Transactional
 	public ResponseModel mod(IclubCohortModel model) {
 		try {
-			IclubCohort iCC = IclubCohortTrans.fromWStoORM(model, iclubPersonDAO, iclubCohortTypeDAO);
+			IclubCohort iCC = IclubCohortTrans.fromWStoORM(model, iclubPersonDAO, iclubCohortTypeDAO, iclubInsuranceItemTypeDAO);
 			iclubCohortDAO.merge(iCC);
 			
 			LOGGER.info("Save Success with ID :: " + model.getCId());
@@ -203,7 +205,6 @@ public class IclubCohortService {
 			IclubCohort bean = iclubCohortDAO.findById(id);
 			
 			model = IclubCohortTrans.fromORMtoWS(bean);
-			
 			
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -388,6 +389,14 @@ public class IclubCohortService {
 	
 	public void setIclubCohortTypeDAO(IclubCohortTypeDAO iclubCohortTypeDAO) {
 		this.iclubCohortTypeDAO = iclubCohortTypeDAO;
+	}
+	
+	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
+		return iclubInsuranceItemTypeDAO;
+	}
+	
+	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
+		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
 	
 }

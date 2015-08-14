@@ -22,6 +22,8 @@ public class IclubCohortModel {
 	private Double CCollectedContrib;
 	private Integer CCurMemberCnt;
 	private Date CCrtdDt;
+	private Long iclubInsuranceItemType;
+	private String iitLongDesc;
 	
 	public String getCId() {
 		return CId;
@@ -141,6 +143,22 @@ public class IclubCohortModel {
 	
 	public void setCCrtdDt(Date cCrtdDt) {
 		CCrtdDt = cCrtdDt;
+	}
+	
+	public Long getIclubInsuranceItemType() {
+		return iclubInsuranceItemType;
+	}
+	
+	public void setIclubInsuranceItemType(Long iclubInsuranceItemType) {
+		this.iclubInsuranceItemType = iclubInsuranceItemType;
+	}
+	
+	public String getIitLongDesc() {
+		return iitLongDesc;
+	}
+	
+	public void setIitLongDesc(String iitLongDesc) {
+		this.iitLongDesc = iitLongDesc;
 	}
 	
 }

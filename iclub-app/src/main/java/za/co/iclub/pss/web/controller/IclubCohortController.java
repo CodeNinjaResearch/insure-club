@@ -40,6 +40,7 @@ import za.co.iclub.pss.model.ui.IclubCohortBean;
 import za.co.iclub.pss.model.ui.IclubCohortInviteBean;
 import za.co.iclub.pss.model.ui.IclubCohortSummaryBean;
 import za.co.iclub.pss.model.ui.IclubCohortTypeBean;
+import za.co.iclub.pss.model.ui.IclubInsuranceItemTypeBean;
 import za.co.iclub.pss.model.ui.IclubNotificationTypeBean;
 import za.co.iclub.pss.model.ui.IclubPersonBean;
 import za.co.iclub.pss.model.ui.OutLookContactsBean;
@@ -50,11 +51,13 @@ import za.co.iclub.pss.model.ws.IclubCohortInviteModel;
 import za.co.iclub.pss.model.ws.IclubCohortModel;
 import za.co.iclub.pss.model.ws.IclubCohortSummaryModel;
 import za.co.iclub.pss.model.ws.IclubCohortTypeModel;
+import za.co.iclub.pss.model.ws.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.model.ws.IclubNotificationTypeModel;
 import za.co.iclub.pss.model.ws.IclubPersonModel;
 import za.co.iclub.pss.trans.IclubCohortInviteTrans;
 import za.co.iclub.pss.trans.IclubCohortTrans;
 import za.co.iclub.pss.trans.IclubCohortTypeTrans;
+import za.co.iclub.pss.trans.IclubInsuranceItemTypeTrans;
 import za.co.iclub.pss.trans.IclubNotificationTypeTrans;
 import za.co.iclub.pss.trans.IclubPersonTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
@@ -82,6 +85,7 @@ public class IclubCohortController implements Serializable {
 	private static final String NFT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubNotificationTypeService/";
 	private static final String CI_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortInviteService/";
 	private static final String CHT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortTypeService/";
+	private static final String IIT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsuranceItemTypeService/";
 	private static final String P_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
 	private List<IclubCohortBean> beans;
 	private List<IclubCohortBean> dashBoardBeans;
@@ -92,6 +96,7 @@ public class IclubCohortController implements Serializable {
 	private List<IclubCohortInviteBean> cohortsInviteBeans;
 	private List<IclubCohortInviteBean> newCohortsInviteBeans;
 	private List<IclubNotificationTypeBean> iclubNotificationTypeBeans;
+	private List<IclubInsuranceItemTypeBean> iclubInsuranceItemTypeBeans;
 	
 	private IclubCohortBean bean;
 	private IclubCohortSummaryBean cohortSummaryBean;
@@ -328,8 +333,11 @@ public class IclubCohortController implements Serializable {
 						IclubWebHelper.addMessage(getLabelBundle().getString("cohortinvite") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 					}
 				} else {
-					IclubWebHelper.addMessage("Select one Row", FacesMessage.SEVERITY_INFO);
-					return "";
+					if (newInvites) {
+						return "userDashboard";
+					} else {
+						return "qq";
+					}
 				}
 				
 			}
@@ -986,6 +994,27 @@ public class IclubCohortController implements Serializable {
 	
 	public void setNewInvites(boolean newInvites) {
 		this.newInvites = newInvites;
+	}
+	
+	public List<IclubInsuranceItemTypeBean> getIclubInsuranceItemTypeBeans() {
+		
+		WebClient client = IclubWebHelper.createCustomClient(IIT_BASE_URL + "list");
+		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
+		client.close();
+		iclubInsuranceItemTypeBeans = new ArrayList<IclubInsuranceItemTypeBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubInsuranceItemTypeModel model : models) {
+				
+				IclubInsuranceItemTypeBean bean = IclubInsuranceItemTypeTrans.fromWStoUI(model);
+				
+				iclubInsuranceItemTypeBeans.add(bean);
+			}
+		}
+		return iclubInsuranceItemTypeBeans;
+	}
+	
+	public void setIclubInsuranceItemTypeBeans(List<IclubInsuranceItemTypeBean> iclubInsuranceItemTypeBeans) {
+		this.iclubInsuranceItemTypeBeans = iclubInsuranceItemTypeBeans;
 	}
 	
 }

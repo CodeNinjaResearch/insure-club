@@ -45,7 +45,7 @@
 				<p:menuitem id="sm_sentinel" value="Sentinel" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('sentinel')}" />
 			</p:submenu>
 			<p:menuitem id="sm_qq" value="Quick Quote" outcome="qq" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
-			<p:menuitem id="sm_nci" value="Invite New Cohorts" containerStyleClass="layout-menubar-active" action="#{iclubLoginController.newCohortInviteAction}" oncomplete="PF('newInviteDialog').show();" rendered="#{iclubMenuController.userMenu}" />
+			<p:menuitem id="sm_nci" value="My Cohorts" containerStyleClass="layout-menubar-active" action="#{iclubLoginController.newCohortInviteAction}" oncomplete="PF('newInviteDialog').show();" rendered="#{iclubMenuController.userMenu}" />
 		</ps:menu>
 	</div>
 </ui:composition>

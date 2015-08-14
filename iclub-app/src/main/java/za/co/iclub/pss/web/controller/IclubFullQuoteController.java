@@ -1207,6 +1207,24 @@ public class IclubFullQuoteController implements Serializable {
 		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
 		 */
 		
+		if (driverBean != null && driverBean.getDDob() != null && driverBean.getDIssueDt() != null) {
+			if (IclubWebHelper.isCurrentDate(driverBean.getDDob().getTime())) {
+				IclubWebHelper.addMessage(("DOB less than current date"), FacesMessage.SEVERITY_ERROR);
+			} else if (driverBean.getDDob().getTime() <= driverBean.getDIssueDt().getTime()) {
+				IclubWebHelper.addMessage(("DOB less than Issue date"), FacesMessage.SEVERITY_ERROR);
+			}
+		}
+		
+		if (accountBean.getAAccNum() == null || accountBean.getAAccNum().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please enter account number"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		
+		if (debitDate == null || debitDate.trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please select debit date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		
 		if (vehicleBeans == null || vehicleBeans.size() == 0) {
 			IclubWebHelper.addMessage("Add atleast one vehicle", FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
@@ -1395,7 +1413,7 @@ public class IclubFullQuoteController implements Serializable {
 		bean.setQCrtdDt(new Date(System.currentTimeMillis()));
 		bean.setQIsMatched("N");
 		bean.setQPrevPremium(0.0d);
-		bean.setQValidUntil(new Date(System.currentTimeMillis() + (31 * 24 * 3600)));
+		bean.setQValidUntil(new Date(new Date(System.currentTimeMillis() + (1000 * 24 * 3600 * 24)).getTime() + (1000 * 24 * 3600 * 6)));
 		bean.setQMobile(personModel.getPMobile());
 		bean.setQEmail(personModel.getPEmail());
 		bean.setQGenPremium(getGenPremium());

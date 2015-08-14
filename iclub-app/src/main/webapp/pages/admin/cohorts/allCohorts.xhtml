@@ -4,21 +4,22 @@
 			<h:inputHidden value="#{iclubCohortController.key}" />
 			<p:panel id="pnlCohortContDet">
 				<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedBeans}" rowKey="#{bean.CId}" value="#{iclubCohortController.beans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Available">
+					<!--  Cover Type  /number of Members/Logo Display -->
 					<p:column rendered="#{!iclubCohortController.showCreateCont}" selectionMode="multiple" style="width:16px;text-align:center">
+					</p:column>
+					<p:column headerText="Cohort Name">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CName}" />
 					</p:column>
 					<p:column headerText="Email">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CEmail}" />
 					</p:column>
-					<p:column headerText="Name">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CName}" />
-					</p:column>
-					<p:column headerText="Created Date">
+					<p:column headerText="Cohort Anniversary">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
 					</p:column>
 					<p:column headerText="Type">
-						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubCohortType}">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
 							<f:selectItem itemLabel="Type" itemDisabled="true" />
-							<f:selectItems value="#{iclubCohortController.cohortTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
+							<f:selectItems value="#{iclubCohortController.iclubInsuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 						</p:selectOneMenu>
 					</p:column>
 					<f:facet name="footer">
@@ -68,7 +69,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Finalize Date :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar styleClass="TexAlCenter" placeholder="Finalized Date" value="#{iclubCohortController.bean.CFinalizeDt}"  navigator="true" yearRange="c-100:c" showOn="button" />
+							<p:calendar styleClass="TexAlCenter" placeholder="Finalized Date" value="#{iclubCohortController.bean.CFinalizeDt}" navigator="true" yearRange="c-100:c" showOn="button" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -86,7 +87,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Init Date :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:calendar styleClass="TexAlCenter" placeholder="Member Contribution" value="#{iclubCohortController.bean.CInitDt}" />
+							<p:calendar styleClass="TexAlCenter" navigator="true" yearRange="c-100:c" showOn="button" placeholder="Initial Date" value="#{iclubCohortController.bean.CInitDt}" />
 						</div>
 					</div>
 					<div class="EmptyBox5" />
@@ -95,9 +96,9 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Type :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.bean.iclubCohortType}">
+							<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.bean.iclubInsuranceItemType}">
 								<f:selectItem itemLabel="Type" itemDisabled="true" />
-								<f:selectItems value="#{iclubCohortController.cohortTypeBeans}" var="c" itemLabel="#{c.ctLongDesc}" itemValue="#{c.ctId}" />
+								<f:selectItems value="#{iclubCohortController.iclubInsuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
