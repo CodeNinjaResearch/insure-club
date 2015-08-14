@@ -1225,11 +1225,19 @@ public class IclubQuickQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Issue Date Should be less than Current Date"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		String idValidate = IclubWebHelper.validateId(bean.getPIdNum(), bean.getPGender());
-		if (idValidate != null && !idValidate.trim().equalsIgnoreCase("")) {
-			
-			IclubWebHelper.addMessage(idValidate, FacesMessage.SEVERITY_ERROR);
+		if (bean.getIclubIdType() == null) {
+			IclubWebHelper.addMessage(("Please Select IdType"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
+		}
+		
+		else if (bean.getIclubIdType() == 4 || bean.getIclubIdType() == 1) {
+			String idValidate = IclubWebHelper.validateId(bean.getPIdNum(), bean.getPGender());
+			if (idValidate != null && !idValidate.trim().equalsIgnoreCase("")) {
+				
+				IclubWebHelper.addMessage(idValidate, FacesMessage.SEVERITY_ERROR);
+				ret = ret && false;
+			}
+			
 		}
 		
 		return ret;
@@ -1565,6 +1573,11 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public boolean validateForm(boolean flag, boolean loginFlag) {
 		boolean ret = true;
+		
+		if (vehicleBeans == null || vehicleBeans.size() == 0) {
+			IclubWebHelper.addMessage("Add atleast one vehicle", FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
 		
 		if (loginFlag && (personBean.getPFName() == null || personBean.getPFName().trim().equalsIgnoreCase(""))) {
 			

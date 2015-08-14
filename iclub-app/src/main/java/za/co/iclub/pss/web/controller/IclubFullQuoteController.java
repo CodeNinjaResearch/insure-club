@@ -587,7 +587,7 @@ public class IclubFullQuoteController implements Serializable {
 				
 				vehicleBean.setVCrtdDt(new Date(System.currentTimeMillis()));
 				vehicleBean.setIclubPerson(getSessionUserId());
-				
+				vehicleBean.setUpdated(true);
 				IclubWebHelper.addMessage(getLabelBundle().getString("vehicle") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 				clearVehForm();
 				
@@ -1206,6 +1206,21 @@ public class IclubFullQuoteController implements Serializable {
 		 * IclubWebHelper.addMessage(("RegNum Cannot be empty"),
 		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
 		 */
+		
+		if (vehicleBeans == null || vehicleBeans.size() == 0) {
+			IclubWebHelper.addMessage("Add atleast one vehicle", FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else {
+			
+			for (IclubVehicleBean bean : vehicleBeans) {
+				if (!bean.isUpdated()) {
+					IclubWebHelper.addMessage("Please upate all vehicle", FacesMessage.SEVERITY_ERROR);
+					ret = ret && false;
+					break;
+				}
+			}
+			
+		}
 		
 		return ret;
 	}

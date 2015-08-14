@@ -44,6 +44,7 @@ public class IclubVehicleBean {
 	private String VModifiedYn;
 	private Long iclubCoverType;
 	private String ctLongDesc;
+	private boolean updated;
 	
 	public String getVId() {
 		return VId;
@@ -363,6 +364,14 @@ public class IclubVehicleBean {
 	
 	public void setSdSerNum(String sdSerNum) {
 		this.sdSerNum = sdSerNum;
+	}
+	
+	public boolean isUpdated() {
+		return updated;
+	}
+	
+	public void setUpdated(boolean updated) {
+		this.updated = updated;
 	}
 	
 }
