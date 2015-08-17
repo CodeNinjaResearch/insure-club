@@ -5,7 +5,8 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
 	display: none;
 }
 </style>
@@ -13,7 +14,7 @@
 	<ui:define name="content">
 		<p:dialog id="perLocationDetailsDialog" widgetVar="perLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">Location Details</f:facet>
-			<p:panel> 
+			<p:panel>
 				<h3 style="margin-top: 0">Geocode</h3>
 				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
 					<p:outputLabel for="perAddress" value="Address:" />
@@ -302,6 +303,18 @@
 							<p:inputText styleClass="TexAlCenter" placeholder="Current Premium" value="#{iclubQuickQuoteController.quoteBean.QPrevPremium}">
 								<f:convertNumber pattern="#0.00" />
 							</p:inputText>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Previous Insurer :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu value="#{iclubQuickQuoteController.quoteBean.iclubInsurerMaster}" widgetVar="mnuViewIM" id="mnuViewIm" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Previous Insurer" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.imName}" itemValue="#{c.imId}" value="#{iclubQuickQuoteController.insurerMasterBeans}" />
+							</p:selectOneMenu>
 						</div>
 					</div>
 					<div class="EmptyBox5" />

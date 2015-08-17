@@ -10,11 +10,6 @@
 					<p:column headerText="Generation Date">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QGenDt}" />
 					</p:column>
-					<p:column headerText=" Prev Premium">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QPrevPremium}">
-							<f:convertNumber pattern="#0.00" />
-						</p:outputLabel>
-					</p:column>
 					<p:column headerText="ValidUntil">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QValidUntil}" />
 					</p:column>
@@ -28,12 +23,12 @@
 							<f:convertNumber pattern="#0.00" />
 						</p:outputLabel>
 					</p:column>
-					<p:column headerText="Previous Insurer">
+					<!-- <p:column headerText="Previous Insurer">
 						<p:selectOneMenu disabled="true" value="#{bean.iclubInsurerMaster}" widgetVar="mnuViewIM" id="mnuViewIm" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
 							<f:selectItem itemLabel="Status" itemDisabled="true" />
 							<f:selectItems var="c" itemLabel="#{c.imName}" itemValue="#{c.imId}" value="#{iclubViewQuoteController.insurerMasterBeans}" />
 						</p:selectOneMenu>
-					</p:column>
+					</p:column> -->
 					<p:column headerText="Email">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.QEmail}" />
 					</p:column>

@@ -5,7 +5,8 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
 	display: none;
 }
 </style>
@@ -313,6 +314,29 @@
 							<p:selectOneMenu widgetVar="mnuLc" styleClass="with-placeholder TexAlCenter " panelStyleClass="hide-disabled" onchange="mnuLc.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.driverBean.iclubLicenseCode}">
 								<f:selectItem itemLabel="License Code" itemDisabled="true" />
 								<f:selectItems value="#{iclubFullQuoteController.licenseCodeBeans}" var="c" itemValue="#{c.lcId}" itemLabel="#{c.lcDesc}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Current Premium :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" placeholder="Current Premium" value="#{iclubFullQuoteController.quoteBean.QPrevPremium}">
+								<f:convertNumber pattern="#0.00" />
+							</p:outputLabel>
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Previous Insurer :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:selectOneMenu disabled="true" value="#{iclubFullQuoteController.quoteBean.iclubInsurerMaster}" widgetVar="mnuViewIM" id="mnuViewIm" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+								<f:selectItem itemLabel="Previous Insurer" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.imName}" itemValue="#{c.imId}" value="#{iclubFullQuoteController.insurerMasterBeans}" />
 							</p:selectOneMenu>
 						</div>
 					</div>
