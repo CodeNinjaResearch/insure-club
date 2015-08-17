@@ -26,6 +26,7 @@ public class ScheduledJob extends QuartzJobBean {
 				List<IclubCohortInvite> cohorsInviteList = iclubNamedQueryDAO.getIclubCohortInvitesByNotSentStatus();
 				
 				if (cohorsInviteList != null && cohorsInviteList.size() > 0) {
+					System.out.println(cohorsInviteList.get(0).getIclubPerson());
 					cohorsInviteList = MailSender.sendMail(cohorsInviteList);
 					
 					for (IclubCohortInvite inviteBean : cohorsInviteList) {

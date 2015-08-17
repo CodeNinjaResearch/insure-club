@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -1266,13 +1267,21 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List getIclubCohortInvitesByNotSentStatus() {
 		log.debug("finding IclubCohortInvite   by Not  Sent Status");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubCohortInviteByNotSentStatus");
 			
-			List object = queryObject.list();
-			return object;
+			List<IclubCohortInvite> cohorsInviteList = queryObject.list();
+			
+			if (cohorsInviteList != null && cohorsInviteList.size() > 0) {
+				for (IclubCohortInvite bean : cohorsInviteList) {
+					Hibernate.initialize(bean.getIclubPerson());
+				}
+			}
+			
+			return cohorsInviteList;
 		} catch (RuntimeException re) {
 			log.error("get IclubCohortInvite  ", re);
 			throw re;

@@ -19,7 +19,8 @@ public class MailSender implements Serializable {
 	
 	private static final long serialVersionUID = -4232011314128276763L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-//	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
+	// private static final ResourceBundle Y_BUNDLE =
+	// ResourceBundle.getBundle("yahoo-web");
 	private static final String username = BUNDLE.getString("mail.google.username");
 	private static final String password = BUNDLE.getString("mail.google.password");
 	private static Properties props;
@@ -54,14 +55,20 @@ public class MailSender implements Serializable {
 					message.setSubject("Test Mail From Insurance Club");
 					StringBuilder mailstring = new StringBuilder();
 					mailstring.append("<table>");
-					mailstring.append("<tr><td><font face='verdana' size=2>Dear <b> Guest" + "," + "</b></font></td></tr>");
-					mailstring.append("<tr><td><font face='verdana' size=2><br />Please click bealow link to register</b></font></td></tr>");
+					mailstring.append("<tr><td><font face='verdana' size=2>Hi" + "," + "</font></td></tr>");
+					mailstring.append("<tr><td><font face='verdana' size=2><br />I have created my own Insurance Club</font></td></tr>");
+					mailstring.append("<tr><td><font face='verdana' size=2><br />We all pool our premiums into one big kitty and, what’s left after claims has been paid is ours.</font></td></tr>");
+					mailstring.append("<tr><td><font face='verdana' size=2><br />It fantastic, if you interested please click on the below link, register and Search for my Clubs name</font></td></tr>");
 					
 					if (bean.getCiInviteUri().split("@")[1].toString().contains("gmail")) {
 						mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "google&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
 					} else if (bean.getCiInviteUri().split("@")[1].toString().contains("yahoo")) {
 						mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "yahoo&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
 					}
+					
+					mailstring.append("<tr><td><font face='verdana' size=2>Kind Regards</font></td></tr>");
+					mailstring.append("<tr><td><font face='verdana' size=2>" + bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() + "</font></td></tr>");
+					
 					mailstring.append("</table>");
 					message.setContent(mailstring.toString(), "text/html; charset=utf-8");
 					
