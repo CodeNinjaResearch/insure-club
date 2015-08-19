@@ -1,0 +1,20 @@
+#MyEclipse Hibernate Properties
+#Thu May 28 09:19:38 SAST 2015
+genBasicCompId=true
+sessionFactoryName=
+profile=
+daoSFId=sessionFactory
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=src/main/resources/iclubORMContext.xml
+useJavaTypes=true
+keyGenerator=
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=true
+reSettingsFile=
+configFile=/iclub-app/src/main/resources/iclubORMContext.xml
+createConfigFile=true

@@ -45,7 +45,6 @@
 			<from-outcome>login-spark</from-outcome>
 			<to-view-id>/templates/login-spark.xhtml</to-view-id>
 		</navigation-case>
-		<redirect>true</redirect>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
