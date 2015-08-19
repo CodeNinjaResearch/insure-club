@@ -1,0 +1,19 @@
+<ui:composition template="/templates/layout#{themeView.theme}.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel id="pnlCohortContDet">
+				<div class="Container90 Fnone MarAuto TexAlCenter">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="De Register From Cohort :" />
+					</div>
+					<div class="Container20 Responsive">
+						<p:commandLink styleClass="TexAlCenter" ajax="false" value="Yes" action="#{iclubCohortController.deRegisterCohort}" />
+					</div>
+					<div class="Container20 Responsive">
+						<p:commandLink styleClass="TexAlCenter" value="No" ajax="false" action="userDashboard" />
+					</div>
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

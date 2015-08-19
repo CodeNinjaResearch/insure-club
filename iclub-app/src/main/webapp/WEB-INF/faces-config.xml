@@ -139,6 +139,17 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>deRegister</from-outcome>
+			<to-view-id>/pages/admin/cohorts/deRegisterCohort.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>

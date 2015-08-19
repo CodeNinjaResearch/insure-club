@@ -123,6 +123,7 @@ public class IclubCohortController implements Serializable {
 	private List<IclubCohortInviteBean> adminCohortInviteBeans;
 	private List<IclubCohortInviteBean> selecteAdminCohortInviteBeans;
 	private List<IclubInviteStatusBean> inviteStatusBeans;
+	private boolean deRegister;
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -266,8 +267,12 @@ public class IclubCohortController implements Serializable {
 							IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 							viewParam = 1l;
 							showView();
-							
-							return "cohortInvites.xhtml?faces-redirect=true";
+							if (!deRegister) {
+								return "cohortInvites.xhtml?faces-redirect=true";
+							} else {
+								deRegister = false;
+								return "userDashboard";
+							}
 						} else {
 							IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 						}
@@ -315,7 +320,12 @@ public class IclubCohortController implements Serializable {
 						IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 						showView();
 						
-						return "cohortInvites.xhtml?face-redirect=true";
+						if (!deRegister) {
+							return "cohortInvites.xhtml?face-redirect=true";
+						} else {
+							deRegister = false;
+							return "userDashboard";
+						}
 					} else {
 						IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 					}
@@ -382,6 +392,33 @@ public class IclubCohortController implements Serializable {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage(getLabelBundle().getString("cohortinvite") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
+		return "";
+	}
+	
+	public String deRegisterCohort() {
+		
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: deRegisterCohort");
+		try {
+			WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + getSessionUserId());
+			IclubPersonModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
+			
+			model.setIclubCohort(null);
+			client = IclubWebHelper.createCustomClient(P_BASE_URL + "mod");
+			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
+			if (response.getStatusCode() == 0) {
+				IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				viewParam = 1l;
+				showView();
+				deRegister = true;
+				return "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true";
+			} else {
+				IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		
 		return "";
 	}
 	
@@ -628,7 +665,7 @@ public class IclubCohortController implements Serializable {
 				for (ContactEntry entry : resultFeed.getEntries()) {
 					IclubCohortInviteBean bean = new IclubCohortInviteBean();
 					bean.setCiId(UUID.randomUUID().toString());
-					bean.setCiInviteFName(entry.getName().getFullName().getValue());
+					// bean.setCiInviteFName(entry.getName().getFullName().getValue());
 					for (Email email : entry.getEmailAddresses()) {
 						if (email.getAddress() != null) {
 							bean.setCiInviteUri(email.getAddress());
@@ -1143,6 +1180,14 @@ public class IclubCohortController implements Serializable {
 	
 	public void setSelecteAdminCohortInviteBeans(List<IclubCohortInviteBean> selecteAdminCohortInviteBeans) {
 		this.selecteAdminCohortInviteBeans = selecteAdminCohortInviteBeans;
+	}
+	
+	public boolean isDeRegister() {
+		return deRegister;
+	}
+	
+	public void setDeRegister(boolean deRegister) {
+		this.deRegister = deRegister;
 	}
 	
 }
