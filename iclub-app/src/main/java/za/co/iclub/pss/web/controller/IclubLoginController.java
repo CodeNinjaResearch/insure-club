@@ -291,7 +291,7 @@ public class IclubLoginController implements Serializable {
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
 						
-						return "userDashboard";
+						return "/pages/dashboard/user/main.xhtml?faces-redirect=true";
 						
 					} else {
 						IclubWebHelper.addMessage("Person Profile Fetch Error - Contact Admin", FacesMessage.SEVERITY_ERROR);
@@ -350,7 +350,7 @@ public class IclubLoginController implements Serializable {
 			String outputString = EntityUtils.toString(response1.getEntity());
 			System.out.println(outputString);
 		} catch (Exception e) {
-			 
+			
 		}
 		
 	}

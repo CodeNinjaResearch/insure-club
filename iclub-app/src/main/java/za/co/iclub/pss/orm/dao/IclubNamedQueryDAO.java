@@ -1084,6 +1084,25 @@ public class IclubNamedQueryDAO {
 		
 	}
 	
+	public List getIclubCohortInvitesByinviteStatusIds(List<Long> statusList, String userId) {
+		log.debug("finding IclubCohortInvite  instances by getIclubCohortInvitesByinviteStatusIds");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubCohortInvite.class);
+			criteria.createAlias("iclubInviteStatus", "inviteStatus");
+			criteria.createAlias("iclubCohort", "cohort");
+			criteria.createAlias("cohort.iclubPersonByCAdminId", "person");
+			criteria.add(Restrictions.eq("person.PId", userId));
+			criteria.add(Restrictions.in("inviteStatus.isId", statusList));
+			
+			List paymentList = criteria.list();
+			return paymentList;
+		} catch (RuntimeException re) {
+			log.error("getIclubCohortInvitesByinviteStatusIds failed", re);
+			throw re;
+		}
+		
+	}
+	
 	public List getIclubPropertyItemByProperty(String propertyId) {
 		log.debug("finding IclubPropertyItem  instance by ProeprtyItemStatus");
 		try {

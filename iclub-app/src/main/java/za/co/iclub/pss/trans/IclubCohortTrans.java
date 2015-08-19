@@ -29,6 +29,8 @@ public class IclubCohortTrans {
 		bean.setPBFNameAndLName(model.getPBFNameAndLName());
 		bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType());
 		bean.setIitLongDesc(model.getIitLongDesc());
+		bean.setIclubPersonByAdminId(model.getIclubPersonByAdminId());
+		bean.setPCFNameAndLName(model.getPCFNameAndLName());
 		
 		return bean;
 	}
@@ -53,6 +55,8 @@ public class IclubCohortTrans {
 		model.setPBFNameAndLName(bean.getPBFNameAndLName());
 		model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType());
 		model.setIitLongDesc(bean.getIitLongDesc());
+		model.setIclubPersonByAdminId(bean.getIclubPersonByAdminId());
+		model.setPCFNameAndLName(bean.getPCFNameAndLName());
 		
 		return model;
 	}
@@ -77,6 +81,8 @@ public class IclubCohortTrans {
 		model.setPBFNameAndLName(bean.getIclubPersonByCCrtdBy() != null ? (bean.getIclubPersonByCCrtdBy()).getPFName() + " " + bean.getIclubPersonByCCrtdBy().getPLName() : null);
 		model.setIclubInsuranceItemType(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitId() : null);
 		model.setIitLongDesc(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitLongDesc() : null);
+		model.setIclubPersonByAdminId(bean.getIclubPersonByCAdminId() != null ? bean.getIclubPersonByCAdminId().getPId() : null);
+		model.setPCFNameAndLName(bean.getIclubPersonByCAdminId() != null ? bean.getIclubPersonByCAdminId().getPFName() + " " + bean.getIclubPersonByCAdminId().getPLName() : null);
 		
 		return model;
 	}
@@ -98,6 +104,7 @@ public class IclubCohortTrans {
 		bean.setCCrtdDt(model.getCCrtdDt());
 		bean.setIclubPersonByCPrimaryUserId(model.getIclubPersonByCPrimaryUserId() != null ? iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()) : null);
 		bean.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()) : null);
+		bean.setIclubPersonByCAdminId(model.getIclubPersonByAdminId() != null ? iclubPersonDAO.findById(model.getIclubPersonByAdminId()) : null);
 		
 		return bean;
 	}

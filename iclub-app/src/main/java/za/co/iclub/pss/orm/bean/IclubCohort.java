@@ -31,6 +31,7 @@ public class IclubCohort implements java.io.Serializable {
 	private String CId;
 	private IclubPerson iclubPersonByCPrimaryUserId;
 	private IclubPerson iclubPersonByCCrtdBy;
+	private IclubPerson iclubPersonByCAdminId;
 	private IclubCohortType iclubCohortType;
 	private String CName;
 	private String CEmail;
@@ -40,6 +41,7 @@ public class IclubCohort implements java.io.Serializable {
 	private Double CCollectedContrib;
 	private Integer CCurMemberCnt;
 	private Date CCrtdDt;
+	
 	private Set<IclubPerson> iclubPersons = new HashSet<IclubPerson>(0);
 	private Set<IclubCohortClaim> iclubCohortClaims = new HashSet<IclubCohortClaim>(0);
 	private Set<IclubCohortInvite> iclubCohortInvites = new HashSet<IclubCohortInvite>(0);
@@ -58,11 +60,12 @@ public class IclubCohort implements java.io.Serializable {
 	}
 	
 	/** full constructor */
-	public IclubCohort(String CId, IclubPerson iclubPersonByCPrimaryUserId, IclubPerson iclubPersonByCCrtdBy, IclubCohortType iclubCohortType, String CName, String CEmail, Date CInitDt, Date CFinalizeDt, Double CTotalContrib, Double CCollectedContrib, Integer CCurMemberCnt, Date CCrtdDt, Set<IclubPerson> iclubPersons, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubCohortInvite> iclubCohortInvites, Set<IclubCohortPerson> iclubCohortPersons) {
+	public IclubCohort(String CId, IclubPerson iclubPersonByCPrimaryUserId, IclubPerson iclubPersonByCCrtdBy, IclubPerson iclubPersonByCAdminId, IclubCohortType iclubCohortType, String CName, String CEmail, Date CInitDt, Date CFinalizeDt, Double CTotalContrib, Double CCollectedContrib, Integer CCurMemberCnt, Date CCrtdDt, Set<IclubPerson> iclubPersons, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubCohortInvite> iclubCohortInvites, Set<IclubCohortPerson> iclubCohortPersons) {
 		this.CId = CId;
 		this.iclubPersonByCPrimaryUserId = iclubPersonByCPrimaryUserId;
 		this.iclubPersonByCCrtdBy = iclubPersonByCCrtdBy;
 		this.iclubCohortType = iclubCohortType;
+		this.iclubPersonByCAdminId = iclubPersonByCAdminId;
 		this.CName = CName;
 		this.CEmail = CEmail;
 		this.CInitDt = CInitDt;
@@ -106,6 +109,16 @@ public class IclubCohort implements java.io.Serializable {
 	
 	public void setIclubPersonByCCrtdBy(IclubPerson iclubPersonByCCrtdBy) {
 		this.iclubPersonByCCrtdBy = iclubPersonByCCrtdBy;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "c_admin_id")
+	public IclubPerson getIclubPersonByCAdminId() {
+		return iclubPersonByCAdminId;
+	}
+	
+	public void setIclubPersonByCAdminId(IclubPerson iclubPersonByCAdminId) {
+		this.iclubPersonByCAdminId = iclubPersonByCAdminId;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -98,6 +98,7 @@
 			<ref bean="IclubQuickQuoteService" />
 			<ref bean="IclubFullQuoteService" />
 			<ref bean="IclubUserDashboardService" />
+			<ref bean="IclubInviteStatusService" />
 
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>

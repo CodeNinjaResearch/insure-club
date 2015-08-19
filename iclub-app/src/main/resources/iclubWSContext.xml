@@ -520,6 +520,7 @@
 		<property name="iclubNotificationTypeDAO" ref="IclubNotificationTypeDAO" />
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubInviteStatusDAO" ref="IclubInviteStatusDAO" />
 	</bean>
 	<bean id="IclubUserDashboardService" class="za.co.iclub.pss.ws.service.IclubUserDashboardService">
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
@@ -592,10 +593,13 @@
 		<property name="iclubPolicyStatusDAO" ref="IclubPolicyStatusDAO"></property>
 		<property name="iclubBankMasterDAO" ref="IclubBankMasterDAO"></property>
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
-
-
 	</bean>
 
+	<bean id="IclubInviteStatusService" class="za.co.iclub.pss.ws.service.IclubInviteStatusService">
+		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
+		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
+		<property name="iclubInviteStatusDAO" ref="IclubInviteStatusDAO" />
+	</bean>
 
 
 	<!-- For times when you need more complex processing, passing data to the scheduled job -->

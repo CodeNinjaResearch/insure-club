@@ -9,6 +9,7 @@ public class IclubCohortInviteModel {
 	
 	private String ciId;
 	private String iclubCohort;
+	private String CName;
 	private String CEmail;
 	private String iclubPerson;
 	private String PFNameAndLName;
@@ -20,6 +21,8 @@ public class IclubCohortInviteModel {
 	private String ciInviteFName;
 	private String ciInviteLName;
 	private String ciInviteSentStatus;
+	private Long iclubInviteStatus;
+	private String isLongDesc;
 	
 	public String getCiId() {
 		return ciId;
@@ -123,5 +126,29 @@ public class IclubCohortInviteModel {
 	
 	public void setCiInviteSentStatus(String ciInviteSentStatus) {
 		this.ciInviteSentStatus = ciInviteSentStatus;
+	}
+	
+	public Long getIclubInviteStatus() {
+		return iclubInviteStatus;
+	}
+	
+	public void setIclubInviteStatus(Long iclubInviteStatus) {
+		this.iclubInviteStatus = iclubInviteStatus;
+	}
+	
+	public String getIsLongDesc() {
+		return isLongDesc;
+	}
+	
+	public void setIsLongDesc(String isLongDesc) {
+		this.isLongDesc = isLongDesc;
+	}
+	
+	public String getCName() {
+		return CName;
+	}
+	
+	public void setCName(String cName) {
+		CName = cName;
 	}
 }

@@ -23,6 +23,7 @@ import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
+import za.co.iclub.pss.orm.dao.IclubInviteStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -34,12 +35,13 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 public class IclubCohortInviteService {
 	
 	private static final Logger LOGGER = Logger.getLogger(IclubCohortInviteService.class);
-	private IclubCohortInviteDAO IclubCohortInviteDAO;
+	private IclubCohortInviteDAO iclubCohortInviteDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubCohortDAO iclubCohortDAO;
 	private IclubNotificationTypeDAO iclubNotificationTypeDAO;
+	private IclubInviteStatusDAO iclubInviteStatusDAO;
 	
 	@POST
 	@Path("/add")
@@ -49,8 +51,8 @@ public class IclubCohortInviteService {
 	public ResponseModel add(IclubCohortInviteModel model) {
 		try {
 			
-			IclubCohortInvite iCC = IclubCohortInviteTrans.fromWStoORM(model, iclubNotificationTypeDAO, iclubCohortDAO, iclubPersonDAO);
-			IclubCohortInviteDAO.save(iCC);
+			IclubCohortInvite iCC = IclubCohortInviteTrans.fromWStoORM(model, iclubNotificationTypeDAO, iclubCohortDAO, iclubPersonDAO, iclubInviteStatusDAO);
+			iclubCohortInviteDAO.save(iCC);
 			
 			LOGGER.info("Save Success with ID :: " + iCC.getCiId());
 			
@@ -80,10 +82,42 @@ public class IclubCohortInviteService {
 			
 			for (IclubCohortInviteModel model : models) {
 				
-				IclubCohortInvite iCC = IclubCohortInviteTrans.fromWStoORM(model, iclubNotificationTypeDAO, iclubCohortDAO, iclubPersonDAO);
-				IclubCohortInviteDAO.save(iCC);
+				IclubCohortInvite iCC = IclubCohortInviteTrans.fromWStoORM(model, iclubNotificationTypeDAO, iclubCohortDAO, iclubPersonDAO, iclubInviteStatusDAO);
+				iclubCohortInviteDAO.save(iCC);
 				
 				LOGGER.info("Save Success with ID :: " + iCC.getCiId());
+			}
+			
+			ResponseModel message = new ResponseModel();
+			
+			message.setStatusCode(0);
+			message.setStatusDesc("Success");
+			
+			return message;
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			ResponseModel message = new ResponseModel();
+			message.setStatusCode(1);
+			message.setStatusDesc(e.getMessage());
+			return message;
+		}
+		
+	}
+	
+	@POST
+	@Path("/modList")
+	@Consumes("application/json")
+	@Produces("application/json")
+	@Transactional
+	public ResponseModel modList(Collection<? extends IclubCohortInviteModel> models) {
+		try {
+			
+			for (IclubCohortInviteModel model : models) {
+				
+				IclubCohortInvite iCC = IclubCohortInviteTrans.fromWStoORM(model, iclubNotificationTypeDAO, iclubCohortDAO, iclubPersonDAO, iclubInviteStatusDAO);
+				iclubCohortInviteDAO.merge(iCC);
+				
+				LOGGER.info("Save Success with ID :: " + model.getCiId());
 			}
 			
 			ResponseModel message = new ResponseModel();
@@ -109,9 +143,9 @@ public class IclubCohortInviteService {
 	@Transactional
 	public ResponseModel mod(IclubCohortInviteModel model) {
 		try {
-			IclubCohortInvite iCC = IclubCohortInviteTrans.fromWStoORM(model, iclubNotificationTypeDAO, iclubCohortDAO, iclubPersonDAO);
+			IclubCohortInvite iCC = IclubCohortInviteTrans.fromWStoORM(model, iclubNotificationTypeDAO, iclubCohortDAO, iclubPersonDAO, iclubInviteStatusDAO);
 			
-			IclubCohortInviteDAO.merge(iCC);
+			iclubCohortInviteDAO.merge(iCC);
 			
 			LOGGER.info("Save Success with ID :: " + model.getCiId());
 			
@@ -136,7 +170,7 @@ public class IclubCohortInviteService {
 	@Transactional
 	public Response del(@PathParam("id") String id) {
 		try {
-			IclubCohortInviteDAO.delete(IclubCohortInviteDAO.findById(id));
+			iclubCohortInviteDAO.delete(iclubCohortInviteDAO.findById(id));
 			return Response.ok().build();
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -152,7 +186,34 @@ public class IclubCohortInviteService {
 		List<T> ret = new ArrayList<T>();
 		
 		try {
-			List batmod = IclubCohortInviteDAO.findAll();
+			List batmod = iclubCohortInviteDAO.findAll();
+			if (batmod != null && batmod.size() > 0) {
+				for (Object object : batmod) {
+					IclubCohortInvite bean = (IclubCohortInvite) object;
+					IclubCohortInviteModel iCC = IclubCohortInviteTrans.fromORMtoWS(bean);
+					
+					ret.add((T) iCC);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+		}
+		
+		return ret;
+	}
+	
+	@GET
+	@Path("/admin/list/{user}")
+	@Produces("application/json")
+	@Transactional
+	public <T extends IclubCohortInviteModel> List<T> adminList(@PathParam("user") String user) {
+		List<T> ret = new ArrayList<T>();
+		
+		try {
+			List<Long> inviteIds = new ArrayList<Long>(2);
+			inviteIds.add(1l);
+			inviteIds.add(2l);
+			List batmod = iclubNamedQueryDAO.getIclubCohortInvitesByinviteStatusIds(inviteIds, user);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubCohortInvite bean = (IclubCohortInvite) object;
@@ -218,7 +279,7 @@ public class IclubCohortInviteService {
 	public IclubCohortInviteModel getById(@PathParam("id") String id) {
 		IclubCohortInviteModel model = new IclubCohortInviteModel();
 		try {
-			IclubCohortInvite bean = IclubCohortInviteDAO.findById(id);
+			IclubCohortInvite bean = iclubCohortInviteDAO.findById(id);
 			
 			model = IclubCohortInviteTrans.fromORMtoWS(bean);
 			
@@ -229,11 +290,11 @@ public class IclubCohortInviteService {
 	}
 	
 	public IclubCohortInviteDAO getIclubCohortInviteDAO() {
-		return IclubCohortInviteDAO;
+		return iclubCohortInviteDAO;
 	}
 	
-	public void setIclubCohortInviteDAO(IclubCohortInviteDAO IclubCohortInviteDAO) {
-		this.IclubCohortInviteDAO = IclubCohortInviteDAO;
+	public void setIclubCohortInviteDAO(IclubCohortInviteDAO iclubCohortInviteDAO) {
+		this.iclubCohortInviteDAO = iclubCohortInviteDAO;
 	}
 	
 	public IclubCommonDAO getIclubCommonDAO() {
@@ -274,6 +335,14 @@ public class IclubCohortInviteService {
 	
 	public void setIclubNotificationTypeDAO(IclubNotificationTypeDAO iclubNotificationTypeDAO) {
 		this.iclubNotificationTypeDAO = iclubNotificationTypeDAO;
+	}
+	
+	public IclubInviteStatusDAO getIclubInviteStatusDAO() {
+		return iclubInviteStatusDAO;
+	}
+	
+	public void setIclubInviteStatusDAO(IclubInviteStatusDAO iclubInviteStatusDAO) {
+		this.iclubInviteStatusDAO = iclubInviteStatusDAO;
 	}
 	
 }

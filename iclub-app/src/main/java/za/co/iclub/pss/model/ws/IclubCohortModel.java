@@ -12,6 +12,8 @@ public class IclubCohortModel {
 	private String PAFNameAndLName;
 	private String iclubPersonByCCrtdBy;
 	private String PBFNameAndLName;
+	private String iclubPersonByAdminId;
+	private String PCFNameAndLName;
 	private Long iclubCohortType;
 	private String ctLongDesc;
 	private String CName;
@@ -159,6 +161,22 @@ public class IclubCohortModel {
 	
 	public void setIitLongDesc(String iitLongDesc) {
 		this.iitLongDesc = iitLongDesc;
+	}
+	
+	public String getIclubPersonByAdminId() {
+		return iclubPersonByAdminId;
+	}
+	
+	public void setIclubPersonByAdminId(String iclubPersonByAdminId) {
+		this.iclubPersonByAdminId = iclubPersonByAdminId;
+	}
+	
+	public String getPCFNameAndLName() {
+		return PCFNameAndLName;
+	}
+	
+	public void setPCFNameAndLName(String pCFNameAndLName) {
+		PCFNameAndLName = pCFNameAndLName;
 	}
 	
 }

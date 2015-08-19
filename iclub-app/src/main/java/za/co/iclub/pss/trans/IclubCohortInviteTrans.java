@@ -4,6 +4,7 @@ import za.co.iclub.pss.model.ui.IclubCohortInviteBean;
 import za.co.iclub.pss.model.ws.IclubCohortInviteModel;
 import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
+import za.co.iclub.pss.orm.dao.IclubInviteStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNotificationTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
@@ -28,6 +29,9 @@ public class IclubCohortInviteTrans {
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
 		bean.setCiInviteSentStatus(model.getCiInviteSentStatus());
+		bean.setIclubInviteStatus(model.getIclubInviteStatus());
+		bean.setCName(model.getCName());
+		bean.setIsLongDesc(model.getIsLongDesc());
 		
 		return bean;
 	}
@@ -51,6 +55,9 @@ public class IclubCohortInviteTrans {
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
 		model.setCiInviteSentStatus(bean.getCiInviteSentStatus());
+		model.setIclubInviteStatus(bean.getIclubInviteStatus());
+		model.setIsLongDesc(bean.getIsLongDesc());
+		model.setCName(bean.getCName());
 		
 		return model;
 	}
@@ -62,6 +69,7 @@ public class IclubCohortInviteTrans {
 		model.setCiId(bean.getCiId());
 		model.setIclubCohort(bean.getIclubCohort() != null ? (bean.getIclubCohort()).getCId() : null);
 		model.setCEmail(bean.getIclubCohort() != null ? (bean.getIclubCohort()).getCEmail() : null);
+		model.setCName(bean.getIclubCohort() != null ? (bean.getIclubCohort()).getCName() : null);
 		model.setCiCrtdDt(bean.getCiCrtdDt());
 		model.setIclubNotificationType((bean.getIclubNotificationType()) != null ? bean.getIclubNotificationType().getNtId() : null);
 		model.setNtLongDesc((bean.getIclubNotificationType()) != null ? bean.getIclubNotificationType().getNtLongDesc() : null);
@@ -72,11 +80,13 @@ public class IclubCohortInviteTrans {
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
 		model.setCiInviteSentStatus(bean.getCiInviteSentStatus());
+		model.setIclubInviteStatus(bean.getIclubInviteStatus() != null ? bean.getIclubInviteStatus().getIsId() : null);
+		model.setIsLongDesc(bean.getIclubInviteStatus() != null ? bean.getIclubInviteStatus().getIsLongDesc() : null);
 		
 		return model;
 	}
 	
-	public static IclubCohortInvite fromWStoORM(IclubCohortInviteModel model, IclubNotificationTypeDAO iclubNotificationTypeDAO, IclubCohortDAO iclubCohortDAO, IclubPersonDAO iclubPersonDAO) {
+	public static IclubCohortInvite fromWStoORM(IclubCohortInviteModel model, IclubNotificationTypeDAO iclubNotificationTypeDAO, IclubCohortDAO iclubCohortDAO, IclubPersonDAO iclubPersonDAO, IclubInviteStatusDAO iclubInviteStatusDAO) {
 		
 		IclubCohortInvite bean = new IclubCohortInvite();
 		
@@ -90,6 +100,7 @@ public class IclubCohortInviteTrans {
 		bean.setCiInviteFName(model.getCiInviteFName());
 		bean.setCiInviteLName(model.getCiInviteLName());
 		bean.setCiInviteSentStatus(model.getCiInviteSentStatus());
+		bean.setIclubInviteStatus(model.getIclubInviteStatus() != null ? iclubInviteStatusDAO.findById(model.getIclubInviteStatus()) : null);
 		
 		return bean;
 	}

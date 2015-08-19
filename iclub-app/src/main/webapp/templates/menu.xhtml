@@ -44,8 +44,11 @@
 				<p:menuitem id="sm_spark" value="Spark Theme" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('spark')}" />
 				<p:menuitem id="sm_sentinel" value="Sentinel" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('sentinel')}" />
 			</p:submenu>
+			<p:submenu id="sm_cohorts" rendered="#{iclubMenuController.userMenu}" label="Cohorts Functions">
+				<p:menuitem id="sm_nci" value="My Cohorts" containerStyleClass="layout-menubar-active" action="#{iclubLoginController.newCohortInviteAction}" oncomplete="PF('newInviteDialog').show();" />
+				<p:menuitem id="sm_nmci" value="Manage Cohorts" containerStyleClass="layout-menubar-active" outcome="manageCohorts" rendered="#{  iclubMenuController.manageCohorts}" />
+			</p:submenu>
 			<p:menuitem id="sm_qq" value="Quick Quote" outcome="qq" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
-			<p:menuitem id="sm_nci" value="My Cohorts" containerStyleClass="layout-menubar-active" action="#{iclubLoginController.newCohortInviteAction}" oncomplete="PF('newInviteDialog').show();" rendered="#{iclubMenuController.userMenu}" />
 		</ps:menu>
 	</div>
 </ui:composition>

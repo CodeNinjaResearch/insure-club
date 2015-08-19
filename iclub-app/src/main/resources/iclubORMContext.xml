@@ -102,6 +102,7 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPropSecType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPurposeType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPclaimStatus</value>
+				<value>za.co.iclub.pss.orm.bean.IclubInviteStatus</value>
 			</list>
 		</property>
 	</bean>
@@ -510,6 +511,11 @@
 		</property>
 	</bean>
 	<bean id="IclubPclaimStatusDAO" class="za.co.iclub.pss.orm.dao.IclubPclaimStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubInviteStatusDAO" class="za.co.iclub.pss.orm.dao.IclubInviteStatusDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

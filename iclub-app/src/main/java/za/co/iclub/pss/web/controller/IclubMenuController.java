@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -56,6 +57,7 @@ import za.co.iclub.pss.model.ui.GooglePojo;
 import za.co.iclub.pss.model.ui.OutLookUserProfileBean;
 import za.co.iclub.pss.model.ui.SocialAuthResponse;
 import za.co.iclub.pss.model.ui.YahooMailsBean;
+import za.co.iclub.pss.model.ws.IclubCohortModel;
 import za.co.iclub.pss.model.ws.IclubLoginModel;
 import za.co.iclub.pss.model.ws.IclubPersonModel;
 import za.co.iclub.pss.util.IclubWebHelper;
@@ -75,9 +77,11 @@ public class IclubMenuController implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(IclubMenuController.class);
 	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubLoginService/";
 	private static final String U_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
+	private static final String CH_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortService/";
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	private String language;
 	private boolean userMenu;
+	private boolean manageCohorts;
 	private String selPage;
 	String preCode = "";
 	String preVerifier = "";
@@ -89,22 +93,35 @@ public class IclubMenuController implements Serializable {
 			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
 			FacesContext.getCurrentInstance().responseComplete();
 		} else if (!FacesContext.getCurrentInstance().getViewRoot().getViewId().equalsIgnoreCase("/pages/admin/cohorts/allCohorts.xhtml") && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
-			try {
-				WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-				IclubPersonModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
-				client.close();
-				if (model != null) {
-					if (model.getIclubCohort() == null && IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
-						String access_token = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.token")).toString();
-						String from = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.provider")).toString();
-						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
-						FacesContext.getCurrentInstance().responseComplete();
-					}
-				}
+			try {/*
+				 * WebClient client =
+				 * IclubWebHelper.createCustomClient(U_BASE_URL + "get/" +
+				 * IclubWebHelper
+				 * .getObjectIntoSession(BUNDLE.getString("logged.in.user.id"
+				 * )).toString()); IclubPersonModel model =
+				 * client.accept(MediaType
+				 * .APPLICATION_JSON).get(IclubPersonModel.class);
+				 * client.close(); if (model != null) { if
+				 * (model.getIclubCohort() == null &&
+				 * IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
+				 * String access_token =
+				 * IclubWebHelper.getObjectIntoSession(BUNDLE
+				 * .getString("socail.access.token")).toString(); String from =
+				 * IclubWebHelper
+				 * .getObjectIntoSession(BUNDLE.getString("socail.access.provider"
+				 * )).toString(); NavigationHandler navigationHandler =
+				 * FacesContext
+				 * .getCurrentInstance().getApplication().getNavigationHandler
+				 * (); navigationHandler.handleNavigation(FacesContext.
+				 * getCurrentInstance(), null,
+				 * "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from="
+				 * + from + "&key=" + access_token);
+				 * FacesContext.getCurrentInstance().responseComplete(); } }
+				 */
 			} catch (Exception e) {
 				
 			}
+			
 		}
 	}
 	
@@ -705,6 +722,22 @@ public class IclubMenuController implements Serializable {
 	
 	public void setSelPage(String selPage) {
 		this.selPage = selPage;
+	}
+	
+	public boolean isManageCohorts() {
+		if (!manageCohorts && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
+			WebClient client = IclubWebHelper.createCustomClient(CH_BASE_URL + "/get/user/" + IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+			Collection<? extends IclubCohortModel> models = new ArrayList<IclubCohortModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCohortModel.class));
+			client.close();
+			if (models != null && models.size() > 0) {
+				manageCohorts = true;
+			}
+		}
+		return manageCohorts;
+	}
+	
+	public void setManageCohorts(boolean manageCohorts) {
+		this.manageCohorts = manageCohorts;
 	}
 	
 }
