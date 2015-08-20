@@ -506,9 +506,22 @@ public class IclubCohortController implements Serializable {
 			if (selecteAdminCohortInviteBeans != null && selecteAdminCohortInviteBeans.size() > 0) {
 				List<IclubCohortInviteModel> models = new ArrayList<IclubCohortInviteModel>();
 				for (IclubCohortInviteBean bean : selecteAdminCohortInviteBeans) {
+					
+					if (status == 3 && bean.getIclubInviteStatus() == 2) {
+						WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + bean.getIclubPerson());
+						IclubPersonModel personModel = client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
+						
+						personModel.setIclubCohort(bean.getIclubCohort());
+						client = IclubWebHelper.createCustomClient(P_BASE_URL + "mod");
+						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(personModel, ResponseModel.class);
+						if (response.getStatusCode() == 0) {
+							
+						}
+					}
 					bean.setIclubInviteStatus(status);
 					IclubCohortInviteModel model = IclubCohortInviteTrans.fromUItoWS(bean);
 					models.add(model);
+					
 				}
 				WebClient client = IclubWebHelper.createCustomClient(CI_BASE_URL + "modList");
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).postCollection(models, IclubCohortInviteModel.class, ResponseModel.class);

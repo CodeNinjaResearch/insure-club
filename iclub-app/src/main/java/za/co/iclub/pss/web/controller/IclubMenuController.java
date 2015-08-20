@@ -569,7 +569,7 @@ public class IclubMenuController implements Serializable {
 								Date date = formatter.parse(jsonGet.get("birthday").toString().replace("\"", ""));
 								model.setPDob(new Timestamp(date.getTime()));
 							} catch (Exception e) {
-								e.printStackTrace();
+								
 							}
 							if (checkExistingUserorNot(model, data.getId(), "GOOGLE", access_token)) {
 								WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "add");
