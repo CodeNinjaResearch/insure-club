@@ -103,7 +103,9 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPurposeType</value>
 				<value>za.co.iclub.pss.orm.bean.IclubPclaimStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubInviteStatus</value>
+				<value>za.co.iclub.pss.orm.bean.IclubCohortActivity</value>
 			</list>
+
 		</property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
@@ -520,4 +522,11 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="IclubCohortActivityDAO" class="za.co.iclub.pss.orm.dao.IclubCohortActivityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+
 </beans>

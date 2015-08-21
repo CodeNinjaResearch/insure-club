@@ -334,6 +334,12 @@ public class IclubUserDashBoardController implements Serializable {
 				cohortSummaryBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
 				cohortSummaryBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
 				cohortSummaryBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
+				cohortSummaryBean.setPoolAvailable(model.getPoolAvailable() != null ? model.getPoolAvailable() : 0.0);
+				cohortSummaryBean.setClaimRatio(model.getClaimRatio() != null ? model.getClaimRatio() : 0.0);
+				cohortSummaryBean.setNumOfActMembers(model.getNumOfActMembers() != null ? model.getNumOfActMembers() : 0l);
+				cohortSummaryBean.setNumOfMemLeftInYear(model.getNumOfMemLeftInYear() != null ? model.getNumOfMemLeftInYear() : 0);
+				cohortSummaryBean.setDropOutRate(model.getDropOutRate() != null ? model.getDropOutRate() : 0.0);
+				cohortSummaryBean.setMonthlyGrowthRate(model.getMonthlyGrowthRate() != null ? model.getMonthlyGrowthRate() : 0.0);
 			}
 			if (userModel != null) {
 				cohortSummaryFlag = true;

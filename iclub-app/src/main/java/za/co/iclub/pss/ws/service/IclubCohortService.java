@@ -251,7 +251,7 @@ public class IclubCohortService {
 		}
 		
 		Double premiumForYear = 0.0;
-		List batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(id, null);
+		List batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(id, null, null);
 		if (batmod != null && batmod.size() > 0) {
 			
 			for (Object object : batPmod) {
@@ -262,7 +262,18 @@ public class IclubCohortService {
 			}
 			cSModel.setPremiumForYear(premiumForYear);
 		}
-		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(id, null);
+		batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(id, null, 4l);
+		if (batmod != null && batmod.size() > 0) {
+			Double premiumApproved = 0.0;
+			for (Object object : batPmod) {
+				IclubPolicy policy = (IclubPolicy) object;
+				if (policy.getPPremium() != null && policy.getPPremium() > 0) {
+					premiumApproved = +(policy.getPPremium() * 12);
+				}
+			}
+			cSModel.setPremiumApproved(premiumApproved);
+		}
+		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(id, null, null);
 		if (batCmod != null && batCmod.size() > 0) {
 			Double claimSinceI = 0.0;
 			Double claimsInYear = 0.0;
@@ -278,6 +289,28 @@ public class IclubCohortService {
 				cSModel.setClaimsInYear(claimsInYear);
 			}
 		}
+		
+		batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(id, null, 5l);
+		if (batCmod != null && batCmod.size() > 0) {
+			Double premiumApproved = 0.0;
+			for (Object object : batCmod) {
+				IclubClaim claim = (IclubClaim) object;
+				if (claim != null && claim.getCValue() > 0) {
+					premiumApproved = +claim.getCValue();
+				}
+				cSModel.setPremiumApproved(premiumApproved);
+				
+			}
+		}
+		cSModel.setPoolAvailable(cSModel.getPremiumApproved() == null ? 0 : cSModel.getClaimsInYear() == null ? cSModel.getPremiumApproved() : (cSModel.getPremiumApproved() - cSModel.getClaimsInYear()));
+		
+		if (cSModel.getPremiumApproved() != null && cSModel.getCalimApproved() != null) {
+			cSModel.setClaimRatio((cSModel.getPremiumApproved() == null || cSModel.getPremiumApproved() == 0) ? cSModel.getCalimApproved() : (cSModel.getCalimApproved() / cSModel.getPremiumApproved()));
+		}
+		
+		Long noOfActiverMemebers = iclubNamedQueryDAO.getIclubPersonCountByCohortId(id).longValue();
+		cSModel.setNumOfActMembers(noOfActiverMemebers);
+		
 		return cSModel;
 	}
 	
@@ -320,7 +353,7 @@ public class IclubCohortService {
 		}
 		
 		Double premiumForYear = 0.0;
-		List batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(null, userId);
+		List batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(null, userId, null);
 		if (batmod != null && batmod.size() > 0) {
 			
 			for (Object object : batPmod) {
@@ -332,7 +365,7 @@ public class IclubCohortService {
 			cSModel.setPremiumForYear(premiumForYear);
 		}
 		
-		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(null, userId);
+		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(null, userId, null);
 		if (batCmod != null && batCmod.size() > 0) {
 			Double claimSinceI = 0.0;
 			Double claimsInYear = 0.0;

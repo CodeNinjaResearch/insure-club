@@ -1042,12 +1042,18 @@ public class IclubNamedQueryDAO {
 		
 	}
 	
-	public List getIclubPoliciesByCohortId(String cohortId, String userId) {
+	public List getIclubPoliciesByCohortId(String cohortId, String userId, Long policyStatus) {
 		log.debug("finding IclubPolicy  instances by getIclubPoliciesByCohortId");
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubPolicy.class);
 			criteria.createAlias("iclubPerson", "person");
+			criteria.createAlias("iclubPolicyStatus", "policyStaus");
 			criteria.createAlias("person.iclubCohort", "cohort");
+			
+			if (policyStatus != null) {
+				criteria.add(Restrictions.eq("iclubPolicyStatus.psId", policyStatus));
+			}
+			
 			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
 				criteria.add(Restrictions.eq("cohort.CId", cohortId).ignoreCase());
 			}
@@ -1063,17 +1069,23 @@ public class IclubNamedQueryDAO {
 		
 	}
 	
-	public List getIclubClaimsByCohortId(String cohortId, String userId) {
+	public List getIclubClaimsByCohortId(String cohortId, String userId, Long staus) {
 		log.debug("finding IclubClaim  instances by getIclubClaimsByCohortId");
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubClaim.class);
 			criteria.createAlias("iclubPerson", "person");
 			criteria.createAlias("person.iclubCohort", "cohort");
+			criteria.createAlias("iclubClaimStatus", "claimStatus");
+			
 			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
 				criteria.add(Restrictions.eq("cohort.CId", cohortId).ignoreCase());
 			}
 			if (userId != null && !userId.trim().equalsIgnoreCase("")) {
 				criteria.add(Restrictions.eq("person.PId", userId).ignoreCase());
+			}
+			
+			if (staus != null) {
+				criteria.add(Restrictions.eq("claimStatus.csId", staus));
 			}
 			List paymentList = criteria.list();
 			return paymentList;
@@ -1082,6 +1094,18 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 		
+	}
+	
+	public BigInteger getIclubPersonCountByCohortId(String cohortId) {
+		log.debug("finding Count of Persons  instance by Cohort Id");
+		try {
+			Query queryObject = getCurrentSession().getNamedQuery("getIclubPersonCountByCohortId");
+			queryObject.setString("cohortId", cohortId);
+			return (BigInteger) queryObject.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("finding Count of Persons failed", re);
+			throw re;
+		}
 	}
 	
 	public List getIclubCohortInvitesByinviteStatusIds(List<Long> statusList, String userId) {
