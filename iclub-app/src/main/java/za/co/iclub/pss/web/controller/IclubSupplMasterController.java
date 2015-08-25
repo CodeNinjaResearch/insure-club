@@ -468,7 +468,6 @@ public class IclubSupplMasterController implements Serializable {
 				
 				model.setIclubPersonAByLCrtdBy(getSessionUserId());
 				model.setIclubPersonBByLPersonId(personId);
-				// need to change
 				model.setIclubRoleType(4l);
 				ResponseModel response = null;
 				if (createOrUpdate) {
@@ -918,7 +917,6 @@ public class IclubSupplMasterController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubSecurityQuestionModel model : models) {
 				IclubSecurityQuestionBean bean = IclubSecurityQuestionTrans.fromWStoUI(model);
-				 
 				
 				securityQuestionBeans.add(bean);
 			}

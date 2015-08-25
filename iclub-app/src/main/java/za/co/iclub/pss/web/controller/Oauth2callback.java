@@ -46,12 +46,8 @@ public class Oauth2callback extends HttpServlet {
 		
 		System.out.println("entering doGet");
 		try {
-			// get code
 			String code = request.getParameter("code");
-			// format parameters to post
 			String urlParameters = "code=" + code + "&client_id=386352872692-uknquacomkku9e75tn2jgpjh5h27ognc.apps.googleusercontent.com" + "&client_secret=X1xK4cHAU2ewqmYk67eGYL0s" + "&redirect_uri=http://localhost:8080/iclub-www/Oauth2callback" + "&grant_type=authorization_code";
-			
-			// post parameters
 			URL url = new URL("https://accounts.google.com/o/oauth2/token");
 			URLConnection urlConn = url.openConnection();
 			urlConn.setDoOutput(true);
@@ -59,7 +55,6 @@ public class Oauth2callback extends HttpServlet {
 			writer.write(urlParameters);
 			writer.flush();
 			
-			// get output in outputString
 			String line, outputString = "";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 			while ((line = reader.readLine()) != null) {
@@ -67,12 +62,10 @@ public class Oauth2callback extends HttpServlet {
 			}
 			System.out.println(outputString);
 			
-			// get Access Token
 			JsonObject json = (JsonObject) new JsonParser().parse(outputString);
 			String access_token = json.get("access_token").getAsString();
 			System.out.println(access_token);
 			
-			// get User Info
 			try {
 				String callUrl = "https://www.google.com/m8/feeds/contacts/default/full?max-results=8&access_token=" + access_token;
 				url = new URL(callUrl);
@@ -104,12 +97,9 @@ public class Oauth2callback extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			// Convert JSON response into Pojo class
-			
 			ContactsService myService = new ContactsService("iclub");
 			URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
 			ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
-			// Print the results
 			System.out.println(resultFeed.getTitle().getPlainText());
 			for (ContactEntry entry : resultFeed.getEntries()) {
 				if (entry.hasName()) {

@@ -227,11 +227,6 @@ public class IclubCohortService {
 		startDate.setMinutes(00);
 		startDate.setSeconds(00);
 		startDate.setHours(0);
-		// Calendar cal = Calendar.getInstance();
-		// cal.setTime(startDate);
-		// cal.add(Calendar.YEAR, 1);
-		// cal.add(Calendar.DATE, -1);
-		// Date endDate = cal.getTime();
 		if (batmod != null && batmod.size() > 0) {
 			Double primumSinceI = 0.0;
 			Double premiumPaidInYear = 0.0;
@@ -329,11 +324,6 @@ public class IclubCohortService {
 		startDate.setMinutes(00);
 		startDate.setSeconds(00);
 		startDate.setHours(0);
-		// Calendar cal = Calendar.getInstance();
-		// cal.setTime(startDate);
-		// cal.add(Calendar.YEAR, 1);
-		// cal.add(Calendar.DATE, -1);
-		// Date endDate = cal.getTime();
 		if (batmod != null && batmod.size() > 0) {
 			Double primumSinceI = 0.0;
 			Double premiumPaidInYear = 0.0;

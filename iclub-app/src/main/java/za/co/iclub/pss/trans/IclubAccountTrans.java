@@ -31,10 +31,10 @@ public class IclubAccountTrans {
 	
 	public static IclubAccountModel fromUItoWS(IclubAccountBean bean) {
 		IclubAccountModel model = new IclubAccountModel();
-		model.setAId(model.getAId());
-		model.setAAccNum(model.getAAccNum());
-		model.setACrtdDt(model.getACrtdDt());
-		model.setAOwnerId(model.getAOwnerId());
+		model.setAId(bean.getAId());
+		model.setAAccNum(bean.getAAccNum());
+		model.setACrtdDt(bean.getACrtdDt());
+		model.setAOwnerId(bean.getAOwnerId());
 		model.setIclubBankMaster(bean.getIclubBankMaster());
 		model.setBmBankName(bean.getBmBankName());
 		model.setBmCode(bean.getBmCode());
@@ -44,7 +44,7 @@ public class IclubAccountTrans {
 		model.setOtLongDesc(bean.getOtLongDesc());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		model.setAStatus(model.getAStatus());
+		model.setAStatus(bean.getAStatus());
 		return model;
 	}
 	

@@ -159,13 +159,7 @@ public class IclubLoginService {
 			if (logins.size() == 0 || logins.get(0) == null) {
 				message.setStatusCode(-1);
 				message.setStatusDesc("Invalid PersonName or Password");
-			} /*
-			 * else if (!(((IclubLogin)
-			 * logins.get(0)).getIclubPersonByLCrtdBy().
-			 * getIclubEntityStatus().getEntityStatusStatus
-			 * ().equalsIgnoreCase("y"))) { message.setStatusCode(1);
-			 * message.setStatusDesc("Inactive Person"); }
-			 */else {
+			} else {
 				message.setStatusCode(0);
 				message.setStatusDesc("Login Success");
 			}

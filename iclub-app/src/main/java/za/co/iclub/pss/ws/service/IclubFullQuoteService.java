@@ -365,10 +365,6 @@ public class IclubFullQuoteService {
 		for (IclubVehicle daf : vehicleBeans) {
 			ids.add(daf.getVId());
 		}
-		// for (IclubProperty props : propertyBeans) {
-		// ids.add(props.getPId());
-		// }
-		//
 		if (vehicleBeans != null && vehicleBeans.size() > 0) {
 			for (String vehProId : ids) {
 				for (Object obj : fieldBeans) {

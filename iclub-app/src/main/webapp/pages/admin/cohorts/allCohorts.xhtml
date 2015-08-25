@@ -4,7 +4,6 @@
 			<h:inputHidden value="#{iclubCohortController.key}" />
 			<p:panel id="pnlCohortContDet">
 				<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedBeans}" rowKey="#{bean.CId}" value="#{iclubCohortController.beans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Available">
-					<!--  Cover Type  /number of Members/Logo Display -->
 					<p:column rendered="#{!iclubCohortController.showCreateCont}" selectionMode="multiple" style="width:16px;text-align:center">
 					</p:column>
 					<p:column headerText="Cohort Name">

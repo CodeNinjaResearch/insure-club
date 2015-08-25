@@ -18,8 +18,6 @@ public class IclubDocumentBean {
 	private String DContent;
 	private Date DCrtdDt;
 	
-	// private byte[] DBlob;
-	
 	public String getDId() {
 		return DId;
 	}

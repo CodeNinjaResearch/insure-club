@@ -202,21 +202,7 @@ public class IclubLoginController implements Serializable {
 			fdsaf.write("grant_type=client_credentials".getBytes());
 			fdsaf.close();
 			response.sendRedirect(endPointUrl);
-			// FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-			/*
-			 * writeRequest(connection, "grant_type=client_credentials");
-			 * 
-			 * // Parse the JSON response into a JSON mapped object to fetch
-			 * fields // from. JSONObject obj = new
-			 * JSONObject(readResponse(connection));
-			 * 
-			 * if (obj != null) { String tokenType = (String)twt.redirect_uri
-			 * obj.get("token_type"); String token = (String)
-			 * obj.get("access_token");
-			 * 
-			 * return ((tokenType.equals("bearer")) && (token != null)) ? token
-			 * : ""; }
-			 */
+			
 			return new String();
 		} catch (MalformedURLException e) {
 			throw new IOException("Invalid endpoint URL specified.", e);

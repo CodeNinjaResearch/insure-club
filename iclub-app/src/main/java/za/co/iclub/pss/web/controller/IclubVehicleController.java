@@ -369,11 +369,7 @@ public class IclubVehicleController implements Serializable {
 			IclubWebHelper.addMessage(("Year Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		/*
-		 * if (bean.getIclubDriver() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Driver"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
+		
 		if (bean.getVImmYn() == null || bean.getVImmYn().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("Imn Yn Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;

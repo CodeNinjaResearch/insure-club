@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.MediaType;
@@ -74,6 +75,11 @@ public class IclubUserDashBoardController implements Serializable {
 	private IclubCohortSummaryBean cohortSummaryUserBean;
 	private boolean cohortSummaryFlag;
 	private IclubUserDashboardBean userDashboardBean;
+	
+	@PostConstruct
+	public void initializeBean() {
+		dashboardAction();
+	}
 	
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
@@ -314,44 +320,79 @@ public class IclubUserDashBoardController implements Serializable {
 			cohortSummaryUserBean = new IclubCohortSummaryBean();
 			
 		}
+		
+		return cohortSummaryUserBean;
+	}
+	
+	public String dashboardAction() {
 		cohortSummaryFlag = false;
 		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && !IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString().trim().equalsIgnoreCase("")) {
+			{
+				String personId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
+				WebClient personClient = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + personId);
+				IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
+				WebClient client = IclubWebHelper.createCustomClient(CH_BASE_URL + "getCohortSummaryById/" + personModel.getIclubCohort());
+				IclubCohortSummaryModel model = (IclubCohortSummaryModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
+				client.close();
+				WebClient userClient = IclubWebHelper.createCustomClient(CH_BASE_URL + "getCohortSummaryByUserId/" + getSessionUserId());
+				IclubCohortSummaryModel userModel = (IclubCohortSummaryModel) (userClient.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
+				cohortSummaryBean = new IclubCohortSummaryBean();
+				cohortSummaryUserBean = new IclubCohortSummaryBean();
+				
+				if (model != null) {
+					cohortSummaryFlag = true;
+					cohortSummaryBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
+					cohortSummaryBean.setClaimsInYear(model.getClaimsInYear() != null ? model.getClaimsInYear() : 0.0);
+					cohortSummaryBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
+					cohortSummaryBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
+					cohortSummaryBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
+					cohortSummaryBean.setPoolAvailable(model.getPoolAvailable() != null ? model.getPoolAvailable() : 0.0);
+					cohortSummaryBean.setClaimRatio(model.getClaimRatio() != null ? model.getClaimRatio() : 0.0);
+					cohortSummaryBean.setNumOfActMembers(model.getNumOfActMembers() != null ? model.getNumOfActMembers() : 0l);
+					cohortSummaryBean.setNumOfMemLeftInYear(model.getNumOfMemLeftInYear() != null ? model.getNumOfMemLeftInYear() : 0);
+					cohortSummaryBean.setDropOutRate(model.getDropOutRate() != null ? model.getDropOutRate() : 0.0);
+					cohortSummaryBean.setMonthlyGrowthRate(model.getMonthlyGrowthRate() != null ? model.getMonthlyGrowthRate() : 0.0);
+				}
+				if (userModel != null) {
+					cohortSummaryFlag = true;
+					cohortSummaryUserBean.setClaimSinceI(userModel.getClaimSinceI() != null ? userModel.getClaimSinceI() : 0.0);
+					cohortSummaryUserBean.setClaimsInYear(userModel.getClaimsInYear() != null ? userModel.getClaimsInYear() : 0.0);
+					cohortSummaryUserBean.setPremiumForYear(userModel.getPremiumForYear() != null ? userModel.getPremiumForYear() : 0.0);
+					cohortSummaryUserBean.setPremiumPaidInYear(userModel.getPremiumPaidInYear() != null ? userModel.getPremiumPaidInYear() : 0.0);
+					cohortSummaryUserBean.setPrimumSinceI(userModel.getPrimumSinceI() != null ? userModel.getPrimumSinceI() : 0.0);
+					cohortSummaryUserBean.setPoolAvailable(userModel.getPoolAvailable() != null ? userModel.getPoolAvailable() : 0.0);
+					cohortSummaryUserBean.setClaimRatio(userModel.getClaimRatio() != null ? userModel.getClaimRatio() : 0.0);
+					cohortSummaryUserBean.setNumOfActMembers(userModel.getNumOfActMembers() != null ? userModel.getNumOfActMembers() : 0l);
+					cohortSummaryUserBean.setNumOfMemLeftInYear(userModel.getNumOfMemLeftInYear() != null ? userModel.getNumOfMemLeftInYear() : 0);
+					cohortSummaryUserBean.setDropOutRate(userModel.getDropOutRate() != null ? userModel.getDropOutRate() : 0.0);
+					cohortSummaryUserBean.setMonthlyGrowthRate(userModel.getMonthlyGrowthRate() != null ? userModel.getMonthlyGrowthRate() : 0.0);
+				}
+				
+			}
+			
 			String personId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-			WebClient personClient = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + personId);
-			IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
-			WebClient client = IclubWebHelper.createCustomClient(CH_BASE_URL + "getCohortSummaryById/" + personModel.getIclubCohort());
-			IclubCohortSummaryModel model = (IclubCohortSummaryModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
-			client.close();
-			WebClient userClient = IclubWebHelper.createCustomClient(CH_BASE_URL + "getCohortSummaryById/" + getSessionUserId());
-			IclubCohortSummaryModel userModel = (IclubCohortSummaryModel) (userClient.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
-			cohortSummaryBean = new IclubCohortSummaryBean();
-			cohortSummaryUserBean = new IclubCohortSummaryBean();
-			
-			if (model != null) {
-				cohortSummaryFlag = true;
-				cohortSummaryBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
-				cohortSummaryBean.setClaimsInYear(model.getClaimsInYear() != null ? model.getClaimsInYear() : 0.0);
-				cohortSummaryBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
-				cohortSummaryBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
-				cohortSummaryBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
-				cohortSummaryBean.setPoolAvailable(model.getPoolAvailable() != null ? model.getPoolAvailable() : 0.0);
-				cohortSummaryBean.setClaimRatio(model.getClaimRatio() != null ? model.getClaimRatio() : 0.0);
-				cohortSummaryBean.setNumOfActMembers(model.getNumOfActMembers() != null ? model.getNumOfActMembers() : 0l);
-				cohortSummaryBean.setNumOfMemLeftInYear(model.getNumOfMemLeftInYear() != null ? model.getNumOfMemLeftInYear() : 0);
-				cohortSummaryBean.setDropOutRate(model.getDropOutRate() != null ? model.getDropOutRate() : 0.0);
-				cohortSummaryBean.setMonthlyGrowthRate(model.getMonthlyGrowthRate() != null ? model.getMonthlyGrowthRate() : 0.0);
-			}
-			if (userModel != null) {
-				cohortSummaryFlag = true;
-				cohortSummaryUserBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
-				cohortSummaryUserBean.setClaimsInYear(model.getClaimsInYear() != null ? model.getClaimsInYear() : 0.0);
-				cohortSummaryUserBean.setPremiumForYear(model.getPremiumForYear() != null ? model.getPremiumForYear() : 0.0);
-				cohortSummaryUserBean.setPremiumPaidInYear(model.getPremiumPaidInYear() != null ? model.getPremiumPaidInYear() : 0.0);
-				cohortSummaryUserBean.setPrimumSinceI(model.getPrimumSinceI() != null ? model.getPrimumSinceI() : 0.0);
-			}
-			
+			WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + personId);
+			IclubUserDashboardModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubUserDashboardModel.class);
+			userDashboardBean = new IclubUserDashboardBean();
+			userDashboardBean.setApprovedClaimValue(model.getApprovedClaimValue() != null ? model.getApprovedClaimValue() : 0);
+			userDashboardBean.setEarliestQExpiry(model.getEarliestQExpiry() != null ? model.getEarliestQExpiry() + "" : "--");
+			userDashboardBean.setNextPremiumDate(model.getNextPremiumDate() != null ? model.getNextPremiumDate() + "" : "--");
+			userDashboardBean.setNoOfProperties(model.getNoOfProperties() != null ? model.getNoOfProperties() : 0);
+			userDashboardBean.setNoOfVehicles(model.getNoOfVehicles() != null ? model.getNoOfVehicles() : 0);
+			userDashboardBean.setRejectedClaimValue(model.getRejectedClaimValue() != null ? model.getRejectedClaimValue() : 0.0);
+			userDashboardBean.setTotalClaimCnt(model.getTotalClaimCnt() != null ? model.getTotalClaimCnt() : 0);
+			userDashboardBean.setTotalCPremium(model.getTotalCPremium() != null ? model.getTotalCPremium() : 0.0);
+			userDashboardBean.setTotalPolicyCnt(model.getTotalPolicyCnt() != null ? model.getTotalPolicyCnt() : 0);
+			userDashboardBean.setTotalPyPremium(model.getTotalPyPremium() != null ? model.getTotalPyPremium() : 0.0);
+			userDashboardBean.setTotalQEstValue(model.getTotalQEstValue() != null ? model.getTotalQEstValue() : 0.0);
+			userDashboardBean.setTotalQPremium(model.getTotalQPremium() != null ? model.getTotalQPremium() : 0.0);
+			userDashboardBean.setTotalQuoteCnt(model.getTotalQuoteCnt() != null ? model.getTotalQuoteCnt() : 0);
+			userDashboardBean.setTotalClaimValue(model.getTotalClaimValue() != null ? model.getTotalClaimValue() : 0.0);
+			userDashboardBean.setTotalPaymentsCnt(model.getTotalPaymentsCnt() != null ? model.getTotalPaymentsCnt() : 0);
+			userDashboardBean.setTotalPPremium(model.getTotalPPremium() != null ? model.getTotalPPremium() : 0.0);
+			return "userDashboard";
 		}
-		return cohortSummaryUserBean;
+		return "login";
 	}
 	
 	public void setCohortSummaryUserBean(IclubCohortSummaryBean cohortSummaryUserBean) {
@@ -372,29 +413,6 @@ public class IclubUserDashBoardController implements Serializable {
 			userDashboardBean = new IclubUserDashboardBean();
 		}
 		
-		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && !IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString().trim().equalsIgnoreCase("")) {
-			String personId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
-			WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + personId);
-			IclubUserDashboardModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubUserDashboardModel.class);
-			
-			userDashboardBean.setApprovedClaimValue(model.getApprovedClaimValue() != null ? model.getApprovedClaimValue() : 0);
-			userDashboardBean.setEarliestQExpiry(model.getEarliestQExpiry() != null ? model.getEarliestQExpiry() + "" : "--");
-			userDashboardBean.setNextPremiumDate(model.getNextPremiumDate() != null ? model.getNextPremiumDate() + "" : "--");
-			userDashboardBean.setNoOfProperties(model.getNoOfProperties() != null ? model.getNoOfProperties() : 0);
-			userDashboardBean.setNoOfVehicles(model.getNoOfVehicles() != null ? model.getNoOfVehicles() : 0);
-			userDashboardBean.setRejectedClaimValue(model.getRejectedClaimValue() != null ? model.getRejectedClaimValue() : 0.0);
-			userDashboardBean.setTotalClaimCnt(model.getTotalClaimCnt() != null ? model.getTotalClaimCnt() : 0);
-			userDashboardBean.setTotalCPremium(model.getTotalCPremium() != null ? model.getTotalCPremium() : 0.0);
-			userDashboardBean.setTotalPolicyCnt(model.getTotalPolicyCnt() != null ? model.getTotalPolicyCnt() : 0);
-			userDashboardBean.setTotalPyPremium(model.getTotalPyPremium() != null ? model.getTotalPyPremium() : 0.0);
-			userDashboardBean.setTotalQEstValue(model.getTotalQEstValue() != null ? model.getTotalQEstValue() : 0.0);
-			userDashboardBean.setTotalQPremium(model.getTotalQPremium() != null ? model.getTotalQPremium() : 0.0);
-			userDashboardBean.setTotalQuoteCnt(model.getTotalQuoteCnt() != null ? model.getTotalQuoteCnt() : 0);
-			userDashboardBean.setTotalClaimValue(model.getTotalClaimValue() != null ? model.getTotalClaimValue() : 0.0);
-			userDashboardBean.setTotalPaymentsCnt(model.getTotalPaymentsCnt() != null ? model.getTotalPaymentsCnt() : 0);
-			userDashboardBean.setTotalPPremium(model.getTotalPPremium() != null ? model.getTotalPPremium() : 0.0);
-			
-		}
 		return userDashboardBean;
 	}
 	

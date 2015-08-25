@@ -48,7 +48,14 @@ public class IclubRateEngineTrans {
 	public static IclubRateEngineModel fromORMtoWS(IclubRateEngine bean) {
 		
 		IclubRateEngineModel model = new IclubRateEngineModel();
-		
+		model.setReId(bean.getReId());
+		model.setReRate(bean.getReRate());
+		model.setReCrtdDt(bean.getReCrtdDt());
+		model.setReStatus(bean.getReStatus());
+		model.setReMaxValue(bean.getReMaxValue());
+		model.setReBaseValue(bean.getReBaseValue());
+		model.setIclubRateType(bean.getIclubRateType() != null ? bean.getIclubRateType().getRtId() : null);
+		model.setRtLongDesc(bean.getIclubRateType() != null ? bean.getIclubRateType().getRtLongDesc() : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
 		

@@ -13,12 +13,6 @@
 				<p:column rendered="#{iclubCohortController.inviteFromFbApp}" headerText="Last Name">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteLName}" />
 				</p:column>
-				<!-- <p:column headerText="Notificatuin Type">
-					<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubNotificationType}">
-						<f:selectItem itemLabel="Type" itemDisabled="true" />
-						<f:selectItems value="#{iclubCohortController.iclubNotificationTypeBeans}" var="c" itemLabel="#{c.ntLongDesc}" itemValue="#{c.ntId}" />
-					</p:selectOneMenu>
-				</p:column> -->
 				<f:facet name="footer">
 					<p:commandButton rendered="#{!iclubCohortController.inviteFromFbApp}" process="dtQuoteCont" update=":iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" ajax="false" action="#{iclubCohortController.addIclubCohortsInvites}" icon="ui-icon-search" value="Save" />
 				</f:facet>

@@ -674,11 +674,9 @@ public class IclubCohortController implements Serializable {
 				myQuery.setStartIndex(1);
 				myQuery.setMaxResults(500);
 				ContactFeed resultFeed = myService.query(myQuery, ContactFeed.class);
-				// Print the results
 				for (ContactEntry entry : resultFeed.getEntries()) {
 					IclubCohortInviteBean bean = new IclubCohortInviteBean();
 					bean.setCiId(UUID.randomUUID().toString());
-					// bean.setCiInviteFName(entry.getName().getFullName().getValue());
 					for (Email email : entry.getEmailAddresses()) {
 						if (email.getAddress() != null) {
 							bean.setCiInviteUri(email.getAddress());

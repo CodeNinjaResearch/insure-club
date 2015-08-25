@@ -437,9 +437,6 @@ public class IclubMenuController implements Serializable {
 					String xoauth_yahoo_guid = json.get("xoauth_yahoo_guid").toString();
 					
 					try {
-						// https://social.yahooapis.com/v1/user/3344/profile?format=json
-						// https://social.yahooapis.com/v1/user/6677/contacts
-						// SELECT * FROM social.contacts WHERE guid='6677'
 						
 						String callUrl1 = "https://social.yahooapis.com/v1/user/" + xoauth_yahoo_guid.replace("\"", "") + "/profile?format=json";
 						HttpGet httpGet = new HttpGet(callUrl1);
@@ -499,7 +496,6 @@ public class IclubMenuController implements Serializable {
 				request.removeAttribute("code");
 				String urlParameters = "code=" + code + "&client_id=" + BUNDLE.getString("client_id") + "&client_secret=" + BUNDLE.getString("client_secret") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&grant_type=" + BUNDLE.getString("grant_type");
 				
-				// post parameters
 				URL url = new URL("https://accounts.google.com/o/oauth2/token");
 				URLConnection urlConn = url.openConnection();
 				urlConn.setDoOutput(true);

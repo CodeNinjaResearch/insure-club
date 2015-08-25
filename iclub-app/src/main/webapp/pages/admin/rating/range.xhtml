@@ -42,7 +42,6 @@
 				</p:contextMenu>
 				<p:dataTable id="dtRateEngineCont" editable="true" editMode="cell" widgetVar="dtRateEngineCont" value="#{iclubRatingController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateEngines Found" reflow="true">
 					<f:facet name="footer">
-						<!-- <p:commandButton id="btnRateEngineShowAdd" value="Add" actionListener="#{iclubRatingController.showAddPanel}" update=":iclubFrm:pnlRateEngineCont" /> -->
 					</f:facet>
 					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
 					<p:column headerText="Rate">

@@ -2,9 +2,6 @@
 	<div class="ContainerIndent">
 		<p:panel id="pnlPropertyCont">
 			<p:dataTable reflow="true" widgetVar="dtPropertyCont" value="#{iclubFullQuoteController.propertyBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Property Available">
-				<f:facet name="footer">
-					<!-- <p:commandButton id="btnPropertyShowAdd" value="Add" actionListener="#{iclubFullQuoteController.showProAddPanel}" update=":iclubFrm:qqTabView:pnlPropertyCont" /> -->
-				</f:facet>
 				<p:column headerText="Registration Number">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.PRegNum}" />
 				</p:column>

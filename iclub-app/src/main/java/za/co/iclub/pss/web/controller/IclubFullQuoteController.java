@@ -303,7 +303,6 @@ public class IclubFullQuoteController implements Serializable {
 	
 	private List<IclubInsuranceItemBean> vehicleIItemBeans;
 	
-	// private IclubInsuranceItemBean propertyIItemBean;
 	private List<IclubPropertyItemBean> propertyItemBeans;
 	private IclubPropertyItemBean propertyItemBean;
 	
@@ -1050,169 +1049,6 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
-		/*
-		 * if (personBean.getPFName() == null ||
-		 * personBean.getPFName().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage
-		 * (getLabelBundle().getString("First Name Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (personBean.getPLName() == null ||
-		 * personBean.getPLName().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Last Name Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (personBean.getPMobile() == null ||
-		 * personBean.getPMobile().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Mobile Number Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (personBean.getPGender() == null ||
-		 * personBean.getPGender().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Gender Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (personBean.getPIdNum() == null ||
-		 * personBean.getPIdNum().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Id Number Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (personBean.getIclubIdType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select ID Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (personBean.getPIsPensioner() == null ||
-		 * personBean.getPIsPensioner().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Please Select Pensioner"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (personBean.getPDob() == null) {
-		 * IclubWebHelper.addMessage(("Please Select DOB"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } else if
-		 * (IclubWebHelper.calculateYearDiff(personBean.getPDob().getTime()) <=
-		 * 18) { IclubWebHelper.addMessage(("You must be over 18 years"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
-		
-		/*
-		 * if (propertyBean.getPRegNum() == null ||
-		 * propertyBean.getPRegNum().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Premium Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPAddress() == null ||
-		 * propertyBean.getPAddress().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Address Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPLat() == null || propertyBean.getPLong() == null) {
-		 * IclubWebHelper.addMessage("Please Select Location",
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (propertyBean.getPPostalCd() == null) {
-		 * IclubWebHelper.addMessage(("Postel Code Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubCoverType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Cover Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubPropUsageType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select PropUsage Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPNoclaimYrs() == null) {
-		 * IclubWebHelper.addMessage(("Noclaim Years Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (propertyBean.getIclubWallType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select WallType"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubRoofType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Roof Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubThatchType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Thatch Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubBarType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Bar Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubAccessType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Access Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPRentFurYn() == null ||
-		 * propertyBean.getPRentFurYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("RentFur Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPCompYn() == null ||
-		 * propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Comp Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPSecGatesYn() == null ||
-		 * propertyBean.getPSecGatesYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Sec Gates Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPEstValue() == null) {
-		 * IclubWebHelper.addMessage(("Est value Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (propertyBean.getPNorobberyYn() == null ||
-		 * propertyBean.getPNorobberyYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("No Robbery Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
-		/*
-		 * if (vehicleBean.getIclubVehicleMaster() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Vm Make and Model"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (vehicleBean.getVOdometer() == null) {
-		 * IclubWebHelper.addMessage(("Odo Meter Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVOnArea() == null ||
-		 * vehicleBean.getVOnArea().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("On Area Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVOnLat() == null || vehicleBean.getVOnLong() == null)
-		 * { IclubWebHelper.addMessage(("Please Select Location"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getIclubAccessTypeByVOnAccessTypeId() == null) {
-		 * IclubWebHelper.addMessage(("Please Select On AccessType"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getIclubAccessTypeByVDdAccessTypeId() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Dd AccessType"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVYear() == null) {
-		 * IclubWebHelper.addMessage(("Year Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getIclubDriver() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Driver"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVImmYn() == null ||
-		 * vehicleBean.getVImmYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Imn Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVGearLockYn() == null ||
-		 * vehicleBean.getVGearLockYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Gear Lock Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getIclubVehSecType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Security Master"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getIclubPropUsageType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select PropUsage Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVNoclaimYrs() == null) {
-		 * IclubWebHelper.addMessage(("No Claim Years Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (vehicleBean.getVCompYrs() == null) {
-		 * IclubWebHelper.addMessage(("Comp Years Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVVin() == null ||
-		 * vehicleBean.getVVin().toString().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Vin Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVEngineNr() == null ||
-		 * vehicleBean.getVEngineNr().toString().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("EngineNr Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVRegNum() == null ||
-		 * vehicleBean.getVRegNum().toString().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("RegNum Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
 		
 		if (driverBean != null && driverBean.getDDob() != null && driverBean.getDIssueDt() != null) {
 			if (IclubWebHelper.isCurrentDate(driverBean.getDDob().getTime())) {
@@ -2293,10 +2129,6 @@ public class IclubFullQuoteController implements Serializable {
 						if (rateTypeBean.getRtType().equalsIgnoreCase("G")) {
 							String fieldValues[] = fieldValue.split("@");
 							IclubGeoLocBean geoLocBean = new IclubGeoLocBean();
-							// getGeoLocBean(new
-							// Double(fieldValues[0]),
-							// new
-							// Double(fieldValues[1]));
 							premium = premium + baseValue * (geoLocBean.getGlRate() / 100);
 							
 						} else {

@@ -214,7 +214,6 @@ public class IclubClaimController implements Serializable {
 	public String viewVehicleAction() {
 		
 		if (bean != null) {
-			// bean.get
 			paVehicleFlag = true;
 			IclubPolicyBean policyBean = new IclubPolicyBean();
 			List<IclubInsuranceItemBean> vehicleIItemBeans = getInsuranceItemDetails(policyBean.getIclubQuote(), 1l);
@@ -336,6 +335,7 @@ public class IclubClaimController implements Serializable {
 				model.setCNumber(getCnumber());
 				model.setIclubPolicy(policyBean.getPId());
 				model.setIclubPerson(getSessionUserId());
+				model.setIclubClaimStatus(1l);
 				
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();

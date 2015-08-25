@@ -19,8 +19,6 @@ public class MailSender implements Serializable {
 	
 	private static final long serialVersionUID = -4232011314128276763L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	// private static final ResourceBundle Y_BUNDLE =
-	// ResourceBundle.getBundle("yahoo-web");
 	private static final String username = BUNDLE.getString("mail.google.username");
 	private static final String password = BUNDLE.getString("mail.google.password");
 	private static Properties props;

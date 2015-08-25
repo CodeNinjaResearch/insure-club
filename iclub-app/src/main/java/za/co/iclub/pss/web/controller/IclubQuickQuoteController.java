@@ -456,40 +456,6 @@ public class IclubQuickQuoteController implements Serializable {
 			ret = ret && false;
 		}
 		
-		/*
-		 * if (propertyBean.getPRegNum() == null ||
-		 * propertyBean.getPRegNum().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Premium Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubCoverType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Cover Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPNoclaimYrs() == null) {
-		 * IclubWebHelper.addMessage(("Noclaim Years Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }if
-		 * (propertyBean.getPRentFurYn() == null ||
-		 * propertyBean.getPRentFurYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("RentFur Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }if
-		 * (propertyBean.getPSecGatesYn() == null ||
-		 * propertyBean.getPSecGatesYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Sec Gates Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPNorobberyYn() == null ||
-		 * propertyBean.getPNorobberyYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("No Robbery Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPPostalCd() == null) {
-		 * IclubWebHelper.addMessage(("Postel Code Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getIclubBarType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Bar Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }if
-		 * (propertyBean.getIclubPropUsageType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select PropUsage Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
-		
 		if (propertyBean.getIclubWallType() == null) {
 			IclubWebHelper.addMessage(("Please Select WallType"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
@@ -498,21 +464,6 @@ public class IclubQuickQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select Roof Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
-		/*
-		 * if (propertyBean.getIclubAccessType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Access Type"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * 
-		 * if (propertyBean.getPCompYn() == null ||
-		 * propertyBean.getPCompYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Comp Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (propertyBean.getPEstValue() == null) {
-		 * IclubWebHelper.addMessage(("Est value Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
 		
 		return ret;
 	}
@@ -599,57 +550,11 @@ public class IclubQuickQuoteController implements Serializable {
 			IclubWebHelper.addMessage(("Year Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		/*
-		 * if (vehicleBean.getIclubAccessTypeByVDdAccessTypeId() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Dd AccessType"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (vehicleBean.getVOdometer() == null) {
-		 * IclubWebHelper.addMessage(("OdoMeter Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (bean.getIclubDriver() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Driver"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVNoclaimYrs() == null) {
-		 * IclubWebHelper.addMessage(("No Claim Years Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
 		
 		if (vehicleBean.getIclubVehUsageType() == null) {
 			IclubWebHelper.addMessage(("Please Select VehUsage Type"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
-		/*
-		 * if (vehicleBean.getVCompYrs() == null) {
-		 * IclubWebHelper.addMessage(("Comp Years Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVImmYn() == null ||
-		 * vehicleBean.getVImmYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Imn Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVGearLockYn() == null ||
-		 * vehicleBean.getVGearLockYn().trim().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Gear Lock Yn Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (vehicleBean.getVVin() == null ||
-		 * vehicleBean.getVVin().toString().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("Vin Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getIclubVehSecType() == null) {
-		 * IclubWebHelper.addMessage(("Please Select Security Master"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 * 
-		 * if (vehicleBean.getVEngineNr() == null ||
-		 * vehicleBean.getVEngineNr().toString().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("EngineNr Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; } if
-		 * (vehicleBean.getVRegNum() == null ||
-		 * vehicleBean.getVRegNum().toString().equalsIgnoreCase("")) {
-		 * IclubWebHelper.addMessage(("RegNum Cannot be empty"),
-		 * FacesMessage.SEVERITY_ERROR); ret = ret && false; }
-		 */
 		
 		return ret;
 	}
@@ -1229,6 +1134,15 @@ public class IclubQuickQuoteController implements Serializable {
 		} else if (IclubWebHelper.isCurrentDate(bean.getPIdIssueDt().getTime())) {
 			IclubWebHelper.addMessage(("Issue Date Should be less than Current Date"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
+		} else if (bean.getPIdExpiryDt() != null && !IclubWebHelper.isCurrentDate(bean.getPIdExpiryDt().getTime())) {
+			IclubWebHelper.addMessage(("Issue Date Should be greater than Current Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (bean.getPIdExpiryDt() != null && !IclubWebHelper.isCurrentDate(bean.getPIdExpiryDt().getTime())) {
+			IclubWebHelper.addMessage(("Expiry Date Should be greater than Current Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (bean.getPIdIssueDt().compareTo(bean.getPIdExpiryDt()) < 0) {
+			IclubWebHelper.addMessage((" Id Issue Date Should be less than Expiry Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
 		}
 		if (bean.getIclubIdType() == null) {
 			IclubWebHelper.addMessage(("Please Select IdType"), FacesMessage.SEVERITY_ERROR);
@@ -1629,6 +1543,10 @@ public class IclubQuickQuoteController implements Serializable {
 		if (driverBean.getDIssueDt() == null) {
 			
 			IclubWebHelper.addMessage(getLabelBundle().getString("quote.val.dissuedt.empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (IclubWebHelper.isCurrentDate(driverBean.getDIssueDt().getTime())) {
+			
+			IclubWebHelper.addMessage("Issue Date Should be less than Current Date", FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (quoteBean.getQPrevPremium() != 0 && quoteBean.getIclubInsurerMaster() == null) {

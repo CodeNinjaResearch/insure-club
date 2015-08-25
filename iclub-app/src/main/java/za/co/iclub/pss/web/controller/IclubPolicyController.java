@@ -766,7 +766,6 @@ public class IclubPolicyController implements Serializable {
 	public String viewVehicleAction() {
 		
 		if (bean != null) {
-			// bean.get
 			paVehicleFlag = true;
 			List<IclubInsuranceItemBean> vehicleIItemBeans = getInsuranceItemDetails(bean.getIclubQuote(), 1l);
 			setVehicleDetails(vehicleIItemBeans);

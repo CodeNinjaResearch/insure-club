@@ -14,6 +14,9 @@
 	<ui:define name="content">
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlProfileCont">
+				<f:facet name="header">
+					<p:outputLabel value="Personal Details" />
+				</f:facet>
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Title :" />
@@ -144,7 +147,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Issue Date :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubQuickQuoteController.bean.PIdIssueDt}"  navigator="true" yearRange="c-100:c" showOn="button" />
+						<p:calendar styleClass="TexAlCenter" placeholder="Issue Date" value="#{iclubQuickQuoteController.bean.PIdIssueDt}" navigator="true" yearRange="c-100:c" showOn="button" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -153,7 +156,7 @@
 						<p:outputLabel value="Expiry Date :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar styleClass="TexAlCenter" placeholder="Expiry Date" value="#{iclubQuickQuoteController.bean.PIdExpiryDt}"  navigator="true" yearRange="c-100:c" showOn="button" />
+						<p:calendar styleClass="TexAlCenter" placeholder="Expiry Date" value="#{iclubQuickQuoteController.bean.PIdExpiryDt}" navigator="true" yearRange="c-100:c" showOn="button" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -174,7 +177,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar placeholder="Date Of Birth" value="#{iclubQuickQuoteController.bean.PDob}"  navigator="true" yearRange="c-100:c" showOn="button" />
+						<p:calendar placeholder="Date Of Birth" value="#{iclubQuickQuoteController.bean.PDob}" navigator="true" yearRange="c-100:c" showOn="button" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />

@@ -187,57 +187,6 @@
 				</p:tab>
 				<p:tab id="qqVehDet" title="Vehicle Items">
 					<ui:include src="/pages/quote/vehicle.xhtml" />
-					<!-- <div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Make :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuVehMake" id="mnuVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vmMake}">
-								<p:ajax update=":iclubFrm:qqTabView:mnuVehModel" listener="#{iclubQuickQuoteController.vmMakeValueChangeListener}" />
-								<f:selectItem itemLabel="Make" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.vmMakes}" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Model :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuVehModel" id="mnuVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubQuickQuoteController.vehicleBean.iclubVehicleMaster}">
-								<p:ajax update=":iclubFrm:qqTabView:mnuYear" listener="#{iclubQuickQuoteController.vmModelValueChangeListener}" />
-								<f:selectItem itemLabel="Model" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Year :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuYear" id="mnuYear" styleClass="with-placeholder TexAlCenter" value="#{iclubQuickQuoteController.vehicleBean.VYear}">
-								<f:selectItem itemLabel="Year" itemDisabled="true" />
-								<f:selectItems value="#{iclubQuickQuoteController.years}" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" />
-					<div class="Container100 Responsive">
-						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Claim In Laste 3 Years :" />
-						</div>
-						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuClaimYrs" id="mnuClaimYrs" styleClass="with-placeholder TexAlCenter" value="#{iclubQuickQuoteController.claimYN}">
-								<f:selectItem itemLabel="Claims in Last 3 Years" itemDisabled="true" />
-								<f:selectItem itemLabel="Yes" itemValue="Y" />
-								<f:selectItem itemLabel="No" itemValue="N" />
-							</p:selectOneMenu>
-						</div>
-					</div>
-					<div class="EmptyBox5" /> -->
 				</p:tab>
 				<p:tab id="qqProDet" title="Property Details">
 					<ui:include src="/pages/quote/property.xhtml" />
