@@ -1016,11 +1016,8 @@ public class IclubNamedQueryDAO {
 		log.debug("finding IclubPayment  instances by getIclubPaymentsByCohortId");
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubPayment.class);
-			// To Restrict the data for two columns
-			// ProjectionList p1 = Projections.projectionList();
-			// p1.add(Projections.property("PValue"));
-			// p1.add(Projections.property("PCrtdDt"));
-			// criteria.setProjection(p1);
+			
+			criteria.add(Restrictions.isNotNull("iclubPolicy"));
 			criteria.createAlias("iclubPerson", "person");
 			criteria.createAlias("person.iclubCohort", "cohort");
 			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {

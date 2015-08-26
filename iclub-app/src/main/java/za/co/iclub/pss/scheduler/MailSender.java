@@ -65,6 +65,8 @@ public class MailSender implements Serializable {
 						mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "google&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
 					} else if (bean.getCiInviteUri().split("@")[1].toString().contains("yahoo")) {
 						mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "yahoo&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
+					} else if (bean.getCiInviteUri().split("@")[1].toString().contains("outlook")) {
+						mailstring.append("<tr><td><font face='verdana' size=2><br /><a href=" + BUNDLE.getString("mail.google.redirect_uri") + "outlook&cohortInvId=" + bean.getCiId() + " >www.insuranceclub.co.za</a></b></font></td></tr>");
 					}
 					
 					mailstring.append("<tr><td><font face='verdana' size=2>Kind Regards</font></td></tr>");

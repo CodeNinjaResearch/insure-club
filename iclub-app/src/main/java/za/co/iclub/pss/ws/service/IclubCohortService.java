@@ -234,9 +234,9 @@ public class IclubCohortService {
 			for (Object object : batmod) {
 				IclubPayment payment = (IclubPayment) object;
 				if (payment != null && payment.getPValue() > 0) {
-					primumSinceI = +payment.getPValue();
+					primumSinceI += payment.getPValue();
 					if (payment.getPCrtdDt().compareTo(startDate) >= 0) {
-						premiumPaidInYear = +payment.getPValue();
+						premiumPaidInYear += payment.getPValue();
 					}
 				}
 				
@@ -252,7 +252,7 @@ public class IclubCohortService {
 			for (Object object : batPmod) {
 				IclubPolicy policy = (IclubPolicy) object;
 				if (policy.getPPremium() != null && policy.getPPremium() > 0) {
-					premiumForYear = +(policy.getPPremium() * 12);
+					premiumForYear += (policy.getPPremium() * 12);
 				}
 			}
 			cSModel.setPremiumForYear(premiumForYear);
@@ -263,7 +263,7 @@ public class IclubCohortService {
 			for (Object object : batPmod) {
 				IclubPolicy policy = (IclubPolicy) object;
 				if (policy.getPPremium() != null && policy.getPPremium() > 0) {
-					premiumApproved = +(policy.getPPremium() * 12);
+					premiumApproved += (policy.getPPremium() * 12);
 				}
 			}
 			cSModel.setPremiumApproved(premiumApproved);
@@ -275,9 +275,9 @@ public class IclubCohortService {
 			for (Object object : batCmod) {
 				IclubClaim claim = (IclubClaim) object;
 				if (claim != null && claim.getCValue() > 0) {
-					claimSinceI = +claim.getCValue();
+					claimSinceI += claim.getCValue();
 					if (claim.getCCrtdDt().compareTo(startDate) >= 0) {
-						claimsInYear = +claim.getCValue();
+						claimsInYear += claim.getCValue();
 					}
 				}
 				cSModel.setClaimSinceI(claimSinceI);
@@ -291,9 +291,9 @@ public class IclubCohortService {
 			for (Object object : batCmod) {
 				IclubClaim claim = (IclubClaim) object;
 				if (claim != null && claim.getCValue() > 0) {
-					premiumApproved = +claim.getCValue();
+					premiumApproved += claim.getCValue();
 				}
-				cSModel.setPremiumApproved(premiumApproved);
+				cSModel.setCalimApproved(premiumApproved);
 				
 			}
 		}
@@ -331,9 +331,9 @@ public class IclubCohortService {
 			for (Object object : batmod) {
 				IclubPayment payment = (IclubPayment) object;
 				if (payment != null && payment.getPValue() > 0) {
-					primumSinceI = +payment.getPValue();
+					primumSinceI += payment.getPValue();
 					if (payment.getPCrtdDt().compareTo(startDate) >= 0) {
-						premiumPaidInYear = +payment.getPValue();
+						premiumPaidInYear += payment.getPValue();
 					}
 				}
 				
@@ -349,7 +349,7 @@ public class IclubCohortService {
 			for (Object object : batPmod) {
 				IclubPolicy policy = (IclubPolicy) object;
 				if (policy.getPPremium() != null && policy.getPPremium() > 0) {
-					premiumForYear = +(policy.getPPremium() * 12);
+					premiumForYear += (policy.getPPremium() * 12);
 				}
 			}
 			cSModel.setPremiumForYear(premiumForYear);
@@ -362,9 +362,9 @@ public class IclubCohortService {
 			for (Object object : batCmod) {
 				IclubClaim claim = (IclubClaim) object;
 				if (claim != null && claim.getCValue() > 0) {
-					claimSinceI = +claim.getCValue();
+					claimSinceI += claim.getCValue();
 					if (claim.getCCrtdDt().compareTo(startDate) >= 0) {
-						claimsInYear = +claim.getCValue();
+						claimsInYear += claim.getCValue();
 					}
 				}
 				cSModel.setClaimSinceI(claimSinceI);

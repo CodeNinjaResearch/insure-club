@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
 
+import za.co.iclub.pss.util.IclubWebHelper;
+
 /**
  * Servlet implementation class SocialRedirectServlet
  */
@@ -57,6 +59,13 @@ public class SocialRedirectServlet extends HttpServlet {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				} else if (from.equalsIgnoreCase("outlook")) {
+					String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + getState("OUTLOOK");
+					try {
+						response.sendRedirect(redirectUrl);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			} else {
 				response.sendRedirect(BUNDLE.getString("login_uri"));
@@ -64,6 +73,21 @@ public class SocialRedirectServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String getState(String from) {
+		String state = "{from:" + from + "}";
+		try {
+			if (IclubWebHelper.getObjectIntoSession("newInvite") != null) {
+				state = "{from:" + from + ",redirect:newInvite}";
+			}
+			
+			state = Base64.encodeBase64URLSafeString(state.getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return state;
 	}
 	
 	/**

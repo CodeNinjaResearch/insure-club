@@ -476,6 +476,7 @@ public class IclubMenuController implements Serializable {
 			
 			else if (code != null && (preCode == null || !preCode.equalsIgnoreCase(code)) && from != null && from.trim().equalsIgnoreCase("GOOGLE")) {
 				request.removeAttribute("code");
+				preCode = code;
 				String urlParameters = "code=" + code + "&client_id=" + BUNDLE.getString("client_id") + "&client_secret=" + BUNDLE.getString("client_secret") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&grant_type=" + BUNDLE.getString("grant_type");
 				
 				URL url = new URL("https://accounts.google.com/o/oauth2/token");
@@ -566,7 +567,7 @@ public class IclubMenuController implements Serializable {
 							
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						LOGGER.error(e, e);
 					}
 					
 				} else {
