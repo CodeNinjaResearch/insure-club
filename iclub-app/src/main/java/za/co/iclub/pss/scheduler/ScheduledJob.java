@@ -2,6 +2,7 @@ package za.co.iclub.pss.scheduler;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -16,11 +17,13 @@ public class ScheduledJob extends QuartzJobBean {
 	
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	
+	private static final Logger LOGGER = Logger.getLogger(ScheduledJob.class);
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void executeInternal(JobExecutionContext arg0) throws JobExecutionException {
 		
-		System.out.println("--------Inside Scheduler-----");
+		LOGGER.info("--------Inside Scheduler-----");
 		try {
 			synchronized (this) {
 				List<IclubCohortInvite> cohorsInviteList = iclubNamedQueryDAO.getIclubCohortInvitesByNotSentStatus();

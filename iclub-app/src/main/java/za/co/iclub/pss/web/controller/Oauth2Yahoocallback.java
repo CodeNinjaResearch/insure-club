@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -77,9 +76,7 @@ public class Oauth2Yahoocallback extends HttpServlet {
 				post.setEntity(new UrlEncodedFormEntity(arguments));
 				HttpResponse response1 = client.execute(post);
 				String outputString = EntityUtils.toString(response1.getEntity());
-				System.out.println(outputString);
 				JsonObject json = (JsonObject) new JsonParser().parse(outputString);
-				System.out.println(json);
 				String access_token = json.get("access_token").getAsString();
 				String xoauth_yahoo_guid = json.get("xoauth_yahoo_guid").toString();
 				
@@ -91,28 +88,23 @@ public class Oauth2Yahoocallback extends HttpServlet {
 					HttpResponse response2 = client.execute(httpGet);
 					outputString = EntityUtils.toString(response2.getEntity());
 					JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
-					System.out.println(outputString + "------outputString   :\n");
 					jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
 					String emails = jsonGet.get("emails").toString();
 					ObjectMapper mapper = new ObjectMapper();
 					
-					List<YahooMailsBean> mailsList = mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
-					System.out.println(mailsList);
+					mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOGGER.error(e, e);
 				}
 				
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOGGER.error(e, e);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("leaving doGet");
+		LOGGER.info("leaving doGet");
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(DigestUtils.md5Hex("TestUserT3stus3rP@ssw0rd1427109538"));
-	}
 }

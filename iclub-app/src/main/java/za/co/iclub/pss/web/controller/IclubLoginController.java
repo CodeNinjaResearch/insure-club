@@ -151,7 +151,7 @@ public class IclubLoginController implements Serializable {
 		try {
 			RequestToken requestToken = twitter.getOAuthRequestToken(BUNDLE.getString("twt.redirect_uri"));
 			request.getSession().setAttribute("requestToken", requestToken);
-			System.out.println("requestToken.getAuthenticationURL():" + requestToken.getAuthenticationURL());
+			LOGGER.info("requestToken.getAuthenticationURL():" + requestToken.getAuthenticationURL());
 			try {
 				response.sendRedirect(requestToken.getAuthenticationURL());
 			} catch (IOException e) {
@@ -333,10 +333,9 @@ public class IclubLoginController implements Serializable {
 			arguments.add(new BasicNameValuePair("data", "test"));
 			post.setEntity(new UrlEncodedFormEntity(arguments));
 			HttpResponse response1 = client.execute(post);
-			String outputString = EntityUtils.toString(response1.getEntity());
-			System.out.println(outputString);
+			EntityUtils.toString(response1.getEntity());
 		} catch (Exception e) {
-			
+			LOGGER.error(e, e);
 		}
 		
 	}

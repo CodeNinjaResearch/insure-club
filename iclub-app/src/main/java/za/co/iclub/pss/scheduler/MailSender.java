@@ -13,6 +13,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
+
 import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 
 public class MailSender implements Serializable {
@@ -22,6 +24,7 @@ public class MailSender implements Serializable {
 	private static final String username = BUNDLE.getString("mail.google.username");
 	private static final String password = BUNDLE.getString("mail.google.password");
 	private static Properties props;
+	private static final Logger LOGGER = Logger.getLogger(MailSender.class);
 	
 	static {
 		props = new Properties();
@@ -74,7 +77,7 @@ public class MailSender implements Serializable {
 					
 					bean.setCiInviteSentStatus("Y");
 					
-					System.out.println(bean.getCiInviteUri() + " : Email Sent Successfully");
+					LOGGER.info(bean.getCiInviteUri() + " : Email Sent Successfully");
 				}
 			}
 			

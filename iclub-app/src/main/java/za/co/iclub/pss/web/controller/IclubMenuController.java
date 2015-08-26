@@ -93,31 +93,20 @@ public class IclubMenuController implements Serializable {
 			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
 			FacesContext.getCurrentInstance().responseComplete();
 		} else if (!FacesContext.getCurrentInstance().getViewRoot().getViewId().equalsIgnoreCase("/pages/admin/cohorts/allCohorts.xhtml") && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
-			try {/*
-				 * WebClient client =
-				 * IclubWebHelper.createCustomClient(U_BASE_URL + "get/" +
-				 * IclubWebHelper
-				 * .getObjectIntoSession(BUNDLE.getString("logged.in.user.id"
-				 * )).toString()); IclubPersonModel model =
-				 * client.accept(MediaType
-				 * .APPLICATION_JSON).get(IclubPersonModel.class);
-				 * client.close(); if (model != null) { if
-				 * (model.getIclubCohort() == null &&
-				 * IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
-				 * String access_token =
-				 * IclubWebHelper.getObjectIntoSession(BUNDLE
-				 * .getString("socail.access.token")).toString(); String from =
-				 * IclubWebHelper
-				 * .getObjectIntoSession(BUNDLE.getString("socail.access.provider"
-				 * )).toString(); NavigationHandler navigationHandler =
-				 * FacesContext
-				 * .getCurrentInstance().getApplication().getNavigationHandler
-				 * (); navigationHandler.handleNavigation(FacesContext.
-				 * getCurrentInstance(), null,
-				 * "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from="
-				 * + from + "&key=" + access_token);
-				 * FacesContext.getCurrentInstance().responseComplete(); } }
-				 */
+			try {
+				WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+				IclubPersonModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
+				client.close();
+				if (model != null) {
+					if (model.getIclubCohort() == null && IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
+						String access_token = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.token")).toString();
+						String from = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.provider")).toString();
+						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
+						FacesContext.getCurrentInstance().responseComplete();
+					}
+				}
+				
 			} catch (Exception e) {
 				
 			}
@@ -214,33 +203,26 @@ public class IclubMenuController implements Serializable {
 					}
 				} catch (Exception e) {
 					LOGGER.error(e, e);
-					e.printStackTrace();
 				}
 			}
 			
 			if (verifier != null && !verifier.trim().equalsIgnoreCase("") && (preVerifier == null || !preVerifier.equalsIgnoreCase(verifier))) {
 				preVerifier = verifier;
 				Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
-				System.out.println("TwitterCallbackServlet:requestToken");
+				LOGGER.info("TwitterCallbackServlet:requestToken");
 				RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
-				System.out.println("TwitterCallbackServlet:requestToken:" + requestToken);
+				LOGGER.info("TwitterCallbackServlet:requestToken:" + requestToken);
 				
-				System.out.println("verifier :" + verifier);
+				LOGGER.info("verifier :" + verifier);
 				try {
 					AccessToken access_token = twitter.getOAuthAccessToken(requestToken, verifier);
 					String screenName = twitter.getScreenName();
 					request.getSession().removeAttribute("requestToken");
-					System.out.println(access_token.getScreenName() + "__________" + screenName);
+					LOGGER.info(access_token.getScreenName() + "__________" + screenName);
 					
 					User user = twitter.showUser(screenName);
 					if (user != null) {
-						System.out.println(user.getName() + " :========Name");
-						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
-						System.out.println(twitter.getFriendsList(screenName, -1L) + " :========Name");
-						System.out.println(twitter.getFollowersIDs(-1L) + " :========Name");
-						System.out.println(twitter.getFollowersIDs(screenName, 50) + " :========Name");
-						System.out.println(user.getFollowersCount() + " :========Name");
-						System.out.println(user.getProfileBannerMobileURL() + " :========Name");
+						
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -593,11 +575,11 @@ public class IclubMenuController implements Serializable {
 			}
 			
 		} catch (MalformedURLException e) {
-			System.out.println(e);
+			LOGGER.error(e, e);
 		} catch (ProtocolException e) {
-			System.out.println(e);
+			LOGGER.error(e, e);
 		} catch (IOException e) {
-			System.out.println(e);
+			LOGGER.error(e, e);
 		}
 	}
 	

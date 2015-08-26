@@ -18,9 +18,7 @@ public class TwitterCallbackServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
 		RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
-		System.out.println("TwitterCallbackServlet:requestToken:" + requestToken);
 		String verifier = request.getParameter("oauth_verifier");
-		System.out.println("verifier :" + verifier);
 		try {
 			twitter.getOAuthAccessToken(requestToken, verifier);
 			request.getSession().removeAttribute("requestToken");

@@ -42,7 +42,7 @@ public class SocialRedirectServlet extends HttpServlet {
 					String state = "";
 					if (cohortInviteId != null && !cohortInviteId.trim().equalsIgnoreCase(""))
 						state = Base64.encodeBase64URLSafeString(("{cohortInviteId :" + cohortInviteId + "}").getBytes());
-					System.out.println("-------" + state);
+					
 					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force&state=" + state;
 					try {
 						response.sendRedirect(redirectUrl);

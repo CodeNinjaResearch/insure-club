@@ -371,7 +371,6 @@ public class IclubGeoLocController implements Serializable {
 					if ((model.getGlAddress() != null && !model.getGlAddress().trim().equalsIgnoreCase("")) || (model.getGlProvince() != null && !model.getGlProvince().trim().equalsIgnoreCase("")) || (model.getGlSuburb() != null && !model.getGlSuburb().trim().equalsIgnoreCase("")))
 						models.add(model);
 					
-					System.out.println("");
 				}
 				i++;
 			}

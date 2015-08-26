@@ -548,7 +548,7 @@ public class IclubCohortController implements Serializable {
 		try {
 			Map<String, IclubCohortInviteBean> cohortsInviteBeanMap = new HashMap<String, IclubCohortInviteBean>();
 			LOGGER.info("Class :: " + this.getClass() + " :: Method :: setIclubCohortInvite");
-			System.out.println(fromSocial + "=====FromSocial====");
+			LOGGER.info(fromSocial + "=====FromSocial====");
 			if (newInvites) {
 				access_token = IclubWebHelper.getObjectIntoSession("key").toString();
 			}
@@ -596,7 +596,6 @@ public class IclubCohortController implements Serializable {
 					HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 					
 					String userId = request.getParameter("to[" + i + "]");
-					System.out.println(userId + "========");
 					if (userId != null && !userId.trim().equalsIgnoreCase("")) {
 						String profileUrl = "https://graph.facebook.com/" + userId + "?access_token=" + access_token;
 						URL u = new URL(profileUrl);
@@ -620,7 +619,6 @@ public class IclubCohortController implements Serializable {
 						if (bean.getCiInviteUri() != null && !bean.getCiInviteUri().trim().equalsIgnoreCase("")) {
 							cohortsInviteBeanMap.put(bean.getCiInviteUri(), bean);
 						}
-						System.out.println(json.getString("first_name") + "------Json------" + json);
 					} else {
 						flag = false;
 					}

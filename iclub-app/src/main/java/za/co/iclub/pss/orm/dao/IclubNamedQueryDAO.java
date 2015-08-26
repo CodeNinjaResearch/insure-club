@@ -41,10 +41,6 @@ public class IclubNamedQueryDAO {
 		// do nothing
 	}
 	
-	public static void main(String[] args) {
-		System.out.println();
-	}
-	
 	public List findByUser(String userId, String className) {
 		log.debug("finding all " + className + " instances by user");
 		try {

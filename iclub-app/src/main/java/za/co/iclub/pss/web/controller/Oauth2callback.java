@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import za.co.iclub.pss.model.ui.GooglePojo;
 
 import com.google.gdata.client.contacts.ContactsService;
@@ -32,6 +34,7 @@ import com.google.gson.JsonParser;
 
 public class Oauth2callback extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = Logger.getLogger(Oauth2callback.class);
 	
 	public Oauth2callback() {
 		super();
@@ -44,7 +47,7 @@ public class Oauth2callback extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("entering doGet");
+		LOGGER.info("entering doGet");
 		try {
 			String code = request.getParameter("code");
 			String urlParameters = "code=" + code + "&client_id=386352872692-uknquacomkku9e75tn2jgpjh5h27ognc.apps.googleusercontent.com" + "&client_secret=X1xK4cHAU2ewqmYk67eGYL0s" + "&redirect_uri=http://localhost:8080/iclub-www/Oauth2callback" + "&grant_type=authorization_code";
@@ -60,11 +63,9 @@ public class Oauth2callback extends HttpServlet {
 			while ((line = reader.readLine()) != null) {
 				outputString += line;
 			}
-			System.out.println(outputString);
 			
 			JsonObject json = (JsonObject) new JsonParser().parse(outputString);
 			String access_token = json.get("access_token").getAsString();
-			System.out.println(access_token);
 			
 			try {
 				String callUrl = "https://www.google.com/m8/feeds/contacts/default/full?max-results=8&access_token=" + access_token;
@@ -75,7 +76,7 @@ public class Oauth2callback extends HttpServlet {
 				while ((line = reader.readLine()) != null) {
 					outputString += line;
 				}
-				System.out.println(outputString);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -89,9 +90,9 @@ public class Oauth2callback extends HttpServlet {
 				while ((line = reader.readLine()) != null) {
 					outputString += line;
 				}
-				System.out.println(outputString);
-				GooglePojo data = new Gson().fromJson(outputString, GooglePojo.class);
-				System.out.println(data);
+				
+				new Gson().fromJson(outputString, GooglePojo.class);
+				
 				reader.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -100,7 +101,7 @@ public class Oauth2callback extends HttpServlet {
 			ContactsService myService = new ContactsService("iclub");
 			URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
 			ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
-			System.out.println(resultFeed.getTitle().getPlainText());
+			LOGGER.info(resultFeed.getTitle().getPlainText());
 			for (ContactEntry entry : resultFeed.getEntries()) {
 				if (entry.hasName()) {
 					Name name = entry.getName();
@@ -109,51 +110,52 @@ public class Oauth2callback extends HttpServlet {
 						if (name.getFullName().hasYomi()) {
 							fullNameToDisplay += " (" + name.getFullName().getYomi() + ")";
 						}
-						System.out.println("\\\t\\\t" + fullNameToDisplay);
+						LOGGER.info("fullNameToDisplay --" + fullNameToDisplay);
+						
 					} else {
-						System.out.println("\\\t\\\t (no full name found)");
+						LOGGER.info("\\\t\\\t (no full name found)");
 					}
 					if (name.hasNamePrefix()) {
-						System.out.println("\\\t\\\t" + name.getNamePrefix().getValue());
+						LOGGER.info("\\\t\\\t" + name.getNamePrefix().getValue());
 					} else {
-						System.out.println("\\\t\\\t (no name prefix found)");
+						LOGGER.info("\\\t\\\t (no name prefix found)");
 					}
 					if (name.hasGivenName()) {
 						String givenNameToDisplay = name.getGivenName().getValue();
 						if (name.getGivenName().hasYomi()) {
 							givenNameToDisplay += " (" + name.getGivenName().getYomi() + ")";
 						}
-						System.out.println("\\\t\\\t" + givenNameToDisplay);
+						LOGGER.info("\\\t\\\t" + givenNameToDisplay);
 					} else {
-						System.out.println("\\\t\\\t (no given name found)");
+						LOGGER.info("\\\t\\\t (no given name found)");
 					}
 					if (name.hasAdditionalName()) {
 						String additionalNameToDisplay = name.getAdditionalName().getValue();
 						if (name.getAdditionalName().hasYomi()) {
 							additionalNameToDisplay += " (" + name.getAdditionalName().getYomi() + ")";
 						}
-						System.out.println("\\\t\\\t" + additionalNameToDisplay);
+						LOGGER.info("\\\t\\\t" + additionalNameToDisplay);
 					} else {
-						System.out.println("\\\t\\\t (no additional name found)");
+						LOGGER.info("\\\t\\\t (no additional name found)");
 					}
 					if (name.hasFamilyName()) {
 						String familyNameToDisplay = name.getFamilyName().getValue();
 						if (name.getFamilyName().hasYomi()) {
 							familyNameToDisplay += " (" + name.getFamilyName().getYomi() + ")";
 						}
-						System.out.println("\\\t\\\t" + familyNameToDisplay);
+						LOGGER.info("\\\t\\\t" + familyNameToDisplay);
 					} else {
-						System.out.println("\\\t\\\t (no family name found)");
+						LOGGER.info("\\\t\\\t (no family name found)");
 					}
 					if (name.hasNameSuffix()) {
-						System.out.println("\\\t\\\t" + name.getNameSuffix().getValue());
+						LOGGER.info("\\\t\\\t" + name.getNameSuffix().getValue());
 					} else {
-						System.out.println("\\\t\\\t (no name suffix found)");
+						LOGGER.info("\\\t\\\t (no name suffix found)");
 					}
 				} else {
-					System.out.println("\t (no name found)");
+					LOGGER.info("\t (no name found)");
 				}
-				System.out.println("Email addresses:");
+				LOGGER.info("Email addresses:");
 				for (Email email : entry.getEmailAddresses()) {
 					System.out.print(" " + email.getAddress());
 					if (email.getRel() != null) {
@@ -167,7 +169,7 @@ public class Oauth2callback extends HttpServlet {
 					}
 					System.out.print("\n");
 				}
-				System.out.println("IM addresses:");
+				LOGGER.info("IM addresses:");
 				for (Im im : entry.getImAddresses()) {
 					System.out.print(" " + im.getAddress());
 					if (im.getLabel() != null) {
@@ -184,38 +186,38 @@ public class Oauth2callback extends HttpServlet {
 					}
 					System.out.print("\n");
 				}
-				System.out.println("Groups:");
+				LOGGER.info("Groups:");
 				for (GroupMembershipInfo group : entry.getGroupMembershipInfos()) {
 					String groupHref = group.getHref();
-					System.out.println("  Id: " + groupHref);
+					LOGGER.info("  Id: " + groupHref);
 				}
-				System.out.println("Extended Properties:");
+				LOGGER.info("Extended Properties:");
 				for (ExtendedProperty property : entry.getExtendedProperties()) {
 					if (property.getValue() != null) {
-						System.out.println("  " + property.getName() + "(value) = " + property.getValue());
+						LOGGER.info("  " + property.getName() + "(value) = " + property.getValue());
 					} else if (property.getXmlBlob() != null) {
-						System.out.println("  " + property.getName() + "(xmlBlob)= " + property.getXmlBlob().getBlob());
+						LOGGER.info("  " + property.getName() + "(xmlBlob)= " + property.getXmlBlob().getBlob());
 					}
 				}
 				Link photoLink = entry.getContactPhotoLink();
 				String photoLinkHref = photoLink.getHref();
-				System.out.println("Photo Link: " + photoLinkHref);
+				LOGGER.info("Photo Link: " + photoLinkHref);
 				if (photoLink.getEtag() != null) {
-					System.out.println("Contact Photo's ETag: " + photoLink.getEtag());
+					LOGGER.info("Contact Photo's ETag: " + photoLink.getEtag());
 				}
-				System.out.println("Contact's ETag: " + entry.getEtag());
+				LOGGER.info("Contact's ETag: " + entry.getEtag());
 			}
 			
 		} catch (MalformedURLException e) {
-			System.out.println(e);
+			LOGGER.error(e, e);
 		} catch (ProtocolException e) {
-			System.out.println(e);
+			LOGGER.error(e, e);
 		} catch (IOException e) {
-			System.out.println(e);
+			LOGGER.error(e, e);
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			LOGGER.error(e, e);
 		}
-		System.out.println("leaving doGet");
+		LOGGER.info("leaving doGet");
 	}
 	
 }

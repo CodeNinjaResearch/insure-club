@@ -18,7 +18,6 @@ public class TwitterLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("TwitterLoginServlet:doGet");
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		
 		cb.setDebugEnabled(true).setOAuthConsumerKey("oINoOag2pIh1G7di2CIButdAR").setOAuthConsumerSecret("bKu1INz6edjn2l4YxN0zK12tuiHEnzuLklobhaQ32gAa4zQ3N1").setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
@@ -27,13 +26,11 @@ public class TwitterLoginServlet extends HttpServlet {
 		request.getSession().setAttribute("twitter", twitter);
 		try {
 			StringBuffer callbackURL = request.getRequestURL();
-			System.out.println("TwitterLoginServlet:callbackURL:" + callbackURL);
 			int index = callbackURL.lastIndexOf("/");
 			callbackURL.replace(index, callbackURL.length(), "").append("/TwitterCallback");
 			
 			RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
 			request.getSession().setAttribute("requestToken", requestToken);
-			System.out.println("requestToken.getAuthenticationURL():" + requestToken.getAuthenticationURL());
 			response.sendRedirect(requestToken.getAuthenticationURL());
 			
 		} catch (TwitterException e) {
@@ -47,6 +44,5 @@ public class TwitterLoginServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Unexpected doPost ...");
 	}
 }

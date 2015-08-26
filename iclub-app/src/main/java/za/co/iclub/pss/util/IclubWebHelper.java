@@ -17,16 +17,19 @@ import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import za.co.iclub.pss.model.ui.GoogleResponse;
 import za.co.iclub.pss.model.ui.Result;
 import za.co.iclub.pss.model.ws.IclubGeoLocModel;
+import za.co.iclub.pss.web.controller.IclubMenuController;
 
 public class IclubWebHelper {
 	
 	private static final String URL = "http://maps.googleapis.com/maps/api/geocode/json";
+	private static final Logger LOGGER = Logger.getLogger(IclubMenuController.class);
 	
 	public static WebClient createCustomClient(String url) {
 		WebClient client = WebClient.create(url, Collections.singletonList(new JacksonJsonProvider(new CustomObjectMapper())));
@@ -100,9 +103,9 @@ public class IclubWebHelper {
 					GoogleResponse res = convertToLatLong((model.getGlAddress() != null ? model.getGlAddress() + "," : "") + (model.getGlSuburb() != null ? model.getGlSuburb() + "," : "") + (model.getGlProvince() != null ? model.getGlProvince() : ""));
 					if (res.getStatus().equals("OK")) {
 						for (Result result : res.getResults()) {
-							System.out.println("Lattitude of address is :" + result.getGeometry().getLocation().getLat());
-							System.out.println("Longitude of address is :" + result.getGeometry().getLocation().getLng());
-							System.out.println("Location is " + result.getGeometry().getLocation_type());
+							LOGGER.info("Lattitude of address is :" + result.getGeometry().getLocation().getLat());
+							LOGGER.info("Longitude of address is :" + result.getGeometry().getLocation().getLng());
+							LOGGER.info("Location is " + result.getGeometry().getLocation_type());
 							model.setGlLat(new Double(result.getGeometry().getLocation().getLat()));
 							model.setGlLong(new Double(result.getGeometry().getLocation().getLng()));
 						}
@@ -111,11 +114,11 @@ public class IclubWebHelper {
 							long time = 500;
 							Thread.sleep(time);
 						} catch (Exception e) {
-							System.out.println(e);
+							LOGGER.error(e, e);
 						}
 						
 					} else {
-						System.out.println(res.getStatus());
+						LOGGER.info(res.getStatus());
 					}
 				}
 			}
@@ -158,11 +161,6 @@ public class IclubWebHelper {
 		return response;
 	}
 	
-	public static void main(String[] args) {
-		String id = "8001015009087";
-		System.out.println(validateId(id, "M"));
-	}
-	
 	public static String validateId(String id, String gender) {
 		
 		if (id != null && !id.trim().equalsIgnoreCase("")) {
@@ -190,18 +188,18 @@ public class IclubWebHelper {
 					String citizenship = id.substring(10, 11);
 					
 					if (Integer.parseInt(citizenship) == 0 || Integer.parseInt(citizenship) == 1) {
-						System.out.println("citizenship------:" + citizenship);
+						LOGGER.info("citizenship------:" + citizenship);
 					}
 					
 					String holdersrace = id.substring(11, 12);
 					
 					if (Integer.parseInt(holdersrace) == 8 || Integer.parseInt(holdersrace) == 9) {
-						System.out.println("holdersrace------:" + holdersrace);
+						LOGGER.info("holdersrace------:" + holdersrace);
 					}
 					
 					String checkSum = id.substring(12, 13);
 					
-					System.out.println("checkSum------:" + checkSum);
+					LOGGER.info("checkSum------:" + checkSum);
 					if (getCheckSum(id.substring(0, 12), Integer.parseInt(checkSum))) {
 						return "";
 					}
@@ -220,7 +218,7 @@ public class IclubWebHelper {
 	
 	public static boolean getCheckSum(String id, int checksum) {
 		
-		System.out.println("id==========:" + id);
+		LOGGER.info("id==========:" + id);
 		
 		char[] idArrya = id.toCharArray();
 		int a = 0;
@@ -239,19 +237,19 @@ public class IclubWebHelper {
 			}
 			
 		}
-		System.out.println("a====" + a);
+		LOGGER.info("a====" + a);
 		b = (Integer.parseInt(b) * 2) + "";
-		System.out.println("b====" + b);
+		LOGGER.info("b====" + b);
 		for (int i = 0; i < b.length(); i++) {
 			
 			String bs = b.toCharArray()[i] + "";
 			c += Integer.parseInt(bs);
 		}
-		System.out.println("====C======:" + c);
+		LOGGER.info("====C======:" + c);
 		d = a + c;
-		System.out.println("====D======:" + d);
+		LOGGER.info("====D======:" + d);
 		int z = 10 - (d % 10);
-		System.out.println("Z========" + z);
+		LOGGER.info("Z========" + z);
 		
 		return z == checksum;
 	}

@@ -1,7 +1,5 @@
 package za.co.iclub.pss.model.ws;
 
-import java.io.File;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "IclubWallTypeModel")
@@ -44,16 +42,4 @@ public class IclubWallTypeModel {
 		this.wtStatus = wtStatus;
 	}
 	
-	public static void main(String[] args) {
-		File file = new File("/noformat/github/iclub-app/src/main/java/za/co/iclub/pss/trans/wstoorm");
-		for (File f : file.listFiles()) {
-			File f2 = new File("/noformat/github/iclub-app/src/main/java/za/co/iclub/pss/trans/" + f.getName().toString().replace("Model", "").replace(".java", "Trans.java"));
-			try {
-				f.renameTo(f2);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			System.out.println(f);
-		}
-	}
 }
