@@ -36,6 +36,7 @@ public class IclubUserDashboardService {
 			Double insuredValue = 0.0;
 			String policyIds = "";
 			String cliamIds = "";
+			List dataQuotes = null;
 			
 			try {
 				List data = iclubNamedQueryDAO.getQuoteDetailsByUserId(userId, 1l);
@@ -56,7 +57,7 @@ public class IclubUserDashboardService {
 					for (int i = 0; i < data.size(); i++) {
 						quoteIds = quoteIds.trim().equalsIgnoreCase("") ? data.get(i).toString() : quoteIds + "," + data.get(i).toString();
 					}
-					
+					dataQuotes = data;
 					data = iclubNamedQueryDAO.getIclubQuoteIdByUserId(data);
 					
 					String vehicleIds = "";
@@ -134,7 +135,7 @@ public class IclubUserDashboardService {
 					}
 					model.setTotalPolicyCnt(new Long(data.size()));
 					
-					data = iclubNamedQueryDAO.getIclubQuoteIdByUserId(quoteIds);
+					data = iclubNamedQueryDAO.getIclubQuoteIdByUserId(dataQuotes);
 					String vehicleIds = "";
 					String propertyIds = "";
 					insuredValue = prorataPremium + insuredValue;
