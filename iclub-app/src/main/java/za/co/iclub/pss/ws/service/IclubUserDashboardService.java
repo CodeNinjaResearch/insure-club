@@ -23,6 +23,7 @@ public class IclubUserDashboardService {
 	private static final Logger LOGGER = Logger.getLogger(IclubUserDashboardService.class);
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	
+	@SuppressWarnings("unchecked")
 	@GET
 	@Path("/get/{userId}")
 	@Consumes("application/json")
@@ -56,7 +57,7 @@ public class IclubUserDashboardService {
 						quoteIds = quoteIds.trim().equalsIgnoreCase("") ? data.get(i).toString() : quoteIds + "," + data.get(i).toString();
 					}
 					
-					data = iclubNamedQueryDAO.getIclubQuoteIdByUserId(quoteIds);
+					data = iclubNamedQueryDAO.getIclubQuoteIdByUserId(data);
 					
 					String vehicleIds = "";
 					String propertyIds = "";

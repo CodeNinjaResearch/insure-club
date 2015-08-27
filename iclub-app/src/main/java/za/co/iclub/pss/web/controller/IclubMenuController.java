@@ -99,11 +99,11 @@ public class IclubMenuController implements Serializable {
 				client.close();
 				if (model != null) {
 					if (model.getIclubCohort() == null && IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
-						String access_token = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.token")).toString();
+						/*String access_token = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.token")).toString();
 						String from = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.provider")).toString();
 						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
-						FacesContext.getCurrentInstance().responseComplete();
+						FacesContext.getCurrentInstance().responseComplete();*/
 					}
 				}
 				

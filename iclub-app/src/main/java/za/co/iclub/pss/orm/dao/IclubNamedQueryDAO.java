@@ -1190,6 +1190,23 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
+	public List getIclubQuoteIdByUserId(Collection<? extends String> quoteIds) {
+		log.debug("finding IclubInsuranceItem fields  by QuoteIds");
+		try {
+			Criteria criteria = getCurrentSession().createCriteria(IclubInsuranceItem.class);
+			criteria.add(Restrictions.in("iiQuoteId", quoteIds));
+			criteria.createAlias("iclubInsuranceItemType", "iclubInsuranceItemType");
+			criteria.setProjection(Projections.property("iclubInsuranceItemType.iitId"));
+			criteria.setProjection(Projections.property("iiItemId"));
+			List personNames = criteria.list();
+			return personNames;
+		} catch (RuntimeException re) {
+			log.error("get IclubPersonList failed", re);
+			throw re;
+		}
+		
+	}
+	
 	public List getIclubPolicIdsByQuotes(String userIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {

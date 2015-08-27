@@ -15,6 +15,7 @@ public class IclubCohortSummaryBean {
 	private Long numOfMemLeftInYear;
 	private Double dropOutRate;
 	private Double monthlyGrowthRate;
+	private Double cliamsLodged;
 	
 	public Double getPrimumSinceI() {
 		return primumSinceI;
@@ -118,6 +119,14 @@ public class IclubCohortSummaryBean {
 	
 	public void setMonthlyGrowthRate(Double monthlyGrowthRate) {
 		this.monthlyGrowthRate = monthlyGrowthRate;
+	}
+
+	public Double getCliamsLodged() {
+		return cliamsLodged;
+	}
+
+	public void setCliamsLodged(Double cliamsLodged) {
+		this.cliamsLodged = cliamsLodged;
 	}
 	
 }

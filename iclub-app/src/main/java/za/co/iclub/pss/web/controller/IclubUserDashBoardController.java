@@ -352,6 +352,7 @@ public class IclubUserDashBoardController implements Serializable {
 					cohortSummaryBean.setNumOfMemLeftInYear(model.getNumOfMemLeftInYear() != null ? model.getNumOfMemLeftInYear() : 0);
 					cohortSummaryBean.setDropOutRate(model.getDropOutRate() != null ? model.getDropOutRate() : 0.0);
 					cohortSummaryBean.setMonthlyGrowthRate(model.getMonthlyGrowthRate() != null ? model.getMonthlyGrowthRate() : 0.0);
+					cohortSummaryBean.setCliamsLodged(model.getCliamsLodged() != null ? model.getCliamsLodged() : 0.0);
 				}
 				if (userModel != null) {
 					cohortSummaryFlag = true;
@@ -366,6 +367,7 @@ public class IclubUserDashBoardController implements Serializable {
 					cohortSummaryUserBean.setNumOfMemLeftInYear(userModel.getNumOfMemLeftInYear() != null ? userModel.getNumOfMemLeftInYear() : 0);
 					cohortSummaryUserBean.setDropOutRate(userModel.getDropOutRate() != null ? userModel.getDropOutRate() : 0.0);
 					cohortSummaryUserBean.setMonthlyGrowthRate(userModel.getMonthlyGrowthRate() != null ? userModel.getMonthlyGrowthRate() : 0.0);
+					cohortSummaryUserBean.setCliamsLodged(userModel.getCliamsLodged() != null ? userModel.getCliamsLodged() : 0.0);
 				}
 				
 			}

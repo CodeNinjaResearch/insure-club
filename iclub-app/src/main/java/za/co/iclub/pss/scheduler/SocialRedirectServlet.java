@@ -38,29 +38,26 @@ public class SocialRedirectServlet extends HttpServlet {
 		
 		try {
 			String from = request.getParameter("from");
+			String cohortInviteId = request.getParameter("cohortInvId");
 			if (from != null) {
 				if (from.equalsIgnoreCase("google")) {
-					String cohortInviteId = request.getParameter("cohortInvId");
-					String state = "";
-					if (cohortInviteId != null && !cohortInviteId.trim().equalsIgnoreCase(""))
-						state = Base64.encodeBase64URLSafeString(("{cohortInviteId :" + cohortInviteId + "}").getBytes());
 					
-					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force&state=" + state;
+					String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force&state=" + getState("GOOGLE", cohortInviteId);
 					try {
 						response.sendRedirect(redirectUrl);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} else if (from.equalsIgnoreCase("yahoo")) {
-					String cohortInviteId = request.getParameter("cohortInvId");
-					String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + (cohortInviteId != null ? "&cohortInviteId=" + cohortInviteId : "") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us";
+					
+					String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + (cohortInviteId != null ? "&cohortInviteId=" + cohortInviteId : "") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us&state=" + getState("YAHOO", cohortInviteId);
 					try {
 						response.sendRedirect(redirectUrl);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} else if (from.equalsIgnoreCase("outlook")) {
-					String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + getState("OUTLOOK");
+					String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + getState("OUTLOOK", cohortInviteId);
 					try {
 						response.sendRedirect(redirectUrl);
 					} catch (IOException e) {
@@ -75,17 +72,18 @@ public class SocialRedirectServlet extends HttpServlet {
 		}
 	}
 	
-	public String getState(String from) {
-		String state = "{from:" + from + "}";
+	public String getState(String from, String cohortInviteId) {
+		String state = "{from:" + from + (cohortInviteId != null ? ",cohortInviteId:" + cohortInviteId : "") + "}";
 		try {
 			if (IclubWebHelper.getObjectIntoSession("newInvite") != null) {
-				state = "{from:" + from + ",redirect:newInvite}";
+				state = "{from:" + from + (cohortInviteId != null ? ",cohortInviteId:" + cohortInviteId : "") + ",redirect:newInvite}";
 			}
 			
-			state = Base64.encodeBase64URLSafeString(state.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		state = Base64.encodeBase64URLSafeString(state.getBytes());
 		
 		return state;
 	}

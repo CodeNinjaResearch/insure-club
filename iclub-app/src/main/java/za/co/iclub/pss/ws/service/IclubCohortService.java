@@ -257,7 +257,7 @@ public class IclubCohortService {
 			}
 			cSModel.setPremiumForYear(premiumForYear);
 		}
-		batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(id, null, 4l);
+		batPmod = iclubNamedQueryDAO.getIclubPoliciesByCohortId(id, null, 6l);
 		if (batmod != null && batmod.size() > 0) {
 			Double premiumApproved = 0.0;
 			for (Object object : batPmod) {
@@ -270,17 +270,17 @@ public class IclubCohortService {
 		}
 		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(id, null, null);
 		if (batCmod != null && batCmod.size() > 0) {
-			Double claimSinceI = 0.0;
+			Double claimsLodged = 0.0;
 			Double claimsInYear = 0.0;
 			for (Object object : batCmod) {
 				IclubClaim claim = (IclubClaim) object;
 				if (claim != null && claim.getCValue() > 0) {
-					claimSinceI += claim.getCValue();
+					claimsLodged += claim.getCValue();
 					if (claim.getCCrtdDt().compareTo(startDate) >= 0) {
 						claimsInYear += claim.getCValue();
 					}
 				}
-				cSModel.setClaimSinceI(claimSinceI);
+				cSModel.setCliamsLodged(claimsLodged);
 				cSModel.setClaimsInYear(claimsInYear);
 			}
 		}
@@ -294,6 +294,19 @@ public class IclubCohortService {
 					premiumApproved += claim.getCValue();
 				}
 				cSModel.setCalimApproved(premiumApproved);
+				
+			}
+		}
+		
+		List batCImod = iclubNamedQueryDAO.getIclubClaimsByCohortId(id, null, 7l);
+		if (batCImod != null && batCImod.size() > 0) {
+			Double claimSinceI = 0.0;
+			for (Object object : batCImod) {
+				IclubClaim claim = (IclubClaim) object;
+				if (claim != null && claim.getCValue() > 0) {
+					claimSinceI += claim.getCValue();
+				}
+				cSModel.setClaimSinceI(claimSinceI);
 				
 			}
 		}
@@ -357,18 +370,31 @@ public class IclubCohortService {
 		
 		List batCmod = iclubNamedQueryDAO.getIclubClaimsByCohortId(null, userId, null);
 		if (batCmod != null && batCmod.size() > 0) {
-			Double claimSinceI = 0.0;
+			Double claimsLodged = 0.0;
 			Double claimsInYear = 0.0;
 			for (Object object : batCmod) {
 				IclubClaim claim = (IclubClaim) object;
 				if (claim != null && claim.getCValue() > 0) {
-					claimSinceI += claim.getCValue();
+					claimsLodged += claim.getCValue();
 					if (claim.getCCrtdDt().compareTo(startDate) >= 0) {
 						claimsInYear += claim.getCValue();
 					}
 				}
-				cSModel.setClaimSinceI(claimSinceI);
+				cSModel.setCliamsLodged(claimsLodged);
 				cSModel.setClaimsInYear(claimsInYear);
+			}
+		}
+		
+		List batCImod = iclubNamedQueryDAO.getIclubClaimsByCohortId(null, userId, 7l);
+		if (batCImod != null && batCImod.size() > 0) {
+			Double claimSinceI = 0.0;
+			for (Object object : batCImod) {
+				IclubClaim claim = (IclubClaim) object;
+				if (claim != null && claim.getCValue() > 0) {
+					claimSinceI += claim.getCValue();
+				}
+				cSModel.setClaimSinceI(claimSinceI);
+				
 			}
 		}
 		return cSModel;

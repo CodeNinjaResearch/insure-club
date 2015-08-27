@@ -53,7 +53,7 @@ public class MailSender implements Serializable {
 					Message message = new MimeMessage(session);
 					message.setFrom(new InternetAddress(username));
 					message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(bean.getCiInviteUri()));
-					message.setSubject("Test Mail From Insurance Club");
+					message.setSubject("Please Join my Club");
 					StringBuilder mailstring = new StringBuilder();
 					mailstring.append("<table>");
 					mailstring.append("<tr><td><font face='verdana' size=2>Hi" + "," + "</font></td></tr>");

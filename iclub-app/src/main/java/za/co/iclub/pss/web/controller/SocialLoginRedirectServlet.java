@@ -46,7 +46,7 @@ public class SocialLoginRedirectServlet extends HttpServlet {
 				
 				String redirectUrl = BUNDLE.getString("local_redirect_uri") + "?code=" + code + "&cohortInviteId=" + cohortInviteId + "&state=" + state + "&from=" + from;
 				try {
-					HttpSession session = request.getSession(false);
+					HttpSession session = request.getSession(true);
 					session.setAttribute("sociallogin", "sociallogin");
 					redirectUrl = response.encodeRedirectURL(redirectUrl);
 					response.sendRedirect(redirectUrl);

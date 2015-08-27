@@ -124,6 +124,7 @@ public class IclubCohortController implements Serializable {
 	private List<IclubCohortInviteBean> selecteAdminCohortInviteBeans;
 	private List<IclubInviteStatusBean> inviteStatusBeans;
 	private boolean deRegister;
+	private IclubCohortInviteModel inviteModel;
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -248,21 +249,27 @@ public class IclubCohortController implements Serializable {
 						
 						IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
 						client.close();
-						IclubCohortInviteModel inviteModel = new IclubCohortInviteModel();
+						IclubCohortInviteModel inviteModel = getInviteModel();
 						inviteModel.setCiInviteFName(model.getPFName());
 						inviteModel.setCiInviteLName(model.getPLName());
 						inviteModel.setCiInviteUri(model.getPEmail());
 						inviteModel.setIclubCohort(this.bean.getCId());
 						inviteModel.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
-						inviteModel.setIclubPerson(getSessionUserId());
 						inviteModel.setCiInviteAcceptYn("Y");
 						inviteModel.setIclubInviteStatus(2l);
 						inviteModel.setIclubNotificationType(3l);
-						inviteModel.setCiId(UUID.randomUUID().toString());
-						
-						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "add");
-						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(inviteModel, ResponseModel.class);
-						client.close();
+						ResponseModel response = null;
+						if (inviteModel.getCiId() == null) {
+							inviteModel.setCiId(UUID.randomUUID().toString());
+							inviteModel.setIclubPerson(getSessionUserId());
+							client = IclubWebHelper.createCustomClient(CI_BASE_URL + "add");
+							response = client.accept(MediaType.APPLICATION_JSON).post(inviteModel, ResponseModel.class);
+							client.close();
+						} else {
+							client = IclubWebHelper.createCustomClient(CI_BASE_URL + "mod");
+							response = client.accept(MediaType.APPLICATION_JSON).put(inviteModel, ResponseModel.class);
+							client.close();
+						}
 						if (response.getStatusCode() == 0) {
 							IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 							viewParam = 1l;
@@ -1005,11 +1012,12 @@ public class IclubCohortController implements Serializable {
 					}
 					if (cohortId == null || cohortId.trim().equalsIgnoreCase("")) {
 						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession("cohortInviteId").toString());
-						IclubCohortInviteModel inviteModel = client.get(IclubCohortInviteModel.class);
+						inviteModel = client.get(IclubCohortInviteModel.class);
 						inviteModel.setCiInviteAcceptYn("Y");
 						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "mod");
 						responseModels = client.accept(MediaType.APPLICATION_JSON).put(inviteModel, ResponseModel.class);
 						cohortId = inviteModel.getIclubCohort();
+						IclubWebHelper.addObjectIntoSession("cohortInviteId", null);
 					}
 					
 					if ((responseModels != null && responseModels.getStatusCode() == 0) || (cohortId != null && !cohortId.trim().equalsIgnoreCase(""))) {
@@ -1197,6 +1205,16 @@ public class IclubCohortController implements Serializable {
 	
 	public void setDeRegister(boolean deRegister) {
 		this.deRegister = deRegister;
+	}
+	
+	public IclubCohortInviteModel getInviteModel() {
+		if (inviteModel == null)
+			inviteModel = new IclubCohortInviteModel();
+		return inviteModel;
+	}
+	
+	public void setInviteModel(IclubCohortInviteModel inviteModel) {
+		this.inviteModel = inviteModel;
 	}
 	
 }
