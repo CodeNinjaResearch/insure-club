@@ -31,6 +31,7 @@ public class IclubCohortTrans {
 		bean.setIitLongDesc(model.getIitLongDesc());
 		bean.setIclubPersonByAdminId(model.getIclubPersonByAdminId());
 		bean.setPCFNameAndLName(model.getPCFNameAndLName());
+		bean.setNoOfActiveMembers(model.getNoOfActiveMembers());
 		
 		return bean;
 	}
@@ -57,6 +58,7 @@ public class IclubCohortTrans {
 		model.setIitLongDesc(bean.getIitLongDesc());
 		model.setIclubPersonByAdminId(bean.getIclubPersonByAdminId());
 		model.setPCFNameAndLName(bean.getPCFNameAndLName());
+		model.setNoOfActiveMembers(bean.getNoOfActiveMembers());
 		
 		return model;
 	}
@@ -83,6 +85,7 @@ public class IclubCohortTrans {
 		model.setIitLongDesc(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitLongDesc() : null);
 		model.setIclubPersonByAdminId(bean.getIclubPersonByCAdminId() != null ? bean.getIclubPersonByCAdminId().getPId() : null);
 		model.setPCFNameAndLName(bean.getIclubPersonByCAdminId() != null ? bean.getIclubPersonByCAdminId().getPFName() + " " + bean.getIclubPersonByCAdminId().getPLName() : null);
+		model.setNoOfActiveMembers(bean.getIclubPersons()!=null ? (bean.getIclubPersons().size()):0l);
 		
 		return model;
 	}
