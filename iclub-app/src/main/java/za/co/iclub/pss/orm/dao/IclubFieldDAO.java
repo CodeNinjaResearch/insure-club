@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubField;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubFieldDAO {
-	private static final Logger log = Logger.getLogger(IclubFieldDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubFieldDAO.class);
 	// property constants
 	public static final String _FNAME = "FName";
 	public static final String _FDESC = "FDesc";
@@ -76,7 +78,8 @@ public class IclubFieldDAO {
 	public IclubField findById(java.lang.Long id) {
 		log.debug("getting IclubField instance with id: " + id);
 		try {
-			IclubField instance = (IclubField) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubField", id);
+			IclubField instance = (IclubField) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubField", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -87,8 +90,11 @@ public class IclubFieldDAO {
 	public List<IclubField> findByExample(IclubField instance) {
 		log.debug("finding IclubField instance by example");
 		try {
-			List<IclubField> results = (List<IclubField>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubField").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubField> results = (List<IclubField>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubField")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -97,9 +103,11 @@ public class IclubFieldDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubField instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubField instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from IclubField as model where model." + propertyName + "= ?";
+			String queryString = "from IclubField as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -148,7 +156,8 @@ public class IclubFieldDAO {
 	public IclubField merge(IclubField detachedInstance) {
 		log.debug("merging IclubField instance");
 		try {
-			IclubField result = (IclubField) getCurrentSession().merge(detachedInstance);
+			IclubField result = (IclubField) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -171,7 +180,8 @@ public class IclubFieldDAO {
 	public void attachClean(IclubField instance) {
 		log.debug("attaching clean IclubField instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);

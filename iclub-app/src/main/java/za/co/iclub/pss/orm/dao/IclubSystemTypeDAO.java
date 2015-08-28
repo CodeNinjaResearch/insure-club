@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubSystemType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubSystemTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubSystemTypeDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubSystemTypeDAO.class);
 	// property constants
 	public static final String ST_SHORT_DESC = "stShortDesc";
 	public static final String ST_LONG_DESC = "stLongDesc";
@@ -73,7 +75,8 @@ public class IclubSystemTypeDAO {
 	public IclubSystemType findById(java.lang.Long id) {
 		log.debug("getting IclubSystemType instance with id: " + id);
 		try {
-			IclubSystemType instance = (IclubSystemType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSystemType", id);
+			IclubSystemType instance = (IclubSystemType) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubSystemType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,11 @@ public class IclubSystemTypeDAO {
 	public List<IclubSystemType> findByExample(IclubSystemType instance) {
 		log.debug("finding IclubSystemType instance by example");
 		try {
-			List<IclubSystemType> results = (List<IclubSystemType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSystemType").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubSystemType> results = (List<IclubSystemType>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubSystemType")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +100,11 @@ public class IclubSystemTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSystemType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubSystemType instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSystemType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubSystemType as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +141,8 @@ public class IclubSystemTypeDAO {
 	public IclubSystemType merge(IclubSystemType detachedInstance) {
 		log.debug("merging IclubSystemType instance");
 		try {
-			IclubSystemType result = (IclubSystemType) getCurrentSession().merge(detachedInstance);
+			IclubSystemType result = (IclubSystemType) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +165,8 @@ public class IclubSystemTypeDAO {
 	public void attachClean(IclubSystemType instance) {
 		log.debug("attaching clean IclubSystemType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +174,8 @@ public class IclubSystemTypeDAO {
 		}
 	}
 
-	public static IclubSystemTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubSystemTypeDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubSystemTypeDAO) ctx.getBean("IclubSystemTypeDAO");
 	}
 }

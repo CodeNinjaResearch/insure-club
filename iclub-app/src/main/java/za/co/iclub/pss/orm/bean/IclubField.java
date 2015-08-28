@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,7 +47,9 @@ public class IclubField implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubField(Long FId, IclubEntityType iclubEntityType, String FName, String FDesc, String FType, String FLTblName, String FRate, String FStatus, Set<IclubRateType> iclubRateTypes) {
+	public IclubField(Long FId, IclubEntityType iclubEntityType, String FName,
+			String FDesc, String FType, String FLTblName, String FRate,
+			String FStatus, Set<IclubRateType> iclubRateTypes) {
 		this.FId = FId;
 		this.iclubEntityType = iclubEntityType;
 		this.FName = FName;

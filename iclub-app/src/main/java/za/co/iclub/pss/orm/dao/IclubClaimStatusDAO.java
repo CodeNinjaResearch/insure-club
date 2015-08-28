@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubClaimStatus;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubClaimStatusDAO {
-	private static final Logger log = Logger.getLogger(IclubClaimStatusDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubClaimStatusDAO.class);
 	// property constants
 	public static final String CS_SHORT_DESC = "csShortDesc";
 	public static final String CS_LONG_DESC = "csLongDesc";
@@ -73,7 +75,8 @@ public class IclubClaimStatusDAO {
 	public IclubClaimStatus findById(java.lang.Long id) {
 		log.debug("getting IclubClaimStatus instance with id: " + id);
 		try {
-			IclubClaimStatus instance = (IclubClaimStatus) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubClaimStatus", id);
+			IclubClaimStatus instance = (IclubClaimStatus) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubClaimStatus", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,11 @@ public class IclubClaimStatusDAO {
 	public List<IclubClaimStatus> findByExample(IclubClaimStatus instance) {
 		log.debug("finding IclubClaimStatus instance by example");
 		try {
-			List<IclubClaimStatus> results = (List<IclubClaimStatus>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubClaimStatus").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubClaimStatus> results = (List<IclubClaimStatus>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubClaimStatus")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +100,11 @@ public class IclubClaimStatusDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubClaimStatus instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubClaimStatus instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubClaimStatus as model where model." + propertyName + "= ?";
+			String queryString = "from IclubClaimStatus as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +141,8 @@ public class IclubClaimStatusDAO {
 	public IclubClaimStatus merge(IclubClaimStatus detachedInstance) {
 		log.debug("merging IclubClaimStatus instance");
 		try {
-			IclubClaimStatus result = (IclubClaimStatus) getCurrentSession().merge(detachedInstance);
+			IclubClaimStatus result = (IclubClaimStatus) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +165,8 @@ public class IclubClaimStatusDAO {
 	public void attachClean(IclubClaimStatus instance) {
 		log.debug("attaching clean IclubClaimStatus instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +174,8 @@ public class IclubClaimStatusDAO {
 		}
 	}
 
-	public static IclubClaimStatusDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubClaimStatusDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubClaimStatusDAO) ctx.getBean("IclubClaimStatusDAO");
 	}
 }

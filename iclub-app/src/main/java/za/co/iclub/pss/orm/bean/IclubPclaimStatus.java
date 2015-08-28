@@ -35,7 +35,8 @@ public class IclubPclaimStatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPclaimStatus(Long psId, String psShortDesc, String psLongDesc, String psStatus) {
+	public IclubPclaimStatus(Long psId, String psShortDesc, String psLongDesc,
+			String psStatus) {
 		this.psId = psId;
 		this.psShortDesc = psShortDesc;
 		this.psLongDesc = psLongDesc;

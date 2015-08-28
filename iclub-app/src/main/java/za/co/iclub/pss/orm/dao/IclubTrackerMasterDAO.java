@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubTrackerMaster;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubTrackerMasterDAO {
-	private static final Logger log = Logger.getLogger(IclubTrackerMasterDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubTrackerMasterDAO.class);
 	// property constants
 	public static final String TM_NAME = "tmName";
 	public static final String TM_TRADE_NAME = "tmTradeName";
@@ -76,7 +78,8 @@ public class IclubTrackerMasterDAO {
 	public IclubTrackerMaster findById(java.lang.Long id) {
 		log.debug("getting IclubTrackerMaster instance with id: " + id);
 		try {
-			IclubTrackerMaster instance = (IclubTrackerMaster) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubTrackerMaster", id);
+			IclubTrackerMaster instance = (IclubTrackerMaster) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubTrackerMaster", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -87,8 +90,12 @@ public class IclubTrackerMasterDAO {
 	public List<IclubTrackerMaster> findByExample(IclubTrackerMaster instance) {
 		log.debug("finding IclubTrackerMaster instance by example");
 		try {
-			List<IclubTrackerMaster> results = (List<IclubTrackerMaster>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubTrackerMaster").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubTrackerMaster> results = (List<IclubTrackerMaster>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubTrackerMaster")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -97,9 +104,11 @@ public class IclubTrackerMasterDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubTrackerMaster instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubTrackerMaster instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubTrackerMaster as model where model." + propertyName + "= ?";
+			String queryString = "from IclubTrackerMaster as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -148,7 +157,8 @@ public class IclubTrackerMasterDAO {
 	public IclubTrackerMaster merge(IclubTrackerMaster detachedInstance) {
 		log.debug("merging IclubTrackerMaster instance");
 		try {
-			IclubTrackerMaster result = (IclubTrackerMaster) getCurrentSession().merge(detachedInstance);
+			IclubTrackerMaster result = (IclubTrackerMaster) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -171,7 +181,8 @@ public class IclubTrackerMasterDAO {
 	public void attachClean(IclubTrackerMaster instance) {
 		log.debug("attaching clean IclubTrackerMaster instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -179,7 +190,8 @@ public class IclubTrackerMasterDAO {
 		}
 	}
 
-	public static IclubTrackerMasterDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubTrackerMasterDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubTrackerMasterDAO) ctx.getBean("IclubTrackerMasterDAO");
 	}
 }

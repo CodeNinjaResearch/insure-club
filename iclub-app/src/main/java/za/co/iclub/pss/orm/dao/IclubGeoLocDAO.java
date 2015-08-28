@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubGeoLoc;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubGeoLocDAO {
-	private static final Logger log = Logger.getLogger(IclubGeoLocDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubGeoLocDAO.class);
 	// property constants
 	public static final String GL_PROVINCE = "glProvince";
 	public static final String GL_SUBURB = "glSuburb";
@@ -76,7 +79,8 @@ public class IclubGeoLocDAO {
 	public IclubGeoLoc findById(java.lang.Long id) {
 		log.debug("getting IclubGeoLoc instance with id: " + id);
 		try {
-			IclubGeoLoc instance = (IclubGeoLoc) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubGeoLoc", id);
+			IclubGeoLoc instance = (IclubGeoLoc) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubGeoLoc", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -87,8 +91,11 @@ public class IclubGeoLocDAO {
 	public List<IclubGeoLoc> findByExample(IclubGeoLoc instance) {
 		log.debug("finding IclubGeoLoc instance by example");
 		try {
-			List<IclubGeoLoc> results = (List<IclubGeoLoc>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubGeoLoc").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubGeoLoc> results = (List<IclubGeoLoc>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubGeoLoc")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -97,9 +104,11 @@ public class IclubGeoLocDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubGeoLoc instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubGeoLoc instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from IclubGeoLoc as model where model." + propertyName + "= ?";
+			String queryString = "from IclubGeoLoc as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -148,7 +157,8 @@ public class IclubGeoLocDAO {
 	public IclubGeoLoc merge(IclubGeoLoc detachedInstance) {
 		log.debug("merging IclubGeoLoc instance");
 		try {
-			IclubGeoLoc result = (IclubGeoLoc) getCurrentSession().merge(detachedInstance);
+			IclubGeoLoc result = (IclubGeoLoc) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -171,7 +181,8 @@ public class IclubGeoLocDAO {
 	public void attachClean(IclubGeoLoc instance) {
 		log.debug("attaching clean IclubGeoLoc instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -179,7 +190,8 @@ public class IclubGeoLocDAO {
 		}
 	}
 
-	public static IclubGeoLocDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubGeoLocDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubGeoLocDAO) ctx.getBean("IclubGeoLocDAO");
 	}
 }

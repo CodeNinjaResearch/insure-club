@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubMaritialStatus;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubMaritialStatusDAO {
-	private static final Logger log = Logger.getLogger(IclubMaritialStatusDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubMaritialStatusDAO.class);
 	// property constants
 	public static final String MS_SHORT_DESC = "msShortDesc";
 	public static final String MS_LONG_DESC = "msLongDesc";
@@ -73,7 +75,8 @@ public class IclubMaritialStatusDAO {
 	public IclubMaritialStatus findById(java.lang.Long id) {
 		log.debug("getting IclubMaritialStatus instance with id: " + id);
 		try {
-			IclubMaritialStatus instance = (IclubMaritialStatus) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubMaritialStatus", id);
+			IclubMaritialStatus instance = (IclubMaritialStatus) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubMaritialStatus", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,12 @@ public class IclubMaritialStatusDAO {
 	public List<IclubMaritialStatus> findByExample(IclubMaritialStatus instance) {
 		log.debug("finding IclubMaritialStatus instance by example");
 		try {
-			List<IclubMaritialStatus> results = (List<IclubMaritialStatus>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubMaritialStatus").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubMaritialStatus> results = (List<IclubMaritialStatus>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubMaritialStatus")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +101,11 @@ public class IclubMaritialStatusDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubMaritialStatus instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubMaritialStatus instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubMaritialStatus as model where model." + propertyName + "= ?";
+			String queryString = "from IclubMaritialStatus as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +142,8 @@ public class IclubMaritialStatusDAO {
 	public IclubMaritialStatus merge(IclubMaritialStatus detachedInstance) {
 		log.debug("merging IclubMaritialStatus instance");
 		try {
-			IclubMaritialStatus result = (IclubMaritialStatus) getCurrentSession().merge(detachedInstance);
+			IclubMaritialStatus result = (IclubMaritialStatus) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +166,8 @@ public class IclubMaritialStatusDAO {
 	public void attachClean(IclubMaritialStatus instance) {
 		log.debug("attaching clean IclubMaritialStatus instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +175,8 @@ public class IclubMaritialStatusDAO {
 		}
 	}
 
-	public static IclubMaritialStatusDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubMaritialStatusDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubMaritialStatusDAO) ctx.getBean("IclubMaritialStatusDAO");
 	}
 }

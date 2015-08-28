@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +41,8 @@ public class IclubAccountType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAccountType(Long atId, String atShortDesc, String atLongDesc, String atStatus, Set<IclubAccount> iclubAccounts) {
+	public IclubAccountType(Long atId, String atShortDesc, String atLongDesc,
+			String atStatus, Set<IclubAccount> iclubAccounts) {
 		this.atId = atId;
 		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;

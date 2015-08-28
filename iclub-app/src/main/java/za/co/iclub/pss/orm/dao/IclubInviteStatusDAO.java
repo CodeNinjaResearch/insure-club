@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,28 +27,29 @@ import za.co.iclub.pss.orm.bean.IclubInviteStatus;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubInviteStatusDAO {
-	private static final Logger log = Logger.getLogger(IclubInviteStatusDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubInviteStatusDAO.class);
 	// property constants
-	public static final String IS_SHORT_DESC = "isShortDesc";
 	public static final String IS_LONG_DESC = "isLongDesc";
+	public static final String IS_SHORT_DESC = "isShortDesc";
 	public static final String IS_STATUS = "isStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubInviteStatus transientInstance) {
 		log.debug("saving IclubInviteStatus instance");
 		try {
@@ -58,7 +60,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubInviteStatus persistentInstance) {
 		log.debug("deleting IclubInviteStatus instance");
 		try {
@@ -69,34 +71,41 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInviteStatus findById(java.lang.Long id) {
 		log.debug("getting IclubInviteStatus instance with id: " + id);
 		try {
-			IclubInviteStatus instance = (IclubInviteStatus) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubInviteStatus", id);
+			IclubInviteStatus instance = (IclubInviteStatus) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubInviteStatus", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInviteStatus> findByExample(IclubInviteStatus instance) {
 		log.debug("finding IclubInviteStatus instance by example");
 		try {
-			List<IclubInviteStatus> results = (List<IclubInviteStatus>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubInviteStatus").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubInviteStatus> results = (List<IclubInviteStatus>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubInviteStatus")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubInviteStatus instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubInviteStatus instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubInviteStatus as model where model." + propertyName + "= ?";
+			String queryString = "from IclubInviteStatus as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -105,19 +114,19 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
-	public List<IclubInviteStatus> findByQsShortDesc(Object isShortDesc) {
-		return findByProperty(IS_SHORT_DESC, isShortDesc);
-	}
-	
-	public List<IclubInviteStatus> findByQsLongDesc(Object isLongDesc) {
+
+	public List<IclubInviteStatus> findByIsLongDesc(Object isLongDesc) {
 		return findByProperty(IS_LONG_DESC, isLongDesc);
 	}
-	
-	public List<IclubInviteStatus> findByQsStatus(Object isStatus) {
+
+	public List<IclubInviteStatus> findByIsShortDesc(Object isShortDesc) {
+		return findByProperty(IS_SHORT_DESC, isShortDesc);
+	}
+
+	public List<IclubInviteStatus> findByIsStatus(Object isStatus) {
 		return findByProperty(IS_STATUS, isStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubInviteStatus instances");
 		try {
@@ -129,11 +138,12 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInviteStatus merge(IclubInviteStatus detachedInstance) {
 		log.debug("merging IclubInviteStatus instance");
 		try {
-			IclubInviteStatus result = (IclubInviteStatus) getCurrentSession().merge(detachedInstance);
+			IclubInviteStatus result = (IclubInviteStatus) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -141,7 +151,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubInviteStatus instance) {
 		log.debug("attaching dirty IclubInviteStatus instance");
 		try {
@@ -152,19 +162,21 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubInviteStatus instance) {
 		log.debug("attaching clean IclubInviteStatus instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-	
-	public static IclubInviteStatusDAO getFromApplicationContext(ApplicationContext ctx) {
+
+	public static IclubInviteStatusDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubInviteStatusDAO) ctx.getBean("IclubInviteStatusDAO");
 	}
 }

@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,11 +27,15 @@ public class IclubAccessType implements java.io.Serializable {
 	private String atShortDesc;
 	private String atLongDesc;
 	private String atStatus;
-	private Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId = new HashSet<IclubVehicle>(0);
-	private Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId = new HashSet<IclubVehicle>(0);
+	private Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId = new HashSet<IclubVehicle>(
+			0);
+	private Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId = new HashSet<IclubVehicle>(
+			0);
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
-	private Set<IclubDriver> iclubDriversForDAccessTypeId = new HashSet<IclubDriver>(0);
-	private Set<IclubDriver> iclubDriversForDAccessStatusId = new HashSet<IclubDriver>(0);
+	private Set<IclubDriver> iclubDriversForDAccessTypeId = new HashSet<IclubDriver>(
+			0);
+	private Set<IclubDriver> iclubDriversForDAccessStatusId = new HashSet<IclubDriver>(
+			0);
 
 	// Constructors
 
@@ -46,7 +49,12 @@ public class IclubAccessType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAccessType(Long atId, String atShortDesc, String atLongDesc, String atStatus, Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId, Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId, Set<IclubProperty> iclubProperties, Set<IclubDriver> iclubDriversForDAccessTypeId, Set<IclubDriver> iclubDriversForDAccessStatusId) {
+	public IclubAccessType(Long atId, String atShortDesc, String atLongDesc,
+			String atStatus, Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId,
+			Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId,
+			Set<IclubProperty> iclubProperties,
+			Set<IclubDriver> iclubDriversForDAccessTypeId,
+			Set<IclubDriver> iclubDriversForDAccessStatusId) {
 		this.atId = atId;
 		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;
@@ -101,7 +109,8 @@ public class IclubAccessType implements java.io.Serializable {
 		return this.iclubVehiclesForVOnAccessTypeId;
 	}
 
-	public void setIclubVehiclesForVOnAccessTypeId(Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId) {
+	public void setIclubVehiclesForVOnAccessTypeId(
+			Set<IclubVehicle> iclubVehiclesForVOnAccessTypeId) {
 		this.iclubVehiclesForVOnAccessTypeId = iclubVehiclesForVOnAccessTypeId;
 	}
 
@@ -110,7 +119,8 @@ public class IclubAccessType implements java.io.Serializable {
 		return this.iclubVehiclesForVDdAccessTypeId;
 	}
 
-	public void setIclubVehiclesForVDdAccessTypeId(Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId) {
+	public void setIclubVehiclesForVDdAccessTypeId(
+			Set<IclubVehicle> iclubVehiclesForVDdAccessTypeId) {
 		this.iclubVehiclesForVDdAccessTypeId = iclubVehiclesForVDdAccessTypeId;
 	}
 
@@ -128,7 +138,8 @@ public class IclubAccessType implements java.io.Serializable {
 		return this.iclubDriversForDAccessTypeId;
 	}
 
-	public void setIclubDriversForDAccessTypeId(Set<IclubDriver> iclubDriversForDAccessTypeId) {
+	public void setIclubDriversForDAccessTypeId(
+			Set<IclubDriver> iclubDriversForDAccessTypeId) {
 		this.iclubDriversForDAccessTypeId = iclubDriversForDAccessTypeId;
 	}
 
@@ -137,7 +148,8 @@ public class IclubAccessType implements java.io.Serializable {
 		return this.iclubDriversForDAccessStatusId;
 	}
 
-	public void setIclubDriversForDAccessStatusId(Set<IclubDriver> iclubDriversForDAccessStatusId) {
+	public void setIclubDriversForDAccessStatusId(
+			Set<IclubDriver> iclubDriversForDAccessStatusId) {
 		this.iclubDriversForDAccessStatusId = iclubDriversForDAccessStatusId;
 	}
 

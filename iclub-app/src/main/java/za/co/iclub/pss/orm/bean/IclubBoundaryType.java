@@ -35,7 +35,8 @@ public class IclubBoundaryType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubBoundaryType(Long btId, String btShortDesc, String btLongDesc, String btStatus) {
+	public IclubBoundaryType(Long btId, String btShortDesc, String btLongDesc,
+			String btStatus) {
 		this.btId = btId;
 		this.btShortDesc = btShortDesc;
 		this.btLongDesc = btLongDesc;

@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +21,7 @@ public class IclubVehicle implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8258849716619007796L;
+	private static final long serialVersionUID = -6299220620894070262L;
 	private String VId;
 	private IclubVehSecType iclubVehSecType;
 	private IclubVehicleType iclubVehicleType;
@@ -53,8 +52,8 @@ public class IclubVehicle implements java.io.Serializable {
 	private String VVin;
 	private String VEngineNr;
 	private String VRegNum;
-	private String VModifiedYn;
 	private Date VCrtdDt;
+	private String VModifiedYn;
 
 	// Constructors
 
@@ -68,7 +67,20 @@ public class IclubVehicle implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicle(String VId, IclubVehSecType iclubVehSecType, IclubVehicleType iclubVehicleType, IclubCoverType iclubCoverType, IclubAccessType iclubAccessTypeByVOnAccessTypeId, IclubVehUsageType iclubVehUsageType, IclubAccessType iclubAccessTypeByVDdAccessTypeId, IclubSecurityDevice iclubSecurityDevice, IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson, IclubDriver iclubDriver, Long VOdometer, String VOnArea, Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat, Double VDdLong, Integer VYear, Double VInsuredValue, Double VConcessPrct, String VConcessReason, String VImmYn, String VGearLockYn, String VOwner, Integer VNoclaimYrs, Integer VCompYrs, String VVin, String VEngineNr, String VRegNum, String VModifiedYn, Date VCrtdDt) {
+	public IclubVehicle(String VId, IclubVehSecType iclubVehSecType,
+			IclubVehicleType iclubVehicleType, IclubCoverType iclubCoverType,
+			IclubAccessType iclubAccessTypeByVOnAccessTypeId,
+			IclubVehUsageType iclubVehUsageType,
+			IclubAccessType iclubAccessTypeByVDdAccessTypeId,
+			IclubSecurityDevice iclubSecurityDevice,
+			IclubVehicleMaster iclubVehicleMaster, IclubPerson iclubPerson,
+			IclubDriver iclubDriver, Long VOdometer, String VOnArea,
+			Double VOnLat, Double VOnLong, String VDdArea, Double VDdLat,
+			Double VDdLong, Integer VYear, Double VInsuredValue,
+			Double VConcessPrct, String VConcessReason, String VImmYn,
+			String VGearLockYn, String VOwner, Integer VNoclaimYrs,
+			Integer VCompYrs, String VVin, String VEngineNr, String VRegNum,
+			Date VCrtdDt, String VModifiedYn) {
 		this.VId = VId;
 		this.iclubVehSecType = iclubVehSecType;
 		this.iclubVehicleType = iclubVehicleType;
@@ -99,8 +111,8 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VVin = VVin;
 		this.VEngineNr = VEngineNr;
 		this.VRegNum = VRegNum;
-		this.VModifiedYn = VModifiedYn;
 		this.VCrtdDt = VCrtdDt;
+		this.VModifiedYn = VModifiedYn;
 	}
 
 	// Property accessors
@@ -150,7 +162,8 @@ public class IclubVehicle implements java.io.Serializable {
 		return this.iclubAccessTypeByVOnAccessTypeId;
 	}
 
-	public void setIclubAccessTypeByVOnAccessTypeId(IclubAccessType iclubAccessTypeByVOnAccessTypeId) {
+	public void setIclubAccessTypeByVOnAccessTypeId(
+			IclubAccessType iclubAccessTypeByVOnAccessTypeId) {
 		this.iclubAccessTypeByVOnAccessTypeId = iclubAccessTypeByVOnAccessTypeId;
 	}
 
@@ -170,7 +183,8 @@ public class IclubVehicle implements java.io.Serializable {
 		return this.iclubAccessTypeByVDdAccessTypeId;
 	}
 
-	public void setIclubAccessTypeByVDdAccessTypeId(IclubAccessType iclubAccessTypeByVDdAccessTypeId) {
+	public void setIclubAccessTypeByVDdAccessTypeId(
+			IclubAccessType iclubAccessTypeByVDdAccessTypeId) {
 		this.iclubAccessTypeByVDdAccessTypeId = iclubAccessTypeByVDdAccessTypeId;
 	}
 
@@ -385,15 +399,6 @@ public class IclubVehicle implements java.io.Serializable {
 		this.VRegNum = VRegNum;
 	}
 
-	@Column(name = "v_modified_yn", length = 1)
-	public String getVModifiedYn() {
-		return this.VModifiedYn;
-	}
-
-	public void setVModifiedYn(String VModifiedYn) {
-		this.VModifiedYn = VModifiedYn;
-	}
-
 	@Column(name = "v_crtd_dt", length = 19)
 	public Date getVCrtdDt() {
 		return this.VCrtdDt;
@@ -401,6 +406,15 @@ public class IclubVehicle implements java.io.Serializable {
 
 	public void setVCrtdDt(Date VCrtdDt) {
 		this.VCrtdDt = VCrtdDt;
+	}
+
+	@Column(name = "v_modified_yn", length = 1)
+	public String getVModifiedYn() {
+		return this.VModifiedYn;
+	}
+
+	public void setVModifiedYn(String VModifiedYn) {
+		this.VModifiedYn = VModifiedYn;
 	}
 
 }

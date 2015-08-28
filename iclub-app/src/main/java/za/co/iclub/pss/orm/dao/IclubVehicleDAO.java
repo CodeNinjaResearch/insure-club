@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubVehicle;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubVehicleDAO {
-	private static final Logger log = Logger.getLogger(IclubVehicleDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubVehicleDAO.class);
 	// property constants
 	public static final String _VODOMETER = "VOdometer";
 	public static final String _VON_AREA = "VOnArea";
@@ -90,7 +93,8 @@ public class IclubVehicleDAO {
 	public IclubVehicle findById(java.lang.String id) {
 		log.debug("getting IclubVehicle instance with id: " + id);
 		try {
-			IclubVehicle instance = (IclubVehicle) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubVehicle", id);
+			IclubVehicle instance = (IclubVehicle) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubVehicle", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -101,8 +105,11 @@ public class IclubVehicleDAO {
 	public List<IclubVehicle> findByExample(IclubVehicle instance) {
 		log.debug("finding IclubVehicle instance by example");
 		try {
-			List<IclubVehicle> results = (List<IclubVehicle>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubVehicle").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubVehicle> results = (List<IclubVehicle>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubVehicle")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -111,9 +118,11 @@ public class IclubVehicleDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubVehicle instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubVehicle instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubVehicle as model where model." + propertyName + "= ?";
+			String queryString = "from IclubVehicle as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -218,7 +227,8 @@ public class IclubVehicleDAO {
 	public IclubVehicle merge(IclubVehicle detachedInstance) {
 		log.debug("merging IclubVehicle instance");
 		try {
-			IclubVehicle result = (IclubVehicle) getCurrentSession().merge(detachedInstance);
+			IclubVehicle result = (IclubVehicle) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -241,7 +251,8 @@ public class IclubVehicleDAO {
 	public void attachClean(IclubVehicle instance) {
 		log.debug("attaching clean IclubVehicle instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -249,7 +260,8 @@ public class IclubVehicleDAO {
 		}
 	}
 
-	public static IclubVehicleDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubVehicleDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubVehicleDAO) ctx.getBean("IclubVehicleDAO");
 	}
 }

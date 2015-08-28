@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +44,11 @@ public class IclubMessage implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMessage(String MId, IclubPerson iclubPerson, IclubSystemType iclubSystemTypeByMToSysId, IclubMessageType iclubMessageType, IclubSystemType iclubSystemTypeByMFromSysId, Date MSentDt, String MTranId, String MContent, Date MCrtdDt) {
+	public IclubMessage(String MId, IclubPerson iclubPerson,
+			IclubSystemType iclubSystemTypeByMToSysId,
+			IclubMessageType iclubMessageType,
+			IclubSystemType iclubSystemTypeByMFromSysId, Date MSentDt,
+			String MTranId, String MContent, Date MCrtdDt) {
 		this.MId = MId;
 		this.iclubPerson = iclubPerson;
 		this.iclubSystemTypeByMToSysId = iclubSystemTypeByMToSysId;
@@ -84,7 +87,8 @@ public class IclubMessage implements java.io.Serializable {
 		return this.iclubSystemTypeByMToSysId;
 	}
 
-	public void setIclubSystemTypeByMToSysId(IclubSystemType iclubSystemTypeByMToSysId) {
+	public void setIclubSystemTypeByMToSysId(
+			IclubSystemType iclubSystemTypeByMToSysId) {
 		this.iclubSystemTypeByMToSysId = iclubSystemTypeByMToSysId;
 	}
 
@@ -104,7 +108,8 @@ public class IclubMessage implements java.io.Serializable {
 		return this.iclubSystemTypeByMFromSysId;
 	}
 
-	public void setIclubSystemTypeByMFromSysId(IclubSystemType iclubSystemTypeByMFromSysId) {
+	public void setIclubSystemTypeByMFromSysId(
+			IclubSystemType iclubSystemTypeByMFromSysId) {
 		this.iclubSystemTypeByMFromSysId = iclubSystemTypeByMFromSysId;
 	}
 

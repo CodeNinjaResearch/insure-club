@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubSupplPerson;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubSupplPersonDAO {
-	private static final Logger log = Logger.getLogger(IclubSupplPersonDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubSupplPersonDAO.class);
 	// property constants
 
 	private SessionFactory sessionFactory;
@@ -70,7 +73,8 @@ public class IclubSupplPersonDAO {
 	public IclubSupplPerson findById(java.lang.String id) {
 		log.debug("getting IclubSupplPerson instance with id: " + id);
 		try {
-			IclubSupplPerson instance = (IclubSupplPerson) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSupplPerson", id);
+			IclubSupplPerson instance = (IclubSupplPerson) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubSupplPerson", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -81,8 +85,11 @@ public class IclubSupplPersonDAO {
 	public List<IclubSupplPerson> findByExample(IclubSupplPerson instance) {
 		log.debug("finding IclubSupplPerson instance by example");
 		try {
-			List<IclubSupplPerson> results = (List<IclubSupplPerson>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSupplPerson").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubSupplPerson> results = (List<IclubSupplPerson>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubSupplPerson")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -91,9 +98,11 @@ public class IclubSupplPersonDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSupplPerson instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubSupplPerson instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSupplPerson as model where model." + propertyName + "= ?";
+			String queryString = "from IclubSupplPerson as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -118,7 +127,8 @@ public class IclubSupplPersonDAO {
 	public IclubSupplPerson merge(IclubSupplPerson detachedInstance) {
 		log.debug("merging IclubSupplPerson instance");
 		try {
-			IclubSupplPerson result = (IclubSupplPerson) getCurrentSession().merge(detachedInstance);
+			IclubSupplPerson result = (IclubSupplPerson) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -141,7 +151,8 @@ public class IclubSupplPersonDAO {
 	public void attachClean(IclubSupplPerson instance) {
 		log.debug("attaching clean IclubSupplPerson instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -149,7 +160,8 @@ public class IclubSupplPersonDAO {
 		}
 	}
 
-	public static IclubSupplPersonDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubSupplPersonDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubSupplPersonDAO) ctx.getBean("IclubSupplPersonDAO");
 	}
 }

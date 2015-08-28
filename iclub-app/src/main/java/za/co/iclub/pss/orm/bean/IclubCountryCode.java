@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +14,9 @@ import javax.persistence.UniqueConstraint;
  * IclubCountryCode entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_country_code", catalog = "iclubdb", uniqueConstraints = { @UniqueConstraint(columnNames = "cc_iso_id"), @UniqueConstraint(columnNames = "cc_short_id") })
+@Table(name = "iclub_country_code", catalog = "iclubdb", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "cc_iso_id"),
+		@UniqueConstraint(columnNames = "cc_short_id") })
 public class IclubCountryCode implements java.io.Serializable {
 
 	// Fields
@@ -43,7 +44,8 @@ public class IclubCountryCode implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubCountryCode(Integer ccId, IclubPerson iclubPerson, String ccShortId, String ccIsoId, String ccName, Date ccCrtdDt) {
+	public IclubCountryCode(Integer ccId, IclubPerson iclubPerson,
+			String ccShortId, String ccIsoId, String ccName, Date ccCrtdDt) {
 		this.ccId = ccId;
 		this.iclubPerson = iclubPerson;
 		this.ccShortId = ccShortId;

@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +34,8 @@ public class IclubClaim implements java.io.Serializable {
 	private Integer CNumItems;
 	private Double CValue;
 	private Date CCrtdDt;
-	private Set<IclubCohortClaim> iclubCohortClaims = new HashSet<IclubCohortClaim>(0);
+	private Set<IclubCohortClaim> iclubCohortClaims = new HashSet<IclubCohortClaim>(
+			0);
 	private Set<IclubPayment> iclubPayments = new HashSet<IclubPayment>(0);
 	private Set<IclubClaimItem> iclubClaimItems = new HashSet<IclubClaimItem>(0);
 
@@ -51,7 +51,11 @@ public class IclubClaim implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubClaim(String CId, IclubPerson iclubPerson, IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy, Long CNumber, Integer CNumItems, Double CValue, Date CCrtdDt, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
+	public IclubClaim(String CId, IclubPerson iclubPerson,
+			IclubClaimStatus iclubClaimStatus, IclubPolicy iclubPolicy,
+			Long CNumber, Integer CNumItems, Double CValue, Date CCrtdDt,
+			Set<IclubCohortClaim> iclubCohortClaims,
+			Set<IclubPayment> iclubPayments, Set<IclubClaimItem> iclubClaimItems) {
 		this.CId = CId;
 		this.iclubPerson = iclubPerson;
 		this.iclubClaimStatus = iclubClaimStatus;

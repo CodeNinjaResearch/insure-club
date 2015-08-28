@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +42,10 @@ public class IclubPurposeType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPurposeType(Long ptId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String ptShortDesc, String ptLongDesc, String ptStatus, Date ptCrtdDt) {
+	public IclubPurposeType(Long ptId,
+			IclubInsuranceItemType iclubInsuranceItemType,
+			IclubPerson iclubPerson, String ptShortDesc, String ptLongDesc,
+			String ptStatus, Date ptCrtdDt) {
 		this.ptId = ptId;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 		this.iclubPerson = iclubPerson;
@@ -70,7 +72,8 @@ public class IclubPurposeType implements java.io.Serializable {
 		return this.iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(
+			IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 

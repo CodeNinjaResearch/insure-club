@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +44,12 @@ public class IclubClaimItem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubClaimItem(String ciId, IclubSupplMaster iclubSupplMasterByCiHandlerId, IclubInsuranceItem iclubInsuranceItem, IclubSupplMaster iclubSupplMasterByCiAssesorId, IclubClaim iclubClaim, IclubClaimStatus iclubClaimStatus, Double ciValue, String ciCrtdBy, Date ciCrtdDt) {
+	public IclubClaimItem(String ciId,
+			IclubSupplMaster iclubSupplMasterByCiHandlerId,
+			IclubInsuranceItem iclubInsuranceItem,
+			IclubSupplMaster iclubSupplMasterByCiAssesorId,
+			IclubClaim iclubClaim, IclubClaimStatus iclubClaimStatus,
+			Double ciValue, String ciCrtdBy, Date ciCrtdDt) {
 		this.ciId = ciId;
 		this.iclubSupplMasterByCiHandlerId = iclubSupplMasterByCiHandlerId;
 		this.iclubInsuranceItem = iclubInsuranceItem;
@@ -74,7 +78,8 @@ public class IclubClaimItem implements java.io.Serializable {
 		return this.iclubSupplMasterByCiHandlerId;
 	}
 
-	public void setIclubSupplMasterByCiHandlerId(IclubSupplMaster iclubSupplMasterByCiHandlerId) {
+	public void setIclubSupplMasterByCiHandlerId(
+			IclubSupplMaster iclubSupplMasterByCiHandlerId) {
 		this.iclubSupplMasterByCiHandlerId = iclubSupplMasterByCiHandlerId;
 	}
 
@@ -94,7 +99,8 @@ public class IclubClaimItem implements java.io.Serializable {
 		return this.iclubSupplMasterByCiAssesorId;
 	}
 
-	public void setIclubSupplMasterByCiAssesorId(IclubSupplMaster iclubSupplMasterByCiAssesorId) {
+	public void setIclubSupplMasterByCiAssesorId(
+			IclubSupplMaster iclubSupplMasterByCiAssesorId) {
 		this.iclubSupplMasterByCiAssesorId = iclubSupplMasterByCiAssesorId;
 	}
 

@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +48,10 @@ public class IclubInsuranceItem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubInsuranceItem(String iiId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String iiQuoteId, Double iiInsureValue, Double iiActualValue, String iiItemId, Date iiCrtdDt, Set<IclubClaimItem> iclubClaimItems) {
+	public IclubInsuranceItem(String iiId, IclubPerson iclubPerson,
+			IclubInsuranceItemType iclubInsuranceItemType, String iiQuoteId,
+			Double iiInsureValue, Double iiActualValue, String iiItemId,
+			Date iiCrtdDt, Set<IclubClaimItem> iclubClaimItems) {
 		this.iiId = iiId;
 		this.iclubPerson = iclubPerson;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
@@ -88,7 +90,8 @@ public class IclubInsuranceItem implements java.io.Serializable {
 		return this.iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(
+			IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 

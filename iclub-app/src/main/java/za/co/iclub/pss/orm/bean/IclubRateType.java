@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +37,8 @@ public class IclubRateType implements java.io.Serializable {
 	private String rtType;
 	private String rtQuoteType;
 	private Date rtCrtdDt;
-	private Set<IclubRateEngine> iclubRateEngines = new HashSet<IclubRateEngine>(0);
+	private Set<IclubRateEngine> iclubRateEngines = new HashSet<IclubRateEngine>(
+			0);
 
 	// Constructors
 
@@ -52,7 +52,12 @@ public class IclubRateType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateType(Long rtId, IclubField iclubField, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String rtShortDesc, String rtLongDesc, String rtStatus, String rtType, String rtQuoteType, Date rtCrtdDt, Set<IclubRateEngine> iclubRateEngines) {
+	public IclubRateType(Long rtId, IclubField iclubField,
+			IclubInsuranceItemType iclubInsuranceItemType,
+			IclubPerson iclubPerson, IclubEntityType iclubEntityType,
+			String rtShortDesc, String rtLongDesc, String rtStatus,
+			String rtType, String rtQuoteType, Date rtCrtdDt,
+			Set<IclubRateEngine> iclubRateEngines) {
 		this.rtId = rtId;
 		this.iclubField = iclubField;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
@@ -94,7 +99,8 @@ public class IclubRateType implements java.io.Serializable {
 		return this.iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(
+			IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 

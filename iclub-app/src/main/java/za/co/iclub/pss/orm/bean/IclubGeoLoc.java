@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +44,9 @@ public class IclubGeoLoc implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glProvince, String glSuburb, String glAddress, Double glLat, Double glLong, Date glCrtdDt, Double glRate) {
+	public IclubGeoLoc(Long glId, IclubPerson iclubPerson, String glProvince,
+			String glSuburb, String glAddress, Double glLat, Double glLong,
+			Date glCrtdDt, Double glRate) {
 		this.glId = glId;
 		this.iclubPerson = iclubPerson;
 		this.glProvince = glProvince;

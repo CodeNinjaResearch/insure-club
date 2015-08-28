@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubMbComment;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubMbCommentDAO {
-	private static final Logger log = Logger.getLogger(IclubMbCommentDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubMbCommentDAO.class);
 	// property constants
 	public static final String MBC_DESC = "mbcDesc";
 
@@ -71,7 +74,8 @@ public class IclubMbCommentDAO {
 	public IclubMbComment findById(java.lang.String id) {
 		log.debug("getting IclubMbComment instance with id: " + id);
 		try {
-			IclubMbComment instance = (IclubMbComment) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubMbComment", id);
+			IclubMbComment instance = (IclubMbComment) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubMbComment", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -82,8 +86,11 @@ public class IclubMbCommentDAO {
 	public List<IclubMbComment> findByExample(IclubMbComment instance) {
 		log.debug("finding IclubMbComment instance by example");
 		try {
-			List<IclubMbComment> results = (List<IclubMbComment>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubMbComment").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubMbComment> results = (List<IclubMbComment>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubMbComment")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -92,9 +99,11 @@ public class IclubMbCommentDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubMbComment instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubMbComment instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubMbComment as model where model." + propertyName + "= ?";
+			String queryString = "from IclubMbComment as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -123,7 +132,8 @@ public class IclubMbCommentDAO {
 	public IclubMbComment merge(IclubMbComment detachedInstance) {
 		log.debug("merging IclubMbComment instance");
 		try {
-			IclubMbComment result = (IclubMbComment) getCurrentSession().merge(detachedInstance);
+			IclubMbComment result = (IclubMbComment) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -146,7 +156,8 @@ public class IclubMbCommentDAO {
 	public void attachClean(IclubMbComment instance) {
 		log.debug("attaching clean IclubMbComment instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -154,7 +165,8 @@ public class IclubMbCommentDAO {
 		}
 	}
 
-	public static IclubMbCommentDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubMbCommentDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubMbCommentDAO) ctx.getBean("IclubMbCommentDAO");
 	}
 }

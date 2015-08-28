@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,8 +24,8 @@ public class IclubPropSecType implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = -24079831302171688L;
 	private Long pstId;
-	private String pstShortDesc;
 	private String pstLongDesc;
+	private String pstShortDesc;
 	private String pstStatus;
 	private Set<IclubProperty> iclubProperties = new HashSet<IclubProperty>(0);
 
@@ -42,10 +41,12 @@ public class IclubPropSecType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPropSecType(Long pstId, String pstShortDesc, String pstLongDesc, String pstStatus, Set<IclubProperty> iclubProperties) {
+	public IclubPropSecType(Long pstId, String pstLongDesc,
+			String pstShortDesc, String pstStatus,
+			Set<IclubProperty> iclubProperties) {
 		this.pstId = pstId;
-		this.pstShortDesc = pstShortDesc;
 		this.pstLongDesc = pstLongDesc;
+		this.pstShortDesc = pstShortDesc;
 		this.pstStatus = pstStatus;
 		this.iclubProperties = iclubProperties;
 	}
@@ -61,6 +62,15 @@ public class IclubPropSecType implements java.io.Serializable {
 		this.pstId = pstId;
 	}
 
+	@Column(name = "pst_long_desc")
+	public String getPstLongDesc() {
+		return this.pstLongDesc;
+	}
+
+	public void setPstLongDesc(String pstLongDesc) {
+		this.pstLongDesc = pstLongDesc;
+	}
+
 	@Column(name = "pst_short_desc", length = 4)
 	public String getPstShortDesc() {
 		return this.pstShortDesc;
@@ -68,15 +78,6 @@ public class IclubPropSecType implements java.io.Serializable {
 
 	public void setPstShortDesc(String pstShortDesc) {
 		this.pstShortDesc = pstShortDesc;
-	}
-
-	@Column(name = "pst_long_desc", length = 500)
-	public String getPstLongDesc() {
-		return this.pstLongDesc;
-	}
-
-	public void setPstLongDesc(String pstLongDesc) {
-		this.pstLongDesc = pstLongDesc;
 	}
 
 	@Column(name = "pst_status", length = 1)

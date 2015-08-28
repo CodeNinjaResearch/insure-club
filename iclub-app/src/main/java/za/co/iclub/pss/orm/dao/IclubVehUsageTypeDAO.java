@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubVehUsageType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubVehUsageTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubVehUsageTypeDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubVehUsageTypeDAO.class);
 	// property constants
 	public static final String VUT_LONG_DESC = "vutLongDesc";
 	public static final String VUT_SHORT_DESC = "vutShortDesc";
@@ -73,7 +75,8 @@ public class IclubVehUsageTypeDAO {
 	public IclubVehUsageType findById(java.lang.Long id) {
 		log.debug("getting IclubVehUsageType instance with id: " + id);
 		try {
-			IclubVehUsageType instance = (IclubVehUsageType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubVehUsageType", id);
+			IclubVehUsageType instance = (IclubVehUsageType) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubVehUsageType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,12 @@ public class IclubVehUsageTypeDAO {
 	public List<IclubVehUsageType> findByExample(IclubVehUsageType instance) {
 		log.debug("finding IclubVehUsageType instance by example");
 		try {
-			List<IclubVehUsageType> results = (List<IclubVehUsageType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubVehUsageType").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubVehUsageType> results = (List<IclubVehUsageType>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubVehUsageType")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +101,11 @@ public class IclubVehUsageTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubVehUsageType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubVehUsageType instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubVehUsageType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubVehUsageType as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +142,8 @@ public class IclubVehUsageTypeDAO {
 	public IclubVehUsageType merge(IclubVehUsageType detachedInstance) {
 		log.debug("merging IclubVehUsageType instance");
 		try {
-			IclubVehUsageType result = (IclubVehUsageType) getCurrentSession().merge(detachedInstance);
+			IclubVehUsageType result = (IclubVehUsageType) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +166,8 @@ public class IclubVehUsageTypeDAO {
 	public void attachClean(IclubVehUsageType instance) {
 		log.debug("attaching clean IclubVehUsageType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +175,8 @@ public class IclubVehUsageTypeDAO {
 		}
 	}
 
-	public static IclubVehUsageTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubVehUsageTypeDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubVehUsageTypeDAO) ctx.getBean("IclubVehUsageTypeDAO");
 	}
 }

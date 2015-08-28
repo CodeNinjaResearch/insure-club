@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubPolicyStatus;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubPolicyStatusDAO {
-	private static final Logger log = Logger.getLogger(IclubPolicyStatusDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubPolicyStatusDAO.class);
 	// property constants
 	public static final String PS_SHORT_DESC = "psShortDesc";
 	public static final String PS_LONG_DESC = "psLongDesc";
@@ -73,7 +75,8 @@ public class IclubPolicyStatusDAO {
 	public IclubPolicyStatus findById(java.lang.Long id) {
 		log.debug("getting IclubPolicyStatus instance with id: " + id);
 		try {
-			IclubPolicyStatus instance = (IclubPolicyStatus) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPolicyStatus", id);
+			IclubPolicyStatus instance = (IclubPolicyStatus) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubPolicyStatus", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,12 @@ public class IclubPolicyStatusDAO {
 	public List<IclubPolicyStatus> findByExample(IclubPolicyStatus instance) {
 		log.debug("finding IclubPolicyStatus instance by example");
 		try {
-			List<IclubPolicyStatus> results = (List<IclubPolicyStatus>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPolicyStatus").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubPolicyStatus> results = (List<IclubPolicyStatus>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubPolicyStatus")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +101,11 @@ public class IclubPolicyStatusDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubPolicyStatus instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubPolicyStatus instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubPolicyStatus as model where model." + propertyName + "= ?";
+			String queryString = "from IclubPolicyStatus as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +142,8 @@ public class IclubPolicyStatusDAO {
 	public IclubPolicyStatus merge(IclubPolicyStatus detachedInstance) {
 		log.debug("merging IclubPolicyStatus instance");
 		try {
-			IclubPolicyStatus result = (IclubPolicyStatus) getCurrentSession().merge(detachedInstance);
+			IclubPolicyStatus result = (IclubPolicyStatus) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +166,8 @@ public class IclubPolicyStatusDAO {
 	public void attachClean(IclubPolicyStatus instance) {
 		log.debug("attaching clean IclubPolicyStatus instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +175,8 @@ public class IclubPolicyStatusDAO {
 		}
 	}
 
-	public static IclubPolicyStatusDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubPolicyStatusDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubPolicyStatusDAO) ctx.getBean("IclubPolicyStatusDAO");
 	}
 }

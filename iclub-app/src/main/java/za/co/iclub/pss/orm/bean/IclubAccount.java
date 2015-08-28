@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +50,11 @@ public class IclubAccount implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAccount(String AId, IclubAccountType iclubAccountType, IclubBankMaster iclubBankMaster, IclubOwnerType iclubOwnerType, IclubPerson iclubPerson, String AAccNum, String AOwnerId, String AStatus, Date ACrtdDt, Set<IclubPolicy> iclubPolicies, Set<IclubPayment> iclubPayments) {
+	public IclubAccount(String AId, IclubAccountType iclubAccountType,
+			IclubBankMaster iclubBankMaster, IclubOwnerType iclubOwnerType,
+			IclubPerson iclubPerson, String AAccNum, String AOwnerId,
+			String AStatus, Date ACrtdDt, Set<IclubPolicy> iclubPolicies,
+			Set<IclubPayment> iclubPayments) {
 		this.AId = AId;
 		this.iclubAccountType = iclubAccountType;
 		this.iclubBankMaster = iclubBankMaster;

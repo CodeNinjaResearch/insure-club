@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,10 +41,13 @@ public class IclubSupplMaster implements java.io.Serializable {
 	private Date srActionDt;
 	private Integer smRating;
 	private Date smCrtdDt;
-	private Set<IclubClaimItem> iclubClaimItemsForCiAssesorId = new HashSet<IclubClaimItem>(0);
+	private Set<IclubClaimItem> iclubClaimItemsForCiAssesorId = new HashSet<IclubClaimItem>(
+			0);
 	private Set<IclubSupplItem> iclubSupplItems = new HashSet<IclubSupplItem>(0);
-	private Set<IclubClaimItem> iclubClaimItemsForCiHandlerId = new HashSet<IclubClaimItem>(0);
-	private Set<IclubSupplPerson> iclubSupplPersons = new HashSet<IclubSupplPerson>(0);
+	private Set<IclubClaimItem> iclubClaimItemsForCiHandlerId = new HashSet<IclubClaimItem>(
+			0);
+	private Set<IclubSupplPerson> iclubSupplPersons = new HashSet<IclubSupplPerson>(
+			0);
 
 	// Constructors
 
@@ -59,7 +61,15 @@ public class IclubSupplMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubSupplMaster(String smId, IclubPerson iclubPerson, IclubSupplierType iclubSupplierType, String smName, String smTradeName, String smRegNum, String smAddress, Double smLat, Double smLong, Double smCrLimit, Date srActionDt, Integer smRating, Date smCrtdDt, Set<IclubClaimItem> iclubClaimItemsForCiAssesorId, Set<IclubSupplItem> iclubSupplItems, Set<IclubClaimItem> iclubClaimItemsForCiHandlerId, Set<IclubSupplPerson> iclubSupplPersons) {
+	public IclubSupplMaster(String smId, IclubPerson iclubPerson,
+			IclubSupplierType iclubSupplierType, String smName,
+			String smTradeName, String smRegNum, String smAddress,
+			Double smLat, Double smLong, Double smCrLimit, Date srActionDt,
+			Integer smRating, Date smCrtdDt,
+			Set<IclubClaimItem> iclubClaimItemsForCiAssesorId,
+			Set<IclubSupplItem> iclubSupplItems,
+			Set<IclubClaimItem> iclubClaimItemsForCiHandlerId,
+			Set<IclubSupplPerson> iclubSupplPersons) {
 		this.smId = smId;
 		this.iclubPerson = iclubPerson;
 		this.iclubSupplierType = iclubSupplierType;
@@ -206,7 +216,8 @@ public class IclubSupplMaster implements java.io.Serializable {
 		return this.iclubClaimItemsForCiAssesorId;
 	}
 
-	public void setIclubClaimItemsForCiAssesorId(Set<IclubClaimItem> iclubClaimItemsForCiAssesorId) {
+	public void setIclubClaimItemsForCiAssesorId(
+			Set<IclubClaimItem> iclubClaimItemsForCiAssesorId) {
 		this.iclubClaimItemsForCiAssesorId = iclubClaimItemsForCiAssesorId;
 	}
 
@@ -224,7 +235,8 @@ public class IclubSupplMaster implements java.io.Serializable {
 		return this.iclubClaimItemsForCiHandlerId;
 	}
 
-	public void setIclubClaimItemsForCiHandlerId(Set<IclubClaimItem> iclubClaimItemsForCiHandlerId) {
+	public void setIclubClaimItemsForCiHandlerId(
+			Set<IclubClaimItem> iclubClaimItemsForCiHandlerId) {
 		this.iclubClaimItemsForCiHandlerId = iclubClaimItemsForCiHandlerId;
 	}
 

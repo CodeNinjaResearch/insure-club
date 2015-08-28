@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,7 +46,9 @@ public class IclubMessageBoard implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubMessageBoard(String mbId, IclubPerson iclubPerson, String mbTitle, String mbContent, String mbTag, Date mbCrtdDt, Set<IclubMbComment> iclubMbComments) {
+	public IclubMessageBoard(String mbId, IclubPerson iclubPerson,
+			String mbTitle, String mbContent, String mbTag, Date mbCrtdDt,
+			Set<IclubMbComment> iclubMbComments) {
 		this.mbId = mbId;
 		this.iclubPerson = iclubPerson;
 		this.mbTitle = mbTitle;

@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +44,10 @@ public class IclubNotif implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubNotif(String NId, IclubPerson iclubPerson, IclubNotificationType iclubNotificationType, String NTitle, String NBody, String NFromAddr, String NToList, String NStatus, Date NCrtdDt) {
+	public IclubNotif(String NId, IclubPerson iclubPerson,
+			IclubNotificationType iclubNotificationType, String NTitle,
+			String NBody, String NFromAddr, String NToList, String NStatus,
+			Date NCrtdDt) {
 		this.NId = NId;
 		this.iclubPerson = iclubPerson;
 		this.iclubNotificationType = iclubNotificationType;
@@ -84,7 +86,8 @@ public class IclubNotif implements java.io.Serializable {
 		return this.iclubNotificationType;
 	}
 
-	public void setIclubNotificationType(IclubNotificationType iclubNotificationType) {
+	public void setIclubNotificationType(
+			IclubNotificationType iclubNotificationType) {
 		this.iclubNotificationType = iclubNotificationType;
 	}
 

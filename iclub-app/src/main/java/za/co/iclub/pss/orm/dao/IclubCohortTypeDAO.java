@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubCohortType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubCohortTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubCohortTypeDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubCohortTypeDAO.class);
 	// property constants
 	public static final String CT_SHORT_DESC = "ctShortDesc";
 	public static final String CT_LONG_DESC = "ctLongDesc";
@@ -73,7 +75,8 @@ public class IclubCohortTypeDAO {
 	public IclubCohortType findById(java.lang.Long id) {
 		log.debug("getting IclubCohortType instance with id: " + id);
 		try {
-			IclubCohortType instance = (IclubCohortType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubCohortType", id);
+			IclubCohortType instance = (IclubCohortType) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubCohortType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,11 @@ public class IclubCohortTypeDAO {
 	public List<IclubCohortType> findByExample(IclubCohortType instance) {
 		log.debug("finding IclubCohortType instance by example");
 		try {
-			List<IclubCohortType> results = (List<IclubCohortType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubCohortType").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubCohortType> results = (List<IclubCohortType>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubCohortType")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +100,11 @@ public class IclubCohortTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubCohortType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubCohortType instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubCohortType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubCohortType as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +141,8 @@ public class IclubCohortTypeDAO {
 	public IclubCohortType merge(IclubCohortType detachedInstance) {
 		log.debug("merging IclubCohortType instance");
 		try {
-			IclubCohortType result = (IclubCohortType) getCurrentSession().merge(detachedInstance);
+			IclubCohortType result = (IclubCohortType) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +165,8 @@ public class IclubCohortTypeDAO {
 	public void attachClean(IclubCohortType instance) {
 		log.debug("attaching clean IclubCohortType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +174,8 @@ public class IclubCohortTypeDAO {
 		}
 	}
 
-	public static IclubCohortTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubCohortTypeDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubCohortTypeDAO) ctx.getBean("IclubCohortTypeDAO");
 	}
 }

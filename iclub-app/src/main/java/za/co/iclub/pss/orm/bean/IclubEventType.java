@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +41,8 @@ public class IclubEventType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubEventType(Long etId, String etShortDesc, String etLongDesc, String etStatus, Set<IclubEvent> iclubEvents) {
+	public IclubEventType(Long etId, String etShortDesc, String etLongDesc,
+			String etStatus, Set<IclubEvent> iclubEvents) {
 		this.etId = etId;
 		this.etShortDesc = etShortDesc;
 		this.etLongDesc = etLongDesc;

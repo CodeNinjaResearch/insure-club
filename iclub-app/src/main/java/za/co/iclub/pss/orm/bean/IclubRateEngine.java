@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,7 +43,9 @@ public class IclubRateEngine implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubRateEngine(String reId, IclubPerson iclubPerson, IclubRateType iclubRateType, String reBaseValue, String reMaxValue, Double reRate, String reStatus, Date reCrtdDt) {
+	public IclubRateEngine(String reId, IclubPerson iclubPerson,
+			IclubRateType iclubRateType, String reBaseValue, String reMaxValue,
+			Double reRate, String reStatus, Date reCrtdDt) {
 		this.reId = reId;
 		this.iclubPerson = iclubPerson;
 		this.iclubRateType = iclubRateType;

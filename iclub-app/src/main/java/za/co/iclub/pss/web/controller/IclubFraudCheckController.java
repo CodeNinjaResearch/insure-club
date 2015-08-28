@@ -24,9 +24,9 @@ public class IclubFraudCheckController {
 	public static void main(String[] args) {
 		
 		String url = "https://testclientapi.fraudcheck.co.za/api/authenticate/test";
-		String currentTimeStamp = System.currentTimeMillis() + "";
+		String currentDate = System.currentTimeMillis() + "";
 		
-		String fcHash = DigestUtils.md5Hex(FRAUD_CHECK_USERID + FRAUD_CHECK_PWD + currentTimeStamp);
+		String fcHash = DigestUtils.md5Hex(FRAUD_CHECK_USERID + FRAUD_CHECK_PWD + currentDate);
 		
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
@@ -35,7 +35,7 @@ public class IclubFraudCheckController {
 			post.setHeader("Content-Type", "application/json");
 			post.setHeader("FcAccId", FRAUD_CHECK_USERID);
 			post.setHeader("FcHash", fcHash);
-			post.setHeader("FcTimestamp", currentTimeStamp);
+			post.setHeader("FcDate", currentDate);
 			
 			List<NameValuePair> arguments = new ArrayList<>(3);
 			arguments.add(new BasicNameValuePair("data", "test"));

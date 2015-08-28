@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,7 +52,10 @@ public class IclubVehicleMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson, String vmMake, String vmModel, Double vmOrigRate, Double vmMrktRate, Double vmRetRate, Double vmRatePrct, Date vmProdDt, Date vmCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubVehicleMaster(Long vmId, IclubPerson iclubPerson,
+			String vmMake, String vmModel, Double vmOrigRate,
+			Double vmMrktRate, Double vmRetRate, Double vmRatePrct,
+			Date vmProdDt, Date vmCrtdDt, Set<IclubVehicle> iclubVehicles) {
 		this.vmId = vmId;
 		this.iclubPerson = iclubPerson;
 		this.vmMake = vmMake;

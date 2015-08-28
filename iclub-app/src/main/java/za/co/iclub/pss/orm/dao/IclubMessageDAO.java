@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubMessage;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubMessageDAO {
-	private static final Logger log = Logger.getLogger(IclubMessageDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubMessageDAO.class);
 	// property constants
 	public static final String _MTRAN_ID = "MTranId";
 	public static final String _MCONTENT = "MContent";
@@ -72,7 +75,8 @@ public class IclubMessageDAO {
 	public IclubMessage findById(java.lang.String id) {
 		log.debug("getting IclubMessage instance with id: " + id);
 		try {
-			IclubMessage instance = (IclubMessage) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubMessage", id);
+			IclubMessage instance = (IclubMessage) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubMessage", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -83,8 +87,11 @@ public class IclubMessageDAO {
 	public List<IclubMessage> findByExample(IclubMessage instance) {
 		log.debug("finding IclubMessage instance by example");
 		try {
-			List<IclubMessage> results = (List<IclubMessage>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubMessage").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubMessage> results = (List<IclubMessage>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubMessage")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -93,9 +100,11 @@ public class IclubMessageDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubMessage instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubMessage instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubMessage as model where model." + propertyName + "= ?";
+			String queryString = "from IclubMessage as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -128,7 +137,8 @@ public class IclubMessageDAO {
 	public IclubMessage merge(IclubMessage detachedInstance) {
 		log.debug("merging IclubMessage instance");
 		try {
-			IclubMessage result = (IclubMessage) getCurrentSession().merge(detachedInstance);
+			IclubMessage result = (IclubMessage) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -151,7 +161,8 @@ public class IclubMessageDAO {
 	public void attachClean(IclubMessage instance) {
 		log.debug("attaching clean IclubMessage instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -159,7 +170,8 @@ public class IclubMessageDAO {
 		}
 	}
 
-	public static IclubMessageDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubMessageDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubMessageDAO) ctx.getBean("IclubMessageDAO");
 	}
 }

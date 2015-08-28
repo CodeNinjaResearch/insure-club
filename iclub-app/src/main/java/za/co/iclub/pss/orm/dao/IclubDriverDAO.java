@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,15 +27,16 @@ import za.co.iclub.pss.orm.bean.IclubDriver;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubDriverDAO {
-	private static final Logger log = Logger.getLogger(IclubDriverDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubDriverDAO.class);
 	// property constants
 	public static final String _DNAME = "DName";
 	public static final String _DLICENSE_NUM = "DLicenseNum";
 	public static final String _DISSUE_YEARS = "DIssueYears";
-	public static final String _DLAST_CLAIM_YEAR = "DLastClaimYear";
 	public static final String _DLAST_CLAIM_DIFF = "DLastClaimDiff";
+	public static final String _DLAST_CLAIM_YEAR = "DLastClaimYear";
 
 	private SessionFactory sessionFactory;
 
@@ -75,7 +77,8 @@ public class IclubDriverDAO {
 	public IclubDriver findById(java.lang.String id) {
 		log.debug("getting IclubDriver instance with id: " + id);
 		try {
-			IclubDriver instance = (IclubDriver) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubDriver", id);
+			IclubDriver instance = (IclubDriver) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubDriver", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,8 +89,11 @@ public class IclubDriverDAO {
 	public List<IclubDriver> findByExample(IclubDriver instance) {
 		log.debug("finding IclubDriver instance by example");
 		try {
-			List<IclubDriver> results = (List<IclubDriver>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubDriver").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubDriver> results = (List<IclubDriver>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubDriver")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -96,9 +102,11 @@ public class IclubDriverDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubDriver instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubDriver instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from IclubDriver as model where model." + propertyName + "= ?";
+			String queryString = "from IclubDriver as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -120,12 +128,12 @@ public class IclubDriverDAO {
 		return findByProperty(_DISSUE_YEARS, DIssueYears);
 	}
 
-	public List<IclubDriver> findByDLastClaimYear(Object DLastClaimYear) {
-		return findByProperty(_DLAST_CLAIM_YEAR, DLastClaimYear);
-	}
-
 	public List<IclubDriver> findByDLastClaimDiff(Object DLastClaimDiff) {
 		return findByProperty(_DLAST_CLAIM_DIFF, DLastClaimDiff);
+	}
+
+	public List<IclubDriver> findByDLastClaimYear(Object DLastClaimYear) {
+		return findByProperty(_DLAST_CLAIM_YEAR, DLastClaimYear);
 	}
 
 	public List findAll() {
@@ -143,7 +151,8 @@ public class IclubDriverDAO {
 	public IclubDriver merge(IclubDriver detachedInstance) {
 		log.debug("merging IclubDriver instance");
 		try {
-			IclubDriver result = (IclubDriver) getCurrentSession().merge(detachedInstance);
+			IclubDriver result = (IclubDriver) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -166,7 +175,8 @@ public class IclubDriverDAO {
 	public void attachClean(IclubDriver instance) {
 		log.debug("attaching clean IclubDriver instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -174,7 +184,8 @@ public class IclubDriverDAO {
 		}
 	}
 
-	public static IclubDriverDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubDriverDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubDriverDAO) ctx.getBean("IclubDriverDAO");
 	}
 }

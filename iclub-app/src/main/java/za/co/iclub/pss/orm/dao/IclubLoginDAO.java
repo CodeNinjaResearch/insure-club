@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,13 +28,16 @@ import za.co.iclub.pss.orm.bean.IclubLogin;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubLoginDAO {
-	private static final Logger log = Logger.getLogger(IclubLoginDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubLoginDAO.class);
 	// property constants
 	public static final String _LNAME = "LName";
 	public static final String _LPASSWD = "LPasswd";
 	public static final String _LSEC_ANS = "LSecAns";
+	public static final String _LPROVIDER_CD = "LProviderCd";
+	public static final String _LPROVIDER_ID = "LProviderId";
 
 	private SessionFactory sessionFactory;
 
@@ -73,7 +78,8 @@ public class IclubLoginDAO {
 	public IclubLogin findById(java.lang.String id) {
 		log.debug("getting IclubLogin instance with id: " + id);
 		try {
-			IclubLogin instance = (IclubLogin) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubLogin", id);
+			IclubLogin instance = (IclubLogin) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubLogin", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +90,11 @@ public class IclubLoginDAO {
 	public List<IclubLogin> findByExample(IclubLogin instance) {
 		log.debug("finding IclubLogin instance by example");
 		try {
-			List<IclubLogin> results = (List<IclubLogin>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubLogin").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubLogin> results = (List<IclubLogin>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubLogin")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +103,11 @@ public class IclubLoginDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubLogin instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubLogin instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from IclubLogin as model where model." + propertyName + "= ?";
+			String queryString = "from IclubLogin as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -118,6 +129,14 @@ public class IclubLoginDAO {
 		return findByProperty(_LSEC_ANS, LSecAns);
 	}
 
+	public List<IclubLogin> findByLProviderCd(Object LProviderCd) {
+		return findByProperty(_LPROVIDER_CD, LProviderCd);
+	}
+
+	public List<IclubLogin> findByLProviderId(Object LProviderId) {
+		return findByProperty(_LPROVIDER_ID, LProviderId);
+	}
+
 	public List findAll() {
 		log.debug("finding all IclubLogin instances");
 		try {
@@ -133,7 +152,8 @@ public class IclubLoginDAO {
 	public IclubLogin merge(IclubLogin detachedInstance) {
 		log.debug("merging IclubLogin instance");
 		try {
-			IclubLogin result = (IclubLogin) getCurrentSession().merge(detachedInstance);
+			IclubLogin result = (IclubLogin) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +176,8 @@ public class IclubLoginDAO {
 	public void attachClean(IclubLogin instance) {
 		log.debug("attaching clean IclubLogin instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);

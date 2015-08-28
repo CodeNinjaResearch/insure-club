@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +41,9 @@ public class IclubPropUsageType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPropUsageType(Long putId, String putLongDesc, String putShortDesc, String putStatus, Set<IclubProperty> iclubProperties) {
+	public IclubPropUsageType(Long putId, String putLongDesc,
+			String putShortDesc, String putStatus,
+			Set<IclubProperty> iclubProperties) {
 		this.putId = putId;
 		this.putLongDesc = putLongDesc;
 		this.putShortDesc = putShortDesc;

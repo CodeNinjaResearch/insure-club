@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubInsurerMaster;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubInsurerMasterDAO {
-	private static final Logger log = Logger.getLogger(IclubInsurerMasterDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubInsurerMasterDAO.class);
 	// property constants
 	public static final String IM_NAME = "imName";
 	public static final String IM_TRADE_NAME = "imTradeName";
@@ -76,7 +78,8 @@ public class IclubInsurerMasterDAO {
 	public IclubInsurerMaster findById(java.lang.Long id) {
 		log.debug("getting IclubInsurerMaster instance with id: " + id);
 		try {
-			IclubInsurerMaster instance = (IclubInsurerMaster) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubInsurerMaster", id);
+			IclubInsurerMaster instance = (IclubInsurerMaster) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubInsurerMaster", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -87,8 +90,12 @@ public class IclubInsurerMasterDAO {
 	public List<IclubInsurerMaster> findByExample(IclubInsurerMaster instance) {
 		log.debug("finding IclubInsurerMaster instance by example");
 		try {
-			List<IclubInsurerMaster> results = (List<IclubInsurerMaster>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubInsurerMaster").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubInsurerMaster> results = (List<IclubInsurerMaster>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubInsurerMaster")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -97,9 +104,11 @@ public class IclubInsurerMasterDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubInsurerMaster instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubInsurerMaster instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubInsurerMaster as model where model." + propertyName + "= ?";
+			String queryString = "from IclubInsurerMaster as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -148,7 +157,8 @@ public class IclubInsurerMasterDAO {
 	public IclubInsurerMaster merge(IclubInsurerMaster detachedInstance) {
 		log.debug("merging IclubInsurerMaster instance");
 		try {
-			IclubInsurerMaster result = (IclubInsurerMaster) getCurrentSession().merge(detachedInstance);
+			IclubInsurerMaster result = (IclubInsurerMaster) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -171,7 +181,8 @@ public class IclubInsurerMasterDAO {
 	public void attachClean(IclubInsurerMaster instance) {
 		log.debug("attaching clean IclubInsurerMaster instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -179,7 +190,8 @@ public class IclubInsurerMasterDAO {
 		}
 	}
 
-	public static IclubInsurerMasterDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubInsurerMasterDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubInsurerMasterDAO) ctx.getBean("IclubInsurerMasterDAO");
 	}
 }

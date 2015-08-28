@@ -35,7 +35,8 @@ public class IclubBuildingState implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubBuildingState(Long bsId, String bsShortDesc, String bsLongDesc, String bsStatus) {
+	public IclubBuildingState(Long bsId, String bsShortDesc, String bsLongDesc,
+			String bsStatus) {
 		this.bsId = bsId;
 		this.bsShortDesc = bsShortDesc;
 		this.bsLongDesc = bsLongDesc;

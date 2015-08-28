@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubPropUsageType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubPropUsageTypeDAO {
-	private static final Logger log = Logger.getLogger(IclubPropUsageTypeDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubPropUsageTypeDAO.class);
 	// property constants
 	public static final String PUT_LONG_DESC = "putLongDesc";
 	public static final String PUT_SHORT_DESC = "putShortDesc";
@@ -73,7 +75,8 @@ public class IclubPropUsageTypeDAO {
 	public IclubPropUsageType findById(java.lang.Long id) {
 		log.debug("getting IclubPropUsageType instance with id: " + id);
 		try {
-			IclubPropUsageType instance = (IclubPropUsageType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPropUsageType", id);
+			IclubPropUsageType instance = (IclubPropUsageType) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubPropUsageType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,12 @@ public class IclubPropUsageTypeDAO {
 	public List<IclubPropUsageType> findByExample(IclubPropUsageType instance) {
 		log.debug("finding IclubPropUsageType instance by example");
 		try {
-			List<IclubPropUsageType> results = (List<IclubPropUsageType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPropUsageType").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubPropUsageType> results = (List<IclubPropUsageType>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubPropUsageType")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +101,11 @@ public class IclubPropUsageTypeDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubPropUsageType instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubPropUsageType instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubPropUsageType as model where model." + propertyName + "= ?";
+			String queryString = "from IclubPropUsageType as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +142,8 @@ public class IclubPropUsageTypeDAO {
 	public IclubPropUsageType merge(IclubPropUsageType detachedInstance) {
 		log.debug("merging IclubPropUsageType instance");
 		try {
-			IclubPropUsageType result = (IclubPropUsageType) getCurrentSession().merge(detachedInstance);
+			IclubPropUsageType result = (IclubPropUsageType) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +166,8 @@ public class IclubPropUsageTypeDAO {
 	public void attachClean(IclubPropUsageType instance) {
 		log.debug("attaching clean IclubPropUsageType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +175,8 @@ public class IclubPropUsageTypeDAO {
 		}
 	}
 
-	public static IclubPropUsageTypeDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubPropUsageTypeDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubPropUsageTypeDAO) ctx.getBean("IclubPropUsageTypeDAO");
 	}
 }

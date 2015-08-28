@@ -35,7 +35,8 @@ public class IclubPaymentType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPaymentType(Long ptId, String ptShortDesc, String ptLongDesc, String ptStatus) {
+	public IclubPaymentType(Long ptId, String ptShortDesc, String ptLongDesc,
+			String ptStatus) {
 		this.ptId = ptId;
 		this.ptShortDesc = ptShortDesc;
 		this.ptLongDesc = ptLongDesc;

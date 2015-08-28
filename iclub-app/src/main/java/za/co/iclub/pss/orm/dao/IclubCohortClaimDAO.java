@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubCohortClaim;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubCohortClaimDAO {
-	private static final Logger log = Logger.getLogger(IclubCohortClaimDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubCohortClaimDAO.class);
 	// property constants
 	public static final String CC_CLAIM_AMT = "ccClaimAmt";
 
@@ -71,7 +74,8 @@ public class IclubCohortClaimDAO {
 	public IclubCohortClaim findById(java.lang.String id) {
 		log.debug("getting IclubCohortClaim instance with id: " + id);
 		try {
-			IclubCohortClaim instance = (IclubCohortClaim) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubCohortClaim", id);
+			IclubCohortClaim instance = (IclubCohortClaim) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubCohortClaim", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -82,8 +86,11 @@ public class IclubCohortClaimDAO {
 	public List<IclubCohortClaim> findByExample(IclubCohortClaim instance) {
 		log.debug("finding IclubCohortClaim instance by example");
 		try {
-			List<IclubCohortClaim> results = (List<IclubCohortClaim>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubCohortClaim").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubCohortClaim> results = (List<IclubCohortClaim>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubCohortClaim")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -92,9 +99,11 @@ public class IclubCohortClaimDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubCohortClaim instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubCohortClaim instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubCohortClaim as model where model." + propertyName + "= ?";
+			String queryString = "from IclubCohortClaim as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -123,7 +132,8 @@ public class IclubCohortClaimDAO {
 	public IclubCohortClaim merge(IclubCohortClaim detachedInstance) {
 		log.debug("merging IclubCohortClaim instance");
 		try {
-			IclubCohortClaim result = (IclubCohortClaim) getCurrentSession().merge(detachedInstance);
+			IclubCohortClaim result = (IclubCohortClaim) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -146,7 +156,8 @@ public class IclubCohortClaimDAO {
 	public void attachClean(IclubCohortClaim instance) {
 		log.debug("attaching clean IclubCohortClaim instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -154,7 +165,8 @@ public class IclubCohortClaimDAO {
 		}
 	}
 
-	public static IclubCohortClaimDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubCohortClaimDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubCohortClaimDAO) ctx.getBean("IclubCohortClaimDAO");
 	}
 }

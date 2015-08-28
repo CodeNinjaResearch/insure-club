@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +25,7 @@ public class IclubDriver implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8007380585037397336L;
+	private static final long serialVersionUID = 6415945969222421863L;
 	private String DId;
 	private IclubAccessType iclubAccessTypeByDAccessStatusId;
 	private IclubLicenseCode iclubLicenseCode;
@@ -38,10 +37,10 @@ public class IclubDriver implements java.io.Serializable {
 	private String DLicenseNum;
 	private Date DIssueDt;
 	private Date DDob;
-	private Integer DIssueYears;
-	private Integer DLastClaimYear;
-	private Integer DLastClaimDiff;
 	private Date DCrtdDt;
+	private Integer DIssueYears;
+	private Integer DLastClaimDiff;
+	private Integer DLastClaimYear;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 
 	// Constructors
@@ -56,7 +55,16 @@ public class IclubDriver implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDriver(String DId, IclubAccessType iclubAccessTypeByDAccessStatusId, IclubLicenseCode iclubLicenseCode, IclubPerson iclubPersonByDCrtdBy, IclubAccessType iclubAccessTypeByDAccessTypeId, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPersonByDPersonId, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Integer DIssueYears, Integer DLastClaimYear, Integer DLastClaimDiff, Date DCrtdDt, Set<IclubVehicle> iclubVehicles) {
+	public IclubDriver(String DId,
+			IclubAccessType iclubAccessTypeByDAccessStatusId,
+			IclubLicenseCode iclubLicenseCode,
+			IclubPerson iclubPersonByDCrtdBy,
+			IclubAccessType iclubAccessTypeByDAccessTypeId,
+			IclubMaritialStatus iclubMaritialStatus,
+			IclubPerson iclubPersonByDPersonId, String DName,
+			String DLicenseNum, Date DIssueDt, Date DDob,
+			Date DCrtdDt, Integer DIssueYears, Integer DLastClaimDiff,
+			Integer DLastClaimYear, Set<IclubVehicle> iclubVehicles) {
 		this.DId = DId;
 		this.iclubAccessTypeByDAccessStatusId = iclubAccessTypeByDAccessStatusId;
 		this.iclubLicenseCode = iclubLicenseCode;
@@ -68,10 +76,10 @@ public class IclubDriver implements java.io.Serializable {
 		this.DLicenseNum = DLicenseNum;
 		this.DIssueDt = DIssueDt;
 		this.DDob = DDob;
-		this.DIssueYears = DIssueYears;
-		this.DLastClaimYear = DLastClaimYear;
-		this.DLastClaimDiff = DLastClaimDiff;
 		this.DCrtdDt = DCrtdDt;
+		this.DIssueYears = DIssueYears;
+		this.DLastClaimDiff = DLastClaimDiff;
+		this.DLastClaimYear = DLastClaimYear;
 		this.iclubVehicles = iclubVehicles;
 	}
 
@@ -92,7 +100,8 @@ public class IclubDriver implements java.io.Serializable {
 		return this.iclubAccessTypeByDAccessStatusId;
 	}
 
-	public void setIclubAccessTypeByDAccessStatusId(IclubAccessType iclubAccessTypeByDAccessStatusId) {
+	public void setIclubAccessTypeByDAccessStatusId(
+			IclubAccessType iclubAccessTypeByDAccessStatusId) {
 		this.iclubAccessTypeByDAccessStatusId = iclubAccessTypeByDAccessStatusId;
 	}
 
@@ -122,7 +131,8 @@ public class IclubDriver implements java.io.Serializable {
 		return this.iclubAccessTypeByDAccessTypeId;
 	}
 
-	public void setIclubAccessTypeByDAccessTypeId(IclubAccessType iclubAccessTypeByDAccessTypeId) {
+	public void setIclubAccessTypeByDAccessTypeId(
+			IclubAccessType iclubAccessTypeByDAccessTypeId) {
 		this.iclubAccessTypeByDAccessTypeId = iclubAccessTypeByDAccessTypeId;
 	}
 
@@ -182,6 +192,15 @@ public class IclubDriver implements java.io.Serializable {
 		this.DDob = DDob;
 	}
 
+	@Column(name = "d_crtd_dt", length = 19)
+	public Date getDCrtdDt() {
+		return this.DCrtdDt;
+	}
+
+	public void setDCrtdDt(Date DCrtdDt) {
+		this.DCrtdDt = DCrtdDt;
+	}
+
 	@Column(name = "d_issue_years")
 	public Integer getDIssueYears() {
 		return this.DIssueYears;
@@ -189,15 +208,6 @@ public class IclubDriver implements java.io.Serializable {
 
 	public void setDIssueYears(Integer DIssueYears) {
 		this.DIssueYears = DIssueYears;
-	}
-
-	@Column(name = "d_last_claim_year")
-	public Integer getDLastClaimYear() {
-		return this.DLastClaimYear;
-	}
-
-	public void setDLastClaimYear(Integer DLastClaimYear) {
-		this.DLastClaimYear = DLastClaimYear;
 	}
 
 	@Column(name = "d_last_claim_diff")
@@ -209,13 +219,13 @@ public class IclubDriver implements java.io.Serializable {
 		this.DLastClaimDiff = DLastClaimDiff;
 	}
 
-	@Column(name = "d_crtd_dt", length = 19)
-	public Date getDCrtdDt() {
-		return this.DCrtdDt;
+	@Column(name = "d_last_claim_year")
+	public Integer getDLastClaimYear() {
+		return this.DLastClaimYear;
 	}
 
-	public void setDCrtdDt(Date DCrtdDt) {
-		this.DCrtdDt = DCrtdDt;
+	public void setDLastClaimYear(Integer DLastClaimYear) {
+		this.DLastClaimYear = DLastClaimYear;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubDriver")

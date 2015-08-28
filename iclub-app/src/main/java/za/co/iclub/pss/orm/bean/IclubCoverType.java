@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +25,7 @@ public class IclubCoverType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -77748403945093293L;
+	private static final long serialVersionUID = -7083851500261300185L;
 	private Long ctId;
 	private IclubPerson iclubPerson;
 	private IclubInsuranceItemType iclubInsuranceItemType;
@@ -50,7 +49,11 @@ public class IclubCoverType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubCoverType(Long ctId, IclubPerson iclubPerson, IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc, String ctLongDesc, String ctStatus, Date ctCrtdDt, Set<IclubProperty> iclubProperties, Set<IclubVehicle> iclubVehicles, Set<IclubQuote> iclubQuotes) {
+	public IclubCoverType(Long ctId, IclubPerson iclubPerson,
+			IclubInsuranceItemType iclubInsuranceItemType, String ctShortDesc,
+			String ctLongDesc, String ctStatus, Date ctCrtdDt,
+			Set<IclubProperty> iclubProperties,
+			Set<IclubVehicle> iclubVehicles, Set<IclubQuote> iclubQuotes) {
 		this.ctId = ctId;
 		this.iclubPerson = iclubPerson;
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
@@ -90,7 +93,8 @@ public class IclubCoverType implements java.io.Serializable {
 		return this.iclubInsuranceItemType;
 	}
 
-	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
+	public void setIclubInsuranceItemType(
+			IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
 

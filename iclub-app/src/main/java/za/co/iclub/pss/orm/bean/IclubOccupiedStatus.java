@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +41,9 @@ public class IclubOccupiedStatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubOccupiedStatus(Long osId, String osShortDesc, String osLongDesc, String osStatus, Set<IclubProperty> iclubProperties) {
+	public IclubOccupiedStatus(Long osId, String osShortDesc,
+			String osLongDesc, String osStatus,
+			Set<IclubProperty> iclubProperties) {
 		this.osId = osId;
 		this.osShortDesc = osShortDesc;
 		this.osLongDesc = osLongDesc;

@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,12 +22,13 @@ public class IclubVehSecType implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4661676321734086985L;
+	private static final long serialVersionUID = 787252223420108941L;
 	private Long vstId;
-	private String vstShortDesc;
 	private String vstLongDesc;
+	private String vstShortDesc;
 	private String vstStatus;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
+	private Set<IclubVehicle> iclubVehicles_1 = new HashSet<IclubVehicle>(0);
 
 	// Constructors
 
@@ -42,12 +42,15 @@ public class IclubVehSecType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubVehSecType(Long vstId, String vstShortDesc, String vstLongDesc, String vstStatus, Set<IclubVehicle> iclubVehicles) {
+	public IclubVehSecType(Long vstId, String vstLongDesc, String vstShortDesc,
+			String vstStatus, Set<IclubVehicle> iclubVehicles,
+			Set<IclubVehicle> iclubVehicles_1) {
 		this.vstId = vstId;
-		this.vstShortDesc = vstShortDesc;
 		this.vstLongDesc = vstLongDesc;
+		this.vstShortDesc = vstShortDesc;
 		this.vstStatus = vstStatus;
 		this.iclubVehicles = iclubVehicles;
+		this.iclubVehicles_1 = iclubVehicles_1;
 	}
 
 	// Property accessors
@@ -61,6 +64,15 @@ public class IclubVehSecType implements java.io.Serializable {
 		this.vstId = vstId;
 	}
 
+	@Column(name = "vst_long_desc")
+	public String getVstLongDesc() {
+		return this.vstLongDesc;
+	}
+
+	public void setVstLongDesc(String vstLongDesc) {
+		this.vstLongDesc = vstLongDesc;
+	}
+
 	@Column(name = "vst_short_desc", length = 4)
 	public String getVstShortDesc() {
 		return this.vstShortDesc;
@@ -68,15 +80,6 @@ public class IclubVehSecType implements java.io.Serializable {
 
 	public void setVstShortDesc(String vstShortDesc) {
 		this.vstShortDesc = vstShortDesc;
-	}
-
-	@Column(name = "vst_long_desc", length = 500)
-	public String getVstLongDesc() {
-		return this.vstLongDesc;
-	}
-
-	public void setVstLongDesc(String vstLongDesc) {
-		this.vstLongDesc = vstLongDesc;
 	}
 
 	@Column(name = "vst_status", length = 1)
@@ -95,6 +98,15 @@ public class IclubVehSecType implements java.io.Serializable {
 
 	public void setIclubVehicles(Set<IclubVehicle> iclubVehicles) {
 		this.iclubVehicles = iclubVehicles;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubVehSecType")
+	public Set<IclubVehicle> getIclubVehicles_1() {
+		return this.iclubVehicles_1;
+	}
+
+	public void setIclubVehicles_1(Set<IclubVehicle> iclubVehicles_1) {
+		this.iclubVehicles_1 = iclubVehicles_1;
 	}
 
 }

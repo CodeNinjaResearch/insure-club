@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +36,8 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	private Double tmLong;
 	private String tmRegNum;
 	private Date tmCrtdDt;
-	private Set<IclubSecurityDevice> iclubSecurityDevices = new HashSet<IclubSecurityDevice>(0);
+	private Set<IclubSecurityDevice> iclubSecurityDevices = new HashSet<IclubSecurityDevice>(
+			0);
 
 	// Constructors
 
@@ -51,7 +51,10 @@ public class IclubTrackerMaster implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubTrackerMaster(Long tmId, IclubPerson iclubPerson, String tmName, String tmTradeName, String tmLocation, Double tmLat, Double tmLong, String tmRegNum, Date tmCrtdDt, Set<IclubSecurityDevice> iclubSecurityDevices) {
+	public IclubTrackerMaster(Long tmId, IclubPerson iclubPerson,
+			String tmName, String tmTradeName, String tmLocation, Double tmLat,
+			Double tmLong, String tmRegNum, Date tmCrtdDt,
+			Set<IclubSecurityDevice> iclubSecurityDevices) {
 		this.tmId = tmId;
 		this.iclubPerson = iclubPerson;
 		this.tmName = tmName;
@@ -153,7 +156,8 @@ public class IclubTrackerMaster implements java.io.Serializable {
 		return this.iclubSecurityDevices;
 	}
 
-	public void setIclubSecurityDevices(Set<IclubSecurityDevice> iclubSecurityDevices) {
+	public void setIclubSecurityDevices(
+			Set<IclubSecurityDevice> iclubSecurityDevices) {
 		this.iclubSecurityDevices = iclubSecurityDevices;
 	}
 

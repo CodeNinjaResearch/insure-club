@@ -6,10 +6,9 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -254,7 +253,7 @@ public class IclubCohortController implements Serializable {
 						inviteModel.setCiInviteLName(model.getPLName());
 						inviteModel.setCiInviteUri(model.getPEmail());
 						inviteModel.setIclubCohort(this.bean.getCId());
-						inviteModel.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
+						inviteModel.setCiCrtdDt(new Date(System.currentTimeMillis()));
 						inviteModel.setCiInviteAcceptYn("Y");
 						inviteModel.setIclubInviteStatus(2l);
 						inviteModel.setIclubNotificationType(3l);
@@ -314,7 +313,7 @@ public class IclubCohortController implements Serializable {
 						inviteModel.setCiInviteLName(person.getPLName());
 						inviteModel.setCiInviteUri(person.getPEmail());
 						inviteModel.setIclubCohort(this.bean.getCId());
-						inviteModel.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
+						inviteModel.setCiCrtdDt(new Date(System.currentTimeMillis()));
 						inviteModel.setIclubPerson(getSessionUserId());
 						inviteModel.setCiInviteAcceptYn("Y");
 						inviteModel.setIclubInviteStatus(3l);
@@ -364,7 +363,7 @@ public class IclubCohortController implements Serializable {
 						IclubCohortInviteModel model = IclubCohortInviteTrans.fromUItoWS(bean);
 						
 						model.setIclubCohort(this.bean.getCId());
-						model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
+						model.setCiCrtdDt(new Date(System.currentTimeMillis()));
 						model.setIclubPerson(getSessionUserId());
 						model.setCiInviteAcceptYn("N");
 						model.setIclubInviteStatus(1l);
@@ -759,7 +758,7 @@ public class IclubCohortController implements Serializable {
 							IclubCohortInviteModel model = IclubCohortInviteTrans.fromUItoWS(bean);
 							
 							model.setIclubCohort(this.bean.getCId());
-							model.setCiCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setCiCrtdDt(new Date(System.currentTimeMillis()));
 							models.add(model);
 							
 						}

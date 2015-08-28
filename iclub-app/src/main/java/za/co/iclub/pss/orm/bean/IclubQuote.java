@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,7 +60,15 @@ public class IclubQuote implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy, IclubPerson iclubPersonByQPersonId, IclubProductType iclubProductType, IclubInsurerMaster iclubInsurerMaster, IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus, Long QNumber, Date QGenDt, Integer QNumItems, Double QGenPremium, String QEmail, String QMobile, Date QValidUntil, Double QPrevPremium, String QIsMatched, Date QCrtdDt, String QClaimYn, Set<IclubPolicy> iclubPolicies) {
+	public IclubQuote(String QId, IclubPerson iclubPersonByQCrtdBy,
+			IclubPerson iclubPersonByQPersonId,
+			IclubProductType iclubProductType,
+			IclubInsurerMaster iclubInsurerMaster,
+			IclubCoverType iclubCoverType, IclubQuoteStatus iclubQuoteStatus,
+			Long QNumber, Date QGenDt, Integer QNumItems,
+			Double QGenPremium, String QEmail, String QMobile,
+			Date QValidUntil, Double QPrevPremium, String QIsMatched,
+			Date QCrtdDt, String QClaimYn, Set<IclubPolicy> iclubPolicies) {
 		this.QId = QId;
 		this.iclubPersonByQCrtdBy = iclubPersonByQCrtdBy;
 		this.iclubPersonByQPersonId = iclubPersonByQPersonId;

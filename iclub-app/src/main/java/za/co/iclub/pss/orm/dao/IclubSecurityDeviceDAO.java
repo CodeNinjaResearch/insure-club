@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubSecurityDevice;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubSecurityDeviceDAO {
-	private static final Logger log = Logger.getLogger(IclubSecurityDeviceDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubSecurityDeviceDAO.class);
 	// property constants
 	public static final String SD_ITEM_ID = "sdItemId";
 	public static final String SD_SER_NUM = "sdSerNum";
@@ -73,7 +75,8 @@ public class IclubSecurityDeviceDAO {
 	public IclubSecurityDevice findById(java.lang.String id) {
 		log.debug("getting IclubSecurityDevice instance with id: " + id);
 		try {
-			IclubSecurityDevice instance = (IclubSecurityDevice) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSecurityDevice", id);
+			IclubSecurityDevice instance = (IclubSecurityDevice) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubSecurityDevice", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -84,8 +87,12 @@ public class IclubSecurityDeviceDAO {
 	public List<IclubSecurityDevice> findByExample(IclubSecurityDevice instance) {
 		log.debug("finding IclubSecurityDevice instance by example");
 		try {
-			List<IclubSecurityDevice> results = (List<IclubSecurityDevice>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSecurityDevice").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubSecurityDevice> results = (List<IclubSecurityDevice>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubSecurityDevice")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -94,9 +101,11 @@ public class IclubSecurityDeviceDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSecurityDevice instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubSecurityDevice instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSecurityDevice as model where model." + propertyName + "= ?";
+			String queryString = "from IclubSecurityDevice as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -133,7 +142,8 @@ public class IclubSecurityDeviceDAO {
 	public IclubSecurityDevice merge(IclubSecurityDevice detachedInstance) {
 		log.debug("merging IclubSecurityDevice instance");
 		try {
-			IclubSecurityDevice result = (IclubSecurityDevice) getCurrentSession().merge(detachedInstance);
+			IclubSecurityDevice result = (IclubSecurityDevice) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +166,8 @@ public class IclubSecurityDeviceDAO {
 	public void attachClean(IclubSecurityDevice instance) {
 		log.debug("attaching clean IclubSecurityDevice instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -164,7 +175,8 @@ public class IclubSecurityDeviceDAO {
 		}
 	}
 
-	public static IclubSecurityDeviceDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubSecurityDeviceDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubSecurityDeviceDAO) ctx.getBean("IclubSecurityDeviceDAO");
 	}
 }

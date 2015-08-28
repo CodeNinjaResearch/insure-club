@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,7 +40,8 @@ public class IclubEvent implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubEvent(String EId, IclubEventType iclubEventType, IclubPerson iclubPerson, String EDesc, Date ECrtdDt) {
+	public IclubEvent(String EId, IclubEventType iclubEventType,
+			IclubPerson iclubPerson, String EDesc, Date ECrtdDt) {
 		this.EId = EId;
 		this.iclubEventType = iclubEventType;
 		this.iclubPerson = iclubPerson;

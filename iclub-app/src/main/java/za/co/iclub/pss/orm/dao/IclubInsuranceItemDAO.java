@@ -1,14 +1,15 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +27,10 @@ import za.co.iclub.pss.orm.bean.IclubInsuranceItem;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubInsuranceItemDAO {
-	private static final Logger log = Logger.getLogger(IclubInsuranceItemDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubInsuranceItemDAO.class);
 	// property constants
 	public static final String II_QUOTE_ID = "iiQuoteId";
 	public static final String II_INSURE_VALUE = "iiInsureValue";
@@ -74,7 +76,8 @@ public class IclubInsuranceItemDAO {
 	public IclubInsuranceItem findById(java.lang.String id) {
 		log.debug("getting IclubInsuranceItem instance with id: " + id);
 		try {
-			IclubInsuranceItem instance = (IclubInsuranceItem) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubInsuranceItem", id);
+			IclubInsuranceItem instance = (IclubInsuranceItem) getCurrentSession()
+					.get("za.co.iclub.pss.orm.bean.IclubInsuranceItem", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -85,8 +88,12 @@ public class IclubInsuranceItemDAO {
 	public List<IclubInsuranceItem> findByExample(IclubInsuranceItem instance) {
 		log.debug("finding IclubInsuranceItem instance by example");
 		try {
-			List<IclubInsuranceItem> results = (List<IclubInsuranceItem>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubInsuranceItem").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubInsuranceItem> results = (List<IclubInsuranceItem>) getCurrentSession()
+					.createCriteria(
+							"za.co.iclub.pss.orm.bean.IclubInsuranceItem")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -95,9 +102,11 @@ public class IclubInsuranceItemDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubInsuranceItem instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubInsuranceItem instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubInsuranceItem as model where model." + propertyName + "= ?";
+			String queryString = "from IclubInsuranceItem as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -138,7 +147,8 @@ public class IclubInsuranceItemDAO {
 	public IclubInsuranceItem merge(IclubInsuranceItem detachedInstance) {
 		log.debug("merging IclubInsuranceItem instance");
 		try {
-			IclubInsuranceItem result = (IclubInsuranceItem) getCurrentSession().merge(detachedInstance);
+			IclubInsuranceItem result = (IclubInsuranceItem) getCurrentSession()
+					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -161,7 +171,8 @@ public class IclubInsuranceItemDAO {
 	public void attachClean(IclubInsuranceItem instance) {
 		log.debug("attaching clean IclubInsuranceItem instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -169,7 +180,8 @@ public class IclubInsuranceItemDAO {
 		}
 	}
 
-	public static IclubInsuranceItemDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubInsuranceItemDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubInsuranceItemDAO) ctx.getBean("IclubInsuranceItemDAO");
 	}
 }

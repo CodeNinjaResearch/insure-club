@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +27,8 @@ public class IclubNotificationType implements java.io.Serializable {
 	private String ntShortDesc;
 	private String ntLongDesc;
 	private String ntStatus;
-	private Set<IclubCohortInvite> iclubCohortInvites = new HashSet<IclubCohortInvite>(0);
+	private Set<IclubCohortInvite> iclubCohortInvites = new HashSet<IclubCohortInvite>(
+			0);
 	private Set<IclubNotif> iclubNotifs = new HashSet<IclubNotif>(0);
 
 	// Constructors
@@ -43,7 +43,10 @@ public class IclubNotificationType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubNotificationType(Long ntId, String ntShortDesc, String ntLongDesc, String ntStatus, Set<IclubCohortInvite> iclubCohortInvites, Set<IclubNotif> iclubNotifs) {
+	public IclubNotificationType(Long ntId, String ntShortDesc,
+			String ntLongDesc, String ntStatus,
+			Set<IclubCohortInvite> iclubCohortInvites,
+			Set<IclubNotif> iclubNotifs) {
 		this.ntId = ntId;
 		this.ntShortDesc = ntShortDesc;
 		this.ntLongDesc = ntLongDesc;

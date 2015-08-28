@@ -1,7 +1,6 @@
 package za.co.iclub.pss.orm.bean;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +21,7 @@ public class IclubDocument implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7301305164188507356L;
+	private static final long serialVersionUID = 17243585253132422L;
 	private String DId;
 	private IclubDocumentType iclubDocumentType;
 	private IclubPerson iclubPerson;
@@ -47,7 +46,10 @@ public class IclubDocument implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubPerson iclubPerson, IclubEntityType iclubEntityType, String DName, String DMimeType, Long DSize, String DEntityId, byte[] DBlob, Date DCrtdDt, String DContent) {
+	public IclubDocument(String DId, IclubDocumentType iclubDocumentType,
+			IclubPerson iclubPerson, IclubEntityType iclubEntityType,
+			String DName, String DMimeType, Long DSize, String DEntityId,
+			byte[] DBlob, Date DCrtdDt, String DContent) {
 		this.DId = DId;
 		this.iclubDocumentType = iclubDocumentType;
 		this.iclubPerson = iclubPerson;

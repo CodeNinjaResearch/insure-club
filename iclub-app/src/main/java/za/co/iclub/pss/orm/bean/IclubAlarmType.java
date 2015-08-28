@@ -35,7 +35,8 @@ public class IclubAlarmType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubAlarmType(Long atId, String atShortDesc, String atLongDesc, String atStatus) {
+	public IclubAlarmType(Long atId, String atShortDesc, String atLongDesc,
+			String atStatus) {
 		this.atId = atId;
 		this.atShortDesc = atShortDesc;
 		this.atLongDesc = atLongDesc;

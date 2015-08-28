@@ -4,11 +4,12 @@ import static org.hibernate.criterion.Example.create;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +29,8 @@ import za.co.iclub.pss.orm.bean.IclubPolicy;
 @Transactional
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubPolicyDAO {
-	private static final Logger log = Logger.getLogger(IclubPolicyDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubPolicyDAO.class);
 	// property constants
 	public static final String _PNUMBER = "PNumber";
 	public static final String _PPREMIUM = "PPremium";
@@ -75,7 +77,8 @@ public class IclubPolicyDAO {
 	public IclubPolicy findById(java.lang.String id) {
 		log.debug("getting IclubPolicy instance with id: " + id);
 		try {
-			IclubPolicy instance = (IclubPolicy) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPolicy", id);
+			IclubPolicy instance = (IclubPolicy) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubPolicy", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -86,8 +89,11 @@ public class IclubPolicyDAO {
 	public List<IclubPolicy> findByExample(IclubPolicy instance) {
 		log.debug("finding IclubPolicy instance by example");
 		try {
-			List<IclubPolicy> results = (List<IclubPolicy>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPolicy").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubPolicy> results = (List<IclubPolicy>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubPolicy")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -96,9 +102,11 @@ public class IclubPolicyDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubPolicy instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubPolicy instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from IclubPolicy as model where model." + propertyName + "= ?";
+			String queryString = "from IclubPolicy as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -143,7 +151,8 @@ public class IclubPolicyDAO {
 	public IclubPolicy merge(IclubPolicy detachedInstance) {
 		log.debug("merging IclubPolicy instance");
 		try {
-			IclubPolicy result = (IclubPolicy) getCurrentSession().merge(detachedInstance);
+			IclubPolicy result = (IclubPolicy) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -166,7 +175,8 @@ public class IclubPolicyDAO {
 	public void attachClean(IclubPolicy instance) {
 		log.debug("attaching clean IclubPolicy instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -174,7 +184,8 @@ public class IclubPolicyDAO {
 		}
 	}
 
-	public static IclubPolicyDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubPolicyDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubPolicyDAO) ctx.getBean("IclubPolicyDAO");
 	}
 }

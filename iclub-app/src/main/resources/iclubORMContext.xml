@@ -104,7 +104,10 @@
 				<value>za.co.iclub.pss.orm.bean.IclubPclaimStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubInviteStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubCohortActivity</value>
-			</list>
+				<value>za.co.iclub.pss.orm.bean.IclubThatchType</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubSecurityMaster
+				</value></list>
 
 		</property>
 	</bean>
@@ -529,4 +532,15 @@
 	</bean>
 
 
-</beans>
+	<bean id="IclubThatchTypeDAO"
+		class="za.co.iclub.pss.orm.dao.IclubThatchTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubSecurityMasterDAO"
+		class="za.co.iclub.pss.orm.dao.IclubSecurityMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>

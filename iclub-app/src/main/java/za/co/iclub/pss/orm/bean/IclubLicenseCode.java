@@ -3,7 +3,6 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,7 +47,9 @@ public class IclubLicenseCode implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson, String lcCategory, String lcDesc, String lcStatus, Date lcCrtdDt, Set<IclubDriver> iclubDrivers) {
+	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson,
+			String lcCategory, String lcDesc, String lcStatus,
+			Date lcCrtdDt, Set<IclubDriver> iclubDrivers) {
 		this.lcId = lcId;
 		this.iclubPerson = iclubPerson;
 		this.lcCategory = lcCategory;

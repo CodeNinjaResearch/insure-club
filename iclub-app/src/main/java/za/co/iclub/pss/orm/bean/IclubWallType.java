@@ -2,7 +2,6 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +41,8 @@ public class IclubWallType implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubWallType(Long wtId, String wtShortDesc, String wtLongDesc, String wtStatus, Set<IclubProperty> iclubProperties) {
+	public IclubWallType(Long wtId, String wtShortDesc, String wtLongDesc,
+			String wtStatus, Set<IclubProperty> iclubProperties) {
 		this.wtId = wtId;
 		this.wtShortDesc = wtShortDesc;
 		this.wtLongDesc = wtLongDesc;

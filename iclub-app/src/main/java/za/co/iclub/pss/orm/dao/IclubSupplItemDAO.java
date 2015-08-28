@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubSupplItem;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubSupplItemDAO {
-	private static final Logger log = Logger.getLogger(IclubSupplItemDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubSupplItemDAO.class);
 	// property constants
 	public static final String SI_ASSESS_NUMBER = "siAssessNumber";
 	public static final String SI_ITEM_ID = "siItemId";
@@ -72,7 +75,8 @@ public class IclubSupplItemDAO {
 	public IclubSupplItem findById(java.lang.String id) {
 		log.debug("getting IclubSupplItem instance with id: " + id);
 		try {
-			IclubSupplItem instance = (IclubSupplItem) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSupplItem", id);
+			IclubSupplItem instance = (IclubSupplItem) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubSupplItem", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -83,8 +87,11 @@ public class IclubSupplItemDAO {
 	public List<IclubSupplItem> findByExample(IclubSupplItem instance) {
 		log.debug("finding IclubSupplItem instance by example");
 		try {
-			List<IclubSupplItem> results = (List<IclubSupplItem>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSupplItem").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubSupplItem> results = (List<IclubSupplItem>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubSupplItem")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -93,9 +100,11 @@ public class IclubSupplItemDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSupplItem instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubSupplItem instance with property: "
+				+ propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSupplItem as model where model." + propertyName + "= ?";
+			String queryString = "from IclubSupplItem as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -128,7 +137,8 @@ public class IclubSupplItemDAO {
 	public IclubSupplItem merge(IclubSupplItem detachedInstance) {
 		log.debug("merging IclubSupplItem instance");
 		try {
-			IclubSupplItem result = (IclubSupplItem) getCurrentSession().merge(detachedInstance);
+			IclubSupplItem result = (IclubSupplItem) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -151,7 +161,8 @@ public class IclubSupplItemDAO {
 	public void attachClean(IclubSupplItem instance) {
 		log.debug("attaching clean IclubSupplItem instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -159,7 +170,8 @@ public class IclubSupplItemDAO {
 		}
 	}
 
-	public static IclubSupplItemDAO getFromApplicationContext(ApplicationContext ctx) {
+	public static IclubSupplItemDAO getFromApplicationContext(
+			ApplicationContext ctx) {
 		return (IclubSupplItemDAO) ctx.getBean("IclubSupplItemDAO");
 	}
 }

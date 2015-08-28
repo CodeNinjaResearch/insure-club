@@ -58,10 +58,10 @@ public class IclubWebHelper {
 		return context.getExternalContext().getSessionMap().get(key);
 	}
 	
-	public static int calculateYearDiff(Long timeStamp) {
+	public static int calculateYearDiff(Long Date) {
 		
 		Calendar birthCal = Calendar.getInstance();
-		birthCal.setTimeInMillis(timeStamp);
+		birthCal.setTimeInMillis(Date);
 		Calendar nowCal = new GregorianCalendar();
 		int years = nowCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
 		boolean isMonthGreater = birthCal.get(Calendar.MONTH) > nowCal.get(Calendar.MONTH);
@@ -73,15 +73,15 @@ public class IclubWebHelper {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static boolean isCurrentDate(Long timeStamp) {
+	public static boolean isCurrentDate(Long Date) {
 		
 		try {
-			if (timeStamp != null) {
+			if (Date != null) {
 				Date currentDate = new Date(System.currentTimeMillis());
 				currentDate.setHours(0);
 				currentDate.setMinutes(0);
 				currentDate.setSeconds(0);
-				Date issueDate = new Date(timeStamp);
+				Date issueDate = new Date(Date);
 				issueDate.setHours(0);
 				issueDate.setMinutes(0);
 				issueDate.setSeconds(0);

@@ -12,12 +12,11 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -270,7 +269,7 @@ public class IclubMenuController implements Serializable {
 							model.setPFName(data.getFirst_name());
 							model.setPLName(data.getLast_name());
 							model.setPGender(data.getGender());
-							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setPCrtdDt(new Date(System.currentTimeMillis()));
 							model.setIclubPerson(1 + "");
 							
 							if (checkExistingUserorNot(model, data.getId().replace("\"", ""), "OUTLOOK", socialAuthResponse.getAccess_token())) {
@@ -347,7 +346,7 @@ public class IclubMenuController implements Serializable {
 								model.setPLName(json.getString("last_name"));
 								if (json.has("gender"))
 									model.setPGender(json.getString("gender") != null ? json.getString("gender").substring(0, 1).toUpperCase() : null);
-								model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+								model.setPCrtdDt(new Date(System.currentTimeMillis()));
 								model.setIclubPerson(1 + "");
 								
 								SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -355,7 +354,7 @@ public class IclubMenuController implements Serializable {
 									if (json.has("birthday")) {
 										
 										Date date = formatter.parse(json.get("birthday").toString().replace("\"", ""));
-										model.setPDob(new Timestamp(date.getTime()));
+										model.setPDob(new Date(date.getTime()));
 									}
 								} catch (ParseException e) {
 									e.printStackTrace();
@@ -439,13 +438,13 @@ public class IclubMenuController implements Serializable {
 							model.setPFName(jsonGet.get("givenName").toString().replace("\"", ""));
 							model.setPLName(jsonGet.get("familyName").toString().replace("\"", ""));
 							model.setPGender(jsonGet.get("gender") != null ? jsonGet.get("gender").toString().replace("\"", "") : "");
-							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setPCrtdDt(new Date(System.currentTimeMillis()));
 							model.setIclubPerson(1 + "");
 							
 							SimpleDateFormat formatter = new SimpleDateFormat("yyyy/dd/MM");
 							try {
 								Date date = formatter.parse(jsonGet.get("birthYear").toString().replace("\"", "") + "/" + jsonGet.get("birthdate").toString().replace("\"", ""));
-								model.setPDob(new Timestamp(date.getTime()));
+								model.setPDob(new Date(date.getTime()));
 							} catch (Exception e) {
 								
 							}
@@ -539,14 +538,14 @@ public class IclubMenuController implements Serializable {
 							model.setPFName(data.getName());
 							model.setPLName(data.getFamily_name());
 							model.setPGender(data.getGender() != null ? data.getGender().substring(0, 1).toUpperCase() : null);
-							model.setPCrtdDt(new Timestamp(System.currentTimeMillis()));
+							model.setPCrtdDt(new Date(System.currentTimeMillis()));
 							model.setIclubPerson(1 + "");
 							
 							SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 							try {
 								JsonObject jsonGet = (JsonObject) new JsonParser().parse(outputString);
 								Date date = formatter.parse(jsonGet.get("birthday").toString().replace("\"", ""));
-								model.setPDob(new Timestamp(date.getTime()));
+								model.setPDob(new Date(date.getTime()));
 							} catch (Exception e) {
 								
 							}
@@ -595,7 +594,7 @@ public class IclubMenuController implements Serializable {
 			IclubWebHelper.addObjectIntoSession("cohortId", personModel.getIclubCohort());
 		}
 		
-		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token.expires"), new Timestamp(System.currentTimeMillis() + 55 * 60 * 1000));
+		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token.expires"), new Date(System.currentTimeMillis() + 55 * 60 * 1000));
 		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token"), access_token);
 		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.provider"), from);
 		
@@ -629,7 +628,7 @@ public class IclubMenuController implements Serializable {
 				IclubWebHelper.addObjectIntoSession("googlelogin", true);
 				IclubWebHelper.addObjectIntoSession("key", access_token);
 				IclubWebHelper.addObjectIntoSession("cohortInviteId", cohortInviteId);
-				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token.expires"), new Timestamp(System.currentTimeMillis() + 55 * 60 * 1000));
+				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token.expires"), new Date(System.currentTimeMillis() + 55 * 60 * 1000));
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token"), access_token);
 				IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.provider"), from);
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();

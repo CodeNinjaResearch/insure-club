@@ -1,6 +1,6 @@
 package za.co.iclub.pss.ws.service;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -225,7 +225,7 @@ public class IclubQuickQuoteService {
 				iCTt.setIiId(UUID.randomUUID().toString());
 				iCTt.setIiItemId(vehicle.getVId());
 				iCTt.setIiQuoteId(iclubQuote.getQId());
-				iCTt.setIiCrtdDt(new Timestamp(System.currentTimeMillis()));
+				iCTt.setIiCrtdDt(new Date(System.currentTimeMillis()));
 				iCTt.setIiInsureValue(vehicle.getVInsuredValue());
 				iCTt.setIclubInsuranceItemType(iclubInsuranceItemTypeDAO.findById(1l));
 				iCTt.setIclubPerson(vehicle.getIclubPerson() != null && !vehicle.getIclubPerson().getPId().equalsIgnoreCase("") ? iclubPersonDAO.findById(vehicle.getIclubPerson().getPId()) : null);
@@ -239,7 +239,7 @@ public class IclubQuickQuoteService {
 				iCTt.setIiId(UUID.randomUUID().toString());
 				iCTt.setIiItemId(property.getPId());
 				iCTt.setIiQuoteId(iclubQuote.getQId());
-				iCTt.setIiCrtdDt(new Timestamp(System.currentTimeMillis()));
+				iCTt.setIiCrtdDt(new Date(System.currentTimeMillis()));
 				iCTt.setIclubInsuranceItemType(iclubInsuranceItemTypeDAO.findById(2l));
 				iCTt.setIclubPerson(property.getIclubPerson() != null && !property.getIclubPerson().getPId().equalsIgnoreCase("") ? iclubPersonDAO.findById(property.getIclubPerson().getPId()) : null);
 				iclubInsuranceItems.add(iCTt);

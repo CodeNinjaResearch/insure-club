@@ -1,14 +1,16 @@
 package za.co.iclub.pss.orm.dao;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import static org.hibernate.criterion.Example.create;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,10 @@ import za.co.iclub.pss.orm.bean.IclubEvent;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked","rawtypes"})
 public class IclubEventDAO {
-	private static final Logger log = Logger.getLogger(IclubEventDAO.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(IclubEventDAO.class);
 	// property constants
 	public static final String _EDESC = "EDesc";
 
@@ -71,7 +74,8 @@ public class IclubEventDAO {
 	public IclubEvent findById(java.lang.String id) {
 		log.debug("getting IclubEvent instance with id: " + id);
 		try {
-			IclubEvent instance = (IclubEvent) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubEvent", id);
+			IclubEvent instance = (IclubEvent) getCurrentSession().get(
+					"za.co.iclub.pss.orm.bean.IclubEvent", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -82,8 +86,11 @@ public class IclubEventDAO {
 	public List<IclubEvent> findByExample(IclubEvent instance) {
 		log.debug("finding IclubEvent instance by example");
 		try {
-			List<IclubEvent> results = (List<IclubEvent>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubEvent").add(create(instance)).list();
-			log.debug("find by example successful, result size: " + results.size());
+			List<IclubEvent> results = (List<IclubEvent>) getCurrentSession()
+					.createCriteria("za.co.iclub.pss.orm.bean.IclubEvent")
+					.add(create(instance)).list();
+			log.debug("find by example successful, result size: "
+					+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -92,9 +99,11 @@ public class IclubEventDAO {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubEvent instance with property: " + propertyName + ", value: " + value);
+		log.debug("finding IclubEvent instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from IclubEvent as model where model." + propertyName + "= ?";
+			String queryString = "from IclubEvent as model where model."
+					+ propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -123,7 +132,8 @@ public class IclubEventDAO {
 	public IclubEvent merge(IclubEvent detachedInstance) {
 		log.debug("merging IclubEvent instance");
 		try {
-			IclubEvent result = (IclubEvent) getCurrentSession().merge(detachedInstance);
+			IclubEvent result = (IclubEvent) getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -146,7 +156,8 @@ public class IclubEventDAO {
 	public void attachClean(IclubEvent instance) {
 		log.debug("attaching clean IclubEvent instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
+					instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
