@@ -107,6 +107,9 @@
 				<value>za.co.iclub.pss.orm.bean.IclubThatchType</value>
 				<value>
 					za.co.iclub.pss.orm.bean.IclubSecurityMaster
+				</value>
+				<value>
+					za.co.iclub.pss.orm.bean.IclubCohortCriteria
 				</value></list>
 
 		</property>
@@ -540,6 +543,12 @@
 	</bean>
 	<bean id="IclubSecurityMasterDAO"
 		class="za.co.iclub.pss.orm.dao.IclubSecurityMasterDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="IclubCohortCriteriaDAO"
+		class="za.co.iclub.pss.orm.dao.IclubCohortCriteriaDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

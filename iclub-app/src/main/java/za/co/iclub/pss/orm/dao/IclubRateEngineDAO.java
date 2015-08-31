@@ -28,30 +28,29 @@ import za.co.iclub.pss.orm.bean.IclubRateEngine;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubRateEngineDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubRateEngineDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubRateEngineDAO.class);
 	// property constants
 	public static final String RE_BASE_VALUE = "reBaseValue";
 	public static final String RE_MAX_VALUE = "reMaxValue";
 	public static final String RE_RATE = "reRate";
 	public static final String RE_STATUS = "reStatus";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubRateEngine transientInstance) {
 		log.debug("saving IclubRateEngine instance");
 		try {
@@ -62,7 +61,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubRateEngine persistentInstance) {
 		log.debug("deleting IclubRateEngine instance");
 		try {
@@ -73,40 +72,34 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubRateEngine findById(java.lang.String id) {
 		log.debug("getting IclubRateEngine instance with id: " + id);
 		try {
-			IclubRateEngine instance = (IclubRateEngine) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubRateEngine", id);
+			IclubRateEngine instance = (IclubRateEngine) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubRateEngine", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubRateEngine> findByExample(IclubRateEngine instance) {
 		log.debug("finding IclubRateEngine instance by example");
 		try {
-			List<IclubRateEngine> results = (List<IclubRateEngine>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubRateEngine")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubRateEngine> results = (List<IclubRateEngine>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubRateEngine").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubRateEngine instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubRateEngine instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubRateEngine as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubRateEngine as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -115,23 +108,23 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubRateEngine> findByReBaseValue(Object reBaseValue) {
 		return findByProperty(RE_BASE_VALUE, reBaseValue);
 	}
-
+	
 	public List<IclubRateEngine> findByReMaxValue(Object reMaxValue) {
 		return findByProperty(RE_MAX_VALUE, reMaxValue);
 	}
-
+	
 	public List<IclubRateEngine> findByReRate(Object reRate) {
 		return findByProperty(RE_RATE, reRate);
 	}
-
+	
 	public List<IclubRateEngine> findByReStatus(Object reStatus) {
 		return findByProperty(RE_STATUS, reStatus);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubRateEngine instances");
 		try {
@@ -143,12 +136,11 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubRateEngine merge(IclubRateEngine detachedInstance) {
 		log.debug("merging IclubRateEngine instance");
 		try {
-			IclubRateEngine result = (IclubRateEngine) getCurrentSession()
-					.merge(detachedInstance);
+			IclubRateEngine result = (IclubRateEngine) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -156,7 +148,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubRateEngine instance) {
 		log.debug("attaching dirty IclubRateEngine instance");
 		try {
@@ -167,21 +159,19 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubRateEngine instance) {
 		log.debug("attaching clean IclubRateEngine instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubRateEngineDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubRateEngineDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRateEngineDAO) ctx.getBean("IclubRateEngineDAO");
 	}
 }

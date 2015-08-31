@@ -28,28 +28,27 @@ import za.co.iclub.pss.orm.bean.IclubPayment;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubPaymentDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubPaymentDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubPaymentDAO.class);
 	// property constants
 	public static final String _PVALUE = "PValue";
 	public static final String _PDR_CR_IND = "PDrCrInd";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubPayment transientInstance) {
 		log.debug("saving IclubPayment instance");
 		try {
@@ -60,7 +59,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubPayment persistentInstance) {
 		log.debug("deleting IclubPayment instance");
 		try {
@@ -71,40 +70,34 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubPayment findById(java.lang.String id) {
 		log.debug("getting IclubPayment instance with id: " + id);
 		try {
-			IclubPayment instance = (IclubPayment) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubPayment", id);
+			IclubPayment instance = (IclubPayment) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPayment", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubPayment> findByExample(IclubPayment instance) {
 		log.debug("finding IclubPayment instance by example");
 		try {
-			List<IclubPayment> results = (List<IclubPayment>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubPayment")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubPayment> results = (List<IclubPayment>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPayment").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubPayment instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubPayment instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubPayment as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubPayment as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -113,15 +106,15 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubPayment> findByPValue(Object PValue) {
 		return findByProperty(_PVALUE, PValue);
 	}
-
+	
 	public List<IclubPayment> findByPDrCrInd(Object PDrCrInd) {
 		return findByProperty(_PDR_CR_IND, PDrCrInd);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubPayment instances");
 		try {
@@ -133,12 +126,11 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubPayment merge(IclubPayment detachedInstance) {
 		log.debug("merging IclubPayment instance");
 		try {
-			IclubPayment result = (IclubPayment) getCurrentSession().merge(
-					detachedInstance);
+			IclubPayment result = (IclubPayment) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -146,7 +138,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubPayment instance) {
 		log.debug("attaching dirty IclubPayment instance");
 		try {
@@ -157,21 +149,19 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubPayment instance) {
 		log.debug("attaching clean IclubPayment instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubPaymentDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubPaymentDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPaymentDAO) ctx.getBean("IclubPaymentDAO");
 	}
 }

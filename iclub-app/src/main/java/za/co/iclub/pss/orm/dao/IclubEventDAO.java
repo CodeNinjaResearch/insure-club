@@ -28,27 +28,26 @@ import za.co.iclub.pss.orm.bean.IclubEvent;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubEventDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubEventDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubEventDAO.class);
 	// property constants
 	public static final String _EDESC = "EDesc";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubEvent transientInstance) {
 		log.debug("saving IclubEvent instance");
 		try {
@@ -59,7 +58,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubEvent persistentInstance) {
 		log.debug("deleting IclubEvent instance");
 		try {
@@ -70,40 +69,34 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubEvent findById(java.lang.String id) {
 		log.debug("getting IclubEvent instance with id: " + id);
 		try {
-			IclubEvent instance = (IclubEvent) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubEvent", id);
+			IclubEvent instance = (IclubEvent) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubEvent", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubEvent> findByExample(IclubEvent instance) {
 		log.debug("finding IclubEvent instance by example");
 		try {
-			List<IclubEvent> results = (List<IclubEvent>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubEvent")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubEvent> results = (List<IclubEvent>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubEvent").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubEvent instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding IclubEvent instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubEvent as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubEvent as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -112,11 +105,11 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubEvent> findByEDesc(Object EDesc) {
 		return findByProperty(_EDESC, EDesc);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubEvent instances");
 		try {
@@ -128,12 +121,11 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubEvent merge(IclubEvent detachedInstance) {
 		log.debug("merging IclubEvent instance");
 		try {
-			IclubEvent result = (IclubEvent) getCurrentSession().merge(
-					detachedInstance);
+			IclubEvent result = (IclubEvent) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -141,7 +133,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubEvent instance) {
 		log.debug("attaching dirty IclubEvent instance");
 		try {
@@ -152,19 +144,18 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubEvent instance) {
 		log.debug("attaching clean IclubEvent instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
+	
 	public static IclubEventDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubEventDAO) ctx.getBean("IclubEventDAO");
 	}

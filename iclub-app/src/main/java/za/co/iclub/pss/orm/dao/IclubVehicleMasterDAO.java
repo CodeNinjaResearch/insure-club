@@ -27,10 +27,9 @@ import za.co.iclub.pss.orm.bean.IclubVehicleMaster;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubVehicleMasterDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubVehicleMasterDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubVehicleMasterDAO.class);
 	// property constants
 	public static final String VM_MAKE = "vmMake";
 	public static final String VM_MODEL = "vmModel";
@@ -38,21 +37,21 @@ public class IclubVehicleMasterDAO {
 	public static final String VM_MRKT_RATE = "vmMrktRate";
 	public static final String VM_RET_RATE = "vmRetRate";
 	public static final String VM_RATE_PRCT = "vmRatePrct";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubVehicleMaster transientInstance) {
 		log.debug("saving IclubVehicleMaster instance");
 		try {
@@ -63,7 +62,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubVehicleMaster persistentInstance) {
 		log.debug("deleting IclubVehicleMaster instance");
 		try {
@@ -74,41 +73,34 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubVehicleMaster findById(java.lang.Long id) {
 		log.debug("getting IclubVehicleMaster instance with id: " + id);
 		try {
-			IclubVehicleMaster instance = (IclubVehicleMaster) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubVehicleMaster", id);
+			IclubVehicleMaster instance = (IclubVehicleMaster) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubVehicleMaster", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubVehicleMaster> findByExample(IclubVehicleMaster instance) {
 		log.debug("finding IclubVehicleMaster instance by example");
 		try {
-			List<IclubVehicleMaster> results = (List<IclubVehicleMaster>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubVehicleMaster")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubVehicleMaster> results = (List<IclubVehicleMaster>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubVehicleMaster").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubVehicleMaster instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubVehicleMaster instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubVehicleMaster as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubVehicleMaster as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -117,31 +109,31 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubVehicleMaster> findByVmMake(Object vmMake) {
 		return findByProperty(VM_MAKE, vmMake);
 	}
-
+	
 	public List<IclubVehicleMaster> findByVmModel(Object vmModel) {
 		return findByProperty(VM_MODEL, vmModel);
 	}
-
+	
 	public List<IclubVehicleMaster> findByVmOrigRate(Object vmOrigRate) {
 		return findByProperty(VM_ORIG_RATE, vmOrigRate);
 	}
-
+	
 	public List<IclubVehicleMaster> findByVmMrktRate(Object vmMrktRate) {
 		return findByProperty(VM_MRKT_RATE, vmMrktRate);
 	}
-
+	
 	public List<IclubVehicleMaster> findByVmRetRate(Object vmRetRate) {
 		return findByProperty(VM_RET_RATE, vmRetRate);
 	}
-
+	
 	public List<IclubVehicleMaster> findByVmRatePrct(Object vmRatePrct) {
 		return findByProperty(VM_RATE_PRCT, vmRatePrct);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubVehicleMaster instances");
 		try {
@@ -153,12 +145,11 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubVehicleMaster merge(IclubVehicleMaster detachedInstance) {
 		log.debug("merging IclubVehicleMaster instance");
 		try {
-			IclubVehicleMaster result = (IclubVehicleMaster) getCurrentSession()
-					.merge(detachedInstance);
+			IclubVehicleMaster result = (IclubVehicleMaster) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -166,7 +157,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubVehicleMaster instance) {
 		log.debug("attaching dirty IclubVehicleMaster instance");
 		try {
@@ -177,21 +168,19 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubVehicleMaster instance) {
 		log.debug("attaching clean IclubVehicleMaster instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubVehicleMasterDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubVehicleMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehicleMasterDAO) ctx.getBean("IclubVehicleMasterDAO");
 	}
 }

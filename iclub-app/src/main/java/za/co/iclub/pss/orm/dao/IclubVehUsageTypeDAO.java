@@ -27,29 +27,28 @@ import za.co.iclub.pss.orm.bean.IclubVehUsageType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubVehUsageTypeDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubVehUsageTypeDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubVehUsageTypeDAO.class);
 	// property constants
 	public static final String VUT_LONG_DESC = "vutLongDesc";
 	public static final String VUT_SHORT_DESC = "vutShortDesc";
 	public static final String VUT_STATUS = "vutStatus";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubVehUsageType transientInstance) {
 		log.debug("saving IclubVehUsageType instance");
 		try {
@@ -60,7 +59,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubVehUsageType persistentInstance) {
 		log.debug("deleting IclubVehUsageType instance");
 		try {
@@ -71,41 +70,34 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubVehUsageType findById(java.lang.Long id) {
 		log.debug("getting IclubVehUsageType instance with id: " + id);
 		try {
-			IclubVehUsageType instance = (IclubVehUsageType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubVehUsageType", id);
+			IclubVehUsageType instance = (IclubVehUsageType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubVehUsageType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubVehUsageType> findByExample(IclubVehUsageType instance) {
 		log.debug("finding IclubVehUsageType instance by example");
 		try {
-			List<IclubVehUsageType> results = (List<IclubVehUsageType>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubVehUsageType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubVehUsageType> results = (List<IclubVehUsageType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubVehUsageType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubVehUsageType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubVehUsageType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubVehUsageType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubVehUsageType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -114,19 +106,19 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubVehUsageType> findByVutLongDesc(Object vutLongDesc) {
 		return findByProperty(VUT_LONG_DESC, vutLongDesc);
 	}
-
+	
 	public List<IclubVehUsageType> findByVutShortDesc(Object vutShortDesc) {
 		return findByProperty(VUT_SHORT_DESC, vutShortDesc);
 	}
-
+	
 	public List<IclubVehUsageType> findByVutStatus(Object vutStatus) {
 		return findByProperty(VUT_STATUS, vutStatus);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubVehUsageType instances");
 		try {
@@ -138,12 +130,11 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubVehUsageType merge(IclubVehUsageType detachedInstance) {
 		log.debug("merging IclubVehUsageType instance");
 		try {
-			IclubVehUsageType result = (IclubVehUsageType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubVehUsageType result = (IclubVehUsageType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -151,7 +142,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubVehUsageType instance) {
 		log.debug("attaching dirty IclubVehUsageType instance");
 		try {
@@ -162,21 +153,19 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubVehUsageType instance) {
 		log.debug("attaching clean IclubVehUsageType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubVehUsageTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubVehUsageTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehUsageTypeDAO) ctx.getBean("IclubVehUsageTypeDAO");
 	}
 }

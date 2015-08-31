@@ -28,26 +28,25 @@ import za.co.iclub.pss.orm.bean.IclubCohortActivity;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubCohortActivityDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubCohortActivityDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubCohortActivityDAO.class);
 	// property constants
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubCohortActivity transientInstance) {
 		log.debug("saving IclubCohortActivity instance");
 		try {
@@ -58,7 +57,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubCohortActivity persistentInstance) {
 		log.debug("deleting IclubCohortActivity instance");
 		try {
@@ -69,41 +68,34 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubCohortActivity findById(java.lang.String id) {
 		log.debug("getting IclubCohortActivity instance with id: " + id);
 		try {
-			IclubCohortActivity instance = (IclubCohortActivity) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubCohortActivity", id);
+			IclubCohortActivity instance = (IclubCohortActivity) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubCohortActivity", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubCohortActivity> findByExample(IclubCohortActivity instance) {
 		log.debug("finding IclubCohortActivity instance by example");
 		try {
-			List<IclubCohortActivity> results = (List<IclubCohortActivity>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubCohortActivity")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubCohortActivity> results = (List<IclubCohortActivity>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubCohortActivity").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubCohortActivity instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubCohortActivity instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubCohortActivity as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubCohortActivity as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -112,7 +104,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubCohortActivity instances");
 		try {
@@ -124,12 +116,11 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubCohortActivity merge(IclubCohortActivity detachedInstance) {
 		log.debug("merging IclubCohortActivity instance");
 		try {
-			IclubCohortActivity result = (IclubCohortActivity) getCurrentSession()
-					.merge(detachedInstance);
+			IclubCohortActivity result = (IclubCohortActivity) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -137,7 +128,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubCohortActivity instance) {
 		log.debug("attaching dirty IclubCohortActivity instance");
 		try {
@@ -148,21 +139,19 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubCohortActivity instance) {
 		log.debug("attaching clean IclubCohortActivity instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubCohortActivityDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubCohortActivityDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCohortActivityDAO) ctx.getBean("IclubCohortActivityDAO");
 	}
 }

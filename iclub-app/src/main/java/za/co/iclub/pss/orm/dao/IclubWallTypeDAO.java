@@ -27,29 +27,28 @@ import za.co.iclub.pss.orm.bean.IclubWallType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubWallTypeDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubWallTypeDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubWallTypeDAO.class);
 	// property constants
 	public static final String WT_SHORT_DESC = "wtShortDesc";
 	public static final String WT_LONG_DESC = "wtLongDesc";
 	public static final String WT_STATUS = "wtStatus";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubWallType transientInstance) {
 		log.debug("saving IclubWallType instance");
 		try {
@@ -60,7 +59,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubWallType persistentInstance) {
 		log.debug("deleting IclubWallType instance");
 		try {
@@ -71,40 +70,34 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubWallType findById(java.lang.Long id) {
 		log.debug("getting IclubWallType instance with id: " + id);
 		try {
-			IclubWallType instance = (IclubWallType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubWallType", id);
+			IclubWallType instance = (IclubWallType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubWallType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubWallType> findByExample(IclubWallType instance) {
 		log.debug("finding IclubWallType instance by example");
 		try {
-			List<IclubWallType> results = (List<IclubWallType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubWallType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubWallType> results = (List<IclubWallType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubWallType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubWallType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubWallType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubWallType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubWallType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -113,19 +106,19 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubWallType> findByWtShortDesc(Object wtShortDesc) {
 		return findByProperty(WT_SHORT_DESC, wtShortDesc);
 	}
-
+	
 	public List<IclubWallType> findByWtLongDesc(Object wtLongDesc) {
 		return findByProperty(WT_LONG_DESC, wtLongDesc);
 	}
-
+	
 	public List<IclubWallType> findByWtStatus(Object wtStatus) {
 		return findByProperty(WT_STATUS, wtStatus);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubWallType instances");
 		try {
@@ -137,12 +130,11 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubWallType merge(IclubWallType detachedInstance) {
 		log.debug("merging IclubWallType instance");
 		try {
-			IclubWallType result = (IclubWallType) getCurrentSession().merge(
-					detachedInstance);
+			IclubWallType result = (IclubWallType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -150,7 +142,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubWallType instance) {
 		log.debug("attaching dirty IclubWallType instance");
 		try {
@@ -161,21 +153,19 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubWallType instance) {
 		log.debug("attaching clean IclubWallType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubWallTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubWallTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubWallTypeDAO) ctx.getBean("IclubWallTypeDAO");
 	}
 }

@@ -27,29 +27,28 @@ import za.co.iclub.pss.orm.bean.IclubPropertyType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubPropertyTypeDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubPropertyTypeDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubPropertyTypeDAO.class);
 	// property constants
 	public static final String PT_SHORT_DESC = "ptShortDesc";
 	public static final String PT_LONG_DESC = "ptLongDesc";
 	public static final String PT_STATUS = "ptStatus";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubPropertyType transientInstance) {
 		log.debug("saving IclubPropertyType instance");
 		try {
@@ -60,7 +59,7 @@ public class IclubPropertyTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubPropertyType persistentInstance) {
 		log.debug("deleting IclubPropertyType instance");
 		try {
@@ -71,41 +70,34 @@ public class IclubPropertyTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubPropertyType findById(java.lang.Long id) {
 		log.debug("getting IclubPropertyType instance with id: " + id);
 		try {
-			IclubPropertyType instance = (IclubPropertyType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubPropertyType", id);
+			IclubPropertyType instance = (IclubPropertyType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPropertyType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubPropertyType> findByExample(IclubPropertyType instance) {
 		log.debug("finding IclubPropertyType instance by example");
 		try {
-			List<IclubPropertyType> results = (List<IclubPropertyType>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubPropertyType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubPropertyType> results = (List<IclubPropertyType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPropertyType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubPropertyType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubPropertyType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubPropertyType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubPropertyType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -114,19 +106,19 @@ public class IclubPropertyTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubPropertyType> findByPtShortDesc(Object ptShortDesc) {
 		return findByProperty(PT_SHORT_DESC, ptShortDesc);
 	}
-
+	
 	public List<IclubPropertyType> findByPtLongDesc(Object ptLongDesc) {
 		return findByProperty(PT_LONG_DESC, ptLongDesc);
 	}
-
+	
 	public List<IclubPropertyType> findByPtStatus(Object ptStatus) {
 		return findByProperty(PT_STATUS, ptStatus);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubPropertyType instances");
 		try {
@@ -138,12 +130,11 @@ public class IclubPropertyTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubPropertyType merge(IclubPropertyType detachedInstance) {
 		log.debug("merging IclubPropertyType instance");
 		try {
-			IclubPropertyType result = (IclubPropertyType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubPropertyType result = (IclubPropertyType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -151,7 +142,7 @@ public class IclubPropertyTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubPropertyType instance) {
 		log.debug("attaching dirty IclubPropertyType instance");
 		try {
@@ -162,21 +153,19 @@ public class IclubPropertyTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubPropertyType instance) {
 		log.debug("attaching clean IclubPropertyType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubPropertyTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubPropertyTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPropertyTypeDAO) ctx.getBean("IclubPropertyTypeDAO");
 	}
 }

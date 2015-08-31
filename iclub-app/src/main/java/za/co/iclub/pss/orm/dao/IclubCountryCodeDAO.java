@@ -28,29 +28,28 @@ import za.co.iclub.pss.orm.bean.IclubCountryCode;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubCountryCodeDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubCountryCodeDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubCountryCodeDAO.class);
 	// property constants
 	public static final String CC_SHORT_ID = "ccShortId";
 	public static final String CC_ISO_ID = "ccIsoId";
 	public static final String CC_NAME = "ccName";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubCountryCode transientInstance) {
 		log.debug("saving IclubCountryCode instance");
 		try {
@@ -61,7 +60,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubCountryCode persistentInstance) {
 		log.debug("deleting IclubCountryCode instance");
 		try {
@@ -72,40 +71,34 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubCountryCode findById(java.lang.Integer id) {
 		log.debug("getting IclubCountryCode instance with id: " + id);
 		try {
-			IclubCountryCode instance = (IclubCountryCode) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubCountryCode", id);
+			IclubCountryCode instance = (IclubCountryCode) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubCountryCode", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubCountryCode> findByExample(IclubCountryCode instance) {
 		log.debug("finding IclubCountryCode instance by example");
 		try {
-			List<IclubCountryCode> results = (List<IclubCountryCode>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubCountryCode")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubCountryCode> results = (List<IclubCountryCode>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubCountryCode").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubCountryCode instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubCountryCode instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubCountryCode as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubCountryCode as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -114,19 +107,19 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubCountryCode> findByCcShortId(Object ccShortId) {
 		return findByProperty(CC_SHORT_ID, ccShortId);
 	}
-
+	
 	public List<IclubCountryCode> findByCcIsoId(Object ccIsoId) {
 		return findByProperty(CC_ISO_ID, ccIsoId);
 	}
-
+	
 	public List<IclubCountryCode> findByCcName(Object ccName) {
 		return findByProperty(CC_NAME, ccName);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubCountryCode instances");
 		try {
@@ -138,12 +131,11 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubCountryCode merge(IclubCountryCode detachedInstance) {
 		log.debug("merging IclubCountryCode instance");
 		try {
-			IclubCountryCode result = (IclubCountryCode) getCurrentSession()
-					.merge(detachedInstance);
+			IclubCountryCode result = (IclubCountryCode) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -151,7 +143,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubCountryCode instance) {
 		log.debug("attaching dirty IclubCountryCode instance");
 		try {
@@ -162,21 +154,19 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubCountryCode instance) {
 		log.debug("attaching clean IclubCountryCode instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubCountryCodeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubCountryCodeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCountryCodeDAO) ctx.getBean("IclubCountryCodeDAO");
 	}
 }

@@ -27,29 +27,28 @@ import za.co.iclub.pss.orm.bean.IclubMaritialStatus;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubMaritialStatusDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubMaritialStatusDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubMaritialStatusDAO.class);
 	// property constants
 	public static final String MS_SHORT_DESC = "msShortDesc";
 	public static final String MS_LONG_DESC = "msLongDesc";
 	public static final String MS_STATUS = "msStatus";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubMaritialStatus transientInstance) {
 		log.debug("saving IclubMaritialStatus instance");
 		try {
@@ -60,7 +59,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubMaritialStatus persistentInstance) {
 		log.debug("deleting IclubMaritialStatus instance");
 		try {
@@ -71,41 +70,34 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubMaritialStatus findById(java.lang.Long id) {
 		log.debug("getting IclubMaritialStatus instance with id: " + id);
 		try {
-			IclubMaritialStatus instance = (IclubMaritialStatus) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubMaritialStatus", id);
+			IclubMaritialStatus instance = (IclubMaritialStatus) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubMaritialStatus", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubMaritialStatus> findByExample(IclubMaritialStatus instance) {
 		log.debug("finding IclubMaritialStatus instance by example");
 		try {
-			List<IclubMaritialStatus> results = (List<IclubMaritialStatus>) getCurrentSession()
-					.createCriteria(
-							"za.co.iclub.pss.orm.bean.IclubMaritialStatus")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubMaritialStatus> results = (List<IclubMaritialStatus>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubMaritialStatus").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubMaritialStatus instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubMaritialStatus instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubMaritialStatus as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubMaritialStatus as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -114,19 +106,19 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubMaritialStatus> findByMsShortDesc(Object msShortDesc) {
 		return findByProperty(MS_SHORT_DESC, msShortDesc);
 	}
-
+	
 	public List<IclubMaritialStatus> findByMsLongDesc(Object msLongDesc) {
 		return findByProperty(MS_LONG_DESC, msLongDesc);
 	}
-
+	
 	public List<IclubMaritialStatus> findByMsStatus(Object msStatus) {
 		return findByProperty(MS_STATUS, msStatus);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubMaritialStatus instances");
 		try {
@@ -138,12 +130,11 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubMaritialStatus merge(IclubMaritialStatus detachedInstance) {
 		log.debug("merging IclubMaritialStatus instance");
 		try {
-			IclubMaritialStatus result = (IclubMaritialStatus) getCurrentSession()
-					.merge(detachedInstance);
+			IclubMaritialStatus result = (IclubMaritialStatus) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -151,7 +142,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubMaritialStatus instance) {
 		log.debug("attaching dirty IclubMaritialStatus instance");
 		try {
@@ -162,21 +153,19 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubMaritialStatus instance) {
 		log.debug("attaching clean IclubMaritialStatus instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubMaritialStatusDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubMaritialStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubMaritialStatusDAO) ctx.getBean("IclubMaritialStatusDAO");
 	}
 }

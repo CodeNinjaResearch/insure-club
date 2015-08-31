@@ -27,29 +27,28 @@ import za.co.iclub.pss.orm.bean.IclubRoleType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubRoleTypeDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubRoleTypeDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubRoleTypeDAO.class);
 	// property constants
 	public static final String RT_SHORT_DESC = "rtShortDesc";
 	public static final String RT_LONG_DESC = "rtLongDesc";
 	public static final String RT_STATUS = "rtStatus";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubRoleType transientInstance) {
 		log.debug("saving IclubRoleType instance");
 		try {
@@ -60,7 +59,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubRoleType persistentInstance) {
 		log.debug("deleting IclubRoleType instance");
 		try {
@@ -71,40 +70,34 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubRoleType findById(java.lang.Long id) {
 		log.debug("getting IclubRoleType instance with id: " + id);
 		try {
-			IclubRoleType instance = (IclubRoleType) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubRoleType", id);
+			IclubRoleType instance = (IclubRoleType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubRoleType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubRoleType> findByExample(IclubRoleType instance) {
 		log.debug("finding IclubRoleType instance by example");
 		try {
-			List<IclubRoleType> results = (List<IclubRoleType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubRoleType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubRoleType> results = (List<IclubRoleType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubRoleType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubRoleType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubRoleType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubRoleType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubRoleType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -113,19 +106,19 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubRoleType> findByRtShortDesc(Object rtShortDesc) {
 		return findByProperty(RT_SHORT_DESC, rtShortDesc);
 	}
-
+	
 	public List<IclubRoleType> findByRtLongDesc(Object rtLongDesc) {
 		return findByProperty(RT_LONG_DESC, rtLongDesc);
 	}
-
+	
 	public List<IclubRoleType> findByRtStatus(Object rtStatus) {
 		return findByProperty(RT_STATUS, rtStatus);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubRoleType instances");
 		try {
@@ -137,12 +130,11 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubRoleType merge(IclubRoleType detachedInstance) {
 		log.debug("merging IclubRoleType instance");
 		try {
-			IclubRoleType result = (IclubRoleType) getCurrentSession().merge(
-					detachedInstance);
+			IclubRoleType result = (IclubRoleType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -150,7 +142,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubRoleType instance) {
 		log.debug("attaching dirty IclubRoleType instance");
 		try {
@@ -161,21 +153,19 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubRoleType instance) {
 		log.debug("attaching clean IclubRoleType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubRoleTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubRoleTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRoleTypeDAO) ctx.getBean("IclubRoleTypeDAO");
 	}
 }

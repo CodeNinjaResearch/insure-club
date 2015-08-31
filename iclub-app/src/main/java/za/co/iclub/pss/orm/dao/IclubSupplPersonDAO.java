@@ -28,26 +28,25 @@ import za.co.iclub.pss.orm.bean.IclubSupplPerson;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubSupplPersonDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubSupplPersonDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubSupplPersonDAO.class);
 	// property constants
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubSupplPerson transientInstance) {
 		log.debug("saving IclubSupplPerson instance");
 		try {
@@ -58,7 +57,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubSupplPerson persistentInstance) {
 		log.debug("deleting IclubSupplPerson instance");
 		try {
@@ -69,40 +68,34 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubSupplPerson findById(java.lang.String id) {
 		log.debug("getting IclubSupplPerson instance with id: " + id);
 		try {
-			IclubSupplPerson instance = (IclubSupplPerson) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubSupplPerson", id);
+			IclubSupplPerson instance = (IclubSupplPerson) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubSupplPerson", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubSupplPerson> findByExample(IclubSupplPerson instance) {
 		log.debug("finding IclubSupplPerson instance by example");
 		try {
-			List<IclubSupplPerson> results = (List<IclubSupplPerson>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubSupplPerson")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubSupplPerson> results = (List<IclubSupplPerson>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubSupplPerson").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubSupplPerson instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubSupplPerson instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubSupplPerson as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubSupplPerson as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -111,7 +104,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubSupplPerson instances");
 		try {
@@ -123,12 +116,11 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubSupplPerson merge(IclubSupplPerson detachedInstance) {
 		log.debug("merging IclubSupplPerson instance");
 		try {
-			IclubSupplPerson result = (IclubSupplPerson) getCurrentSession()
-					.merge(detachedInstance);
+			IclubSupplPerson result = (IclubSupplPerson) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -136,7 +128,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubSupplPerson instance) {
 		log.debug("attaching dirty IclubSupplPerson instance");
 		try {
@@ -147,21 +139,19 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubSupplPerson instance) {
 		log.debug("attaching clean IclubSupplPerson instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubSupplPersonDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubSupplPersonDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSupplPersonDAO) ctx.getBean("IclubSupplPersonDAO");
 	}
 }

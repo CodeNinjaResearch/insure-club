@@ -20,9 +20,9 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "iclub_license_code", catalog = "iclubdb", uniqueConstraints = @UniqueConstraint(columnNames = "lc_category"))
 public class IclubLicenseCode implements java.io.Serializable {
-
+	
 	// Fields
-
+	
 	/**
 	 * 
 	 */
@@ -34,22 +34,20 @@ public class IclubLicenseCode implements java.io.Serializable {
 	private String lcStatus;
 	private Date lcCrtdDt;
 	private Set<IclubDriver> iclubDrivers = new HashSet<IclubDriver>(0);
-
+	
 	// Constructors
-
+	
 	/** default constructor */
 	public IclubLicenseCode() {
 	}
-
+	
 	/** minimal constructor */
 	public IclubLicenseCode(Long lcId) {
 		this.lcId = lcId;
 	}
-
+	
 	/** full constructor */
-	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson,
-			String lcCategory, String lcDesc, String lcStatus,
-			Date lcCrtdDt, Set<IclubDriver> iclubDrivers) {
+	public IclubLicenseCode(Long lcId, IclubPerson iclubPerson, String lcCategory, String lcDesc, String lcStatus, Date lcCrtdDt, Set<IclubDriver> iclubDrivers) {
 		this.lcId = lcId;
 		this.iclubPerson = iclubPerson;
 		this.lcCategory = lcCategory;
@@ -58,71 +56,71 @@ public class IclubLicenseCode implements java.io.Serializable {
 		this.lcCrtdDt = lcCrtdDt;
 		this.iclubDrivers = iclubDrivers;
 	}
-
+	
 	// Property accessors
 	@Id
 	@Column(name = "lc_id", unique = true, nullable = false)
 	public Long getLcId() {
 		return this.lcId;
 	}
-
+	
 	public void setLcId(Long lcId) {
 		this.lcId = lcId;
 	}
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lc_crtd_by")
 	public IclubPerson getIclubPerson() {
 		return this.iclubPerson;
 	}
-
+	
 	public void setIclubPerson(IclubPerson iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
-
+	
 	@Column(name = "lc_category", unique = true, length = 2)
 	public String getLcCategory() {
 		return this.lcCategory;
 	}
-
+	
 	public void setLcCategory(String lcCategory) {
 		this.lcCategory = lcCategory;
 	}
-
+	
 	@Column(name = "lc_desc", length = 450)
 	public String getLcDesc() {
 		return this.lcDesc;
 	}
-
+	
 	public void setLcDesc(String lcDesc) {
 		this.lcDesc = lcDesc;
 	}
-
+	
 	@Column(name = "lc_status", length = 1)
 	public String getLcStatus() {
 		return this.lcStatus;
 	}
-
+	
 	public void setLcStatus(String lcStatus) {
 		this.lcStatus = lcStatus;
 	}
-
+	
 	@Column(name = "lc_crtd_dt", length = 19)
 	public Date getLcCrtdDt() {
 		return this.lcCrtdDt;
 	}
-
+	
 	public void setLcCrtdDt(Date lcCrtdDt) {
 		this.lcCrtdDt = lcCrtdDt;
 	}
-
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubLicenseCode")
 	public Set<IclubDriver> getIclubDrivers() {
 		return this.iclubDrivers;
 	}
-
+	
 	public void setIclubDrivers(Set<IclubDriver> iclubDrivers) {
 		this.iclubDrivers = iclubDrivers;
 	}
-
+	
 }

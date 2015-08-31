@@ -27,10 +27,9 @@ import za.co.iclub.pss.orm.bean.IclubQuote;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubQuoteDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubQuoteDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubQuoteDAO.class);
 	// property constants
 	public static final String _QNUMBER = "QNumber";
 	public static final String _QNUM_ITEMS = "QNumItems";
@@ -40,21 +39,21 @@ public class IclubQuoteDAO {
 	public static final String _QPREV_PREMIUM = "QPrevPremium";
 	public static final String _QIS_MATCHED = "QIsMatched";
 	public static final String _QCLAIM_YN = "QClaimYn";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubQuote transientInstance) {
 		log.debug("saving IclubQuote instance");
 		try {
@@ -65,7 +64,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubQuote persistentInstance) {
 		log.debug("deleting IclubQuote instance");
 		try {
@@ -76,40 +75,34 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubQuote findById(java.lang.String id) {
 		log.debug("getting IclubQuote instance with id: " + id);
 		try {
-			IclubQuote instance = (IclubQuote) getCurrentSession().get(
-					"za.co.iclub.pss.orm.bean.IclubQuote", id);
+			IclubQuote instance = (IclubQuote) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubQuote", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubQuote> findByExample(IclubQuote instance) {
 		log.debug("finding IclubQuote instance by example");
 		try {
-			List<IclubQuote> results = (List<IclubQuote>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubQuote")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubQuote> results = (List<IclubQuote>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubQuote").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubQuote instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding IclubQuote instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubQuote as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubQuote as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -118,39 +111,39 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubQuote> findByQNumber(Object QNumber) {
 		return findByProperty(_QNUMBER, QNumber);
 	}
-
+	
 	public List<IclubQuote> findByQNumItems(Object QNumItems) {
 		return findByProperty(_QNUM_ITEMS, QNumItems);
 	}
-
+	
 	public List<IclubQuote> findByQGenPremium(Object QGenPremium) {
 		return findByProperty(_QGEN_PREMIUM, QGenPremium);
 	}
-
+	
 	public List<IclubQuote> findByQEmail(Object QEmail) {
 		return findByProperty(_QEMAIL, QEmail);
 	}
-
+	
 	public List<IclubQuote> findByQMobile(Object QMobile) {
 		return findByProperty(_QMOBILE, QMobile);
 	}
-
+	
 	public List<IclubQuote> findByQPrevPremium(Object QPrevPremium) {
 		return findByProperty(_QPREV_PREMIUM, QPrevPremium);
 	}
-
+	
 	public List<IclubQuote> findByQIsMatched(Object QIsMatched) {
 		return findByProperty(_QIS_MATCHED, QIsMatched);
 	}
-
+	
 	public List<IclubQuote> findByQClaimYn(Object QClaimYn) {
 		return findByProperty(_QCLAIM_YN, QClaimYn);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubQuote instances");
 		try {
@@ -162,12 +155,11 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubQuote merge(IclubQuote detachedInstance) {
 		log.debug("merging IclubQuote instance");
 		try {
-			IclubQuote result = (IclubQuote) getCurrentSession().merge(
-					detachedInstance);
+			IclubQuote result = (IclubQuote) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -175,7 +167,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubQuote instance) {
 		log.debug("attaching dirty IclubQuote instance");
 		try {
@@ -186,19 +178,18 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubQuote instance) {
 		log.debug("attaching clean IclubQuote instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
+	
 	public static IclubQuoteDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubQuoteDAO) ctx.getBean("IclubQuoteDAO");
 	}

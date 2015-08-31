@@ -28,29 +28,28 @@ import za.co.iclub.pss.orm.bean.IclubPaymentType;
  * @author MyEclipse Persistence Tools
  */
 @Transactional
-@SuppressWarnings({"unchecked","rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class IclubPaymentTypeDAO {
-	private static final Logger log = LoggerFactory
-			.getLogger(IclubPaymentTypeDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(IclubPaymentTypeDAO.class);
 	// property constants
 	public static final String PT_SHORT_DESC = "ptShortDesc";
 	public static final String PT_LONG_DESC = "ptLongDesc";
 	public static final String PT_STATUS = "ptStatus";
-
+	
 	private SessionFactory sessionFactory;
-
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
+	
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-
+	
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(IclubPaymentType transientInstance) {
 		log.debug("saving IclubPaymentType instance");
 		try {
@@ -61,7 +60,7 @@ public class IclubPaymentTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void delete(IclubPaymentType persistentInstance) {
 		log.debug("deleting IclubPaymentType instance");
 		try {
@@ -72,40 +71,34 @@ public class IclubPaymentTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubPaymentType findById(java.lang.Long id) {
 		log.debug("getting IclubPaymentType instance with id: " + id);
 		try {
-			IclubPaymentType instance = (IclubPaymentType) getCurrentSession()
-					.get("za.co.iclub.pss.orm.bean.IclubPaymentType", id);
+			IclubPaymentType instance = (IclubPaymentType) getCurrentSession().get("za.co.iclub.pss.orm.bean.IclubPaymentType", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List<IclubPaymentType> findByExample(IclubPaymentType instance) {
 		log.debug("finding IclubPaymentType instance by example");
 		try {
-			List<IclubPaymentType> results = (List<IclubPaymentType>) getCurrentSession()
-					.createCriteria("za.co.iclub.pss.orm.bean.IclubPaymentType")
-					.add(create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<IclubPaymentType> results = (List<IclubPaymentType>) getCurrentSession().createCriteria("za.co.iclub.pss.orm.bean.IclubPaymentType").add(create(instance)).list();
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
 	}
-
+	
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding IclubPaymentType instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding IclubPaymentType instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from IclubPaymentType as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from IclubPaymentType as model where model." + propertyName + "= ?";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
@@ -114,19 +107,19 @@ public class IclubPaymentTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public List<IclubPaymentType> findByPtShortDesc(Object ptShortDesc) {
 		return findByProperty(PT_SHORT_DESC, ptShortDesc);
 	}
-
+	
 	public List<IclubPaymentType> findByPtLongDesc(Object ptLongDesc) {
 		return findByProperty(PT_LONG_DESC, ptLongDesc);
 	}
-
+	
 	public List<IclubPaymentType> findByPtStatus(Object ptStatus) {
 		return findByProperty(PT_STATUS, ptStatus);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all IclubPaymentType instances");
 		try {
@@ -138,12 +131,11 @@ public class IclubPaymentTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public IclubPaymentType merge(IclubPaymentType detachedInstance) {
 		log.debug("merging IclubPaymentType instance");
 		try {
-			IclubPaymentType result = (IclubPaymentType) getCurrentSession()
-					.merge(detachedInstance);
+			IclubPaymentType result = (IclubPaymentType) getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -151,7 +143,7 @@ public class IclubPaymentTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachDirty(IclubPaymentType instance) {
 		log.debug("attaching dirty IclubPaymentType instance");
 		try {
@@ -162,21 +154,19 @@ public class IclubPaymentTypeDAO {
 			throw re;
 		}
 	}
-
+	
 	public void attachClean(IclubPaymentType instance) {
 		log.debug("attaching clean IclubPaymentType instance");
 		try {
-			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(
-					instance);
+			getCurrentSession().buildLockRequest(LockOptions.NONE).lock(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
 			throw re;
 		}
 	}
-
-	public static IclubPaymentTypeDAO getFromApplicationContext(
-			ApplicationContext ctx) {
+	
+	public static IclubPaymentTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPaymentTypeDAO) ctx.getBean("IclubPaymentTypeDAO");
 	}
 }
