@@ -1,5 +1,79 @@
 <ui:composition template="/templates/layout#{themeView.theme}.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<p:dialog id="cohortQuesDialog" widgetVar="cohortQuesDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">Cohort Selection Criteria</f:facet>
+			<p:panel>
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Age :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubCohortController.criteriaBean.ccAge}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Gender :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.criteriaBean.ccGender}">
+							<f:selectItem itemLabel="Male" itemValue="M" />
+							<f:selectItem itemLabel="Female" itemValue="F" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Maritial Status :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuMarS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubCohortController.criteriaBean.ccMaritialStatus}">
+							<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msShortDesc}" value="#{iclubCohortController.maritialStatusBeans}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Insured Value :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="#{iclubCohortController.criteriaBean.ccInsuredValue}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Claims In Last Two Years :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.criteriaBean.ccClaimLastTwYrs}">
+							<f:selectItem itemLabel="Claims In Last Two Years" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Claims In Last Year :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.criteriaBean.ccClaimLastYr}">
+							<f:selectItem itemLabel="Claims In Last Year" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<p:growl id="growlPre" showDetail="true" />
+			</p:panel>
+		</p:dialog>
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlCohortContDet">
 				<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selecteAdminCohortInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.adminCohortInviteBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Available">
@@ -22,6 +96,11 @@
 							<f:selectItem itemLabel="Type" itemDisabled="true" />
 							<f:selectItems value="#{iclubCohortController.inviteStatusBeans}" var="c" itemLabel="#{c.isLongDesc}" itemValue="#{c.isId}" />
 						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:commandButton disabled="#{!bean.criteria}" oncomplete="PF('cohortQuesDialog').show();" actionListener="#{iclubCohortController.showCriteria}" update=":iclubFrm:cohortQuesDialog,:iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" icon="ui-icon-search" value="View Cirteria">
+							<f:setPropertyActionListener target="#{iclubCohortController.cohortInviteBean}" value="#{bean}" />
+						</p:commandButton>
 					</p:column>
 					<f:facet name="footer">
 						<p:panel>

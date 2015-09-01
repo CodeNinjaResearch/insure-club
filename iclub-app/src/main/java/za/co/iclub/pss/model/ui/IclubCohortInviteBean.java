@@ -20,6 +20,8 @@ public class IclubCohortInviteBean {
 	private String ciInviteSentStatus;
 	private Long iclubInviteStatus;
 	private String isLongDesc;
+	private boolean criteria;
+	private String cohortCriteriaId;
 	
 	public String getCiId() {
 		return ciId;
@@ -147,5 +149,21 @@ public class IclubCohortInviteBean {
 	
 	public void setCName(String cName) {
 		CName = cName;
+	}
+	
+	public boolean isCriteria() {
+		return criteria;
+	}
+	
+	public void setCriteria(boolean criteria) {
+		this.criteria = criteria;
+	}
+	
+	public String getCohortCriteriaId() {
+		return cohortCriteriaId;
+	}
+	
+	public void setCohortCriteriaId(String cohortCriteriaId) {
+		this.cohortCriteriaId = cohortCriteriaId;
 	}
 }

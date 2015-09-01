@@ -36,30 +36,36 @@ import org.codehaus.jackson.map.type.TypeFactory;
 import org.json.JSONObject;
 
 import za.co.iclub.pss.model.ui.IclubCohortBean;
+import za.co.iclub.pss.model.ui.IclubCohortCriteriaBean;
 import za.co.iclub.pss.model.ui.IclubCohortInviteBean;
 import za.co.iclub.pss.model.ui.IclubCohortSummaryBean;
 import za.co.iclub.pss.model.ui.IclubCohortTypeBean;
 import za.co.iclub.pss.model.ui.IclubInsuranceItemTypeBean;
 import za.co.iclub.pss.model.ui.IclubInviteStatusBean;
+import za.co.iclub.pss.model.ui.IclubMaritialStatusBean;
 import za.co.iclub.pss.model.ui.IclubNotificationTypeBean;
 import za.co.iclub.pss.model.ui.IclubPersonBean;
 import za.co.iclub.pss.model.ui.OutLookContactsBean;
 import za.co.iclub.pss.model.ui.OutlookContactDataBean;
 import za.co.iclub.pss.model.ui.yahoo.YahooContactBean;
 import za.co.iclub.pss.model.ui.yahoo.YahooFieldBean;
+import za.co.iclub.pss.model.ws.IclubCohortCriteriaModel;
 import za.co.iclub.pss.model.ws.IclubCohortInviteModel;
 import za.co.iclub.pss.model.ws.IclubCohortModel;
 import za.co.iclub.pss.model.ws.IclubCohortSummaryModel;
 import za.co.iclub.pss.model.ws.IclubCohortTypeModel;
 import za.co.iclub.pss.model.ws.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.model.ws.IclubInviteStatusModel;
+import za.co.iclub.pss.model.ws.IclubMaritialStatusModel;
 import za.co.iclub.pss.model.ws.IclubNotificationTypeModel;
 import za.co.iclub.pss.model.ws.IclubPersonModel;
+import za.co.iclub.pss.trans.IclubCohortCriteriaTrans;
 import za.co.iclub.pss.trans.IclubCohortInviteTrans;
 import za.co.iclub.pss.trans.IclubCohortTrans;
 import za.co.iclub.pss.trans.IclubCohortTypeTrans;
 import za.co.iclub.pss.trans.IclubInsuranceItemTypeTrans;
 import za.co.iclub.pss.trans.IclubInviteStatusTrans;
+import za.co.iclub.pss.trans.IclubMaritialStatusTrans;
 import za.co.iclub.pss.trans.IclubNotificationTypeTrans;
 import za.co.iclub.pss.trans.IclubPersonTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
@@ -85,7 +91,9 @@ public class IclubCohortController implements Serializable {
 	protected static final Logger LOGGER = Logger.getLogger(IclubCohortController.class);
 	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortService/";
 	private static final String NFT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubNotificationTypeService/";
+	private static final String MS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritialStatusService/";
 	private static final String CI_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortInviteService/";
+	private static final String CC_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortCriteriaService/";
 	private static final String CHT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortTypeService/";
 	private static final String IIT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubInsuranceItemTypeService/";
 	private static final String P_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
@@ -102,6 +110,7 @@ public class IclubCohortController implements Serializable {
 	private List<IclubInsuranceItemTypeBean> iclubInsuranceItemTypeBeans;
 	
 	private IclubCohortBean bean;
+	private IclubCohortCriteriaBean criteriaBean;
 	private IclubCohortSummaryBean cohortSummaryBean;
 	private IclubCohortSummaryBean cohortSummaryUserBean;
 	private boolean showCreateCont;
@@ -124,6 +133,8 @@ public class IclubCohortController implements Serializable {
 	private List<IclubInviteStatusBean> inviteStatusBeans;
 	private boolean deRegister;
 	private IclubCohortInviteModel inviteModel;
+	private IclubCohortInviteBean cohortInviteBean;
+	private List<IclubMaritialStatusBean> maritialStatusBeans;
 	
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
@@ -144,6 +155,21 @@ public class IclubCohortController implements Serializable {
 		showSummaryCont = false;
 		viewParam = 1l;
 		selectedBeans = new ArrayList<IclubCohortBean>();
+	}
+	
+	public void showCriteria() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCriteria");
+		
+		if (cohortInviteBean != null) {
+			WebClient client = IclubWebHelper.createCustomClient(CC_BASE_URL + "get/" + cohortInviteBean.getCohortCriteriaId());
+			
+			IclubCohortCriteriaModel model = (IclubCohortCriteriaModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubCohortCriteriaModel.class));
+			
+			criteriaBean = IclubCohortCriteriaTrans.fromWStoUI(model);
+			
+			client.close();
+		}
+		
 	}
 	
 	public void showCreate() {
@@ -234,11 +260,15 @@ public class IclubCohortController implements Serializable {
 		bean = new IclubCohortBean();
 	}
 	
-	public String assigenCohort(IclubCohortBean bean) {
-		selectedBeans = getSelectedBeans();
-		if (selectedBeans.size() == 0)
-			selectedBeans.add(bean);
-		return addIclubCohorts();
+	public String criteriaAction() {
+		
+		if (validateForm(true)) {
+			selectedBeans = getSelectedBeans();
+			if (selectedBeans.size() == 0)
+				selectedBeans.add(bean);
+			return addIclubCohorts();
+		}
+		return "";
 	}
 	
 	public String addIclubCohorts() {
@@ -277,6 +307,12 @@ public class IclubCohortController implements Serializable {
 							client.close();
 						}
 						if (response.getStatusCode() == 0) {
+							criteriaBean.setCcId(UUID.randomUUID().toString());
+							criteriaBean.setIclubCohortInvite(inviteModel.getCiId());
+							IclubCohortCriteriaModel criteriaModel = IclubCohortCriteriaTrans.fromUItoWS(criteriaBean);
+							client = IclubWebHelper.createCustomClient(CC_BASE_URL + "add");
+							response = client.accept(MediaType.APPLICATION_JSON).post(criteriaModel, ResponseModel.class);
+							client.close();
 							IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 							viewParam = 1l;
 							showView();
@@ -789,6 +825,24 @@ public class IclubCohortController implements Serializable {
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		
+		if (criteriaBean.getCcAge() == null) {
+			IclubWebHelper.addMessage(("Age Cannot be empty"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (criteriaBean.getCcGender() == null || criteriaBean.getCcGender().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please Select Gender"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		
+		if (criteriaBean.getCcClaimLastTwYrs() == null || criteriaBean.getCcClaimLastTwYrs().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please Select Claims In Last Two Years"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		if (criteriaBean.getCcClaimLastYr() == null || criteriaBean.getCcClaimLastYr().trim().equalsIgnoreCase("")) {
+			IclubWebHelper.addMessage(("Please Select Claims In Last Year"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		}
+		
 		return ret;
 	}
 	
@@ -1221,6 +1275,45 @@ public class IclubCohortController implements Serializable {
 	
 	public void setInviteModel(IclubCohortInviteModel inviteModel) {
 		this.inviteModel = inviteModel;
+	}
+	
+	public IclubCohortCriteriaBean getCriteriaBean() {
+		if (criteriaBean == null) {
+			criteriaBean = new IclubCohortCriteriaBean();
+		}
+		return criteriaBean;
+	}
+	
+	public void setCriteriaBean(IclubCohortCriteriaBean criteriaBean) {
+		this.criteriaBean = criteriaBean;
+	}
+	
+	public IclubCohortInviteBean getCohortInviteBean() {
+		return cohortInviteBean;
+	}
+	
+	public void setCohortInviteBean(IclubCohortInviteBean cohortInviteBean) {
+		this.cohortInviteBean = cohortInviteBean;
+	}
+	
+	public List<IclubMaritialStatusBean> getMaritialStatusBeans() {
+		
+		WebClient client = IclubWebHelper.createCustomClient(MS_BASE_URL + "list");
+		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
+		client.close();
+		maritialStatusBeans = new ArrayList<IclubMaritialStatusBean>();
+		if (models != null && models.size() > 0) {
+			for (IclubMaritialStatusModel model : models) {
+				IclubMaritialStatusBean bean = IclubMaritialStatusTrans.fromWStoUI(model);
+				
+				maritialStatusBeans.add(bean);
+			}
+		}
+		return maritialStatusBeans;
+	}
+	
+	public void setMaritialStatusBeans(List<IclubMaritialStatusBean> maritialStatusBeans) {
+		this.maritialStatusBeans = maritialStatusBeans;
 	}
 	
 }

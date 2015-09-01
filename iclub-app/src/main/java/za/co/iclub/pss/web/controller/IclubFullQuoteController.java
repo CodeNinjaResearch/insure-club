@@ -1052,9 +1052,12 @@ public class IclubFullQuoteController implements Serializable {
 		
 		if (driverBean != null && driverBean.getDDob() != null && driverBean.getDIssueDt() != null) {
 			if (IclubWebHelper.isCurrentDate(driverBean.getDDob().getTime())) {
-				IclubWebHelper.addMessage(("DOB less than current date"), FacesMessage.SEVERITY_ERROR);
-			} else if (driverBean.getDDob().getTime() <= driverBean.getDIssueDt().getTime()) {
-				IclubWebHelper.addMessage(("DOB less than Issue date"), FacesMessage.SEVERITY_ERROR);
+				IclubWebHelper.addMessage(("Driver DOB less than current date"), FacesMessage.SEVERITY_ERROR);
+			} else if (driverBean.getDDob().getTime() >= driverBean.getDIssueDt().getTime()) {
+				IclubWebHelper.addMessage(("Driver DOB should less than Issue date"), FacesMessage.SEVERITY_ERROR);
+			} else if (IclubWebHelper.calculateYearDiff(driverBean.getDDob().getTime()) <= 18) {
+				IclubWebHelper.addMessage(("Driver must be over 18 years"), FacesMessage.SEVERITY_ERROR);
+				ret = ret && false;
 			}
 		}
 		

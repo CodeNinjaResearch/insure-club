@@ -1,7 +1,10 @@
 package za.co.iclub.pss.trans;
 
+import java.util.Iterator;
+
 import za.co.iclub.pss.model.ui.IclubCohortInviteBean;
 import za.co.iclub.pss.model.ws.IclubCohortInviteModel;
+import za.co.iclub.pss.orm.bean.IclubCohortCriteria;
 import za.co.iclub.pss.orm.bean.IclubCohortInvite;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubInviteStatusDAO;
@@ -32,6 +35,8 @@ public class IclubCohortInviteTrans {
 		bean.setIclubInviteStatus(model.getIclubInviteStatus());
 		bean.setCName(model.getCName());
 		bean.setIsLongDesc(model.getIsLongDesc());
+		bean.setCriteria(model.isCriteria());
+		bean.setCohortCriteriaId(model.getCohortCriteriaId());
 		
 		return bean;
 	}
@@ -58,6 +63,8 @@ public class IclubCohortInviteTrans {
 		model.setIclubInviteStatus(bean.getIclubInviteStatus());
 		model.setIsLongDesc(bean.getIsLongDesc());
 		model.setCName(bean.getCName());
+		model.setCriteria(bean.isCriteria());
+		model.setCohortCriteriaId(bean.getCohortCriteriaId());
 		
 		return model;
 	}
@@ -82,6 +89,16 @@ public class IclubCohortInviteTrans {
 		model.setCiInviteSentStatus(bean.getCiInviteSentStatus());
 		model.setIclubInviteStatus(bean.getIclubInviteStatus() != null ? bean.getIclubInviteStatus().getIsId() : null);
 		model.setIsLongDesc(bean.getIclubInviteStatus() != null ? bean.getIclubInviteStatus().getIsLongDesc() : null);
+		model.setCriteria(bean.getIclubCohortCriterias() != null && bean.getIclubCohortCriterias().size() > 0 ? true : false);
+		
+		if (bean.getIclubCohortCriterias() != null && bean.getIclubCohortCriterias().size() > 0) {
+			
+			Iterator<IclubCohortCriteria> iterator = bean.getIclubCohortCriterias().iterator();
+			if (iterator.hasNext()) {
+				IclubCohortCriteria tem = (IclubCohortCriteria) iterator.next();
+				model.setCohortCriteriaId(tem.getCcId());
+			}
+		}
 		
 		return model;
 	}

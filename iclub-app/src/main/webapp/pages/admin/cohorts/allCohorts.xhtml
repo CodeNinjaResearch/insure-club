@@ -3,15 +3,80 @@
 		<p:dialog id="cohortQuesDialog" widgetVar="cohortQuesDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">Cohort Selection Criteria</f:facet>
 			<p:panel>
-				<div class="EmptyBox5" />
+				<f:facet name="footer">
+					<div class="Container100 Responsive">
+						<p:commandButton value="Submit" action="#{iclubCohortController.criteriaAction}" update=":iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" ajax="false" icon="ui-icon-search" />
+					</div>
+					<div class="EmptyBox5" />
+				</f:facet>
 				<div class="Container100 Responsive">
 					<div class="Container50 Responsive">
 						<p:outputLabel styleClass="TexAlCenter" value="Age :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Name" value="#{iclubCohortController.bean.CName}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Age" value="#{iclubCohortController.criteriaBean.ccAge}" />
 					</div>
 				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Gender :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.criteriaBean.ccGender}">
+							<f:selectItem itemLabel="Male" itemValue="M" />
+							<f:selectItem itemLabel="Female" itemValue="F" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Maritial Status :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu widgetVar="mnuMarS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubCohortController.criteriaBean.ccMaritialStatus}">
+							<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
+							<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msShortDesc}" value="#{iclubCohortController.maritialStatusBeans}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Insured Value :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:inputText styleClass="TexAlCenter" placeholder="Insured Value" value="#{iclubCohortController.criteriaBean.ccInsuredValue}" />
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Claims In Last Two Years :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.criteriaBean.ccClaimLastTwYrs}">
+							<f:selectItem itemLabel="Claims In Last Two Years" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container50 Responsive">
+						<p:outputLabel styleClass="TexAlCenter" value="Claims In Last Year :" />
+					</div>
+					<div class="Container50 Responsive">
+						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{iclubCohortController.criteriaBean.ccClaimLastYr}">
+							<f:selectItem itemLabel="Claims In Last Year" itemDisabled="true" />
+							<f:selectItem itemLabel="Yes" itemValue="Y" />
+							<f:selectItem itemLabel="No" itemValue="N" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="EmptyBox5" />
 				<p:growl id="growlPre" showDetail="true" />
 			</p:panel>
 		</p:dialog>
@@ -37,7 +102,7 @@
 						</p:selectOneMenu>
 					</p:column>
 					<p:column>
-						<p:commandButton process="dtQuoteCont" update=":iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" ajax="false" icon="ui-icon-search" value="Save">
+						<p:commandButton process="dtQuoteCont" oncomplete="PF('cohortQuesDialog').show();" update=":iclubFrm:cohortQuesDialog,:iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" icon="ui-icon-search" value="Save">
 							<f:setPropertyActionListener target="#{iclubCohortController.bean}" value="#{bean}" />
 						</p:commandButton>
 					</p:column>
