@@ -1,6 +1,7 @@
 package za.co.iclub.pss.ws.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class IclubUserDashboardService {
 			String quoteIds = "";
 			Double insuredValue = 0.0;
 			String policyIds = "";
+			List<String> policyIdsList = new ArrayList<String>();
 			String cliamIds = "";
 			List dataQuotes = null;
 			
@@ -114,7 +116,7 @@ public class IclubUserDashboardService {
 			}
 			try {
 				List data = iclubNamedQueryDAO.getIclubPolicIdsByQuotes(userId);
-				
+				dataQuotes = new ArrayList<String>();
 				if (data != null && data.size() > 0) {
 					quoteIds = "";
 					Double prorataPremium = 0.0;
@@ -127,9 +129,15 @@ public class IclubUserDashboardService {
 						} else if (model.getNextPremiumDate() != null && object[3] != null && model.getNextPremiumDate().intValue() < new Integer(object[3].toString())) {
 							model.setNextPremiumDate(new Long(object[3].toString()));
 						}
-						
+						if (object[2].toString() != null) {
+							dataQuotes.add(object[2].toString());
+						}
 						quoteIds = quoteIds.trim().equalsIgnoreCase("") ? object[2].toString().toString() + "" : quoteIds + "," + object[2].toString().toString() + "";
-						policyIds = policyIds.trim().equalsIgnoreCase("") ? object[0].toString().toString() + "" : policyIds + "," + object[0].toString().toString() + "";
+						if (object[0].toString() != null) {
+							policyIdsList.add(object[0].toString());
+						}
+						
+						policyIds = policyIds.trim().equalsIgnoreCase("") ? object[0].toString() + "" : policyIds + "," + object[0].toString().toString() + "";
 						prorataPremium = object != null && object[1] != null ? new Double(object[1].toString()) + prorataPremium : prorataPremium;
 						insuredValue = object != null && object[4] != null ? new Double(object[4].toString()) + insuredValue : insuredValue;
 					}
@@ -167,7 +175,7 @@ public class IclubUserDashboardService {
 			}
 			
 			try {
-				List data = iclubNamedQueryDAO.getIclubClaimValueByPolicyIds(policyIds);
+				List data = iclubNamedQueryDAO.getIclubClaimValueByPolicyIds(policyIdsList);
 				
 				if (data != null && data.size() > 0) {
 					

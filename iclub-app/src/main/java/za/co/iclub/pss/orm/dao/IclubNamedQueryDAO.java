@@ -10,6 +10,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
@@ -1176,28 +1177,33 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
-	public List getIclubQuoteIdByUserId(String quoteIds) {
-		log.debug("finding IclubInsuranceItem fields  by PersonId");
-		try {
-			Query queryObject = getCurrentSession().getNamedQuery("getIclubItemIdsByUserId");
-			
-			queryObject.setString("quoteIds", quoteIds);
-			List object = queryObject.list();
-			return object;
-		} catch (RuntimeException re) {
-			log.error("get IclubInsuranceItem failed", re);
-			throw re;
-		}
-	}
-	
+	// public List getIclubItemIdsByUserId(List<String> quoteIds) {
+	// log.debug("finding IclubInsuranceItem fields  by PersonId");
+	// try {
+	// Query queryObject =
+	// getCurrentSession().getNamedQuery("getIclubItemIdsByUserId");
+	//
+	// queryObject.setParameter("quoteIds", quoteIds);
+	// List object = queryObject.list();
+	// return object;
+	// } catch (RuntimeException re) {
+	// log.error("get IclubInsuranceItem failed", re);
+	// throw re;
+	// }
+	// }
+	//
 	public List getIclubQuoteIdByUserId(Collection<? extends String> quoteIds) {
 		log.debug("finding IclubInsuranceItem fields  by QuoteIds");
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubInsuranceItem.class);
 			criteria.add(Restrictions.in("iiQuoteId", quoteIds));
+			
 			criteria.createAlias("iclubInsuranceItemType", "iclubInsuranceItemType");
-			criteria.setProjection(Projections.property("iclubInsuranceItemType.iitId"));
-			criteria.setProjection(Projections.property("iiItemId"));
+			
+			ProjectionList projectionList = Projections.projectionList();
+			projectionList.add(Projections.property("iclubInsuranceItemType.iitId"));
+			projectionList.add(Projections.property("iiItemId"));
+			criteria.setProjection(projectionList);
 			List personNames = criteria.list();
 			return personNames;
 		} catch (RuntimeException re) {
@@ -1221,12 +1227,12 @@ public class IclubNamedQueryDAO {
 		}
 	}
 	
-	public List getIclubClaimValueByPolicyIds(String policyIds) {
+	public List getIclubClaimValueByPolicyIds(List<String> policyIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubClaimValueByPolicyIds");
 			
-			queryObject.setString("policyIds", policyIds);
+			queryObject.setParameter("policyIds", policyIds);
 			List object = queryObject.list();
 			return object;
 		} catch (RuntimeException re) {
