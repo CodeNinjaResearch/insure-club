@@ -51,12 +51,12 @@ public class ThemeView implements Serializable {
 		if (theme == null || theme.trim().equalsIgnoreCase("")) {
 			theme = "";
 		}
-		
+		theme = "-spark";
 		return theme;
 	}
 	
 	public void setTheme(String theme) {
-		this.theme = theme;
+		this.theme = "-spark";
 	}
 	
 	public String getWebTheme() {

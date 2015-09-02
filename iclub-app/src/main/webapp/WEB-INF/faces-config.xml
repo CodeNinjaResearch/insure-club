@@ -50,7 +50,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>login-spark</from-outcome>
-			<to-view-id>/templates/login-spark.xhtml</to-view-id>
+			<to-view-id>/templates/login.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 
