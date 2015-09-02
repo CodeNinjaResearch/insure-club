@@ -28,7 +28,7 @@ public class SessionPhaseListener implements PhaseListener {
 			if (!context.getViewRoot().getViewId().toLowerCase().contains("login")) {
 				if (userSessionId == null && socilalogin == null) {
 					context.getExternalContext().invalidateSession();
-					context.getApplication().getNavigationHandler().handleNavigation(context, null, "/pages/iclubLogin.xhtml?faces-redirect=true");
+					context.getApplication().getNavigationHandler().handleNavigation(context, null, "/templates/login.xhtml?faces-redirect=true");
 				}
 			}
 		}

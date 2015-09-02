@@ -6,6 +6,7 @@ public class IclubPersonBean {
 	
 	private String PId;
 	private Long iclubMaritialStatus;
+	private String iclubCohortInvite;
 	private String msLongDesc;
 	private String iclubPerson;
 	private String PFNameAndLName;
@@ -273,6 +274,14 @@ public class IclubPersonBean {
 	
 	public void setPCrtdDt(Date pCrtdDt) {
 		PCrtdDt = pCrtdDt;
+	}
+	
+	public String getIclubCohortInvite() {
+		return iclubCohortInvite;
+	}
+	
+	public void setIclubCohortInvite(String iclubCohortInvite) {
+		this.iclubCohortInvite = iclubCohortInvite;
 	}
 	
 }

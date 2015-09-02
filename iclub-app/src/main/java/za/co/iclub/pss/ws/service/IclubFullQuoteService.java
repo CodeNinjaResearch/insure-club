@@ -46,6 +46,7 @@ import za.co.iclub.pss.orm.dao.IclubAccountTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBankMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
+import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
@@ -124,6 +125,7 @@ public class IclubFullQuoteService {
 	private IclubBankMasterDAO iclubBankMasterDAO;
 	private IclubPolicyStatusDAO iclubPolicyStatusDAO;
 	private IclubCohortDAO iclubCohortDAO;
+	private IclubCohortInviteDAO iclubCohortInviteDAO;
 	
 	@POST
 	@Path("/createQuote")
@@ -131,7 +133,7 @@ public class IclubFullQuoteService {
 	public IclubFullQuoteResponse createQuote(IclubFullQuoteRequest iclubFullQuoteRequest) {
 		
 		Double generatedPremium = 0.0;
-		IclubPerson iclubPerson = IclubPersonTrans.fromWStoORM(iclubFullQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO);
+		IclubPerson iclubPerson = IclubPersonTrans.fromWStoORM(iclubFullQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 		iclubPersonDAO.merge(iclubPerson);
 		IclubQuote iclubQuote = IclubQuoteTrans.fromWStoORM(iclubFullQuoteRequest.getIclubQuoteModel(), iclubQuoteStatusDAO, iclubCoverTypeDAO, iclubInsurerMasterDAO, iclubProductTypeDAO, iclubPersonDAO);
 		iclubQuoteDAO.merge(iclubQuote);
@@ -912,6 +914,14 @@ public class IclubFullQuoteService {
 	
 	public void setIclubCohortDAO(IclubCohortDAO iclubCohortDAO) {
 		this.iclubCohortDAO = iclubCohortDAO;
+	}
+	
+	public IclubCohortInviteDAO getIclubCohortInviteDAO() {
+		return iclubCohortInviteDAO;
+	}
+	
+	public void setIclubCohortInviteDAO(IclubCohortInviteDAO iclubCohortInviteDAO) {
+		this.iclubCohortInviteDAO = iclubCohortInviteDAO;
 	}
 	
 }

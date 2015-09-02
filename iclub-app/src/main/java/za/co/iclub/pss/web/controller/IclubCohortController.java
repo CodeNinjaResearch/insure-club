@@ -122,6 +122,7 @@ public class IclubCohortController implements Serializable {
 	private String userName;
 	private ResourceBundle labelBundle;
 	private String key;
+	private String newInviteKey;
 	private String fromSocial;
 	private String guid;
 	private String cohortId;
@@ -393,10 +394,72 @@ public class IclubCohortController implements Serializable {
 		return "";
 	}
 	
+	public String addCohortInvites() {
+		
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addCohortInvites");
+		try {
+			
+			if (selectedBeans != null && selectedBeans.size() == 1 && !showCreateCont) {
+				for (IclubCohortBean bean : selectedBeans) {
+					this.bean = bean;
+					
+					WebClient client = IclubWebHelper.createCustomClient(P_BASE_URL + "get/" + getSessionUserId());
+					
+					IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+					client.close();
+					IclubCohortInviteModel inviteModel = getInviteModel();
+					
+					if (model.getIclubCohortInvite() == null) {
+						inviteModel.setCiInviteFName(model.getPFName());
+						inviteModel.setCiInviteLName(model.getPLName());
+						inviteModel.setCiInviteUri(model.getPEmail());
+						inviteModel.setIclubCohort(this.bean.getCId());
+						inviteModel.setCiCrtdDt(new Date(System.currentTimeMillis()));
+						inviteModel.setCiInviteAcceptYn("Y");
+						inviteModel.setIclubInviteStatus(2l);
+						inviteModel.setIclubNotificationType(3l);
+					} else {
+						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + model.getIclubCohortInvite());
+						inviteModel = (IclubCohortInviteModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubCohortInviteModel.class));
+					}
+					ResponseModel response = null;
+					if (inviteModel.getCiId() == null) {
+						inviteModel.setCiId(UUID.randomUUID().toString());
+						inviteModel.setIclubPerson(getSessionUserId());
+						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "add");
+						response = client.accept(MediaType.APPLICATION_JSON).post(inviteModel, ResponseModel.class);
+						client.close();
+					}
+					if (response.getStatusCode() == 0) {
+						
+						IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+						viewParam = 1l;
+						showView();
+						return "cohortInvites.xhtml?faces-redirect=true";
+						
+					} else {
+						IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					}
+				}
+			}
+			
+			else {
+				IclubWebHelper.addMessage("Select one Row", FacesMessage.SEVERITY_INFO);
+				return "";
+			}
+			
+		} catch (Exception e) {
+			LOGGER.error(e, e);
+			IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		return "";
+		
+	}
+	
 	public String addIclubCohortsInvites() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohort");
 		try {
-			if (validateForm(true)) {
+			if (true) {
 				
 				List<IclubCohortInviteModel> models = new ArrayList<IclubCohortInviteModel>();
 				if (selectedInviteBeans != null && selectedInviteBeans.size() > 0) {
@@ -1101,6 +1164,67 @@ public class IclubCohortController implements Serializable {
 			setIclubCohortInvite(access_token, "fbapp", guid);
 		}
 		return key;
+	}
+	
+	public String getNewInviteKey() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		
+		if (request.getParameter("key") != null) {
+			key = (String) request.getParameter("key");
+			fromSocial = (String) request.getParameter("from");
+			guid = (String) request.getParameter("guid");
+			if (IclubWebHelper.getObjectIntoSession("newInvites") != null) {
+				newInvites = new Boolean(IclubWebHelper.getObjectIntoSession("newInvites").toString());
+			}
+			
+			request.removeAttribute("key");
+			request.removeAttribute("guid");
+			request.removeAttribute("from");
+			setIclubCohortInvite(key, fromSocial, guid);
+			
+			if (IclubWebHelper.getObjectIntoSession("cohortInviteId") != null || IclubWebHelper.getObjectIntoSession("cohortId") != null) {
+				try {
+					
+					WebClient client = null;
+					ResponseModel responseModels = null;
+					String cohortId = null;
+					if (IclubWebHelper.getObjectIntoSession("cohortId") != null) {
+						cohortId = IclubWebHelper.getObjectIntoSession("cohortId").toString();
+					}
+					if (cohortId == null || cohortId.trim().equalsIgnoreCase("")) {
+						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession("cohortInviteId").toString());
+						inviteModel = client.get(IclubCohortInviteModel.class);
+						inviteModel.setCiInviteAcceptYn("Y");
+						client = IclubWebHelper.createCustomClient(CI_BASE_URL + "mod");
+						responseModels = client.accept(MediaType.APPLICATION_JSON).put(inviteModel, ResponseModel.class);
+						cohortId = inviteModel.getIclubCohort();
+						IclubWebHelper.addObjectIntoSession("cohortInviteId", null);
+					}
+					
+					if ((responseModels != null && responseModels.getStatusCode() == 0) || (cohortId != null && !cohortId.trim().equalsIgnoreCase(""))) {
+						client = IclubWebHelper.createCustomClient(BASE_URL + "get/" + cohortId);
+						IclubCohortModel model = client.get(IclubCohortModel.class);
+						IclubCohortBean bean = IclubCohortTrans.fromWStoUI(model);
+						this.bean = bean;
+						selectedBeans = new ArrayList<IclubCohortBean>();
+						selectedBeans.add(bean);
+					}
+				} catch (Exception e) {
+					
+				}
+				
+			}
+			
+		} else if (request.getParameter("from") != null && request.getParameter("from").toString().equalsIgnoreCase("fbapp")) {
+			String access_token = IclubWebHelper.getObjectIntoSession("access_token") != null ? IclubWebHelper.getObjectIntoSession("access_token").toString() : null;
+			String guid = IclubWebHelper.getObjectIntoSession("guid") != null ? IclubWebHelper.getObjectIntoSession("guid").toString() : null;
+			setIclubCohortInvite(access_token, "fbapp", guid);
+		}
+		return newInviteKey;
+	}
+	
+	public void setNewInviteKey(String newInviteKey) {
+		this.newInviteKey = newInviteKey;
 	}
 	
 	public void setKey(String key) {

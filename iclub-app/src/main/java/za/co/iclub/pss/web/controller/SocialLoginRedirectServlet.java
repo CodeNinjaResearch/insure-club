@@ -60,6 +60,7 @@ public class SocialLoginRedirectServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public String getState(String from) {

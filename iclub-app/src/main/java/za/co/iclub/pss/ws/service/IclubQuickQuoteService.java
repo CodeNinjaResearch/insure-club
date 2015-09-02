@@ -42,6 +42,7 @@ import za.co.iclub.pss.orm.bean.IclubVehicle;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubBarTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
+import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubCoverTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
@@ -112,6 +113,7 @@ public class IclubQuickQuoteService {
 	private IclubPropertyItemDAO iclubPropertyItemDAO;
 	private IclubInsuranceItemDAO iclubInsuranceItemDAO;
 	private IclubCohortDAO iclubCohortDAO;
+	private IclubCohortInviteDAO iclubCohortInviteDAO;
 	
 	@POST
 	@Path("/createQuote")
@@ -121,10 +123,10 @@ public class IclubQuickQuoteService {
 		Double generatedPremium = 0.0;
 		IclubPerson iclubPerson = null;
 		if (!iclubQuickQuoteRequest.isLoginFlag()) {
-			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO);
+			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 			iclubPersonDAO.save(iclubPerson);
 		} else {
-			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO);
+			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 			iclubPersonDAO.merge(iclubPerson);
 		}
 		
@@ -762,6 +764,14 @@ public class IclubQuickQuoteService {
 	
 	public void setIclubCohortDAO(IclubCohortDAO iclubCohortDAO) {
 		this.iclubCohortDAO = iclubCohortDAO;
+	}
+	
+	public IclubCohortInviteDAO getIclubCohortInviteDAO() {
+		return iclubCohortInviteDAO;
+	}
+	
+	public void setIclubCohortInviteDAO(IclubCohortInviteDAO iclubCohortInviteDAO) {
+		this.iclubCohortInviteDAO = iclubCohortInviteDAO;
 	}
 	
 }

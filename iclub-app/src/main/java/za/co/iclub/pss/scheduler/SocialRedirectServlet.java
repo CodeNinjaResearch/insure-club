@@ -66,6 +66,7 @@ public class SocialRedirectServlet extends HttpServlet {
 				}
 			} else {
 				response.sendRedirect(BUNDLE.getString("login_uri"));
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

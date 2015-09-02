@@ -1,10 +1,11 @@
 <ui:composition template="/templates/layout#{themeView.theme}.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<h:inputHidden value="#{iclubCohortController.newInviteKey}" />
 		<p:panel id="pnlCohortContDet">
-			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.newCohortsInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="5" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Invites Available">
+			<p:dataTable reflow="true" id="dtQuoteCont" widgetVar="dtQuoteCont" selection="#{iclubCohortController.selectedInviteBeans}" rowKey="#{bean.ciId}" value="#{iclubCohortController.cohortsInviteBeans}" var="bean" rows="20" paginator="true" paginatorPosition="bottom" emptyMessage="No Cohorts Invites Available">
 				<p:column rendered="#{!iclubCohortController.inviteFromFbApp}" selectionMode="multiple" style="width:16px;text-align:center">
 				</p:column>
-				<p:column headerText="Invite Uri">
+				<p:column filterBy="#{bean.ciInviteUri}" filterMatchMode="contains" headerText="Invite Uri">
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteUri}" />
 				</p:column>
 				<p:column rendered="#{iclubCohortController.inviteFromFbApp}" headerText="First Name">
@@ -14,7 +15,7 @@
 					<p:outputLabel styleClass="TexAlCenter" value="#{bean.ciInviteLName}" />
 				</p:column>
 				<f:facet name="footer">
-					<p:commandButton rendered="#{!iclubCohortController.inviteFromFbApp}" process="dtQuoteCont" update=":iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" ajax="false" action="#{iclubCohortController.addIclubCohortsInvites}" icon="ui-icon-search" value="Save" />
+					<p:commandButton rendered="#{!iclubCohortController.inviteFromFbApp}" update=":iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" ajax="false" action="#{iclubCohortController.addIclubCohortsInvites}" icon="ui-icon-search" value="Save" />
 				</f:facet>
 			</p:dataTable>
 		</p:panel>

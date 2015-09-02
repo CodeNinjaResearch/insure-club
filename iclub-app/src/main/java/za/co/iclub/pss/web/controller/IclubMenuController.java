@@ -91,25 +91,6 @@ public class IclubMenuController implements Serializable {
 			NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 			navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/user/profile.xhtml?faces-redirect=true");
 			FacesContext.getCurrentInstance().responseComplete();
-		} else if (!FacesContext.getCurrentInstance().getViewRoot().getViewId().equalsIgnoreCase("/pages/admin/cohorts/allCohorts.xhtml") && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
-			try {
-				WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
-				IclubPersonModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
-				client.close();
-				if (model != null) {
-					if (model.getIclubCohort() == null && IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
-						/*String access_token = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.token")).toString();
-						String from = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("socail.access.provider")).toString();
-						NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-						navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
-						FacesContext.getCurrentInstance().responseComplete();*/
-					}
-				}
-				
-			} catch (Exception e) {
-				
-			}
-			
 		}
 	}
 	
@@ -599,7 +580,7 @@ public class IclubMenuController implements Serializable {
 		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.provider"), from);
 		
 		NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-		navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
+		navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/newCohortInvites.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
 	}
 	
 	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token, String from, String guid, String cohortInviteId) {

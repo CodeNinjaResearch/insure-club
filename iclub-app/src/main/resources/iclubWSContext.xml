@@ -191,6 +191,7 @@
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
+		<property name="iclubCohortInviteDAO" ref="IclubCohortInviteDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
 	<bean id="IclubBankMasterService" class="za.co.iclub.pss.ws.service.IclubBankMasterService">
@@ -558,6 +559,7 @@
 		<property name="iclubAccessTypeDAO" ref="IclubAccessTypeDAO" />
 		<property name="iclubRoofTypeDAO" ref="IclubRoofTypeDAO" />
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
+		<property name="iclubCohortInviteDAO" ref="IclubCohortInviteDAO" />
 	</bean>
 	<bean id="IclubFullQuoteService" class="za.co.iclub.pss.ws.service.IclubFullQuoteService">
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
@@ -596,6 +598,7 @@
 		<property name="iclubPolicyStatusDAO" ref="IclubPolicyStatusDAO"></property>
 		<property name="iclubBankMasterDAO" ref="IclubBankMasterDAO"></property>
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
+		<property name="iclubCohortInviteDAO" ref="IclubCohortInviteDAO" />
 	</bean>
 
 	<bean id="IclubInviteStatusService" class="za.co.iclub.pss.ws.service.IclubInviteStatusService">

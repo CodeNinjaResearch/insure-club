@@ -4,6 +4,7 @@ import za.co.iclub.pss.model.ui.IclubPersonBean;
 import za.co.iclub.pss.model.ws.IclubPersonModel;
 import za.co.iclub.pss.orm.bean.IclubPerson;
 import za.co.iclub.pss.orm.dao.IclubCohortDAO;
+import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -45,6 +46,7 @@ public class IclubPersonTrans {
 		bean.setPFNameAndLName(model.getPFNameAndLName());
 		bean.setIclubCohort(model.getIclubCohort());
 		bean.setCEmail(model.getCEmail());
+		bean.setIclubCohortInvite(model.getIclubCohortInvite());
 		
 		return bean;
 	}
@@ -84,6 +86,7 @@ public class IclubPersonTrans {
 		model.setPFNameAndLName(bean.getPFNameAndLName());
 		model.setIclubCohort(bean.getIclubCohort());
 		model.setCEmail(bean.getCEmail());
+		model.setIclubCohortInvite(bean.getIclubCohortInvite());
 		
 		return model;
 	}
@@ -123,11 +126,12 @@ public class IclubPersonTrans {
 		model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
 		model.setMsLongDesc(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsLongDesc()) : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
+		model.setIclubCohortInvite(bean.getIclubCohortInvite() != null ? bean.getIclubCohortInvite().getCiId() : null);
 		
 		return model;
 	}
 	
-	public static IclubPerson fromWStoORM(IclubPersonModel model, IclubIdTypeDAO iclubIdTypeDAO, IclubPersonDAO iclubPersonDAO, IclubMaritialStatusDAO iclubMaritialStatusDAO, IclubCohortDAO iclubCohortDAO) {
+	public static IclubPerson fromWStoORM(IclubPersonModel model, IclubIdTypeDAO iclubIdTypeDAO, IclubPersonDAO iclubPersonDAO, IclubMaritialStatusDAO iclubMaritialStatusDAO, IclubCohortDAO iclubCohortDAO, IclubCohortInviteDAO iclubCohortInviteDAO) {
 		
 		IclubPerson bean = new IclubPerson();
 		
@@ -160,7 +164,7 @@ public class IclubPersonTrans {
 		bean.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		bean.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+		bean.setIclubCohortInvite(model.getIclubCohortInvite() != null ? iclubCohortInviteDAO.findById(model.getIclubCohortInvite()) : null);
 		return bean;
 	}
 	
