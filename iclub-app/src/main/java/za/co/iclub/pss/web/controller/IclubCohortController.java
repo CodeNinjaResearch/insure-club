@@ -276,7 +276,7 @@ public class IclubCohortController implements Serializable {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohort");
 		try {
 			List<IclubCohortModel> models = new ArrayList<IclubCohortModel>();
-			if (validateForm(true)) {
+			if (!showCreateCont && validateForm(true)) {
 				
 				if (selectedBeans != null && selectedBeans.size() == 1 && !showCreateCont) {
 					for (IclubCohortBean bean : selectedBeans) {
@@ -294,6 +294,7 @@ public class IclubCohortController implements Serializable {
 						inviteModel.setCiCrtdDt(new Date(System.currentTimeMillis()));
 						inviteModel.setCiInviteAcceptYn("Y");
 						inviteModel.setIclubInviteStatus(2l);
+						inviteModel.setCiInviteSentStatus("Y");
 						inviteModel.setIclubNotificationType(3l);
 						ResponseModel response = null;
 						if (inviteModel.getCiId() == null) {
@@ -378,6 +379,7 @@ public class IclubCohortController implements Serializable {
 					inviteModel.setCiCrtdDt(new Date(System.currentTimeMillis()));
 					inviteModel.setIclubPerson(getSessionUserId());
 					inviteModel.setCiInviteAcceptYn("Y");
+					inviteModel.setCiInviteSentStatus("Y");
 					inviteModel.setIclubInviteStatus(3l);
 					inviteModel.setIclubNotificationType(3l);
 					inviteModel.setCiId(UUID.randomUUID().toString());
@@ -390,7 +392,7 @@ public class IclubCohortController implements Serializable {
 						person.setIclubCohort(bean.getCId());
 						person.setIclubCohortInvite(inviteModel.getCiId());
 						response = client.accept(MediaType.APPLICATION_JSON).put(person, ResponseModel.class);
-						IclubWebHelper.addMessage(getLabelBundle().getString("bankmaster") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+						IclubWebHelper.addMessage("Cohort " + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 						showView();
 					} catch (Exception e) {
 						e.printStackTrace();
