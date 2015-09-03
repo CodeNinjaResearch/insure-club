@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -37,6 +38,13 @@ public class SocialRedirectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
+			
+			HttpSession session = request.getSession(true);
+			
+			if (session != null && session.getAttribute("loggedin_user_id") != null) {
+				response.sendRedirect(request.getContextPath() + "/pages/dashboard/user/main.xhtml");
+			}
+			
 			String from = request.getParameter("from");
 			String cohortInviteId = request.getParameter("cohortInvId");
 			if (from != null) {

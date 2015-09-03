@@ -616,4 +616,9 @@
 	<lifecycle>
 		<phase-listener>za.co.iclub.pss.util.SessionPhaseListener</phase-listener>
 	</lifecycle>
+	 <factory>
+        <exception-handler-factory>
+           za.co.iclub.pss.util.ViewExpiredExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
 </faces-config>
