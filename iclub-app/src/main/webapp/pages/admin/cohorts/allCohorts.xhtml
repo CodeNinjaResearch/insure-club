@@ -96,7 +96,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.CCrtdDt}" />
 					</p:column>
 					<p:column headerText="Type">
-						<p:selectOneMenu styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
+						<p:selectOneMenu disabled="true" styleClass="with-placeholder TexAlCenter" value="#{bean.iclubInsuranceItemType}">
 							<f:selectItem itemLabel="Type" itemDisabled="true" />
 							<f:selectItems value="#{iclubCohortController.iclubInsuranceItemTypeBeans}" var="c" itemLabel="#{c.iitLongDesc}" itemValue="#{c.iitId}" />
 						</p:selectOneMenu>

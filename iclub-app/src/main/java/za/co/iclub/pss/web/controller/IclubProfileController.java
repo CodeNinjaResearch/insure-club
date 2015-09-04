@@ -1,6 +1,8 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -12,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -328,7 +331,16 @@ public class IclubProfileController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select IssueDate"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		} else if (IclubWebHelper.isCurrentDate(bean.getPIdIssueDt().getTime())) {
-			IclubWebHelper.addMessage(("Issue Date less than Current Date"), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(("Issue Date Should be less than Current Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (bean.getPIdExpiryDt() != null && !IclubWebHelper.isCurrentDate(bean.getPIdExpiryDt().getTime())) {
+			IclubWebHelper.addMessage(("Expiry Date Should be greater than Current Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (bean.getPIdExpiryDt() != null && !IclubWebHelper.isCurrentDate(bean.getPIdExpiryDt().getTime())) {
+			IclubWebHelper.addMessage(("Expiry Date Should be greater than Current Date"), FacesMessage.SEVERITY_ERROR);
+			ret = ret && false;
+		} else if (((Long) bean.getPIdIssueDt().getTime()).compareTo(((Long) bean.getPIdExpiryDt().getTime())) >= 0) {
+			IclubWebHelper.addMessage((" Id Issue Date Should be less than Expiry Date"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		String idValidate = IclubWebHelper.validateId(bean.getPIdNum(), bean.getPGender());
@@ -421,6 +433,24 @@ public class IclubProfileController implements Serializable {
 		}
 		
 		return bean;
+	}
+	
+	public void validateID(AjaxBehaviorEvent event) {
+		
+		String idValidate = IclubWebHelper.validateId(bean.getPIdNum(), bean.getPGender());
+		if (idValidate != null && !idValidate.trim().equalsIgnoreCase("")) {
+			
+			IclubWebHelper.addMessage(idValidate, FacesMessage.SEVERITY_ERROR);
+		} else {
+			String dateOfBirth = bean.getPIdNum().toString().substring(0, 6);
+			SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy");
+			try {
+				Date dateOfBirthD = formatter.parse(dateOfBirth);
+				bean.setPDob(dateOfBirthD);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void setBean(IclubPersonBean bean) {

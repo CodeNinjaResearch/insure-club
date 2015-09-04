@@ -275,7 +275,7 @@ public class IclubLoginController implements Serializable {
 						IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
 						personClient.close();
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
-						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
+						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
 						
 						return "/pages/dashboard/user/main.xhtml?faces-redirect=true";
 						

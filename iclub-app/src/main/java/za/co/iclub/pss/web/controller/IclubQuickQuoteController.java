@@ -1010,7 +1010,7 @@ public class IclubQuickQuoteController implements Serializable {
 						IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
 						personClient.close();
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
-						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), 1l);
+						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
 						
 					} else {
 						IclubWebHelper.addMessage("Person Profile Fetch Error - Contact Admin", FacesMessage.SEVERITY_ERROR);
@@ -1140,7 +1140,7 @@ public class IclubQuickQuoteController implements Serializable {
 		} else if (bean.getPIdExpiryDt() != null && !IclubWebHelper.isCurrentDate(bean.getPIdExpiryDt().getTime())) {
 			IclubWebHelper.addMessage(("Expiry Date Should be greater than Current Date"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
-		} else if (bean.getPIdIssueDt().compareTo(bean.getPIdExpiryDt()) < 0) {
+		} else if (((Long) bean.getPIdIssueDt().getTime()).compareTo(((Long) bean.getPIdExpiryDt().getTime())) >= 0) {
 			IclubWebHelper.addMessage((" Id Issue Date Should be less than Expiry Date"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}

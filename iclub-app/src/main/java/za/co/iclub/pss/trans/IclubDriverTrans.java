@@ -33,6 +33,7 @@ public class IclubDriverTrans {
 		bean.setIclubPersonAByDCrtdBy(model.getIclubPersonAByDCrtdBy());
 		bean.setPBFNameAndLName(model.getPBFNameAndLName());
 		bean.setPAFNameAndLName(model.getPAFNameAndLName());
+		bean.setDLName(model.getDLName());
 		
 		return bean;
 	}
@@ -60,6 +61,7 @@ public class IclubDriverTrans {
 		model.setIclubPersonAByDCrtdBy(bean.getIclubPersonAByDCrtdBy());
 		model.setPBFNameAndLName(bean.getPBFNameAndLName());
 		model.setPAFNameAndLName(bean.getPAFNameAndLName());
+		model.setDLName(bean.getDLName());
 		
 		return model;
 	}
@@ -87,6 +89,7 @@ public class IclubDriverTrans {
 		model.setIclubPersonAByDCrtdBy(bean.getIclubPersonByDCrtdBy() != null ? (bean.getIclubPersonByDCrtdBy().getPId()) : null);
 		model.setPBFNameAndLName(bean.getIclubPersonByDPersonId() != null ? bean.getIclubPersonByDPersonId().getPFName() + " " + bean.getIclubPersonByDPersonId().getPLName() != null ? bean.getIclubPersonByDPersonId().getPLName() : "" : "");
 		model.setPAFNameAndLName(bean.getIclubPersonByDCrtdBy() != null ? bean.getIclubPersonByDCrtdBy().getPFName() + " " + bean.getIclubPersonByDCrtdBy().getPLName() != null ? bean.getIclubPersonByDCrtdBy().getPLName() : "" : "");
+		model.setDLName(bean.getDLName());
 		
 		return model;
 	}
@@ -108,6 +111,7 @@ public class IclubDriverTrans {
 		bean.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
 		bean.setIclubPersonByDPersonId(model.getIclubPersonBByDPersonId() != null && !model.getIclubPersonBByDPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonBByDPersonId()) : null);
 		bean.setIclubPersonByDCrtdBy(model.getIclubPersonAByDCrtdBy() != null && !model.getIclubPersonAByDCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonAByDCrtdBy()) : null);
+		bean.setDLName(model.getDLName());
 		
 		return bean;
 	}

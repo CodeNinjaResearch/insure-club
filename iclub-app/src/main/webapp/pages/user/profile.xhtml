@@ -5,7 +5,8 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
 	display: none;
 }
 </style>
@@ -170,7 +171,9 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Id Number :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Id Number" value="#{iclubProfileController.bean.PIdNum}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Id Number" value="#{iclubProfileController.bean.PIdNum}">
+							<f:ajax event="blur" execute=":iclubFrm:dob" listener="#{iclubProfileController.validateID}" />
+						</p:inputText>
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -221,7 +224,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar placeholder="Date Of Birth" value="#{iclubProfileController.bean.PDob}" navigator="true" yearRange="c-100:c" showOn="button" />
+						<p:calendar id="dob" placeholder="Date Of Birth" disabled="true" value="#{iclubProfileController.bean.PDob}" navigator="true" yearRange="c-100:c" showOn="button" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />

@@ -281,6 +281,15 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
+							<p:outputLabel styleClass="TexAlCenter" value="Surname :" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:inputText styleClass="TexAlCenter" placeholder="Surname" value="#{iclubFullQuoteController.driverBean.DLName}" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<div class="Container100 Responsive">
+						<div class="Container50 Responsive">
 							<p:outputLabel styleClass="TexAlCenter" value="License Number :" />
 						</div>
 						<div class="Container50 Responsive">
@@ -323,7 +332,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Current Premium :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" placeholder="Current Premium" value="#{iclubFullQuoteController.quoteBean.QPrevPremium}">
+							<p:outputLabel styleClass="TexAlCenter" value="#{iclubFullQuoteController.quoteBean.QPrevPremium}">
 								<f:convertNumber pattern="#0.00" />
 							</p:outputLabel>
 						</div>

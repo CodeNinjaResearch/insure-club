@@ -56,6 +56,7 @@ import za.co.iclub.pss.model.ui.GooglePojo;
 import za.co.iclub.pss.model.ui.OutLookUserProfileBean;
 import za.co.iclub.pss.model.ui.SocialAuthResponse;
 import za.co.iclub.pss.model.ui.YahooMailsBean;
+import za.co.iclub.pss.model.ws.IclubCohortInviteModel;
 import za.co.iclub.pss.model.ws.IclubCohortModel;
 import za.co.iclub.pss.model.ws.IclubLoginModel;
 import za.co.iclub.pss.model.ws.IclubPersonModel;
@@ -77,10 +78,13 @@ public class IclubMenuController implements Serializable {
 	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubLoginService/";
 	private static final String U_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubPersonService/";
 	private static final String CH_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortService/";
+	private static final String CI_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubCohortInviteService/";
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	private String language;
 	private boolean userMenu;
 	private boolean manageCohorts;
+	private boolean deregisterCohorts;
+	private boolean adminScreens;
 	private String selPage;
 	String preCode = "";
 	String preVerifier = "";
@@ -573,6 +577,14 @@ public class IclubMenuController implements Serializable {
 			IclubPersonModel personModel = personClient.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class);
 			personClient.close();
 			IclubWebHelper.addObjectIntoSession("cohortId", personModel.getIclubCohort());
+			if (personModel.getIclubCohort() == null && personModel.getIclubCohortInvite() != null) {
+				WebClient invteClient = IclubWebHelper.createCustomClient(CI_BASE_URL + "get/" + personModel.getIclubCohortInvite());
+				IclubCohortInviteModel cohortInviteModel = invteClient.accept(MediaType.APPLICATION_JSON).get(IclubCohortInviteModel.class);
+				invteClient.close();
+				IclubWebHelper.addObjectIntoSession("cohortId", cohortInviteModel.getIclubCohort());
+				
+			}
+			
 		}
 		
 		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.token.expires"), new Date(System.currentTimeMillis() + 55 * 60 * 1000));
@@ -697,6 +709,33 @@ public class IclubMenuController implements Serializable {
 	
 	public void setManageCohorts(boolean manageCohorts) {
 		this.manageCohorts = manageCohorts;
+	}
+	
+	public boolean isDeregisterCohorts() {
+		if (!deregisterCohorts && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null) {
+			WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString());
+			IclubPersonModel model = (IclubPersonModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubPersonModel.class));
+			client.close();
+			if (model != null && model.getIclubCohort() != null) {
+				deregisterCohorts = true;
+			}
+		}
+		return deregisterCohorts;
+	}
+	
+	public void setDeregisterCohorts(boolean deregisterCohorts) {
+		this.deregisterCohorts = deregisterCohorts;
+	}
+	
+	public boolean isAdminScreens() {
+		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.role.id")) != null && IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.role.id")).toString().equalsIgnoreCase("1")) {
+			adminScreens = true;
+		}
+		return adminScreens;
+	}
+	
+	public void setAdminScreens(boolean adminScreens) {
+		this.adminScreens = adminScreens;
 	}
 	
 }

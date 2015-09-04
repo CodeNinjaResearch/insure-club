@@ -41,6 +41,7 @@ public class IclubDriver implements java.io.Serializable {
 	private Integer DIssueYears;
 	private Integer DLastClaimDiff;
 	private Integer DLastClaimYear;
+	private String DLName;
 	private Set<IclubVehicle> iclubVehicles = new HashSet<IclubVehicle>(0);
 	
 	// Constructors
@@ -224,6 +225,15 @@ public class IclubDriver implements java.io.Serializable {
 	
 	public void setIclubVehicles(Set<IclubVehicle> iclubVehicles) {
 		this.iclubVehicles = iclubVehicles;
+	}
+	
+	@Column(name = "d_l_name")
+	public String getDLName() {
+		return DLName;
+	}
+	
+	public void setDLName(String dLName) {
+		DLName = dLName;
 	}
 	
 }

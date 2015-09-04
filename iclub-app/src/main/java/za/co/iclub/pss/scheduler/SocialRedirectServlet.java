@@ -40,8 +40,10 @@ public class SocialRedirectServlet extends HttpServlet {
 		try {
 			
 			HttpSession session = request.getSession(true);
+			System.out.println("---------loca---" + session.getAttribute("loggedin_user_id"));
 			
 			if (session != null && session.getAttribute("loggedin_user_id") != null) {
+				System.out.println("----------");
 				response.sendRedirect(request.getContextPath() + "/pages/dashboard/user/main.xhtml");
 			}
 			

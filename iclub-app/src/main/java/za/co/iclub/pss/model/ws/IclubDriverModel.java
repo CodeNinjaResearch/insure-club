@@ -26,6 +26,7 @@ public class IclubDriverModel {
 	private Long iclubAccessTypeBByDAccessStatusId;
 	private String atBLongDesc;
 	private Integer DIssueYears;
+	private String DLName;
 	
 	public String getDId() {
 		return DId;
@@ -177,6 +178,14 @@ public class IclubDriverModel {
 	
 	public void setDIssueYears(Integer dIssueYears) {
 		DIssueYears = dIssueYears;
+	}
+	
+	public String getDLName() {
+		return DLName;
+	}
+	
+	public void setDLName(String dLName) {
+		DLName = dLName;
 	}
 	
 }
