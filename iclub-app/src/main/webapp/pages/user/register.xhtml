@@ -126,7 +126,9 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Id Num :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:inputText styleClass="TexAlCenter" placeholder="Id Num" value="#{iclubQuickQuoteController.bean.PIdNum}" />
+						<p:inputText styleClass="TexAlCenter" placeholder="Id Num" value="#{iclubQuickQuoteController.bean.PIdNum}">
+							<p:ajax event="blur" update=":iclubFrm:grlMsg,:iclubFrm:dob" listener="#{iclubQuickQuoteController.validateID}" />
+						</p:inputText>
 					</div>
 				</div>
 				<div class="EmptyBox5" />
@@ -177,7 +179,7 @@
 						<p:outputLabel styleClass="TexAlCenter" value="Date Of Birth :" />
 					</div>
 					<div class="Container50 Responsive">
-						<p:calendar placeholder="Date Of Birth" disabled="true" value="#{iclubQuickQuoteController.bean.PDob}" navigator="true" yearRange="c-100:c" showOn="button" />
+						<p:calendar id="dob" placeholder="Date Of Birth" disabled="true" value="#{iclubQuickQuoteController.bean.PDob}" navigator="true" yearRange="c-100:c" showOn="button" />
 					</div>
 				</div>
 				<div class="EmptyBox5" />

@@ -30,6 +30,7 @@ import za.co.iclub.pss.trans.IclubPersonTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
 @Path("/IclubPersonService")
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPersonService {
 	protected static final Logger LOGGER = Logger.getLogger(IclubPersonService.class);
 	private IclubPersonDAO iclubPersonDAO;
@@ -110,7 +111,6 @@ public class IclubPersonService {
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T extends IclubPersonModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
 		
@@ -136,7 +136,6 @@ public class IclubPersonService {
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T extends IclubPersonModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
 		
@@ -175,7 +174,6 @@ public class IclubPersonService {
 		return model;
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@POST
 	@Path("/getMNumberList")
 	@Produces("application/json")
@@ -197,7 +195,6 @@ public class IclubPersonService {
 		return ret;
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@POST
 	@Path("/getEmailsList")
 	@Produces("application/json")

@@ -91,7 +91,7 @@ public class SocialRedirectServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		
 		state = Base64.encodeBase64URLSafeString(state.getBytes());

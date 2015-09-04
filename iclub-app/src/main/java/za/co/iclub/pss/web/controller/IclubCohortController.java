@@ -604,6 +604,8 @@ public class IclubCohortController implements Serializable {
 				} else {
 					IclubWebHelper.addMessage("CohortInvite" + " " + approveOrReject + "error :: Web Service Error - Contact Admin", FacesMessage.SEVERITY_ERROR);
 				}
+				selecteAdminCohortInviteBeans.clear();
+				
 			} else {
 				IclubWebHelper.addMessage("Select atleast on record", FacesMessage.SEVERITY_INFO);
 			}

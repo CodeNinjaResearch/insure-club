@@ -1,6 +1,7 @@
 package za.co.iclub.pss.web.controller;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +21,7 @@ import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -989,6 +991,24 @@ public class IclubQuickQuoteController implements Serializable {
 		
 		return "";
 		
+	}
+	
+	public void validateID(AjaxBehaviorEvent event) {
+		
+		String idValidate = IclubWebHelper.validateId(bean.getPIdNum(), bean.getPGender());
+		if (idValidate != null && !idValidate.trim().equalsIgnoreCase("")) {
+			
+			IclubWebHelper.addMessage(idValidate, FacesMessage.SEVERITY_ERROR);
+		} else {
+			String dateOfBirth = bean.getPIdNum().toString().substring(0, 6);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyMMdd");
+			try {
+				Date dateOfBirthD = formatter.parse(dateOfBirth);
+				bean.setPDob(dateOfBirthD);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void doIclubLogin(IclubLoginBean bean, IclubPersonBean personBean) {

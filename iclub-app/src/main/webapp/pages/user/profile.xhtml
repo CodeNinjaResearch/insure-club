@@ -172,7 +172,7 @@
 					</div>
 					<div class="Container50 Responsive">
 						<p:inputText styleClass="TexAlCenter" placeholder="Id Number" value="#{iclubProfileController.bean.PIdNum}">
-							<f:ajax event="blur" execute=":iclubFrm:dob" listener="#{iclubProfileController.validateID}" />
+							<p:ajax event="blur" update=":iclubFrm:grlMsg,:iclubFrm:dob" listener="#{iclubProfileController.validateID}" />
 						</p:inputText>
 					</div>
 				</div>

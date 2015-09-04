@@ -443,7 +443,7 @@ public class IclubProfileController implements Serializable {
 			IclubWebHelper.addMessage(idValidate, FacesMessage.SEVERITY_ERROR);
 		} else {
 			String dateOfBirth = bean.getPIdNum().toString().substring(0, 6);
-			SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyMMdd");
 			try {
 				Date dateOfBirthD = formatter.parse(dateOfBirth);
 				bean.setPDob(dateOfBirthD);
