@@ -211,7 +211,7 @@ public class IclubCohortInviteService {
 		
 		try {
 			List<Long> inviteIds = new ArrayList<Long>(2);
-			inviteIds.add(1l);
+			
 			inviteIds.add(2l);
 			List batmod = iclubNamedQueryDAO.getIclubCohortInvitesByinviteStatusIds(inviteIds, user);
 			if (batmod != null && batmod.size() > 0) {

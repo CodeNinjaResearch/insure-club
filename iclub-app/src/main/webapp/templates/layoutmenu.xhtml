@@ -50,7 +50,7 @@
 		<p:separator rendered="#{iclubMenuController.userMenu}" />
 		<p:submenu id="sm_cohorts" rendered="#{iclubMenuController.userMenu}" icon="fa fa-rocket" label="Cohorts Functions">
 			<p:menuitem id="sm_nci" value="My Cohorts" containerStyleClass="layout-menubar-active" icon="fa fa-paint-brush" action="#{iclubLoginController.newCohortInviteAction}" oncomplete="PF('newInviteDialog').show();" />
-			<p:menuitem id="sm_chrtmemb" icon="fa fa-paint-brush" value="Cohort Members" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.deregisterCohorts}" />
+			<p:menuitem id="sm_chrtmemb" icon="fa fa-paint-brush" value="Cohort Chat" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.deregisterCohorts}" />
 			<p:menuitem id="sm_nmci" value="Manage Cohorts" containerStyleClass="layout-menubar-active" outcome="manageCohorts" icon="fa fa-paint-brush" rendered="#{  iclubMenuController.manageCohorts}" />
 			<p:menuitem id="sm_ndci" value="De Register Cohort" containerStyleClass="layout-menubar-active" outcome="deRegister" icon="fa fa-paint-brush" rendered="#{  !iclubMenuController.manageCohorts &amp;&amp; iclubMenuController.deregisterCohorts}" />
 		</p:submenu>

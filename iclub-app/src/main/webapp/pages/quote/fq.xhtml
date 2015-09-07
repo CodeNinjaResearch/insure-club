@@ -407,7 +407,7 @@
 							<p:outputLabel styleClass="TexAlCenter" value="Branch :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+							<p:selectOneMenu value="#{iclubFullQuoteController.accountBean.iclubBankMaster}" widgetVar="mnuBM" id="mnuBM" styleClass="with-placeholder TexAlCenter"  >
 								<f:selectItem itemLabel="Branch" itemDisabled="true" />
 								<f:selectItems var="c" itemLabel="#{c.bmBranchName}" itemValue="#{c.bmId}" value="#{iclubFullQuoteController.bankMasterBeans}" />
 							</p:selectOneMenu>
