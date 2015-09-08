@@ -84,6 +84,7 @@ public class IclubMenuController implements Serializable {
 	private boolean userMenu;
 	private boolean manageCohorts;
 	private boolean deregisterCohorts;
+	private boolean joinCohorts;
 	private boolean adminScreens;
 	private String selPage;
 	String preCode = "";
@@ -736,6 +737,14 @@ public class IclubMenuController implements Serializable {
 	
 	public void setAdminScreens(boolean adminScreens) {
 		this.adminScreens = adminScreens;
+	}
+	
+	public boolean isJoinCohorts() {
+		return joinCohorts;
+	}
+	
+	public void setJoinCohorts(boolean joinCohorts) {
+		this.joinCohorts = joinCohorts;
 	}
 	
 }

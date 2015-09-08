@@ -20,11 +20,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.map.GeocodeEvent;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.event.map.OverlaySelectEvent;
@@ -326,6 +328,10 @@ public class IclubFullQuoteController implements Serializable {
 	private List<IclubVehicleMasterBean> vehicleMasters;
 	
 	private List<IclubInsurerMasterBean> insurerMasterBeans;
+	private boolean policyHldrProYFlag;
+	private boolean policyHldrProNFlag;
+	private boolean policyStfYFlag;
+	private boolean policyStfNFlag;
 	
 	@PostConstruct
 	public void init() {
@@ -1014,21 +1020,25 @@ public class IclubFullQuoteController implements Serializable {
 	public String registerActionListener() {
 		
 		try {
-			IclubQuoteModel quoteModel = addQuote(quoteBean, personBean);
-			IclubAccountModel accountModel = addAccount(accountBean, personBean, quoteModel);
-			IclubPolicyModel policyModel = addPolicy(policyBean, quoteModel, accountModel);
-			IclubClaimModel claimModel = addClaim(getClaimBean(), policyModel);
-			IclubFullQuoteRequest request = new IclubFullQuoteRequest();
-			request.setIclubAccountModel(accountModel);
-			request.setIclubClaimModel(claimModel);
-			request.setIclubPolicyModel(policyModel);
-			request.setIclubQuoteModel(quoteModel);
-			WebClient client = IclubWebHelper.createCustomClient(FQUT_BASE_URL + "createPolicy/");
-			IclubFullQuoteResponse response = client.accept(MediaType.APPLICATION_JSON).post(request, IclubFullQuoteResponse.class);
-			genPremium = response.getGeneratedPremium();
-			IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
-			clearForm();
-			return "pdash";
+			if (termsAndConditionFlag) {
+				IclubQuoteModel quoteModel = addQuote(quoteBean, personBean);
+				IclubAccountModel accountModel = addAccount(accountBean, personBean, quoteModel);
+				IclubPolicyModel policyModel = addPolicy(policyBean, quoteModel, accountModel);
+				IclubClaimModel claimModel = addClaim(getClaimBean(), policyModel);
+				IclubFullQuoteRequest request = new IclubFullQuoteRequest();
+				request.setIclubAccountModel(accountModel);
+				request.setIclubClaimModel(claimModel);
+				request.setIclubPolicyModel(policyModel);
+				request.setIclubQuoteModel(quoteModel);
+				WebClient client = IclubWebHelper.createCustomClient(FQUT_BASE_URL + "createPolicy/");
+				IclubFullQuoteResponse response = client.accept(MediaType.APPLICATION_JSON).post(request, IclubFullQuoteResponse.class);
+				genPremium = response.getGeneratedPremium();
+				IclubWebHelper.addMessage("Success", FacesMessage.SEVERITY_INFO);
+				clearForm();
+				return "pdash";
+			} else {
+				IclubWebHelper.addMessage("Please accept Terms & Conditions", FacesMessage.SEVERITY_ERROR);
+			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage("Load Person Fail ::" + e.getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -2301,6 +2311,54 @@ public class IclubFullQuoteController implements Serializable {
 		}
 	}
 	
+	public void termsAndConditionListnr(AjaxBehaviorEvent event) {
+		
+		if (event.getComponent() != null) {
+			
+			String id = event.getComponent().getId();
+			if (id != null && id.contains("yesHld") && policyHldrProYFlag) {
+				policyHldrProNFlag = !policyHldrProYFlag;
+			}
+			if (id != null && id.contains("noHld") && policyHldrProNFlag) {
+				policyHldrProYFlag = !policyHldrProNFlag;
+			}
+			if (id != null && id.contains("yesTerm") && policyStfYFlag) {
+				policyStfNFlag = !policyStfYFlag;
+			}
+			if (id != null && id.contains("noTerm") && policyStfNFlag) {
+				policyStfYFlag = !policyStfYFlag;
+			}
+		}
+		updateTermsFinalFlag();
+	}
+	
+	public void updateTermsFinalFlag() {
+		if ((policyStfYFlag || policyStfNFlag) && (policyHldrProNFlag || policyHldrProYFlag)) {
+			termsAndConditionFlag = true;
+		} else {
+			termsAndConditionFlag = false;
+		}
+	}
+	
+	public void closeWindowValidation() {
+		boolean flag = true;
+		RequestContext.getCurrentInstance().addCallbackParam("saved", false);
+		if (!policyHldrProYFlag && !policyHldrProNFlag) {
+			IclubWebHelper.addMessage("Please a Policy Holder Portection Rules", FacesMessage.SEVERITY_ERROR);
+			flag = false;
+		}
+		
+		if (!policyStfYFlag && !policyStfNFlag) {
+			IclubWebHelper.addMessage("Please select Insurance Needs", FacesMessage.SEVERITY_ERROR);
+			flag = false;
+		}
+		
+		if (flag) {
+			RequestContext.getCurrentInstance().addCallbackParam("saved", true);
+		}
+		updateTermsFinalFlag();
+	}
+	
 	public Double getGenPremium() {
 		if (genPremium == null) {
 			genPremium = 0d;
@@ -2588,5 +2646,37 @@ public class IclubFullQuoteController implements Serializable {
 	
 	public void setInsurerMasterBeans(List<IclubInsurerMasterBean> insurerMasterBean) {
 		this.insurerMasterBeans = insurerMasterBean;
+	}
+	
+	public boolean isPolicyHldrProYFlag() {
+		return policyHldrProYFlag;
+	}
+	
+	public void setPolicyHldrProYFlag(boolean policyHldrProYFlag) {
+		this.policyHldrProYFlag = policyHldrProYFlag;
+	}
+	
+	public boolean isPolicyHldrProNFlag() {
+		return policyHldrProNFlag;
+	}
+	
+	public void setPolicyHldrProNFlag(boolean policyHldrProNFlag) {
+		this.policyHldrProNFlag = policyHldrProNFlag;
+	}
+	
+	public boolean isPolicyStfYFlag() {
+		return policyStfYFlag;
+	}
+	
+	public void setPolicyStfYFlag(boolean policyStfYFlag) {
+		this.policyStfYFlag = policyStfYFlag;
+	}
+	
+	public boolean isPolicyStfNFlag() {
+		return policyStfNFlag;
+	}
+	
+	public void setPolicyStfNFlag(boolean policyStfNFlag) {
+		this.policyStfNFlag = policyStfNFlag;
 	}
 }

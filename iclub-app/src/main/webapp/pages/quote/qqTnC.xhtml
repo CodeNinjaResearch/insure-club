@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout#{themeView.theme}.xhtml">
+	<ui:define name="head">
+		<style type="text/css">
+.ui-selectonemenu.with-placeholder .ui-selectonemenu-label {
+	color: #ccc;
+}
+
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
+	{
+	display: none;
+}
+</style>
+	</ui:define>
+	<ui:define name="content">
+		<div class="ContainerIndent Fnone TexAlCenter">
+			<p:panel>
+				<f:facet name="header">
+		                    Terms &amp; Conditions
+		              </f:facet>
+				<div class="EmptyBox5" />
+				<div class="Container100 Responsive">
+					<div class="Container90 Responsive TexAlLeft">Thank you for your time so far. Before we issue your policy, we would like to inform you of some mandatory legislative disclosers. By moving forward to conclude the sale of the policy, you accept the disclosures and terms and conditions.</div>
+					<div class="EmptyBox5" />
+					<div class="Container90 Responsive TexAlLeft">This proposal will be sent to the insurer for consideration. In the event that we require more information, we may contact you. The insurer reserves the right to reject the proposal outright</div>
+					<div class="EmptyBox5" />
+					<div class="Container90 Responsive TexAlLeft">Insurance Club is an authorised financial services provider in terms of the FAIS Act:</div>
+					<div class="EmptyBox5" />
+					<div class="Container90 Responsive ">
+						<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+						<div class="Container85 Responsive TexAlLeft">We hold professional indemnity cover and have written mandates to act on behalf of the underwriter.</div>
+						<div class="EmptyBox5" />
+						<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+						<div class="Container85 Responsive TexAlLeft">We support the ombudsman for insurance services and the FAIS ombud, and also subscribe to the Code of Banking Practice.</div>
+						<div class="EmptyBox5" />
+						<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+						<div class="Container85 Responsive TexAlLeft">We have included in your policy documents the details of our and the insurer’s compliance officer, Short Term Insurance Ombudsman and FAIS ombud, should you be dissatisfied with the handling of a claim or the service provided.</div>
+						<div class="EmptyBox5" />
+						<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+						<div class="Container85 Responsive TexAlLeft">Your policy includes political and non-political riot and strike cover, provided for by the SASRIA (South African Special Risk Insurance Association). Their details are included in the policy documents.</div>
+						<div class="EmptyBox5" />
+					</div>
+				</div>
+				<p:panel id="plcyHldrPnl">
+					<div class="Container100 Responsive TexAlLeft">
+						<div class="Container50 Responsive">I understand the disclosures made in terms of the FAIS General Code of Conduct and Policyholder Protection Rules:</div>
+						<div class="Container50 Responsive">
+							<div class="Container10 Responsive">Yes</div>
+							<div class="Container10 Responsive">
+								<p:selectBooleanCheckbox id="yesHld" value="#{iclubQuickQuoteController.policyHldrProYFlag}">
+									<p:ajax update="iclubFrm:noHld" listener="#{iclubQuickQuoteController.termsAndConditionListnr}" />
+								</p:selectBooleanCheckbox>
+							</div>
+							<div class="Container10 Responsive">No</div>
+							<div class="Container10 Responsive">
+								<p:selectBooleanCheckbox id="noHld" value="#{iclubQuickQuoteController.policyHldrProNFlag}">
+									<p:ajax update="iclubFrm:yesHld" listener="#{iclubQuickQuoteController.termsAndConditionListnr}" />
+								</p:selectBooleanCheckbox>
+							</div>
+						</div>
+					</div>
+					<div class=" EmptyBox5" />
+				</p:panel>
+				<p:panel>
+					<div class="Container100 Responsive">
+						<div class="Container90 Responsive TexAlLeft">Your cover is valid for the period in which your premiums have been paid. In the event of a claim, all incidents must be reported to the police within 24 hours:</div>
+						<div class="Container90 Responsive ">
+							<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+							<div class="Container85 Responsive TexAlLeft">and your claim lodged at your own expense with your insurer within 30 days.</div>
+							<div class="EmptyBox5" />
+							<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+							<div class="Container85 Responsive TexAlLeft">Should you wish to cancel your policy, please provide us with 30 days’ notice of your intention to do so.</div>
+							<div class="EmptyBox5" />
+							<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+							<div class="Container85 Responsive TexAlLeft">If Insurance Club makes any amendments to your policy in respect of the premiums, terms and conditions, special conditions and intention to cancel your policy, we will provide you with 30 days’ notice at your last known address.</div>
+							<div class="EmptyBox5" />
+							<div class="Container5 Responsive TexAlCenter">&#8226;</div>
+							<div class="Container85 Responsive TexAlLeft">Your policy schedule, statutory notice and obligatory disclosures (policy wording) will be sent to you within 21 days. Please contact us if you do not receive these as they outline important terms and conditions that are applied to the policy.</div>
+							<div class="EmptyBox5" />
+							<div class="Container85 Responsive TexAlLeft">We also urge you to contact us if you do not understand the terms and conditions, as these are applied to the policy during its duration and at claim stage. Failure to follow these conditions will result in a claim being rejected.</div>
+							<div class="EmptyBox5" />
+							<div class="Container85 Responsive TexAlLeft">Please speak to an online consultant during office hours. Please have your ID number and policy number available.</div>
+							<div class="EmptyBox5" />
+							<div class="Container85 Responsive TexAlLeft">If any of the information supplied in this application changes, please advise us immediately, as it may be material to the premium charged and your cover under this policy. Any change in details may affect the validity and outcome of a claim.</div>
+							<div class="EmptyBox5" />
+						</div>
+					</div>
+					<div class="EmptyBox5" />
+					<p:panel>
+						<div class="Container100 Responsive TexAlLeft">
+							<div class="Container50 Responsive">I am comfortable that I understand the insurance policy and that it satisfies my insurance needs:</div>
+							<div class="Container50 Responsive">
+								<div class="Container10 Responsive">Yes</div>
+								<div class="Container10 Responsive">
+									<p:selectBooleanCheckbox id="yesTerm" value="#{iclubQuickQuoteController.policyStfYFlag}">
+										<p:ajax update="iclubFrm:noTerm" listener="#{iclubQuickQuoteController.termsAndConditionListnr}" />
+									</p:selectBooleanCheckbox>
+								</div>
+								<div class="Container10 Responsive">No</div>
+								<div class="Container10 Responsive">
+									<p:selectBooleanCheckbox id="noTerm" value="#{iclubQuickQuoteController.policyStfNFlag}">
+										<p:ajax update="iclubFrm:yesTerm" listener="#{iclubQuickQuoteController.termsAndConditionListnr}" />
+									</p:selectBooleanCheckbox>
+								</div>
+							</div>
+						</div>
+						<div class=" EmptyBox5" />
+					</p:panel>
+				</p:panel>
+				<div class="Container100 Responsive TexAlCenter">
+					<p:commandButton value="Close" update="iclubFrm:grlMsg" id="tnc" actionListener="#{iclubQuickQuoteController.closeWindowValidation}" oncomplete="closeWindow(xhr, status, args);" />
+				</div>
+			</p:panel>
+		</div>
+	</ui:define>
+</ui:composition>

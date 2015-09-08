@@ -61,13 +61,10 @@
 					</div>
 				</div>
 				<div class="Container100 Responsive">
-					<p:selectBooleanCheckbox value="#{iclubFullQuoteController.termsAndConditionFlag}">
-						<p:ajax update=":iclubFrm:pnlViewVehCont"></p:ajax>
-					</p:selectBooleanCheckbox>
-					I Agree With Terms &amp; Conditions
+					<p:commandLink value="I Agree With Terms &amp; Conditions" id="tnc" onclick="openWindow();" />
 				</div>
 				<div class="Container100 Responsive">
-					<p:commandButton value="Accept" disabled="#{!iclubFullQuoteController.termsAndConditionFlag}" styleClass="Fs16" action="#{iclubFullQuoteController.registerActionListener}" ajax="false" />
+					<p:commandButton value="Accept" update=":iclubFrm:grlMsg" styleClass="Fs16" action="#{iclubFullQuoteController.registerActionListener}" ajax="false" />
 				</div>
 			</p:panel>
 		</div>

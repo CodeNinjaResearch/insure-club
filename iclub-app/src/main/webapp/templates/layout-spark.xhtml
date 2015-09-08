@@ -12,31 +12,60 @@
 	<script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
 	<script type="text/javascript">
 		function geocodePer() {
-			PF('geoMapPer').geocode(document.getElementById('perAddress').value);
+			PF('geoMapPer')
+					.geocode(document.getElementById('perAddress').value);
 		}
 		function geocodePro() {
-			PF('geoMapPro').geocode(document.getElementById('proAddress').value);
+			PF('geoMapPro')
+					.geocode(document.getElementById('proAddress').value);
 		}
 		function geocodeVeh() {
-			PF('geoMapVeh').geocode(document.getElementById('vehAddress').value);
+			PF('geoMapVeh')
+					.geocode(document.getElementById('vehAddress').value);
 		}
 		function geocodeVehDd() {
-			PF('geoMapVehDd').geocode(document.getElementById('vehDdAddress').value);
+			PF('geoMapVehDd').geocode(
+					document.getElementById('vehDdAddress').value);
 		}
-		 
 	</script>
 	<script type="text/javascript">
-    function hideDialog(xhr, status, args) {
-        if(args.saved){ 
-        	$("#addRateEngineDailog").hide(); 
-        	$("#addRateEngineDailog_modal").hide(); 
-        	$("#addRateEngineRangeDailog").hide()
-        	$("#addRateEngineRangeDailog_modal").hide(); 
-        	$("#addRateEngineRangeDailog").hide()
-        	$("#addRateEngineRangeDailog_modal").hide(); 
-        	 }
-    }
-</script>
+		function closeWindow(xhr, status, args) {
+			if (args.saved) {
+
+				window.close();
+			}
+		}
+
+		function openWindow() {
+
+			window
+					.open(
+							"../../pages/quote/fqTnC.xhtml",
+							"_blank",
+							"toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400",
+							true);
+		}
+		function openqqWindow() {
+
+			window
+					.open(
+							"../../pages/quote/qqTnC.xhtml",
+							"_blank",
+							"toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400",
+							true);
+		}
+
+		function hideDialog(xhr, status, args) {
+			if (args.saved) {
+				$("#addRateEngineDailog").hide();
+				$("#addRateEngineDailog_modal").hide();
+				$("#addRateEngineRangeDailog").hide()
+				$("#addRateEngineRangeDailog_modal").hide();
+				$("#addRateEngineRangeDailog").hide()
+				$("#addRateEngineRangeDailog_modal").hide();
+			}
+		}
+	</script>
 	<h:outputText value="&lt;!--[if gte IE 9]&gt;" escape="false" />
 	<style type="text/css">
 .ui-tabs-top .ui-tabs-nav li, .ui-tabs .ui-tabs-nav li {

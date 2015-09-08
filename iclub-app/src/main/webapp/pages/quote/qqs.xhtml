@@ -64,14 +64,11 @@
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
-					<p:selectBooleanCheckbox value="#{iclubQuickQuoteController.termsAndConditionFlag}">
-						<p:ajax update=":iclubFrm:pnlViewVehCont"></p:ajax>
-					</p:selectBooleanCheckbox>
-					I Agree With Terms &amp; Conditions
+					<p:commandLink value="I Agree With Terms &amp; Conditions" id="tnc" onclick="openqqWindow();" />
 				</div>
 				<div class="EmptyBox5" />
 				<div class="Container100 Responsive">
-					<p:commandButton value="Register" disabled="#{!iclubQuickQuoteController.termsAndConditionFlag}" styleClass="Fs16" action="#{iclubQuickQuoteController.registerActionListener}" ajax="false" />
+					<p:commandButton value="Register" update=":iclubFrm:grlMsg" styleClass="Fs16" action="#{iclubQuickQuoteController.registerActionListener}" ajax="false" />
 				</div>
 			</p:panel>
 		</div>

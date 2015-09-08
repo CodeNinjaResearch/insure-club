@@ -29,6 +29,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.map.GeocodeEvent;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.event.map.OverlaySelectEvent;
@@ -249,6 +250,10 @@ public class IclubQuickQuoteController implements Serializable {
 	private IclubQuoteBean quoteBean;
 	private List<IclubVehicleMasterBean> vehicleMasters;
 	private List<IclubInsurerMasterBean> insurerMasterBeans;
+	private boolean policyHldrProYFlag;
+	private boolean policyHldrProNFlag;
+	private boolean policyStfYFlag;
+	private boolean policyStfNFlag;
 	
 	@PostConstruct
 	public void init() {
@@ -860,49 +865,53 @@ public class IclubQuickQuoteController implements Serializable {
 	public String registerActionListener() {
 		
 		try {
-			WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/" + quoteId);
-			
-			IclubQuoteModel model = (IclubQuoteModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubQuoteModel.class));
-			
-			{
-				loadPersonBean(model.getIclubPersonBByQPersonId());
-				if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null || IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
-					clearForm();
-					clearVehForm();
-					clearProForm();
-					return "register";
-				} else {
-					client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/" + quoteId);
-					
-					IclubQuoteModel quoteModel = (IclubQuoteModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubQuoteModel.class));
-					client.close();
-					if (quoteModel != null) {
+			if (termsAndConditionFlag) {
+				WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/" + quoteId);
+				
+				IclubQuoteModel model = (IclubQuoteModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubQuoteModel.class));
+				
+				{
+					loadPersonBean(model.getIclubPersonBByQPersonId());
+					if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) == null || IclubWebHelper.getObjectIntoSession("googlelogin") != null) {
+						clearForm();
+						clearVehForm();
+						clearProForm();
+						return "register";
+					} else {
+						client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/" + quoteId);
 						
-						quoteModel.setQGenPremium(genPremium);
-						quoteModel.setIclubPersonAByQCrtdBy(getSessionUserId());
-						quoteModel.setIclubPersonBByQPersonId(getSessionUserId());
-						client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "mod");
-						ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(quoteModel, ResponseModel.class);
+						IclubQuoteModel quoteModel = (IclubQuoteModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubQuoteModel.class));
 						client.close();
-						if (response != null && response.getStatusCode() == 0) {
+						if (quoteModel != null) {
 							
-							client = IclubWebHelper.createCustomClient(II_BASE_URL + "getByQuoteIdAndItemTypeId/" + quoteId + "/" + 1l);
-							
-							IclubInsuranceItemModel insurancemodel = (IclubInsuranceItemModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubInsuranceItemModel.class));
+							quoteModel.setQGenPremium(genPremium);
+							quoteModel.setIclubPersonAByQCrtdBy(getSessionUserId());
+							quoteModel.setIclubPersonBByQPersonId(getSessionUserId());
+							client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "mod");
+							ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(quoteModel, ResponseModel.class);
 							client.close();
-							if (insurancemodel != null) {
-								insurancemodel.setIclubPerson(getSessionUserId());
-								client = IclubWebHelper.createCustomClient(II_BASE_URL + "mod");
-								response = client.accept(MediaType.APPLICATION_JSON).put(insurancemodel, ResponseModel.class);
+							if (response != null && response.getStatusCode() == 0) {
+								
+								client = IclubWebHelper.createCustomClient(II_BASE_URL + "getByQuoteIdAndItemTypeId/" + quoteId + "/" + 1l);
+								
+								IclubInsuranceItemModel insurancemodel = (IclubInsuranceItemModel) (client.accept(MediaType.APPLICATION_JSON).get(IclubInsuranceItemModel.class));
 								client.close();
+								if (insurancemodel != null) {
+									insurancemodel.setIclubPerson(getSessionUserId());
+									client = IclubWebHelper.createCustomClient(II_BASE_URL + "mod");
+									response = client.accept(MediaType.APPLICATION_JSON).put(insurancemodel, ResponseModel.class);
+									client.close();
+								}
+								
 							}
-							
 						}
+						
+						clearForm();
+						return "vq";
 					}
-					
-					clearForm();
-					return "vq";
 				}
+			} else {
+				IclubWebHelper.addMessage("Please accept Terms & Conditions", FacesMessage.SEVERITY_ERROR);
 			}
 			
 		} catch (Exception e) {
@@ -2353,6 +2362,54 @@ public class IclubQuickQuoteController implements Serializable {
 		this.pPropUsageTypeBeans = pPropUsageTypeBeans;
 	}
 	
+	public void termsAndConditionListnr(AjaxBehaviorEvent event) {
+		
+		if (event.getComponent() != null) {
+			
+			String id = event.getComponent().getId();
+			if (id != null && id.contains("yesHld") && policyHldrProYFlag) {
+				policyHldrProNFlag = !policyHldrProYFlag;
+			}
+			if (id != null && id.contains("noHld") && policyHldrProNFlag) {
+				policyHldrProYFlag = !policyHldrProNFlag;
+			}
+			if (id != null && id.contains("yesTerm") && policyStfYFlag) {
+				policyStfNFlag = !policyStfYFlag;
+			}
+			if (id != null && id.contains("noTerm") && policyStfNFlag) {
+				policyStfYFlag = !policyStfYFlag;
+			}
+		}
+		updateTermsFinalFlag();
+	}
+	
+	public void updateTermsFinalFlag() {
+		if ((policyStfYFlag || policyStfNFlag) && (policyHldrProNFlag || policyHldrProYFlag)) {
+			termsAndConditionFlag = true;
+		} else {
+			termsAndConditionFlag = false;
+		}
+	}
+	
+	public void closeWindowValidation() {
+		boolean flag = true;
+		RequestContext.getCurrentInstance().addCallbackParam("saved", false);
+		if (!policyHldrProYFlag && !policyHldrProNFlag) {
+			IclubWebHelper.addMessage("Please a Policy Holder Portection Rules", FacesMessage.SEVERITY_ERROR);
+			flag = false;
+		}
+		
+		if (!policyStfYFlag && !policyStfNFlag) {
+			IclubWebHelper.addMessage("Please select Insurance Needs", FacesMessage.SEVERITY_ERROR);
+			flag = false;
+		}
+		
+		if (flag) {
+			RequestContext.getCurrentInstance().addCallbackParam("saved", true);
+		}
+		updateTermsFinalFlag();
+	}
+	
 	public List<IclubCoverTypeBean> getCoverTypeBeans() {
 		
 		WebClient client = IclubWebHelper.createCustomClient(CT_BASE_URL + "list");
@@ -2540,6 +2597,38 @@ public class IclubQuickQuoteController implements Serializable {
 	
 	public void setInsurerMasterBeans(List<IclubInsurerMasterBean> insurerMasterBean) {
 		this.insurerMasterBeans = insurerMasterBean;
+	}
+	
+	public boolean isPolicyHldrProYFlag() {
+		return policyHldrProYFlag;
+	}
+	
+	public void setPolicyHldrProYFlag(boolean policyHldrProYFlag) {
+		this.policyHldrProYFlag = policyHldrProYFlag;
+	}
+	
+	public boolean isPolicyHldrProNFlag() {
+		return policyHldrProNFlag;
+	}
+	
+	public void setPolicyHldrProNFlag(boolean policyHldrProNFlag) {
+		this.policyHldrProNFlag = policyHldrProNFlag;
+	}
+	
+	public boolean isPolicyStfYFlag() {
+		return policyStfYFlag;
+	}
+	
+	public void setPolicyStfYFlag(boolean policyStfYFlag) {
+		this.policyStfYFlag = policyStfYFlag;
+	}
+	
+	public boolean isPolicyStfNFlag() {
+		return policyStfNFlag;
+	}
+	
+	public void setPolicyStfNFlag(boolean policyStfNFlag) {
+		this.policyStfNFlag = policyStfNFlag;
 	}
 	
 }
