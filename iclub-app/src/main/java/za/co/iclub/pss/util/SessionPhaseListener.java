@@ -31,8 +31,8 @@ public class SessionPhaseListener implements PhaseListener {
 		String socilalogin = (String) IclubWebHelper.getObjectIntoSession("sociallogin");
 		if (!bypassAuth && context.getViewRoot() != null) {
 			String viewId = context.getViewRoot().getViewId();
-			LOGGER.info("-------ViewId---" + context.getViewRoot().getViewId());
-			if (!context.getViewRoot().getViewId().toLowerCase().contains("login")) {
+			LOGGER.info("-------ViewId---" + viewId);
+			if (!viewId.toLowerCase().contains("login")) {
 				if (userSessionId == null && socilalogin == null) {
 					context.getExternalContext().invalidateSession();
 					context.getApplication().getNavigationHandler().handleNavigation(context, null, "/templates/login.xhtml?faces-redirect=true");
