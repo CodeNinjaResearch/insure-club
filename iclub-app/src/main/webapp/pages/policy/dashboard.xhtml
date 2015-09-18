@@ -1,5 +1,49 @@
 <ui:composition template="/templates/layout#{themeView.theme}.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<p:dialog id="documentUploadDialog" widgetVar="documentUploadDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">#{labels['documentmanagement']}</f:facet>
+			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubPolicyController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubPolicyController.docs.size() > 0}">
+				<p:panel style="text-align:center" header="#{bean.DName}">
+					<f:facet name="actions">
+						<p:commandButton ajax="false" actionListener="#{iclubPolicyController.downloadDocument(bean.DId)}" icon="ui-icon-arrowthick-1-s">
+							<p:fileDownload value="#{iclubPolicyController.file}" />
+						</p:commandButton>
+						<p:commandButton update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" actionListener="#{iclubPolicyController.deleteDocument(bean.DId)}" icon="ui-icon-circle-close" />
+					</f:facet>
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentid']}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documenttype']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DContent}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentsizeinbytes']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DSize}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentcreatedDate']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DCrtdDt}" />
+						</p:column>
+					</p:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+			<p:panel id="documentUploadPanel">
+				<div class="Fnone TexAlCenter">
+					<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" fileUploadListener="#{iclubPolicyController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(pdf|doc|docx|xls|xlsx|jpe?g)$/" value="#{labels['container.selectdocument']}" />
+				</div>
+			</p:panel>
+		</p:dialog>
 		<p:dialog id="proLocationDetailsDialog" widgetVar="proLocationDetailsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 			<f:facet name="header">Location Details</f:facet>
 			<p:panel>
@@ -326,7 +370,12 @@
 					</p:tabView>
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
-						<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubPolicyController.claimAction}" ajax="false" />
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnPlcPViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubPolicyController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubPolicyController.claimAction}" ajax="false" />
+						</div>
 					</div>
 				</div>
 			</p:panel>
@@ -590,77 +639,15 @@
 							</div>
 							<div class="EmptyBox5" />
 						</p:tab>
-						<p:tab rendered="false" id="qqSubVehOthDetMod" title="Others">
-							<div class="Container100 Responsive">
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Unique Id :" />
-								</div>
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VId}" />
-								</div>
-							</div>
-							<div class="EmptyBox5" />
-							<div class="Container100 Responsive">
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Created By :" />
-								</div>
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.iclubPerson}" />
-								</div>
-							</div>
-							<div class="EmptyBox5" />
-							<div class="Container100 Responsive">
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Created Date :" />
-								</div>
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="#{iclubPolicyController.vehicleBean.VCrtdDt}" />
-								</div>
-							</div>
-							<div class="EmptyBox5" />
-							<div class="Container100 Responsive">
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Owner :" />
-								</div>
-								<div class="Container50 Responsive">
-									<p:outputLabel value="#{iclubPolicyController.vehicleBean.VOwner}" styleClass="TexAlCenter" />
-								</div>
-							</div>
-							<div class="EmptyBox5" />
-							<div class="Container100 Responsive">
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Concession Reason :" />
-								</div>
-								<div class="Container50 Responsive">
-									<p:outputLabel value="#{iclubPolicyController.vehicleBean.VConcessReason}" styleClass="TexAlCenter" />
-								</div>
-							</div>
-							<div class="EmptyBox5" />
-							<div class="Container100 Responsive">
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Concession Percentage :" />
-								</div>
-								<div class="Container50 Responsive">
-									<p:outputLabel value="#{iclubPolicyController.vehicleBean.VConcessPrct}" styleClass="TexAlCenter" />
-								</div>
-							</div>
-							<div class="EmptyBox5" />
-							<div class="Container100 Responsive">
-								<div class="Container50 Responsive">
-									<p:outputLabel styleClass="TexAlCenter" value="Insured Value :" />
-								</div>
-								<div class="Container50 Responsive">
-									<p:outputLabel value="#{iclubPolicyController.vehicleBean.VInsuredValue}" styleClass="TexAlCenter">
-										<f:convertNumber pattern="#0.00" />
-									</p:outputLabel>
-								</div>
-							</div>
-							<div class="EmptyBox5" />
-						</p:tab>
 					</p:tabView>
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
-						<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubPolicyController.claimAction}" ajax="false" />
+						<div class="Container50 Responsive">
+							<p:commandButton id="btnPlcVViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubPolicyController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
+						</div>
+						<div class="Container50 Responsive">
+							<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubPolicyController.claimAction}" ajax="false" />
+						</div>
 					</div>
 				</div>
 			</p:panel>

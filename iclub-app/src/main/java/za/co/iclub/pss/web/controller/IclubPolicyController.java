@@ -394,6 +394,7 @@ public class IclubPolicyController implements Serializable {
 		
 		List<IclubInsuranceItemModel> models = (ArrayList<IclubInsuranceItemModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemModel.class));
 		iItemBeans = new ArrayList<IclubInsuranceItemBean>();
+		bean = policyBean;
 		IclubWebHelper.addObjectIntoSession("policyBean", policyBean);
 		for (IclubInsuranceItemModel model : models) {
 			IclubInsuranceItemBean bean = IclubInsuranceItemTrans.fromWStoUI(model);
@@ -576,7 +577,7 @@ public class IclubPolicyController implements Serializable {
 	
 	public void handleFileUpload(FileUploadEvent fue) {
 		String docId = UUID.randomUUID().toString();
-		getDocIds().add(docId);
+		// getDocIds().add(docId);
 		try {
 			IclubDocumentModel model = new IclubDocumentModel();
 			model.setIclubPerson(getSessionUserId());
@@ -585,7 +586,8 @@ public class IclubPolicyController implements Serializable {
 			model.setDName(fue.getFile().getFileName());
 			model.setDContent(fue.getFile().getContentType());
 			model.setDSize(fue.getFile().getSize());
-			
+			model.setDEntityId(bean.getPId().toString());
+			model.setIclubEntityType(1l);
 			WebClient client = IclubWebHelper.createCustomClient(D_BASE_URL + "add");
 			ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 			client.close();
