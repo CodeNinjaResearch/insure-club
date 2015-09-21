@@ -391,7 +391,8 @@ public class IclubPolicyController implements Serializable {
 	@SuppressWarnings("unchecked")
 	public String policyListener(IclubPolicyBean policyBean) {
 		WebClient client = IclubWebHelper.createCustomClient(II_BASE_URL + "get/quoteId/" + policyBean.getIclubQuote());
-		
+		propertyFlag = false;
+		vehhicleFlag = false;
 		List<IclubInsuranceItemModel> models = (ArrayList<IclubInsuranceItemModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemModel.class));
 		iItemBeans = new ArrayList<IclubInsuranceItemBean>();
 		bean = policyBean;

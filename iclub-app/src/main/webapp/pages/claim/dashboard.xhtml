@@ -12,6 +12,50 @@
 </style>
 	</ui:define>
 	<ui:define name="content">
+		<p:dialog id="documentUploadDialog" widgetVar="documentUploadDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<f:facet name="header">#{labels['documentmanagement']}</f:facet>
+			<p:dataGrid id="uploadedFiles" var="bean" value="#{iclubClaimController.docs}" columns="3" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" rendered="#{iclubClaimController.docs.size() > 0}">
+				<p:panel style="text-align:center" header="#{bean.DName}">
+					<f:facet name="actions">
+						<p:commandButton ajax="false" actionListener="#{iclubClaimController.downloadDocument(bean.DId)}" icon="ui-icon-arrowthick-1-s">
+							<p:fileDownload value="#{iclubClaimController.file}" />
+						</p:commandButton>
+						<p:commandButton rendered="false" update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" actionListener="#{iclubClaimController.deleteDocument(bean.DId)}" icon="ui-icon-circle-close" />
+					</f:facet>
+					<p:panelGrid columns="2">
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentid']}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DId}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documenttype']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DContent}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentsizeinbytes']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DSize}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{labels['container.documentcreatedDate']} :" />
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{bean.DCrtdDt}" />
+						</p:column>
+					</p:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+			<p:panel id="documentUploadPanel">
+				<div class="Fnone TexAlCenter">
+					<p:fileUpload update=":iclubFrm:grlMsg, :iclubFrm:documentUploadDialog" fileUploadListener="#{iclubClaimController.handleFileUpload}" sizeLimit="30000000" fileLimit="3" allowTypes="/(\.|\/)(pdf|doc|docx|xls|xlsx|jpe?g)$/" value="#{labels['container.selectdocument']}" />
+				</div>
+			</p:panel>
+		</p:dialog>
 		<div class="ContainerIndent Fnone TexAlCenter">
 			<p:panel id="pnlClaimCont">
 				<f:facet name="header">
@@ -106,429 +150,498 @@
 				<p:panel id="temp1" rendered="#{iclubClaimController.propertyFlag}">
 					<f:facet name="header">
 						<div class="Container100 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Property Details"></p:outputLabel>
+							<p:outputLabel styleClass="TexAlCenter" value="Property Details" />
 						</div>
 					</f:facet>
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Location :" />
-							</div>
-							<div class="Container50 Responsive"></div>
-						</div>
+						<p:tabView id="qqSubProDetViewMod">
+							<p:tab id="qqSubProLocDetMod" title="Location Details">
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Location :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:commandButton disabled="true"  icon="ui-icon-document" value="Location Details"   />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Address :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:inputText disabled="true" placeholder="Address" value="#{iclubClaimController.propertyBean.PAddress}" styleClass="TexAlCenter" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+							</p:tab>
+							<p:tab id="qqSubProConstDetMod" title="Constuction Details">
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Thatch Type :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.PThatchType}" widgetVar="mnuModThat" id="mnuModThat" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Thatch Type" itemDisabled="true" />
+											<f:selectItem itemLabel="Yes" itemValue="Y" />
+											<f:selectItem itemLabel="No" itemValue="N" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Type of Roof :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.iclubRoofType}" widgetVar="mnuModRoofT" id="mnuModRoofT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Type of Roof" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.roofTypeBeans}" var="c" itemValue="#{c.rtId}" itemLabel="#{c.rtLongDesc}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Type of Walls :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.iclubWallType}" widgetVar="mnuModWT" id="mnuModWT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Type of Walls" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.wallTypeBeans}" var="c" itemValue="#{c.wtId}" itemLabel="#{c.wtLongDesc}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Occupied Status :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuModOCS" id="mnuModOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Ocupied Status" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.occupiedStatusBeans}" var="c" itemValue="#{c.osId}" itemLabel="#{c.osLongDesc}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel rendered="false" styleClass="TexAlCenter" value="Estimatted Value :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:outputLabel value="#{iclubClaimController.propertyBean.PEstValue}" styleClass="TexAlCenter" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Bar Type :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.iclubBarType}" widgetVar="mnuModBarT" id="mnuModBarT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Bar Type" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.barTypeBeans}" var="c" itemValue="#{c.btId}" itemLabel="#{c.btLongDesc}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:outputLabel value="#{iclubClaimController.propertyBean.PRegNum}" styleClass="TexAlCenter" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Whatt is the property used for :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.iclubPropUsageType}" widgetVar="mnuModPurTyp" id="mnuModPurTyp" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Whatt is the property used for" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.pPropUsageTypeBeans}" var="c" itemValue="#{c.putId}" itemLabel="#{c.putLongDesc}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Claim Free years :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.PNoclaimYrs}" widgetVar="mnuClmYrsMod" id="mnuClmYrsMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Claim Free years" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.noClaimYrs}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Is it Rent Furnished :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.PRentFurYn}" widgetVar="mnuRentMod" id="mnuRentMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Is it Rent Furnished" itemDisabled="true" />
+											<f:selectItem itemLabel="Yes" itemValue="Y" />
+											<f:selectItem itemLabel="No" itemValue="N" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Is it Compleed :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.PCompYn}" widgetVar="mnuComptMod" id="mnuComptMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Is it Compleed" itemDisabled="true" />
+											<f:selectItem itemLabel="Yes" itemValue="Y" />
+											<f:selectItem itemLabel="No" itemValue="N" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Robbery Free Years :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.PNorobberyYn}" widgetVar="mnuRonFrMod" id="mnuRonFrMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Robbery Free Years" itemDisabled="true" />
+											<f:selectItem itemLabel="Yes" itemValue="Y" />
+											<f:selectItem itemLabel="No" itemValue="N" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Is the premises secured with gates :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.PSecGatesYn}" widgetVar="mnuGateMod" id="mnuGateMod" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Is the premises secured with gates" itemDisabled="true" />
+											<f:selectItem itemLabel="Yes" itemValue="Y" />
+											<f:selectItem itemLabel="No" itemValue="N" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+							</p:tab>
+							<p:tab id="insuranceTab" title="Contents and Building">
+								<p:panel id="pnlPropertyItemCont">
+									<p:dataTable reflow="true" widgetVar="dtPropertyItemCont" value="#{iclubClaimController.propertyItemBeans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No PropertyItem Available">
+										<p:column headerText="Registration Number">
+											<p:outputLabel styleClass="TexAlCenter" value="#{bean.piDescripton}" />
+										</p:column>
+										<p:column headerText="Estimatted Value">
+											<p:outputLabel styleClass="TexAlCenter" value="#{bean.piValue}" />
+										</p:column>
+									</p:dataTable>
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Building Replacement Cost :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:inputText disabled="true" placeholder="Building Replacement Cost" value="#{iclubClaimController.propertyBean.PReplacementCost}" styleClass="TexAlCenter" />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Content Value Replacement Cost :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:outputLabel value="#{iclubClaimController.propertyBean.PContentCost}" styleClass="TexAlCenter">
+												<f:convertNumber pattern="#0.00" />
+											</p:outputLabel>
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+								</p:panel>
+							</p:tab>
+						</p:tabView>
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Cover Type :" />
+								<p:commandButton id="btnPlcPViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubClaimController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.iclubCoverType}" />
+								<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubClaimController.claimAction}" ajax="false" />
 							</div>
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="What is the property used for :" />
-							</div>
-							<div class="EmptyBox5" />
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.iclubPropUsageType}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Ocupied Status :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:selectOneMenu disabled="true" value="#{iclubClaimController.propertyBean.iclubOccupiedStatus}" widgetVar="mnuModOCS" id="mnuModOCS" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
-									<f:selectItem itemLabel="Ocupied Status" itemDisabled="true" />
-									<f:selectItems value="#{iclubFullQuoteController.occupiedStatusBeans}" var="c" itemValue="#{c.osId}" itemLabel="#{c.osLongDesc}" />
-								</p:selectOneMenu>
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Type :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.iclubPropertyType}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Access Type :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.iclubAccessType}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Bar Type :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.iclubBarType}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Thatch Type :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PThatchType}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Type of roof :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.iclubRoofType}">
-								</p:outputLabel>
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Registration Number" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PRegNum}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Address" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PAddress}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Latitude" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PLat}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Longitude" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PLong}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Zip Code" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PPostalCd}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Claim Free years" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PNoclaimYrs}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Is it Rent Furnished" />
-							</div>
-							<div class="Container80 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PRentFurYn}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Is it Compleed" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PCompYn}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Robbery Free Years" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PNorobberyYn}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Is the premises secured with gates" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PSecGatesYn}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Estimatted Value" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.propertyBean.PEstValue}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
 					</div>
 				</p:panel>
 				<p:panel id="temp2" rendered="#{iclubClaimController.vehhicleFlag}">
 					<f:facet name="header">
 						<div class="Container100 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Details"></p:outputLabel>
+							<p:outputLabel styleClass="TexAlCenter" value="Vehicle Details" />
 						</div>
 					</f:facet>
 					<div class="Container90 Fnone MarAuto TexAlCenter">
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Security Master" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.iclubVehSecType}" />
-							</div>
-						</div>
+						<p:tabView id="qqSubVehDetViewMod">
+							<p:tab id="qqSubVehDetMod" title="Vehicle Details">
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Make :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" widgetVar="mnuModVehMake" id="mnuModVehMake" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubClaimController.vehicleBean.iclubVehicleMaster}">
+											<f:selectItem itemLabel="Make" itemDisabled="true" />
+											<f:selectItems value="#{iclubClaimController.vBeans}" var="c" itemLabel="#{c.vmMake}" itemValue="#{c.vmId}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Model :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" widgetVar="mnuModVehModel" id="mnuModVehModel" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubClaimController.vehicleBean.iclubVehicleMaster}">
+											<f:selectItem itemLabel="Model" itemDisabled="true" />
+											<f:selectItems value="#{iclubClaimController.vBeans}" var="c" itemLabel="#{c.vmModel}" itemValue="#{c.vmId}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Year :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" widgetVar="mnuModYear" id="mnuModYear" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuYear.jq.removeClass('with-placeholder')" value="#{iclubClaimController.vehicleBean.VYear}">
+											<f:selectItem itemLabel="Year" itemDisabled="true" />
+											<f:selectItems value="#{iclubClaimController.years}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Vehicle Usage Purpose :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.vehicleBean.iclubVehUsageType}" widgetVar="mnuModPurT" id="mnuModPurT" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Vehicle Usage Purpose" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.vehUsageTypeBeans}" var="p" itemLabel="#{p.vutLongDesc}" itemValue="#{p.vutId}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="OdoMeter :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:outputLabel value="#{iclubClaimController.vehicleBean.VOdometer}" styleClass="TexAlCenter" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Claim Free years :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.vehicleBean.VNoclaimYrs}" widgetVar="mnuModClmFY" id="mnuModClmFY" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="No Claims Years" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.noClaimYrs}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Engine Number :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:outputLabel value="#{iclubClaimController.vehicleBean.VEngineNr}" styleClass="TexAlCenter" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Registration Number :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:outputLabel value="#{iclubClaimController.vehicleBean.VRegNum}" styleClass="TexAlCenter" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Vin :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:outputLabel value="#{iclubClaimController.vehicleBean.VVin}" styleClass="TexAlCenter" />
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Years of Comprehensive Insurance :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.vehicleBean.VCompYrs}" widgetVar="mnuModCompYI" id="mnuModCompYI" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Years of Comprehensive Insurance" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.noOfCompYrs}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+							</p:tab>
+							<p:tab id="qqSubVehLocDetMod" title="Location Details">
+								<p:panel id="onLocationDetMod">
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="On Location :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:commandButton disabled="true"   icon="ui-icon-document" value="Location Details"   />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Access Type Over Night :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:selectOneMenu disabled="true" value="#{iclubClaimController.vehicleBean.iclubAccessTypeByVOnAccessTypeId}" widgetVar="mnuModAccTV" id="mnuModAccTV" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+												<f:selectItem itemLabel="Access Type VOn" itemDisabled="true" />
+												<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+											</p:selectOneMenu>
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Location Overnight :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:outputLabel value="#{iclubClaimController.vehicleBean.VOnArea}" styleClass="TexAlCenter" />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="On Latitude :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:outputLabel value="#{iclubClaimController.vehicleBean.VOnLat}" styleClass="TexAlCenter" />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="On Longitude  :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:outputLabel value="#{iclubClaimController.vehicleBean.VOnLong}" styleClass="TexAlCenter" />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+								</p:panel>
+								<p:panel id="ddLocationDetMod">
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Dd Location :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:commandButton disabled="true"   icon="ui-icon-document" value="Location Details"  />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Access Type During Day :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:selectOneMenu disabled="true" value="#{iclubClaimController.vehicleBean.iclubAccessTypeByVDdAccessTypeId}" widgetVar="mnuModAccTVDd" id="mnuModAccTVDd" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+												<f:selectItem itemLabel="Access Type VDd" itemDisabled="true" />
+												<f:selectItems value="#{iclubFullQuoteController.accessTypeBeans}" var="c" itemLabel="#{c.atLongDesc}" itemValue="#{c.atId}" />
+											</p:selectOneMenu>
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Location During Day :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:outputLabel value="#{iclubClaimController.vehicleBean.VDdArea}" styleClass="TexAlCenter" />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Dd Latitude :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:outputLabel value="#{iclubClaimController.vehicleBean.VDdLat}" styleClass="TexAlCenter" />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+									<div class="Container100 Responsive">
+										<div class="Container50 Responsive">
+											<p:outputLabel styleClass="TexAlCenter" value="Dd Longitude  :" />
+										</div>
+										<div class="Container50 Responsive">
+											<p:outputLabel value="#{iclubClaimController.vehicleBean.VDdLong}" styleClass="TexAlCenter" />
+										</div>
+									</div>
+									<div class="EmptyBox5" />
+								</p:panel>
+							</p:tab>
+							<p:tab id="qqSubVehSecDetMod" title="Security Details">
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Security Master :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" value="#{iclubClaimController.vehicleBean.iclubVehSecType}" widgetVar="mnuModSecVM" id="mnuModSecVM" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled">
+											<f:selectItem itemLabel="Security Master" itemDisabled="true" />
+											<f:selectItems value="#{iclubFullQuoteController.vehSecTypeBeans}" var="c" itemLabel="#{c.vstLongDesc}" itemValue="#{c.vstId}" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Is the vehicle equipped with a gear lock :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" widgetVar="mnuModGearLoc" id="mnuModGearLoc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubClaimController.vehicleBean.VGearLockYn}">
+											<f:selectItem itemLabel="Gear Lock" itemDisabled="true" />
+											<f:selectItem itemLabel="Yes" itemValue="Y" />
+											<f:selectItem itemLabel="No" itemValue="N" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+								<div class="Container100 Responsive">
+									<div class="Container50 Responsive">
+										<p:outputLabel styleClass="TexAlCenter" value="Is the vehicle equipped with immobiliser :" />
+									</div>
+									<div class="Container50 Responsive">
+										<p:selectOneMenu disabled="true" widgetVar="mnuImmModLoc" id="mnuImmModLoc" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubClaimController.vehicleBean.VImmYn}">
+											<f:selectItem itemLabel="Is the vehicle equipped with immobiliser" itemDisabled="true" />
+											<f:selectItem itemLabel="Yes" itemValue="Y" />
+											<f:selectItem itemLabel="No" itemValue="N" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+								<div class="EmptyBox5" />
+							</p:tab>
+						</p:tabView>
 						<div class="EmptyBox5" />
 						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Access Type VOn" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.iclubAccessTypeByVOnAccessTypeId}" />
-							</div>
+							<p:commandButton id="btnPlcVViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubClaimController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Access Type VD" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.iclubAccessTypeByVDdAccessTypeId}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Vo Do Meter" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VOdometer}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="On Area" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VOnArea}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="On Lat" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VOnLat}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="On Long" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VOnLong}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="VDd Area" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VDdArea}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="VDd Lat" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VDdLat}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="VDd Long" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VDdLong}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Insured Value" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VInsuredValue}">
-									<f:convertNumber pattern="#0.00" />
-								</p:outputLabel>
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Concess Prct" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VConcessPrct}">
-									<f:convertNumber pattern="#0.00" />
-								</p:outputLabel>
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Concess Reason" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VConcessReason}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="VImm Yn" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VImmYn}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Gear Lock Yn" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VGearLockYn}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Owner" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VOwner}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="No Claims Years" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VNoclaimYrs}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Comp Years" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VCompYrs}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="VVin" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VVin}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Engine Nr" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VEngineNr}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Reg Number" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VRegNum}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Location" />
-							</div>
-							<div class="Container50 Responsive"></div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Vehicle Model :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" id="vmm" value="#{iclubClaimController.vehicleBean.iclubVehicleMaster}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="year :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.VYear}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
-						<div class="Container100 Responsive">
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="Purpose Type :" />
-							</div>
-							<div class="Container50 Responsive">
-								<p:outputLabel styleClass="TexAlCenter" value="#{iclubClaimController.vehicleBean.iclubVehUsageType}" />
-							</div>
-						</div>
-						<div class="EmptyBox5" />
 					</div>
 				</p:panel>
 			</p:panel>
