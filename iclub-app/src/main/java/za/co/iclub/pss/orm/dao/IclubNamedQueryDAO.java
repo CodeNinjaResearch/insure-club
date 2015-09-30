@@ -110,8 +110,8 @@ public class IclubNamedQueryDAO {
 		log.debug("Fetching all IclubGeoLoc by Query :: getIclubGeoLocByLatAndLong");
 		try {
 			Query query = getCurrentSession().getNamedQuery("getIclubGeoLocByLatAndLong");
-			query.setDouble("gLong", gLong);
-			query.setDouble("gLat", gLat);
+			query.setDouble("gLong", gLat);
+			query.setDouble("gLat", gLong);
 			Object[] res = (Object[]) query.uniqueResult();
 			Long ret = -999l;
 			if (res != null && res.length > 0) {
