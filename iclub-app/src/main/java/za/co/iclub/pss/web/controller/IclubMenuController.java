@@ -33,6 +33,7 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -593,7 +594,7 @@ public class IclubMenuController implements Serializable {
 		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("socail.access.provider"), from);
 		
 		NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-		navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/newCohortInvites.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
+		navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/newCohortInvites.xhtml?faces-redirect=true&from=" + from + "&key=" + Base64.encodeBase64URLSafeString(access_token.getBytes()));
 	}
 	
 	public ResponseModel updatePassword(IclubPersonModel personModel, String access_token, String from, String guid, String cohortInviteId) {
@@ -628,9 +629,9 @@ public class IclubMenuController implements Serializable {
 				NavigationHandler navigationHandler = FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 				
 				if (guid != null) {
-					navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token + "&guid=" + guid);
+					navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + Base64.encodeBase64URLSafeString(access_token.getBytes()) + "&guid=" + guid);
 				} else {
-					navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + access_token);
+					navigationHandler.handleNavigation(FacesContext.getCurrentInstance(), null, "/pages/admin/cohorts/allCohorts.xhtml?faces-redirect=true&from=" + from + "&key=" + Base64.encodeBase64URLSafeString(access_token.getBytes()));
 				}
 				IclubWebHelper.addMessage("Person Registered successfully", FacesMessage.SEVERITY_INFO);
 			} else {

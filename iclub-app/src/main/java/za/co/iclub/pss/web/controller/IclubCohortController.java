@@ -6,9 +6,10 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -1074,6 +1076,8 @@ public class IclubCohortController implements Serializable {
 		
 		if (request.getParameter("key") != null) {
 			key = (String) request.getParameter("key");
+			byte[] keys = Base64.decodeBase64(key.getBytes());
+			key = new String(keys, StandardCharsets.UTF_8);
 			fromSocial = (String) request.getParameter("from");
 			guid = (String) request.getParameter("guid");
 			if (IclubWebHelper.getObjectIntoSession("newInvites") != null) {
@@ -1137,6 +1141,8 @@ public class IclubCohortController implements Serializable {
 		
 		if (request.getParameter("key") != null) {
 			key = (String) request.getParameter("key");
+			byte[] keys = Base64.decodeBase64(key.getBytes());
+			key = new String(keys, StandardCharsets.UTF_8);
 			fromSocial = (String) request.getParameter("from");
 			guid = (String) request.getParameter("guid");
 			if (IclubWebHelper.getObjectIntoSession("newInvites") != null) {

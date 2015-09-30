@@ -129,7 +129,7 @@ public class IclubLoginController implements Serializable {
 	
 	public String hotmailAction() {
 		
-		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=wl.birthday wl.contacts_birthday wl.contacts_phone_numbers wl.emails wl.offline_access wl.signin wl.basic" + "&redirect_uri=http://www.insuranceclub.co.za/iclub-app/templates/home.xhtml" + "&response_type=code&client_id=000000004C1516D6&state=" + getState("OUTLOOK");
+		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=" + BUNDLE.getString("htm.scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("htm.client_id") + "&state=" + getState("OUTLOOK");
 		try {
 			setTheme();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
