@@ -160,7 +160,7 @@ public class IclubCohortController implements Serializable {
 		selectedBeans = new ArrayList<IclubCohortBean>();
 	}
 	
-	public void showCriteria() {
+	public void showCriteria(IclubCohortInviteBean cohortInviteBean) {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCriteria");
 		
 		if (cohortInviteBean != null) {

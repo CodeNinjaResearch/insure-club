@@ -98,8 +98,7 @@
 						</p:selectOneMenu>
 					</p:column>
 					<p:column>
-						<p:commandButton disabled="#{!bean.criteria}" oncomplete="PF('cohortQuesDialog').show();" actionListener="#{iclubCohortController.showCriteria}" update=":iclubFrm:cohortQuesDialog,:iclubFrm:grlMsg,:iclubFrm:pnlCohortContDet" icon="ui-icon-search" value="View Cirteria">
-							<f:setPropertyActionListener target="#{iclubCohortController.cohortInviteBean}" value="#{bean}" />
+						<p:commandButton disabled="#{!bean.criteria}" oncomplete="PF('cohortQuesDialog').show();" action="#{iclubCohortController.showCriteria(bean)}" update=":iclubFrm:cohortQuesDialog,:iclubFrm:grlMsg " icon="ui-icon-search" value="View Cirteria">
 						</p:commandButton>
 					</p:column>
 					<f:facet name="footer">
