@@ -32,8 +32,6 @@
 					<p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()" />
 				</p:contextMenu>
 				<p:dataTable id="dtRateEngineCont" editable="true" editMode="cell" widgetVar="dtRateEngineCont" value="#{iclubRatingController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateEngines Found" reflow="true">
-					<f:facet name="footer">
-					</f:facet>
 					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
 					<p:column headerText="Rate">
 						<p:cellEditor>
@@ -51,12 +49,12 @@
 					<p:column headerText="Type">
 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubRateType}" />
 					</p:column>
-					<p:column headerText="Created By">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" />
-					</p:column>
-					<p:column headerText="Created Date">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reCrtdDt}" />
-					</p:column>
+					<!-- 					<p:column headerText="Created By"> -->
+					<!-- 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" /> -->
+					<!-- 					</p:column> -->
+					<!-- 					<p:column headerText="Created Date"> -->
+					<!-- 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reCrtdDt}" /> -->
+					<!-- 					</p:column> -->
 					<p:column headerText="Status">
 						<p:selectOneMenu widgetVar="mnuViewStatus" id="mnuViewStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.reStatus}" disabled="true">
 							<f:selectItem itemLabel="Status" itemDisabled="true" />

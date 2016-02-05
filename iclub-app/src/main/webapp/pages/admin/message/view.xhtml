@@ -18,9 +18,9 @@
 		<p:column headerText="Content">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.MContent}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.MCrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.MCrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnMessageSummary" icon="ui-icon-summary" ajax="false" action="#{iclubMessageController.showSummary}" update=":messageFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubMessageController.bean}" value="#{bean}" />

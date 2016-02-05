@@ -37,15 +37,15 @@
 				<f:selectItems value="#{iclubRateTypeController.quoteType}" />
 			</p:selectOneMenu>
 		</p:column>
-		<p:column headerText="Short Description">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtShortDesc}" />
-		</p:column>
-		<p:column headerText="Long Description">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtLongDesc}" />
-		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtCrtdDt}"></p:outputLabel>
-		</p:column>
+		<!-- 		<p:column headerText="Short Description"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtShortDesc}" /> -->
+		<!-- 		</p:column> -->
+		<!-- 		<p:column headerText="Long Description"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtLongDesc}" /> -->
+		<!-- 		</p:column> -->
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.rtCrtdDt}"></p:outputLabel> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnRateTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubRateTypeController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubRateTypeController.bean}" value="#{bean}" />

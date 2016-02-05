@@ -9,9 +9,9 @@
 		<p:column headerText="Status">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcStatus}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcCrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.lcCrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnLicenseCodeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubLicenseCodeController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubLicenseCodeController.bean}" value="#{bean}" />

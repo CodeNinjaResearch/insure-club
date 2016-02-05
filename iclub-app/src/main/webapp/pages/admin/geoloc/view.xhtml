@@ -9,9 +9,9 @@
 		<p:column headerText="Rate">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glRate}" />
 		</p:column>
-		<p:column headerText="created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glCrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.glCrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnGeoLocSummary" icon="ui-icon-summary" ajax="false" action="#{iclubGeoLocController.showSummary}" update=":geolocFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubGeoLocController.bean}" value="#{bean}" />

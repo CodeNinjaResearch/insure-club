@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<f:facet name="first">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -11,21 +10,47 @@
 	<h:outputScript name="js/layout.js" library="spark-layout" />
 	<script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
 	<script type="text/javascript">
+	<!--
+		//edit this message to say what you want
+		var message = "Function Disabled";
+
+		function clickIE() {
+			if (document.all) {
+				alert(message);
+				return false;
+			}
+		}
+		function clickNS(e) {
+			if (document.layers || (document.getElementById && !document.all)) {
+				if (e.which == 2 || e.which == 3) {
+					alert(message);
+					return false;
+				}
+			}
+		}
+		if (document.layers) {
+			document.captureEvents(Event.MOUSEDOWN);
+			document.onmousedown = clickNS;
+		} else {
+			document.onmouseup = clickNS;
+			document.oncontextmenu = clickIE;
+		}
+
+		document.oncontextmenu = new Function("return false")
+	// -->
+	</script>
+	<script type="text/javascript">
 		function geocodePer() {
-			PF('geoMapPer')
-					.geocode(document.getElementById('perAddress').value);
+			PF('geoMapPer').geocode(document.getElementById('perAddress').value);
 		}
 		function geocodePro() {
-			PF('geoMapPro')
-					.geocode(document.getElementById('proAddress').value);
+			PF('geoMapPro').geocode(document.getElementById('proAddress').value);
 		}
 		function geocodeVeh() {
-			PF('geoMapVeh')
-					.geocode(document.getElementById('vehAddress').value);
+			PF('geoMapVeh').geocode(document.getElementById('vehAddress').value);
 		}
 		function geocodeVehDd() {
-			PF('geoMapVehDd').geocode(
-					document.getElementById('vehDdAddress').value);
+			PF('geoMapVehDd').geocode(document.getElementById('vehDdAddress').value);
 		}
 	</script>
 	<script type="text/javascript">
@@ -38,21 +63,11 @@
 
 		function openWindow() {
 
-			window
-					.open(
-							"../../pages/quote/fqTnC.xhtml",
-							"_blank",
-							"toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400",
-							true);
+			window.open("../../pages/quote/fqTnC.xhtml", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400", true);
 		}
 		function openqqWindow() {
 
-			window
-					.open(
-							"../../pages/quote/qqTnC.xhtml",
-							"_blank",
-							"toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400",
-							true);
+			window.open("../../pages/quote/qqTnC.xhtml", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400", true);
 		}
 
 		function hideDialog(xhr, status, args) {

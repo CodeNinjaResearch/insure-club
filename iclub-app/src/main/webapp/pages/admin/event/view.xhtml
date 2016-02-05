@@ -9,9 +9,9 @@
 		<p:column headerText="Description">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EDesc}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ECrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ECrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnEventSummary" icon="ui-icon-summary" ajax="false" action="#{iclubEventController.showSummary}" update=":eventFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubEventController.bean}" value="#{bean}" />

@@ -1,32 +1,46 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/templates/layout#{themeView.theme}.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/layout-#{themeView.theme}.xhtml">
 	<ui:define name="content">
 		<div id="layout-portlets-cover">
-			<div class="other-pages-box Container40 Responsive50 MarAuto Fnone TexAlCenter ShadowGray MarTop10" style="margin-top: 5%; background-image: url(/spark/resources/spark-layout/images/loginpageillust.svg); background-repeat: no-repeat; background-position: center; background-size: cover;">
+			<div
+				class="other-pages-box Container40 Responsive50 MarAuto Fnone TexAlCenter ShadowGray MarTop10"
+				style="margin-top: 5%; background-image: url(/spark/resources/spark-layout/images/loginpageillust.svg); background-repeat: no-repeat; background-position: center; background-size: cover;">
 				<div class="Container90 Fnone MarAuto TexAlCenter">
 					<div class="EmptyBox50"></div>
 					<p:outputLabel>Login</p:outputLabel>
 					<div class="EmptyBox20"></div>
-					<p:inputText value="#{iclubLoginController.bean.LName}" placeholder="Username" styleClass="Container80 Fnone MarAuto Fs18" />
+					<p:inputText value="#{iclubLoginController.bean.LName}"
+						placeholder="Username" styleClass="Container80 Fnone MarAuto Fs18" />
 					<div class="EmptyBox10"></div>
-					<p:password value="#{iclubLoginController.bean.LPasswd}" placeholder="Password" styleClass="Container80 Fnone MarAuto Fs18" feedback="false" />
+					<p:password value="#{iclubLoginController.bean.LPasswd}"
+						placeholder="Password" styleClass="Container80 Fnone MarAuto Fs18"
+						feedback="false" />
 					<div class="EmptyBox20"></div>
-					<p:commandButton value="Log In / Sign Up" action="#{iclubLoginController.doIclubLogin}" styleClass="Fs16" />
+					<p:commandButton value="Log In / Sign Up"
+						action="#{iclubLoginController.doIclubLogin}" styleClass="Fs16" />
 					<div class="EmptyBox10"></div>
 					<div class="Seperator"></div>
 					<div class="EmptyBox10"></div>
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container30 TexAlCenter">
-							<p:commandLink styleClass="Fs16" action="#{iclubLoginController.googleAction}" ajax="false">
+							<p:commandLink styleClass="Fs16"
+								action="#{iclubLoginController.googleAction}" ajax="false">
 								<h:graphicImage value="/images/gmail-icon.jpg" />
 							</p:commandLink>
 						</div>
 						<div class="Container30 TexAlCenter">
-							<p:commandLink styleClass="Fs16" action="#{iclubLoginController.yahooAction}" ajax="false">
+							<p:commandLink styleClass="Fs16"
+								action="#{iclubLoginController.yahooAction}" ajax="false">
 								<h:graphicImage value="/images/yahoomail_icon.jpg" />
 							</p:commandLink>
 						</div>
 						<div class="Container30 TexAlCenter">
-							<p:commandLink styleClass="Fs16" action="#{iclubLoginController.hotmailAction}" ajax="false">
+							<p:commandLink styleClass="Fs16"
+								action="#{iclubLoginController.hotmailAction}" ajax="false">
 								<h:graphicImage value="/images/hotmail.jpeg" />
 							</p:commandLink>
 						</div>

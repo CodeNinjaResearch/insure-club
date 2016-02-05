@@ -6,9 +6,9 @@
 		<p:column headerText="Status">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.EStatus}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ECrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ECrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnExtrasEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubExtrasController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubExtrasController.bean}" value="#{bean}" />

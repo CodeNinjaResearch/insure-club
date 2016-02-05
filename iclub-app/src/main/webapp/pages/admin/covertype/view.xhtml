@@ -15,9 +15,9 @@
 		<p:column headerText="Status">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctStatus}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctCrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.ctCrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnCoverTypeEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubCoverTypeController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubCoverTypeController.bean}" value="#{bean}" />

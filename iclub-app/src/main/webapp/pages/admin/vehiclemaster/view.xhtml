@@ -27,9 +27,9 @@
 		<p:column headerText="Rate Percentage">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmRatePrct}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmCrtdDt}" />
-		</p:column>
+<!-- 		<p:column headerText="Created Date"> -->
+<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.vmCrtdDt}" /> -->
+<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnVehicleMasterSummary" icon="ui-icon-summary" ajax="false" action="#{iclubVehicleMasterController.showSummary}" update=":vehiclemasterFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubVehicleMasterController.bean}" value="#{bean}" />

@@ -5,8 +5,7 @@
 	color: #ccc;
 }
 
-.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled
-	{
+.ui-selectonemenu-panel.hide-disabled .ui-selectonemenu-list-item.ui-state-disabled {
 	display: none;
 }
 </style>
@@ -161,7 +160,7 @@
 										<p:outputLabel styleClass="TexAlCenter" value="Location :" />
 									</div>
 									<div class="Container50 Responsive">
-										<p:commandButton disabled="true"  icon="ui-icon-document" value="Location Details"   />
+										<p:commandButton disabled="true" icon="ui-icon-document" value="Location Details" />
 									</div>
 								</div>
 								<div class="EmptyBox5" />
@@ -372,7 +371,7 @@
 								<p:commandButton id="btnPlcPViewDoc" update=":iclubFrm:documentUploadDialog" icon="ui-icon-document" value="#{labels['viewdocs']}" actionListener="#{iclubClaimController.showDocumentUpload}" oncomplete="PF('documentUploadDialog').show();" />
 							</div>
 							<div class="Container50 Responsive">
-								<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubClaimController.claimAction}" ajax="false" />
+								<p:commandButton value="Claim" styleClass="Fs16" action="#{iclubClaimController.viewClaimAction}" ajax="false" />
 							</div>
 						</div>
 					</div>
@@ -502,7 +501,7 @@
 											<p:outputLabel styleClass="TexAlCenter" value="On Location :" />
 										</div>
 										<div class="Container50 Responsive">
-											<p:commandButton disabled="true"   icon="ui-icon-document" value="Location Details"   />
+											<p:commandButton disabled="true" icon="ui-icon-document" value="Location Details" />
 										</div>
 									</div>
 									<div class="EmptyBox5" />
@@ -552,7 +551,7 @@
 											<p:outputLabel styleClass="TexAlCenter" value="Dd Location :" />
 										</div>
 										<div class="Container50 Responsive">
-											<p:commandButton disabled="true"   icon="ui-icon-document" value="Location Details"  />
+											<p:commandButton disabled="true" icon="ui-icon-document" value="Location Details" />
 										</div>
 									</div>
 									<div class="EmptyBox5" />

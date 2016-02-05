@@ -18,9 +18,9 @@
 		<p:column headerText="Regstration Number">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmRegNum}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmCrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.tmCrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnTrackerMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubTrackerMasterController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubTrackerMasterController.bean}" value="#{bean}" />

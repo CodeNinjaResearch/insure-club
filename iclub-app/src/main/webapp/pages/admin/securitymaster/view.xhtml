@@ -12,9 +12,9 @@
 		<p:column headerText="Status">
 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smStatus}" />
 		</p:column>
-		<p:column headerText="Created Date">
-			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" />
-		</p:column>
+		<!-- 		<p:column headerText="Created Date"> -->
+		<!-- 			<p:outputLabel styleClass="TexAlCenter" value="#{bean.smCrtdDt}" /> -->
+		<!-- 		</p:column> -->
 		<p:column>
 			<p:commandButton id="btnSecurityMasterEdit" icon="ui-icon-pencil" ajax="false" action="#{iclubSecurityMasterController.showEdit}" update=":iclubFrm:grlMsg">
 				<f:setPropertyActionListener target="#{iclubSecurityMasterController.bean}" value="#{bean}" />
