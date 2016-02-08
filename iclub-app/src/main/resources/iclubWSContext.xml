@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 	<import resource="classpath:iclubORMContext.xml" />
 
 
@@ -25,8 +23,7 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
-	<bean id="IclubInsuranceItemTypeService"
-		class="za.co.iclub.pss.ws.service.IclubInsuranceItemTypeService">
+	<bean id="IclubInsuranceItemTypeService" class="za.co.iclub.pss.ws.service.IclubInsuranceItemTypeService">
 		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
@@ -615,10 +612,8 @@
 
 
 
-	<!-- For times when you need more complex processing, passing data to the 
-		scheduled job -->
-	<bean name="complexJobDetail"
-		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	<!-- For times when you need more complex processing, passing data to the scheduled job -->
+	<bean name="complexJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<property name="jobClass" value="za.co.iclub.pss.scheduler.ScheduledJob" />
 		<property name="jobDataMap">
 			<map>
@@ -631,15 +626,13 @@
 
 
 
-	<bean id="cronTrigger"
-		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="complexJobDetail" />
 		<property name="cronExpression" value="0 0/5 * ? * 1-7" />
 	</bean>
 
 
-	<!-- Scheduler factory bean to glue together jobDetails and triggers to 
-		Configure Quartz Scheduler -->
+	<!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="jobDetails">
 			<list>

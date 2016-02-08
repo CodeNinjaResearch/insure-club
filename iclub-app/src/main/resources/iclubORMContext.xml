@@ -16,7 +16,7 @@
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 		<property name="annotatedClasses">
@@ -110,7 +110,8 @@
 				</value>
 				<value>
 					za.co.iclub.pss.orm.bean.IclubCohortCriteria
-				</value></list>
+				</value>
+			</list>
 
 		</property>
 	</bean>
@@ -535,21 +536,19 @@
 	</bean>
 
 
-	<bean id="IclubThatchTypeDAO"
-		class="za.co.iclub.pss.orm.dao.IclubThatchTypeDAO">
+	<bean id="IclubThatchTypeDAO" class="za.co.iclub.pss.orm.dao.IclubThatchTypeDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="IclubSecurityMasterDAO"
-		class="za.co.iclub.pss.orm.dao.IclubSecurityMasterDAO">
+	<bean id="IclubSecurityMasterDAO" class="za.co.iclub.pss.orm.dao.IclubSecurityMasterDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="IclubCohortCriteriaDAO"
-		class="za.co.iclub.pss.orm.dao.IclubCohortCriteriaDAO">
+	<bean id="IclubCohortCriteriaDAO" class="za.co.iclub.pss.orm.dao.IclubCohortCriteriaDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
-	</bean></beans>
+	</bean>
+</beans>
