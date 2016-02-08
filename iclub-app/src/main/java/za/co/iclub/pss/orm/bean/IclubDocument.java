@@ -15,9 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "iclub_document", catalog = "iclubdb")
 public class IclubDocument implements java.io.Serializable {
-	
+
 	// Fields
-	
+
 	/**
 	 * 
 	 */
@@ -33,18 +33,18 @@ public class IclubDocument implements java.io.Serializable {
 	private byte[] DBlob;
 	private Date DCrtdDt;
 	private String DContent;
-	
+
 	// Constructors
-	
+
 	/** default constructor */
 	public IclubDocument() {
 	}
-	
+
 	/** minimal constructor */
 	public IclubDocument(String DId) {
 		this.DId = DId;
 	}
-	
+
 	/** full constructor */
 	public IclubDocument(String DId, IclubDocumentType iclubDocumentType, IclubEntityType iclubEntityType, IclubPerson iclubPerson, String DName, String DMimeType, Long DSize, String DEntityId, byte[] DBlob, Date DCrtdDt, String DContent) {
 		this.DId = DId;
@@ -59,109 +59,109 @@ public class IclubDocument implements java.io.Serializable {
 		this.DCrtdDt = DCrtdDt;
 		this.DContent = DContent;
 	}
-	
+
 	// Property accessors
 	@Id
 	@Column(name = "d_id", unique = true, nullable = false, length = 36)
 	public String getDId() {
 		return this.DId;
 	}
-	
+
 	public void setDId(String DId) {
 		this.DId = DId;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "d_type_id")
 	public IclubDocumentType getIclubDocumentType() {
 		return this.iclubDocumentType;
 	}
-	
+
 	public void setIclubDocumentType(IclubDocumentType iclubDocumentType) {
 		this.iclubDocumentType = iclubDocumentType;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "d_entity_type_id")
 	public IclubEntityType getIclubEntityType() {
 		return this.iclubEntityType;
 	}
-	
+
 	public void setIclubEntityType(IclubEntityType iclubEntityType) {
 		this.iclubEntityType = iclubEntityType;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "d_crtd_by")
 	public IclubPerson getIclubPerson() {
 		return this.iclubPerson;
 	}
-	
+
 	public void setIclubPerson(IclubPerson iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
-	
+
 	@Column(name = "d_name", length = 999)
 	public String getDName() {
 		return this.DName;
 	}
-	
+
 	public void setDName(String DName) {
 		this.DName = DName;
 	}
-	
+
 	@Column(name = "d_mime_type", length = 999)
 	public String getDMimeType() {
 		return this.DMimeType;
 	}
-	
+
 	public void setDMimeType(String DMimeType) {
 		this.DMimeType = DMimeType;
 	}
-	
+
 	@Column(name = "d_size")
 	public Long getDSize() {
 		return this.DSize;
 	}
-	
+
 	public void setDSize(Long DSize) {
 		this.DSize = DSize;
 	}
-	
+
 	@Column(name = "d_entity_id", length = 36)
 	public String getDEntityId() {
 		return this.DEntityId;
 	}
-	
+
 	public void setDEntityId(String DEntityId) {
 		this.DEntityId = DEntityId;
 	}
-	
+
 	@Column(name = "d_blob")
 	public byte[] getDBlob() {
 		return this.DBlob;
 	}
-	
+
 	public void setDBlob(byte[] DBlob) {
 		this.DBlob = DBlob;
 	}
-	
+
 	@Column(name = "d_crtd_dt", length = 19)
 	public Date getDCrtdDt() {
 		return this.DCrtdDt;
 	}
-	
+
 	public void setDCrtdDt(Date DCrtdDt) {
 		this.DCrtdDt = DCrtdDt;
 	}
-	
+
 	@Column(name = "d_content")
 	public String getDContent() {
 		return this.DContent;
 	}
-	
+
 	public void setDContent(String DContent) {
 		this.DContent = DContent;
 	}
-	
+
 }

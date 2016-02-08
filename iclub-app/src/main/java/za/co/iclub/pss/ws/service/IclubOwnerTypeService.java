@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubOwnerTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubOwnerTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubOwnerTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubOwnerTypeDAO iclubOwnerTypeDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubOwnerTypeService {
 	public ResponseModel add(IclubOwnerTypeModel model) {
 		try {
 			IclubOwnerType iOt = IclubOwnerTypeTrans.fromWStoORM(model);
-			
+
 			iOt.setOtId(iclubCommonDAO.getNextId(IclubOwnerType.class));
-			
+
 			iclubOwnerTypeDAO.save(iOt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iOt.getOtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubOwnerTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubOwnerTypeService {
 	public ResponseModel mod(IclubOwnerTypeModel model) {
 		try {
 			IclubOwnerType iOt = IclubOwnerTypeTrans.fromWStoORM(model);
-			
+
 			iclubOwnerTypeDAO.merge(iOt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getOtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubOwnerTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubOwnerTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubOwnerTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubOwnerTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubOwnerType bean = (IclubOwnerType) object;
-					
+
 					IclubOwnerTypeModel model = IclubOwnerTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,15 +138,15 @@ public class IclubOwnerTypeService {
 		IclubOwnerTypeModel model = new IclubOwnerTypeModel();
 		try {
 			IclubOwnerType bean = iclubOwnerTypeDAO.findById(id);
-			
+
 			model = IclubOwnerTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -172,29 +172,29 @@ public class IclubOwnerTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubOwnerTypeDAO getIclubOwnerTypeDAO() {
 		return iclubOwnerTypeDAO;
 	}
-	
+
 	public void setIclubOwnerTypeDAO(IclubOwnerTypeDAO iclubOwnerTypeDAO) {
 		this.iclubOwnerTypeDAO = iclubOwnerTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

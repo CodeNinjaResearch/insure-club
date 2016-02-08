@@ -8,10 +8,10 @@ import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubCohortTrans {
-	
+
 	public static IclubCohortBean fromWStoUI(IclubCohortModel model) {
 		IclubCohortBean bean = new IclubCohortBean();
-		
+
 		bean.setCId(model.getCId());
 		bean.setCName(model.getCName());
 		bean.setCEmail(model.getCEmail());
@@ -32,13 +32,13 @@ public class IclubCohortTrans {
 		bean.setIclubPersonByAdminId(model.getIclubPersonByAdminId());
 		bean.setPCFNameAndLName(model.getPCFNameAndLName());
 		bean.setNoOfActiveMembers(model.getNoOfActiveMembers());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubCohortModel fromUItoWS(IclubCohortBean bean) {
 		IclubCohortModel model = new IclubCohortModel();
-		
+
 		model.setCId(bean.getCId());
 		model.setCName(bean.getCName());
 		model.setCEmail(bean.getCEmail());
@@ -59,13 +59,13 @@ public class IclubCohortTrans {
 		model.setIclubPersonByAdminId(bean.getIclubPersonByAdminId());
 		model.setPCFNameAndLName(bean.getPCFNameAndLName());
 		model.setNoOfActiveMembers(bean.getNoOfActiveMembers());
-		
+
 		return model;
 	}
-	
+
 	public static IclubCohortModel fromORMtoWS(IclubCohort bean) {
 		IclubCohortModel model = new IclubCohortModel();
-		
+
 		model.setCId(bean.getCId());
 		model.setCName(bean.getCName());
 		model.setCEmail(bean.getCEmail());
@@ -85,15 +85,15 @@ public class IclubCohortTrans {
 		model.setIitLongDesc(bean.getIclubInsuranceItemType() != null ? bean.getIclubInsuranceItemType().getIitLongDesc() : null);
 		model.setIclubPersonByAdminId(bean.getIclubPersonByCAdminId() != null ? bean.getIclubPersonByCAdminId().getPId() : null);
 		model.setPCFNameAndLName(bean.getIclubPersonByCAdminId() != null ? bean.getIclubPersonByCAdminId().getPFName() + " " + bean.getIclubPersonByCAdminId().getPLName() : null);
-		model.setNoOfActiveMembers(bean.getIclubPersons()!=null ? (bean.getIclubPersons().size()):0l);
-		
+		model.setNoOfActiveMembers(bean.getIclubPersons() != null ? (bean.getIclubPersons().size()) : 0l);
+
 		return model;
 	}
-	
+
 	public static IclubCohort fromWStoORM(IclubCohortModel model, IclubPersonDAO iclubPersonDAO, IclubCohortTypeDAO iclubCohortTypeDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		
+
 		IclubCohort bean = new IclubCohort();
-		
+
 		bean.setCId(model.getCId());
 		bean.setCName(model.getCName());
 		bean.setCEmail(model.getCEmail());
@@ -108,7 +108,7 @@ public class IclubCohortTrans {
 		bean.setIclubPersonByCPrimaryUserId(model.getIclubPersonByCPrimaryUserId() != null ? iclubPersonDAO.findById(model.getIclubPersonByCPrimaryUserId()) : null);
 		bean.setIclubPersonByCCrtdBy(model.getIclubPersonByCCrtdBy() != null ? iclubPersonDAO.findById(model.getIclubPersonByCCrtdBy()) : null);
 		bean.setIclubPersonByCAdminId(model.getIclubPersonByAdminId() != null ? iclubPersonDAO.findById(model.getIclubPersonByAdminId()) : null);
-		
+
 		return bean;
 	}
 }

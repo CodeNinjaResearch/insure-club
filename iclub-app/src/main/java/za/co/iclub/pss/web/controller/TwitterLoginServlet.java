@@ -14,12 +14,12 @@ import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterLoginServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		
+
 		cb.setDebugEnabled(true).setOAuthConsumerKey("oINoOag2pIh1G7di2CIButdAR").setOAuthConsumerSecret("bKu1INz6edjn2l4YxN0zK12tuiHEnzuLklobhaQ32gAa4zQ3N1").setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		Twitter twitter = tf.getInstance();
@@ -28,17 +28,17 @@ public class TwitterLoginServlet extends HttpServlet {
 			StringBuffer callbackURL = request.getRequestURL();
 			int index = callbackURL.lastIndexOf("/");
 			callbackURL.replace(index, callbackURL.length(), "").append("/TwitterCallback");
-			
+
 			RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
 			request.getSession().setAttribute("requestToken", requestToken);
 			response.sendRedirect(requestToken.getAuthenticationURL());
-			
+
 		} catch (TwitterException e) {
 			throw new ServletException(e);
 		}
-		
+
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

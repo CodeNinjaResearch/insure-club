@@ -12,9 +12,9 @@ import twitter4j.TwitterException;
 import twitter4j.auth.RequestToken;
 
 public class TwitterCallbackServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
 		RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");

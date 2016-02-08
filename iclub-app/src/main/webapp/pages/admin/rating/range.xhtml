@@ -44,6 +44,15 @@
 					<f:facet name="footer">
 					</f:facet>
 					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
+					<p:column headerText="Base Value" sortBy="#{bean.reBaseValue}" filterBy="#{bean.reBaseValue}" filterMatchMode="contains">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
+					</p:column>
+					<p:column headerText="Max Value">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reMaxValue}" />
+					</p:column>
+					<p:column headerText="Rate Type">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubRateType}" />
+					</p:column>
 					<p:column headerText="Rate">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -53,15 +62,6 @@
 								<p:inputText id="rateInput" value="#{bean.reRate}" styleClass="TexAlCenter" placeholder="Rate" />
 							</f:facet>
 						</p:cellEditor>
-					</p:column>
-					<p:column headerText="Base Value">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
-					</p:column>
-					<p:column headerText="Max Value">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reMaxValue}" />
-					</p:column>
-					<p:column headerText="Rate Type">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubRateType}" />
 					</p:column>
 					<p:column headerText="Status">
 						<p:selectOneMenu widgetVar="mnuViewStatus" id="mnuViewStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{bean.reStatus}" disabled="true">

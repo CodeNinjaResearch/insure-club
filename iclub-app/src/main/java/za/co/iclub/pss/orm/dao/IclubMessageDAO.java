@@ -34,21 +34,21 @@ public class IclubMessageDAO {
 	// property constants
 	public static final String _MTRAN_ID = "MTranId";
 	public static final String _MCONTENT = "MContent";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubMessage transientInstance) {
 		log.debug("saving IclubMessage instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubMessage persistentInstance) {
 		log.debug("deleting IclubMessage instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMessage findById(java.lang.String id) {
 		log.debug("getting IclubMessage instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMessage> findByExample(IclubMessage instance) {
 		log.debug("finding IclubMessage instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubMessage instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMessage> findByMTranId(Object MTranId) {
 		return findByProperty(_MTRAN_ID, MTranId);
 	}
-	
+
 	public List<IclubMessage> findByMContent(Object MContent) {
 		return findByProperty(_MCONTENT, MContent);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubMessage instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMessage merge(IclubMessage detachedInstance) {
 		log.debug("merging IclubMessage instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubMessage instance) {
 		log.debug("attaching dirty IclubMessage instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubMessage instance) {
 		log.debug("attaching clean IclubMessage instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubMessageDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubMessageDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubMessageDAO) ctx.getBean("IclubMessageDAO");
 	}

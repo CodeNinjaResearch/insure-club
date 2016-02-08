@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubSupplMasterService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubSupplMasterService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubSupplMasterService.class);
 	private IclubSupplMasterDAO iclubSupplMasterDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubSupplierTypeDAO iclubSupplierTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -45,18 +45,18 @@ public class IclubSupplMasterService {
 	@Transactional
 	public ResponseModel add(IclubSupplMasterModel model) {
 		try {
-			
+
 			IclubSupplMaster iCSm = IclubSupplMasterTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplierTypeDAO);
-			
+
 			iclubSupplMasterDAO.save(iCSm);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCSm.getSmId());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -65,9 +65,9 @@ public class IclubSupplMasterService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -76,11 +76,11 @@ public class IclubSupplMasterService {
 	public ResponseModel mod(IclubSupplMasterModel model) {
 		try {
 			IclubSupplMaster iCSm = IclubSupplMasterTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplierTypeDAO);
-			
+
 			iclubSupplMasterDAO.merge(iCSm);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getSmId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -92,9 +92,9 @@ public class IclubSupplMasterService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -109,31 +109,31 @@ public class IclubSupplMasterService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubSupplMasterModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubSupplMasterDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubSupplMaster bean = (IclubSupplMaster) object;
 					IclubSupplMasterModel iCSm = IclubSupplMasterTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCSm);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/getByLongAndLat/{smLat}/{smLong}")
 	@Produces("application/json")
@@ -145,9 +145,9 @@ public class IclubSupplMasterService {
 			if (smIds != null && smIds.size() > 0) {
 				for (Object obj : smIds) {
 					String smId = (String) ((Object[]) obj)[0];
-					
+
 					IclubSupplMaster bean = iclubSupplMasterDAO.findById(smId);
-					
+
 					IclubSupplMasterModel model = IclubSupplMasterTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
@@ -156,23 +156,23 @@ public class IclubSupplMasterService {
 			LOGGER.error(e, e);
 		}
 		return ret;
-		
+
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubSupplMasterModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSupplMaster.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubSupplMaster bean = (IclubSupplMaster) object;
 					IclubSupplMasterModel iCSm = IclubSupplMasterTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCSm);
 				}
 			}
@@ -181,7 +181,7 @@ public class IclubSupplMasterService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -190,53 +190,53 @@ public class IclubSupplMasterService {
 		IclubSupplMasterModel model = new IclubSupplMasterModel();
 		try {
 			IclubSupplMaster bean = iclubSupplMasterDAO.findById(id);
-			
+
 			model = IclubSupplMasterTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubSupplMasterDAO getIclubSupplMasterDAO() {
 		return iclubSupplMasterDAO;
 	}
-	
+
 	public void setIclubSupplMasterDAO(IclubSupplMasterDAO iclubSupplMasterDAO) {
 		this.iclubSupplMasterDAO = iclubSupplMasterDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubSupplierTypeDAO getIclubSupplierTypeDAO() {
 		return iclubSupplierTypeDAO;
 	}
-	
+
 	public void setIclubSupplierTypeDAO(IclubSupplierTypeDAO iclubSupplierTypeDAO) {
 		this.iclubSupplierTypeDAO = iclubSupplierTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

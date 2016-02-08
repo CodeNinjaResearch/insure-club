@@ -34,21 +34,21 @@ public class IclubAccountDAO {
 	public static final String _AACC_NUM = "AAccNum";
 	public static final String _AOWNER_ID = "AOwnerId";
 	public static final String _ASTATUS = "AStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubAccount transientInstance) {
 		log.debug("saving IclubAccount instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubAccount persistentInstance) {
 		log.debug("deleting IclubAccount instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAccount findById(java.lang.String id) {
 		log.debug("getting IclubAccount instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAccount> findByExample(IclubAccount instance) {
 		log.debug("finding IclubAccount instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubAccount instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAccount> findByAAccNum(Object AAccNum) {
 		return findByProperty(_AACC_NUM, AAccNum);
 	}
-	
+
 	public List<IclubAccount> findByAOwnerId(Object AOwnerId) {
 		return findByProperty(_AOWNER_ID, AOwnerId);
 	}
-	
+
 	public List<IclubAccount> findByAStatus(Object AStatus) {
 		return findByProperty(_ASTATUS, AStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubAccount instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAccount merge(IclubAccount detachedInstance) {
 		log.debug("merging IclubAccount instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubAccount instance) {
 		log.debug("attaching dirty IclubAccount instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubAccount instance) {
 		log.debug("attaching clean IclubAccount instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubAccountDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubAccountDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAccountDAO) ctx.getBean("IclubAccountDAO");
 	}

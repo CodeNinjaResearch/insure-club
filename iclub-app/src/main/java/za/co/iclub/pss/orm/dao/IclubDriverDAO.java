@@ -36,21 +36,21 @@ public class IclubDriverDAO {
 	public static final String _DISSUE_YEARS = "DIssueYears";
 	public static final String _DLAST_CLAIM_DIFF = "DLastClaimDiff";
 	public static final String _DLAST_CLAIM_YEAR = "DLastClaimYear";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubDriver transientInstance) {
 		log.debug("saving IclubDriver instance");
 		try {
@@ -61,7 +61,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubDriver persistentInstance) {
 		log.debug("deleting IclubDriver instance");
 		try {
@@ -72,7 +72,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubDriver findById(java.lang.String id) {
 		log.debug("getting IclubDriver instance with id: " + id);
 		try {
@@ -83,7 +83,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubDriver> findByExample(IclubDriver instance) {
 		log.debug("finding IclubDriver instance by example");
 		try {
@@ -95,7 +95,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubDriver instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -108,27 +108,27 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubDriver> findByDName(Object DName) {
 		return findByProperty(_DNAME, DName);
 	}
-	
+
 	public List<IclubDriver> findByDLicenseNum(Object DLicenseNum) {
 		return findByProperty(_DLICENSE_NUM, DLicenseNum);
 	}
-	
+
 	public List<IclubDriver> findByDIssueYears(Object DIssueYears) {
 		return findByProperty(_DISSUE_YEARS, DIssueYears);
 	}
-	
+
 	public List<IclubDriver> findByDLastClaimDiff(Object DLastClaimDiff) {
 		return findByProperty(_DLAST_CLAIM_DIFF, DLastClaimDiff);
 	}
-	
+
 	public List<IclubDriver> findByDLastClaimYear(Object DLastClaimYear) {
 		return findByProperty(_DLAST_CLAIM_YEAR, DLastClaimYear);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubDriver instances");
 		try {
@@ -140,7 +140,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubDriver merge(IclubDriver detachedInstance) {
 		log.debug("merging IclubDriver instance");
 		try {
@@ -152,7 +152,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubDriver instance) {
 		log.debug("attaching dirty IclubDriver instance");
 		try {
@@ -163,7 +163,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubDriver instance) {
 		log.debug("attaching clean IclubDriver instance");
 		try {
@@ -174,7 +174,7 @@ public class IclubDriverDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubDriverDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubDriverDAO) ctx.getBean("IclubDriverDAO");
 	}

@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubSystemTypeModel;
 import za.co.iclub.pss.orm.bean.IclubSystemType;
 
 public class IclubSystemTypeTrans {
-	
+
 	public static IclubSystemTypeBean fromWStoUI(IclubSystemTypeModel model) {
 		IclubSystemTypeBean bean = new IclubSystemTypeBean();
 		bean.setStId(model.getStId());
@@ -14,7 +14,7 @@ public class IclubSystemTypeTrans {
 		bean.setStStatus(model.getStStatus());
 		return bean;
 	}
-	
+
 	public static IclubSystemTypeModel fromUItoWS(IclubSystemTypeBean bean) {
 		IclubSystemTypeModel model = new IclubSystemTypeModel();
 		model.setStId(bean.getStId());
@@ -23,7 +23,7 @@ public class IclubSystemTypeTrans {
 		model.setStStatus(bean.getStStatus());
 		return model;
 	}
-	
+
 	public static IclubSystemTypeModel fromORMtoWS(IclubSystemType bean) {
 		IclubSystemTypeModel model = new IclubSystemTypeModel();
 		model.setStId(bean.getStId());
@@ -32,15 +32,15 @@ public class IclubSystemTypeTrans {
 		model.setStStatus(bean.getStStatus());
 		return model;
 	}
-	
+
 	public static IclubSystemType fromWStoORM(IclubSystemTypeModel model) {
 		IclubSystemType acctype = new IclubSystemType();
-		
+
 		acctype.setStId(model.getStId());
 		acctype.setStLongDesc(model.getStLongDesc());
 		acctype.setStShortDesc(model.getStShortDesc());
 		acctype.setStStatus(model.getStStatus());
-		
+
 		return acctype;
 	}
 }

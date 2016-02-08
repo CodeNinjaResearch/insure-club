@@ -39,21 +39,21 @@ public class IclubBankMasterDAO {
 	public static final String BM_BRANCH_LAT = "bmBranchLat";
 	public static final String BM_BRANCH_LONG = "bmBranchLong";
 	public static final String BM_BRANCH_ZIP = "bmBranchZip";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubBankMaster transientInstance) {
 		log.debug("saving IclubBankMaster instance");
 		try {
@@ -64,7 +64,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubBankMaster persistentInstance) {
 		log.debug("deleting IclubBankMaster instance");
 		try {
@@ -75,7 +75,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBankMaster findById(java.lang.Long id) {
 		log.debug("getting IclubBankMaster instance with id: " + id);
 		try {
@@ -86,7 +86,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBankMaster> findByExample(IclubBankMaster instance) {
 		log.debug("finding IclubBankMaster instance by example");
 		try {
@@ -98,7 +98,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubBankMaster instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -111,39 +111,39 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBankMaster> findByBmBankName(Object bmBankName) {
 		return findByProperty(BM_BANK_NAME, bmBankName);
 	}
-	
+
 	public List<IclubBankMaster> findByBmBankCode(Object bmBankCode) {
 		return findByProperty(BM_BANK_CODE, bmBankCode);
 	}
-	
+
 	public List<IclubBankMaster> findByBmBranchName(Object bmBranchName) {
 		return findByProperty(BM_BRANCH_NAME, bmBranchName);
 	}
-	
+
 	public List<IclubBankMaster> findByBmBranchCode(Object bmBranchCode) {
 		return findByProperty(BM_BRANCH_CODE, bmBranchCode);
 	}
-	
+
 	public List<IclubBankMaster> findByBmBranchAddress(Object bmBranchAddress) {
 		return findByProperty(BM_BRANCH_ADDRESS, bmBranchAddress);
 	}
-	
+
 	public List<IclubBankMaster> findByBmBranchLat(Object bmBranchLat) {
 		return findByProperty(BM_BRANCH_LAT, bmBranchLat);
 	}
-	
+
 	public List<IclubBankMaster> findByBmBranchLong(Object bmBranchLong) {
 		return findByProperty(BM_BRANCH_LONG, bmBranchLong);
 	}
-	
+
 	public List<IclubBankMaster> findByBmBranchZip(Object bmBranchZip) {
 		return findByProperty(BM_BRANCH_ZIP, bmBranchZip);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubBankMaster instances");
 		try {
@@ -155,7 +155,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBankMaster merge(IclubBankMaster detachedInstance) {
 		log.debug("merging IclubBankMaster instance");
 		try {
@@ -167,7 +167,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubBankMaster instance) {
 		log.debug("attaching dirty IclubBankMaster instance");
 		try {
@@ -178,7 +178,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubBankMaster instance) {
 		log.debug("attaching clean IclubBankMaster instance");
 		try {
@@ -189,7 +189,7 @@ public class IclubBankMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubBankMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBankMasterDAO) ctx.getBean("IclubBankMasterDAO");
 	}

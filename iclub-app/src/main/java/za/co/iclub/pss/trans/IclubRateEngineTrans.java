@@ -8,11 +8,11 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubRateTypeDAO;
 
 public class IclubRateEngineTrans {
-	
+
 	public static IclubRateEngineBean fromWStoUI(IclubRateEngineModel model) {
-		
+
 		IclubRateEngineBean bean = new IclubRateEngineBean();
-		
+
 		bean.setReId(model.getReId());
 		bean.setReRate(model.getReRate());
 		bean.setReCrtdDt(model.getReCrtdDt());
@@ -23,14 +23,14 @@ public class IclubRateEngineTrans {
 		bean.setRtLongDesc(model.getRtLongDesc());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubRateEngineModel fromUItoWS(IclubRateEngineBean bean) {
-		
+
 		IclubRateEngineModel model = new IclubRateEngineModel();
-		
+
 		model.setReId(bean.getReId());
 		model.setReRate(bean.getReRate());
 		model.setReCrtdDt(bean.getReCrtdDt());
@@ -41,12 +41,12 @@ public class IclubRateEngineTrans {
 		model.setRtLongDesc(bean.getRtLongDesc());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubRateEngineModel fromORMtoWS(IclubRateEngine bean) {
-		
+
 		IclubRateEngineModel model = new IclubRateEngineModel();
 		model.setReId(bean.getReId());
 		model.setReRate(bean.getReRate());
@@ -58,14 +58,14 @@ public class IclubRateEngineTrans {
 		model.setRtLongDesc(bean.getIclubRateType() != null ? bean.getIclubRateType().getRtLongDesc() : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubRateEngine fromWStoORM(IclubRateEngineModel model, IclubRateTypeDAO iclubRateTypeDAO, IclubPersonDAO iclubPersonDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		
+
 		IclubRateEngine bean = new IclubRateEngine();
-		
+
 		bean.setReId(model.getReId());
 		bean.setReRate(model.getReRate());
 		bean.setReCrtdDt(model.getReCrtdDt());
@@ -74,7 +74,7 @@ public class IclubRateEngineTrans {
 		bean.setReBaseValue(model.getReBaseValue());
 		bean.setIclubRateType(model.getIclubRateType() != null ? iclubRateTypeDAO.findById(model.getIclubRateType()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+
 		return bean;
 	}
 }

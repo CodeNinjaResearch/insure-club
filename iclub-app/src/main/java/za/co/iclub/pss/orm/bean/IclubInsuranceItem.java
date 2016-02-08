@@ -19,9 +19,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "iclub_insurance_item", catalog = "iclubdb")
 public class IclubInsuranceItem implements java.io.Serializable {
-	
+
 	// Fields
-	
+
 	/**
 	 * 
 	 */
@@ -35,18 +35,18 @@ public class IclubInsuranceItem implements java.io.Serializable {
 	private String iiItemId;
 	private Date iiCrtdDt;
 	private Set<IclubClaimItem> iclubClaimItems = new HashSet<IclubClaimItem>(0);
-	
+
 	// Constructors
-	
+
 	/** default constructor */
 	public IclubInsuranceItem() {
 	}
-	
+
 	/** minimal constructor */
 	public IclubInsuranceItem(String iiId) {
 		this.iiId = iiId;
 	}
-	
+
 	/** full constructor */
 	public IclubInsuranceItem(String iiId, IclubInsuranceItemType iclubInsuranceItemType, IclubPerson iclubPerson, String iiQuoteId, Double iiInsureValue, Double iiActualValue, String iiItemId, Date iiCrtdDt, Set<IclubClaimItem> iclubClaimItems) {
 		this.iiId = iiId;
@@ -59,90 +59,90 @@ public class IclubInsuranceItem implements java.io.Serializable {
 		this.iiCrtdDt = iiCrtdDt;
 		this.iclubClaimItems = iclubClaimItems;
 	}
-	
+
 	// Property accessors
 	@Id
 	@Column(name = "ii_id", unique = true, nullable = false, length = 36)
 	public String getIiId() {
 		return this.iiId;
 	}
-	
+
 	public void setIiId(String iiId) {
 		this.iiId = iiId;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ii_type_id")
 	public IclubInsuranceItemType getIclubInsuranceItemType() {
 		return this.iclubInsuranceItemType;
 	}
-	
+
 	public void setIclubInsuranceItemType(IclubInsuranceItemType iclubInsuranceItemType) {
 		this.iclubInsuranceItemType = iclubInsuranceItemType;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ii_crtd_by")
 	public IclubPerson getIclubPerson() {
 		return this.iclubPerson;
 	}
-	
+
 	public void setIclubPerson(IclubPerson iclubPerson) {
 		this.iclubPerson = iclubPerson;
 	}
-	
+
 	@Column(name = "ii_quote_id", length = 36)
 	public String getIiQuoteId() {
 		return this.iiQuoteId;
 	}
-	
+
 	public void setIiQuoteId(String iiQuoteId) {
 		this.iiQuoteId = iiQuoteId;
 	}
-	
+
 	@Column(name = "ii_insure_value", precision = 15, scale = 5)
 	public Double getIiInsureValue() {
 		return this.iiInsureValue;
 	}
-	
+
 	public void setIiInsureValue(Double iiInsureValue) {
 		this.iiInsureValue = iiInsureValue;
 	}
-	
+
 	@Column(name = "ii_actual_value", precision = 15, scale = 5)
 	public Double getIiActualValue() {
 		return this.iiActualValue;
 	}
-	
+
 	public void setIiActualValue(Double iiActualValue) {
 		this.iiActualValue = iiActualValue;
 	}
-	
+
 	@Column(name = "ii_item_id", length = 36)
 	public String getIiItemId() {
 		return this.iiItemId;
 	}
-	
+
 	public void setIiItemId(String iiItemId) {
 		this.iiItemId = iiItemId;
 	}
-	
+
 	@Column(name = "ii_crtd_dt", length = 19)
 	public Date getIiCrtdDt() {
 		return this.iiCrtdDt;
 	}
-	
+
 	public void setIiCrtdDt(Date iiCrtdDt) {
 		this.iiCrtdDt = iiCrtdDt;
 	}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubInsuranceItem")
 	public Set<IclubClaimItem> getIclubClaimItems() {
 		return this.iclubClaimItems;
 	}
-	
+
 	public void setIclubClaimItems(Set<IclubClaimItem> iclubClaimItems) {
 		this.iclubClaimItems = iclubClaimItems;
 	}
-	
+
 }

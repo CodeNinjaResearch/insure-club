@@ -34,21 +34,21 @@ public class IclubProductTypeDAO {
 	public static final String PT_SHORT_DESC = "ptShortDesc";
 	public static final String PT_LONG_DESC = "ptLongDesc";
 	public static final String PT_STATUS = "ptStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubProductType transientInstance) {
 		log.debug("saving IclubProductType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubProductType persistentInstance) {
 		log.debug("deleting IclubProductType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubProductType findById(java.lang.Long id) {
 		log.debug("getting IclubProductType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubProductType> findByExample(IclubProductType instance) {
 		log.debug("finding IclubProductType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubProductType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubProductType> findByPtShortDesc(Object ptShortDesc) {
 		return findByProperty(PT_SHORT_DESC, ptShortDesc);
 	}
-	
+
 	public List<IclubProductType> findByPtLongDesc(Object ptLongDesc) {
 		return findByProperty(PT_LONG_DESC, ptLongDesc);
 	}
-	
+
 	public List<IclubProductType> findByPtStatus(Object ptStatus) {
 		return findByProperty(PT_STATUS, ptStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubProductType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubProductType merge(IclubProductType detachedInstance) {
 		log.debug("merging IclubProductType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubProductType instance) {
 		log.debug("attaching dirty IclubProductType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubProductType instance) {
 		log.debug("attaching clean IclubProductType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubProductTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubProductTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubProductTypeDAO) ctx.getBean("IclubProductTypeDAO");
 	}

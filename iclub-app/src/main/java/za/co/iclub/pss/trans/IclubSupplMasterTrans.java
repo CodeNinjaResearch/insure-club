@@ -7,11 +7,11 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplierTypeDAO;
 
 public class IclubSupplMasterTrans {
-	
+
 	public static IclubSupplMasterBean fromWStoUI(IclubSupplMasterModel model) {
-		
+
 		IclubSupplMasterBean bean = new IclubSupplMasterBean();
-		
+
 		bean.setSmId(model.getSmId());
 		bean.setSmCrtdDt(model.getSmCrtdDt());
 		bean.setIclubSupplierType(model.getIclubSupplierType());
@@ -29,11 +29,11 @@ public class IclubSupplMasterTrans {
 		bean.setPFNameAndLName(model.getPFNameAndLName());
 		return bean;
 	}
-	
+
 	public static IclubSupplMasterModel fromUItoWS(IclubSupplMasterBean bean) {
-		
+
 		IclubSupplMasterModel model = new IclubSupplMasterModel();
-		
+
 		model.setSmId(bean.getSmId());
 		model.setSmCrtdDt(bean.getSmCrtdDt());
 		model.setIclubSupplierType(bean.getIclubSupplierType());
@@ -49,14 +49,14 @@ public class IclubSupplMasterTrans {
 		model.setSmName(bean.getSmName());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubSupplMasterModel fromORMtoWS(IclubSupplMaster bean) {
-		
+
 		IclubSupplMasterModel model = new IclubSupplMasterModel();
-		
+
 		model.setSmId(bean.getSmId());
 		model.setSmCrtdDt(bean.getSmCrtdDt());
 		model.setIclubSupplierType(bean.getIclubSupplierType() != null ? bean.getIclubSupplierType().getStId() : null);
@@ -72,14 +72,14 @@ public class IclubSupplMasterTrans {
 		model.setSmName(bean.getSmName());
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubSupplMaster fromWStoORM(IclubSupplMasterModel model, IclubPersonDAO iclubPersonDAO, IclubSupplierTypeDAO iclubSupplierTypeDAO) {
-		
+
 		IclubSupplMaster bean = new IclubSupplMaster();
-		
+
 		bean.setSmId(model.getSmId());
 		bean.setSmCrtdDt(model.getSmCrtdDt());
 		bean.setSmRating(model.getSmRating());
@@ -93,7 +93,7 @@ public class IclubSupplMasterTrans {
 		bean.setSmName(model.getSmName());
 		bean.setIclubSupplierType(model.getIclubSupplierType() != null ? iclubSupplierTypeDAO.findById(model.getIclubSupplierType()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+
 		return bean;
 	}
 }

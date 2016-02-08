@@ -37,21 +37,21 @@ public class IclubNotifDAO {
 	public static final String _NFROM_ADDR = "NFromAddr";
 	public static final String _NTO_LIST = "NToList";
 	public static final String _NSTATUS = "NStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubNotif transientInstance) {
 		log.debug("saving IclubNotif instance");
 		try {
@@ -62,7 +62,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubNotif persistentInstance) {
 		log.debug("deleting IclubNotif instance");
 		try {
@@ -73,7 +73,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubNotif findById(java.lang.String id) {
 		log.debug("getting IclubNotif instance with id: " + id);
 		try {
@@ -84,7 +84,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubNotif> findByExample(IclubNotif instance) {
 		log.debug("finding IclubNotif instance by example");
 		try {
@@ -96,7 +96,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubNotif instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -109,27 +109,27 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubNotif> findByNTitle(Object NTitle) {
 		return findByProperty(_NTITLE, NTitle);
 	}
-	
+
 	public List<IclubNotif> findByNBody(Object NBody) {
 		return findByProperty(_NBODY, NBody);
 	}
-	
+
 	public List<IclubNotif> findByNFromAddr(Object NFromAddr) {
 		return findByProperty(_NFROM_ADDR, NFromAddr);
 	}
-	
+
 	public List<IclubNotif> findByNToList(Object NToList) {
 		return findByProperty(_NTO_LIST, NToList);
 	}
-	
+
 	public List<IclubNotif> findByNStatus(Object NStatus) {
 		return findByProperty(_NSTATUS, NStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubNotif instances");
 		try {
@@ -141,7 +141,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubNotif merge(IclubNotif detachedInstance) {
 		log.debug("merging IclubNotif instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubNotif instance) {
 		log.debug("attaching dirty IclubNotif instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubNotif instance) {
 		log.debug("attaching clean IclubNotif instance");
 		try {
@@ -175,7 +175,7 @@ public class IclubNotifDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubNotifDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubNotifDAO) ctx.getBean("IclubNotifDAO");
 	}

@@ -36,21 +36,21 @@ public class IclubRateTypeDAO {
 	public static final String RT_STATUS = "rtStatus";
 	public static final String RT_TYPE = "rtType";
 	public static final String RT_QUOTE_TYPE = "rtQuoteType";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubRateType transientInstance) {
 		log.debug("saving IclubRateType instance");
 		try {
@@ -61,7 +61,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubRateType persistentInstance) {
 		log.debug("deleting IclubRateType instance");
 		try {
@@ -72,7 +72,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRateType findById(java.lang.Long id) {
 		log.debug("getting IclubRateType instance with id: " + id);
 		try {
@@ -83,7 +83,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRateType> findByExample(IclubRateType instance) {
 		log.debug("finding IclubRateType instance by example");
 		try {
@@ -95,7 +95,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubRateType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -108,27 +108,27 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRateType> findByRtShortDesc(Object rtShortDesc) {
 		return findByProperty(RT_SHORT_DESC, rtShortDesc);
 	}
-	
+
 	public List<IclubRateType> findByRtLongDesc(Object rtLongDesc) {
 		return findByProperty(RT_LONG_DESC, rtLongDesc);
 	}
-	
+
 	public List<IclubRateType> findByRtStatus(Object rtStatus) {
 		return findByProperty(RT_STATUS, rtStatus);
 	}
-	
+
 	public List<IclubRateType> findByRtType(Object rtType) {
 		return findByProperty(RT_TYPE, rtType);
 	}
-	
+
 	public List<IclubRateType> findByRtQuoteType(Object rtQuoteType) {
 		return findByProperty(RT_QUOTE_TYPE, rtQuoteType);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubRateType instances");
 		try {
@@ -140,7 +140,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRateType merge(IclubRateType detachedInstance) {
 		log.debug("merging IclubRateType instance");
 		try {
@@ -152,7 +152,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubRateType instance) {
 		log.debug("attaching dirty IclubRateType instance");
 		try {
@@ -163,7 +163,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubRateType instance) {
 		log.debug("attaching clean IclubRateType instance");
 		try {
@@ -174,7 +174,7 @@ public class IclubRateTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubRateTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRateTypeDAO) ctx.getBean("IclubRateTypeDAO");
 	}

@@ -48,8 +48,7 @@ public class IclubCohortModel {
 		return iclubPersonByCPrimaryUserId;
 	}
 
-	public void setIclubPersonByCPrimaryUserId(
-			String iclubPersonByCPrimaryUserId) {
+	public void setIclubPersonByCPrimaryUserId(String iclubPersonByCPrimaryUserId) {
 		this.iclubPersonByCPrimaryUserId = iclubPersonByCPrimaryUserId;
 	}
 

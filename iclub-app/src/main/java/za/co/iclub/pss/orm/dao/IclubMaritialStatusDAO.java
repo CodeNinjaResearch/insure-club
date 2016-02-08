@@ -34,21 +34,21 @@ public class IclubMaritialStatusDAO {
 	public static final String MS_SHORT_DESC = "msShortDesc";
 	public static final String MS_LONG_DESC = "msLongDesc";
 	public static final String MS_STATUS = "msStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubMaritialStatus transientInstance) {
 		log.debug("saving IclubMaritialStatus instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubMaritialStatus persistentInstance) {
 		log.debug("deleting IclubMaritialStatus instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMaritialStatus findById(java.lang.Long id) {
 		log.debug("getting IclubMaritialStatus instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMaritialStatus> findByExample(IclubMaritialStatus instance) {
 		log.debug("finding IclubMaritialStatus instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubMaritialStatus instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMaritialStatus> findByMsShortDesc(Object msShortDesc) {
 		return findByProperty(MS_SHORT_DESC, msShortDesc);
 	}
-	
+
 	public List<IclubMaritialStatus> findByMsLongDesc(Object msLongDesc) {
 		return findByProperty(MS_LONG_DESC, msLongDesc);
 	}
-	
+
 	public List<IclubMaritialStatus> findByMsStatus(Object msStatus) {
 		return findByProperty(MS_STATUS, msStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubMaritialStatus instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMaritialStatus merge(IclubMaritialStatus detachedInstance) {
 		log.debug("merging IclubMaritialStatus instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubMaritialStatus instance) {
 		log.debug("attaching dirty IclubMaritialStatus instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubMaritialStatus instance) {
 		log.debug("attaching clean IclubMaritialStatus instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubMaritialStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubMaritialStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubMaritialStatusDAO) ctx.getBean("IclubMaritialStatusDAO");
 	}

@@ -34,21 +34,21 @@ public class IclubMessageBoardDAO {
 	public static final String MB_TITLE = "mbTitle";
 	public static final String MB_CONTENT = "mbContent";
 	public static final String MB_TAG = "mbTag";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubMessageBoard transientInstance) {
 		log.debug("saving IclubMessageBoard instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubMessageBoard persistentInstance) {
 		log.debug("deleting IclubMessageBoard instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMessageBoard findById(java.lang.String id) {
 		log.debug("getting IclubMessageBoard instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMessageBoard> findByExample(IclubMessageBoard instance) {
 		log.debug("finding IclubMessageBoard instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubMessageBoard instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMessageBoard> findByMbTitle(Object mbTitle) {
 		return findByProperty(MB_TITLE, mbTitle);
 	}
-	
+
 	public List<IclubMessageBoard> findByMbContent(Object mbContent) {
 		return findByProperty(MB_CONTENT, mbContent);
 	}
-	
+
 	public List<IclubMessageBoard> findByMbTag(Object mbTag) {
 		return findByProperty(MB_TAG, mbTag);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubMessageBoard instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMessageBoard merge(IclubMessageBoard detachedInstance) {
 		log.debug("merging IclubMessageBoard instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubMessageBoard instance) {
 		log.debug("attaching dirty IclubMessageBoard instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubMessageBoard instance) {
 		log.debug("attaching clean IclubMessageBoard instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubMessageBoardDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubMessageBoardDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubMessageBoardDAO) ctx.getBean("IclubMessageBoardDAO");
 	}

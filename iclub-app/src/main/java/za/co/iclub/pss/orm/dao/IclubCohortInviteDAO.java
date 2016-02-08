@@ -36,21 +36,21 @@ public class IclubCohortInviteDAO {
 	public static final String CI_INVITE_FNAME = "ciInviteFName";
 	public static final String CI_INVITE_LNAME = "ciInviteLName";
 	public static final String CI_INVITE_SENT_STATUS = "ciInviteSentStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCohortInvite transientInstance) {
 		log.debug("saving IclubCohortInvite instance");
 		try {
@@ -61,7 +61,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCohortInvite persistentInstance) {
 		log.debug("deleting IclubCohortInvite instance");
 		try {
@@ -72,7 +72,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortInvite findById(java.lang.String id) {
 		log.debug("getting IclubCohortInvite instance with id: " + id);
 		try {
@@ -83,7 +83,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortInvite> findByExample(IclubCohortInvite instance) {
 		log.debug("finding IclubCohortInvite instance by example");
 		try {
@@ -95,7 +95,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCohortInvite instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -108,27 +108,27 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortInvite> findByCiInviteUri(Object ciInviteUri) {
 		return findByProperty(CI_INVITE_URI, ciInviteUri);
 	}
-	
+
 	public List<IclubCohortInvite> findByCiInviteAcceptYn(Object ciInviteAcceptYn) {
 		return findByProperty(CI_INVITE_ACCEPT_YN, ciInviteAcceptYn);
 	}
-	
+
 	public List<IclubCohortInvite> findByCiInviteFName(Object ciInviteFName) {
 		return findByProperty(CI_INVITE_FNAME, ciInviteFName);
 	}
-	
+
 	public List<IclubCohortInvite> findByCiInviteLName(Object ciInviteLName) {
 		return findByProperty(CI_INVITE_LNAME, ciInviteLName);
 	}
-	
+
 	public List<IclubCohortInvite> findByCiInviteSentStatus(Object ciInviteSentStatus) {
 		return findByProperty(CI_INVITE_SENT_STATUS, ciInviteSentStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCohortInvite instances");
 		try {
@@ -140,7 +140,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortInvite merge(IclubCohortInvite detachedInstance) {
 		log.debug("merging IclubCohortInvite instance");
 		try {
@@ -152,7 +152,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCohortInvite instance) {
 		log.debug("attaching dirty IclubCohortInvite instance");
 		try {
@@ -163,7 +163,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCohortInvite instance) {
 		log.debug("attaching clean IclubCohortInvite instance");
 		try {
@@ -174,7 +174,7 @@ public class IclubCohortInviteDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCohortInviteDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCohortInviteDAO) ctx.getBean("IclubCohortInviteDAO");
 	}

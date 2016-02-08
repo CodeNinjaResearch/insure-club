@@ -37,21 +37,21 @@ public class IclubTrackerMasterDAO {
 	public static final String TM_LAT = "tmLat";
 	public static final String TM_LONG = "tmLong";
 	public static final String TM_REG_NUM = "tmRegNum";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubTrackerMaster transientInstance) {
 		log.debug("saving IclubTrackerMaster instance");
 		try {
@@ -62,7 +62,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubTrackerMaster persistentInstance) {
 		log.debug("deleting IclubTrackerMaster instance");
 		try {
@@ -73,7 +73,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubTrackerMaster findById(java.lang.Long id) {
 		log.debug("getting IclubTrackerMaster instance with id: " + id);
 		try {
@@ -84,7 +84,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubTrackerMaster> findByExample(IclubTrackerMaster instance) {
 		log.debug("finding IclubTrackerMaster instance by example");
 		try {
@@ -96,7 +96,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubTrackerMaster instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -109,31 +109,31 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubTrackerMaster> findByTmName(Object tmName) {
 		return findByProperty(TM_NAME, tmName);
 	}
-	
+
 	public List<IclubTrackerMaster> findByTmTradeName(Object tmTradeName) {
 		return findByProperty(TM_TRADE_NAME, tmTradeName);
 	}
-	
+
 	public List<IclubTrackerMaster> findByTmLocation(Object tmLocation) {
 		return findByProperty(TM_LOCATION, tmLocation);
 	}
-	
+
 	public List<IclubTrackerMaster> findByTmLat(Object tmLat) {
 		return findByProperty(TM_LAT, tmLat);
 	}
-	
+
 	public List<IclubTrackerMaster> findByTmLong(Object tmLong) {
 		return findByProperty(TM_LONG, tmLong);
 	}
-	
+
 	public List<IclubTrackerMaster> findByTmRegNum(Object tmRegNum) {
 		return findByProperty(TM_REG_NUM, tmRegNum);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubTrackerMaster instances");
 		try {
@@ -145,7 +145,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubTrackerMaster merge(IclubTrackerMaster detachedInstance) {
 		log.debug("merging IclubTrackerMaster instance");
 		try {
@@ -157,7 +157,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubTrackerMaster instance) {
 		log.debug("attaching dirty IclubTrackerMaster instance");
 		try {
@@ -168,7 +168,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubTrackerMaster instance) {
 		log.debug("attaching clean IclubTrackerMaster instance");
 		try {
@@ -179,7 +179,7 @@ public class IclubTrackerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubTrackerMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubTrackerMasterDAO) ctx.getBean("IclubTrackerMasterDAO");
 	}

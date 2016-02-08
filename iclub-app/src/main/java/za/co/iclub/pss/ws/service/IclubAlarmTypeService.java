@@ -31,7 +31,7 @@ public class IclubAlarmTypeService {
 	private IclubAlarmTypeDAO iclubAlarmTypeDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -39,20 +39,20 @@ public class IclubAlarmTypeService {
 	@Transactional
 	public ResponseModel add(IclubAlarmTypeModel model) {
 		try {
-			
+
 			IclubAlarmType alamType = IclubAlarmTypeTrans.fromWStoORM(model);
-			
+
 			alamType.setAtId(iclubCommonDAO.getNextId(IclubAlarmType.class));
-			
+
 			iclubAlarmTypeDAO.save(alamType);
-			
+
 			LOGGER.info("Save Success with ID :: " + alamType.getAtId().longValue());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -61,9 +61,9 @@ public class IclubAlarmTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -72,11 +72,11 @@ public class IclubAlarmTypeService {
 	public ResponseModel mod(IclubAlarmTypeModel model) {
 		try {
 			IclubAlarmType alamType = IclubAlarmTypeTrans.fromWStoORM(model);
-			
+
 			iclubAlarmTypeDAO.merge(alamType);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getAtId().longValue());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -88,9 +88,9 @@ public class IclubAlarmTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -105,7 +105,7 @@ public class IclubAlarmTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes("application/json")
@@ -130,33 +130,33 @@ public class IclubAlarmTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubAlarmTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubAlarmTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubAlarmType bean = (IclubAlarmType) object;
 					IclubAlarmTypeModel iCB = IclubAlarmTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCB);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -165,37 +165,37 @@ public class IclubAlarmTypeService {
 		IclubAlarmTypeModel model = new IclubAlarmTypeModel();
 		try {
 			IclubAlarmType bean = iclubAlarmTypeDAO.findById(id);
-			
+
 			model = IclubAlarmTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubAlarmTypeDAO getIclubAlarmTypeDAO() {
 		return iclubAlarmTypeDAO;
 	}
-	
+
 	public void setIclubAlarmTypeDAO(IclubAlarmTypeDAO iclubAlarmTypeDAO) {
 		this.iclubAlarmTypeDAO = iclubAlarmTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

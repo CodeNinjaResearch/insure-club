@@ -34,21 +34,21 @@ public class IclubInviteStatusDAO {
 	public static final String IS_LONG_DESC = "isLongDesc";
 	public static final String IS_SHORT_DESC = "isShortDesc";
 	public static final String IS_STATUS = "isStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubInviteStatus transientInstance) {
 		log.debug("saving IclubInviteStatus instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubInviteStatus persistentInstance) {
 		log.debug("deleting IclubInviteStatus instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInviteStatus findById(java.lang.Long id) {
 		log.debug("getting IclubInviteStatus instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInviteStatus> findByExample(IclubInviteStatus instance) {
 		log.debug("finding IclubInviteStatus instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubInviteStatus instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInviteStatus> findByIsLongDesc(Object isLongDesc) {
 		return findByProperty(IS_LONG_DESC, isLongDesc);
 	}
-	
+
 	public List<IclubInviteStatus> findByIsShortDesc(Object isShortDesc) {
 		return findByProperty(IS_SHORT_DESC, isShortDesc);
 	}
-	
+
 	public List<IclubInviteStatus> findByIsStatus(Object isStatus) {
 		return findByProperty(IS_STATUS, isStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubInviteStatus instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInviteStatus merge(IclubInviteStatus detachedInstance) {
 		log.debug("merging IclubInviteStatus instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubInviteStatus instance) {
 		log.debug("attaching dirty IclubInviteStatus instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubInviteStatus instance) {
 		log.debug("attaching clean IclubInviteStatus instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubInviteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubInviteStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubInviteStatusDAO) ctx.getBean("IclubInviteStatusDAO");
 	}

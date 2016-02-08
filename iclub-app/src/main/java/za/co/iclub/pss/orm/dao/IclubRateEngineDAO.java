@@ -36,21 +36,21 @@ public class IclubRateEngineDAO {
 	public static final String RE_MAX_VALUE = "reMaxValue";
 	public static final String RE_RATE = "reRate";
 	public static final String RE_STATUS = "reStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubRateEngine transientInstance) {
 		log.debug("saving IclubRateEngine instance");
 		try {
@@ -61,7 +61,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubRateEngine persistentInstance) {
 		log.debug("deleting IclubRateEngine instance");
 		try {
@@ -72,7 +72,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRateEngine findById(java.lang.String id) {
 		log.debug("getting IclubRateEngine instance with id: " + id);
 		try {
@@ -83,7 +83,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRateEngine> findByExample(IclubRateEngine instance) {
 		log.debug("finding IclubRateEngine instance by example");
 		try {
@@ -95,7 +95,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubRateEngine instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -108,23 +108,23 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRateEngine> findByReBaseValue(Object reBaseValue) {
 		return findByProperty(RE_BASE_VALUE, reBaseValue);
 	}
-	
+
 	public List<IclubRateEngine> findByReMaxValue(Object reMaxValue) {
 		return findByProperty(RE_MAX_VALUE, reMaxValue);
 	}
-	
+
 	public List<IclubRateEngine> findByReRate(Object reRate) {
 		return findByProperty(RE_RATE, reRate);
 	}
-	
+
 	public List<IclubRateEngine> findByReStatus(Object reStatus) {
 		return findByProperty(RE_STATUS, reStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubRateEngine instances");
 		try {
@@ -136,7 +136,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRateEngine merge(IclubRateEngine detachedInstance) {
 		log.debug("merging IclubRateEngine instance");
 		try {
@@ -148,7 +148,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubRateEngine instance) {
 		log.debug("attaching dirty IclubRateEngine instance");
 		try {
@@ -159,7 +159,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubRateEngine instance) {
 		log.debug("attaching clean IclubRateEngine instance");
 		try {
@@ -170,7 +170,7 @@ public class IclubRateEngineDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubRateEngineDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRateEngineDAO) ctx.getBean("IclubRateEngineDAO");
 	}

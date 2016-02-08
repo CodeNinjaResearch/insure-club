@@ -34,21 +34,21 @@ public class IclubOwnerTypeDAO {
 	public static final String OT_SHORT_DESC = "otShortDesc";
 	public static final String OT_LONG_DESC = "otLongDesc";
 	public static final String OT_STATUS = "otStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubOwnerType transientInstance) {
 		log.debug("saving IclubOwnerType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubOwnerType persistentInstance) {
 		log.debug("deleting IclubOwnerType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubOwnerType findById(java.lang.Long id) {
 		log.debug("getting IclubOwnerType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubOwnerType> findByExample(IclubOwnerType instance) {
 		log.debug("finding IclubOwnerType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubOwnerType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubOwnerType> findByOtShortDesc(Object otShortDesc) {
 		return findByProperty(OT_SHORT_DESC, otShortDesc);
 	}
-	
+
 	public List<IclubOwnerType> findByOtLongDesc(Object otLongDesc) {
 		return findByProperty(OT_LONG_DESC, otLongDesc);
 	}
-	
+
 	public List<IclubOwnerType> findByOtStatus(Object otStatus) {
 		return findByProperty(OT_STATUS, otStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubOwnerType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubOwnerType merge(IclubOwnerType detachedInstance) {
 		log.debug("merging IclubOwnerType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubOwnerType instance) {
 		log.debug("attaching dirty IclubOwnerType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubOwnerType instance) {
 		log.debug("attaching clean IclubOwnerType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubOwnerTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubOwnerTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubOwnerTypeDAO) ctx.getBean("IclubOwnerTypeDAO");
 	}

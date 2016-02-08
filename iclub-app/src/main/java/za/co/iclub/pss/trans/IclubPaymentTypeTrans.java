@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubPaymentTypeModel;
 import za.co.iclub.pss.orm.bean.IclubPaymentType;
 
 public class IclubPaymentTypeTrans {
-	
+
 	public static IclubPaymentTypeBean fromWStoUI(IclubPaymentTypeModel model) {
 		IclubPaymentTypeBean bean = new IclubPaymentTypeBean();
 		bean.setPtId(model.getPtId());
@@ -14,7 +14,7 @@ public class IclubPaymentTypeTrans {
 		bean.setPtStatus(model.getPtStatus());
 		return bean;
 	}
-	
+
 	public static IclubPaymentTypeModel fromUItoWS(IclubPaymentTypeBean bean) {
 		IclubPaymentTypeModel model = new IclubPaymentTypeModel();
 		model.setPtId(bean.getPtId());
@@ -23,7 +23,7 @@ public class IclubPaymentTypeTrans {
 		model.setPtStatus(bean.getPtStatus());
 		return model;
 	}
-	
+
 	public static IclubPaymentTypeModel fromORMtoWS(IclubPaymentType bean) {
 		IclubPaymentTypeModel model = new IclubPaymentTypeModel();
 		model.setPtId(bean.getPtId());
@@ -32,15 +32,15 @@ public class IclubPaymentTypeTrans {
 		model.setPtStatus(bean.getPtStatus());
 		return model;
 	}
-	
+
 	public static IclubPaymentType fromWStoORM(IclubPaymentTypeModel model) {
 		IclubPaymentType acctype = new IclubPaymentType();
-		
+
 		acctype.setPtId(model.getPtId());
 		acctype.setPtLongDesc(model.getPtLongDesc());
 		acctype.setPtShortDesc(model.getPtShortDesc());
 		acctype.setPtStatus(model.getPtStatus());
-		
+
 		return acctype;
 	}
 }

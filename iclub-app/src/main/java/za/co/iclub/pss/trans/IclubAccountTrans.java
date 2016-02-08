@@ -9,7 +9,7 @@ import za.co.iclub.pss.orm.dao.IclubOwnerTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubAccountTrans {
-	
+
 	public static IclubAccountBean fromWStoUI(IclubAccountModel model) {
 		IclubAccountBean bean = new IclubAccountBean();
 		bean.setAId(model.getAId());
@@ -28,7 +28,7 @@ public class IclubAccountTrans {
 		bean.setAStatus(model.getAStatus());
 		return bean;
 	}
-	
+
 	public static IclubAccountModel fromUItoWS(IclubAccountBean bean) {
 		IclubAccountModel model = new IclubAccountModel();
 		model.setAId(bean.getAId());
@@ -47,7 +47,7 @@ public class IclubAccountTrans {
 		model.setAStatus(bean.getAStatus());
 		return model;
 	}
-	
+
 	public static IclubAccountModel fromORMtoWS(IclubAccount bean) {
 		IclubAccountModel model = new IclubAccountModel();
 		model.setAId(model.getAId());
@@ -65,7 +65,7 @@ public class IclubAccountTrans {
 		model.setAStatus(model.getAStatus());
 		return model;
 	}
-	
+
 	public static IclubAccount fromWStoORM(IclubAccountModel model, IclubBankMasterDAO iclubBankMasterDAO, IclubAccountTypeDAO iclubAccountTypeDAO, IclubOwnerTypeDAO iclubOwnerTypeDAO, IclubPersonDAO iclubPersonDAO) {
 		IclubAccount bean = new IclubAccount();
 		bean.setAId(model.getAId());
@@ -79,5 +79,5 @@ public class IclubAccountTrans {
 		bean.setAStatus(model.getAStatus());
 		return bean;
 	}
-	
+
 }

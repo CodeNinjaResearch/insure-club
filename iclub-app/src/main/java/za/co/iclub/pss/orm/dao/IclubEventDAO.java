@@ -33,21 +33,21 @@ public class IclubEventDAO {
 	private static final Logger log = LoggerFactory.getLogger(IclubEventDAO.class);
 	// property constants
 	public static final String _EDESC = "EDesc";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubEvent transientInstance) {
 		log.debug("saving IclubEvent instance");
 		try {
@@ -58,7 +58,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubEvent persistentInstance) {
 		log.debug("deleting IclubEvent instance");
 		try {
@@ -69,7 +69,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubEvent findById(java.lang.String id) {
 		log.debug("getting IclubEvent instance with id: " + id);
 		try {
@@ -80,7 +80,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubEvent> findByExample(IclubEvent instance) {
 		log.debug("finding IclubEvent instance by example");
 		try {
@@ -92,7 +92,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubEvent instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -105,11 +105,11 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubEvent> findByEDesc(Object EDesc) {
 		return findByProperty(_EDESC, EDesc);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubEvent instances");
 		try {
@@ -121,7 +121,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubEvent merge(IclubEvent detachedInstance) {
 		log.debug("merging IclubEvent instance");
 		try {
@@ -133,7 +133,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubEvent instance) {
 		log.debug("attaching dirty IclubEvent instance");
 		try {
@@ -144,7 +144,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubEvent instance) {
 		log.debug("attaching clean IclubEvent instance");
 		try {
@@ -155,7 +155,7 @@ public class IclubEventDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubEventDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubEventDAO) ctx.getBean("IclubEventDAO");
 	}

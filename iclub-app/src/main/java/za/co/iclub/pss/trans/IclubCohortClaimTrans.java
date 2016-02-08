@@ -8,10 +8,10 @@ import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubCohortClaimTrans {
-	
+
 	public static IclubCohortClaimBean fromWStoUI(IclubCohortClaimModel model) {
 		IclubCohortClaimBean bean = new IclubCohortClaimBean();
-		
+
 		model.setCcId(model.getCcId());
 		model.setIclubCohort(model.getIclubCohort());
 		model.setCEmail(model.getCEmail());
@@ -22,22 +22,22 @@ public class IclubCohortClaimTrans {
 		model.setCcClaimAmt(model.getCcClaimAmt());
 		model.setIclubPerson(model.getIclubPerson());
 		model.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubCohortClaimModel fromUItoWS(IclubCohortClaimBean bean) {
 		IclubCohortClaimModel model = new IclubCohortClaimModel();
-		
+
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
 		return model;
 	}
-	
+
 	public static IclubCohortClaimModel fromORMtoWS(IclubCohortClaim bean) {
-		
+
 		IclubCohortClaimModel model = new IclubCohortClaimModel();
-		
+
 		model.setCcId(bean.getCcId());
 		model.setIclubCohort(bean.getIclubCohort() != null ? (bean.getIclubCohort()).getCId() : null);
 		model.setCEmail(bean.getIclubCohort() != null ? (bean.getIclubCohort()).getCEmail() : null);
@@ -48,21 +48,21 @@ public class IclubCohortClaimTrans {
 		model.setCcClaimAmt(bean.getCcClaimAmt());
 		model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson()).getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubCohortClaim fromWStoORM(IclubCohortClaimModel model, IclubClaimDAO iclubClaimDAO, IclubCohortDAO iclubCohortDAO, IclubPersonDAO iclubPersonDAO) {
-		
+
 		IclubCohortClaim bean = new IclubCohortClaim();
-		
+
 		bean.setCcId(model.getCcId());
 		bean.setIclubCohort(iclubCohortDAO.findById(model.getIclubCohort()));
 		bean.setIclubClaim(iclubClaimDAO.findById(model.getIclubClaim()));
 		bean.setCcCrtdDt(model.getCcCrtdDt());
 		bean.setCcClaimAmt(model.getCcClaimAmt());
 		bean.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
-		
+
 		return bean;
 	}
 }

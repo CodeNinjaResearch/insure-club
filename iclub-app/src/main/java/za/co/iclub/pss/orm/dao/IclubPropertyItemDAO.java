@@ -34,21 +34,21 @@ public class IclubPropertyItemDAO {
 	// property constants
 	public static final String PI_DESCRIPTON = "piDescripton";
 	public static final String PI_VALUE = "piValue";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubPropertyItem transientInstance) {
 		log.debug("saving IclubPropertyItem instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubPropertyItem persistentInstance) {
 		log.debug("deleting IclubPropertyItem instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPropertyItem findById(java.lang.String id) {
 		log.debug("getting IclubPropertyItem instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPropertyItem> findByExample(IclubPropertyItem instance) {
 		log.debug("finding IclubPropertyItem instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubPropertyItem instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPropertyItem> findByPiDescripton(Object piDescripton) {
 		return findByProperty(PI_DESCRIPTON, piDescripton);
 	}
-	
+
 	public List<IclubPropertyItem> findByPiValue(Object piValue) {
 		return findByProperty(PI_VALUE, piValue);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubPropertyItem instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPropertyItem merge(IclubPropertyItem detachedInstance) {
 		log.debug("merging IclubPropertyItem instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubPropertyItem instance) {
 		log.debug("attaching dirty IclubPropertyItem instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubPropertyItem instance) {
 		log.debug("attaching clean IclubPropertyItem instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubPropertyItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPropertyItemDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPropertyItemDAO) ctx.getBean("IclubPropertyItemDAO");
 	}

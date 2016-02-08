@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubSupplPersonService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubSupplPersonService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubSupplPersonService.class);
 	private IclubSupplPersonDAO iclubSupplPersonDAO;
 	private IclubSupplMasterDAO iclubSupplMasterDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -45,18 +45,18 @@ public class IclubSupplPersonService {
 	@Transactional
 	public ResponseModel add(IclubSupplPersonModel model) {
 		try {
-			
+
 			IclubSupplPerson bean = IclubSupplPersonTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplMasterDAO);
-			
+
 			iclubSupplPersonDAO.save(bean);
-			
+
 			LOGGER.info("Save Success with ID :: " + bean.getSpId());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -65,9 +65,9 @@ public class IclubSupplPersonService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -76,11 +76,11 @@ public class IclubSupplPersonService {
 	public ResponseModel mod(IclubSupplPersonModel model) {
 		try {
 			IclubSupplPerson iCSp = IclubSupplPersonTrans.fromWStoORM(model, iclubPersonDAO, iclubSupplMasterDAO);
-			
+
 			iclubSupplPersonDAO.merge(iCSp);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getSpId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -92,9 +92,9 @@ public class IclubSupplPersonService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -109,45 +109,45 @@ public class IclubSupplPersonService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubSupplPersonModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubSupplPersonDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubSupplPerson bean = (IclubSupplPerson) object;
 					IclubSupplPersonModel iCSp = IclubSupplPersonTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCSp);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubSupplPersonModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubSupplPerson.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubSupplPerson bean = (IclubSupplPerson) object;
 					IclubSupplPersonModel iCSp = IclubSupplPersonTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCSp);
 				}
 			}
@@ -156,7 +156,7 @@ public class IclubSupplPersonService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -165,21 +165,21 @@ public class IclubSupplPersonService {
 		IclubSupplPersonModel model = new IclubSupplPersonModel();
 		try {
 			IclubSupplPerson bean = iclubSupplPersonDAO.findById(id);
-			
+
 			model = IclubSupplPersonTrans.fromORMtoWS(bean);
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/get/supplMaster/{id}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubSupplPersonModel> List<T> getBySupplMaster(@PathParam("id") String smId) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findIclubSupplPersonBySmId(smId);
 			if (batmod != null && batmod.size() > 0) {
@@ -194,45 +194,45 @@ public class IclubSupplPersonService {
 		}
 		return ret;
 	}
-	
+
 	public IclubSupplPersonDAO getIclubSupplPersonDAO() {
 		return iclubSupplPersonDAO;
 	}
-	
+
 	public void setIclubSupplPersonDAO(IclubSupplPersonDAO iclubSupplPersonDAO) {
 		this.iclubSupplPersonDAO = iclubSupplPersonDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 	public IclubSupplMasterDAO getIclubSupplMasterDAO() {
 		return iclubSupplMasterDAO;
 	}
-	
+
 	public void setIclubSupplMasterDAO(IclubSupplMasterDAO iclubSupplMasterDAO) {
 		this.iclubSupplMasterDAO = iclubSupplMasterDAO;
 	}
-	
+
 }

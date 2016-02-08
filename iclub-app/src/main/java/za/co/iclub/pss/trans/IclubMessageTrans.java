@@ -8,10 +8,10 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSystemTypeDAO;
 
 public class IclubMessageTrans {
-	
+
 	public static IclubMessageBean fromWStoUI(IclubMessageModel model) {
 		IclubMessageBean bean = new IclubMessageBean();
-		
+
 		bean.setMId(model.getMId());
 		bean.setMContent(model.getMContent());
 		bean.setMTranId(model.getMTranId());
@@ -25,14 +25,14 @@ public class IclubMessageTrans {
 		bean.setToStLongDesc(model.getToStLongDesc());
 		bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId());
 		bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubMessageModel fromUItoWS(IclubMessageBean bean) {
-		
+
 		IclubMessageModel model = new IclubMessageModel();
-		
+
 		model.setMId(bean.getMId());
 		model.setMContent(bean.getMContent());
 		model.setMTranId(bean.getMTranId());
@@ -46,13 +46,13 @@ public class IclubMessageTrans {
 		model.setToStLongDesc(bean.getToStLongDesc());
 		model.setIclubSystemTypeByMFromSysId(bean.getIclubSystemTypeByMFromSysId());
 		model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId());
-		
+
 		return model;
 	}
-	
+
 	public static IclubMessageModel fromORMtoWS(IclubMessage bean) {
 		IclubMessageModel model = new IclubMessageModel();
-		
+
 		model.setMId(bean.getMId());
 		model.setMContent(bean.getMContent());
 		model.setMTranId(bean.getMTranId());
@@ -66,14 +66,14 @@ public class IclubMessageTrans {
 		model.setIclubSystemTypeByMToSysId(bean.getIclubSystemTypeByMToSysId() != null ? bean.getIclubSystemTypeByMToSysId().getStId() : null);
 		model.setFromStLongDesc(bean.getIclubSystemTypeByMToSysId() != null ? bean.getIclubSystemTypeByMToSysId().getStLongDesc() : null);
 		model.setToStLongDesc(bean.getIclubSystemTypeByMToSysId() != null ? bean.getIclubSystemTypeByMToSysId().getStLongDesc() : null);
-		
+
 		return model;
 	}
-	
+
 	public static IclubMessage fromWStoORM(IclubMessageModel model, IclubPersonDAO iclubPersonDAO, IclubMessageTypeDAO iclubMessageTypeDAO, IclubSystemTypeDAO iclubSystemTypeDAO) {
-		
+
 		IclubMessage bean = new IclubMessage();
-		
+
 		bean.setMId(model.getMId());
 		bean.setMContent(model.getMContent());
 		bean.setMTranId(model.getMTranId());
@@ -83,7 +83,7 @@ public class IclubMessageTrans {
 		bean.setIclubMessageType(model.getIclubMessageType() != null ? iclubMessageTypeDAO.findById(model.getIclubMessageType()) : null);
 		bean.setIclubSystemTypeByMFromSysId(model.getIclubSystemTypeByMFromSysId() != null ? iclubSystemTypeDAO.findById(model.getIclubSystemTypeByMFromSysId()) : null);
 		bean.setIclubSystemTypeByMToSysId(model.getIclubSystemTypeByMToSysId() != null ? iclubSystemTypeDAO.findById(model.getIclubSystemTypeByMToSysId()) : null);
-		
+
 		return bean;
 	}
 }

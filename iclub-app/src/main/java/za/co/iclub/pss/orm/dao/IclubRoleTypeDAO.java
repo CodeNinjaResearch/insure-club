@@ -34,21 +34,21 @@ public class IclubRoleTypeDAO {
 	public static final String RT_SHORT_DESC = "rtShortDesc";
 	public static final String RT_LONG_DESC = "rtLongDesc";
 	public static final String RT_STATUS = "rtStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubRoleType transientInstance) {
 		log.debug("saving IclubRoleType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubRoleType persistentInstance) {
 		log.debug("deleting IclubRoleType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRoleType findById(java.lang.Long id) {
 		log.debug("getting IclubRoleType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRoleType> findByExample(IclubRoleType instance) {
 		log.debug("finding IclubRoleType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubRoleType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRoleType> findByRtShortDesc(Object rtShortDesc) {
 		return findByProperty(RT_SHORT_DESC, rtShortDesc);
 	}
-	
+
 	public List<IclubRoleType> findByRtLongDesc(Object rtLongDesc) {
 		return findByProperty(RT_LONG_DESC, rtLongDesc);
 	}
-	
+
 	public List<IclubRoleType> findByRtStatus(Object rtStatus) {
 		return findByProperty(RT_STATUS, rtStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubRoleType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRoleType merge(IclubRoleType detachedInstance) {
 		log.debug("merging IclubRoleType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubRoleType instance) {
 		log.debug("attaching dirty IclubRoleType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubRoleType instance) {
 		log.debug("attaching clean IclubRoleType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubRoleTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubRoleTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRoleTypeDAO) ctx.getBean("IclubRoleTypeDAO");
 	}

@@ -35,21 +35,21 @@ public class IclubEntityTypeDAO {
 	public static final String ET_LONG_DESC = "etLongDesc";
 	public static final String ET_TBL_NM = "etTblNm";
 	public static final String ET_STATUS = "etStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubEntityType transientInstance) {
 		log.debug("saving IclubEntityType instance");
 		try {
@@ -60,7 +60,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubEntityType persistentInstance) {
 		log.debug("deleting IclubEntityType instance");
 		try {
@@ -71,7 +71,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubEntityType findById(java.lang.Long id) {
 		log.debug("getting IclubEntityType instance with id: " + id);
 		try {
@@ -82,7 +82,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubEntityType> findByExample(IclubEntityType instance) {
 		log.debug("finding IclubEntityType instance by example");
 		try {
@@ -94,7 +94,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubEntityType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -107,23 +107,23 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubEntityType> findByEtShortDesc(Object etShortDesc) {
 		return findByProperty(ET_SHORT_DESC, etShortDesc);
 	}
-	
+
 	public List<IclubEntityType> findByEtLongDesc(Object etLongDesc) {
 		return findByProperty(ET_LONG_DESC, etLongDesc);
 	}
-	
+
 	public List<IclubEntityType> findByEtTblNm(Object etTblNm) {
 		return findByProperty(ET_TBL_NM, etTblNm);
 	}
-	
+
 	public List<IclubEntityType> findByEtStatus(Object etStatus) {
 		return findByProperty(ET_STATUS, etStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubEntityType instances");
 		try {
@@ -135,7 +135,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubEntityType merge(IclubEntityType detachedInstance) {
 		log.debug("merging IclubEntityType instance");
 		try {
@@ -147,7 +147,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubEntityType instance) {
 		log.debug("attaching dirty IclubEntityType instance");
 		try {
@@ -158,7 +158,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubEntityType instance) {
 		log.debug("attaching clean IclubEntityType instance");
 		try {
@@ -169,7 +169,7 @@ public class IclubEntityTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubEntityTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubEntityTypeDAO) ctx.getBean("IclubEntityTypeDAO");
 	}

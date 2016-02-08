@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubPaymentStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPaymentStatusService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubPaymentStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPaymentStatusDAO iclubPaymentStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubPaymentStatusService {
 	public ResponseModel add(IclubPaymentStatusModel model) {
 		try {
 			IclubPaymentStatus iPs = IclubPaymentStatusTrans.fromWStoORM(model);
-			
+
 			iPs.setPsId(iclubCommonDAO.getNextId(IclubPaymentStatus.class));
-			
+
 			iclubPaymentStatusDAO.save(iPs);
-			
+
 			LOGGER.info("Save Success with ID :: " + iPs.getPsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubPaymentStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubPaymentStatusService {
 	public ResponseModel mod(IclubPaymentStatusModel model) {
 		try {
 			IclubPaymentStatus iPs = IclubPaymentStatusTrans.fromWStoORM(model);
-			
+
 			iclubPaymentStatusDAO.merge(iPs);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubPaymentStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubPaymentStatusService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPaymentStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPaymentStatusDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPaymentStatus bean = (IclubPaymentStatus) object;
-					
+
 					IclubPaymentStatusModel model = IclubPaymentStatusTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,15 +138,15 @@ public class IclubPaymentStatusService {
 		IclubPaymentStatusModel model = new IclubPaymentStatusModel();
 		try {
 			IclubPaymentStatus bean = iclubPaymentStatusDAO.findById(id);
-			
+
 			model = IclubPaymentStatusTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -154,7 +154,7 @@ public class IclubPaymentStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			
+
 			List data = iclubNamedQueryDAO.getBySD(val, id, IclubPaymentStatus.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
@@ -173,29 +173,29 @@ public class IclubPaymentStatusService {
 			return message;
 		}
 	}
-	
+
 	public IclubPaymentStatusDAO getIclubPaymentStatusDAO() {
 		return iclubPaymentStatusDAO;
 	}
-	
+
 	public void setIclubPaymentStatusDAO(IclubPaymentStatusDAO iclubPaymentStatusDAO) {
 		this.iclubPaymentStatusDAO = iclubPaymentStatusDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

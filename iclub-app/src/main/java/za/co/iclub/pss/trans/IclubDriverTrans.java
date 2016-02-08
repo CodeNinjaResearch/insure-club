@@ -9,11 +9,11 @@ import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubDriverTrans {
-	
+
 	public static IclubDriverBean fromWStoUI(IclubDriverModel model) {
-		
+
 		IclubDriverBean bean = new IclubDriverBean();
-		
+
 		bean.setDId(model.getDId());
 		bean.setDDob(model.getDDob());
 		bean.setDIssueDt(model.getDIssueDt());
@@ -34,14 +34,14 @@ public class IclubDriverTrans {
 		bean.setPBFNameAndLName(model.getPBFNameAndLName());
 		bean.setPAFNameAndLName(model.getPAFNameAndLName());
 		bean.setDLName(model.getDLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubDriverModel fromUItoWS(IclubDriverBean bean) {
-		
+
 		IclubDriverModel model = new IclubDriverModel();
-		
+
 		model.setDId(bean.getDId());
 		model.setDDob(bean.getDDob());
 		model.setDIssueDt(bean.getDIssueDt());
@@ -62,14 +62,14 @@ public class IclubDriverTrans {
 		model.setPBFNameAndLName(bean.getPBFNameAndLName());
 		model.setPAFNameAndLName(bean.getPAFNameAndLName());
 		model.setDLName(bean.getDLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubDriverModel fromORMtoWS(IclubDriver bean) {
-		
+
 		IclubDriverModel model = new IclubDriverModel();
-		
+
 		model.setDId(bean.getDId());
 		model.setDDob(bean.getDDob());
 		model.setDIssueDt(bean.getDIssueDt());
@@ -90,14 +90,14 @@ public class IclubDriverTrans {
 		model.setPBFNameAndLName(bean.getIclubPersonByDPersonId() != null ? bean.getIclubPersonByDPersonId().getPFName() + " " + bean.getIclubPersonByDPersonId().getPLName() != null ? bean.getIclubPersonByDPersonId().getPLName() : "" : "");
 		model.setPAFNameAndLName(bean.getIclubPersonByDCrtdBy() != null ? bean.getIclubPersonByDCrtdBy().getPFName() + " " + bean.getIclubPersonByDCrtdBy().getPLName() != null ? bean.getIclubPersonByDCrtdBy().getPLName() : "" : "");
 		model.setDLName(bean.getDLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubDriver fromWStoORM(IclubDriverModel model, IclubAccessTypeDAO iclubAccessTypeDAO, IclubLicenseCodeDAO iclubLicenseCodeDAO, IclubMaritialStatusDAO iclubMaritialStatusDAO, IclubPersonDAO iclubPersonDAO) {
-		
+
 		IclubDriver bean = new IclubDriver();
-		
+
 		bean.setDId(model.getDId());
 		bean.setDDob(model.getDDob());
 		bean.setDIssueDt(model.getDIssueDt());
@@ -112,7 +112,7 @@ public class IclubDriverTrans {
 		bean.setIclubPersonByDPersonId(model.getIclubPersonBByDPersonId() != null && !model.getIclubPersonBByDPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonBByDPersonId()) : null);
 		bean.setIclubPersonByDCrtdBy(model.getIclubPersonAByDCrtdBy() != null && !model.getIclubPersonAByDCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonAByDCrtdBy()) : null);
 		bean.setDLName(model.getDLName());
-		
+
 		return bean;
 	}
 }

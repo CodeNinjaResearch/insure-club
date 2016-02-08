@@ -34,21 +34,21 @@ public class IclubOccupationDAO {
 	// property constants
 	public static final String _ODESC = "ODesc";
 	public static final String _OSTATUS = "OStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubOccupation transientInstance) {
 		log.debug("saving IclubOccupation instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubOccupation persistentInstance) {
 		log.debug("deleting IclubOccupation instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubOccupation findById(java.lang.Long id) {
 		log.debug("getting IclubOccupation instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubOccupation> findByExample(IclubOccupation instance) {
 		log.debug("finding IclubOccupation instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubOccupation instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubOccupation> findByODesc(Object ODesc) {
 		return findByProperty(_ODESC, ODesc);
 	}
-	
+
 	public List<IclubOccupation> findByOStatus(Object OStatus) {
 		return findByProperty(_OSTATUS, OStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubOccupation instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubOccupation merge(IclubOccupation detachedInstance) {
 		log.debug("merging IclubOccupation instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubOccupation instance) {
 		log.debug("attaching dirty IclubOccupation instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubOccupation instance) {
 		log.debug("attaching clean IclubOccupation instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubOccupationDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubOccupationDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubOccupationDAO) ctx.getBean("IclubOccupationDAO");
 	}

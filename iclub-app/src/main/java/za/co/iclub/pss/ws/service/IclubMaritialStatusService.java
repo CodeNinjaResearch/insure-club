@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubMaritialStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubMaritialStatusService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubMaritialStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubMaritialStatusService {
 	public ResponseModel add(IclubMaritialStatusModel model) {
 		try {
 			IclubMaritialStatus iMs = IclubMaritialStatusTrans.fromWStoORM(model);
-			
+
 			iMs.setMsId(iclubCommonDAO.getNextId(IclubMaritialStatus.class));
-			
+
 			iclubMaritialStatusDAO.save(iMs);
-			
+
 			LOGGER.info("Save Success with ID :: " + iMs.getMsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubMaritialStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubMaritialStatusService {
 	public ResponseModel mod(IclubMaritialStatusModel model) {
 		try {
 			IclubMaritialStatus iMs = IclubMaritialStatusTrans.fromWStoORM(model);
-			
+
 			iclubMaritialStatusDAO.merge(iMs);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getMsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubMaritialStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubMaritialStatusService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubMaritialStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubMaritialStatusDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubMaritialStatus bean = (IclubMaritialStatus) object;
-					
+
 					IclubMaritialStatusModel model = IclubMaritialStatusTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,15 +138,15 @@ public class IclubMaritialStatusService {
 		IclubMaritialStatusModel model = new IclubMaritialStatusModel();
 		try {
 			IclubMaritialStatus bean = iclubMaritialStatusDAO.findById(id);
-			
+
 			model = IclubMaritialStatusTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -172,29 +172,29 @@ public class IclubMaritialStatusService {
 			return message;
 		}
 	}
-	
+
 	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
 		return iclubMaritialStatusDAO;
 	}
-	
+
 	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
 		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

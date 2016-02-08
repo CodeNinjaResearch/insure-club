@@ -36,27 +36,27 @@ public class Oauth2Yahoocallback extends HttpServlet {
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
 	protected static final Logger LOGGER = Logger.getLogger(Oauth2Yahoocallback.class);
 	private static String encodedValue = "";
-	
+
 	public Oauth2Yahoocallback() {
 		super();
-		
+
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		System.err.println("entering doGet");
-		
+
 		LOGGER.info("==========hello:");
 		try {
 			String code = request.getParameter("code");
-			
+
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost("https://api.login.yahoo.com/oauth2/get_token");
-			
+
 			List<NameValuePair> arguments = new ArrayList<>(3);
 			arguments.add(new BasicNameValuePair("grant_type", Y_BUNDLE.getString("grant_type")));
 			arguments.add(new BasicNameValuePair("redirect_uri", Y_BUNDLE.getString("redirect_uri")));
@@ -79,7 +79,7 @@ public class Oauth2Yahoocallback extends HttpServlet {
 				JsonObject json = (JsonObject) new JsonParser().parse(outputString);
 				String access_token = json.get("access_token").getAsString();
 				String xoauth_yahoo_guid = json.get("xoauth_yahoo_guid").toString();
-				
+
 				try {
 					String callUrl1 = "https://social.yahooapis.com/v1/user/" + xoauth_yahoo_guid.replace("\"", "") + "/profile?format=json";
 					HttpGet httpGet = new HttpGet(callUrl1);
@@ -91,20 +91,20 @@ public class Oauth2Yahoocallback extends HttpServlet {
 					jsonGet = (JsonObject) new JsonParser().parse(jsonGet.get("profile").toString());
 					String emails = jsonGet.get("emails").toString();
 					ObjectMapper mapper = new ObjectMapper();
-					
+
 					mapper.readValue(emails.toString(), TypeFactory.collectionType(List.class, YahooMailsBean.class));
 				} catch (Exception e) {
 					LOGGER.error(e, e);
 				}
-				
+
 			} catch (IOException e) {
 				LOGGER.error(e, e);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		LOGGER.info("leaving doGet");
 	}
-	
+
 }

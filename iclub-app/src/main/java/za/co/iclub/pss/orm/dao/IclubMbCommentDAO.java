@@ -33,21 +33,21 @@ public class IclubMbCommentDAO {
 	private static final Logger log = LoggerFactory.getLogger(IclubMbCommentDAO.class);
 	// property constants
 	public static final String MBC_DESC = "mbcDesc";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubMbComment transientInstance) {
 		log.debug("saving IclubMbComment instance");
 		try {
@@ -58,7 +58,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubMbComment persistentInstance) {
 		log.debug("deleting IclubMbComment instance");
 		try {
@@ -69,7 +69,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMbComment findById(java.lang.String id) {
 		log.debug("getting IclubMbComment instance with id: " + id);
 		try {
@@ -80,7 +80,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMbComment> findByExample(IclubMbComment instance) {
 		log.debug("finding IclubMbComment instance by example");
 		try {
@@ -92,7 +92,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubMbComment instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -105,11 +105,11 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubMbComment> findByMbcDesc(Object mbcDesc) {
 		return findByProperty(MBC_DESC, mbcDesc);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubMbComment instances");
 		try {
@@ -121,7 +121,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubMbComment merge(IclubMbComment detachedInstance) {
 		log.debug("merging IclubMbComment instance");
 		try {
@@ -133,7 +133,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubMbComment instance) {
 		log.debug("attaching dirty IclubMbComment instance");
 		try {
@@ -144,7 +144,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubMbComment instance) {
 		log.debug("attaching clean IclubMbComment instance");
 		try {
@@ -155,7 +155,7 @@ public class IclubMbCommentDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubMbCommentDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubMbCommentDAO) ctx.getBean("IclubMbCommentDAO");
 	}

@@ -9,11 +9,11 @@ import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubRateTypeTrans {
-	
+
 	public static IclubRateTypeBean fromWStoUI(IclubRateTypeModel model) {
-		
+
 		IclubRateTypeBean bean = new IclubRateTypeBean();
-		
+
 		bean.setRtId(model.getRtId());
 		bean.setRtLongDesc(model.getRtLongDesc());
 		bean.setRtShortDesc(model.getRtShortDesc());
@@ -29,14 +29,14 @@ public class IclubRateTypeTrans {
 		bean.setRtType(model.getRtType());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubRateTypeModel fromUItoWS(IclubRateTypeBean bean) {
-		
+
 		IclubRateTypeModel model = new IclubRateTypeModel();
-		
+
 		model.setRtId(bean.getRtId());
 		model.setRtLongDesc(bean.getRtLongDesc());
 		model.setRtShortDesc(bean.getRtShortDesc());
@@ -52,14 +52,14 @@ public class IclubRateTypeTrans {
 		model.setRtType(bean.getRtType());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubRateTypeModel fromORMtoWS(IclubRateType bean) {
-		
+
 		IclubRateTypeModel model = new IclubRateTypeModel();
-		
+
 		model.setRtId(bean.getRtId());
 		model.setRtLongDesc(bean.getRtLongDesc());
 		model.setRtShortDesc(bean.getRtShortDesc());
@@ -75,14 +75,14 @@ public class IclubRateTypeTrans {
 		model.setRtCrtdDt(bean.getRtCrtdDt());
 		model.setRtType(bean.getRtType());
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubRateType fromWStoORM(IclubRateTypeModel model, IclubFieldDAO iclubFieldDAO, IclubPersonDAO iclubPersonDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO, IclubEntityTypeDAO iclubEntityTypeDAO) {
-		
+
 		IclubRateType bean = new IclubRateType();
-		
+
 		bean.setRtId(model.getRtId());
 		bean.setRtLongDesc(model.getRtLongDesc());
 		bean.setRtShortDesc(model.getRtShortDesc());
@@ -94,8 +94,8 @@ public class IclubRateTypeTrans {
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		bean.setRtCrtdDt(model.getRtCrtdDt());
 		bean.setRtType(model.getRtType());
-		
+
 		return bean;
 	}
-	
+
 }

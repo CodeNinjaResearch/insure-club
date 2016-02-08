@@ -34,21 +34,21 @@ public class IclubBarTypeDAO {
 	public static final String BT_SHORT_DESC = "btShortDesc";
 	public static final String BT_LONG_DESC = "btLongDesc";
 	public static final String BT_STATUS = "btStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubBarType transientInstance) {
 		log.debug("saving IclubBarType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubBarType persistentInstance) {
 		log.debug("deleting IclubBarType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBarType findById(java.lang.Long id) {
 		log.debug("getting IclubBarType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBarType> findByExample(IclubBarType instance) {
 		log.debug("finding IclubBarType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubBarType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBarType> findByBtShortDesc(Object btShortDesc) {
 		return findByProperty(BT_SHORT_DESC, btShortDesc);
 	}
-	
+
 	public List<IclubBarType> findByBtLongDesc(Object btLongDesc) {
 		return findByProperty(BT_LONG_DESC, btLongDesc);
 	}
-	
+
 	public List<IclubBarType> findByBtStatus(Object btStatus) {
 		return findByProperty(BT_STATUS, btStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubBarType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBarType merge(IclubBarType detachedInstance) {
 		log.debug("merging IclubBarType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubBarType instance) {
 		log.debug("attaching dirty IclubBarType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubBarType instance) {
 		log.debug("attaching clean IclubBarType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubBarTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubBarTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBarTypeDAO) ctx.getBean("IclubBarTypeDAO");
 	}

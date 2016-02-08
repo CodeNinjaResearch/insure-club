@@ -8,11 +8,11 @@ import za.co.iclub.pss.orm.dao.IclubEntityTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubDocumentTrans {
-	
+
 	public static IclubDocumentBean fromWStoUI(IclubDocumentModel model) {
-		
+
 		IclubDocumentBean bean = new IclubDocumentBean();
-		
+
 		bean.setDId(model.getDId());
 		bean.setDContent(model.getDContent());
 		bean.setDEntityId(model.getDEntityId());
@@ -26,14 +26,14 @@ public class IclubDocumentTrans {
 		bean.setEtLongDesc(model.getEtLongDesc());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubDocumentModel fromUItoWS(IclubDocumentBean bean) {
-		
+
 		IclubDocumentModel model = new IclubDocumentModel();
-		
+
 		model.setDId(bean.getDId());
 		model.setDContent(bean.getDContent());
 		model.setDEntityId(bean.getDEntityId());
@@ -47,14 +47,14 @@ public class IclubDocumentTrans {
 		model.setEtLongDesc(bean.getEtLongDesc());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubDocumentModel fromORMtoWS(IclubDocument bean) {
-		
+
 		IclubDocumentModel model = new IclubDocumentModel();
-		
+
 		model.setDId(bean.getDId());
 		model.setDContent(bean.getDContent());
 		model.setDEntityId(bean.getDEntityId());
@@ -68,14 +68,14 @@ public class IclubDocumentTrans {
 		model.setEtLongDesc(bean.getIclubEntityType() != null ? (bean.getIclubEntityType().getEtLongDesc()) : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubDocument fromWStoORM(IclubDocumentModel model, IclubEntityTypeDAO iclubEntityTypeDAO, IclubPersonDAO iclubPersonDAO, IclubDocumentTypeDAO iclubDocumentTypeDAO) {
-		
+
 		IclubDocument bean = new IclubDocument();
-		
+
 		bean.setDId(model.getDId());
 		bean.setDContent(model.getDContent());
 		bean.setDEntityId(model.getDEntityId());
@@ -86,7 +86,7 @@ public class IclubDocumentTrans {
 		bean.setIclubDocumentType(model.getIclubDocumentType() != null ? iclubDocumentTypeDAO.findById(model.getIclubDocumentType()) : null);
 		bean.setIclubEntityType(model.getIclubEntityType() != null ? iclubEntityTypeDAO.findById(model.getIclubEntityType()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+
 		return bean;
 	}
 }

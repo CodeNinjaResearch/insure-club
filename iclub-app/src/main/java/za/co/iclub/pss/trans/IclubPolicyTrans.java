@@ -9,11 +9,11 @@ import za.co.iclub.pss.orm.dao.IclubPolicyStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteDAO;
 
 public class IclubPolicyTrans {
-	
+
 	public static IclubPolicyBean fromWStoUI(IclubPolicyModel model) {
-		
+
 		IclubPolicyBean bean = new IclubPolicyBean();
-		
+
 		bean.setPId(model.getPId());
 		bean.setPProrataPrm(model.getPProrataPrm());
 		bean.setPPremium(model.getPPremium());
@@ -28,14 +28,14 @@ public class IclubPolicyTrans {
 		bean.setPsLongDesc(model.getPsLongDesc());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubPolicyModel fromUItoWS(IclubPolicyBean bean) {
-		
+
 		IclubPolicyModel model = new IclubPolicyModel();
-		
+
 		model.setPId(bean.getPId());
 		model.setPProrataPrm(bean.getPProrataPrm());
 		model.setPPremium(bean.getPPremium());
@@ -50,14 +50,14 @@ public class IclubPolicyTrans {
 		model.setPsLongDesc(bean.getPsLongDesc());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubPolicyModel fromORMtoWS(IclubPolicy bean) {
-		
+
 		IclubPolicyModel model = new IclubPolicyModel();
-		
+
 		model.setPId(bean.getPId());
 		model.setPProrataPrm(bean.getPProrataPrm());
 		model.setPPremium(bean.getPPremium());
@@ -72,14 +72,14 @@ public class IclubPolicyTrans {
 		model.setPsLongDesc(bean.getIclubPolicyStatus() != null ? (bean.getIclubPolicyStatus().getPsLongDesc()) : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubPolicy fromWStoORM(IclubPolicyModel model, IclubPersonDAO iclubPersonDAO, IclubPolicyStatusDAO iclubPolicyStatusDAO, IclubQuoteDAO iclubQuoteDAO, IclubAccountDAO iclubAccountDAO) {
-		
+
 		IclubPolicy bean = new IclubPolicy();
-		
+
 		bean.setPId(model.getPId());
 		bean.setPProrataPrm(model.getPProrataPrm());
 		bean.setPPremium(model.getPPremium());
@@ -91,8 +91,8 @@ public class IclubPolicyTrans {
 		bean.setIclubAccount(model.getIclubAccount() != null ? iclubAccountDAO.findById(model.getIclubAccount()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+
 		return bean;
 	}
-	
+
 }

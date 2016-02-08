@@ -34,21 +34,21 @@ public class IclubThatchTypeDAO {
 	public static final String TT_SHORT_DESC = "ttShortDesc";
 	public static final String TT_LONG_DESC = "ttLongDesc";
 	public static final String TT_STATUS = "ttStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubThatchType transientInstance) {
 		log.debug("saving IclubThatchType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubThatchType persistentInstance) {
 		log.debug("deleting IclubThatchType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubThatchType findById(java.lang.Long id) {
 		log.debug("getting IclubThatchType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubThatchType> findByExample(IclubThatchType instance) {
 		log.debug("finding IclubThatchType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubThatchType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubThatchType> findByTtShortDesc(Object ttShortDesc) {
 		return findByProperty(TT_SHORT_DESC, ttShortDesc);
 	}
-	
+
 	public List<IclubThatchType> findByTtLongDesc(Object ttLongDesc) {
 		return findByProperty(TT_LONG_DESC, ttLongDesc);
 	}
-	
+
 	public List<IclubThatchType> findByTtStatus(Object ttStatus) {
 		return findByProperty(TT_STATUS, ttStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubThatchType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubThatchType merge(IclubThatchType detachedInstance) {
 		log.debug("merging IclubThatchType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubThatchType instance) {
 		log.debug("attaching dirty IclubThatchType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubThatchType instance) {
 		log.debug("attaching clean IclubThatchType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubThatchTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubThatchTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubThatchTypeDAO) ctx.getBean("IclubThatchTypeDAO");
 	}

@@ -16,7 +16,7 @@ public class IclubPolicyStatusTrans {
 		bean.setPsStatus(model.getPsStatus());
 		return bean;
 	}
-	
+
 	public static IclubPolicyStatusModel fromUItoWS(IclubPolicyStatusBean bean) {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
 		model.setPsId(bean.getPsId());
@@ -25,7 +25,7 @@ public class IclubPolicyStatusTrans {
 		model.setPsStatus(bean.getPsStatus());
 		return model;
 	}
-	
+
 	public static IclubPolicyStatusModel fromORMtoWS(IclubPolicyStatus bean) {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
 		model.setPsId(bean.getPsId());
@@ -34,15 +34,15 @@ public class IclubPolicyStatusTrans {
 		model.setPsStatus(bean.getPsStatus());
 		return model;
 	}
-	
+
 	public static IclubPolicyStatus fromWStoORM(IclubPolicyStatusModel model) {
 		IclubPolicyStatus acctype = new IclubPolicyStatus();
-		
+
 		acctype.setPsId(model.getPsId());
 		acctype.setPsLongDesc(model.getPsLongDesc());
 		acctype.setPsShortDesc(model.getPsShortDesc());
 		acctype.setPsStatus(model.getPsStatus());
-		
+
 		return acctype;
 	}
 }

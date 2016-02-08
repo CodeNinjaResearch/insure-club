@@ -25,7 +25,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubInsuranceItemTypeController")
 @SessionScoped
 public class IclubInsuranceItemTypeController implements Serializable {
-	
+
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubInsuranceItemTypeController.class);
@@ -35,14 +35,14 @@ public class IclubInsuranceItemTypeController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-	
+
 	public void addIclubInsuranceItemType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubInsuranceItemType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubInsuranceItemTypeModel model = IclubInsuranceItemTypeTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -57,14 +57,14 @@ public class IclubInsuranceItemTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("insuranceitemtype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubInsuranceItemType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubInsuranceItemType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubInsuranceItemTypeModel model = IclubInsuranceItemTypeTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -79,7 +79,7 @@ public class IclubInsuranceItemTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("insuranceitemtype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubInsuranceItemType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubInsuranceItemType");
 		try {
@@ -96,27 +96,27 @@ public class IclubInsuranceItemTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("insuranceitemtype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubInsuranceItemTypeBean();
 	}
-	
+
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubInsuranceItemTypeBean();
 	}
-	
+
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		if (bean.getIitShortDesc() != null && !bean.getIitShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getIitShortDesc().trim() + "/" + ((bean.getIitId() == null) ? -999l : bean.getIitId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -129,20 +129,20 @@ public class IclubInsuranceItemTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getIitLongDesc() == null || bean.getIitLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getIitStatus() == null || bean.getIitStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public List<IclubInsuranceItemTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
@@ -151,49 +151,49 @@ public class IclubInsuranceItemTypeController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubInsuranceItemTypeModel model : models) {
 				IclubInsuranceItemTypeBean bean = IclubInsuranceItemTypeTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubInsuranceItemTypeBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubInsuranceItemTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubInsuranceItemTypeBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubInsuranceItemTypeBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
-		
+
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

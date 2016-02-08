@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubCoverTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubCoverTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubCoverTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubCoverTypeDAO iclubCoverTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,13 +46,13 @@ public class IclubCoverTypeService {
 	public ResponseModel add(IclubCoverTypeModel model) {
 		try {
 			IclubCoverType iCt = IclubCoverTypeTrans.fromWStoORM(model, iclubInsuranceItemTypeDAO, iclubPersonDAO);
-			
+
 			iCt.setCtId(iclubCommonDAO.getNextId(IclubCoverType.class));
-			
+
 			iclubCoverTypeDAO.save(iCt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCt.getCtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -64,9 +64,9 @@ public class IclubCoverTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -75,11 +75,11 @@ public class IclubCoverTypeService {
 	public ResponseModel mod(IclubCoverTypeModel model) {
 		try {
 			IclubCoverType iCt = IclubCoverTypeTrans.fromWStoORM(model, iclubInsuranceItemTypeDAO, iclubPersonDAO);
-			
+
 			iclubCoverTypeDAO.merge(iCt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getCtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -91,9 +91,9 @@ public class IclubCoverTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -108,57 +108,57 @@ public class IclubCoverTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubCoverTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubCoverTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubCoverType bean = (IclubCoverType) object;
-					
+
 					IclubCoverTypeModel model = IclubCoverTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubCoverTypeModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubCoverType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubCoverType bean = (IclubCoverType) object;
-					
+
 					IclubCoverTypeModel model = IclubCoverTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -167,51 +167,51 @@ public class IclubCoverTypeService {
 		IclubCoverTypeModel model = new IclubCoverTypeModel();
 		try {
 			IclubCoverType bean = iclubCoverTypeDAO.findById(id);
-			
+
 			model = IclubCoverTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubCoverTypeDAO getIclubCoverTypeDAO() {
 		return iclubCoverTypeDAO;
 	}
-	
+
 	public void setIclubCoverTypeDAO(IclubCoverTypeDAO iclubCoverTypeDAO) {
 		this.iclubCoverTypeDAO = iclubCoverTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

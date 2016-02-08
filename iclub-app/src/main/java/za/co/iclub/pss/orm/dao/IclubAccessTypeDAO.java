@@ -34,21 +34,21 @@ public class IclubAccessTypeDAO {
 	public static final String AT_SHORT_DESC = "atShortDesc";
 	public static final String AT_LONG_DESC = "atLongDesc";
 	public static final String AT_STATUS = "atStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubAccessType transientInstance) {
 		log.debug("saving IclubAccessType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubAccessType persistentInstance) {
 		log.debug("deleting IclubAccessType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAccessType findById(java.lang.Long id) {
 		log.debug("getting IclubAccessType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAccessType> findByExample(IclubAccessType instance) {
 		log.debug("finding IclubAccessType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubAccessType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAccessType> findByAtShortDesc(Object atShortDesc) {
 		return findByProperty(AT_SHORT_DESC, atShortDesc);
 	}
-	
+
 	public List<IclubAccessType> findByAtLongDesc(Object atLongDesc) {
 		return findByProperty(AT_LONG_DESC, atLongDesc);
 	}
-	
+
 	public List<IclubAccessType> findByAtStatus(Object atStatus) {
 		return findByProperty(AT_STATUS, atStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubAccessType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAccessType merge(IclubAccessType detachedInstance) {
 		log.debug("merging IclubAccessType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubAccessType instance) {
 		log.debug("attaching dirty IclubAccessType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubAccessType instance) {
 		log.debug("attaching clean IclubAccessType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubAccessTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubAccessTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAccessTypeDAO) ctx.getBean("IclubAccessTypeDAO");
 	}

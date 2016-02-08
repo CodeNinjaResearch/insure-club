@@ -34,21 +34,21 @@ public class IclubDocumentTypeDAO {
 	public static final String DT_SHORT_DESC = "dtShortDesc";
 	public static final String DT_LONG_DESC = "dtLongDesc";
 	public static final String DT_STATUS = "dtStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubDocumentType transientInstance) {
 		log.debug("saving IclubDocumentType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubDocumentType persistentInstance) {
 		log.debug("deleting IclubDocumentType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubDocumentType findById(java.lang.Long id) {
 		log.debug("getting IclubDocumentType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubDocumentType> findByExample(IclubDocumentType instance) {
 		log.debug("finding IclubDocumentType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubDocumentType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubDocumentType> findByDtShortDesc(Object dtShortDesc) {
 		return findByProperty(DT_SHORT_DESC, dtShortDesc);
 	}
-	
+
 	public List<IclubDocumentType> findByDtLongDesc(Object dtLongDesc) {
 		return findByProperty(DT_LONG_DESC, dtLongDesc);
 	}
-	
+
 	public List<IclubDocumentType> findByDtStatus(Object dtStatus) {
 		return findByProperty(DT_STATUS, dtStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubDocumentType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubDocumentType merge(IclubDocumentType detachedInstance) {
 		log.debug("merging IclubDocumentType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubDocumentType instance) {
 		log.debug("attaching dirty IclubDocumentType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubDocumentType instance) {
 		log.debug("attaching clean IclubDocumentType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubDocumentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubDocumentTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubDocumentTypeDAO) ctx.getBean("IclubDocumentTypeDAO");
 	}

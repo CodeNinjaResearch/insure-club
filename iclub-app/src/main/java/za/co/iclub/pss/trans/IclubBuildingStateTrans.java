@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubBuildingStateModel;
 import za.co.iclub.pss.orm.bean.IclubBuildingState;
 
 public class IclubBuildingStateTrans {
-	
+
 	public static IclubBuildingStateBean fromWStoUI(IclubBuildingStateModel model) {
 		IclubBuildingStateBean bean = new IclubBuildingStateBean();
 		bean.setBsId(model.getBsId());
@@ -14,7 +14,7 @@ public class IclubBuildingStateTrans {
 		bean.setBsStatus(model.getBsStatus());
 		return bean;
 	}
-	
+
 	public static IclubBuildingStateModel fromUItoWS(IclubBuildingStateBean bean) {
 		IclubBuildingStateModel model = new IclubBuildingStateModel();
 		model.setBsId(bean.getBsId());
@@ -23,7 +23,7 @@ public class IclubBuildingStateTrans {
 		model.setBsStatus(bean.getBsStatus());
 		return model;
 	}
-	
+
 	public static IclubBuildingStateModel fromORMtoWS(IclubBuildingState bean) {
 		IclubBuildingStateModel model = new IclubBuildingStateModel();
 		model.setBsId(bean.getBsId());
@@ -32,15 +32,15 @@ public class IclubBuildingStateTrans {
 		model.setBsStatus(bean.getBsStatus());
 		return model;
 	}
-	
+
 	public static IclubBuildingState fromWStoORM(IclubBuildingStateModel model) {
 		IclubBuildingState acctype = new IclubBuildingState();
-		
+
 		acctype.setBsId(model.getBsId());
 		acctype.setBsLongDesc(model.getBsLongDesc());
 		acctype.setBsShortDesc(model.getBsShortDesc());
 		acctype.setBsStatus(model.getBsStatus());
-		
+
 		return acctype;
 	}
 }

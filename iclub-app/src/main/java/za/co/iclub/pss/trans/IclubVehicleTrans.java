@@ -14,9 +14,9 @@ import za.co.iclub.pss.orm.dao.IclubVehicleMasterDAO;
 
 public class IclubVehicleTrans {
 	public static IclubVehicleBean fromWStoUI(IclubVehicleModel model) {
-		
+
 		IclubVehicleBean bean = new IclubVehicleBean();
-		
+
 		bean.setVId(model.getVId());
 		bean.setVOwner(model.getVOwner());
 		bean.setVGearLockYn(model.getVGearLockYn());
@@ -57,14 +57,14 @@ public class IclubVehicleTrans {
 		bean.setPFNameAndLName(model.getPFNameAndLName());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubVehicleModel fromUItoWS(IclubVehicleBean bean) {
-		
+
 		IclubVehicleModel model = new IclubVehicleModel();
-		
+
 		model.setVId(bean.getVId());
 		model.setVOwner(bean.getVOwner());
 		model.setVGearLockYn(bean.getVGearLockYn());
@@ -103,14 +103,14 @@ public class IclubVehicleTrans {
 		model.setAtOnLongDesc(bean.getAtOnLongDesc());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubVehicleModel fromORMtoWS(IclubVehicle bean) {
-		
+
 		IclubVehicleModel model = new IclubVehicleModel();
-		
+
 		model.setVId(bean.getVId());
 		model.setVOwner(bean.getVOwner());
 		model.setVGearLockYn(bean.getVGearLockYn());
@@ -149,14 +149,14 @@ public class IclubVehicleTrans {
 		model.setAtOnLongDesc(bean.getIclubAccessTypeByVOnAccessTypeId() != null ? (bean.getIclubAccessTypeByVOnAccessTypeId().getAtLongDesc()) : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubVehicle fromWStoORM(IclubVehicleModel model, IclubVehicleMasterDAO iclubVehicleMasterDAO, IclubAccessTypeDAO iclubAccessTypeDAO, IclubDriverDAO iclubDriverDAO, IclubSecurityDeviceDAO iclubSecurityDeviceDAO, IclubVehSecTypeDAO iclubVehSecTypeDAO, IclubPersonDAO iclubPersonDAO, IclubCoverTypeDAO iclubCoverTypeDAO, IclubVehUsageTypeDAO iclubVehUsageTypeDAO) {
-		
+
 		IclubVehicle bean = new IclubVehicle();
-		
+
 		bean.setVId(model.getVId());
 		bean.setVOwner(model.getVOwner());
 		bean.setVGearLockYn(model.getVGearLockYn());
@@ -187,9 +187,9 @@ public class IclubVehicleTrans {
 		bean.setIclubAccessTypeByVDdAccessTypeId(model.getIclubAccessTypeByVDdAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVDdAccessTypeId()) : null);
 		bean.setIclubAccessTypeByVOnAccessTypeId(model.getIclubAccessTypeByVOnAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeByVOnAccessTypeId()) : null);
 		bean.setIclubVehicleMaster(model.getIclubVehicleMaster() != null ? iclubVehicleMasterDAO.findById(model.getIclubVehicleMaster()) : null);
-		
+
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+
 		return bean;
 	}
 }

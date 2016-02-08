@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubInsuranceItemTypeModel;
 import za.co.iclub.pss.orm.bean.IclubInsuranceItemType;
 
 public class IclubInsuranceItemTypeTrans {
-	
+
 	public static IclubInsuranceItemTypeBean fromWStoUI(IclubInsuranceItemTypeModel model) {
 		IclubInsuranceItemTypeBean bean = new IclubInsuranceItemTypeBean();
 		bean.setIitId(model.getIitId());
@@ -14,7 +14,7 @@ public class IclubInsuranceItemTypeTrans {
 		bean.setIitStatus(model.getIitStatus());
 		return bean;
 	}
-	
+
 	public static IclubInsuranceItemTypeModel fromUItoWS(IclubInsuranceItemTypeBean bean) {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
 		model.setIitId(bean.getIitId());
@@ -23,7 +23,7 @@ public class IclubInsuranceItemTypeTrans {
 		model.setIitStatus(bean.getIitStatus());
 		return model;
 	}
-	
+
 	public static IclubInsuranceItemTypeModel fromORMtoWS(IclubInsuranceItemType bean) {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
 		model.setIitId(bean.getIitId());
@@ -32,15 +32,15 @@ public class IclubInsuranceItemTypeTrans {
 		model.setIitStatus(bean.getIitStatus());
 		return model;
 	}
-	
+
 	public static IclubInsuranceItemType fromWStoORM(IclubInsuranceItemTypeModel model) {
 		IclubInsuranceItemType acctype = new IclubInsuranceItemType();
-		
+
 		acctype.setIitId(model.getIitId());
 		acctype.setIitLongDesc(model.getIitLongDesc());
 		acctype.setIitShortDesc(model.getIitShortDesc());
 		acctype.setIitStatus(model.getIitStatus());
-		
+
 		return acctype;
 	}
 }

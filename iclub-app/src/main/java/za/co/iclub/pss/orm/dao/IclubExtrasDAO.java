@@ -34,21 +34,21 @@ public class IclubExtrasDAO {
 	// property constants
 	public static final String _EDESC = "EDesc";
 	public static final String _ESTATUS = "EStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubExtras transientInstance) {
 		log.debug("saving IclubExtras instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubExtras persistentInstance) {
 		log.debug("deleting IclubExtras instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubExtras findById(java.lang.Long id) {
 		log.debug("getting IclubExtras instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubExtras> findByExample(IclubExtras instance) {
 		log.debug("finding IclubExtras instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubExtras instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubExtras> findByEDesc(Object EDesc) {
 		return findByProperty(_EDESC, EDesc);
 	}
-	
+
 	public List<IclubExtras> findByEStatus(Object EStatus) {
 		return findByProperty(_ESTATUS, EStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubExtras instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubExtras merge(IclubExtras detachedInstance) {
 		log.debug("merging IclubExtras instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubExtras instance) {
 		log.debug("attaching dirty IclubExtras instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubExtras instance) {
 		log.debug("attaching clean IclubExtras instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubExtrasDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubExtrasDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubExtrasDAO) ctx.getBean("IclubExtrasDAO");
 	}

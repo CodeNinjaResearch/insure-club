@@ -36,21 +36,21 @@ public class IclubCohortDAO {
 	public static final String _CTOTAL_CONTRIB = "CTotalContrib";
 	public static final String _CCOLLECTED_CONTRIB = "CCollectedContrib";
 	public static final String _CCUR_MEMBER_CNT = "CCurMemberCnt";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCohort transientInstance) {
 		log.debug("saving IclubCohort instance");
 		try {
@@ -61,7 +61,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCohort persistentInstance) {
 		log.debug("deleting IclubCohort instance");
 		try {
@@ -72,7 +72,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohort findById(java.lang.String id) {
 		log.debug("getting IclubCohort instance with id: " + id);
 		try {
@@ -83,7 +83,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohort> findByExample(IclubCohort instance) {
 		log.debug("finding IclubCohort instance by example");
 		try {
@@ -95,7 +95,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCohort instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -108,27 +108,27 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohort> findByCName(Object CName) {
 		return findByProperty(_CNAME, CName);
 	}
-	
+
 	public List<IclubCohort> findByCEmail(Object CEmail) {
 		return findByProperty(_CEMAIL, CEmail);
 	}
-	
+
 	public List<IclubCohort> findByCTotalContrib(Object CTotalContrib) {
 		return findByProperty(_CTOTAL_CONTRIB, CTotalContrib);
 	}
-	
+
 	public List<IclubCohort> findByCCollectedContrib(Object CCollectedContrib) {
 		return findByProperty(_CCOLLECTED_CONTRIB, CCollectedContrib);
 	}
-	
+
 	public List<IclubCohort> findByCCurMemberCnt(Object CCurMemberCnt) {
 		return findByProperty(_CCUR_MEMBER_CNT, CCurMemberCnt);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCohort instances");
 		try {
@@ -140,7 +140,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohort merge(IclubCohort detachedInstance) {
 		log.debug("merging IclubCohort instance");
 		try {
@@ -152,7 +152,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCohort instance) {
 		log.debug("attaching dirty IclubCohort instance");
 		try {
@@ -163,7 +163,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCohort instance) {
 		log.debug("attaching clean IclubCohort instance");
 		try {
@@ -174,7 +174,7 @@ public class IclubCohortDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCohortDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCohortDAO) ctx.getBean("IclubCohortDAO");
 	}

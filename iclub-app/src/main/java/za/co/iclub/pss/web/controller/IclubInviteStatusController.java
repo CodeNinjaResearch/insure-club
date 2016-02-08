@@ -25,7 +25,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubInviteStatusController")
 @SessionScoped
 public class IclubInviteStatusController implements Serializable {
-	
+
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubInviteStatusController.class);
@@ -35,14 +35,14 @@ public class IclubInviteStatusController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-	
+
 	public void addIclubInviteStatus() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubInviteStatus");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubInviteStatusModel model = IclubInviteStatusTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -57,14 +57,14 @@ public class IclubInviteStatusController implements Serializable {
 			IclubWebHelper.addMessage("Invite Status " + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubInviteStatus() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubInviteStatus");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubInviteStatusModel model = IclubInviteStatusTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -79,7 +79,7 @@ public class IclubInviteStatusController implements Serializable {
 			IclubWebHelper.addMessage("Invite Status " + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubInviteStatus() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubInviteStatus");
 		try {
@@ -96,27 +96,27 @@ public class IclubInviteStatusController implements Serializable {
 			IclubWebHelper.addMessage("Invite Status " + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubInviteStatusBean();
 	}
-	
+
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubInviteStatusBean();
 	}
-	
+
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		if (bean.getIsShortDesc() != null && !bean.getIsShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getIsShortDesc().trim() + "/" + ((bean.getIsId() == null) ? -999l : bean.getIsId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -129,20 +129,20 @@ public class IclubInviteStatusController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getIsLongDesc() == null || bean.getIsLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getIsStatus() == null || bean.getIsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public List<IclubInviteStatusBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubInviteStatusModel> models = new ArrayList<IclubInviteStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInviteStatusModel.class));
@@ -151,49 +151,49 @@ public class IclubInviteStatusController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubInviteStatusModel model : models) {
 				IclubInviteStatusBean bean = IclubInviteStatusTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubInviteStatusBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubInviteStatusBean getBean() {
 		if (bean == null)
 			bean = new IclubInviteStatusBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubInviteStatusBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
-		
+
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

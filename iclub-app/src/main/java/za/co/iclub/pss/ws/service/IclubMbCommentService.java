@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubMbCommentService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubMbCommentService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubMbCommentService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubMbCommentDAO iclubMbCommentDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubMessageBoardDAO iclubMessageBoardDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,11 +46,11 @@ public class IclubMbCommentService {
 	public ResponseModel add(IclubMbCommentModel model) {
 		try {
 			IclubMbComment iCMbc = IclubMbCommentTrans.fromWStoORM(model, iclubPersonDAO, iclubMessageBoardDAO);
-			
+
 			iclubMbCommentDAO.save(iCMbc);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCMbc.getMbcId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -62,9 +62,9 @@ public class IclubMbCommentService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -73,11 +73,11 @@ public class IclubMbCommentService {
 	public ResponseModel mod(IclubMbCommentModel model) {
 		try {
 			IclubMbComment iCMbc = IclubMbCommentTrans.fromWStoORM(model, iclubPersonDAO, iclubMessageBoardDAO);
-			
+
 			iclubMbCommentDAO.merge(iCMbc);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getMbcId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -89,9 +89,9 @@ public class IclubMbCommentService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -106,57 +106,57 @@ public class IclubMbCommentService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubMbCommentModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubMbCommentDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubMbComment bean = (IclubMbComment) object;
-					
+
 					IclubMbCommentModel model = IclubMbCommentTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubMbCommentModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubMbComment.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubMbComment bean = (IclubMbComment) object;
-					
+
 					IclubMbCommentModel model = IclubMbCommentTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -165,78 +165,78 @@ public class IclubMbCommentService {
 		IclubMbCommentModel model = new IclubMbCommentModel();
 		try {
 			IclubMbComment bean = iclubMbCommentDAO.findById(id);
-			
+
 			model = IclubMbCommentTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/get/messageboard/{mbId}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubMbCommentModel> List<T> getByMbId(@PathParam("mbId") String mbId) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.getMbCommentsByMbId(mbId);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubMbComment bean = (IclubMbComment) object;
-					
+
 					IclubMbCommentModel model = IclubMbCommentTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	public IclubMbCommentDAO getIclubMbCommentDAO() {
 		return iclubMbCommentDAO;
 	}
-	
+
 	public void setIclubMbCommentDAO(IclubMbCommentDAO iclubMbCommentDAO) {
 		this.iclubMbCommentDAO = iclubMbCommentDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubMessageBoardDAO getIclubMessageBoardDAO() {
 		return iclubMessageBoardDAO;
 	}
-	
+
 	public void setIclubMessageBoardDAO(IclubMessageBoardDAO iclubMessageBoardDAO) {
 		this.iclubMessageBoardDAO = iclubMessageBoardDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

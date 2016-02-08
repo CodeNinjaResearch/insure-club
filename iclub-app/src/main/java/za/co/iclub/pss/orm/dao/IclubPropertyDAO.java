@@ -45,21 +45,21 @@ public class IclubPropertyDAO {
 	public static final String _PCONTENT_COST = "PContentCost";
 	public static final String _PREPLACEMENT_COST = "PReplacementCost";
 	public static final String _PTHATCH_TYPE = "PThatchType";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubProperty transientInstance) {
 		log.debug("saving IclubProperty instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubProperty persistentInstance) {
 		log.debug("deleting IclubProperty instance");
 		try {
@@ -81,7 +81,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubProperty findById(java.lang.String id) {
 		log.debug("getting IclubProperty instance with id: " + id);
 		try {
@@ -92,7 +92,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubProperty> findByExample(IclubProperty instance) {
 		log.debug("finding IclubProperty instance by example");
 		try {
@@ -104,7 +104,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubProperty instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -117,63 +117,63 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubProperty> findByPRegNum(Object PRegNum) {
 		return findByProperty(_PREG_NUM, PRegNum);
 	}
-	
+
 	public List<IclubProperty> findByPAddress(Object PAddress) {
 		return findByProperty(_PADDRESS, PAddress);
 	}
-	
+
 	public List<IclubProperty> findByPLat(Object PLat) {
 		return findByProperty(_PLAT, PLat);
 	}
-	
+
 	public List<IclubProperty> findByPLong(Object PLong) {
 		return findByProperty(_PLONG, PLong);
 	}
-	
+
 	public List<IclubProperty> findByPPostalCd(Object PPostalCd) {
 		return findByProperty(_PPOSTAL_CD, PPostalCd);
 	}
-	
+
 	public List<IclubProperty> findByPNoclaimYrs(Object PNoclaimYrs) {
 		return findByProperty(_PNOCLAIM_YRS, PNoclaimYrs);
 	}
-	
+
 	public List<IclubProperty> findByPRentFurYn(Object PRentFurYn) {
 		return findByProperty(_PRENT_FUR_YN, PRentFurYn);
 	}
-	
+
 	public List<IclubProperty> findByPCompYn(Object PCompYn) {
 		return findByProperty(_PCOMP_YN, PCompYn);
 	}
-	
+
 	public List<IclubProperty> findByPNorobberyYn(Object PNorobberyYn) {
 		return findByProperty(_PNOROBBERY_YN, PNorobberyYn);
 	}
-	
+
 	public List<IclubProperty> findByPSecGatesYn(Object PSecGatesYn) {
 		return findByProperty(_PSEC_GATES_YN, PSecGatesYn);
 	}
-	
+
 	public List<IclubProperty> findByPEstValue(Object PEstValue) {
 		return findByProperty(_PEST_VALUE, PEstValue);
 	}
-	
+
 	public List<IclubProperty> findByPContentCost(Object PContentCost) {
 		return findByProperty(_PCONTENT_COST, PContentCost);
 	}
-	
+
 	public List<IclubProperty> findByPReplacementCost(Object PReplacementCost) {
 		return findByProperty(_PREPLACEMENT_COST, PReplacementCost);
 	}
-	
+
 	public List<IclubProperty> findByPThatchType(Object PThatchType) {
 		return findByProperty(_PTHATCH_TYPE, PThatchType);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubProperty instances");
 		try {
@@ -185,7 +185,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubProperty merge(IclubProperty detachedInstance) {
 		log.debug("merging IclubProperty instance");
 		try {
@@ -197,7 +197,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubProperty instance) {
 		log.debug("attaching dirty IclubProperty instance");
 		try {
@@ -208,7 +208,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubProperty instance) {
 		log.debug("attaching clean IclubProperty instance");
 		try {
@@ -219,7 +219,7 @@ public class IclubPropertyDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPropertyDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPropertyDAO) ctx.getBean("IclubPropertyDAO");
 	}

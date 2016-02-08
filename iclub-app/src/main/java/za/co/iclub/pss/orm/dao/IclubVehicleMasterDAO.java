@@ -37,21 +37,21 @@ public class IclubVehicleMasterDAO {
 	public static final String VM_MRKT_RATE = "vmMrktRate";
 	public static final String VM_RET_RATE = "vmRetRate";
 	public static final String VM_RATE_PRCT = "vmRatePrct";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubVehicleMaster transientInstance) {
 		log.debug("saving IclubVehicleMaster instance");
 		try {
@@ -62,7 +62,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubVehicleMaster persistentInstance) {
 		log.debug("deleting IclubVehicleMaster instance");
 		try {
@@ -73,7 +73,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubVehicleMaster findById(java.lang.Long id) {
 		log.debug("getting IclubVehicleMaster instance with id: " + id);
 		try {
@@ -84,7 +84,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubVehicleMaster> findByExample(IclubVehicleMaster instance) {
 		log.debug("finding IclubVehicleMaster instance by example");
 		try {
@@ -96,7 +96,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubVehicleMaster instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -109,31 +109,31 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubVehicleMaster> findByVmMake(Object vmMake) {
 		return findByProperty(VM_MAKE, vmMake);
 	}
-	
+
 	public List<IclubVehicleMaster> findByVmModel(Object vmModel) {
 		return findByProperty(VM_MODEL, vmModel);
 	}
-	
+
 	public List<IclubVehicleMaster> findByVmOrigRate(Object vmOrigRate) {
 		return findByProperty(VM_ORIG_RATE, vmOrigRate);
 	}
-	
+
 	public List<IclubVehicleMaster> findByVmMrktRate(Object vmMrktRate) {
 		return findByProperty(VM_MRKT_RATE, vmMrktRate);
 	}
-	
+
 	public List<IclubVehicleMaster> findByVmRetRate(Object vmRetRate) {
 		return findByProperty(VM_RET_RATE, vmRetRate);
 	}
-	
+
 	public List<IclubVehicleMaster> findByVmRatePrct(Object vmRatePrct) {
 		return findByProperty(VM_RATE_PRCT, vmRatePrct);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubVehicleMaster instances");
 		try {
@@ -145,7 +145,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubVehicleMaster merge(IclubVehicleMaster detachedInstance) {
 		log.debug("merging IclubVehicleMaster instance");
 		try {
@@ -157,7 +157,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubVehicleMaster instance) {
 		log.debug("attaching dirty IclubVehicleMaster instance");
 		try {
@@ -168,7 +168,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubVehicleMaster instance) {
 		log.debug("attaching clean IclubVehicleMaster instance");
 		try {
@@ -179,7 +179,7 @@ public class IclubVehicleMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubVehicleMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehicleMasterDAO) ctx.getBean("IclubVehicleMasterDAO");
 	}

@@ -37,21 +37,21 @@ public class IclubFieldDAO {
 	public static final String _FLTBL_NAME = "FLTblName";
 	public static final String _FRATE = "FRate";
 	public static final String _FSTATUS = "FStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubField transientInstance) {
 		log.debug("saving IclubField instance");
 		try {
@@ -62,7 +62,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubField persistentInstance) {
 		log.debug("deleting IclubField instance");
 		try {
@@ -73,7 +73,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubField findById(java.lang.Long id) {
 		log.debug("getting IclubField instance with id: " + id);
 		try {
@@ -84,7 +84,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubField> findByExample(IclubField instance) {
 		log.debug("finding IclubField instance by example");
 		try {
@@ -96,7 +96,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubField instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -109,31 +109,31 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubField> findByFName(Object FName) {
 		return findByProperty(_FNAME, FName);
 	}
-	
+
 	public List<IclubField> findByFDesc(Object FDesc) {
 		return findByProperty(_FDESC, FDesc);
 	}
-	
+
 	public List<IclubField> findByFType(Object FType) {
 		return findByProperty(_FTYPE, FType);
 	}
-	
+
 	public List<IclubField> findByFLTblName(Object FLTblName) {
 		return findByProperty(_FLTBL_NAME, FLTblName);
 	}
-	
+
 	public List<IclubField> findByFRate(Object FRate) {
 		return findByProperty(_FRATE, FRate);
 	}
-	
+
 	public List<IclubField> findByFStatus(Object FStatus) {
 		return findByProperty(_FSTATUS, FStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubField instances");
 		try {
@@ -145,7 +145,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubField merge(IclubField detachedInstance) {
 		log.debug("merging IclubField instance");
 		try {
@@ -157,7 +157,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubField instance) {
 		log.debug("attaching dirty IclubField instance");
 		try {
@@ -168,7 +168,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubField instance) {
 		log.debug("attaching clean IclubField instance");
 		try {
@@ -179,7 +179,7 @@ public class IclubFieldDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubFieldDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubFieldDAO) ctx.getBean("IclubFieldDAO");
 	}

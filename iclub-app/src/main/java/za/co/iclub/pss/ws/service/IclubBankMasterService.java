@@ -29,13 +29,13 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubBankMasterService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubBankMasterService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubBankMasterService.class);
 	private IclubBankMasterDAO iclubBankMasterDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubPersonDAO iclubPersonDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -43,20 +43,20 @@ public class IclubBankMasterService {
 	@Transactional
 	public ResponseModel add(IclubBankMasterModel model) {
 		try {
-			
+
 			IclubBankMaster iCBm = IclubBankMasterTrans.fromWStoORM(model, iclubPersonDAO);
-			
+
 			iCBm.setBmId(iclubCommonDAO.getNextId(IclubBankMaster.class));
-			
+
 			iclubBankMasterDAO.save(iCBm);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCBm.getBmId().longValue());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -65,9 +65,9 @@ public class IclubBankMasterService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -76,11 +76,11 @@ public class IclubBankMasterService {
 	public ResponseModel mod(IclubBankMasterModel model) {
 		try {
 			IclubBankMaster iCBm = IclubBankMasterTrans.fromWStoORM(model, iclubPersonDAO);
-			
+
 			iclubBankMasterDAO.merge(iCBm);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getBmId().longValue());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -92,9 +92,9 @@ public class IclubBankMasterService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -109,30 +109,30 @@ public class IclubBankMasterService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubBankMasterModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubBankMasterDAO.findAll();
-			
+
 			for (Object object : batmod) {
 				IclubBankMaster bean = (IclubBankMaster) object;
 				IclubBankMasterModel iCBm = IclubBankMasterTrans.fromORMtoWS(bean);
-				
+
 				ret.add((T) iCBm);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/list/banknames")
 	@Produces("application/json")
@@ -152,21 +152,21 @@ public class IclubBankMasterService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/bankName/{bankName}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubBankMasterModel> List<T> getByBankName(@PathParam("bankName") String bankName) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.getIclubBankMastersByBankName(bankName);
-			
+
 			for (Object object : batmod) {
 				IclubBankMaster bean = (IclubBankMaster) object;
 				IclubBankMasterModel iCBm = IclubBankMasterTrans.fromORMtoWS(bean);
-				
+
 				ret.add((T) iCBm);
 			}
 		} catch (Exception e) {
@@ -174,21 +174,21 @@ public class IclubBankMasterService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubBankMasterModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubBankMaster.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubBankMaster bean = (IclubBankMaster) object;
 					IclubBankMasterModel iCBm = IclubBankMasterTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCBm);
 				}
 			}
@@ -197,7 +197,7 @@ public class IclubBankMasterService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -206,45 +206,45 @@ public class IclubBankMasterService {
 		IclubBankMasterModel model = new IclubBankMasterModel();
 		try {
 			IclubBankMaster bean = iclubBankMasterDAO.findById(id);
-			
+
 			model = IclubBankMasterTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubBankMasterDAO getIclubBankMasterDAO() {
 		return iclubBankMasterDAO;
 	}
-	
+
 	public void setIclubBankMasterDAO(IclubBankMasterDAO iclubBankMasterDAO) {
 		this.iclubBankMasterDAO = iclubBankMasterDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 }

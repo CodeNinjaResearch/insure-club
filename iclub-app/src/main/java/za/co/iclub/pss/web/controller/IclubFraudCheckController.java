@@ -16,36 +16,36 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings({ "resource", "deprecation" })
 public class IclubFraudCheckController {
-	
+
 	public static final String FRAUD_CHECK_USERID = "4050";
 	public static final String FRAUD_CHECK_PWD = "AeB7uvv5mO+dt7YH6OBal+JHESTppNG0GowXD/IJhT4=";
 	private static final Logger LOGGER = Logger.getLogger(IclubMenuController.class);
-	
+
 	public static void main(String[] args) {
-		
+
 		String url = "https://testclientapi.fraudcheck.co.za/api/authenticate/test";
 		String currentDate = System.currentTimeMillis() + "";
-		
+
 		String fcHash = DigestUtils.md5Hex(FRAUD_CHECK_USERID + FRAUD_CHECK_PWD + currentDate);
-		
+
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
-		
+
 		try {
 			post.setHeader("Content-Type", "application/json");
 			post.setHeader("FcAccId", FRAUD_CHECK_USERID);
 			post.setHeader("FcHash", fcHash);
 			post.setHeader("FcDate", currentDate);
-			
+
 			List<NameValuePair> arguments = new ArrayList<>(3);
 			arguments.add(new BasicNameValuePair("data", "test"));
 			post.setEntity(new UrlEncodedFormEntity(arguments));
 			HttpResponse response1 = client.execute(post);
 			EntityUtils.toString(response1.getEntity());
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 	}
 }

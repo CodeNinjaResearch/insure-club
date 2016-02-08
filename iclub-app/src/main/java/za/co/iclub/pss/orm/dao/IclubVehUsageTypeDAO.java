@@ -34,21 +34,21 @@ public class IclubVehUsageTypeDAO {
 	public static final String VUT_LONG_DESC = "vutLongDesc";
 	public static final String VUT_SHORT_DESC = "vutShortDesc";
 	public static final String VUT_STATUS = "vutStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubVehUsageType transientInstance) {
 		log.debug("saving IclubVehUsageType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubVehUsageType persistentInstance) {
 		log.debug("deleting IclubVehUsageType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubVehUsageType findById(java.lang.Long id) {
 		log.debug("getting IclubVehUsageType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubVehUsageType> findByExample(IclubVehUsageType instance) {
 		log.debug("finding IclubVehUsageType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubVehUsageType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubVehUsageType> findByVutLongDesc(Object vutLongDesc) {
 		return findByProperty(VUT_LONG_DESC, vutLongDesc);
 	}
-	
+
 	public List<IclubVehUsageType> findByVutShortDesc(Object vutShortDesc) {
 		return findByProperty(VUT_SHORT_DESC, vutShortDesc);
 	}
-	
+
 	public List<IclubVehUsageType> findByVutStatus(Object vutStatus) {
 		return findByProperty(VUT_STATUS, vutStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubVehUsageType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubVehUsageType merge(IclubVehUsageType detachedInstance) {
 		log.debug("merging IclubVehUsageType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubVehUsageType instance) {
 		log.debug("attaching dirty IclubVehUsageType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubVehUsageType instance) {
 		log.debug("attaching clean IclubVehUsageType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubVehUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubVehUsageTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehUsageTypeDAO) ctx.getBean("IclubVehUsageTypeDAO");
 	}

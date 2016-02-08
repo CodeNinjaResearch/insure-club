@@ -34,21 +34,21 @@ public class IclubSecurityDeviceDAO {
 	public static final String SD_ITEM_ID = "sdItemId";
 	public static final String SD_SER_NUM = "sdSerNum";
 	public static final String SD_CONTRACT_NUM = "sdContractNum";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubSecurityDevice transientInstance) {
 		log.debug("saving IclubSecurityDevice instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubSecurityDevice persistentInstance) {
 		log.debug("deleting IclubSecurityDevice instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSecurityDevice findById(java.lang.String id) {
 		log.debug("getting IclubSecurityDevice instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSecurityDevice> findByExample(IclubSecurityDevice instance) {
 		log.debug("finding IclubSecurityDevice instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubSecurityDevice instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSecurityDevice> findBySdItemId(Object sdItemId) {
 		return findByProperty(SD_ITEM_ID, sdItemId);
 	}
-	
+
 	public List<IclubSecurityDevice> findBySdSerNum(Object sdSerNum) {
 		return findByProperty(SD_SER_NUM, sdSerNum);
 	}
-	
+
 	public List<IclubSecurityDevice> findBySdContractNum(Object sdContractNum) {
 		return findByProperty(SD_CONTRACT_NUM, sdContractNum);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubSecurityDevice instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSecurityDevice merge(IclubSecurityDevice detachedInstance) {
 		log.debug("merging IclubSecurityDevice instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubSecurityDevice instance) {
 		log.debug("attaching dirty IclubSecurityDevice instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubSecurityDevice instance) {
 		log.debug("attaching clean IclubSecurityDevice instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubSecurityDeviceDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubSecurityDeviceDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSecurityDeviceDAO) ctx.getBean("IclubSecurityDeviceDAO");
 	}

@@ -10,11 +10,11 @@ import za.co.iclub.pss.orm.dao.IclubProductTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubQuoteStatusDAO;
 
 public class IclubQuoteTrans {
-	
+
 	public static IclubQuoteBean fromWStoUI(IclubQuoteModel model) {
-		
+
 		IclubQuoteBean bean = new IclubQuoteBean();
-		
+
 		bean.setQId(model.getQId());
 		bean.setQCrtdDt(model.getQCrtdDt());
 		bean.setQIsMatched(model.getQIsMatched());
@@ -38,14 +38,14 @@ public class IclubQuoteTrans {
 		bean.setIclubPersonBByQPersonId(model.getIclubPersonBByQPersonId());
 		bean.setPBFNameAndLName(model.getPAFNameAndLName());
 		bean.setPAFNameAndLName(model.getPBFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubQuoteModel fromUItoWS(IclubQuoteBean bean) {
-		
+
 		IclubQuoteModel model = new IclubQuoteModel();
-		
+
 		model.setQId(bean.getQId());
 		model.setQCrtdDt(bean.getQCrtdDt());
 		model.setQIsMatched(bean.getQIsMatched());
@@ -69,14 +69,14 @@ public class IclubQuoteTrans {
 		model.setIclubPersonBByQPersonId(bean.getIclubPersonBByQPersonId());
 		model.setPBFNameAndLName(bean.getPAFNameAndLName());
 		model.setPAFNameAndLName(bean.getPBFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubQuoteModel fromORMtoWS(IclubQuote bean) {
-		
+
 		IclubQuoteModel model = new IclubQuoteModel();
-		
+
 		model.setQId(bean.getQId());
 		model.setQCrtdDt(bean.getQCrtdDt());
 		model.setQIsMatched(bean.getQIsMatched());
@@ -94,17 +94,17 @@ public class IclubQuoteTrans {
 		model.setIclubCoverType(bean.getIclubCoverType() != null ? (bean.getIclubCoverType().getCtId()) : null);
 		model.setIclubQuoteStatus(bean.getIclubQuoteStatus() != null ? (bean.getIclubQuoteStatus().getQsId()) : null);
 		model.setIclubPersonBByQPersonId(bean.getIclubPersonByQPersonId() != null ? (bean.getIclubPersonByQPersonId().getPId()) : null);
-		
+
 		model.setPBFNameAndLName(bean.getIclubPersonByQPersonId() != null ? bean.getIclubPersonByQPersonId().getPFName() + " " + bean.getIclubPersonByQPersonId().getPLName() != null ? bean.getIclubPersonByQPersonId().getPLName() : "" : "");
 		model.setPAFNameAndLName(bean.getIclubPersonByQCrtdBy() != null ? bean.getIclubPersonByQCrtdBy().getPFName() + " " + bean.getIclubPersonByQCrtdBy().getPLName() != null ? bean.getIclubPersonByQCrtdBy().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubQuote fromWStoORM(IclubQuoteModel model, IclubQuoteStatusDAO iclubQuoteStatusDAO, IclubCoverTypeDAO iclubCoverTypeDAO, IclubInsurerMasterDAO iclubInsurerMasterDAO, IclubProductTypeDAO iclubProductTypeDAO, IclubPersonDAO iclubPersonDAO) {
-		
+
 		IclubQuote bean = new IclubQuote();
-		
+
 		bean.setQId(model.getQId());
 		bean.setQCrtdDt(model.getQCrtdDt());
 		bean.setQIsMatched(model.getQIsMatched());
@@ -122,7 +122,7 @@ public class IclubQuoteTrans {
 		bean.setIclubProductType(model.getIclubProductType() != null ? iclubProductTypeDAO.findById(model.getIclubProductType()) : null);
 		bean.setIclubPersonByQPersonId(model.getIclubPersonBByQPersonId() != null && !model.getIclubPersonBByQPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonBByQPersonId()) : null);
 		bean.setIclubPersonByQCrtdBy(model.getIclubPersonAByQCrtdBy() != null && !model.getIclubPersonAByQCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonAByQCrtdBy()) : null);
-		
+
 		return bean;
 	}
 }

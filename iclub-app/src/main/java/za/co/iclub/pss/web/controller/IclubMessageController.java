@@ -27,7 +27,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubMessageController")
 @SessionScoped
 public class IclubMessageController implements Serializable {
-	
+
 	private static final long serialVersionUID = 8245517153102756484L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubMessageController.class);
@@ -43,7 +43,7 @@ public class IclubMessageController implements Serializable {
 	private String sessionUserId;
 	private String userName;
 	private ResourceBundle labelBundle;
-	
+
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
 		if (viewParam == null || viewParam.longValue() == 1)
@@ -52,9 +52,9 @@ public class IclubMessageController implements Serializable {
 			showEdit();
 		else if (viewParam != null && viewParam.longValue() == 3)
 			showSummary();
-		
+
 	}
-	
+
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -62,7 +62,7 @@ public class IclubMessageController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubMessageBean();
@@ -71,7 +71,7 @@ public class IclubMessageController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
 		showCreateCont = false;
@@ -79,7 +79,7 @@ public class IclubMessageController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -88,7 +88,7 @@ public class IclubMessageController implements Serializable {
 		showSummaryCont = true;
 		viewParam = 3l;
 	}
-	
+
 	public List<IclubMessageBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubMessageModel> models = new ArrayList<IclubMessageModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMessageModel.class));
@@ -97,38 +97,38 @@ public class IclubMessageController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubMessageModel model : models) {
 				IclubMessageBean bean = IclubMessageTrans.fromWStoUI(model);
-				
+
 				dashBoardBeans.add(bean);
 			}
 		}
 		return dashBoardBeans;
 	}
-	
+
 	public void setDashBoardBeans(List<IclubMessageBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
-	
+
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
 		bean = new IclubMessageBean();
 	}
-	
+
 	public void addIclubMessage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubMessage");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubMessageModel model = IclubMessageTrans.fromUItoWS(bean);
-				
+
 				model.setMId(UUID.randomUUID().toString());
 				model.setMCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					
+
 					IclubWebHelper.addMessage(getLabelBundle().getString("message") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -141,14 +141,14 @@ public class IclubMessageController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("message") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubMessage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubMessage");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubMessageModel model = IclubMessageTrans.fromUItoWS(bean);
-				
+
 				model.setIclubPerson(getSessionUserId());
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
@@ -165,7 +165,7 @@ public class IclubMessageController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("message") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubMessage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubMessage");
 		try {
@@ -183,55 +183,55 @@ public class IclubMessageController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("message") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		return ret;
 	}
-	
+
 	public IclubMessageBean getBean() {
 		if (bean == null)
 			bean = new IclubMessageBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubMessageBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowCreateCont() {
 		return showCreateCont;
 	}
-	
+
 	public void setShowCreateCont(boolean showCreateCont) {
 		this.showCreateCont = showCreateCont;
 	}
-	
+
 	public boolean isShowViewCont() {
 		return showViewCont;
 	}
-	
+
 	public void setShowViewCont(boolean showViewCont) {
 		this.showViewCont = showViewCont;
 	}
-	
+
 	public boolean isShowEditCont() {
 		return showEditCont;
 	}
-	
+
 	public void setShowEditCont(boolean showEditCont) {
 		this.showEditCont = showEditCont;
 	}
-	
+
 	public Long getViewParam() {
 		return viewParam;
 	}
-	
+
 	public void setViewParam(Long viewParam) {
 		this.viewParam = viewParam;
 	}
-	
+
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -240,58 +240,58 @@ public class IclubMessageController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public String getUserName() {
 		userName = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.scname")).toString();
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
 		if (labelBundle == null) {
 			labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		}
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
-	
+
 	public List<IclubMessageBean> getBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubMessageModel> models = new ArrayList<IclubMessageModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMessageModel.class));
 		client.close();
 		beans = new ArrayList<IclubMessageBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubMessageModel model : models) {
-				
+
 				IclubMessageBean bean = IclubMessageTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubMessageBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public boolean isShowSummaryCont() {
 		return showSummaryCont;
 	}
-	
+
 	public void setShowSummaryCont(boolean showSummaryCont) {
 		this.showSummaryCont = showSummaryCont;
 	}
-	
+
 }

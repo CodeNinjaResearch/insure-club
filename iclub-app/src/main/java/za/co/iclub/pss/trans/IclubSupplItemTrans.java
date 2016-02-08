@@ -9,11 +9,11 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubSupplMasterDAO;
 
 public class IclubSupplItemTrans {
-	
+
 	public static IclubSupplItemBean fromWStoUI(IclubSupplItemModel model) {
-		
+
 		IclubSupplItemBean bean = new IclubSupplItemBean();
-		
+
 		bean.setSiId(model.getSiId());
 		bean.setIclubAssessmentType(model.getIclubAssessmentType());
 		bean.setAtLongDesc(model.getAtLongDesc());
@@ -26,14 +26,14 @@ public class IclubSupplItemTrans {
 		bean.setSiItemId(model.getSiItemId());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubSupplItemModel fromUItoWS(IclubSupplItemBean bean) {
-		
+
 		IclubSupplItemModel model = new IclubSupplItemModel();
-		
+
 		model.setSiId(bean.getSiId());
 		model.setIclubAssessmentType(bean.getIclubAssessmentType());
 		model.setAtLongDesc(bean.getAtLongDesc());
@@ -46,14 +46,14 @@ public class IclubSupplItemTrans {
 		model.setSiItemId(bean.getSiItemId());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubSupplItemModel fromORMtoWS(IclubSupplItem bean) {
-		
+
 		IclubSupplItemModel model = new IclubSupplItemModel();
-		
+
 		model.setSiId(bean.getSiId());
 		model.setIclubAssessmentType(bean.getIclubAssessmentType() != null ? bean.getIclubAssessmentType().getAtId() : null);
 		model.setAtLongDesc(bean.getIclubAssessmentType() != null ? bean.getIclubAssessmentType().getAtLongDesc() : null);
@@ -66,14 +66,14 @@ public class IclubSupplItemTrans {
 		model.setSiItemId(bean.getSiItemId());
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubSupplItem fromWStoORM(IclubSupplItemModel model, IclubAssessmentTypeDAO iclubAssessmentTypeDAO, IclubPersonDAO iclubPersonDAO, IclubSupplMasterDAO iclubSupplMasterDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
-		
+
 		IclubSupplItem bean = new IclubSupplItem();
-		
+
 		bean.setSiId(model.getSiId());
 		bean.setIclubAssessmentType(model.getIclubAssessmentType() != null ? iclubAssessmentTypeDAO.findById(model.getIclubAssessmentType()) : null);
 		bean.setIclubInsuranceItemType(model.getIclubInsuranceItemType() != null ? iclubInsuranceItemTypeDAO.findById(model.getIclubInsuranceItemType()) : null);
@@ -82,7 +82,7 @@ public class IclubSupplItemTrans {
 		bean.setSiCrtdDt(model.getSiCrtdDt());
 		bean.setSiAssessNumber(model.getSiAssessNumber());
 		bean.setSiItemId(model.getSiItemId());
-		
+
 		return bean;
 	}
 }

@@ -6,11 +6,11 @@ import za.co.iclub.pss.orm.bean.IclubInsurerMaster;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubInsurerMasterTrans {
-	
+
 	public static IclubInsurerMasterBean fromWStoUI(IclubInsurerMasterModel model) {
-		
+
 		IclubInsurerMasterBean bean = new IclubInsurerMasterBean();
-		
+
 		bean.setImId(model.getImId());
 		bean.setImName(model.getImName());
 		bean.setImLat(model.getImLat());
@@ -21,14 +21,14 @@ public class IclubInsurerMasterTrans {
 		bean.setImCrtdDt(model.getImCrtdDt());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubInsurerMasterModel fromUItoWS(IclubInsurerMasterBean bean) {
-		
+
 		IclubInsurerMasterModel model = new IclubInsurerMasterModel();
-		
+
 		model.setImId(bean.getImId());
 		model.setImName(bean.getImName());
 		model.setImLat(bean.getImLat());
@@ -39,14 +39,14 @@ public class IclubInsurerMasterTrans {
 		model.setImCrtdDt(bean.getImCrtdDt());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubInsurerMasterModel fromORMtoWS(IclubInsurerMaster bean) {
-		
+
 		IclubInsurerMasterModel model = new IclubInsurerMasterModel();
-		
+
 		model.setImId(bean.getImId());
 		model.setImName(bean.getImName());
 		model.setImLat(bean.getImLat());
@@ -58,13 +58,13 @@ public class IclubInsurerMasterTrans {
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? bean.getIclubPerson().getPId() : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubInsurerMaster fromWStoORM(IclubInsurerMasterModel model, IclubPersonDAO iclubPersonDAO) {
 		IclubInsurerMaster bean = new IclubInsurerMaster();
-		
+
 		bean.setImId(model.getImId());
 		bean.setImName(model.getImName());
 		bean.setImLat(model.getImLat());
@@ -74,8 +74,8 @@ public class IclubInsurerMasterTrans {
 		bean.setImLocation(model.getImLocation());
 		bean.setImCrtdDt(model.getImCrtdDt());
 		bean.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
-		
+
 		return bean;
 	}
-	
+
 }

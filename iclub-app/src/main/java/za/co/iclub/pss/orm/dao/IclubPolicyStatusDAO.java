@@ -34,21 +34,21 @@ public class IclubPolicyStatusDAO {
 	public static final String PS_SHORT_DESC = "psShortDesc";
 	public static final String PS_LONG_DESC = "psLongDesc";
 	public static final String PS_STATUS = "psStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubPolicyStatus transientInstance) {
 		log.debug("saving IclubPolicyStatus instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubPolicyStatus persistentInstance) {
 		log.debug("deleting IclubPolicyStatus instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPolicyStatus findById(java.lang.Long id) {
 		log.debug("getting IclubPolicyStatus instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPolicyStatus> findByExample(IclubPolicyStatus instance) {
 		log.debug("finding IclubPolicyStatus instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubPolicyStatus instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPolicyStatus> findByPsShortDesc(Object psShortDesc) {
 		return findByProperty(PS_SHORT_DESC, psShortDesc);
 	}
-	
+
 	public List<IclubPolicyStatus> findByPsLongDesc(Object psLongDesc) {
 		return findByProperty(PS_LONG_DESC, psLongDesc);
 	}
-	
+
 	public List<IclubPolicyStatus> findByPsStatus(Object psStatus) {
 		return findByProperty(PS_STATUS, psStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubPolicyStatus instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPolicyStatus merge(IclubPolicyStatus detachedInstance) {
 		log.debug("merging IclubPolicyStatus instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubPolicyStatus instance) {
 		log.debug("attaching dirty IclubPolicyStatus instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubPolicyStatus instance) {
 		log.debug("attaching clean IclubPolicyStatus instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubPolicyStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPolicyStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPolicyStatusDAO) ctx.getBean("IclubPolicyStatusDAO");
 	}

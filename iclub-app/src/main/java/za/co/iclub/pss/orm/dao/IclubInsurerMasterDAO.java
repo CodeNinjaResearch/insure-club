@@ -37,21 +37,21 @@ public class IclubInsurerMasterDAO {
 	public static final String IM_LAT = "imLat";
 	public static final String IM_LONG = "imLong";
 	public static final String IM_REG_NUM = "imRegNum";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubInsurerMaster transientInstance) {
 		log.debug("saving IclubInsurerMaster instance");
 		try {
@@ -62,7 +62,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubInsurerMaster persistentInstance) {
 		log.debug("deleting IclubInsurerMaster instance");
 		try {
@@ -73,7 +73,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInsurerMaster findById(java.lang.Long id) {
 		log.debug("getting IclubInsurerMaster instance with id: " + id);
 		try {
@@ -84,7 +84,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInsurerMaster> findByExample(IclubInsurerMaster instance) {
 		log.debug("finding IclubInsurerMaster instance by example");
 		try {
@@ -96,7 +96,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubInsurerMaster instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -109,31 +109,31 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInsurerMaster> findByImName(Object imName) {
 		return findByProperty(IM_NAME, imName);
 	}
-	
+
 	public List<IclubInsurerMaster> findByImTradeName(Object imTradeName) {
 		return findByProperty(IM_TRADE_NAME, imTradeName);
 	}
-	
+
 	public List<IclubInsurerMaster> findByImLocation(Object imLocation) {
 		return findByProperty(IM_LOCATION, imLocation);
 	}
-	
+
 	public List<IclubInsurerMaster> findByImLat(Object imLat) {
 		return findByProperty(IM_LAT, imLat);
 	}
-	
+
 	public List<IclubInsurerMaster> findByImLong(Object imLong) {
 		return findByProperty(IM_LONG, imLong);
 	}
-	
+
 	public List<IclubInsurerMaster> findByImRegNum(Object imRegNum) {
 		return findByProperty(IM_REG_NUM, imRegNum);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubInsurerMaster instances");
 		try {
@@ -145,7 +145,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInsurerMaster merge(IclubInsurerMaster detachedInstance) {
 		log.debug("merging IclubInsurerMaster instance");
 		try {
@@ -157,7 +157,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubInsurerMaster instance) {
 		log.debug("attaching dirty IclubInsurerMaster instance");
 		try {
@@ -168,7 +168,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubInsurerMaster instance) {
 		log.debug("attaching clean IclubInsurerMaster instance");
 		try {
@@ -179,7 +179,7 @@ public class IclubInsurerMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubInsurerMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubInsurerMasterDAO) ctx.getBean("IclubInsurerMasterDAO");
 	}

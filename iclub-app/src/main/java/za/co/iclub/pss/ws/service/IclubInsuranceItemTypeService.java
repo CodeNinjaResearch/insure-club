@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubInsuranceItemTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubInsuranceItemTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubInsuranceItemTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubInsuranceItemTypeService {
 	public ResponseModel add(IclubInsuranceItemTypeModel model) {
 		try {
 			IclubInsuranceItemType iIit = IclubInsuranceItemTypeTrans.fromWStoORM(model);
-			
+
 			iIit.setIitId(iclubCommonDAO.getNextId(IclubInsuranceItemType.class));
-			
+
 			iclubInsuranceItemTypeDAO.save(iIit);
-			
+
 			LOGGER.info("Save Success with ID :: " + iIit.getIitId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubInsuranceItemTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubInsuranceItemTypeService {
 	public ResponseModel mod(IclubInsuranceItemTypeModel model) {
 		try {
 			IclubInsuranceItemType iIit = IclubInsuranceItemTypeTrans.fromWStoORM(model);
-			
+
 			iclubInsuranceItemTypeDAO.merge(iIit);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getIitId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubInsuranceItemTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubInsuranceItemTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubInsuranceItemTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubInsuranceItemTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubInsuranceItemType bean = (IclubInsuranceItemType) object;
-					
+
 					IclubInsuranceItemTypeModel model = IclubInsuranceItemTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,15 +138,15 @@ public class IclubInsuranceItemTypeService {
 		IclubInsuranceItemTypeModel model = new IclubInsuranceItemTypeModel();
 		try {
 			IclubInsuranceItemType bean = iclubInsuranceItemTypeDAO.findById(id);
-			
+
 			model = IclubInsuranceItemTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -172,27 +172,27 @@ public class IclubInsuranceItemTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

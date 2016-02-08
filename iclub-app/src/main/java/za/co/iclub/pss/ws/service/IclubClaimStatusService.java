@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubClaimStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubClaimStatusService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubClaimStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubClaimStatusDAO iclubClaimStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubClaimStatusService {
 	public ResponseModel add(IclubClaimStatusModel model) {
 		try {
 			IclubClaimStatus iCS = IclubClaimStatusTrans.fromWStoORM(model);
-			
+
 			iCS.setCsId(iclubCommonDAO.getNextId(IclubClaimStatus.class));
-			
+
 			iclubClaimStatusDAO.save(iCS);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCS.getCsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubClaimStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubClaimStatusService {
 	public ResponseModel mod(IclubClaimStatusModel model) {
 		try {
 			IclubClaimStatus iCS = IclubClaimStatusTrans.fromWStoORM(model);
-			
+
 			iclubClaimStatusDAO.merge(iCS);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getCsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubClaimStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubClaimStatusService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubClaimStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubClaimStatusDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubClaimStatus bean = (IclubClaimStatus) object;
-					
+
 					IclubClaimStatusModel model = IclubClaimStatusTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,15 +138,15 @@ public class IclubClaimStatusService {
 		IclubClaimStatusModel model = new IclubClaimStatusModel();
 		try {
 			IclubClaimStatus bean = iclubClaimStatusDAO.findById(id);
-			
+
 			model = IclubClaimStatusTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -172,27 +172,27 @@ public class IclubClaimStatusService {
 			return message;
 		}
 	}
-	
+
 	public IclubClaimStatusDAO getIclubClaimStatusDAO() {
 		return iclubClaimStatusDAO;
 	}
-	
+
 	public void setIclubClaimStatusDAO(IclubClaimStatusDAO iclubClaimStatusDAO) {
 		this.iclubClaimStatusDAO = iclubClaimStatusDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

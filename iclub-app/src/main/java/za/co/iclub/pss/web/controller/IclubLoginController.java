@@ -57,7 +57,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubLoginController")
 @SessionScoped
 public class IclubLoginController implements Serializable {
-	
+
 	private static final long serialVersionUID = 8092436101540887282L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final ResourceBundle Y_BUNDLE = ResourceBundle.getBundle("yahoo-web");
@@ -70,30 +70,30 @@ public class IclubLoginController implements Serializable {
 	private IclubLoginBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
-	
+
 	public String getState(String from) {
 		String state = "{from:" + from + "}";
 		try {
 			if (IclubWebHelper.getObjectIntoSession("newInvite") != null) {
 				state = "{from:" + from + ",redirect:newInvite}";
 			}
-			
+
 			state = Base64.encodeBase64URLSafeString(state.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return state;
 	}
-	
+
 	public void newCohortInviteAction() {
 		setTheme();
 		IclubWebHelper.addObjectIntoSession("newInvite", "true");
-		
+
 	}
-	
+
 	public String googleAction() {
-		
+
 		String redirectUrl = "https://accounts.google.com/o/oauth2/auth?scope=" + BUNDLE.getString("scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("client_id") + "&approval_prompt=force&state=" + getState("GOOGLE");
 		try {
 			setTheme();
@@ -103,9 +103,9 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 	}
-	
+
 	public String getFaceBookLogin() {
-		
+
 		String redirectUrl = "https://graph.facebook.com/oauth/authorize?client_id=" + BUNDLE.getString("fb.client_id") + "&display=page&redirect_uri=" + BUNDLE.getString("fb.redirect_uri") + "&scope=" + BUNDLE.getString("fb.perms2") + "&state=" + getState("fb");
 		try {
 			setTheme();
@@ -115,7 +115,7 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 	}
-	
+
 	public String yahooAction() {
 		String redirectUrl = "https://api.login.yahoo.com/oauth2/request_auth?redirect_uri=" + Y_BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + Y_BUNDLE.getString("client_id") + "&language=en-us&state=" + getState("YAHOO");
 		try {
@@ -126,9 +126,9 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 	}
-	
+
 	public String hotmailAction() {
-		
+
 		String redirectUrl = "https://login.live.com/oauth20_authorize.srf?scope=" + BUNDLE.getString("htm.scope") + "&redirect_uri=" + BUNDLE.getString("redirect_uri") + "&response_type=code&client_id=" + BUNDLE.getString("htm.client_id") + "&state=" + getState("OUTLOOK");
 		try {
 			setTheme();
@@ -138,10 +138,10 @@ public class IclubLoginController implements Serializable {
 		}
 		return "";
 	}
-	
+
 	public String twitterLogin() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		
+
 		cb.setDebugEnabled(true).setOAuthConsumerKey(BUNDLE.getString("twt.client_id")).setOAuthConsumerSecret(BUNDLE.getString("twt.secret")).setOAuthRequestTokenURL("https://api.twitter.com/oauth/request_token").setOAuthAuthorizationURL(("https://api.twitter.com/oauth/authorize")).setOAuthAccessTokenURL(("https://api.twitter.com/oauth/access_token"));
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		Twitter twitter = tf.getInstance();
@@ -157,36 +157,36 @@ public class IclubLoginController implements Serializable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
 		return "";
 	}
-	
+
 	public String encodeKeys(String consumerKey, String consumerSecret) {
-		
+
 		try {
-			
+
 			String encodedConsumerKey = URLEncoder.encode(consumerKey, "UTF-8");
-			
+
 			String encodedConsumerSecret = URLEncoder.encode(consumerSecret, "UTF-8");
-			
+
 			String fullKey = encodedConsumerKey + ":" + encodedConsumerSecret;
-			
+
 			byte[] encodedBytes = Base64.encodeBase64(fullKey.getBytes());
-			
+
 			return new String(encodedBytes);
-			
+
 		}
-		
+
 		catch (UnsupportedEncodingException e) {
 			return new String();
-			
+
 		}
-		
+
 	}
-	
+
 	public String requestBearerToken() throws IOException {
 		HttpsURLConnection connection = null;
 		String encodedCredentials = encodeKeys(BUNDLE.getString("twt.client_id"), BUNDLE.getString("twt.secret"));
@@ -202,7 +202,7 @@ public class IclubLoginController implements Serializable {
 			fdsaf.write("grant_type=client_credentials".getBytes());
 			fdsaf.close();
 			response.sendRedirect(endPointUrl);
-			
+
 			return new String();
 		} catch (MalformedURLException e) {
 			throw new IOException("Invalid endpoint URL specified.", e);
@@ -212,9 +212,9 @@ public class IclubLoginController implements Serializable {
 			}
 		}
 	}
-	
+
 	public boolean writeRequest(HttpsURLConnection connection, String textBody) {
-		
+
 		try {
 			BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
 			wr.write(textBody);
@@ -225,7 +225,7 @@ public class IclubLoginController implements Serializable {
 			return false;
 		}
 	}
-	
+
 	public String readResponse(HttpsURLConnection connection) {
 		try {
 			StringBuilder str = new StringBuilder();
@@ -239,22 +239,22 @@ public class IclubLoginController implements Serializable {
 			return new String();
 		}
 	}
-	
+
 	public static void setTheme() {
 		String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-		
+
 		if (viewId != null && viewId.contains("spark")) {
-			
+
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), "-spark");
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), "spark");
-			
+
 		} else {
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.theme"), "");
 			IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), "sentinel");
 		}
-		
+
 	}
-	
+
 	public String doIclubLogin() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: doIclubLogin");
 		if (!validateLogin()) {
@@ -276,9 +276,9 @@ public class IclubLoginController implements Serializable {
 						personClient.close();
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.name"), personModel.getPFName() + (personModel.getPLName() == null ? "" : personModel.getPLName() + " "));
 						IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.role.id"), model.getIclubRoleType());
-						
+
 						return "/pages/dashboard/user/main.xhtml?faces-redirect=true";
-						
+
 					} else {
 						IclubWebHelper.addMessage("Person Profile Fetch Error - Contact Admin", FacesMessage.SEVERITY_ERROR);
 						return "";
@@ -296,9 +296,9 @@ public class IclubLoginController implements Serializable {
 			return "";
 		}
 	}
-	
+
 	public void doIclubLogout() {
-		
+
 		String theme = "";
 		String webTheme = "";
 		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.theme")) != null) {
@@ -312,23 +312,23 @@ public class IclubLoginController implements Serializable {
 		IclubWebHelper.addObjectIntoSession(BUNDLE.getString("logged.in.user.webTheme"), webTheme);
 		FacesContext context = FacesContext.getCurrentInstance();
 		NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
-		
+
 		navigationHandler.handleNavigation(context, null, "/templates/login" + theme + ".xhtml?faces-redirect=true");
-		
+
 		String url = "https://testclientapi.fraudcheck.co.za/api/authenticate/test";
 		String currentDate = System.currentTimeMillis() + "";
-		
+
 		String fcHash = DigestUtils.md5Hex(FRAUD_CHECK_USERID + FRAUD_CHECK_PWD + currentDate);
-		
+
 		HttpClient client = getHttpClient();
-		
+
 		try {
 			HttpPost post = new HttpPost(url);
 			post.setHeader("Content-Type", "application/json");
 			post.setHeader("FcAccId", FRAUD_CHECK_USERID);
 			post.setHeader("FcHash", fcHash);
 			post.setHeader("FcDate", currentDate);
-			
+
 			List<NameValuePair> arguments = new ArrayList<>(3);
 			arguments.add(new BasicNameValuePair("data", "test"));
 			post.setEntity(new UrlEncodedFormEntity(arguments));
@@ -337,41 +337,41 @@ public class IclubLoginController implements Serializable {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 	}
-	
+
 	private static HttpClient getHttpClient() {
-		
+
 		try {
 			SSLContext sslContext = SSLContext.getInstance("SSL");
-			
+
 			sslContext.init(null, new TrustManager[] { new X509TrustManager() {
 				public X509Certificate[] getAcceptedIssuers() {
-					
+
 					return null;
 				}
-				
+
 				public void checkClientTrusted(X509Certificate[] certs, String authType) {
-					
+
 				}
-				
+
 				public void checkServerTrusted(X509Certificate[] certs, String authType) {
-					
+
 				}
 			} }, new SecureRandom());
-			
+
 			SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-			
+
 			HttpClient httpClient = HttpClientBuilder.create().setSSLSocketFactory(socketFactory).build();
-			
+
 			return httpClient;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return HttpClientBuilder.create().build();
 		}
 	}
-	
+
 	public boolean validateLogin() {
 		boolean ret = false;
 		if (bean.getLName() == null || bean.getLName().trim().length() == 0) {
@@ -384,39 +384,39 @@ public class IclubLoginController implements Serializable {
 		}
 		return ret;
 	}
-	
+
 	public List<IclubLoginBean> getBeans() {
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubLoginBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubLoginBean getBean() {
 		if (bean == null)
 			bean = new IclubLoginBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubLoginBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 }

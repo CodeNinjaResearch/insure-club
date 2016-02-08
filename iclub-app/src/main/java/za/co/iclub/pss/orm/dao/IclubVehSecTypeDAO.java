@@ -34,21 +34,21 @@ public class IclubVehSecTypeDAO {
 	public static final String VST_LONG_DESC = "vstLongDesc";
 	public static final String VST_SHORT_DESC = "vstShortDesc";
 	public static final String VST_STATUS = "vstStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubVehSecType transientInstance) {
 		log.debug("saving IclubVehSecType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubVehSecType persistentInstance) {
 		log.debug("deleting IclubVehSecType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubVehSecType findById(java.lang.Long id) {
 		log.debug("getting IclubVehSecType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubVehSecType> findByExample(IclubVehSecType instance) {
 		log.debug("finding IclubVehSecType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubVehSecType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubVehSecType> findByVstLongDesc(Object vstLongDesc) {
 		return findByProperty(VST_LONG_DESC, vstLongDesc);
 	}
-	
+
 	public List<IclubVehSecType> findByVstShortDesc(Object vstShortDesc) {
 		return findByProperty(VST_SHORT_DESC, vstShortDesc);
 	}
-	
+
 	public List<IclubVehSecType> findByVstStatus(Object vstStatus) {
 		return findByProperty(VST_STATUS, vstStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubVehSecType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubVehSecType merge(IclubVehSecType detachedInstance) {
 		log.debug("merging IclubVehSecType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubVehSecType instance) {
 		log.debug("attaching dirty IclubVehSecType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubVehSecType instance) {
 		log.debug("attaching clean IclubVehSecType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubVehSecTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubVehSecTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubVehSecTypeDAO) ctx.getBean("IclubVehSecTypeDAO");
 	}

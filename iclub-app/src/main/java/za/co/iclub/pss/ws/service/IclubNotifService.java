@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubNotifService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubNotifService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubNotifService.class);
 	private IclubNotifDAO iclubNotifDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNotificationTypeDAO iclubNotificationTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -45,18 +45,18 @@ public class IclubNotifService {
 	@Transactional
 	public ResponseModel add(IclubNotifModel model) {
 		try {
-			
+
 			IclubNotif iCN = IclubNotifTrans.fromWStoORM(model, iclubPersonDAO, iclubNotificationTypeDAO);
-			
+
 			iclubNotifDAO.save(iCN);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCN.getNId());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -65,9 +65,9 @@ public class IclubNotifService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -76,11 +76,11 @@ public class IclubNotifService {
 	public ResponseModel mod(IclubNotifModel model) {
 		try {
 			IclubNotif iCN = IclubNotifTrans.fromWStoORM(model, iclubPersonDAO, iclubNotificationTypeDAO);
-			
+
 			iclubNotifDAO.merge(iCN);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getNId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -92,9 +92,9 @@ public class IclubNotifService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -109,45 +109,45 @@ public class IclubNotifService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubNotifModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNotifDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubNotif bean = (IclubNotif) object;
 					IclubNotifModel iCN = IclubNotifTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCN);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubNotifModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubNotif.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubNotif bean = (IclubNotif) object;
 					IclubNotifModel iCN = IclubNotifTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCN);
 				}
 			}
@@ -156,7 +156,7 @@ public class IclubNotifService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -165,53 +165,53 @@ public class IclubNotifService {
 		IclubNotifModel model = new IclubNotifModel();
 		try {
 			IclubNotif bean = iclubNotifDAO.findById(id);
-			
+
 			model = IclubNotifTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubNotifDAO getIclubNotifDAO() {
 		return iclubNotifDAO;
 	}
-	
+
 	public void setIclubNotifDAO(IclubNotifDAO iclubNotifDAO) {
 		this.iclubNotifDAO = iclubNotifDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubNotificationTypeDAO getIclubNotificationTypeDAO() {
 		return iclubNotificationTypeDAO;
 	}
-	
+
 	public void setIclubNotificationTypeDAO(IclubNotificationTypeDAO iclubNotificationTypeDAO) {
 		this.iclubNotificationTypeDAO = iclubNotificationTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

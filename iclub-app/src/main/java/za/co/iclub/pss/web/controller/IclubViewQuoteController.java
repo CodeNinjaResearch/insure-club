@@ -27,7 +27,7 @@ import za.co.iclub.pss.util.IclubWebHelper;
 @ManagedBean(name = "iclubViewQuoteController")
 @SessionScoped
 public class IclubViewQuoteController implements Serializable {
-	
+
 	private static final long serialVersionUID = -6405843984156478759L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubViewQuoteController.class);
@@ -38,56 +38,56 @@ public class IclubViewQuoteController implements Serializable {
 	private List<IclubQuoteStatusBean> quoteStatusBeans;
 	private List<IclubInsurerMasterBean> insurerMasterBeans;
 	private String sessionUserId;
-	
+
 	public List<IclubQuoteBean> getBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/userstatusId/" + getSessionUserId() + "/1");
 		Collection<? extends IclubQuoteModel> models = new ArrayList<IclubQuoteModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteModel.class));
 		client.close();
-		
+
 		beans = new ArrayList<IclubQuoteBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubQuoteModel model : models) {
 				IclubQuoteBean bean = IclubQuoteTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public String quoteActionListener(IclubQuoteBean bean) {
 		IclubWebHelper.addObjectIntoSession("fullquote", bean);
-		
+
 		return "fq";
 	}
-	
+
 	public String policyActionListener(IclubQuoteBean bean) {
 		IclubWebHelper.addObjectIntoSession("fullquote", bean);
-		
+
 		return "pdash";
 	}
-	
+
 	public void setBeans(List<IclubQuoteBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public String getSessionUserId() {
-		
+
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
-		
+
 		if (sessUsrId != null)
 			sessionUserId = sessUsrId.toString();
-		
+
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public List<IclubQuoteStatusBean> getQuoteStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(QUTS_BASE_URL + "list");
 		Collection<? extends IclubQuoteStatusModel> models = new ArrayList<IclubQuoteStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteStatusModel.class));
 		client.close();
@@ -95,20 +95,20 @@ public class IclubViewQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubQuoteStatusModel model : models) {
 				IclubQuoteStatusBean bean = IclubQuoteStatusTrans.fromWStoUI(model);
-				
+
 				quoteStatusBeans.add(bean);
 			}
 		}
-		
+
 		return quoteStatusBeans;
 	}
-	
+
 	public void setQuoteStatusBeans(List<IclubQuoteStatusBean> quoteStatusBeans) {
 		this.quoteStatusBeans = quoteStatusBeans;
 	}
-	
+
 	public List<IclubInsurerMasterBean> getInsurerMasterBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(IM_BASE_URL + "list");
 		Collection<? extends IclubInsurerMasterModel> models = new ArrayList<IclubInsurerMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsurerMasterModel.class));
 		client.close();
@@ -116,16 +116,16 @@ public class IclubViewQuoteController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubInsurerMasterModel model : models) {
 				IclubInsurerMasterBean bean = IclubInsurerMasterTrans.fromWStoUI(model);
-				
+
 				insurerMasterBeans.add(bean);
 			}
 		}
-		
+
 		return insurerMasterBeans;
 	}
-	
+
 	public void setInsurerMasterBeans(List<IclubInsurerMasterBean> insurerMasterBean) {
 		this.insurerMasterBeans = insurerMasterBean;
 	}
-	
+
 }

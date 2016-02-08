@@ -37,21 +37,21 @@ public class IclubLoginDAO {
 	public static final String _LSEC_ANS = "LSecAns";
 	public static final String _LPROVIDER_CD = "LProviderCd";
 	public static final String _LPROVIDER_ID = "LProviderId";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubLogin transientInstance) {
 		log.debug("saving IclubLogin instance");
 		try {
@@ -62,7 +62,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubLogin persistentInstance) {
 		log.debug("deleting IclubLogin instance");
 		try {
@@ -73,7 +73,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubLogin findById(java.lang.String id) {
 		log.debug("getting IclubLogin instance with id: " + id);
 		try {
@@ -84,7 +84,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubLogin> findByExample(IclubLogin instance) {
 		log.debug("finding IclubLogin instance by example");
 		try {
@@ -96,7 +96,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubLogin instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -109,27 +109,27 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubLogin> findByLName(Object LName) {
 		return findByProperty(_LNAME, LName);
 	}
-	
+
 	public List<IclubLogin> findByLPasswd(Object LPasswd) {
 		return findByProperty(_LPASSWD, LPasswd);
 	}
-	
+
 	public List<IclubLogin> findByLSecAns(Object LSecAns) {
 		return findByProperty(_LSEC_ANS, LSecAns);
 	}
-	
+
 	public List<IclubLogin> findByLProviderCd(Object LProviderCd) {
 		return findByProperty(_LPROVIDER_CD, LProviderCd);
 	}
-	
+
 	public List<IclubLogin> findByLProviderId(Object LProviderId) {
 		return findByProperty(_LPROVIDER_ID, LProviderId);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubLogin instances");
 		try {
@@ -141,7 +141,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubLogin merge(IclubLogin detachedInstance) {
 		log.debug("merging IclubLogin instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubLogin instance) {
 		log.debug("attaching dirty IclubLogin instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubLogin instance) {
 		log.debug("attaching clean IclubLogin instance");
 		try {
@@ -175,7 +175,7 @@ public class IclubLoginDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubLoginDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubLoginDAO) ctx.getBean("IclubLoginDAO");
 	}

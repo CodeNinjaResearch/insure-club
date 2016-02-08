@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubCohortTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubCohortTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubCohortTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubCohortTypeDAO iclubCohortTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubCohortTypeService {
 	public ResponseModel add(IclubCohortTypeModel model) {
 		try {
 			IclubCohortType iTt = IclubCohortTypeTrans.fromWStoORM(model);
-			
+
 			iTt.setCtId(iclubCommonDAO.getNextId(IclubCohortType.class));
-			
+
 			iclubCohortTypeDAO.save(iTt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iTt.getCtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubCohortTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubCohortTypeService {
 	public ResponseModel mod(IclubCohortTypeModel model) {
 		try {
 			IclubCohortType iTt = IclubCohortTypeTrans.fromWStoORM(model);
-			
+
 			iclubCohortTypeDAO.merge(iTt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getCtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubCohortTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,20 +104,20 @@ public class IclubCohortTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubCohortTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubCohortTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubCohortType bean = (IclubCohortType) object;
-					
+
 					IclubCohortTypeModel model = IclubCohortTypeTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
@@ -125,10 +125,10 @@ public class IclubCohortTypeService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -137,15 +137,15 @@ public class IclubCohortTypeService {
 		IclubCohortTypeModel model = new IclubCohortTypeModel();
 		try {
 			IclubCohortType bean = iclubCohortTypeDAO.findById(id);
-			
+
 			model = IclubCohortTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -171,27 +171,27 @@ public class IclubCohortTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubCohortTypeDAO getIclubCohortTypeDAO() {
 		return iclubCohortTypeDAO;
 	}
-	
+
 	public void setIclubCohortTypeDAO(IclubCohortTypeDAO iclubCohortTypeDAO) {
 		this.iclubCohortTypeDAO = iclubCohortTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

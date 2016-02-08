@@ -29,19 +29,19 @@ import za.co.iclub.pss.orm.bean.IclubPolicy;
 public class IclubNamedQueryDAO {
 	private static final Logger log = Logger.getLogger(IclubNamedQueryDAO.class);
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public List findByUser(String userId, String className) {
 		log.debug("finding all " + className + " instances by user");
 		try {
@@ -53,7 +53,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findIclubQuotesByUserAndStatusId(String userId, Long statusId) {
 		log.debug("finding all IclubQuote instances by user");
 		try {
@@ -66,7 +66,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findIclubSupplPersonBySmId(String smId) {
 		log.debug("finding all IclubSupplPerson instances by smId");
 		try {
@@ -78,7 +78,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getBySD(String sd, Long id, String className) {
 		log.debug("Fetching all " + className + " by Query :: get" + className + "SD");
 		try {
@@ -92,7 +92,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubFieldByFieldStatus(String fieldStatus) {
 		log.debug("Fetching all IclubBankMaster by Query :: getAllBankNames");
 		try {
@@ -105,7 +105,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public Long getIclubGeoLocByLatAndLong(Double gLong, Double gLat) {
 		log.debug("Fetching all IclubGeoLoc by Query :: getIclubGeoLocByLatAndLong");
 		try {
@@ -116,16 +116,16 @@ public class IclubNamedQueryDAO {
 			Long ret = -999l;
 			if (res != null && res.length > 0) {
 				ret = ((BigInteger) res[0]).longValue();
-				
+
 			}
 			return ret;
-			
+
 		} catch (RuntimeException re) {
 			log.error("BankNames", re);
 			throw re;
 		}
 	}
-	
+
 	public List getIclubSupplMasterByLatAndLong(Double smLong, Double smLat) {
 		log.debug("Fetching all IclubSupplMaster by Query :: getIclubSupplMasterByLatAndLong");
 		try {
@@ -133,15 +133,15 @@ public class IclubNamedQueryDAO {
 			query.setDouble("smLong", smLong);
 			query.setDouble("smLat", smLat);
 			List res = query.list();
-			
+
 			return res;
-			
+
 		} catch (RuntimeException re) {
 			log.error("BankNames", re);
 			throw re;
 		}
 	}
-	
+
 	public List getAllBankNames() {
 		log.debug("Fetching all IclubBankMaster by Query :: getAllBankNames");
 		try {
@@ -153,7 +153,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubBankMastersByBankName(String bankName) {
 		log.debug("Fetching all IclubBankMaster by Query :: getAllBankNames");
 		try {
@@ -166,7 +166,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findIclubRateTypeByQuoteTypeAndFieldId(Long fieldId, String quoteType) {
 		log.debug("Fetching all IclubMbCommnet by Query :: findIclubRateTypeByQuoteTypeAndFieldId");
 		try {
@@ -180,7 +180,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getMbCommentsByMbId(String mbId) {
 		log.debug("Fetching all IclubMbCommnet by Query :: getIclubMbCommnetByMbId");
 		try {
@@ -193,7 +193,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getAccountTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Account Type by Query :: getAccountTypeySD");
 		try {
@@ -207,7 +207,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getAlarmTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Alarm Type by Query :: getAlarmTypeBySD");
 		try {
@@ -221,7 +221,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findBankMasterByUser(String userId) {
 		log.debug("finding all IclubBankMaster instances by user");
 		try {
@@ -233,7 +233,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getBarTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Bar Type by Query :: getBarTypeBySD");
 		try {
@@ -247,7 +247,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getBoundaryTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Boundary Type by Query :: getBoundaryTypeBySD");
 		try {
@@ -261,7 +261,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getBuildingStateBySD(String sd, Long id) {
 		log.debug("Fetching all Building State by Query :: getBuildingStateBySD");
 		try {
@@ -275,7 +275,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubClaim findByPolicyId(String policyId) {
 		log.debug("finding all IclubClaim instances by user");
 		try {
@@ -287,7 +287,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubConfig getIclubConfigByKey(String key) {
 		log.debug("finding IclubConfig instance by config key");
 		try {
@@ -299,7 +299,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getDocumentByEntity(String id, Long typeId) {
 		log.debug("Fetching all Batch by Query :: getDocumentByEntity");
 		try {
@@ -313,7 +313,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findClaimItemByUser(String userId) {
 		log.debug("finding all IclubClaimItem instances by user");
 		try {
@@ -325,7 +325,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getClaimStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Claim Status by Query :: getClaimStatusBySD");
 		try {
@@ -339,7 +339,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findConfigByUser(String userId) {
 		log.debug("finding all IclubConfig instances by user");
 		try {
@@ -351,7 +351,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getDocumentTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Document Type by Query :: getDocumentTypeySD");
 		try {
@@ -365,7 +365,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubDriver findByPersonId(String personId) {
 		log.debug("finding all IclubDriver instances by user");
 		try {
@@ -377,7 +377,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getEntityTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Entity Type by Query :: getEntityTypeBySD");
 		try {
@@ -391,7 +391,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getEventTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Event Type by Query :: getEventTypeBySD");
 		try {
@@ -405,7 +405,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getFieldBySD(String sd, Long id) {
 		log.debug("Fetching all Field by Query :: getFieldBySD");
 		try {
@@ -419,7 +419,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIdTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Id Type by Query :: getIdTypeBySD");
 		try {
@@ -433,7 +433,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getPropertyItemByProperty(String propertyId) {
 		log.debug("Fetching all Id Type by Query :: getIdTypeBySD");
 		try {
@@ -446,7 +446,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInsuranceItem findByQuoteIdAndItemTypeId(String quoteId, Long itemTypeId) {
 		log.debug("finding all IclubInsuranceItem instances by user");
 		try {
@@ -454,15 +454,15 @@ public class IclubNamedQueryDAO {
 			queryObject.setString("quoteId", quoteId);
 			queryObject.setLong("itemTypeId", itemTypeId);
 			List ret = queryObject.list();
-			
+
 			return (IclubInsuranceItem) ret.get(0);
-			
+
 		} catch (RuntimeException re) {
 			log.error("find all by user failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List findIclubInsuranceItemsByQuoteIdAndItemTypeId(String quoteId, Long itemTypeId) {
 		log.debug("finding all IclubInsuranceItem instances by user");
 		try {
@@ -476,7 +476,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByQuoteId(String quoteId) {
 		log.debug("finding all IclubInsuranceItem instances by user");
 		try {
@@ -488,7 +488,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPolicy findIclubPlolicyByQuoteId(String quoteId) {
 		log.debug("finding IclubPolicy instances by user");
 		try {
@@ -500,7 +500,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getInsuranceItemTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Insurance Item Type by Query :: getInsuranceItemTypeBySD");
 		try {
@@ -514,7 +514,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List verifyLogin(String name, String pwd) {
 		log.debug("Fetching Login Query :: verify Login");
 		try {
@@ -528,7 +528,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getMaritialStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Maritial Status by Query :: getMaritialStatusBySD");
 		try {
@@ -542,7 +542,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getMessageTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Message Type by Query :: getMessageTypeBySD");
 		try {
@@ -556,7 +556,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getAccessTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Access Type by Query :: getAccessTypeBySD");
 		try {
@@ -570,7 +570,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getNotificationTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Notification Type by Query :: getNotificationTypeBySD");
 		try {
@@ -584,7 +584,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getOccupiedStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Occupied Status by Query :: getOccupiedStatusBySD");
 		try {
@@ -598,7 +598,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getOwnerTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Owner Type by Query :: getOwnerTypeBySD");
 		try {
@@ -612,7 +612,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getPaymentStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Payment Status by Query :: getPaymentStatusBySD");
 		try {
@@ -626,7 +626,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getPaymentTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Payment Type by Query :: getPaymentTypeBySD");
 		try {
@@ -640,7 +640,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPolicy findPolicyByQuoteId(String quoteId) {
 		log.debug("finding   IclubPolicy instances by user");
 		try {
@@ -652,7 +652,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getPolicyStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Policy Status by Query :: getPolicyStatusBySD");
 		try {
@@ -666,7 +666,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getProductTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Product Type by Query :: getProductTypeBySD");
 		try {
@@ -680,7 +680,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getPropertyTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Property Type by Query :: getPropertyTypeBySD");
 		try {
@@ -694,20 +694,20 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findAllVmMakes() {
 		log.debug("finding all IclubVehicleMaster instances by vmMake");
 		try {
 			String queryString = "select  distinct model.vmMake from IclubVehicleMaster as model ";
 			Query queryObject = getCurrentSession().createQuery(queryString);
-			
+
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all by vmMake failed", re);
 			throw re;
 		}
 	}
-	
+
 	public List getQuoteStatusBySD(String sd, Long id) {
 		log.debug("Fetching all Quote Status by Query :: getQuoteStatusBySD");
 		try {
@@ -721,7 +721,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByRateType(String rateType) {
 		log.debug("finding all IclubRateEngine instances by user");
 		try {
@@ -733,7 +733,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getRateTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Rate Type by Query :: getRateTypeBySD");
 		try {
@@ -747,7 +747,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getRoleTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Role Type by Query :: getRoleTypeBySD");
 		try {
@@ -761,7 +761,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getRoofTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Roof Type by Query :: getRoofTypeBySD");
 		try {
@@ -775,7 +775,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getSecurityQuestionBySD(String sd, Long id) {
 		log.debug("Fetching all Security Question by Query :: getSecurityQuestionBySD");
 		try {
@@ -789,7 +789,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getSupplierTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Supplier Type by Query :: getSupplierTypeBySD");
 		try {
@@ -803,7 +803,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByDriverId(String driverId) {
 		log.debug("finding  IclubVehicle instance by getVehicleByDriverId");
 		try {
@@ -816,7 +816,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findAllByMake(String vmMake) {
 		log.debug("finding all IclubVehicleMaster instances by vmMake");
 		try {
@@ -828,7 +828,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getVehicleTypeBySD(String sd, Long id) {
 		log.debug("Fetching all VehicleType by Query :: getVehicleTypeBySD");
 		try {
@@ -842,7 +842,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getWallTypeBySD(String sd, Long id) {
 		log.debug("Fetching all Wall Type by Query :: getWallTypeBySD");
 		try {
@@ -856,7 +856,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubLoginByPersonId(String personId) {
 		log.debug("finding IclubLogin instance by PersonId");
 		try {
@@ -868,7 +868,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubRateEngineByBaseValueAndRateTypeId(String baseValue, Long rateTypeId, String reId) {
 		log.debug("Fetching all IclubRateEngine by Query :: getIclubRateEngineByBaseValueAndRateTypeId");
 		try {
@@ -883,7 +883,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubRateEngineByBaseMaxValueAndRateTypeId(String baseValue, String maxValue, Long rateTypeId, String reId) {
 		log.debug("Fetching all IclubRateEngine by Query :: getIclubRateEngineByBaseValueAndRateTypeId");
 		try {
@@ -909,7 +909,7 @@ public class IclubNamedQueryDAO {
 			 * reId); } if (rateTypeId != null) {
 			 * query.setParameter("rateTypeId", rateTypeId); }
 			 */
-			
+
 			query.setDouble("baseValue", new Double(baseValue));
 			query.setDouble("maxValue", new Double(maxValue));
 			query.setString("reId", reId);
@@ -921,7 +921,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPolicyByPolicyStatus(String policyStatus) {
 		log.debug("finding IclubPolicy instance by policyStatus");
 		try {
@@ -933,7 +933,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPolicies() {
 		log.debug("finding IclubPolicy instance");
 		try {
@@ -944,7 +944,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubClaimByCrtDt() {
 		log.debug("finding IclubCalim instance");
 		try {
@@ -955,7 +955,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubCalimByClaimStatus(String claimStatus) {
 		log.debug("finding IclubCalim  instance by CalimStatus");
 		try {
@@ -967,7 +967,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPersonNumbersList(Collection<? extends String> numbers) {
 		log.debug("finding IclubPerson  instances by getIclubPersonNumbersList");
 		try {
@@ -980,9 +980,9 @@ public class IclubNamedQueryDAO {
 			log.error("get IclubPersonList failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public List getIclubPersonEmailsList(Collection<? extends String> emails) {
 		log.debug("finding IclubPerson  instances by getIclubPersonEmailsList");
 		try {
@@ -995,9 +995,9 @@ public class IclubNamedQueryDAO {
 			log.error("get IclubPersonList failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public List getIclubCohoretInvitesEmailsList(Collection<? extends String> emails) {
 		log.debug("finding IclubCohortInvite  instances by getIclubPersonEmailsList");
 		try {
@@ -1010,14 +1010,14 @@ public class IclubNamedQueryDAO {
 			log.error("get IclubPersonList failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public List getIclubPaymentsByCohortId(String cohortId, String userId) {
 		log.debug("finding IclubPayment  instances by getIclubPaymentsByCohortId");
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubPayment.class);
-			
+
 			criteria.add(Restrictions.isNotNull("iclubPolicy"));
 			criteria.createAlias("iclubPerson", "person");
 			criteria.createAlias("person.iclubCohort", "cohort");
@@ -1033,9 +1033,9 @@ public class IclubNamedQueryDAO {
 			log.error("get IclubPayment failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public List getIclubPoliciesByCohortId(String cohortId, String userId, Long policyStatus) {
 		log.debug("finding IclubPolicy  instances by getIclubPoliciesByCohortId");
 		try {
@@ -1043,11 +1043,11 @@ public class IclubNamedQueryDAO {
 			criteria.createAlias("iclubPerson", "person");
 			criteria.createAlias("iclubPolicyStatus", "policyStaus");
 			criteria.createAlias("person.iclubCohort", "cohort");
-			
+
 			if (policyStatus != null) {
 				criteria.add(Restrictions.eq("iclubPolicyStatus.psId", policyStatus));
 			}
-			
+
 			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
 				criteria.add(Restrictions.eq("cohort.CId", cohortId).ignoreCase());
 			}
@@ -1060,9 +1060,9 @@ public class IclubNamedQueryDAO {
 			log.error("get IclubPolicy failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public List getIclubClaimsByCohortId(String cohortId, String userId, Long staus) {
 		log.debug("finding IclubClaim  instances by getIclubClaimsByCohortId");
 		try {
@@ -1070,14 +1070,14 @@ public class IclubNamedQueryDAO {
 			criteria.createAlias("iclubPerson", "person");
 			criteria.createAlias("person.iclubCohort", "cohort");
 			criteria.createAlias("iclubClaimStatus", "claimStatus");
-			
+
 			if (cohortId != null && !cohortId.trim().equalsIgnoreCase("")) {
 				criteria.add(Restrictions.eq("cohort.CId", cohortId).ignoreCase());
 			}
 			if (userId != null && !userId.trim().equalsIgnoreCase("")) {
 				criteria.add(Restrictions.eq("person.PId", userId).ignoreCase());
 			}
-			
+
 			if (staus != null) {
 				criteria.add(Restrictions.eq("claimStatus.csId", staus));
 			}
@@ -1087,9 +1087,9 @@ public class IclubNamedQueryDAO {
 			log.error("get IclubClaim failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public BigInteger getIclubPersonCountByCohortId(String cohortId) {
 		log.debug("finding Count of Persons  instance by Cohort Id");
 		try {
@@ -1101,7 +1101,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubCohortInvitesByinviteStatusIds(List<Long> statusList, String userId) {
 		log.debug("finding IclubCohortInvite  instances by getIclubCohortInvitesByinviteStatusIds");
 		try {
@@ -1111,16 +1111,16 @@ public class IclubNamedQueryDAO {
 			criteria.createAlias("cohort.iclubPersonByCAdminId", "person");
 			criteria.add(Restrictions.eq("person.PId", userId));
 			criteria.add(Restrictions.in("inviteStatus.isId", statusList));
-			
+
 			List paymentList = criteria.list();
 			return paymentList;
 		} catch (RuntimeException re) {
 			log.error("getIclubCohortInvitesByinviteStatusIds failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public List getIclubPropertyItemByProperty(String propertyId) {
 		log.debug("finding IclubPropertyItem  instance by ProeprtyItemStatus");
 		try {
@@ -1132,7 +1132,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubLoginByIdAndProviderId(String loginId, String providerId, String providerCd) {
 		log.debug("finding IclubLogin instance by PersonId");
 		try {
@@ -1146,12 +1146,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getQuoteDetailsByUserId(String userId, Long quoteStatus) {
 		log.debug("finding IclubQuote instance by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteCntByUserId");
-			
+
 			queryObject.setString("userId", userId);
 			queryObject.setLong("quoteStatus", quoteStatus);
 			List object = queryObject.list();
@@ -1161,12 +1161,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getQuoteDetailsIdByUserId(String userId, Long quoteStatus) {
 		log.debug("finding IclubQuote IDs instance by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteIdByUserId");
-			
+
 			queryObject.setString("userId", userId);
 			queryObject.setLong("quoteStatus", quoteStatus);
 			List object = queryObject.list();
@@ -1176,7 +1176,7 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	// public List getIclubItemIdsByUserId(List<String> quoteIds) {
 	// log.debug("finding IclubInsuranceItem fields  by PersonId");
 	// try {
@@ -1197,9 +1197,9 @@ public class IclubNamedQueryDAO {
 		try {
 			Criteria criteria = getCurrentSession().createCriteria(IclubInsuranceItem.class);
 			criteria.add(Restrictions.in("iiQuoteId", quoteIds));
-			
+
 			criteria.createAlias("iclubInsuranceItemType", "iclubInsuranceItemType");
-			
+
 			ProjectionList projectionList = Projections.projectionList();
 			projectionList.add(Projections.property("iclubInsuranceItemType.iitId"));
 			projectionList.add(Projections.property("iiItemId"));
@@ -1210,14 +1210,14 @@ public class IclubNamedQueryDAO {
 			log.error("get IclubPersonList failed", re);
 			throw re;
 		}
-		
+
 	}
-	
+
 	public List getIclubPolicIdsByQuotes(String userIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicIdsByQuotes");
-			
+
 			queryObject.setString("userIds", userIds);
 			List object = queryObject.list();
 			return object;
@@ -1226,12 +1226,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubClaimValueByPolicyIds(List<String> policyIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubClaimValueByPolicyIds");
-			
+
 			queryObject.setParameter("policyIds", policyIds);
 			List object = queryObject.list();
 			return object;
@@ -1240,12 +1240,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPaymentByPolicyIds(String policyIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPaymentByPolicyIds");
-			
+
 			queryObject.setString("policyIds", policyIds);
 			List object = queryObject.list();
 			return object;
@@ -1254,12 +1254,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPaymentLeastDbDtByPolicyIds(String policyIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPaymentByPolicyIds");
-			
+
 			queryObject.setString("policyIds", policyIds);
 			List object = queryObject.list();
 			return object;
@@ -1268,12 +1268,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPaymentsByClaimIds(String claimIds) {
 		log.debug("finding IclubPolicy fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPaymentsByClaimIds");
-			
+
 			queryObject.setString("claimIds", claimIds);
 			List object = queryObject.list();
 			return object;
@@ -1282,12 +1282,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubVehicleIValueByVIds(String vehicleIds) {
 		log.debug("finding IclubInsuranceItem fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubVehicleIValueByVIds");
-			
+
 			queryObject.setString("vehicleIds", vehicleIds);
 			List object = queryObject.list();
 			return object;
@@ -1296,12 +1296,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPropertyIValueByPIds(String propertyIds) {
 		log.debug("finding IclubInsuranceItem fields  by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPropertyIValueByPIds");
-			
+
 			queryObject.setString("propertyIds", propertyIds);
 			List object = queryObject.list();
 			return object;
@@ -1310,12 +1310,12 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public Object getQuoteDetailsValDateByUserId(String userId, Long quoteStatus) {
 		log.debug("finding IclubQuote instance by PersonId");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubQuoteValDtByUserId");
-			
+
 			queryObject.setString("userId", userId);
 			queryObject.setLong("quoteStatus", quoteStatus);
 			Object object = queryObject.uniqueResult();
@@ -1325,27 +1325,27 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubCohortInvitesByNotSentStatus() {
 		log.debug("finding IclubCohortInvite   by Not  Sent Status");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubCohortInviteByNotSentStatus");
-			
+
 			List<IclubCohortInvite> cohorsInviteList = queryObject.list();
-			
+
 			if (cohorsInviteList != null && cohorsInviteList.size() > 0) {
 				for (IclubCohortInvite bean : cohorsInviteList) {
 					Hibernate.initialize(bean.getIclubPerson());
 				}
 			}
-			
+
 			return cohorsInviteList;
 		} catch (RuntimeException re) {
 			log.error("get IclubCohortInvite  ", re);
 			throw re;
 		}
 	}
-	
+
 	public List getIclubClaimPaymentsByUserId(String userId, Long claimStausId) {
 		log.debug("finding IclubPayment   by Not  Sent Status");
 		try {
@@ -1359,13 +1359,13 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 	public List getIclubPolicyPaymentsByUserId(String userId) {
 		log.debug("finding IclubPayment   by Not  Sent Status");
 		try {
 			Query queryObject = getCurrentSession().getNamedQuery("getIclubPolicyPaymentsByUserId");
 			queryObject.setString("userId", userId);
-			
+
 			List object = queryObject.list();
 			return object;
 		} catch (RuntimeException re) {
@@ -1373,5 +1373,5 @@ public class IclubNamedQueryDAO {
 			throw re;
 		}
 	}
-	
+
 }

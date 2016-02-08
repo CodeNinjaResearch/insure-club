@@ -25,7 +25,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubCohortTypeController")
 @SessionScoped
 public class IclubCohortTypeController implements Serializable {
-	
+
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubCohortTypeController.class);
@@ -35,14 +35,14 @@ public class IclubCohortTypeController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-	
+
 	public void addIclubCohortType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubCohortType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubCohortTypeModel model = IclubCohortTypeTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -57,14 +57,14 @@ public class IclubCohortTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubCohortType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubCohortType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubCohortTypeModel model = IclubCohortTypeTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -79,7 +79,7 @@ public class IclubCohortTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubCohortType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubCohortType");
 		try {
@@ -96,27 +96,27 @@ public class IclubCohortTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("cohorttype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubCohortTypeBean();
 	}
-	
+
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubCohortTypeBean();
 	}
-	
+
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		if (bean.getCtShortDesc() != null && !bean.getCtShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getCtShortDesc().trim() + "/" + ((bean.getCtId() == null) ? -999l : bean.getCtId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -129,20 +129,20 @@ public class IclubCohortTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getCtLongDesc() == null || bean.getCtLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getCtStatus() == null || bean.getCtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public List<IclubCohortTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubCohortTypeModel> models = new ArrayList<IclubCohortTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubCohortTypeModel.class));
@@ -151,49 +151,49 @@ public class IclubCohortTypeController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubCohortTypeModel model : models) {
 				IclubCohortTypeBean bean = IclubCohortTypeTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubCohortTypeBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubCohortTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubCohortTypeBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubCohortTypeBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
-		
+
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

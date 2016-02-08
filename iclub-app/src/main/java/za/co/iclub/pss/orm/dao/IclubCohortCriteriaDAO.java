@@ -36,21 +36,21 @@ public class IclubCohortCriteriaDAO {
 	public static final String ICC_GENDER = "iccGender";
 	public static final String ICC_CLAIM_LAST_TW_YRS = "iccClaimLastTwYrs";
 	public static final String ICC_CLAIM_LAST_YR = "iccClaimLastYr";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCohortCriteria transientInstance) {
 		log.debug("saving IclubCohortCriteria instance");
 		try {
@@ -61,7 +61,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCohortCriteria persistentInstance) {
 		log.debug("deleting IclubCohortCriteria instance");
 		try {
@@ -72,7 +72,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortCriteria findById(java.lang.String id) {
 		log.debug("getting IclubCohortCriteria instance with id: " + id);
 		try {
@@ -83,7 +83,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortCriteria> findByExample(IclubCohortCriteria instance) {
 		log.debug("finding IclubCohortCriteria instance by example");
 		try {
@@ -95,7 +95,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCohortCriteria instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -108,23 +108,23 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortCriteria> findByIccAge(Object iccAge) {
 		return findByProperty(ICC_AGE, iccAge);
 	}
-	
+
 	public List<IclubCohortCriteria> findByIccGender(Object iccGender) {
 		return findByProperty(ICC_GENDER, iccGender);
 	}
-	
+
 	public List<IclubCohortCriteria> findByIccClaimLastTwYrs(Object iccClaimLastTwYrs) {
 		return findByProperty(ICC_CLAIM_LAST_TW_YRS, iccClaimLastTwYrs);
 	}
-	
+
 	public List<IclubCohortCriteria> findByIccClaimLastYr(Object iccClaimLastYr) {
 		return findByProperty(ICC_CLAIM_LAST_YR, iccClaimLastYr);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCohortCriteria instances");
 		try {
@@ -136,7 +136,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortCriteria merge(IclubCohortCriteria detachedInstance) {
 		log.debug("merging IclubCohortCriteria instance");
 		try {
@@ -148,7 +148,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCohortCriteria instance) {
 		log.debug("attaching dirty IclubCohortCriteria instance");
 		try {
@@ -159,7 +159,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCohortCriteria instance) {
 		log.debug("attaching clean IclubCohortCriteria instance");
 		try {
@@ -170,7 +170,7 @@ public class IclubCohortCriteriaDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCohortCriteriaDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCohortCriteriaDAO) ctx.getBean("IclubCohortCriteriaDAO");
 	}

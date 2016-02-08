@@ -34,21 +34,21 @@ public class IclubQuoteStatusDAO {
 	public static final String QS_SHORT_DESC = "qsShortDesc";
 	public static final String QS_LONG_DESC = "qsLongDesc";
 	public static final String QS_STATUS = "qsStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubQuoteStatus transientInstance) {
 		log.debug("saving IclubQuoteStatus instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubQuoteStatus persistentInstance) {
 		log.debug("deleting IclubQuoteStatus instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubQuoteStatus findById(java.lang.Long id) {
 		log.debug("getting IclubQuoteStatus instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubQuoteStatus> findByExample(IclubQuoteStatus instance) {
 		log.debug("finding IclubQuoteStatus instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubQuoteStatus instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubQuoteStatus> findByQsShortDesc(Object qsShortDesc) {
 		return findByProperty(QS_SHORT_DESC, qsShortDesc);
 	}
-	
+
 	public List<IclubQuoteStatus> findByQsLongDesc(Object qsLongDesc) {
 		return findByProperty(QS_LONG_DESC, qsLongDesc);
 	}
-	
+
 	public List<IclubQuoteStatus> findByQsStatus(Object qsStatus) {
 		return findByProperty(QS_STATUS, qsStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubQuoteStatus instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubQuoteStatus merge(IclubQuoteStatus detachedInstance) {
 		log.debug("merging IclubQuoteStatus instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubQuoteStatus instance) {
 		log.debug("attaching dirty IclubQuoteStatus instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubQuoteStatus instance) {
 		log.debug("attaching clean IclubQuoteStatus instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubQuoteStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubQuoteStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubQuoteStatusDAO) ctx.getBean("IclubQuoteStatusDAO");
 	}

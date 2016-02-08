@@ -13,7 +13,7 @@ public class IclubClaimStatusTrans {
 		bean.setCsStatus(model.getCsStatus());
 		return bean;
 	}
-	
+
 	public static IclubClaimStatusModel fromUItoWS(IclubClaimStatusBean bean) {
 		IclubClaimStatusModel model = new IclubClaimStatusModel();
 		model.setCsId(bean.getCsId());
@@ -22,7 +22,7 @@ public class IclubClaimStatusTrans {
 		model.setCsStatus(bean.getCsStatus());
 		return model;
 	}
-	
+
 	public static IclubClaimStatusModel fromORMtoWS(IclubClaimStatus bean) {
 		IclubClaimStatusModel model = new IclubClaimStatusModel();
 		model.setCsId(bean.getCsId());
@@ -31,15 +31,15 @@ public class IclubClaimStatusTrans {
 		model.setCsStatus(bean.getCsStatus());
 		return model;
 	}
-	
+
 	public static IclubClaimStatus fromWStoORM(IclubClaimStatusModel model) {
 		IclubClaimStatus acctype = new IclubClaimStatus();
-		
+
 		acctype.setCsId(model.getCsId());
 		acctype.setCsLongDesc(model.getCsLongDesc());
 		acctype.setCsShortDesc(model.getCsShortDesc());
 		acctype.setCsStatus(model.getCsStatus());
-		
+
 		return acctype;
 	}
 }

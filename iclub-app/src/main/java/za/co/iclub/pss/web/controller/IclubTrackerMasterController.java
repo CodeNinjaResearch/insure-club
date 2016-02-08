@@ -26,7 +26,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubTrackerMasterController")
 @SessionScoped
 public class IclubTrackerMasterController implements Serializable {
-	
+
 	private static final long serialVersionUID = 1399848586779525616L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubTrackerMasterController.class);
@@ -41,16 +41,16 @@ public class IclubTrackerMasterController implements Serializable {
 	private String sessionUserId;
 	private String userName;
 	private ResourceBundle labelBundle;
-	
+
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
 		if (viewParam == null || viewParam.longValue() == 1)
 			showView();
 		else if (viewParam != null && viewParam.longValue() == 2)
 			showEdit();
-		
+
 	}
-	
+
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -58,7 +58,7 @@ public class IclubTrackerMasterController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubTrackerMasterBean();
@@ -67,7 +67,7 @@ public class IclubTrackerMasterController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
 		showCreateCont = false;
@@ -75,7 +75,7 @@ public class IclubTrackerMasterController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-	
+
 	public List<IclubTrackerMasterBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubTrackerMasterModel> models = new ArrayList<IclubTrackerMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubTrackerMasterModel.class));
@@ -84,37 +84,37 @@ public class IclubTrackerMasterController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubTrackerMasterModel model : models) {
 				IclubTrackerMasterBean bean = IclubTrackerMasterTrans.fromWStoUI(model);
-				
+
 				dashBoardBeans.add(bean);
 			}
 		}
 		return dashBoardBeans;
 	}
-	
+
 	public void setDashBoardBeans(List<IclubTrackerMasterBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
-	
+
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
 		bean = new IclubTrackerMasterBean();
 	}
-	
+
 	public void addIclubTrackerMaster() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubTrackerMaster");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubTrackerMasterModel model = IclubTrackerMasterTrans.fromUItoWS(bean);
-				
+
 				model.setTmCrtdDt(new Date(System.currentTimeMillis()));
 				model.setIclubPerson(getSessionUserId());
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					
+
 					IclubWebHelper.addMessage(getLabelBundle().getString("trackermaster") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -127,16 +127,16 @@ public class IclubTrackerMasterController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("trackermaster") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubTrackerMaster() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubTrackerMaster");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubTrackerMasterModel model = IclubTrackerMasterTrans.fromUItoWS(bean);
-				
+
 				model.setIclubPerson(getSessionUserId());
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -152,7 +152,7 @@ public class IclubTrackerMasterController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("trackermaster") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubTrackerMaster() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubTrackerMaster");
 		try {
@@ -170,7 +170,7 @@ public class IclubTrackerMasterController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("trackermaster") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		if (bean.getTmName() == null || bean.getTmName().equalsIgnoreCase("")) {
@@ -191,49 +191,49 @@ public class IclubTrackerMasterController implements Serializable {
 		}
 		return ret;
 	}
-	
+
 	public IclubTrackerMasterBean getBean() {
 		if (bean == null)
 			bean = new IclubTrackerMasterBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubTrackerMasterBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowCreateCont() {
 		return showCreateCont;
 	}
-	
+
 	public void setShowCreateCont(boolean showCreateCont) {
 		this.showCreateCont = showCreateCont;
 	}
-	
+
 	public boolean isShowViewCont() {
 		return showViewCont;
 	}
-	
+
 	public void setShowViewCont(boolean showViewCont) {
 		this.showViewCont = showViewCont;
 	}
-	
+
 	public boolean isShowEditCont() {
 		return showEditCont;
 	}
-	
+
 	public void setShowEditCont(boolean showEditCont) {
 		this.showEditCont = showEditCont;
 	}
-	
+
 	public Long getViewParam() {
 		return viewParam;
 	}
-	
+
 	public void setViewParam(Long viewParam) {
 		this.viewParam = viewParam;
 	}
-	
+
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -242,48 +242,48 @@ public class IclubTrackerMasterController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public String getUserName() {
 		userName = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.scname")).toString();
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
 		if (labelBundle == null) {
 			labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		}
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
-	
+
 	public List<IclubTrackerMasterBean> getBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubTrackerMasterModel> models = new ArrayList<IclubTrackerMasterModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubTrackerMasterModel.class));
 		client.close();
 		beans = new ArrayList<IclubTrackerMasterBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubTrackerMasterModel model : models) {
-				
+
 				IclubTrackerMasterBean bean = IclubTrackerMasterTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubTrackerMasterBean> beans) {
 		this.beans = beans;
 	}

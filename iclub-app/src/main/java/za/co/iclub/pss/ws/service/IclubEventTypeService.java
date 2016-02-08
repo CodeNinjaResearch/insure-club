@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubEventTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubEventTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubEventTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubEventTypeDAO iclubEventTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubEventTypeService {
 	public ResponseModel add(IclubEventTypeModel model) {
 		try {
 			IclubEventType iEt = IclubEventTypeTrans.fromWStoORM(model);
-			
+
 			iEt.setEtId(iclubCommonDAO.getNextId(IclubEventType.class));
-			
+
 			iclubEventTypeDAO.save(iEt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iEt.getEtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubEventTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -72,9 +72,9 @@ public class IclubEventTypeService {
 		try {
 			IclubEventType iEt = IclubEventTypeTrans.fromWStoORM(model);
 			iclubEventTypeDAO.merge(iEt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getEtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -86,9 +86,9 @@ public class IclubEventTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -103,20 +103,20 @@ public class IclubEventTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubEventTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubEventTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubEventType bean = (IclubEventType) object;
-					
+
 					IclubEventTypeModel model = IclubEventTypeTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
@@ -124,10 +124,10 @@ public class IclubEventTypeService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -136,15 +136,15 @@ public class IclubEventTypeService {
 		IclubEventTypeModel model = new IclubEventTypeModel();
 		try {
 			IclubEventType bean = iclubEventTypeDAO.findById(id);
-			
+
 			model = IclubEventTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -170,27 +170,27 @@ public class IclubEventTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubEventTypeDAO getIclubEventTypeDAO() {
 		return iclubEventTypeDAO;
 	}
-	
+
 	public void setIclubEventTypeDAO(IclubEventTypeDAO iclubEventTypeDAO) {
 		this.iclubEventTypeDAO = iclubEventTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

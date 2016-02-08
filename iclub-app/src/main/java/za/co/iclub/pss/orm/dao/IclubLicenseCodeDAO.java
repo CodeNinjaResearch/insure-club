@@ -34,21 +34,21 @@ public class IclubLicenseCodeDAO {
 	public static final String LC_CATEGORY = "lcCategory";
 	public static final String LC_DESC = "lcDesc";
 	public static final String LC_STATUS = "lcStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubLicenseCode transientInstance) {
 		log.debug("saving IclubLicenseCode instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubLicenseCode persistentInstance) {
 		log.debug("deleting IclubLicenseCode instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubLicenseCode findById(java.lang.Long id) {
 		log.debug("getting IclubLicenseCode instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubLicenseCode> findByExample(IclubLicenseCode instance) {
 		log.debug("finding IclubLicenseCode instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubLicenseCode instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubLicenseCode> findByLcCategory(Object lcCategory) {
 		return findByProperty(LC_CATEGORY, lcCategory);
 	}
-	
+
 	public List<IclubLicenseCode> findByLcDesc(Object lcDesc) {
 		return findByProperty(LC_DESC, lcDesc);
 	}
-	
+
 	public List<IclubLicenseCode> findByLcStatus(Object lcStatus) {
 		return findByProperty(LC_STATUS, lcStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubLicenseCode instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubLicenseCode merge(IclubLicenseCode detachedInstance) {
 		log.debug("merging IclubLicenseCode instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubLicenseCode instance) {
 		log.debug("attaching dirty IclubLicenseCode instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubLicenseCode instance) {
 		log.debug("attaching clean IclubLicenseCode instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubLicenseCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubLicenseCodeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubLicenseCodeDAO) ctx.getBean("IclubLicenseCodeDAO");
 	}

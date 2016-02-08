@@ -34,21 +34,21 @@ public class IclubCohortTypeDAO {
 	public static final String CT_SHORT_DESC = "ctShortDesc";
 	public static final String CT_LONG_DESC = "ctLongDesc";
 	public static final String CT_STATUS = "ctStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCohortType transientInstance) {
 		log.debug("saving IclubCohortType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCohortType persistentInstance) {
 		log.debug("deleting IclubCohortType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortType findById(java.lang.Long id) {
 		log.debug("getting IclubCohortType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortType> findByExample(IclubCohortType instance) {
 		log.debug("finding IclubCohortType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCohortType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortType> findByCtShortDesc(Object ctShortDesc) {
 		return findByProperty(CT_SHORT_DESC, ctShortDesc);
 	}
-	
+
 	public List<IclubCohortType> findByCtLongDesc(Object ctLongDesc) {
 		return findByProperty(CT_LONG_DESC, ctLongDesc);
 	}
-	
+
 	public List<IclubCohortType> findByCtStatus(Object ctStatus) {
 		return findByProperty(CT_STATUS, ctStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCohortType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortType merge(IclubCohortType detachedInstance) {
 		log.debug("merging IclubCohortType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCohortType instance) {
 		log.debug("attaching dirty IclubCohortType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCohortType instance) {
 		log.debug("attaching clean IclubCohortType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubCohortTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCohortTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCohortTypeDAO) ctx.getBean("IclubCohortTypeDAO");
 	}

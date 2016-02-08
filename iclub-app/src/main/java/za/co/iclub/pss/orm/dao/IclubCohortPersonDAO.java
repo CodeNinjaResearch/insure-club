@@ -33,21 +33,21 @@ public class IclubCohortPersonDAO {
 	private static final Logger log = LoggerFactory.getLogger(IclubCohortPersonDAO.class);
 	// property constants
 	public static final String CP_CONTRIB = "cpContrib";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCohortPerson transientInstance) {
 		log.debug("saving IclubCohortPerson instance");
 		try {
@@ -58,7 +58,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCohortPerson persistentInstance) {
 		log.debug("deleting IclubCohortPerson instance");
 		try {
@@ -69,7 +69,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortPerson findById(java.lang.String id) {
 		log.debug("getting IclubCohortPerson instance with id: " + id);
 		try {
@@ -80,7 +80,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortPerson> findByExample(IclubCohortPerson instance) {
 		log.debug("finding IclubCohortPerson instance by example");
 		try {
@@ -92,7 +92,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCohortPerson instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -105,11 +105,11 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortPerson> findByCpContrib(Object cpContrib) {
 		return findByProperty(CP_CONTRIB, cpContrib);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCohortPerson instances");
 		try {
@@ -121,7 +121,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortPerson merge(IclubCohortPerson detachedInstance) {
 		log.debug("merging IclubCohortPerson instance");
 		try {
@@ -133,7 +133,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCohortPerson instance) {
 		log.debug("attaching dirty IclubCohortPerson instance");
 		try {
@@ -144,7 +144,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCohortPerson instance) {
 		log.debug("attaching clean IclubCohortPerson instance");
 		try {
@@ -155,7 +155,7 @@ public class IclubCohortPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCohortPersonDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCohortPersonDAO) ctx.getBean("IclubCohortPersonDAO");
 	}

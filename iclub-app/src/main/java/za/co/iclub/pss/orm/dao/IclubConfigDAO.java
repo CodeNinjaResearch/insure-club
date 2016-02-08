@@ -35,21 +35,21 @@ public class IclubConfigDAO {
 	public static final String _CKEY = "CKey";
 	public static final String _CVALUE = "CValue";
 	public static final String _CSTATUS = "CStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubConfig transientInstance) {
 		log.debug("saving IclubConfig instance");
 		try {
@@ -60,7 +60,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubConfig persistentInstance) {
 		log.debug("deleting IclubConfig instance");
 		try {
@@ -71,7 +71,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubConfig findById(java.lang.Long id) {
 		log.debug("getting IclubConfig instance with id: " + id);
 		try {
@@ -82,7 +82,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubConfig> findByExample(IclubConfig instance) {
 		log.debug("finding IclubConfig instance by example");
 		try {
@@ -94,7 +94,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubConfig instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -107,19 +107,19 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubConfig> findByCKey(Object CKey) {
 		return findByProperty(_CKEY, CKey);
 	}
-	
+
 	public List<IclubConfig> findByCValue(Object CValue) {
 		return findByProperty(_CVALUE, CValue);
 	}
-	
+
 	public List<IclubConfig> findByCStatus(Object CStatus) {
 		return findByProperty(_CSTATUS, CStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubConfig instances");
 		try {
@@ -131,7 +131,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubConfig merge(IclubConfig detachedInstance) {
 		log.debug("merging IclubConfig instance");
 		try {
@@ -143,7 +143,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubConfig instance) {
 		log.debug("attaching dirty IclubConfig instance");
 		try {
@@ -154,7 +154,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubConfig instance) {
 		log.debug("attaching clean IclubConfig instance");
 		try {
@@ -165,7 +165,7 @@ public class IclubConfigDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubConfigDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubConfigDAO) ctx.getBean("IclubConfigDAO");
 	}

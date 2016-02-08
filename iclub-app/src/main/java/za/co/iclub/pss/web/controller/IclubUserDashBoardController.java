@@ -45,7 +45,7 @@ import za.co.iclub.pss.util.IclubWebHelper;
 @ManagedBean(name = "iclubUserDashBoardController")
 @SessionScoped
 public class IclubUserDashBoardController implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -75,12 +75,12 @@ public class IclubUserDashBoardController implements Serializable {
 	private IclubCohortSummaryBean cohortSummaryUserBean;
 	private boolean cohortSummaryFlag;
 	private IclubUserDashboardBean userDashboardBean;
-	
+
 	@PostConstruct
 	public void initializeBean() {
 		dashboardAction();
 	}
-	
+
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -89,115 +89,115 @@ public class IclubUserDashBoardController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public List<IclubPolicyStatusBean> getPolicyStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PCY_STS_BASE_URL + "list");
-		
+
 		List<IclubPolicyStatusModel> models = (ArrayList<IclubPolicyStatusModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyStatusModel.class));
-		
+
 		if (models != null && models.size() > 0) {
 			policyStatusBeans = new ArrayList<IclubPolicyStatusBean>();
 			for (IclubPolicyStatusModel model : models) {
 				if (model != null && model.getPsId() != null) {
-					
+
 					IclubPolicyStatusBean bean = new IclubPolicyStatusBean();
-					
+
 					bean.setPsId(model.getPsId());
 					bean.setPsLongDesc(model.getPsLongDesc());
 					bean.setPsShortDesc(model.getPsShortDesc());
 					bean.setPsStatus(model.getPsStatus());
-					
+
 					policyStatusBeans.add(bean);
 				}
-				
+
 			}
 		}
 		return policyStatusBeans;
 	}
-	
+
 	public String viewPolicies() {
-		
+
 		return "/pages/policy/dashboard.xhtml?faces-redirect=true";
-		
+
 	}
-	
+
 	public String viewClaims() {
-		
+
 		return "/pages/claim/dashboard.xhtml?faces-redirect=true";
-		
+
 	}
-	
+
 	public String viewQuotes() {
-		
+
 		return "/pages/quote/vq.xhtml?faces-redirect=true";
-		
+
 	}
-	
+
 	public String viewPayments() {
-		
+
 		return "/pages/dashboard/user/payment.xhtml?faces-redirect=true";
-		
+
 	}
-	
+
 	public void setPolicyStatusBeans(List<IclubPolicyStatusBean> policyStatusBeans) {
 		this.policyStatusBeans = policyStatusBeans;
 	}
-	
+
 	public List<IclubQuoteBean> getQuoteBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(QUT_BASE_URL + "get/userstatusId/" + getSessionUserId() + "/1");
 		Collection<? extends IclubQuoteModel> models = new ArrayList<IclubQuoteModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubQuoteModel.class));
 		client.close();
-		
+
 		quoteBeans = new ArrayList<IclubQuoteBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubQuoteModel model : models) {
 				IclubQuoteBean bean = IclubQuoteTrans.fromWStoUI(model);
-				
+
 				quoteBeans.add(bean);
 			}
 		}
 		return quoteBeans;
 	}
-	
+
 	public void setQuoteBeans(List<IclubQuoteBean> quoteBeans) {
 		this.quoteBeans = quoteBeans;
 	}
-	
+
 	public List<IclubPolicyBean> getPolicyBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(PCY_BASE_URL + "get/user/" + getSessionUserId());
-		
+
 		List<IclubPolicyModel> models = (ArrayList<IclubPolicyModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPolicyModel.class));
-		
+
 		if (models != null && models.size() > 0) {
 			policyBeans = new ArrayList<IclubPolicyBean>();
 			int i = 0;
 			for (IclubPolicyModel model : models) {
 				if (model != null && model.getPId() != null) {
-					
+
 					IclubPolicyBean bean = IclubPolicyTrans.fromWStoUI(model);
 					i++;
 					if (i == 6)
 						break;
 					policyBeans.add(bean);
 				}
-				
+
 			}
 		}
 		return policyBeans;
 	}
-	
+
 	public void setPolicyBeans(List<IclubPolicyBean> policyBeans) {
 		this.policyBeans = policyBeans;
 	}
-	
+
 	public List<IclubClaimBean> getClaimBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(CLM_BASE_URL + "listOrderByCrtDt");
 		Collection<? extends IclubClaimModel> models = new ArrayList<IclubClaimModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimModel.class));
 		client.close();
@@ -214,19 +214,19 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return claimBeans;
 	}
-	
+
 	public void setClaimBeans(List<IclubClaimBean> claimBeans) {
 		this.claimBeans = claimBeans;
 	}
-	
+
 	public List<IclubPaymentBean> getPaymentBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "policyPayments/" + getSessionUserId());
 		Collection<? extends IclubPaymentModel> models = new ArrayList<IclubPaymentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentModel.class));
 		client.close();
 		paymentBeans = new ArrayList<IclubPaymentBean>();
 		if (models != null && models.size() > 0) {
-			
+
 			for (IclubPaymentModel model : models) {
 				IclubPaymentBean bean = IclubPaymentTrans.fromWStoUI(model);
 				paymentBeans.add(bean);
@@ -234,13 +234,13 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return paymentBeans;
 	}
-	
+
 	public void setPaymentBeans(List<IclubPaymentBean> paymentBeans) {
 		this.paymentBeans = paymentBeans;
 	}
-	
+
 	public List<IclubClaimStatusBean> getClaimStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(CS_BASE_URL + "list");
 		Collection<? extends IclubClaimStatusModel> models = new ArrayList<IclubClaimStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubClaimStatusModel.class));
 		client.close();
@@ -248,19 +248,19 @@ public class IclubUserDashBoardController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubClaimStatusModel model : models) {
 				IclubClaimStatusBean bean = IclubClaimStatusTrans.fromWStoUI(model);
-				
+
 				claimStatusBeans.add(bean);
 			}
 		}
 		return claimStatusBeans;
 	}
-	
+
 	public void setClaimStatusBeans(List<IclubClaimStatusBean> claimStatusBeans) {
 		this.claimStatusBeans = claimStatusBeans;
 	}
-	
+
 	public List<IclubPaymentBean> getClaimPaymentBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PMT_BASE_URL + "claimPayments/" + getSessionUserId());
 		Collection<? extends IclubPaymentModel> models = new ArrayList<IclubPaymentModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentModel.class));
 		client.close();
@@ -268,62 +268,62 @@ public class IclubUserDashBoardController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubPaymentModel model : models) {
 				IclubPaymentBean bean = IclubPaymentTrans.fromWStoUI(model);
-				
+
 				claimPaymentBeans.add(bean);
 			}
 		}
 		return claimPaymentBeans;
 	}
-	
+
 	public void setClaimPaymentBeans(List<IclubPaymentBean> claimPaymentBeans) {
 		this.claimPaymentBeans = claimPaymentBeans;
 	}
-	
+
 	public List<IclubPaymentStatusBean> getPaymentStatusBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(PMT_STS_BASE_URL + "list");
-		
+
 		List<IclubPaymentStatusModel> models = (ArrayList<IclubPaymentStatusModel>) (client.accept(MediaType.APPLICATION_JSON).getCollection(IclubPaymentStatusModel.class));
-		
+
 		if (models != null && models.size() > 0) {
 			paymentStatusBeans = new ArrayList<IclubPaymentStatusBean>();
 			for (IclubPaymentStatusModel model : models) {
 				if (model != null && model.getPsId() != null) {
-					
+
 					IclubPaymentStatusBean bean = IclubPaymentStatusTrans.fromWStoUI(model);
-					
+
 					paymentStatusBeans.add(bean);
 				}
-				
+
 			}
 		}
 		return paymentStatusBeans;
 	}
-	
+
 	public void setPaymentStatusBeans(List<IclubPaymentStatusBean> paymentStatusBeans) {
 		this.paymentStatusBeans = paymentStatusBeans;
 	}
-	
+
 	public IclubCohortSummaryBean getCohortSummaryBean() {
 		if (cohortSummaryBean == null) {
 			cohortSummaryBean = new IclubCohortSummaryBean();
 		}
 		return cohortSummaryBean;
 	}
-	
+
 	public void setCohortSummaryBean(IclubCohortSummaryBean cohortSummaryBean) {
 		this.cohortSummaryBean = cohortSummaryBean;
 	}
-	
+
 	public IclubCohortSummaryBean getCohortSummaryUserBean() {
 		if (cohortSummaryUserBean == null) {
 			cohortSummaryUserBean = new IclubCohortSummaryBean();
-			
+
 		}
-		
+
 		return cohortSummaryUserBean;
 	}
-	
+
 	public String dashboardAction() {
 		cohortSummaryFlag = false;
 		if (IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")) != null && !IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString().trim().equalsIgnoreCase("")) {
@@ -338,7 +338,7 @@ public class IclubUserDashBoardController implements Serializable {
 				IclubCohortSummaryModel userModel = (IclubCohortSummaryModel) (userClient.accept(MediaType.APPLICATION_JSON).get(IclubCohortSummaryModel.class));
 				cohortSummaryBean = new IclubCohortSummaryBean();
 				cohortSummaryUserBean = new IclubCohortSummaryBean();
-				
+
 				if (model != null) {
 					cohortSummaryFlag = true;
 					cohortSummaryBean.setClaimSinceI(model.getClaimSinceI() != null ? model.getClaimSinceI() : 0.0);
@@ -369,9 +369,9 @@ public class IclubUserDashBoardController implements Serializable {
 					cohortSummaryUserBean.setMonthlyGrowthRate(userModel.getMonthlyGrowthRate() != null ? userModel.getMonthlyGrowthRate() : 0.0);
 					cohortSummaryUserBean.setCliamsLodged(userModel.getCliamsLodged() != null ? userModel.getCliamsLodged() : 0.0);
 				}
-				
+
 			}
-			
+
 			String personId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id")).toString();
 			WebClient client = IclubWebHelper.createCustomClient(U_BASE_URL + "get/" + personId);
 			IclubUserDashboardModel model = client.accept(MediaType.APPLICATION_JSON).get(IclubUserDashboardModel.class);
@@ -396,30 +396,30 @@ public class IclubUserDashBoardController implements Serializable {
 		}
 		return "login";
 	}
-	
+
 	public void setCohortSummaryUserBean(IclubCohortSummaryBean cohortSummaryUserBean) {
 		this.cohortSummaryUserBean = cohortSummaryUserBean;
 	}
-	
+
 	public boolean isCohortSummaryFlag() {
 		return cohortSummaryFlag;
 	}
-	
+
 	public void setCohortSummaryFlag(boolean cohortSummaryFlag) {
 		this.cohortSummaryFlag = cohortSummaryFlag;
 	}
-	
+
 	public IclubUserDashboardBean getUserDashboardBean() {
-		
+
 		if (userDashboardBean == null) {
 			userDashboardBean = new IclubUserDashboardBean();
 		}
-		
+
 		return userDashboardBean;
 	}
-	
+
 	public void setUserDashboardBean(IclubUserDashboardBean userDashboardBean) {
 		this.userDashboardBean = userDashboardBean;
 	}
-	
+
 }

@@ -34,21 +34,21 @@ public class IclubInsuranceItemTypeDAO {
 	public static final String IIT_SHORT_DESC = "iitShortDesc";
 	public static final String IIT_LONG_DESC = "iitLongDesc";
 	public static final String IIT_STATUS = "iitStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubInsuranceItemType transientInstance) {
 		log.debug("saving IclubInsuranceItemType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubInsuranceItemType persistentInstance) {
 		log.debug("deleting IclubInsuranceItemType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInsuranceItemType findById(java.lang.Long id) {
 		log.debug("getting IclubInsuranceItemType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInsuranceItemType> findByExample(IclubInsuranceItemType instance) {
 		log.debug("finding IclubInsuranceItemType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubInsuranceItemType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInsuranceItemType> findByIitShortDesc(Object iitShortDesc) {
 		return findByProperty(IIT_SHORT_DESC, iitShortDesc);
 	}
-	
+
 	public List<IclubInsuranceItemType> findByIitLongDesc(Object iitLongDesc) {
 		return findByProperty(IIT_LONG_DESC, iitLongDesc);
 	}
-	
+
 	public List<IclubInsuranceItemType> findByIitStatus(Object iitStatus) {
 		return findByProperty(IIT_STATUS, iitStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubInsuranceItemType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInsuranceItemType merge(IclubInsuranceItemType detachedInstance) {
 		log.debug("merging IclubInsuranceItemType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubInsuranceItemType instance) {
 		log.debug("attaching dirty IclubInsuranceItemType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubInsuranceItemType instance) {
 		log.debug("attaching clean IclubInsuranceItemType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubInsuranceItemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubInsuranceItemTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubInsuranceItemTypeDAO) ctx.getBean("IclubInsuranceItemTypeDAO");
 	}

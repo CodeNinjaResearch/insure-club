@@ -35,21 +35,21 @@ public class IclubBoundaryTypeDAO {
 	public static final String BT_SHORT_DESC = "btShortDesc";
 	public static final String BT_LONG_DESC = "btLongDesc";
 	public static final String BT_STATUS = "btStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubBoundaryType transientInstance) {
 		log.debug("saving IclubBoundaryType instance");
 		try {
@@ -60,7 +60,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubBoundaryType persistentInstance) {
 		log.debug("deleting IclubBoundaryType instance");
 		try {
@@ -71,7 +71,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBoundaryType findById(java.lang.Long id) {
 		log.debug("getting IclubBoundaryType instance with id: " + id);
 		try {
@@ -82,7 +82,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBoundaryType> findByExample(IclubBoundaryType instance) {
 		log.debug("finding IclubBoundaryType instance by example");
 		try {
@@ -94,7 +94,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubBoundaryType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -107,19 +107,19 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBoundaryType> findByBtShortDesc(Object btShortDesc) {
 		return findByProperty(BT_SHORT_DESC, btShortDesc);
 	}
-	
+
 	public List<IclubBoundaryType> findByBtLongDesc(Object btLongDesc) {
 		return findByProperty(BT_LONG_DESC, btLongDesc);
 	}
-	
+
 	public List<IclubBoundaryType> findByBtStatus(Object btStatus) {
 		return findByProperty(BT_STATUS, btStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubBoundaryType instances");
 		try {
@@ -131,7 +131,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBoundaryType merge(IclubBoundaryType detachedInstance) {
 		log.debug("merging IclubBoundaryType instance");
 		try {
@@ -143,7 +143,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubBoundaryType instance) {
 		log.debug("attaching dirty IclubBoundaryType instance");
 		try {
@@ -154,7 +154,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubBoundaryType instance) {
 		log.debug("attaching clean IclubBoundaryType instance");
 		try {
@@ -165,7 +165,7 @@ public class IclubBoundaryTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubBoundaryTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBoundaryTypeDAO) ctx.getBean("IclubBoundaryTypeDAO");
 	}

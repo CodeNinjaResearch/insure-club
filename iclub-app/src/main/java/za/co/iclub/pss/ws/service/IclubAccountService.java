@@ -31,7 +31,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubAccountService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubAccountService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubAccountService.class);
 	private IclubAccountDAO iclubAccountDAO;
 	private IclubOwnerTypeDAO iclubOwnerTypeDAO;
@@ -39,7 +39,7 @@ public class IclubAccountService {
 	private IclubAccountTypeDAO iclubAccountTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -47,18 +47,18 @@ public class IclubAccountService {
 	@Transactional
 	public ResponseModel add(IclubAccountModel model) {
 		try {
-			
+
 			IclubAccount iCA = IclubAccountTrans.fromWStoORM(model, iclubBankMasterDAO, iclubAccountTypeDAO, iclubOwnerTypeDAO, iclubPersonDAO);
-			
+
 			iclubAccountDAO.save(iCA);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCA.getAId());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -67,9 +67,9 @@ public class IclubAccountService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -78,11 +78,11 @@ public class IclubAccountService {
 	public ResponseModel mod(IclubAccountModel model) {
 		try {
 			IclubAccount iCA = IclubAccountTrans.fromWStoORM(model, iclubBankMasterDAO, iclubAccountTypeDAO, iclubOwnerTypeDAO, iclubPersonDAO);
-			
+
 			iclubAccountDAO.merge(iCA);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getAId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -94,9 +94,9 @@ public class IclubAccountService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -111,14 +111,14 @@ public class IclubAccountService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubAccountModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubAccountDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
@@ -131,17 +131,17 @@ public class IclubAccountService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubAccountModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubAccount.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
@@ -156,7 +156,7 @@ public class IclubAccountService {
 		}
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -165,61 +165,61 @@ public class IclubAccountService {
 		IclubAccountModel model = new IclubAccountModel();
 		try {
 			IclubAccount bean = iclubAccountDAO.findById(id);
-			
+
 			model = IclubAccountTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubAccountDAO getIclubAccountDAO() {
 		return iclubAccountDAO;
 	}
-	
+
 	public void setIclubAccountDAO(IclubAccountDAO iclubAccountDAO) {
 		this.iclubAccountDAO = iclubAccountDAO;
 	}
-	
+
 	public IclubOwnerTypeDAO getIclubOwnerTypeDAO() {
 		return iclubOwnerTypeDAO;
 	}
-	
+
 	public void setIclubOwnerTypeDAO(IclubOwnerTypeDAO iclubOwnerTypeDAO) {
 		this.iclubOwnerTypeDAO = iclubOwnerTypeDAO;
 	}
-	
+
 	public IclubBankMasterDAO getIclubBankMasterDAO() {
 		return iclubBankMasterDAO;
 	}
-	
+
 	public void setIclubBankMasterDAO(IclubBankMasterDAO iclubBankMasterDAO) {
 		this.iclubBankMasterDAO = iclubBankMasterDAO;
 	}
-	
+
 	public IclubAccountTypeDAO getIclubAccountTypeDAO() {
 		return iclubAccountTypeDAO;
 	}
-	
+
 	public void setIclubAccountTypeDAO(IclubAccountTypeDAO iclubAccountTypeDAO) {
 		this.iclubAccountTypeDAO = iclubAccountTypeDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

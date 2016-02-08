@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubAccountTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubAccountTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubAccountTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubAccountTypeDAO iclubAccountTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubAccountTypeService {
 	public ResponseModel add(IclubAccountTypeModel model) {
 		try {
 			IclubAccountType iAt = IclubAccountTypeTrans.fromWStoORM(model);
-			
+
 			iAt.setAtId(iclubCommonDAO.getNextId(IclubAccountType.class));
-			
+
 			iclubAccountTypeDAO.save(iAt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iAt.getAtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubAccountTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubAccountTypeService {
 	public ResponseModel mod(IclubAccountTypeModel model) {
 		try {
 			IclubAccountType iAt = IclubAccountTypeTrans.fromWStoORM(model);
-			
+
 			iclubAccountTypeDAO.merge(iAt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getAtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubAccountTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubAccountTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubAccountTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubAccountTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubAccountType bean = (IclubAccountType) object;
-					
+
 					IclubAccountTypeModel model = IclubAccountTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,15 +138,15 @@ public class IclubAccountTypeService {
 		IclubAccountTypeModel model = new IclubAccountTypeModel();
 		try {
 			IclubAccountType bean = iclubAccountTypeDAO.findById(id);
-			
+
 			model = IclubAccountTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -154,7 +154,7 @@ public class IclubAccountTypeService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			
+
 			List data = iclubNamedQueryDAO.getBySD(val, id, IclubAccountType.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
@@ -173,27 +173,27 @@ public class IclubAccountTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubAccountTypeDAO getIclubAccountTypeDAO() {
 		return iclubAccountTypeDAO;
 	}
-	
+
 	public void setIclubAccountTypeDAO(IclubAccountTypeDAO iclubAccountTypeDAO) {
 		this.iclubAccountTypeDAO = iclubAccountTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

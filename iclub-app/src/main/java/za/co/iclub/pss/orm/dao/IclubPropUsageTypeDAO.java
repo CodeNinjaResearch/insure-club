@@ -34,21 +34,21 @@ public class IclubPropUsageTypeDAO {
 	public static final String PUT_LONG_DESC = "putLongDesc";
 	public static final String PUT_SHORT_DESC = "putShortDesc";
 	public static final String PUT_STATUS = "putStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubPropUsageType transientInstance) {
 		log.debug("saving IclubPropUsageType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubPropUsageType persistentInstance) {
 		log.debug("deleting IclubPropUsageType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPropUsageType findById(java.lang.Long id) {
 		log.debug("getting IclubPropUsageType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPropUsageType> findByExample(IclubPropUsageType instance) {
 		log.debug("finding IclubPropUsageType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubPropUsageType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPropUsageType> findByPutLongDesc(Object putLongDesc) {
 		return findByProperty(PUT_LONG_DESC, putLongDesc);
 	}
-	
+
 	public List<IclubPropUsageType> findByPutShortDesc(Object putShortDesc) {
 		return findByProperty(PUT_SHORT_DESC, putShortDesc);
 	}
-	
+
 	public List<IclubPropUsageType> findByPutStatus(Object putStatus) {
 		return findByProperty(PUT_STATUS, putStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubPropUsageType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPropUsageType merge(IclubPropUsageType detachedInstance) {
 		log.debug("merging IclubPropUsageType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubPropUsageType instance) {
 		log.debug("attaching dirty IclubPropUsageType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubPropUsageType instance) {
 		log.debug("attaching clean IclubPropUsageType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubPropUsageTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPropUsageTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPropUsageTypeDAO) ctx.getBean("IclubPropUsageTypeDAO");
 	}

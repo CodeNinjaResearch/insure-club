@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubEventService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubEventService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubEventService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubEventDAO iclubEventDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubEventTypeDAO iclubEventTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,11 +46,11 @@ public class IclubEventService {
 	public ResponseModel add(IclubEventModel model) {
 		try {
 			IclubEvent iCE = IclubEventTrans.fromWStoORM(model, iclubPersonDAO, iclubEventTypeDAO);
-			
+
 			iclubEventDAO.save(iCE);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCE.getEId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -62,9 +62,9 @@ public class IclubEventService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -73,11 +73,11 @@ public class IclubEventService {
 	public ResponseModel mod(IclubEventModel model) {
 		try {
 			IclubEvent iCE = IclubEventTrans.fromWStoORM(model, iclubPersonDAO, iclubEventTypeDAO);
-			
+
 			iclubEventDAO.merge(iCE);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getEId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -89,9 +89,9 @@ public class IclubEventService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -106,57 +106,57 @@ public class IclubEventService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubEventModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubEventDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubEvent bean = (IclubEvent) object;
-					
+
 					IclubEventModel model = IclubEventTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubEventModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubEvent.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubEvent bean = (IclubEvent) object;
-					
+
 					IclubEventModel model = IclubEventTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -165,51 +165,51 @@ public class IclubEventService {
 		IclubEventModel model = new IclubEventModel();
 		try {
 			IclubEvent bean = iclubEventDAO.findById(id);
-			
+
 			model = IclubEventTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubEventDAO getIclubEventDAO() {
 		return iclubEventDAO;
 	}
-	
+
 	public void setIclubEventDAO(IclubEventDAO iclubEventDAO) {
 		this.iclubEventDAO = iclubEventDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubEventTypeDAO getIclubEventTypeDAO() {
 		return iclubEventTypeDAO;
 	}
-	
+
 	public void setIclubEventTypeDAO(IclubEventTypeDAO iclubEventTypeDAO) {
 		this.iclubEventTypeDAO = iclubEventTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

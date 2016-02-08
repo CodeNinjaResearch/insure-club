@@ -38,7 +38,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubRateTypeController")
 @SessionScoped
 public class IclubRateTypeController implements Serializable {
-	
+
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubRateTypeController.class);
@@ -68,7 +68,7 @@ public class IclubRateTypeController implements Serializable {
 	private String selEntityType;
 	private String selQuoteType;
 	private String selRateType;
-	
+
 	public void initializePage() {
 		selQuoteType = null;
 		selEntityType = null;
@@ -78,9 +78,9 @@ public class IclubRateTypeController implements Serializable {
 			showView();
 		else if (viewParam != null && viewParam.longValue() == 2)
 			showEdit();
-		
+
 	}
-	
+
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -88,7 +88,7 @@ public class IclubRateTypeController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubRateTypeBean();
@@ -97,7 +97,7 @@ public class IclubRateTypeController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
 		showCreateCont = false;
@@ -105,20 +105,20 @@ public class IclubRateTypeController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-	
+
 	public void changeQuoteType(ValueChangeEvent valueChangeEvent) {
 		selEntityType = null;
 		selRateType = null;
 	}
-	
+
 	public void changeEntityType(ValueChangeEvent valueChangeEvent) {
 		selRateType = null;
 	}
-	
+
 	public void changeRateType(ValueChangeEvent valueChangeEvent) {
-		
+
 	}
-	
+
 	public List<IclubRateTypeBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubRateTypeModel> models = new ArrayList<IclubRateTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateTypeModel.class));
@@ -126,37 +126,37 @@ public class IclubRateTypeController implements Serializable {
 		dashBoardBeans = new ArrayList<IclubRateTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubRateTypeModel model : models) {
-				
+
 				IclubRateTypeBean bean = IclubRateTypeTrans.fromWStoUI(model);
-				
+
 				dashBoardBeans.add(bean);
 			}
 		}
 		return dashBoardBeans;
 	}
-	
+
 	public void setDashBoardBeans(List<IclubRateTypeBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
-	
+
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
 		bean = new IclubRateTypeBean();
 	}
-	
+
 	public void addIclubRateType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubRateType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubRateTypeModel model = IclubRateTypeTrans.fromUItoWS(bean);
-				
+
 				model.setRtCrtdDt(new Date(System.currentTimeMillis()));
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					
+
 					IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -169,14 +169,14 @@ public class IclubRateTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubRateType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubRateType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubRateTypeModel model = IclubRateTypeTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -192,7 +192,7 @@ public class IclubRateTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubRateType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubRateType");
 		try {
@@ -210,7 +210,7 @@ public class IclubRateTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("ratetype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
 		if (bean.getIclubField() == null) {
@@ -233,85 +233,85 @@ public class IclubRateTypeController implements Serializable {
 			IclubWebHelper.addMessage(("Please Select Status"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getRtType() == null || bean.getRtType().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("Rt Type Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getRtQuoteType() == null || bean.getRtQuoteType().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(("Quote Type Cannot be empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		return ret;
 	}
-	
+
 	public IclubRateTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubRateTypeBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubRateTypeBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowCreateCont() {
 		return showCreateCont;
 	}
-	
+
 	public void setShowCreateCont(boolean showCreateCont) {
 		this.showCreateCont = showCreateCont;
 	}
-	
+
 	public boolean isShowViewCont() {
 		return showViewCont;
 	}
-	
+
 	public void setShowViewCont(boolean showViewCont) {
 		this.showViewCont = showViewCont;
 	}
-	
+
 	public boolean isShowEditCont() {
 		return showEditCont;
 	}
-	
+
 	public void setShowEditCont(boolean showEditCont) {
 		this.showEditCont = showEditCont;
 	}
-	
+
 	public boolean isShowMin() {
 		return showMin;
 	}
-	
+
 	public void setShowMin(boolean showMin) {
 		this.showMin = showMin;
 	}
-	
+
 	public boolean isShowMax() {
 		return showMax;
 	}
-	
+
 	public void setShowMax(boolean showMax) {
 		this.showMax = showMax;
 	}
-	
+
 	public boolean isShowLookup() {
 		return showLookup;
 	}
-	
+
 	public void setShowLookup(boolean showLookup) {
 		this.showLookup = showLookup;
 	}
-	
+
 	public Long getViewParam() {
 		return viewParam;
 	}
-	
+
 	public void setViewParam(Long viewParam) {
 		this.viewParam = viewParam;
 	}
-	
+
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -320,54 +320,54 @@ public class IclubRateTypeController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public String getUserName() {
 		userName = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.scname")).toString();
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
 		if (labelBundle == null) {
 			labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		}
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
-	
+
 	public List<IclubRateTypeBean> getBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubRateTypeModel> models = new ArrayList<IclubRateTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRateTypeModel.class));
 		client.close();
 		beans = new ArrayList<IclubRateTypeBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubRateTypeModel model : models) {
-				
+
 				IclubRateTypeBean bean = IclubRateTypeTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubRateTypeBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public List<IclubEntityTypeBean> getEntityTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(E_BASE_URL + "list");
 		Collection<? extends IclubEntityTypeModel> models = new ArrayList<IclubEntityTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubEntityTypeModel.class));
 		client.close();
@@ -375,17 +375,17 @@ public class IclubRateTypeController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubEntityTypeModel model : models) {
 				IclubEntityTypeBean bean = IclubEntityTypeTrans.fromWStoUI(model);
-				
+
 				entityTypeBeans.add(bean);
 			}
 		}
 		return entityTypeBeans;
 	}
-	
+
 	public void setEntityTypeBeans(List<IclubEntityTypeBean> entityTypeBeans) {
 		this.entityTypeBeans = entityTypeBeans;
 	}
-	
+
 	public List<String> getFields() {
 		fields = new ArrayList<String>();
 		switch (bean.getIclubEntityType().intValue()) {
@@ -414,22 +414,22 @@ public class IclubRateTypeController implements Serializable {
 		}
 		return fields;
 	}
-	
+
 	public void setFields(List<String> fields) {
 		this.fields = fields;
 	}
-	
+
 	public Map<String, String> getQuoteType() {
 		quoteType = new HashMap<String, String>();
 		quoteType.put("F-Full", "F");
 		quoteType.put("Q-Quick", "Q");
 		return quoteType;
 	}
-	
+
 	public void setQuoteType(Map<String, String> quoteType) {
 		this.quoteType = quoteType;
 	}
-	
+
 	public Map<String, String> getRateType() {
 		rateType = new HashMap<String, String>();
 		rateType.put("L-Lookup", "L");
@@ -438,37 +438,37 @@ public class IclubRateTypeController implements Serializable {
 		rateType.put("G-Geo Location", "G");
 		return rateType;
 	}
-	
+
 	public void setRateType(Map<String, String> rateType) {
 		this.rateType = rateType;
 	}
-	
+
 	public String getSelEntityType() {
 		return selEntityType;
 	}
-	
+
 	public void setSelEntityType(String selEntityType) {
 		this.selEntityType = selEntityType;
 	}
-	
+
 	public String getSelQuoteType() {
 		return selQuoteType;
 	}
-	
+
 	public void setSelQuoteType(String selQuoteType) {
 		this.selQuoteType = selQuoteType;
 	}
-	
+
 	public String getSelRateType() {
 		return selRateType;
 	}
-	
+
 	public void setSelRateType(String selRateType) {
 		this.selRateType = selRateType;
 	}
-	
+
 	public List<IclubInsuranceItemTypeBean> getInsuranceItemTypeBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(IIT_BASE_URL + "list");
 		Collection<? extends IclubInsuranceItemTypeModel> models = new ArrayList<IclubInsuranceItemTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubInsuranceItemTypeModel.class));
 		client.close();
@@ -476,17 +476,17 @@ public class IclubRateTypeController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubInsuranceItemTypeModel model : models) {
 				IclubInsuranceItemTypeBean bean = IclubInsuranceItemTypeTrans.fromWStoUI(model);
-				
+
 				insuranceItemTypeBeans.add(bean);
 			}
 		}
 		return insuranceItemTypeBeans;
 	}
-	
+
 	public void setInsuranceItemTypeBeans(List<IclubInsuranceItemTypeBean> insuranceItemTypeBeans) {
 		this.insuranceItemTypeBeans = insuranceItemTypeBeans;
 	}
-	
+
 	public List<IclubFieldBean> getFieldBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(F_BASE_URL + "list");
 		Collection<? extends IclubFieldModel> models = new ArrayList<IclubFieldModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubFieldModel.class));
@@ -495,16 +495,16 @@ public class IclubRateTypeController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubFieldModel model : models) {
 				IclubFieldBean bean = IclubFieldTrans.fromWStoUI(model);
-				
+
 				fieldBeans.add(bean);
 			}
 		}
-		
+
 		return fieldBeans;
 	}
-	
+
 	public void setFieldBeans(List<IclubFieldBean> fieldBeans) {
 		this.fieldBeans = fieldBeans;
 	}
-	
+
 }

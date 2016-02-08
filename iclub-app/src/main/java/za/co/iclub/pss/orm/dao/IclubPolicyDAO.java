@@ -36,21 +36,21 @@ public class IclubPolicyDAO {
 	public static final String _PPRORATA_PRM = "PProrataPrm";
 	public static final String _PDEBIT_DT = "PDebitDt";
 	public static final String _PCRTD_DT = "PCrtdDt";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubPolicy transientInstance) {
 		log.debug("saving IclubPolicy instance");
 		try {
@@ -61,7 +61,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubPolicy persistentInstance) {
 		log.debug("deleting IclubPolicy instance");
 		try {
@@ -72,7 +72,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPolicy findById(java.lang.String id) {
 		log.debug("getting IclubPolicy instance with id: " + id);
 		try {
@@ -83,7 +83,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPolicy> findByExample(IclubPolicy instance) {
 		log.debug("finding IclubPolicy instance by example");
 		try {
@@ -95,7 +95,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubPolicy instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -108,27 +108,27 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPolicy> findByPNumber(Object PNumber) {
 		return findByProperty(_PNUMBER, PNumber);
 	}
-	
+
 	public List<IclubPolicy> findByPPremium(Object PPremium) {
 		return findByProperty(_PPREMIUM, PPremium);
 	}
-	
+
 	public List<IclubPolicy> findByPProrataPrm(Object PProrataPrm) {
 		return findByProperty(_PPRORATA_PRM, PProrataPrm);
 	}
-	
+
 	public List<IclubPolicy> findByPDebitDt(Object PDebitDt) {
 		return findByProperty(_PDEBIT_DT, PDebitDt);
 	}
-	
+
 	public List<IclubPolicy> findByPCrtdDt(Object PCrtdDt) {
 		return findByProperty(_PCRTD_DT, PCrtdDt);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubPolicy instances");
 		try {
@@ -140,7 +140,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPolicy merge(IclubPolicy detachedInstance) {
 		log.debug("merging IclubPolicy instance");
 		try {
@@ -152,7 +152,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubPolicy instance) {
 		log.debug("attaching dirty IclubPolicy instance");
 		try {
@@ -163,7 +163,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubPolicy instance) {
 		log.debug("attaching clean IclubPolicy instance");
 		try {
@@ -174,7 +174,7 @@ public class IclubPolicyDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPolicyDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPolicyDAO) ctx.getBean("IclubPolicyDAO");
 	}

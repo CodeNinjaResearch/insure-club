@@ -32,21 +32,21 @@ import za.co.iclub.pss.orm.bean.IclubSupplPerson;
 public class IclubSupplPersonDAO {
 	private static final Logger log = LoggerFactory.getLogger(IclubSupplPersonDAO.class);
 	// property constants
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubSupplPerson transientInstance) {
 		log.debug("saving IclubSupplPerson instance");
 		try {
@@ -57,7 +57,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubSupplPerson persistentInstance) {
 		log.debug("deleting IclubSupplPerson instance");
 		try {
@@ -68,7 +68,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSupplPerson findById(java.lang.String id) {
 		log.debug("getting IclubSupplPerson instance with id: " + id);
 		try {
@@ -79,7 +79,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSupplPerson> findByExample(IclubSupplPerson instance) {
 		log.debug("finding IclubSupplPerson instance by example");
 		try {
@@ -91,7 +91,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubSupplPerson instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -104,7 +104,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubSupplPerson instances");
 		try {
@@ -116,7 +116,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSupplPerson merge(IclubSupplPerson detachedInstance) {
 		log.debug("merging IclubSupplPerson instance");
 		try {
@@ -128,7 +128,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubSupplPerson instance) {
 		log.debug("attaching dirty IclubSupplPerson instance");
 		try {
@@ -139,7 +139,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubSupplPerson instance) {
 		log.debug("attaching clean IclubSupplPerson instance");
 		try {
@@ -150,7 +150,7 @@ public class IclubSupplPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubSupplPersonDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSupplPersonDAO) ctx.getBean("IclubSupplPersonDAO");
 	}

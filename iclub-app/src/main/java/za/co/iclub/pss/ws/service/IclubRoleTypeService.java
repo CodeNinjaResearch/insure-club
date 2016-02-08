@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubRoleTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubRoleTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubRoleTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubRoleTypeDAO iclubRoleTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubRoleTypeService {
 	public ResponseModel add(IclubRoleTypeModel model) {
 		try {
 			IclubRoleType iRt = IclubRoleTypeTrans.fromWStoORM(model);
-			
+
 			iRt.setRtId(iclubCommonDAO.getNextId(IclubRoleType.class));
-			
+
 			iclubRoleTypeDAO.save(iRt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iRt.getRtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubRoleTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubRoleTypeService {
 	public ResponseModel mod(IclubRoleTypeModel model) {
 		try {
 			IclubRoleType iRt = IclubRoleTypeTrans.fromWStoORM(model);
-			
+
 			iclubRoleTypeDAO.merge(iRt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getRtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubRoleTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubRoleTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubRoleTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubRoleTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubRoleType bean = (IclubRoleType) object;
-					
+
 					IclubRoleTypeModel model = IclubRoleTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,14 +138,14 @@ public class IclubRoleTypeService {
 		IclubRoleTypeModel model = new IclubRoleTypeModel();
 		try {
 			IclubRoleType bean = iclubRoleTypeDAO.findById(id);
-			
+
 			model = IclubRoleTypeTrans.fromORMtoWS(bean);
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -171,27 +171,27 @@ public class IclubRoleTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubRoleTypeDAO getIclubRoleTypeDAO() {
 		return iclubRoleTypeDAO;
 	}
-	
+
 	public void setIclubRoleTypeDAO(IclubRoleTypeDAO iclubRoleTypeDAO) {
 		this.iclubRoleTypeDAO = iclubRoleTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

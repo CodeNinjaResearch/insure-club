@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubPropertyItemService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPropertyItemService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropertyItemService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPropertyItemDAO iclubPropertyItemDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubPropertyDAO iclubPropertyDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,11 +46,11 @@ public class IclubPropertyItemService {
 	public ResponseModel add(IclubPropertyItemModel model) {
 		try {
 			IclubPropertyItem iTt = IclubPropertyItemTrans.fromWStoORM(model, iclubPersonDAO, iclubPropertyDAO);
-			
+
 			iclubPropertyItemDAO.save(iTt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iTt.getPiId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -62,9 +62,9 @@ public class IclubPropertyItemService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -73,11 +73,11 @@ public class IclubPropertyItemService {
 	public ResponseModel mod(IclubPropertyItemModel model) {
 		try {
 			IclubPropertyItem iTt = IclubPropertyItemTrans.fromWStoORM(model, iclubPersonDAO, iclubPropertyDAO);
-			
+
 			iclubPropertyItemDAO.merge(iTt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPiId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -89,9 +89,9 @@ public class IclubPropertyItemService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -106,7 +106,7 @@ public class IclubPropertyItemService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/delByProperty/{propertyId}")
 	@Consumes("application/json")
@@ -125,57 +125,57 @@ public class IclubPropertyItemService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropertyItemModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPropertyItemDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPropertyItem bean = (IclubPropertyItem) object;
-					
+
 					IclubPropertyItemModel model = IclubPropertyItemTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/listByProperty/{propertyId}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropertyItemModel> List<T> listByProperty(@PathParam("propertyId") String propertyId) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.getIclubPropertyItemByProperty(propertyId);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPropertyItem bean = (IclubPropertyItem) object;
-					
+
 					IclubPropertyItemModel model = IclubPropertyItemTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -184,15 +184,15 @@ public class IclubPropertyItemService {
 		IclubPropertyItemModel model = new IclubPropertyItemModel();
 		try {
 			IclubPropertyItem bean = iclubPropertyItemDAO.findById(id);
-			
+
 			model = IclubPropertyItemTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -218,43 +218,43 @@ public class IclubPropertyItemService {
 			return message;
 		}
 	}
-	
+
 	public IclubPropertyItemDAO getIclubPropertyItemDAO() {
 		return iclubPropertyItemDAO;
 	}
-	
+
 	public void setIclubPropertyItemDAO(IclubPropertyItemDAO iclubPropertyItemDAO) {
 		this.iclubPropertyItemDAO = iclubPropertyItemDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubPropertyDAO getIclubPropertyDAO() {
 		return iclubPropertyDAO;
 	}
-	
+
 	public void setIclubPropertyDAO(IclubPropertyDAO iclubPropertyDAO) {
 		this.iclubPropertyDAO = iclubPropertyDAO;
 	}

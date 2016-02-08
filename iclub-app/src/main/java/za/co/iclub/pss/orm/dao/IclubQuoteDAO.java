@@ -39,21 +39,21 @@ public class IclubQuoteDAO {
 	public static final String _QPREV_PREMIUM = "QPrevPremium";
 	public static final String _QIS_MATCHED = "QIsMatched";
 	public static final String _QCLAIM_YN = "QClaimYn";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubQuote transientInstance) {
 		log.debug("saving IclubQuote instance");
 		try {
@@ -64,7 +64,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubQuote persistentInstance) {
 		log.debug("deleting IclubQuote instance");
 		try {
@@ -75,7 +75,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubQuote findById(java.lang.String id) {
 		log.debug("getting IclubQuote instance with id: " + id);
 		try {
@@ -86,7 +86,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubQuote> findByExample(IclubQuote instance) {
 		log.debug("finding IclubQuote instance by example");
 		try {
@@ -98,7 +98,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubQuote instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -111,39 +111,39 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubQuote> findByQNumber(Object QNumber) {
 		return findByProperty(_QNUMBER, QNumber);
 	}
-	
+
 	public List<IclubQuote> findByQNumItems(Object QNumItems) {
 		return findByProperty(_QNUM_ITEMS, QNumItems);
 	}
-	
+
 	public List<IclubQuote> findByQGenPremium(Object QGenPremium) {
 		return findByProperty(_QGEN_PREMIUM, QGenPremium);
 	}
-	
+
 	public List<IclubQuote> findByQEmail(Object QEmail) {
 		return findByProperty(_QEMAIL, QEmail);
 	}
-	
+
 	public List<IclubQuote> findByQMobile(Object QMobile) {
 		return findByProperty(_QMOBILE, QMobile);
 	}
-	
+
 	public List<IclubQuote> findByQPrevPremium(Object QPrevPremium) {
 		return findByProperty(_QPREV_PREMIUM, QPrevPremium);
 	}
-	
+
 	public List<IclubQuote> findByQIsMatched(Object QIsMatched) {
 		return findByProperty(_QIS_MATCHED, QIsMatched);
 	}
-	
+
 	public List<IclubQuote> findByQClaimYn(Object QClaimYn) {
 		return findByProperty(_QCLAIM_YN, QClaimYn);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubQuote instances");
 		try {
@@ -155,7 +155,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubQuote merge(IclubQuote detachedInstance) {
 		log.debug("merging IclubQuote instance");
 		try {
@@ -167,7 +167,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubQuote instance) {
 		log.debug("attaching dirty IclubQuote instance");
 		try {
@@ -178,7 +178,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubQuote instance) {
 		log.debug("attaching clean IclubQuote instance");
 		try {
@@ -189,7 +189,7 @@ public class IclubQuoteDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubQuoteDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubQuoteDAO) ctx.getBean("IclubQuoteDAO");
 	}

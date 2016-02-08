@@ -19,31 +19,31 @@ import za.co.iclub.pss.util.IclubWebHelper;
  */
 @WebServlet("/SocialLoginRedirect")
 public class SocialLoginRedirectServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public SocialLoginRedirectServlet() {
 		super();
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try {
 			String code = request.getParameter("code");
 			String cohortInviteId = request.getParameter("cohortInviteId");
 			String state = request.getParameter("state");
 			String from = request.getParameter("from");
-			
+
 			if (code != null) {
-				
+
 				String redirectUrl = BUNDLE.getString("local_redirect_uri") + "?code=" + code + "&cohortInviteId=" + cohortInviteId + "&state=" + state + "&from=" + from;
 				try {
 					HttpSession session = request.getSession(true);
@@ -53,38 +53,38 @@ public class SocialLoginRedirectServlet extends HttpServlet {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 			} else {
 				response.sendRedirect(BUNDLE.getString("login_uri"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public String getState(String from) {
 		String state = "{from:" + from + "}";
 		try {
 			if (IclubWebHelper.getObjectIntoSession("newInvite") != null) {
 				state = "{from:" + from + ",redirect:newInvite}";
 			}
-			
+
 			state = Base64.encodeBase64URLSafeString(state.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return state;
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
-	
+
 }

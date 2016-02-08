@@ -34,21 +34,21 @@ public class IclubAccountTypeDAO {
 	public static final String AT_SHORT_DESC = "atShortDesc";
 	public static final String AT_LONG_DESC = "atLongDesc";
 	public static final String AT_STATUS = "atStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubAccountType transientInstance) {
 		log.debug("saving IclubAccountType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubAccountType persistentInstance) {
 		log.debug("deleting IclubAccountType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAccountType findById(java.lang.Long id) {
 		log.debug("getting IclubAccountType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAccountType> findByExample(IclubAccountType instance) {
 		log.debug("finding IclubAccountType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubAccountType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAccountType> findByAtShortDesc(Object atShortDesc) {
 		return findByProperty(AT_SHORT_DESC, atShortDesc);
 	}
-	
+
 	public List<IclubAccountType> findByAtLongDesc(Object atLongDesc) {
 		return findByProperty(AT_LONG_DESC, atLongDesc);
 	}
-	
+
 	public List<IclubAccountType> findByAtStatus(Object atStatus) {
 		return findByProperty(AT_STATUS, atStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubAccountType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAccountType merge(IclubAccountType detachedInstance) {
 		log.debug("merging IclubAccountType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubAccountType instance) {
 		log.debug("attaching dirty IclubAccountType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubAccountType instance) {
 		log.debug("attaching clean IclubAccountType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubAccountTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubAccountTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAccountTypeDAO) ctx.getBean("IclubAccountTypeDAO");
 	}

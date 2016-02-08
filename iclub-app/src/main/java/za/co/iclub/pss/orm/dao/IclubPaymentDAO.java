@@ -34,21 +34,21 @@ public class IclubPaymentDAO {
 	// property constants
 	public static final String _PVALUE = "PValue";
 	public static final String _PDR_CR_IND = "PDrCrInd";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubPayment transientInstance) {
 		log.debug("saving IclubPayment instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubPayment persistentInstance) {
 		log.debug("deleting IclubPayment instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPayment findById(java.lang.String id) {
 		log.debug("getting IclubPayment instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPayment> findByExample(IclubPayment instance) {
 		log.debug("finding IclubPayment instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubPayment instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPayment> findByPValue(Object PValue) {
 		return findByProperty(_PVALUE, PValue);
 	}
-	
+
 	public List<IclubPayment> findByPDrCrInd(Object PDrCrInd) {
 		return findByProperty(_PDR_CR_IND, PDrCrInd);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubPayment instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPayment merge(IclubPayment detachedInstance) {
 		log.debug("merging IclubPayment instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubPayment instance) {
 		log.debug("attaching dirty IclubPayment instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubPayment instance) {
 		log.debug("attaching clean IclubPayment instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubPaymentDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPaymentDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPaymentDAO) ctx.getBean("IclubPaymentDAO");
 	}

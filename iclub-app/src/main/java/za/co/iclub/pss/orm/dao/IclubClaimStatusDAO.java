@@ -34,21 +34,21 @@ public class IclubClaimStatusDAO {
 	public static final String CS_SHORT_DESC = "csShortDesc";
 	public static final String CS_LONG_DESC = "csLongDesc";
 	public static final String CS_STATUS = "csStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubClaimStatus transientInstance) {
 		log.debug("saving IclubClaimStatus instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubClaimStatus persistentInstance) {
 		log.debug("deleting IclubClaimStatus instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubClaimStatus findById(java.lang.Long id) {
 		log.debug("getting IclubClaimStatus instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubClaimStatus> findByExample(IclubClaimStatus instance) {
 		log.debug("finding IclubClaimStatus instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubClaimStatus instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubClaimStatus> findByCsShortDesc(Object csShortDesc) {
 		return findByProperty(CS_SHORT_DESC, csShortDesc);
 	}
-	
+
 	public List<IclubClaimStatus> findByCsLongDesc(Object csLongDesc) {
 		return findByProperty(CS_LONG_DESC, csLongDesc);
 	}
-	
+
 	public List<IclubClaimStatus> findByCsStatus(Object csStatus) {
 		return findByProperty(CS_STATUS, csStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubClaimStatus instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubClaimStatus merge(IclubClaimStatus detachedInstance) {
 		log.debug("merging IclubClaimStatus instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubClaimStatus instance) {
 		log.debug("attaching dirty IclubClaimStatus instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubClaimStatus instance) {
 		log.debug("attaching clean IclubClaimStatus instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubClaimStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubClaimStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubClaimStatusDAO) ctx.getBean("IclubClaimStatusDAO");
 	}

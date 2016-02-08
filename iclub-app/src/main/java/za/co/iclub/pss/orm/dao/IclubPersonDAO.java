@@ -48,21 +48,21 @@ public class IclubPersonDAO {
 	public static final String _PLONG = "PLong";
 	public static final String _PZIP_CD = "PZipCd";
 	public static final String _PAGE = "PAge";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubPerson transientInstance) {
 		log.debug("saving IclubPerson instance");
 		try {
@@ -73,7 +73,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubPerson persistentInstance) {
 		log.debug("deleting IclubPerson instance");
 		try {
@@ -84,7 +84,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPerson findById(java.lang.String id) {
 		log.debug("getting IclubPerson instance with id: " + id);
 		try {
@@ -95,7 +95,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPerson> findByExample(IclubPerson instance) {
 		log.debug("finding IclubPerson instance by example");
 		try {
@@ -107,7 +107,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubPerson instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -120,75 +120,75 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPerson> findByPTitle(Object PTitle) {
 		return findByProperty(_PTITLE, PTitle);
 	}
-	
+
 	public List<IclubPerson> findByPInitials(Object PInitials) {
 		return findByProperty(_PINITIALS, PInitials);
 	}
-	
+
 	public List<IclubPerson> findByPFName(Object PFName) {
 		return findByProperty(_PFNAME, PFName);
 	}
-	
+
 	public List<IclubPerson> findByPLName(Object PLName) {
 		return findByProperty(_PLNAME, PLName);
 	}
-	
+
 	public List<IclubPerson> findByPMobile(Object PMobile) {
 		return findByProperty(_PMOBILE, PMobile);
 	}
-	
+
 	public List<IclubPerson> findByPEmail(Object PEmail) {
 		return findByProperty(_PEMAIL, PEmail);
 	}
-	
+
 	public List<IclubPerson> findByPContactPref(Object PContactPref) {
 		return findByProperty(_PCONTACT_PREF, PContactPref);
 	}
-	
+
 	public List<IclubPerson> findByPGender(Object PGender) {
 		return findByProperty(_PGENDER, PGender);
 	}
-	
+
 	public List<IclubPerson> findByPIdNum(Object PIdNum) {
 		return findByProperty(_PID_NUM, PIdNum);
 	}
-	
+
 	public List<IclubPerson> findByPIdIssueCntry(Object PIdIssueCntry) {
 		return findByProperty(_PID_ISSUE_CNTRY, PIdIssueCntry);
 	}
-	
+
 	public List<IclubPerson> findByPOccupation(Object POccupation) {
 		return findByProperty(_POCCUPATION, POccupation);
 	}
-	
+
 	public List<IclubPerson> findByPIsPensioner(Object PIsPensioner) {
 		return findByProperty(_PIS_PENSIONER, PIsPensioner);
 	}
-	
+
 	public List<IclubPerson> findByPAddress(Object PAddress) {
 		return findByProperty(_PADDRESS, PAddress);
 	}
-	
+
 	public List<IclubPerson> findByPLat(Object PLat) {
 		return findByProperty(_PLAT, PLat);
 	}
-	
+
 	public List<IclubPerson> findByPLong(Object PLong) {
 		return findByProperty(_PLONG, PLong);
 	}
-	
+
 	public List<IclubPerson> findByPZipCd(Object PZipCd) {
 		return findByProperty(_PZIP_CD, PZipCd);
 	}
-	
+
 	public List<IclubPerson> findByPAge(Object PAge) {
 		return findByProperty(_PAGE, PAge);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubPerson instances");
 		try {
@@ -200,7 +200,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPerson merge(IclubPerson detachedInstance) {
 		log.debug("merging IclubPerson instance");
 		try {
@@ -212,7 +212,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubPerson instance) {
 		log.debug("attaching dirty IclubPerson instance");
 		try {
@@ -223,7 +223,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubPerson instance) {
 		log.debug("attaching clean IclubPerson instance");
 		try {
@@ -234,7 +234,7 @@ public class IclubPersonDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPersonDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPersonDAO) ctx.getBean("IclubPersonDAO");
 	}

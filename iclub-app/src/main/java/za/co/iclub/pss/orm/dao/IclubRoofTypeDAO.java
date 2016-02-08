@@ -34,21 +34,21 @@ public class IclubRoofTypeDAO {
 	public static final String RT_SHORT_DESC = "rtShortDesc";
 	public static final String RT_LONG_DESC = "rtLongDesc";
 	public static final String RT_STATUS = "rtStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubRoofType transientInstance) {
 		log.debug("saving IclubRoofType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubRoofType persistentInstance) {
 		log.debug("deleting IclubRoofType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRoofType findById(java.lang.Long id) {
 		log.debug("getting IclubRoofType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRoofType> findByExample(IclubRoofType instance) {
 		log.debug("finding IclubRoofType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubRoofType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubRoofType> findByRtShortDesc(Object rtShortDesc) {
 		return findByProperty(RT_SHORT_DESC, rtShortDesc);
 	}
-	
+
 	public List<IclubRoofType> findByRtLongDesc(Object rtLongDesc) {
 		return findByProperty(RT_LONG_DESC, rtLongDesc);
 	}
-	
+
 	public List<IclubRoofType> findByRtStatus(Object rtStatus) {
 		return findByProperty(RT_STATUS, rtStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubRoofType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubRoofType merge(IclubRoofType detachedInstance) {
 		log.debug("merging IclubRoofType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubRoofType instance) {
 		log.debug("attaching dirty IclubRoofType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubRoofType instance) {
 		log.debug("attaching clean IclubRoofType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubRoofTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubRoofTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubRoofTypeDAO) ctx.getBean("IclubRoofTypeDAO");
 	}

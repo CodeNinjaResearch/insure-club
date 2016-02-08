@@ -36,7 +36,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubGeoLocController")
 @SessionScoped
 public class IclubGeoLocController implements Serializable {
-	
+
 	private static final long serialVersionUID = 8245517153102756484L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	protected static final Logger LOGGER = Logger.getLogger(IclubGeoLocController.class);
@@ -53,7 +53,7 @@ public class IclubGeoLocController implements Serializable {
 	private String userName;
 	private ResourceBundle labelBundle;
 	private StreamedContent file;
-	
+
 	public void initializePage() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: initializePage");
 		if (viewParam == null || viewParam.longValue() == 1)
@@ -62,9 +62,9 @@ public class IclubGeoLocController implements Serializable {
 			showEdit();
 		else if (viewParam != null && viewParam.longValue() == 3)
 			showSummary();
-		
+
 	}
-	
+
 	public void showView() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showView");
 		showCreateCont = false;
@@ -72,7 +72,7 @@ public class IclubGeoLocController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showCreate() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showCreate");
 		bean = new IclubGeoLocBean();
@@ -81,7 +81,7 @@ public class IclubGeoLocController implements Serializable {
 		showEditCont = false;
 		viewParam = 1l;
 	}
-	
+
 	public void showEdit() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showEdit");
 		showCreateCont = false;
@@ -89,7 +89,7 @@ public class IclubGeoLocController implements Serializable {
 		showEditCont = true;
 		viewParam = 2l;
 	}
-	
+
 	public void showSummary() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: showSummary");
 		showCreateCont = false;
@@ -98,7 +98,7 @@ public class IclubGeoLocController implements Serializable {
 		showSummaryCont = true;
 		viewParam = 3l;
 	}
-	
+
 	public List<IclubGeoLocBean> getDashBoardBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "/get/user/" + getSessionUserId());
 		Collection<? extends IclubGeoLocModel> models = new ArrayList<IclubGeoLocModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubGeoLocModel.class));
@@ -112,17 +112,17 @@ public class IclubGeoLocController implements Serializable {
 		}
 		return dashBoardBeans;
 	}
-	
+
 	public void setDashBoardBeans(List<IclubGeoLocBean> dashBoardBeans) {
 		this.dashBoardBeans = dashBoardBeans;
 	}
-	
+
 	public void clearForm() {
 		showCreateCont = false;
 		showEditCont = false;
 		bean = new IclubGeoLocBean();
 	}
-	
+
 	public void addIclubGeoLoc() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubGeoLoc");
 		try {
@@ -131,11 +131,11 @@ public class IclubGeoLocController implements Serializable {
 				bean.setGlCrtdDt(new Date(System.currentTimeMillis()));
 				bean.setIclubPerson(getSessionUserId());
 				IclubGeoLocModel model = IclubGeoLocTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					
+
 					IclubWebHelper.addMessage(getLabelBundle().getString("geoloc") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					viewParam = 1l;
 					showView();
@@ -148,7 +148,7 @@ public class IclubGeoLocController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("geoloc") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubGeoLoc() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubGeoLoc");
 		try {
@@ -157,7 +157,7 @@ public class IclubGeoLocController implements Serializable {
 				bean.setGlCrtdDt(new Date(System.currentTimeMillis()));
 				bean.setIclubPerson(getSessionUserId());
 				IclubGeoLocModel model = IclubGeoLocTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -173,7 +173,7 @@ public class IclubGeoLocController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("geoloc") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubGeoLoc() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubGeoLoc");
 		try {
@@ -191,55 +191,55 @@ public class IclubGeoLocController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("geoloc") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		return ret;
 	}
-	
+
 	public IclubGeoLocBean getBean() {
 		if (bean == null)
 			bean = new IclubGeoLocBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubGeoLocBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowCreateCont() {
 		return showCreateCont;
 	}
-	
+
 	public void setShowCreateCont(boolean showCreateCont) {
 		this.showCreateCont = showCreateCont;
 	}
-	
+
 	public boolean isShowViewCont() {
 		return showViewCont;
 	}
-	
+
 	public void setShowViewCont(boolean showViewCont) {
 		this.showViewCont = showViewCont;
 	}
-	
+
 	public boolean isShowEditCont() {
 		return showEditCont;
 	}
-	
+
 	public void setShowEditCont(boolean showEditCont) {
 		this.showEditCont = showEditCont;
 	}
-	
+
 	public Long getViewParam() {
 		return viewParam;
 	}
-	
+
 	public void setViewParam(Long viewParam) {
 		this.viewParam = viewParam;
 	}
-	
+
 	public String getSessionUserId() {
 		Object sessUsrId = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.id"));
 		if (sessUsrId == null)
@@ -248,51 +248,51 @@ public class IclubGeoLocController implements Serializable {
 			sessionUserId = sessUsrId.toString();
 		return sessionUserId;
 	}
-	
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
-	
+
 	public String getUserName() {
 		userName = IclubWebHelper.getObjectIntoSession(BUNDLE.getString("logged.in.user.scname")).toString();
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
 		if (labelBundle == null) {
 			labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		}
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}
-	
+
 	public List<IclubGeoLocBean> getBeans() {
-		
+
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubGeoLocModel> models = new ArrayList<IclubGeoLocModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubGeoLocModel.class));
 		client.close();
 		beans = new ArrayList<IclubGeoLocBean>();
 		if (models != null && models.size() > 0) {
 			for (IclubGeoLocModel model : models) {
-				
+
 				IclubGeoLocBean bean = IclubGeoLocTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	@SuppressWarnings("resource")
 	public void handleFileUpload(FileUploadEvent fue) {
-		
+
 		try {
 			Iterator<Row> rowIterator = null;
 			InputStream fis = fue.getFile().getInputstream();
@@ -300,7 +300,7 @@ public class IclubGeoLocController implements Serializable {
 				XSSFWorkbook myWorkBook = new XSSFWorkbook(fis);
 				XSSFSheet mySheet = myWorkBook.getSheetAt(0);
 				rowIterator = mySheet.iterator();
-				
+
 			} else {
 				HSSFWorkbook workbook = new HSSFWorkbook(fis);
 				HSSFSheet sheet = workbook.getSheetAt(0);
@@ -316,10 +316,10 @@ public class IclubGeoLocController implements Serializable {
 					IclubGeoLocModel model = new IclubGeoLocModel();
 					while (cellIterator.hasNext()) {
 						Cell cell = row.getCell(j);
-						
+
 						if (cell != null)
 							cellIterator.next();
-						
+
 						if (j == 0 && cell != null && cell.getStringCellValue() != null && !cell.getStringCellValue().toString().equalsIgnoreCase("")) {
 							model.setGlId(new Long(cell.getStringCellValue()));
 						} else if (j == 1 && cell != null && cell.getStringCellValue() != null && !cell.getStringCellValue().toString().equalsIgnoreCase("")) {
@@ -327,7 +327,7 @@ public class IclubGeoLocController implements Serializable {
 						} else if (j == 2 && cell != null && cell.getStringCellValue() != null && !cell.getStringCellValue().toString().equalsIgnoreCase("")) {
 							model.setGlSuburb(cell.getStringCellValue());
 						} else if (j == 3 && cell != null) {
-							
+
 							switch (cell.getCellType()) {
 							case Cell.CELL_TYPE_BOOLEAN:
 								Boolean bollean = cell.getBooleanCellValue();
@@ -341,7 +341,7 @@ public class IclubGeoLocController implements Serializable {
 								model.setGlAddress(cell.getStringCellValue());
 								break;
 							}
-							
+
 						} else if (j == 4 && cell != null) {
 							Double d = cell.getNumericCellValue();
 							if (d != null)
@@ -366,22 +366,22 @@ public class IclubGeoLocController implements Serializable {
 							}
 						}
 						j++;
-						
+
 					}
 					if ((model.getGlAddress() != null && !model.getGlAddress().trim().equalsIgnoreCase("")) || (model.getGlProvince() != null && !model.getGlProvince().trim().equalsIgnoreCase("")) || (model.getGlSuburb() != null && !model.getGlSuburb().trim().equalsIgnoreCase("")))
 						models.add(model);
-					
+
 				}
 				i++;
 			}
 			updateOrSaveGeoLoc(models);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadingerror") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void updateOrSaveGeoLoc(List<IclubGeoLocModel> models) {
 		if (models != null && models.size() > 0) {
 			for (IclubGeoLocModel model : models) {
@@ -394,34 +394,34 @@ public class IclubGeoLocController implements Serializable {
 					client.close();
 				} else {
 					WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-					
+
 					client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 					client.close();
 				}
 			}
 			IclubWebHelper.addMessage(getLabelBundle().getString("doucmentuploadedsuccessfully"), FacesMessage.SEVERITY_INFO);
-			
+
 		}
 	}
-	
+
 	public void setBeans(List<IclubGeoLocBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public boolean isShowSummaryCont() {
 		return showSummaryCont;
 	}
-	
+
 	public void setShowSummaryCont(boolean showSummaryCont) {
 		this.showSummaryCont = showSummaryCont;
 	}
-	
+
 	public StreamedContent getFile() {
 		return file;
 	}
-	
+
 	public void setFile(StreamedContent file) {
 		this.file = file;
 	}
-	
+
 }

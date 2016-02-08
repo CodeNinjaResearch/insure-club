@@ -6,7 +6,7 @@ import za.co.iclub.pss.orm.bean.IclubBankMaster;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubBankMasterTrans {
-	
+
 	public static IclubBankMasterBean fromWStoUI(IclubBankMasterModel model) {
 		IclubBankMasterBean bean = new IclubBankMasterBean();
 		bean.setBmId(model.getBmId());
@@ -22,7 +22,7 @@ public class IclubBankMasterTrans {
 		bean.setPFNameAndLName(model.getPFNameAndLName());
 		return bean;
 	}
-	
+
 	public static IclubBankMasterModel fromUItoWS(IclubBankMasterBean bean) {
 		IclubBankMasterModel model = new IclubBankMasterModel();
 		model.setBmId(bean.getBmId());
@@ -38,7 +38,7 @@ public class IclubBankMasterTrans {
 		model.setPFNameAndLName(bean.getPFNameAndLName());
 		return model;
 	}
-	
+
 	public static IclubBankMasterModel fromORMtoWS(IclubBankMaster bean) {
 		IclubBankMasterModel model = new IclubBankMasterModel();
 		model.setBmId(bean.getBmId());
@@ -54,7 +54,7 @@ public class IclubBankMasterTrans {
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
 		return model;
 	}
-	
+
 	public static IclubBankMaster fromWStoORM(IclubBankMasterModel model, IclubPersonDAO iclubPersonDAO) {
 		IclubBankMaster bean = new IclubBankMaster();
 		bean.setBmId(model.getBmId());
@@ -69,5 +69,5 @@ public class IclubBankMasterTrans {
 		bean.setIclubPerson(iclubPersonDAO.findById(model.getIclubPerson()));
 		return bean;
 	}
-	
+
 }

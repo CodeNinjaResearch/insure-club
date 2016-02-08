@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubCohortCriteriaService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubCohortCriteriaService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubCohortCriteriaService.class);
 	private IclubCohortCriteriaDAO iclubCohortCriteriaDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubCohortInviteDAO iclubCohortInviteDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -41,17 +41,17 @@ public class IclubCohortCriteriaService {
 	@Transactional
 	public ResponseModel add(IclubCohortCriteriaModel model) {
 		try {
-			
+
 			IclubCohortCriteria iCC = IclubCohortCriteriaTrans.fromWStoORM(model, iclubCohortInviteDAO);
 			iclubCohortCriteriaDAO.save(iCC);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCC.getCcId());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -60,9 +60,9 @@ public class IclubCohortCriteriaService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@POST
 	@Path("/addList")
 	@Consumes("application/json")
@@ -70,20 +70,20 @@ public class IclubCohortCriteriaService {
 	@Transactional
 	public ResponseModel addList(Collection<? extends IclubCohortCriteriaModel> models) {
 		try {
-			
+
 			for (IclubCohortCriteriaModel model : models) {
-				
+
 				IclubCohortCriteria iCC = IclubCohortCriteriaTrans.fromWStoORM(model, iclubCohortInviteDAO);
 				iclubCohortCriteriaDAO.save(iCC);
-				
+
 				LOGGER.info("Save Success with ID :: " + iCC.getCcId());
 			}
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -92,9 +92,9 @@ public class IclubCohortCriteriaService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@POST
 	@Path("/modList")
 	@Consumes("application/json")
@@ -102,20 +102,20 @@ public class IclubCohortCriteriaService {
 	@Transactional
 	public ResponseModel modList(Collection<? extends IclubCohortCriteriaModel> models) {
 		try {
-			
+
 			for (IclubCohortCriteriaModel model : models) {
-				
+
 				IclubCohortCriteria iCC = IclubCohortCriteriaTrans.fromWStoORM(model, iclubCohortInviteDAO);
 				iclubCohortCriteriaDAO.merge(iCC);
-				
+
 				LOGGER.info("Save Success with ID :: " + model.getCcId());
 			}
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -124,9 +124,9 @@ public class IclubCohortCriteriaService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -135,11 +135,11 @@ public class IclubCohortCriteriaService {
 	public ResponseModel mod(IclubCohortCriteriaModel model) {
 		try {
 			IclubCohortCriteria iCC = IclubCohortCriteriaTrans.fromWStoORM(model, iclubCohortInviteDAO);
-			
+
 			iclubCohortCriteriaDAO.merge(iCC);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getCcId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -151,9 +151,9 @@ public class IclubCohortCriteriaService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -168,31 +168,31 @@ public class IclubCohortCriteriaService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubCohortCriteriaModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubCohortCriteriaDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubCohortCriteria bean = (IclubCohortCriteria) object;
 					IclubCohortCriteriaModel iCC = IclubCohortCriteriaTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCC);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -201,37 +201,37 @@ public class IclubCohortCriteriaService {
 		IclubCohortCriteriaModel model = new IclubCohortCriteriaModel();
 		try {
 			IclubCohortCriteria bean = iclubCohortCriteriaDAO.findById(id);
-			
+
 			model = IclubCohortCriteriaTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubCohortCriteriaDAO getIclubCohortCriteriaDAO() {
 		return iclubCohortCriteriaDAO;
 	}
-	
+
 	public void setIclubCohortCriteriaDAO(IclubCohortCriteriaDAO iclubCohortCriteriaDAO) {
 		this.iclubCohortCriteriaDAO = iclubCohortCriteriaDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 	public IclubCohortInviteDAO getIclubCohortInviteDAO() {
 		return iclubCohortInviteDAO;
 	}
-	
+
 	public void setIclubCohortInviteDAO(IclubCohortInviteDAO iclubCohortInviteDAO) {
 		this.iclubCohortInviteDAO = iclubCohortInviteDAO;
 	}
-	
+
 }

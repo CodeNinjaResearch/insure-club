@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubInviteStatusModel;
 import za.co.iclub.pss.orm.bean.IclubInviteStatus;
 
 public class IclubInviteStatusTrans {
-	
+
 	public static IclubInviteStatusBean fromWStoUI(IclubInviteStatusModel model) {
 		IclubInviteStatusBean bean = new IclubInviteStatusBean();
 		bean.setIsId(model.getIsId());
@@ -14,7 +14,7 @@ public class IclubInviteStatusTrans {
 		bean.setIsStatus(model.getIsStatus());
 		return bean;
 	}
-	
+
 	public static IclubInviteStatusModel fromUItoWS(IclubInviteStatusBean bean) {
 		IclubInviteStatusModel model = new IclubInviteStatusModel();
 		model.setIsId(bean.getIsId());
@@ -23,7 +23,7 @@ public class IclubInviteStatusTrans {
 		model.setIsStatus(bean.getIsStatus());
 		return model;
 	}
-	
+
 	public static IclubInviteStatusModel fromORMtoWS(IclubInviteStatus bean) {
 		IclubInviteStatusModel model = new IclubInviteStatusModel();
 		model.setIsId(bean.getIsId());
@@ -32,15 +32,15 @@ public class IclubInviteStatusTrans {
 		model.setIsStatus(bean.getIsStatus());
 		return model;
 	}
-	
+
 	public static IclubInviteStatus fromWStoORM(IclubInviteStatusModel model) {
 		IclubInviteStatus inviteStatus = new IclubInviteStatus();
-		
+
 		inviteStatus.setIsId(model.getIsId());
 		inviteStatus.setIsLongDesc(model.getIsLongDesc());
 		inviteStatus.setIsShortDesc(model.getIsShortDesc());
 		inviteStatus.setIsStatus(model.getIsStatus());
-		
+
 		return inviteStatus;
 	}
 }

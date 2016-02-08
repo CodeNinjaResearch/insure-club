@@ -40,7 +40,7 @@ public class IclubPersonService {
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubCohortDAO iclubCohortDAO;
 	private IclubCohortInviteDAO iclubCohortInviteDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes({ "application/json" })
@@ -49,11 +49,11 @@ public class IclubPersonService {
 	public ResponseModel add(IclubPersonModel model) {
 		try {
 			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
-			
+
 			iclubPersonDAO.save(person);
-			
+
 			LOGGER.info("Save Success with ID :: " + person.getPId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(Integer.valueOf(0));
 			message.setStatusDesc("Success");
@@ -66,7 +66,7 @@ public class IclubPersonService {
 			return message;
 		}
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes({ "application/json" })
@@ -76,9 +76,9 @@ public class IclubPersonService {
 		try {
 			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 			iclubPersonDAO.merge(person);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(Integer.valueOf(0));
 			message.setStatusDesc("Success");
@@ -91,7 +91,7 @@ public class IclubPersonService {
 			return message;
 		}
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes({ "application/json" })
@@ -106,57 +106,57 @@ public class IclubPersonService {
 		}
 		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPersonModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPersonDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPerson bean = (IclubPerson) object;
-					
+
 					IclubPersonModel model = IclubPersonTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPersonModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPerson.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPerson bean = (IclubPerson) object;
-					
+
 					IclubPersonModel model = IclubPersonTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces({ "application/json" })
@@ -165,15 +165,15 @@ public class IclubPersonService {
 		IclubPersonModel model = new IclubPersonModel();
 		try {
 			IclubPerson bean = iclubPersonDAO.findById(id);
-			
+
 			model = IclubPersonTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@POST
 	@Path("/getMNumberList")
 	@Produces("application/json")
@@ -181,7 +181,7 @@ public class IclubPersonService {
 	public <T extends String> List<T> getAllExistingMobileNmbers(Collection<? extends String> models) {
 		List<T> ret = new ArrayList<T>();
 		try {
-			
+
 			List batmod = iclubNamedQueryDAO.getIclubPersonNumbersList(models);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
@@ -194,7 +194,7 @@ public class IclubPersonService {
 		}
 		return ret;
 	}
-	
+
 	@POST
 	@Path("/getEmailsList")
 	@Produces("application/json")
@@ -202,7 +202,7 @@ public class IclubPersonService {
 	public <T extends String> List<T> getAllEmails(Collection<? extends String> models) {
 		List<T> ret = new ArrayList<T>();
 		try {
-			
+
 			List batmod = iclubNamedQueryDAO.getIclubPersonEmailsList(models);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
@@ -215,61 +215,61 @@ public class IclubPersonService {
 		}
 		return ret;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubIdTypeDAO getIclubIdTypeDAO() {
 		return iclubIdTypeDAO;
 	}
-	
+
 	public void setIclubIdTypeDAO(IclubIdTypeDAO iclubIdTypeDAO) {
 		this.iclubIdTypeDAO = iclubIdTypeDAO;
 	}
-	
+
 	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
 		return iclubMaritialStatusDAO;
 	}
-	
+
 	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
 		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 	public IclubCohortDAO getIclubCohortDAO() {
 		return iclubCohortDAO;
 	}
-	
+
 	public void setIclubCohortDAO(IclubCohortDAO iclubCohortDAO) {
 		this.iclubCohortDAO = iclubCohortDAO;
 	}
-	
+
 	public IclubCohortInviteDAO getIclubCohortInviteDAO() {
 		return iclubCohortInviteDAO;
 	}
-	
+
 	public void setIclubCohortInviteDAO(IclubCohortInviteDAO iclubCohortInviteDAO) {
 		this.iclubCohortInviteDAO = iclubCohortInviteDAO;
 	}
-	
+
 }

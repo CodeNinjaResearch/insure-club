@@ -34,21 +34,21 @@ public class IclubPaymentStatusDAO {
 	public static final String PS_SHORT_DESC = "psShortDesc";
 	public static final String PS_LONG_DESC = "psLongDesc";
 	public static final String PS_STATUS = "psStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubPaymentStatus transientInstance) {
 		log.debug("saving IclubPaymentStatus instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubPaymentStatus persistentInstance) {
 		log.debug("deleting IclubPaymentStatus instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPaymentStatus findById(java.lang.Long id) {
 		log.debug("getting IclubPaymentStatus instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPaymentStatus> findByExample(IclubPaymentStatus instance) {
 		log.debug("finding IclubPaymentStatus instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubPaymentStatus instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubPaymentStatus> findByPsShortDesc(Object psShortDesc) {
 		return findByProperty(PS_SHORT_DESC, psShortDesc);
 	}
-	
+
 	public List<IclubPaymentStatus> findByPsLongDesc(Object psLongDesc) {
 		return findByProperty(PS_LONG_DESC, psLongDesc);
 	}
-	
+
 	public List<IclubPaymentStatus> findByPsStatus(Object psStatus) {
 		return findByProperty(PS_STATUS, psStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubPaymentStatus instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubPaymentStatus merge(IclubPaymentStatus detachedInstance) {
 		log.debug("merging IclubPaymentStatus instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubPaymentStatus instance) {
 		log.debug("attaching dirty IclubPaymentStatus instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubPaymentStatus instance) {
 		log.debug("attaching clean IclubPaymentStatus instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubPaymentStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubPaymentStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubPaymentStatusDAO) ctx.getBean("IclubPaymentStatusDAO");
 	}

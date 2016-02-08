@@ -25,7 +25,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubRoofTypeController")
 @SessionScoped
 public class IclubRoofTypeController implements Serializable {
-	
+
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubRoofTypeController.class);
@@ -35,14 +35,14 @@ public class IclubRoofTypeController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-	
+
 	public void addIclubRoofType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubRoofType");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubRoofTypeModel model = IclubRoofTypeTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -57,14 +57,14 @@ public class IclubRoofTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("rooftype") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubRoofType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubRoofType");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubRoofTypeModel model = IclubRoofTypeTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -79,7 +79,7 @@ public class IclubRoofTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("rooftype") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubRoofType() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubRoofType");
 		try {
@@ -96,27 +96,27 @@ public class IclubRoofTypeController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("rooftype") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubRoofTypeBean();
 	}
-	
+
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubRoofTypeBean();
 	}
-	
+
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		if (bean.getRtShortDesc() != null && !bean.getRtShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getRtShortDesc().trim() + "/" + ((bean.getRtId() == null) ? -999l : bean.getRtId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -126,25 +126,25 @@ public class IclubRoofTypeController implements Serializable {
 				ret = ret && false;
 			}
 		}
-		
+
 		else {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getRtLongDesc() == null || bean.getRtLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getRtStatus() == null || bean.getRtStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public List<IclubRoofTypeBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubRoofTypeModel> models = new ArrayList<IclubRoofTypeModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubRoofTypeModel.class));
@@ -153,49 +153,49 @@ public class IclubRoofTypeController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubRoofTypeModel model : models) {
 				IclubRoofTypeBean bean = IclubRoofTypeTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubRoofTypeBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubRoofTypeBean getBean() {
 		if (bean == null)
 			bean = new IclubRoofTypeBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubRoofTypeBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
-		
+
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

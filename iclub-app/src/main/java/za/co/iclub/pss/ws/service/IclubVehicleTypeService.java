@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubVehicleTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubVehicleTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubVehicleTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubVehicleTypeDAO iclubVehicleTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubVehicleTypeService {
 	public ResponseModel add(IclubVehicleTypeModel model) {
 		try {
 			IclubVehicleType iTt = IclubVehicleTypeTrans.fromWStoORM(model);
-			
+
 			iTt.setVtId(iclubCommonDAO.getNextId(IclubVehicleType.class));
-			
+
 			iclubVehicleTypeDAO.save(iTt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iTt.getVtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubVehicleTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -72,9 +72,9 @@ public class IclubVehicleTypeService {
 		try {
 			IclubVehicleType iTt = IclubVehicleTypeTrans.fromWStoORM(model);
 			iclubVehicleTypeDAO.merge(iTt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getVtId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -86,9 +86,9 @@ public class IclubVehicleTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -103,32 +103,32 @@ public class IclubVehicleTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubVehicleTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubVehicleTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubVehicleType bean = (IclubVehicleType) object;
-					
+
 					IclubVehicleTypeModel model = IclubVehicleTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -137,15 +137,15 @@ public class IclubVehicleTypeService {
 		IclubVehicleTypeModel model = new IclubVehicleTypeModel();
 		try {
 			IclubVehicleType bean = iclubVehicleTypeDAO.findById(id);
-			
+
 			model = IclubVehicleTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -171,27 +171,27 @@ public class IclubVehicleTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubVehicleTypeDAO getIclubVehicleTypeDAO() {
 		return iclubVehicleTypeDAO;
 	}
-	
+
 	public void setIclubVehicleTypeDAO(IclubVehicleTypeDAO iclubVehicleTypeDAO) {
 		this.iclubVehicleTypeDAO = iclubVehicleTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

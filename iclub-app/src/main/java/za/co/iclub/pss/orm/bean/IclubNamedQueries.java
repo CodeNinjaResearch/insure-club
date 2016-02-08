@@ -37,22 +37,22 @@ import javax.persistence.Table;
 		@NamedNativeQuery(query = "select q_id  from iclub_quote where q_crtd_by like :userId and q_status_id=:quoteStatus and   q_valid_until>= cast((now()) as date) order by q_valid_until desc limit 0,1 ", name = "getIclubQuoteIdByUserId"), @NamedNativeQuery(query = "select ii_type_id,ii_item_id  from iclub_insurance_item where ii_quote_id in (:quoteIds)", name = "getIclubItemIdsByUserId"), @NamedNativeQuery(query = "select sum(v_insured_value) from iclub_vehicle where v_id in (:vehicleIds)", name = "getIclubVehicleIValueByVIds"), @NamedNativeQuery(query = "select sum(p_replacement_cost), sum(p_content_cost) from iclub_property where p_id in (:propertyIds)", name = "getIclubPropertyIValueByPIds"),
 		@NamedNativeQuery(query = "select p_id, p_prorata_prm, p_quote_id, p_debit_dt, p_premium from iclub_policy where p_crtd_by like :userIds", name = "getIclubPolicIdsByQuotes"), @NamedNativeQuery(query = "select c_id, c_value,c_status_id from iclub_claim where c_policy_id in (:policyIds)", name = "getIclubClaimValueByPolicyIds"), @NamedNativeQuery(query = "select count(*), sum(p_value) from iclub_payment where p_policy_id in (:policyIds) and p_gen_dt <=cast((NOW() - INTERVAL 6 MONTH)as date)", name = "getIclubPaymentByPolicyIds"), @NamedNativeQuery(query = "select * FROM iclubdb.iclub_cohort_invite where ci_invite_sent_status is null or ci_invite_sent_status like 'N'", resultClass = IclubCohortInvite.class, name = "getIclubCohortInviteByNotSentStatus"),
 		@NamedNativeQuery(query = "select count(*), sum(p_value) from iclub_payment where p_claim_id in (:claimIds) and p_gen_dt <=cast((NOW() - INTERVAL 6 MONTH) as date)", name = "getIclubPaymentsByClaimIds"), @NamedNativeQuery(query = "select * from iclub_payment    where    p_gen_dt <=cast((NOW() - INTERVAL 6 MONTH) as date) and  p_crtd_by like :userId and p_policy_id is not null limit 0,6", name = "getIclubPolicyPaymentsByUserId", resultClass = IclubPayment.class), @NamedNativeQuery(query = "select * from iclub_payment as p, iclub_claim as c where p.p_claim_id=c.c_id and p.p_gen_dt <=cast((NOW() - INTERVAL 6 MONTH) as date) and p.p_crtd_by like :userId and c.c_status_id=:claimStausId limit 0,6", name = "getIclubClaimPaymentsByUserId", resultClass = IclubPayment.class),
-		@NamedNativeQuery(query = "select count(*) FROM iclubdb.iclub_person  where p_pri_cohort_id like :cohortId", name = "getIclubPersonCountByCohortId"),		@NamedNativeQuery(query = "select * FROM iclubdb.iclub_login  where ( l_name like :lId or (l_provider_id like :lpId and l_provider_cd like :lpCd))", name = "getIclubLoginByIdOrProviderId", resultClass = IclubLogin.class) })
+		@NamedNativeQuery(query = "select count(*) FROM iclubdb.iclub_person  where p_pri_cohort_id like :cohortId", name = "getIclubPersonCountByCohortId"), @NamedNativeQuery(query = "select * FROM iclubdb.iclub_login  where ( l_name like :lId or (l_provider_id like :lpId and l_provider_cd like :lpCd))", name = "getIclubLoginByIdOrProviderId", resultClass = IclubLogin.class) })
 @Table(name = "iclub_account_type")
 public class IclubNamedQueries implements java.io.Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7107040889492342220L;
 	private Long atId;
-	
+
 	@Id
 	@Column(name = "at_id", unique = true, nullable = false)
 	public Long getAtId() {
 		return this.atId;
 	}
-	
+
 	public void setAtId(Long atId) {
 		this.atId = atId;
 	}

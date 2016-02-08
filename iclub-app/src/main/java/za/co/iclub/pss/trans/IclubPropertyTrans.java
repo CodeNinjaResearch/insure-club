@@ -14,11 +14,11 @@ import za.co.iclub.pss.orm.dao.IclubRoofTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubWallTypeDAO;
 
 public class IclubPropertyTrans {
-	
+
 	public static IclubPropertyBean fromWStoUI(IclubPropertyModel model) {
-		
+
 		IclubPropertyBean bean = new IclubPropertyBean();
-		
+
 		bean.setPId(model.getPId());
 		bean.setPCrtdDt(model.getPCrtdDt());
 		bean.setPEstValue(model.getPEstValue());
@@ -53,14 +53,14 @@ public class IclubPropertyTrans {
 		bean.setPFNameAndLName(model.getPFNameAndLName());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubPropertyModel fromUItoWS(IclubPropertyBean bean) {
-		
+
 		IclubPropertyModel model = new IclubPropertyModel();
-		
+
 		model.setPId(bean.getPId());
 		model.setPCrtdDt(bean.getPCrtdDt());
 		model.setPEstValue(bean.getPEstValue());
@@ -95,14 +95,14 @@ public class IclubPropertyTrans {
 		model.setPFNameAndLName(bean.getPFNameAndLName());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubPropertyModel fromORMtoWS(IclubProperty bean) {
-		
+
 		IclubPropertyModel model = new IclubPropertyModel();
-		
+
 		model.setPId(bean.getPId());
 		model.setPCrtdDt(bean.getPCrtdDt());
 		model.setPEstValue(bean.getPEstValue());
@@ -136,14 +136,14 @@ public class IclubPropertyTrans {
 		model.setPThatchType(bean.getPThatchType());
 		model.setIclubRoofType(bean.getIclubRoofType() != null ? (bean.getIclubRoofType().getRtId()) : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubProperty fromWStoORM(IclubPropertyModel model, IclubPersonDAO iclubPersonDAO, IclubCoverTypeDAO iclubCoverTypeDAO, IclubPropUsageTypeDAO iclubPropUsageTypeDAO, IclubOccupiedStatusDAO iclubOccupiedStatusDAO, IclubPropertyTypeDAO iclubPropertyTypeDAO, IclubWallTypeDAO iclubWallTypeDAO, IclubAccessTypeDAO iclubAccessTypeDAO, IclubBarTypeDAO iclubBarTypeDAO, IclubRoofTypeDAO iclubRoofTypeDAO) {
-		
+
 		IclubProperty bean = new IclubProperty();
-		
+
 		bean.setPId(model.getPId());
 		bean.setPCrtdDt(model.getPCrtdDt());
 		bean.setPEstValue(model.getPEstValue());
@@ -169,7 +169,7 @@ public class IclubPropertyTrans {
 		bean.setIclubPropUsageType(model.getIclubPropUsageType() != null ? iclubPropUsageTypeDAO.findById(model.getIclubPropUsageType()) : null);
 		bean.setIclubCoverType(model.getIclubCoverType() != null ? iclubCoverTypeDAO.findById(model.getIclubCoverType()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+
 		return bean;
 	}
 }

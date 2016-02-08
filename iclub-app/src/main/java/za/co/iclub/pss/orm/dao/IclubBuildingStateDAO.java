@@ -35,21 +35,21 @@ public class IclubBuildingStateDAO {
 	public static final String BS_SHORT_DESC = "bsShortDesc";
 	public static final String BS_LONG_DESC = "bsLongDesc";
 	public static final String BS_STATUS = "bsStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubBuildingState transientInstance) {
 		log.debug("saving IclubBuildingState instance");
 		try {
@@ -60,7 +60,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubBuildingState persistentInstance) {
 		log.debug("deleting IclubBuildingState instance");
 		try {
@@ -71,7 +71,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBuildingState findById(java.lang.Long id) {
 		log.debug("getting IclubBuildingState instance with id: " + id);
 		try {
@@ -82,7 +82,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBuildingState> findByExample(IclubBuildingState instance) {
 		log.debug("finding IclubBuildingState instance by example");
 		try {
@@ -94,7 +94,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubBuildingState instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -107,19 +107,19 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubBuildingState> findByBsShortDesc(Object bsShortDesc) {
 		return findByProperty(BS_SHORT_DESC, bsShortDesc);
 	}
-	
+
 	public List<IclubBuildingState> findByBsLongDesc(Object bsLongDesc) {
 		return findByProperty(BS_LONG_DESC, bsLongDesc);
 	}
-	
+
 	public List<IclubBuildingState> findByBsStatus(Object bsStatus) {
 		return findByProperty(BS_STATUS, bsStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubBuildingState instances");
 		try {
@@ -131,7 +131,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubBuildingState merge(IclubBuildingState detachedInstance) {
 		log.debug("merging IclubBuildingState instance");
 		try {
@@ -143,7 +143,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubBuildingState instance) {
 		log.debug("attaching dirty IclubBuildingState instance");
 		try {
@@ -154,7 +154,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubBuildingState instance) {
 		log.debug("attaching clean IclubBuildingState instance");
 		try {
@@ -165,7 +165,7 @@ public class IclubBuildingStateDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubBuildingStateDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubBuildingStateDAO) ctx.getBean("IclubBuildingStateDAO");
 	}

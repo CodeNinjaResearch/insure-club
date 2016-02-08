@@ -34,21 +34,21 @@ public class IclubClaimItemDAO {
 	// property constants
 	public static final String CI_VALUE = "ciValue";
 	public static final String CI_CRTD_BY = "ciCrtdBy";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubClaimItem transientInstance) {
 		log.debug("saving IclubClaimItem instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubClaimItem persistentInstance) {
 		log.debug("deleting IclubClaimItem instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubClaimItem findById(java.lang.String id) {
 		log.debug("getting IclubClaimItem instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubClaimItem> findByExample(IclubClaimItem instance) {
 		log.debug("finding IclubClaimItem instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubClaimItem instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubClaimItem> findByCiValue(Object ciValue) {
 		return findByProperty(CI_VALUE, ciValue);
 	}
-	
+
 	public List<IclubClaimItem> findByCiCrtdBy(Object ciCrtdBy) {
 		return findByProperty(CI_CRTD_BY, ciCrtdBy);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubClaimItem instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubClaimItem merge(IclubClaimItem detachedInstance) {
 		log.debug("merging IclubClaimItem instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubClaimItem instance) {
 		log.debug("attaching dirty IclubClaimItem instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubClaimItem instance) {
 		log.debug("attaching clean IclubClaimItem instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubClaimItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubClaimItemDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubClaimItemDAO) ctx.getBean("IclubClaimItemDAO");
 	}

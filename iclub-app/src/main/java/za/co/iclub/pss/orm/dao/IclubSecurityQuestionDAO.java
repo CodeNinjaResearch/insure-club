@@ -34,21 +34,21 @@ public class IclubSecurityQuestionDAO {
 	public static final String SQ_SHORT_DESC = "sqShortDesc";
 	public static final String SQ_LONG_DESC = "sqLongDesc";
 	public static final String SQ_STATUS = "sqStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubSecurityQuestion transientInstance) {
 		log.debug("saving IclubSecurityQuestion instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubSecurityQuestion persistentInstance) {
 		log.debug("deleting IclubSecurityQuestion instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSecurityQuestion findById(java.lang.Long id) {
 		log.debug("getting IclubSecurityQuestion instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSecurityQuestion> findByExample(IclubSecurityQuestion instance) {
 		log.debug("finding IclubSecurityQuestion instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubSecurityQuestion instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSecurityQuestion> findBySqShortDesc(Object sqShortDesc) {
 		return findByProperty(SQ_SHORT_DESC, sqShortDesc);
 	}
-	
+
 	public List<IclubSecurityQuestion> findBySqLongDesc(Object sqLongDesc) {
 		return findByProperty(SQ_LONG_DESC, sqLongDesc);
 	}
-	
+
 	public List<IclubSecurityQuestion> findBySqStatus(Object sqStatus) {
 		return findByProperty(SQ_STATUS, sqStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubSecurityQuestion instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSecurityQuestion merge(IclubSecurityQuestion detachedInstance) {
 		log.debug("merging IclubSecurityQuestion instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubSecurityQuestion instance) {
 		log.debug("attaching dirty IclubSecurityQuestion instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubSecurityQuestion instance) {
 		log.debug("attaching clean IclubSecurityQuestion instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubSecurityQuestionDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubSecurityQuestionDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSecurityQuestionDAO) ctx.getBean("IclubSecurityQuestionDAO");
 	}

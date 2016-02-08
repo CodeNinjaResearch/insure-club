@@ -35,18 +35,18 @@ import com.google.gson.JsonParser;
 public class Oauth2callback extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = Logger.getLogger(Oauth2callback.class);
-	
+
 	public Oauth2callback() {
 		super();
-		
+
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		LOGGER.info("entering doGet");
 		try {
 			String code = request.getParameter("code");
@@ -57,16 +57,16 @@ public class Oauth2callback extends HttpServlet {
 			OutputStreamWriter writer = new OutputStreamWriter(urlConn.getOutputStream());
 			writer.write(urlParameters);
 			writer.flush();
-			
+
 			String line, outputString = "";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 			while ((line = reader.readLine()) != null) {
 				outputString += line;
 			}
-			
+
 			JsonObject json = (JsonObject) new JsonParser().parse(outputString);
 			String access_token = json.get("access_token").getAsString();
-			
+
 			try {
 				String callUrl = "https://www.google.com/m8/feeds/contacts/default/full?max-results=8&access_token=" + access_token;
 				url = new URL(callUrl);
@@ -76,11 +76,11 @@ public class Oauth2callback extends HttpServlet {
 				while ((line = reader.readLine()) != null) {
 					outputString += line;
 				}
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			try {
 				String callUrl1 = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + access_token;
 				url = new URL(callUrl1);
@@ -90,14 +90,14 @@ public class Oauth2callback extends HttpServlet {
 				while ((line = reader.readLine()) != null) {
 					outputString += line;
 				}
-				
+
 				new Gson().fromJson(outputString, GooglePojo.class);
-				
+
 				reader.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			ContactsService myService = new ContactsService("iclub");
 			URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full?access_token=" + access_token);
 			ContactFeed resultFeed = myService.getFeed(feedUrl, ContactFeed.class);
@@ -111,7 +111,7 @@ public class Oauth2callback extends HttpServlet {
 							fullNameToDisplay += " (" + name.getFullName().getYomi() + ")";
 						}
 						LOGGER.info("fullNameToDisplay --" + fullNameToDisplay);
-						
+
 					} else {
 						LOGGER.info("\\\t\\\t (no full name found)");
 					}
@@ -207,7 +207,7 @@ public class Oauth2callback extends HttpServlet {
 				}
 				LOGGER.info("Contact's ETag: " + entry.getEtag());
 			}
-			
+
 		} catch (MalformedURLException e) {
 			LOGGER.error(e, e);
 		} catch (ProtocolException e) {
@@ -219,5 +219,5 @@ public class Oauth2callback extends HttpServlet {
 		}
 		LOGGER.info("leaving doGet");
 	}
-	
+
 }

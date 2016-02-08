@@ -33,6 +33,12 @@
 				</p:contextMenu>
 				<p:dataTable id="dtRateEngineCont" editable="true" editMode="cell" widgetVar="dtRateEngineCont" value="#{iclubRatingController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No RateEngines Found" reflow="true">
 					<p:ajax event="cellEdit" listener="#{iclubRatingController.onCellEdit}" update=":iclubFrm:dtRateEngineCont,:iclubFrm:grlMsg" />
+					<p:column headerText="Base Value" sortBy="#{bean.reBaseValue}" filterBy="#{bean.reBaseValue}" filterMatchMode="contains">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
+					</p:column>
+					<p:column headerText="Type">
+						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubRateType}" />
+					</p:column>
 					<p:column headerText="Rate">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -42,12 +48,6 @@
 								<p:inputText id="rateInput" value="#{bean.reRate}" styleClass="TexAlCenter" placeholder="Rate" />
 							</f:facet>
 						</p:cellEditor>
-					</p:column>
-					<p:column headerText="Base Value">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.reBaseValue}" />
-					</p:column>
-					<p:column headerText="Type">
-						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubRateType}" />
 					</p:column>
 					<!-- 					<p:column headerText="Created By"> -->
 					<!-- 						<p:outputLabel styleClass="TexAlCenter" value="#{bean.iclubPerson}" /> -->

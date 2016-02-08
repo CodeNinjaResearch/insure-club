@@ -34,21 +34,21 @@ public class IclubSystemTypeDAO {
 	public static final String ST_SHORT_DESC = "stShortDesc";
 	public static final String ST_LONG_DESC = "stLongDesc";
 	public static final String ST_STATUS = "stStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubSystemType transientInstance) {
 		log.debug("saving IclubSystemType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubSystemType persistentInstance) {
 		log.debug("deleting IclubSystemType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSystemType findById(java.lang.Long id) {
 		log.debug("getting IclubSystemType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSystemType> findByExample(IclubSystemType instance) {
 		log.debug("finding IclubSystemType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubSystemType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSystemType> findByStShortDesc(Object stShortDesc) {
 		return findByProperty(ST_SHORT_DESC, stShortDesc);
 	}
-	
+
 	public List<IclubSystemType> findByStLongDesc(Object stLongDesc) {
 		return findByProperty(ST_LONG_DESC, stLongDesc);
 	}
-	
+
 	public List<IclubSystemType> findByStStatus(Object stStatus) {
 		return findByProperty(ST_STATUS, stStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubSystemType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSystemType merge(IclubSystemType detachedInstance) {
 		log.debug("merging IclubSystemType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubSystemType instance) {
 		log.debug("attaching dirty IclubSystemType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubSystemType instance) {
 		log.debug("attaching clean IclubSystemType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubSystemTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubSystemTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSystemTypeDAO) ctx.getBean("IclubSystemTypeDAO");
 	}

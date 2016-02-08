@@ -34,21 +34,21 @@ public class IclubWallTypeDAO {
 	public static final String WT_SHORT_DESC = "wtShortDesc";
 	public static final String WT_LONG_DESC = "wtLongDesc";
 	public static final String WT_STATUS = "wtStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubWallType transientInstance) {
 		log.debug("saving IclubWallType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubWallType persistentInstance) {
 		log.debug("deleting IclubWallType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubWallType findById(java.lang.Long id) {
 		log.debug("getting IclubWallType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubWallType> findByExample(IclubWallType instance) {
 		log.debug("finding IclubWallType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubWallType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubWallType> findByWtShortDesc(Object wtShortDesc) {
 		return findByProperty(WT_SHORT_DESC, wtShortDesc);
 	}
-	
+
 	public List<IclubWallType> findByWtLongDesc(Object wtLongDesc) {
 		return findByProperty(WT_LONG_DESC, wtLongDesc);
 	}
-	
+
 	public List<IclubWallType> findByWtStatus(Object wtStatus) {
 		return findByProperty(WT_STATUS, wtStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubWallType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubWallType merge(IclubWallType detachedInstance) {
 		log.debug("merging IclubWallType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubWallType instance) {
 		log.debug("attaching dirty IclubWallType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubWallType instance) {
 		log.debug("attaching clean IclubWallType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubWallTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubWallTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubWallTypeDAO) ctx.getBean("IclubWallTypeDAO");
 	}

@@ -35,21 +35,21 @@ public class IclubCountryCodeDAO {
 	public static final String CC_SHORT_ID = "ccShortId";
 	public static final String CC_ISO_ID = "ccIsoId";
 	public static final String CC_NAME = "ccName";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCountryCode transientInstance) {
 		log.debug("saving IclubCountryCode instance");
 		try {
@@ -60,7 +60,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCountryCode persistentInstance) {
 		log.debug("deleting IclubCountryCode instance");
 		try {
@@ -71,7 +71,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCountryCode findById(java.lang.Integer id) {
 		log.debug("getting IclubCountryCode instance with id: " + id);
 		try {
@@ -82,7 +82,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCountryCode> findByExample(IclubCountryCode instance) {
 		log.debug("finding IclubCountryCode instance by example");
 		try {
@@ -94,7 +94,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCountryCode instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -107,19 +107,19 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCountryCode> findByCcShortId(Object ccShortId) {
 		return findByProperty(CC_SHORT_ID, ccShortId);
 	}
-	
+
 	public List<IclubCountryCode> findByCcIsoId(Object ccIsoId) {
 		return findByProperty(CC_ISO_ID, ccIsoId);
 	}
-	
+
 	public List<IclubCountryCode> findByCcName(Object ccName) {
 		return findByProperty(CC_NAME, ccName);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCountryCode instances");
 		try {
@@ -131,7 +131,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCountryCode merge(IclubCountryCode detachedInstance) {
 		log.debug("merging IclubCountryCode instance");
 		try {
@@ -143,7 +143,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCountryCode instance) {
 		log.debug("attaching dirty IclubCountryCode instance");
 		try {
@@ -154,7 +154,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCountryCode instance) {
 		log.debug("attaching clean IclubCountryCode instance");
 		try {
@@ -165,7 +165,7 @@ public class IclubCountryCodeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCountryCodeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCountryCodeDAO) ctx.getBean("IclubCountryCodeDAO");
 	}

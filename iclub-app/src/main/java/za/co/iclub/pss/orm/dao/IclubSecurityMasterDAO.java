@@ -34,21 +34,21 @@ public class IclubSecurityMasterDAO {
 	// property constants
 	public static final String SM_DESC = "smDesc";
 	public static final String SM_STATUS = "smStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubSecurityMaster transientInstance) {
 		log.debug("saving IclubSecurityMaster instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubSecurityMaster persistentInstance) {
 		log.debug("deleting IclubSecurityMaster instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSecurityMaster findById(java.lang.String id) {
 		log.debug("getting IclubSecurityMaster instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSecurityMaster> findByExample(IclubSecurityMaster instance) {
 		log.debug("finding IclubSecurityMaster instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubSecurityMaster instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSecurityMaster> findBySmDesc(Object smDesc) {
 		return findByProperty(SM_DESC, smDesc);
 	}
-	
+
 	public List<IclubSecurityMaster> findBySmStatus(Object smStatus) {
 		return findByProperty(SM_STATUS, smStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubSecurityMaster instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSecurityMaster merge(IclubSecurityMaster detachedInstance) {
 		log.debug("merging IclubSecurityMaster instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubSecurityMaster instance) {
 		log.debug("attaching dirty IclubSecurityMaster instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubSecurityMaster instance) {
 		log.debug("attaching clean IclubSecurityMaster instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubSecurityMasterDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubSecurityMasterDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSecurityMasterDAO) ctx.getBean("IclubSecurityMasterDAO");
 	}

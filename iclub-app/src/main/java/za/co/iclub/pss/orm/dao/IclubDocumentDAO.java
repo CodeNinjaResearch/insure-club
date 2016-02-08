@@ -38,21 +38,21 @@ public class IclubDocumentDAO {
 	public static final String _DENTITY_ID = "DEntityId";
 	public static final String _DBLOB = "DBlob";
 	public static final String _DCONTENT = "DContent";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubDocument transientInstance) {
 		log.debug("saving IclubDocument instance");
 		try {
@@ -63,7 +63,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubDocument persistentInstance) {
 		log.debug("deleting IclubDocument instance");
 		try {
@@ -74,7 +74,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubDocument findById(java.lang.String id) {
 		log.debug("getting IclubDocument instance with id: " + id);
 		try {
@@ -85,7 +85,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubDocument> findByExample(IclubDocument instance) {
 		log.debug("finding IclubDocument instance by example");
 		try {
@@ -97,7 +97,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubDocument instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -110,31 +110,31 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubDocument> findByDName(Object DName) {
 		return findByProperty(_DNAME, DName);
 	}
-	
+
 	public List<IclubDocument> findByDMimeType(Object DMimeType) {
 		return findByProperty(_DMIME_TYPE, DMimeType);
 	}
-	
+
 	public List<IclubDocument> findByDSize(Object DSize) {
 		return findByProperty(_DSIZE, DSize);
 	}
-	
+
 	public List<IclubDocument> findByDEntityId(Object DEntityId) {
 		return findByProperty(_DENTITY_ID, DEntityId);
 	}
-	
+
 	public List<IclubDocument> findByDBlob(Object DBlob) {
 		return findByProperty(_DBLOB, DBlob);
 	}
-	
+
 	public List<IclubDocument> findByDContent(Object DContent) {
 		return findByProperty(_DCONTENT, DContent);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubDocument instances");
 		try {
@@ -146,7 +146,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubDocument merge(IclubDocument detachedInstance) {
 		log.debug("merging IclubDocument instance");
 		try {
@@ -158,7 +158,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubDocument instance) {
 		log.debug("attaching dirty IclubDocument instance");
 		try {
@@ -169,7 +169,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubDocument instance) {
 		log.debug("attaching clean IclubDocument instance");
 		try {
@@ -180,7 +180,7 @@ public class IclubDocumentDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubDocumentDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubDocumentDAO) ctx.getBean("IclubDocumentDAO");
 	}

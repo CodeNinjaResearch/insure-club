@@ -34,21 +34,21 @@ public class IclubCoverTypeDAO {
 	public static final String CT_SHORT_DESC = "ctShortDesc";
 	public static final String CT_LONG_DESC = "ctLongDesc";
 	public static final String CT_STATUS = "ctStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCoverType transientInstance) {
 		log.debug("saving IclubCoverType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCoverType persistentInstance) {
 		log.debug("deleting IclubCoverType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCoverType findById(java.lang.Long id) {
 		log.debug("getting IclubCoverType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCoverType> findByExample(IclubCoverType instance) {
 		log.debug("finding IclubCoverType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCoverType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCoverType> findByCtShortDesc(Object ctShortDesc) {
 		return findByProperty(CT_SHORT_DESC, ctShortDesc);
 	}
-	
+
 	public List<IclubCoverType> findByCtLongDesc(Object ctLongDesc) {
 		return findByProperty(CT_LONG_DESC, ctLongDesc);
 	}
-	
+
 	public List<IclubCoverType> findByCtStatus(Object ctStatus) {
 		return findByProperty(CT_STATUS, ctStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCoverType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCoverType merge(IclubCoverType detachedInstance) {
 		log.debug("merging IclubCoverType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCoverType instance) {
 		log.debug("attaching dirty IclubCoverType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCoverType instance) {
 		log.debug("attaching clean IclubCoverType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubCoverTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCoverTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCoverTypeDAO) ctx.getBean("IclubCoverTypeDAO");
 	}

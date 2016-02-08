@@ -34,21 +34,21 @@ public class IclubSupplItemDAO {
 	// property constants
 	public static final String SI_ASSESS_NUMBER = "siAssessNumber";
 	public static final String SI_ITEM_ID = "siItemId";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubSupplItem transientInstance) {
 		log.debug("saving IclubSupplItem instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubSupplItem persistentInstance) {
 		log.debug("deleting IclubSupplItem instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSupplItem findById(java.lang.String id) {
 		log.debug("getting IclubSupplItem instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSupplItem> findByExample(IclubSupplItem instance) {
 		log.debug("finding IclubSupplItem instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubSupplItem instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,15 +106,15 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubSupplItem> findBySiAssessNumber(Object siAssessNumber) {
 		return findByProperty(SI_ASSESS_NUMBER, siAssessNumber);
 	}
-	
+
 	public List<IclubSupplItem> findBySiItemId(Object siItemId) {
 		return findByProperty(SI_ITEM_ID, siItemId);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubSupplItem instances");
 		try {
@@ -126,7 +126,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubSupplItem merge(IclubSupplItem detachedInstance) {
 		log.debug("merging IclubSupplItem instance");
 		try {
@@ -138,7 +138,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubSupplItem instance) {
 		log.debug("attaching dirty IclubSupplItem instance");
 		try {
@@ -149,7 +149,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubSupplItem instance) {
 		log.debug("attaching clean IclubSupplItem instance");
 		try {
@@ -160,7 +160,7 @@ public class IclubSupplItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubSupplItemDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubSupplItemDAO) ctx.getBean("IclubSupplItemDAO");
 	}

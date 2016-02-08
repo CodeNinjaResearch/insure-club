@@ -34,21 +34,21 @@ public class IclubEventTypeDAO {
 	public static final String ET_SHORT_DESC = "etShortDesc";
 	public static final String ET_LONG_DESC = "etLongDesc";
 	public static final String ET_STATUS = "etStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubEventType transientInstance) {
 		log.debug("saving IclubEventType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubEventType persistentInstance) {
 		log.debug("deleting IclubEventType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubEventType findById(java.lang.Long id) {
 		log.debug("getting IclubEventType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubEventType> findByExample(IclubEventType instance) {
 		log.debug("finding IclubEventType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubEventType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubEventType> findByEtShortDesc(Object etShortDesc) {
 		return findByProperty(ET_SHORT_DESC, etShortDesc);
 	}
-	
+
 	public List<IclubEventType> findByEtLongDesc(Object etLongDesc) {
 		return findByProperty(ET_LONG_DESC, etLongDesc);
 	}
-	
+
 	public List<IclubEventType> findByEtStatus(Object etStatus) {
 		return findByProperty(ET_STATUS, etStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubEventType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubEventType merge(IclubEventType detachedInstance) {
 		log.debug("merging IclubEventType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubEventType instance) {
 		log.debug("attaching dirty IclubEventType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubEventType instance) {
 		log.debug("attaching clean IclubEventType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubEventTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubEventTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubEventTypeDAO) ctx.getBean("IclubEventTypeDAO");
 	}

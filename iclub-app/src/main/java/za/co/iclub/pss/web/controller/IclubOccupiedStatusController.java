@@ -25,7 +25,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @ManagedBean(name = "iclubOccupiedStatusController")
 @SessionScoped
 public class IclubOccupiedStatusController implements Serializable {
-	
+
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
 	private static final Logger LOGGER = Logger.getLogger(IclubOccupiedStatusController.class);
@@ -35,14 +35,14 @@ public class IclubOccupiedStatusController implements Serializable {
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
-	
+
 	public void addIclubOccupiedStatus() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubOccupiedStatus");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
 				IclubOccupiedStatusModel model = IclubOccupiedStatusTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -57,14 +57,14 @@ public class IclubOccupiedStatusController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("occupiedstatus") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void modIclubOccupiedStatus() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubOccupiedStatus");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
 				IclubOccupiedStatusModel model = IclubOccupiedStatusTrans.fromUItoWS(bean);
-				
+
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
@@ -79,7 +79,7 @@ public class IclubOccupiedStatusController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("occupiedstatus") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void delIclubOccupiedStatus() {
 		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubOccupiedStatus");
 		try {
@@ -96,27 +96,27 @@ public class IclubOccupiedStatusController implements Serializable {
 			IclubWebHelper.addMessage(getLabelBundle().getString("occupiedstatus") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
-	
+
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
 		bean = new IclubOccupiedStatusBean();
 	}
-	
+
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
 		bean = new IclubOccupiedStatusBean();
 	}
-	
+
 	public void showModPanel() {
 		showAddPanel = false;
 		showModPanel = true;
 	}
-	
+
 	public boolean validateForm(boolean flag) {
 		boolean ret = true;
-		
+
 		if (bean.getOsShortDesc() != null && !bean.getOsShortDesc().trim().equalsIgnoreCase("")) {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "validate/sd/" + bean.getOsShortDesc().trim() + "/" + ((bean.getOsId() == null) ? -999l : bean.getOsId()));
 			ResponseModel message = client.accept(MediaType.APPLICATION_JSON).get(ResponseModel.class);
@@ -126,25 +126,25 @@ public class IclubOccupiedStatusController implements Serializable {
 				ret = ret && false;
 			}
 		}
-		
+
 		else {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.shortdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getOsLongDesc() == null || bean.getOsLongDesc().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.longdesc.empty"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		if (bean.getOsStatus() == null || bean.getOsStatus().trim().equalsIgnoreCase("")) {
 			IclubWebHelper.addMessage(getLabelBundle().getString("val.select.valid"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public List<IclubOccupiedStatusBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
 		Collection<? extends IclubOccupiedStatusModel> models = new ArrayList<IclubOccupiedStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubOccupiedStatusModel.class));
@@ -153,49 +153,49 @@ public class IclubOccupiedStatusController implements Serializable {
 		if (models != null && models.size() > 0) {
 			for (IclubOccupiedStatusModel model : models) {
 				IclubOccupiedStatusBean bean = IclubOccupiedStatusTrans.fromWStoUI(model);
-				
+
 				beans.add(bean);
 			}
 		}
 		return beans;
 	}
-	
+
 	public void setBeans(List<IclubOccupiedStatusBean> beans) {
 		this.beans = beans;
 	}
-	
+
 	public IclubOccupiedStatusBean getBean() {
 		if (bean == null)
 			bean = new IclubOccupiedStatusBean();
 		return bean;
 	}
-	
+
 	public void setBean(IclubOccupiedStatusBean bean) {
 		this.bean = bean;
 	}
-	
+
 	public boolean isShowAddPanel() {
 		return showAddPanel;
 	}
-	
+
 	public void setShowAddPanel(boolean showAddPanel) {
 		this.showAddPanel = showAddPanel;
 	}
-	
+
 	public boolean isShowModPanel() {
 		return showModPanel;
 	}
-	
+
 	public void setShowModPanel(boolean showModPanel) {
 		this.showModPanel = showModPanel;
 	}
-	
+
 	public ResourceBundle getLabelBundle() {
-		
+
 		labelBundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "labels");
 		return labelBundle;
 	}
-	
+
 	public void setLabelBundle(ResourceBundle labelBundle) {
 		this.labelBundle = labelBundle;
 	}

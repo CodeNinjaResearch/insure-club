@@ -33,7 +33,7 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubClaimService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubClaimService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubClaimService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubClaimDAO iclubClaimDAO;
@@ -43,7 +43,7 @@ public class IclubClaimService {
 	private IclubPolicyDAO iclubPolicyDAO;
 	private IclubClaimStatusDAO iclubClaimStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -52,11 +52,11 @@ public class IclubClaimService {
 	public ResponseModel add(IclubClaimModel model) {
 		try {
 			IclubClaim iCC = IclubClaimTrans.fromWStoORM(model, iclubClaimStatusDAO, iclubPolicyDAO, iclubPersonDAO);
-			
+
 			iclubClaimDAO.save(iCC);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCC.getCId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -68,9 +68,9 @@ public class IclubClaimService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -80,9 +80,9 @@ public class IclubClaimService {
 		try {
 			IclubClaim iCC = IclubClaimTrans.fromWStoORM(model, iclubClaimStatusDAO, iclubPolicyDAO, iclubPersonDAO);
 			iclubClaimDAO.merge(iCC);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getCId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -94,9 +94,9 @@ public class IclubClaimService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -111,20 +111,20 @@ public class IclubClaimService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubClaimModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubClaimDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubClaim bean = (IclubClaim) object;
-					
+
 					IclubClaimModel model = IclubClaimTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
@@ -132,23 +132,23 @@ public class IclubClaimService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/listOrderByCrtDt")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubClaimModel> List<T> getByCreatedDate() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.getIclubClaimByCrtDt();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubClaim bean = (IclubClaim) object;
-					
+
 					IclubClaimModel model = IclubClaimTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
@@ -156,23 +156,23 @@ public class IclubClaimService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/statusId/{statusId}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubClaimModel> List<T> getByStatusId(@PathParam("statusId") String statusId) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.getIclubCalimByClaimStatus(statusId);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubClaim bean = (IclubClaim) object;
-					
+
 					IclubClaimModel model = IclubClaimTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
@@ -180,23 +180,23 @@ public class IclubClaimService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubClaimModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubClaim.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubClaim bean = (IclubClaim) object;
-					
+
 					IclubClaimModel model = IclubClaimTrans.fromORMtoWS(bean);
 					ret.add((T) model);
 				}
@@ -204,10 +204,10 @@ public class IclubClaimService {
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -216,15 +216,15 @@ public class IclubClaimService {
 		IclubClaimModel model = new IclubClaimModel();
 		try {
 			IclubClaim bean = iclubClaimDAO.findById(id);
-			
+
 			model = IclubClaimTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/getByPolicyId/{policyId}")
 	@Produces("application/json")
@@ -233,77 +233,77 @@ public class IclubClaimService {
 		IclubClaimModel model = new IclubClaimModel();
 		try {
 			IclubClaim bean = iclubNamedQueryDAO.findByPolicyId(policyId);
-			
+
 			model = IclubClaimTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubClaimDAO getIclubClaimDAO() {
 		return iclubClaimDAO;
 	}
-	
+
 	public void setIclubClaimDAO(IclubClaimDAO iclubClaimDAO) {
 		this.iclubClaimDAO = iclubClaimDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubProductTypeDAO getIclubProductTypeDAO() {
 		return iclubProductTypeDAO;
 	}
-	
+
 	public void setIclubProductTypeDAO(IclubProductTypeDAO iclubProductTypeDAO) {
 		this.iclubProductTypeDAO = iclubProductTypeDAO;
 	}
-	
+
 	public IclubInsurerMasterDAO getIclubInsurerMasterDAO() {
 		return iclubInsurerMasterDAO;
 	}
-	
+
 	public void setIclubInsurerMasterDAO(IclubInsurerMasterDAO iclubInsurerMasterDAO) {
 		this.iclubInsurerMasterDAO = iclubInsurerMasterDAO;
 	}
-	
+
 	public IclubPolicyDAO getIclubPolicyDAO() {
 		return iclubPolicyDAO;
 	}
-	
+
 	public void setIclubPolicyDAO(IclubPolicyDAO iclubPolicyDAO) {
 		this.iclubPolicyDAO = iclubPolicyDAO;
 	}
-	
+
 	public IclubClaimStatusDAO getIclubClaimStatusDAO() {
 		return iclubClaimStatusDAO;
 	}
-	
+
 	public void setIclubClaimStatusDAO(IclubClaimStatusDAO iclubClaimStatusDAO) {
 		this.iclubClaimStatusDAO = iclubClaimStatusDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

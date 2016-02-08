@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubInsuranceItemService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubInsuranceItemService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubInsuranceItemService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubInsuranceItemDAO iclubInsuranceItemDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,11 +46,11 @@ public class IclubInsuranceItemService {
 	public ResponseModel add(IclubInsuranceItemModel model) {
 		try {
 			IclubInsuranceItem iCTt = IclubInsuranceItemTrans.fromWStoORM(model, iclubPersonDAO, iclubInsuranceItemTypeDAO);
-			
+
 			iclubInsuranceItemDAO.save(iCTt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCTt.getIiId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -62,9 +62,9 @@ public class IclubInsuranceItemService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -74,9 +74,9 @@ public class IclubInsuranceItemService {
 		try {
 			IclubInsuranceItem iCTt = IclubInsuranceItemTrans.fromWStoORM(model, iclubPersonDAO, iclubInsuranceItemTypeDAO);
 			iclubInsuranceItemDAO.merge(iCTt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getIiId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -88,9 +88,9 @@ public class IclubInsuranceItemService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -105,7 +105,7 @@ public class IclubInsuranceItemService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/delByVehilce/{vehicleId}")
 	@Consumes("application/json")
@@ -120,82 +120,82 @@ public class IclubInsuranceItemService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubInsuranceItemModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubInsuranceItemDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubInsuranceItem bean = (IclubInsuranceItem) object;
-					
+
 					IclubInsuranceItemModel model = IclubInsuranceItemTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubInsuranceItemModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubInsuranceItem.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubInsuranceItem bean = (IclubInsuranceItem) object;
-					
+
 					IclubInsuranceItemModel model = IclubInsuranceItemTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/quoteId/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubInsuranceItemModel> List<T> getByQuoteId(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByQuoteId(user);
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubInsuranceItem bean = (IclubInsuranceItem) object;
-					
+
 					IclubInsuranceItemModel model = IclubInsuranceItemTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -204,15 +204,15 @@ public class IclubInsuranceItemService {
 		IclubInsuranceItemModel model = new IclubInsuranceItemModel();
 		try {
 			IclubInsuranceItem bean = iclubInsuranceItemDAO.findById(id);
-			
+
 			model = IclubInsuranceItemTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/getByQuoteIdAndItemTypeId/{quoteId}/{itemTypeId}")
 	@Produces("application/json")
@@ -229,7 +229,7 @@ public class IclubInsuranceItemService {
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/listByQuoteIdAndItemTypeId/{quoteId}/{itemTypeId}")
 	@Produces("application/json")
@@ -251,43 +251,43 @@ public class IclubInsuranceItemService {
 		}
 		return ret;
 	}
-	
+
 	public IclubInsuranceItemDAO getIclubInsuranceItemDAO() {
 		return iclubInsuranceItemDAO;
 	}
-	
+
 	public void setIclubInsuranceItemDAO(IclubInsuranceItemDAO iclubInsuranceItemDAO) {
 		this.iclubInsuranceItemDAO = iclubInsuranceItemDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}

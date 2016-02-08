@@ -34,21 +34,21 @@ public class IclubAssessmentTypeDAO {
 	public static final String AT_LONG_DESC = "atLongDesc";
 	public static final String AT_SHORT_DESC = "atShortDesc";
 	public static final String AT_STATUS = "atStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubAssessmentType transientInstance) {
 		log.debug("saving IclubAssessmentType instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubAssessmentType persistentInstance) {
 		log.debug("deleting IclubAssessmentType instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAssessmentType findById(java.lang.Long id) {
 		log.debug("getting IclubAssessmentType instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAssessmentType> findByExample(IclubAssessmentType instance) {
 		log.debug("finding IclubAssessmentType instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubAssessmentType instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubAssessmentType> findByAtLongDesc(Object atLongDesc) {
 		return findByProperty(AT_LONG_DESC, atLongDesc);
 	}
-	
+
 	public List<IclubAssessmentType> findByAtShortDesc(Object atShortDesc) {
 		return findByProperty(AT_SHORT_DESC, atShortDesc);
 	}
-	
+
 	public List<IclubAssessmentType> findByAtStatus(Object atStatus) {
 		return findByProperty(AT_STATUS, atStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubAssessmentType instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubAssessmentType merge(IclubAssessmentType detachedInstance) {
 		log.debug("merging IclubAssessmentType instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubAssessmentType instance) {
 		log.debug("attaching dirty IclubAssessmentType instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubAssessmentType instance) {
 		log.debug("attaching clean IclubAssessmentType instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubAssessmentTypeDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubAssessmentTypeDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubAssessmentTypeDAO) ctx.getBean("IclubAssessmentTypeDAO");
 	}

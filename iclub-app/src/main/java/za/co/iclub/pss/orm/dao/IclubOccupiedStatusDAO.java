@@ -34,21 +34,21 @@ public class IclubOccupiedStatusDAO {
 	public static final String OS_SHORT_DESC = "osShortDesc";
 	public static final String OS_LONG_DESC = "osLongDesc";
 	public static final String OS_STATUS = "osStatus";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubOccupiedStatus transientInstance) {
 		log.debug("saving IclubOccupiedStatus instance");
 		try {
@@ -59,7 +59,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubOccupiedStatus persistentInstance) {
 		log.debug("deleting IclubOccupiedStatus instance");
 		try {
@@ -70,7 +70,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubOccupiedStatus findById(java.lang.Long id) {
 		log.debug("getting IclubOccupiedStatus instance with id: " + id);
 		try {
@@ -81,7 +81,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubOccupiedStatus> findByExample(IclubOccupiedStatus instance) {
 		log.debug("finding IclubOccupiedStatus instance by example");
 		try {
@@ -93,7 +93,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubOccupiedStatus instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -106,19 +106,19 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubOccupiedStatus> findByOsShortDesc(Object osShortDesc) {
 		return findByProperty(OS_SHORT_DESC, osShortDesc);
 	}
-	
+
 	public List<IclubOccupiedStatus> findByOsLongDesc(Object osLongDesc) {
 		return findByProperty(OS_LONG_DESC, osLongDesc);
 	}
-	
+
 	public List<IclubOccupiedStatus> findByOsStatus(Object osStatus) {
 		return findByProperty(OS_STATUS, osStatus);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubOccupiedStatus instances");
 		try {
@@ -130,7 +130,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubOccupiedStatus merge(IclubOccupiedStatus detachedInstance) {
 		log.debug("merging IclubOccupiedStatus instance");
 		try {
@@ -142,7 +142,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubOccupiedStatus instance) {
 		log.debug("attaching dirty IclubOccupiedStatus instance");
 		try {
@@ -153,7 +153,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubOccupiedStatus instance) {
 		log.debug("attaching clean IclubOccupiedStatus instance");
 		try {
@@ -164,7 +164,7 @@ public class IclubOccupiedStatusDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubOccupiedStatusDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubOccupiedStatusDAO) ctx.getBean("IclubOccupiedStatusDAO");
 	}

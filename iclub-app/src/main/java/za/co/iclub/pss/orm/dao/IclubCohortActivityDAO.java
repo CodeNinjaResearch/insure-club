@@ -32,21 +32,21 @@ import za.co.iclub.pss.orm.bean.IclubCohortActivity;
 public class IclubCohortActivityDAO {
 	private static final Logger log = LoggerFactory.getLogger(IclubCohortActivityDAO.class);
 	// property constants
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubCohortActivity transientInstance) {
 		log.debug("saving IclubCohortActivity instance");
 		try {
@@ -57,7 +57,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubCohortActivity persistentInstance) {
 		log.debug("deleting IclubCohortActivity instance");
 		try {
@@ -68,7 +68,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortActivity findById(java.lang.String id) {
 		log.debug("getting IclubCohortActivity instance with id: " + id);
 		try {
@@ -79,7 +79,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubCohortActivity> findByExample(IclubCohortActivity instance) {
 		log.debug("finding IclubCohortActivity instance by example");
 		try {
@@ -91,7 +91,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubCohortActivity instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -104,7 +104,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubCohortActivity instances");
 		try {
@@ -116,7 +116,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubCohortActivity merge(IclubCohortActivity detachedInstance) {
 		log.debug("merging IclubCohortActivity instance");
 		try {
@@ -128,7 +128,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubCohortActivity instance) {
 		log.debug("attaching dirty IclubCohortActivity instance");
 		try {
@@ -139,7 +139,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubCohortActivity instance) {
 		log.debug("attaching clean IclubCohortActivity instance");
 		try {
@@ -150,7 +150,7 @@ public class IclubCohortActivityDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubCohortActivityDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubCohortActivityDAO) ctx.getBean("IclubCohortActivityDAO");
 	}

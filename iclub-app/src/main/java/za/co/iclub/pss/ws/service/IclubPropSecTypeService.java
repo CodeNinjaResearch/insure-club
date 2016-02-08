@@ -30,14 +30,14 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubPropSecTypeService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPropSecTypeService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubPropSecTypeService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPropSecTypeDAO iclubPropSecTypeDAO;
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -46,13 +46,13 @@ public class IclubPropSecTypeService {
 	public ResponseModel add(IclubPropSecTypeModel model) {
 		try {
 			IclubPropSecType iCPt = IclubPropSecTypeTrans.fromWStoORM(model);
-			
+
 			iCPt.setPstId(iclubCommonDAO.getNextId(IclubPropSecType.class));
-			
+
 			iclubPropSecTypeDAO.save(iCPt);
-			
+
 			LOGGER.info("Save Success with ID :: " + iCPt.getPstId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -64,9 +64,9 @@ public class IclubPropSecTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -75,11 +75,11 @@ public class IclubPropSecTypeService {
 	public ResponseModel mod(IclubPropSecTypeModel model) {
 		try {
 			IclubPropSecType iCPt = IclubPropSecTypeTrans.fromWStoORM(model);
-			
+
 			iclubPropSecTypeDAO.merge(iCPt);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPstId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -91,9 +91,9 @@ public class IclubPropSecTypeService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -108,62 +108,62 @@ public class IclubPropSecTypeService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropSecTypeModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPropSecTypeDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPropSecType iCPt = (IclubPropSecType) object;
-					
+
 					IclubPropSecTypeModel model = new IclubPropSecTypeModel();
-					
+
 					model.setPstId(iCPt.getPstId());
 					model.setPstLongDesc(iCPt.getPstLongDesc());
 					model.setPstShortDesc(iCPt.getPstShortDesc());
 					model.setPstStatus(iCPt.getPstStatus());
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/user/{user}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPropSecTypeModel> List<T> getByUser(@PathParam("user") String user) {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubNamedQueryDAO.findByUser(user, IclubPropSecType.class.getSimpleName());
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPropSecType bean = (IclubPropSecType) object;
-					
+
 					IclubPropSecTypeModel model = IclubPropSecTypeTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -172,15 +172,15 @@ public class IclubPropSecTypeService {
 		IclubPropSecTypeModel model = new IclubPropSecTypeModel();
 		try {
 			IclubPropSecType bean = iclubPropSecTypeDAO.findById(id);
-			
+
 			model = IclubPropSecTypeTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -206,45 +206,45 @@ public class IclubPropSecTypeService {
 			return message;
 		}
 	}
-	
+
 	public IclubPropSecTypeDAO getIclubPropSecTypeDAO() {
 		return iclubPropSecTypeDAO;
 	}
-	
+
 	public void setIclubPropSecTypeDAO(IclubPropSecTypeDAO iclubPropSecTypeDAO) {
 		this.iclubPropSecTypeDAO = iclubPropSecTypeDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubPersonDAO getIclubPersonDAO() {
 		return iclubPersonDAO;
 	}
-	
+
 	public void setIclubPersonDAO(IclubPersonDAO iclubPersonDAO) {
 		this.iclubPersonDAO = iclubPersonDAO;
 	}
-	
+
 	public IclubInsuranceItemTypeDAO getIclubInsuranceItemTypeDAO() {
 		return iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public void setIclubInsuranceItemTypeDAO(IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO) {
 		this.iclubInsuranceItemTypeDAO = iclubInsuranceItemTypeDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

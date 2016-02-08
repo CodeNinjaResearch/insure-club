@@ -8,11 +8,11 @@ import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.orm.dao.IclubTrackerMasterDAO;
 
 public class IclubSecurityDeviceTrans {
-	
+
 	public static IclubSecurityDeviceBean fromWStoUI(IclubSecurityDeviceModel model) {
-		
+
 		IclubSecurityDeviceBean bean = new IclubSecurityDeviceBean();
-		
+
 		bean.setSdId(model.getSdId());
 		bean.setSdItemId(model.getSdItemId());
 		bean.setSdContractNum(model.getSdContractNum());
@@ -24,14 +24,14 @@ public class IclubSecurityDeviceTrans {
 		bean.setTmRegNum(model.getTmRegNum());
 		bean.setIclubPerson(model.getIclubPerson());
 		bean.setPFNameAndLName(model.getPFNameAndLName());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubSecurityDeviceModel fromUItoWS(IclubSecurityDeviceBean bean) {
-		
+
 		IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
-		
+
 		model.setSdId(bean.getSdId());
 		model.setSdItemId(bean.getSdItemId());
 		model.setSdContractNum(bean.getSdContractNum());
@@ -43,14 +43,14 @@ public class IclubSecurityDeviceTrans {
 		model.setTmRegNum(bean.getTmRegNum());
 		model.setIclubPerson(bean.getIclubPerson());
 		model.setPFNameAndLName(bean.getPFNameAndLName());
-		
+
 		return model;
 	}
-	
+
 	public static IclubSecurityDeviceModel fromORMtoWS(IclubSecurityDevice bean) {
-		
+
 		IclubSecurityDeviceModel model = new IclubSecurityDeviceModel();
-		
+
 		model.setSdId(bean.getSdId());
 		model.setSdItemId(bean.getSdItemId());
 		model.setSdContractNum(bean.getSdContractNum());
@@ -62,14 +62,14 @@ public class IclubSecurityDeviceTrans {
 		model.setTmRegNum(bean.getIclubTrackerMaster() != null ? (bean.getIclubTrackerMaster().getTmRegNum()) : null);
 		model.setIclubPerson(bean.getIclubPerson() != null ? (bean.getIclubPerson().getPId()) : null);
 		model.setPFNameAndLName(bean.getIclubPerson() != null ? bean.getIclubPerson().getPFName() + " " + bean.getIclubPerson().getPLName() != null ? bean.getIclubPerson().getPLName() : "" : "");
-		
+
 		return model;
 	}
-	
+
 	public static IclubSecurityDevice fromWStoORM(IclubSecurityDeviceModel model, IclubTrackerMasterDAO iclubTrackerMasterDAO, IclubInsuranceItemTypeDAO iclubInsuranceItemTypeDAO, IclubPersonDAO iclubPersonDAO) {
-		
+
 		IclubSecurityDevice bean = new IclubSecurityDevice();
-		
+
 		bean.setSdId(model.getSdId());
 		bean.setSdItemId(model.getSdItemId());
 		bean.setSdContractNum(model.getSdContractNum());
@@ -79,7 +79,7 @@ public class IclubSecurityDeviceTrans {
 		bean.setIclubTrackerMaster(model.getIclubTrackerMaster() != null ? iclubTrackerMasterDAO.findById(model.getIclubTrackerMaster()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
 		bean.setIclubPerson(model.getIclubPerson() != null ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		
+
 		return bean;
 	}
 }

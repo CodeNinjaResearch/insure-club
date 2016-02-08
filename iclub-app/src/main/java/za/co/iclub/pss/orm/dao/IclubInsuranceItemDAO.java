@@ -35,21 +35,21 @@ public class IclubInsuranceItemDAO {
 	public static final String II_INSURE_VALUE = "iiInsureValue";
 	public static final String II_ACTUAL_VALUE = "iiActualValue";
 	public static final String II_ITEM_ID = "iiItemId";
-	
+
 	private SessionFactory sessionFactory;
-	
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(IclubInsuranceItem transientInstance) {
 		log.debug("saving IclubInsuranceItem instance");
 		try {
@@ -60,7 +60,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void delete(IclubInsuranceItem persistentInstance) {
 		log.debug("deleting IclubInsuranceItem instance");
 		try {
@@ -71,7 +71,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInsuranceItem findById(java.lang.String id) {
 		log.debug("getting IclubInsuranceItem instance with id: " + id);
 		try {
@@ -82,7 +82,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInsuranceItem> findByExample(IclubInsuranceItem instance) {
 		log.debug("finding IclubInsuranceItem instance by example");
 		try {
@@ -94,7 +94,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding IclubInsuranceItem instance with property: " + propertyName + ", value: " + value);
 		try {
@@ -107,23 +107,23 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public List<IclubInsuranceItem> findByIiQuoteId(Object iiQuoteId) {
 		return findByProperty(II_QUOTE_ID, iiQuoteId);
 	}
-	
+
 	public List<IclubInsuranceItem> findByIiInsureValue(Object iiInsureValue) {
 		return findByProperty(II_INSURE_VALUE, iiInsureValue);
 	}
-	
+
 	public List<IclubInsuranceItem> findByIiActualValue(Object iiActualValue) {
 		return findByProperty(II_ACTUAL_VALUE, iiActualValue);
 	}
-	
+
 	public List<IclubInsuranceItem> findByIiItemId(Object iiItemId) {
 		return findByProperty(II_ITEM_ID, iiItemId);
 	}
-	
+
 	public List findAll() {
 		log.debug("finding all IclubInsuranceItem instances");
 		try {
@@ -135,7 +135,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public IclubInsuranceItem merge(IclubInsuranceItem detachedInstance) {
 		log.debug("merging IclubInsuranceItem instance");
 		try {
@@ -147,7 +147,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachDirty(IclubInsuranceItem instance) {
 		log.debug("attaching dirty IclubInsuranceItem instance");
 		try {
@@ -158,7 +158,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public void attachClean(IclubInsuranceItem instance) {
 		log.debug("attaching clean IclubInsuranceItem instance");
 		try {
@@ -169,7 +169,7 @@ public class IclubInsuranceItemDAO {
 			throw re;
 		}
 	}
-	
+
 	public static IclubInsuranceItemDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (IclubInsuranceItemDAO) ctx.getBean("IclubInsuranceItemDAO");
 	}

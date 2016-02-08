@@ -11,9 +11,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "iclub_building_state", catalog = "iclubdb")
 public class IclubBuildingState implements java.io.Serializable {
-	
+
 	// Fields
-	
+
 	/**
 	 * 
 	 */
@@ -22,18 +22,18 @@ public class IclubBuildingState implements java.io.Serializable {
 	private String bsShortDesc;
 	private String bsLongDesc;
 	private String bsStatus;
-	
+
 	// Constructors
-	
+
 	/** default constructor */
 	public IclubBuildingState() {
 	}
-	
+
 	/** minimal constructor */
 	public IclubBuildingState(Long bsId) {
 		this.bsId = bsId;
 	}
-	
+
 	/** full constructor */
 	public IclubBuildingState(Long bsId, String bsShortDesc, String bsLongDesc, String bsStatus) {
 		this.bsId = bsId;
@@ -41,43 +41,43 @@ public class IclubBuildingState implements java.io.Serializable {
 		this.bsLongDesc = bsLongDesc;
 		this.bsStatus = bsStatus;
 	}
-	
+
 	// Property accessors
 	@Id
 	@Column(name = "bs_id", unique = true, nullable = false)
 	public Long getBsId() {
 		return this.bsId;
 	}
-	
+
 	public void setBsId(Long bsId) {
 		this.bsId = bsId;
 	}
-	
+
 	@Column(name = "bs_short_desc", length = 4)
 	public String getBsShortDesc() {
 		return this.bsShortDesc;
 	}
-	
+
 	public void setBsShortDesc(String bsShortDesc) {
 		this.bsShortDesc = bsShortDesc;
 	}
-	
+
 	@Column(name = "bs_long_desc", length = 500)
 	public String getBsLongDesc() {
 		return this.bsLongDesc;
 	}
-	
+
 	public void setBsLongDesc(String bsLongDesc) {
 		this.bsLongDesc = bsLongDesc;
 	}
-	
+
 	@Column(name = "bs_status", length = 1)
 	public String getBsStatus() {
 		return this.bsStatus;
 	}
-	
+
 	public void setBsStatus(String bsStatus) {
 		this.bsStatus = bsStatus;
 	}
-	
+
 }

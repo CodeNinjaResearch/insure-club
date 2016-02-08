@@ -28,12 +28,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubPolicyStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubPolicyStatusService {
-	
+
 	protected static final Logger LOGGER = Logger.getLogger(IclubPolicyStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubPolicyStatusDAO iclubPolicyStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -42,13 +42,13 @@ public class IclubPolicyStatusService {
 	public ResponseModel add(IclubPolicyStatusModel model) {
 		try {
 			IclubPolicyStatus iPs = IclubPolicyStatusTrans.fromWStoORM(model);
-			
+
 			iPs.setPsId(iclubCommonDAO.getNextId(IclubPolicyStatus.class));
-			
+
 			iclubPolicyStatusDAO.save(iPs);
-			
+
 			LOGGER.info("Save Success with ID :: " + iPs.getPsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -60,9 +60,9 @@ public class IclubPolicyStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -71,11 +71,11 @@ public class IclubPolicyStatusService {
 	public ResponseModel mod(IclubPolicyStatusModel model) {
 		try {
 			IclubPolicyStatus iPs = IclubPolicyStatusTrans.fromWStoORM(model);
-			
+
 			iclubPolicyStatusDAO.merge(iPs);
-			
+
 			LOGGER.info("Merge Success with ID :: " + model.getPsId());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -87,9 +87,9 @@ public class IclubPolicyStatusService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -104,32 +104,32 @@ public class IclubPolicyStatusService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <T extends IclubPolicyStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubPolicyStatusDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubPolicyStatus bean = (IclubPolicyStatus) object;
-					
+
 					IclubPolicyStatusModel model = IclubPolicyStatusTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) model);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -138,15 +138,15 @@ public class IclubPolicyStatusService {
 		IclubPolicyStatusModel model = new IclubPolicyStatusModel();
 		try {
 			IclubPolicyStatus bean = iclubPolicyStatusDAO.findById(id);
-			
+
 			model = IclubPolicyStatusTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes({ "application/json" })
@@ -172,29 +172,29 @@ public class IclubPolicyStatusService {
 			return message;
 		}
 	}
-	
+
 	public IclubPolicyStatusDAO getIclubPolicyStatusDAO() {
 		return iclubPolicyStatusDAO;
 	}
-	
+
 	public void setIclubPolicyStatusDAO(IclubPolicyStatusDAO iclubPolicyStatusDAO) {
 		this.iclubPolicyStatusDAO = iclubPolicyStatusDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

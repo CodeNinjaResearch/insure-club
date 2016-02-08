@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubSupplierTypeModel;
 import za.co.iclub.pss.orm.bean.IclubSupplierType;
 
 public class IclubSupplierTypeTrans {
-	
+
 	public static IclubSupplierTypeBean fromWStoUI(IclubSupplierTypeModel model) {
 		IclubSupplierTypeBean bean = new IclubSupplierTypeBean();
 		bean.setStId(model.getStId());
@@ -14,7 +14,7 @@ public class IclubSupplierTypeTrans {
 		bean.setStStatus(model.getStStatus());
 		return bean;
 	}
-	
+
 	public static IclubSupplierTypeModel fromUItoWS(IclubSupplierTypeBean bean) {
 		IclubSupplierTypeModel model = new IclubSupplierTypeModel();
 		model.setStId(bean.getStId());
@@ -23,7 +23,7 @@ public class IclubSupplierTypeTrans {
 		model.setStStatus(bean.getStStatus());
 		return model;
 	}
-	
+
 	public static IclubSupplierTypeModel fromORMtoWS(IclubSupplierType bean) {
 		IclubSupplierTypeModel model = new IclubSupplierTypeModel();
 		model.setStId(bean.getStId());
@@ -32,15 +32,15 @@ public class IclubSupplierTypeTrans {
 		model.setStStatus(bean.getStStatus());
 		return model;
 	}
-	
+
 	public static IclubSupplierType fromWStoORM(IclubSupplierTypeModel model) {
 		IclubSupplierType acctype = new IclubSupplierType();
-		
+
 		acctype.setStId(model.getStId());
 		acctype.setStLongDesc(model.getStLongDesc());
 		acctype.setStShortDesc(model.getStShortDesc());
 		acctype.setStStatus(model.getStStatus());
-		
+
 		return acctype;
 	}
 }

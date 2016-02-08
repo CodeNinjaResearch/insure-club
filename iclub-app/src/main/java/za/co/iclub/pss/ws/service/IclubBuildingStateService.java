@@ -27,12 +27,12 @@ import za.co.iclub.pss.ws.model.common.ResponseModel;
 @Path(value = "/IclubBuildingStateService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class IclubBuildingStateService {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(IclubBuildingStateService.class);
 	private IclubBuildingStateDAO iclubBuildingStateDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
-	
+
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
@@ -40,20 +40,20 @@ public class IclubBuildingStateService {
 	@Transactional
 	public ResponseModel add(IclubBuildingStateModel model) {
 		try {
-			
+
 			IclubBuildingState buildType = IclubBuildingStateTrans.fromWStoORM(model);
-			
+
 			buildType.setBsId(iclubCommonDAO.getNextId(IclubBuildingState.class));
-			
+
 			iclubBuildingStateDAO.save(buildType);
-			
+
 			LOGGER.info("Save Success with ID :: " + buildType.getBsId().longValue());
-			
+
 			ResponseModel message = new ResponseModel();
-			
+
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
-			
+
 			return message;
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -62,9 +62,9 @@ public class IclubBuildingStateService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@PUT
 	@Path("/mod")
 	@Consumes("application/json")
@@ -73,11 +73,11 @@ public class IclubBuildingStateService {
 	public ResponseModel mod(IclubBuildingStateModel model) {
 		try {
 			IclubBuildingState buildType = IclubBuildingStateTrans.fromWStoORM(model);
-			
+
 			iclubBuildingStateDAO.merge(buildType);
-			
+
 			LOGGER.info("Save Success with ID :: " + model.getBsId().longValue());
-			
+
 			ResponseModel message = new ResponseModel();
 			message.setStatusCode(0);
 			message.setStatusDesc("Success");
@@ -89,9 +89,9 @@ public class IclubBuildingStateService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/del/{id}")
 	@Consumes("application/json")
@@ -106,7 +106,7 @@ public class IclubBuildingStateService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
+
 	@GET
 	@Path("/validate/sd/{val}/{id}")
 	@Consumes("application/json")
@@ -131,33 +131,33 @@ public class IclubBuildingStateService {
 			message.setStatusDesc(e.getMessage());
 			return message;
 		}
-		
+
 	}
-	
+
 	@GET
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional
 	public <T extends IclubBuildingStateModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
-		
+
 		try {
 			List batmod = iclubBuildingStateDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
 					IclubBuildingState bean = (IclubBuildingState) object;
 					IclubBuildingStateModel iCB = IclubBuildingStateTrans.fromORMtoWS(bean);
-					
+
 					ret.add((T) iCB);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
@@ -166,37 +166,37 @@ public class IclubBuildingStateService {
 		IclubBuildingStateModel model = new IclubBuildingStateModel();
 		try {
 			IclubBuildingState bean = iclubBuildingStateDAO.findById(id);
-			
+
 			model = IclubBuildingStateTrans.fromORMtoWS(bean);
-			
+
 		} catch (Exception e) {
 			LOGGER.error(e, e);
 		}
 		return model;
 	}
-	
+
 	public IclubBuildingStateDAO getIclubBuildingStateDAO() {
 		return iclubBuildingStateDAO;
 	}
-	
+
 	public void setIclubBuildingStateDAO(IclubBuildingStateDAO iclubBuildingStateDAO) {
 		this.iclubBuildingStateDAO = iclubBuildingStateDAO;
 	}
-	
+
 	public IclubCommonDAO getIclubCommonDAO() {
 		return iclubCommonDAO;
 	}
-	
+
 	public void setIclubCommonDAO(IclubCommonDAO iclubCommonDAO) {
 		this.iclubCommonDAO = iclubCommonDAO;
 	}
-	
+
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
 		return iclubNamedQueryDAO;
 	}
-	
+
 	public void setIclubNamedQueryDAO(IclubNamedQueryDAO iclubNamedQueryDAO) {
 		this.iclubNamedQueryDAO = iclubNamedQueryDAO;
 	}
-	
+
 }

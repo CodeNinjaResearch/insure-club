@@ -8,10 +8,10 @@ import za.co.iclub.pss.orm.dao.IclubRoleTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubSecurityQuestionDAO;
 
 public class IclubLoginTrans {
-	
+
 	public static IclubLoginBean fromWStoUI(IclubLoginModel model) {
 		IclubLoginBean bean = new IclubLoginBean();
-		
+
 		bean.setLId(model.getLId());
 		bean.setLCrtdDt(model.getLCrtdDt());
 		bean.setLLastDate(model.getLLastDate());
@@ -27,13 +27,13 @@ public class IclubLoginTrans {
 		bean.setPBFNameAndLName(model.getPBFNameAndLName());
 		bean.setLProviderCd(model.getLProviderCd());
 		bean.setLProviderId(model.getLProviderId());
-		
+
 		return bean;
 	}
-	
+
 	public static IclubLoginModel fromUItoWS(IclubLoginBean bean) {
 		IclubLoginModel model = new IclubLoginModel();
-		
+
 		model.setLId(bean.getLId());
 		model.setLCrtdDt(bean.getLCrtdDt());
 		model.setLLastDate(bean.getLLastDate());
@@ -49,13 +49,13 @@ public class IclubLoginTrans {
 		model.setPBFNameAndLName(bean.getPBFNameAndLName());
 		model.setLProviderCd(bean.getLProviderCd());
 		model.setLProviderId(bean.getLProviderId());
-		
+
 		return model;
 	}
-	
+
 	public static IclubLoginModel fromORMtoWS(IclubLogin bean) {
 		IclubLoginModel model = new IclubLoginModel();
-		
+
 		model.setLId(bean.getLId());
 		model.setLCrtdDt(bean.getLCrtdDt());
 		model.setLLastDate(bean.getLLastDate());
@@ -71,14 +71,14 @@ public class IclubLoginTrans {
 		model.setPBFNameAndLName(bean.getIclubPersonByLPersonId() != null ? bean.getIclubPersonByLPersonId().getPFName() + " " + bean.getIclubPersonByLPersonId().getPLName() != null ? bean.getIclubPersonByLPersonId().getPLName() : "" : "");
 		model.setLProviderCd(bean.getLProviderCd());
 		model.setLProviderId(bean.getLProviderId());
-		
+
 		return model;
 	}
-	
+
 	public static IclubLogin fromWStoORM(IclubLoginModel model, IclubPersonDAO iclubPersonDAO, IclubSecurityQuestionDAO iclubSecurityQuestionDAO, IclubRoleTypeDAO iclubRoleTypeDAO) {
-		
+
 		IclubLogin bean = new IclubLogin();
-		
+
 		bean.setLId(model.getLId());
 		bean.setLCrtdDt(model.getLCrtdDt());
 		bean.setLLastDate(model.getLLastDate());
@@ -91,7 +91,7 @@ public class IclubLoginTrans {
 		bean.setIclubSecurityQuestion(model.getIclubSecurityQuestion() != null ? iclubSecurityQuestionDAO.findById(model.getIclubSecurityQuestion()) : null);
 		bean.setLProviderCd(model.getLProviderCd());
 		bean.setLProviderId(model.getLProviderId());
-		
+
 		return bean;
 	}
 }

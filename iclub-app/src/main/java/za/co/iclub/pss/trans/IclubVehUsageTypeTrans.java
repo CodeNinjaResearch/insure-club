@@ -13,7 +13,7 @@ public class IclubVehUsageTypeTrans {
 		bean.setVutStatus(model.getVutStatus());
 		return bean;
 	}
-	
+
 	public static IclubVehUsageTypeModel fromUItoWS(IclubVehUsageTypeBean bean) {
 		IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
 		model.setVutId(bean.getVutId());
@@ -22,7 +22,7 @@ public class IclubVehUsageTypeTrans {
 		model.setVutStatus(bean.getVutStatus());
 		return model;
 	}
-	
+
 	public static IclubVehUsageTypeModel fromORMtoWS(IclubVehUsageType bean) {
 		IclubVehUsageTypeModel model = new IclubVehUsageTypeModel();
 		model.setVutId(bean.getVutId());
@@ -31,15 +31,15 @@ public class IclubVehUsageTypeTrans {
 		model.setVutStatus(bean.getVutStatus());
 		return model;
 	}
-	
+
 	public static IclubVehUsageType fromWStoORM(IclubVehUsageTypeModel model) {
 		IclubVehUsageType acctype = new IclubVehUsageType();
-		
+
 		acctype.setVutId(model.getVutId());
 		acctype.setVutLongDesc(model.getVutLongDesc());
 		acctype.setVutShortDesc(model.getVutShortDesc());
 		acctype.setVutStatus(model.getVutStatus());
-		
+
 		return acctype;
 	}
 }
