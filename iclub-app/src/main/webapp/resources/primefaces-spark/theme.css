@@ -1436,6 +1436,7 @@ ui-message-fatal{color: #F55151 !important; background-color: #FBFCFD !important
                                 background-size: 110% !important;}
              .ui-panel .ui-panel-titlebar .ui-icon-gear{background-image:url("#{resource['primefaces-spark:images/gear.svg']}") !important; background-position: center !important;
                                 background-size: 110% !important;}
+                                /*color: #778D9B; */
     .ui-panel .ui-panel-content{padding:5px !important; font-size: 15px; color: #778D9B; font-family: 'ralewayregular';}
     .ui-panel .ui-panel-footer{border-top: solid 1px #E8EDF2 !important; background-color:#F6FAFC; margin: 0px -2px -2px -2px !important; font-size: 14px;
                     border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; color:#C7D5DB;}
@@ -1750,7 +1751,7 @@ font-family: 'titillium_webregular';}
     border-radius: 3px !important; -webkit-border-radius: 3px !important; -moz-border-radius: 3px  !important;}
     
 .ui-outputlabel{font-size: 16px; font-family: 'ralewaymedium';}
-.ui-outputlabel, table tbody tr td{color:#778D9B;}
+/* .ui-outputlabel, table tbody tr td{color:#778D9B;} */
 
 
 /*Style For UI Galleria --------------------------------------------------------------------------------------*/

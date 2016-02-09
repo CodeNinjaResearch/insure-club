@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ps="http://primefaces.org/spark" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<ps:menu>
+		<p:menuitem rendered="#{iclubMenuController.userMenu}" icon="fa fa-paint-brush" id="sm_home" value="Home" action="#{iclubUserDashBoardController.dashboardAction}" containerStyleClass="layout-menubar-active" />
+		<p:separator rendered="#{iclubMenuController.userMenu}" />
+		<p:menuitem icon="fa fa-paint-brush" id="sm_login" value="Login" outcome="login-spark" containerStyleClass="layout-menubar-active" rendered="#{!iclubMenuController.userMenu}" />
+		<p:separator rendered="#{!iclubMenuController.userMenu}" />
+		<p:menuitem icon="fa fa-paint-brush" id="sm_logout" value="Logout" ajax="false" action="#{iclubLoginController.doIclubLogout}" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
+		<p:separator rendered="#{iclubMenuController.adminScreens}" />
+		<p:submenu icon="fa fa-rocket" id="sm_screens" label="Screens" rendered="#{iclubMenuController.adminScreens}">
+			<p:menuitem icon="fa fa-paint-brush" id="sm_viewquote" outcome="vq" value="View Quotes" containerStyleClass="layout-menubar-active" />
+			<p:menuitem icon="fa fa-paint-brush" id="sm_pdash" outcome="pdash" value="View Policies" containerStyleClass="layout-menubar-active" />
+			<p:menuitem icon="fa fa-paint-brush" id="sm_cdash" outcome="cdash" value="View Claims" containerStyleClass="layout-menubar-active" />
+			<p:submenu icon="fa fa-rocket" id="sm_admin" label="Admin Screens">
+				<p:menuitem icon="fa fa-paint-brush" id="sm_mdata" value="Metadata" outcome="mdata" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="sm_master" value="Master Data" outcome="master" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="sm_rating" value="Rating" outcome="rating" containerStyleClass="layout-menubar-active" />
+			</p:submenu>
+			<p:submenu icon="fa fa-rocket" id="sm_policy" label="Policy Dashboards">
+				<p:menuitem icon="fa fa-paint-brush" id="sm_mypcy" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="sm_pendass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="sm_allpcy" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
+			</p:submenu>
+			<p:submenu icon="fa fa-rocket" id="sm_claim" label="Claim Dashboards">
+				<p:menuitem icon="fa fa-paint-brush" id="sm_myclm" value="My Policies" outcome="acdash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="sm_pendclmass" value="Pending Assessment" outcome="padash" containerStyleClass="layout-menubar-active" />
+				<p:menuitem icon="fa fa-paint-brush" id="sm_allclm" value="All Policies" outcome="alldash" containerStyleClass="layout-menubar-active" />
+			</p:submenu>
+		</p:submenu>
+		<p:separator rendered="#{iclubMenuController.userMenu}" />
+		<p:menuitem id="sm_faq" icon="fa fa-paint-brush" value="FAQ" containerStyleClass="layout-menubar-active" />
+		<p:separator />
+		<p:submenu id="sm_hitw" icon="fa fa-rocket" label="How It Works">
+			<p:menuitem id="sm_transparency" icon="fa fa-paint-brush" value="Transparency" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="sm_privacy" icon="fa fa-paint-brush" value="Privacy" containerStyleClass="layout-menubar-active" />
+		</p:submenu>
+		<p:separator />
+		<p:submenu id="sm_aboutus" label="About Us" icon="fa fa-rocket">
+			<p:menuitem id="sm_leadership" icon="fa fa-paint-brush" value="Leadership" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="sm_board" icon="fa fa-paint-brush" value="Board" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="sm_execmem" icon="fa fa-paint-brush" value="Executive Management" containerStyleClass="layout-menubar-active" />
+			<p:menuitem id="sm_senmem" icon="fa fa-paint-brush" value="Senior Management" containerStyleClass="layout-menubar-active" />
+		</p:submenu>
+		<p:separator rendered="false" />
+		<p:submenu rendered="false" id="sm_theme" label="Theme" icon="fa fa-rocket">
+			<p:menuitem id="sm_spark" value="Spark Theme" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('spark')}" />
+			<p:menuitem id="sm_sentinel" value="Sentinel" containerStyleClass="layout-menubar-active" action="#{themeView.themeAction('sentinel')}" />
+		</p:submenu>
+		<p:separator />
+		<p:menuitem id="sm_blog" icon="fa fa-paint-brush" value="Blogger" containerStyleClass="layout-menubar-active" />
+		<p:separator rendered="#{iclubMenuController.userMenu}" />
+		<p:submenu id="sm_cohorts" rendered="#{iclubMenuController.userMenu}" icon="fa fa-rocket" label="Cohorts Functions">
+			<p:menuitem id="sm_nci" value="My Cohorts" containerStyleClass="layout-menubar-active" icon="fa fa-paint-brush" action="#{iclubLoginController.newCohortInviteAction}" oncomplete="PF('newInviteDialog').show();" />
+			<p:menuitem id="sm_chrtmemb" icon="fa fa-paint-brush" value="Cohort Chat" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.deregisterCohorts}" />
+			<p:menuitem id="sm_nmci" value="Manage Cohorts" containerStyleClass="layout-menubar-active" outcome="manageCohorts" icon="fa fa-paint-brush" rendered="#{  iclubMenuController.manageCohorts}" />
+			<p:menuitem id="sm_ndci" value="De Register Cohort" containerStyleClass="layout-menubar-active" outcome="deRegister" icon="fa fa-paint-brush" rendered="#{  !iclubMenuController.manageCohorts &amp;&amp;  iclubMenuController.deregisterCohorts}" />
+		</p:submenu>
+		<p:separator rendered="#{iclubMenuController.userMenu}" />
+		<p:menuitem id="sm_qq" value="Quick Quote" icon="fa fa-paint-brush" outcome="qq" containerStyleClass="layout-menubar-active" rendered="#{iclubMenuController.userMenu}" />
+	</ps:menu>
+</ui:composition>
