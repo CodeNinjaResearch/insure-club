@@ -1,0 +1,151 @@
+﻿<!-- Key look up table
+Vs 	= Vehicle List
+V		= Vehicle
+Ts 	=	Trips
+T 	=	Trip
+sP 	= Start Position
+eP	= End Position
+Es 	= Events
+E		= Event
+Ps	= Positions
+P		= Position
+Pd	= Position detail
+dc	= Device Calibrated
+ts	= Trip start
+te	= Trip end
+td	= Trip distance
+tm	= Trip Maximum Speed
+et	= Event TYPE of event A=Harsh Accel, B=Harsh Brake, C=Harsh Corner
+eg	=	g-force at event
+es	=	initial-speed of event
+pt	= Position Time
+ps	=	Position speed
+pl	=	Position speed limit
+pm  =   Position Maximum speed
+x		=	Position longitude
+y		=	Position latitude
+t		= Time
+-->
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="header"/>
+        <xs:element ref="body"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:string" minOccurs="0"/>
+        <xs:element name="service-name" type="xs:string"/>
+        <xs:element name="aud-user-id" type="xs:long"/>
+        <xs:element name="external-reference" type="xs:string" minOccurs="0"/>
+        <xs:element name="system-no" type="xs:long" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="body">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="meta-data" type="xs:string" minOccurs="0"/>
+        <xs:element ref="content"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="telematic-detail"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="telematic-detail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="file-data-cutoff-time" type="xs:dateTime"/>
+        <xs:element ref="Vs" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Vs">  <!-- Vehicle  List -->
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="V" minOccurs="1" maxOccurs="unbounded"/> <!-- Vehicle  -->
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="V">
+    <xs:complexType>
+      <xs:sequence>
+         <xs:element ref="Ts" minOccurs="0" maxOccurs="1"/> <!-- Trips -->
+      </xs:sequence>
+	    <xs:attribute name="vin" type="xs:string" use="required" /><!-- VIN Number -->
+	    <xs:attribute name="reg" type="xs:string" use="required" /><!-- Registration Number -->
+	    <xs:attribute name="no" type="xs:string" use="required" /> <!-- Unique number mapped to Fleet Number in MaXx -->
+    </xs:complexType>
+   </xs:element>
+  <xs:element name="Ts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="T" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="T">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="sP" type="P"/> <!-- Start Position -->
+        <xs:element name="eP" type="P"/> <!-- End Position -->
+        <xs:element ref="Es" minOccurs="0"/> <!-- Events -->
+        <xs:element ref="Ps" minOccurs="0"/> <!-- Positions -->
+      </xs:sequence>
+      <xs:attribute name="dc" type="xs:boolean" use="required" /> <!-- Device Calibrated i.e. unit g forces accurate -->
+      <xs:attribute name="ts" type="xs:dateTime" use="required" /> <!-- Trip Start Time-->
+      <xs:attribute name="te" type="xs:dateTime" use="required" /> <!-- Trip End Time-->
+      <xs:attribute name="td" type="xs:decimal" use="required" /> <!-- Trip Distance-->
+	  <xs:attribute name="tm" type="xs:decimal" use="required" /> <!-- Trip Maximum Speed-->
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Es">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="E" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="E">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="P" type="P"/>
+      </xs:sequence>
+    	<xs:attribute name="et" type="xs:string" use="required" /> <!-- Event TYPE of event A=Harsh Accel, B=Harsh Brake, C=Harsh Corner-->
+    	<xs:attribute name="eg" type="xs:decimal" use="required" /> <!-- g-force at event-->
+    	<xs:attribute name="t" type="xs:dateTime" use="required" /> <!-- Time of event-->
+    	<xs:attribute name="es" type="xs:unsignedShort" use="required" /> <!-- initial-speed of event-->
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Pd" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Pd">
+    <xs:complexType>
+    <xs:attribute name="t" type="xs:dateTime" use="required" /> <!-- Time  -->
+    <xs:attribute name="ps" type="xs:decimal" use="required" /> <!-- speed -->
+    <xs:attribute name="pl" type="xs:decimal" use="required" /> <!-- speed limit  -->
+	<xs:attribute name="pm" type="xs:decimal" use="required" /> <!-- pos maximum speed    -->
+    <xs:attribute name="x" type="xs:decimal" use="required" /> <!-- longitude -->
+    <xs:attribute name="y" type="xs:decimal" use="required" /> <!-- latitude  -->
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="P">
+    <xs:attribute name="x" type="xs:decimal" use="required" /> <!-- longitude -->
+    <xs:attribute name="y" type="xs:decimal" use="required" /> <!-- latitude  -->
+  </xs:complexType>
+</xs:schema>
