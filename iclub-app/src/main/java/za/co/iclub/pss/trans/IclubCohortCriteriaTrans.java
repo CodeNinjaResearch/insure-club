@@ -17,7 +17,7 @@ public class IclubCohortCriteriaTrans {
 		bean.setCcClaimLastYr(model.getCcClaimLastYr());
 		bean.setIclubCohortInvite(model.getIclubCohortInvite());
 		bean.setCcInsuredValue(model.getCcInsuredValue());
-		bean.setCcMaritialStatus(model.getCcMaritialStatus());
+		bean.setCcMaritalStatus(model.getCcMaritalStatus());
 
 		return bean;
 	}
@@ -32,7 +32,7 @@ public class IclubCohortCriteriaTrans {
 		model.setCcClaimLastYr(bean.getCcClaimLastYr());
 		model.setIclubCohortInvite(bean.getIclubCohortInvite());
 		model.setCcInsuredValue(bean.getCcInsuredValue());
-		model.setCcMaritialStatus(bean.getCcMaritialStatus());
+		model.setCcMaritalStatus(bean.getCcMaritalStatus());
 
 		return model;
 	}
@@ -46,7 +46,7 @@ public class IclubCohortCriteriaTrans {
 		model.setCcGender(bean.getCcGender());
 		model.setCcClaimLastYr(bean.getCcClaimLastYr());
 		model.setCcInsuredValue(bean.getCcInsuredValue());
-		model.setCcMaritialStatus(bean.getCcMaritialStatus());
+		model.setCcMaritalStatus(bean.getCcMaritalStatus());
 		model.setIclubCohortInvite(bean.getIclubCohortInvite() != null ? bean.getIclubCohortInvite().getCiId() : null);
 
 		return model;
@@ -62,7 +62,7 @@ public class IclubCohortCriteriaTrans {
 		bean.setCcGender(model.getCcGender());
 		bean.setCcClaimLastYr(model.getCcClaimLastYr());
 		bean.setCcInsuredValue(model.getCcInsuredValue());
-		bean.setCcMaritialStatus(model.getCcMaritialStatus());
+		bean.setCcMaritalStatus(model.getCcMaritalStatus());
 		bean.setIclubCohortInvite(model.getIclubCohortInvite() != null ? iclubCohortInviteDAO.findById(model.getIclubCohortInvite()) : null);
 
 		return bean;

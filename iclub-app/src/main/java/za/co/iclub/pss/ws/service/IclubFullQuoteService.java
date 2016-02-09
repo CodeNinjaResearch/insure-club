@@ -56,7 +56,7 @@ import za.co.iclub.pss.orm.dao.IclubInsuranceItemDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
-import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubMaritalStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubOccupiedStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubOwnerTypeDAO;
@@ -98,7 +98,7 @@ public class IclubFullQuoteService {
 	private IclubQuoteStatusDAO iclubQuoteStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubIdTypeDAO iclubIdTypeDAO;
-	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubMaritalStatusDAO IclubMaritalStatusDAO;
 	private IclubGeoLocDAO iclubGeoLocDAO;
 	private IclubLicenseCodeDAO iclubLicenseCodeDAO;
 	private IclubAccessTypeDAO iclubAccessTypeDAO;
@@ -133,13 +133,13 @@ public class IclubFullQuoteService {
 	public IclubFullQuoteResponse createQuote(IclubFullQuoteRequest iclubFullQuoteRequest) {
 
 		Double generatedPremium = 0.0;
-		IclubPerson iclubPerson = IclubPersonTrans.fromWStoORM(iclubFullQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
+		IclubPerson iclubPerson = IclubPersonTrans.fromWStoORM(iclubFullQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, IclubMaritalStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 		iclubPersonDAO.merge(iclubPerson);
 		IclubQuote iclubQuote = IclubQuoteTrans.fromWStoORM(iclubFullQuoteRequest.getIclubQuoteModel(), iclubQuoteStatusDAO, iclubCoverTypeDAO, iclubInsurerMasterDAO, iclubProductTypeDAO, iclubPersonDAO);
 		iclubQuoteDAO.merge(iclubQuote);
 		String quoteNumber = iclubQuote.getQId();
 		IclubDriverModel iclubDriverModel = iclubFullQuoteRequest.getIclubDriverModel();
-		IclubDriver iclubDriver = IclubDriverTrans.fromWStoORM(iclubDriverModel, iclubAccessTypeDAO, iclubLicenseCodeDAO, iclubMaritialStatusDAO, iclubPersonDAO);
+		IclubDriver iclubDriver = IclubDriverTrans.fromWStoORM(iclubDriverModel, iclubAccessTypeDAO, iclubLicenseCodeDAO, IclubMaritalStatusDAO, iclubPersonDAO);
 		iclubDriverDAO.merge(iclubDriver);
 		List<IclubVehicleModel> vehicleModels = iclubFullQuoteRequest.getIclubVehicleModels();
 
@@ -245,7 +245,7 @@ public class IclubFullQuoteService {
 		person.setPZipCd(model.getPZipCd());
 		person.setIclubIdType(model.getIclubIdType() != null ? iclubIdTypeDAO.findById(model.getIclubIdType()) : null);
 		person.setIclubPerson(model.getIclubPerson() != null && !model.getIclubPerson().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPerson()) : null);
-		person.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
+		person.setIclubMaritalStatus(model.getIclubMaritalStatus() != null ? IclubMaritalStatusDAO.findById(model.getIclubMaritalStatus()) : null);
 		return person;
 	}
 
@@ -700,12 +700,12 @@ public class IclubFullQuoteService {
 		this.iclubIdTypeDAO = iclubIdTypeDAO;
 	}
 
-	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
-		return iclubMaritialStatusDAO;
+	public IclubMaritalStatusDAO getIclubMaritalStatusDAO() {
+		return IclubMaritalStatusDAO;
 	}
 
-	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
-		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
+	public void setIclubMaritalStatusDAO(IclubMaritalStatusDAO IclubMaritalStatusDAO) {
+		this.IclubMaritalStatusDAO = IclubMaritalStatusDAO;
 	}
 
 	public IclubGeoLocDAO getIclubGeoLocDAO() {

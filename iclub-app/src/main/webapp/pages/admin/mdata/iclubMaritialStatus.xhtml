@@ -1,10 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" template="/pages/admin/mdata/container.xhtml">
 	<ui:define name="mdata">
 		<div class="ContainerIndent">
-			<p:panel id="pnlMaritialStatusCont">
-				<p:dataTable widgetVar="dtMaritialStatusCont" value="#{iclubMaritialStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Maritial Status Found" reflow="true">
+			<p:panel id="pnlMaritalStatusCont">
+				<p:dataTable widgetVar="dtMaritalStatusCont" value="#{IclubMaritalStatusController.beans}" var="bean" rows="10" paginator="true" paginatorPosition="bottom" emptyMessage="No Marital Status Found" reflow="true">
 					<f:facet name="footer">
-						<p:commandButton id="btnMaritialStatusShowAdd" value="Add" actionListener="#{iclubMaritialStatusController.showAddPanel}" update=":iclubFrm:pnlMaritialStatusCont" />
+						<p:commandButton id="btnMaritalStatusShowAdd" value="Add" actionListener="#{IclubMaritalStatusController.showAddPanel}" update=":iclubFrm:pnlMaritalStatusCont" />
 					</f:facet>
 					<!-- 					<p:column headerText="Unique Id"> -->
 					<!-- 						<p:outputLabel value="#{bean.msId}" /> -->
@@ -23,23 +23,23 @@
 						</p:selectOneMenu>
 					</p:column>
 					<p:column>
-						<p:commandButton id="btnMaritialStatusEdit" icon="ui-icon-pencil" actionListener="#{iclubMaritialStatusController.showModPanel}" update=":iclubFrm:pnlMaritialStatusCont">
-							<f:setPropertyActionListener target="#{iclubMaritialStatusController.bean}" value="#{bean}" />
+						<p:commandButton id="btnMaritalStatusEdit" icon="ui-icon-pencil" actionListener="#{IclubMaritalStatusController.showModPanel}" update=":iclubFrm:pnlMaritalStatusCont">
+							<f:setPropertyActionListener target="#{IclubMaritalStatusController.bean}" value="#{bean}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
-				<p:panel id="pnlAdd" rendered="#{iclubMaritialStatusController.showAddPanel}">
+				<p:panel id="pnlAdd" rendered="#{IclubMaritalStatusController.showAddPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubMaritialStatusController.bean.msShortDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{IclubMaritalStatusController.bean.msShortDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubMaritialStatusController.bean.msLongDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{IclubMaritalStatusController.bean.msLongDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubMaritialStatusController.bean.msStatus}">
+							<p:selectOneMenu widgetVar="mnuAddStatus" id="mnuAddStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{IclubMaritalStatusController.bean.msStatus}">
 								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />
@@ -48,30 +48,30 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container50">
-								<p:commandButton id="btnMaritialStatusAddSave" value="Save" actionListener="#{iclubMaritialStatusController.addIclubMaritialStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritalStatusAddSave" value="Save" actionListener="#{IclubMaritalStatusController.addIclubMaritalStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritalStatusCont" />
 							</div>
 							<div class="Container50">
-								<p:commandButton id="btnMaritialStatusAddClose" value="Close" actionListener="#{iclubMaritialStatusController.clearForm}" update=":iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritalStatusAddClose" value="Close" actionListener="#{IclubMaritalStatusController.clearForm}" update=":iclubFrm:pnlMaritalStatusCont" />
 							</div>
 						</div>
 					</div>
 				</p:panel>
-				<p:panel id="pnlMod" rendered="#{iclubMaritialStatusController.showModPanel}">
+				<p:panel id="pnlMod" rendered="#{IclubMaritalStatusController.showModPanel}">
 					<div class="Container90 Fnone MarAuto TexAlCenter">
 						<div class="Container80 Responsive">
-							<p:outputLabel value="#{iclubMaritialStatusController.bean.msId}" />
+							<p:outputLabel value="#{IclubMaritalStatusController.bean.msId}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{iclubMaritialStatusController.bean.msShortDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Short Description" value="#{IclubMaritalStatusController.bean.msShortDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{iclubMaritialStatusController.bean.msLongDesc}" />
+							<p:inputText styleClass="TexAlCenter" placeholder="Long Description" value="#{IclubMaritalStatusController.bean.msLongDesc}" />
 						</div>
 						<div class="EmptyBox5" />
 						<div class="Container80 Responsive">
-							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{iclubMaritialStatusController.bean.msStatus}">
+							<p:selectOneMenu widgetVar="mnuModStatus" id="mnuModStatus" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" value="#{IclubMaritalStatusController.bean.msStatus}">
 								<f:selectItem itemLabel="Status" itemDisabled="true" />
 								<f:selectItem itemLabel="Yes" itemValue="Y" />
 								<f:selectItem itemLabel="No" itemValue="N" />
@@ -80,13 +80,13 @@
 						<div class="EmptyBox5" />
 						<div class="Container100">
 							<div class="Container33">
-								<p:commandButton id="btnMaritialStatusModSave" value="Save" actionListener="#{iclubMaritialStatusController.modIclubMaritialStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritalStatusModSave" value="Save" actionListener="#{IclubMaritalStatusController.modIclubMaritalStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritalStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnMaritialStatusModDelete" value="Delete" actionListener="#{iclubMaritialStatusController.delIclubMaritialStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritalStatusModDelete" value="Delete" actionListener="#{IclubMaritalStatusController.delIclubMaritalStatus}" update="iclubFrm:grlMsg,:iclubFrm:pnlMaritalStatusCont" />
 							</div>
 							<div class="Container33">
-								<p:commandButton id="btnMaritialStatusModClose" value="Close" actionListener="#{iclubMaritialStatusController.clearForm}" update=":iclubFrm:pnlMaritialStatusCont" />
+								<p:commandButton id="btnMaritalStatusModClose" value="Close" actionListener="#{IclubMaritalStatusController.clearForm}" update=":iclubFrm:pnlMaritalStatusCont" />
 							</div>
 						</div>
 					</div>

@@ -1,7 +1,7 @@
 package za.co.iclub.pss.ws.service;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,7 +52,7 @@ import za.co.iclub.pss.orm.dao.IclubInsuranceItemDAO;
 import za.co.iclub.pss.orm.dao.IclubInsuranceItemTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubInsurerMasterDAO;
 import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
-import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubMaritalStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubOccupiedStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
@@ -92,7 +92,7 @@ public class IclubQuickQuoteService {
 	private IclubQuoteStatusDAO iclubQuoteStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubIdTypeDAO iclubIdTypeDAO;
-	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubMaritalStatusDAO IclubMaritalStatusDAO;
 	private IclubGeoLocDAO iclubGeoLocDAO;
 	private IclubLicenseCodeDAO iclubLicenseCodeDAO;
 	private IclubAccessTypeDAO iclubAccessTypeDAO;
@@ -123,10 +123,10 @@ public class IclubQuickQuoteService {
 		Double generatedPremium = 0.0;
 		IclubPerson iclubPerson = null;
 		if (!iclubQuickQuoteRequest.isLoginFlag()) {
-			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
+			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, IclubMaritalStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 			iclubPersonDAO.save(iclubPerson);
 		} else {
-			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
+			iclubPerson = IclubPersonTrans.fromWStoORM(iclubQuickQuoteRequest.getIclubPersonModel(), iclubIdTypeDAO, iclubPersonDAO, IclubMaritalStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 			iclubPersonDAO.merge(iclubPerson);
 		}
 
@@ -134,7 +134,7 @@ public class IclubQuickQuoteService {
 		iclubQuoteDAO.save(iclubQuote);
 		String quoteNumber = iclubQuote.getQId();
 		IclubDriverModel iclubDriverModel = iclubQuickQuoteRequest.getIclubDriverModel();
-		IclubDriver iclubDriver = IclubDriverTrans.fromWStoORM(iclubDriverModel, iclubAccessTypeDAO, iclubLicenseCodeDAO, iclubMaritialStatusDAO, iclubPersonDAO);
+		IclubDriver iclubDriver = IclubDriverTrans.fromWStoORM(iclubDriverModel, iclubAccessTypeDAO, iclubLicenseCodeDAO, IclubMaritalStatusDAO, iclubPersonDAO);
 		iclubDriverDAO.save(iclubDriver);
 		List<IclubVehicleModel> vehicleModels = iclubQuickQuoteRequest.getIclubVehicleModels();
 
@@ -598,12 +598,12 @@ public class IclubQuickQuoteService {
 		this.iclubIdTypeDAO = iclubIdTypeDAO;
 	}
 
-	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
-		return iclubMaritialStatusDAO;
+	public IclubMaritalStatusDAO getIclubMaritalStatusDAO() {
+		return IclubMaritalStatusDAO;
 	}
 
-	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
-		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
+	public void setIclubMaritalStatusDAO(IclubMaritalStatusDAO IclubMaritalStatusDAO) {
+		this.IclubMaritalStatusDAO = IclubMaritalStatusDAO;
 	}
 
 	public IclubGeoLocDAO getIclubGeoLocDAO() {

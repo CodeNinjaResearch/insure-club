@@ -3,6 +3,7 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class IclubPerson implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 6904314475598401673L;
 	private String PId;
-	private IclubMaritialStatus iclubMaritialStatus;
+	private IclubMaritalStatus IclubMaritalStatus;
 	private IclubPerson iclubPerson;
 	private IclubCohort iclubCohort;
 	private IclubCohortInvite iclubCohortInvite;
@@ -116,12 +117,12 @@ public class IclubPerson implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubPerson(String PId, IclubMaritialStatus iclubMaritialStatus, IclubPerson iclubPerson, IclubCohort iclubCohort, IclubCohortInvite iclubCohortInvite, IclubIdType iclubIdType, String PTitle, String PInitials, String PFName, String PLName, String PMobile, String PEmail, String PContactPref, String PGender, String PIdNum, Long PIdIssueCntry, Date PIdIssueDt, Date PIdExpiryDt, Long POccupation, Date PDob, String PIsPensioner, String PAddress, Double PLat, Double PLong, Integer PZipCd, Integer PAge, Date PCrtdDt, Set<IclubSupplPerson> iclubSupplPersonsForSpPersonId, Set<IclubMbComment> iclubMbComments, Set<IclubSupplPerson> iclubSupplPersonsForSpCrtdBy, Set<IclubCohortInvite> iclubCohortInvites, Set<IclubNotif> iclubNotifs, Set<IclubTrackerMaster> iclubTrackerMasters,
+	public IclubPerson(String PId, IclubMaritalStatus IclubMaritalStatus, IclubPerson iclubPerson, IclubCohort iclubCohort, IclubCohortInvite iclubCohortInvite, IclubIdType iclubIdType, String PTitle, String PInitials, String PFName, String PLName, String PMobile, String PEmail, String PContactPref, String PGender, String PIdNum, Long PIdIssueCntry, Date PIdIssueDt, Date PIdExpiryDt, Long POccupation, Date PDob, String PIsPensioner, String PAddress, Double PLat, Double PLong, Integer PZipCd, Integer PAge, Date PCrtdDt, Set<IclubSupplPerson> iclubSupplPersonsForSpPersonId, Set<IclubMbComment> iclubMbComments, Set<IclubSupplPerson> iclubSupplPersonsForSpCrtdBy, Set<IclubCohortInvite> iclubCohortInvites, Set<IclubNotif> iclubNotifs, Set<IclubTrackerMaster> iclubTrackerMasters,
 			Set<IclubPayment> iclubPayments, Set<IclubRateEngine> iclubRateEngines, Set<IclubCountryCode> iclubCountryCodes, Set<IclubLogin> iclubLoginsForLPersonId, Set<IclubPolicy> iclubPolicies, Set<IclubLogin> iclubLoginsForLCrtdBy, Set<IclubVehicle> iclubVehicles, Set<IclubCohortPerson> iclubCohortPersonsForCpPersonId, Set<IclubCohortPerson> iclubCohortPersonsForCpCrtdBy, Set<IclubVehicleMaster> iclubVehicleMasters, Set<IclubGeoLoc> iclubGeoLocs, Set<IclubConfig> iclubConfigs, Set<IclubOccupation> iclubOccupations, Set<IclubMessage> iclubMessages, Set<IclubPropertyItem> iclubPropertyItems, Set<IclubInsurerMaster> iclubInsurerMasters, Set<IclubSupplItem> iclubSupplItems, Set<IclubLicenseCode> iclubLicenseCodes, Set<IclubCohort> iclubCohortsForCCrtdBy,
 			Set<IclubRateType> iclubRateTypes, Set<IclubCohort> iclubCohortsForCAdminId, Set<IclubQuote> iclubQuotesForQCrtdBy, Set<IclubAccount> iclubAccounts, Set<IclubCohort> iclubCohortsForCPrimaryUserId, Set<IclubInsuranceItem> iclubInsuranceItems, Set<IclubCoverType> iclubCoverTypes, Set<IclubPurposeType> iclubPurposeTypes, Set<IclubEvent> iclubEvents, Set<IclubSecurityDevice> iclubSecurityDevices, Set<IclubClaim> iclubClaims, Set<IclubSecurityMaster> iclubSecurityMasters, Set<IclubCohortClaim> iclubCohortClaims, Set<IclubBankMaster> iclubBankMasters, Set<IclubQuote> iclubQuotesForQPersonId, Set<IclubDriver> iclubDriversForDCrtdBy, Set<IclubMessageBoard> iclubMessageBoards, Set<IclubExtras> iclubExtrases, Set<IclubProperty> iclubProperties, Set<IclubDocument> iclubDocuments,
 			Set<IclubPerson> iclubPersons, Set<IclubSupplMaster> iclubSupplMasters, Set<IclubDriver> iclubDriversForDPersonId) {
 		this.PId = PId;
-		this.iclubMaritialStatus = iclubMaritialStatus;
+		this.IclubMaritalStatus = IclubMaritalStatus;
 		this.iclubPerson = iclubPerson;
 		this.iclubCohort = iclubCohort;
 		this.iclubCohortInvite = iclubCohortInvite;
@@ -210,12 +211,12 @@ public class IclubPerson implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "p_mar_status")
-	public IclubMaritialStatus getIclubMaritialStatus() {
-		return this.iclubMaritialStatus;
+	public IclubMaritalStatus getIclubMaritalStatus() {
+		return this.IclubMaritalStatus;
 	}
 
-	public void setIclubMaritialStatus(IclubMaritialStatus iclubMaritialStatus) {
-		this.iclubMaritialStatus = iclubMaritialStatus;
+	public void setIclubMaritalStatus(IclubMaritalStatus IclubMaritalStatus) {
+		this.IclubMaritalStatus = IclubMaritalStatus;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

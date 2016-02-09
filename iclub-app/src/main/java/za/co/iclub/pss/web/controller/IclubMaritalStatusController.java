@@ -16,97 +16,97 @@ import javax.ws.rs.core.Response;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.log4j.Logger;
 
-import za.co.iclub.pss.model.ui.IclubMaritialStatusBean;
-import za.co.iclub.pss.model.ws.IclubMaritialStatusModel;
-import za.co.iclub.pss.trans.IclubMaritialStatusTrans;
+import za.co.iclub.pss.model.ui.IclubMaritalStatusBean;
+import za.co.iclub.pss.model.ws.IclubMaritalStatusModel;
+import za.co.iclub.pss.trans.IclubMaritalStatusTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@ManagedBean(name = "iclubMaritialStatusController")
+@ManagedBean(name = "IclubMaritalStatusController")
 @SessionScoped
-public class IclubMaritialStatusController implements Serializable {
+public class IclubMaritalStatusController implements Serializable {
 
 	private static final long serialVersionUID = 6271776777151313314L;
 	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("iclub-web");
-	private static final Logger LOGGER = Logger.getLogger(IclubMaritialStatusController.class);
-	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritialStatusService/";
-	private List<IclubMaritialStatusBean> beans;
-	private IclubMaritialStatusBean bean;
+	private static final Logger LOGGER = Logger.getLogger(IclubMaritalStatusController.class);
+	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritalStatusService/";
+	private List<IclubMaritalStatusBean> beans;
+	private IclubMaritalStatusBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private ResourceBundle labelBundle;
 
-	public void addIclubMaritialStatus() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubMaritialStatus");
+	public void addIclubMaritalStatus() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: addIclubMaritalStatus");
 		try {
 			if (validateForm(true)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "add");
-				IclubMaritialStatusModel model = IclubMaritialStatusTrans.fromUItoWS(bean);
+				IclubMaritalStatusModel model = IclubMaritalStatusTrans.fromUItoWS(bean);
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).post(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("add.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("add.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("add.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
-	public void modIclubMaritialStatus() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubMaritialStatus");
+	public void modIclubMaritalStatus() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: modIclubMaritalStatus");
 		try {
 			if (validateForm(false)) {
 				WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "mod");
-				IclubMaritialStatusModel model = IclubMaritialStatusTrans.fromUItoWS(bean);
+				IclubMaritalStatusModel model = IclubMaritalStatusTrans.fromUItoWS(bean);
 
 				ResponseModel response = client.accept(MediaType.APPLICATION_JSON).put(model, ResponseModel.class);
 				client.close();
 				if (response.getStatusCode() == 0) {
-					IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
+					IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("mod.success"), FacesMessage.SEVERITY_INFO);
 					clearForm();
 				} else {
-					IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
+					IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("mod.error") + " :: " + response.getStatusDesc(), FacesMessage.SEVERITY_ERROR);
 				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("mod.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
-	public void delIclubMaritialStatus() {
-		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubMaritialStatus");
+	public void delIclubMaritalStatus() {
+		LOGGER.info("Class :: " + this.getClass() + " :: Method :: delIclubMaritalStatus");
 		try {
 			WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "del/" + bean.getMsId());
 			Response response = client.accept(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
-				IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
+				IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("del.success"), FacesMessage.SEVERITY_INFO);
 				clearForm();
 			} else {
-				IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
+				IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("del.service.error"), FacesMessage.SEVERITY_ERROR);
 			}
 		} catch (Exception e) {
 			LOGGER.error(e, e);
-			IclubWebHelper.addMessage(getLabelBundle().getString("maritialstatus") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
+			IclubWebHelper.addMessage(getLabelBundle().getString("maritalstatus") + " " + getLabelBundle().getString("del.error") + " :: " + e.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
 
 	public void clearForm() {
 		showAddPanel = false;
 		showModPanel = false;
-		bean = new IclubMaritialStatusBean();
+		bean = new IclubMaritalStatusBean();
 	}
 
 	public void showAddPanel() {
 		showAddPanel = true;
 		showModPanel = false;
-		bean = new IclubMaritialStatusBean();
+		bean = new IclubMaritalStatusBean();
 	}
 
 	public void showModPanel() {
@@ -145,14 +145,14 @@ public class IclubMaritialStatusController implements Serializable {
 		return ret;
 	}
 
-	public List<IclubMaritialStatusBean> getBeans() {
+	public List<IclubMaritalStatusBean> getBeans() {
 		WebClient client = IclubWebHelper.createCustomClient(BASE_URL + "list");
-		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
+		Collection<? extends IclubMaritalStatusModel> models = new ArrayList<IclubMaritalStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritalStatusModel.class));
 		client.close();
-		beans = new ArrayList<IclubMaritialStatusBean>();
+		beans = new ArrayList<IclubMaritalStatusBean>();
 		if (models != null && models.size() > 0) {
-			for (IclubMaritialStatusModel model : models) {
-				IclubMaritialStatusBean bean = IclubMaritialStatusTrans.fromWStoUI(model);
+			for (IclubMaritalStatusModel model : models) {
+				IclubMaritalStatusBean bean = IclubMaritalStatusTrans.fromWStoUI(model);
 
 				beans.add(bean);
 			}
@@ -160,17 +160,17 @@ public class IclubMaritialStatusController implements Serializable {
 		return beans;
 	}
 
-	public void setBeans(List<IclubMaritialStatusBean> beans) {
+	public void setBeans(List<IclubMaritalStatusBean> beans) {
 		this.beans = beans;
 	}
 
-	public IclubMaritialStatusBean getBean() {
+	public IclubMaritalStatusBean getBean() {
 		if (bean == null)
-			bean = new IclubMaritialStatusBean();
+			bean = new IclubMaritalStatusBean();
 		return bean;
 	}
 
-	public void setBean(IclubMaritialStatusBean bean) {
+	public void setBean(IclubMaritalStatusBean bean) {
 		this.bean = bean;
 	}
 

@@ -222,10 +222,10 @@
  <PROCESS-ITEM NAME="rules:*:27" PATH="*" SHAPE="32,3041,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:27" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="iclubMaritialStatus::#pages#admin#mdata#iclubMaritialStatus.xhtml"
-    NAME="output" PATH="/pages/admin/mdata/iclubMaritialStatus.xhtml"
-    TARGET="rules:#pages#admin#mdata#iclubMaritialStatus.xhtml"
-    TITLE="iclubMaritialStatus" model-entity="JSFProcessItemOutput"/>
+    ID="IclubMaritalStatus::#pages#admin#mdata#IclubMaritalStatus.xhtml"
+    NAME="output" PATH="/pages/admin/mdata/IclubMaritalStatus.xhtml"
+    TARGET="rules:#pages#admin#mdata#IclubMaritalStatus.xhtml"
+    TITLE="IclubMaritalStatus" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:*:28" PATH="*" SHAPE="32,3153,0,0" model-entity="JSFProcessGroup">
@@ -726,8 +726,8 @@
   PATH="/pages/admin/licensecode/container.xhtml" SHAPE="240,5521,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubMessageType.xhtml"
   PATH="/pages/admin/mdata/iclubMessageType.xhtml" SHAPE="240,2721,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubMaritialStatus.xhtml"
-  PATH="/pages/admin/mdata/iclubMaritialStatus.xhtml"
+ <PROCESS-ITEM NAME="rules:#pages#admin#mdata#IclubMaritalStatus.xhtml"
+  PATH="/pages/admin/mdata/IclubMaritalStatus.xhtml"
   SHAPE="240,2609,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#admin#mdata#iclubRoofType.xhtml"
   PATH="/pages/admin/mdata/iclubRoofType.xhtml" SHAPE="240,3953,0,0" model-entity="JSFProcessGroup"/>

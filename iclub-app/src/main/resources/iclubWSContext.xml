@@ -18,8 +18,8 @@
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
-	<bean id="IclubMaritialStatusService" class="za.co.iclub.pss.ws.service.IclubMaritialStatusService">
-		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
+	<bean id="IclubMaritalStatusService" class="za.co.iclub.pss.ws.service.IclubMaritalStatusService">
+		<property name="iclubMaritalStatusDAO" ref="IclubMaritalStatusDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
@@ -184,7 +184,7 @@
 
 	<bean id="IclubPersonService" class="za.co.iclub.pss.ws.service.IclubPersonService">
 		<property name="iclubIdTypeDAO" ref="IclubIdTypeDAO" />
-		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
+		<property name="iclubMaritalStatusDAO" ref="IclubMaritalStatusDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
 		<property name="iclubCohortDAO" ref="IclubCohortDAO" />
@@ -317,7 +317,7 @@
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 	</bean>
 	<bean id="IclubDriverService" class="za.co.iclub.pss.ws.service.IclubDriverService">
-		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
+		<property name="iclubMaritalStatusDAO" ref="IclubMaritalStatusDAO" />
 		<property name="iclubLicenseCodeDAO" ref="IclubLicenseCodeDAO" />
 		<property name="iclubPersonDAO" ref="IclubPersonDAO" />
 		<property name="iclubCommonDAO" ref="IclubCommonDAO" />
@@ -536,7 +536,7 @@
 		<property name="iclubQuoteStatusDAO" ref="IclubQuoteStatusDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 		<property name="iclubIdTypeDAO" ref="IclubIdTypeDAO" />
-		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
+		<property name="iclubMaritalStatusDAO" ref="IclubMaritalStatusDAO" />
 		<property name="iclubGeoLocDAO" ref="IclubGeoLocDAO" />
 		<property name="iclubLicenseCodeDAO" ref="IclubLicenseCodeDAO" />
 		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />
@@ -568,7 +568,7 @@
 		<property name="iclubQuoteStatusDAO" ref="IclubQuoteStatusDAO" />
 		<property name="iclubNamedQueryDAO" ref="IclubNamedQueryDAO" />
 		<property name="iclubIdTypeDAO" ref="IclubIdTypeDAO" />
-		<property name="iclubMaritialStatusDAO" ref="IclubMaritialStatusDAO" />
+		<property name="iclubMaritalStatusDAO" ref="IclubMaritalStatusDAO" />
 		<property name="iclubGeoLocDAO" ref="IclubGeoLocDAO" />
 		<property name="iclubLicenseCodeDAO" ref="IclubLicenseCodeDAO" />
 		<property name="iclubInsuranceItemTypeDAO" ref="IclubInsuranceItemTypeDAO" />

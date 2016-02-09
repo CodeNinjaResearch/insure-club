@@ -404,7 +404,7 @@ public class IclubRateTypeController implements Serializable {
 		case 2:
 			fields.add("Age");
 			fields.add("Gender");
-			fields.add("Maritial Status");
+			fields.add("Marital Status");
 			fields.add("Years with License");
 			break;
 		case 3:

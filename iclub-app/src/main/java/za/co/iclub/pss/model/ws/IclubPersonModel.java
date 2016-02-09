@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IclubPersonModel {
 
 	private String PId;
-	private Long iclubMaritialStatus;
+	private Long IclubMaritalStatus;
 	private String iclubCohortInvite;
 	private String msLongDesc;
 	private String iclubPerson;
@@ -47,12 +47,12 @@ public class IclubPersonModel {
 		PId = pId;
 	}
 
-	public Long getIclubMaritialStatus() {
-		return iclubMaritialStatus;
+	public Long getIclubMaritalStatus() {
+		return IclubMaritalStatus;
 	}
 
-	public void setIclubMaritialStatus(Long iclubMaritialStatus) {
-		this.iclubMaritialStatus = iclubMaritialStatus;
+	public void setIclubMaritalStatus(Long IclubMaritalStatus) {
+		this.IclubMaritalStatus = IclubMaritalStatus;
 	}
 
 	public String getMsLongDesc() {

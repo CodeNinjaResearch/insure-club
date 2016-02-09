@@ -54,7 +54,7 @@ import za.co.iclub.pss.model.ui.IclubIdTypeBean;
 import za.co.iclub.pss.model.ui.IclubInsuranceItemBean;
 import za.co.iclub.pss.model.ui.IclubInsurerMasterBean;
 import za.co.iclub.pss.model.ui.IclubLicenseCodeBean;
-import za.co.iclub.pss.model.ui.IclubMaritialStatusBean;
+import za.co.iclub.pss.model.ui.IclubMaritalStatusBean;
 import za.co.iclub.pss.model.ui.IclubOccupationBean;
 import za.co.iclub.pss.model.ui.IclubOccupiedStatusBean;
 import za.co.iclub.pss.model.ui.IclubOwnerTypeBean;
@@ -94,7 +94,7 @@ import za.co.iclub.pss.model.ws.IclubIdTypeModel;
 import za.co.iclub.pss.model.ws.IclubInsuranceItemModel;
 import za.co.iclub.pss.model.ws.IclubInsurerMasterModel;
 import za.co.iclub.pss.model.ws.IclubLicenseCodeModel;
-import za.co.iclub.pss.model.ws.IclubMaritialStatusModel;
+import za.co.iclub.pss.model.ws.IclubMaritalStatusModel;
 import za.co.iclub.pss.model.ws.IclubOccupationModel;
 import za.co.iclub.pss.model.ws.IclubOccupiedStatusModel;
 import za.co.iclub.pss.model.ws.IclubOwnerTypeModel;
@@ -131,7 +131,7 @@ import za.co.iclub.pss.trans.IclubIdTypeTrans;
 import za.co.iclub.pss.trans.IclubInsuranceItemTrans;
 import za.co.iclub.pss.trans.IclubInsurerMasterTrans;
 import za.co.iclub.pss.trans.IclubLicenseCodeTrans;
-import za.co.iclub.pss.trans.IclubMaritialStatusTrans;
+import za.co.iclub.pss.trans.IclubMaritalStatusTrans;
 import za.co.iclub.pss.trans.IclubOccupationTrans;
 import za.co.iclub.pss.trans.IclubOccupiedStatusTrans;
 import za.co.iclub.pss.trans.IclubOwnerTypeTrans;
@@ -172,7 +172,7 @@ public class IclubFullQuoteController implements Serializable {
 	private static final String WT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubWallTypeService/";
 	private static final String ROT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubRoofTypeService/";
 	private static final String RAT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubRateTypeService/";
-	private static final String MS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritialStatusService/";
+	private static final String MS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritalStatusService/";
 	private static final String IT_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubIdTypeService/";
 	private static final String SM_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubVehSecTypeService/";
 	private static final String AEST_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubAccessTypeService/";
@@ -271,7 +271,7 @@ public class IclubFullQuoteController implements Serializable {
 
 	private IclubPropertyBean propertyBean;
 
-	private List<IclubMaritialStatusBean> maritialStatusBeans;
+	private List<IclubMaritalStatusBean> maritalStatusBeans;
 
 	private List<IclubIdTypeBean> idTypeBeans;
 
@@ -1156,7 +1156,7 @@ public class IclubFullQuoteController implements Serializable {
 	public IclubDriverModel addDriver(IclubDriverBean bean, IclubPersonBean personModel, IclubQuoteBean quoteModel) {
 
 		bean.setDCrtdDt(new Date(System.currentTimeMillis()));
-		bean.setIclubMaritialStatus(personModel.getIclubMaritialStatus());
+		bean.setIclubMaritalStatus(personModel.getIclubMaritalStatus());
 		bean.setIclubPersonBByDPersonId(personModel.getPId());
 		bean.setIclubPersonAByDCrtdBy(getSessionUserId());
 
@@ -1665,24 +1665,24 @@ public class IclubFullQuoteController implements Serializable {
 		this.propertyBean = propertyBean;
 	}
 
-	public List<IclubMaritialStatusBean> getMaritialStatusBeans() {
+	public List<IclubMaritalStatusBean> getMaritalStatusBeans() {
 
 		WebClient client = IclubWebHelper.createCustomClient(MS_BASE_URL + "list");
-		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
+		Collection<? extends IclubMaritalStatusModel> models = new ArrayList<IclubMaritalStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritalStatusModel.class));
 		client.close();
-		maritialStatusBeans = new ArrayList<IclubMaritialStatusBean>();
+		maritalStatusBeans = new ArrayList<IclubMaritalStatusBean>();
 		if (models != null && models.size() > 0) {
-			for (IclubMaritialStatusModel model : models) {
-				IclubMaritialStatusBean bean = IclubMaritialStatusTrans.fromWStoUI(model);
+			for (IclubMaritalStatusModel model : models) {
+				IclubMaritalStatusBean bean = IclubMaritalStatusTrans.fromWStoUI(model);
 
-				maritialStatusBeans.add(bean);
+				maritalStatusBeans.add(bean);
 			}
 		}
-		return maritialStatusBeans;
+		return maritalStatusBeans;
 	}
 
-	public void setMaritialStatusBeans(List<IclubMaritialStatusBean> maritialStatusBeans) {
-		this.maritialStatusBeans = maritialStatusBeans;
+	public void setMaritalStatusBeans(List<IclubMaritalStatusBean> maritalStatusBeans) {
+		this.maritalStatusBeans = maritalStatusBeans;
 	}
 
 	public List<IclubIdTypeBean> getIdTypeBeans() {

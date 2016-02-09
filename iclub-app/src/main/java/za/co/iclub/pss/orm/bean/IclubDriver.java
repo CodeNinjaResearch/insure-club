@@ -3,6 +3,7 @@ package za.co.iclub.pss.orm.bean;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class IclubDriver implements java.io.Serializable {
 	private IclubAccessType iclubAccessTypeByDAccessStatusId;
 	private IclubPerson iclubPersonByDCrtdBy;
 	private IclubPerson iclubPersonByDPersonId;
-	private IclubMaritialStatus iclubMaritialStatus;
+	private IclubMaritalStatus IclubMaritalStatus;
 	private IclubAccessType iclubAccessTypeByDAccessTypeId;
 	private IclubLicenseCode iclubLicenseCode;
 	private String DName;
@@ -56,12 +57,12 @@ public class IclubDriver implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public IclubDriver(String DId, IclubAccessType iclubAccessTypeByDAccessStatusId, IclubPerson iclubPersonByDCrtdBy, IclubPerson iclubPersonByDPersonId, IclubMaritialStatus iclubMaritialStatus, IclubAccessType iclubAccessTypeByDAccessTypeId, IclubLicenseCode iclubLicenseCode, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Date DCrtdDt, Integer DIssueYears, Integer DLastClaimDiff, Integer DLastClaimYear, Set<IclubVehicle> iclubVehicles) {
+	public IclubDriver(String DId, IclubAccessType iclubAccessTypeByDAccessStatusId, IclubPerson iclubPersonByDCrtdBy, IclubPerson iclubPersonByDPersonId, IclubMaritalStatus IclubMaritalStatus, IclubAccessType iclubAccessTypeByDAccessTypeId, IclubLicenseCode iclubLicenseCode, String DName, String DLicenseNum, Date DIssueDt, Date DDob, Date DCrtdDt, Integer DIssueYears, Integer DLastClaimDiff, Integer DLastClaimYear, Set<IclubVehicle> iclubVehicles) {
 		this.DId = DId;
 		this.iclubAccessTypeByDAccessStatusId = iclubAccessTypeByDAccessStatusId;
 		this.iclubPersonByDCrtdBy = iclubPersonByDCrtdBy;
 		this.iclubPersonByDPersonId = iclubPersonByDPersonId;
-		this.iclubMaritialStatus = iclubMaritialStatus;
+		this.IclubMaritalStatus = IclubMaritalStatus;
 		this.iclubAccessTypeByDAccessTypeId = iclubAccessTypeByDAccessTypeId;
 		this.iclubLicenseCode = iclubLicenseCode;
 		this.DName = DName;
@@ -118,12 +119,12 @@ public class IclubDriver implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "d_mar_status_id")
-	public IclubMaritialStatus getIclubMaritialStatus() {
-		return this.iclubMaritialStatus;
+	public IclubMaritalStatus getIclubMaritalStatus() {
+		return this.IclubMaritalStatus;
 	}
 
-	public void setIclubMaritialStatus(IclubMaritialStatus iclubMaritialStatus) {
-		this.iclubMaritialStatus = iclubMaritialStatus;
+	public void setIclubMaritalStatus(IclubMaritalStatus IclubMaritalStatus) {
+		this.IclubMaritalStatus = IclubMaritalStatus;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

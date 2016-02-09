@@ -14,7 +14,7 @@ public class IclubDriverModel {
 	private String lcDesc;
 	private String iclubPersonAByDCrtdBy;
 	private String PAFNameAndLName;
-	private Long iclubMaritialStatus;
+	private Long IclubMaritalStatus;
 	private String msLongDesc;
 	private String iclubPersonBByDPersonId;
 	private String PBFNameAndLName;
@@ -84,12 +84,12 @@ public class IclubDriverModel {
 		PAFNameAndLName = pAFNameAndLName;
 	}
 
-	public Long getIclubMaritialStatus() {
-		return iclubMaritialStatus;
+	public Long getIclubMaritalStatus() {
+		return IclubMaritalStatus;
 	}
 
-	public void setIclubMaritialStatus(Long iclubMaritialStatus) {
-		this.iclubMaritialStatus = iclubMaritialStatus;
+	public void setIclubMaritalStatus(Long IclubMaritalStatus) {
+		this.IclubMaritalStatus = IclubMaritalStatus;
 	}
 
 	public String getMsLongDesc() {

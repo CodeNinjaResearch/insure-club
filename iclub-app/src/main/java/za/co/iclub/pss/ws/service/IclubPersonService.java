@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.dao.IclubCohortDAO;
 import za.co.iclub.pss.orm.dao.IclubCohortInviteDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubIdTypeDAO;
-import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubMaritalStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.trans.IclubPersonTrans;
@@ -36,7 +36,7 @@ public class IclubPersonService {
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubCommonDAO iclubCommonDAO;
 	private IclubIdTypeDAO iclubIdTypeDAO;
-	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubMaritalStatusDAO IclubMaritalStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 	private IclubCohortDAO iclubCohortDAO;
 	private IclubCohortInviteDAO iclubCohortInviteDAO;
@@ -48,7 +48,7 @@ public class IclubPersonService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubPersonModel model) {
 		try {
-			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
+			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, IclubMaritalStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 
 			iclubPersonDAO.save(person);
 
@@ -74,7 +74,7 @@ public class IclubPersonService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubPersonModel model) {
 		try {
-			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, iclubMaritialStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
+			IclubPerson person = IclubPersonTrans.fromWStoORM(model, iclubIdTypeDAO, iclubPersonDAO, IclubMaritalStatusDAO, iclubCohortDAO, iclubCohortInviteDAO);
 			iclubPersonDAO.merge(person);
 
 			LOGGER.info("Merge Success with ID :: " + model.getPId());
@@ -240,12 +240,12 @@ public class IclubPersonService {
 		this.iclubIdTypeDAO = iclubIdTypeDAO;
 	}
 
-	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
-		return iclubMaritialStatusDAO;
+	public IclubMaritalStatusDAO getIclubMaritalStatusDAO() {
+		return IclubMaritalStatusDAO;
 	}
 
-	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
-		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
+	public void setIclubMaritalStatusDAO(IclubMaritalStatusDAO IclubMaritalStatusDAO) {
+		this.IclubMaritalStatusDAO = IclubMaritalStatusDAO;
 	}
 
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {

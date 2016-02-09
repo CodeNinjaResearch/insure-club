@@ -529,16 +529,16 @@ public class IclubNamedQueryDAO {
 		}
 	}
 
-	public List getMaritialStatusBySD(String sd, Long id) {
-		log.debug("Fetching all Maritial Status by Query :: getMaritialStatusBySD");
+	public List getMaritalStatusBySD(String sd, Long id) {
+		log.debug("Fetching all Marital Status by Query :: getMaritalStatusBySD");
 		try {
-			Query query = getCurrentSession().getNamedQuery("getMaritialStatusBySD");
+			Query query = getCurrentSession().getNamedQuery("getMaritalStatusBySD");
 			query.setString("sd", sd);
 			query.setLong("id", id);
 			List ret = query.list();
 			return ret;
 		} catch (RuntimeException re) {
-			log.error("Maritial Status", re);
+			log.error("Marital Status", re);
 			throw re;
 		}
 	}

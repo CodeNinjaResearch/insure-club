@@ -1,9 +1,6 @@
-package za.co.iclub.pss.model.ws;
+package za.co.iclub.pss.model.ui;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "IclubMaritialStatusModel")
-public class IclubMaritialStatusModel {
+public class IclubMaritalStatusBean {
 
 	private Long msId;
 	private String msShortDesc;

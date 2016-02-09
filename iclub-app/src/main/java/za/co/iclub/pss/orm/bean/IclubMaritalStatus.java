@@ -2,6 +2,7 @@ package za.co.iclub.pss.orm.bean;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * IclubMaritialStatus entity. @author MyEclipse Persistence Tools
+ * IclubMaritalStatus entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "iclub_maritial_status", catalog = "iclubdb")
-public class IclubMaritialStatus implements java.io.Serializable {
+@Table(name = "iclub_marital_status", catalog = "iclubdb")
+public class IclubMaritalStatus implements java.io.Serializable {
 
 	// Fields
 
@@ -33,16 +34,16 @@ public class IclubMaritialStatus implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public IclubMaritialStatus() {
+	public IclubMaritalStatus() {
 	}
 
 	/** minimal constructor */
-	public IclubMaritialStatus(Long msId) {
+	public IclubMaritalStatus(Long msId) {
 		this.msId = msId;
 	}
 
 	/** full constructor */
-	public IclubMaritialStatus(Long msId, String msShortDesc, String msLongDesc, String msStatus, Set<IclubDriver> iclubDrivers, Set<IclubPerson> iclubPersons) {
+	public IclubMaritalStatus(Long msId, String msShortDesc, String msLongDesc, String msStatus, Set<IclubDriver> iclubDrivers, Set<IclubPerson> iclubPersons) {
 		this.msId = msId;
 		this.msShortDesc = msShortDesc;
 		this.msLongDesc = msLongDesc;
@@ -89,7 +90,7 @@ public class IclubMaritialStatus implements java.io.Serializable {
 		this.msStatus = msStatus;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubMaritialStatus")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "IclubMaritalStatus")
 	public Set<IclubDriver> getIclubDrivers() {
 		return this.iclubDrivers;
 	}
@@ -98,7 +99,7 @@ public class IclubMaritialStatus implements java.io.Serializable {
 		this.iclubDrivers = iclubDrivers;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "iclubMaritialStatus")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "IclubMaritalStatus")
 	public Set<IclubPerson> getIclubPersons() {
 		return this.iclubPersons;
 	}

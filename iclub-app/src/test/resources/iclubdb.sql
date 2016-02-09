@@ -523,7 +523,7 @@ CREATE TABLE `iclub_driver` (
   KEY `fk_iclub_driver_4_idx` (`d_crtd_by`),
   KEY `fk_iclub_driver_5_idx` (`d_person_id`),
   CONSTRAINT `fk_iclub_driver_1` FOREIGN KEY (`d_license_code`) REFERENCES `iclub_license_code` (`lc_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_iclub_driver_2` FOREIGN KEY (`d_mar_status_id`) REFERENCES `iclub_maritial_status` (`ms_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_iclub_driver_2` FOREIGN KEY (`d_mar_status_id`) REFERENCES `iclub_marital_status` (`ms_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_iclub_driver_3` FOREIGN KEY (`d_access_status_id`) REFERENCES `iclub_access_type` (`at_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_iclub_driver_4` FOREIGN KEY (`d_crtd_by`) REFERENCES `iclub_person` (`p_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_iclub_driver_5` FOREIGN KEY (`d_person_id`) REFERENCES `iclub_person` (`p_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -866,13 +866,13 @@ LOCK TABLES `iclub_login` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `iclub_maritial_status`
+-- Table structure for table `iclub_marital_status`
 --
 
-DROP TABLE IF EXISTS `iclub_maritial_status`;
+DROP TABLE IF EXISTS `iclub_marital_status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `iclub_maritial_status` (
+CREATE TABLE `iclub_marital_status` (
   `ms_id` bigint(20) NOT NULL,
   `ms_short_desc` varchar(4) COLLATE utf8_bin DEFAULT NULL,
   `ms_long_desc` varchar(500) COLLATE utf8_bin DEFAULT NULL,
@@ -882,12 +882,12 @@ CREATE TABLE `iclub_maritial_status` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `iclub_maritial_status`
+-- Dumping data for table `iclub_marital_status`
 --
 
-LOCK TABLES `iclub_maritial_status` WRITE;
-/*!40000 ALTER TABLE `iclub_maritial_status` DISABLE KEYS */;
-/*!40000 ALTER TABLE `iclub_maritial_status` ENABLE KEYS */;
+LOCK TABLES `iclub_marital_status` WRITE;
+/*!40000 ALTER TABLE `iclub_marital_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `iclub_marital_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1278,7 +1278,7 @@ CREATE TABLE `iclub_person` (
   KEY `fk_iclub_person_3_idx` (`p_mar_status`),
   CONSTRAINT `fk_iclub_person_1` FOREIGN KEY (`p_id_type`) REFERENCES `iclub_id_type` (`it_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_iclub_person_2` FOREIGN KEY (`p_crtd_by`) REFERENCES `iclub_person` (`p_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_iclub_person_3` FOREIGN KEY (`p_mar_status`) REFERENCES `iclub_maritial_status` (`ms_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_iclub_person_3` FOREIGN KEY (`p_mar_status`) REFERENCES `iclub_marital_status` (`ms_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

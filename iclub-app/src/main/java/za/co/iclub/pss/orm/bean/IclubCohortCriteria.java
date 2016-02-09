@@ -27,7 +27,7 @@ public class IclubCohortCriteria implements java.io.Serializable {
 	private String ccGender;
 	private String ccClaimLastTwYrs;
 	private String ccClaimLastYr;
-	private String ccMaritialStatus;
+	private String ccMaritalStatus;
 	private String ccInsuredValue;
 
 	// Constructors
@@ -108,13 +108,13 @@ public class IclubCohortCriteria implements java.io.Serializable {
 		this.ccClaimLastYr = ccClaimLastYr;
 	}
 
-	@Column(name = "cc_maritial_status")
-	public String getCcMaritialStatus() {
-		return ccMaritialStatus;
+	@Column(name = "cc_marital_status")
+	public String getCcMaritalStatus() {
+		return ccMaritalStatus;
 	}
 
-	public void setCcMaritialStatus(String ccMaritialStatus) {
-		this.ccMaritialStatus = ccMaritialStatus;
+	public void setCcMaritalStatus(String ccMaritalStatus) {
+		this.ccMaritalStatus = ccMaritalStatus;
 	}
 
 	@Column(name = "cc_insured_value")

@@ -17,21 +17,21 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import za.co.iclub.pss.model.ws.IclubMaritialStatusModel;
-import za.co.iclub.pss.orm.bean.IclubMaritialStatus;
+import za.co.iclub.pss.model.ws.IclubMaritalStatusModel;
+import za.co.iclub.pss.orm.bean.IclubMaritalStatus;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
-import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubMaritalStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
-import za.co.iclub.pss.trans.IclubMaritialStatusTrans;
+import za.co.iclub.pss.trans.IclubMaritalStatusTrans;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
-@Path(value = "/IclubMaritialStatusService")
+@Path(value = "/IclubMaritalStatusService")
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class IclubMaritialStatusService {
+public class IclubMaritalStatusService {
 
-	protected static final Logger LOGGER = Logger.getLogger(IclubMaritialStatusService.class);
+	protected static final Logger LOGGER = Logger.getLogger(IclubMaritalStatusService.class);
 	private IclubCommonDAO iclubCommonDAO;
-	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubMaritalStatusDAO IclubMaritalStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
@@ -39,13 +39,13 @@ public class IclubMaritialStatusService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public ResponseModel add(IclubMaritialStatusModel model) {
+	public ResponseModel add(IclubMaritalStatusModel model) {
 		try {
-			IclubMaritialStatus iMs = IclubMaritialStatusTrans.fromWStoORM(model);
+			IclubMaritalStatus iMs = IclubMaritalStatusTrans.fromWStoORM(model);
 
-			iMs.setMsId(iclubCommonDAO.getNextId(IclubMaritialStatus.class));
+			iMs.setMsId(iclubCommonDAO.getNextId(IclubMaritalStatus.class));
 
-			iclubMaritialStatusDAO.save(iMs);
+			IclubMaritalStatusDAO.save(iMs);
 
 			LOGGER.info("Save Success with ID :: " + iMs.getMsId());
 
@@ -68,11 +68,11 @@ public class IclubMaritialStatusService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public ResponseModel mod(IclubMaritialStatusModel model) {
+	public ResponseModel mod(IclubMaritalStatusModel model) {
 		try {
-			IclubMaritialStatus iMs = IclubMaritialStatusTrans.fromWStoORM(model);
+			IclubMaritalStatus iMs = IclubMaritalStatusTrans.fromWStoORM(model);
 
-			iclubMaritialStatusDAO.merge(iMs);
+			IclubMaritalStatusDAO.merge(iMs);
 
 			LOGGER.info("Merge Success with ID :: " + model.getMsId());
 
@@ -97,7 +97,7 @@ public class IclubMaritialStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Response del(@PathParam("id") Long id) {
 		try {
-			iclubMaritialStatusDAO.delete(iclubMaritialStatusDAO.findById(id));
+			IclubMaritalStatusDAO.delete(IclubMaritalStatusDAO.findById(id));
 			return Response.ok().build();
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -109,16 +109,16 @@ public class IclubMaritialStatusService {
 	@Path("/list")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public <T extends IclubMaritialStatusModel> List<T> list() {
+	public <T extends IclubMaritalStatusModel> List<T> list() {
 		List<T> ret = new ArrayList<T>();
 
 		try {
-			List batmod = iclubMaritialStatusDAO.findAll();
+			List batmod = IclubMaritalStatusDAO.findAll();
 			if (batmod != null && batmod.size() > 0) {
 				for (Object object : batmod) {
-					IclubMaritialStatus bean = (IclubMaritialStatus) object;
+					IclubMaritalStatus bean = (IclubMaritalStatus) object;
 
-					IclubMaritialStatusModel model = IclubMaritialStatusTrans.fromORMtoWS(bean);
+					IclubMaritalStatusModel model = IclubMaritalStatusTrans.fromORMtoWS(bean);
 
 					ret.add((T) model);
 				}
@@ -134,12 +134,12 @@ public class IclubMaritialStatusService {
 	@Path("/get/{id}")
 	@Produces("application/json")
 	@Transactional(propagation = Propagation.REQUIRED)
-	public IclubMaritialStatusModel getById(@PathParam("id") Long id) {
-		IclubMaritialStatusModel model = new IclubMaritialStatusModel();
+	public IclubMaritalStatusModel getById(@PathParam("id") Long id) {
+		IclubMaritalStatusModel model = new IclubMaritalStatusModel();
 		try {
-			IclubMaritialStatus bean = iclubMaritialStatusDAO.findById(id);
+			IclubMaritalStatus bean = IclubMaritalStatusDAO.findById(id);
 
-			model = IclubMaritialStatusTrans.fromORMtoWS(bean);
+			model = IclubMaritalStatusTrans.fromORMtoWS(bean);
 
 		} catch (Exception e) {
 			LOGGER.error(e, e);
@@ -154,7 +154,7 @@ public class IclubMaritialStatusService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel validateSd(@PathParam("val") String val, @PathParam("id") Long id) {
 		try {
-			List data = iclubNamedQueryDAO.getBySD(val, id, IclubMaritialStatus.class.getSimpleName());
+			List data = iclubNamedQueryDAO.getBySD(val, id, IclubMaritalStatus.class.getSimpleName());
 			ResponseModel message = new ResponseModel();
 			if ((data != null) && (data.size() > 0)) {
 				message.setStatusCode(Integer.valueOf(1));
@@ -173,12 +173,12 @@ public class IclubMaritialStatusService {
 		}
 	}
 
-	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
-		return iclubMaritialStatusDAO;
+	public IclubMaritalStatusDAO getIclubMaritalStatusDAO() {
+		return IclubMaritalStatusDAO;
 	}
 
-	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
-		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
+	public void setIclubMaritalStatusDAO(IclubMaritalStatusDAO IclubMaritalStatusDAO) {
+		this.IclubMaritalStatusDAO = IclubMaritalStatusDAO;
 	}
 
 	public IclubCommonDAO getIclubCommonDAO() {

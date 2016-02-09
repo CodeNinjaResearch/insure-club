@@ -49,7 +49,7 @@
 				<value>za.co.iclub.pss.orm.bean.IclubInsurerMaster</value>
 				<value>za.co.iclub.pss.orm.bean.IclubLicenseCode</value>
 				<value>za.co.iclub.pss.orm.bean.IclubLogin</value>
-				<value>za.co.iclub.pss.orm.bean.IclubMaritialStatus</value>
+				<value>za.co.iclub.pss.orm.bean.IclubMaritalStatus</value>
 				<value>za.co.iclub.pss.orm.bean.IclubMbComment</value>
 				<value>za.co.iclub.pss.orm.bean.IclubMessage</value>
 				<value>za.co.iclub.pss.orm.bean.IclubMessageBoard</value>
@@ -199,7 +199,7 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="IclubMaritialStatusDAO" class="za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO">
+	<bean id="IclubMaritalStatusDAO" class="za.co.iclub.pss.orm.dao.IclubMaritalStatusDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

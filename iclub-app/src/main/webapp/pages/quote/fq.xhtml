@@ -161,12 +161,12 @@
 					<div class="EmptyBox5" />
 					<div class="Container100 Responsive">
 						<div class="Container50 Responsive">
-							<p:outputLabel styleClass="TexAlCenter" value="Maritial Status :" />
+							<p:outputLabel styleClass="TexAlCenter" value="Marital Status :" />
 						</div>
 						<div class="Container50 Responsive">
-							<p:selectOneMenu widgetVar="mnuMarS" disabled="true" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.iclubMaritialStatus}">
-								<f:selectItem itemLabel="Maritial Status" itemDisabled="true" />
-								<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msId}" value="#{iclubFullQuoteController.maritialStatusBeans}" />
+							<p:selectOneMenu widgetVar="mnuMarS" disabled="true" styleClass="with-placeholder TexAlCenter" panelStyleClass="hide-disabled" onchange="mnuMarS.jq.removeClass('with-placeholder')" value="#{iclubFullQuoteController.personBean.IclubMaritalStatus}">
+								<f:selectItem itemLabel="Marital Status" itemDisabled="true" />
+								<f:selectItems var="c" itemLabel="#{c.msLongDesc}" itemValue="#{c.msId}" value="#{iclubFullQuoteController.maritalStatusBeans}" />
 							</p:selectOneMenu>
 						</div>
 					</div>

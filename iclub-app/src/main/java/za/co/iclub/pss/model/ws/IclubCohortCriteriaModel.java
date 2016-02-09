@@ -11,7 +11,7 @@ public class IclubCohortCriteriaModel {
 	private String ccGender;
 	private String ccClaimLastTwYrs;
 	private String ccClaimLastYr;
-	private String ccMaritialStatus;
+	private String ccMaritalStatus;
 	private String ccInsuredValue;
 
 	public String getCcId() {
@@ -62,12 +62,12 @@ public class IclubCohortCriteriaModel {
 		this.ccClaimLastYr = ccClaimLastYr;
 	}
 
-	public String getCcMaritialStatus() {
-		return ccMaritialStatus;
+	public String getCcMaritalStatus() {
+		return ccMaritalStatus;
 	}
 
-	public void setCcMaritialStatus(String ccMaritialStatus) {
-		this.ccMaritialStatus = ccMaritialStatus;
+	public void setCcMaritalStatus(String ccMaritalStatus) {
+		this.ccMaritalStatus = ccMaritalStatus;
 	}
 
 	public String getCcInsuredValue() {

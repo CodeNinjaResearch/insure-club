@@ -25,7 +25,7 @@
   <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/iclubEventType.xhtml" x="338" y="8626" id="pf1439384983626101" referenceLink="//@navigationRule.24/@navigationCase.0/@toViewId|" inlinks="pf143938498362524" path="/pages/admin/mdata/iclubEventType.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/iclubIdType.xhtml" x="338" y="9010" id="pf1439384983626102" referenceLink="//@navigationRule.25/@navigationCase.0/@toViewId|" inlinks="pf143938498362525" path="/pages/admin/mdata/iclubIdType.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/iclubInsuranceItemType.xhtml" x="338" y="9394" id="pf1439384983626103" referenceLink="//@navigationRule.26/@navigationCase.0/@toViewId|" inlinks="pf143938498362526" path="/pages/admin/mdata/iclubInsuranceItemType.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/iclubMaritialStatus.xhtml" x="338" y="9778" id="pf1439384983626104" referenceLink="//@navigationRule.27/@navigationCase.0/@toViewId|" inlinks="pf143938498362527" path="/pages/admin/mdata/iclubMaritialStatus.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/IclubMaritalStatus.xhtml" x="338" y="9778" id="pf1439384983626104" referenceLink="//@navigationRule.27/@navigationCase.0/@toViewId|" inlinks="pf143938498362527" path="/pages/admin/mdata/IclubMaritalStatus.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/iclubMessageType.xhtml" x="338" y="10162" id="pf1439384983626105" referenceLink="//@navigationRule.28/@navigationCase.0/@toViewId|" inlinks="pf143938498362528" path="/pages/admin/mdata/iclubMessageType.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/iclubNotificationType.xhtml" x="338" y="10546" id="pf1439384983626106" referenceLink="//@navigationRule.29/@navigationCase.0/@toViewId|" inlinks="pf143938498362529" path="/pages/admin/mdata/iclubNotificationType.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/admin/mdata/iclubOccupiedStatus.xhtml" x="338" y="10930" id="pf1439384983626107" referenceLink="//@navigationRule.30/@navigationCase.0/@toViewId|" inlinks="pf143938498362530" path="/pages/admin/mdata/iclubOccupiedStatus.xhtml"/>
@@ -103,7 +103,7 @@
   <links id="pf143938498362524" target="pf1439384983626101" source="pf14393849836251" outcome="iclubEventType"/>
   <links id="pf143938498362525" target="pf1439384983626102" source="pf14393849836251" outcome="iclubIdType"/>
   <links id="pf143938498362526" target="pf1439384983626103" source="pf14393849836251" outcome="iclubInsuranceItemType"/>
-  <links id="pf143938498362527" target="pf1439384983626104" source="pf14393849836251" outcome="iclubMaritialStatus"/>
+  <links id="pf143938498362527" target="pf1439384983626104" source="pf14393849836251" outcome="IclubMaritalStatus"/>
   <links id="pf143938498362528" target="pf1439384983626105" source="pf14393849836251" outcome="iclubMessageType"/>
   <links id="pf143938498362529" target="pf1439384983626106" source="pf14393849836251" outcome="iclubNotificationType"/>
   <links id="pf143938498362530" target="pf1439384983626107" source="pf14393849836251" outcome="iclubOccupiedStatus"/>

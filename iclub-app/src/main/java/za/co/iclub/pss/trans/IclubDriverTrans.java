@@ -5,7 +5,7 @@ import za.co.iclub.pss.model.ws.IclubDriverModel;
 import za.co.iclub.pss.orm.bean.IclubDriver;
 import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
-import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubMaritalStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 
 public class IclubDriverTrans {
@@ -27,7 +27,7 @@ public class IclubDriverTrans {
 		bean.setAtBLongDesc(model.getAtBLongDesc());
 		bean.setIclubLicenseCode(model.getIclubLicenseCode());
 		bean.setLcDesc(model.getLcDesc());
-		bean.setIclubMaritialStatus(model.getIclubMaritialStatus());
+		bean.setIclubMaritalStatus(model.getIclubMaritalStatus());
 		bean.setMsLongDesc(model.getMsLongDesc());
 		bean.setIclubPersonBByDPersonId(model.getIclubPersonBByDPersonId());
 		bean.setIclubPersonAByDCrtdBy(model.getIclubPersonAByDCrtdBy());
@@ -55,7 +55,7 @@ public class IclubDriverTrans {
 		model.setAtBLongDesc(bean.getAtBLongDesc());
 		model.setIclubLicenseCode(bean.getIclubLicenseCode());
 		model.setLcDesc(bean.getLcDesc());
-		model.setIclubMaritialStatus(bean.getIclubMaritialStatus());
+		model.setIclubMaritalStatus(bean.getIclubMaritalStatus());
 		model.setMsLongDesc(bean.getMsLongDesc());
 		model.setIclubPersonBByDPersonId(bean.getIclubPersonBByDPersonId());
 		model.setIclubPersonAByDCrtdBy(bean.getIclubPersonAByDCrtdBy());
@@ -83,8 +83,8 @@ public class IclubDriverTrans {
 		model.setAtBLongDesc(bean.getIclubAccessTypeByDAccessStatusId() != null ? bean.getIclubAccessTypeByDAccessStatusId().getAtLongDesc() : null);
 		model.setIclubLicenseCode(bean.getIclubLicenseCode() != null ? (bean.getIclubLicenseCode().getLcId()) : null);
 		model.setLcDesc(bean.getIclubLicenseCode() != null ? (bean.getIclubLicenseCode().getLcDesc()) : null);
-		model.setIclubMaritialStatus(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsId()) : null);
-		model.setMsLongDesc(bean.getIclubMaritialStatus() != null ? (bean.getIclubMaritialStatus().getMsLongDesc()) : null);
+		model.setIclubMaritalStatus(bean.getIclubMaritalStatus() != null ? (bean.getIclubMaritalStatus().getMsId()) : null);
+		model.setMsLongDesc(bean.getIclubMaritalStatus() != null ? (bean.getIclubMaritalStatus().getMsLongDesc()) : null);
 		model.setIclubPersonBByDPersonId(bean.getIclubPersonByDPersonId() != null ? (bean.getIclubPersonByDPersonId().getPId()) : null);
 		model.setIclubPersonAByDCrtdBy(bean.getIclubPersonByDCrtdBy() != null ? (bean.getIclubPersonByDCrtdBy().getPId()) : null);
 		model.setPBFNameAndLName(bean.getIclubPersonByDPersonId() != null ? bean.getIclubPersonByDPersonId().getPFName() + " " + bean.getIclubPersonByDPersonId().getPLName() != null ? bean.getIclubPersonByDPersonId().getPLName() : "" : "");
@@ -94,7 +94,7 @@ public class IclubDriverTrans {
 		return model;
 	}
 
-	public static IclubDriver fromWStoORM(IclubDriverModel model, IclubAccessTypeDAO iclubAccessTypeDAO, IclubLicenseCodeDAO iclubLicenseCodeDAO, IclubMaritialStatusDAO iclubMaritialStatusDAO, IclubPersonDAO iclubPersonDAO) {
+	public static IclubDriver fromWStoORM(IclubDriverModel model, IclubAccessTypeDAO iclubAccessTypeDAO, IclubLicenseCodeDAO iclubLicenseCodeDAO, IclubMaritalStatusDAO IclubMaritalStatusDAO, IclubPersonDAO iclubPersonDAO) {
 
 		IclubDriver bean = new IclubDriver();
 
@@ -108,7 +108,7 @@ public class IclubDriverTrans {
 		bean.setIclubAccessTypeByDAccessTypeId(model.getIclubAccessTypeAByDAccessTypeId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeAByDAccessTypeId()) : null);
 		bean.setIclubAccessTypeByDAccessStatusId(model.getIclubAccessTypeBByDAccessStatusId() != null ? iclubAccessTypeDAO.findById(model.getIclubAccessTypeAByDAccessTypeId()) : null);
 		bean.setIclubLicenseCode(model.getIclubLicenseCode() != null ? iclubLicenseCodeDAO.findById(model.getIclubLicenseCode()) : null);
-		bean.setIclubMaritialStatus(model.getIclubMaritialStatus() != null ? iclubMaritialStatusDAO.findById(model.getIclubMaritialStatus()) : null);
+		bean.setIclubMaritalStatus(model.getIclubMaritalStatus() != null ? IclubMaritalStatusDAO.findById(model.getIclubMaritalStatus()) : null);
 		bean.setIclubPersonByDPersonId(model.getIclubPersonBByDPersonId() != null && !model.getIclubPersonBByDPersonId().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonBByDPersonId()) : null);
 		bean.setIclubPersonByDCrtdBy(model.getIclubPersonAByDCrtdBy() != null && !model.getIclubPersonAByDCrtdBy().trim().equalsIgnoreCase("") ? iclubPersonDAO.findById(model.getIclubPersonAByDCrtdBy()) : null);
 		bean.setDLName(model.getDLName());

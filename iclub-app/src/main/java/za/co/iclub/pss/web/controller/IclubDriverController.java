@@ -21,15 +21,15 @@ import org.apache.log4j.Logger;
 import za.co.iclub.pss.model.ui.IclubAccessTypeBean;
 import za.co.iclub.pss.model.ui.IclubDriverBean;
 import za.co.iclub.pss.model.ui.IclubLicenseCodeBean;
-import za.co.iclub.pss.model.ui.IclubMaritialStatusBean;
+import za.co.iclub.pss.model.ui.IclubMaritalStatusBean;
 import za.co.iclub.pss.model.ws.IclubAccessTypeModel;
 import za.co.iclub.pss.model.ws.IclubDriverModel;
 import za.co.iclub.pss.model.ws.IclubLicenseCodeModel;
-import za.co.iclub.pss.model.ws.IclubMaritialStatusModel;
+import za.co.iclub.pss.model.ws.IclubMaritalStatusModel;
 import za.co.iclub.pss.trans.IclubAccessTypeTrans;
 import za.co.iclub.pss.trans.IclubDriverTrans;
 import za.co.iclub.pss.trans.IclubLicenseCodeTrans;
-import za.co.iclub.pss.trans.IclubMaritialStatusTrans;
+import za.co.iclub.pss.trans.IclubMaritalStatusTrans;
 import za.co.iclub.pss.util.IclubWebHelper;
 import za.co.iclub.pss.ws.model.common.ResponseModel;
 
@@ -43,14 +43,14 @@ public class IclubDriverController implements Serializable {
 	private static final String AEST_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubAccessTypeService/";
 	private static final String BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubDriverService/";
 	private static final String LIC_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubLicenseCodeService/";
-	private static final String MS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritialStatusService/";
+	private static final String MS_BASE_URL = BUNDLE.getString("ws.protocol") + BUNDLE.getString("ws.host") + ":" + BUNDLE.getString("ws.port") + BUNDLE.getString("ws.context") + "/iclub/IclubMaritalStatusService/";
 	private List<IclubDriverBean> beans;
 	private IclubDriverBean bean;
 	private boolean showAddPanel;
 	private boolean showModPanel;
 	private List<IclubAccessTypeBean> accessTypeBeans;
 	private List<IclubLicenseCodeBean> licenseCodeBeans;
-	private List<IclubMaritialStatusBean> maritialStatusBeans;
+	private List<IclubMaritalStatusBean> maritalStatusBeans;
 
 	private ResourceBundle labelBundle;
 	private String sessionUserId;
@@ -160,8 +160,8 @@ public class IclubDriverController implements Serializable {
 			IclubWebHelper.addMessage(("You must be over 18 years"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
-		if (bean.getIclubMaritialStatus() == null) {
-			IclubWebHelper.addMessage(getLabelBundle().getString("Please select Maritial Status"), FacesMessage.SEVERITY_ERROR);
+		if (bean.getIclubMaritalStatus() == null) {
+			IclubWebHelper.addMessage(getLabelBundle().getString("Please select Marital Status"), FacesMessage.SEVERITY_ERROR);
 			ret = ret && false;
 		}
 		if (bean.getDIssueDt() == null) {
@@ -285,23 +285,23 @@ public class IclubDriverController implements Serializable {
 		this.licenseCodeBeans = licenseCodeBeans;
 	}
 
-	public List<IclubMaritialStatusBean> getMaritialStatusBeans() {
+	public List<IclubMaritalStatusBean> getMaritalStatusBeans() {
 
 		WebClient client = IclubWebHelper.createCustomClient(MS_BASE_URL + "list");
-		Collection<? extends IclubMaritialStatusModel> models = new ArrayList<IclubMaritialStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritialStatusModel.class));
+		Collection<? extends IclubMaritalStatusModel> models = new ArrayList<IclubMaritalStatusModel>(client.accept(MediaType.APPLICATION_JSON).getCollection(IclubMaritalStatusModel.class));
 		client.close();
-		maritialStatusBeans = new ArrayList<IclubMaritialStatusBean>();
+		maritalStatusBeans = new ArrayList<IclubMaritalStatusBean>();
 		if (models != null && models.size() > 0) {
-			for (IclubMaritialStatusModel model : models) {
-				IclubMaritialStatusBean bean = IclubMaritialStatusTrans.fromWStoUI(model);
+			for (IclubMaritalStatusModel model : models) {
+				IclubMaritalStatusBean bean = IclubMaritalStatusTrans.fromWStoUI(model);
 
-				maritialStatusBeans.add(bean);
+				maritalStatusBeans.add(bean);
 			}
 		}
-		return maritialStatusBeans;
+		return maritalStatusBeans;
 	}
 
-	public void setMaritialStatusBeans(List<IclubMaritialStatusBean> maritialStatusBeans) {
-		this.maritialStatusBeans = maritialStatusBeans;
+	public void setMaritalStatusBeans(List<IclubMaritalStatusBean> maritalStatusBeans) {
+		this.maritalStatusBeans = maritalStatusBeans;
 	}
 }

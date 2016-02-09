@@ -16,7 +16,7 @@
 			<ref bean="IclubAlarmTypeService" />
 			<ref bean="IclubBoundaryTypeService" />
 			<ref bean="IclubBarTypeService" />
-			<ref bean="IclubMaritialStatusService" />
+			<ref bean="IclubMaritalStatusService" />
 			<ref bean="IclubInsuranceItemTypeService" />
 			<ref bean="IclubQuoteStatusService" />
 			<ref bean="IclubNotificationTypeService" />

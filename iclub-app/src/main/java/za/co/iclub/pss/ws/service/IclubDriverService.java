@@ -23,7 +23,7 @@ import za.co.iclub.pss.orm.dao.IclubAccessTypeDAO;
 import za.co.iclub.pss.orm.dao.IclubCommonDAO;
 import za.co.iclub.pss.orm.dao.IclubDriverDAO;
 import za.co.iclub.pss.orm.dao.IclubLicenseCodeDAO;
-import za.co.iclub.pss.orm.dao.IclubMaritialStatusDAO;
+import za.co.iclub.pss.orm.dao.IclubMaritalStatusDAO;
 import za.co.iclub.pss.orm.dao.IclubNamedQueryDAO;
 import za.co.iclub.pss.orm.dao.IclubPersonDAO;
 import za.co.iclub.pss.trans.IclubDriverTrans;
@@ -39,7 +39,7 @@ public class IclubDriverService {
 	private IclubPersonDAO iclubPersonDAO;
 	private IclubAccessTypeDAO iclubAccessTypeDAO;
 	private IclubLicenseCodeDAO iclubLicenseCodeDAO;
-	private IclubMaritialStatusDAO iclubMaritialStatusDAO;
+	private IclubMaritalStatusDAO IclubMaritalStatusDAO;
 	private IclubNamedQueryDAO iclubNamedQueryDAO;
 
 	@POST
@@ -49,7 +49,7 @@ public class IclubDriverService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel add(IclubDriverModel model) {
 		try {
-			IclubDriver iCt = IclubDriverTrans.fromWStoORM(model, iclubAccessTypeDAO, iclubLicenseCodeDAO, iclubMaritialStatusDAO, iclubPersonDAO);
+			IclubDriver iCt = IclubDriverTrans.fromWStoORM(model, iclubAccessTypeDAO, iclubLicenseCodeDAO, IclubMaritalStatusDAO, iclubPersonDAO);
 
 			iclubDriverDAO.save(iCt);
 
@@ -76,7 +76,7 @@ public class IclubDriverService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ResponseModel mod(IclubDriverModel model) {
 		try {
-			IclubDriver iCt = IclubDriverTrans.fromWStoORM(model, iclubAccessTypeDAO, iclubLicenseCodeDAO, iclubMaritialStatusDAO, iclubPersonDAO);
+			IclubDriver iCt = IclubDriverTrans.fromWStoORM(model, iclubAccessTypeDAO, iclubLicenseCodeDAO, IclubMaritalStatusDAO, iclubPersonDAO);
 
 			iclubDriverDAO.merge(iCt);
 
@@ -235,12 +235,12 @@ public class IclubDriverService {
 		this.iclubLicenseCodeDAO = iclubLicenseCodeDAO;
 	}
 
-	public IclubMaritialStatusDAO getIclubMaritialStatusDAO() {
-		return iclubMaritialStatusDAO;
+	public IclubMaritalStatusDAO getIclubMaritalStatusDAO() {
+		return IclubMaritalStatusDAO;
 	}
 
-	public void setIclubMaritialStatusDAO(IclubMaritialStatusDAO iclubMaritialStatusDAO) {
-		this.iclubMaritialStatusDAO = iclubMaritialStatusDAO;
+	public void setIclubMaritalStatusDAO(IclubMaritalStatusDAO IclubMaritalStatusDAO) {
+		this.IclubMaritalStatusDAO = IclubMaritalStatusDAO;
 	}
 
 	public IclubNamedQueryDAO getIclubNamedQueryDAO() {
